@@ -583,3 +583,10 @@ Read-only honesty review also approved `lem:exterior-product` and
 coordinate consumer, generator-form scalar extension, and all six new axiom
 probes. Only these two product producer nodes receive completion markers;
 `lem:determinant-product` and `lem:exact-determinant-degree` stay `notready`.
+
+Final graph sync: **184 blueprint nodes, 1214 Lean declarations, 848 edges**;
+no unresolved-reference or stale-node warning. The **621 unattached** helper
+and imported declarations include concurrent drafts and are retained as an
+intentional coverage warning. I-0050 hands the two checked product leaves to
+SPECHT for a future root batch; that integration is pending. All eight scoped
+arithmetic completion markers from this round were independently reviewed.
