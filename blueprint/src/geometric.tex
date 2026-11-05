@@ -1531,7 +1531,8 @@ follow by substituting the invariant polynomial and the specified map.
 \label{lem:plucker-invariant-tensor}
 \uses{lem:plucker-polynomial-pullback,lem:polynomial-symmetric-lift}
 \source{bost-specht-manuscript:page-0010}
-\notready
+\lean{BostConjecture.Geometry.homogeneousPolynomials_pow,BostConjecture.Geometry.homogeneousInvariants_pow,BostConjecture.Geometry.exists_plucker_invariant_tensor,BostConjecture.Geometry.tensorSpecialLinearRepresentation,BostConjecture.Geometry.pluckerRepresentation_eq_map,BostConjecture.Geometry.exists_tensorSL_plucker_invariant_tensor}
+\leanok
 Let $V,X$ be finite-dimensional vector spaces over a characteristic-zero
 field $F$, let $b$ be a basis of $V$ of length $s$, and let $G$ act linearly
 on $X$. Suppose a homogeneous polynomial $p$ of degree $m$ on
@@ -1558,14 +1559,18 @@ functoriality identifies its exterior action with the stated Pl\"ucker action.
 
 \begin{lemma}[Divisibility forced by special-linear scalar actions]
 \label{lem:invariant-degree-divisibility}
-\uses{lem:plucker-invariant-tensor}
+\uses{lem:plucker-polynomial-pullback}
 \source{bost-specht-manuscript:page-0010}
-\notready
+\lean{BostConjecture.Geometry.scalarSpecialLinear,BostConjecture.Geometry.scalar_pow_eq_one_of_invariant,BostConjecture.Geometry.ranks_dvd_hom_invariant_degree,BostConjecture.Geometry.plucker_degree_positive_divisible}
+\leanok
 Let $U,W,V$ be finite-dimensional vector spaces over an algebraically closed
 field $F$ of characteristic zero, with $\dim U=a>0$ and $\dim W=b>0$.
 If a degree-$d$ homogeneous polynomial on $\Hom(V,U\otimes W)$ is invariant
 under $\SL(U)\times\SL(W)\times\SL(V)$ and is nonzero at some map, then
 $a\mid d$ and $b\mid d$.
+In particular, for a nonvanishing invariant Pl\"ucker polynomial of positive
+degree $m$ and a positive source rank $s$, the pulled-back degree $sm$ is
+positive and divisible by $s,a,b$.
 \end{lemma}
 \begin{proof}
 Choose a primitive $a$th root of unity $\zeta\in F$. It is a unit, and
@@ -1575,6 +1580,9 @@ postcomposition on $\Hom(V,U\otimes W)$, is scalar multiplication by
 $\zeta$. At a map $A$ where $q(A)\ne0$, homogeneity and invariance give
 $\zeta^d q(A)=q(A)$. Cancellation gives $\zeta^d=1$, and primitivity
 gives $a\mid d$. The same construction in $\SL(W)$ gives $b\mid d$.
+For the last assertion the Pl\"ucker pullback has degree $sm$, is invariant
+and has the same nonzero evaluation. Apply the two divisibilities just
+proved; $s\mid sm$ is immediate, and $sm>0$ follows from $s,m>0$.
 \end{proof}
 
 \begin{lemma}[Nonvanishing in unbounded degrees]

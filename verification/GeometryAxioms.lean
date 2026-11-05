@@ -28,6 +28,22 @@ import BostConjecture.Geometry.PiInvariants
 import BostConjecture.Geometry.PolynomialTensor
 import BostConjecture.Geometry.PolynomialPolarization
 import BostConjecture.Geometry.PluckerPolynomial
+import BostConjecture.Geometry.DegreeDivisibility
+
+#print axioms BostConjecture.Geometry.homogeneousPolynomials_pow
+#print axioms BostConjecture.Geometry.homogeneousInvariants_pow
+#print axioms BostConjecture.Geometry.exists_plucker_invariant_tensor
+#print axioms BostConjecture.Geometry.tensorSpecialLinearRepresentation
+#print axioms BostConjecture.Geometry.pluckerRepresentation_eq_map
+#print axioms BostConjecture.Geometry.exists_tensorSL_plucker_invariant_tensor
+#print axioms BostConjecture.Geometry.scalar_pow_eq_one_of_invariant
+#print axioms BostConjecture.Geometry.scalarSpecialLinear
+#print axioms BostConjecture.Geometry.tensorSpecialLinear_scalar_left
+#print axioms BostConjecture.Geometry.tensorSpecialLinear_scalar_right
+#print axioms BostConjecture.Geometry.left_rank_dvd_hom_invariant_degree
+#print axioms BostConjecture.Geometry.right_rank_dvd_hom_invariant_degree
+#print axioms BostConjecture.Geometry.ranks_dvd_hom_invariant_degree
+#print axioms BostConjecture.Geometry.plucker_degree_positive_divisible
 
 #print axioms BostConjecture.Geometry.polynomial_ext
 #print axioms BostConjecture.Geometry.pluckerLinearPolynomial

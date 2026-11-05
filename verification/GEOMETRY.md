@@ -747,3 +747,27 @@ producer route substantive, including the degree-zero power. Positive degree,
 rank divisibility and rectangular regrouping are separate; no canonical
 contraction nonvanishing follows from this result alone. The expanded axiom
 audit and corresponding completion marker follow in the next checked batch.
+
+`Geometry/DegreeDivisibility.lean` constructs the actual special-linear scalar
+transformations and uses nonzero homogeneous evaluation to prove both target
+ranks divide the Hom invariant degree. Its Pluecker consumer proves that the
+pulled-back degree is positive and divisible by the source and both target
+ranks. Primitive-root existence is supplied by unchanged Mathlib over
+algebraically closed characteristic-zero fields; the one-factor results only
+need the corresponding roots of unity and positive rank.
+
+- Module `b5d63bf8466120d2` passed 3054 jobs without warnings at 23:29:54 UTC.
+- The combined 226-probe audit passed at 23:30:45 UTC (`ffefd7bf352d83dc`),
+  with only the three standard foundational axioms. The complete log is
+  `session0016/plucker-divisibility-axioms.log`. LSP is clean; no kernel check
+  in this session failed.
+- The read-only honesty reviewer approved the actual scalar/invariance route
+  and both new nodes; its blueprint dependency and explicit positive-degree
+  corollary corrections were applied. The limited polarization and divisibility
+  nodes are now checked. No new external code was copied.
+
+The next local producer is the canonical regrouping of the Hom-dual invariant
+tensor into the independent factor tensor powers, with evaluation compatibility.
+Rectangular invariant spanning and the coaction base-change bridge remain open;
+I-0070 proposes a smaller Schur-Weyl extraction for independent mathematical
+review. No source theorem completion is inferred from these producers.
