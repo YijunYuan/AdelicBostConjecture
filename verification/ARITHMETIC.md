@@ -67,7 +67,7 @@ proof was repaired and its module rebuilt as a dependency; the final remaining
 doc-comment syntax error was then repaired before the accepted build above.
 Slow LSP elaboration was not treated as successful verification.
 
-## Review and remaining boundary
+## Review of the line-degree construction
 
 Read-only honesty reviews checked the actual module/fiber representation,
 the product-formula cancellation, nonfree coordinate comparison, genuine
@@ -102,14 +102,63 @@ does not extend that root evidence to subsequent determinant sources.
 ## Remaining boundary
 
 The full conjugate-linear fiber map and real fixed-fiber identification remain
-an explicit unchecked equivalence lemma. The next producer is the complex
-Gram-determinant metric on the checked integral determinant line. Mathlib's
-existing exterior inner product is real-only; it does not supply that complex
-metric. Its complete mathematical statement and proof are in
-`blueprint/src/arithmetic.tex`, still marked `notready`.
+an explicit unchecked equivalence lemma. Determinant-metric uniqueness and
+independence from the auxiliary frame, degree-zero normalization, and the
+rank-one comparison of determinant degree with the original line degree are
+not yet proved. These are the next metric-transport and normalization steps.
 
-Higher-rank determinant degree, dual/tensor/exact-sequence identities,
+Dual/tensor/exact-sequence identities,
 contraction and saturation inequalities, degree finiteness/supermodularity,
 and the actual HN specialization remain open. The existing abstract slope
 bridge does not close them. No main-theorem completion or whole-project
 verification claim follows from these arithmetic checks.
+
+## Complex determinant metric and its degree consumer
+
+`Arithmetic/DeterminantMetric.lean` constructs the complex determinant form
+from the supplied `HermitianMetric.fiber` by taking its orthonormal frame and
+transporting the scalar inner product through the top-wedge coordinate. It
+proves the cross-Gram determinant formula for **arbitrary complex fiber
+wedges** in `determinantFiber_inner_ιMulti`, then consumes that formula on
+integral wedges. Two-variable span induction proves conjugation compatibility
+on every integral determinant section. `determinant` packages these proved
+forms as the intrinsic determinant metric; it assumes no degree identities.
+Rank zero is supported by the empty determinant construction.
+
+`Arithmetic/Degree.lean` defines `HermitianMetric.degree` and `slope`.
+`degree_eq` applies the previously proved intrinsic line-degree formula to
+this actual metrized determinant line, with the actual finite quotient and
+all complex embeddings. `determinant_quotient_finite` proves the finiteness
+appearing in that formula. Both the metric construction and the degree
+consumer support nonfree finite projective modules over arbitrary number
+fields.
+
+The shared geometry equivalence is reused from the lightweight
+`Geometry/DeterminantCoordinates.lean`, extracted by BOST-GEOM in `d470bdb`.
+There is no duplicate determinant coordinate. This import reduces the
+arithmetic degree build from 9072 to 3241 jobs and avoids the Specht cone.
+
+| Final target | Fingerprint | Completion (UTC) | Result |
+| --- | --- | --- | --- |
+| `BostConjecture.Arithmetic.Degree` | `ea82f359ff103b59` | 2026-11-05 16:49:19.045342 | 3241 jobs, passed, no warnings, not reused |
+| `verification/ArithmeticAxioms.lean` | `590174f2cda53d26` | 2026-11-05 16:50:53.589750 | 40 probes, all standard foundational axioms only |
+
+The checked implementation is in explicit commits `6429efa` and `5d59bb0`;
+no Lean source edit followed the final module pass. Reproduce with the same
+explicit-root commands above, replacing the module target by
+`BostConjecture.Arithmetic.Degree`.
+
+The intermediate metric file check at 16:35 failed on star rewrite names
+and an underconstrained positivity argument; both were repaired. The later
+16:46 Degree check failed on the final definitional-equality step in the new
+complex-wedge consumer. The explicit reflexivity step repaired that failure,
+and the 16:49 build above checks the entire final dependency cone. These
+failed development records do not supersede the later accepted pass.
+
+Read-only honesty review found that the original metric is used substantively,
+conjugation covers all determinant sections, and the degree consumer invokes
+the real line-degree construction. The blueprint splits the checked metric
+construction from its still-unchecked uniqueness theorem; it likewise keeps
+zero normalization and the later calculus/HN boundary separate. The imported
+Mathlib finiteness instance is recorded here rather than attached to a graph
+restricted to project sources.

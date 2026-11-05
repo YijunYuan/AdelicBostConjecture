@@ -264,7 +264,8 @@ Its top wedge is a basis of its top exterior power, proving dimension one.
 \begin{lemma}[The complex determinant metric]
 \label{lem:determinant-metric}
 \uses{def:hermitian-metric,lem:integral-determinant-line,lem:determinant-coordinates}
-\source{bost-specht-manuscript:page-0003}\notready
+\source{bost-specht-manuscript:page-0003}
+\lean{BostConjecture.Arithmetic.ComplexDeterminant.core,BostConjecture.Arithmetic.ComplexDeterminant.core_inner_ιMulti,BostConjecture.Arithmetic.HermitianMetric.determinantFiber_inner_ιMulti,BostConjecture.Arithmetic.HermitianMetric.determinantFiber_conjugate,BostConjecture.Arithmetic.HermitianMetric.determinant,BostConjecture.Arithmetic.HermitianMetric.determinant_sectionNorm_wedge_sq}\leanok
 There is a Hermitian metric on $\det M$ such that, in every complex
 fiber of dimension $r$,
 \[
@@ -314,7 +315,8 @@ metrics with the stated norm formula agree on every pair of vectors.
 \begin{definition}[Intrinsic determinant degree and slope]
 \label{def:intrinsic-determinant-degree}
 \uses{lem:line-degree-quotient-formula,lem:integral-determinant-line,lem:determinant-metric}
-\source{bost-specht-manuscript:page-0003}\notready
+\source{bost-specht-manuscript:page-0003}
+\lean{BostConjecture.Arithmetic.HermitianMetric.degree,BostConjecture.Arithmetic.HermitianMetric.slope,BostConjecture.Arithmetic.HermitianMetric.degree_eq,BostConjecture.Arithmetic.HermitianMetric.determinant_quotient_finite}\leanok
 For a finite projective Hermitian module $M$, define its normalized determinant
 degree as the intrinsic line degree of its metrized determinant line.
 For generic rank $r>0$, its slope is this degree divided by $r$.
