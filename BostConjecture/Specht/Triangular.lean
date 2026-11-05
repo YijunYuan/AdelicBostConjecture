@@ -114,28 +114,31 @@ theorem murphyOperator_sub_content_mem_colex (t : Tableau n μ)
     (T : {u : Tableau n μ // IsStandard u}) (j : Fin n) :
     murphyOperator t j (standardRealBasis t T) -
       (tableauContent T.val j : ℝ) • standardRealBasis t T ∈ colexSubspace t T.val := by
-  let e : realSpan T.val ≃ₗ[ℝ] realSpan t := LinearEquiv.ofEq _ _
-    ((realSpan_eq_span_standard T.val).trans (realSpan_eq_span_standard t).symm)
-  have he (x : realSpan T.val) : (e x).val = x.val := rfl
-  have hb (U : {u : Tableau n μ // IsStandard u}) :
-      e (standardRealBasis T.val U) = standardRealBasis t U := by
-    apply Subtype.ext
-    rw [he, standardRealBasis_coe, standardRealBasis_coe]
-  have hm (x : realSpan T.val) : e (murphyOperator T.val j x) =
-      murphyOperator t j (e x) := by
-    apply Subtype.ext
-    simp only [he, murphyOperator, LinearMap.sum_apply, Submodule.coe_sum, realSpechtRep_coe]
-  have hmap {x : realSpan T.val} (hx : x ∈ colexSubspace T.val T.val) :
-      e x ∈ colexSubspace t T.val := by
-    induction hx using Submodule.span_induction with
-    | mem x hx =>
-      obtain ⟨U, hU, rfl⟩ := hx
-      rw [hb]
-      exact Submodule.subset_span ⟨U, hU, rfl⟩
-    | zero => simp
-    | add x y hx hy ihx ihy => simpa only [map_add] using Submodule.add_mem _ ihx ihy
-    | smul a x hx ih => simpa only [map_smul] using Submodule.smul_mem _ a ih
-  simpa only [map_sub, map_smul, hm, hb] using
-    hmap (murphyOperator_self_sub_content_mem_colex T.val T.property j)
+  have hspan (v : Tableau n μ) :
+      (colexSubspace v T.val).map (realSpan v).subtype =
+        Submodule.span ℝ {x | ∃ U : {u : Tableau n μ // IsStandard u},
+          TableauColexLT U.val T.val ∧ realCast n (μ.colLen 0) (polytabloidInt U.val) = x} := by
+    rw [colexSubspace, Submodule.map_span]
+    congr 1
+    ext x
+    constructor
+    · rintro ⟨y, ⟨U, hU, rfl⟩, rfl⟩
+      exact ⟨U, hU, (standardRealBasis_coe v U).symm⟩
+    · rintro ⟨U, hU, rfl⟩
+      exact ⟨standardRealBasis v U, ⟨U, hU, rfl⟩, standardRealBasis_coe v U⟩
+  let x := murphyOperator t j (standardRealBasis t T) -
+    (tableauContent T.val j : ℝ) • standardRealBasis t T
+  let y := murphyOperator T.val j (standardRealBasis T.val T) -
+    (tableauContent T.val j : ℝ) • standardRealBasis T.val T
+  have hxy : y.val = x.val := by
+    simp only [x, y, Submodule.coe_sub, Submodule.coe_smul, murphyOperator,
+      LinearMap.sum_apply, Submodule.coe_sum, realSpechtRep_coe, standardRealBasis_coe]
+  have h : x.val ∈ (colexSubspace T.val T.val).map (realSpan T.val).subtype :=
+    ⟨y, murphyOperator_self_sub_content_mem_colex T.val T.property j, hxy⟩
+  rw [hspan T.val, ← hspan t] at h
+  obtain ⟨z, hz, hzx⟩ := h
+  have he : z = x := Subtype.ext hzx
+  rw [he] at hz
+  exact hz
 
 end BostConjecture.Specht
