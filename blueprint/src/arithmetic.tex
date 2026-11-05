@@ -398,7 +398,7 @@ strictly smaller slope. It is normalized if its slope is zero.
 \end{definition}
 
 \begin{lemma}[Finite projectivity of integral submodules]
-\label{lem:integral-submodule-projective}\notready
+\label{lem:integral-submodule-projective}\lean{BostConjecture.Arithmetic.submoduleProjective}\leanok
 Every integral submodule $P$ of a finite projective $\Ocal$-module $M$
 is itself finite projective.
 \end{lemma}
@@ -412,7 +412,7 @@ making it a direct summand of that module. Thus $P$ is finite projective.
 
 \begin{lemma}[Induced metrics on integral submodules]
 \label{lem:induced-hermitian-metric}
-\uses{def:hermitian-metric}\notready
+\uses{def:hermitian-metric}\lean{BostConjecture.Arithmetic.fiberMap_injective,BostConjecture.Arithmetic.HermitianMetric.pullback,BostConjecture.Arithmetic.HermitianMetric.sectionNorm_pullback,BostConjecture.Arithmetic.HermitianMetric.submodule,BostConjecture.Arithmetic.HermitianMetric.sectionNorm_submodule}\leanok
 Let $f:N\to M$ be an injective integral linear map and let $M$ have a
 Hermitian metric. Every complex scalar extension $f_\sigma:N_\sigma\to
 M_\sigma$ is injective, and
@@ -457,7 +457,7 @@ Sum these inequalities and divide by $D>0$ to obtain the degree inequality.
 
 \begin{lemma}[Uniform metric scaling]
 \label{lem:degree-metric-scaling}
-\uses{def:intrinsic-determinant-degree,lem:determinant-metric-unique,lem:induced-hermitian-metric,lem:integral-submodule-projective}\notready
+\uses{def:intrinsic-determinant-degree,lem:determinant-metric-unique,lem:induced-hermitian-metric,lem:integral-submodule-projective}\lean{BostConjecture.Arithmetic.HermitianMetric.rescale,BostConjecture.Arithmetic.HermitianMetric.sectionNorm_rescale,BostConjecture.Arithmetic.HermitianMetric.determinant_rescale,BostConjecture.Arithmetic.HermitianMetric.degree_rescale,BostConjecture.Arithmetic.HermitianMetric.slope_rescale_self,BostConjecture.Arithmetic.HermitianMetric.degree_submodule_rescale,BostConjecture.Arithmetic.HermitianMetric.slope_submodule_rescale}\leanok
 For $t\in\mathbb R$ let $h[t]_\sigma=e^{2t}h_\sigma$, so that every
 norm is multiplied by $e^t$. If $M$ has generic rank $r$, then
 \[

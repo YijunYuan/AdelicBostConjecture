@@ -107,7 +107,7 @@ frame independence, and normalization in ranks zero and one are now proved;
 their new evidence is recorded below.
 
 Dual/tensor/exact-sequence identities,
-contraction and saturation inequalities, degree finiteness/supermodularity,
+higher-rank contraction and saturation inequalities, degree finiteness/supermodularity,
 and the actual HN specialization remain open. The existing abstract slope
 bridge does not close them. No main-theorem completion or whole-project
 verification claim follows from these arithmetic checks.
@@ -207,9 +207,26 @@ and an unreduced conjugation field) was repaired before that pass.
 Its source was captured by the concurrent automatic snapshot `a1924a2`
 before the explicit source commit could run. That snapshot is cited only
 for these independently checked arithmetic paths, not for other captured
-files. Expanded axiom evidence and the final source state will be recorded
-at this session's boundary. Uniform metric scaling is still being checked;
-no scaling completion claim follows from these earlier passes.
+files. The final submodule source (blob `b490dc4`) also proves finite
+projectivity via Mathlib's Dedekind torsion-free/flat and finite-presentation
+results; explicit source commit `9f613eb` records that addition.
+
+`MetricScaling` (final blob `c703904`, explicit commit `64dd7e3`) constructs
+uniformly scaled metrics, proves their determinant and intrinsic degree
+formulas, and consumes these on actual submodules and to normalize slope
+to zero. The determinant formula uses the newly proved metric uniqueness.
+No degree identities are assumed as structure fields.
+
+The final combined module check for `DegreeNormalization`, `LineContraction`,
+and `MetricScaling` (including `SubmoduleMetric`) passed 3509 jobs without
+warnings at 2026-11-05 17:46:25 UTC, fingerprint `95a6d06d50e391b6`.
+The expanded 70-probe `ArithmeticAxioms.lean` check passed at 17:47:54 UTC,
+`590174f2cda53d26`: only `propext`, `Classical.choice`, and `Quot.sound`.
+The independent honesty reviewer inspected these exact source blobs and
+accepted the three scoped blueprint nodes as honest partial progress.
+Intermediate scaling failures involved explicit complex-real conversions and
+projection elaboration in the Gram formula; all were repaired before these
+accepted passes. The full calculus and HN boundary above remains open.
 
 Lean LSP tools are unavailable in this session; serialized file checks are
 the development fallback. The Lean-search MCP endpoint also points at the
