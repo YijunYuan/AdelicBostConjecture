@@ -142,8 +142,12 @@ RAM and 8.86 GiB available, memory pressure avg10 0.03%, and no sustained swap
 out in the interval sample. About 4.49 GiB of swap was already occupied; this
 is recorded separately from active swapping. Keep builds serialized and
 monitor memory after startup. The immediate postlaunch sample retained
-8.63 GiB available with memory-pressure avg10 0.18%. A read-only operational
-review is checking the four-lane count and roadmap ancestor warnings.
+8.63 GiB available with memory-pressure avg10 0.18%. The read-only operational
+review at 20:39 UTC confirmed four distinct healthy lanes, 8.79–9.01 GiB
+available, PSI avg10 0.04%, and no swap-out increase or OOM kills. The roadmap
+warning counts nine ancestors plus four active fronts; it is retained
+intentionally, with current evidence added to `I-0017`. No extra proof writer
+was launched for that review.
 
 BALANCED owns the shared geometric-semistability and orbit-criterion API and
 coordinates its consumers with GEOM through `I-0047`. Its proof must cover the actual source
