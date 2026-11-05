@@ -1,0 +1,16 @@
+import BostConjecture.Specht.Asymptotic
+
+#print axioms BostConjecture.Specht.sum_polytabloidInt_sq
+#print axioms BostConjecture.Specht.log_prefixInsertionFactor
+#print axioms BostConjecture.Specht.log_prefixInsertionFactor_nonneg
+#print axioms BostConjecture.Specht.log_prefixInsertionFactor_le
+#print axioms BostConjecture.Specht.prefixAxialDistance_eq_shifted
+#print axioms BostConjecture.Specht.log_prefixInsertionFactor_le_of_not_gap
+#print axioms BostConjecture.Specht.log_prefixNormProduct
+#print axioms BostConjecture.Specht.expect_prefixGap_eq
+#print axioms BostConjecture.Specht.expect_prefixGap_uniform
+#print axioms BostConjecture.Specht.expect_logInsertion_le
+#print axioms BostConjecture.Specht.sum_le_of_bulk
+#print axioms BostConjecture.Specht.average_log_prefixNormProduct_eventually_le
+#print axioms BostConjecture.Specht.tendsto_average_log_prefixNormProduct_div
+#print axioms BostConjecture.Specht.tendsto_rectangleLogCovolume_div
