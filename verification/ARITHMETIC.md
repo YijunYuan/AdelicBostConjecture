@@ -102,10 +102,9 @@ does not extend that root evidence to subsequent determinant sources.
 ## Remaining boundary
 
 The full conjugate-linear fiber map and real fixed-fiber identification remain
-an explicit unchecked equivalence lemma. Determinant-metric uniqueness and
-independence from the auxiliary frame, degree-zero normalization, and the
-rank-one comparison of determinant degree with the original line degree are
-not yet proved. These are the next metric-transport and normalization steps.
+an explicit unchecked equivalence lemma. Determinant-metric uniqueness,
+frame independence, and normalization in ranks zero and one are now proved;
+their new evidence is recorded below.
 
 Dual/tensor/exact-sequence identities,
 contraction and saturation inequalities, degree finiteness/supermodularity,
@@ -169,3 +168,50 @@ unattached imported/helper declarations remain an intentional shared-project
 coverage warning; graph enumeration is not kernel evidence for concurrent
 drafts. The nested active-roadmap count was independently reviewed and left
 intact; only the three authorized proof lanes were used.
+
+## Metric uniqueness, normalization and line contraction
+
+The next checked units are `ComplexDeterminant.core_unique`, `core_eq`,
+`HermitianMetric.determinantFiber_unique`, `lineDegree_eq_of_equiv`, the
+rank-zero/rank-one determinant norms and degree identities in
+`DegreeNormalization`, and `lineDegree_le_of_injective` in `LineContraction`.
+The latter consumes `quotient_span_card_le`, an injection between the actual
+quotients by a section. No integral freeness restriction is introduced.
+
+- `Degree` rebuilt the uniqueness and line-isometry cone: 3241 jobs passed
+  at 2026-11-05 17:12:19 UTC, `ea82f359ff103b59`.
+- `DegreeNormalization` and `LineContraction`: 3243 jobs passed at 17:22:26 UTC,
+  `65ae2276f8a202bb`. Unused-section-variable warnings were then removed;
+  the final normalization file check `07045aa7357bebde` passed without warnings
+  at 17:23:49 UTC.
+- Read-only honesty review independently checked 11 new declarations at
+  17:24:10 UTC (`3b98b72a68d94ccd`): only `propext`, `Classical.choice`, and
+  `Quot.sound`. It approved the five corresponding scoped blueprint markers.
+
+Source commits are `1fc05f9`, `a81126f`, and `b2fd0b0`; markers are in
+`294498a`. The marker-edit command preceding `b2fd0b0` failed because it ran
+from the workspace root; `294498a` supplied the promised attachments.
+Intermediate normalization failures concerned exterior-degree transport and
+an empty-determinant lemma application, repaired before the accepted checks.
+
+## Actual induced submodule metrics
+
+`SubmoduleMetric` defines the canonical complex `fiberMap`, proves its
+injectivity by localization and transitivity of flatness, and constructs
+`HermitianMetric.pullback` and `submodule`. `sectionNorm_pullback` and
+`sectionNorm_submodule` prove equality with ambient section norms. The module
+check `eeb89b7e1a75c44b` passed 3074 jobs at 2026-11-05 17:37:03 UTC.
+The earlier file failure (missing explicit localization-flatness instance
+and an unreduced conjugation field) was repaired before that pass.
+
+Its source was captured by the concurrent automatic snapshot `a1924a2`
+before the explicit source commit could run. That snapshot is cited only
+for these independently checked arithmetic paths, not for other captured
+files. Expanded axiom evidence and the final source state will be recorded
+at this session's boundary. Uniform metric scaling is still being checked;
+no scaling completion claim follows from these earlier passes.
+
+Lean LSP tools are unavailable in this session; serialized file checks are
+the development fallback. The Lean-search MCP endpoint also points at the
+member directory rather than the workspace root, so searches use explicit-root
+Horizon CLI calls. Toolchain and dependencies are unchanged.
