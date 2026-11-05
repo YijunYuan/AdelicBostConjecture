@@ -445,6 +445,9 @@ $P_X=\{m\in M:1\otimes m\in X\}$. Then $P_X$ is finite projective,
 its canonical generic fiber is $X$, and its rank is $\dim_K X$.
 Moreover $M/P_X$ is finite projective. The assignment $X\mapsto P_X$
 is increasing, preserves intersections, and sends $0,V$ to $0,M$.
+For an integral submodule $P$ one has
+$P_{KP}=\{m:\exists\,0\ne a\in\Ocal,\ am\in P\}$; in particular
+$P_{KP}=P$ whenever $M/P$ is torsion-free.
 \end{lemma}
 \begin{proof}
 Every vector in $V$ is $a^{-1}(1\otimes m)$ for some $0\ne a\in\Ocal$
@@ -460,6 +463,11 @@ it is finite, and the same Dedekind flatness and finite-presentation
 argument makes it projective. Monotonicity and intersections follow by
 inverse images. The inverse image of $V$ is $M$; that of zero is zero
 because the localization map on the torsion-free module $M$ is injective.
+Finally, membership of $1\otimes m$ in $KP$ means that it is
+$a^{-1}(1\otimes p)$ for $a\ne0$ and $p\in P$. Injectivity of
+$M\to V$ gives $am=p$, proving the saturation formula; its converse
+follows by dividing by $a$ in $K$. If $M/P$ is torsion-free then
+$am\in P$ implies $m\in P$, which gives the last assertion.
 \end{proof}
 
 \begin{lemma}[Contraction between intrinsic Hermitian lines]
@@ -508,6 +516,29 @@ divide by $r$ for the slope statement. Pullback of the form along an
 inclusion commutes with multiplication by $e^{2t}$, so the same result
 applies to each induced submodule metric; these submodules are finite
 projective by the preceding lemma.
+\end{proof}
+
+\begin{lemma}[Intrinsic degree on generic subspaces]
+\label{lem:intrinsic-subspace-degree}
+\uses{lem:integral-part-generic-subspace,lem:induced-hermitian-metric,def:intrinsic-determinant-degree,lem:degree-rank-zero,lem:degree-metric-scaling}\notready
+Let $M$ be a finite projective Hermitian module and $V=K\otimes_\Ocal M$.
+Define $\delta_h(X)=\degn(P_X,h|_{P_X})$ for $X\subseteq V$.
+Then $\delta_h(0)=0$, and for $X\ne0$,
+\[
+ \frac{\delta_h(X)-\delta_h(0)}{\dim X-\dim0}
+ =\slope(P_X,h|_{P_X}).
+\]
+Uniform metric scaling satisfies
+$\delta_{h[t]}(X)=\delta_h(X)-t\dim X$.
+\end{lemma}
+\begin{proof}
+The integral part is finite projective and its generic dimension is
+$\dim X$, so its induced metric and determinant degree are defined.
+At $X=0$ that dimension is zero, and rank-zero normalization gives
+$\delta_h(0)=0$. The displayed identity follows by this normalization
+and the generic rank formula in the definition of slope. Finally,
+induced metrics commute with uniform rescaling, and the degree scaling
+formula subtracts $t$ times the generic rank, namely $t\dim X$.
 \end{proof}
 
 \begin{lemma}[Determinant identities and contraction]
