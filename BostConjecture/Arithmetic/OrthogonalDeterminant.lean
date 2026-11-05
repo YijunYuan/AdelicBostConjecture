@@ -2,6 +2,7 @@ module
 
 public import BostConjecture.Arithmetic.DeterminantContraction
 public import BostConjecture.Arithmetic.ExteriorProduct
+public import BostConjecture.Arithmetic.OrthogonalLift
 
 /-!
 # Determinant norms of orthogonal summands
@@ -75,3 +76,38 @@ lemma norm_prodMap (p : OrthonormalBasis (Fin a) ℂ E)
   rw [hu, mul_one, mul_comm]
 
 end BostConjecture.Arithmetic.ComplexDeterminant
+
+namespace BostConjecture.Arithmetic.ComplexQuotient
+
+variable {E F G : Type*} [NormedAddCommGroup E] [InnerProductSpace ℂ E]
+    [AddCommGroup F] [Module ℂ F]
+    [NormedAddCommGroup G] [InnerProductSpace ℂ G] [FiniteDimensional ℂ G]
+    {a b : ℕ}
+
+/-- The orthogonal section realizes the determinant norm product for the
+actual quotient Hermitian form. -/
+lemma norm_determinant_lift (i : E →ₗ[ℂ] G) (q : G →ₗ[ℂ] F)
+    (hq : Function.Surjective q)
+    (hi : ∀ x y, inner ℂ (i x) (i y) = inner ℂ x y)
+    (hqi : q.comp i = 0) :
+    letI : InnerProductSpace.Core ℂ F := core q hq
+    letI := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := F)
+    letI := InnerProductSpace.ofCore (inferInstance : PreInnerProductSpace.Core ℂ F)
+    ∀ (p : OrthonormalBasis (Fin a) ℂ E) (r : OrthonormalBasis (Fin b) ℂ F)
+      (c : OrthonormalBasis (Fin (a + b)) ℂ G)
+      (x : ⋀[ℂ]^a E) (y : ⋀[ℂ]^b F),
+      Real.sqrt (((ComplexDeterminant.core c).inner
+        (map (a + b) (i.coprod (lift q hq)) (prodMap ℂ E F a b (x ⊗ₜ[ℂ] y)))
+        (map (a + b) (i.coprod (lift q hq)) (prodMap ℂ E F a b (x ⊗ₜ[ℂ] y)))).re) =
+        Real.sqrt (((ComplexDeterminant.core p).inner x x).re) *
+          Real.sqrt (((ComplexDeterminant.core r).inner y y).re) := by
+  let : InnerProductSpace.Core ℂ F := core q hq
+  let := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := F)
+  let := InnerProductSpace.ofCore (inferInstance : PreInnerProductSpace.Core ℂ F)
+  intro p r c x y
+  apply ComplexDeterminant.norm_prodMap p r c i (lift q hq) hi (fun _ _ => rfl)
+  intro u v
+  exact (Submodule.mem_orthogonal _ _).mp (lift_mem q hq v) (i u)
+    (show q (i u) = 0 from LinearMap.congr_fun hqi u)
+
+end BostConjecture.Arithmetic.ComplexQuotient
