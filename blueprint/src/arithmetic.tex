@@ -545,7 +545,8 @@ formula subtracts $t$ times the generic rank, namely $t\dim X$.
 \end{proof}
 
 \begin{lemma}[Orthogonal representatives of a surjection]
-\label{lem:orthogonal-lift}\notready
+\label{lem:orthogonal-lift}
+\lean{BostConjecture.Arithmetic.ComplexQuotient.orthogonalEquiv,BostConjecture.Arithmetic.ComplexQuotient.lift,BostConjecture.Arithmetic.ComplexQuotient.map_lift,BostConjecture.Arithmetic.ComplexQuotient.lift_mem,BostConjecture.Arithmetic.ComplexQuotient.lift_injective,BostConjecture.Arithmetic.ComplexQuotient.lift_map,BostConjecture.Arithmetic.ComplexQuotient.eq_lift,BostConjecture.Arithmetic.ComplexQuotient.norm_lift_map_le,BostConjecture.Arithmetic.ComplexQuotient.core}\leanok
 Let $E$ be a finite-dimensional complex Hermitian space, $F$ a complex
 vector space and $f:E\to F$ a surjective linear map. There is a unique
 linear map $s:F\to E$ with $fs=1$ and image in $(\ker f)^\perp$.
@@ -571,7 +572,8 @@ $\|s(u)\|\leq\|x\|$, with equality attained at $x=s(u)$.
 \begin{lemma}[Canonical quotient Hermitian metric]
 \label{lem:quotient-hermitian-metric}
 \uses{lem:orthogonal-lift,lem:hermitian-fiber-conjugation,lem:induced-hermitian-metric,lem:integral-part-generic-subspace}
-\source{bost-specht-manuscript:page-0003}\notready
+\source{bost-specht-manuscript:page-0003}
+\lean{BostConjecture.Arithmetic.ker_fiberMap_mkQ,BostConjecture.Arithmetic.HermitianMetric.fiberLift_conjugate,BostConjecture.Arithmetic.HermitianMetric.quotient,BostConjecture.Arithmetic.HermitianMetric.quotientFiber_min,BostConjecture.Arithmetic.HermitianMetric.pushforwardFiber_unique,BostConjecture.Arithmetic.HermitianMetric.sectionNorm_quotient_le}\leanok
 Let $P\subseteq M$ be a saturated submodule of a finite projective
 Hermitian $\Ocal$-module, and put $Q=M/P$. Then $Q$ is finite projective.
 There is a unique Hermitian metric on $Q$ such that, at each embedding,
@@ -580,8 +582,6 @@ For every $v\in M_\sigma$ it satisfies
 \[
  \|[v]\|_{Q,\sigma}=\min_{u\in P_\sigma}\|v-u\|_{M,\sigma}.
 \]
-If $P\subseteq T\subseteq M$, the quotient metric on $T/P$ agrees
-with the metric induced by its inclusion in $M/P$.
 \end{lemma}
 \begin{proof}
 Saturation identifies $P$ with the integral part of its generic span,
@@ -597,13 +597,55 @@ The minimum occurs at $u=v_P$, proving the formula.
 Conjugation on the ambient fibers is antiunitary and takes $P_\sigma$
 to $P_{\bar\sigma}$, hence takes their orthogonal complements to each
 other. The transported quotient forms thus satisfy conjugation
-compatibility. Finally, if $v\in T_\sigma$, then $v_P\in P_\sigma$
-and $v-v_P\in T_\sigma$, so the same orthogonal representative computes
-both metrics on $T_\sigma/P_\sigma$. This proves their agreement.
+compatibility.
+\end{proof}
+
+\begin{lemma}[Compatibility of nested quotient metrics]
+\label{lem:nested-quotient-metric}\uses{lem:quotient-hermitian-metric}\notready
+If $P\subseteq T\subseteq M$ are saturated submodules, the quotient
+metric on $T/P$ agrees with the metric induced by its inclusion in $M/P$.
+\end{lemma}
+\begin{proof}
+For $v\in T_\sigma$, its orthogonal projection $v_P$ lies in
+$P_\sigma\subseteq T_\sigma$, so $v-v_P$ belongs to $T_\sigma$.
+It is orthogonal to $P_\sigma$ in both ambient spaces. Thus it is the
+unique orthogonal representative in both quotient constructions, and
+its inner products in the induced metric of $T_\sigma$ are exactly
+those of $M_\sigma$. This proves agreement of the quotient forms.
+\end{proof}
+
+\begin{lemma}[Intrinsic finite tensor metrics]
+\label{lem:arithmetic-tensor-metric}
+\uses{def:hermitian-metric,lem:finite-hilbert-tensor,lem:tensor-base-change-equivalence}
+\source{bost-specht-manuscript:page-0002,bost-specht-manuscript:page-0010}
+\lean{BostConjecture.Arithmetic.tensorFiberEquiv,BostConjecture.Arithmetic.HermitianMetric.tensorFiber_inner_tprod,BostConjecture.Arithmetic.HermitianMetric.tensorFiber_conjugate,BostConjecture.Arithmetic.HermitianMetric.piTensor,BostConjecture.Arithmetic.HermitianMetric.sectionNorm_piTensor_tprod}\leanok
+For a finite family of metrized $\Ocal$-modules $M_i$, transport of the
+canonical Hilbert tensor metric through scalar extension defines a positive
+definite conjugation-compatible Hermitian metric on the actual tensor module
+$\bigotimes_i M_i$. For integral sections $x_i,y_i\in M_i$ it satisfies
+\[
+ h_{\otimes,\sigma}(j_\sigma(\otimes_i x_i),j_\sigma(\otimes_i y_i))
+   =\prod_i h_{i,\sigma}(j_\sigma(x_i),j_\sigma(y_i)).
+\]
+The norm of an integral pure tensor is the product of its factor norms.
+\end{lemma}
+\begin{proof}
+The canonical scalar-extension isomorphism sends the integral section
+$1\otimes(\otimes_i x_i)$ to $\otimes_i(1\otimes x_i)$.
+Pull back the positive Hilbert tensor form along this isomorphism;
+its pure-tensor formula gives the displayed identity. The Hilbert tensor
+producer applies to arbitrary complex inner product spaces, so no
+finite-dimensionality hypothesis is required for this metric construction.
+On integral pure tensors conjugation compatibility follows by multiplying
+the compatibility identities of the factors. Integral pure tensors generate
+the tensor module, so additivity and sesquilinearity extend that identity
+to all integral sections. Finally, each self-pairing is real and nonnegative;
+the square root of their product is the product of their square roots,
+which gives the norm formula, including for the empty family.
 \end{proof}
 
 \begin{lemma}[Determinant identities and contraction]
-\label{lem:degree-calculus}\uses{def:hermitian-degree,lem:quotient-hermitian-metric,lem:line-degree-contraction,lem:degree-metric-scaling}
+\label{lem:degree-calculus}\uses{def:hermitian-degree,lem:quotient-hermitian-metric,lem:arithmetic-tensor-metric,lem:line-degree-contraction,lem:degree-metric-scaling}
 \source{bost-specht-manuscript:page-0003}\notready
 Degrees are additive in an exact sequence with induced and quotient
 metrics. For positive-rank bundles $A,B$ and a line bundle $L$,
@@ -731,7 +773,7 @@ degree is asserted.
 
 \begin{lemma}[The Hermitian subspace degree is supermodular]
 \label{lem:hermitian-convex-slopes}
-\uses{lem:degree-calculus,lem:intrinsic-subspace-degree,lem:integral-part-generic-subspace,lem:subspace-convex-slopes}\notready
+\uses{lem:nested-quotient-metric,lem:degree-calculus,lem:intrinsic-subspace-degree,lem:integral-part-generic-subspace,lem:subspace-convex-slopes}\notready
 For a Hermitian bundle $A$ put $\delta(X)=\degn(A\cap X)$ on the
 $K$-subspaces of $A_K$, using the induced metrics. Then $\delta$ is
 supermodular. If $X\subsetneq Y$, the interval slope in the preceding

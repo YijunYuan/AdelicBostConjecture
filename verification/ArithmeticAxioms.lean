@@ -1,3 +1,5 @@
+import BostConjecture.Arithmetic.QuotientMetric
+import BostConjecture.Arithmetic.TensorMetric
 import BostConjecture.Arithmetic.HermitianLine
 import BostConjecture.Arithmetic.DeterminantLine
 import BostConjecture.Arithmetic.Degree
@@ -93,3 +95,27 @@ import BostConjecture.Arithmetic.DegreeNormalization
 #print axioms BostConjecture.Arithmetic.HermitianMetric.subspaceDegree_div_finrank
 #print axioms BostConjecture.Arithmetic.HermitianMetric.subspaceDegree_rescale
 #print axioms BostConjecture.Arithmetic.HermitianMetric.subspaceSlope_apply_bot
+
+#print axioms BostConjecture.Arithmetic.fiberConjugate
+#print axioms BostConjecture.Arithmetic.fiberConjugate_map
+#print axioms BostConjecture.Arithmetic.HermitianMetric.inner_conjugate
+#print axioms BostConjecture.Arithmetic.ComplexQuotient.lift
+#print axioms BostConjecture.Arithmetic.ComplexQuotient.eq_lift
+#print axioms BostConjecture.Arithmetic.ComplexQuotient.norm_lift_map_le
+#print axioms BostConjecture.Arithmetic.ComplexQuotient.core
+#print axioms BostConjecture.Arithmetic.fiberMap_surjective
+#print axioms BostConjecture.Arithmetic.ker_fiberMap_mkQ
+#print axioms BostConjecture.Arithmetic.HermitianMetric.fiberLift
+#print axioms BostConjecture.Arithmetic.HermitianMetric.fiberLift_conjugate
+#print axioms BostConjecture.Arithmetic.HermitianMetric.pushforward
+#print axioms BostConjecture.Arithmetic.HermitianMetric.quotient
+#print axioms BostConjecture.Arithmetic.HermitianMetric.sectionNorm_pushforward_le
+#print axioms BostConjecture.Arithmetic.HermitianMetric.sectionNorm_quotient_le
+#print axioms BostConjecture.Arithmetic.HermitianMetric.pushforwardFiber_min
+#print axioms BostConjecture.Arithmetic.HermitianMetric.quotientFiber_min
+#print axioms BostConjecture.Arithmetic.HermitianMetric.pushforwardFiber_unique
+#print axioms BostConjecture.Arithmetic.tensorFiberEquiv
+#print axioms BostConjecture.Arithmetic.HermitianMetric.tensorFiber_inner_tprod
+#print axioms BostConjecture.Arithmetic.HermitianMetric.tensorFiber_conjugate
+#print axioms BostConjecture.Arithmetic.HermitianMetric.piTensor
+#print axioms BostConjecture.Arithmetic.HermitianMetric.sectionNorm_piTensor_tprod

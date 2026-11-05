@@ -291,3 +291,83 @@ and pure-tensor pairing/regrouping formulas to GEOM's existing `Tensor/**`
 lane. ARITH will consume them through the canonical complex scalar-extension
 equivalence and prove conjugation and degree identities. No arithmetic tensor
 metric is claimed checked, and no additional proof writer was launched.
+
+
+## Full fiber conjugation, quotient metrics and finite tensor metrics (2026-11-05)
+
+Claim class: **proved producers**. The inherited intrinsic representation is
+unchanged. `fiberConjugate` is the canonical conjugate-linear equivalence and
+`inner_conjugate` proves antiunitarity from compatibility on integral sections.
+`ComplexQuotient.lift` constructs the orthogonal right inverse using Mathlib's
+kernel quotient and complement equivalences. Its uniqueness proves
+`fiberLift_conjugate`; this supplies the conjugation field of the constructed
+`pushforward` and `quotient` metrics. No degree identities are assumed.
+`ker_fiberMap_mkQ` identifies the actual submodule fiber, and
+`quotientFiber_min` proves the attained distance formula there. Section
+contraction and the core uniqueness formula are checked consumers.
+
+`TensorMetric` consumes GEOM's checked `Tensor.baseChangeEquiv` and
+`Tensor.hilbertCore` on the existing `ComplexFiber`. It constructs the actual
+finite integral tensor metric, proves conjugation on all integral tensor
+sections, and proves the integral pure-tensor pairing and norm formulas,
+including the empty family. No integral freeness assumption is added.
+The blueprint tensor statement explicitly quantifies integral factor sections;
+it does not label an unexported arbitrary-complex-factor uniqueness theorem.
+
+Accepted serialized checks (explicit workspace root on every invocation):
+
+- `BostConjecture.Arithmetic.FiberConjugation`: 3338 jobs,
+  `cf8191be68a4d703`, 18:28:03 UTC.
+- `BostConjecture.Arithmetic.OrthogonalLift`: 2433 jobs,
+  `edf793a3ea7dd4b6`, 18:29:22 UTC.
+- Final combined `BostConjecture.Arithmetic.QuotientMetric
+  BostConjecture.Arithmetic.TensorMetric`: 3452 jobs,
+  `a9a6a8914330d729`, 18:48:33 UTC.
+- Final `--lean verification/ArithmeticAxioms.lean`: **107 probes**,
+  `590174f2cda53d26`, 18:49:24 UTC. Every probe reports only `propext`,
+  `Classical.choice`, and `Quot.sound`; no `sorryAx` or additional axiom.
+
+Final checked source blobs:
+
+- `BostConjecture/Arithmetic/FiberConjugation.lean`: `39ebdb64cf567c2bf450bc97e9adaf8fc19032c9`.
+- `BostConjecture/Arithmetic/OrthogonalLift.lean`: `0e760223da30f518a71a1a65666593f3664a108e`.
+- `BostConjecture/Arithmetic/QuotientMetric.lean`: `92925620f1c6320443e712e600ee3b989a119f9a`.
+- `BostConjecture/Arithmetic/TensorMetric.lean`: `53064c0a5ca51898e95053f8b5bb47a9c8946ce5`.
+- `verification/ArithmeticAxioms.lean`: `5cf8b2557efe1c6ce7b3fdf43a40d9037a8b99f0`.
+
+The combined check at 18:44:17 UTC (`9ccf9fba86c6b2a9`) failed on the new
+quotient distance corollary: simplifying a dependent equality obscured its
+metric instance. Direct rewriting followed by `exact` repaired it; the final
+combined pass above supersedes that failure. Earlier LSP errors in conjugation
+and tensor proofs were repaired. LSP was available during most proof work; it
+briefly failed to load the concurrently edited Hilbert dependency, so the
+serialized check settled that interface. No remaining broken proof is claimed
+within the checked arithmetic cone.
+
+The frontier moved from full fiber conjugation/canonical quotient metrics to
+nested quotient compatibility and the determinant dual/tensor/exact-sequence
+degree identities. Higher-rank contraction, saturation-degree monotonicity,
+arithmetic degree finiteness, supermodularity and actual HN remain open.
+The next source-facing nodes are `lem:nested-quotient-metric` and
+`lem:degree-calculus`, kept `notready`. No main-theorem or task completion
+is claimed. Root integration remains owned by SPECHT through I-0028.
+
+Graph sync: 128 blueprint nodes, 931 Lean declarations, 552 generated edges;
+no unresolved attachment warning. The 517 unattached declarations are the
+shared helper/imported-declaration coverage warning, intentionally retained.
+Read-only janitor review confirmed that ten active roadmap rows represent
+three live branches and their ancestors; HN stays pending. Scratch cleanup
+found no stale candidates. I-0030's delivered tensor interface was acknowledged;
+GEOM owns that thread's closure. Only owned paths are included in ARITH commits.
+
+Honesty-reviewer was used and rechecked the repaired quotient, tensor and
+blueprint deltas: verdict **satisfactory, honest partial progress**. It
+independently inspected the recorded 107-probe audit, found no certificate,
+vacuity or target-shaped assumptions, and confirmed that the scoped completion
+markers match the actual metric producers. Its requested tensor wording and
+dependency corrections were applied before this report.
+
+SPECHT subsequently confirmed the earlier arithmetic imports (through
+`SubspaceDegree`) in root commit `2072f12`, with a 9141-job root check at
+18:42:11 UTC (`975bdb23135a0d4a`). That snapshot does not certify this round's
+new metric imports; I-0028 now tracks only their remaining integration.

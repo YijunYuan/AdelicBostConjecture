@@ -156,6 +156,28 @@ lemma pushforwardFiber_min (h : HermitianMetric (K := K) M)
   rw [← hz]
   exact ComplexQuotient.norm_lift_map_le _ _ _
 
+/-- The quotient norm is the attained distance to the actual submodule fiber. -/
+lemma quotientFiber_min (h : HermitianMetric (K := K) M)
+    (P : Submodule (𝓞 K) M) (σ : K →+* ℂ) (v : ComplexFiber M σ) :
+    ∃ u ∈ LinearMap.range (fiberMap P.subtype σ),
+      Real.sqrt ((((h.quotient P).fiber σ).inner (fiberMap P.mkQ σ v)
+        (fiberMap P.mkQ σ v)).re) = Real.sqrt (((h.fiber σ).inner (v - u) (v - u)).re) ∧
+      ∀ w ∈ LinearMap.range (fiberMap P.subtype σ),
+        Real.sqrt (((h.fiber σ).inner (v - u) (v - u)).re) ≤
+          Real.sqrt (((h.fiber σ).inner (v - w) (v - w)).re) := by
+  obtain ⟨x, hx, he, hmin⟩ := h.pushforwardFiber_min P.mkQ P.mkQ_surjective σ
+    (fiberMap P.mkQ σ v)
+  refine ⟨v - x, ?_, ?_, ?_⟩
+  · rw [← ker_fiberMap_mkQ]
+    change fiberMap P.mkQ σ (v - x) = 0
+    rw [map_sub, hx, sub_self]
+  · rw [sub_sub_cancel]
+    exact he
+  · intro w hw
+    rw [← ker_fiberMap_mkQ] at hw
+    simpa only [sub_sub_cancel] using hmin (v - w) (by
+      rw [map_sub, (LinearMap.mem_ker.mp hw), sub_zero])
+
 /-- Agreement on all orthogonal representatives determines the quotient form. -/
 lemma pushforwardFiber_unique (h : HermitianMetric (K := K) M)
     (f : M →ₗ[𝓞 K] N) (hf : Function.Surjective f) (σ : K →+* ℂ)
