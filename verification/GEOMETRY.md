@@ -434,7 +434,7 @@ round can start with the guarded LSP client. BOST-GEOM remains open. No proof
 work was started after that request was read; the global pairing diagram and
 contraction are explicitly deferred to that round.
 
-Before the request arrived, an initial `Tensor/EvaluationBaseChange.lean` draft
+Before the request was read, an initial `Tensor/EvaluationBaseChange.lean` draft
 was checked and failed (`84bc78e9aaa6390a`, 20:16:11 UTC). It is not a producer:
 the scalar case needs an explicit restricted-scalar linearity rewrite, and the
 `LinearEquiv.baseChange` call used the wrong argument order. The exact draft is
@@ -449,3 +449,11 @@ The stable local-contraction import was handed to SPECHT in I-0044, with the
 138-probe evidence and the distinction from the earlier 9171-job root batch.
 The shared-index incident above remains resolved; final owned commits use
 explicit `commit --only` pathspecs. No other lane's drafts are certified here.
+
+Final hygiene review confirmed the handoff and no pending owned Lean changes.
+The graph sync has 158 blueprint nodes and two stale declaration nodes, both
+from the removed failed evaluation draft. Their generated `lean_ok` tags are
+syntactic scanner output, not kernel evidence; the failed-check reviews and
+node comment explicitly record this. No blueprint node attaches to those drafts.
+Helper/import coverage warnings and the ten active roadmap items across the
+three lanes are retained intentionally. Scratch dry-run found no stale candidates.
