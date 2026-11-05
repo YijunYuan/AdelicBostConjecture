@@ -108,15 +108,17 @@ lemma determinantFiber_norm_eq (h : HermitianMetric (K := K) M) (σ : K →+* �
 
 variable {N : Type*} [AddCommGroup N] [Module (𝓞 K) N] [Module.Finite (𝓞 K) N]
 
-/-- Fiberwise contraction descends to contraction of every integral determinant section. -/
-theorem determinant_sectionNorm_map_le (h : HermitianMetric (K := K) M)
+/-- Fiberwise contraction descends to every vector of the complex determinant fiber. -/
+theorem determinantFiber_norm_map_le (h : HermitianMetric (K := K) M)
     (g : HermitianMetric (K := K) N) (f : M →ₗ[𝓞 K] N)
     (hr : Module.finrank K (K ⊗[𝓞 K] M) = Module.finrank K (K ⊗[𝓞 K] N))
     (hc : ∀ (σ : K →+* ℂ) (x : ComplexFiber M σ),
       Real.sqrt (((g.fiber σ).inner (fiberMap f σ x) (fiberMap f σ x)).re) ≤
         Real.sqrt (((h.fiber σ).inner x x).re))
-    (σ : K →+* ℂ) (x : DeterminantLine (K := K) M) :
-    g.determinant.sectionNorm σ (determinantMap f hr x) ≤ h.determinant.sectionNorm σ x := by
+    (σ : K →+* ℂ) (x : ComplexFiber (DeterminantLine (K := K) M) σ) :
+    Real.sqrt (((g.determinantFiber σ).inner (fiberMap (determinantMap f hr) σ x)
+      (fiberMap (determinantMap f hr) σ x)).re) ≤
+      Real.sqrt (((h.determinantFiber σ).inner x x).re) := by
   let : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
   let := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber M σ)
   let := InnerProductSpace.ofCore
@@ -130,12 +132,22 @@ theorem determinant_sectionNorm_map_le (h : HermitianMetric (K := K) M)
   let c := (stdOrthonormalBasis ℂ (ComplexFiber N σ)).reindex
     (finCongr (complexFiber_finrank N σ))
   let d := c.reindex (finCongr hr.symm)
-  change Real.sqrt (((g.determinantFiber σ).inner
-    (fiberSection _ σ (determinantMap f hr x)) (fiberSection _ σ (determinantMap f hr x))).re) ≤
-      Real.sqrt (((h.determinantFiber σ).inner (fiberSection _ σ x) (fiberSection _ σ x)).re)
   rw [g.determinantFiber_norm_eq σ c, h.determinantFiber_norm_eq σ b,
-    determinantMap_section, ComplexDeterminant.norm_degreeCongr hr d c]
+    determinantMap_fiber, ComplexDeterminant.norm_degreeCongr hr d c]
   exact ComplexDeterminant.norm_map_le b d (fiberMap f σ) (hc σ) _
+
+/-- Fiberwise contraction descends to contraction of every integral determinant section. -/
+theorem determinant_sectionNorm_map_le (h : HermitianMetric (K := K) M)
+    (g : HermitianMetric (K := K) N) (f : M →ₗ[𝓞 K] N)
+    (hr : Module.finrank K (K ⊗[𝓞 K] M) = Module.finrank K (K ⊗[𝓞 K] N))
+    (hc : ∀ (σ : K →+* ℂ) (x : ComplexFiber M σ),
+      Real.sqrt (((g.fiber σ).inner (fiberMap f σ x) (fiberMap f σ x)).re) ≤
+        Real.sqrt (((h.fiber σ).inner x x).re))
+    (σ : K →+* ℂ) (x : DeterminantLine (K := K) M) :
+    g.determinant.sectionNorm σ (determinantMap f hr x) ≤ h.determinant.sectionNorm σ x := by
+  have he := h.determinantFiber_norm_map_le g f hr hc σ (fiberSection _ σ x)
+  rw [fiberMap_section] at he
+  exact he
 
 variable [NumberField K] [Module.Projective (𝓞 K) M] [Module.Projective (𝓞 K) N]
 

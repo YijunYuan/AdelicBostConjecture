@@ -102,6 +102,32 @@ lemma determinantMap_section (f : M →ₗ[𝓞 K] N)
   rw [exteriorDegreeCongr_section, exteriorMap_section]
   rfl
 
+/-- Naturality on all complex determinant vectors, extended from integral generators. -/
+lemma determinantMap_fiber (f : M →ₗ[𝓞 K] N)
+    (hr : Module.finrank K (K ⊗[𝓞 K] M) = Module.finrank K (K ⊗[𝓞 K] N))
+    (σ : K →+* ℂ) (x : ComplexFiber (DeterminantLine (K := K) M) σ) :
+    determinantComplexEquiv N σ (fiberMap (determinantMap f hr) σ x) =
+      degreeCongr hr (map (Module.finrank K (K ⊗[𝓞 K] M)) (fiberMap f σ)
+        (determinantComplexEquiv M σ x)) := by
+  let : Algebra (𝓞 K) ℂ := (σ.comp (algebraMap (𝓞 K) K)).toAlgebra
+  have he : (determinantComplexEquiv N σ).toLinearMap.comp (fiberMap (determinantMap f hr) σ) =
+      (degreeCongr hr).toLinearMap.comp
+        ((map (Module.finrank K (K ⊗[𝓞 K] M)) (fiberMap f σ)).comp
+          (determinantComplexEquiv M σ).toLinearMap) := by
+    apply TensorProduct.AlgebraTensorModule.ext
+    intro a y
+    have he := determinantMap_section f hr σ y
+    change determinantComplexEquiv N σ
+      ((determinantMap f hr).baseChange ℂ (a ⊗ₜ[𝓞 K] y)) =
+      degreeCongr hr (map _ (fiberMap f σ)
+        (determinantComplexEquiv M σ (a ⊗ₜ[𝓞 K] y)))
+    have ht (z : DeterminantLine (K := K) M) :
+        a ⊗ₜ[𝓞 K] z = a • fiberSection _ σ z := by
+      simp only [fiberSection, TensorProduct.smul_tmul', smul_eq_mul, mul_one]
+    rw [ht, map_smul, map_smul, map_smul, map_smul, map_smul]
+    simpa only [fiberSection, LinearMap.baseChange_tmul] using congrArg (a • ·) he
+  exact LinearMap.congr_fun he x
+
 variable [NumberField K] [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 
 /-- The determinant of an injective equal-rank integral map is injective. -/
