@@ -214,7 +214,8 @@ frame independence over both rings.
 
 \begin{lemma}[Tensor products and extension of scalars]
 \label{lem:tensor-base-change-equivalence}
-\source{bost-specht-manuscript:page-0009}\notready
+\source{bost-specht-manuscript:page-0009}\lean{BostConjecture.Tensor.baseChangeEquiv,BostConjecture.Tensor.baseChangeEquiv_tmul,BostConjecture.Tensor.baseChangeEquiv_symm_tprod,BostConjecture.Tensor.baseChangeEquiv_natural,BostConjecture.Tensor.scalarExtension_trans}
+\leanok
 For a commutative $R$-algebra $S$ and a finite family of $R$-modules
 $(M_i)_{i\in I}$, the canonical map
 \[
@@ -252,32 +253,106 @@ $(\prod_i s_i)\otimes\bigotimes_i m_i$.
 Naturality follows by applying each composite to the same pure generators.
 \end{proof}
 
-\begin{lemma}[Descent of linear maps on a finite principal cover]
-\label{lem:linear-map-localization-descent}
-\source{bost-specht-manuscript:page-0009}\notready
-Let $f_1,\ldots,f_m$ generate the unit ideal of a commutative ring $R$,
-and let $P,Q$ be $R$-modules. A family of $R_{f_i}$-linear maps
-$u_i:P_{f_i}\to Q_{f_i}$ whose extensions agree on every
-$R_{f_i f_j}$ comes from a unique $R$-linear map $u:P\to Q$.
-If all $u_i$ are injective, then $u$ is injective.
+\begin{lemma}[Scalar extension of the intrinsic determinant twist]
+\label{lem:determinant-twist-base-change-equivalence}
+\uses{lem:tensor-base-change-equivalence}
+\source{bost-specht-manuscript:page-0009}
+\lean{BostConjecture.Geometry.determinantPowerBaseChangeEquiv,BostConjecture.Geometry.determinantTwistBaseChangeEquiv,BostConjecture.Geometry.determinantTwistBaseChangeEquiv_tmul}
+\leanok
+Let $S$ be a commutative $R$-algebra, $M$ an $R$-module, $L$ an
+abelian group, and $a,k\geq0$. There is a canonical isomorphism
+\[
+ S\otimes_R\bigl((\bigwedge_R^aM)^{\otimes k}\otimes_R
+ (R\otimes_{\mathbb Z}L)\bigr)
+ \simeq
+ (\bigwedge_S^a(S\otimes_R M))^{\otimes k}\otimes_S
+ (S\otimes_{\mathbb Z}L).
+\]
+It sends $s\otimes(\eta\otimes(1\otimes x))$ to
+$s(\delta(\eta)\otimes(1\otimes x))$, where $\delta$ is the tensor
+power of the canonical exterior-power scalar-extension map.
 \end{lemma}
 \begin{proof}
-First consider compatible elements $x_i\in Q_{f_i}$. Choose
+First distribute scalar extension over the outer binary tensor
+product. On its first factor apply tensor base change, followed in
+each slot by the canonical exterior-power base-change isomorphism.
+The latter takes $s\otimes(m_1\wedge\cdots\wedge m_a)$ to
+$s((1\otimes m_1)\wedge\cdots\wedge(1\otimes m_a))$; the universal
+alternating property gives its inverse and verifies the two inverse
+identities on wedges. On the second factor use
+$S\otimes_R(R\otimes_{\mathbb Z}L)\simeq S\otimes_{\mathbb Z}L$,
+which sends $s\otimes(r\otimes x)$ to $s r\otimes x$.
+Each factor is an isomorphism without any flatness hypothesis.
+Their composite has the asserted formula by substitution.
+\end{proof}
+
+\begin{lemma}[The full base-change square for the free inclusion]
+\label{lem:determinant-free-base-change-square}
+\uses{lem:determinant-free-base-change,lem:determinant-twist-base-change-equivalence}
+\source{bost-specht-manuscript:page-0009}
+\lean{BostConjecture.Geometry.freeDeterminantMap_baseChange}
+\leanok
+Let $M$ be free of rank $a$ over a commutative ring $R$, let $S$ be
+an $R$-algebra, and let $t$ be a rectangular tableau of shape $(k^a)$,
+$k>0$. Under the canonical isomorphisms for its source and target,
+the scalar extension $S\otimes_R j_M$ equals $j_{S\otimes_R M}$
+for any chosen frame of $S\otimes_R M$.
+\end{lemma}
+\begin{proof}
+Every element of the scalar-extended source is a sum of elements
+$s\otimes(\eta\otimes(r\otimes x))$. Balancing moves $r$ to the
+leading coefficient, so it suffices to take $r=1$. The source
+isomorphism then has the formula of the preceding lemma, and the
+target isomorphism is scalar extension on tensor powers. Their
+compatibility with $j_M$ is the scalar-extension identity for the
+free determinant-twisted map. Multiplying by $s$ proves the identity
+on these generators, and additivity proves the equality of maps.
+\end{proof}
+
+\begin{lemma}[Compatible localized elements]
+\label{lem:localized-sections-glue}
+\source{bost-specht-manuscript:page-0009}\notready
+Let $s$ be a finite subset generating the unit ideal of a commutative
+ring $R$, and let $Q$ be an $R$-module. Suppose $x_f\in Q_f$ for
+$f\in s$, and for every $f,g\in s$ the image of $x_f$ in $(Q_g)_f$
+equals the image of $x_g$. Then there is a unique $q\in Q$ whose
+image in each $Q_f$ is $x_f$.
+\end{lemma}
+\begin{proof}
+Consider compatible elements $x_i\in Q_{f_i}$. Choose
 $q_i\in Q$ and exponents $n_i$ with $x_i=q_i/f_i^{n_i}$.
 For each $i,j$, compatibility means that in $(Q_{f_j})_{f_i}$
 the element $q_i-f_i^{n_i}x_j$ is zero. Hence a power of $f_i$
-annihilates this difference in $Q_{f_j}$. Finiteness permits one
-integer $N\geq n_i$ for all $i$ such that
-$v_i=f_i^{N-n_i}q_i$ has image $f_i^N x_j$ in $Q_{f_j}$ for every $j$.
-The ideal generated by the $f_i^N$ is the unit ideal: a proper ideal
+annihilates this difference in $Q_{f_j}$. For each fixed $i$, finiteness of the second index permits an
+integer $N_i\geq n_i$ such that
+$v_i=f_i^{N_i-n_i}q_i$ has image $f_i^{N_i}x_j$ in $Q_{f_j}$ for every $j$.
+The ideal generated by the $f_i^{N_i}$ is the unit ideal: a proper ideal
 would lie in a maximal ideal containing every $f_i$, a contradiction.
-Choose $a_i\in R$ with $\sum_i a_i f_i^N=1$. Then
+Choose $a_i\in R$ with $\sum_i a_i f_i^{N_i}=1$. Then
 $q=\sum_i a_i v_i$ maps to $x_j$ in each localization.
 If $q$ maps to zero in all $Q_{f_i}$, some common power $f_i^K$
 annihilates $q$ for every $i$. The same unit-ideal argument gives
 $q=0$, proving uniqueness.
+\end{proof}
 
-For $p\in P$, apply this construction to $x_i=u_i(p/1)$.
+\begin{lemma}[Descent of linear maps on a finite principal cover]
+\label{lem:linear-map-localization-descent}
+\uses{lem:localized-sections-glue}
+\source{bost-specht-manuscript:page-0009}\notready
+Let $f_1,\ldots,f_m$ generate the unit ideal of a commutative ring $R$,
+and let $P,Q$ be $R$-modules. A family of $R$-linear maps
+$u_i:P_{f_i}\to Q_{f_i}$ comes from a unique $R$-linear map $u:P\to Q$
+if, for every $p\in P$ and every $i,j$, the image of $u_i(p/1)$
+in $(Q_{f_j})_{f_i}$ equals the image of $u_j(p/1)$.
+If all $u_i$ are injective, then $u$ is injective.
+\end{lemma}
+\begin{proof}
+An $R$-linear map between modules localized at $f_i$ commutes with
+$f_i^{-1}$: multiplying the desired equality by the invertible scalar
+$f_i$ reduces it to $R$-linearity. Thus such maps are also
+$R_{f_i}$-linear. The stated compatibility follows in particular when
+the local maps agree on all double localizations.
+For $p\in P$, apply the preceding lemma to $x_i=u_i(p/1)$.
 Define $u(p)$ as the unique resulting element of $Q$. The local
 identities for sums and scalar multiples, together with uniqueness,
 show that $u$ is $R$-linear. Its localization is $u_i$, since they
@@ -320,7 +395,7 @@ a positive degree with nonzero restriction is therefore unchanged.
 
 \begin{lemma}[Determinant-isotypic integral modules]
 \label{lem:determinant-isotypic}
-\uses{def:rectangular-specht,lem:rectangular-invariants,lem:determinant-twisted-free-inclusion,lem:determinant-free-base-change,lem:determinant-free-naturality,lem:tensor-base-change-equivalence,lem:linear-map-localization-descent,lem:degree-calculus}
+\uses{def:rectangular-specht,lem:rectangular-invariants,lem:determinant-twisted-free-inclusion,lem:determinant-free-base-change,lem:determinant-free-naturality,lem:tensor-base-change-equivalence,lem:determinant-free-base-change-square,lem:linear-map-localization-descent,lem:degree-calculus}
 \source{bost-specht-manuscript:page-0008,bost-specht-manuscript:page-0009}
 \notready
 For a rank-$a$ projective $\Ocal$-module $A$ and $d=ak>0$, there is

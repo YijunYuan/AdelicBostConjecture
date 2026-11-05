@@ -155,4 +155,17 @@ theorem baseChangeEquiv_natural [Finite ι] (f : ∀ i, M i →ₗ[R] N i) :
     PiTensorProduct.map (fun i => (f i).baseChange S) (baseChangeMap R S M (s ⊗ₜ[R] z))
   simp [scalarExtension_map]
 
+/-- Compatibility with a tower of coefficient extensions. -/
+theorem scalarExtension_trans {T : Type*} [CommRing T] [Algebra R T] [Algebra S T]
+    [IsScalarTower R S T] (z : ⨂[R] i, M i) :
+    PiTensorProduct.map (fun i =>
+      (TensorProduct.AlgebraTensorModule.cancelBaseChange R S T T (M i)).toLinearMap)
+      (scalarExtension S T (fun i => S ⊗[R] M i) (scalarExtension R S M z)) =
+        scalarExtension R T M z := by
+  induction z using PiTensorProduct.induction_on with
+  | smul_tprod r v =>
+    simp only [map_smul, LinearMap.map_smul_of_tower, scalarExtension_tprod, map_tprod,
+      LinearEquiv.coe_coe, TensorProduct.AlgebraTensorModule.cancelBaseChange_tmul, one_smul]
+  | add x y hx hy => simp only [map_add, hx, hy]
+
 end BostConjecture.Tensor
