@@ -191,3 +191,47 @@ coverage warning. Read-only hygiene review retained the nine active nested
 lane/ancestor items; completed-parent warnings were sent to their owners.
 Scratch cleanup found no stale candidates. I-0026 requests root integration
 of the new descent import; this session does not claim that integration check.
+
+## Global finite-projective determinant inclusion
+
+The local-frame and gluing frontier is closed at `b72a7fd`.
+`Geometry/ProjectiveFrames.lean` produces actual finite principal frames of
+prescribed constant stalk rank using Mathlib finite-presentation lifting.
+`Geometry/DeterminantTower.lean` proves exterior/tensor tower identities and
+constructs actual determinant charts on scalar extensions of intrinsic modules.
+`Geometry/LocalizationDescent.lean` now accepts arbitrary localization models
+and specializes to tensor-ring overlaps, using Mathlib identifications directly.
+`Geometry/ProjectiveEmbedding.lean` consumes all three producers to construct
+the unique global map and recover its free formula after **every** coefficient
+extension on which the module becomes free. Flatness over the integers gives
+injectivity; no freeness of the original module is assumed.
+
+- Producer pins: `26576cb`, `3844a4b`, `1f5c5a3`; global map pin `b72a7fd`.
+  Concurrent automatic snapshots captured some drafts; these explicit pins and
+  the checks below, not the snapshots, are the verification evidence.
+- Combined frames/tower build `123f22d12823e254` passed 9070 jobs at
+  2026-11-05 17:52:30 UTC. Generalized descent module `8c0559dcf98409f5`
+  passed 1613 jobs at 18:01:08 UTC.
+- Global map file check `91960196857d4aa1` passed at 18:07:40 UTC.
+  The strengthened arbitrary-free-base-change version passed final module
+  check `8138d12f84e54487`, 9072 jobs at 18:10:28 UTC, without warnings.
+- All 78 transitive probes in `GeometryAxioms.lean` passed at 18:12:02 UTC
+  (`ffefd7bf352d83dc`), using only `propext`, `Classical.choice`, `Quot.sound`.
+  No `sorryAx` or additional axioms occur. Every check used the explicit root
+  and shared serialized slot. Earlier local proof/instance failures were repaired.
+- LSP often returned partial import elaboration; narrow serialized file checks
+  supplied feedback. It was responsive for later chart proof repairs.
+- The read-only honesty reviewer inspected the local and global constructions
+  and verification records, finding substantive producer use and no vacuity,
+  target-shaped assumption package, or hidden global-gluing claim. Its two
+  blueprint wording corrections were applied.
+- New checked blueprint nodes distinguish principal frames, chart towers,
+  tensor-model descent and the **algebraic** projective inclusion. The larger
+  determinant-isotypic node remains unproved because its metric and invariant
+  conclusions are still open. No new external code was copied.
+
+The next consumer is the actual Hilbert tensor metric, determinant isometry,
+regrouping, and restricted contracting pairing. Arithmetic requested the generic
+finite tensor Hermitian core in `Tensor/**` and retains ownership of arithmetic
+conjugation and degree integration (I-0030). I-0031 requests root integration;
+that integration is not certified by these module checks.
