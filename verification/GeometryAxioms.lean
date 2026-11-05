@@ -29,6 +29,7 @@ import BostConjecture.Geometry.PolynomialTensor
 import BostConjecture.Geometry.PolynomialPolarization
 import BostConjecture.Geometry.PluckerPolynomial
 import BostConjecture.Geometry.DegreeDivisibility
+import BostConjecture.Geometry.RectangularInvariants
 
 #print axioms BostConjecture.Geometry.homogeneousPolynomials_pow
 #print axioms BostConjecture.Geometry.homogeneousInvariants_pow
@@ -282,3 +283,32 @@ import BostConjecture.Geometry.DegreeDivisibility
 
 #print axioms BostConjecture.Tensor.tensorPowerPairing_equiv
 #print axioms BostConjecture.Tensor.tensorPowerPairing_tensorBaseChange
+
+#print axioms PiTensorProduct.reindexRepresentation
+#print axioms MonoidAlgebra.toSubmodule_range_lift
+#print axioms Representation.mem_centralizer_range_asAlgebraHom_iff
+#print axioms MultilinearMap.sum_neg_one_pow_card_smul_apply_sum_compl
+#print axioms PiTensorProduct.sum_neg_one_pow_card_smul_tprod_sum_compl
+#print axioms PiTensorProduct.invariants_reindexRepresentation
+#print axioms PiTensorProduct.piTensorHomEquiv_reindexRepresentation_mul
+#print axioms PiTensorProduct.mem_span_range_map_const_iff_forall_commute
+#print axioms Subalgebra.centralizer_centralizer_of_isSemisimpleModule
+#print axioms AlgHom.centralizer_centralizer_range
+#print axioms MultilinearMap.exists_mvPolynomial_eval_eq_apply_const
+#print axioms MultilinearMap.apply_const_eq_zero_of_eq_zero_on_gl
+#print axioms PiTensorProduct.map_const_mem_span_range_map_const_units
+#print axioms PiTensorProduct.coe_centralizer_reindex_eq_diagonal_span
+#print axioms PiTensorProduct.centralizer_diagonal_span_eq_reindex_range
+#print axioms PiTensorProduct.mem_permutation_span_iff_commute_diagonal
+#print axioms PiTensorProduct.mem_permutation_span_of_commute_units
+#print axioms BostConjecture.Specht.sum_polytabloidInt_sq
+#print axioms BostConjecture.Geometry.rectangularTensor
+#print axioms BostConjecture.Geometry.rectangularCovector
+#print axioms BostConjecture.Geometry.rectangularCovector_tensor
+#print axioms BostConjecture.Geometry.rectangularTensor_mem_range
+#print axioms BostConjecture.Geometry.rectangularCovector_map
+#print axioms BostConjecture.Geometry.permutation_span_apply_rectangularTensor
+#print axioms BostConjecture.Geometry.mem_range_freeLatticeMap_of_determinant_covariant
+#print axioms BostConjecture.Geometry.tensorPower_map_smul
+#print axioms BostConjecture.Geometry.determinant_covariant_of_specialLinear_fixed
+#print axioms BostConjecture.Geometry.mem_range_freeLatticeMap_iff_specialLinear_fixed

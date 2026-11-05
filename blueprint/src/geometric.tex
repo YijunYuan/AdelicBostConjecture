@@ -1469,7 +1469,8 @@ formula for $\pi_d$. The descent and factorial identity are the
 
 \begin{lemma}[Symmetric tensors are spanned by pure powers]
 \label{lem:symmetric-tensor-pure-power-span}
-\notready
+\lean{PiTensorProduct.invariants_reindexRepresentation}
+\leanok
 Let $R$ be a commutative ring, $M$ an $R$-module, and $I$ a finite set of
 size $d$, with $d!$ invertible in $R$. The tensors fixed by permutation of
 the $I$ positions are exactly the span of $x^{\otimes I}$ for $x\in M$.
@@ -1494,8 +1495,9 @@ fixed. This is the inclusion-exclusion proof in
 
 \begin{lemma}[The permutation commutant]
 \label{lem:permutation-tensor-commutant}
+\lean{PiTensorProduct.piTensorHomEquiv_reindexRepresentation_mul,PiTensorProduct.mem_span_range_map_const_iff_forall_commute}
 \uses{lem:symmetric-tensor-pure-power-span}
-\notready
+\leanok
 For a finite projective $R$-module $M$ and $d!$ invertible in $R$, an
 endomorphism of $M^{\otimes d}$ commutes with all position permutations
 if and only if it is in the span of $f^{\otimes d}$ for $f\in\End_R(M)$.
@@ -1514,8 +1516,9 @@ comparison-map proof in
 
 \begin{lemma}[The diagonal commutant and invertible operators]
 \label{lem:schur-weyl-permutation-span}
+\lean{Subalgebra.centralizer_centralizer_of_isSemisimpleModule,AlgHom.centralizer_centralizer_range,PiTensorProduct.map_const_mem_span_range_map_const_units,PiTensorProduct.mem_permutation_span_of_commute_units}
 \uses{lem:permutation-tensor-commutant}
-\notready
+\leanok
 Let $M$ be a finite-dimensional vector space over an infinite field $F$
 in which $d!\ne0$. Every endomorphism of $M^{\otimes d}$ commuting
 with $g^{\otimes d}$ for all $g\in\GL(M)$ lies in the linear span of
@@ -1540,37 +1543,72 @@ group elements span their group algebra. This is the image-level argument
 in \href{https://github.com/TauCetiProject/TauCeti/blob/b3b0334ab9203d9faee4b2f34cd75161463ecdd0/TauCeti/RepresentationTheory/Symmetric/TensorAction/SchurWeyl.lean}{Tau Ceti's Schur--Weyl theorem}; no faithfulness of the group-algebra action is required.
 \end{proof}
 
+\begin{lemma}[The rectangular bilinear coefficient covector]
+\label{lem:rectangular-bilinear-covector}
+\uses{lem:rectangular-tensor-realization,lem:free-integral-tensor-embedding}
+\lean{BostConjecture.Geometry.rectangularTensor,BostConjecture.Geometry.rectangularCovector,BostConjecture.Geometry.rectangularCovector_tensor,BostConjecture.Geometry.rectangularTensor_mem_range,BostConjecture.Geometry.rectangularCovector_map}
+\leanok
+Let $R$ be a commutative ring, let $b$ be a frame of a free rank-$a$
+module $M$, let $k>0$, and let $t$ be a rectangular tableau with $a$ rows
+and $k$ columns. In the tensor basis let $z_t$ have the integer
+polytabloid coefficients and define $\phi_t(x)=\sum_w z_t(w)x(w)$.
+Then $z_t$ belongs to the scalar-extended orbit-lattice image,
+$\phi_t(z_t)=(a!)^k$, and, for every endomorphism $f$ of $M$,
+$\phi_t(f^{\otimes ak}x)=(\det f)^k\phi_t(x)$.
+\end{lemma}
+\begin{proof}
+The tensor $z_t$ is the image of $1\otimes e_t$ under the existing free
+lattice realization. Its square coefficient sum is the integral identity
+$\sum_w e_t(w)^2=|C_t|$, transported along the alphabet equivalence
+and the integer map to $R$. The rectangular column group has order
+$(a!)^k$. Finally interchange the two finite sums in the coefficient
+pairing with the tensor matrix of $f$. This moves that matrix to its
+transpose on $z_t$. Rectangular covariance for $f^{\mathsf T}$ gives
+the claimed factor, since transposition preserves determinants. This is
+bilinear; no conjugation or positivity is involved.
+\end{proof}
+
+\begin{lemma}[The rectangular determinant weight space]
+\label{lem:rectangular-determinant-weight-span}
+\uses{lem:schur-weyl-permutation-span,lem:rectangular-bilinear-covector,lem:free-determinant-permutation}
+\lean{BostConjecture.Geometry.permutation_span_apply_rectangularTensor,BostConjecture.Geometry.mem_range_freeLatticeMap_of_determinant_covariant}
+\leanok
+Let $F$ be a field of characteristic zero, and retain the framed rectangular data
+of the preceding lemma. If $v\in M^{\otimes ak}$ satisfies
+$g^{\otimes ak}v=(\det g)^kv$ for every $g\in\GL(M)$, then $v$
+belongs to the image of the actual scalar-extended integral orbit lattice.
+\end{lemma}
+\begin{proof}
+Form the actual endomorphism $T(x)=\phi_t(x)v$. The covariance of
+$\phi_t$ and of $v$ gives $Tg^{\otimes ak}=g^{\otimes ak}T$.
+Schur--Weyl puts $T$ in the span of the position permutations. Each such
+permutation sends $z_t$ into the integral lattice image, by the proved
+intertwining of the integral orbit action and tensor reindexing. Linearity
+therefore puts $Tz_t=(a!)^kv$ in that image. The factorial is nonzero
+in characteristic zero; multiply by its inverse.
+\end{proof}
+
 \begin{lemma}[Actual rectangular orbit spanning over an algebraic closure]
 \label{lem:rectangular-tensor-span-algclosed}
-\uses{lem:schur-weyl-permutation-span,lem:rectangular-tensor-realization,lem:free-integral-tensor-embedding}
+\lean{BostConjecture.Geometry.determinant_covariant_of_specialLinear_fixed,BostConjecture.Geometry.mem_range_freeLatticeMap_iff_specialLinear_fixed}
+\uses{lem:rectangular-determinant-weight-span}
 \source{bost-specht-manuscript:page-0009}
-\notready
+\leanok
 Let $F$ be algebraically closed of characteristic zero, let $M$ have
 positive dimension $a$, and let $k>0$, $d=ak$. The $\SL(M)$-fixed vectors
 in $M^{\otimes d}$ are the image of the actual scalar-extended rectangular
 orbit lattice under its frame realization.
 \end{lemma}
 \begin{proof}
-Choose a frame and let $z$ be the actual integral rectangular polytabloid
-in tensor coordinates. Covariance gives $g^{\otimes d}z=(\det g)^kz$.
-Define the bilinear coefficient covector
-$\phi(x)=\sum_w z(w)x(w)$. Transposition of the tensor matrix gives
-$\phi(g^{\otimes d}x)=(\det g)^k\phi(x)$, by applying covariance to
-$g^{\mathsf T}$. Distinct column permutations give distinct coefficient
-positions, each with coefficient $\pm1$, so
-$\phi(z)=(a!)^k\ne0$ in $F$.
 For an $\SL(M)$-fixed vector $v$ and $g\in\GL(M)$, choose $c$ with
-$c^a=\det g$. Then $c\ne0$ and $c^{-1}g\in\SL(M)$, so
-$g^{\otimes d}v=c^d v=(\det g)^kv$. Consequently
-$T(x)=\phi(x)v$ commutes with every $g^{\otimes d}$.
-The preceding lemma writes $T$ as a linear combination of position
-permutations. Evaluate at $z$ and divide by $\phi(z)$ to put $v$ in the
-span of those permutations of $z$. The integral orbit lattice is by
-definition the integer span of this orbit; scalar extension and the
-frame realization have precisely its $F$-span as image. Covariance
-gives the reverse inclusion. No Hermitian conjugation or positivity of
-the bilinear form is used. Frame independence follows from the already
-proved determinant-twisted transition identity.
+$c^a=\det g$. Positive $a$ ensures such a root exists; invertibility
+of $g$ ensures $c\ne0$. The map $c^{-1}g$ has determinant one, so
+invariance gives $g^{\otimes d}v=c^dv=(\det g)^kv$, since $d=ak$.
+Apply the preceding determinant-weight lemma to $v$ to put it in the
+actual scalar-extended integral lattice image. Conversely, covariance of
+the free lattice realization makes every vector in that image fixed
+when the determinant is one. Frame independence follows from the
+already proved determinant-twisted transition identity.
 \end{proof}
 
 \begin{lemma}[Polynomial identities from evaluation]

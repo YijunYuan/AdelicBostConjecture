@@ -28,9 +28,12 @@ theorem tensorPower_map_smul (c : F) (f : M →ₗ[F] M) (v : ⨂[F] (_ : Fin n)
     PiTensorProduct.map (fun _ => c • f) v =
       c ^ n • PiTensorProduct.map (fun _ => f) v := by
   induction v using PiTensorProduct.induction_on with
-  | smul_tprod r x => simp [PiTensorProduct.tprod_smul, smul_comm]
+  | smul_tprod r x =>
+    simp only [map_smul, map_tprod, LinearMap.smul_apply, MultilinearMap.map_smul_univ]
+    simp [smul_smul, mul_comm]
   | add x y hx hy => simp only [map_add, hx, hy, smul_add]
 
+omit [CharZero F] in
 /-- Over an algebraic closure, actual SL invariance implies the rectangular
 GL determinant weight. -/
 theorem determinant_covariant_of_specialLinear_fixed [IsAlgClosed F]
@@ -66,7 +69,9 @@ theorem determinant_covariant_of_specialLinear_fixed [IsAlgClosed F]
   rw [he', tensorPower_map_smul] at hfix
   have hmul := congrArg (fun x => c ^ n • x) hfix
   rw [smul_smul, ← mul_pow, mul_inv_cancel₀ hc0, one_pow, one_smul] at hmul
-  rw [hmul, hn, pow_mul, hc, LinearMap.det_toMatrix]
+  rw [hmul, LinearMap.det_toMatrix]
+  congr 1
+  rw [hn, pow_mul, hc]
 
 /-- Actual SL-fixed tensors are exactly the scalar-extended rectangular
 integral lattice, over an algebraically closed characteristic-zero field. -/

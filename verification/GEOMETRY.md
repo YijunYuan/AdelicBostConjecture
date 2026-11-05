@@ -760,7 +760,7 @@ need the corresponding roots of unity and positive rank.
 - The combined 226-probe audit passed at 23:30:45 UTC (`ffefd7bf352d83dc`),
   with only the three standard foundational axioms. The complete log is
   `session0016/plucker-divisibility-axioms.log`. LSP is clean; no kernel check
-  in this session failed.
+  in the Pluecker/divisibility batch failed.
 - The read-only honesty reviewer approved the actual scalar/invariance route
   and both new nodes; its blueprint dependency and explicit positive-degree
   corollary corrections were applied. The limited polarization and divisibility
@@ -771,3 +771,59 @@ tensor into the independent factor tensor powers, with evaluation compatibility.
 Rectangular invariant spanning and the coaction base-change bridge remain open;
 I-0070 proposes a smaller Schur-Weyl extraction for independent mathematical
 review. No source theorem completion is inferred from these producers.
+
+
+## Rectangular invariant spanning via the checked permutation commutant
+
+I-0070 authorized the bounded, mathematically reviewed TauCeti extraction at
+`b3b0334ab9203d9faee4b2f34cd75161463ecdd0`. Original files, Apache-2.0 notices,
+hashes, exact declaration mappings and adaptations are preserved under
+`vendor/tauceti-schur-weyl/`. The source snapshot and complete route were
+committed at `26489ca`; this commit alone was not proof evidence. No dependencies
+or pinned toolchains changed. The project reuses its existing finite-projective
+`piTensorHomEquiv` from Mathlib PR44845 rather than importing TauCeti's Hom API.
+
+The seven selected modules prove pure-power spanning, the permutation
+commutant over finite projective modules, the image-level double centralizer,
+and invertible diagonal density. `Geometry/RectangularCovector.lean` constructs
+the actual bilinear covector, proves transpose covariance over every commutative
+ring, and casts SPECHT's exact integer square sum to obtain `(a!)^k`.
+`RectangularSpan.lean` applies Schur-Weyl to its actual rank-one operator and
+uses `freeLatticeMap_reindex` to obtain membership in the scalar-extended
+integral lattice. `RectangularInvariants.lean` proves the SL-to-GL determinant
+weight by a nonzero determinant root, and proves both directions of actual
+SL-fixed-space identification over algebraically closed characteristic-zero
+fields with positive rank and positive column count. The tableau supplies
+`n = a*k`; no invariant-space equality is assumed.
+
+Checks (all explicit workspace-root, shared serialized slot):
+
+- `Centralizer` plus `RectangularCovector`: `ce89f54ede192c68`, 9,071 jobs,
+  passed warning-free at 2026-11-05 23:42:55 UTC.
+- `SchurWeyl`: `ef26df9b15681f3a`, 2,378 jobs, passed warning-free at 23:43:45.
+- `RectangularSpan`: `866b8abcaf5afdec`, 9,075 jobs, passed warning-free at 23:46:46.
+- `RectangularInvariants`: `07f7559ab37fb3d2`, 9,076 jobs, passed warning-free
+  at 23:53:11.
+- The expanded `GeometryAxioms.lean` audit passed at 23:53:39
+  (`ffefd7bf352d83dc`), all **254** transitive probes using only `propext`,
+  `Classical.choice`, and `Quot.sound`. Full log:
+  `session0016/schur-weyl-axioms.log`. No `sorryAx` or custom axiom occurs.
+- Initial port checks exposed a factorial-notation scope issue, an invariant
+  predicate unfolding and a projective-Hom simplification; all were repaired.
+  Some LSP files retained stale import state, so fresh standalone LSP snippets
+  and narrow serialized kernel checks were used. Final source is warning-free.
+
+Independent read-only source review verified all 14 preserved originals against
+raw files at the exact revision and approved the projective comparison,
+image-level centralizer, concrete rank-one consumer and final SL endpoint.
+The required honesty review found no certificate, vacuity or discarded-producer
+route. Its explicit-field and blueprint dependency-reference corrections were
+applied. Six limited nodes now carry checked completion markers.
+
+The canonical nonzero contraction is still open: the Hom-dual tensor must be
+regrouped with equivariance and evaluation compatibility, and the factor
+invariants transported into these lattice images. Arbitrary-field descent and
+actual coaction base-change are separate pending obligations (BALANCED owns the
+coaction producer). No geometric slope inequality or manuscript Theorem1.1 is
+claimed. Shared integration of this extraction follows parent activation in
+I-0073; the earlier root check covers only the Pluecker/divisibility batch.

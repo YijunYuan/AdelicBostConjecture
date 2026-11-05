@@ -20,9 +20,9 @@ Mathlib PR #44845 is reused. Generic source namespaces are preserved where
 canonical APIs are absent locally; private helper names use the project namespace.
 
 Consumers: the actual determinant-covariant rectangular tensor and its bilinear
-coefficient covector in Geometry, then rectangular invariant identification and
-canonical contraction nonvanishing. Until explicit local checks and consumer
-bridges are recorded in GEOMETRY.md, this is unverified source material.
+coefficient covector in Geometry, then rectangular invariant identification.
+Canonical contraction nonvanishing remains a later consumer. See the local
+kernel evidence below and in GEOMETRY.md; upstream-wide validity is not claimed.
 
 ## Selected declarations and adaptations
 
@@ -39,7 +39,7 @@ below. Private helper namespaces `TauCeti` became `BostConjecture.SchurWeyl`.
 | `RepresentationTheory/Symmetric/TensorAction/Centralizer.lean`: `PiTensorProduct.piTensorHomEquiv_reindexRepresentation_tprod_mul`, `piTensorHomEquiv_reindexRepresentation_mul`, `mem_span_range_map_const_iff_forall_commute` and private inverse-cancellation helper | `Centralizer.lean` | Reuse the project's previously checked finite-projective `piTensorHomEquiv` (Mathlib PR44845); replace upstream pure-tensor simplifications by `piTensorHomEquiv_apply` and `piTensorHomMap_tprod_eq_map`. No second tensor-Hom representation. |
 | `LinearAlgebra/End/Centralizer.lean`: `Subalgebra.restrictScalars_mem_centralizer`; `RingTheory/Semisimple/DoubleCentralizer.lean`: `Subalgebra.centralizer_centralizer_of_isSemisimpleModule`, `AlgHom.centralizer_centralizer_range` | `DoubleCentralizer.lean` | Keep only the endomorphism-subalgebra/image argument. Use pinned Mathlib's `Module.Finite.toModuleEnd_moduleEnd_surjective` and `Module.End.mul_apply`. |
 | `LinearAlgebra/Matrix/GeneralLinearGroup/Multilinear.lean`: `MultilinearMap.exists_mvPolynomial_eval_eq_apply_const`, `apply_const_eq_zero_of_eq_zero_on_gl`; `LinearAlgebra/PiTensorProduct/GeneralLinear.lean`: `PiTensorProduct.map_const_mem_span_range_map_const_units`, `span_range_map_const_units_eq_span_range_map_const` | `GeneralLinear.lean` | Combine the two short source modules; keep canonical matrix polynomial density and dual-annihilator argument. |
-| `RepresentationTheory/Symmetric/TensorAction/SchurWeyl.lean`: image-level centralizer and double-centralizer argument | `SchurWeyl.lean` | Generalize the coordinate-space endpoint to arbitrary finite-dimensional modules and arbitrary finite index types. New names: `PiTensorProduct.coe_centralizer_reindex_eq_diagonal_span`, `centralizer_diagonal_span_eq_reindex_range`, `mem_permutation_span_iff_commute_diagonal`, `mem_permutation_span_of_commute_units`. Derive the last criterion using the selected invertible-density theorem. |
+| `RepresentationTheory/Symmetric/TensorAction/SchurWeyl.lean`: `TauCeti.coe_centralizer_range_permTensorActionAlgHom_eq_span_range_map_const`, `TauCeti.centralizer_span_range_map_const_eq_range_permTensorActionAlgHom`, `TauCeti.mem_range_permTensorActionAlgHom_iff_forall_commute` | `SchurWeyl.lean` | Generalize the coordinate-space endpoint to arbitrary finite-dimensional modules and arbitrary finite index types. New names: `PiTensorProduct.coe_centralizer_reindex_eq_diagonal_span`, `centralizer_diagonal_span_eq_reindex_range`, `mem_permutation_span_iff_commute_diagonal`, `mem_permutation_span_of_commute_units`. Derive the last criterion using the selected invertible-density theorem. |
 
 The actual downstream consumer is
 `Geometry.mem_range_freeLatticeMap_of_determinant_covariant` in
@@ -55,3 +55,8 @@ unchanged Mathlib Maschke, semisimple-module density and matrix-polynomial
 identity theorems. Exact kernel/axiom results and source reviews are recorded
 in `verification/GEOMETRY.md`; the SPECHT lane owns the corresponding
 `CONTRIBUTIONS.md` entry.
+
+The additional concrete consumer `Geometry.mem_range_freeLatticeMap_iff_specialLinear_fixed`
+in `Geometry/RectangularInvariants.lean` derives determinant covariance from
+actual SL invariance by extracting a determinant root over an algebraically
+closed field. It does not assume any invariant-space identification.
