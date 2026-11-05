@@ -1591,7 +1591,8 @@ and every binomial coefficient being divided by is positive.
 
 \begin{lemma}[Binomial moments of sampling without replacement]
 \label{lem:sampling-binomial-moments}
-\source{bost-specht-manuscript:page-0007}\notready
+\lean{BostConjecture.Specht.sum_choose_inter,BostConjecture.Specht.sampling_binomialMoment_eq,BostConjecture.Specht.sampling_binomialMoment_le}
+\source{bost-specht-manuscript:page-0007}\leanok
 Let $\Omega$ have $N$ elements, let $T\subseteq\Omega$ have $M$
 elements, and let $0\leq r\leq A\leq N$. Then
 \[
@@ -1621,8 +1622,33 @@ This supplies the Bernoulli-population special case of the symmetric-mean
 estimate used in the manuscript.
 \end{proof}
 
+\begin{lemma}[Bernoulli bound for the finite-sample exponential moment]
+\label{lem:sampling-exponential-moment}\uses{lem:sampling-binomial-moments}
+\source{bost-specht-manuscript:page-0007}\notready
+Let $\Omega$ have $N>0$ elements, let $T\subseteq\Omega$ have $M$
+elements, and choose an $A$-element subset $S$ uniformly, where
+$0\leq A\leq N$. Put $X=|S\cap T|$ and $p=M/N$. For every
+$\theta\in\mathbb R$,
+\[
+ \mathbb E e^{\theta X}\leq(1-p+pe^\theta)^A.
+\]
+\end{lemma}
+\begin{proof}
+For $z\geq0$, the binomial theorem and $X\leq A$ give
+\[
+ \mathbb E(1+z)^X=\sum_{r=0}^A z^r\mathbb E\binom Xr
+ \leq\sum_{r=0}^A\binom Ar(pz)^r=(1+pz)^A.
+\]
+For $\theta\geq0$, take $z=e^\theta-1$. For $\theta<0$,
+apply that bound to $A-X=|S\cap(\Omega\setminus T)|$ with
+parameter $-\theta$ and success fraction $1-p$. Multiplication by
+$e^{A\theta}$ gives
+$e^{A\theta}(p+(1-p)e^{-\theta})^A=(1-p+pe^\theta)^A$,
+as claimed.
+\end{proof}
+
 \begin{lemma}[Labelled hypergeometric concentration]
-\label{lem:occupancy-concentration}\uses{lem:labelled-occupancy,lem:sampling-binomial-moments}
+\label{lem:occupancy-concentration}\uses{lem:labelled-occupancy,lem:sampling-exponential-moment}
 \source{bost-specht-manuscript:page-0007}\notready
 Let $a,M\geq1$ and $0<A\leq aM$. Under the labelled occupancy
 law $B$, for every coordinate $i$ and $u>0$,
@@ -1631,16 +1657,12 @@ law $B$, for every coordinate $i$ and $u>0$,
 \]
 \end{lemma}
 \begin{proof}
-Put $N=aM$ and $p=M/N=1/a$. For $\theta\geq0$, expand
-$e^{\theta b_i}=(1+(e^\theta-1))^{b_i}$ and apply the binomial-moment
-bound term by term. All coefficients are nonnegative, and terms above
-$b_i$ vanish, so
+Put $N=aM$ and $p=M/N=1/a$. The labelled occupancy law is the
+image of uniform $A$-element subset sampling. Apply the preceding
+bound to the $i$th block of size $M$ to obtain
 \[
  \mathbb E_B e^{\theta b_i}\leq(1-1/a+e^\theta/a)^A.
 \]
-For $\theta<0$, apply the same argument to the number $A-b_i$ of
-selected elements outside block $i$, with success fraction $1-p$,
-and multiply by $e^{\theta A}$. This gives the same inequality.
 For $p=1/a$, the second derivative of
 $\log(1-p+pe^\theta)$ is at most $1/4$, so subtracting its tangent
 at zero yields
