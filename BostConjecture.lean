@@ -2,7 +2,8 @@ module
 
 public import BostConjecture.Slope.Subspace
 public import BostConjecture.Lattice.Covolume
-public import BostConjecture.Specht.Integral
+public import BostConjecture.Specht.Tableau
+public import BostConjecture.Specht.Metric
 public import OAI.NumberTheory.ArithmeticGroups.Lattices.FrameMatrices
 public import OAI.RepresentationTheory.Saxl.SpechtSubmodule
 public import HarderNarasimhan.Filtration.Unique

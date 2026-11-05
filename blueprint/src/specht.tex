@@ -63,7 +63,8 @@ The preceding lemma identifies that span.
 
 \begin{lemma}[Independence of the enumerating tableau]
 \label{lem:integral-specht-all-tableaux}\uses{def:integral-specht-orbit}
-\source{bost-specht-manuscript:page-0004}\notready
+\lean{BostConjecture.Specht.polytabloidInt_relabel,BostConjecture.Specht.orbitLattice_eq_span_polytabloids,BostConjecture.Specht.orbitLattice_eq}
+\source{bost-specht-manuscript:page-0004}\leanok
 For $u=t\circ g^{-1}$ one has $e_u=g e_t$. Consequently $L_t$ is
 independent of $t$ and equals the integral span of all polytabloids
 of shape $\mu$.
@@ -77,9 +78,62 @@ Every enumerating tableau has this form for a unique $g$, so the set
 of all polytabloids is exactly the orbit used to define $L_t$.
 \end{proof}
 
+\begin{definition}[Real Hilbert realization of the orbit lattice]
+\label{def:real-specht-lattice}\uses{def:integral-specht-orbit}
+\lean{BostConjecture.Specht.realCast,BostConjecture.Specht.realLattice,BostConjecture.Specht.realSpan,BostConjecture.Specht.spanLattice}
+\source{bost-specht-manuscript:page-0004}\leanok
+Equip $\mathbb R^W$ with the inner product
+$\langle x,y\rangle=\sum_{w\in W}x_w y_w$. Let $j_\mathbb R$
+be coefficientwise inclusion, $V_t=\operatorname{span}_\mathbb R
+j_\mathbb R(L_t)$, and $\Lambda_t=j_\mathbb R(L_t)\subset V_t$.
+The metric on $V_t$ is the restriction of this Hilbert metric.
+\end{definition}
+
+\begin{lemma}[Orthonormal word coordinates and integral discreteness]
+\label{lem:real-specht-lattice}\uses{def:real-specht-lattice}
+\lean{BostConjecture.Specht.realCast_injective,BostConjecture.Specht.inner_realCast,BostConjecture.Specht.realCast_single_orthonormal,BostConjecture.Specht.one_le_norm_realCast,BostConjecture.Specht.spanLattice_discreteTopology,BostConjecture.Specht.spanLattice_isZLattice,BostConjecture.Specht.latticeEquiv}
+\source{bost-specht-manuscript:page-0004}\leanok
+The vectors $j_\mathbb R(\delta_w)$ are orthonormal, and
+$\langle j_\mathbb R(x),j_\mathbb R(y)\rangle=\sum_w x_w y_w$.
+Every nonzero integer vector has norm at least one. The inclusion
+identifies $L_t$ with $\Lambda_t$, which is a discrete full lattice
+in $V_t$.
+\end{lemma}
+\begin{proof}
+The inner-product formula gives the orthonormality assertion. A nonzero
+integer vector has a coordinate of absolute value at least one, and
+its Hilbert norm is at least that absolute value. Differences of distinct
+lattice vectors thus have norm at least one, proving discreteness.
+Coefficientwise real inclusion is injective; restricting its codomain
+to $V_t$ does not change its image. The real span of that image is $V_t$
+by definition, so the lattice is full there.
+\end{proof}
+
+\begin{lemma}[Integral Gram determinant and nonnegative logarithmic covolume]
+\label{lem:integral-specht-covolume-nonneg}
+\uses{lem:integral-specht-span,lem:real-specht-lattice}
+\lean{BostConjecture.Specht.covolume_sq_eq_integer_gram,BostConjecture.Specht.one_le_covolume,BostConjecture.Specht.log_covolume_nonneg}
+\source{bost-specht-manuscript:page-0004}\leanok
+For any integral basis $(b_i)$ of $L_t$, put
+$G_{ij}=\sum_{w\in W}(b_i)_w(b_j)_w\in\mathbb Z$. Then
+\[
+ \covol(\Lambda_t)^2=\det G,\qquad
+ \covol(\Lambda_t)\geq1,\qquad \log\covol(\Lambda_t)\geq0.
+\]
+\end{lemma}
+\begin{proof}
+The integral basis maps to an integral basis of the full discrete
+lattice $\Lambda_t$. The squared volume of its fundamental
+parallelepiped equals its Gram determinant, which is exactly $\det G$
+by the coordinate inner-product formula. The covolume is positive,
+so this integer determinant is strictly positive and hence at least
+one. Taking the nonnegative square root and then the logarithm gives
+the two inequalities. A finite integral basis exists by finite freeness.
+\end{proof}
+
 \begin{definition}[The canonical rectangular Specht lattice]
 \label{def:rectangular-specht}
-\uses{def:integral-specht-orbit,lem:integral-specht-all-tableaux}
+\uses{def:integral-specht-orbit,lem:integral-specht-all-tableaux,lem:real-specht-lattice}
 \source{bost-specht-manuscript:page-0004}\notready
 For $a,k\geq1$ and $d=ak$, let $M^{(k^a)}_\mathbb Z$ be the free
 abelian group on row tabloids of the rectangle with $a$ rows of length
