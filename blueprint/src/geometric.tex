@@ -135,9 +135,42 @@ positions preserves the lattice and the ambient Hilbert tensor norm,
 and commutes with changes of frame, proving the isometric action.
 \end{proof}
 
+\begin{lemma}[Evaluation and permutations in finite projective tensor powers]
+\label{lem:projective-tensor-evaluation}
+\source{bost-specht-manuscript:page-0010}
+\lean{BostConjecture.Tensor.tensorPowerPairing,BostConjecture.Tensor.tensorPowerPairing_tprod_tprod,BostConjecture.Tensor.tensorPowerPairing_reindex_left,BostConjecture.Tensor.tensorPowerPairing_eq_zero_iff}
+\leanok
+Let $R$ be a commutative ring, $W$ a finite projective $R$-module,
+$V$ an $R$-module, $i:V\to W$ linear, and $I$ a finite set.
+The canonical finite-projective duality isomorphism defines the linear map
+\[
+ C_i:V^{\otimes I}\longrightarrow ((W^\vee)^{\otimes I})^\vee,
+ \qquad C_i(z)(u)=u(i^{\otimes I}z).
+\]
+For pure tensors its value is $\prod_{q\in I}f_q(i(v_q))$.
+If $\tau$ permutes $I$, then
+$C_i(\tau z)(u)=C_i(z)(\tau^{-1}u)$.
+Moreover $C_i(z)=0$ if and only if $i^{\otimes I}z=0$.
+\end{lemma}
+\begin{proof}
+The duality isomorphism identifies $\bigotimes_q f_q$ with the functional
+$\bigotimes_q w_q\mapsto\prod_q f_q(w_q)$. Its bilinearity and the
+linearity of $i^{\otimes I}$ define $C_i$ and give the pure-tensor formula.
+Simultaneous permutation of the two pure tensors only permutes the factors
+of this product. Bilinearity and spanning by pure tensors extend this
+identity to all tensors. The tensor power of $i$ commutes with permutations,
+so substitution of $\tau^{-1}u$ gives the asserted dual action identity.
+If $i^{\otimes I}z=0$, evaluation vanishes. Conversely the tensor power
+of $W$ is projective, hence any nonzero tensor has a linear functional
+nonzero on it: embed the projective module as a direct summand of a free
+module and choose a nonzero basis coordinate. The finite-projective
+duality isomorphism realizes this functional by a tensor of dual vectors,
+which contradicts $C_i(z)=0$.
+\end{proof}
+
 \begin{lemma}[The canonical contracting pairing]
 \label{lem:canonical-contraction}
-\uses{lem:determinant-isotypic}
+\uses{lem:determinant-isotypic,lem:projective-tensor-evaluation}
 \source{bost-specht-manuscript:page-0010}\notready
 Let $i:V\hookrightarrow W=\bigotimes_{j=1}^N E_j$ be a nonzero
 submodule with its induced metrics. Set $s=\rk V$, $a_j=\rk E_j$.

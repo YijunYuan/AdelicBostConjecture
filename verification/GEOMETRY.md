@@ -19,10 +19,31 @@ change-of-frame identity. No additional external code was copied.
   `lem:rectangular-change-frame` are checked. This supplies local covariance,
   not the finite-projective determinant-twisted injection or invariant equality.
 
+## Finite-projective ambient evaluation
+
+`BostConjecture/Tensor/Evaluation.lean` constructs `tensorPowerPairing`
+through `PiTensorProduct.dualDistribEquivOfProjective`. It proves the pure
+tensor formula, simultaneous permutation invariance, the contragredient
+identity, and vanishing precisely when the image tensor vanishes. It uses
+finite projectivity, with no freeness assumption or certificate package.
+
+- Kernel module check: fingerprint `77c6942507c8c1c0`, passed at
+  2026-11-05 15:40:30 UTC (1730 jobs).
+- Expanded `GeometryAxioms.lean`: twelve transitive probes passed at
+  15:41:29 UTC, command fingerprint `ffefd7bf352d83dc`, only the same three
+  standard foundational axioms. Fingerprints identify commands, not content.
+- Blueprint `lem:projective-tensor-evaluation` is checked. It concerns the
+  ambient algebraic pairing; it does not assert nonvanishing after restriction
+  to the determinant-isotypic submodules or an archimedean norm bound.
+
+The read-only honesty review of commit `0d893d5` classified its five exports
+as proved producers with faithful finite-free blueprint scope. Root integration
+has been requested from BOST-SPECHT; no root check is claimed here.
+
 ## Remaining boundaries
 
 Projective gluing, the determinant-twisted integral injection, the metric
-isometry, regrouping and canonical contraction, invariant base change and
+isometry, regrouping and restricted canonical contraction, invariant base change and
 nonvanishing detection remain open. The geometric slope inequality and
 number-field target are not proved by these producers.
 

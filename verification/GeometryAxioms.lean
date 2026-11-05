@@ -1,7 +1,16 @@
 import BostConjecture.Geometry.TensorRealization
+import BostConjecture.Tensor.Evaluation
 
 #print axioms BostConjecture.Geometry.tensorCoordinates
 #print axioms BostConjecture.Geometry.tensorCoordinates_tprod
 #print axioms BostConjecture.Geometry.tensorCoordinates_map
 #print axioms BostConjecture.Geometry.map_tensorCoordinates_symm_of_mem_span
 #print axioms BostConjecture.Geometry.tensorCoordinates_symm_change_basis
+
+#print axioms BostConjecture.Tensor.evaluation_reindex
+#print axioms BostConjecture.Tensor.tensorPowerPairing
+#print axioms BostConjecture.Tensor.tensorPowerPairing_apply
+#print axioms BostConjecture.Tensor.tensorPowerPairing_tprod_tprod
+#print axioms BostConjecture.Tensor.tensorPowerPairing_reindex
+#print axioms BostConjecture.Tensor.tensorPowerPairing_reindex_left
+#print axioms BostConjecture.Tensor.tensorPowerPairing_eq_zero_iff
