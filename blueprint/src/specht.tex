@@ -1149,7 +1149,7 @@ reaches $t_0$. Reverse the swaps to obtain the stated path.
 \begin{definition}[Prefix insertion product]
 \label{def:prefix-norm-product}\uses{def:standard-tableau}
 \lean{BostConjecture.Specht.prefixRowCount,BostConjecture.Specht.prefixAxialDistance,BostConjecture.Specht.prefixInsertionFactor,BostConjecture.Specht.prefixNormProduct}\leanok
-For an enumerating tableau $t$, let $N_t(m,r)$ be the number of labels
+For a standard enumerating tableau $t$, let $N_t(m,r)$ be the number of labels
 strictly less than $m$ in row $r$. If label $m$ occupies $(s,q)$, put
 \[
  D_t(m,r)=N_t(m,r)-q+s-r,\qquad
@@ -1202,7 +1202,8 @@ All other factors are unchanged, proving the product identity.
 \end{proof}
 
 \begin{lemma}[Column-reading prefix product]
-\label{lem:prefix-norm-initial}\uses{def:prefix-norm-product,lem:column-reading-initial}\notready
+\label{lem:prefix-norm-initial}\uses{def:prefix-norm-product,lem:column-reading-initial}
+\lean{BostConjecture.Specht.prefixNormProduct_rectangleColumnTableau}\leanok
 For column reading $t_0$ of the $a$ by $k$ rectangle,
 $P(t_0)=(a!)^k$.
 \end{lemma}
