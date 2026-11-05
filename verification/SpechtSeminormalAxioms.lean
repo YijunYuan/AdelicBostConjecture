@@ -23,3 +23,5 @@ import BostConjecture.Specht.RealAction
 #print axioms BostConjecture.Specht.murphyOperator_succ
 #print axioms BostConjecture.Specht.murphyOperator_mul_swap
 #print axioms BostConjecture.Specht.inner_swap_of_murphy_eigenvector
+#print axioms BostConjecture.Specht.inner_swap_residual_of_murphy_eigenvector
+#print axioms BostConjecture.Specht.norm_swap_residual_of_murphy_eigenvector

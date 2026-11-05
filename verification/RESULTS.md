@@ -11,10 +11,39 @@ The adjacent diagonal-coefficient corollary explicitly requires two
 eigenvalue equations; it is not a proof of the content spectrum.
 
 The explicit-root serialized check of both modules passed (9,061 jobs).
-`check --lean verification/SeminormalAxioms.lean` passed all 22 probes;
-only `propext`, `Classical.choice`, and `Quot.sound` occur. LSP diagnostics
-are clean. Local elaboration failures were repaired before this checkpoint.
-Full umbrella integration and the required honesty review follow separately.
+The configured `horizon --root /home/yijunyuan/bc-workspace check` then
+passed **9,103 jobs** in 27.5 seconds, including the two new root imports.
+The serialized `check --lean verification/SpechtSeminormalAxioms.lean`
+passed in 7.0 seconds after the probe was renamed to match the task's
+write-set. It audits **24** declarations, including the
+residual orthogonality and squared-norm formulas. All report only
+`propext`, `Classical.choice`, and `Quot.sound`; no additional axiom or
+`sorryAx` occurs. Source LSP diagnostics are clean; the renamed probe's LSP
+query remained partial, so its final evidence is the completed kernel check.
+Local elaboration failures
+were repaired; no kernel check failed. The configured build certifies its
+import cone, not concurrent unimported ARITH/GEOM drafts.
+
+Honesty-reviewer: **used, satisfactory**. It independently repeated the first
+22 axiom probes and checked the residual norm theorem, and found genuine
+producer-to-consumer progress without a hidden content-spectrum assumption.
+The orthogonal Gram identity substantively feeds the orbit-covolume bound.
+The spectral corollaries retain their eigenvalue premises and do not identify
+the residual with the next standard vector.
+
+Graph sync observed 69 blueprint nodes, 524 Lean declarations, 234 edges and
+30 checked blueprint nodes. The 320 unattached helper/imported declarations
+include concurrent ARITH drafts and remain an intentional coverage warning.
+An initial sync invocation rejected unsupported `--json`; plain sync passed.
+The source-scope symlink is intact. Janitor reviewed the nine-active-row
+warning: these are nested ancestors for three live proof tasks, intentionally
+retained. The transient all-Murphy-children-done warning was resolved by the
+explicit pending content-action child. Scratch cleanup found no stale files.
+
+Automatic run-start snapshots `ff681c6` and `667e372` captured this session's
+owned proof edits before explicit commit `dea9987`; their ownership and
+verification are established by the exact module checks above, not by those
+automatic snapshots. All later commits use explicit owned paths.
 
 Claim class: **proved producers**, with one **conditional spectral corollary**.
 The first unmet source producer is now the content-triangular Murphy action

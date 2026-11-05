@@ -638,7 +638,7 @@ $s^2=1$ to obtain the second.
 \end{proof}
 
 \begin{theorem}[Monic seminormal basis]
-\label{lem:monic-seminormal}\uses{lem:orthogonal-standard-basis,lem:murphy-recurrence}
+\label{lem:monic-seminormal}\uses{lem:orthogonal-standard-basis,lem:murphy-eigenvector-residual}
 \source{bost-specht-manuscript:page-0005,ryom-hansen-seminormal-denominators-v1:classical_formula}\notready
 Order standard tableaux by an extension of dominance of every prefix,
 starting with the column-reading tableau $t_0$. Monic orthogonalization
@@ -658,8 +658,33 @@ the action formula and its scalar-extension identification are
 the separate representation-theoretic input here.
 \end{theorem}
 
+\begin{lemma}[Adjacent eigenvector residual]
+\label{lem:murphy-eigenvector-residual}\uses{lem:murphy-recurrence,lem:real-specht-action}
+\lean{BostConjecture.Specht.inner_swap_of_murphy_eigenvector,BostConjecture.Specht.inner_swap_residual_of_murphy_eigenvector,BostConjecture.Specht.norm_swap_residual_of_murphy_eigenvector}\leanok
+Suppose $x\in V_t$, $J_i x=\alpha x$ and
+$J_{i+1}x=\beta x$, with $\Delta=\beta-\alpha\ne0$.
+For $s=P_{(i,i+1)}$ and $y=sx-\Delta^{-1}x$ one has
+\[
+ \langle x,sx\rangle=\|x\|^2/\Delta,\qquad
+ \langle x,y\rangle=0,\qquad
+ \|y\|^2=(1-\Delta^{-2})\|x\|^2.
+\]
+\end{lemma}
+\begin{proof}
+The recurrence gives $J_{i+1}sx=sJ_ix+x=\alpha sx+x$.
+Taking its inner product with $x$ and using symmetry of $J_{i+1}$
+gives $(\beta-\alpha)\langle x,sx\rangle=\|x\|^2$.
+Division by $\Delta$ proves the first identity, and subtracting
+$\Delta^{-1}\langle x,x\rangle$ proves the second. Since $s$
+is an isometry, expansion of the squared norm gives
+$\|y\|^2=\|x\|^2-2\Delta^{-2}\|x\|^2+
+\Delta^{-2}\|x\|^2$, proving the last identity.
+These statements assume the two eigenvalue equations; they do not
+identify the eigenvalues of the orthogonalized standard polytabloids.
+\end{proof}
+
 \begin{lemma}[Seminormal norms]
-\label{lem:seminormal-norms}\uses{lem:monic-seminormal,lem:rectangular-initial-norm}
+\label{lem:seminormal-norms}\uses{lem:monic-seminormal,lem:rectangular-initial-norm,lem:orthogonal-standard-basis}
 \source{bost-specht-manuscript:page-0005,bost-specht-manuscript:page-0006}\notready
 For a standard tableau $t$, let $\lambda^{(j)}$ be its prefix shape
 after $j$ entries, and let $r_j$ be the row of entry $j$. Set

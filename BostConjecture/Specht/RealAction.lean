@@ -224,7 +224,7 @@ theorem norm_swap_residual_of_murphy_eigenvector (t : Tableau n μ) (i j : Fin n
   have hn : ‖realSpechtRep t (Equiv.swap i j) x‖ ^ 2 = ‖x‖ ^ 2 := by
     simpa only [real_inner_self_eq_norm_sq] using inner_realSpechtRep t (Equiv.swap i j) x x
   rw [norm_sub_sq_real, real_inner_smul_right (F := realSpan t),
-    real_inner_comm (F := realSpan t) (realSpechtRep t (Equiv.swap i j) x) x,
+    real_inner_comm (F := realSpan t) x (realSpechtRep t (Equiv.swap i j) x),
     inner_swap_of_murphy_eigenvector t i j hij x a b hi hj hab,
     hn, norm_smul, mul_pow, Real.norm_eq_abs, sq_abs]
   simp only [div_eq_mul_inv]
