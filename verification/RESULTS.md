@@ -1,3 +1,83 @@
+## Seminormal norm and standard Gram checkpoint (session 0021)
+
+Claim class: **proved producers**. The six new modules prove normalized
+adjacent action, the column-reading initial value, increasing legal adjacent
+paths, the positive prefix product and its swap ratio, and equality of that
+product with the actual monic squared norms. The standard Gram determinant
+is now evaluated, giving the canonical integral orbit lattice bound
+`0 ≤ 2 * rectangleLogCovolume ≤ average log prefixNormProduct`.
+Neither the lattice nor its orthonormal word metric was changed.
+
+Verified milestones: `c0009e2`, `66af066`, `b0d9750`, `6c1ea54`,
+`a8ec6c3`, `333c037`. The final `Seminormal.lean` source was incidentally
+captured by concurrent automatic snapshot `2c8201c`; that snapshot is not
+verification evidence. Its checked blob is
+`c4d9d81053bc5a88fc8e7c41250698935bb12c8f`.
+
+All checks used the explicit workspace root and shared serialized slot.
+`horizon --root /home/yijunyuan/bc-workspace check --json` passed
+**9,171 jobs**, without warnings, at **2026-11-05 20:05:06 UTC**,
+fingerprint `975bdb23135a0d4a`. The checked root blob is
+`8869bc55010c2f4aaf9470f841d13966941cc982`. No mathematical source was
+changed after that build for this checkpoint.
+
+The following exact producer audits use
+`horizon --root /home/yijunyuan/bc-workspace check --lean verification/FILE --json`.
+Times are UTC on 2026-11-05.
+
+| File | Probes | Passed | Fingerprint |
+| --- | ---: | --- | --- |
+| `SpechtAdjacentAxioms.lean` | 10 | 19:31:34 | `606512c35fc19d23` |
+| `SpechtColumnReadingAxioms.lean` | 8 | 19:39:06 | `f199481c9988c541` |
+| `SpechtAdjacentPathAxioms.lean` | 4 | 19:45:16 | `d8f98ee3b3f6548a` |
+| `SpechtPrefixNormAxioms.lean` | 17 | 19:57:39 | `fdc45269329f360f` |
+| `SpechtPrefixNormInitialAxioms.lean` | 4 | 20:02:08 | `13f1fe28b44582d0` |
+| `SpechtNormProductAxioms.lean` | 6 | 20:10:27 | `336d1427e627a6a0` |
+
+All **49** new probes report only `propext`, `Classical.choice` and
+`Quot.sound`; none reports `sorryAx` or an additional axiom. The older
+24-probe `SpechtSeminormalAxioms.lean` suite was restored unchanged after
+an audit filename collision. The six final probes also passed before the
+rename at 20:06:19 (`255d9cfc066fbf12`). The rename was checked separately.
+A first rename command failed because `python` was unavailable, so its
+following check reported a missing file; the `python3` repair and above
+successful check supersede that tooling failure.
+
+Initial elaboration failures, including a simplifier recursion error, were
+repaired without increased heartbeat options. The six mathematical source
+files contain no sorry/admit, new axiom, unsafe/native computation or option
+override. LSP was not used: this legacy client remains kernel-only under
+I-0034. The offline search MCP could not resolve the member-project cwd;
+explicit-root CLI searches supplied library discovery instead.
+
+Honesty-reviewer: **used, satisfactory**. It verified substantive path
+induction, the independently proved initial values and swap ratios, the
+prefix-shape cardinality bijection, and actual consumers in the Gram and
+covolume bounds. Its two precision findings were repaired: the norm
+blueprint statement explicitly says rectangular shape, and both old and new
+audit suites are preserved. No unresolved semantic finding remains.
+
+Frontier before: normalized adjacent action and its coefficient-one
+normalization. Frontier after: shifted-coordinate tableau counting, then
+rectangular prefix distribution and the sublinear logarithmic expectation.
+Consumer: the general covolume squeeze. **BOST-SPECHT remains open**;
+the general limit and manuscript Theorem 1.1 are not proved.
+
+The fixed root batch also integrates the checked arithmetic leaves through
+`DualFiber` (`e3a7b48`) and geometric leaves through `DualMetric`
+(`90d9c82`). The owners' separate 135-probe arithmetic and 131-probe
+geometry evidence remains in their reports. Later leaf modules are outside
+this batch; prerequisite builds do not certify the main theorem.
+
+The graph retains `hgraph/config.yaml -> ../hgraph-sources.yaml`. The first
+checkpoint sync had 154 blueprint nodes, 1,071 Lean declarations and 722
+edges, with 557 intentionally unattached imported/helper declarations and
+no missing references. A later concurrent ARITH draft introduced two missing
+dependency labels; these were reported to its owner in I-0037. Janitor was
+used for the active-roadmap warning: ten active items represent the three
+live task branches and their ancestors, intentionally retained. Scratch
+cleanup dry-run found no candidates and protected all three live runs.
+
 ## Colex content-spectrum checkpoint (session 0019)
 
 Claim class: **proved producers**. `Extension.lean` constructs standard

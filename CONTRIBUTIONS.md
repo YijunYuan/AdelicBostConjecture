@@ -356,6 +356,42 @@ are retained; `verification/GEOMETRY.md` records the 9,068-job build and
 overlap transport must still be supplied before constructing the global
 integral injection.
 
+## Normalized seminormal norms and Gram evaluation — session 0021
+
+`Specht/Adjacent.lean`, `ColumnReading.lean`, `AdjacentPath.lean`,
+`PrefixNorm.lean`, `PrefixNormInitial.lean` and `Seminormal.lean` are original
+local proofs in the existing tableau/word representation. No new external
+source was copied. They substantively consume the attributed OpenAI Specht
+cone through the checked content eigenvalues and local standard basis.
+The canonical integral orbit lattice and its orthonormal Hilbert metric are
+unchanged. The normalization and explicit prefix product are now proved,
+not assumed from the Ryom-Hansen/Murphy reference.
+
+Direct Mathlib reuse retains the repository, exact revision and Apache 2.0
+license recorded above. Used declarations include
+`InnerProductSpace.ext_inner_left_basis`
+(`Mathlib/Analysis/InnerProductSpace/Dual.lean`),
+`Fin.strictMono_iff_lt_succ` (`Mathlib/Order/Fin/Basic.lean`),
+`Finset.prod_range_reflect` (`Mathlib/Algebra/BigOperators/Intervals.lean`)
+and `Nat.factorial_eq_prod_range_add_one`
+(`Mathlib/Data/Nat/Factorial/BigOperators.lean`). They are imported unchanged;
+consumers are spectral-line separation, legal paths and the initial product.
+Exact new-producer audits and source blobs are in `verification/RESULTS.md`.
+The general sublinear covolume limit is still open.
+
+## Checked arithmetic and geometric integration — session 0021
+
+The root additionally consumes the owners' checked
+`Arithmetic.NestedQuotient`, `SaturationDegree`, `LineTensorDegree` and
+`DualFiber` leaves, and `Geometry.ProjectiveMetric`, `Contraction` and
+`Tensor.DualMetric` (transitively including the delivered determinant metric,
+position action and projective permutation modules). These are original local
+proofs with the existing pinned dependencies. No new external code was copied.
+Their separate 135-probe arithmetic and 131-probe geometry audits are recorded
+in `verification/ARITHMETIC.md` and `verification/GEOMETRY.md`. They do not
+close arbitrary-rank degree identities/HN, the restricted pairing norm bound,
+or the main theorem. Later leaves are outside this fixed import batch.
+
 ## Verification
 
 Run `horizon --root ../.. check --json` from this project, then
