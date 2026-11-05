@@ -1347,6 +1347,34 @@ Lemma~\ref{lem:saturation-degree}. Uniform scaling is
 Lemma~\ref{lem:degree-metric-scaling}.
 \end{proof}
 
+\begin{lemma}[Finiteness of bounded integral sections]
+\label{lem:bounded-integral-sections}
+\uses{def:hermitian-metric,lem:dual-fiber-base-change}\notready
+Let $A$ be a finite projective Hermitian module over $\Ocal$ and let
+$b_\sigma\in\mathbb R$ be prescribed for every complex embedding
+$\sigma:K\hookrightarrow\mathbb C$. Then
+\[
+ \{x\in A:\|x\|_\sigma\leq b_\sigma\text{ for every }\sigma\}
+\]
+is finite.
+\end{lemma}
+\begin{proof}
+A finite projective module embeds as a direct summand of $\Ocal^n$.
+Let $f_i:A\to\Ocal$ be the resulting integral coordinate maps.
+On each finite-dimensional Hermitian fiber, the scalar extension of $f_i$
+is a continuous complex linear functional. Thus there is $c_{i,\sigma}\geq0$
+with $|\sigma(f_i(x))|\leq c_{i,\sigma}\|x\|_\sigma$.
+For a section in the displayed set, every conjugate of $f_i(x)$ is
+bounded by $C_i=\sum_\sigma\max(c_{i,\sigma}b_\sigma,0)$.
+There are only finitely many algebraic integers in the fixed number field
+with all conjugates bounded by $C_i$: their monic characteristic
+polynomials have integral coefficients bounded by the elementary
+symmetric functions of these conjugates, giving finitely many polynomials,
+each with finitely many roots. Hence each coordinate $f_i(x)$ belongs to
+a finite set. There are finitely many coordinates, and the coordinate map
+is injective, proving the assertion without an integral basis of $A$.
+\end{proof}
+
 \begin{lemma}[Restriction of scalars and covolume]
 \label{lem:restriction-covolume}\uses{def:hermitian-degree}
 \source{bost-specht-manuscript:page-0011}\notready
@@ -1394,7 +1422,7 @@ determine the original submodules.
 \begin{lemma}[Finite-dimensional convex interval slopes]
 \label{lem:subspace-convex-slopes}
 \source{chen-jeannin-harder-narasimhan-games-v1}
-\lean{BostConjecture.Subspace.intervalRank_pos,BostConjecture.Subspace.slope_isSlopeLike,BostConjecture.Subspace.slope_apply,BostConjecture.Subspace.slope_isConvex}\notready
+\lean{BostConjecture.Subspace.intervalRank_pos,BostConjecture.Subspace.slope_isSlopeLike,BostConjecture.Subspace.slope_apply,BostConjecture.Subspace.slope_isConvex}\leanok
 Let $V$ be a finite-dimensional vector space and let $\delta$ be a
 real-valued function on its lattice of subspaces. For $X\subsetneq Y$ put
 \[
@@ -1445,9 +1473,9 @@ is at most $\dim V$. Reverse a decreasing chain to get the same bound.
 
 \begin{lemma}[The degree inequality for a sum and intersection]
 \label{lem:submodule-degree-supermodular}
-\uses{lem:nested-quotient-metric,lem:exact-determinant-degree,lem:determinant-contraction,lem:degree-isometry,lem:integral-submodule-projective}
+\uses{lem:nested-quotient-metric,lem:exact-determinant-degree,lem:determinant-contraction,lem:integral-submodule-projective}
 \source{bost-specht-manuscript:page-0003}
-\lean{BostConjecture.Arithmetic.submoduleQuotientProjective,BostConjecture.Arithmetic.exact_inf_subToSupQuotient,BostConjecture.Arithmetic.exact_inclusion_quotient,BostConjecture.Arithmetic.HermitianMetric.pushforward_norm_le_of_inclusion,BostConjecture.Arithmetic.HermitianMetric.degree_submodule_sup}\notready
+\lean{BostConjecture.Arithmetic.submoduleQuotientProjective,BostConjecture.Arithmetic.exact_inf_subToSupQuotient,BostConjecture.Arithmetic.exact_inclusion_quotient,BostConjecture.Arithmetic.HermitianMetric.pushforward_norm_le_of_inclusion,BostConjecture.Arithmetic.HermitianMetric.degree_submodule_sup}\leanok
 Let $U,V$ be submodules of a finite projective Hermitian bundle $A$,
 and assume that $A/V$ is torsion-free. With the induced metrics,
 \[
@@ -1475,7 +1503,7 @@ the two sequences yields the displayed inequality.
 \label{lem:hermitian-subspace-supermodular}
 \uses{lem:submodule-degree-supermodular,lem:saturation-degree,lem:intrinsic-subspace-degree,lem:integral-part-generic-subspace,lem:subspace-convex-slopes}
 \source{bost-specht-manuscript:page-0003}
-\lean{BostConjecture.Arithmetic.HermitianMetric.subspaceDegree_supermodular,BostConjecture.Arithmetic.HermitianMetric.subspaceSlope_isConvex}\notready
+\lean{BostConjecture.Arithmetic.HermitianMetric.subspaceDegree_supermodular,BostConjecture.Arithmetic.HermitianMetric.subspaceSlope_isConvex}\leanok
 For a Hermitian bundle $A$ put $\delta(X)=\degn(A\cap X)$ on the
 $K$-subspaces of $A_K$, using the induced metrics. Then $\delta$ is
 supermodular, and its interval slope is convex:
@@ -1496,7 +1524,7 @@ Lemma~\ref{lem:subspace-convex-slopes} for convexity of the interval slope.
 \label{lem:hermitian-quotient-interval-slope}
 \uses{lem:exact-determinant-degree,lem:intrinsic-subspace-degree,lem:integral-part-generic-subspace,lem:submodule-degree-supermodular,lem:subspace-convex-slopes}
 \source{bost-specht-manuscript:page-0003}
-\lean{BostConjecture.Arithmetic.HermitianMetric.subspaceDegree_sub_eq_quotient,BostConjecture.Arithmetic.HermitianMetric.subspaceQuotient_finrank,BostConjecture.Arithmetic.HermitianMetric.subspaceSlope_eq_quotient}\notready
+\lean{BostConjecture.Arithmetic.HermitianMetric.subspaceDegree_sub_eq_quotient,BostConjecture.Arithmetic.HermitianMetric.subspaceQuotient_finrank,BostConjecture.Arithmetic.HermitianMetric.subspaceSlope_eq_quotient}\leanok
 If $X\subseteq Y\subseteq A_K$, give
 $Q=(A\cap Y)/(A\cap X)$ its quotient metric. Then
 \[

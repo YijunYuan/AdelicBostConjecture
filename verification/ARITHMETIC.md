@@ -780,3 +780,42 @@ rank-one reduction. It does not construct a separate canonical general
 tensor-determinant isomorphism. Supermodularity, arithmetic degree
 finiteness and intrinsic HN remain open; the aggregate calculus marker is
 still pending. No claim for maximal slopes or manuscript Theorem 1.1 follows.
+
+
+## Session 0014: intrinsic supermodularity and quotient interval slopes
+
+`SumQuotient` proves the projectivity and exactness of the actual sum quotient.
+`SubmoduleDegree` compares the two quotient norms on `(U + V) / V` by
+minimality of orthogonal lifts, then consumes exact degree and contraction.
+`SubspaceSupermodular` consumes that inequality and saturation to prove
+supermodularity of the intrinsic `subspaceDegree`. Its convexity instance
+feeds the existing HN payoff API. The interval degree and generic-rank
+identities identify every strict interval with the actual induced quotient
+bundle slope. All statements support arbitrary number fields and nonfree
+finite projective modules; no calculus or convexity assumption is supplied.
+
+| Target | Fingerprint | Accepted completion (UTC) | Result |
+| --- | --- | --- | --- |
+| `Arithmetic.SumQuotient` | `52d82dd6262403b5` | 2026-11-05 23:02:22.753 | 3342 jobs, warning-free |
+| `Arithmetic.SubmoduleDegree` | `f79b953ac12c1229` | 2026-11-05 23:06:21.048 | 3550 jobs, warning-free |
+| `Arithmetic.SubspaceSupermodular` | `a75f036feec8dce9` | 2026-11-05 23:08:55.287110 | 3563 jobs, warning-free |
+| `verification/ArithmeticAxioms.lean` | `590174f2cda53d26` | 2026-11-05 23:15:08.049455 | 235 probes, passed |
+
+All checks used the explicit workspace root and serialized Horizon slot.
+The read-only honesty reviewer read the original audit log, counted all
+235 probes, and confirmed only `propext`, `Classical.choice`, and `Quot.sound`.
+The reviewer approved the precise abstract slope, sum/intersection,
+Hermitian supermodularity, and quotient-interval blueprint nodes. The unused
+degree-isometry dependency edge was removed. The former combined node was
+split so semistability and the chain-length claim remain explicitly open.
+
+`SumQuotient` and `SubmoduleDegree` are in explicit commit `d436624`.
+`SubspaceSupermodular` was captured by concurrent boundary `f55b9fd` before
+its explicit commit; that snapshot is not evidence for unrelated files.
+The explicit audit commit is `d248986`. No Lean edits followed the three
+accepted producer checks. Axiom and source evidence is local; root integration
+was requested from SPECHT in I-0065 and remains separate.
+
+Degree finiteness, attained maximal slope, and the intrinsic HN filtration
+remain open. The checked convexity instance alone does not establish these
+or manuscript Theorem 1.1.
