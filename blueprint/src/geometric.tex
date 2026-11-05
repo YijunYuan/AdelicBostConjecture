@@ -122,6 +122,43 @@ linearity proves equality everywhere. Finally $\delta_b^{(k)}$ takes
 the stated basis tensor to one, proving the normalization formula.
 \end{proof}
 
+\begin{lemma}[Scalar extension of the determinant-twisted free map]
+\label{lem:determinant-free-base-change}
+\uses{lem:determinant-twisted-free-inclusion}
+\source{bost-specht-manuscript:page-0009}\notready
+Let $R\to S$ be a homomorphism of commutative rings, and let $M$ be free
+of rank $a$ over $R$. The determinant-twisted free map commutes with
+extension of scalars to $S$. More precisely, write $\beta$ for the maps
+on tensor powers induced by $m\mapsto1\otimes m$, and write $\delta$
+for the corresponding map on the $k$th tensor power of $\bigwedge^aM$,
+using the exterior-power base-change isomorphism. For $\eta$ in that
+power and $x\in L_t$,
+\[
+ \beta\bigl(j_M(\eta\otimes(1\otimes x))\bigr)
+ =j_{S\otimes_R M}\bigl(\delta(\eta)\otimes(1\otimes x)\bigr).
+\]
+These identities determine the full scalar-extension square by
+$S$-linearity and spanning by elementary tensors. No flatness assumption
+is needed for this equality.
+\end{lemma}
+\begin{proof}
+Choose a basis $b$ of $M$; then $1\otimes b$ is a basis after extension.
+The coordinate of a pure tensor at a word is a product of basis
+coordinates. Applying $R\to S$ commutes with this product, and hence
+with the coordinates of every tensor by linearity. In particular the
+realization of the integral vector $x$ commutes with scalar extension.
+The exterior-power base-change map sends the wedge of $b$ to the wedge
+of $1\otimes b$. Every element of the top exterior power is a scalar
+multiple of this wedge, so its determinant coordinate is carried to
+its image in $S$. On the $k$th tensor power, the same assertion follows
+by taking products of these coordinates. The formula for the
+determinant-twisted map now gives the displayed equality: both sides
+are the realization of $x$ multiplied by the image of the determinant
+coordinate of $\eta$. Additivity and scalar multiplication extend it
+to the full square. Independence of the chosen basis follows from
+frame independence over both rings.
+\end{proof}
+
 \begin{definition}[Geometric semistability of a Pl\"ucker line]
 \label{def:geometric-semistability}
 \source{bost-specht-manuscript:page-0009}\notready
