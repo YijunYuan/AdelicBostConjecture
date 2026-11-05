@@ -1527,9 +1527,59 @@ $A$, and the preceding lemma identifies them. Invariance and nonvanishing
 follow by substituting the invariant polynomial and the specified map.
 \end{proof}
 
+\begin{lemma}[Invariant Hom tensors from Pl\"ucker invariants]
+\label{lem:plucker-invariant-tensor}
+\uses{lem:plucker-polynomial-pullback,lem:polynomial-symmetric-lift}
+\source{bost-specht-manuscript:page-0010}
+\notready
+Let $V,X$ be finite-dimensional vector spaces over a characteristic-zero
+field $F$, let $b$ be a basis of $V$ of length $s$, and let $G$ act linearly
+on $X$. Suppose a homogeneous polynomial $p$ of degree $m$ on
+$\bigwedge^s X$ is invariant and is nonzero at $\bigwedge_i A b_i$.
+For every $r\ge0$, there is a tensor
+$u_r\in(\Hom(V,X)^\vee)^{\otimes (sm)r}$ fixed by the dual tensor action
+of $G\times\SL(V)$, whose polynomial quotient is $(P_bp)^r$ and whose
+evaluation on $A^{\otimes (sm)r}$ is nonzero.
+In particular this applies to $X=U\otimes W$ with the independent
+$\SL(U)\times\SL(W)$ action on its Pl\"ucker exterior power.
+\end{lemma}
+\begin{proof}
+Put $q=P_bp$. The preceding lemma gives its degree $sm$, invariance and
+$q(A)\ne0$. The product of homogeneous polynomials of degrees $d,e$ lies
+in degree $d+e$, because products of $d$ and $e$ generators concatenate
+to products of $d+e$ generators. Induction gives $q^r$ degree $(sm)r$;
+algebra pullback preserves products, so $q^r$ is invariant. Its evaluation
+is $q(A)^r\ne0$ in the field, including $r=0$.
+Apply the canonical symmetric lift to $q^r$. Its naturality gives the
+stated tensor invariance, and its quotient and evaluation identities give
+the remaining conclusions. For the independent tensor action, exterior
+functoriality identifies its exterior action with the stated Pl\"ucker action.
+\end{proof}
+
+\begin{lemma}[Divisibility forced by special-linear scalar actions]
+\label{lem:invariant-degree-divisibility}
+\uses{lem:plucker-invariant-tensor}
+\source{bost-specht-manuscript:page-0010}
+\notready
+Let $U,W,V$ be finite-dimensional vector spaces over an algebraically closed
+field $F$ of characteristic zero, with $\dim U=a>0$ and $\dim W=b>0$.
+If a degree-$d$ homogeneous polynomial on $\Hom(V,U\otimes W)$ is invariant
+under $\SL(U)\times\SL(W)\times\SL(V)$ and is nonzero at some map, then
+$a\mid d$ and $b\mid d$.
+\end{lemma}
+\begin{proof}
+Choose a primitive $a$th root of unity $\zeta\in F$. It is a unit, and
+the determinant of $\zeta\,\mathrm{id}_U$ is $\zeta^a=1$, so this is
+an actual member of $\SL(U)$. Its action on $U\otimes W$, and hence by
+postcomposition on $\Hom(V,U\otimes W)$, is scalar multiplication by
+$\zeta$. At a map $A$ where $q(A)\ne0$, homogeneity and invariance give
+$\zeta^d q(A)=q(A)$. Cancellation gives $\zeta^d=1$, and primitivity
+gives $a\mid d$. The same construction in $\SL(W)$ gives $b\mid d$.
+\end{proof}
+
 \begin{lemma}[Nonvanishing in unbounded degrees]
 \label{lem:contraction-nonzero}
-\uses{def:geometric-semistability,lem:invariant-base-change,lem:canonical-contraction,lem:rectangular-invariants,lem:finite-independent-tensor-invariants,lem:polynomial-symmetric-lift,lem:plucker-polynomial-pullback}
+\uses{def:geometric-semistability,lem:invariant-base-change,lem:canonical-contraction,lem:rectangular-invariants,lem:finite-independent-tensor-invariants,lem:plucker-invariant-tensor,lem:invariant-degree-divisibility}
 \source{bost-specht-manuscript:page-0010}\notready
 If the Pl\"ucker line of $V_K$ is geometrically semistable, then there
 is a positive integer $d_0$, divisible by $s,a_1,\ldots,a_N$, such

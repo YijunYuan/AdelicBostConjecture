@@ -737,3 +737,13 @@ Rectangular invariant identification and polynomial coaction base change are
 still separate boundaries. I-0067 was consumed by the completed session0014
 handoff; session0016 is its fresh continuation. The one-time read-only hygiene
 review retained 12 active roadmap rows as four frontiers and eight ancestors.
+
+`Geometry/PluckerPolarization.lean` now consumes this pullback, invariant powers
+and the checked normalized lift to produce Hom-dual invariant tensors in every
+multiple of the pulled-back degree. Its concrete binary consumer uses BALANCED's
+actual product-SL Pluecker invariants. Module `db602ea8eca60eb6` passed 2418 jobs
+without warnings at 23:25:12 UTC. The read-only honesty review found the
+producer route substantive, including the degree-zero power. Positive degree,
+rank divisibility and rectangular regrouping are separate; no canonical
+contraction nonvanishing follows from this result alone. The expanded axiom
+audit and corresponding completion marker follow in the next checked batch.
