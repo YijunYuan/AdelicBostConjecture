@@ -1052,9 +1052,41 @@ composite is the canonical dual regrouping already constructed
 algebraically, proving the assertion for that exact map.
 \end{proof}
 
+\begin{lemma}[The local determinant pairing is contracting]
+\label{lem:free-determinant-contraction}
+\uses{lem:free-determinant-isometry,lem:dual-regrouping-isometry,lem:hilbert-tensor-duality,lem:finite-hilbert-tensor}
+\source{bost-specht-manuscript:page-0010}
+\lean{BostConjecture.Geometry.freeDeterminantTensorMap_inner,BostConjecture.Geometry.freeDeterminantPairing_le}
+\leanok
+Let $i:V\hookrightarrow W=\bigotimes_jE_j$ be an isometric linear
+inclusion of finite-dimensional complex inner product spaces, with a
+finite family $(E_j)$. Choose orthonormal frames of $V$ and $E_j^\vee$
+and rectangular tableaux as in the integral pairing construction.
+For the actual free determinant maps $U_V$ and $U_j$, and the canonical
+dual regrouping $G$, the local pairing satisfies
+\[
+ \left|\left\langle G\bigl((\bigotimes_jU_j)u\bigr),
+           i^{\otimes n}U_V(z)\right\rangle\right|
+ \leq \|z\|\,\|u\|.
+\]
+The source norms are the tensor products of the Gram determinant metrics
+and the canonical complex lattice metrics; the dual metrics are the
+canonical Riesz dual metrics.
+\end{lemma}
+\begin{proof}
+The tensor evaluation bound gives the product of the two ambient
+norms. Dual regrouping is isometric, and every $U_j$ is isometric
+for the prescribed determinant-lattice form. The tensor product of
+these maps is therefore isometric, so the first ambient norm equals
+$\|u\|$. The isometry $i$ remains isometric on its $n$th Hilbert tensor
+power, and $U_V$ is isometric by the local determinant metric theorem.
+Thus the second ambient norm equals $\|z\|$. Substitution proves the
+bound on all tensors, with no purity restriction on $u$ or $z$.
+\end{proof}
+
 \begin{lemma}[The canonical contracting pairing]
 \label{lem:canonical-contraction}
-\uses{lem:integral-canonical-pairing,lem:projective-determinant-isometry,lem:finite-hilbert-tensor,lem:hilbert-tensor-duality,lem:dual-regrouping-isometry}
+\uses{lem:integral-canonical-pairing,lem:projective-determinant-isometry,lem:finite-hilbert-tensor,lem:hilbert-tensor-duality,lem:dual-regrouping-isometry,lem:free-determinant-contraction}
 \source{bost-specht-manuscript:page-0010}\notready
 Let $i:V\hookrightarrow W=\bigotimes_{j=1}^N E_j$ be a nonzero
 submodule with its induced metrics. Set $s=\rk V$, $a_j=\rk E_j$.

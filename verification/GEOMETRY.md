@@ -367,14 +367,14 @@ evidence for those paths. ARITH independently verified the module before staging
 or content mismatch. I-0039 records the resolution. Subsequent GEOM commits use
 `commit --only` with explicit owned paths as well as explicit staging.
 
-Final boundary sync: 151 blueprint nodes, 1059 Lean declarations and 683 generated
+Earlier boundary sync: 151 blueprint nodes, 1059 Lean declarations and 683 generated
 edges, with no stale/missing-reference warning. The 570 unattached declarations
 are intentional helper/imported coverage, including concurrent lane work.
 Read-only hygiene review retained 13 active nested items across the three proof
 lanes and corrected stale frontier wording. Scratch dry-run found no stale
-candidates. I-0038 and I-0039 are resolved; I-0036 awaits SPECHT's root-integration
-result for the stable new imports. All GEOM checks have completed, and this report
-does not certify any later root batch. I-0034 still forbids this session's legacy
+candidates. I-0038 and I-0039 are resolved. SPECHT subsequently supplied the fixed root pass
+`975bdb23135a0d4a` at 20:05:06 UTC (9171 jobs), covering delivered leaves through
+`90d9c82`; I-0036 was closed. Later metric leaves have their own checks below. I-0034 still forbids this session's legacy
 LSP client; every post-freeze feedback check used the serialized kernel slot.
 
 ARITH subsequently supplied the actual finite-projective dual scalar-extension
@@ -399,5 +399,30 @@ warnings; all 136 transitive axiom probes passed with only the three standard
 foundational axioms. Earlier notation and unused-simp feedback was repaired.
 Read-only honesty review approved the source/blueprint correspondence and
 substantive use of the generic map lemma. Both duality metric nodes are checked.
-The restricted determinant pairing norm bound and its scalar-extension
-identification remain the next consumers; invariant detection remains separate.
+The local restricted determinant pairing bound is checked below. Its identification
+with scalar extension of the integral pairing remains a subsequent consumer;
+invariant detection remains separate.
+
+## Local determinant pairing contraction
+
+`Geometry/ContractionMetric.lean` proves the isometry of the tensor product of
+actual dual determinant maps, then consumes it with dual regrouping, tensor
+evaluation and the isometric inclusion to obtain the product bound on arbitrary
+source tensors. The determinant, dual and lattice metrics are the prescribed
+ones. No target-shaped certificate or pairing bound is assumed.
+
+Module check `456e68d5f3c862c0` passed 9088 jobs at 20:14:08 UTC.
+All 138 transitive axiom probes then passed with only `propext`,
+`Classical.choice`, and `Quot.sound`, and no `sorryAx` or new axioms.
+The first underspecified Core rewrite and heartbeat failure were repaired by
+explicit arguments and a separately proved factor-map lemma. The final matching
+of nested Core-derived instances uses a localized `maxRecDepth 1024`; there is
+no heartbeat increase. An accidental workspace-cwd file check had no project
+search path and was rerun from the member project. Read-only honesty review
+approved the final source and the local blueprint completion marker.
+
+This is a local pointwise contraction theorem. The global integral-to-complex
+pairing diagram is still required before marking canonical-contraction checked.
+ARITH supplied its intrinsic dual metric at `ba2f037` (3349-job module check,
+I-0041); this complements its dual base-change interface at `e3a7b48` and will
+be reused for that diagram. Invariant base change and nonvanishing remain open.

@@ -15,6 +15,7 @@ import BostConjecture.Geometry.ProjectivePermutation
 import BostConjecture.Geometry.Contraction
 import BostConjecture.Tensor.DualMetric
 import BostConjecture.Tensor.DualRegroupMetric
+import BostConjecture.Geometry.ContractionMetric
 
 #print axioms BostConjecture.Geometry.tensorCoordinates
 #print axioms BostConjecture.Geometry.tensorCoordinates_tprod
@@ -165,3 +166,6 @@ import BostConjecture.Tensor.DualRegroupMetric
 #print axioms BostConjecture.Tensor.tensorDual_evaluation_le
 #print axioms BostConjecture.Tensor.tensorCore_map_inner
 #print axioms BostConjecture.Tensor.dualRegroupEquiv_inner
+
+#print axioms BostConjecture.Geometry.freeDeterminantTensorMap_inner
+#print axioms BostConjecture.Geometry.freeDeterminantPairing_le
