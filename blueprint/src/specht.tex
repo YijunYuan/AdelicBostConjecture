@@ -1685,7 +1685,8 @@ Summing the single-coordinate bounds proves the simultaneous bound.
 
 \begin{lemma}[Finite weighted bad-gap bound]
 \label{lem:weighted-bad-gap-bound}\uses{lem:labelled-occupancy,lem:occupancy-concentration}
-\source{bost-specht-manuscript:page-0007}\notready
+\lean{BostConjecture.Specht.vandermonde_sq_le_pow,BostConjecture.Specht.vandermonde_sq_le_of_gap,BostConjecture.Specht.occupancy_vandermonde_sq_le,BostConjecture.Specht.sum_occupancyWeight_gap_le,BostConjecture.Specht.occupancyWeight_gap_probability_le}
+\source{bost-specht-manuscript:page-0007}\leanok
 Let $a\geq2$, $M\geq1$, $0<A\leq aM$, and put $c=a(a-1)/2$.
 For the labelled occupancy law $B$, set
 $Z=\mathbb E_B V(b)^2$ and suppose $Z>0$.
@@ -1710,8 +1711,32 @@ at most $2a e^{-u^2/(4A)}$. Add the two nonnegative weighted bounds
 and divide by $Z>0$.
 \end{proof}
 
+\begin{lemma}[A bound independent of the bulk prefix time]
+\label{lem:bulk-gap-bound}\uses{lem:prefix-normalizer-lower,lem:weighted-bad-gap-bound}
+\source{bost-specht-manuscript:page-0007}\notready
+Let $a\geq2$, $k\geq1$, $c=a(a-1)/2$, $\varepsilon>0$,
+$\varepsilon ak\leq m\leq(1-\varepsilon)ak$ and $u>0$.
+Put $C=a!\prod_{j=0}^{a-1}j!\,(\varepsilon/a)^{2c}$.
+Under the normalized Vandermonde-weighted occupancy law with
+$M=k+a-1$ and $A=m+c$, the probability of a pairwise gap at most $L$
+is at most
+\[
+ \frac{L^2(2u)^{2(c-1)}+
+  2a(ak)^{2c}\exp(-u^2/(4a^2k))}{Ck^c}.
+\]
+\end{lemma}
+\begin{proof}
+The normalizer is at least $Ck^c>0$. Since $k\geq1$,
+$M\leq ak$ and $0<A\leq aM\leq a^2k$.
+The exponential function is increasing, so replacing $A$ by $a^2k$
+in the finite weighted bad-gap bound increases its tail term.
+Replacing $M$ by $ak$ increases its nonnegative polynomial factor.
+Finally divide by the positive lower bound on the normalizer.
+Every quantity in the resulting bound is independent of $m$.
+\end{proof}
+
 \begin{lemma}[Uniform separation of bulk prefix coordinates]
-\label{lem:prefix-separation}\uses{lem:prefix-distribution,lem:prefix-normalizer-lower,lem:weighted-bad-gap-bound}
+\label{lem:prefix-separation}\uses{lem:prefix-distribution,lem:bulk-gap-bound}
 \source{bost-specht-manuscript:page-0007}\notready
 For fixed $a\geq2$, $0<\varepsilon<1/2$, and $L>0$,
 \[

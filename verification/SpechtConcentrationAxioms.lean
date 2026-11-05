@@ -1,4 +1,5 @@
 import BostConjecture.Specht.OccupancyMGF
+import BostConjecture.Specht.WeightedGap
 
 #print axioms BostConjecture.Specht.sum_occupancyMass_apply
 #print axioms BostConjecture.Specht.card_blockFiber_eq_inter
@@ -9,3 +10,8 @@ import BostConjecture.Specht.OccupancyMGF
 #print axioms BostConjecture.Specht.sum_abs_tail_le_of_exp_bound
 #print axioms BostConjecture.Specht.occupancyMass_concentration
 #print axioms BostConjecture.Specht.occupancyMass_max_concentration
+#print axioms BostConjecture.Specht.vandermonde_sq_le_pow
+#print axioms BostConjecture.Specht.vandermonde_sq_le_of_gap
+#print axioms BostConjecture.Specht.occupancy_vandermonde_sq_le
+#print axioms BostConjecture.Specht.sum_occupancyWeight_gap_le
+#print axioms BostConjecture.Specht.occupancyWeight_gap_probability_le
