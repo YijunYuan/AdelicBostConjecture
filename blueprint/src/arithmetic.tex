@@ -601,11 +601,18 @@ compatibility.
 \end{proof}
 
 \begin{lemma}[Compatibility of nested quotient metrics]
-\label{lem:nested-quotient-metric}\uses{lem:quotient-hermitian-metric}\notready
-If $P\subseteq T\subseteq M$ are saturated submodules, the quotient
-metric on $T/P$ agrees with the metric induced by its inclusion in $M/P$.
+\label{lem:nested-quotient-metric}\uses{lem:quotient-hermitian-metric,lem:induced-hermitian-metric}\notready
+Let $M$ be a finite Hermitian $\Ocal$-module and $P\subseteq T\subseteq M$
+be submodules. The map
+$j:T/(P\cap T)\to M/P$, $[t]\mapsto[t]$, is injective.
+The quotient of the induced metric on $T$ by $P\cap T$ equals the
+pullback by $j$ of the quotient metric on $M/P$; in particular the
+two norms of every integral quotient section agree.
 \end{lemma}
 \begin{proof}
+The kernel of $T\to M/P$ is $P\cap T$, proving injectivity of $j$.
+Flat scalar extension preserves this injection and identifies the
+quotient kernels with the corresponding submodule fibers.
 For $v\in T_\sigma$, its orthogonal projection $v_P$ lies in
 $P_\sigma\subseteq T_\sigma$, so $v-v_P$ belongs to $T_\sigma$.
 It is orthogonal to $P_\sigma$ in both ambient spaces. Thus it is the

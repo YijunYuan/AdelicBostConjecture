@@ -85,5 +85,28 @@ def core (f : E →ₗ[ℂ] F) (hf : Function.Surjective f) :
 lemma core_inner (f : E →ₗ[ℂ] F) (hf : Function.Surjective f) (x y : F) :
     (core f hf).inner x y = inner ℂ (lift f hf x) (lift f hf y) := rfl
 
+/-- Orthogonal lifts commute with an isometric inclusion whose image contains
+the kernel of the ambient quotient. -/
+lemma lift_natural {E' F' : Type*} [NormedAddCommGroup E'] [InnerProductSpace ℂ E']
+    [FiniteDimensional ℂ E'] [AddCommGroup F'] [Module ℂ F']
+    (i : E →ₗ[ℂ] E') (hi : ∀ x y, inner ℂ (i x) (i y) = inner ℂ x y)
+    (f : E →ₗ[ℂ] F) (hf : Function.Surjective f)
+    (g : E' →ₗ[ℂ] F') (hg : Function.Surjective g)
+    (j : F →ₗ[ℂ] F') (hj : Function.Injective j)
+    (hcomm : ∀ x, g (i x) = j (f x))
+    (hker : LinearMap.ker g ≤ LinearMap.range i) (x : F) :
+    i (lift f hf x) = lift g hg (j x) := by
+  apply eq_lift
+  · rw [Submodule.mem_orthogonal]
+    intro u hu
+    obtain ⟨v, rfl⟩ := hker hu
+    have hv : v ∈ LinearMap.ker f := by
+      apply hj
+      rw [map_zero, ← hcomm]
+      exact hu
+    rw [hi]
+    exact (Submodule.mem_orthogonal _ _).mp (lift_mem f hf x) v hv
+  · rw [hcomm, map_lift]
+
 end ComplexQuotient
 end BostConjecture.Arithmetic
