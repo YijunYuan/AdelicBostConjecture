@@ -364,6 +364,71 @@ is injective, then $p/1=0$ in every $P_{f_i}$. Applying the same
 uniqueness argument to $P$ gives $p=0$.
 \end{proof}
 
+\begin{lemma}[Compatibility of determinant charts under further base change]
+\label{lem:determinant-chart-tower}
+\uses{lem:determinant-free-base-change-square,lem:determinant-free-naturality}
+\source{bost-specht-manuscript:page-0009}
+\notready
+Let $R\to S\to T$ be a tower of commutative rings, $M$ an
+$R$-module, and $t$ a tableau of shape $(k^a)$ with $k>0$.
+Suppose $S\otimes_R M$ and $T\otimes_R M$ have $a$-element bases
+$b$ and $c$. Write
+$P=(\bigwedge_R^a M)^{\otimes k}\otimes_R(R\otimes_{\mathbb Z}L_t)$
+and $Q=M^{\otimes n}$. Transporting the free determinant map through
+the canonical base-change isomorphisms gives
+$u_b:S\otimes_R P\to S\otimes_R Q$ and
+$u_c:T\otimes_R P\to T\otimes_R Q$. They are compatible with
+further scalar extension: under $T\otimes_S(S\otimes_R X)\simeq
+T\otimes_R X$, one has $T\otimes_S u_b=u_c$.
+\end{lemma}
+\begin{proof}
+The exterior-power base-change map sends a decomposable wedge
+$m_1\wedge\cdots\wedge m_a$ to the wedge of $1\otimes m_i$.
+Doing this twice and applying the canonical cancellation
+$T\otimes_S(S\otimes_R M)\simeq T\otimes_R M$ gives the same
+wedge as direct base change. Decomposable wedges span, so this
+identity holds on the entire exterior power. Applying the same
+argument to pure tensors proves its $k$th tensor-power version,
+and on the integral lattice factor cancellation sends
+$t\otimes(s\otimes x)$ to $ts\otimes x$.
+The free determinant map commutes with base change from $S$ to $T$.
+It also commutes with the cancellation isomorphism on the module,
+by naturality for linear maps. Combining these two identities with
+the exterior and tensor identities just established proves the
+asserted equality on $t\otimes(\eta\otimes(1\otimes x))$.
+These elements span the source, so the two linear maps agree.
+Frame independence permits any choice of the final basis $c$.
+\end{proof}
+
+\begin{lemma}[Finite principal frames of constant rank]
+\label{lem:finite-projective-frames}
+\source{bost-specht-manuscript:page-0009}
+\notready
+Let $R$ be a commutative ring and $M$ a finite projective $R$-module.
+Suppose $\operatorname{rank}_{R_{\mathfrak p}}M_{\mathfrak p}=a$
+for every prime $\mathfrak p$. There is a finite set $s\subset R$
+generating the unit ideal such that each $R_f\otimes_R M$, $f\in s$,
+has a basis indexed by $\{1,\ldots,a\}$.
+\end{lemma}
+\begin{proof}
+A finite projective module is finitely presented. At each prime
+$\mathfrak p$ its localization is finite free over the local ring
+$R_{\mathfrak p}$, hence has an $a$-element basis. Finite presentation
+allows this basis and its inverse coordinate map to descend to
+$R_f$ for some $f\notin\mathfrak p$: lift the finitely many basis
+vectors, the finitely many coordinates of generators, and their
+relations; clear their denominators and those of the two inverse
+identities by multiplying a finite number of elements outside
+$\mathfrak p$. The resulting maps are inverse and give the required
+basis on $M_f$. The canonical identification
+$M_f\simeq R_f\otimes_R M$ transfers this basis.
+Let $T$ be the set of $f$ for which such a basis exists. No maximal
+ideal contains $T$, by the preceding construction at that maximal
+ideal. Thus $(T)=R$. Expressing $1$ as a finite linear combination
+of elements of $T$ gives the required finite set $s$. This also
+covers the zero ring, where the empty set generates the unit ideal.
+\end{proof}
+
 \begin{definition}[Geometric semistability of a Pl\"ucker line]
 \label{def:geometric-semistability}
 \source{bost-specht-manuscript:page-0009}\notready
@@ -397,7 +462,7 @@ a positive degree with nonzero restriction is therefore unchanged.
 
 \begin{lemma}[Determinant-isotypic integral modules]
 \label{lem:determinant-isotypic}
-\uses{def:rectangular-specht,lem:rectangular-invariants,lem:determinant-twisted-free-inclusion,lem:determinant-free-base-change,lem:determinant-free-naturality,lem:tensor-base-change-equivalence,lem:determinant-free-base-change-square,lem:linear-map-localization-descent,lem:degree-calculus}
+\uses{def:rectangular-specht,lem:rectangular-invariants,lem:determinant-twisted-free-inclusion,lem:determinant-free-base-change,lem:determinant-free-naturality,lem:tensor-base-change-equivalence,lem:determinant-free-base-change-square,lem:linear-map-localization-descent,lem:determinant-chart-tower,lem:finite-projective-frames,lem:degree-calculus}
 \source{bost-specht-manuscript:page-0008,bost-specht-manuscript:page-0009}
 \notready
 For a rank-$a$ projective $\Ocal$-module $A$ and $d=ak>0$, there is

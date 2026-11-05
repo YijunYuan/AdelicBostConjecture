@@ -1,6 +1,10 @@
 import BostConjecture.Arithmetic.HermitianLine
 import BostConjecture.Arithmetic.DeterminantLine
 import BostConjecture.Arithmetic.Degree
+import BostConjecture.Arithmetic.MetricScaling
+import BostConjecture.Arithmetic.SubmoduleMetric
+import BostConjecture.Arithmetic.LineContraction
+import BostConjecture.Arithmetic.DegreeNormalization
 
 #print axioms BostConjecture.Arithmetic.HermitianMetric
 #print axioms BostConjecture.Arithmetic.fiberSection_injective
@@ -42,3 +46,34 @@ import BostConjecture.Arithmetic.Degree
 #print axioms BostConjecture.Arithmetic.HermitianMetric.slope
 #print axioms BostConjecture.Arithmetic.HermitianMetric.degree_eq
 #print axioms BostConjecture.Arithmetic.HermitianMetric.determinant_quotient_finite
+
+#print axioms BostConjecture.Arithmetic.ComplexDeterminant.core_ext_of_unit
+#print axioms BostConjecture.Arithmetic.ComplexDeterminant.core_unique
+#print axioms BostConjecture.Arithmetic.ComplexDeterminant.core_eq
+#print axioms BostConjecture.Arithmetic.HermitianMetric.determinantFiber_unique
+#print axioms BostConjecture.Arithmetic.HermitianMetric.lineDegree_eq_of_equiv
+#print axioms BostConjecture.Arithmetic.determinantOneEquiv
+#print axioms BostConjecture.Arithmetic.determinantZeroEquiv
+#print axioms BostConjecture.Arithmetic.HermitianMetric.determinant_sectionNorm_rank_one
+#print axioms BostConjecture.Arithmetic.HermitianMetric.determinant_sectionNorm_rank_zero
+#print axioms BostConjecture.Arithmetic.HermitianMetric.degree_eq_lineDegree
+#print axioms BostConjecture.Arithmetic.HermitianMetric.degree_eq_zero_of_rank_zero
+#print axioms BostConjecture.Arithmetic.quotient_span_card_le
+#print axioms BostConjecture.Arithmetic.HermitianMetric.lineDegree_le_of_injective
+#print axioms BostConjecture.Arithmetic.fiberMap_injective
+#print axioms BostConjecture.Arithmetic.submoduleProjective
+#print axioms BostConjecture.Arithmetic.HermitianMetric.pullback
+#print axioms BostConjecture.Arithmetic.HermitianMetric.sectionNorm_pullback
+#print axioms BostConjecture.Arithmetic.HermitianMetric.submodule
+#print axioms BostConjecture.Arithmetic.HermitianMetric.sectionNorm_submodule
+#print axioms BostConjecture.Arithmetic.HermitianMetric.rescale
+#print axioms BostConjecture.Arithmetic.HermitianMetric.sectionNorm_rescale
+#print axioms BostConjecture.Arithmetic.HermitianMetric.pullback_rescale
+#print axioms BostConjecture.Arithmetic.HermitianMetric.submodule_rescale
+#print axioms BostConjecture.Arithmetic.HermitianMetric.determinant_rescale
+#print axioms BostConjecture.Arithmetic.HermitianMetric.lineDegree_rescale
+#print axioms BostConjecture.Arithmetic.HermitianMetric.degree_rescale
+#print axioms BostConjecture.Arithmetic.HermitianMetric.slope_rescale
+#print axioms BostConjecture.Arithmetic.HermitianMetric.slope_rescale_self
+#print axioms BostConjecture.Arithmetic.HermitianMetric.degree_submodule_rescale
+#print axioms BostConjecture.Arithmetic.HermitianMetric.slope_submodule_rescale
