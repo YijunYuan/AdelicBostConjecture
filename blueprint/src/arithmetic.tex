@@ -188,9 +188,105 @@ $I_g=(c)I_f$ and $\rho_v(g,x)=|c|_v^{-1}\rho_v(f,x)$.
 Apply generic-section independence with $a=c^{-1}$.
 \end{proof}
 
+\begin{lemma}[Fractional-ideal index and norm]
+\label{lem:fractional-ideal-index}\notready
+For nonzero fractional ideals $J\subseteq I\subset K$,
+\[
+ [I:J]=N(J)/N(I).
+\]
+\end{lemma}
+\begin{proof}
+Choose integral bases of $I$ and $J$, each of length $D$, and regard them
+as rational bases of $K$. The finite index $[I:J]$ is the absolute value
+of the determinant changing the basis of $I$ to that of $J$. For each of
+$I,J$, its norm is the absolute value of the determinant changing a fixed
+integral basis of $\Ocal$ to its integral basis. The chain rule for change
+of basis therefore gives $N(J)=N(I)[I:J]$. The norm $N(I)$ is nonzero,
+so division gives the assertion. The index-determinant identity also
+shows finiteness, since both bases span $K$ and hence the determinant
+is nonzero.
+\end{proof}
+
+\begin{lemma}[The quotient formula for intrinsic line degree]
+\label{lem:line-degree-quotient-formula}
+\uses{lem:intrinsic-line-degree,lem:fractional-ideal-index}\notready
+For every nonzero finite projective Hermitian module $M$ of generic rank
+one and every nonzero $x\in M$, the quotient $M/\Ocal x$ is finite and
+\[
+ \degn(M)=\frac{\log\#(M/\Ocal x)
+   -\sum_v w_v\log\|j_{\sigma_v}(x)\|}{D}.
+\]
+Equivalently, the weighted sum can be replaced by the sum over every
+embedding $\sigma:K\hookrightarrow\mathbb C$, with conjugate complex
+embeddings counted separately.
+\end{lemma}
+\begin{proof}
+An injective coordinate $f$ identifies $M$ with $I_f$ and $\Ocal x$
+with the principal fractional ideal $(f(x))$. Therefore the quotient
+cardinality is the relative index $[I_f:(f(x))]$, which equals
+$N((f(x)))/N(I_f)>0$ by the index formula. In particular the quotient
+is finite. Substitute this ratio in the section formula. The archimedean
+term is the actual norm of $x$, since
+$|f(x)|_v\rho_v(f,x)=\|j_{\sigma_v}(x)\|$.
+The embeddings above a real place number one and those above a complex
+place number two; conjugation compatibility makes their summands equal.
+Grouping the embedding sum by its infinite place gives precisely the weights $w_v$.
+\end{proof}
+
+\begin{lemma}[The integral determinant line]
+\label{lem:integral-determinant-line}\notready
+For a finite projective $\Ocal$-module $M$ of generic rank $r$,
+$\det M=\bigwedge^r_{\Ocal}M$ is finite projective and its generic fiber
+has dimension one. Formation of this exterior power commutes with
+extension to $K$ and to every complex archimedean fiber.
+\end{lemma}
+\begin{proof}
+Choose a finite free module $F$ and maps $i:M\to F$, $p:F\to M$ with
+$pi=1_M$. Exterior powers preserve composition and identity, so
+$(\bigwedge^r p)(\bigwedge^r i)=1_{\bigwedge^r M}$. Thus $\bigwedge^r M$
+is a direct summand of the finite free module $\bigwedge^r F$, and is
+finite projective. Scalar extension commutes with exterior powers by
+the universal property of alternating maps: send
+$1\otimes(x_1\wedge\cdots\wedge x_r)$ to
+$(1\otimes x_1)\wedge\cdots\wedge(1\otimes x_r)$; multilinearity gives
+the inverse. Over $K$ choose a basis of the rank-$r$ generic fiber.
+Its top wedge is a basis of its top exterior power, proving dimension one.
+\end{proof}
+
+\begin{lemma}[The complex determinant metric]
+\label{lem:determinant-metric}
+\uses{def:hermitian-metric,lem:integral-determinant-line}
+\source{bost-specht-manuscript:page-0003}\notready
+There is a unique Hermitian metric on $\det M$ such that, in every complex
+fiber of dimension $r$,
+\[
+ \|x_1\wedge\cdots\wedge x_r\|^2
+   =\det\bigl(h_\sigma(x_i,x_j)\bigr)_{1\le i,j\le r}.
+\]
+It is compatible with conjugation, including when $r=0$.
+\end{lemma}
+\begin{proof}
+Choose a complex basis $e_1,\ldots,e_r$ and write $e=e_1\wedge\cdots\wedge e_r$.
+Give its one-dimensional exterior power the form
+$h_{\det}(te,se)=\bar t s\det G$, where $G=(h_\sigma(e_i,e_j))$.
+The Gram matrix is positive definite, so $\det G>0$; for $r=0$ the
+empty determinant is $1$. This defines a positive-definite Hermitian form.
+Under a basis change with matrix $A$, the Gram matrix becomes $A^*GA$
+and the top wedge becomes $(\det A)e$. Since
+$\det(A^*GA)=|\det A|^2\det G$, the two definitions coincide.
+For arbitrary $x_i$ with coordinate matrix $X$, their wedge is
+$(\det X)e$ and their Gram matrix is $X^*GX$, which proves the formula
+also when the $x_i$ are dependent. A nonzero top wedge spans the line,
+so the formula determines the metric uniquely.
+Conjugation sends a basis to a basis and conjugates its Gram matrix;
+its positive real determinant is unchanged. The displayed construction
+therefore commutes with conjugation. Transfer the forms to the complex
+fibers of $\det M$ through the exterior-power scalar-extension isomorphisms.
+\end{proof}
+
 \begin{definition}[Hermitian bundles and normalized degree]
 \label{def:hermitian-degree}
-\uses{def:hermitian-metric,lem:line-degree-section-independence}
+\uses{def:hermitian-metric,lem:line-degree-quotient-formula,lem:determinant-metric}
 \source{bost-specht-manuscript:page-0002,bost-specht-manuscript:page-0003}\notready
 A Hermitian bundle $\overline A$ is a finite projective $\Ocal$-module $A$
 with a positive-definite Hermitian metric on each complex archimedean fiber,

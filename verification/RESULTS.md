@@ -1,5 +1,20 @@
 # Dependency integration evidence — 2026-11-05
 
+## Content action and checked geometry integration — session 0013
+
+`Content.lean` computes the integral transposition coefficient at the original
+row word and identifies its Murphy sum with the box content. The final theorem
+uses the actual real standard basis. These are word coefficients; the statement
+does not assert triangularity or content eigenvalues.
+
+The serialized module check passed **9,061 jobs** (fingerprint
+`8bb511124ccb9cf5`). All **seven** transitive probes in
+`SpechtContentAxioms.lean` passed (`35ede571115c9a69`), reporting only
+`propext`, `Classical.choice`, and `Quot.sound`. Content LSP diagnostics were
+clean. Subsequent Central/root LSP queries repeatedly remained partial at the
+imports; the central proof loop therefore uses serialized narrow kernel
+checks. Draft elaboration errors are being repaired before acceptance.
+
 ## Monic orthogonalization and Murphy operators — session 0011
 
 `Orthogonal.lean` constructs a monic orthogonal basis from the existing

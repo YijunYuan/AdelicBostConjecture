@@ -1,0 +1,24 @@
+import BostConjecture.Arithmetic.HermitianLine
+
+#print axioms BostConjecture.Arithmetic.HermitianMetric
+#print axioms BostConjecture.Arithmetic.fiberSection_injective
+#print axioms BostConjecture.Arithmetic.HermitianMetric.sectionNorm_smul
+#print axioms BostConjecture.Arithmetic.HermitianMetric.sectionNorm_pos
+#print axioms BostConjecture.Arithmetic.HermitianMetric.sectionNorm_eq_of_place_eq
+#print axioms BostConjecture.Arithmetic.logIdealNorm_spanSingleton
+#print axioms BostConjecture.Arithmetic.lineDegree_changeSection
+#print axioms BostConjecture.Arithmetic.lineDegree_eq_section
+#print axioms BostConjecture.Arithmetic.coordinateIdeal_smul
+#print axioms BostConjecture.Arithmetic.coordinateEquiv
+#print axioms BostConjecture.Arithmetic.linearMap_eq_smul_of_injective
+#print axioms BostConjecture.Arithmetic.fractionalIdeal_relIndex
+#print axioms BostConjecture.Arithmetic.coordinate_quotient_card
+#print axioms BostConjecture.Arithmetic.coordinate_quotient_finite
+#print axioms BostConjecture.Arithmetic.lineCoordinate_injective
+#print axioms BostConjecture.Arithmetic.HermitianMetric.coordinateLength_eq
+#print axioms BostConjecture.Arithmetic.HermitianMetric.degreeInCoordinate_eq
+#print axioms BostConjecture.Arithmetic.HermitianMetric.lineDegree_eq_degreeInCoordinate
+#print axioms BostConjecture.Arithmetic.HermitianMetric.lineDegree_eq
+#print axioms BostConjecture.Arithmetic.HermitianMetric.sum_log_sectionNorm
+#print axioms BostConjecture.Arithmetic.HermitianMetric.lineDegree_eq_sum_embeddings
+#print axioms BostConjecture.Arithmetic.line_quotient_finite

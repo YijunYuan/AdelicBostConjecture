@@ -82,6 +82,15 @@ lemma sectionNorm_conjugate (h : HermitianMetric (K := K) M)
     h.sectionNorm (ComplexEmbedding.conjugate σ) x = h.sectionNorm σ x := by
   simp only [sectionNorm, h.conjugate, Complex.star_def, Complex.conj_re]
 
+/-- The section norm depends only on the infinite place, not on its representing
+complex embedding. -/
+lemma sectionNorm_eq_of_place_eq (h : HermitianMetric (K := K) M)
+    {σ τ : K →+* ℂ} (heq : InfinitePlace.mk σ = InfinitePlace.mk τ) (x : M) :
+    h.sectionNorm σ x = h.sectionNorm τ x := by
+  rcases InfinitePlace.mk_eq_iff.mp heq with heq | heq
+  · rw [heq]
+  · rw [← heq, h.sectionNorm_conjugate]
+
 /-- Fiber norms scale by the archimedean absolute value. -/
 lemma sectionNorm_smul (h : HermitianMetric (K := K) M)
     (σ : K →+* ℂ) (a : 𝓞 K) (x : M) :

@@ -1,7 +1,7 @@
 module
 
 public import BostConjecture.Arithmetic.Hermitian
-public import BostConjecture.Arithmetic.LineCoordinates
+public import BostConjecture.Arithmetic.FractionalIdealIndex
 public import Mathlib.LinearAlgebra.Dimension.Free
 public import Mathlib.LinearAlgebra.TensorProduct.Finiteness
 
@@ -15,7 +15,7 @@ are proved irrelevant. Generic rank one is a dimension statement about the
 canonical scalar extension, not a chosen integral basis.
 
 Reference: bost_specht_manuscript.pdf, §2, page 3. The quotient-cardinality
-interpretation of the finite term is a separate arithmetic index theorem.
+formula follows from the fractional-ideal index theorem.
 -/
 
 @[expose] public section
@@ -126,6 +126,22 @@ theorem degreeInCoordinate_eq [Module.Projective (𝓞 K) M] [Nontrivial M]
     (coordinateIdeal_ne_zero f hf) (h.coordinateLength f x)
     (h.coordinateLength_pos f hf hx) (inv_ne_zero hc)
 
+omit [Module.Finite (𝓞 K) M] in
+/-- Counting the two conjugate complex embeddings recovers the place weights. -/
+lemma sum_log_sectionNorm (h : HermitianMetric (K := K) M) (x : M) :
+    (∑ σ : K →+* ℂ, Real.log (h.sectionNorm σ x)) =
+      archLog (fun v => h.sectionNorm v.embedding x) := by
+  classical
+  rw [archLog, ← Finset.univ.sum_fiberwise (fun σ : K →+* ℂ => InfinitePlace.mk σ)]
+  apply Finset.sum_congr rfl
+  intro v _
+  have hc (σ : K →+* ℂ) (hσ : σ ∈ (Finset.univ.filter (fun σ => InfinitePlace.mk σ = v))) :
+      Real.log (h.sectionNorm σ x) = Real.log (h.sectionNorm v.embedding x) := by
+    congr 1
+    apply h.sectionNorm_eq_of_place_eq
+    rw [(Finset.mem_filter.mp hσ).2, InfinitePlace.mk_embedding]
+  rw [Finset.sum_congr rfl hc, Finset.sum_const, InfinitePlace.card_filter_mk_eq, nsmul_eq_mul]
+
 variable [Module.Projective (𝓞 K) M] [Nontrivial M]
 
 /-- Normalized degree of an intrinsic Hermitian line. Its generic rank is computed
@@ -165,5 +181,36 @@ theorem lineDegree_eq_normRatio (h : HermitianMetric (K := K) M)
   dsimp only [coordinateLength]
   exact mul_div_cancel₀ _ (ne_of_gt (InfinitePlace.pos_iff.mpr hfx))
 
+/-- The manuscript's normalized degree formula on the actual finite quotient and
+actual archimedean section norms. It holds for every nonzero integral section. -/
+theorem lineDegree_eq (h : HermitianMetric (K := K) M)
+    (hrank : Module.finrank K (K ⊗[𝓞 K] M) = 1) {x : M} (hx : x ≠ 0) :
+    h.lineDegree hrank =
+      (Real.log (Nat.card (M ⧸ (𝓞 K ∙ x))) -
+        archLog (fun v => h.sectionNorm v.embedding x)) / (Module.finrank ℚ K : ℝ) := by
+  let f := lineCoordinate (M := M) hrank
+  have hf := lineCoordinate_injective (M := M) hrank
+  have hcard : (Nat.card (M ⧸ (𝓞 K ∙ x)) : ℝ) =
+      (FractionalIdeal.absNorm (FractionalIdeal.spanSingleton (𝓞 K)⁰ (f x)) : ℝ) /
+        (FractionalIdeal.absNorm (coordinateIdeal f) : ℝ) := by
+    exact_mod_cast coordinate_quotient_card f hf hx
+  rw [h.lineDegree_eq_normRatio hrank f hf hx, ← hcard]
+
+/-- The same intrinsic formula indexed by all complex embeddings, exactly as
+in the manuscript; complex conjugate embeddings are both counted. -/
+theorem lineDegree_eq_sum_embeddings (h : HermitianMetric (K := K) M)
+    (hrank : Module.finrank K (K ⊗[𝓞 K] M) = 1) {x : M} (hx : x ≠ 0) :
+    h.lineDegree hrank =
+      (Real.log (Nat.card (M ⧸ (𝓞 K ∙ x))) -
+        ∑ σ : K →+* ℂ, Real.log (h.sectionNorm σ x)) / (Module.finrank ℚ K : ℝ) := by
+  rw [h.lineDegree_eq hrank hx, h.sum_log_sectionNorm]
+
 end HermitianMetric
+
+/-- A nonzero section of an intrinsic projective line has finite quotient. -/
+theorem line_quotient_finite [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
+    [Nontrivial M] (hrank : Module.finrank K (K ⊗[𝓞 K] M) = 1)
+    {x : M} (hx : x ≠ 0) : Finite (M ⧸ (𝓞 K ∙ x)) :=
+  coordinate_quotient_finite (lineCoordinate hrank) (lineCoordinate_injective hrank) hx
+
 end BostConjecture.Arithmetic

@@ -21,7 +21,9 @@ orthogonal basis for any total order, proves its determinant-one basis change,
 and expresses the standard Gram determinant as the product of its actual
 squared norms. `RealAction.lean` constructs the real isometric action and
 proves symmetry, commutation, and the adjacent recurrence of the concrete
-Murphy operators. The standard Gram bound is now
+Murphy operators. `Content.lean` computes the concrete Murphy coefficient at the original
+row word as the box content; it does not yet give triangularity or an
+eigenvalue equation. The standard Gram bound is now
 unconditional; its explicit seminormal evaluation, the invariant-space identification,
 and the general covolume asymptotic remain open.
 
@@ -61,7 +63,8 @@ the blueprint's mathematical proofs still require independent review.
 The seminormal Gram identity is for the standard family. For the orbit lattice
 it yields only `0 ≤ 2c_a(d) ≤ E log γ`; the sublinear limit follows by squeezing.
 Determinant covariance in word coordinates is proved. Identification with
-abstract tensor maps, projective local-frame gluing, and the full invariant
+abstract tensor maps and flat scalar-extended injectivity in a free frame
+are proved by the geometry modules. Projective local-frame gluing and the full invariant
 generic fiber for nonvanishing remain requirements of the contraction route.
 
 All cited manuscript page anchors resolve to registered vision transcriptions

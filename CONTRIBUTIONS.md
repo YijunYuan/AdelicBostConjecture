@@ -221,6 +221,20 @@ probes before this session integrated their root imports. See
 [reuse survey](verification/STACKS_AND_MATHLIB_PRS.md) for the parent review
 and the exact separation between these producers and their future consumers.
 
+## Geometry integration consumers — session 0013
+
+The checked local modules `Geometry/TensorRealization.lean` (0d893d5),
+`Tensor/Evaluation.lean` (1c0ac0c), and `Geometry/FreeEmbedding.lean`
+(922a2f4) are now root imports. Tensor realization consumes the attributed
+Stacks tensor-coordinate equivalence and the existing integral Specht
+covariance; evaluation consumes the attributed finite-projective tensor
+and duality port. Free embedding consumes the canonical orbit-lattice
+inclusion and flat scalar extension. No additional external code is copied.
+The free embedding is injective under flatness over the integers; its
+covariance and frame transition hold over every commutative ring.
+Projective gluing, restricted isotypic nonvanishing, invariant-space equality,
+and the archimedean norm estimate remain separate obligations.
+
 ## Verification
 
 Run `horizon --root ../.. check --json` from this project, then
