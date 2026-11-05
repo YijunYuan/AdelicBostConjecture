@@ -145,8 +145,14 @@ These CI results do not certify a local backport. The polar port must take
 ## TauCeti polarization handoff (22:49 UTC)
 
 A bounded read-only follow-up found a selective port for GEOM's invariant
-tensor lift. This is **source-inspected, not locally verified**. GEOM owns
-implementation and checks through `I-0063`; the coordinator wrote no proof.
+tensor lift. At handoff this was source-inspected only. GEOM subsequently
+implemented and checked the port and its actual consumer (`c55300f`, evidence
+`94cc6d8`): the polarization module passed 2,379 build jobs and all 202 geometry
+axiom probes were foundational-only; honesty and source-fidelity reviews were
+satisfactory. Exact retained sources, hashes and adaptations are recorded in
+[the port provenance](../vendor/tauceti-polarization/PROVENANCE.md).
+Root integration and the shared contribution entry are handed to SPECHT in
+`I-0066`. The coordinator wrote no proof.
 
 Pinned repository: [TauCeti `3c3a32baea963db05c302adeb307b22baae4de78`](https://github.com/TauCetiProject/TauCeti/tree/3c3a32baea963db05c302adeb307b22baae4de78),
 Apache-2.0, copyright/authors “The Tau Ceti contributors”. This revision uses
@@ -163,20 +169,24 @@ Paths below are relative to `TauCeti/LinearAlgebra/`:
 
 The upstream homogeneous submodule is literally `LinearMap.range (SymmetricAlgebra.ι R M) ^ d`;
 with `M = Module.Dual K X`, it matches BALANCED's existing definition.
-The proposed characteristic-zero section composes `equivHomogeneous.symm`
+The implemented characteristic-zero section composes `equivHomogeneous.symm`
 with symmetrization and divides by the factorial. GEOM must prove compatibility
-with its actual quotient and with BALANCED's pullback representation; those
-integration statements were not supplied as locally checked results.
+with its actual quotient and with BALANCED's pullback representation; these
+integration statements, originally open at handoff, are now checked in
+`Geometry.PolynomialPolarization`, including invariant lifting and preservation
+of nonzero evaluation.
 
 Exclude the independent basis-comparison theorem
 `toSymmetricAlgebra_symmetricPower_apply` and its broad imports. The remaining
 proof closure needs only small homogeneous product/span lemmas and at most
 `prod_map_mem_range_pow` and `span_prod_map_eq_range_pow_of_span` from
 `TauCeti/Algebra/WordFiltration/Basic.lean`; GEOM's own quotient-range result
-may replace them. No full TauCeti, Lie/PBW or categorical dependency is proposed.
+may replace them. The completed port uses direct submodule-power induction
+and omits all WordFiltration imports. No full TauCeti, Lie/PBW or categorical
+dependency was added.
 The full inspected Basic/Lift/Algebra bodies and relevant helper bodies contain
-no `sorry`, `axiom`, `unsafe` or `implemented_by`. Neither an upstream build nor
-a local port build/transitive axiom audit was established by this survey.
+no `sorry`, `axiom`, `unsafe` or `implemented_by`. An upstream build was not
+established by this survey; the later local port checks are recorded above.
 
 The bounded search found **no directly reusable proof** that every SL-fixed
 tensor lies in the actual rectangular Specht orbit-lattice image.
