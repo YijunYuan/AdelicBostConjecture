@@ -1073,7 +1073,6 @@ $j_s(a,c)=i(a)+s(c)$ composed with $W_{a,c}$ defines the same isomorphism
 \[
  \det A\otimes_R\det C\simeq\det B.
 \]
-It commutes with extension of scalars to an extension field of $F$.
 \end{lemma}
 \begin{proof}
 Projectivity of $C$ gives a linear section $s$ of $q$.
@@ -1091,15 +1090,39 @@ leaves the identity determinant on the remaining $c$ rows and columns.
 Thus it acts as the identity on the top exterior power over $F$.
 The integral determinant line is projective and hence torsion-free;
 its injection into its generic fiber proves equality of the two integral maps.
-Scalar extension commutes with the exterior product and the exterior power
-of $j_s$; the extended $s$ is a section of the extended $q$.
-The same argument over the extension field proves independence there, giving
-the asserted compatibility, also when either rank is zero.
+The direct-sum splitting also proves the rank formula $\rk B=\rk A+\rk C$.
+Both assertions include zero ranks.
+\end{proof}
+
+\begin{lemma}[Scalar extension formula for the exact determinant]
+\label{lem:exact-determinant-base-change}
+\uses{lem:exact-determinant-algebra,lem:exterior-product}\notready
+In the preceding setting, let $T$ be any commutative $R$-algebra and
+let $s:C\to B$ be any section of $q$. Write $D$ for the canonical exact
+determinant map. For $x\in\det A$ and $y\in\det C$, the exterior-power
+base-change identification sends $1\otimes D(x\otimes y)$ to
+\[
+ \bigwedge^{a+c}(i_T\mathbin{\oplus}s_T)
+ \left(W_{a,c,T}((1\otimes x)\otimes(1\otimes y))\right),
+\]
+where $i_T\mathbin{\oplus}s_T$ denotes $(u,v)\mapsto i_T(u)+s_T(v)$
+and the two input exterior vectors are also identified by base change.
+\end{lemma}
+\begin{proof}
+Section independence expresses $D$ using the indicated $s$.
+Naturality of exterior powers sends its exterior map to the exterior map
+of $(i\mathbin{\oplus}s)_T$. On a generator $t\otimes(a,c)$ the
+product-module identification sends this map to
+$i_T(t\otimes a)+s_T(t\otimes c)$, so it equals
+$(i_T\mathbin{\oplus}s_T)$ after that identification.
+The exterior-product base-change formula then gives the displayed equality.
+The naturality identities hold on elementary wedges, which span the
+exterior powers, so they apply to arbitrary $x,y$ as asserted.
 \end{proof}
 
 \begin{lemma}[Exact-sequence determinant isometry and degree]
 \label{lem:exact-determinant-degree}
-\uses{lem:exact-determinant-algebra,lem:quotient-hermitian-metric,lem:determinant-metric,lem:line-tensor-degree,lem:line-degree-isometry,def:intrinsic-determinant-degree}
+\uses{lem:exact-determinant-algebra,lem:exact-determinant-base-change,lem:quotient-hermitian-metric,lem:determinant-metric,lem:line-tensor-degree,lem:line-degree-isometry,def:intrinsic-determinant-degree}
 \source{bost-specht-manuscript:page-0003}\notready
 Let $0\to A\xrightarrow{i}B\xrightarrow{q}C\to0$ be an exact sequence
 of finite projective $\Ocal$-modules. Equip $B$ with a Hermitian metric,

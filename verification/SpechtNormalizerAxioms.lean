@@ -1,0 +1,13 @@
+import BostConjecture.Specht.PrefixNormalizer
+
+#print axioms BostConjecture.Specht.shiftedVandermonde_rectangle
+#print axioms BostConjecture.Specht.shiftedFactorials_rectangle
+#print axioms BostConjecture.Specht.card_standard_rectangle_eq_factorials
+#print axioms BostConjecture.Specht.factorial_pow_eq_shiftedFactorials_mul_powers
+#print axioms BostConjecture.Specht.sum_occupancyWeight_eq_closed
+#print axioms BostConjecture.Specht.staircaseSum_eq
+#print axioms BostConjecture.Specht.two_mul_staircaseSum
+#print axioms BostConjecture.Specht.rectangle_occupancy_population
+#print axioms BostConjecture.Specht.card_standard_rectangle_pos
+#print axioms BostConjecture.Specht.sum_occupancyWeight_pos
+#print axioms BostConjecture.Specht.rectanglePrefix_probability_eq_weighted

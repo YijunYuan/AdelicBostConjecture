@@ -426,7 +426,7 @@ subdiagrams after staircase subtraction. Both inverse identities and the
 cardinality statement are local proofs; no alternate partition model is added.
 
 `Specht/PrefixDistribution.lean` uses the unchanged `Equiv.sigmaFiberEquiv`
-from `Mathlib/Logic/Equiv/Basic.lean` to count the actual prefix fibers, then
+from `Mathlib/Logic/Equiv/Sum.lean` to count the actual prefix fibers, then
 combines the preceding original producers with the squared Vandermonde
 determinant identity. It adds no dependency or external copied code.
 

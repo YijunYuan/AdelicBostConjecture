@@ -274,8 +274,39 @@ identity. At zero the frame is $v_i$ itself; the vanishing assertion
 now follows from balanced Gram variation.
 \end{proof}
 
+\begin{lemma}[The complex exterior Gram metric]
+\label{lem:balanced-exterior-metric}\notready
+For every finite-dimensional complex Hermitian space $E$ and integer $s\geq0$,
+there is a unique Hermitian inner product on $\bigwedge^s E$ such that
+\[
+ \langle x_1\wedge\cdots\wedge x_s,y_1\wedge\cdots\wedge y_s\rangle
+ =\det(\langle x_i,y_j\rangle)_{i,j}.
+\]
+The increasing wedges of any orthonormal basis of $E$ form an orthonormal
+basis for this inner product.
+\end{lemma}
+\begin{proof}
+Fix an orthonormal basis $b$ and give the exterior power the inner product
+whose orthonormal basis consists of the increasing wedges $b_I$.
+The coordinate of $x_1\wedge\cdots\wedge x_s$ at $I$ is the determinant
+of the $I$-rows of the coordinate matrix of the $x_i$.
+For fixed $x_1,\ldots,x_s$, the functional on the exterior power obtained
+by pairing the wedge of the linear forms $\langle x_i,-\rangle$ with
+an exterior vector takes at $b_I$ the conjugate of that coordinate:
+conjugate symmetry and transpose invariance of determinant give this equality.
+It is therefore the inner product with $x_1\wedge\cdots\wedge x_s$,
+since these two linear functionals agree on the exterior basis.
+Evaluating at a wedge of the $y_j$ gives the displayed formula.
+Wedges span the exterior power, so sesquilinearity proves uniqueness and
+independence from $b$. Applying the formula to wedges of any orthonormal
+basis gives $1$ for equal index sets and $0$ otherwise. This also covers
+$s=0$ with the empty determinant equal to $1$, and $s>\dim E$ with
+the exterior power equal to zero.
+\end{proof}
+
 \begin{lemma}[Convexity along Hermitian exponentials]
 \label{lem:balanced-exponential-convexity}\notready
+\uses{lem:balanced-exterior-metric}
 Let $A$ be Hermitian on a finite-dimensional complex Hermitian space
 $E$, and give $\bigwedge^sE$ its Gram determinant norm. For
 $z\in\bigwedge^sE$ the function
@@ -368,31 +399,71 @@ Euclidean and Zariski closures.
 \end{lemma}
 \begin{proof}
 It suffices to prove that a nonempty Zariski open subset of an
-irreducible affine variety $Y$ is Euclidean dense: decompose a
-constructible set into finitely many locally closed subsets and
-then into irreducible components of their closures. Write the open
-subset as $Y\setminus Z$, with $Z$ proper closed, and fix $p\in Y$.
-For $\dim Y=0$ the assertion is immediate. Otherwise choose finite
-Noether normalization $\pi:Y\to\mathbb A^d$, $d=\dim Y$.
-The finite image $\pi(Z)$ is closed and has dimension less than $d$.
-Choose a line $L$ through $\pi(p)$ not contained in $\pi(Z)$.
+irreducible affine variety $Y\subseteq\mathbb C^N$ is Euclidean dense:
+decompose a constructible set into finitely many irreducible locally closed
+pieces and take their closures. Let $B$ be the coordinate domain of $Y$.
+Noether normalization gives a finite inclusion
+$A=\mathbb C[t_1,\ldots,t_d]\subseteq B$, inducing
+$\pi:Y\to\mathbb C^d$. We first show that $\pi$ is Euclidean open.
 
-The inverse image $\pi^{-1}L$ is cut out in $Y$ by $d-1$ equations.
-The dimension theorem for intersections therefore gives dimension
-at least one to every irreducible component through $p$. Finiteness
-of $\pi$ bounds their dimension by one, so such a component $C$ is
-a curve and maps onto $L$. In particular $C\not\subseteq Z$, and
-$C\cap Z$ is finite. Normalize $C$. Normalization of an affine
-complex curve is finite and surjective, and the normal curve is
-nonsingular. A point above $p$ has a complex analytic coordinate
-disk, by the implicit function theorem. The inverse image of
-$C\cap Z$ is finite. Points in that disk outside this finite set
-approach the chosen point, and their images approach $p$ through
-$Y\setminus Z$. This proves the required density. The reverse
-closure inclusion follows because polynomial zero sets are
+Every ambient coordinate satisfies a monic polynomial over $A$. Its values
+on a fixed fiber belong to a finite root set, so each fiber is finite.
+Fix $p\in Y$, put $a=\pi(p)$, and for each other point $q$ of this fiber
+choose a coordinate $j(q)$ such that $p_{j(q)}\ne q_{j(q)}$. The regular function
+\[
+ u(x)=\prod_{q\in\pi^{-1}(a)\setminus\{p\}}
+ \frac{x_{j(q)}-q_{j(q)}}{p_{j(q)}-q_{j(q)}}
+\]
+is $1$ at $p$ and $0$ at all other points of the fiber; an empty product
+is $1$. Since $A$ is integrally closed and $u$ is integral over $A$, its
+monic minimal polynomial over $\operatorname{Frac}(A)$ has coefficients in
+$A$. Call it $F$, of degree $r>0$. Monic division and minimality show
+that the kernel of $A[T]\to B$, $T\mapsto u$, is exactly $(F)$.
+Thus $A[u]=A[T]/(F)$. Every complex solution $(a',z)$ of $F(a',z)=0$
+defines a maximal ideal of $A[u]$. The extension $A[u]\subseteq B$ is
+integral, so lying over and the weak Nullstellensatz give $q\in Y$
+with $\pi(q)=a'$ and $u(q)=z$.
+
+Let $a_k\to a$. The specialization $F(a_k,T)$ remains monic of degree
+$r$. Among its roots choose $z_k$ nearest to $1$. Factorization over
+$\mathbb C$ gives
+\[
+ |z_k-1|^r\leq |F(a_k,1)|\longrightarrow |F(a,1)|=0,
+\]
+so $z_k\to1$. Lift $(a_k,z_k)$ to $q_k\in Y$ as above. The
+coefficients of each ambient coordinate's monic integral equation are
+bounded along $(a_k)$. The Cauchy bound for polynomial roots therefore
+bounds every coordinate of $(q_k)$. Every subsequence has a convergent
+further subsequence. Its limit $q$ lies in $Y$, since polynomial zero
+sets are Euclidean closed, and continuity gives $\pi(q)=a$ and $u(q)=1$.
+The separating function forces $q=p$. Hence the whole sequence converges
+to $p$: otherwise a subsequence outside a fixed neighborhood of $p$ would
+have a further subsequence converging to $p$, a contradiction.
+If the image of an open neighborhood $V$ of $p$ were not a neighborhood
+of $a$, one could choose $a_k\notin\pi(V)$ tending to $a$; the lifts
+just constructed would eventually belong to $V$. This contradiction
+proves openness of $\pi$.
+
+Now let $Z\subsetneq Y$ be closed. Choose a nonzero $b\in B$ vanishing
+on $Z$. In a monic integral relation for $b$, remove the largest power
+of $T$ dividing the relation. Cancellation is valid because $B$ is a
+domain and $b\ne0$. The remaining relation has nonzero constant
+coefficient $g\in A$, and its evaluation shows $g\in bB$. Consequently
+$\pi(Z)\subseteq V(g)$. A nonzero complex polynomial has zero set with
+empty Euclidean interior: if it vanishes on a product of open disks,
+view it as a polynomial in the last variable, use the finite-root
+bound, and induct on the number of variables to show every coefficient
+is zero. Since $\pi$ is open, the image of every nonempty Euclidean
+open subset of $Y$ meets the complement of $V(g)$. The subset therefore
+meets $Y\setminus Z$, proving density. In dimension zero the coordinate
+domain is finite over $\mathbb C$, hence equals $\mathbb C$, and the
+same conclusion is immediate.
+
+The reverse closure inclusion follows because polynomial zero sets are
 Euclidean closed. The statement is
-\cite[Aside 9.8]{milne-algebraic-geometry}; the curve argument supplies
-the density step not proved in that aside.
+\cite[Aside 9.8]{milne-algebraic-geometry}; the finite-normalization and
+root-bound argument here supplies a proof of the density assertion
+stated without proof in that aside.
 \end{proof}
 
 \begin{lemma}[Special-unitary Zariski density]
