@@ -381,7 +381,7 @@ Run `0006`, session `0006-horizon-BOST-BALANCED` adds three checked producers:
 | --- | --- | --- |
 | `d0bf835`, `InvariantTheory.PluckerCoordinates` | The universal tensor entries and exterior minors evaluate to the actual action on every exterior vector. | `33a63fa2553139f3`, 2,034 jobs, warning-free (21.8s). |
 | `392ba05`, `InvariantTheory.SpecialLinearCoordinates` | The determinant-one quotient is finite type and represents actual SL pairs over every commutative base algebra. | `7ff26a0219378861`, 1,816 jobs, warning-free (2.8s). |
-| `InvariantTheory.Coaction` | Full and degree-restricted coordinate pullbacks evaluate to the existing intrinsic forward action; coefficientwise fixedness implies homogeneous invariance. | `c0f9424df17fc9eb`, 2,406 jobs, warning-free (6.3s). |
+| `35770db` (automatic ARITH snapshot), `InvariantTheory.Coaction` | Full and degree-restricted coordinate pullbacks evaluate to the existing intrinsic forward action; coefficientwise fixedness implies homogeneous invariance. | `c0f9424df17fc9eb`, 2,406 jobs, warning-free (6.3s). |
 
 All commands use `"$HORIZON_BIN" --root /home/yijunyuan/bc-workspace check`
 with the named module. Guarded LSP diagnostics are clear. The first coordinate-ring
@@ -430,3 +430,52 @@ density proof is in the blueprint. Special-unitary density, finite-degree Haar
 averaging and homogeneous extraction are also still required. The norm bound
 alone does not prove Lemma 7.2. Root integration remains with SPECHT in `I-0060`;
 no completion claim is made for this task.
+
+## Proposed independent complex-closure producer (I-0072)
+
+This is a scheduling proposal only: no ownership has been transferred and no
+additional writer has been launched. The exact output proposition below was
+type-checked with the existing definitions (the theorem is unproved):
+
+```lean
+theorem closure_polynomial_image_zeroLocus
+    {σ τ E : Type*} [Fintype σ] [Fintype τ]
+    [NormedAddCommGroup E] [NormedSpace ℂ E]
+    (b : Module.Basis τ ℂ E) (I : Ideal (MvPolynomial σ ℂ))
+    (q : τ → MvPolynomial σ ℂ) :
+    closure ((fun a : σ → ℂ => ∑ i, MvPolynomial.eval a (q i) • b i) ''
+      MvPolynomial.zeroLocus ℂ I) =
+    polynomialZariskiClosure (K := ℂ)
+      ((fun a : σ → ℂ => ∑ i, MvPolynomial.eval a (q i) • b i) ''
+        MvPolynomial.zeroLocus ℂ I)
+```
+
+Prerequisite imports for the signature are `InvariantTheory.Semistability`,
+`Mathlib.RingTheory.Nullstellensatz`, and
+`Mathlib.Analysis.Normed.Module.FiniteDimension`. The successor must prove the
+used constructibility, finite-normalization/root-persistence density, and
+intrinsic-versus-coordinate polynomial zero-locus bridge, importing existing
+checked library results wherever they match. It must not assume closure
+comparison, constructibility or root persistence as a hypothesis.
+The existing complete blueprint proofs are `lem:balanced-constructible-image`
+and `lem:balanced-constructible-closure`; source anchors are Milne page 0201
+and manuscript page 0012. The finite-normalization proof is an explicit
+supplement to Milne's unproved closure-comparison aside.
+
+Proposed exclusive paths: `InvariantTheory/ComplexClosure/**`,
+`blueprint/src/complex_closure.tex`, `verification/ComplexClosureAxioms.lean`,
+and `verification/COMPLEX_CLOSURE.md`. If authorized, parent and BALANCED should
+migrate the two existing blueprint nodes into that slice and arrange the
+shared include once, so the successor never writes `compactness.tex` or the
+root/shared attribution files.
+
+BALANCED retains the canonical polynomial, semistability and Plücker action
+definitions and their source-facing assembly. The concrete consumer takes
+`σ = (ι × ι) ⊕ (κ × κ)`, `I = specialLinearPairIdeal ℂ ι κ`,
+`b = (bU.tensorProduct bW).exteriorPower s`, and
+`q = pluckerOrbitPolynomial bU bW s z`. The checked coordinate evaluation
+identifies the resulting image with the actual orbit; the returned closure
+equality then turns `IsBalanced.zero_not_mem_closure_plucker_orbit` into
+the existing `IsGeometricallySemistable` predicate. Invariant extraction
+remains BALANCED-owned and is still required for the source's Plücker-line
+conclusion and GEOM consumer.
