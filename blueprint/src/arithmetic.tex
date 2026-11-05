@@ -1125,9 +1125,33 @@ The naturality identities hold on elementary wedges, which span the
 exterior powers, so they apply to arbitrary $x,y$ as asserted.
 \end{proof}
 
+\begin{lemma}[Determinant norm of orthogonal summands]
+\label{lem:orthogonal-determinant-norm}
+\uses{lem:exterior-product,lem:determinant-metric}\notready
+Let $E,F,G$ be complex Hermitian spaces of dimensions $a,b,a+b$.
+Let $i:E\to G$ and $j:F\to G$ preserve inner products and have
+orthogonal images. For $x\in\bigwedge^a E$ and $y\in\bigwedge^b F$,
+\[
+ \left\|\bigwedge^{a+b}(i\mathbin{\oplus}j)
+                 W_{a,b}(x\otimes y)\right\|=\|x\|\|y\|.
+\]
+\end{lemma}
+\begin{proof}
+Choose orthonormal bases $e_1,\ldots,e_a$ and $f_1,\ldots,f_b$.
+The Gram matrix of their concatenated images under $i,j$ is the identity:
+the diagonal blocks are identities by preservation of inner products, and
+both off-diagonal blocks vanish by orthogonality and conjugate symmetry.
+The Gram determinant formula therefore gives norm one to the concatenated
+wedge. Write $x=\alpha(e_1\wedge\cdots\wedge e_a)$ and
+$y=\beta(f_1\wedge\cdots\wedge f_b)$. Linearity of the exterior product
+and homogeneity of the determinant norm give $|\alpha\beta|$ on the
+left and $|\alpha||\beta|$ on the right, proving equality. Empty bases
+have determinant one, so this also proves the cases of zero dimensions.
+\end{proof}
+
 \begin{lemma}[Exact-sequence determinant isometry and degree]
 \label{lem:exact-determinant-degree}
-\uses{lem:exact-determinant-algebra,lem:exact-determinant-base-change,lem:quotient-hermitian-metric,lem:determinant-metric,lem:line-tensor-degree,lem:line-degree-isometry,def:intrinsic-determinant-degree}
+\uses{lem:exact-determinant-algebra,lem:exact-determinant-base-change,lem:orthogonal-determinant-norm,lem:quotient-hermitian-metric,lem:determinant-metric,lem:line-tensor-degree,lem:line-degree-isometry,def:intrinsic-determinant-degree}
 \source{bost-specht-manuscript:page-0003}\notready
 Let $0\to A\xrightarrow{i}B\xrightarrow{q}C\to0$ be an exact sequence
 of finite projective $\Ocal$-modules. Equip $B$ with a Hermitian metric,
