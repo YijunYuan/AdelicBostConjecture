@@ -211,7 +211,8 @@ $(s/m)\Tr H+(s/n)\Tr J=0$.
 
 \begin{lemma}[Gram determinant variation]
 \label{lem:balanced-gram-variation}
-\uses{lem:balanced-projection-trace}\notready
+\uses{lem:balanced-projection-trace}
+\lean{BostConjecture.Balanced.hasDerivAt_gramDet, BostConjecture.Balanced.hasDerivAt_re_gramDet}\leanok
 Let $v_1,\ldots,v_s$ be an orthonormal basis of $S\subset E$,
 and let differentiable curves $v_i(t)$ satisfy $v_i(0)=v_i$ and
 $v_i'(0)=Av_i$. If $G(t)_{ij}=\langle v_i(t),v_j(t)\rangle$, then
@@ -228,6 +229,21 @@ permutation contributes a first-order term, since every nonidentity
 permutation moves at least two indices. Conjugate symmetry changes this
 sum into $2\operatorname{Re}\sum_i\langle v_i,Av_i\rangle$.
 Apply the projection trace formula.
+\end{proof}
+
+
+\begin{lemma}[Balanced Gram variation vanishes]
+\label{lem:balanced-gram-variation-zero}
+\uses{lem:balanced-frame-sum,lem:balanced-gram-variation}
+\lean{BostConjecture.Balanced.IsBalanced.hasDerivAt_re_gramDet_zero}\leanok
+If $S\subset U\otimes W$ is balanced, $H,J$ are traceless,
+$v_i(0)$ is an orthonormal basis of $S$, and
+$v_i'(0)=(H\otimes1+1\otimes J)v_i(0)$, then the derivative at zero
+of the real part of the Gram determinant is zero.
+\end{lemma}
+\begin{proof}
+The Gram variation formula gives twice the real part of the balanced
+frame sum, which vanishes.
 \end{proof}
 
 \begin{lemma}[Convexity along Hermitian exponentials]
@@ -285,7 +301,7 @@ The Euclidean and Zariski closures of $Gx$ coincide.
 
 \begin{lemma}[Balanced projections give geometric semistability]
 \label{lem:balanced-plucker}
-\uses{def:geometric-semistability,lem:invariant-orbit-criterion,lem:balanced-frame-sum,lem:balanced-gram-variation,lem:balanced-exponential-convexity,lem:balanced-special-linear-polar}
+\uses{def:geometric-semistability,lem:invariant-orbit-criterion,lem:balanced-gram-variation-zero,lem:balanced-exponential-convexity,lem:balanced-special-linear-polar}
 \source{bost-specht-manuscript:page-0012}\notready
 Let $S\subset U\otimes W$ be a nonzero subspace of complex Hermitian
 spaces of dimensions $m,n$, and put $s=\dim S$. If its orthogonal
