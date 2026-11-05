@@ -1,6 +1,6 @@
 # Parallel Horizon scheduling
 
-Coordinator checkpoint: 2026-11-06 04:09 Asia/Shanghai (2026-11-05 20:09 UTC).
+Coordinator checkpoint: 2026-11-06 04:28 Asia/Shanghai (2026-11-05 20:28 UTC).
 
 The user assigned the parent session scheduling only, with at most three
 concurrent proof tasks and no spending cap. Horizon owns the mathematics.
@@ -11,7 +11,7 @@ The standing ownership rule is inbox `I-0012`; configuration was committed in
 | --- | --- | --- | --- |
 | `0003` | `BOST-SPECHT` | `Specht/**`, `Lattice/**`, Specht blueprint | Tableau enumeration and prefix-distribution estimates for covolume asymptotics |
 | `0004` | `BOST-ARITH` | `Arithmetic/**`, `Slope/**`, arithmetic blueprint | Dual degree, general tensor/exact-sequence identities and intrinsic HN specialization |
-| `0005` | `BOST-GEOM` | `Geometry/**`, `Tensor/**`, geometry blueprint | Actual integral pairing and its norm bound, consuming projective isometry and equivariance |
+| `0005` | `BOST-GEOM` | `Geometry/**`, `Tensor/**`, geometry blueprint | Scalar extension of the integral pairing, global contraction, then invariant/nonvanishing arguments |
 
 Each task owns its corresponding verification files. BOST-SPECHT is the sole
 editor of the shared root import, `CONTRIBUTIONS.md`, `RESULTS.md`, and shared
@@ -37,41 +37,28 @@ slot; prefer narrow checks during repair and complete the required final checks.
 
 ## Accepted evidence and open boundaries
 
-The latest completed joint boundary reviewed here is `75b41aa`: the configured
-root build passed 9,148 jobs at 19:08:01 UTC, after the artifact-race recovery
-below. SPECHT session `0019` exited successfully and its 32 new-producer probes
-used only standard foundational axioms. Later accepted producers include:
+The latest completed joint boundary is SPECHT session `0021`, final evidence
+commit `baa0cc7`: the root build passed 9,171 jobs at 20:05:06 UTC, and 49
+new axiom probes used only the standard foundational axioms. This includes
+the actual seminormal norm product, rectangular Gram determinant and canonical
+orbit-lattice covolume bound (`333c037`). The asymptotic is still open.
 
-- `c0009e2`, `66af066`, and `b0d9750`: adjacent action, the column-reading
-  initial norm, and legal-swap connectivity. Adjacent action and initial-value
-  modules passed; the path file passed at 19:40:38 UTC. The manuscript norm
-  product and asymptotic are still open.
-- `d15ab3e` and audit `31f3fff`: full-fiber determinant contraction and saturation
-  degree inequality. The `SaturationDegree` build passed at 19:30:41 UTC;
-  123 arithmetic axiom probes passed at 19:32:08 UTC. `4f53c5a` additionally
-  proves tensor coordinate-ideal multiplication; the metric/degree consumer
-  remains under development.
-- `77dd408`, `9868e05`, and `f409e4a`: prescribed local determinant isometry,
-  complex-fiber isometry, and global position equivariance. The projective
-  equivariance build passed at 19:39:50 UTC. The first pairing-module check
-  passed at 19:42:59 UTC, but this is not yet a certified contraction bound.
-
-The next fixed root-import batch is coordinated in `I-0036` and `I-0037`.
-Current drafts and later additions need their own evidence.
-Detailed source revisions, checks and remaining claims
-belong in [RESULTS.md](RESULTS.md), [ARITHMETIC.md](ARITHMETIC.md), and
-[GEOMETRY.md](GEOMETRY.md).
-
-Update at 20:09 UTC: `333c037` proves the seminormal norm product, rectangular
-Gram determinant and canonical orbit-lattice covolume bound. The root build
-passed 9,171 jobs at 20:05:06 UTC and `SpechtSeminormalAxioms.lean` passed
-at 20:06:19 UTC; the session's final integration report is still in progress.
 ARITH session `0008` exited normally at 20:03:40 UTC, committed through
 `3131d4b`, with 135 foundational-only probes. Its successor `0010` is active
-and has checked the intrinsic dual metric (`ba2f037`). GEOM additionally
-committed tensor-duality and dual-regrouping isometry as `178980b`; the
-determinant-pairing norm consumer is still being checked. None of these
-updates proves the covolume asymptotic or manuscript main theorem.
+on general-rank dual degree after checking the intrinsic dual metric and
+line dual degree. GEOM session `0010` exited normally at 20:23:44 UTC,
+committed through `5344b4d`: local contraction at `00eec3c` passed 9,088 jobs
+and 138 foundational-only probes. That newer metric batch awaits the next root
+integration through `I-0044`; it is not included in the 9,171-job result above.
+
+The current sessions are SPECHT `0023`, ARITH `0010`, and GEOM `0012`.
+SPECHT `0023` is the last currently planned round of run `0003`; resume the
+run after it exits if the task remains incomplete, without exceeding three
+proof writers. The saved hook-count draft has since been repaired and checked.
+GEOM's saved evaluation-base-change draft has also passed a new module check;
+its global pairing consumer remains in progress. Use the owners' exact source
+revisions and checks in [RESULTS.md](RESULTS.md), [ARITHMETIC.md](ARITHMETIC.md),
+and [GEOMETRY.md](GEOMETRY.md), rather than treating live drafts as accepted.
 
 Automatic project-wide boundary snapshots can capture another task's drafts;
 their presence in a commit is not verification. Use explicit owned pathspecs
@@ -86,7 +73,10 @@ directory dry run found no stale candidates and protected all three live runs.
 
 The manuscript main theorem remains unproved. General Specht asymptotics,
 arithmetic degree calculus/HN, metric contraction, and invariant/nonvanishing
-arguments still require work. A successful local batch
+arguments still require work. Manuscript Lemma 7.2, balanced projections imply
+Plücker semistability, still has an empty Lean attachment; its analytic argument
+and invariant orbit-closure criterion are not discharged by the three lanes'
+current milestones. A successful local batch
 does not close those tasks.
 
 ## LSP dependency-build race and recovery
@@ -123,17 +113,18 @@ unchanged. Reproduce with:
 uvx --from lean-lsp-mcp==0.33.0 --with leanclient==0.13.2 python tools/check_lean_lsp_no_build.py
 ```
 
-The change takes effect when an MCP process starts. Old unwrapped clients must
-continue using serialized kernel feedback; protection `I-0034` tracks that
-transition. New guarded clients may use LSP without compiling dependencies.
-The repair is committed as `d0f37d5`; its four tracked files were rechecked
-against ledger HEAD. ARITH's new session `0010` has actual guarded launcher
-processes `364426`/`364450`, traced through Codex `364286` to run `0004` PID
-`161941`, and has successfully used LSP diagnostics. SPECHT `0021` and GEOM
-`0010` still have old clients and remain kernel-only until normal session
-turnover. A configuration listing alone is not evidence that a running MCP
-process was replaced.
-The completed previous integration-cutoff thread `I-0033` is archived.
+The repair is committed as `d0f37d5`. All three current proof sessions now have
+actual guarded MCP processes, verified by command and parent ancestry:
+
+- ARITH `0010`: wrapper PIDs `364426`/`364450`, Codex `364286`, run PID `161941`.
+- SPECHT `0023`: wrapper PIDs `375430`/`375478`, Codex `375307`, run PID `76365`.
+- GEOM `0012`: wrapper PIDs `379185`/`379198`, Codex `379060`, run PID `163151`.
+
+The old sessions ended normally. Temporary transition protection `I-0034` is
+archived; guarded diagnostics are permitted and kernel builds still use the
+shared Horizon check slot. The launcher and configuration remain in effect.
+Handoff hints `I-0042` and `I-0043` are archived after verifying continuation;
+the earlier integration-cutoff thread `I-0033` was already consumed.
 
 The coordinator has made no mathematical edits: all proof changes above were
 produced by Horizon. Continuation remains authorized; no new proof writer or
