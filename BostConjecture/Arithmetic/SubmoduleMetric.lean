@@ -3,6 +3,8 @@ module
 public import BostConjecture.Arithmetic.Hermitian
 public import Mathlib.RingTheory.Flat.Stability
 public import Mathlib.RingTheory.Flat.Localization
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.RingTheory.Flat.EquationalCriterion
 
 /-!
 # Induced Hermitian metrics on integral submodules
@@ -46,6 +48,14 @@ lemma fiberMap_injective (f : N →ₗ[𝓞 K] M) (hf : Function.Injective f) (�
   let : Module.Flat (𝓞 K) K := IsLocalization.flat K (nonZeroDivisors (𝓞 K))
   let : Module.Flat (𝓞 K) ℂ := Module.Flat.trans (𝓞 K) K ℂ
   exact Module.Flat.lTensor_preserves_injective_linearMap (M := ℂ) f hf
+
+/-- Every integral submodule of a finite projective module over the ring of
+integers is projective, without an integral basis. Finiteness is supplied by
+Noetherianity. -/
+instance submoduleProjective [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
+    (P : Submodule (𝓞 K) M) : Module.Projective (𝓞 K) P := by
+  let : Module.FinitePresentation (𝓞 K) P := Module.finitePresentation_of_finite (𝓞 K) P
+  exact Module.Flat.projective_of_finitePresentation
 
 namespace HermitianMetric
 

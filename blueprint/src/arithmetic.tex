@@ -397,6 +397,19 @@ slope, and strictly stable if every nonzero proper saturated submodule has
 strictly smaller slope. It is normalized if its slope is zero.
 \end{definition}
 
+\begin{lemma}[Finite projectivity of integral submodules]
+\label{lem:integral-submodule-projective}\notready
+Every integral submodule $P$ of a finite projective $\Ocal$-module $M$
+is itself finite projective.
+\end{lemma}
+\begin{proof}
+The ring $\Ocal$ is Noetherian, so $P$ is finite and finitely presented.
+The module $M$ is torsion-free and therefore so is $P$. Over a Dedekind
+domain, torsion-free modules are flat. A finitely presented flat module
+is projective: its identity map factors through a finite free module,
+making it a direct summand of that module. Thus $P$ is finite projective.
+\end{proof}
+
 \begin{lemma}[Induced metrics on integral submodules]
 \label{lem:induced-hermitian-metric}
 \uses{def:hermitian-metric}\notready
