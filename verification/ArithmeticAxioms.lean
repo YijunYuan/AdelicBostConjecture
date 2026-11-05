@@ -8,6 +8,8 @@ import BostConjecture.Arithmetic.MetricScaling
 import BostConjecture.Arithmetic.SubmoduleMetric
 import BostConjecture.Arithmetic.LineContraction
 import BostConjecture.Arithmetic.DegreeNormalization
+import BostConjecture.Arithmetic.NestedQuotient
+import BostConjecture.Arithmetic.SaturationDegree
 
 #print axioms BostConjecture.Arithmetic.HermitianMetric
 #print axioms BostConjecture.Arithmetic.fiberSection_injective
@@ -119,3 +121,20 @@ import BostConjecture.Arithmetic.DegreeNormalization
 #print axioms BostConjecture.Arithmetic.HermitianMetric.tensorFiber_conjugate
 #print axioms BostConjecture.Arithmetic.HermitianMetric.piTensor
 #print axioms BostConjecture.Arithmetic.HermitianMetric.sectionNorm_piTensor_tprod
+
+#print axioms BostConjecture.Arithmetic.ComplexQuotient.lift_natural
+#print axioms BostConjecture.Arithmetic.submoduleQuotientMap_injective
+#print axioms BostConjecture.Arithmetic.HermitianMetric.fiberLift_submodule
+#print axioms BostConjecture.Arithmetic.HermitianMetric.quotient_submodule
+#print axioms BostConjecture.Arithmetic.HermitianMetric.sectionNorm_quotient_submodule
+#print axioms BostConjecture.Arithmetic.exteriorMap_section
+#print axioms BostConjecture.Arithmetic.exteriorMap_injective
+#print axioms BostConjecture.Arithmetic.determinantMap_fiber
+#print axioms BostConjecture.Arithmetic.determinantMap_injective
+#print axioms BostConjecture.Arithmetic.ComplexDeterminant.norm_det_le_one
+#print axioms BostConjecture.Arithmetic.ComplexDeterminant.norm_map_le
+#print axioms BostConjecture.Arithmetic.HermitianMetric.determinantFiber_norm_map_le
+#print axioms BostConjecture.Arithmetic.HermitianMetric.determinant_sectionNorm_map_le
+#print axioms BostConjecture.Arithmetic.HermitianMetric.degree_le_of_injective
+#print axioms BostConjecture.Arithmetic.HermitianMetric.degree_submodule_le_of_le
+#print axioms BostConjecture.Arithmetic.HermitianMetric.degree_le_saturation
