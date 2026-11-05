@@ -155,6 +155,8 @@ theorem specialLinearOpenQuotient_comp_normalization (i₀ : ι) (j₀ : κ) :
   have h : (r.comp (specialLinearNormalization K ι κ i₀ j₀)).comp q = q := by
     apply MvPolynomial.algHom_ext
     intro ij
+    simp only [AlgHom.comp_apply, specialLinearNormalization, q,
+      specialLinearPairEval_mk, MvPolynomial.aeval_X]
     cases ij with
     | inl ij =>
       have hc := congrArg (fun M : Matrix ι ι (SpecialLinearPairCoordinateRing K ι κ) =>
