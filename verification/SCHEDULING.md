@@ -1,6 +1,6 @@
 # Parallel Horizon scheduling
 
-Coordinator checkpoint: 2026-11-06 06:03 Asia/Shanghai (2026-11-05 22:03 UTC).
+Coordinator checkpoint: 2026-11-06 06:21 Asia/Shanghai (2026-11-05 22:21 UTC).
 
 The user assigned the parent session scheduling only, with no spending cap. The user subsequently authorized a fourth dedicated
 Lemma 7.2 lane if memory pressure is low; the total cap is now four proof
@@ -10,9 +10,9 @@ existing proof ownership is retained. No publishing or pushing is authorized by 
 
 | Run | Task | Proof ownership | Current frontier |
 | --- | --- | --- | --- |
-| `0003` | `BOST-SPECHT` | `Specht/**`, `Lattice/**`, Specht blueprint | Tableau enumeration and prefix-distribution estimates for covolume asymptotics |
+| `0003` | `BOST-SPECHT` | `Specht/**`, `Lattice/**`, Specht blueprint | Bulk concentration, separation and logarithmic expectation for covolume asymptotics |
 | `0004` | `BOST-ARITH` | `Arithmetic/**`, `Slope/**`, arithmetic blueprint | Exact-sequence determinants, general tensor-degree identities and intrinsic HN specialization |
-| `0005` | `BOST-GEOM` | `Geometry/**`, `Tensor/**`, geometry blueprint | Scalar extension of the integral pairing, global contraction, then invariant/nonvanishing arguments |
+| `0005` | `BOST-GEOM` | `Geometry/**`, `Tensor/**`, geometry blueprint | Invariant scalar extension and nonvanishing after the checked contracting pairing |
 | `0006` | `BOST-BALANCED` | `Balanced/**`, `InvariantTheory/**`, balanced/orbit sections of compactness blueprint | Exact manuscript Lemma 7.2, including the needed analytic and orbit-closure/invariant criteria |
 
 Each task owns its corresponding verification files. BOST-SPECHT is the sole
@@ -45,74 +45,54 @@ was four, then resumed run `0003` for another ten rounds. The successor is
 
 ## Accepted evidence and open boundaries
 
-The latest completed joint boundary is SPECHT session `0023`, final evidence
-commit `81945dd`: the root build passed 9,190 jobs at 20:56:40 UTC, and 34
-new counting/weight axiom probes used only the standard foundational axioms.
-The new producers identify actual tableau prefixes and prove their exact
-squared-Vandermonde binomial weights. The earlier seminormal norm product,
-rectangular Gram determinant and canonical orbit-lattice covolume bound
-(`333c037`) remain in use. Distribution normalization, bulk separation and
-the general covolume asymptotic are still open.
+The latest completed joint boundary is SPECHT session `0026`, final evidence
+`4d40509`: the configured root build passed **9,210 jobs without warnings** at
+22:11:39 UTC, and its 38 new Specht axiom probes used only the standard
+foundational axioms. That root includes the intrinsic exact-sequence
+determinant and Plucker norm handoffs, with separate 192- and 30-probe audits,
+as well as the earlier geometry pairing base-change leaf. It does not certify
+later independent producers or any headline result still open below.
 
-ARITH session `0008` exited normally at 20:03:40 UTC, committed through
-`3131d4b`, with 135 foundational-only probes. Its successor `0010` has checked
-general-rank dual degree (`49b13ce`, audit `9869294`, 165 probes), and is active
-on exact-sequence determinants. GEOM session `0010` exited normally at 20:23:44 UTC,
-committed through `5344b4d`: local contraction at `00eec3c` passed 9,088 jobs
-and 138 foundational-only probes. The 9,190-job root batch now includes
-`Arithmetic.LineDualDegree`, `Arithmetic.DeterminantDual`,
-`Geometry.ContractionMetric`, `Tensor.EvaluationBaseChange`, and
-`Tensor.DualRegroupBaseChange`. Later undelivered leaves are excluded.
+The current sessions are SPECHT `0028`, ARITH `0012`, GEOM `0014`, and BALANCED
+`0004`; all four foreground invocations continue normally.
 
-The current sessions are SPECHT `0026`, ARITH `0012`, GEOM `0014`, and BALANCED `0004`.
-ARITH `0010` handed off with final evidence `1c0421a` and 171
-foundational-only probes. Its exact exterior-product and finite-free
-determinant-product producers await root integration in `I-0050`;
-ARITH `0012` continues the nonfree projective descent.
-The saved hook-count and evaluation-base-change drafts have been repaired,
-checked and integrated. GEOM `0012` subsequently checked the full pairing
-scalar-extension formula (`b42d795`) and intrinsic fiberwise bilinear bound
-(`38aaf59`), with 159 foundational-only probes and satisfactory honesty review
-(`c4a17e6`). Its root integration remains a separate pending boundary. The
-actual dual-fiber operator-norm endpoint and full global contraction still
-require proof; the unfinished transport is preserved as attempt `0002`.
-BALANCED has checked intrinsic partial traces
-(`fdb954d`), their actual orthogonal-projection consumer (`3361234`), and the
-Gram determinant first variation (`ee2abe7`); its 16-probe axiom audit passed
-at 21:04:53 UTC with standard foundational axioms only, and the scoped honesty
-review was satisfactory. The actual exponential-flow consumer subsequently
-passed 2,821 jobs at 21:28:53 UTC (`5e76175`), with all 19 export probes
-foundational-only at 21:30:33 UTC. Evidence `9cddfb6` records satisfactory
-source, mathematical and honesty reviews. Their updated root handoff is
-`I-0049`. BALANCED `0002` ended successfully at 21:38:47 UTC and `0004`
-started at 21:40:05 UTC after the coordinator's checkpoint hint `I-0053`.
-The next analytic step reuses the exterior-basis API and constructs the
-complex Gram metric to connect variation with the Plucker norm. The existing
-exterior inner-product implementation is real-only; BALANCED corrected its
-initial broader reuse claim after inspecting the hypotheses. These leaves are not yet
-the full Lemma 7.2 or part of the
-9,190-job root boundary. Use the owners' exact source
-revisions and checks in [RESULTS.md](RESULTS.md), [ARITHMETIC.md](ARITHMETIC.md),
-and [GEOMETRY.md](GEOMETRY.md), rather than treating live drafts as accepted.
+- **SPECHT:** the canonical integral lattice, Gram bound and exact finite
+  prefix distribution are checked. The current round has additionally checked
+  the bulk normalizer bound (`76b7bf8`). Concentration, uniform separation,
+  logarithmic expectation and the general covolume limit remain open.
+- **ARITH:** intrinsic dual degree and the nonfree exact-sequence determinant
+  construction are checked, including zero ranks and splitting independence.
+  The current metric work has checked the norm formula on integral pure tensors
+  (`8b595d4`). The full determinant isometry/degree identity, general tensor
+  degree, finiteness, supermodularity and HN specialization remain open.
+- **GEOM:** the actual canonical contracting pairing is checked through its
+  intrinsic dual-fiber norm bound (`fd211a8`, evidence `8045b27`), with 163
+  foundational-only probes and satisfactory honesty review. This newer
+  endpoint awaits a subsequent root batch. The lane is now working on
+  invariant scalar extension and nonzero evaluation; invariant detection and
+  the full geometric task remain open.
+- **BALANCED:** actual Plucker norm variation (`76a3ad5`) is checked and root
+  integrated. The complex exterior metric is an original construction using
+  imported mathlib basis/pairing APIs; the existing real-only exterior metric
+  was not silently treated as a complex theorem. Spectral expansion, convexity
+  and stationary minimum (`eae8dac`) now have a module check, independent
+  review and 40 foundational-only probes. The tensor-flow bridge,
+  determinant-one polar/logarithm reduction and algebraic orbit/invariant
+  criterion remain open. The spectral leaf awaits subsequent root integration.
 
-Automatic project-wide boundary snapshots can capture another task's drafts;
-their presence in a commit is not verification. Use explicit owned pathspecs
-and preserve exact check timestamps and source revisions. Check fingerprints
-identify commands, so their latest cache records can be overwritten by reruns.
+Manuscript **Lemma 7.2 and the main theorem remain unproved**. The dedicated
+lane has made substantive analytic progress; no norm estimate, interface
+agreement or source-backed blueprint is counted as the full semistability
+conclusion. The reviewed smaller closure route below is still unformalized.
 
-The two earlier geometry capacity interruptions are recorded in `I-0018`;
-the missing audit was recovered and that incident is archived. The temporary
-check-queue hint `I-0025` was acknowledged and archived. Subsequent completed
-rounds inspected by the coordinator exited successfully. The latest temporary
-directory dry run found no stale candidates and protected all three live runs.
-
-The manuscript main theorem remains unproved. General Specht asymptotics,
-arithmetic degree calculus/HN, metric contraction, and invariant/nonvanishing
-arguments still require work. Manuscript Lemma 7.2, balanced projections imply
-Plücker semistability, still has an empty Lean attachment; its analytic argument
-and invariant orbit-closure criterion are now assigned to the new BALANCED
-lane, rather than counted as completed by the existing milestones. A successful local batch
-does not close those tasks.
+Use exact source revisions and check evidence in [RESULTS.md](RESULTS.md),
+[ARITHMETIC.md](ARITHMETIC.md), [GEOMETRY.md](GEOMETRY.md) and
+[BALANCED.md](BALANCED.md). Automatic cross-task snapshots can capture live
+drafts: commit presence alone is not verification. Check fingerprints identify
+commands, so latest cache records can be replaced by reruns. Use explicit
+owned paths on the commit command and preserve source/check timestamps.
+Unattached helper/imported graph nodes and ancestor-inclusive roadmap counts
+remain documented coverage warnings, not extra proof writers or completion.
 
 ## LSP dependency-build race and recovery
 
