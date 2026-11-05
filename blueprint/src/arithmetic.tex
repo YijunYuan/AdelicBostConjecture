@@ -1434,9 +1434,36 @@ uses supermodularity of the subspace degree; no modularity of that
 degree is asserted.
 \end{remark}
 
+\begin{lemma}[The degree inequality for a sum and intersection]
+\label{lem:submodule-degree-supermodular}
+\uses{lem:nested-quotient-metric,lem:exact-determinant-degree,lem:determinant-contraction,lem:degree-isometry,lem:integral-submodule-projective}
+\source{bost-specht-manuscript:page-0003}\notready
+Let $U,V$ be submodules of a finite projective Hermitian bundle $A$,
+and assume that $A/V$ is torsion-free. With the induced metrics,
+\[
+ \degn(U)+\degn(V)\leq\degn(U\cap V)+\degn(U+V).
+\]
+\end{lemma}
+\begin{proof}
+Put $I=U\cap V$, $T=U+V$ and $Q=T/V$. Since $Q$ embeds in $A/V$,
+it is torsion-free and finite, hence projective. The two actual exact
+sequences are $0\to I\to U\to Q\to0$ and
+$0\to V\to T\to Q\to0$. Their submodule metrics are the induced
+metrics from $A$. Write $q_U,q_T$ for their quotient maps, and equip $Q$
+with the two respective quotient metrics $H_U,H_T$.
+For a complex fiber vector $z\in Q_\sigma$, take its orthogonal lift
+$u$ through $q_U$. The inclusion $U_\sigma\to T_\sigma$ is an isometry,
+and its value on $u$ is a lift of $z$ through $q_T$. Minimality of the
+orthogonal lift through $q_T$ gives
+$\|z\|_{H_T}\leq\|u\|=\|z\|_{H_U}$. Thus the identity from
+$(Q,H_U)$ to $(Q,H_T)$ is an injective contraction. The degree inequality
+gives $\degn(Q,H_U)\leq\degn(Q,H_T)$. Applying exact additivity to
+the two sequences yields the displayed inequality.
+\end{proof}
+
 \begin{lemma}[The Hermitian subspace degree is supermodular]
 \label{lem:hermitian-convex-slopes}
-\uses{lem:nested-quotient-metric,lem:degree-calculus,lem:intrinsic-subspace-degree,lem:integral-part-generic-subspace,lem:subspace-convex-slopes}\notready
+\uses{lem:submodule-degree-supermodular,lem:nested-quotient-metric,lem:degree-calculus,lem:intrinsic-subspace-degree,lem:integral-part-generic-subspace,lem:subspace-convex-slopes}\notready
 For a Hermitian bundle $A$ put $\delta(X)=\degn(A\cap X)$ on the
 $K$-subspaces of $A_K$, using the induced metrics. Then $\delta$ is
 supermodular. If $X\subsetneq Y$, the interval slope in the preceding
