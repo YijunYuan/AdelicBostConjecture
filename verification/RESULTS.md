@@ -1,5 +1,27 @@
 # Dependency integration evidence — 2026-11-05
 
+## Monic orthogonalization and Murphy operators — session 0011
+
+`Orthogonal.lean` constructs a monic orthogonal basis from the existing
+standard real basis for any total order and proves the exact Gram norm
+product and its orbit-covolume consumers. `RealAction.lean` restricts the
+real isometric word action to the actual Specht span and proves symmetry,
+pairwise commutation and the adjacent recurrence of its Murphy sums.
+The adjacent diagonal-coefficient corollary explicitly requires two
+eigenvalue equations; it is not a proof of the content spectrum.
+
+The explicit-root serialized check of both modules passed (9,061 jobs).
+`check --lean verification/SeminormalAxioms.lean` passed all 22 probes;
+only `propext`, `Classical.choice`, and `Quot.sound` occur. LSP diagnostics
+are clean. Local elaboration failures were repaired before this checkpoint.
+Full umbrella integration and the required honesty review follow separately.
+
+Claim class: **proved producers**, with one **conditional spectral corollary**.
+The first unmet source producer is now the content-triangular Murphy action
+and its dominance-order control; the explicit prefix norm product and the
+general covolume limit remain unproved. The original Murphy proof could not
+be retrieved; its access record is `references/murphy-seminormal-1981/notes.md`.
+
 ## Rectangular determinant covariance and PR integration — session 0009
 
 Commits `f3d37a3` and `c5a4975` identify the actual integer rectangular
