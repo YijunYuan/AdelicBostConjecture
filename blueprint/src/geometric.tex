@@ -1304,9 +1304,34 @@ $\Psi_d(\tau v)(u)=\Psi_d(v)(\tau^{-1}u)$, precisely equivariance
 into the dual representation.
 \end{proof}
 
+\begin{lemma}[Invariants for two independent factors]
+\label{lem:independent-tensor-invariants}
+\notready
+Let $G$ and $H$ act linearly on vector spaces $A$ and $B$ over a field $F$.
+For the action $(g,h)(a\otimes b)=ga\otimes hb$, the canonical map
+\[
+ A^G\otimes_F B^H\longrightarrow(A\otimes_F B)^{G\times H}
+\]
+is an isomorphism. The groups need not be finite, and no averaging or
+semisimplicity hypothesis is needed.
+\end{lemma}
+\begin{proof}
+Choose a basis $(b_j)$ of $B$. Every tensor has a unique finite expansion
+$z=\sum_j a_j\otimes b_j$. The equation $(g,1)z=z$ is equivalent, by
+uniqueness of this expansion, to $ga_j=a_j$ for every $j$ and every $g$.
+Thus the vectors fixed by $G$ are exactly the image of $A^G\otimes B$.
+Tensoring the inclusion $A^G\hookrightarrow A$ is injective over a field,
+so this image identifies with $A^G\otimes B$. The residual $H$-action
+on this space acts only on $B$. Expanding in a basis of $A^G$ gives its
+fixed subspace exactly as $A^G\otimes B^H$. Conversely each pure tensor
+of invariant vectors is fixed by $(g,h)$, and so is any sum of them.
+Finally, tensoring the two injective factor inclusions is injective,
+proving the asserted isomorphism onto the invariant subspace.
+\end{proof}
+
 \begin{lemma}[Nonvanishing in unbounded degrees]
 \label{lem:contraction-nonzero}
-\uses{def:geometric-semistability,lem:invariant-base-change,lem:canonical-contraction,lem:rectangular-invariants}
+\uses{def:geometric-semistability,lem:invariant-base-change,lem:canonical-contraction,lem:rectangular-invariants,lem:independent-tensor-invariants}
 \source{bost-specht-manuscript:page-0010}\notready
 If the Pl\"ucker line of $V_K$ is geometrically semistable, then there
 is a positive integer $d_0$, divisible by $s,a_1,\ldots,a_N$, such
