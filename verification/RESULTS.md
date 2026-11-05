@@ -1,5 +1,52 @@
 # Dependency integration evidence — 2026-11-05
 
+## Rectangular determinant covariance and PR integration — session 0009
+
+Commits `f3d37a3` and `c5a4975` identify the actual integer rectangular
+polytabloid with a product of unnormalized alternating columns, and prove
+that its word tensor-power matrix action is multiplication by `det(u)^k`.
+The result holds over every commutative ring and is consumed by the actual
+integral orbit lattice, its scalar span and the existing complex Specht
+module. `wordTensorAction_prod` proves the action applies the matrix
+independently to pure-tensor factors. No factorial division, invariant-space
+hypothesis or replacement lattice is used.
+
+- `horizon check BostConjecture.Specht.ColumnTensor --json` passed at
+  **14:45:03 UTC** (9,058 jobs; fingerprint `b98225d4a0b91993`).
+- The configured `horizon check --json` with covariance passed at
+  **14:54:07 UTC** (9,095 jobs).
+- `horizon check --lean verification/CovarianceAxioms.lean --json` passed at
+  **14:55:12 UTC** (fingerprint `137e2cddfd6ab359`). All **19** transitive
+  probes, comprising eight Stacks exports and eleven new public declarations,
+  report only `propext`, `Classical.choice`, and `Quot.sound`.
+- The combined configured build after adding all three approved Mathlib PR
+  root imports passed at **14:56:32 UTC** (**9,101 jobs**, 18.528 seconds).
+  No Lean source changed after this check. The PR source ports and their
+  45 export axiom checks belong to the parent; this session integrated root
+  imports and attribution links. See `STACKS_AND_MATHLIB_PRS.md` for the
+  parent's API review and historical Polar check-cache caveat.
+
+All commands used the workspace Horizon CLI. The recurring resource-slot
+notice had measured waits of 0.001 seconds (known issue I-0001). Narrow
+producer LSP diagnostics are clean; the umbrella import file remained in
+partial LSP elaboration, so its evidence is the completed kernel build.
+Initial local proof elaboration errors were repaired; no kernel check failed.
+
+Claim class: **proved producers**. Covariance frontier before: the isolated
+alternating-vector theorem lacked its rectangular word consumer. After:
+column factorization and actual lattice/complex-Specht covariance are checked.
+Consumer: `lem:determinant-isotypic`; abstract tensor-map transport, projective
+local-frame gluing, metric compatibility and invariant-space equality are
+still open. The main Gram frontier remains `lem:monic-seminormal`, followed
+by the prefix law and sublinear estimate; manuscript Theorem 1.1 is unproved.
+
+Final graph: 60 blueprint nodes, 485 Lean declarations, 199 edges, 25 checked
+blueprint nodes and zero stale nodes. A mistyped covariance dependency was
+corrected. The 302 unattached helper/imported declarations are intentional
+coverage warnings (I-0004), including approved PR producers without source
+completion claims. The source-scope symlink is preserved; scratch cleanup
+found no stale candidates.
+
 ## Rational spanning and the actual standard Gram bound — session 0007
 
 Commits `e29f2ab` and `54e9cbf` prove integral Garnir cancellation,

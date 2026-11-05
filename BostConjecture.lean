@@ -2,6 +2,9 @@ module
 
 public import BostConjecture.Slope.Subspace
 public import BostConjecture.LinearAlgebra.AlternatingTensorPower
+public import BostConjecture.LinearAlgebra.ExteriorPower.BaseChange
+public import BostConjecture.LinearAlgebra.PiTensorProduct.Projective
+public import BostConjecture.Analysis.InnerProductSpace.Polar
 public import BostConjecture.Lattice.Covolume
 public import BostConjecture.Specht.Tableau
 public import BostConjecture.Specht.Metric

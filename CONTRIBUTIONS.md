@@ -175,6 +175,52 @@ changes. The installed mathlib revision is pinned in `lake-manifest.json`.
   `verification/StacksAxioms.lean`; the module and all probes were checked by
   the parent extraction session, separately from the preceding Specht build.
 
+## Selective Mathlib PR ports
+
+These user-approved ports retain the Lean/mathlib 4.35 pins and the exact
+Apache-2.0 licenses and author notices. They are checked local producers
+from proposals that were unmerged when retrieved. Detailed original paths,
+export lists, file hashes, adaptations and axiom checks are in the linked
+provenance records; no arithmetic or analytic Bost bridge follows merely
+from importing them.
+
+- **Exterior base change, #40948 — Nailin Guan.**
+  Repository `Thmoas-Guan/mathlib4_fork`, revision
+  `b642b6723caf97b7b462dd5ddeabb0226c3b5433`.
+  `Mathlib/LinearAlgebra/ExteriorPower/BaseChange.lean` and two projections
+  from `ExteriorAlgebra/Grading.lean` are ported to
+  `BostConjecture/LinearAlgebra/ExteriorPower/` with adjusted imports;
+  proof bodies are unchanged. The five public exports include
+  `exteriorPower.baseChangeEquiv` and both pure-tensor formulas.
+  Intended consumers: determinant and Plucker scalar extension.
+  [Provenance and license](vendor/mathlib-prs/40948/PROVENANCE.json).
+- **Finite projective tensor duality, #44845 — Daniel Horton.**
+  Repository `DanielJHorton/mathlib4`, revision
+  `47365e3b9fd4329f058c31ac7aa9565a6036b17d`.
+  `Mathlib/LinearAlgebra/PiTensorProduct/Projective.lean` and three
+  `Dual/Defs.lean` declarations are ported to
+  `BostConjecture/LinearAlgebra/PiTensorProduct/`; two missing reindex
+  simplifications are proved inline. Ten exports include
+  `PiTensorProduct.piTensorHomEquiv` and
+  `PiTensorProduct.dualDistribEquivOfProjective`.
+  Intended consumer: contractions over nonfree finite projective
+  integer-ring modules. [Provenance and license](vendor/mathlib-prs/44845/PROVENANCE.json).
+- **Polar decomposition, #45002 — Tjeerd Jan Heeringa.**
+  Repository `TJHeeringa/mathlib4`, revision
+  `41260205df493c627e1ac0e54812cfdeb6517fbc`.
+  `Mathlib/Analysis/InnerProductSpace/{Abs,Polar}.lean` is ported to
+  `BostConjecture/Analysis/InnerProductSpace/` with one relocated import
+  and documentation corrections; the 30 declarations and proofs are
+  unchanged. Intended consumer: polar factorization in the balanced
+  Plucker argument. This API is for complex Hilbert spaces; the unitary,
+  logarithm and determinant adapters remain open.
+  [Provenance and license](vendor/mathlib-prs/45002/PROVENANCE.json).
+
+The parent checked all three narrow module builds and all 45 export axiom
+probes before this session integrated their root imports. See
+[reuse survey](verification/STACKS_AND_MATHLIB_PRS.md) for the parent review
+and the exact separation between these producers and their future consumers.
+
 ## Verification
 
 Run `horizon --root ../.. check --json` from this project, then
