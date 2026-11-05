@@ -109,10 +109,16 @@ changes. The installed mathlib revision is pinned in `lake-manifest.json`.
   increasing fillings of partition cells and the factors are actual hook lengths.
 - Local changes and exact file hashes are recorded in the vendor provenance
   record. Changes update Lean 4.35 visibility and proof elaboration.
-- Intended consumer: tableau counts in the rectangular prefix law (§5).
-  The tableau-type comparison, prefix bijections, and seminormal Gram identity
-  remain separate obligations. This formula alone does not prove the
-  manuscript's covolume bound.
+- Actual consumer: `Specht/HookCount.lean` identifies the existing enumerating
+  standard tableaux with `AuxiliaryPartitionSource` by inversion and derives
+  `card_standard_mul_hookProduct`. Its `partitionCell_mem` and
+  `partitionCellEquiv` adapt the private `sytCell_iff_mem_toYoungDiagram` and
+  `sytCellEquiv` in `Combinatorics/YoungDiagram/CornerStatistics.lean` at the
+  same revision, preserving coordinates and attribution. The inverse-tableau
+  proofs are new; Lean 4.35 visibility and dependent rewriting are adapted.
+  The copied formula's dependency cone is kernel-checked and audited through
+  this consumer. Shifted-coordinate products and prefix bijections remain
+  separate obligations for the rectangular prefix law (§5).
 
 ## Gram determinants and covolumes — The Tau Ceti contributors
 

@@ -62,8 +62,8 @@ The following producers still need complete source-backed mathematical proofs:
   and the actual prefix norm formula. Its first unmet asymptotic consumer is
   `lem:tableau-count`, the shifted-coordinate count for standard tableaux,
   followed by the exact rectangular prefix distribution and the logarithmic
-  expectation bound. The imported hook formula still needs its precise bridge
-  to the accepted tableau indexing. No seminormal theorem is assumed: the
+  expectation bound. `HookCount.lean` now bridges the imported hook formula
+  to the accepted tableau indexing; the shifted-coordinate product remains open. No seminormal theorem is assumed: the
   action and norms are now proved in the canonical word realization.
 - `lem:invariant-orbit-criterion`: equality of Euclidean and Zariski orbit
   closures, and detection by homogeneous invariants for products of special

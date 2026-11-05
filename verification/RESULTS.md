@@ -700,3 +700,12 @@ working LSP diagnostics and used them before its final kernel checks.
 Horizon 0.1.5 emits a spurious resource-slot waiting message even when its
 recorded wait is about 0.002 seconds: its `flock` success return is tested
 against zero. This is recorded as a tooling issue, not proof evidence.
+
+## Session 0023: hook-count producer
+
+`Specht/HookCount.lean` identifies enumerating standard tableaux with the
+checked increasing-fillings model and proves `card_standard_mul_hookProduct`
+for every Young diagram. The serialized module check passed 9,065 jobs;
+`verification/SpechtHookCountAxioms.lean` checks all five new declarations,
+with only `propext`, `Classical.choice`, and `Quot.sound`. No shifted-coordinate
+count, prefix distribution, or general covolume limit is claimed here.
