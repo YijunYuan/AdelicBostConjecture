@@ -4,6 +4,7 @@ import BostConjecture.Balanced.PluckerNorm
 import BostConjecture.Balanced.SpectralExpansion
 import BostConjecture.Balanced.TensorExponential
 import BostConjecture.Balanced.SpecialLinearPolar
+import BostConjecture.Balanced.OrbitNorm
 import BostConjecture.InvariantTheory.Semistability
 
 #print axioms BostConjecture.Balanced.trace_starProjection_comp
@@ -97,3 +98,10 @@ import BostConjecture.InvariantTheory.Semistability
 #print axioms BostConjecture.Balanced.det_abs_eq_one
 #print axioms BostConjecture.Balanced.trace_log_abs_eq_zero
 #print axioms BostConjecture.Balanced.specialLinear_polar
+
+#print axioms BostConjecture.InvariantTheory.pluckerRepresentation
+#print axioms BostConjecture.InvariantTheory.pluckerRepresentation_apply
+#print axioms BostConjecture.InvariantTheory.pluckerRepresentation_apply_ιMulti
+#print axioms BostConjecture.Balanced.exterior_map_norm
+#print axioms BostConjecture.Balanced.IsBalanced.one_le_plucker_norm_sq
+#print axioms BostConjecture.Balanced.IsBalanced.zero_not_mem_closure_plucker_orbit

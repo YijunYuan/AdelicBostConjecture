@@ -3,7 +3,9 @@
 Manuscript Lemma 7.2 is **not yet formalized**. The accepted code proves the
 intrinsic partial traces, actual exponential-frame Gram first variation, and
 the basis-independent complex Gram metric on the full exterior power, actual
-Plücker norm stationarity, and Hermitian exterior exponential convexity. It also supplies intrinsic polynomial evaluation, homogeneous invariants,
+Plücker norm stationarity, Hermitian exterior exponential convexity, determinant-one
+polar factorization, and the full actual special-linear orbit norm bound and
+Euclidean closure exclusion. It also supplies intrinsic polynomial evaluation, homogeneous invariants,
 and the elementary implication from a nonvanishing homogeneous invariant to
 zero excluded from orbit closure. The converse orbit criterion is unproved.
 
@@ -207,15 +209,12 @@ also allows Mathlib's totalized determinant convention outside that setting.
 
 ## Remaining mathematical producers
 
-1. Complete root integration of the tensor exponential producer; the actual
-   tensor-flow bridge and balanced norm minimum pass kernel and axiom checks.
-2. Assemble the norm bound for the full special-linear Plücker orbit from
-   the checked tensor minimum and determinant-one polar reduction.
-3. The canonical algebraic tensor/exterior representation, coordinate coaction
+1. Complete root integration of the newest checked producers.
+2. The coordinate coaction for the actual tensor/exterior representation
    and base-change/detection bridges, coordinated with GEOM in `I-0047`.
    Intrinsic polynomials, homogeneous degree, finite dimensionality and
-   homogeneous invariants are now checked.
-4. Constructible images and comparison of complex/Zariski closures,
+   homogeneous invariants are checked; so is the actual Plücker representation.
+3. Constructible images and comparison of complex/Zariski closures,
    special-unitary Zariski density, and finite-degree Haar averaging.
    The blueprint now supplies the mathematical arguments, but there is no
    Lean implementation of these conclusions. Its independently reviewed affine-density proof uses
@@ -226,7 +225,7 @@ also allows Mathlib's totalized determinant convention outside that setting.
    the actual minimal polynomial, not an arbitrary monic annihilator. This
    replaces the earlier curve-normalization route without an analytic-chart dependency. Each used external
    conclusion must be proved or matched to checked library declarations.
-5. Exact Plücker semistability and its invariant-polynomial conclusion,
+4. Exact Plücker semistability and its invariant-polynomial conclusion,
    followed by independent source/math/honesty review and root integration.
 
 The orbit criterion is restricted to the needed pair of special linear
@@ -234,7 +233,7 @@ groups with an **algebraic linear action**. It does not apply to arbitrary
 abstract linear representations. The finite-degree separation argument uses
 neither finite generation of the invariant ring nor a semistability axiom.
 The orbit-criterion blueprint nodes remain `notready`. Only the
-checked analytic producers carry `leanok`; Lemma 7.2 remains open.
+checked analytic and elementary polynomial producers carry `leanok`; Lemma 7.2 remains open.
 
 ## Source registration
 
@@ -260,10 +259,11 @@ helper was prohibited. Read-only source/mathematical review was used.
 
 Claim class: **proved producers**. Before this session: actual tensor exponential-frame Gram stationarity was
 proved but the complex exterior metric was missing. After: the full complex
-exterior Gram metric, Plücker norm stationarity and Hermitian spectral
-expansion/convexity are checked. The first unmet analytic producer is the
-assembly of the full special-linear orbit norm bound. Tensor-flow and
-determinant-one polar/log reduction are now checked.
+exterior Gram metric, Plücker norm stationarity, Hermitian spectral
+expansion/convexity, tensor flow, determinant-one polar/log reduction and
+the full actual special-linear orbit norm bound are checked. Zero is excluded
+from the Euclidean orbit closure. The first unmet conclusion is its algebraic
+closure comparison, followed by positive-degree invariant existence.
 Consumer: `lem:balanced-plucker`, still unproved. The source-backed orbit route
 is mathematical blueprint only, with all formal dependencies still open.
 Honesty reviewer: used; actual projection and both balance equations are
