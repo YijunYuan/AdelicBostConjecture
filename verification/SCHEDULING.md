@@ -1,17 +1,19 @@
 # Parallel Horizon scheduling
 
-Coordinator checkpoint: 2026-11-06 04:28 Asia/Shanghai (2026-11-05 20:28 UTC).
+Coordinator checkpoint: 2026-11-06 04:34 Asia/Shanghai (2026-11-05 20:34 UTC).
 
-The user assigned the parent session scheduling only, with at most three
-concurrent proof tasks and no spending cap. Horizon owns the mathematics.
-The standing ownership rule is inbox `I-0012`; configuration was committed in
-`d9a1468`. No publishing or pushing is authorized by this arrangement.
+The user assigned the parent session scheduling only, with no spending cap. The user subsequently authorized a fourth dedicated
+Lemma 7.2 lane if memory pressure is low; the total cap is now four proof
+writers, including writable helpers. Horizon owns all mathematical work.
+The new four-slot ownership protection supersedes the original `I-0012`;
+existing proof ownership is retained. No publishing or pushing is authorized by this arrangement.
 
 | Run | Task | Proof ownership | Current frontier |
 | --- | --- | --- | --- |
 | `0003` | `BOST-SPECHT` | `Specht/**`, `Lattice/**`, Specht blueprint | Tableau enumeration and prefix-distribution estimates for covolume asymptotics |
 | `0004` | `BOST-ARITH` | `Arithmetic/**`, `Slope/**`, arithmetic blueprint | Dual degree, general tensor/exact-sequence identities and intrinsic HN specialization |
 | `0005` | `BOST-GEOM` | `Geometry/**`, `Tensor/**`, geometry blueprint | Scalar extension of the integral pairing, global contraction, then invariant/nonvanishing arguments |
+| Pending launch | `BOST-BALANCED` | `Balanced/**`, `InvariantTheory/**`, balanced/orbit sections of compactness blueprint | Exact manuscript Lemma 7.2, including the needed analytic and orbit-closure/invariant criteria |
 
 Each task owns its corresponding verification files. BOST-SPECHT is the sole
 editor of the shared root import, `CONTRIBUTIONS.md`, `RESULTS.md`, and shared
@@ -21,9 +23,10 @@ The arithmetic and geometry lanes share the existing `ComplexFiber`,
 
 ## Continuing the runs
 
-The three foreground runs are active at this checkpoint. Before resuming any
+The original three foreground runs remain active; the fourth lane is being
+registered and launched in the foreground. Before resuming any
 run, inspect `horizon ps --json` and its terminal session status. Resume an exited
-run with meaningful remaining work, keeping the total at three. For example:
+run with meaningful remaining work, keeping the total at four. For example:
 
 ```sh
 /home/yijunyuan/.local/bin/horizon --root /home/yijunyuan/bc-workspace ps --json
@@ -53,7 +56,7 @@ integration through `I-0044`; it is not included in the 9,171-job result above.
 
 The current sessions are SPECHT `0023`, ARITH `0010`, and GEOM `0012`.
 SPECHT `0023` is the last currently planned round of run `0003`; resume the
-run after it exits if the task remains incomplete, without exceeding three
+run after it exits if the task remains incomplete, without exceeding four
 proof writers. The saved hook-count draft has since been repaired and checked.
 GEOM's saved evaluation-base-change draft has also passed a new module check;
 its global pairing consumer remains in progress. Use the owners' exact source
@@ -75,8 +78,8 @@ The manuscript main theorem remains unproved. General Specht asymptotics,
 arithmetic degree calculus/HN, metric contraction, and invariant/nonvanishing
 arguments still require work. Manuscript Lemma 7.2, balanced projections imply
 Plücker semistability, still has an empty Lean attachment; its analytic argument
-and invariant orbit-closure criterion are not discharged by the three lanes'
-current milestones. A successful local batch
+and invariant orbit-closure criterion are now assigned to the new BALANCED
+lane, rather than counted as completed by the existing milestones. A successful local batch
 does not close those tasks.
 
 ## LSP dependency-build race and recovery
@@ -127,6 +130,21 @@ Handoff hints `I-0042` and `I-0043` are archived after verifying continuation;
 the earlier integration-cutoff thread `I-0033` was already consumed.
 
 The coordinator has made no mathematical edits: all proof changes above were
-produced by Horizon. Continuation remains authorized; no new proof writer or
-fourth run was launched at this checkpoint. Dashboard HTTP health was checked
+produced by Horizon. Continuation remains authorized. The additional BALANCED lane follows the
+user's explicit request; no fifth proof writer is authorized. Dashboard HTTP health was checked
 successfully at `http://127.0.0.1:8765`.
+
+## Fourth-lane resource and completion conditions
+
+Before authorizing the fourth run, the coordinator measured 23.46 GiB total
+RAM and 8.86 GiB available, memory pressure avg10 0.03%, and no sustained swap
+out in the interval sample. About 4.49 GiB of swap was already occupied; this
+is recorded separately from active swapping. Keep builds serialized and
+monitor memory after startup.
+
+BALANCED owns the shared geometric-semistability and orbit-criterion API and
+coordinates its consumers with GEOM. Its proof must cover the actual source
+conclusion, including all external results it uses; an analytic norm bound
+alone does not complete Lemma 7.2. The parent will notify the user in this chat
+only after the exact theorem, transitive axioms, independent review and required
+integration have passed. No wait for Specht asymptotics or HN is required.
