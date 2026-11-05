@@ -1,0 +1,7 @@
+import BostConjecture.Geometry.TensorRealization
+
+#print axioms BostConjecture.Geometry.tensorCoordinates
+#print axioms BostConjecture.Geometry.tensorCoordinates_tprod
+#print axioms BostConjecture.Geometry.tensorCoordinates_map
+#print axioms BostConjecture.Geometry.map_tensorCoordinates_symm_of_mem_span
+#print axioms BostConjecture.Geometry.tensorCoordinates_symm_change_basis

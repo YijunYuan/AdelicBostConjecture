@@ -1,5 +1,57 @@
 \chapter{Integral contractions and the geometric slope inequality}
 
+\begin{lemma}[Tensor coordinates and determinant covariance]
+\label{lem:rectangular-tensor-realization}
+\uses{lem:rectangular-word-covariance}
+\source{bost-specht-manuscript:page-0008,bost-specht-manuscript:page-0009}
+\lean{BostConjecture.Geometry.tensorCoordinates,BostConjecture.Geometry.tensorCoordinates_map,BostConjecture.Geometry.map_tensorCoordinates_symm_of_mem_span}
+\leanok
+Let $R$ be a commutative ring, $M$ a free $R$-module with basis
+$(b_i)_{i=1}^a$, and $n\geq0$. The tensor basis identifies $M^{\otimes n}$
+with the functions from words $\{1,\ldots,n\}\to\{1,\ldots,a\}$ to $R$.
+If $f\in\operatorname{End}_R(M)$ has matrix $U$ in this basis, the
+coordinates of $f^{\otimes n}z$ are
+\[
+ w\longmapsto\sum_v\left(\prod_{q=1}^nU_{w(q),v(q)}\right)z_v.
+\]
+Consequently, for a tableau $t$ of rectangular shape $(k^a)$ with $k>0$,
+the inverse coordinate map sends the $R$-span of the integral orbit
+lattice into tensors on which $f^{\otimes n}$ acts by $(\det U)^k$.
+\end{lemma}
+\begin{proof}
+The coordinate of $\bigotimes_q x_q$ at $w$ is
+$\prod_q b^*_{w(q)}(x_q)$. Applying $f$ replaces each factor by
+$\sum_i U_{w(q),i}b_i^*(x_q)$. Distributing this finite product of
+sums gives the stated sum over words. Pure tensors span, so the
+formula holds for every tensor. On the scalar span of the rectangular
+orbit lattice the word-coordinate action is $(\det U)^k$ by
+determinant covariance. Applying the inverse coordinate isomorphism,
+which is $R$-linear, proves the asserted tensor identity.
+\end{proof}
+
+\begin{lemma}[Change of frame for the rectangular realization]
+\label{lem:rectangular-change-frame}
+\uses{lem:rectangular-tensor-realization}
+\source{bost-specht-manuscript:page-0009}
+\lean{BostConjecture.Geometry.tensorCoordinates_symm_change_basis}
+\leanok
+Let $b,c$ be two bases of the same free rank-$a$ module over a
+commutative ring $R$. Write $U$ for the matrix whose columns are the
+$c$-coordinates of the vectors of $b$. If $x$ belongs to the scalar
+span of a rectangular orbit lattice of shape $(k^a)$ with $k>0$, then
+\[
+ b^{\otimes n}x=(\det U)^k c^{\otimes n}x.
+\]
+\end{lemma}
+\begin{proof}
+The coordinate computation in the preceding lemma applies to a linear
+map between modules with different chosen bases: its matrix entries
+are the output coordinates of the images of the input basis vectors.
+Apply it to the identity map with input basis $b$ and output basis $c$.
+The tensor power of the identity is the identity, and the rectangular
+word-coordinate action is multiplication by $(\det U)^k$.
+\end{proof}
+
 \begin{definition}[Geometric semistability of a Pl\"ucker line]
 \label{def:geometric-semistability}
 \source{bost-specht-manuscript:page-0009}\notready
@@ -33,7 +85,7 @@ a positive degree with nonzero restriction is therefore unchanged.
 
 \begin{lemma}[Determinant-isotypic integral modules]
 \label{lem:determinant-isotypic}
-\uses{def:rectangular-specht,lem:rectangular-invariants,lem:rectangular-word-covariance,lem:degree-calculus}
+\uses{def:rectangular-specht,lem:rectangular-invariants,lem:rectangular-change-frame,lem:degree-calculus}
 \source{bost-specht-manuscript:page-0008,bost-specht-manuscript:page-0009}
 \notready
 For a rank-$a$ projective $\Ocal$-module $A$ and $d=ak>0$, there is
