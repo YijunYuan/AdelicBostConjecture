@@ -88,7 +88,7 @@ theorem mem_span_range_map_const_iff_forall_commute (h : IsUnit ((Fintype.card �
       ⇑(piTensorHomEquiv R (fun _ : ι => M) (fun _ : ι => M)).toLinearMap ∘
         fun f : M →ₗ[R] M => ⨂ₜ[R] (_ : ι), f := by
     funext f
-    simp [piTensorHomEquiv_apply]
+    simp [piTensorHomMap_tprod_eq_map]
   -- So their span is the image of the invariants under the comparison map.
   have hspan : Submodule.span R (Set.range fun f : M →ₗ[R] M => map fun _ : ι => f) =
       Submodule.map (piTensorHomEquiv R (fun _ : ι => M) (fun _ : ι => M)).toLinearMap
