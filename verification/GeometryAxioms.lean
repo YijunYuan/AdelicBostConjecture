@@ -6,6 +6,7 @@ import BostConjecture.Geometry.DeterminantBaseChange
 import BostConjecture.Geometry.DeterminantNaturality
 import BostConjecture.Geometry.LocalizationDescent
 import BostConjecture.Geometry.ProjectiveEmbedding
+import BostConjecture.Tensor.Hilbert
 
 #print axioms BostConjecture.Geometry.tensorCoordinates
 #print axioms BostConjecture.Geometry.tensorCoordinates_tprod
@@ -92,3 +93,10 @@ import BostConjecture.Geometry.ProjectiveEmbedding
 #print axioms BostConjecture.Geometry.projectiveDeterminantMap_baseChange
 #print axioms BostConjecture.Geometry.projectiveDeterminantMap_baseChange_of_basis
 #print axioms BostConjecture.Geometry.projectiveDeterminantMap_injective
+
+#print axioms BostConjecture.Tensor.exists_hilbertCore
+#print axioms BostConjecture.Tensor.hilbertCore
+#print axioms BostConjecture.Tensor.hilbertCore_inner_tprod
+#print axioms BostConjecture.Tensor.hilbertCore_unique
+#print axioms BostConjecture.Tensor.hilbertCore_map_inner
+#print axioms BostConjecture.Tensor.hilbertCore_reindex_inner

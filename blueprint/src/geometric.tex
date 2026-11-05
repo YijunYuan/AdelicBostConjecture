@@ -625,9 +625,43 @@ duality isomorphism realizes this functional by a tensor of dual vectors,
 which contradicts $C_i(z)=0$.
 \end{proof}
 
+\begin{lemma}[The Hermitian form on a finite tensor product]
+\label{lem:finite-hilbert-tensor}
+\source{bost-specht-manuscript:page-0010}
+\lean{BostConjecture.Tensor.hilbertCore,BostConjecture.Tensor.hilbertCore_inner_tprod,BostConjecture.Tensor.hilbertCore_unique,BostConjecture.Tensor.hilbertCore_map_inner,BostConjecture.Tensor.hilbertCore_reindex_inner}
+\leanok
+For a finite family of complex inner product spaces $E_i$, the
+algebraic tensor product $\bigotimes_i E_i$ has a unique positive
+definite Hermitian form satisfying
+\[
+ \left\langle\bigotimes_i x_i,\bigotimes_i y_i\right\rangle
+ =\prod_i\langle x_i,y_i\rangle.
+\]
+The tensor product of a family of linear isometries preserves this
+form, and relabelling its finite factors preserves the form.
+\end{lemma}
+\begin{proof}
+For the empty family identify the tensor product with $\mathbb C$
+and use its usual form. Adjoining one factor identifies the tensor
+product with the binary tensor product of the earlier product and
+that factor. The binary Hilbert tensor product has a positive
+definite form with the displayed multiplication rule, so induction
+gives existence. Transport along an equivalence of finite index
+sets does not change the formula, since it permutes the factors of
+a finite product. For uniqueness, fix a pure tensor in the second
+argument and extend equality from pure tensors in the first argument
+by conjugate linearity and spanning; then extend in the second
+argument by linearity and spanning. This proves equality on all
+pairs. Applying the same argument to the two forms obtained before
+and after the tensor product of isometries proves that it preserves
+inner products. For relabelling the factors the pure-tensor formula
+is unchanged by a finite permutation; the spanning argument again
+extends this equality to all tensors.
+\end{proof}
+
 \begin{lemma}[The canonical contracting pairing]
 \label{lem:canonical-contraction}
-\uses{lem:determinant-isotypic,lem:projective-tensor-evaluation}
+\uses{lem:determinant-isotypic,lem:projective-tensor-evaluation,lem:finite-hilbert-tensor}
 \source{bost-specht-manuscript:page-0010}\notready
 Let $i:V\hookrightarrow W=\bigotimes_{j=1}^N E_j$ be a nonzero
 submodule with its induced metrics. Set $s=\rk V$, $a_j=\rk E_j$.
