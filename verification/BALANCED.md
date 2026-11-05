@@ -207,6 +207,30 @@ law, wedge formula and use by the full-orbit norm proof. The blueprint
 uses the intended finite-dimensional setting; the generic Lean construction
 also allows Mathlib's totalized determinant convention outside that setting.
 
+`Balanced.OrbitNorm` at `b94d6c3` then passed **3,188 jobs, warning-free**,
+55.9s including setup. Its exports `IsBalanced.one_le_plucker_norm_sq` and
+`IsBalanced.zero_not_mem_closure_plucker_orbit` consume the full actual
+special-linear action, polar reduction, tensor exponential minimum and
+exterior Gram isometry. The expanded **92-probe** serialized kernel audit
+passed in 8.6s: only `propext`, `Classical.choice`, and `Quot.sound`, with
+no `sorryAx` or additional axioms. Independent honesty review accepted the
+exact analytic conclusion and requested the direct headline dependency on
+this producer, now incorporated. The first scoped OrbitNorm build failed on
+two coercion/instance inference issues; explicit linear-map equality and
+the typed norm-zero lemma repaired both. Final guarded LSP diagnostics are
+clear. The earlier stale-import diagnostic was cleared by reopening with an
+import-header change. Root integration of the newest leaves is requested
+in `I-0060`; the last confirmed root boundary remains the one recorded above.
+
+Boundary maintenance: the roadmap now marks only the analytic subtask done
+and the orbit criterion active. The earlier independent board-hygiene review
+accepted concurrent lanes and active ancestors; the current 12-active-item
+warning remains intentional. Graph sync reports 230 blueprint nodes, 1,568
+Lean declarations and 1,104 edges, with 775 unattached helper declarations
+across the concurrent project; the new source-facing exports are attached.
+The scratch cleanup dry run found no stale candidates. No helper or check
+was left running for this batch.
+
 ## Remaining mathematical producers
 
 1. Complete root integration of the newest checked producers.
@@ -265,7 +289,8 @@ the full actual special-linear orbit norm bound are checked. Zero is excluded
 from the Euclidean orbit closure. The first unmet conclusion is its algebraic
 closure comparison, followed by positive-degree invariant existence.
 Consumer: `lem:balanced-plucker`, still unproved. The source-backed orbit route
-is mathematical blueprint only, with all formal dependencies still open.
+has a complete reviewed mathematical blueprint; its constructibility,
+Euclidean/Zariski comparison, density and averaging conclusions remain unproved.
 Honesty reviewer: used; actual projection and both balance equations are
 load-bearing, with no hidden semistability assumption. Its request for explicit
 ambient context in the Gram-variation blueprint has been incorporated.
