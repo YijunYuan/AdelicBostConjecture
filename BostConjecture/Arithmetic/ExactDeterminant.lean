@@ -54,7 +54,8 @@ lemma exactEquivOfSection_eq (s s' : N →ₗ[R] P)
     (LinearMap.congr_fun (h.splitSurjectiveEquiv hi ⟨s, hs⟩).2.2 x).symm
   have ht (y : N) : i (t y) + s y = s' y := by
     have hy := e.apply_symm_apply (s' y)
-    rw [he, hq, LinearMap.congr_fun hs' y] at hy
+    have hqs : q (s' y) = y := LinearMap.congr_fun hs' y
+    rw [he, hq, hqs] at hy
     exact hy
   have hc : i.coprod s' = (i.coprod s).comp (upperShear t) := by
     apply LinearMap.ext
@@ -79,13 +80,15 @@ lemma exactEquiv_eq_of_section (hq : Function.Surjective q)
     exactEquiv i q h hi hq = exactEquivOfSection i q h hi s hs :=
   exactEquivOfSection_eq i q h hi _ _ _ _
 
+omit [Module.Projective R M] in
+include h hi in
 /-- Rank additivity of a finite projective exact sequence over a domain. -/
 lemma finrank_exact (hq : Function.Surjective q) :
     Module.finrank R P = Module.finrank R M + Module.finrank R N := by
   obtain ⟨s, hs⟩ := q.exists_rightInverse_of_surjective (LinearMap.range_eq_top.mpr hq)
   let e := (h.splitSurjectiveEquiv hi ⟨s, hs⟩).1
   let F := FractionRing R
-  rw [← (TensorProduct.isBaseChange R P F).finrank_eq, (e.baseChange F).finrank_eq,
+  rw [← (TensorProduct.isBaseChange R P F).finrank_eq, (e.baseChange R F P (M × N)).finrank_eq,
     (TensorProduct.prodRight R F F M N).finrank_eq, Module.finrank_prod,
     (TensorProduct.isBaseChange R M F).finrank_eq,
     (TensorProduct.isBaseChange R N F).finrank_eq]

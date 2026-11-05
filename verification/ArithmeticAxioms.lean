@@ -1,4 +1,6 @@
 import BostConjecture.Arithmetic.QuotientMetric
+import BostConjecture.Arithmetic.IntegralDeterminantProduct
+import BostConjecture.Arithmetic.IntegralExactDeterminant
 import BostConjecture.Arithmetic.TensorMetric
 import BostConjecture.Arithmetic.HermitianLine
 import BostConjecture.Arithmetic.DeterminantLine
@@ -193,3 +195,25 @@ import BostConjecture.Arithmetic.DeterminantProduct
 #print axioms exteriorPower.prodMap_baseChange_section
 #print axioms exteriorPower.prodMap_coordinates
 #print axioms exteriorPower.prodMap_bijective_of_basis
+
+#print axioms exteriorPower.prodMap_baseChange_bijective
+#print axioms LinearMap.bijective_of_baseChange_maximal
+#print axioms exteriorPower.prodMap_bijective
+#print axioms exteriorPower.prodEquiv
+#print axioms exteriorPower.prodMap_bijective_generic
+#print axioms BostConjecture.Arithmetic.generic_finrank_prod
+#print axioms BostConjecture.Arithmetic.determinantProdEquiv
+#print axioms exteriorPower.prodBasis_det_upperShear
+#print axioms exteriorPower.map_upperShear_top_of_basis
+#print axioms exteriorPower.map_baseChange_section
+#print axioms exteriorPower.map_upperShear_top
+#print axioms exteriorPower.exactEquivOfSection
+#print axioms exteriorPower.exactEquivOfSection_apply
+#print axioms exteriorPower.exactEquivOfSection_eq
+#print axioms exteriorPower.exactEquiv
+#print axioms exteriorPower.exactEquiv_eq_of_section
+#print axioms exteriorPower.finrank_exact
+#print axioms exteriorPower.exactEquiv_baseChange_section
+#print axioms BostConjecture.Arithmetic.generic_finrank_exact
+#print axioms BostConjecture.Arithmetic.determinantExactEquiv
+#print axioms BostConjecture.Arithmetic.determinantExactEquiv_apply_of_section

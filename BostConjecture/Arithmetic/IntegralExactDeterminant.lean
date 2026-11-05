@@ -28,6 +28,8 @@ variable {M N P : Type*} [AddCommGroup M] [Module (𝓞 K) M]
 variable (i : M →ₗ[𝓞 K] P) (q : P →ₗ[𝓞 K] N) (h : Function.Exact i q)
     (hi : Function.Injective i) (hq : Function.Surjective q)
 
+omit [Module.Projective (𝓞 K) M] in
+include h hi hq in
 /-- The arithmetic ranks in a projective exact sequence are additive. -/
 lemma generic_finrank_exact :
     Module.finrank K (K ⊗[𝓞 K] P) =
