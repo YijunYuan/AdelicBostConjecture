@@ -319,12 +319,93 @@ $t$, a contradiction. No division is used, so the argument holds
 over every ring.
 \end{proof}
 
+\begin{lemma}[Garnir cancellation]
+\label{lem:garnir-cancellation}\uses{lem:integral-specht-span}
+\source{bost-specht-manuscript:page-0004}\lean{BostConjecture.Specht.sum_sign_smul_polytabloidInt_relabel_eq_zero,BostConjecture.Specht.polytabloidRat_mem_span_relabel}\leanok
+Let $t$ enumerate a Young diagram and let $X$ be a set of labels.
+Suppose every label of $X$ lies in a column of length at most $r$,
+and $|X|>r$. Write $G_X$ for the permutations supported on $X$.
+Then
+\[
+ \sum_{\sigma\in G_X}\operatorname{sgn}(\sigma)e_{\sigma t}=0.
+\]
+Moreover, $e_t$ belongs to the rational span of those
+$e_{\sigma t}$ with $\sigma\in G_X\setminus C_t$.
+\end{lemma}
+\begin{proof}
+Expand $e_t$ as its signed sum of row words obtained by column
+permutations. In each such word the labels of $X$ occupy at most
+$r$ rows, so two distinct labels of $X$ have the same row.
+Their transposition $\tau$ fixes this word. Pairing $\sigma$ with
+$\sigma\tau$ in its antisymmetrization over $G_X$ cancels the
+terms, since the signs are opposite. Linearity gives the identity.
+If $\sigma\in C_t$, reindexing the column sum gives
+$e_{\sigma t}=\operatorname{sgn}(\sigma)e_t$. Thus the internal
+terms contribute $Ne_t$, where $N=|G_X\cap C_t|\geq1$.
+Moving the remaining terms to the other side and dividing by
+$N$ proves the rational span assertion.
+\end{proof}
+
+\begin{lemma}[Garnir set geometry]
+\label{lem:garnir-set}\uses{def:standard-tableau}
+\source{bost-specht-manuscript:page-0004}\lean{BostConjecture.Specht.card_garnirSet,BostConjecture.Specht.colLen_colIndex_le_colLen_of_mem_garnirSet,BostConjecture.Specht.mem_columnGroup_iff_image_garnirSetLeft_eq}\leanok
+For a cell $(i,j+1)$, let $A$ consist of the labels in column $j$
+weakly below row $i$, and $B$ of those in column $j+1$ weakly above
+row $i$. Then $X=A\sqcup B$ has $\mu'_j+1$ labels, all in columns
+of length at most $\mu'_j$. A permutation supported on $X$
+preserves columns exactly when it preserves $A$.
+\end{lemma}
+\begin{proof}
+The two cardinalities are $\mu'_j-i$ and $i+1$; both columns
+reach row $i$. Columns shorten to the right. On $X$, the column
+is $j$ on $A$ and $j+1$ on $B$, so preserving columns is equivalent
+to preserving $A$. \end{proof}
+
 \begin{theorem}[Rational standard-polytabloid spanning]
-\label{lem:rational-standard-spanning}\uses{def:rectangular-specht,def:standard-tableau}
-\source{bost-specht-manuscript:page-0004}\notready
-Every rectangular polytabloid is a rational linear combination of
-standard polytabloids of the same shape.
+\label{lem:rational-standard-spanning}
+\uses{def:standard-tableau,lem:garnir-cancellation,lem:garnir-set}
+\source{bost-specht-manuscript:page-0004}\lean{BostConjecture.Specht.polytabloidRat_mem_span_standard}\leanok
+Every polytabloid of a Young diagram is a rational linear combination
+of standard polytabloids of the same shape.
 \end{theorem}
+\begin{proof}
+Write $R(t)=\sum_{\ell=0}^{n-1}\operatorname{row}_t(\ell)\ell$
+and $W(t)=(n^3+1)C(t)+R(t)$. Both moments are at most $n^3$,
+since there are $n$ labels and each factor is at most $n$.
+Consequently $W$ is bounded above by $(n^3+1)n^3+n^3$.
+Induct on this bound minus $W(t)$.
+If a column is not increasing, swap a larger label $x$ in row
+$i$ with a smaller label $y$ in row $i'>i$ of that column.
+This preserves $C$ and increases $R$ by $(i'-i)(x-y)>0$.
+The polytabloid changes only by sign, so induction applies.
+Otherwise the columns increase. If a row fails to increase, some
+adjacent pair in that row is inverted: otherwise transitivity of
+all adjacent inequalities orders the row. Apply Garnir cancellation
+at this pair. It expresses $e_t$ as a rational combination of
+polytabloids indexed by permutations of $X=A\sqcup B$ which fail
+to preserve $A$. Column-standardness and the chosen inversion
+imply that every label of $A$ exceeds every label of $B$.
+Under relabeling, $C(\sigma t)=\sum_\ell
+\operatorname{col}_t(\ell)\sigma(\ell)$. The contribution outside
+$X$ is fixed, and that on $X$ is
+$j\sum_{\ell\in X}\sigma(\ell)+\sum_{\ell\in B}\sigma(\ell)$.
+The first sum is fixed. If $A$ is not preserved, neither is $B$.
+The equally sized sets $\sigma(B)\setminus B$ and
+$B\setminus\sigma(B)$ are nonempty; the first lies in $A$ and
+its labels exceed every label in the second. Their sums are
+therefore strictly ordered, which proves the assertion.
+Their column moments therefore strictly increase. Each such
+increase raises $W$, even if the row moment drops by as much as
+$n^3$. Induction again applies. If neither case occurs, $t$ is
+standard and its polytabloid is already a generator.
+\end{proof}
+
+\begin{remark}
+This rational straightening proof follows the Garnir and bounded-moment
+argument in the pinned TauCeti formalization. It uses the existing word
+realization and divides only by the positive integer counting internal
+permutations. It makes no assertion of integral standard spanning.
+\end{remark}
 
 \begin{theorem}[Rational standard-polytabloid basis]
 \label{lem:rational-standard-basis}

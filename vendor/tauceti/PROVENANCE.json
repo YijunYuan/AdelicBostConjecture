@@ -149,7 +149,7 @@
     "No TauCeti Lake dependency or separate Lean library was introduced."
   ],
   "implementation_note": "The short coordinate determinant proof is retained because it directly bridges the two existing Mathlib APIs; using LinearMap.normDet_sq_eq_det_gram would require an additional basis-to-endomorphism construction and determinant bridge.",
-  "intended_consumer": "The integral Specht lattice: the standard-polytabloid Gram determinant computes a full sublattice covolume, and lattice inclusion bounds the integral orbit lattice covolume. This consumer is not yet implemented.",
+  "intended_consumer": "Integral Specht lattice: covolume_sq_eq_integer_gram and covolume_sq_le_det_gram use the copied Gram and inclusion results; standard real basis follows rational straightening.",
   "verification": {
     "build_target": "BostConjecture.Lattice.Covolume",
     "transitive_axioms": [
@@ -157,5 +157,37 @@
       "Classical.choice",
       "Quot.sound"
     ]
+  },
+  "specht_straightening": {
+    "source_files": [
+      {
+        "path": "TauCeti/RepresentationTheory/Symmetric/Specht/Garnir.lean",
+        "sha256": "7c52af5ceff8adac75adbd89997b3142d8b4711ea20aa025b20892081f61ce17"
+      },
+      {
+        "path": "TauCeti/RepresentationTheory/Symmetric/Specht/Straightening.lean",
+        "sha256": "ae260b0b9802988ba936c3399be040e8bf659a977663b5bd13ee5cdf94dc78fb"
+      },
+      {
+        "path": "TauCeti/Combinatorics/Young/Diagram.lean",
+        "sha256": "9b39863c01abc682ed15b5cbf89ab1c57c6c17715252d9b1edb442d90f8b7f29"
+      },
+      {
+        "path": "TauCeti/Algebra/Order/BigOperators/Sum/LtSum.lean",
+        "sha256": "a14136d443981de8dc127c53331c434bed3c5c5a70bad9b40b41ad1284e4a2e8"
+      },
+      {
+        "path": "TauCeti/Algebra/BigOperators/Finset/Swap.lean",
+        "sha256": "5b46b09474adcec8d644b6ca9e4e993de9bf1c2142455871e301e4ebb7db444d"
+      }
+    ],
+    "local_files": [
+      "BostConjecture/Specht/Garnir.lean",
+      "BostConjecture/Specht/GarnirSets.lean",
+      "BostConjecture/Specht/Straightening.lean"
+    ],
+    "modifications": "Selective adaptation to the existing OAI enumerating tableau and integer word model; direct integer swap-involution cancellation; coefficientwise rational cast; bounded-moment straightening. See CONTRIBUTIONS.md for declaration map.",
+    "consumer": "BostConjecture.Specht.polytabloidRat_mem_span_standard",
+    "boundary": "Rational spanning only; no integral standard basis or seminormal formula."
   }
 }

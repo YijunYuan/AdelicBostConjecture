@@ -60,8 +60,8 @@ changes. The installed mathlib revision is pinned in `lake-manifest.json`.
   `Norm`, `Rectangle`, `Standard`, and `OneRow` modules add the rectangular
   word realization, initial norm, standard-family independence, and one-row
   covolume calculation. `Standard` uses an original lexicographic proof;
-  no TauCeti straightening code has been copied. Still required:
-  rational standard spanning and determinant-isotypic bridges; for
+  the separately attributed TauCeti adaptation below supplies rational
+  straightening. Still required: determinant-isotypic bridges; for
   compactness, restriction of scalars, arithmetic covolume/systole formulas,
   persistence of the integer-ring action, and degree continuity.
 
@@ -111,6 +111,40 @@ changes. The installed mathlib revision is pinned in `lake-manifest.json`.
   computes its covolume. Rational standard spanning and the seminormal Gram
   formula remain open. No TauCeti Lake
   dependency was added.
+
+## Rational Garnir straightening — The Tau Ceti contributors
+
+- Repository: <https://github.com/TauCetiProject/TauCeti>, revision
+  `b3b0334ab9203d9faee4b2f34cd75161463ecdd0`; Apache-2.0, with the original
+  license at `vendor/tauceti/LICENSE` and notices in each adapted file.
+- `TauCeti/RepresentationTheory/Symmetric/Specht/Garnir.lean`: adapted
+  `exists_ne_rowIndex_relabel_eq`, the signed Garnir relation, Garnir set
+  definitions, cardinality and internal-column-permutation lemmas to
+  `BostConjecture/Specht/{Garnir,GarnirSets}.lean`.
+- `TauCeti/RepresentationTheory/Symmetric/Specht/Straightening.lean`: adapted
+  the collected internal multiplicity and rational span lemmas, bounded
+  straightening weight, strict-progress lemmas and
+  `polytabloid_mem_span_polytabloid_standard` to `Garnir.lean` and
+  `Straightening.lean`.
+- Selected helpers only: `Combinatorics/Young/Diagram.lean`'s
+  `card_filter_fst_lt_filter_snd_eq`; `Algebra/BigOperators/Finset/Swap.lean`'s
+  `sum_swap_apply_add`; `Algebra/Order/BigOperators/Sum/LtSum.lean`'s
+  `sum_lt_sum_of_forall_lt` and `sum_lt_sum_image_sdiff` (all paths under
+  `TauCeti/`). Helpers are private within their consuming modules.
+- Modifications: port to Lean 4.35; use existing `OAI.Saxl.Tableau n μ`
+  and integral word polytabloids; remove the categorical permutation module
+  and all its imports; prove cancellation directly over the integers by a
+  finite-sum involution; extend coefficientwise to rationals; use the existing
+  standardness predicate and prove the label/cardinality bridge. No alternate
+  tableau, representation or lattice was introduced.
+- Consumer: `BostConjecture.Specht.polytabloidRat_mem_span_standard` supplies
+  the missing rational spanning theorem for the standard real basis and its
+  Gram/covolume comparison. Division by a positive internal multiplicity
+  occurs over the rationals: no integral basis claim is made.
+- Only these needed proof pieces are adapted, with their local dependency cone
+  checked. Source hashes and target modules are recorded in
+  `vendor/tauceti/PROVENANCE.json`; transitive axiom probes are recorded in
+  `verification/SpechtAxioms.lean` and results in `verification/RESULTS.md`.
 
 ## Verification
 
