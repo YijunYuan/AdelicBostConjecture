@@ -303,8 +303,10 @@ source anchors; both requested precision edits were incorporated.
 The interface confirmed by GEOM in `I-0047/C-0010` uses existing `Representation`,
 `SpecialLinearGroup`, `exteriorPower`, and `SymmetricAlgebra`; it creates no
 second polynomial-function representation. Below, `K` is a field, `U`, `W`
-and `X` are finite-dimensional `K`-spaces, and `G` is a group. Polynomial, PolynomialAction and Semistability below are checked;
-PluckerAction and Coaction remain design proposals.
+and `X` are finite-dimensional `K`-spaces, and `G` is a group. Polynomial,
+PolynomialAction, Semistability and the actual PluckerAction below are checked.
+Algebraicity of that action and Coaction remain unproved, as does the
+Euclidean-to-algebraic orbit-closure comparison.
 
 - `InvariantTheory/PluckerAction.lean`:
   `pluckerRepresentation K U W s : Representation K
@@ -363,3 +365,23 @@ rational-point detection over the needed
 infinite fields, and scalar-extension compatibility of these maps. Flatness
 of a field extension then gives kernel base change; the coordinate coaction's
 codomain need not itself be finite-dimensional.
+
+## Next-session handoff
+
+Parent `I-0069` requests a fresh LSP session after this analytic checkpoint;
+the task remains open and there is no unfinished owned Lean draft. Begin
+with the concrete algebraic action and its coordinate coaction: express the
+matrix coefficients of the checked tensor/exterior action as polynomials,
+then identify forward pullback with the agreed coaction. GEOM is proving
+polynomial evaluation extensionality and the Plücker pullback/equivariance
+consumer in `Geometry/PluckerPolynomial.lean` (`I-0068`); reuse those results.
+Keep the existing canonical polynomial definitions unchanged.
+
+The next source-facing conclusion is Euclidean/Zariski closure comparison
+for this algebraic orbit. Implement the reviewed constructible-image and
+finite-normalization density proof in the blueprint, matching each algebraic
+ingredient to checked Mathlib results. After that, implement special-unitary
+density and finite-degree Haar averaging, then extract a nonzero
+positive-degree homogeneous invariant. These conclusions are all required;
+the checked norm bound alone does not prove Lemma 7.2. The outstanding root
+handoff is `I-0060` and stays open until SPECHT confirms the newest imports.
