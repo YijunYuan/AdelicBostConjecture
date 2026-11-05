@@ -840,33 +840,49 @@ thus it preserves the displayed support condition and $F_r$.
 
 \begin{lemma}[Successive branching quotients]
 \label{lem:specht-branching-quotient}
-\uses{lem:specht-last-row-filtration,lem:polytabloid-prefix-restriction,lem:real-standard-basis}\notready
-Suppose row $r$ ends in a removable corner of $\mu$, and let $\nu$
-be the diagram obtained by deleting it. Let $F_{<r}$ be the span of
+\uses{lem:specht-last-row-filtration,lem:polytabloid-prefix-restriction,lem:real-standard-basis}
+\lean{BostConjecture.Specht.branchingMap_surjective,BostConjecture.Specht.ker_branchingMap,BostConjecture.Specht.branchingQuotientEquiv,BostConjecture.Specht.branchingQuotientEquiv_mk_apply,BostConjecture.Specht.branchingQuotientEquiv_mk_action}\leanok
+Let $t$ be a standard tableau of $\mu$ on $n+1$ labels, let $r$ be
+the row of its largest label, and let $\nu=\lambda_t^{(n)}$ be its
+prefix diagram. The removed box is a removable corner. Let $F_{<r}$ be the span of
 standard polytabloids with largest-label row strictly less than $r$.
 Restriction to words assigning the largest label to row $r$ induces
 an $\mathfrak S_n$-equivariant isomorphism
 \[
  F_r/F_{<r}\simeq S^\nu_{\mathbb R}.
 \]
-It sends the class of each standard polytabloid with largest-label
-row $r$ to the polytabloid obtained by deleting that label.
+On representatives it restricts word coefficients by assigning the
+last label row $r$. In particular it sends the class of $e_t$ to
+the polytabloid obtained by deleting its largest label.
 \end{lemma}
 \begin{proof}
-The largest label is at the end of its row, because row labels
-increase, and at the bottom of its column, because column labels
-increase. Thus its position is the unique removable corner in that
-row. Deleting it gives a standard tableau of $\nu$. Conversely,
-adjoining the largest label at this corner to any standard tableau
-of $\nu$ gives a standard tableau of $\mu$. These operations are inverse.
-The support bound annihilates all generators with largest-label row
-less than $r$. Frozen-tail restriction sends every remaining generator
-to the associated smaller polytabloid. They form a basis of the
-smaller Specht space. Therefore the kernel on $F_r$ is exactly
-$F_{<r}$, and the image is the whole smaller space. The support
-filtration is invariant, and restriction commutes with the position
-action on the first $n$ labels, proving equivariance of the induced
-isomorphism.
+Let $u$ be the prefix tableau of $t$. The largest label lies at the right end of
+its row and bottom of its column, so its box is the specified corner.
+Two row-standard tableaux with largest-label row $r$ have the same
+last box. Consequently they differ by a permutation fixing the last
+label. Frozen-tail restriction intertwines this permutation with its
+restriction to the prefix. Thus every standard generator in row $r$
+maps into $S^\nu_{\mathbb R}$, while every generator in a smaller row
+maps to zero by the support bound. This proves the image inclusion.
+Conversely, every permutation translate of $e_u$ is the restriction
+of the same prefix permutation applied to $e_t$. These lifts remain
+in $F_r$ by invariance. The translates span the smaller Specht space,
+so restriction is onto.
+
+For the kernel, suppose $x\in F_r$ has zero restriction. For each
+standard tableau $v$ in row $r$, its leading row word is an extension
+of a prefix word: use the prefix permutation carrying $t$ to $v$.
+Thus $x(w_v)=0$. For standard tableaux in larger rows this evaluation
+also vanishes by the support condition defining $F_r$. If any
+standard-basis coefficient in row at least $r$ were nonzero, choose
+one with lexicographically least leading word. Evaluating there,
+the support bound eliminates the coefficients in earlier rows, and
+leading-word triangularity eliminates all other nonzero coefficients
+in rows at least $r$. The result is the chosen coefficient, a
+contradiction. Hence only rows strictly less than $r$ occur, proving
+that the kernel is $F_{<r}$. The first isomorphism theorem now gives
+the asserted quotient isomorphism. Frozen-tail restriction gives
+its formula on generators and its equivariance.
 \end{proof}
 
 \begin{lemma}[Colexicographic triangular Murphy action]

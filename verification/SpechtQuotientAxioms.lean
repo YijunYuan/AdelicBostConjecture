@@ -1,0 +1,27 @@
+import BostConjecture.Specht.Quotient
+
+#print axioms BostConjecture.Specht.standardRealBasis_repr_eq_zero_of_leading_zero
+#print axioms BostConjecture.Specht.RowStandard.last_col_eq_of_row_eq
+#print axioms BostConjecture.Specht.exists_prefixPerm_relabel
+#print axioms BostConjecture.Specht.prefixSliceReal
+#print axioms BostConjecture.Specht.prefixSliceReal_realCast
+#print axioms BostConjecture.Specht.prefixSliceReal_polytabloid
+#print axioms BostConjecture.Specht.prefixSliceReal_wordRepReal
+#print axioms BostConjecture.Specht.extendPrefixWord_rowWord
+#print axioms BostConjecture.Specht.exists_extendPrefixWord_eq_rowWord
+#print axioms BostConjecture.Specht.prefixSliceReal_standardRealBasis_eq_zero
+#print axioms BostConjecture.Specht.prefixSliceReal_standardRealBasis_mem
+#print axioms BostConjecture.Specht.prefixSliceReal_mem_realSpan
+#print axioms BostConjecture.Specht.branchingMap
+#print axioms BostConjecture.Specht.branchingMap_lift_orbit
+#print axioms BostConjecture.Specht.branchingMap_surjective
+#print axioms BostConjecture.Specht.lastRowSubspaceLT
+#print axioms BostConjecture.Specht.lastRowSubspaceLT_le
+#print axioms BostConjecture.Specht.prefixSliceReal_eq_zero_of_mem_lastRowSubspaceLT
+#print axioms BostConjecture.Specht.branchingMap_eq_zero_iff
+#print axioms BostConjecture.Specht.ker_branchingMap
+#print axioms BostConjecture.Specht.branchingQuotientEquiv
+#print axioms BostConjecture.Specht.branchingQuotientEquiv_mk
+#print axioms BostConjecture.Specht.branchingQuotientEquiv_mk_apply
+#print axioms BostConjecture.Specht.branchingMap_equivariant
+#print axioms BostConjecture.Specht.branchingQuotientEquiv_mk_action

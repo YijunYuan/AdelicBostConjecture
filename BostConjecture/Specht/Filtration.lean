@@ -20,18 +20,19 @@ open OAI.Saxl
 
 variable {n : ℕ} {μ : YoungDiagram}
 
-/-- A standard coefficient outside a last-letter support cutoff must vanish. -/
-theorem standardRealBasis_repr_eq_zero_of_last_support (t : Tableau (n + 1) μ)
+/-- Vanishing at leading words above a row cutoff forces the corresponding basis coefficients to vanish. -/
+theorem standardRealBasis_repr_eq_zero_of_leading_zero (t : Tableau (n + 1) μ)
     (x : realSpan t) (r : ℕ)
-    (hx : ∀ w : Fin (n + 1) → Fin (μ.colLen 0), r < (w (Fin.last n)).val → x.val w = 0)
+    (hx : ∀ U : {u : Tableau (n + 1) μ // IsStandard u},
+      r ≤ (rowWord U.val (Fin.last n)).val → x.val (rowWord U.val) = 0)
     (T : {u : Tableau (n + 1) μ // IsStandard u})
-    (hT : r < (rowWord T.val (Fin.last n)).val) :
+    (hT : r ≤ (rowWord T.val (Fin.last n)).val) :
     (standardRealBasis t).repr x T = 0 := by
   classical
   let c := (standardRealBasis t).repr x
   by_contra hcT
   let s := Finset.univ.filter fun U : {u : Tableau (n + 1) μ // IsStandard u} =>
-    r < (rowWord U.val (Fin.last n)).val ∧ c U ≠ 0
+    r ≤ (rowWord U.val (Fin.last n)).val ∧ c U ≠ 0
   have hs : s.Nonempty := ⟨T, Finset.mem_filter.mpr ⟨Finset.mem_univ _, hT, hcT⟩⟩
   obtain ⟨U, hU, hmin⟩ := Finset.exists_min_image s (fun U => toLex (rowWord U.val)) hs
   have hU' := (Finset.mem_filter.mp hU).2
@@ -42,7 +43,7 @@ theorem standardRealBasis_repr_eq_zero_of_last_support (t : Tableau (n + 1) μ)
     have hpol : polytabloidInt V.val (rowWord U.val) = 0 := by
       by_contra hpol
       have hrow := V.property.2.last_row_le_of_polytabloidInt_ne_zero hpol
-      have hrV : r < (rowWord V.val (Fin.last n)).val := hU'.1.trans_le hrow
+      have hrV : r ≤ (rowWord V.val (Fin.last n)).val := hU'.1.trans hrow
       have hle := V.property.2.rowWord_le_of_polytabloid_ne_zero hpol
       have hrev := hmin V (Finset.mem_filter.mpr ⟨Finset.mem_univ _, hrV, hcV⟩)
       have hw : rowWord V.val = rowWord U.val := congrArg ofLex (le_antisymm hle hrev)
@@ -56,6 +57,16 @@ theorem standardRealBasis_repr_eq_zero_of_last_support (t : Tableau (n + 1) μ)
   rw [Finset.sum_eq_single U (fun V _ hVU => hzero V hVU) (by simp),
     polytabloidInt_rowWord, Int.cast_one, mul_one, hx _ hU'.1] at he
   exact hU'.2 he
+
+/-- A standard coefficient outside a last-letter support cutoff must vanish. -/
+theorem standardRealBasis_repr_eq_zero_of_last_support (t : Tableau (n + 1) μ)
+    (x : realSpan t) (r : ℕ)
+    (hx : ∀ w : Fin (n + 1) → Fin (μ.colLen 0), r < (w (Fin.last n)).val → x.val w = 0)
+    (T : {u : Tableau (n + 1) μ // IsStandard u})
+    (hT : r < (rowWord T.val (Fin.last n)).val) :
+    (standardRealBasis t).repr x T = 0 :=
+  standardRealBasis_repr_eq_zero_of_leading_zero t x (r + 1)
+    (fun U hU => hx (rowWord U.val) hU) T hT
 
 /-- The standard subspace cut out by the row of the largest label. -/
 def lastRowSubspace (t : Tableau (n + 1) μ) (r : ℕ) : Submodule ℝ (realSpan t) :=

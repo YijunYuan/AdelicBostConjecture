@@ -30,8 +30,10 @@ content increments. `Branching.lean` proves frozen-tail integral restriction,
 prefix equivariance, lifts of smaller lattice vectors and the sliced central
 scalar. `Filtration.lean` identifies the standard-basis largest-label
 filtration with the ambient word-support filtration and proves its stability.
-Individual content eigenvalues still require identification of the successive
-branching quotients and the resulting colexicographic triangularity. The standard Gram bound is now
+`Quotient.lean` identifies the successive branching quotient at the last
+box of any standard tableau with its smaller real Specht space, by an actual
+surjective coefficient restriction and an exact kernel calculation. Individual
+content eigenvalues still require the resulting colexicographic triangularity. The standard Gram bound is now
 unconditional; its explicit seminormal evaluation, the invariant-space identification,
 and the general covolume asymptotic remain open.
 
@@ -46,10 +48,9 @@ The following producers still need complete source-backed mathematical proofs:
   Its complex orbit representation now has an explicit integral model and
   tensor-product scalar-extension equivalence. Characteristic-zero descent
   and the invariant-space identification remain open.
-- `lem:specht-branching-quotient` is the first unmet Gram producer: identify
-  the successive largest-label filtration quotient with the smaller Specht
-  module, using the proved restriction and support filtration. The written
-  induction then gives `lem:prefix-content-triangular` in the sufficient
+- `lem:specht-branching-quotient` is now proved for the last box of each
+  standard tableau. The first unmet Gram producer is the induction giving
+  `lem:prefix-content-triangular` in the sufficient
   colexicographic total order; it no longer requires the stronger partial-order
   dominance statement. `lem:monic-seminormal` then requires the spectral identification
   and the resulting correctly normalized adjacent-transposition formula.
