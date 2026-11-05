@@ -1006,7 +1006,8 @@ $r\otimes s$ to $rs$. Hence it is bijective, including empty bases.
 
 \begin{lemma}[Determinant of a direct sum]
 \label{lem:determinant-product}
-\uses{lem:determinant-product-free,lem:integral-determinant-line}\notready
+\uses{lem:determinant-product-free,lem:integral-determinant-line}
+\lean{exteriorPower.prodMap_bijective,exteriorPower.prodMap_bijective_generic,BostConjecture.Arithmetic.generic_finrank_prod,BostConjecture.Arithmetic.determinantProdEquiv}\leanok
 Let $R$ be a domain with fraction field $F$, and let $P,Q$ be finite
 projective $R$-modules of generic ranks $a,b$. Then $W_{a,b}$ is an
 isomorphism $\det P\otimes_R\det Q\simeq\det(P\oplus Q)$, using
@@ -1027,7 +1028,8 @@ cokernel. This proves the assertion without choosing global bases.
 \end{proof}
 
 \begin{lemma}[Shears act trivially on the determinant]
-\label{lem:determinant-shear}\uses{lem:determinant-product-free}\notready
+\label{lem:determinant-shear}\uses{lem:determinant-product-free}
+\lean{exteriorPower.prodBasis_det_upperShear,exteriorPower.map_upperShear_top_of_basis}\leanok
 Let $P,Q$ have finite bases of lengths $a,c$ over a commutative ring $R$,
 and let $t:Q\to P$ be linear. The automorphism
 $u_t(p,q)=(p+t(q),q)$ acts as the identity on
@@ -1045,7 +1047,8 @@ vector. This argument includes empty bases.
 
 \begin{lemma}[Projective shears act trivially on the determinant]
 \label{lem:projective-determinant-shear}
-\uses{lem:determinant-shear,lem:integral-determinant-line}\notready
+\uses{lem:determinant-shear,lem:integral-determinant-line}
+\lean{exteriorPower.map_upperShear_top}\leanok
 Let $R$ be a domain and $P,Q$ finite projective $R$-modules of ranks
 $a,c$. For every linear map $t:Q\to P$, $u_t(p,q)=(p+t(q),q)$ acts
 trivially on $\bigwedge^{a+c}(P\oplus Q)$.
@@ -1064,7 +1067,8 @@ implies the claimed integral equality.
 
 \begin{lemma}[Integral determinant of an exact sequence]
 \label{lem:exact-determinant-algebra}
-\uses{lem:determinant-product,lem:projective-determinant-shear}\notready
+\uses{lem:determinant-product,lem:projective-determinant-shear}
+\lean{exteriorPower.exactEquivOfSection_eq,exteriorPower.exactEquiv,exteriorPower.finrank_exact,BostConjecture.Arithmetic.generic_finrank_exact,BostConjecture.Arithmetic.determinantExactEquiv,BostConjecture.Arithmetic.determinantExactEquiv_apply_of_section}\leanok
 Let $R$ be a domain with fraction field $F$, and let
 $0\to A\xrightarrow{i}B\xrightarrow{q}C\to0$ be an exact sequence
 of finite projective $R$-modules. Suppose $A,C$ have generic ranks $a,c$.
@@ -1096,7 +1100,8 @@ Both assertions include zero ranks.
 
 \begin{lemma}[Scalar extension formula for the exact determinant]
 \label{lem:exact-determinant-base-change}
-\uses{lem:exact-determinant-algebra,lem:exterior-product}\notready
+\uses{lem:exact-determinant-algebra,lem:exterior-product}
+\lean{exteriorPower.map_baseChange_section,exteriorPower.exactEquiv_baseChange_section}\leanok
 In the preceding setting, let $T$ be any commutative $R$-algebra and
 let $s:C\to B$ be any section of $q$. Write $D$ for the canonical exact
 determinant map. For $x\in\det A$ and $y\in\det C$, the exterior-power

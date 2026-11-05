@@ -633,3 +633,32 @@ I-0051. I-0050 now hands the new checked product and shear imports to SPECHT.
 The roadmap hygiene review recommends retaining its 14 active rows: ten
 are ancestors and four are the authorized active proof leaves; I-0017
 already records this intentional count warning.
+
+The exact algebra extension is now checked:
+- `ProjectiveDeterminantShear`: 3138-job check `74c96073a1f508bc`,
+  2026-11-05 21:57:55 UTC; explicit commit `c21586b`.
+- `IntegralExactDeterminant` and its actual `ExactDeterminant` dependency:
+  final warning-free 3478-job check `17cadcc289f092c1`, 22:08:26 UTC.
+  Explicit commit `9ed74af` records final repairs; earlier source was captured
+  by concurrent ledger snapshots, which are not evidence for unrelated drafts.
+- The 192-probe transitive audit `590174f2cda53d26` passed at22:08:52 UTC;
+  all axiom lists contain only `propext`, `Classical.choice`, `Quot.sound`.
+  Full output: run0004/session0012 `arithmetic-axioms-final.log`.
+- Earlier checks failed on a section-evaluation rewrite, proof-only binder
+  inclusion, and the explicit arguments of `LinearEquiv.baseChange`. These
+  were repaired before the passing checks. Unused projectivity warnings on
+  rank lemmas were removed. LSP kept stale-import diagnostics for the new
+  dependent files, so serialized kernel checks supplied the fallback evidence.
+- Honesty review approved exactly the five algebra nodes: projective product,
+  finite/projective shears, exact determinant, and original-section scalar
+  extension. The review prompted correction of a middle-rank premise into a
+  conclusion and a narrower base-change statement; both are resolved.
+- SPECHT reports earlier product/integral-product/finite-shear imports in the
+  warning-free 9205-job root check `975bdb23135a0d4a` at22:04:15 UTC. Later
+  exact-sequence imports were delivered through I-0050 for the next root batch.
+
+These producers support nonfree finite projective modules and zero ranks;
+no number-field restriction or assumed degree calculus was introduced.
+Remaining: the complex-fiber comparison with an arbitrary orthogonal section,
+the determinant isometry and exact degree identity, arbitrary-rank tensor
+identity, degree finiteness/supermodularity and the actual HN specialization.
