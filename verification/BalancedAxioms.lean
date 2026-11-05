@@ -1,4 +1,5 @@
 import BostConjecture.Balanced.ExponentialFlow
+import BostConjecture.Balanced.ExteriorMetric
 
 #print axioms BostConjecture.Balanced.trace_starProjection_comp
 #print axioms BostConjecture.Balanced.trace_starProjection_comp_eq_sum
@@ -19,3 +20,11 @@ import BostConjecture.Balanced.ExponentialFlow
 #print axioms BostConjecture.Balanced.hasDerivAt_exp_apply_zero
 #print axioms BostConjecture.Balanced.hasDerivAt_tensor_exp_zero
 #print axioms BostConjecture.Balanced.IsBalanced.hasDerivAt_re_gramDet_tensor_exp_zero
+#print axioms BostConjecture.Balanced.exteriorCore
+#print axioms BostConjecture.Balanced.exteriorCore_inner_ιMulti
+#print axioms BostConjecture.Balanced.exteriorCore_unique
+#print axioms BostConjecture.Balanced.exteriorCore_eq
+#print axioms BostConjecture.Balanced.exterior_inner_ιMulti
+#print axioms BostConjecture.Balanced.exterior_norm_sq_ιMulti
+#print axioms BostConjecture.Balanced.exteriorOrthonormalBasis
+#print axioms BostConjecture.Balanced.exteriorOrthonormalBasis_apply

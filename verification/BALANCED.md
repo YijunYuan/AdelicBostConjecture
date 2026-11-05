@@ -1,7 +1,8 @@
 # Balanced projections: verified boundary
 
 Manuscript Lemma 7.2 is **not yet formalized**. The accepted code proves the
-intrinsic partial-trace and actual exponential-frame Gram first-variation producers. It contains no
+intrinsic partial traces, actual exponential-frame Gram first variation, and
+the basis-independent complex Gram metric on the full exterior power. It contains no
 geometric-semistability theorem or assumed orbit criterion.
 
 ## Checked producers
@@ -12,6 +13,7 @@ geometric-semistability theorem or assumed orbit criterion.
 | `3361234` | `Balanced.ProjectionTrace` | Actual orthogonal-projection trace as an orthonormal frame sum; `IsBalanced` is exactly the two scalar partial-trace equations. |
 | `ee2abe7` | `Balanced.GramDerivative` | Determinant derivative at the identity, complex and real Gram variation, and `IsBalanced.hasDerivAt_re_gramDet_zero`. |
 | `5e76175` | `Balanced.ExponentialFlow` | Differentiation of the actual tensor exponential frame and `IsBalanced.hasDerivAt_re_gramDet_tensor_exp_zero`. |
+| `497b5b1` (automatic cross-lane snapshot) | `Balanced.ExteriorMetric` | Full complex exterior Gram metric, uniqueness/basis independence, Gram norm formula and orthonormal exterior basis. |
 
 The exponential consumer constructs the actual frame rather than assuming
 its derivative. It needs no Hermitian hypothesis for this first-variation
@@ -46,10 +48,51 @@ No unguarded build was used.
 Root integration was handed to SPECHT in `I-0049`; it is pending in this
 checkpoint and is not implied by the scoped builds.
 
+## Current exterior-metric checkpoint
+
+Run `0006`, session `0004-horizon-BOST-BALANCED` checked
+`BostConjecture.Balanced.ExteriorMetric` with the explicit-root serialized
+command: **2,841 jobs, warning-free**, 115.8s including setup. The updated
+`verification/BalancedAxioms.lean` kernel check passed **27 probes** in 2.6s;
+all report only `propext`, `Classical.choice`, and `Quot.sound`.
+Guarded LSP diagnostics are clear for the metric and its new Plücker norm
+consumer. The latter's kernel check is pending at this checkpoint.
+
+Independent `honesty-reviewer` accepted the actual exterior object, Gram
+formula, spanning uniqueness, degree-zero/over-rank cases, instance pattern,
+and substantive Plücker norm consumer. No completion of Lemma 7.2 follows.
+The read-only reviewer had no working LSP; its independent stdin probe was
+stopped without results, and acceptance uses the owner's serialized checks.
+
+Automatic GEOM integration `497b5b1` captured BALANCED's in-flight new files
+and blueprint edits, including a then-unfixed coercion in `PluckerNorm`.
+The scoped metric check verifies the accepted metric; the Plücker consumer's
+coercion is now fixed and awaits its own check. Root integration remains a
+separate SPECHT handoff. The automatic cross-lane snapshot was reported in
+`I-0049`; it is not evidence that every file in that commit built.
+
+The construction reuses mathlib at revision
+`56a005855ea17e0b0958f73ec801ae140b0a1679` (Apache-2.0), specifically
+`Module.Basis.exteriorPower` and its coordinate API from
+`Mathlib/LinearAlgebra/ExteriorPower/Basis.lean`, `pairingDual` and
+`pairingDual_ιMulti_ιMulti` from `ExteriorPower/Pairing.lean`, and Euclidean
+coordinate transport from `Analysis/InnerProductSpace/PiL2.lean`.
+These are imports, with no copied or modified mathlib source. The existing
+`Analysis/InnerProductSpace/ExteriorPower.lean` is **real-only**; it does not
+supply the required complex result. Project-local `Tensor.inner_ext_of_span`
+is reused for uniqueness and the isometry consumer. Shared attribution
+updates belong to SPECHT.
+
+The read-only board audit found the active-item warning intentional: BALANCED
+has one active analytic leaf; other active rows include ancestors and other
+proof lanes. No unrelated status was changed. Scratch dry-run found no stale
+candidates. Indexed Horizon searches stalled; guarded local library search
+and actual source inspection supplied the used declarations.
+
 ## Remaining mathematical producers
 
-1. The induced norm on the full exterior power and its Gram determinant
-   identity; spectral exponential expansion and convexity.
+1. Spectral exponential expansion and convexity for the now-constructed
+   complex exterior Gram norm; final acceptance of the actual norm-variation bridge.
 2. Determinant-one unitary/logarithm adapters for the already checked polar
    decomposition port (`TJHeeringa/mathlib4`, revision
    `41260205df493c627e1ac0e54812cfdeb6517fbc`, PR 45002).
@@ -58,10 +101,13 @@ checkpoint and is not implied by the scoped builds.
 4. Constructible images and comparison of complex/Zariski closures,
    special-unitary Zariski density, and finite-degree Haar averaging.
    The blueprint now supplies the mathematical arguments, but there is no
-   Lean implementation of these conclusions. Its curve-density proof uses
-   finite Noether normalization, finite-map dimension facts, the intersection
-   dimension theorem, finite normalization and nonsingularity of complex
-   normal curves, and analytic local coordinates. Each used external
+   Lean implementation of these conclusions. Its independently reviewed affine-density proof uses
+   finite Noether normalization, integrally closed polynomial rings and the
+   minimal-polynomial kernel theorem, lying over/Nullstellensatz, complex
+   polynomial factorization and Cauchy bounds, and finite-dimensional compactness.
+   Finite fibers are separated by an explicit polynomial. Root lifting uses
+   the actual minimal polynomial, not an arbitrary monic annihilator. This
+   replaces the earlier curve-normalization route without an analytic-chart dependency. Each used external
    conclusion must be proved or matched to checked library declarations.
 5. Exact Plücker semistability and its invariant-polynomial conclusion,
    followed by independent source/math/honesty review and root integration.
@@ -85,7 +131,7 @@ The parent granted the bounded reference extension in `I-0048`.
   printed page 201. Its vision-verified mathematical excerpt records
   Proposition 9.6, Theorem 9.7 and Aside 9.8; it is explicitly not a full-page
   transcription. The original aside states closure comparison without proof;
-  the blueprint expands the missing density argument using curves.
+  the blueprint supplies the density argument by finite normalization and root bounds.
 
 No source code was copied from these mathematical references. Their original
 copyright/license notices are retained. Reference retrieval and the visual
@@ -94,10 +140,11 @@ helper was prohibited. Read-only source/mathematical review was used.
 
 ## Epistemic checkpoint
 
-Claim class: **proved producers**. Before: the analytic proof had no Lean
-implementation. After: actual balance implies vanishing Gram first variation
-along the actual tensor exponential frame; the first analytic unmet producer
-is the full exterior norm and its spectral expansion.
+Claim class: **proved producers**. Before this session: actual tensor exponential-frame Gram stationarity was
+proved but the complex exterior metric was missing. After: the full complex
+exterior Gram metric and orthonormal basis are checked; the first analytic
+unmet producer is spectral expansion/convexity, with the actual norm-variation
+bridge awaiting its kernel check.
 Consumer: `lem:balanced-plucker`, still unproved. The source-backed orbit route
 is mathematical blueprint only, with all formal dependencies still open.
 Honesty reviewer: used; actual projection and both balance equations are
@@ -107,9 +154,9 @@ Its followup semantic audit of the exponential consumer also passed. The
 orbit/source reviewer verified the new mathematical proofs and original
 source anchors; both requested precision edits were incorporated.
 
-## Proposed invariant interface (not yet implemented)
+## Agreed invariant interface (not yet implemented)
 
-The next interface proposal for `I-0047` uses existing `Representation`,
+The interface confirmed by GEOM in `I-0047/C-0010` uses existing `Representation`,
 `SpecialLinearGroup`, `exteriorPower`, and `SymmetricAlgebra`; it creates no
 second polynomial-function representation. Below, `K` is a field, `U`, `W`
 and `X` are finite-dimensional `K`-spaces, and `G` is a group. The displayed
@@ -159,7 +206,7 @@ signatures are design proposals, not checked declarations.
 
 The use of bases is confined to constructing the coordinate coaction. The
 Plücker vector space, polynomial algebra, degree, evaluation and invariant
-submodule are intrinsic. GEOM confirmation and checked implementations remain
+submodule are intrinsic. GEOM confirmation is complete; checked implementations remain
 pending; polynomial laws were inspected but do not yet provide a finite-degree
 coefficient API in the pinned library.
 

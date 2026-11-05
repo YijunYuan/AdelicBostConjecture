@@ -275,7 +275,8 @@ now follows from balanced Gram variation.
 \end{proof}
 
 \begin{lemma}[The complex exterior Gram metric]
-\label{lem:balanced-exterior-metric}\notready
+\label{lem:balanced-exterior-metric}
+\lean{BostConjecture.Balanced.exteriorCore, BostConjecture.Balanced.exteriorCore_unique, BostConjecture.Balanced.exterior_inner_ιMulti, BostConjecture.Balanced.exteriorOrthonormalBasis, BostConjecture.Balanced.exteriorOrthonormalBasis_apply}\leanok
 For every finite-dimensional complex Hermitian space $E$ and integer $s\geq0$,
 there is a unique Hermitian inner product on $\bigwedge^s E$ such that
 \[
@@ -302,6 +303,29 @@ independence from $b$. Applying the formula to wedges of any orthonormal
 basis gives $1$ for equal index sets and $0$ otherwise. This also covers
 $s=0$ with the empty determinant equal to $1$, and $s>\dim E$ with
 the exterior power equal to zero.
+\end{proof}
+
+\begin{lemma}[Exterior isometries and Pl\"ucker norm variation]
+\label{lem:balanced-plucker-norm-variation}
+\uses{lem:balanced-exterior-metric,lem:balanced-exponential-variation}\notready
+Linear isometries of finite-dimensional complex Hermitian spaces induce
+isometries of their exterior powers. If $v_1,\ldots,v_s$ is an orthonormal
+basis of $S\subset U\otimes W$, its Pl\"ucker vector
+$z=v_1\wedge\cdots\wedge v_s$ has squared norm $1$.
+If $S$ is balanced and $H,J$ are traceless, then
+\[
+ \left.\frac{d}{dt}\left\|\bigwedge^s(e^{tH}\otimes e^{tJ})z\right\|^2
+ \right|_{t=0}=0.
+\]
+\end{lemma}
+\begin{proof}
+The Gram formula shows that an isometry preserves inner products of
+decomposable wedges. Sesquilinearity and the spanning property of wedges
+extend this equality to arbitrary exterior vectors. The Gram matrix of
+the orthonormal frame is the identity, whose determinant is $1$.
+Finally, the squared exterior norm of the transformed wedge equals the
+real Gram determinant of the transformed frame. Its derivative is zero
+by balanced tensor exponential first variation.
 \end{proof}
 
 \begin{lemma}[Convexity along Hermitian exponentials]
@@ -568,7 +592,7 @@ No finite-generation assertion for the invariant ring is needed.
 
 \begin{lemma}[Balanced projections give geometric semistability]
 \label{lem:balanced-plucker}
-\uses{def:geometric-semistability,lem:invariant-orbit-criterion,lem:balanced-exponential-variation,lem:balanced-exponential-convexity,lem:balanced-special-linear-polar}
+\uses{def:geometric-semistability,lem:invariant-orbit-criterion,lem:balanced-plucker-norm-variation,lem:balanced-exponential-convexity,lem:balanced-special-linear-polar}
 \source{bost-specht-manuscript:page-0012}\notready
 Let $S\subset U\otimes W$ be a nonzero subspace of complex Hermitian
 spaces of dimensions $m,n$, and put $s=\dim S$. If its orthogonal
