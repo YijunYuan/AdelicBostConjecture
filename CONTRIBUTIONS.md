@@ -580,6 +580,18 @@ tensor exponential identity to exclude zero from the Euclidean orbit
 closure. Exact declarations and audits are in `verification/BALANCED.md`.
 All Mathlib imports here use the pinned revision above without copying.
 
+`InvariantTheory.PluckerCoordinates`, `SpecialLinearCoordinates` and
+`Coaction` also use that unchanged Mathlib dependency: tensor-product
+basis coordinates (`LinearAlgebra/TensorProduct/Basis.lean`), exterior
+basis/minor formulas (`LinearAlgebra/ExteriorPower/Basis.lean`), determinant
+maps (`LinearAlgebra/Determinant.lean`), `Matrix.SpecialLinearGroup`,
+`Ideal.Quotient.liftₐ`, `Algebra.FiniteType.quotient`, and
+`Submodule.toBaseChange.toLinearEquiv` (`RingTheory/Flat/Basic.lean`).
+Their consumer is the actual degree-restricted polynomial coordinate
+pullback for the Plucker action, with the forward convention documented
+in `verification/BALANCED.md`. The 120-probe owner audit is foundational-only.
+This is not a proof of rational-point detection or invariant base change.
+
 ## Verification
 
 Run `horizon --root ../.. check --json` from this project, then

@@ -1,3 +1,84 @@
+## Completed rectangular covolume asymptotic (session 0030)
+
+Claim class: **proved target for BOST-SPECHT**.
+`BostConjecture.Specht.tendsto_rectangleLogCovolume_div` proves, for every
+fixed positive integer `a`, `rectangleLogCovolume a k / (a*k) → 0`.
+The quantity is the rank-normalized logarithm of the covolume of the
+canonical integral orbit lattice in its own real span with the orthonormal
+word Hilbert metric. The lattice is unchanged. The proved standard integral
+sublattice comparison suffices; integral standard spanning is not assumed.
+The invariant-space identification, absolute irreducibility over general
+characteristic-zero fields, Lemma 7.2 and number-field Theorem 1.1 remain open.
+
+The final configured explicit-root `horizon check --json` passed **9,263 jobs
+without warnings** at **2026-11-05 23:42:25 UTC**, fingerprint
+`975bdb23135a0d4a`. Root blob:
+`30f3a016666f4a42f99e905a434b65f63c1f8770`.
+Final `Asymptotic.lean` blob:
+`84574d773fe73cb0f586de6c66dba269e8b47788`.
+The preceding root boundary passed 9,260 jobs at 23:41:46 UTC; the final
+delta adds the delivered coaction import and corrects a source-reference
+comment. The final build explicitly rebuilt `Specht.Asymptotic` and the root.
+
+| Producer | Accepted kernel check | Completion UTC |
+| --- | --- | --- |
+| `WeightedGap` | `7415b2aa8b83b126`, 9,085 jobs | 23:03:12 |
+| `BulkGap`, `GapAsymptotics` | `77a224ac7fa64fd6`, 9,087 jobs | 23:11:54 |
+| `PrefixEvent`, `Separation` | `b494af1f67c12077`, 9,089 jobs | 23:19:29 |
+| `LogInsertion` | `a9f22b36a25cc96d`, 9,103 jobs | 23:27:28 |
+| `LogExpectation` | `6c4ce0e5b8fecd92`, 9,106 jobs | 23:32:59 |
+| integer normalization in `Norm` | `ef477d8ea90f7fcd`, 9,055 jobs | 23:36:57 |
+| `Asymptotic` | `86b84cbe4d36dc6c`, 9,108 jobs | 23:38:25 |
+
+All accepted builds above are warning-free. Three persisted transitive axiom
+audits each passed 14 probes: `SpechtConcentrationAxioms.lean`
+(`772635051cd91c86`, 23:04:38), `SpechtSeparationAxioms.lean`
+(`356e3457033d87d3`, 23:24:41), and `SpechtAsymptoticAxioms.lean`
+(`b2c046c4b5e17bdb`, 23:38:52). Every probe reports only `propext`,
+`Classical.choice`, and `Quot.sound`. The final audit includes the exact
+limit, normalized expectation and integer coefficient-square identity.
+No `sorryAx` or extra axiom occurs in their dependency cones.
+
+Honesty-reviewer: **used**, satisfactory throughout. The final review traced
+the lattice, metric, positive rank, Gram upper bound and actual seminormal
+average, and confirmed the epsilon squeeze and one-row case. It approved
+completion of the covolume objective with the independent invariant and
+main-theorem boundaries retained. Its source-reference correction was applied.
+The first Asymptotic build failed on local elaboration/coercion mistakes;
+these were repaired before the accepted build and audit. Earlier PrefixEvent
+style warnings were likewise repaired. After the Norm interface changed,
+LSP retained stale-import diagnostics; serialized kernel checks covered the
+affected files. A graph-sync invocation using unsupported `--json` was
+corrected to the supported command.
+
+Explicit mathematical checkpoints include `ce93c5f`, `9a8438a`, `a9a2924`,
+`35a9b36`, and `4c5e607`. Concurrent integration snapshots also captured
+some already checked source and final metadata (notably `35770db`); the
+checks and source blobs, rather than snapshot membership, define the evidence.
+The blueprint now attaches the exact limit with `\\leanok`, separates the
+weighted, separation and expectation producers, and leaves invariant-space
+nodes open. Final sync found 249 blueprint nodes, 1,707 Lean declarations,
+and no unresolved source/declaration attachments. The 824 unattached helper
+or imported declarations are the intentional coverage warning in I-0004.
+The graph-scope symlink remains `hgraph/config.yaml -> ../hgraph-sources.yaml`.
+
+This root also integrates the owner-checked arithmetic tensor degree,
+supermodularity, bounded integral sections and HN interval flag; geometry
+polarization, Plucker polynomial and degree divisibility; balanced tensor
+exponential, special-linear polar factorization and full orbit norm bound;
+and the coordinate coaction. Owner evidence is in `ARITHMETIC.md` (252 probes),
+`GEOMETRY.md` (226 probes), and `BALANCED.md` (120 probes), all foundational-only.
+The narrow TauCeti polarization port and all new library consumers are
+attributed in `CONTRIBUTIONS.md`. These imports do not close their owners'
+remaining HN, invariant-base-change, orbit-criterion or main-theorem tasks.
+
+The parent requested a successor handoff in I-0072. Shared root,
+`CONTRIBUTIONS.md`, `RESULTS.md`, `blueprint/OPEN_PROOFS.md` and blueprint
+index are ready for that handoff after this task terminates. No new proof
+lane or ownership transfer was started here. Janitor review and the final
+scratch dry run found no stale scratch; active ancestor/frontier warnings
+are intentional across the four authorized lanes.
+
 ## Bulk normalization and occupancy concentration (session 0028)
 
 Claim class: **proved producers**. The bulk normalizer lower bound, finite

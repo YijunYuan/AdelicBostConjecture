@@ -32,6 +32,7 @@ public import BostConjecture.Balanced.TensorExponential
 public import BostConjecture.Balanced.SpecialLinearPolar
 public import BostConjecture.Balanced.OrbitNorm
 public import BostConjecture.InvariantTheory.Semistability
+public import BostConjecture.InvariantTheory.Coaction
 public import BostConjecture.Geometry.TensorRealization
 public import BostConjecture.Geometry.FreeEmbedding
 public import BostConjecture.Geometry.DeterminantBaseChange
