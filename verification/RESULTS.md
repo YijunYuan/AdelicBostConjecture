@@ -1,3 +1,68 @@
+## Tableau enumeration and prefix weights checkpoint (session 0023)
+
+Claim class: **proved producers**. The accepted enumerating tableaux now
+have the checked hook count, shifted factorial/Vandermonde count, actual
+prefix/complement gluing bijection, and exact squared-Vandermonde binomial
+prefix-fiber weight. The canonical integral orbit lattice, Hilbert metric,
+and arbitrary-number-field target are unchanged. The labelled normalization,
+bulk separation, logarithmic expectation and general covolume limit remain
+open; no main-theorem completion is claimed.
+
+The final explicit-root serialized `horizon check` passed **9,190 jobs**,
+without warnings. It integrates the new Specht producers plus the checked
+handoffs `Arithmetic.LineDualDegree`, `Arithmetic.DeterminantDual`,
+`Geometry.ContractionMetric`, `Tensor.EvaluationBaseChange`, and
+`Tensor.DualRegroupBaseChange`. Later undelivered leaves are excluded.
+
+All **34** new transitive axiom probes passed: HookCount (5), ShiftedCount
+(7), PrefixCount/Complement (14), and PrefixWeights/ComplementCount (8).
+Each reports only `propext`, `Classical.choice`, and `Quot.sound`; no
+`sorryAx` or additional mathematical axiom occurs. The eight final probes
+passed in the serialized `check --lean verification/SpechtPrefixWeightsAxioms.lean`.
+
+Honesty-reviewer: **used, satisfactory** for the counting equivalence, shifted
+formula, complement/prefix bijection, complement reindexing and actual weight
+formula. Blueprint completion markers cover only these proved producers.
+No new certificate, hypothesis replacing a proof, sorry/admit, new axiom,
+unsafe/native computation or heartbeat override was introduced.
+
+Guarded LSP supplied proof feedback. After promoting the row-length bound to
+its public shared helper, guarded LSP retained stale-import diagnostics;
+serialized checks rebuilt and verified the dependent modules. One narrow
+ComplementCount check failed on implicit inference in `prod_range_reflect`;
+the explicit-function repair passed in the 9,076-job PrefixWeights check
+`ca86797b8c9efa4d`, and the final root build covers the repaired source.
+
+Janitor reviewed the active-roadmap warning: the live producer leaves and
+their ancestors intentionally remain active. The fourth BALANCED lane was
+subsequently authorized by protection I-0046. The scratch dry-run found zero
+cleanup candidates. Source ownership and the scoped graph symlink are preserved.
+
+## Session 0023: hook-count producer
+
+`Specht/HookCount.lean` identifies enumerating standard tableaux with the
+checked increasing-fillings model and proves `card_standard_mul_hookProduct`
+for every Young diagram. The serialized module check passed 9,065 jobs;
+`verification/SpechtHookCountAxioms.lean` checks all five new declarations,
+with only `propext`, `Classical.choice`, and `Quot.sound`. No shifted-coordinate
+count, prefix distribution, or general covolume limit is claimed here.
+
+`Specht/ShiftedCount.lean` proves the disjoint exhaustive row-hook interval
+partition and the resulting shifted factorial/Vandermonde enumeration. The
+serialized module check passed 9,066 jobs. All seven transitive probes in
+`verification/SpechtShiftedCountAxioms.lean` show only the three foundational
+axioms above. This closes the counting producer, including empty diagrams
+and padding with zero rows; rectangular prefix distribution remains open.
+
+`Specht/Complement.lean` and `Specht/PrefixCount.lean` prove the rotated
+complement, the actual glue/extract equivalence, and the exact prefix-fiber
+cardinality as a product of standard-tableau counts. Serialized checks
+`6e545c6818cc2a06` and `8a2b321cc8db8b14` passed 9,066 and 9,074 jobs.
+The 14 transitive probes in `SpechtPrefixCountAxioms.lean` passed, each with
+only `propext`, `Classical.choice`, and `Quot.sound`. Honesty review accepted
+the actual constructions and the two matching blueprint completion markers.
+Root integration and the weighted hypergeometric law are separate boundaries.
+
 ## Seminormal norm and standard Gram checkpoint (session 0021)
 
 Claim class: **proved producers**. The six new modules prove normalized
@@ -701,27 +766,3 @@ Horizon 0.1.5 emits a spurious resource-slot waiting message even when its
 recorded wait is about 0.002 seconds: its `flock` success return is tested
 against zero. This is recorded as a tooling issue, not proof evidence.
 
-## Session 0023: hook-count producer
-
-`Specht/HookCount.lean` identifies enumerating standard tableaux with the
-checked increasing-fillings model and proves `card_standard_mul_hookProduct`
-for every Young diagram. The serialized module check passed 9,065 jobs;
-`verification/SpechtHookCountAxioms.lean` checks all five new declarations,
-with only `propext`, `Classical.choice`, and `Quot.sound`. No shifted-coordinate
-count, prefix distribution, or general covolume limit is claimed here.
-
-`Specht/ShiftedCount.lean` proves the disjoint exhaustive row-hook interval
-partition and the resulting shifted factorial/Vandermonde enumeration. The
-serialized module check passed 9,066 jobs. All seven transitive probes in
-`verification/SpechtShiftedCountAxioms.lean` show only the three foundational
-axioms above. This closes the counting producer, including empty diagrams
-and padding with zero rows; rectangular prefix distribution remains open.
-
-`Specht/Complement.lean` and `Specht/PrefixCount.lean` prove the rotated
-complement, the actual glue/extract equivalence, and the exact prefix-fiber
-cardinality as a product of standard-tableau counts. Serialized checks
-`6e545c6818cc2a06` and `8a2b321cc8db8b14` passed 9,066 and 9,074 jobs.
-The 14 transitive probes in `SpechtPrefixCountAxioms.lean` passed, each with
-only `propext`, `Classical.choice`, and `Quot.sound`. Honesty review accepted
-the actual constructions and the two matching blueprint completion markers.
-Root integration and the weighted hypergeometric law are separate boundaries.

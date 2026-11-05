@@ -13,6 +13,8 @@ public import BostConjecture.Arithmetic.NestedQuotient
 public import BostConjecture.Arithmetic.SaturationDegree
 public import BostConjecture.Arithmetic.LineTensorDegree
 public import BostConjecture.Arithmetic.DualFiber
+public import BostConjecture.Arithmetic.LineDualDegree
+public import BostConjecture.Arithmetic.DeterminantDual
 public import BostConjecture.LinearAlgebra.AlternatingTensorPower
 public import BostConjecture.LinearAlgebra.ExteriorPower.BaseChange
 public import BostConjecture.LinearAlgebra.PiTensorProduct.Projective
@@ -25,7 +27,10 @@ public import BostConjecture.Geometry.DeterminantNaturality
 public import BostConjecture.Geometry.ProjectiveEmbedding
 public import BostConjecture.Geometry.ProjectiveMetric
 public import BostConjecture.Geometry.Contraction
+public import BostConjecture.Geometry.ContractionMetric
 public import BostConjecture.Tensor.Evaluation
+public import BostConjecture.Tensor.EvaluationBaseChange
+public import BostConjecture.Tensor.DualRegroupBaseChange
 public import BostConjecture.Tensor.HilbertRegroup
 public import BostConjecture.Tensor.DualRegroup
 public import BostConjecture.Tensor.DualMetric
@@ -38,6 +43,7 @@ public import BostConjecture.Specht.ColumnTensor
 public import BostConjecture.Specht.Covariance
 public import BostConjecture.Specht.Standard
 public import BostConjecture.Specht.Basis
+public import BostConjecture.Specht.PrefixWeights
 public import BostConjecture.Specht.Orthogonal
 public import BostConjecture.Specht.RealAction
 public import BostConjecture.Specht.Content

@@ -1381,7 +1381,8 @@ Taking cardinalities gives the product formula.
 \end{proof}
 
 \begin{lemma}[Complementary shifted Vandermonde]
-\label{lem:complement-vandermonde}\uses{lem:rectangle-complement}\notready
+\label{lem:complement-vandermonde}\uses{lem:rectangle-complement}
+\lean{BostConjecture.Specht.shiftedRowLength_rectangleComplement,BostConjecture.Specht.shiftedVandermonde_rectangleComplement,BostConjecture.Specht.shiftedFactorials_rectangleComplement}\leanok
 For $\mu\subseteq(k^a)$ put $b_r=\mu_r+a-r-1$ and $M=k+a-1$.
 The shifted coordinates of $\mu^c$ are $M-b_{a-1-r}$, and
 $V(\mu^c)=V(\mu)$.
@@ -1395,8 +1396,33 @@ $(r,j)\mapsto(a-1-j,a-1-r)$ preserves the set of strictly ordered
 pairs and is an involution. Multiplying gives the Vandermonde identity.
 \end{proof}
 
+\begin{lemma}[Exact binomial weight of a prefix fiber]
+\label{lem:prefix-binomial-weight}
+\uses{lem:tableau-count,lem:rectangle-prefix-count,lem:complement-vandermonde}
+\lean{BostConjecture.Specht.card_rectanglePrefix_mul_factorials,BostConjecture.Specht.card_rectanglePrefix_mul_factorial_pow,BostConjecture.Specht.card_rectanglePrefix_eq_binomial_weight}\leanok
+Let $\mu\subseteq(k^a)$ have $m$ boxes, put $l=ak-m$, $M=k+a-1$,
+and $b_r=\mu_r+a-r-1$. The number $N_\mu$ of standard rectangular
+tableaux with prefix $\mu$ satisfies
+\[
+ N_\mu=\frac{m!\,l!}{(M!)^a}\,V(b)^2\prod_{r<a}\binom M{b_r}.
+\]
+\end{lemma}
+\begin{proof}
+The prefix bijection gives $N_\mu=f^\mu f^{\mu^c}$. Apply the
+shifted enumeration formula to both factors and use the complementary
+coordinate identity. Reversing the product index gives
+\[
+ N_\mu\prod_{r<a}b_r!(M-b_r)!=m!\,l!\,V(b)^2.
+\]
+Every $b_r$ lies between zero and $M$, so
+$\binom M{b_r}b_r!(M-b_r)!=M!$. Multiply these identities and the
+preceding count identity to obtain
+$N_\mu(M!)^a=m!\,l!\,V(b)^2\prod_r\binom M{b_r}$.
+The denominator is positive, so division proves the assertion.
+\end{proof}
+
 \begin{lemma}[Exact prefix distribution]
-\label{lem:prefix-distribution}\uses{lem:tableau-count,lem:rectangle-prefix-count,lem:complement-vandermonde}
+\label{lem:prefix-distribution}\uses{lem:tableau-count,lem:prefix-binomial-weight}
 \source{bost-specht-manuscript:page-0006}\notready
 Fix $a\geq2$, $k\geq1$, $d=ak$, $c=a(a-1)/2$, $M=k+a-1$,
 and $V_0=\prod_{j=1}^{a-1}j!$. For a uniform standard tableau of

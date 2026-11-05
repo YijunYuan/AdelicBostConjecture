@@ -97,7 +97,8 @@ theorem card_add_card_rectangleComplement {μ : YoungDiagram} {a k : ℕ}
   change μ.card + (rectangleComplement μ a k).card = (rectangle a k).card at h
   rwa [card_rectangle] at h
 
-private theorem rowLen_le_rectangle {μ : YoungDiagram} {a k r : ℕ}
+/-- A subdiagram has no row longer than the enclosing rectangle. -/
+theorem rowLen_le_of_le_rectangle {μ : YoungDiagram} {a k r : ℕ}
     (hμ : μ ≤ rectangle a k) : μ.rowLen r ≤ k := by
   by_contra h
   have hm : (r, k) ∈ μ := YoungDiagram.mem_iff_lt_rowLen.mpr (by omega)
@@ -113,7 +114,7 @@ theorem rowLen_rectangleComplement {μ : YoungDiagram} {a k r : ℕ}
   rw [← YoungDiagram.mem_iff_lt_rowLen, mem_rectangleComplement]
   rw [mem_rectangle]
   simp only [hr, true_and, rotateCell, YoungDiagram.mem_iff_lt_rowLen]
-  have hb := rowLen_le_rectangle (r := a - 1 - r) hμ
+  have hb := rowLen_le_of_le_rectangle (r := a - 1 - r) hμ
   omega
 
 end BostConjecture.Specht

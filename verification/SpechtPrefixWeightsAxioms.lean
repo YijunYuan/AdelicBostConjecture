@@ -1,0 +1,10 @@
+import BostConjecture.Specht.PrefixWeights
+
+#print axioms BostConjecture.Specht.rowLen_le_of_le_rectangle
+#print axioms BostConjecture.Specht.shiftedRowLength_rectangleComplement
+#print axioms BostConjecture.Specht.shiftedDifference_rectangleComplement
+#print axioms BostConjecture.Specht.shiftedVandermonde_rectangleComplement
+#print axioms BostConjecture.Specht.shiftedFactorials_rectangleComplement
+#print axioms BostConjecture.Specht.card_rectanglePrefix_mul_factorials
+#print axioms BostConjecture.Specht.card_rectanglePrefix_mul_factorial_pow
+#print axioms BostConjecture.Specht.card_rectanglePrefix_eq_binomial_weight
