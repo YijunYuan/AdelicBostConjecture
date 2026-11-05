@@ -1043,9 +1043,28 @@ multiplies this generator by that determinant. It therefore fixes every
 vector. This argument includes empty bases.
 \end{proof}
 
+\begin{lemma}[Projective shears act trivially on the determinant]
+\label{lem:projective-determinant-shear}
+\uses{lem:determinant-shear,lem:integral-determinant-line}\notready
+Let $R$ be a domain and $P,Q$ finite projective $R$-modules of ranks
+$a,c$. For every linear map $t:Q\to P$, $u_t(p,q)=(p+t(q),q)$ acts
+trivially on $\bigwedge^{a+c}(P\oplus Q)$.
+\end{lemma}
+\begin{proof}
+Extend scalars to the fraction field $F$ and use the canonical identification
+$F\otimes_R(P\oplus Q)=(F\otimes_R P)\oplus(F\otimes_R Q)$.
+The extended shear is $u_{1\otimes t}$. The two summands have dimensions
+$a,c$, so the finite-basis shear lemma says its top exterior power is the
+identity. Exterior-power scalar extension sends an integral wedge to the
+wedge of its images and therefore intertwines these maps on the spanning
+elementary wedges. Since the integral exterior power is projective, its map
+to its fraction-field extension is injective. Equality after that map
+implies the claimed integral equality.
+\end{proof}
+
 \begin{lemma}[Integral determinant of an exact sequence]
 \label{lem:exact-determinant-algebra}
-\uses{lem:determinant-product,lem:determinant-shear}\notready
+\uses{lem:determinant-product,lem:projective-determinant-shear}\notready
 Let $R$ be a domain with fraction field $F$, and let
 $0\to A\xrightarrow{i}B\xrightarrow{q}C\to0$ be an exact sequence
 of finite projective $R$-modules, of generic ranks $a,a+c,c$.
