@@ -22,6 +22,18 @@ import BostConjecture.Tensor.PairingBaseChange
 import BostConjecture.Geometry.ContractionBaseChange
 import BostConjecture.Geometry.IntrinsicContraction
 import BostConjecture.Geometry.ContractionNorm
+import BostConjecture.Geometry.InvariantBaseChange
+import BostConjecture.Geometry.IndependentInvariants
+
+#print axioms BostConjecture.Geometry.baseChange_apply_tensorKer
+#print axioms BostConjecture.Geometry.exists_ker_baseChange_ne_zero_iff
+#print axioms BostConjecture.Geometry.exists_invariants_tensor_iff
+#print axioms BostConjecture.Geometry.exists_tensor_invariants_iff
+#print axioms BostConjecture.Geometry.exists_independent_invariants_iff
+#print axioms BostConjecture.Geometry.independent_invariants_eq_range
+#print axioms BostConjecture.Geometry.independent_invariants_map_injective
+#print axioms BostConjecture.Geometry.independentInvariantsEquiv
+#print axioms BostConjecture.Geometry.independentInvariantsEquiv_apply
 
 #print axioms BostConjecture.Tensor.dualCore_norm_le
 #print axioms BostConjecture.Geometry.dualDeterminantTensorBaseChange_bijective

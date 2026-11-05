@@ -380,6 +380,79 @@ In dimension zero all the maps are the unique endomorphism and the
 assertions hold with $H=0$.
 \end{proof}
 
+\begin{lemma}[Intrinsic homogeneous polynomials]
+\label{lem:balanced-intrinsic-polynomials}\notready
+For a field $K$ and $K$-vector space $X$, put
+$P(X)=\operatorname{Sym}_K(X^*)$ and let $P_d(X)$ be the span of products
+of exactly $d$ linear forms. Evaluation $p\mapsto p(x)$ is an algebra
+homomorphism. A linear map $f:X\to Y$ induces $f^*:P(Y)\to P(X)$,
+with $(f^*p)(x)=p(fx)$, $(gf)^*=f^*g^*$, and
+$f^*(P_d(Y))\subset P_d(X)$. For $p\in P_d(X)$,
+$p(ax)=a^dp(x)$; in particular $p(0)=0$ if $d>0$.
+If $X$ is finite-dimensional, so is every $P_d(X)$.
+\end{lemma}
+\begin{proof}
+Evaluation is the universal algebra extension of the linear functional
+$X^*\to K$, $\ell\mapsto\ell(x)$. Likewise $f^*$ extends
+$\ell\mapsto\ell\circ f$. Equality on the linear generators proves
+both composition and evaluation compatibility. Pullback sends a product of
+$d$ linear forms to a product of $d$ linear forms and preserves sums and
+scalar multiples, proving degree preservation. Each linear factor scales
+by $a$, proving the scaling identity on products and then on their span.
+For $d=0$ the space consists of constants. If $d>0$, take $a=0$.
+Finally, a finite basis of $X^*$ generates $P_1(X)$; the finitely many
+ordered products of $d$ such generators span $P_d(X)$, including the
+empty product for $d=0$.
+\end{proof}
+
+\begin{lemma}[Homogeneous polynomial action]
+\label{lem:balanced-polynomial-action}\notready
+\uses{lem:balanced-intrinsic-polynomials}
+Let $\rho:G\to\operatorname{GL}(X)$ be a representation of a group on a
+$K$-vector space. The intrinsic pullback $g\cdot p=(\rho(g^{-1}))^*p$, satisfying
+$(g\cdot p)(x)=p(\rho(g^{-1})x)$, defines
+an action on $P(X)$ preserving $P_d(X)$. Put
+$P_d(X)^G=P_d(X)\cap P(X)^G$. These are exactly the fixed vectors of
+the restricted degree representation, and are finite-dimensional when
+$X$ is finite-dimensional. A polynomial is fixed by this action if and
+only if $\rho(g)^*p=p$ for every $g$. Such a polynomial is constant
+on every $G$-orbit.
+\end{lemma}
+\begin{proof}
+Contravariance of pullback and $(gh)^{-1}=h^{-1}g^{-1}$ give the group
+law; the identity acts trivially. Degree preservation gives the restricted
+action. Its fixed vectors are precisely the elements of $P_d(X)$ fixed
+in $P(X)$; the resulting linear bijection identifies them with the stated
+intersection. A subspace of the finite-dimensional space $P_d(X)$ is
+finite-dimensional. Replacing $g$ by $g^{-1}$ identifies forward and
+inverse fixed-point equations. Evaluation of the forward equation gives
+$p(\rho(g)x)=p(x)$.
+\end{proof}
+
+\begin{lemma}[A homogeneous invariant excludes the origin]
+\label{lem:balanced-invariant-sufficient}\notready
+\uses{def:geometric-semistability,lem:balanced-polynomial-action}
+For $A\subset X$, define its polynomial Zariski closure as the common
+zero locus of all intrinsic polynomials vanishing on $A$. This closure
+contains $A$, is monotone and idempotent. A polynomial constant on $A$
+is constant with the same value on its closure.
+For a complex linear representation $\rho:G\to\operatorname{GL}(X)$,
+if $p\in P_d(X)^G$, $d>0$, and $p(x)\ne0$, then zero lies outside
+the polynomial Zariski closure of the orbit of $x$. In particular $x$
+is geometrically semistable. Every geometrically semistable vector is nonzero.
+\end{lemma}
+\begin{proof}
+Every polynomial vanishing on $A$ vanishes at its points, proving
+extensivity. Inclusion of sets reverses inclusion of their vanishing
+polynomials, proving monotonicity. Those polynomials already vanish on
+the defined closure; thus taking the closure twice changes nothing.
+If $p=c$ on $A$, apply the definition to $p-c$ to see that $p=c$
+on the closure. An invariant $p$ is constant with value $p(x)$ on the
+orbit. If zero were in its closure, this would give $p(0)=p(x)$,
+contradicting $p(0)=0$ and $p(x)\ne0$. Finally the orbit of zero contains
+zero, which belongs to its closure, so zero is not semistable.
+\end{proof}
+
 \begin{lemma}[Constructible images]
 \label{lem:balanced-constructible-image}
 \source{milne-algebraic-geometry:page-0201}\notready

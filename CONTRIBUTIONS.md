@@ -474,6 +474,26 @@ used external results remain unproved Lean obligations.
 
 ## Verification
 
+Session 0028 adds original finite-product and subset-counting proofs in
+`Specht/BulkNormalizer.lean` and `Specht/Sampling.lean`. They import unchanged
+Mathlib at `56a005855ea17e0b0958f73ec801ae140b0a1679` (Apache-2.0):
+`Nat.factorial_mul_ascFactorial`, `Nat.ascFactorial_le_pow_add` and
+`Nat.descFactorial_pos` in `Mathlib/Data/Nat/Factorial/Basic.lean`, product
+formulas in `Mathlib/Data/Nat/Factorial/BigOperators.lean`, `Nat.choose_mul`
+in `Mathlib/Data/Nat/Choose/Basic.lean`, and `Finset.card_powersetCard`
+in `Mathlib/Data/Finset/Powerset.lean`. The concrete normalizer lower bound
+consumes the rising-factorial identities; the sampling moment bound consumes
+the subset count and falling-factorial inequality. No external source was copied.
+
+The new integration imports are original owner-delivered
+`Arithmetic.ExactDegree`, `Geometry.ContractionNorm`, and
+`Balanced.SpectralExpansion`. The latter uses unchanged Mathlib
+`Mathlib/Analysis/InnerProductSpace/Spectrum.lean`,
+`Mathlib/Analysis/Normed/Algebra/Exponential.lean`, and
+`Mathlib/Analysis/Convex/Deriv.lean` at the same revision and license for the
+actual exterior-norm spectral expansion and convexity. The owner audit files
+record their exact consumers and remaining theorem boundaries.
+
 Run `horizon --root ../.. check --json` from this project, then
 `horizon --root ../.. check --lean verification/ReuseAxioms.lean --json`.
 The latter audits the transitive axioms of the named reused producers.

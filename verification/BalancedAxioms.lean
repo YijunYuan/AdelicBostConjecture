@@ -2,6 +2,7 @@ import BostConjecture.Balanced.ExponentialFlow
 import BostConjecture.Balanced.ExteriorMetric
 import BostConjecture.Balanced.PluckerNorm
 import BostConjecture.Balanced.SpectralExpansion
+import BostConjecture.InvariantTheory.PolynomialAction
 
 #print axioms BostConjecture.Balanced.trace_starProjection_comp
 #print axioms BostConjecture.Balanced.trace_starProjection_comp_eq_sum
@@ -43,3 +44,24 @@ import BostConjecture.Balanced.SpectralExpansion
 #print axioms BostConjecture.Balanced.convexOn_sum_exp
 #print axioms BostConjecture.Balanced.convexOn_exterior_exp_norm_sq
 #print axioms BostConjecture.Balanced.exterior_norm_sq_le_exp_of_hasDerivAt_zero
+
+#print axioms BostConjecture.InvariantTheory.polynomialEval
+#print axioms BostConjecture.InvariantTheory.polynomialEval_ι
+#print axioms BostConjecture.InvariantTheory.polynomialPullback
+#print axioms BostConjecture.InvariantTheory.polynomialPullback_id
+#print axioms BostConjecture.InvariantTheory.polynomialPullback_comp
+#print axioms BostConjecture.InvariantTheory.polynomialEval_pullback
+#print axioms BostConjecture.InvariantTheory.homogeneousPolynomials
+#print axioms BostConjecture.InvariantTheory.polynomialEval_smul_of_mem_homogeneous
+#print axioms BostConjecture.InvariantTheory.polynomialEval_zero_of_mem_homogeneous
+#print axioms BostConjecture.InvariantTheory.polynomialPullback_mem_homogeneous
+#print axioms BostConjecture.InvariantTheory.finiteDimensional_homogeneousPolynomials
+
+#print axioms BostConjecture.InvariantTheory.polynomialRepresentation
+#print axioms BostConjecture.InvariantTheory.polynomialEval_representation
+#print axioms BostConjecture.InvariantTheory.homogeneousInvariants
+#print axioms BostConjecture.InvariantTheory.mem_homogeneousInvariants_iff
+#print axioms BostConjecture.InvariantTheory.polynomialEval_orbit_of_mem_invariants
+#print axioms BostConjecture.InvariantTheory.homogeneousPolynomialRepresentation
+#print axioms BostConjecture.InvariantTheory.homogeneousInvariantsEquiv
+#print axioms BostConjecture.InvariantTheory.finiteDimensional_homogeneousInvariants

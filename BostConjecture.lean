@@ -18,11 +18,13 @@ public import BostConjecture.Arithmetic.DeterminantDual
 public import BostConjecture.Arithmetic.DeterminantProduct
 public import BostConjecture.Arithmetic.IntegralDeterminantProduct
 public import BostConjecture.Arithmetic.IntegralExactDeterminant
+public import BostConjecture.Arithmetic.ExactDegree
 public import BostConjecture.LinearAlgebra.AlternatingTensorPower
 public import BostConjecture.LinearAlgebra.ExteriorPower.BaseChange
 public import BostConjecture.LinearAlgebra.PiTensorProduct.Projective
 public import BostConjecture.Analysis.InnerProductSpace.Polar
 public import BostConjecture.Balanced.PluckerNorm
+public import BostConjecture.Balanced.SpectralExpansion
 public import BostConjecture.Geometry.TensorRealization
 public import BostConjecture.Geometry.FreeEmbedding
 public import BostConjecture.Geometry.DeterminantBaseChange
@@ -33,6 +35,7 @@ public import BostConjecture.Geometry.ProjectiveMetric
 public import BostConjecture.Geometry.Contraction
 public import BostConjecture.Geometry.ContractionMetric
 public import BostConjecture.Geometry.ContractionBaseChange
+public import BostConjecture.Geometry.ContractionNorm
 public import BostConjecture.Tensor.Evaluation
 public import BostConjecture.Tensor.EvaluationBaseChange
 public import BostConjecture.Tensor.DualRegroupBaseChange
@@ -50,6 +53,7 @@ public import BostConjecture.Specht.Standard
 public import BostConjecture.Specht.Basis
 public import BostConjecture.Specht.PrefixWeights
 public import BostConjecture.Specht.PrefixNormalizer
+public import BostConjecture.Specht.BulkNormalizer
 public import BostConjecture.Specht.Orthogonal
 public import BostConjecture.Specht.RealAction
 public import BostConjecture.Specht.Content

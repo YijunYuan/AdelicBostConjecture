@@ -70,9 +70,11 @@ The following producers still need complete source-backed mathematical proofs:
   sorting multiplicity, and equivalence with actual rectangular subdiagrams.
   `PrefixDistribution.lean` and `PrefixNormalizer.lean` prove the closed
   normalizer and exact prefix probability formula. The next separate
-  producers are the uniform bulk lower bound for that normalizer and the
-  labelled hypergeometric concentration inequality; their weighted bad-gap
-  consequence is still unproved. `HookCount.lean`
+  bulk lower bound for that normalizer is proved in `BulkNormalizer.lean`.
+  The labelled hypergeometric concentration inequality and its weighted bad-gap
+  consequence are still unproved. The concentration proof uses binomial
+  moments of finite subset sampling, a sufficient Bernoulli-population
+  special case of the manuscript symmetric-mean inequality. `HookCount.lean`
   bridges the imported hook formula
   to the accepted tableau indexing; `ShiftedCount.lean` proves the row hook
   interval partition and the factorial/Vandermonde enumeration.
