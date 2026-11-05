@@ -1217,7 +1217,8 @@ Multiplication down each column gives $a!$, and there are $k$ columns.
 
 \begin{lemma}[Seminormal norms]
 \label{lem:seminormal-norms}\uses{lem:monic-seminormal,lem:column-reading-initial,lem:standard-adjacent-path,lem:prefix-norm-swap,lem:prefix-norm-initial,lem:orthogonal-standard-basis}
-\source{bost-specht-manuscript:page-0005,bost-specht-manuscript:page-0006}\notready
+\lean{BostConjecture.Specht.prefixRowCount_eq_rowLen_prefixShape,BostConjecture.Specht.norm_orthogonalStandardBasis_sq_eq_prefixNormProduct,BostConjecture.Specht.det_standard_gram_eq_prod_prefixNormProduct}
+\source{bost-specht-manuscript:page-0005,bost-specht-manuscript:page-0006}\leanok
 For a standard tableau $t$, let $\lambda^{(j)}$ be its prefix shape
 after $j$ entries, and let $r_j$ be the row of entry $j$. Set
 $\delta_{i,r_j}(j)=\lambda_i^{(j-1)}-\lambda_{r_j}^{(j-1)}+r_j-i$.
@@ -1230,40 +1231,27 @@ Then each relevant $\delta$ is at least two, and
 \]
 \end{lemma}
 \begin{proof}
-A legal insertion in row $r$ requires every row above it to have at
-least one more box, which implies $\delta_{i,r}\geq2$.
-For the column-reading tableau, each inserted row-$r$ box contributes
-$\prod_{i<r}(r-i+1)/(r-i)=r$ to the product. Its total is $(a!)^k$,
-the squared norm of $e_{t_0}$, whose $(a!)^k$ distinct tabloid terms
-have coefficients $\pm1$.
+Earlier labels in a fixed row are exactly the boxes in that row of the
+prefix diagram. Thus $N_t(j,i)=\lambda_i^{(j-1)}$, and the current
+row's earlier-label count is the column of the inserted box. The
+explicit product $P(t)$ is therefore the product displayed here.
+Every distance is at least two by positivity of insertion denominators.
 
-An adjacent legal swap changes the order of two consecutive insertions.
-Suppose the first is in a lower row $r$ and the second in a higher
-row $q<r$, and let $\nu$ be the shape preceding both. With
-$\Delta=\nu_q-\nu_r+r-q\geq2$, only the pair $(q,r)$ changes in
-the proposed norm product; its ratio after the swap is
-$((\Delta+1)/\Delta)/(\Delta/(\Delta-1))=1-\Delta^{-2}$.
-The seminormal formula and orthogonality, together with the isometry
-of the transposition, give the same ratio for the squared norms:
-$\gamma_u/\gamma_t=1-\rho^2=1-\Delta^{-2}$.
-All standard tableaux are connected by adjacent swaps of incomparable
-entries. To prove this, compare two linear extensions of the box
-partial order; move the first entry of the desired extension leftward
-through the other extension. Every entry crossed is incomparable with
-it, or the two linear extensions would disagree with the partial
-order. Repeat on the remaining entries. Thus the initial value and
-swap ratios identify the norm product everywhere.
-
-The monic triangular change of basis has determinant one. The Gram
-matrix of the orthogonal family $(f_t)$ is diagonal with entries
-$\gamma_t$. Transformation of the Gram determinant therefore gives
-the asserted product for the standard polytabloid family.
+The actual squared norm and $P(t)$ both equal $(a!)^k$ at column
+reading. Every standard tableau is reached by a finite increasing
+legal adjacent path. At each step, the normalized adjacent action
+and the prefix-product ratio multiply the two quantities by exactly
+the same factor $1-\Delta^{-2}$. Induction along the path proves
+$\|f_t\|^2=P(t)$ for every standard tableau. Finally, the monic
+orthogonal change of basis preserves the Gram determinant, and the
+orthogonal Gram matrix has diagonal entries $\|f_t\|^2$.
 \end{proof}
 
 \begin{lemma}[Seminormal upper bound for orbit covolume]
 \label{lem:seminormal-covolume}
-\uses{lem:seminormal-norms,lem:real-standard-basis,lem:standard-gram-covolume}
-\source{bost-specht-manuscript:page-0005,bost-specht-manuscript:page-0006}\notready
+\uses{lem:seminormal-norms,lem:real-standard-basis,lem:standard-gram-covolume,lem:rectangular-covolume-nonneg}
+\lean{BostConjecture.Specht.two_mul_log_covolume_le_sum_log_prefixNormProduct,BostConjecture.Specht.two_mul_rectangleLogCovolume_le_average_log_prefixNormProduct}
+\source{bost-specht-manuscript:page-0005,bost-specht-manuscript:page-0006}\leanok
 For the all-polytabloid lattice,
 \[
  0\leq2c_a(d)\leq\mathbb E_{t\in\SYT(k^a)}\log\gamma_t.
