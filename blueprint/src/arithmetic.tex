@@ -397,6 +397,32 @@ slope, and strictly stable if every nonzero proper saturated submodule has
 strictly smaller slope. It is normalized if its slope is zero.
 \end{definition}
 
+\begin{lemma}[Induced metrics on integral submodules]
+\label{lem:induced-hermitian-metric}
+\uses{def:hermitian-metric}\notready
+Let $f:N\to M$ be an injective integral linear map and let $M$ have a
+Hermitian metric. Every complex scalar extension $f_\sigma:N_\sigma\to
+M_\sigma$ is injective, and
+\[
+ (f^*h)_\sigma(x,y)=h_\sigma(f_\sigma x,f_\sigma y)
+\]
+defines a conjugation-compatible positive Hermitian metric on $N$.
+In particular every integral submodule has its induced metric, with
+$\|x\|_{f^*h,\sigma}=\|f(x)\|_{h,\sigma}$ for integral sections.
+\end{lemma}
+\begin{proof}
+The field $K$ is a localization of $\Ocal$ and therefore is flat over
+$\Ocal$. At every embedding, $\mathbb C$ is a vector space over $K$
+and hence is free and flat over $K$. Transitivity of flatness implies
+that tensoring an injection with $\mathbb C$ preserves injectivity.
+Pulling back a positive Hermitian form along this injective map remains
+positive definite and sesquilinear. Since $f_\sigma(1\otimes x)=
+1\otimes f(x)$, conjugation compatibility on integral sections follows
+from that for $h$. The equality of section norms follows by taking the
+square root of the corresponding diagonal pairing. Apply the construction
+to the inclusion for a submodule.
+\end{proof}
+
 \begin{lemma}[Contraction between intrinsic Hermitian lines]
 \label{lem:line-degree-contraction}
 \uses{lem:line-degree-quotient-formula}\lean{BostConjecture.Arithmetic.quotient_span_card_le,BostConjecture.Arithmetic.HermitianMetric.lineDegree_le_of_injective}\leanok

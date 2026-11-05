@@ -1,3 +1,25 @@
+## Branching quotient checkpoint (session 0017)
+
+`Specht/Quotient.lean` proves the real coefficient restriction has the smaller
+Specht space as its image and exactly the preceding largest-label filtration
+step as its kernel. `branchingQuotientEquiv` uses both results, and its
+representative formula intertwines the actual prefix action. The canonical
+integral lattice and orthonormal word model are unchanged. `Filtration.lean`
+now exposes the leading-word coefficient argument used by the kernel proof.
+
+The serialized module check `horizon --root /home/yijunyuan/bc-workspace check
+BostConjecture.Specht.Quotient --json` passed 9,066 jobs at
+2026-11-05 17:23:25 UTC. The check with `--lean
+verification/SpechtQuotientAxioms.lean --json` passed at 17:28:07 UTC;
+all 25 probes use only `propext`, `Classical.choice`, and `Quot.sound`.
+Initial elaboration errors were repaired. Repeatedly stalled LSP queries
+required the serialized kernel fallback; actual slot waits were recorded.
+
+Honesty-reviewer: **used, satisfactory**. Its identified quantifier mismatch
+was repaired: the blueprint producer is indexed by a standard tableau and its
+last box, precisely the case needed for triangularity. The quotient result is
+a **proved producer**, not the full seminormal or asymptotic theorem.
+
 # Dependency integration evidence — 2026-11-05
 
 

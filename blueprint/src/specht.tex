@@ -885,9 +885,34 @@ the asserted quotient isomorphism. Frozen-tail restriction gives
 its formula on generators and its equivariance.
 \end{proof}
 
+\begin{lemma}[Last Murphy operator on a branching quotient]
+\label{lem:last-murphy-branching}
+\uses{lem:specht-branching-quotient,lem:standard-prefix-diagram,lem:central-content-action}\notready
+Let $t$ be a standard tableau on labels $0,\ldots,n$, set
+$r=\operatorname{row}_t(n)$, and let $\nu=\lambda_t^{(n)}$.
+Let $Z_n$ be the sum of transpositions of the first $n$ labels,
+acting on the original real Specht space. For every $x\in F_r$,
+\[
+ Z_nx-C_\nu x\in F_{<r},\qquad
+ J_nx-\operatorname{content}_t(n)x\in F_{<r}.
+\]
+\end{lemma}
+\begin{proof}
+Every summand of $Z_n$ fixes the last label, so it preserves $F_r$.
+The branching restriction intertwines $Z_n$ with the full central
+sum on the smaller Specht space. That sum is multiplication by
+$C_\nu$. Thus $Z_nx-C_\nu x$ is in the kernel of restriction,
+which is exactly $F_{<r}$ by the quotient theorem.
+The full central sum is $Z_n+J_n$, since its remaining transpositions
+are precisely those involving the last label. It acts by $C_\mu$.
+The difference $C_\mu-C_\nu$ is the content of the removed box.
+Consequently the second displayed difference is the negative of the
+first, and belongs to the same subspace.
+\end{proof}
+
 \begin{lemma}[Colexicographic triangular Murphy action]
 \label{lem:prefix-content-triangular}
-\uses{lem:specht-branching-quotient,lem:standard-prefix-diagram,lem:central-content-action}\notready
+\uses{lem:specht-branching-quotient,lem:last-murphy-branching,lem:standard-prefix-diagram}\notready
 Order standard tableaux by comparing their row words at the largest
 label where they differ; the tableau with the smaller row there is
 earlier. For every label $j$,
