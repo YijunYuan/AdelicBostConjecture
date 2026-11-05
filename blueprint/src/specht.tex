@@ -1624,7 +1624,8 @@ estimate used in the manuscript.
 
 \begin{lemma}[Bernoulli bound for the finite-sample exponential moment]
 \label{lem:sampling-exponential-moment}\uses{lem:sampling-binomial-moments}
-\source{bost-specht-manuscript:page-0007}\notready
+\lean{BostConjecture.Specht.sampling_exp_le}
+\source{bost-specht-manuscript:page-0007}\leanok
 Let $\Omega$ have $N>0$ elements, let $T\subseteq\Omega$ have $M$
 elements, and choose an $A$-element subset $S$ uniformly, where
 $0\leq A\leq N$. Put $X=|S\cap T|$ and $p=M/N$. For every
@@ -1653,7 +1654,7 @@ as claimed.
 Let $a,M\geq1$ and $0<A\leq aM$. Under the labelled occupancy
 law $B$, for every coordinate $i$ and $u>0$,
 \[
- \mathbb P_B(|b_i-A/a|>u)\leq2e^{-2u^2/A}.
+ \mathbb P_B(|b_i-A/a|\geq u)\leq2e^{-u^2/(4A)}.
 \]
 \end{lemma}
 \begin{proof}
@@ -1663,12 +1664,18 @@ bound to the $i$th block of size $M$ to obtain
 \[
  \mathbb E_B e^{\theta b_i}\leq(1-1/a+e^\theta/a)^A.
 \]
-For $p=1/a$, the second derivative of
-$\log(1-p+pe^\theta)$ is at most $1/4$, so subtracting its tangent
-at zero yields
-$\mathbb E_Be^{\theta(b_i-A/a)}\leq e^{A\theta^2/8}$.
-Markov's inequality with $\theta=4u/A$ and $-4u/A$ gives
-$\mathbb P_B(|b_i-A/a|>u)\leq2e^{-2u^2/A}$.
+For $|\theta|\leq1$, the exponential-series remainder gives
+$e^\theta-1-\theta\leq\theta^2$. Since $0\leq p\leq1$,
+$1+p(e^\theta-1)\leq1+p\theta+\theta^2\leq e^{p\theta+\theta^2}$.
+Centering the preceding inequality therefore gives
+$\mathbb E_Be^{\theta(b_i-A/a)}\leq e^{A\theta^2}$.
+If $0<u\leq A$, apply exponential Markov bounds with
+$\theta=u/(2A)$ and $-u/(2A)$, whose absolute values are at most one.
+Each tail is at most $e^{-u^2/(4A)}$. If $u>A$, both tails are empty
+because $0\leq b_i\leq A$ and $0\leq A/a\leq A$.
+This weaker numerical constant than the manuscript's Hoeffding estimate
+suffices for the sublinear limit and uses only the quadratic exponential
+remainder.
 
 \end{proof}
 
@@ -1685,7 +1692,7 @@ For fixed $a\geq2$, $0<\varepsilon<1/2$, and $L>0$,
 \begin{proof}
 Put $\eta=1/(4c)$ and $u=k^{1/2+\eta}$. Since $A\leq aM\leq a^2k$,
 the union bound gives
-$\mathbb P_B(\max_i|b_i-A/a|>u)\leq2a e^{-2k^{2\eta}/a^2}$.
+$\mathbb P_B(\max_i|b_i-A/a|>u)\leq2a e^{-k^{2\eta}/(4a^2)}$.
 On the complementary event all pairwise differences are at most
 $2u$. If one difference is at most $L$, then
 $V(b)^2\leq L^2(2u)^{2(c-1)}$.
@@ -1693,7 +1700,7 @@ Dividing by the lower bound for $Z$ bounds the weighted probability
 of this event by a constant times
 $k^{-1+2\eta(c-1)}=k^{-1/2-1/(2c)}$, tending to zero. On the tail
 event use $V(b)^2\leq M^{2c}$; its weighted probability is at most a
-constant times $k^c e^{-2k^{2\eta}/a^2}$, also tending to zero.
+constant times $k^c e^{-k^{2\eta}/(4a^2)}$, also tending to zero.
 The constants are independent of $t$ in the stated range. Both events
 are invariant under sorting the coordinates, so the same bound
 holds for the prefix distribution.
