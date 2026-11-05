@@ -1853,7 +1853,8 @@ Sum the logarithms of the positive factors to obtain both claims.
 
 \begin{lemma}[Expected logarithmic insertion]
 \label{lem:expected-log-insertion}\uses{lem:log-insertion-bounds,lem:prefix-separation}
-\source{bost-specht-manuscript:page-0008}\notready
+\lean{BostConjecture.Specht.expect_prefixGap_eq,BostConjecture.Specht.expect_prefixGap_uniform,BostConjecture.Specht.expect_logInsertion_le}
+\source{bost-specht-manuscript:page-0008}\leanok
 Let $p_m(L)$ be the probability that the prefix preceding insertion
 $m$ has a shifted coordinate gap at most $L\geq2$.
 Then its logarithmic contribution satisfies
@@ -1864,15 +1865,38 @@ Then its logarithmic contribution satisfies
 \begin{proof}
 On the event without a small gap use the small insertion bound;
 on its complement use the uniform insertion bound. Both bounds
-are nonnegative, so pointwise the contribution is at most
-$(a-1)/(L-1)+(a-1)\log2$ times the bad-event indicator, with the
-first summand present everywhere. Taking the uniform finite
+are nonnegative, so pointwise
+$\ell_m\leq(a-1)/(L-1)+(a-1)\log2\,\mathbf1_{\mathrm{bad}}$.
+Taking the uniform finite
 average gives the displayed inequality.
+\end{proof}
+
+\begin{lemma}[Total logarithmic average]
+\label{lem:total-log-average}\uses{lem:expected-log-insertion,lem:log-insertion-bounds,lem:prefix-separation}
+\lean{BostConjecture.Specht.sum_le_of_bulk,BostConjecture.Specht.average_log_prefixNormProduct_eventually_le}
+\source{bost-specht-manuscript:page-0008}\leanok
+Fix $a\geq2$, $\varepsilon,\delta>0$ and $L\geq2$.
+For all sufficiently large $k$, with $d=ak$ and $C=(a-1)\log2$,
+\[
+ \frac{\mathbb E\log\gamma_T}{d}
+ \leq(2\varepsilon+2/d)C+\frac{a-1}{L-1}+C\delta.
+\]
+\end{lemma}
+\begin{proof}
+Uniform separation bounds every bulk bad-prefix probability by $\delta$.
+Each bulk expected insertion is at most $B=(a-1)/(L-1)+C\delta$,
+and every insertion is at most $C$. Set $b=\lceil\varepsilon d\rceil$.
+Every index outside the bulk belongs either to $m<b$ or to
+$d-1-m<b$, so at most $2b\leq2\varepsilon d+2$ indices are exceptional.
+Since $B,C\geq0$, the sum of expected insertions is at most
+$dB+(2\varepsilon d+2)C$. The logarithm of the positive prefix product
+is the sum of insertion logarithms. Commute this finite sum with the
+uniform finite expectation and divide by $d>0$.
 \end{proof}
 
 \begin{theorem}[Sublinear rectangular Specht covolume]
 \label{thm:specht-sublinear-covolume}
-\uses{def:rectangular-specht,lem:rectangular-covolume-nonneg,lem:one-row-covolume,lem:seminormal-norms,lem:seminormal-covolume,lem:prefix-separation,lem:expected-log-insertion}
+\uses{def:rectangular-specht,lem:rectangular-covolume-nonneg,lem:one-row-covolume,lem:seminormal-covolume,lem:total-log-average}
 \source{bost-specht-manuscript:page-0008}\notready
 For every fixed positive integer $a$,
 $c_a(ak)\geq0$ and $c_a(ak)/(ak)\to0$ as $k\to\infty$.

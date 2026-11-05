@@ -59,4 +59,14 @@ theorem norm_polytabloidInt_sq (t : Tableau n μ) :
   simp only [RCLike.conj_to_real, hs, Finset.sum_const, Finset.card_univ,
     nsmul_eq_mul, mul_one, Nat.card_eq_fintype_card]
 
+/-- The coefficient square sum is an integer identity, so it transports to
+bilinear coefficient pairings over every characteristic-zero field. -/
+theorem sum_polytabloidInt_sq (t : Tableau n μ) :
+    ∑ w, polytabloidInt t w ^ 2 = (Nat.card (columnGroup t) : ℤ) := by
+  have h := norm_polytabloidInt_sq t
+  rw [← real_inner_self_eq_norm_sq, inner_realCast] at h
+  apply Int.cast_injective (α := ℝ)
+  push_cast
+  simpa only [pow_two] using h
+
 end BostConjecture.Specht
