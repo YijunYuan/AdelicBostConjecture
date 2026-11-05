@@ -590,3 +590,11 @@ and imported declarations include concurrent drafts and are retained as an
 intentional coverage warning. I-0050 hands the two checked product leaves to
 SPECHT for a future root batch; that integration is pending. All eight scoped
 arithmetic completion markers from this round were independently reviewed.
+
+Finalization acknowledgment: SPECHT accepted I-0050 and queued
+`Arithmetic.DeterminantProduct` for its next shared-root check. ARITH
+acknowledged that plan and left the thread open for the result. No proof
+source changed during finalization. The remaining workspace diff belongs to
+GEOM (`Geometry/ContractionBaseChange.lean`); the untracked workspace-root
+configuration/instruction files and reference PDFs predate this checkpoint.
+Those paths were left untouched and excluded from arithmetic commits.
