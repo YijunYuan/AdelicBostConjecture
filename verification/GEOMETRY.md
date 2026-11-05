@@ -80,9 +80,34 @@ and its basis-wedge normalization is proved.
 - Read-only honesty reviews found the local constructions substantive;
   suggested codomain/rank wording and dependency-edge repairs were applied.
 
+## Scalar-extension compatibility
+
+`Tensor/BaseChange.lean` supplies the canonical scalar-extension map on
+actual tensor products. `Geometry/DeterminantBaseChange.lean` proves its
+compatibility with tensor coordinates, the integral orbit-lattice inclusion,
+and the top exterior-power twist. The final equality holds for every source
+and target frame, over any commutative algebra, without flatness. This is the
+compatibility identity for localization overlaps; it is not projective gluing.
+
+- Module check `8b2dbff47b9041a9` passed at 2026-11-05 16:29:46 UTC
+  (9066 jobs), including the arbitrary-target-frame corollary, without warnings.
+- Earlier file check `166c0aadf3533522` failed on scalar-tower rewrites; these
+  were repaired. Its second invocation passed with one unused simp argument,
+  removed before the module check. LSP often returned partial elaboration;
+  serialized file checks supplied feedback in those cases.
+- All 38 exports, including the interrupted round's `DeterminantFrame` exports,
+  passed the renewed combined `GeometryAxioms.lean` audit at 16:32:48 UTC,
+  fingerprint `ffefd7bf352d83dc`. Only `propext`, `Classical.choice`, and
+  `Quot.sound` occur; no `sorryAx` or additional axiom.
+- Explicit checked revision: `3ac7a36`. An intervening automatic snapshot
+  captured an earlier draft and is not its verification evidence.
+- The read-only honesty reviewer found substantive producer use and honest
+  scope. Its requests for explicit tableau hypotheses and the global consumer
+  dependency edge were applied. No new external code was copied.
+
 ## Remaining boundaries
 
-Localization compatibility and projective gluing of the global integral injection, the metric
+Projective gluing of the global integral injection, the metric
 isometry, regrouping and restricted canonical contraction, invariant base change and
 nonvanishing detection remain open. The geometric slope inequality and
 number-field target are not proved by these producers.
