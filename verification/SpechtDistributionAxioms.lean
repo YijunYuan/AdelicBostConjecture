@@ -1,7 +1,12 @@
-import BostConjecture.Specht.Hypergeometric
+import BostConjecture.Specht.OccupancySort
 
 #print axioms BostConjecture.Specht.sum_card_blockFiber
 #print axioms BostConjecture.Specht.occupancyEquiv
 #print axioms BostConjecture.Specht.sum_occupancy_choose
 #print axioms BostConjecture.Specht.occupancyMass_nonneg
 #print axioms BostConjecture.Specht.sum_occupancyMass
+#print axioms BostConjecture.Specht.sortedOccupancyEquiv
+#print axioms BostConjecture.Specht.sum_occupancy_eq_factorial_mul_sorted
+#print axioms BostConjecture.Specht.occupancyWeight_perm
+#print axioms BostConjecture.Specht.occupancyWeight_eq_zero_of_not_injective
+#print axioms BostConjecture.Specht.sum_occupancyWeight_eq_factorial_mul_sorted

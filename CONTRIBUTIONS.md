@@ -411,6 +411,27 @@ Apache 2.0 license recorded above. The concrete block bijection consumes
 these counts; its sum identity proves probability normalization.
 No external code was copied and no new dependency was added.
 
+`Specht/OccupancySort.lean` additionally imports unchanged
+`Tuple.sort`, `Tuple.monotone_sort`, `Tuple.unique_antitone`
+(`Mathlib/Data/Fin/Tuple/Sort.lean`) and `Matrix.det_vandermonde_ne_zero_iff`
+(`Mathlib/LinearAlgebra/Vandermonde.lean`) at that same revision and license.
+The concrete tuple equivalence consumes sorting; determinant permutation
+and nonvanishing prove the actual squared-Vandermonde weight's symmetry
+and collision vanishing, feeding its factorial sum identity.
+
+## Orbit-criterion mathematical references — session 0026
+
+The BALANCED lane registered Maithani, *Splittings and the Reynolds Operator*,
+arXiv:2412.18841v2 (11 September 2025), and Milne, *Algebraic Geometry*,
+v6.10 (11 November 2024), at `55fdc42`. Exact original files, SHA256 hashes,
+license notices and source anchors are recorded in `references/manifest.yaml`
+and `verification/BALANCED.md`. Maithani Theorem 5.6 and Proposition A.6
+support the finite-degree averaging and density blueprint; Milne Theorem 9.7
+and Aside 9.8 support constructibility and closure comparison. The Milne
+page-201 file is a normalized statement excerpt, not a full transcription.
+No Lean code was copied from either reference. The orbit criterion and its
+used external results remain unproved Lean obligations.
+
 ## Verification
 
 Run `horizon --root ../.. check --json` from this project, then

@@ -1444,7 +1444,8 @@ and dividing by this positive total proves the claim.
 \end{proof}
 
 \begin{lemma}[Sorting distinct labelled occupancies]
-\label{lem:occupancy-sorting}\uses{lem:labelled-occupancy}\notready
+\label{lem:occupancy-sorting}\uses{lem:labelled-occupancy}
+\lean{BostConjecture.Specht.sortedOccupancyEquiv,BostConjecture.Specht.sum_occupancy_eq_factorial_mul_sorted,BostConjecture.Specht.sum_occupancyWeight_eq_factorial_mul_sorted}\leanok
 Among bounded occupancy tuples of total $A$, every tuple with distinct
 entries is uniquely a strictly decreasing tuple with a permutation of its
 $a$ labels. Consequently, for any permutation-invariant real weight $w$
@@ -1452,6 +1453,8 @@ that vanishes on repeated entries,
 \[
  \sum_b w(b)=a!\sum_{b_1>\cdots>b_a}w(b).
 \]
+This applies to $w(b)=V(b)^2B(b)$, where
+$V(b)=\prod_{i<j}(b_j-b_i)$ and $B$ is the labelled occupancy mass.
 \end{lemma}
 \begin{proof}
 Sort the entries in decreasing order. Their distinctness makes both the
@@ -1461,10 +1464,32 @@ the occupancy set. Thus the distinct tuples are in bijection with pairs
 consisting of a decreasing tuple and a permutation. A repeated-entry tuple
 contributes zero. Each decreasing tuple contributes its unchanged weight
 once for each of the $a!$ permutations, proving the formula.
+For the stated specialization, the binomial product is unchanged by
+permutations. The Vandermonde determinant changes by the sign of the
+permutation, so its square is unchanged, and it vanishes on repeated entries.
+\end{proof}
+
+\begin{lemma}[Decreasing occupancies and rectangular subdiagrams]
+\label{lem:shifted-shape-equivalence}\uses{lem:occupancy-sorting}\notready
+Let $a\geq1$, $k,m\geq0$, $M=k+a-1$, and
+$c=\sum_{r=0}^{a-1}(a-r-1)$. Rectangular subdiagrams
+$\mu\subseteq(k^a)$ of size $m$ are in bijection with strictly
+decreasing tuples $M\geq b_0>\cdots>b_{a-1}\geq0$ of sum $m+c$,
+by $b_r=\mu_r+a-r-1$.
+\end{lemma}
+\begin{proof}
+The shifted row lengths of a subdiagram are strictly decreasing,
+bounded by $M$, and sum to $m+c$. Conversely, strict decrease of
+integer entries gives $b_i\geq b_j+j-i$ for $i\leq j$ by adding
+the successive inequalities. Hence $a-r-1\leq b_r\leq M-r$.
+The integers $\mu_r=b_r-(a-r-1)$ lie between zero and $k$ and
+weakly decrease, so they are the row lengths of a subdiagram of
+the rectangle. Their sum is $m$. Shifting and subtracting the
+staircase are inverse on every row, establishing the bijection.
 \end{proof}
 
 \begin{lemma}[Exact prefix distribution]
-\label{lem:prefix-distribution}\uses{lem:tableau-count,lem:prefix-binomial-weight,lem:labelled-occupancy,lem:occupancy-sorting}
+\label{lem:prefix-distribution}\uses{lem:tableau-count,lem:prefix-binomial-weight,lem:labelled-occupancy,lem:occupancy-sorting,lem:shifted-shape-equivalence}
 \source{bost-specht-manuscript:page-0006}\notready
 Fix $a\geq2$, $k\geq1$, $d=ak$, $c=a(a-1)/2$, $M=k+a-1$,
 and $V_0=\prod_{j=1}^{a-1}j!$. For a uniform standard tableau of

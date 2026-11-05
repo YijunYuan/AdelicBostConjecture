@@ -9,6 +9,15 @@ sum to one for `A ≤ a*M`. The explicit-root serialized module check
 Honesty-reviewer independently accepted the exact producer and attachment.
 The Vandermonde normalizer, bulk separation and covolume limit remain open.
 
+`Specht/OccupancySort.lean` proves the actual distinct-tuple sorting
+equivalence, the factorial weighted sum, and its squared-Vandermonde
+specialization. Module check `f321d52fd9e8688b` passed 1,841 jobs; the updated
+ten-probe distribution audit passed at 21:29:34 UTC, with only the same
+foundational axioms. Independent honesty review accepted this scoped node.
+Stale-import LSP diagnostics after the queued dependency build were cleared
+by reloading the import header; the final audit import is restored to the
+single import used by the successful serialized check.
+
 ## Tableau enumeration and prefix weights checkpoint (session 0023)
 
 Claim class: **proved producers**. The accepted enumerating tableaux now
