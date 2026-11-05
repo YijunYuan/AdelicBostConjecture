@@ -1139,9 +1139,37 @@ identity with these duality identities in each of the $n$ positions.
 This proves the assertion without choosing bases.
 \end{proof}
 
+\begin{lemma}[Scalar extension of the restricted pairing]
+\label{lem:canonical-pairing-base-change}
+\uses{lem:integral-canonical-pairing,lem:projective-determinant-inclusion,lem:determinant-free-naturality,lem:dual-regrouping-base-change,lem:tensor-evaluation-base-change}
+\source{bost-specht-manuscript:page-0010}\notready
+Let $R\to S$ be a commutative algebra, and let $V,E_j$ be finite
+projective $R$-modules of the constant ranks used in the integral
+pairing. Suppose the scalar-extended modules $S\otimes_R V$ and
+$(S\otimes_R E_j)^\vee$ admit frames. Under canonical tensor,
+exterior-power, and dual scalar extension, the extension of the
+integral pairing equals the free determinant-restricted evaluation
+in these frames, for arbitrary vectors in both scalar-extended sources.
+\end{lemma}
+\begin{proof}
+The projective determinant map becomes the free determinant map
+in every frame after scalar extension. For a dual factor, pull back
+its chosen frame along
+$S\otimes_R E_j^\vee\simeq(S\otimes_R E_j)^\vee$.
+Naturality of the free determinant map moves this equivalence
+through its exterior-power twist and its tensor-power target.
+Tensor these identities over $j$ and use the dual regrouping
+base-change identity. On the $V$ factor use the projective
+determinant base-change identity directly. Finally, evaluation
+commutes with scalar extension; transporting an ambient module
+by an equivalence and its dual by the inverse pullback preserves
+evaluation, since $f(e^{-1}e(x))=f(x)$. Composing these identities
+proves the equality on arbitrary extended tensors.
+\end{proof}
+
 \begin{lemma}[The canonical contracting pairing]
 \label{lem:canonical-contraction}
-\uses{lem:integral-canonical-pairing,lem:projective-determinant-isometry,lem:finite-hilbert-tensor,lem:hilbert-tensor-duality,lem:dual-regrouping-isometry,lem:free-determinant-contraction,lem:tensor-evaluation-base-change}
+\uses{lem:integral-canonical-pairing,lem:projective-determinant-isometry,lem:finite-hilbert-tensor,lem:hilbert-tensor-duality,lem:dual-regrouping-isometry,lem:free-determinant-contraction,lem:canonical-pairing-base-change}
 \source{bost-specht-manuscript:page-0010}\notready
 Let $i:V\hookrightarrow W=\bigotimes_{j=1}^N E_j$ be a nonzero
 submodule with its induced metrics. Set $s=\rk V$, $a_j=\rk E_j$.

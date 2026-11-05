@@ -483,3 +483,18 @@ Module `f4bd4142fbf0161a` passed 3362 jobs at 20:33:04 UTC; all 148 combined
 axiom probes passed at 20:35:38 UTC with the same three foundational axioms.
 Read-only honesty review approved the source and blueprint correspondence.
 The remaining pairing transport concerns its determinant factors.
+
+`Tensor/PairingBaseChange.lean` identifies tensor-power pairing into the
+scalar-extended tensor product, transporting the ambient dual by the canonical
+inverse pullback. Module `6baad720253d5e6e` passed 3363 jobs at 20:44:44 UTC;
+the 150-probe audit passed at 20:49:26 UTC with foundational axioms only.
+An earlier invocation of that module failed on coercion of a composite
+equivalence to a linear map; the explicit map identity repairs it. The new
+canonical-pairing base-change blueprint node remains unmarked until the
+determinant-factor assembly is verified.
+
+The one-time read-only health review found the 12-active roadmap warning
+intentional: it counts nested ancestors of the four authorized live proof
+lanes. I-0044 remains open for SPECHT integration; the human owns I-0047 until
+BALANCED provides its canonical semistability signatures and GEOM confirms the
+consumer interface. Scratch dry-run found no stale candidates.
