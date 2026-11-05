@@ -1088,7 +1088,8 @@ bound on all tensors, with no purity restriction on $u$ or $z$.
 \label{lem:tensor-evaluation-base-change}
 \uses{lem:projective-tensor-evaluation,lem:tensor-base-change-equivalence,lem:dual-fiber-base-change}
 \source{bost-specht-manuscript:page-0010}
-\notready
+\lean{BostConjecture.Tensor.evaluation_scalarExtension,BostConjecture.Tensor.evaluation_baseChange,BostConjecture.Tensor.tensorPowerPairing_scalarExtension,BostConjecture.Tensor.tensorPowerPairing_baseChange}
+\leanok
 Let $R\to S$ be a homomorphism of commutative rings and let $(M_i)$
 be a finite family of finite projective $R$-modules. Under the canonical
 isomorphisms for tensor and dual scalar extension, the evaluation map
@@ -1111,6 +1112,30 @@ arbitrary elements of both scalar extensions. Applying this identity
 to $i^{\otimes n}z$, and using naturality of tensor scalar extension
 for the linear map $i$, gives the tensor-power pairing identity.
 No basis or flatness assumption on $S$ is needed.
+\end{proof}
+
+\begin{lemma}[Dual regrouping commutes with scalar extension]
+\label{lem:dual-regrouping-base-change}
+\uses{lem:tensor-evaluation-base-change,lem:tensor-base-change-equivalence,lem:dual-regrouping}
+\source{bost-specht-manuscript:page-0010}
+\notready
+For a commutative algebra $S$ over $R$ and a finite family of finite
+projective modules $E_j$, the canonical regrouping
+$\bigotimes_j(E_j^\vee)^{\otimes n}\simeq
+ ( (\bigotimes_j E_j)^\vee)^{\otimes n}$ commutes with scalar
+extension, using the canonical tensor and dual identifications.
+\end{lemma}
+\begin{proof}
+First interchange the two tensor index sets. On a tensor of tensors
+$\bigotimes_j\bigotimes_q x_{jq}$, either order of interchange and
+extension gives $\bigotimes_q\bigotimes_j(1\otimes x_{jq})$.
+These tensors span the iterated tensor product, so the equality holds
+on the whole module and, by scalar linearity, on its extension.
+Next the tensor-duality square commutes by the evaluation
+base-change theorem: the two resulting functionals agree on every
+element of the scalar-extended tensor product. Compose the interchange
+identity with these duality identities in each of the $n$ positions.
+This proves the assertion without choosing bases.
 \end{proof}
 
 \begin{lemma}[The canonical contracting pairing]

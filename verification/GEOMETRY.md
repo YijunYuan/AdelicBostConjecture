@@ -457,3 +457,20 @@ syntactic scanner output, not kernel evidence; the failed-check reviews and
 node comment explicitly record this. No blueprint node attaches to those drafts.
 Helper/import coverage warnings and the ten active roadmap items across the
 three lanes are retained intentionally. Scratch dry-run found no stale candidates.
+
+## Tensor evaluation under arbitrary scalar extension
+
+`Tensor/EvaluationBaseChange.lean` repairs the preserved failed draft and proves
+the actual evaluation square and tensor-power pairing square on arbitrary
+elements of both scalar extensions. The argument uses finite projectivity,
+ARITH's canonical dual equivalence, and tensor-map naturality, without a
+freeness or flatness assumption on the extension ring.
+
+- Module check `0c9c7c3672723131` passed 3359 jobs at 2026-11-05 20:28:22 UTC.
+- The 142-probe combined axiom audit passed at 20:29:18 UTC, fingerprint
+  `ffefd7bf352d83dc`; only `propext`, `Classical.choice`, and `Quot.sound`.
+- Guarded LSP feedback is active in session0012; scalar-action and coercion
+  proof errors were repaired before kernel verification. No kernel check failed.
+- Read-only honesty review found substantive actual-map proofs and no
+  certificate or vacuity defect. The evaluation blueprint node is checked;
+  canonical pairing transport through regrouping/determinant maps is still open.

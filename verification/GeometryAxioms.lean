@@ -16,6 +16,7 @@ import BostConjecture.Geometry.Contraction
 import BostConjecture.Tensor.DualMetric
 import BostConjecture.Tensor.DualRegroupMetric
 import BostConjecture.Geometry.ContractionMetric
+import BostConjecture.Tensor.EvaluationBaseChange
 
 #print axioms BostConjecture.Geometry.tensorCoordinates
 #print axioms BostConjecture.Geometry.tensorCoordinates_tprod
@@ -169,3 +170,8 @@ import BostConjecture.Geometry.ContractionMetric
 
 #print axioms BostConjecture.Geometry.freeDeterminantTensorMap_inner
 #print axioms BostConjecture.Geometry.freeDeterminantPairing_le
+
+#print axioms BostConjecture.Tensor.evaluation_scalarExtension
+#print axioms BostConjecture.Tensor.evaluation_baseChange
+#print axioms BostConjecture.Tensor.tensorPowerPairing_scalarExtension
+#print axioms BostConjecture.Tensor.tensorPowerPairing_baseChange
