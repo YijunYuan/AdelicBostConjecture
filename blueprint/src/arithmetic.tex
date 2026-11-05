@@ -17,11 +17,15 @@ Here a Hermitian form is conjugate-linear in its first variable.
 \end{definition}
 
 \begin{lemma}[Conjugation on the full archimedean fiber]
-\label{lem:hermitian-fiber-conjugation}\uses{def:hermitian-metric}\notready
-The compatibility condition on integral generators is equivalent to compatibility with the canonical conjugate-linear
-map $c_\sigma(z\otimes x)=\bar z\otimes x$.
-At a real embedding its fixed subspace is the real fiber, on which the
-form restricts to a positive-definite real inner product.
+\label{lem:hermitian-fiber-conjugation}\uses{def:hermitian-metric}
+\lean{BostConjecture.Arithmetic.fiberConjugate,BostConjecture.Arithmetic.fiberConjugate_map,BostConjecture.Arithmetic.HermitianMetric.inner_conjugate}\leanok
+There is a canonical conjugate-linear isomorphism
+$c_\sigma:M_\sigma\to M_{\bar\sigma}$ defined by
+$c_\sigma(z\otimes x)=\bar z\otimes x$. It commutes with the
+scalar extension of every integral linear map. The compatibility condition
+on integral generators is equivalent to
+$h_{\bar\sigma}(c_\sigma v,c_\sigma w)=\overline{h_\sigma(v,w)}$
+for all fiber vectors $v,w$.
 \end{lemma}
 \begin{proof}
 Both sides are sesquilinear,
@@ -29,12 +33,11 @@ and the $j_\sigma(x)$ span the complex fiber. Indeed, expanding on two finite
 linear combinations reduces the equality to the displayed equality, with
 coefficients $z_i\overline{w_j}$ on both sides. The map $c_\sigma$ is
 well-defined because $\overline{\sigma(a)z}=\bar\sigma(a)\bar z$ for
-$a\in\Ocal$. At a real embedding its fixed subspace is the real fiber,
-and conjugation invariance makes the restricted inner product real.
-Positivity and definiteness are inherited from the complex form.
-The fixed-subspace identification follows by choosing a real basis of
-$M\otimes_{\Ocal,\sigma}\mathbb R$; a vector in its complexification is
-fixed exactly when every coefficient in that basis is real.
+$a\in\Ocal$. Applying conjugation a second time gives the inverse. Naturality holds
+on pure tensors because both compositions send $z\otimes x$ to
+$\bar z\otimes f(x)$, and hence holds on their additive span.
+The converse metric implication is obtained by evaluating on $1\otimes x$
+and $1\otimes y$.
 \end{proof}
 
 \begin{lemma}[Norms of integral sections]
@@ -541,9 +544,33 @@ induced metrics commute with uniform rescaling, and the degree scaling
 formula subtracts $t$ times the generic rank, namely $t\dim X$.
 \end{proof}
 
+\begin{lemma}[Orthogonal representatives of a surjection]
+\label{lem:orthogonal-lift}\notready
+Let $E$ be a finite-dimensional complex Hermitian space, $F$ a complex
+vector space and $f:E\to F$ a surjective linear map. There is a unique
+linear map $s:F\to E$ with $fs=1$ and image in $(\ker f)^\perp$.
+It is injective, and $s(f(x))$ is the orthogonal projection of $x$
+onto $(\ker f)^\perp$. Consequently $\|s(f(x))\|\leq\|x\|$.
+The form $\langle u,v\rangle_F=\langle s(u),s(v)\rangle_E$ is
+positive definite, and for $u\in F$ its norm is the minimum of
+$\|x\|$ over $f(x)=u$.
+\end{lemma}
+\begin{proof}
+The decomposition $E=\ker f\oplus(\ker f)^\perp$ shows that the
+restriction of $f$ to the second summand is bijective. Its inverse
+followed by inclusion is $s$. If two orthogonal vectors have the same
+image, their difference belongs to both summands, hence is zero;
+this proves uniqueness. Also $s(f(x))$ is the orthogonal summand of
+$x$. Pythagoras gives
+$\|x\|^2=\|x-s(f(x))\|^2+\|s(f(x))\|^2$, proving contraction.
+The right inverse identity makes $s$ injective, so pullback of the
+form is positive definite. For any lift $x$ of $u$, contraction gives
+$\|s(u)\|\leq\|x\|$, with equality attained at $x=s(u)$.
+\end{proof}
+
 \begin{lemma}[Canonical quotient Hermitian metric]
 \label{lem:quotient-hermitian-metric}
-\uses{lem:hermitian-fiber-conjugation,lem:induced-hermitian-metric,lem:integral-part-generic-subspace}
+\uses{lem:orthogonal-lift,lem:hermitian-fiber-conjugation,lem:induced-hermitian-metric,lem:integral-part-generic-subspace}
 \source{bost-specht-manuscript:page-0003}\notready
 Let $P\subseteq M$ be a saturated submodule of a finite projective
 Hermitian $\Ocal$-module, and put $Q=M/P$. Then $Q$ is finite projective.
