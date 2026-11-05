@@ -1,6 +1,6 @@
 # Parallel Horizon scheduling
 
-Coordinator checkpoint: 2026-11-06 04:34 Asia/Shanghai (2026-11-05 20:34 UTC).
+Coordinator checkpoint: 2026-11-06 05:05 Asia/Shanghai (2026-11-05 21:05 UTC).
 
 The user assigned the parent session scheduling only, with no spending cap. The user subsequently authorized a fourth dedicated
 Lemma 7.2 lane if memory pressure is low; the total cap is now four proof
@@ -11,7 +11,7 @@ existing proof ownership is retained. No publishing or pushing is authorized by 
 | Run | Task | Proof ownership | Current frontier |
 | --- | --- | --- | --- |
 | `0003` | `BOST-SPECHT` | `Specht/**`, `Lattice/**`, Specht blueprint | Tableau enumeration and prefix-distribution estimates for covolume asymptotics |
-| `0004` | `BOST-ARITH` | `Arithmetic/**`, `Slope/**`, arithmetic blueprint | Dual degree, general tensor/exact-sequence identities and intrinsic HN specialization |
+| `0004` | `BOST-ARITH` | `Arithmetic/**`, `Slope/**`, arithmetic blueprint | Exact-sequence determinants, general tensor-degree identities and intrinsic HN specialization |
 | `0005` | `BOST-GEOM` | `Geometry/**`, `Tensor/**`, geometry blueprint | Scalar extension of the integral pairing, global contraction, then invariant/nonvanishing arguments |
 | `0006` | `BOST-BALANCED` | `Balanced/**`, `InvariantTheory/**`, balanced/orbit sections of compactness blueprint | Exact manuscript Lemma 7.2, including the needed analytic and orbit-closure/invariant criteria |
 
@@ -38,28 +38,40 @@ consume a proof slot. Read-only reviews remain part of the Horizon workflow.
 All kernel checks use the explicit workspace root and the single shared check
 slot; prefer narrow checks during repair and complete the required final checks.
 
+SPECHT session `0023` ended successfully at 21:03:42 UTC. The coordinator
+checked its report, confirmed only the other three runs were live and the cap
+was four, then resumed run `0003` for another ten rounds. The successor is
+`0026-horizon-BOST-SPECHT`, round 11, started at 21:05:14 UTC; run PID `409475`.
+
 ## Accepted evidence and open boundaries
 
-The latest completed joint boundary is SPECHT session `0021`, final evidence
-commit `baa0cc7`: the root build passed 9,171 jobs at 20:05:06 UTC, and 49
-new axiom probes used only the standard foundational axioms. This includes
-the actual seminormal norm product, rectangular Gram determinant and canonical
-orbit-lattice covolume bound (`333c037`). The asymptotic is still open.
+The latest completed joint boundary is SPECHT session `0023`, final evidence
+commit `81945dd`: the root build passed 9,190 jobs at 20:56:40 UTC, and 34
+new counting/weight axiom probes used only the standard foundational axioms.
+The new producers identify actual tableau prefixes and prove their exact
+squared-Vandermonde binomial weights. The earlier seminormal norm product,
+rectangular Gram determinant and canonical orbit-lattice covolume bound
+(`333c037`) remain in use. Distribution normalization, bulk separation and
+the general covolume asymptotic are still open.
 
 ARITH session `0008` exited normally at 20:03:40 UTC, committed through
-`3131d4b`, with 135 foundational-only probes. Its successor `0010` is active
-on general-rank dual degree after checking the intrinsic dual metric and
-line dual degree. GEOM session `0010` exited normally at 20:23:44 UTC,
+`3131d4b`, with 135 foundational-only probes. Its successor `0010` has checked
+general-rank dual degree (`49b13ce`, audit `9869294`, 165 probes), and is active
+on exact-sequence determinants. GEOM session `0010` exited normally at 20:23:44 UTC,
 committed through `5344b4d`: local contraction at `00eec3c` passed 9,088 jobs
-and 138 foundational-only probes. That newer metric batch awaits the next root
-integration through `I-0044`; it is not included in the 9,171-job result above.
+and 138 foundational-only probes. The 9,190-job root batch now includes
+`Arithmetic.LineDualDegree`, `Arithmetic.DeterminantDual`,
+`Geometry.ContractionMetric`, `Tensor.EvaluationBaseChange`, and
+`Tensor.DualRegroupBaseChange`. Later undelivered leaves are excluded.
 
-The current sessions are SPECHT `0023`, ARITH `0010`, GEOM `0012`, and BALANCED `0002`.
-SPECHT `0023` is the last currently planned round of run `0003`; resume the
-run after it exits if the task remains incomplete, without exceeding four
-proof writers. The saved hook-count draft has since been repaired and checked.
-GEOM's saved evaluation-base-change draft has also passed a new module check;
-its global pairing consumer remains in progress. Use the owners' exact source
+The current sessions are SPECHT `0026`, ARITH `0010`, GEOM `0012`, and BALANCED `0002`.
+The saved hook-count and evaluation-base-change drafts have been repaired,
+checked and integrated. GEOM's full pairing transport and global contraction
+consumer remain in progress. BALANCED has checked intrinsic partial traces
+(`fdb954d`), their actual orthogonal-projection consumer (`3361234`), and the
+Gram determinant first variation (`ee2abe7`); its initial axiom audit passed
+at 21:04:53 UTC. These leaves are not yet the full Lemma 7.2 or part of the
+9,190-job root boundary. Use the owners' exact source
 revisions and checks in [RESULTS.md](RESULTS.md), [ARITHMETIC.md](ARITHMETIC.md),
 and [GEOMETRY.md](GEOMETRY.md), rather than treating live drafts as accepted.
 
@@ -116,15 +128,17 @@ unchanged. Reproduce with:
 uvx --from lean-lsp-mcp==0.33.0 --with leanclient==0.13.2 python tools/check_lean_lsp_no_build.py
 ```
 
-The repair is committed as `d0f37d5`. All four current proof sessions now have
-actual guarded MCP processes, verified by command and parent ancestry:
+The repair is committed as `d0f37d5`. At the initial four-lane rollout, all
+four proof sessions had actual guarded MCP processes, verified by command
+and parent ancestry:
 
 - ARITH `0010`: wrapper PIDs `364426`/`364450`, Codex `364286`, run PID `161941`.
 - SPECHT `0023`: wrapper PIDs `375430`/`375478`, Codex `375307`, run PID `76365`.
 - GEOM `0012`: wrapper PIDs `379185`/`379198`, Codex `379060`, run PID `163151`.
 - BALANCED `0002`: wrapper PIDs `391121`/`391456`, Codex `390896`, run PID `390675`.
 
-The old sessions ended normally. Temporary transition protection `I-0034` is
+These PIDs record the completed guarded-client rollout; SPECHT subsequently
+continued in session `0026`. The old sessions ended normally. Temporary transition protection `I-0034` is
 archived; guarded diagnostics are permitted and kernel builds still use the
 shared Horizon check slot. The launcher and configuration remain in effect.
 Handoff hints `I-0042` and `I-0043` are archived after verifying continuation;
@@ -155,3 +169,12 @@ conclusion, including all external results it uses; an analytic norm bound
 alone does not complete Lemma 7.2. The parent will notify the user in this chat
 only after the exact theorem, transitive axioms, independent review and required
 integration have passed. No wait for Specht asymptotics or HN is required.
+
+In `I-0048`, the coordinator granted BALANCED a bounded reference-only
+extension: new `references/maithani-reynolds/` and
+`references/milne-algebraic-geometry/` directories, their manifest entries,
+and their entries in `blueprint/src/refs.bib`. Only the used pages/results
+should be registered; SPECHT retains shared root/progress-file ownership.
+Exact semistability API signatures are still being settled in `I-0047`.
+At 21:03 UTC, available memory was 9.35 GiB and PSI avg10 was 0.00%; no
+resource condition currently requires reducing the four proof lanes.
