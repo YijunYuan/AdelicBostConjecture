@@ -127,9 +127,41 @@ submodules. A metric change with $at<\delta$ keeps all their degrees
 negative. Restricting to normalized metrics proves openness.
 \end{proof}
 
+\begin{lemma}[Intrinsic partial traces]
+\label{lem:balanced-partial-traces}
+\source{bost-specht-manuscript:page-0012}
+\lean{BostConjecture.Balanced.partialTraceRight, BostConjecture.Balanced.partialTraceLeft, BostConjecture.Balanced.trace_partialTraceRight_comp, BostConjecture.Balanced.trace_partialTraceLeft_comp, BostConjecture.Balanced.trace_comp_tensorSum_of_partialTrace_eq_smul}\leanok
+Let $U,W$ be finite-dimensional vector spaces over a field $k$.
+Under the canonical isomorphism
+$\operatorname{End}(U\otimes W)=\operatorname{End}(U)\otimes
+\operatorname{End}(W)$, define $\Tr_W=1\otimes\Tr$ and
+$\Tr_U=\Tr\otimes1$. For $P\in\operatorname{End}(U\otimes W)$,
+$H\in\operatorname{End}(U)$ and $J\in\operatorname{End}(W)$,
+\[
+ \Tr((\Tr_W P)H)=\Tr(P(H\otimes1)),\qquad
+ \Tr((\Tr_U P)J)=\Tr(P(1\otimes J)).
+\]
+Consequently, if $\Tr_W P=a1$ and $\Tr_U P=b1$, then
+$\Tr(P(H\otimes1+1\otimes J))=a\Tr H+b\Tr J$.
+\end{lemma}
+\begin{proof}
+The tensor-endomorphism isomorphism sends $A\otimes B$ to the map
+$u\otimes w\mapsto Au\otimes Bw$. Such maps span all endomorphisms:
+in bases of $U,W$, their matrix units are exactly the matrix units on
+the tensor-product basis. Both sides of each claimed identity are linear
+in $P$, so it suffices to take $P=A\otimes B$. Then
+$P(H\otimes1)=AH\otimes B$ and
+$\Tr(AH\otimes B)=\Tr(AH)\Tr(B)$, by summing diagonal entries in
+the tensor-product basis. This equals $\Tr((\Tr(B)A)H)$.
+The second identity follows from
+$P(1\otimes J)=A\otimes BJ$ and the same diagonal calculation.
+Adding the identities and substituting the scalar partial traces gives
+the last formula.
+\end{proof}
+
 \begin{lemma}[Invariant detection of orbit closure]
 \label{lem:invariant-orbit-criterion}\notready
-For a product $G$ of complex special linear groups acting linearly on
+For a product $G$ of complex special linear groups acting algebraically and linearly on
 a finite-dimensional complex vector space $X$, a nonzero $x\in X$
 has $0\notin\overline{Gx}^{\mathrm{Zar}}$ if and only if some
 positive-degree homogeneous $G$-invariant polynomial is nonzero at $x$.
@@ -138,7 +170,7 @@ The Euclidean and Zariski closures of $Gx$ coincide.
 
 \begin{lemma}[Balanced projections give geometric semistability]
 \label{lem:balanced-plucker}
-\uses{def:geometric-semistability,lem:invariant-orbit-criterion}
+\uses{def:geometric-semistability,lem:invariant-orbit-criterion,lem:balanced-partial-traces}
 \source{bost-specht-manuscript:page-0012}\notready
 Let $S\subset U\otimes W$ be a nonzero subspace of complex Hermitian
 spaces of dimensions $m,n$, and put $s=\dim S$. If its orthogonal
