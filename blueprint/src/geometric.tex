@@ -1365,7 +1365,9 @@ preimage in the asserted source, completing the induction.
 
 \begin{lemma}[The homogeneous polynomial tensor quotient]
 \label{lem:polynomial-tensor-quotient}
-\uses{lem:projective-tensor-evaluation}\notready
+\uses{lem:projective-tensor-evaluation}
+\lean{BostConjecture.Geometry.polynomialTensorMap,BostConjecture.Geometry.range_polynomialTensorMap,BostConjecture.Geometry.polynomialTensorMap_map_dual,BostConjecture.Geometry.polynomialTensorMap_representation,BostConjecture.Geometry.polynomialEval_tensorMap,BostConjecture.Geometry.exists_tensor_evaluation_ne_zero}
+\leanok
 Let $X$ be a vector space over a field $F$. Multiplication of linear
 forms defines a canonical linear map
 \[
@@ -1399,9 +1401,54 @@ $\prod_j\ell_j(x)$, hence on every tensor. Apply this identity to any
 preimage supplied by the image claim to obtain the last conclusion.
 \end{proof}
 
+\begin{lemma}[The canonical symmetric lift of homogeneous invariants]
+\label{lem:polynomial-symmetric-lift}
+\uses{lem:polynomial-tensor-quotient}\notready
+Let $X$ be a finite-dimensional vector space over a characteristic-zero
+field $F$. The restriction of $\pi_d$ to the tensors fixed by permutation
+of their $d$ positions is an isomorphism onto the degree-$d$ polynomial
+space. Its inverse is natural in $X$. Consequently a homogeneous
+polynomial invariant under a group acting linearly on $X$ has a unique
+symmetric tensor lift, and this lift is invariant for the tensor dual
+action. Evaluation on $x^{\otimes d}$ is preserved.
+\end{lemma}
+\begin{proof}
+Write $T_d=(X^\vee)^{\otimes d}$ and define
+$A_d=(d!)^{-1}\sum_{\sigma\in\mathfrak S_d}\sigma$ on $T_d$.
+Left multiplication permutes the summands, so $A_du$ is symmetric.
+If $u$ is symmetric, all $d!$ summands equal $u$, hence $A_du=u$.
+Commutativity of polynomial multiplication gives $\pi_dA_d=\pi_d$.
+
+We show that $\ker\pi_d$ is spanned by the differences $u-\sigma u$.
+Choose a basis $(e_j)$ of $X^\vee$. Its tensor words form a basis of
+$T_d$. The universal property identifies $\operatorname{Sym}(X^\vee)$
+with the polynomial ring on the symbols $e_j$: the maps sending a
+basis vector to its variable and a variable to that basis vector are
+inverse algebra maps, as may be checked on the generators. Distinct
+commutative monomials therefore form a basis. Two tensor words map to
+the same monomial exactly when each basis letter has the same
+multiplicity, which holds exactly when they differ by a permutation
+of positions. On the span of one such orbit, the kernel consists of
+coefficient lists whose sum is zero. Choosing one word $w_0$ in the
+orbit expresses every such list as $\sum_{w\ne w_0}c_w(w-w_0)$.
+Splitting a finite linear combination into its distinct monomials
+proves the asserted kernel description.
+
+The averaging map annihilates each difference, so it vanishes on
+$\ker\pi_d$. For a homogeneous polynomial $p$, choose any $u$ with
+$\pi_du=p$ and put $s_d(p)=A_du$. The kernel description makes this
+independent of the choice, and gives linearity. Its image is symmetric,
+$\pi_ds_d(p)=p$, and $s_d\pi_d$ is the identity on symmetric tensors.
+Tensor powers of any dual linear map commute with position permutations.
+Together with naturality of $\pi_d$, uniqueness of the symmetric lift
+therefore proves naturality of $s_d$. Apply this to every inverse group
+element to obtain invariance of the lift of an invariant polynomial.
+The evaluation formula is the one proved for $\pi_d$.
+\end{proof}
+
 \begin{lemma}[Nonvanishing in unbounded degrees]
 \label{lem:contraction-nonzero}
-\uses{def:geometric-semistability,lem:invariant-base-change,lem:canonical-contraction,lem:rectangular-invariants,lem:finite-independent-tensor-invariants,lem:polynomial-tensor-quotient}
+\uses{def:geometric-semistability,lem:invariant-base-change,lem:canonical-contraction,lem:rectangular-invariants,lem:finite-independent-tensor-invariants,lem:polynomial-symmetric-lift}
 \source{bost-specht-manuscript:page-0010}\notready
 If the Pl\"ucker line of $V_K$ is geometrically semistable, then there
 is a positive integer $d_0$, divisible by $s,a_1,\ldots,a_N$, such

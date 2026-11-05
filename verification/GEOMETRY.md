@@ -598,3 +598,51 @@ concrete polynomial/coaction exports are pending; independent-factor invariants
 and the generic flat-kernel/evaluation argument can proceed independently.
 The one-time read-only hygiene review retained the 15 active roadmap rows as
 four live proof leaves and eleven ancestors; no status churn is needed.
+
+## Kernel detection, independent invariants and polynomial tensors
+
+Session0014 continues from the completed canonical contraction with actual
+algebraic producers, without a new bundle or degree representation:
+
+- `e411a3c`, `Geometry/InvariantBaseChange.lean`: the canonical flat kernel
+  equivalence commutes with evaluation; faithfully flat extension detects
+  nonzero evaluation on that kernel. Module `688f08cf8b0ac1ab` passed at
+  22:20:10 UTC. The application to polynomial coactions remains separate.
+- `46a2476`, `Geometry/IndependentInvariants.lean`: the tensor of two invariant
+  subspaces is canonically the invariant subspace for independent group actions.
+  Module `e6eeaf114063a89a` passed at 22:24:08 UTC.
+- `534fa25`, `Geometry/PiInvariants.lean`: the two-factor theorem is consumed
+  in cardinal induction to obtain unique preimages under the canonical map
+  from the tensor of invariants for any finite family. The empty family is
+  included, and no finite-dimensional or finite-group assumption is used.
+  Module `f09e9bb818e9f5b1` passed at 22:35:58 UTC. The 177-probe audit passed
+  at 22:37:27 UTC; only `propext`, `Classical.choice`, and `Quot.sound` occur.
+- `7239cdf`, `Geometry/PolynomialTensor.lean`: multiplication of linear forms
+  gives the actual quotient onto BALANCED's `homogeneousPolynomials`. It
+  commutes with linear pullback and inverse-pullback representation, and its
+  evaluation equals the existing finite-projective tensor-duality pairing.
+  The nonzero-preimage theorem consumes the range and evaluation identities.
+  Module `571bcbec8790f6dd` passed 2374 jobs at 22:43:25 UTC.
+
+Read-only honesty reviews found each limited producer substantive and faithful;
+no invariant preimage is claimed by the polynomial quotient theorem. No external
+source was copied. Root integration is assigned to SPECHT in I-0059, with leaf
+check evidence; this report does not infer a root build from those checks.
+
+The next local producer is `lem:polynomial-symmetric-lift`. Its complete
+mathematical proof now identifies the quotient kernel by tensor-word orbits
+and commutative monomials, then descends normalized permutation averaging.
+Mathlib's `TensorPower/Symmetric.lean` explicitly leaves the homogeneous
+polynomial comparison as a TODO; importing it does not supply this bridge.
+The concrete coaction scalar-extension and rational-point bridge still await
+BALANCED. Rectangular SL-invariant identification remains a separate SPECHT
+producer. These must feed actual contraction nonvanishing before BOST-GEOM can
+be marked complete. The geometric slope inequality and Theorem 1.1 remain open.
+
+The final serialized `--lean verification/GeometryAxioms.lean` audit passed
+at 2026-11-05 22:47:59 UTC (`ffefd7bf352d83dc`, 27.552 seconds after
+165.535 seconds waiting for the shared slot). All 184 probes report only
+`propext`, `Classical.choice`, and `Quot.sound`; there is no `sorryAx` or
+custom axiom in their transitive dependencies. The full log is
+session0014/polynomial-tensor-axioms.log. The final polynomial quotient marker
+was added only after this audit and the read-only honesty review.

@@ -24,6 +24,22 @@ import BostConjecture.Geometry.IntrinsicContraction
 import BostConjecture.Geometry.ContractionNorm
 import BostConjecture.Geometry.InvariantBaseChange
 import BostConjecture.Geometry.IndependentInvariants
+import BostConjecture.Geometry.PiInvariants
+import BostConjecture.Geometry.PolynomialTensor
+
+#print axioms BostConjecture.Geometry.polynomialTensorMap
+#print axioms BostConjecture.Geometry.polynomialTensorMap_tprod
+#print axioms BostConjecture.Geometry.range_polynomialTensorMap
+#print axioms BostConjecture.Geometry.polynomialTensorMap_map_dual
+#print axioms BostConjecture.Geometry.polynomialTensorMap_representation
+#print axioms BostConjecture.Geometry.polynomialEval_tensorMap
+#print axioms BostConjecture.Geometry.exists_tensor_evaluation_ne_zero
+
+#print axioms BostConjecture.Geometry.piTensor_map_injective
+#print axioms BostConjecture.Geometry.piTensor_split_map
+#print axioms BostConjecture.Geometry.piTensor_invariants_fixed
+#print axioms BostConjecture.Geometry.exists_piTensor_invariants_iff
+#print axioms BostConjecture.Geometry.existsUnique_piTensor_invariants_iff
 
 #print axioms BostConjecture.Geometry.baseChange_apply_tensorKer
 #print axioms BostConjecture.Geometry.exists_ker_baseChange_ne_zero_iff
