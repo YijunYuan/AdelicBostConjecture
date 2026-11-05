@@ -102,7 +102,12 @@
       "status": "passed",
       "finished_at": "2026-11-05T14:49:12.187168+00:00",
       "fingerprint": "e1559dd0c1901505",
-      "warnings": []
+      "warnings": [],
+      "invocation_cwd": "/home/yijunyuan/bc-workspace/projects/BostConjecture",
+      "recorded_cwd": ".",
+      "horizon_effective_root": "/home/yijunyuan/bc-workspace/projects/BostConjecture",
+      "cache_record": "projects/BostConjecture/.archon-horizon/cache/checks/latest-e1559dd0c1901505.json",
+      "cache_record_sha256": "06a07f94b93d5bdc2f55a16c823e4e58c4b20e4a265c6f2de824f403add985e9"
     },
     "axiom_probe": "verification/PolarAxioms.lean",
     "axiom_probe_count": 30,
@@ -118,13 +123,19 @@
         "Quot.sound"
       ],
       "sorry_or_custom_axiom": false,
-      "warnings": []
+      "warnings": [],
+      "invocation_cwd": "/home/yijunyuan/bc-workspace/projects/BostConjecture",
+      "recorded_cwd": ".",
+      "horizon_effective_root": "/home/yijunyuan/bc-workspace/projects/BostConjecture",
+      "cache_record": "projects/BostConjecture/.archon-horizon/cache/checks/latest-8bd3125875ce00b6.json",
+      "cache_record_sha256": "dec90b5188f07aec06f1f5811687a98bf0128190b3d9a81c67e0371a01c4e31c"
     },
     "axiom_probe_sha256": "5a6c3b2f6d2a8dfa77716ef4d9e56b14b52a327f026566285aec5ed6e2ae4635",
     "post_check_comment_only_packaging": {
       "description": "Added modified-source notices to original copyright header comments in Abs.lean and Polar.lean.",
       "proof_signature_text_unchanged": true,
       "verification": "Compared source with comments removed before/after; LSP inspected before and after. No kernel/build repetition for comment-only edits."
-    }
+    },
+    "serialization_caveat": "Both historical commands omitted explicit workspace --root. They used the nested project-local Horizon root/cache and resource slot, so they were not serialized by the shared workspace slot at /home/yijunyuan/bc-workspace. Their successful kernel and axiom results remain valid; no claim of workspace-slot serialization is made. Original nested cache evidence is preserved. Future checks must use horizon --root /home/yijunyuan/bc-workspace."
   }
 }
