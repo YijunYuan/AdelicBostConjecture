@@ -641,6 +641,55 @@ identity therefore gives $p\circ\rho(g)=p$ for every $g$, exactly the
 forward fixed-point description of the homogeneous invariant subspace.
 \end{proof}
 
+\begin{lemma}[Point detection on a principal open]
+\label{lem:balanced-localization-detection}
+\lean{BostConjecture.InvariantTheory.localizationPolynomialEval,BostConjecture.InvariantTheory.localizationPolynomialEval_algebraMap,BostConjecture.InvariantTheory.polynomial_eq_zero_of_eval_on_principalOpen,BostConjecture.InvariantTheory.localizationPolynomialEval_detects}\leanok
+Let $K$ be an infinite field, $R=K[T_i]_{i\in I}$ and $0\ne D\in R$.
+An element of $R[D^{-1}]$ that evaluates to zero at every tuple
+$a\in K^I$ with $D(a)\ne0$ is zero.
+\end{lemma}
+\begin{proof}
+For $z\in R[D^{-1}]$ choose $n\geq0$ and $f\in R$ with $zD^n=f$.
+At each tuple where $D(a)\ne0$, evaluation extends uniquely to the
+localization and gives $f(a)=0$. Hence $(fD)(a)=0$ at every tuple:
+use this identity when $D(a)\ne0$ and the factor $D(a)$ otherwise.
+A polynomial over an infinite field vanishing everywhere is zero,
+by induction on its finitely many variables using the univariate
+finite-root theorem. Thus $fD=0$. Since $R$ is a domain and $D\ne0$,
+$f=0$; since $D^n$ is a unit in the localization, $z=0$.
+\end{proof}
+
+\begin{lemma}[Rational-point detection for the special-linear coordinate algebra]
+\label{lem:balanced-special-linear-detection}
+\uses{lem:balanced-localization-detection,lem:balanced-special-linear-coordinates}
+\source{maithani-reynolds:prop:SU-SL-dense}\notready
+Over an infinite field $K$, the coordinate algebra
+$A=K[X,Y]/(\det X-1,\det Y-1)$ is detected by its evaluations at
+$\SL_I(K)\times\SL_J(K)$, for finite nonempty $I,J$.
+\end{lemma}
+\begin{proof}
+Put $R=K[X,Y]$, $D=\det X\det Y$, and $B=R[D^{-1}]$.
+Evaluation at the pair of identity matrices gives $D=1$, so $D\ne0$.
+Both universal determinants are units in $B$. Fix one row in each
+nonempty index set and multiply that row by the inverse determinant.
+The resulting matrices have determinant one, hence define a homomorphism
+$j:A\to B$. The quotient map $R\to A$ sends $D$ to one and therefore
+extends to $q:B\to A$. Applying $q$ to either normalized universal
+matrix recovers the original coordinate matrix, since its determinant
+is one in $A$. Thus $qj$ is the identity on every coordinate generator
+and on $A$, so $j$ is injective. This is the determinant-normalization
+retraction used in the cited compact-density proof; no group-homomorphism
+property of the retraction is needed.
+
+Suppose $a\in A$ vanishes at every rational special-linear pair.
+Each evaluation $\varepsilon:B\to K$ at a tuple with $D\ne0$ yields
+the homomorphism $\varepsilon j:A\to K$. The coordinate-algebra point
+equivalence identifies it with evaluation at an actual special-linear
+pair, so $\varepsilon(j(a))=0$. Principal-open detection gives $j(a)=0$,
+and injectivity gives $a=0$. In particular no irreducibility assertion
+about the determinant polynomial or Nullstellensatz is assumed.
+\end{proof}
+
 \begin{definition}[Semistability of a complex vector by orbit closure]
 \label{def:balanced-vector-semistability}
 \lean{BostConjecture.InvariantTheory.polynomialZariskiClosure,BostConjecture.InvariantTheory.IsGeometricallySemistable}\leanok
