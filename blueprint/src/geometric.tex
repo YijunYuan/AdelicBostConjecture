@@ -1333,7 +1333,9 @@ proving the asserted isomorphism onto the invariant subspace.
 
 \begin{lemma}[Invariants for a finite family of independent factors]
 \label{lem:finite-independent-tensor-invariants}
-\uses{lem:independent-tensor-invariants}\notready
+\uses{lem:independent-tensor-invariants}
+\lean{BostConjecture.Geometry.piTensor_map_injective,BostConjecture.Geometry.piTensor_split_map,BostConjecture.Geometry.exists_piTensor_invariants_iff,BostConjecture.Geometry.existsUnique_piTensor_invariants_iff}
+\leanok
 Let $I$ be a finite set, and for each $i\in I$ let $G_i$ act linearly
 on an $F$-vector space $M_i$. The natural map
 \[
@@ -1361,9 +1363,45 @@ factor with $\bigotimes_{j\in J}M_j^{G_j}$. Regrouping back gives a
 preimage in the asserted source, completing the induction.
 \end{proof}
 
+\begin{lemma}[The homogeneous polynomial tensor quotient]
+\label{lem:polynomial-tensor-quotient}
+\uses{lem:projective-tensor-evaluation}\notready
+Let $X$ be a vector space over a field $F$. Multiplication of linear
+forms defines a canonical linear map
+\[
+ \pi_d:(X^\vee)^{\otimes d}\longrightarrow\operatorname{Sym}(X^\vee),
+ \qquad \ell_1\otimes\cdots\otimes\ell_d\longmapsto\ell_1\cdots\ell_d.
+\]
+Its image is the degree-$d$ subspace, the span of products of $d$ linear
+forms. For a linear map $f:X\to Y$, it satisfies
+$\pi_d\circ(f^\vee)^{\otimes d}=f^*\circ\pi_d$. In particular it
+intertwines the tensor dual action and polynomial inverse pullback.
+If $X$ is finite dimensional, then for every tensor $u$,
+\[
+ \pi_d(u)(x)=\langle u,x^{\otimes d}\rangle.
+\]
+Consequently any degree-$d$ polynomial nonzero at $x$ has a tensor
+preimage whose pairing with $x^{\otimes d}$ is nonzero.
+\end{lemma}
+\begin{proof}
+Multiplication of the $d$ linear forms is multilinear, so the tensor
+universal property defines $\pi_d$. Its values on pure tensors belong
+to the stated degree subspace, and these pure tensors span the source.
+Conversely, constants in degree zero lift through the empty tensor
+product $F$. Sums lift by addition, and multiplication by a linear
+form lifts by inserting that form as the first tensor factor.
+Induction on products and linear combinations proves the image claim.
+Both sides of the naturality formula take a pure tensor
+$\ell_1\otimes\cdots\otimes\ell_d$ to
+$(\ell_1\circ f)\cdots(\ell_d\circ f)$, proving that formula by linearity.
+The evaluation identity holds on a pure tensor because both sides are
+$\prod_j\ell_j(x)$, hence on every tensor. Apply this identity to any
+preimage supplied by the image claim to obtain the last conclusion.
+\end{proof}
+
 \begin{lemma}[Nonvanishing in unbounded degrees]
 \label{lem:contraction-nonzero}
-\uses{def:geometric-semistability,lem:invariant-base-change,lem:canonical-contraction,lem:rectangular-invariants,lem:finite-independent-tensor-invariants}
+\uses{def:geometric-semistability,lem:invariant-base-change,lem:canonical-contraction,lem:rectangular-invariants,lem:finite-independent-tensor-invariants,lem:polynomial-tensor-quotient}
 \source{bost-specht-manuscript:page-0010}\notready
 If the Pl\"ucker line of $V_K$ is geometrically semistable, then there
 is a positive integer $d_0$, divisible by $s,a_1,\ldots,a_N$, such
