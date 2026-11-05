@@ -1,0 +1,34 @@
+import BostConjecture.Specht.Spectral
+
+#print axioms BostConjecture.Specht.extendTableau
+#print axioms BostConjecture.Specht.extendTableau_castSucc
+#print axioms BostConjecture.Specht.extendTableau_last
+#print axioms BostConjecture.Specht.extendTableau_isStandard
+#print axioms BostConjecture.Specht.extendStandardTableau
+#print axioms BostConjecture.Specht.prefixSliceReal_extendTableau
+#print axioms BostConjecture.Specht.TableauColexLT
+#print axioms BostConjecture.Specht.tableauColexLT_iff
+#print axioms BostConjecture.Specht.standardColex_lt_iff
+#print axioms BostConjecture.Specht.tableauColexLT_of_last_row_lt
+#print axioms BostConjecture.Specht.tableauColexLT_extendTableau_iff
+#print axioms BostConjecture.Specht.extendTableau_prefixTableau
+#print axioms BostConjecture.Specht.tableauColexLT_extendTableau
+#print axioms BostConjecture.Specht.colexSubspace
+#print axioms BostConjecture.Specht.lastRowSubspaceLT_le_colexSubspace
+#print axioms BostConjecture.Specht.cornerLift
+#print axioms BostConjecture.Specht.cornerLift_standardRealBasis
+#print axioms BostConjecture.Specht.cornerLift_mem_lastRowSubspace
+#print axioms BostConjecture.Specht.prefixSliceReal_cornerLift
+#print axioms BostConjecture.Specht.cornerLift_mem_colexSubspace
+#print axioms BostConjecture.Specht.murphyOperator_castSucc
+#print axioms BostConjecture.Specht.murphyOperator_castSucc_mem_lastRowSubspace
+#print axioms BostConjecture.Specht.prefixSliceReal_murphyOperator
+#print axioms BostConjecture.Specht.murphyOperator_self_sub_content_mem_colex
+#print axioms BostConjecture.Specht.murphyOperator_sub_content_mem_colex
+#print axioms BostConjecture.Specht.colexSubspace_eq_span
+#print axioms BostConjecture.Specht.colexSubspace_mono
+#print axioms BostConjecture.Specht.murphyOperator_mem_colexSubspace
+#print axioms BostConjecture.Specht.orthogonalStandardBasis_mem_colexSubspace
+#print axioms BostConjecture.Specht.orthogonalStandardBasis_sub_mem_colexSubspace
+#print axioms BostConjecture.Specht.inner_orthogonalStandardBasis_eq_zero_of_mem_colexSubspace
+#print axioms BostConjecture.Specht.murphyOperator_orthogonalStandardBasis
