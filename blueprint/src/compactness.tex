@@ -381,7 +381,8 @@ assertions hold with $H=0$.
 \end{proof}
 
 \begin{lemma}[Intrinsic homogeneous polynomials]
-\label{lem:balanced-intrinsic-polynomials}\notready
+\label{lem:balanced-intrinsic-polynomials}
+\lean{BostConjecture.InvariantTheory.polynomialEval,BostConjecture.InvariantTheory.polynomialEval_ι,BostConjecture.InvariantTheory.polynomialPullback_id,BostConjecture.InvariantTheory.polynomialPullback_comp,BostConjecture.InvariantTheory.polynomialEval_pullback,BostConjecture.InvariantTheory.homogeneousPolynomials,BostConjecture.InvariantTheory.polynomialEval_smul_of_mem_homogeneous,BostConjecture.InvariantTheory.polynomialEval_zero_of_mem_homogeneous,BostConjecture.InvariantTheory.polynomialPullback_mem_homogeneous,BostConjecture.InvariantTheory.finiteDimensional_homogeneousPolynomials}\leanok
 For a field $K$ and $K$-vector space $X$, put
 $P(X)=\operatorname{Sym}_K(X^*)$ and let $P_d(X)$ be the span of products
 of exactly $d$ linear forms. Evaluation $p\mapsto p(x)$ is an algebra
@@ -406,7 +407,8 @@ empty product for $d=0$.
 \end{proof}
 
 \begin{lemma}[Homogeneous polynomial action]
-\label{lem:balanced-polynomial-action}\notready
+\label{lem:balanced-polynomial-action}
+\lean{BostConjecture.InvariantTheory.polynomialRepresentation,BostConjecture.InvariantTheory.polynomialEval_representation,BostConjecture.InvariantTheory.homogeneousInvariants,BostConjecture.InvariantTheory.mem_homogeneousInvariants_iff,BostConjecture.InvariantTheory.polynomialEval_orbit_of_mem_invariants,BostConjecture.InvariantTheory.homogeneousPolynomialRepresentation,BostConjecture.InvariantTheory.homogeneousInvariantsEquiv,BostConjecture.InvariantTheory.finiteDimensional_homogeneousInvariants}\leanok
 \uses{lem:balanced-intrinsic-polynomials}
 Let $\rho:G\to\operatorname{GL}(X)$ be a representation of a group on a
 $K$-vector space. The intrinsic pullback $g\cdot p=(\rho(g^{-1}))^*p$, satisfying
@@ -429,9 +431,23 @@ inverse fixed-point equations. Evaluation of the forward equation gives
 $p(\rho(g)x)=p(x)$.
 \end{proof}
 
+\begin{definition}[Semistability of a complex vector by orbit closure]
+\label{def:balanced-vector-semistability}
+\lean{BostConjecture.InvariantTheory.polynomialZariskiClosure,BostConjecture.InvariantTheory.IsGeometricallySemistable}\leanok
+Let $G$ be a group, $X$ a complex vector space, and
+$\rho:G\to\operatorname{GL}(X)$ a representation. A vector $x$ is
+semistable in the orbit-closure sense if zero is outside the common
+zero locus of all intrinsic polynomials vanishing on $Gx$.
+This predicate is defined for abstract representations. Its equivalence
+with homogeneous invariant existence, and hence with the Pl\"ucker-line
+notion in Definition~\ref{def:geometric-semistability}, is asserted only
+for the concrete algebraic action in Lemma~\ref{lem:invariant-orbit-criterion}.
+\end{definition}
+
 \begin{lemma}[A homogeneous invariant excludes the origin]
-\label{lem:balanced-invariant-sufficient}\notready
-\uses{def:geometric-semistability,lem:balanced-polynomial-action}
+\label{lem:balanced-invariant-sufficient}
+\lean{BostConjecture.InvariantTheory.subset_polynomialZariskiClosure,BostConjecture.InvariantTheory.polynomialZariskiClosure_mono,BostConjecture.InvariantTheory.polynomialZariskiClosure_idem,BostConjecture.InvariantTheory.polynomialEval_eq_on_closure,BostConjecture.InvariantTheory.IsGeometricallySemistable.ne_zero,BostConjecture.InvariantTheory.isGeometricallySemistable_of_homogeneousInvariant}\leanok
+\uses{def:balanced-vector-semistability,lem:balanced-polynomial-action}
 For $A\subset X$, define its polynomial Zariski closure as the common
 zero locus of all intrinsic polynomials vanishing on $A$. This closure
 contains $A$, is monotone and idempotent. A polynomial constant on $A$
@@ -439,7 +455,8 @@ is constant with the same value on its closure.
 For a complex linear representation $\rho:G\to\operatorname{GL}(X)$,
 if $p\in P_d(X)^G$, $d>0$, and $p(x)\ne0$, then zero lies outside
 the polynomial Zariski closure of the orbit of $x$. In particular $x$
-is geometrically semistable. Every geometrically semistable vector is nonzero.
+is semistable in the orbit-closure sense. Every vector semistable in that
+sense is nonzero.
 \end{lemma}
 \begin{proof}
 Every polynomial vanishing on $A$ vanishes at its points, proving

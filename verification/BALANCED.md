@@ -3,8 +3,9 @@
 Manuscript Lemma 7.2 is **not yet formalized**. The accepted code proves the
 intrinsic partial traces, actual exponential-frame Gram first variation, and
 the basis-independent complex Gram metric on the full exterior power, actual
-Plücker norm stationarity, and Hermitian exterior exponential convexity. It contains no
-geometric-semistability theorem or assumed orbit criterion.
+Plücker norm stationarity, and Hermitian exterior exponential convexity. It also supplies intrinsic polynomial evaluation, homogeneous invariants,
+and the elementary implication from a nonvanishing homogeneous invariant to
+zero excluded from orbit closure. The converse orbit criterion is unproved.
 
 ## Checked producers
 
@@ -16,7 +17,7 @@ geometric-semistability theorem or assumed orbit criterion.
 | `5e76175` | `Balanced.ExponentialFlow` | Differentiation of the actual tensor exponential frame and `IsBalanced.hasDerivAt_re_gramDet_tensor_exp_zero`. |
 | `497b5b1` (automatic cross-lane snapshot) | `Balanced.ExteriorMetric` | Full complex exterior Gram metric, uniqueness/basis independence, Gram norm formula and orthonormal exterior basis. |
 | `76a3ad5` | `Balanced.PluckerNorm` | Actual Plücker norm equals one; balanced tensor exponential norm squared has derivative zero. |
-| This checkpoint | `Balanced.SpectralExpansion` | Actual exterior spectral expansion, convexity and global minimum from stationarity. |
+| `eae8dac` | `Balanced.SpectralExpansion` | Actual exterior spectral expansion, convexity and global minimum from stationarity. |
 
 The exponential consumer constructs the actual frame rather than assuming
 its derivative. It needs no Hermitian hypothesis for this first-variation
@@ -114,6 +115,38 @@ from `Analysis/Convex/Deriv.lean`, at the pinned revision above, without copying
 or modifying source. The tensor product flow is not yet identified with the
 single Hermitian exponential in this theorem; that consumer bridge is open.
 
+## Intrinsic polynomial checkpoint
+
+The serialized scoped builds passed for `InvariantTheory.Polynomial`
+(**1,719 jobs**, 3.6s), `PolynomialAction` (**2,358 jobs**, 46.7s), and
+`Semistability` (**2,675 jobs**, 20.5s), all warning-free. The updated
+`BalancedAxioms` check passed **67 transitive probes** in 17.4s, all using
+only the three foundational axioms. LSP is clear on all three sources;
+the audit initially reported stale imports, then its new import and the
+serialized dependency checks restored clear diagnostics.
+
+The actual degree spaces are proved finite-dimensional. The inverse-pullback
+representation, forward fixed-point bridge, and equivalence of homogeneous
+invariants with fixed vectors of the degree representation are checked.
+The canonical closure uses all vanishing intrinsic polynomials; a
+nonvanishing positive-degree invariant excludes zero from the orbit closure.
+No converse or equality with Euclidean closure is proved.
+
+Independent honesty/API review accepted these definitions and proofs. Its
+finite-field precision edit was incorporated: polynomial actions are defined
+intrinsically by pullback, not by their values as functions. Its attachment
+correction was also incorporated: `def:balanced-vector-semistability` records
+the complex vector orbit-closure predicate, while the source's Plücker-line
+invariant-existence definition and its equivalence remain under the open
+orbit criterion. Root integration of these new modules is pending SPECHT.
+
+Imports reuse Mathlib's `SymmetricAlgebra.lift`, dual evaluation/transposition,
+`Submodule.pow_induction_on_left'`, `Submodule.FG.pow`,
+`Representation.subrepresentation` and `Representation.invariants`, at the
+pinned Apache-2.0 revision above, without copying or modifying source.
+Project consumers are PolynomialAction and Semistability, followed by the
+pending Plücker/coaction/orbit criterion and GEOM base-change consumers.
+
 ## Remaining mathematical producers
 
 1. Identify the tensor product of Hermitian exponentials with the exponential
@@ -122,8 +155,10 @@ single Hermitian exponential in this theorem; that consumer bridge is open.
 2. Determinant-one unitary/logarithm adapters for the already checked polar
    decomposition port (`TJHeeringa/mathlib4`, revision
    `41260205df493c627e1ac0e54812cfdeb6517fbc`, PR 45002).
-3. The canonical algebraic tensor/exterior representation and homogeneous
-   invariant-polynomial interface, coordinated with GEOM in `I-0047`.
+3. The canonical algebraic tensor/exterior representation, coordinate coaction
+   and base-change/detection bridges, coordinated with GEOM in `I-0047`.
+   Intrinsic polynomials, homogeneous degree, finite dimensionality and
+   homogeneous invariants are now checked.
 4. Constructible images and comparison of complex/Zariski closures,
    special-unitary Zariski density, and finite-degree Haar averaging.
    The blueprint now supplies the mathematical arguments, but there is no
@@ -181,13 +216,13 @@ Its followup semantic audit of the exponential consumer also passed. The
 orbit/source reviewer verified the new mathematical proofs and original
 source anchors; both requested precision edits were incorporated.
 
-## Agreed invariant interface (not yet implemented)
+## Agreed invariant interface (partial implementation checked)
 
 The interface confirmed by GEOM in `I-0047/C-0010` uses existing `Representation`,
 `SpecialLinearGroup`, `exteriorPower`, and `SymmetricAlgebra`; it creates no
 second polynomial-function representation. Below, `K` is a field, `U`, `W`
-and `X` are finite-dimensional `K`-spaces, and `G` is a group. The displayed
-signatures are design proposals, not checked declarations.
+and `X` are finite-dimensional `K`-spaces, and `G` is a group. Polynomial, PolynomialAction and Semistability below are checked;
+PluckerAction and Coaction remain design proposals.
 
 - `InvariantTheory/PluckerAction.lean`:
   `pluckerRepresentation K U W s : Representation K
@@ -201,6 +236,7 @@ signatures are design proposals, not checked declarations.
   `homogeneousPolynomials K X (d : ℕ) : Submodule K
   (SymmetricAlgebra K (Module.Dual K X))` is the `d`th submodule power of
   the range of `SymmetricAlgebra.ι K (Module.Dual K X)`.
+- `InvariantTheory/PolynomialAction.lean`:
   `polynomialRepresentation (ρ : Representation K G X) : Representation K G
   (SymmetricAlgebra K (Module.Dual K X))` is the symmetric-algebra extension
   of `ρ.dual`. Thus `g` acts by pullback along `ρ g⁻¹`.
@@ -233,15 +269,15 @@ signatures are design proposals, not checked declarations.
 
 The use of bases is confined to constructing the coordinate coaction. The
 Plücker vector space, polynomial algebra, degree, evaluation and invariant
-submodule are intrinsic. GEOM confirmation is complete; checked implementations remain
-pending; polynomial laws were inspected but do not yet provide a finite-degree
+submodule are intrinsic. GEOM confirmation is complete; the coordinate
+coaction implementation remains pending. Polynomial laws were inspected but do not provide a finite-degree
 coefficient API in the pinned library.
 
 Independent review found the proposed objects faithful and requested the
 explicit coaction convention above. Remaining interface proofs include the
-homogeneous decomposition and finite dimensionality, coordinate-polynomial
-evaluation/zero-locus comparison, the degree-subtype kernel versus the
-intersection invariant module, rational-point detection over the needed
+homogeneous decomposition, coordinate-polynomial evaluation/zero-locus
+comparison, the degree-subtype coaction kernel versus fixed vectors,
+rational-point detection over the needed
 infinite fields, and scalar-extension compatibility of these maps. Flatness
 of a field extension then gives kernel base change; the coordinate coaction's
 codomain need not itself be finite-dimensional.

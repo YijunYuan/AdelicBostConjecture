@@ -2,7 +2,7 @@ import BostConjecture.Balanced.ExponentialFlow
 import BostConjecture.Balanced.ExteriorMetric
 import BostConjecture.Balanced.PluckerNorm
 import BostConjecture.Balanced.SpectralExpansion
-import BostConjecture.InvariantTheory.PolynomialAction
+import BostConjecture.InvariantTheory.Semistability
 
 #print axioms BostConjecture.Balanced.trace_starProjection_comp
 #print axioms BostConjecture.Balanced.trace_starProjection_comp_eq_sum
@@ -65,3 +65,12 @@ import BostConjecture.InvariantTheory.PolynomialAction
 #print axioms BostConjecture.InvariantTheory.homogeneousPolynomialRepresentation
 #print axioms BostConjecture.InvariantTheory.homogeneousInvariantsEquiv
 #print axioms BostConjecture.InvariantTheory.finiteDimensional_homogeneousInvariants
+
+#print axioms BostConjecture.InvariantTheory.polynomialZariskiClosure
+#print axioms BostConjecture.InvariantTheory.subset_polynomialZariskiClosure
+#print axioms BostConjecture.InvariantTheory.polynomialZariskiClosure_mono
+#print axioms BostConjecture.InvariantTheory.polynomialZariskiClosure_idem
+#print axioms BostConjecture.InvariantTheory.polynomialEval_eq_on_closure
+#print axioms BostConjecture.InvariantTheory.IsGeometricallySemistable
+#print axioms BostConjecture.InvariantTheory.IsGeometricallySemistable.ne_zero
+#print axioms BostConjecture.InvariantTheory.isGeometricallySemistable_of_homogeneousInvariant
