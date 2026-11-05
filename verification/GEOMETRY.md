@@ -307,3 +307,19 @@ canonical-module instance and alphabet-relabelling elaboration failures were
 repaired. Read-only honesty review approved the two source/blueprint nodes.
 The full contraction still needs dual-metric/evaluation compatibility and
 restricted equivariance; no contraction completion claim is made.
+
+## Global projective permutation equivariance
+
+`Tensor/ReindexBaseChange.lean` and `Geometry/ProjectivePermutation.lean`
+prove the actual global equivariance identity. The proof normalizes intrinsic
+determinant-lattice generators, uses the existing principal frame cover and
+base-change formula, applies free equivariance, and detects equality locally.
+The original module is never assumed free. This now supplies the genuine
+embedding-equivariance input to the restricted pairing.
+
+Final module check `2a871570380819bb` passed 9075 jobs at 19:39:50 UTC
+without warnings, after repairing a scalar-tower rewrite and removing an
+unneeded finiteness hypothesis from the scalar-extension lemma. All 119
+transitive probes then passed with only the standard foundational axioms.
+Read-only honesty review found substantive use of the global cover and actual
+producers, with faithful source-facing blueprint attachments.

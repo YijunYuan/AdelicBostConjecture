@@ -780,7 +780,8 @@ the conclusion is independent of the chosen orthonormal frame.
 \label{lem:tensor-reindex-base-change}
 \uses{lem:tensor-base-change-equivalence}
 \source{bost-specht-manuscript:page-0010}
-\notready
+\lean{BostConjecture.Tensor.scalarExtension_reindex,BostConjecture.Tensor.baseChangeEquiv_reindex}
+\leanok
 For a homomorphism $R\to S$ of commutative rings, an $R$-module $M$,
 and a finite set $J$, the canonical isomorphism
 $S\otimes_R M^{\otimes J}\simeq (S\otimes_R M)^{\otimes J}$
@@ -824,7 +825,8 @@ tensors and extends by linearity to the full determinant-twisted source.
 \label{lem:projective-determinant-permutation}
 \uses{lem:projective-determinant-inclusion,lem:free-determinant-permutation,lem:tensor-reindex-base-change}
 \source{bost-specht-manuscript:page-0010}
-\notready
+\lean{BostConjecture.Geometry.projectiveDeterminantMap_scalarExtension_tmul,BostConjecture.Geometry.projectiveDeterminantMap_reindex}
+\leanok
 Let $M$ be a finite projective module of constant rank $a$ over a
 commutative ring $R$, and let $t$ be a rectangular tableau of shape
 $(k^a)$ with $n$ boxes, where $k>0$. The global determinant map
@@ -917,9 +919,50 @@ gives the same formula on every nested pure tensor. The spanning
 property extends this identity to the whole source.
 \end{proof}
 
+\begin{lemma}[The integral equivariant restricted pairing]
+\label{lem:integral-canonical-pairing}
+\uses{lem:projective-determinant-permutation,lem:dual-regrouping,lem:projective-tensor-evaluation}
+\source{bost-specht-manuscript:page-0010}
+\notready
+Let $R$ be a commutative ring, $V$ and $E_j$ finite projective
+$R$-modules, and $i:V\to\bigotimes_j E_j$ an $R$-linear map.
+Suppose $V$ has constant rank $s$ and $E_j^\vee$ has constant rank
+$a_j$. Choose rectangular tableaux $v,t_j$ of shapes $(\ell^s)$
+and $(k_j^{a_j})$, all with the same number $n$ of boxes, where
+$\ell,k_j>0$. Put
+\[
+ B=(\det V)^{\otimes\ell}\otimes_R(R\otimes_{\mathbb Z}L_v),\qquad
+ D=\bigotimes_j\left((\det E_j^\vee)^{\otimes k_j}
+       \otimes_R(R\otimes_{\mathbb Z}L_{t_j})\right).
+\]
+The actual determinant maps and canonical dual regrouping define
+$U_D:D\to((\bigotimes_j E_j)^\vee)^{\otimes n}$. There is a
+canonical $R$-linear map $\Psi:B\to D^\vee$ given by
+\[
+ \Psi(z)(u)=U_D(u)\bigl(i^{\otimes n}(U_V(z))\bigr).
+\]
+It satisfies $\Psi(\tau z)(u)=\Psi(z)(\tau^{-1}u)$ for the
+integral orbit action on the source lattice and the simultaneous
+orbit action on the factors of $D$.
+\end{lemma}
+\begin{proof}
+Take the tensor product of the constructed determinant maps of
+$E_j^\vee$ and compose with the canonical projective dual regrouping;
+this defines $U_D$ over $R$. Compose $U_V$ with $i^{\otimes n}$,
+then evaluate against the ambient tensor power of the dual and
+restrict along $U_D$. All three operations are $R$-linear, giving
+the displayed map and formula without freeness assumptions.
+Each determinant map intertwines the position action, and dual
+regrouping intertwines simultaneous position actions, so $U_D$
+also does. Evaluation satisfies
+$\langle u,\tau z\rangle=\langle\tau^{-1}u,z\rangle$,
+and $i^{\otimes n}$ commutes with position permutations.
+Substituting these identities proves the stated equivariance.
+\end{proof}
+
 \begin{lemma}[The canonical contracting pairing]
 \label{lem:canonical-contraction}
-\uses{lem:determinant-isotypic,lem:dual-regrouping,lem:hilbert-regrouping}
+\uses{lem:determinant-isotypic,lem:integral-canonical-pairing,lem:dual-regrouping,lem:hilbert-regrouping}
 \source{bost-specht-manuscript:page-0010}\notready
 Let $i:V\hookrightarrow W=\bigotimes_{j=1}^N E_j$ be a nonzero
 submodule with its induced metrics. Set $s=\rk V$, $a_j=\rk E_j$.

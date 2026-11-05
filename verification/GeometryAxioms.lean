@@ -11,6 +11,7 @@ import BostConjecture.Tensor.DualRegroup
 import BostConjecture.Geometry.DeterminantMetric
 import BostConjecture.Geometry.ProjectiveMetric
 import BostConjecture.Geometry.Permutation
+import BostConjecture.Geometry.ProjectivePermutation
 
 #print axioms BostConjecture.Geometry.tensorCoordinates
 #print axioms BostConjecture.Geometry.tensorCoordinates_tprod
@@ -135,3 +136,9 @@ import BostConjecture.Geometry.Permutation
 #print axioms BostConjecture.Geometry.tensorCoordinates_reindex
 #print axioms BostConjecture.Geometry.freeLatticeMap_reindex
 #print axioms BostConjecture.Geometry.freeDeterminantMap_reindex
+
+#print axioms BostConjecture.Tensor.scalarExtension_reindex
+#print axioms BostConjecture.Tensor.baseChangeEquiv_tmul_eq_scalarExtension
+#print axioms BostConjecture.Tensor.baseChangeEquiv_reindex
+#print axioms BostConjecture.Geometry.projectiveDeterminantMap_scalarExtension_tmul
+#print axioms BostConjecture.Geometry.projectiveDeterminantMap_reindex
