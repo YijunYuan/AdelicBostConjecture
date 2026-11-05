@@ -298,7 +298,7 @@ fibers of $\det M$ through the exterior-power scalar-extension isomorphisms.
 \end{proof}
 
 \begin{lemma}[Uniqueness of the determinant metric]
-\label{lem:determinant-metric-unique}\uses{lem:determinant-metric}\notready
+\label{lem:determinant-metric-unique}\uses{lem:determinant-metric}\lean{BostConjecture.Arithmetic.ComplexDeterminant.core_unique,BostConjecture.Arithmetic.ComplexDeterminant.core_eq,BostConjecture.Arithmetic.HermitianMetric.determinantFiber_unique}\leanok
 The Gram-determinant norm formula uniquely determines the metric on each
 complex determinant fiber. In particular the construction is independent
 of its auxiliary orthonormal frames.
@@ -338,7 +338,7 @@ depend on $\xi$.
 
 \begin{lemma}[Isometries preserve intrinsic line degree]
 \label{lem:line-degree-isometry}
-\uses{lem:line-degree-quotient-formula}\notready
+\uses{lem:line-degree-quotient-formula}\lean{BostConjecture.Arithmetic.HermitianMetric.lineDegree_eq_of_equiv}\leanok
 Let $L,L'$ be finite projective rank-one modules with Hermitian metrics,
 and let $f:L\simeq L'$ be an integral linear isomorphism preserving all
 archimedean section norms. Then $\degn(L)=\degn(L')$.
@@ -354,7 +354,7 @@ for the line degree therefore gives the same value for $L$ and $L'$.
 
 \begin{lemma}[Rank-one determinant normalization]
 \label{lem:degree-rank-one}
-\uses{def:intrinsic-determinant-degree,lem:line-degree-isometry}\notready
+\uses{def:intrinsic-determinant-degree,lem:line-degree-isometry}\lean{BostConjecture.Arithmetic.HermitianMetric.determinant_sectionNorm_rank_one,BostConjecture.Arithmetic.HermitianMetric.degree_eq_lineDegree}\leanok
 If $L$ has generic rank one, its determinant degree is its original
 intrinsic line degree.
 \end{lemma}
@@ -367,7 +367,7 @@ section norms. Apply invariance of line degree under integral isometries.
 
 \begin{lemma}[Rank-zero determinant normalization]
 \label{lem:degree-rank-zero}
-\uses{def:intrinsic-determinant-degree}\notready
+\uses{def:intrinsic-determinant-degree}\lean{BostConjecture.Arithmetic.HermitianMetric.determinant_sectionNorm_rank_zero,BostConjecture.Arithmetic.HermitianMetric.degree_eq_zero_of_rank_zero}\leanok
 A Hermitian module of generic rank zero has determinant degree zero.
 \end{lemma}
 \begin{proof}
@@ -399,7 +399,7 @@ strictly smaller slope. It is normalized if its slope is zero.
 
 \begin{lemma}[Contraction between intrinsic Hermitian lines]
 \label{lem:line-degree-contraction}
-\uses{lem:line-degree-quotient-formula}\notready
+\uses{lem:line-degree-quotient-formula}\lean{BostConjecture.Arithmetic.quotient_span_card_le,BostConjecture.Arithmetic.HermitianMetric.lineDegree_le_of_injective}\leanok
 Let $L,L'$ be finite projective rank-one Hermitian modules, and let
 $f:L\to L'$ be an injective integral linear map satisfying
 $\|f(x)\|_\sigma\leq\|x\|_\sigma$ for every embedding $\sigma$ and
