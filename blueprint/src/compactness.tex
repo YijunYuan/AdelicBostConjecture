@@ -159,6 +159,121 @@ Adding the identities and substituting the scalar partial traces gives
 the last formula.
 \end{proof}
 
+\begin{lemma}[Trace against an orthogonal projection]
+\label{lem:balanced-projection-trace}
+\source{bost-specht-manuscript:page-0012}\lean{BostConjecture.Balanced.trace_starProjection_comp, BostConjecture.Balanced.trace_starProjection_comp_eq_sum}\leanok
+Let $E$ be a finite-dimensional complex Hermitian space, $S\subset E$
+a subspace, $P$ its orthogonal projection, and $v_1,\ldots,v_s$ an
+orthonormal basis of $S$. For every endomorphism $A$ of $E$,
+\[
+ \Tr(PA)=\sum_{i=1}^s\langle v_i,Av_i\rangle.
+\]
+The Hermitian form is conjugate-linear in its first argument.
+\end{lemma}
+\begin{proof}
+Write $\iota:S\to E$ for inclusion and $\pi:E\to S$ for orthogonal
+projection, so $P=\iota\pi$. The rectangular trace identity
+$\Tr(BC)=\Tr(CB)$ gives $\Tr(PA)=\Tr(\pi A\iota)$.
+The latter trace is the sum of diagonal entries in the basis $(v_i)$.
+Its $i$th entry is $\langle v_i,\pi Av_i\rangle_S
+=\langle v_i,Av_i\rangle_E$, because $Av_i-\iota\pi Av_i$
+is perpendicular to $S$.
+\end{proof}
+
+\begin{definition}[Balanced subspace]
+\label{def:balanced-subspace}
+\uses{lem:balanced-partial-traces}
+\source{bost-specht-manuscript:page-0012}\lean{BostConjecture.Balanced.IsBalanced}\leanok
+A subspace $S\subset U\otimes W$ of finite-dimensional complex
+Hermitian spaces is balanced if its actual orthogonal projection $P$
+satisfies $\Tr_WP=(s/m)1_U$ and $\Tr_UP=(s/n)1_W$, where
+$s=\dim S$, $m=\dim U$, and $n=\dim W$.
+For the zero-dimensional cases, a quotient with zero denominator is
+defined to be zero. A nonzero $S$ forces $m,n>0$.
+\end{definition}
+
+\begin{lemma}[Vanishing balanced frame sum]
+\label{lem:balanced-frame-sum}
+\uses{def:balanced-subspace,lem:balanced-projection-trace,lem:balanced-partial-traces}
+\source{bost-specht-manuscript:page-0012}\lean{BostConjecture.Balanced.IsBalanced.sum_inner_tensorSum_eq_zero}\leanok
+If $S$ is balanced and $H,J$ are traceless endomorphisms of $U,W$,
+then for every orthonormal basis $(v_i)$ of $S$,
+\[
+ \sum_i\langle v_i,(H\otimes1+1\otimes J)v_i\rangle=0.
+\]
+\end{lemma}
+\begin{proof}
+The projection trace formula identifies the sum with
+$\Tr(P(H\otimes1+1\otimes J))$.
+The partial trace identities identify this with
+$(s/m)\Tr H+(s/n)\Tr J=0$.
+\end{proof}
+
+\begin{lemma}[Gram determinant variation]
+\label{lem:balanced-gram-variation}
+\uses{lem:balanced-projection-trace}\notready
+Let $v_1,\ldots,v_s$ be an orthonormal basis of $S\subset E$,
+and let differentiable curves $v_i(t)$ satisfy $v_i(0)=v_i$ and
+$v_i'(0)=Av_i$. If $G(t)_{ij}=\langle v_i(t),v_j(t)\rangle$, then
+\[
+ \left.\frac{d}{dt}\det G(t)\right|_{t=0}=2\operatorname{Re}\Tr(PA).
+\]
+\end{lemma}
+\begin{proof}
+The product rule for the Hermitian form gives
+$G'(0)_{ij}=\langle Av_i,v_j\rangle+\langle v_i,Av_j\rangle$.
+Since $G(0)=I$, multilinearity of determinant shows its derivative
+is $\sum_iG'(0)_{ii}$: in the permutation expansion only the identity
+permutation contributes a first-order term, since every nonidentity
+permutation moves at least two indices. Conjugate symmetry changes this
+sum into $2\operatorname{Re}\sum_i\langle v_i,Av_i\rangle$.
+Apply the projection trace formula.
+\end{proof}
+
+\begin{lemma}[Convexity along Hermitian exponentials]
+\label{lem:balanced-exponential-convexity}\notready
+Let $A$ be Hermitian on a finite-dimensional complex Hermitian space
+$E$, and give $\bigwedge^sE$ its Gram determinant norm. For
+$z\in\bigwedge^sE$ the function
+$\phi(t)=\|\bigwedge^s(e^{tA})z\|^2$ is convex on $\mathbb R$.
+If $\phi'(0)=0$, then $\phi(t)\geq\phi(0)$ for every real $t$.
+\end{lemma}
+\begin{proof}
+Choose an orthonormal eigenbasis $e_1,\ldots,e_d$ for $A$, with
+real eigenvalues $\lambda_i$. The wedges $e_I$, for $s$-element
+subsets $I$ in increasing order, form an orthonormal basis of
+$\bigwedge^sE$: their Gram inner products are determinants of submatrices
+of the identity. Write $z=\sum_I z_I e_I$. The exponential acts on
+$e_i$ by $e^{t\lambda_i}$, so
+\[
+ \phi(t)=\sum_I |z_I|^2 e^{2t\sum_{i\in I}\lambda_i}.
+\]
+Every summand has nonnegative second derivative, proving convexity.
+For completeness, $e^x\geq1+x$ gives
+$\phi(t)\geq\phi(0)+t\phi'(0)$ for every real $t$, which proves
+the minimum assertion when $\phi'(0)=0$.
+\end{proof}
+
+\begin{lemma}[Determinant-one polar reduction]
+\label{lem:balanced-special-linear-polar}\notready
+For a finite-dimensional complex Hermitian space $U$ and $g\in\SL(U)$,
+there exist a unitary $u$ and a traceless Hermitian $H$ such that
+$g=ue^H$. The unitary $u$ also has determinant one.
+\end{lemma}
+\begin{proof}
+Put $p=(g^*g)^{1/2}$ and $u=gp^{-1}$. Positivity and invertibility
+of $g^*g$ imply those of $p$, and $u^*u=p^{-1}g^*gp^{-1}=I$;
+in finite dimension this makes $u$ unitary. Also
+$(\det p)^2=\det(g^*g)=|\det g|^2=1$.
+All eigenvalues of $p$ are positive, so $\det p>0$ and $\det p=1$.
+Choose an orthonormal eigenbasis of $p$, with eigenvalues $a_i>0$,
+and define $H$ in that basis by eigenvalues $\log a_i$. Then $H$ is
+Hermitian, $e^H=p$, and $\Tr H=\sum_i\log a_i=\log\prod_i a_i=0$.
+Finally $\det u=\det g/\det p=1$.
+In dimension zero all the maps are the unique endomorphism and the
+assertions hold with $H=0$.
+\end{proof}
+
 \begin{lemma}[Invariant detection of orbit closure]
 \label{lem:invariant-orbit-criterion}\notready
 For a product $G$ of complex special linear groups acting algebraically and linearly on
@@ -170,7 +285,7 @@ The Euclidean and Zariski closures of $Gx$ coincide.
 
 \begin{lemma}[Balanced projections give geometric semistability]
 \label{lem:balanced-plucker}
-\uses{def:geometric-semistability,lem:invariant-orbit-criterion,lem:balanced-partial-traces}
+\uses{def:geometric-semistability,lem:invariant-orbit-criterion,lem:balanced-frame-sum,lem:balanced-gram-variation,lem:balanced-exponential-convexity,lem:balanced-special-linear-polar}
 \source{bost-specht-manuscript:page-0012}\notready
 Let $S\subset U\otimes W$ be a nonzero subspace of complex Hermitian
 spaces of dimensions $m,n$, and put $s=\dim S$. If its orthogonal
