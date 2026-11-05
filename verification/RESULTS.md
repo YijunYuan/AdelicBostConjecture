@@ -47,6 +47,14 @@ coverage warnings (I-0004), including approved PR producers without source
 completion claims. The source-scope symlink is preserved; scratch cleanup
 found no stale candidates.
 
+Honesty-reviewer: **used, satisfactory**. It independently checked the
+column producer and its axioms, reviewed the final covariance consumers and
+recorded checks, and found no target-shaped hypothesis, vacuity or replacement
+lattice. Its two metadata findings (page-9 anchors and the all-tableaux
+dependency label) were repaired. One capacity interruption was recovered;
+the review then completed. Boundary memory I-0010 preserves the distinction
+between word covariance and the remaining tensor/gluing/invariant obligations.
+
 ## Rational spanning and the actual standard Gram bound — session 0007
 
 Commits `e29f2ab` and `54e9cbf` prove integral Garnir cancellation,
