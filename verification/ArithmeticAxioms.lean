@@ -1,6 +1,7 @@
 import BostConjecture.Arithmetic.HermitianLine
 import BostConjecture.Arithmetic.DeterminantLine
 import BostConjecture.Arithmetic.Degree
+import BostConjecture.Arithmetic.SubspaceDegree
 import BostConjecture.Arithmetic.MetricScaling
 import BostConjecture.Arithmetic.SubmoduleMetric
 import BostConjecture.Arithmetic.LineContraction
@@ -77,3 +78,18 @@ import BostConjecture.Arithmetic.DegreeNormalization
 #print axioms BostConjecture.Arithmetic.HermitianMetric.slope_rescale_self
 #print axioms BostConjecture.Arithmetic.HermitianMetric.degree_submodule_rescale
 #print axioms BostConjecture.Arithmetic.HermitianMetric.slope_submodule_rescale
+
+#print axioms BostConjecture.Arithmetic.integralPart
+#print axioms BostConjecture.Arithmetic.baseChange_integralPart
+#print axioms BostConjecture.Arithmetic.integralPartGenericEquiv
+#print axioms BostConjecture.Arithmetic.integralPart_generic_finrank
+#print axioms BostConjecture.Arithmetic.mem_integralPart_of_smul_mem
+#print axioms BostConjecture.Arithmetic.integralPartQuotientTorsionFree
+#print axioms BostConjecture.Arithmetic.integralPartQuotientProjective
+#print axioms BostConjecture.Arithmetic.mem_integralPart_baseChange_iff
+#print axioms BostConjecture.Arithmetic.integralPart_baseChange
+#print axioms BostConjecture.Arithmetic.HermitianMetric.subspaceDegree
+#print axioms BostConjecture.Arithmetic.HermitianMetric.subspaceDegree_bot
+#print axioms BostConjecture.Arithmetic.HermitianMetric.subspaceDegree_div_finrank
+#print axioms BostConjecture.Arithmetic.HermitianMetric.subspaceDegree_rescale
+#print axioms BostConjecture.Arithmetic.HermitianMetric.subspaceSlope_apply_bot
