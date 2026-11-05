@@ -46,7 +46,8 @@ lemma prodBasis_det_upperShear (p : Basis (Fin a) R M) (q : Basis (Fin b) R N)
       Matrix.fromBlocks 1 (LinearMap.toMatrix q p t) 0 1 := by
     ext i j
     rcases i with i | i <;> rcases j with j | j <;>
-      simp [Basis.toMatrix_apply, LinearMap.toMatrix_apply, Matrix.one_apply]
+      simp [Basis.toMatrix_apply, LinearMap.toMatrix_apply, Matrix.one_apply,
+        Finsupp.single_apply, eq_comm]
   rw [hm, Matrix.det_fromBlocks_zero₂₁, Matrix.det_one, Matrix.det_one, one_mul]
 
 /-- The top exterior power of a shear is the identity, including zero ranks. -/
