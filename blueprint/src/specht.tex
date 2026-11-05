@@ -911,9 +911,34 @@ Consequently the second displayed difference is the negative of the
 first, and belongs to the same subspace.
 \end{proof}
 
+\begin{lemma}[Extension at a fixed removable corner]
+\label{lem:standard-corner-extension}
+\uses{lem:standard-prefix-diagram,lem:polytabloid-prefix-restriction}\notready
+Let $t$ be standard on $n+1$ labels and let $\nu$ be its diagram
+after deleting the largest label. Every standard tableau $u$ of
+$\nu$ extends to a standard tableau $\widehat u$ of the original
+diagram by putting label $n$ in the deleted box. Restriction of
+$e_{\widehat u}$ at that last row is $e_u$. Colexicographic
+comparison of two such extensions agrees with comparison of their
+prefix row words.
+\end{lemma}
+\begin{proof}
+The removed box is at the right end of its row and the bottom of
+its column. All row and column comparisons inside $\nu$ are
+preserved. Every comparison involving the added box places its
+largest label after the other label, so the extension is standard.
+Choose the permutation of the first $n$ labels that carries the
+prefix of $t$ to $u$. Its extension fixing $n$ carries $t$ to
+$\widehat u$. Equivariance of frozen-tail restriction therefore
+identifies the restricted polytabloid with $e_u$. The last row
+agrees for both extensions, and their earlier row entries are
+exactly those of the two prefixes. Their last differing label and
+the row comparison at that label are consequently unchanged.
+\end{proof}
+
 \begin{lemma}[Colexicographic triangular Murphy action]
 \label{lem:prefix-content-triangular}
-\uses{lem:specht-branching-quotient,lem:last-murphy-branching,lem:standard-prefix-diagram}\notready
+\uses{lem:specht-branching-quotient,lem:last-murphy-branching,lem:standard-corner-extension}\notready
 Order standard tableaux by comparing their row words at the largest
 label where they differ; the tableau with the smaller row there is
 earlier. For every label $j$,
