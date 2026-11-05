@@ -1,5 +1,6 @@
 import BostConjecture.Geometry.TensorRealization
 import BostConjecture.Geometry.FreeEmbedding
+import BostConjecture.Geometry.DeterminantFrame
 import BostConjecture.Tensor.Evaluation
 
 #print axioms BostConjecture.Geometry.tensorCoordinates
@@ -21,3 +22,16 @@ import BostConjecture.Tensor.Evaluation
 #print axioms BostConjecture.Geometry.freeLatticeMap_injective
 #print axioms BostConjecture.Geometry.map_freeLatticeMap
 #print axioms BostConjecture.Geometry.freeLatticeMap_change_basis
+
+#print axioms BostConjecture.Geometry.determinantCoordinates
+#print axioms BostConjecture.Geometry.determinantCoordinates_ιMulti
+#print axioms BostConjecture.Geometry.determinantCoordinates_symm_apply
+#print axioms BostConjecture.Geometry.determinantCoordinates_change_basis
+#print axioms BostConjecture.Geometry.determinantPowerCoordinates
+#print axioms BostConjecture.Geometry.determinantPowerCoordinates_tprod
+#print axioms BostConjecture.Geometry.determinantPowerCoordinates_change_basis
+#print axioms BostConjecture.Geometry.freeDeterminantMap
+#print axioms BostConjecture.Geometry.freeDeterminantMap_tmul
+#print axioms BostConjecture.Geometry.freeDeterminantMap_injective
+#print axioms BostConjecture.Geometry.freeDeterminantMap_eq
+#print axioms BostConjecture.Geometry.freeDeterminantMap_basis
