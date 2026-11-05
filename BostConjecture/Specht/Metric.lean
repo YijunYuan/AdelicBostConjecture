@@ -38,6 +38,18 @@ theorem inner_realCast (x y : (Fin n → Fin d) → ℤ) :
     inner ℝ (realCast n d x) (realCast n d y) = ∑ w, (x w : ℝ) * (y w : ℝ) := by
   simp [PiLp.inner_apply, realCast, mul_comm]
 
+/-- Position permutations preserve the Hilbert inner product on integral words. -/
+theorem inner_realCast_wordRep (g : Equiv.Perm (Fin n)) (x y : (Fin n → Fin d) → ℤ) :
+    inner ℝ (realCast n d (wordRepInt n d g x)) (realCast n d (wordRepInt n d g y)) =
+      inner ℝ (realCast n d x) (realCast n d y) := by
+  rw [inner_realCast, inner_realCast]
+  exact Equiv.sum_comp (wordPerm n d g) (fun w => (x w : ℝ) * (y w : ℝ))
+
+theorem norm_realCast_wordRep (g : Equiv.Perm (Fin n)) (x : (Fin n → Fin d) → ℤ) :
+    ‖realCast n d (wordRepInt n d g x)‖ = ‖realCast n d x‖ := by
+  apply (sq_eq_sq₀ (norm_nonneg _) (norm_nonneg _)).mp
+  simpa only [real_inner_self_eq_norm_sq] using inner_realCast_wordRep g x x
+
 @[simp] theorem realCast_single (w : Fin n → Fin d) :
     realCast n d (Pi.single w 1) = EuclideanSpace.basisFun (Fin n → Fin d) ℝ w := by
   classical

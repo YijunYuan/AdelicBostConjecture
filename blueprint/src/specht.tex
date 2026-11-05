@@ -19,7 +19,7 @@ column antisymmetrizer as the rectangular construction in the manuscript.
 
 \begin{lemma}[Integrality, finite generation, and complex span]
 \label{lem:integral-specht-span}\uses{def:integral-specht-orbit}
-\lean{BostConjecture.Specht.orbitLattice_fg,BostConjecture.Specht.orbitLattice_ne_bot,BostConjecture.Specht.wordRepInt_mem_orbitLattice,BostConjecture.Specht.complexCast_injective,BostConjecture.Specht.complexCast_polytabloid,BostConjecture.Specht.complex_span_orbitLattice}
+\lean{BostConjecture.Specht.orbitLattice_fg,BostConjecture.Specht.orbitLattice_free,BostConjecture.Specht.orbitLattice_ne_bot,BostConjecture.Specht.wordRepInt_mem_orbitLattice,BostConjecture.Specht.complexCast_injective,BostConjecture.Specht.complexCast_polytabloid,BostConjecture.Specht.complex_span_orbitLattice}
 \source{bost-specht-manuscript:page-0004}\leanok
 The group $L_t$ is a nonzero finite free abelian group, stable under
 $\mathfrak S_n$. Coefficientwise inclusion $j:P_\mathbb Z\to\mathbb C^W$
@@ -45,11 +45,12 @@ inclusions prove the equality of spans.
 
 \begin{lemma}[Scalar extension of the integral orbit span]
 \label{lem:integral-specht-base-change}\uses{lem:integral-specht-span}
-\lean{BostConjecture.Specht.complexification_injective,BostConjecture.Specht.range_complexification,BostConjecture.Specht.complexSpechtEquiv,BostConjecture.Specht.complexSpechtEquiv_tmul}
+\lean{BostConjecture.Specht.complexification_injective,BostConjecture.Specht.range_complexification,BostConjecture.Specht.complexSpechtEquiv,BostConjecture.Specht.complexSpechtEquiv_tmul,BostConjecture.Specht.complexSpechtEquiv_equivariant}
 \source{bost-specht-manuscript:page-0004}\leanok
 The map $\mathbb C\otimes_\mathbb Z L_t\to\mathbb C^W$ given by
 $z\otimes x\mapsto zj(x)$ is injective and identifies its image with
-the complex Specht orbit span of $e_t$.
+the complex Specht orbit span of $e_t$. It intertwines the position
+actions on the integral scalar extension and the complex Specht module.
 \end{lemma}
 \begin{proof}
 The torsion-free $\mathbb Z$-module $\mathbb C$ is flat. Tensoring the
@@ -58,7 +59,9 @@ The coordinate isomorphism
 $\mathbb C\otimes_\mathbb Z\mathbb Z^W\simeq\mathbb C^W$ sends
 $z\otimes x$ to $zj(x)$. The image of the resulting injection is the
 complex span of $j(L_t)$, since pure tensors span the tensor product.
-The preceding lemma identifies that span.
+The preceding lemma identifies that span. On a pure tensor, both orders
+of applying a permutation and this map give $zj(gx)$, since $j$ commutes
+with position permutations. Linearity extends the equality to every tensor.
 \end{proof}
 
 \begin{lemma}[Independence of the enumerating tableau]
@@ -91,13 +94,14 @@ The metric on $V_t$ is the restriction of this Hilbert metric.
 
 \begin{lemma}[Orthonormal word coordinates and integral discreteness]
 \label{lem:real-specht-lattice}\uses{def:real-specht-lattice}
-\lean{BostConjecture.Specht.realCast_injective,BostConjecture.Specht.inner_realCast,BostConjecture.Specht.realCast_single_orthonormal,BostConjecture.Specht.one_le_norm_realCast,BostConjecture.Specht.spanLattice_discreteTopology,BostConjecture.Specht.spanLattice_isZLattice,BostConjecture.Specht.latticeEquiv}
+\lean{BostConjecture.Specht.realCast_injective,BostConjecture.Specht.inner_realCast,BostConjecture.Specht.realCast_single_orthonormal,BostConjecture.Specht.one_le_norm_realCast,BostConjecture.Specht.spanLattice_discreteTopology,BostConjecture.Specht.spanLattice_isZLattice,BostConjecture.Specht.latticeEquiv,BostConjecture.Specht.inner_realCast_wordRep,BostConjecture.Specht.norm_realCast_wordRep}
 \source{bost-specht-manuscript:page-0004}\leanok
 The vectors $j_\mathbb R(\delta_w)$ are orthonormal, and
 $\langle j_\mathbb R(x),j_\mathbb R(y)\rangle=\sum_w x_w y_w$.
 Every nonzero integer vector has norm at least one. The inclusion
 identifies $L_t$ with $\Lambda_t$, which is a discrete full lattice
-in $V_t$.
+in $V_t$. Position permutations preserve the inner product and norm
+of integral vectors.
 \end{lemma}
 \begin{proof}
 The inner-product formula gives the orthonormality assertion. A nonzero
@@ -106,7 +110,9 @@ its Hilbert norm is at least that absolute value. Differences of distinct
 lattice vectors thus have norm at least one, proving discreteness.
 Coefficientwise real inclusion is injective; restricting its codomain
 to $V_t$ does not change its image. The real span of that image is $V_t$
-by definition, so the lattice is full there.
+by definition, so the lattice is full there. Precomposition by a position
+permutation bijects the finite word set; reindexing the coordinate sum
+proves preservation of inner products and hence of norms.
 \end{proof}
 
 \begin{lemma}[Integral Gram determinant and nonnegative logarithmic covolume]

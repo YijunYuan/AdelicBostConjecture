@@ -1,8 +1,11 @@
 The mathematical reduction is written in `src/`, but its dependency cone is
 not yet closed. The integral word orbit span and its complex scalar-extension
-map are proved in `BostConjecture/Specht/Integral.lean`; their three precise
-nodes carry Lean attachments. This does not establish the integral standard
-basis, the invariant-space identification, or the covolume asymptotic.
+map are proved in `BostConjecture/Specht/Integral.lean`. `Tableau.lean`
+identifies the orbit with all polytabloids; `Metric.lean` constructs the
+discrete full Hilbert lattice in its own real span and proves its covolume
+is at least one using an integer Gram determinant. Seven precise nodes carry
+Lean attachments. This does not establish the integral standard basis,
+the invariant-space identification, or the covolume asymptotic.
 
 Three theorem nodes still need complete source-backed mathematical proofs:
 

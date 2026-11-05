@@ -104,10 +104,10 @@ theorem wordRepInt_mem_orbitLattice (t : Tableau n μ) (g : Equiv.Perm (Fin n))
 theorem orbitLattice_fg (t : Tableau n μ) : (orbitLattice t).FG :=
   Submodule.fg_span (Set.finite_range _)
 
-instance (t : Tableau n μ) : Module.Finite ℤ (orbitLattice t) :=
+instance orbitLattice_finite (t : Tableau n μ) : Module.Finite ℤ (orbitLattice t) :=
   Module.Finite.of_fg (orbitLattice_fg t)
 
-instance (t : Tableau n μ) : Module.Free ℤ (orbitLattice t) := inferInstance
+instance orbitLattice_free (t : Tableau n μ) : Module.Free ℤ (orbitLattice t) := inferInstance
 
 theorem orbitLattice_ne_bot (t : Tableau n μ) : orbitLattice t ≠ ⊥ := by
   intro h
@@ -185,5 +185,26 @@ def complexSpechtEquiv (t : Tableau n μ) : ℂ ⊗[ℤ] orbitLattice t ≃ₗ[�
     (complexSpechtEquiv t (z ⊗ₜ[ℤ] x) : WordSpace n (μ.colLen 0)) =
       z • complexCast n (μ.colLen 0) x :=
   complexification_tmul t z x
+
+/-- The position action restricted to the integral orbit lattice. -/
+def orbitAction (t : Tableau n μ) (g : Equiv.Perm (Fin n)) :
+    orbitLattice t →ₗ[ℤ] orbitLattice t where
+  toFun x := ⟨wordRepInt n (μ.colLen 0) g x, wordRepInt_mem_orbitLattice t g x.property⟩
+  map_add' x y := by apply Subtype.ext; exact map_add _ _ _
+  map_smul' a x := by apply Subtype.ext; exact map_smul _ _ _
+
+/-- Scalar extension intertwines the integer and complex permutation actions. -/
+theorem complexSpechtEquiv_equivariant (t : Tableau n μ) (g : Equiv.Perm (Fin n))
+    (x : ℂ ⊗[ℤ] orbitLattice t) :
+    complexSpechtEquiv t ((orbitAction t g).baseChange ℂ x) =
+      spechtRep t g (complexSpechtEquiv t x) := by
+  induction x using TensorProduct.inductionOn with
+  | tmul z x =>
+    apply Subtype.ext
+    simp only [LinearMap.baseChange_tmul, complexSpechtEquiv_tmul]
+    change z • complexCast n (μ.colLen 0) (wordRepInt n (μ.colLen 0) g x.val) =
+      wordRep n (μ.colLen 0) g (complexSpechtEquiv t (z ⊗ₜ[ℤ] x))
+    rw [complexSpechtEquiv_tmul, complexCast_wordRep, map_smul]
+  | add x y hx hy => simp only [map_add, hx, hy]
 
 end BostConjecture.Specht

@@ -51,8 +51,13 @@ changes. The installed mathlib revision is pinned in `lake-manifest.json`.
   multiplicity, staircase and Saxl-conjecture code from `Model` and `Basic`.
   Retained theorem statements and proof bodies otherwise unchanged.
 - Intended consumers: rectangular Specht irreducibility (§6) and the underlying
-  real-lattice compactness step (§7). Still required: integral polytabloid
-  lattice, scalar extension, metric and determinant-isotypic bridges; for
+  real-lattice compactness step (§7). The project-local
+  `BostConjecture/Specht/{Integral,Tableau,Metric}.lean` now consumes this
+  Specht cone to construct the integral orbit lattice, prove its equality
+  with the all-polytabloid span, identify its complex scalar extension
+  equivariantly, and realize its orthonormal word metric. These are original
+  bridge proofs using the unmodified vendor declarations. Still required:
+  integral standard basis and determinant-isotypic bridges; for
   compactness, restriction of scalars, arithmetic covolume/systole formulas,
   persistence of the integer-ring action, and degree continuity.
 
@@ -92,8 +97,12 @@ changes. The installed mathlib revision is pinned in `lake-manifest.json`.
   inclusion, in arbitrary finite-dimensional real inner product spaces.
 - Intended consumer: the full-rank standard-polytabloid sublattice's Gram
   determinant bounds the actual integral orbit lattice's covolume. The
-  construction, fullness, and metric compatibility of those lattices remain
-  to be proved. No TauCeti Lake dependency was added.
+  orbit lattice is now constructed as `BostConjecture.Specht.spanLattice`,
+  with discreteness and fullness proved. The consumer
+  `BostConjecture.Specht.covolume_sq_eq_integer_gram` applies the copied
+  Gram theorem, and `one_le_covolume` derives its lower bound. The standard
+  basis and its seminormal Gram upper bound remain open. No TauCeti Lake
+  dependency was added.
 
 ## Verification
 
