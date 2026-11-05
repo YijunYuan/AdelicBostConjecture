@@ -272,3 +272,15 @@ construction. Quotient-interval slope compatibility, higher-rank contraction,
 saturation-degree monotonicity, dual/tensor/exact-sequence identities,
 arithmetic finiteness, supermodularity and the HN filtration remain open.
 The task has not been marked done and no main-theorem check is claimed.
+
+
+The boundary graph sync recorded 120 blueprint nodes, 852 project declarations
+and 500 generated edges, with no unresolved attachment warning. The 479
+unattached helper/imported declarations remain an intentional shared-project
+coverage warning, not a kernel-completion measure. The read-only janitor
+review found the nine active roadmap rows to be intentional nested ancestors
+of the three authorized proof lanes. New subspace work is recorded as a done
+child while the remaining HN core and exact-sequence calculus stay unfinished.
+Scratch cleanup found no stale candidates. I-0028 carries checked imports to
+SPECHT; its next root integration result is still pending, so this report
+claims only the arithmetic module checks specified above.
