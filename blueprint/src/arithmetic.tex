@@ -1621,6 +1621,27 @@ localization recovers each $X_i$, so strictness and the two endpoints are
 preserved. This argument does not use bounded-degree finiteness.
 \end{proof}
 
+\begin{lemma}[Degree of a submodule of a quotient]
+\label{lem:quotient-submodule-degree}
+\uses{lem:nested-quotient-metric,lem:exact-determinant-degree}
+\notready
+Let $P\subset A$ be saturated, let $N\subset A/P$, and let
+$T$ be its inverse image in $A$. Give $N$ the metric induced from the
+quotient metric of $A/P$. Then
+\[
+ \degn(N)=\degn(T)-\degn(P),\qquad
+ \rk(N)=\rk(T)-\rk(P).
+\]
+\end{lemma}
+\begin{proof}
+The quotient map induces an isomorphism $T/P\simeq N$: it is
+surjective by the definition of the inverse image and its kernel is $P$.
+The nested-quotient metric identity makes this isomorphism an isometry.
+Exact degree additivity applied to $0\to P\to T\to T/P\to0$
+therefore gives the degree formula. Localization preserves this exact
+sequence, so dimension additivity gives the rank formula.
+\end{proof}
+
 \begin{lemma}[Harder--Narasimhan filtration]
 \label{lem:hn-filtration}
 \uses{def:hermitian-degree,lem:hermitian-hn-interval-flag,lem:nested-quotient-metric,lem:exact-determinant-degree,lem:determinant-contraction,lem:saturation-degree,lem:hermitian-convex-slopes}
