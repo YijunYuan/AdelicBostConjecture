@@ -49,7 +49,7 @@ public import BostConjecture.Specht.Covariance
 public import BostConjecture.Specht.Standard
 public import BostConjecture.Specht.Basis
 public import BostConjecture.Specht.PrefixWeights
-public import BostConjecture.Specht.PrefixDistribution
+public import BostConjecture.Specht.PrefixNormalizer
 public import BostConjecture.Specht.Orthogonal
 public import BostConjecture.Specht.RealAction
 public import BostConjecture.Specht.Content

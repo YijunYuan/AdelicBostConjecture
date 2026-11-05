@@ -1,4 +1,19 @@
-## Labelled occupancy producer (session 0026)
+## Exact labelled prefix distribution (session 0026)
+
+Claim class: **proved producers**. The finite prefix-distribution frontier is
+closed. Uniform bulk separation and the logarithmic-expectation squeeze are
+the remaining asymptotic consumers; BOST-SPECHT stays open. The canonical
+integral orbit lattice, orthonormal Hilbert metric and arbitrary-number-field
+main target are unchanged.
+
+The final explicit-root configured `horizon check` (`975bdb23135a0d4a`)
+passed **9,205 jobs** without warnings at 22:04:15 UTC on 2026-11-05.
+It integrates the delivered arithmetic determinant product/integral/shear,
+geometry contraction base-change and balanced exponential-flow leaves.
+The four new audit files contain **38 distinct probes**, all foundational-only.
+Honesty-reviewer independently accepted the producers and finite-node
+completion; the separated lower-bound and concentration nodes remain
+`notready`. No sorry, extra axiom or target-shaped hypothesis was introduced.
 
 `Specht/Hypergeometric.lean` constructs the actual block-subset bijection,
 counts every occupancy fiber, and proves the labelled hypergeometric masses
@@ -7,7 +22,7 @@ sum to one for `A ≤ a*M`. The explicit-root serialized module check
 `SpechtDistributionAxioms.lean` passed in `85643ebb74bb2ff7`, each with only
 `propext`, `Classical.choice`, and `Quot.sound`. Guarded LSP supplied feedback.
 Honesty-reviewer independently accepted the exact producer and attachment.
-The Vandermonde normalizer, bulk separation and covolume limit remain open.
+Bulk separation and the covolume limit remain open.
 
 `Specht/OccupancySort.lean` proves the actual distinct-tuple sorting
 equivalence, the factorial weighted sum, and its squared-Vandermonde
@@ -28,9 +43,22 @@ the narrow equivalence node, including zero-height and zero-width cases.
 `Specht/PrefixDistribution.lean` partitions the actual standard tableaux by
 prefix shape and evaluates the labelled Vandermonde normalizer in terms of
 their cardinality. Module check `6e6d524e78cff26d` passed 9,080 jobs; the five
-probes in `SpechtPrefixDistributionAxioms.lean` passed in 197.9 seconds,
+probes in `SpechtPrefixDistributionAxioms.lean` passed in `acfe6f57cd699d61`,
 each with only `propext`, `Classical.choice`, and `Quot.sound`.
 Independent honesty review accepted the producer and its narrow attachment.
+
+`Specht/PrefixNormalizer.lean` proves the finite-product normalizer,
+positivity, staircase/population identities and exact prefix probabilities.
+Module check `52a65ac77e43784b` passed 9,081 jobs; all eleven probes in
+`SpechtNormalizerAxioms.lean` passed in `7781aeb13e497e66` at 22:04:05 UTC,
+using only `propext`, `Classical.choice`, and `Quot.sound`.
+The reviewed source blob is `bf9c9974162e35159b65ce0be5063225676463bf`.
+
+The searched local libraries supplied sorting, finite counts and factorial
+identities. Bounded Horizon and LeanSearch queries did not locate the needed
+sampling-without-replacement concentration theorem; this is not a proof of
+absence. Guarded LSP briefly retained stale imports, while the serialized
+checks above verified the accepted files. No kernel check failed this session.
 
 ## Tableau enumeration and prefix weights checkpoint (session 0023)
 

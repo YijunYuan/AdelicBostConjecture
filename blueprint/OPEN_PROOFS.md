@@ -60,14 +60,19 @@ The following producers still need complete source-backed mathematical proofs:
   and the invariant-space identification remain open.
 - The Gram producer is closed, including the coefficient-one normalization
   and the actual prefix norm formula. Its first unmet asymptotic consumer is
-  the normalized labelled hypergeometric prefix distribution, followed by
-  bulk separation and the logarithmic expectation bound.
+  bulk separation, followed by the logarithmic expectation bound.
   `Complement.lean` and `PrefixCount.lean`
   prove the rotated complement and actual prefix-fiber bijection, yielding
   the exact product of the two smaller standard-tableau counts.
   `ComplementCount.lean` and `PrefixWeights.lean` turn that count into the
-  exact squared-Vandermonde binomial weight. The labelled normalizer and
-  uniform concentration bound are not yet formalized. `HookCount.lean`
+  exact squared-Vandermonde binomial weight. `Hypergeometric.lean`,
+  `OccupancySort.lean`, and `ShiftedShapes.lean` prove the labelled law,
+  sorting multiplicity, and equivalence with actual rectangular subdiagrams.
+  `PrefixDistribution.lean` and `PrefixNormalizer.lean` prove the closed
+  normalizer and exact prefix probability formula. The next separate
+  producers are the uniform bulk lower bound for that normalizer and the
+  labelled hypergeometric concentration inequality; their weighted bad-gap
+  consequence is still unproved. `HookCount.lean`
   bridges the imported hook formula
   to the accepted tableau indexing; `ShiftedCount.lean` proves the row hook
   interval partition and the factorial/Vandermonde enumeration.

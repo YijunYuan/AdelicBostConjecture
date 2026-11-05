@@ -430,6 +430,19 @@ from `Mathlib/Logic/Equiv/Sum.lean` to count the actual prefix fibers, then
 combines the preceding original producers with the squared Vandermonde
 determinant identity. It adds no dependency or external copied code.
 
+`Specht/PrefixNormalizer.lean` evaluates the rectangle count and normalizer
+by original finite-product proofs, using unchanged Mathlib factorial and
+interval-product identities at the same pinned revision. Its explicit
+probability theorem consumes the actual prefix-fiber count. No additional
+concentration or asymptotic result is imported or assumed.
+
+The checked root batch includes the owners' original
+`Arithmetic.DeterminantProduct`, `IntegralDeterminantProduct`,
+`DeterminantShear`, `Geometry.ContractionBaseChange`, and
+`Balanced.ExponentialFlow` leaves. Their provenance and separate scoped
+audits remain in the arithmetic, geometry and balanced verification records.
+The shared root build is integration evidence, not completion of those tasks.
+
 ## Orbit-criterion mathematical references — session 0026
 
 The BALANCED lane registered Maithani, *Splittings and the Reynolds Operator*,

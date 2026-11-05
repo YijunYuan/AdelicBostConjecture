@@ -1512,7 +1512,8 @@ the sorting formula multiplies it by $a!$ to give the labelled sum.
 
 \begin{lemma}[Exact prefix distribution]
 \label{lem:prefix-distribution}\uses{lem:tableau-count,lem:prefix-binomial-weight,lem:labelled-occupancy,lem:occupancy-sorting,lem:shifted-shape-equivalence,lem:prefix-normalizer-count}
-\source{bost-specht-manuscript:page-0006}\notready
+\lean{BostConjecture.Specht.sum_occupancyWeight_eq_closed,BostConjecture.Specht.staircaseSum_eq,BostConjecture.Specht.rectangle_occupancy_population,BostConjecture.Specht.sum_occupancyWeight_pos,BostConjecture.Specht.rectanglePrefix_probability_eq_weighted}
+\source{bost-specht-manuscript:page-0006}\leanok
 Fix $a\geq2$, $k\geq1$, $d=ak$, $c=a(a-1)/2$, $M=k+a-1$,
 and $V_0=\prod_{j=1}^{a-1}j!$. Let $0\leq t\leq d$. For a uniform standard tableau of
 $(k^a)$, write $\nu$ for the prefix after $t$ entries and put
@@ -1562,14 +1563,14 @@ displayed product convention. All denominators are positive: the
 factorials are positive and $0\leq t+c\leq aM$.
 \end{proof}
 
-\begin{lemma}[Uniform separation of bulk prefix coordinates]
-\label{lem:prefix-separation}\uses{lem:prefix-distribution}
+\begin{lemma}[Bulk lower bound for the prefix normalizer]
+\label{lem:prefix-normalizer-lower}\uses{lem:prefix-distribution}
 \source{bost-specht-manuscript:page-0007}\notready
-For fixed $a\geq2$, $0<\varepsilon<1/2$, and $L>0$,
+Let $a\geq2$, $k\geq1$, $d=ak$, $c=a(a-1)/2$,
+$0<\varepsilon<1/2$, and $\varepsilon d\leq t\leq(1-\varepsilon)d$.
+Then
 \[
- \sup_{\varepsilon d\leq t\leq(1-\varepsilon)d}
- \mathbb P\left(\min_{i<j}|b_i-b_j|\leq L\right)\longrightarrow0
- \qquad(k\to\infty).
+ Z_{k,t}\geq a!V_0(\varepsilon/a)^{2c}k^c.
 \]
 \end{lemma}
 \begin{proof}
@@ -1583,13 +1584,28 @@ $\varepsilon d$, while every denominator factor is at most
 $d+2c=a(k+a-1)\leq ad$. Thus
 $Z_{k,t}\geq a!V_0(\varepsilon/a)^{2c}k^c$.
 
+Here $\prod_{j=1}^{a-1}(k+j)^j\geq k^{\sum_{j=1}^{a-1}j}=k^c$,
+and every binomial coefficient being divided by is positive.
+\end{proof}
+
+\begin{lemma}[Labelled hypergeometric concentration]
+\label{lem:occupancy-concentration}\uses{lem:labelled-occupancy}
+\source{bost-specht-manuscript:page-0007}\notready
+Let $a,M\geq1$ and $0<A\leq aM$. Under the labelled occupancy
+law $B$, for every coordinate $i$ and $u>0$,
+\[
+ \mathbb P_B(|b_i-A/a|>u)\leq2e^{-2u^2/A}.
+\]
+\end{lemma}
+\begin{proof}
 Under the unweighted hypergeometric law, the moment-generating
 function of $b_i$ is the normalized $A$th elementary symmetric
 polynomial of $aM$ positive numbers, of which $M$ equal $e^\theta$
 and the others equal one. For positive numbers with fixed sum, this
 normalized polynomial is at most the $A$th power of their mean.
-To prove that inequality, replace a largest and a smallest entry by
-their mean. With their sum fixed, the symmetric polynomial is affine
+An all-equal tuple gives equality, including the case $aM=1$.
+Otherwise replace distinct largest and smallest entries by their mean.
+With their sum fixed, the symmetric polynomial is affine
 in their product with nonnegative coefficient, so does not decrease.
 The sum of squared deviations from the mean drops by half their
 squared difference, at least the previous sum of squared deviations
@@ -1605,6 +1621,19 @@ $\mathbb E_Be^{\theta(b_i-A/a)}\leq e^{A\theta^2/8}$.
 Markov's inequality with $\theta=4u/A$ and $-4u/A$ gives
 $\mathbb P_B(|b_i-A/a|>u)\leq2e^{-2u^2/A}$.
 
+\end{proof}
+
+\begin{lemma}[Uniform separation of bulk prefix coordinates]
+\label{lem:prefix-separation}\uses{lem:prefix-distribution,lem:prefix-normalizer-lower,lem:occupancy-concentration}
+\source{bost-specht-manuscript:page-0007}\notready
+For fixed $a\geq2$, $0<\varepsilon<1/2$, and $L>0$,
+\[
+ \sup_{\varepsilon d\leq t\leq(1-\varepsilon)d}
+ \mathbb P\left(\min_{i<j}|b_i-b_j|\leq L\right)\longrightarrow0
+ \qquad(k\to\infty).
+\]
+\end{lemma}
+\begin{proof}
 Put $\eta=1/(4c)$ and $u=k^{1/2+\eta}$. Since $A\leq aM\leq a^2k$,
 the union bound gives
 $\mathbb P_B(\max_i|b_i-A/a|>u)\leq2a e^{-2k^{2\eta}/a^2}$.
