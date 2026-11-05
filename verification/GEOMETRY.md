@@ -175,8 +175,8 @@ supply it.
 
 ## Remaining boundaries
 
-Projective gluing of the global integral injection, the metric
-isometry, regrouping and restricted canonical contraction, invariant base change and
+The global integral injection and finite Hilbert tensor core are proved below.
+The determinant metric isometry, regrouping and restricted canonical contraction, invariant base change and
 nonvanishing detection remain open. The geometric slope inequality and
 number-field target are not proved by these producers.
 
@@ -230,8 +230,27 @@ injectivity; no freeness of the original module is assumed.
   determinant-isotypic node remains unproved because its metric and invariant
   conclusions are still open. No new external code was copied.
 
-The next consumer is the actual Hilbert tensor metric, determinant isometry,
-regrouping, and restricted contracting pairing. Arithmetic requested the generic
+The next consumers are determinant isometry,
+regrouping, and the restricted contracting pairing. Arithmetic requested the generic
 finite tensor Hermitian core in `Tensor/**` and retains ownership of arithmetic
 conjugation and degree integration (I-0030). I-0031 requests root integration;
 that integration is not certified by these module checks.
+
+## Canonical finite Hilbert tensor form
+
+`Tensor/Hilbert.lean` at `cb7df3a` constructs the positive definite core on the
+actual complex `PiTensorProduct`, proves its pure-tensor formula and uniqueness,
+and proves preservation by factor isometries and reindexing. It uses Mathlib's
+binary Hilbert tensor product by finite induction. No global competing norm
+instance, arithmetic metric representation, or assumed metric certificate is added.
+
+- Module check `193ff323bec46737` passed 2814 jobs at 18:30:16 UTC.
+- The expanded 84-probe `GeometryAxioms.lean` check passed at 18:32:13 UTC
+  (`ffefd7bf352d83dc`), with only the three standard foundational axioms.
+  Initial elaboration failures were repaired before these checks.
+- The honesty reviewer independently inspected the module record and source,
+  finding substantive positivity and uniqueness proofs and coherent local instances.
+- The source-facing finite-Hilbert-tensor blueprint node is checked. Arithmetic
+  transport, determinant isometry and the contraction remain subsequent consumers.
+- Checked API sent to ARITH in I-0030 and root-integration/provenance owner
+  SPECHT in I-0031. All external reuse is by direct unchanged Mathlib imports.
