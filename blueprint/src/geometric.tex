@@ -963,9 +963,71 @@ and $i^{\otimes n}$ commutes with position permutations.
 Substituting these identities proves the stated equivariance.
 \end{proof}
 
+\begin{lemma}[The canonical dual Hilbert metric and evaluation bound]
+\label{lem:dual-hilbert-metric}
+\source{bost-specht-manuscript:page-0010}
+\lean{BostConjecture.Tensor.dualRieszEquiv,BostConjecture.Tensor.dualRieszEquiv_inner,BostConjecture.Tensor.dualCore,BostConjecture.Tensor.dualCore_norm,BostConjecture.Tensor.dualCore_evaluation_le,BostConjecture.Tensor.dualCore_inner_basis}
+\leanok
+Let $E$ be a finite-dimensional complex inner product space. For
+$f\in E^\vee$, let $r(f)\in E$ be its Riesz vector, characterized by
+$f(x)=\langle r(f),x\rangle$. Then
+\[
+ \langle f,g\rangle_\vee=\langle r(g),r(f)\rangle
+\]
+is a positive Hermitian form on the actual algebraic dual. Its norm
+is exactly the operator norm, so
+$|f(x)|\leq\|f\|_\vee\|x\|$. In any orthonormal basis $(b_i)$,
+\[
+ \langle f,g\rangle_\vee=\sum_i\overline{f(b_i)}g(b_i).
+\]
+\end{lemma}
+\begin{proof}
+Every linear functional is continuous in finite dimension. Riesz
+representation gives a conjugate-linear bijective isometry from the
+continuous dual to $E$. Reversing the two arguments in its pulled-back
+inner product makes the first argument conjugate linear and the second
+linear; conjugate symmetry and positivity follow from those on $E$.
+The norm is $\|r(f)\|$, equal to the continuous operator norm by the
+Riesz isometry. The operator norm estimate gives the evaluation bound.
+Expanding $\langle r(g),r(f)\rangle$ in an orthonormal basis gives
+$\sum_i\langle r(g),b_i\rangle\langle b_i,r(f)\rangle
+=\sum_i g(b_i)\overline{f(b_i)}$, as asserted.
+\end{proof}
+
+\begin{lemma}[Hilbert tensor duality and evaluation]
+\label{lem:hilbert-tensor-duality}
+\uses{lem:dual-hilbert-metric,lem:finite-hilbert-tensor,lem:projective-tensor-evaluation}
+\source{bost-specht-manuscript:page-0010}
+\notready
+For a finite family of finite-dimensional complex inner product spaces $E_j$,
+the canonical map
+\[
+ \bigotimes_j E_j^\vee\longrightarrow\left(\bigotimes_j E_j\right)^\vee
+\]
+is an isometry for the Hilbert tensor and dual metrics. Consequently its
+evaluation satisfies $|u(x)|\leq\|u\|\|x\|$ for arbitrary tensors
+$u\in\bigotimes_j E_j^\vee$ and $x\in\bigotimes_j E_j$.
+\end{lemma}
+\begin{proof}
+Let $r_j(f_j)$ denote the Riesz vector of $f_j$. For every pure tensor
+$x=\bigotimes_jx_j$, the image of $\bigotimes_jf_j$ evaluates to
+$\prod_j f_j(x_j)=\prod_j\langle r_j(f_j),x_j\rangle$.
+The Hilbert tensor formula identifies this with
+$\langle\bigotimes_jr_j(f_j),x\rangle$. Linearity and spanning extend
+this identity to every $x$, so uniqueness of the Riesz vector identifies
+the Riesz vector of the image with $\bigotimes_jr_j(f_j)$.
+The inner product of two such images is therefore
+$\prod_j\langle r_j(g_j),r_j(f_j)\rangle
+=\prod_j\langle f_j,g_j\rangle_\vee$, the source tensor inner product.
+Sesquilinearity and spanning extend the equality to all pairs of source
+tensors. Applying the dual evaluation estimate and this isometry gives
+the asserted bound. The finite-projective duality theorem supplies
+bijectivity of the same canonical map.
+\end{proof}
+
 \begin{lemma}[The canonical contracting pairing]
 \label{lem:canonical-contraction}
-\uses{lem:determinant-isotypic,lem:integral-canonical-pairing,lem:dual-regrouping,lem:hilbert-regrouping}
+\uses{lem:integral-canonical-pairing,lem:projective-determinant-isometry,lem:finite-hilbert-tensor,lem:hilbert-tensor-duality,lem:dual-regrouping,lem:hilbert-regrouping}
 \source{bost-specht-manuscript:page-0010}\notready
 Let $i:V\hookrightarrow W=\bigotimes_{j=1}^N E_j$ be a nonzero
 submodule with its induced metrics. Set $s=\rk V$, $a_j=\rk E_j$.
@@ -974,7 +1036,9 @@ For any positive $d$ divisible by $s,a_1,\ldots,a_N$, put
  B_d=\mathcal S_{s,d}(V),\qquad
  D_d=\bigotimes_j\mathcal S_{a_j,d}(E_j^\vee).
 \]
-Regrouping tensor positions embeds $D_d$ isometrically into
+Here $\mathcal S_{a,d}(A)$ denotes the explicit determinant-twisted
+integral orbit lattice of the preceding construction, without using
+an invariant-space identification. Regrouping tensor positions embeds $D_d$ isometrically into
 $(W^\vee)^{\otimes d}$. The map
 \[
  \Psi_d:B_d\to D_d^\vee,\qquad
@@ -985,8 +1049,10 @@ for the simultaneous permutation action of $\mathfrak S_d$.
 \end{lemma}
 \begin{proof}
 All maps and pairings in the formula are defined over $\Ocal$, proving
-integrality. Each determinant-isotypic embedding is an isometry, and
-regrouping Hilbert tensor factors is an isometry. The inclusion $i$ is
+integrality. Each determinant embedding is an isometry on complex fibers.
+Regrouping Hilbert tensor factors is isometric, and Hilbert tensor
+duality identifies the regrouped dual tensors with the ambient dual
+isometrically. The inclusion $i$ is
 isometric by its induced metric, hence so is $i^{\otimes d}$. For
 $v\in B_{d,v}$, the functional on the ambient dual tensor space given
 by evaluation on $i^{\otimes d}\iota_V(v)$ has norm $\|v\|$.

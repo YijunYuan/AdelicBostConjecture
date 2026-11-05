@@ -13,6 +13,7 @@ import BostConjecture.Geometry.ProjectiveMetric
 import BostConjecture.Geometry.Permutation
 import BostConjecture.Geometry.ProjectivePermutation
 import BostConjecture.Geometry.Contraction
+import BostConjecture.Tensor.DualMetric
 
 #print axioms BostConjecture.Geometry.tensorCoordinates
 #print axioms BostConjecture.Geometry.tensorCoordinates_tprod
@@ -149,3 +150,11 @@ import BostConjecture.Geometry.Contraction
 #print axioms BostConjecture.Geometry.canonicalPairing
 #print axioms BostConjecture.Geometry.canonicalPairing_apply
 #print axioms BostConjecture.Geometry.canonicalPairing_reindex_left
+
+#print axioms BostConjecture.Tensor.dualRieszEquiv
+#print axioms BostConjecture.Tensor.dualRieszEquiv_inner
+#print axioms BostConjecture.Tensor.dualCore
+#print axioms BostConjecture.Tensor.dualCore_inner
+#print axioms BostConjecture.Tensor.dualCore_norm
+#print axioms BostConjecture.Tensor.dualCore_evaluation_le
+#print axioms BostConjecture.Tensor.dualCore_inner_basis

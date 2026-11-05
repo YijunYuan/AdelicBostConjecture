@@ -177,8 +177,8 @@ supply it.
 
 The global integral injection and finite Hilbert tensor core are proved below.
 Regrouping and the local determinant isometry are also proved below. The
-restricted canonical contraction with its norm bound and equivariance, invariant
-base change, and nonvanishing detection remain open. The geometric slope inequality and
+restricted canonical pairing and equivariance are proved below; its norm bound,
+invariant base change, and nonvanishing detection remain open. The geometric slope inequality and
 number-field target are not proved by these producers.
 
 Arithmetic interface coordination selected
@@ -341,3 +341,31 @@ actual producer route; its finite-family/evaluation notation clarifications
 were applied to the checked blueprint node. The first metric boundary is now
 the genuine dual Hilbert metric and evaluation bound, coordinated with ARITH
 in I-0038; invariant base change and nonvanishing remain later producers.
+
+## Canonical dual form and the current metric frontier
+
+`Tensor/DualMetric.lean` constructs `dualRieszEquiv` and `dualCore` on the
+existing algebraic dual. It proves the exact continuous operator-norm identity,
+the evaluation bound and the orthonormal-coordinate Gram formula. ARITH accepted
+this generic interface in I-0038 and owns arithmetic dual scalar-extension and
+conjugation transport. No duplicate module, bundle, or arithmetic metric is added.
+
+- Module check `14e934fc56245088` passed 2486 jobs at 19:51:41 UTC without
+  warnings. The expanded 131-probe audit passed with only the standard
+  foundational axioms and no `sorryAx` or additional assumptions.
+- Earlier missing completeness and semilinear simplifier failures were repaired
+  using `FiniteDimensional.complete` and a direct rewrite, without raising limits.
+- Read-only honesty review approved the canonical dual construction and actual
+  norm/evaluation consumer. The new dual-metric blueprint node is checked.
+- The first remaining metric producer is now isometry of the canonical
+  `dualDistribEquivOfProjective` for these dual/Hilbert forms. Its full
+  source-facing Riesz-vector proof is in the pending Hilbert-tensor-duality
+  blueprint node. This is then consumed by the restricted pairing norm bound;
+  invariant-space equality is not a prerequisite for that norm argument.
+
+Commit `eecbe72` incidentally captured ARITH's staged `BinaryTensorMetric.lean`
+and arithmetic blueprint edit through the shared index. This is not GEOM proof
+evidence for those paths. ARITH independently verified the module before staging
+(`94052864d5cf1949`, 3450 jobs at 19:43:46 UTC); the parent confirmed no deletion
+or content mismatch. I-0039 records the resolution. Subsequent GEOM commits use
+`commit --only` with explicit owned paths as well as explicit staging.
