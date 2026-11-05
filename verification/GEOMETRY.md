@@ -474,3 +474,12 @@ freeness or flatness assumption on the extension ring.
 - Read-only honesty review found substantive actual-map proofs and no
   certificate or vacuity defect. The evaluation blueprint node is checked;
   canonical pairing transport through regrouping/determinant maps is still open.
+
+`Tensor/DualRegroupBaseChange.lean` now consumes the evaluation square to prove
+compatibility of the actual canonical dual regrouping on the entire scalar
+extension. It constructs the ambient dual identification from the existing
+tensor and dual equivalences and imposes no freeness or flatness assumption.
+Module `f4bd4142fbf0161a` passed 3362 jobs at 20:33:04 UTC; all 148 combined
+axiom probes passed at 20:35:38 UTC with the same three foundational axioms.
+Read-only honesty review approved the source and blueprint correspondence.
+The remaining pairing transport concerns its determinant factors.
