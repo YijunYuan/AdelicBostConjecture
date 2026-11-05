@@ -122,6 +122,35 @@ linearity proves equality everywhere. Finally $\delta_b^{(k)}$ takes
 the stated basis tensor to one, proving the normalization formula.
 \end{proof}
 
+\begin{lemma}[Naturality of the determinant-twisted free map]
+\label{lem:determinant-free-naturality}
+\uses{lem:determinant-twisted-free-inclusion,lem:free-integral-tensor-embedding}
+\source{bost-specht-manuscript:page-0009}
+\lean{BostConjecture.Geometry.map_freeDeterminantMap}
+\leanok
+Let $M,N$ be free rank-$a$ modules over a commutative ring $R$, and let
+$t$ be a rectangular tableau of shape $(k^a)$ with $k>0$ and $n$ boxes.
+For every linear map $f:M\to N$, the frame-independent maps satisfy
+\[
+ f^{\otimes n}\circ j_M
+ =j_N\circ\bigl((\bigwedge^a f)^{\otimes k}\otimes 1\bigr).
+\]
+No invertibility or flatness assumption is required.
+\end{lemma}
+\begin{proof}
+Choose bases $b,c$ and put $D=\det([f]_{c,b})$. The map on the top
+exterior power sends the basis wedge of $b$ to $D$ times that of $c$.
+Since that wedge is a basis of its exterior power, this proves
+$\delta_c(\bigwedge^a f(\xi))=D\delta_b(\xi)$ for every $\xi$.
+Taking products on pure tensors and using their spanning property gives
+$\delta_c^{(k)}((\bigwedge^a f)^{\otimes k}\eta)
+=D^k\delta_b^{(k)}(\eta)$. On the other hand, determinant covariance
+of the integral lattice realization gives
+$f^{\otimes n}j_b(z)=D^k j_c(z)$. The defining formula for the twisted
+map now proves the identity on $\eta\otimes z$, and linearity proves
+it on the entire source.
+\end{proof}
+
 \begin{lemma}[Scalar extension of the determinant-twisted free map]
 \label{lem:determinant-free-base-change}
 \uses{lem:determinant-twisted-free-inclusion}
@@ -196,7 +225,7 @@ a positive degree with nonzero restriction is therefore unchanged.
 
 \begin{lemma}[Determinant-isotypic integral modules]
 \label{lem:determinant-isotypic}
-\uses{def:rectangular-specht,lem:rectangular-invariants,lem:determinant-twisted-free-inclusion,lem:determinant-free-base-change,lem:degree-calculus}
+\uses{def:rectangular-specht,lem:rectangular-invariants,lem:determinant-twisted-free-inclusion,lem:determinant-free-base-change,lem:determinant-free-naturality,lem:degree-calculus}
 \source{bost-specht-manuscript:page-0008,bost-specht-manuscript:page-0009}
 \notready
 For a rank-$a$ projective $\Ocal$-module $A$ and $d=ak>0$, there is
