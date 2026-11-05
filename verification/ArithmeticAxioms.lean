@@ -1,4 +1,5 @@
 import BostConjecture.Arithmetic.TensorDegree
+import BostConjecture.Arithmetic.SubspaceSupermodular
 import BostConjecture.Arithmetic.ExactDegree
 import BostConjecture.Arithmetic.QuotientMetric
 import BostConjecture.Arithmetic.IntegralDeterminantProduct
@@ -250,3 +251,18 @@ import BostConjecture.Arithmetic.DeterminantProduct
 #print axioms BostConjecture.Arithmetic.HermitianMetric.degree_tensor_exact
 #print axioms BostConjecture.Arithmetic.HermitianMetric.degree_tensor
 #print axioms BostConjecture.Arithmetic.HermitianMetric.slope_tensor
+
+#print axioms BostConjecture.Arithmetic.submoduleQuotientTorsionFree
+#print axioms BostConjecture.Arithmetic.submoduleQuotientProjective
+#print axioms BostConjecture.Arithmetic.subToSupQuotient_surjective
+#print axioms BostConjecture.Arithmetic.exact_inf_subToSupQuotient
+#print axioms BostConjecture.Arithmetic.exact_inclusion_quotient
+#print axioms BostConjecture.Arithmetic.HermitianMetric.pullback_submodule_inclusion
+#print axioms BostConjecture.Arithmetic.HermitianMetric.pushforward_norm_le_of_inclusion
+#print axioms BostConjecture.Arithmetic.HermitianMetric.degree_submodule_sup
+#print axioms BostConjecture.Arithmetic.baseChange_sup
+#print axioms BostConjecture.Arithmetic.HermitianMetric.subspaceDegree_supermodular
+#print axioms BostConjecture.Arithmetic.HermitianMetric.subspaceSlope_isConvex
+#print axioms BostConjecture.Arithmetic.HermitianMetric.subspaceDegree_sub_eq_quotient
+#print axioms BostConjecture.Arithmetic.HermitianMetric.subspaceQuotient_finrank
+#print axioms BostConjecture.Arithmetic.HermitianMetric.subspaceSlope_eq_quotient
