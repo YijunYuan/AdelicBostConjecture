@@ -330,7 +330,8 @@ by balanced tensor exponential first variation.
 \end{proof}
 
 \begin{lemma}[Convexity along Hermitian exponentials]
-\label{lem:balanced-exponential-convexity}\notready
+\label{lem:balanced-exponential-convexity}
+\lean{BostConjecture.Balanced.exterior_exp_norm_sq_of_isSymmetric,BostConjecture.Balanced.convexOn_exterior_exp_norm_sq,BostConjecture.Balanced.exterior_norm_sq_le_exp_of_hasDerivAt_zero}\leanok
 \uses{lem:balanced-exterior-metric}
 Let $A$ be Hermitian on a finite-dimensional complex Hermitian space
 $E$, and give $\bigwedge^sE$ its Gram determinant norm. For
@@ -348,10 +349,15 @@ $e_i$ by $e^{t\lambda_i}$, so
 \[
  \phi(t)=\sum_I |z_I|^2 e^{2t\sum_{i\in I}\lambda_i}.
 \]
-Every summand has nonnegative second derivative, proving convexity.
-For completeness, $e^x\geq1+x$ gives
-$\phi(t)\geq\phi(0)+t\phi'(0)$ for every real $t$, which proves
-the minimum assertion when $\phi'(0)=0$.
+The exponential function is convex; composition with a real linear map,
+multiplication by a nonnegative coefficient, and finite sums preserve
+convexity. For $t>0$, convexity gives
+$\phi(h)\leq(1-h/t)\phi(0)+(h/t)\phi(t)$ for $0<h<t$.
+Subtract $\phi(0)$, divide by $h$, and let $h\downarrow0$ to get
+$\phi'(0)\leq(\phi(t)-\phi(0))/t$. For $t<0$, the same argument
+on $[t,0]$ gives $(\phi(t)-\phi(0))/t\leq\phi'(0)$.
+If $\phi'(0)=0$, both inequalities imply $\phi(t)\geq\phi(0)$;
+at $t=0$ equality holds.
 \end{proof}
 
 \begin{lemma}[Determinant-one polar reduction]

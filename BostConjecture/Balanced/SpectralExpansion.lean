@@ -3,6 +3,8 @@ module
 public import BostConjecture.Balanced.ExteriorMetric
 public import Mathlib.Analysis.SpecialFunctions.Exponential
 public import Mathlib.Analysis.InnerProductSpace.Spectrum
+public import Mathlib.Analysis.Convex.SpecificFunctions.Basic
+public import Mathlib.Analysis.Convex.Deriv
 
 /-!
 # Spectral expansion of the exterior exponential
@@ -113,5 +115,46 @@ theorem exterior_exp_norm_sq_of_isSymmetric (A : Module.End ℂ E) (hA : A.IsSym
             hA.eigenvalues rfl (Set.powersetCard.ofFinEmbEquiv.symm I j)) :=
   exterior_exp_norm_sq (hA.eigenvectorBasis rfl) s (LinearMap.toContinuousLinearMap A)
     (hA.eigenvalues rfl) (hA.apply_eigenvectorBasis rfl) z t
+
+theorem convexOn_sum_exp {κ : Type*} (K : Finset κ) (c a : κ → ℝ)
+    (hc : ∀ i, 0 ≤ c i) :
+    ConvexOn ℝ Set.univ (fun t : ℝ => ∑ i ∈ K, c i * Real.exp (t * a i)) := by
+  classical
+  induction K using Finset.induction_on with
+  | empty => simpa using (convexOn_const (c := (0 : ℝ)) convex_univ)
+  | @insert i K hi hK =>
+    have he : ConvexOn ℝ Set.univ (fun t : ℝ => Real.exp (t * a i)) := by
+      simpa [Function.comp_def, mul_comm] using
+        convexOn_exp.comp_linearMap (a i • (LinearMap.id : ℝ →ₗ[ℝ] ℝ))
+    simpa only [Finset.sum_insert hi, Pi.add_def, smul_eq_mul] using (he.smul (hc i)).add hK
+
+/-- The actual exterior norm squared is convex along every Hermitian exponential. -/
+theorem convexOn_exterior_exp_norm_sq (A : Module.End ℂ E) (hA : A.IsSymmetric)
+    (s : ℕ) (z : ⋀[ℂ]^s E) :
+    ConvexOn ℝ Set.univ (fun t : ℝ => ‖exteriorPower.map s
+      (NormedSpace.exp (t • LinearMap.toContinuousLinearMap A)).toLinearMap z‖ ^ 2) := by
+  let b := exteriorOrthonormalBasis (hA.eigenvectorBasis rfl) s
+  convert convexOn_sum_exp Finset.univ (fun I => ‖b.repr z I‖ ^ 2)
+    (fun I => 2 * ∑ j : Fin s, hA.eigenvalues rfl
+      (Set.powersetCard.ofFinEmbEquiv.symm I j)) (fun _ => sq_nonneg _) using 1
+  funext t
+  rw [exterior_exp_norm_sq_of_isSymmetric A hA]
+  apply Finset.sum_congr rfl
+  intro I _
+  congr 2
+  ring
+
+/-- A stationary point of the Hermitian exterior norm flow is a global minimum. -/
+theorem exterior_norm_sq_le_exp_of_hasDerivAt_zero (A : Module.End ℂ E)
+    (hA : A.IsSymmetric) (s : ℕ) (z : ⋀[ℂ]^s E)
+    (hd : HasDerivAt (fun t : ℝ => ‖exteriorPower.map s
+      (NormedSpace.exp (t • LinearMap.toContinuousLinearMap A)).toLinearMap z‖ ^ 2) 0 0)
+    (t : ℝ) :
+    ‖z‖ ^ 2 ≤ ‖exteriorPower.map s
+      (NormedSpace.exp (t • LinearMap.toContinuousLinearMap A)).toLinearMap z‖ ^ 2 := by
+  have hm := (convexOn_exterior_exp_norm_sq A hA s z).isMinOn_of_rightDeriv_eq_zero
+    (by simp) (hd.hasDerivWithinAt.derivWithin (uniqueDiffWithinAt_Ioi 0))
+  have hmap : exteriorPower.map s (1 : Module.End ℂ E) = LinearMap.id := map_id
+  simpa [hmap] using hm (Set.mem_univ t)
 
 end BostConjecture.Balanced

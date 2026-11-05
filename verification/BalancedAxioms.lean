@@ -1,6 +1,7 @@
 import BostConjecture.Balanced.ExponentialFlow
 import BostConjecture.Balanced.ExteriorMetric
 import BostConjecture.Balanced.PluckerNorm
+import BostConjecture.Balanced.SpectralExpansion
 
 #print axioms BostConjecture.Balanced.trace_starProjection_comp
 #print axioms BostConjecture.Balanced.trace_starProjection_comp_eq_sum
@@ -32,3 +33,13 @@ import BostConjecture.Balanced.PluckerNorm
 #print axioms BostConjecture.Balanced.exterior_map_inner
 #print axioms BostConjecture.Balanced.plucker_norm_sq
 #print axioms BostConjecture.Balanced.IsBalanced.hasDerivAt_plucker_norm_sq_tensor_exp_zero
+#print axioms BostConjecture.Balanced.exp_apply_of_apply_eq_smul
+#print axioms BostConjecture.Balanced.exp_real_smul_apply_of_apply_eq_smul
+#print axioms BostConjecture.Balanced.exterior_map_basis_of_apply_eq_smul
+#print axioms BostConjecture.Balanced.norm_sq_apply_of_basis
+#print axioms BostConjecture.Balanced.exterior_exp_apply_basis
+#print axioms BostConjecture.Balanced.exterior_exp_norm_sq
+#print axioms BostConjecture.Balanced.exterior_exp_norm_sq_of_isSymmetric
+#print axioms BostConjecture.Balanced.convexOn_sum_exp
+#print axioms BostConjecture.Balanced.convexOn_exterior_exp_norm_sq
+#print axioms BostConjecture.Balanced.exterior_norm_sq_le_exp_of_hasDerivAt_zero

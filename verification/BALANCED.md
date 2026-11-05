@@ -2,7 +2,8 @@
 
 Manuscript Lemma 7.2 is **not yet formalized**. The accepted code proves the
 intrinsic partial traces, actual exponential-frame Gram first variation, and
-the basis-independent complex Gram metric on the full exterior power. It contains no
+the basis-independent complex Gram metric on the full exterior power, actual
+Plücker norm stationarity, and Hermitian exterior exponential convexity. It contains no
 geometric-semistability theorem or assumed orbit criterion.
 
 ## Checked producers
@@ -14,10 +15,12 @@ geometric-semistability theorem or assumed orbit criterion.
 | `ee2abe7` | `Balanced.GramDerivative` | Determinant derivative at the identity, complex and real Gram variation, and `IsBalanced.hasDerivAt_re_gramDet_zero`. |
 | `5e76175` | `Balanced.ExponentialFlow` | Differentiation of the actual tensor exponential frame and `IsBalanced.hasDerivAt_re_gramDet_tensor_exp_zero`. |
 | `497b5b1` (automatic cross-lane snapshot) | `Balanced.ExteriorMetric` | Full complex exterior Gram metric, uniqueness/basis independence, Gram norm formula and orthonormal exterior basis. |
+| `76a3ad5` | `Balanced.PluckerNorm` | Actual Plücker norm equals one; balanced tensor exponential norm squared has derivative zero. |
+| This checkpoint | `Balanced.SpectralExpansion` | Actual exterior spectral expansion, convexity and global minimum from stationarity. |
 
 The exponential consumer constructs the actual frame rather than assuming
 its derivative. It needs no Hermitian hypothesis for this first-variation
-statement; Hermitian hypotheses enter the still-open convexity argument.
+statement; Hermitian hypotheses enter the checked spectral convexity argument.
 The real scalar instances use the canonical restriction along ℝ → ℂ.
 Zero-dimensional auxiliary cases are permitted; the open headline retains
 the source requirement that the subspace is nonzero.
@@ -45,9 +48,10 @@ updated axiom file's LSP retained a stale-import error after the producer
 build; the serialized kernel check passed all 19 probes in 36.0s.
 No unguarded build was used.
 
-SPECHT confirmed root integration through `Balanced.ExponentialFlow` in
-`I-0049/C-0010`: check `975bdb23135a0d4a`, **9,205 jobs warning-free**.
-The new exterior metric and Plücker norm leaf require the next root batch.
+SPECHT confirmed root integration through `Balanced.PluckerNorm` at
+`4d40509`, root blob `d29b590246c8925d6cce74559397b56db2cc8de5`:
+**9,210 jobs warning-free** at 2026-11-05 22:11:39 UTC, check
+`975bdb23135a0d4a`. SpectralExpansion requires the next root batch.
 
 ## Current exterior-metric checkpoint
 
@@ -70,8 +74,7 @@ stopped without results, and acceptance uses the owner's serialized checks.
 Automatic GEOM integration `497b5b1` captured BALANCED's in-flight new files
 and blueprint edits, including a then-unfixed coercion in `PluckerNorm`.
 The scoped metric check verifies the accepted metric; the Plücker consumer's
-coercion is fixed and its scoped build and axiom probes pass. Root integration remains a
-separate SPECHT handoff. The automatic cross-lane snapshot was reported in
+coercion is fixed and its scoped build, axiom probes and root integration pass. The automatic cross-lane snapshot was reported in
 `I-0049`; it is not evidence that every file in that commit built.
 
 The construction reuses mathlib at revision
@@ -92,10 +95,30 @@ proof lanes. No unrelated status was changed. Scratch dry-run found no stale
 candidates. Indexed Horizon searches stalled; guarded local library search
 and actual source inspection supplied the used declarations.
 
+## Hermitian spectral checkpoint
+
+`BostConjecture.Balanced.SpectralExpansion` passed its explicit-root serialized
+kernel build: **2,861 jobs, warning-free**, 7.2s. The updated axiom audit passed
+**40 probes** in 5.7s; all report only `propext`, `Classical.choice`, and
+`Quot.sound`. Guarded LSP diagnostics are clear. Independent honesty review
+accepted the exact spectral formula, real eigenvalues derived from Mathlib's
+Hermitian spectral theorem, nonnegative coefficients, convexity and the
+minimum theorem using genuine `HasDerivAt` stationarity. It found no defect
+or hidden spectral assumption. Degree zero and over-rank cases are valid.
+
+The new imports reuse Mathlib's `LinearMap.IsSymmetric.eigenvectorBasis`,
+`eigenvalues`, and `apply_eigenvectorBasis` from
+`Analysis/InnerProductSpace/Spectrum.lean`, the exponential series from
+`Analysis/SpecialFunctions/Exponential.lean`, and convex derivative results
+from `Analysis/Convex/Deriv.lean`, at the pinned revision above, without copying
+or modifying source. The tensor product flow is not yet identified with the
+single Hermitian exponential in this theorem; that consumer bridge is open.
+
 ## Remaining mathematical producers
 
-1. Spectral exponential expansion and convexity for the now-constructed
-   complex exterior Gram norm. The actual Plücker norm-variation bridge is checked.
+1. Identify the tensor product of Hermitian exponentials with the exponential
+   of the tensor-sum generator and prove that generator Hermitian, connecting
+   checked Plücker stationarity with checked exterior convexity.
 2. Determinant-one unitary/logarithm adapters for the already checked polar
    decomposition port (`TJHeeringa/mathlib4`, revision
    `41260205df493c627e1ac0e54812cfdeb6517fbc`, PR 45002).
@@ -119,7 +142,8 @@ The orbit criterion is restricted to the needed pair of special linear
 groups with an **algebraic linear action**. It does not apply to arbitrary
 abstract linear representations. The finite-degree separation argument uses
 neither finite generation of the invariant ring nor a semistability axiom.
-The orbit-criterion, exponential-convexity and polar blueprint nodes remain `notready`.
+The orbit-criterion and polar blueprint nodes remain `notready`. Only the
+checked analytic producers carry `leanok`; Lemma 7.2 remains open.
 
 ## Source registration
 
@@ -145,9 +169,9 @@ helper was prohibited. Read-only source/mathematical review was used.
 
 Claim class: **proved producers**. Before this session: actual tensor exponential-frame Gram stationarity was
 proved but the complex exterior metric was missing. After: the full complex
-exterior Gram metric and orthonormal basis are checked; the first analytic
-unmet producer is spectral expansion/convexity, and the actual Plücker norm-variation
-bridge is checked.
+exterior Gram metric, Plücker norm stationarity and Hermitian spectral
+expansion/convexity are checked. The first unmet analytic producer is the
+tensor-flow bridge, followed by determinant-one polar/log reduction.
 Consumer: `lem:balanced-plucker`, still unproved. The source-backed orbit route
 is mathematical blueprint only, with all formal dependencies still open.
 Honesty reviewer: used; actual projection and both balance equations are
