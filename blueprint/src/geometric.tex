@@ -776,6 +776,101 @@ is the one characterized by the cross Gram determinant formula, hence
 the conclusion is independent of the chosen orthonormal frame.
 \end{proof}
 
+\begin{lemma}[Position permutations commute with scalar extension]
+\label{lem:tensor-reindex-base-change}
+\uses{lem:tensor-base-change-equivalence}
+\source{bost-specht-manuscript:page-0010}
+\notready
+For a homomorphism $R\to S$ of commutative rings, an $R$-module $M$,
+and a finite set $J$, the canonical isomorphism
+$S\otimes_R M^{\otimes J}\simeq (S\otimes_R M)^{\otimes J}$
+intertwines every permutation of $J$.
+\end{lemma}
+\begin{proof}
+The scalar-extension map sends $\bigotimes_j m_j$ to
+$\bigotimes_j(1\otimes m_j)$. Applying a permutation before or after
+this formula gives the same tensor. Pure tensors span the original
+tensor power, so the equality extends by linearity; extending once
+more by $S$-linearity gives the equality on the full scalar extension.
+\end{proof}
+
+\begin{lemma}[Position equivariance of the free determinant map]
+\label{lem:free-determinant-permutation}
+\uses{lem:determinant-twisted-free-inclusion}
+\source{bost-specht-manuscript:page-0010}
+\lean{BostConjecture.Geometry.tensorCoordinates_reindex,BostConjecture.Geometry.freeLatticeMap_reindex,BostConjecture.Geometry.freeDeterminantMap_reindex}
+\leanok
+Let $R$ be a commutative ring, let $M$ have a basis of length $a$,
+and let $t$ be a rectangular tableau of shape $(k^a)$ with $n$ boxes,
+where $k>0$. The free determinant map intertwines the permutation
+of tensor positions with the integral orbit action on $R\otimes L_t$,
+the determinant-power factor carrying the trivial action.
+\end{lemma}
+\begin{proof}
+For a pure tensor the coordinate indexed by a word $w$ after a
+permutation $\tau$ is the original coordinate at $w\circ\tau$:
+reindex the product of the basis coefficients by $\tau^{-1}$.
+Pure tensors span, so the formula holds for all tensors. The integral
+orbit action on a coefficient vector is precisely precomposition by
+$\tau$, and the alphabet relabelling commutes with precomposition.
+It follows that the free lattice map intertwines the actions. On
+$\eta\otimes x$, the determinant map multiplies the lattice image of
+$x$ by the scalar determinant coordinate of $\eta$. This scalar is
+fixed by position permutations. Hence equivariance holds on simple
+tensors and extends by linearity to the full determinant-twisted source.
+\end{proof}
+
+\begin{lemma}[Position equivariance of the projective determinant map]
+\label{lem:projective-determinant-permutation}
+\uses{lem:projective-determinant-inclusion,lem:free-determinant-permutation,lem:tensor-reindex-base-change}
+\source{bost-specht-manuscript:page-0010}
+\notready
+Let $M$ be a finite projective module of constant rank $a$ over a
+commutative ring $R$, and let $t$ be a rectangular tableau of shape
+$(k^a)$ with $n$ boxes, where $k>0$. The global determinant map
+intertwines the integral orbit action on its lattice factor with
+permutation of the positions in $M^{\otimes n}$.
+\end{lemma}
+\begin{proof}
+It suffices by linearity to consider the generators
+$\eta\otimes(1\otimes x)$, since every elementary tensor
+$\eta\otimes(r\otimes x)$ is $r$ times such a generator.
+Take a finite principal cover trivializing $M$. In each chart the
+scalar extension of the global map is the free determinant map.
+Scalar extension sends the displayed generator to
+$\eta_S\otimes(1\otimes x)$, so it also commutes with applying the
+integral orbit action to $x$. On the target it commutes with position
+permutations by the preceding lemma. Free equivariance therefore
+proves the desired equality in every chart. The principal elements
+span the unit ideal, so equality is detected in these localizations.
+This proves the global identity without assuming that $M$ is free.
+\end{proof}
+
+\begin{lemma}[Complex-fiber isometry of the projective determinant map]
+\label{lem:projective-determinant-isometry}
+\uses{lem:projective-determinant-inclusion,lem:free-determinant-isometry}
+\source{bost-specht-manuscript:page-0010}
+\lean{BostConjecture.Geometry.projectiveDeterminantMap_inner}
+\leanok
+Let $R\to\mathbb C$ be a homomorphism of commutative rings, and let $M$
+be a finite projective $R$-module of constant rank $a$. Let $k>0$ and
+let $t$ be a rectangular tableau of shape $(k^a)$ with $n$ boxes.
+Give $M_{\mathbb C}$ a positive Hermitian form and choose an orthonormal
+basis of it. Under the canonical tensor and exterior scalar-extension
+isomorphisms, the complex scalar extension of the global determinant
+map preserves the tensor product of the Gram determinant form
+and the canonical complex lattice form.
+\end{lemma}
+\begin{proof}
+The scalar-extension theorem for the global map identifies it,
+in the chosen basis of $M_{\mathbb C}$, with the free determinant map.
+The local isometry lemma proves equality of the target Hilbert form
+and the prescribed source form for every pair of vectors. Transporting
+this equality through the canonical scalar-extension isomorphisms
+proves the assertion on the original scalar-extended source. Only the
+complex fiber is trivialized; no basis of $M$ over $R$ is needed.
+\end{proof}
+
 \begin{lemma}[Regrouping preserves the Hilbert form]
 \label{lem:hilbert-regrouping}
 \uses{lem:tensor-regrouping,lem:finite-hilbert-tensor}

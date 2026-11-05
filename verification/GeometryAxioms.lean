@@ -9,6 +9,8 @@ import BostConjecture.Geometry.ProjectiveEmbedding
 import BostConjecture.Tensor.HilbertRegroup
 import BostConjecture.Tensor.DualRegroup
 import BostConjecture.Geometry.DeterminantMetric
+import BostConjecture.Geometry.ProjectiveMetric
+import BostConjecture.Geometry.Permutation
 
 #print axioms BostConjecture.Geometry.tensorCoordinates
 #print axioms BostConjecture.Geometry.tensorCoordinates_tprod
@@ -128,3 +130,8 @@ import BostConjecture.Geometry.DeterminantMetric
 #print axioms BostConjecture.Geometry.freeLatticeMap_inner
 #print axioms BostConjecture.Geometry.determinantPowerCore_inner
 #print axioms BostConjecture.Geometry.freeDeterminantMap_inner
+
+#print axioms BostConjecture.Geometry.projectiveDeterminantMap_inner
+#print axioms BostConjecture.Geometry.tensorCoordinates_reindex
+#print axioms BostConjecture.Geometry.freeLatticeMap_reindex
+#print axioms BostConjecture.Geometry.freeDeterminantMap_reindex

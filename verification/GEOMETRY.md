@@ -289,3 +289,21 @@ new Hermitian bundle representation, or external copied code was introduced.
   attachments, finding no hidden isometry assumption or global-contraction
   overclaim. The three new metric nodes are checked; the full determinant
   isotypic/invariant theorem and canonical contraction remain unproved.
+
+## Complex fibers and free permutation compatibility
+
+`Geometry/ProjectiveMetric.lean` combines the actual global base-change theorem
+with the local isometry, proving preservation of the prescribed forms on every
+complex fiber. It takes a Core on the canonical tensor module and derives local
+norm instances. Over arbitrary rings it claims a global map; integral injectivity
+still requires the earlier integer-flatness hypothesis.
+`Geometry/Permutation.lean` transports position permutations through tensor
+coordinates and proves actual equivariance for the free lattice and determinant
+maps. The global projective permutation descent is a subsequent consumer.
+
+The combined module check `8f5fd4cb8257389e` passed 9085 jobs at 19:34:02 UTC;
+all 114 transitive probes then passed with only the foundational axioms. Initial
+canonical-module instance and alphabet-relabelling elaboration failures were
+repaired. Read-only honesty review approved the two source/blueprint nodes.
+The full contraction still needs dual-metric/evaluation compatibility and
+restricted equivariance; no contraction completion claim is made.
