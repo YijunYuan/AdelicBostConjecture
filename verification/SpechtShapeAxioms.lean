@@ -1,0 +1,14 @@
+import BostConjecture.Specht.ShiftedShapes
+
+#print axioms BostConjecture.Specht.staircase_le_occupancy
+#print axioms BostConjecture.Specht.unshiftOccupancy_antitone
+#print axioms BostConjecture.Specht.unshiftOccupancy_le
+#print axioms BostConjecture.Specht.occupancyShape
+#print axioms BostConjecture.Specht.rowLen_occupancyShape
+#print axioms BostConjecture.Specht.occupancyShape_le
+#print axioms BostConjecture.Specht.shiftedRowLength_occupancyShape
+#print axioms BostConjecture.Specht.sum_rowLen_rectangle
+#print axioms BostConjecture.Specht.card_occupancyShape_add_staircase
+#print axioms BostConjecture.Specht.rectangleShapeOccupancy
+#print axioms BostConjecture.Specht.occupancyShape_rectangleShapeOccupancy
+#print axioms BostConjecture.Specht.rectangleShapeEquivSortedOccupancy

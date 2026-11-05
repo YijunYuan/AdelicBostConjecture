@@ -1168,9 +1168,26 @@ evaluation, since $f(e^{-1}e(x))=f(x)$. Composing these identities
 proves the equality on arbitrary extended tensors.
 \end{proof}
 
+\begin{lemma}[Frames after extension of a constant-rank projective module]
+\label{lem:projective-fiber-frames}
+\notready
+Let $M$ be a finite projective module of constant rank $a$ over a
+commutative ring $R$, and let $R\to F$ be an algebra over a field $F$.
+Then $\dim_F(F\otimes_R M)=a$. In particular, a positive Hermitian form
+on a complex fiber admits an orthonormal frame indexed by $a$ elements.
+The dual of that fiber has the same dimension.
+\end{lemma}
+\begin{proof}
+The rank at the zero prime of $F$ is the rank at its inverse-image
+prime of $R$, because rank at a stalk commutes with scalar extension
+for finite projective modules. Over a field this rank is the vector-space
+dimension. Gram--Schmidt provides an orthonormal basis, which can therefore
+be indexed by $a$ elements. Finite-dimensional duality preserves dimension.
+\end{proof}
+
 \begin{lemma}[Contraction on the intrinsic complex fibers]
 \label{lem:intrinsic-pairing-contraction}
-\uses{lem:canonical-pairing-base-change,lem:free-determinant-contraction,lem:finite-hilbert-tensor,lem:arithmetic-tensor-metric,lem:induced-hermitian-metric}
+\uses{lem:canonical-pairing-base-change,lem:free-determinant-contraction,lem:finite-hilbert-tensor,lem:arithmetic-tensor-metric,lem:induced-hermitian-metric,lem:projective-fiber-frames}
 \source{bost-specht-manuscript:page-0010}\notready
 Let $E_j$ be finite projective modules over the integers of a number field,
 with Hermitian metrics, and let $i:V\hookrightarrow\bigotimes_j E_j$ be an

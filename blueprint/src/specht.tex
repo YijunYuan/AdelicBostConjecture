@@ -1488,8 +1488,28 @@ the rectangle. Their sum is $m$. Shifting and subtracting the
 staircase are inverse on every row, establishing the bijection.
 \end{proof}
 
+\begin{lemma}[Vandermonde normalizer from the tableau count]
+\label{lem:prefix-normalizer-count}
+\uses{lem:prefix-binomial-weight,lem:occupancy-sorting,lem:shifted-shape-equivalence}\notready
+Let $m+l=ak$, $M=k+a-1$, $c=\sum_{r<a}(a-r-1)$, and
+$F=f^{(k^a)}$. Then the labelled occupancy law at total $m+c$ satisfies
+\[
+ \sum_b V(b)^2 B(b)=
+ \frac{a!\,F\,(M!)^a}{m!\,l!\binom{aM}{m+c}}.
+\]
+\end{lemma}
+\begin{proof}
+The prefix fibers over all subdiagrams of size $m$ partition the $F$
+standard tableaux. By the exact binomial weight formula, the weight
+$V(b)^2B(b)$ of a decreasing tuple associated to $\mu$ is its prefix
+fiber size times $(M!)^a/(m!l!\binom{aM}{m+c})$.
+Summing over shapes gives $F$ times this constant. The shifted-shape
+bijection identifies this sum with the sum over decreasing tuples;
+the sorting formula multiplies it by $a!$ to give the labelled sum.
+\end{proof}
+
 \begin{lemma}[Exact prefix distribution]
-\label{lem:prefix-distribution}\uses{lem:tableau-count,lem:prefix-binomial-weight,lem:labelled-occupancy,lem:occupancy-sorting,lem:shifted-shape-equivalence}
+\label{lem:prefix-distribution}\uses{lem:tableau-count,lem:prefix-binomial-weight,lem:labelled-occupancy,lem:occupancy-sorting,lem:shifted-shape-equivalence,lem:prefix-normalizer-count}
 \source{bost-specht-manuscript:page-0006}\notready
 Fix $a\geq2$, $k\geq1$, $d=ak$, $c=a(a-1)/2$, $M=k+a-1$,
 and $V_0=\prod_{j=1}^{a-1}j!$. For a uniform standard tableau of

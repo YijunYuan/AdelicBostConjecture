@@ -15,10 +15,12 @@ public import BostConjecture.Arithmetic.LineTensorDegree
 public import BostConjecture.Arithmetic.DualFiber
 public import BostConjecture.Arithmetic.LineDualDegree
 public import BostConjecture.Arithmetic.DeterminantDual
+public import BostConjecture.Arithmetic.DeterminantProduct
 public import BostConjecture.LinearAlgebra.AlternatingTensorPower
 public import BostConjecture.LinearAlgebra.ExteriorPower.BaseChange
 public import BostConjecture.LinearAlgebra.PiTensorProduct.Projective
 public import BostConjecture.Analysis.InnerProductSpace.Polar
+public import BostConjecture.Balanced.ExponentialFlow
 public import BostConjecture.Geometry.TensorRealization
 public import BostConjecture.Geometry.FreeEmbedding
 public import BostConjecture.Geometry.DeterminantBaseChange
@@ -44,6 +46,7 @@ public import BostConjecture.Specht.Covariance
 public import BostConjecture.Specht.Standard
 public import BostConjecture.Specht.Basis
 public import BostConjecture.Specht.PrefixWeights
+public import BostConjecture.Specht.OccupancySort
 public import BostConjecture.Specht.Orthogonal
 public import BostConjecture.Specht.RealAction
 public import BostConjecture.Specht.Content

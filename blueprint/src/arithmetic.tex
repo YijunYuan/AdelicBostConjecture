@@ -1026,18 +1026,35 @@ localizations are bijective: localization detects both its kernel and
 cokernel. This proves the assertion without choosing global bases.
 \end{proof}
 
-\begin{lemma}[Exact-sequence determinant isometry and degree]
-\label{lem:exact-determinant-degree}
-\uses{lem:determinant-product,lem:quotient-hermitian-metric,lem:determinant-metric,lem:line-tensor-degree,lem:line-degree-isometry,def:intrinsic-determinant-degree}
-\source{bost-specht-manuscript:page-0003}\notready
-Let $0\to A\xrightarrow{i}B\xrightarrow{q}C\to0$ be an exact sequence
-of finite projective $\Ocal$-modules. Equip $B$ with a Hermitian metric,
-$A$ with the induced metric and $C$ with the quotient metric.
-There is a canonical isometry
+\begin{lemma}[Shears act trivially on the determinant]
+\label{lem:determinant-shear}\uses{lem:determinant-product-free}\notready
+Let $P,Q$ have finite bases of lengths $a,c$ over a commutative ring $R$,
+and let $t:Q\to P$ be linear. The automorphism
+$u_t(p,q)=(p+t(q),q)$ acts as the identity on
+$\bigwedge^{a+c}(P\oplus Q)$.
+\end{lemma}
+\begin{proof}
+In the concatenated basis its matrix is
+$\left(\begin{smallmatrix}I&t\\0&I\end{smallmatrix}\right)$.
+The determinant of this block triangular matrix is the product of the
+two diagonal determinants, namely $1$. The top exterior power is free of
+rank one with generator the concatenated basis wedge, and the induced map
+multiplies this generator by that determinant. It therefore fixes every
+vector. This argument includes empty bases.
+\end{proof}
+
+\begin{lemma}[Integral determinant of an exact sequence]
+\label{lem:exact-determinant-algebra}
+\uses{lem:determinant-product,lem:determinant-shear}\notready
+Let $R$ be a domain with fraction field $F$, and let
+$0\to A\xrightarrow{i}B\xrightarrow{q}C\to0$ be an exact sequence
+of finite projective $R$-modules, of generic ranks $a,a+c,c$.
+For every linear section $s$ of $q$, the exterior power of
+$j_s(a,c)=i(a)+s(c)$ composed with $W_{a,c}$ defines the same isomorphism
 \[
- \det A\otimes_\Ocal\det C\simeq\det B,
+ \det A\otimes_R\det C\simeq\det B.
 \]
-and $\degn(B)=\degn(A)+\degn(C)$, including zero ranks.
+It commutes with extension of scalars to an extension field of $F$.
 \end{lemma}
 \begin{proof}
 Projectivity of $C$ gives a linear section $s$ of $q$.
@@ -1045,12 +1062,34 @@ The map $(a,c)\mapsto i(a)+s(c)$ is an isomorphism $A\oplus C\simeq B$:
 surjectivity follows by subtracting $s(q(b))$, and injectivity follows by
 applying $q$ and then using injectivity of $i$.
 Compose its top exterior power with the preceding determinant isomorphism.
-Another section has the form $s+i\circ t$ for a linear map $t:C\to A$.
-The resulting change on $A\oplus C$ is block upper triangular with identity
-diagonal, hence has determinant $1$ after extending to $K$. The integral
-determinant line is torsion-free, so the two integral maps are equal.
-This proves independence of the section and hence canonicity.
+For another section $s'$, the difference $s'-s$ takes values in
+$\ker q=\operatorname{im}i$. Inverting $i:A\to\operatorname{im}i$
+gives a linear map $t:C\to A$ with $s'=s+i\circ t$.
+In bases of $A_F,C_F$, the change from $j_s$ to $j_{s'}$ is
+$\left(\begin{smallmatrix}I&t\\0&I\end{smallmatrix}\right)$.
+Its determinant is $1$, because expansion along the first $a$ columns
+leaves the identity determinant on the remaining $c$ rows and columns.
+Thus it acts as the identity on the top exterior power over $F$.
+The integral determinant line is projective and hence torsion-free;
+its injection into its generic fiber proves equality of the two integral maps.
+Scalar extension commutes with the exterior product and the exterior power
+of $j_s$; the extended $s$ is a section of the extended $q$.
+The same argument over the extension field proves independence there, giving
+the asserted compatibility, also when either rank is zero.
+\end{proof}
 
+\begin{lemma}[Exact-sequence determinant isometry and degree]
+\label{lem:exact-determinant-degree}
+\uses{lem:exact-determinant-algebra,lem:quotient-hermitian-metric,lem:determinant-metric,lem:line-tensor-degree,lem:line-degree-isometry,def:intrinsic-determinant-degree}
+\source{bost-specht-manuscript:page-0003}\notready
+Let $0\to A\xrightarrow{i}B\xrightarrow{q}C\to0$ be an exact sequence
+of finite projective $\Ocal$-modules. Equip $B$ with a Hermitian metric,
+$A$ with the induced metric and $C$ with the quotient metric.
+The canonical determinant isomorphism
+$\det A\otimes_\Ocal\det C\simeq\det B$ is an isometry, and
+$\degn(B)=\degn(A)+\degn(C)$, including zero ranks.
+\end{lemma}
+\begin{proof}
 At an embedding $\sigma$, the same independence permits the orthogonal
 section of $q_\sigma$. Choose orthonormal bases of $A_\sigma$ and
 $C_\sigma$. Their images in $B_\sigma$ form an orthonormal basis, since
