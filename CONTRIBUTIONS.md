@@ -75,6 +75,26 @@ changes. The installed mathlib revision is pinned in `lake-manifest.json`.
   remain separate obligations. This formula alone does not prove the
   manuscript's covolume bound.
 
+## Gram determinants and covolumes — The Tau Ceti contributors
+
+- Repository: <https://github.com/TauCetiProject/TauCeti>.
+- Revision: `b3b0334ab9203d9faee4b2f34cd75161463ecdd0`.
+- License: Apache-2.0, original `LICENSE` retained at `vendor/tauceti/LICENSE`.
+- Extracted from `TauCeti/Analysis/InnerProductSpace/Gram/Hadamard.lean`
+  and `TauCeti/Algebra/Module/ZLattice/Covolume.lean` into the 95-line
+  `BostConjecture/Lattice/Covolume.lean`. Copyright and attribution are preserved.
+  Exact file/declaration hashes and changes are in `vendor/tauceti/PROVENANCE.json`.
+- Local changes: backport from Lean 4.36.0-rc2 to 4.35; narrow Mathlib imports;
+  derive lattice-inclusion covolume monotonicity using Mathlib's relative-index
+  formula, avoiding an additional fundamental-domain comparison helper.
+- Results: coordinate Gram determinant, volume of orthonormal fundamental
+  domains, Gram formulas for covolumes, and reversal of covolume under lattice
+  inclusion, in arbitrary finite-dimensional real inner product spaces.
+- Intended consumer: the full-rank standard-polytabloid sublattice's Gram
+  determinant bounds the actual integral orbit lattice's covolume. The
+  construction, fullness, and metric compatibility of those lattices remain
+  to be proved. No TauCeti Lake dependency was added.
+
 ## Verification
 
 Run `horizon --root ../.. check --json` from this project, then

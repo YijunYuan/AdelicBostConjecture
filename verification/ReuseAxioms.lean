@@ -14,4 +14,10 @@ import BostConjecture
 #print axioms HarderNarasimhan.PayoffFunction.isSemistable_of_hasNashEquilibrium
 #print axioms BostConjecture.Subspace.slope_isSlopeLike
 #print axioms BostConjecture.Subspace.slope_isConvex
+#print axioms OrthonormalBasis.det_gram_eq_norm_det_sq
+#print axioms OrthonormalBasis.volume_fundamentalDomain
+#print axioms OrthonormalBasis.volume_real_fundamentalDomain
+#print axioms ZLattice.covolume_sq_eq_det_gram
+#print axioms ZLattice.covolume_span_sq_eq_det_gram
+#print axioms ZLattice.covolume_le_covolume_of_le
 #print axioms RepresentationTheory.Combinatorics.YoungDiagram.CornerStatistics.Partition.auxiliaryCard_mul_hookLengthProduct_eq_factorial

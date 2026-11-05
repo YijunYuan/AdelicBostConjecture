@@ -1,5 +1,12 @@
 # Tau Ceti selective-reuse survey
 
+Integration update: the Gram/covolume subset below has now been adapted into
+`BostConjecture/Lattice/Covolume.lean` (95 lines, six declarations), built on
+Lean 4.35 and audited with only standard foundational axioms. It uses Mathlib's
+relative-index formula to avoid the separate fundamental-domain helper.
+See `CONTRIBUTIONS.md` and `vendor/tauceti/PROVENANCE.json`. The rest of this
+document records the original source survey; its larger candidates remain unported.
+
 Inspected 2026-11-05 for the Bost manuscript's integral Specht/Gram and tensor-invariant prerequisites. **Recommendation: first adapt only the covolume–Gram and lattice-inclusion lemmas below; then adapt the rational standard-polytabloid proof into the existing word-space model. Do not require TauCeti as a Lake dependency.**
 
 ## Revision, licence, and evidence

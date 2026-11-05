@@ -1,6 +1,7 @@
 module
 
 public import BostConjecture.Slope.Subspace
+public import BostConjecture.Lattice.Covolume
 public import OAI.NumberTheory.ArithmeticGroups.Lattices.FrameMatrices
 public import OAI.RepresentationTheory.Saxl.SpechtSubmodule
 public import HarderNarasimhan.Filtration.Unique
