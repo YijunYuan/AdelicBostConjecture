@@ -517,7 +517,8 @@ nonzero on a nonzero vector of $\bigwedge^sV$.
 
 \begin{lemma}[Evaluation on a kernel after faithfully flat extension]
 \label{lem:kernel-evaluation-base-change}
-\notready
+\lean{BostConjecture.Geometry.baseChange_apply_tensorKer,BostConjecture.Geometry.exists_ker_baseChange_ne_zero_iff}
+\leanok
 Let $R\to S$ be a faithfully flat homomorphism of commutative rings,
 and let $f:M\to N$ and $e:M\to P$ be linear maps. The canonical
 isomorphism $S\otimes_R\ker f\simeq\ker(1\otimes f)$ identifies the
@@ -1306,7 +1307,8 @@ into the dual representation.
 
 \begin{lemma}[Invariants for two independent factors]
 \label{lem:independent-tensor-invariants}
-\notready
+\lean{BostConjecture.Geometry.exists_independent_invariants_iff,BostConjecture.Geometry.independentInvariantsEquiv,BostConjecture.Geometry.independentInvariantsEquiv_apply}
+\leanok
 Let $G$ and $H$ act linearly on vector spaces $A$ and $B$ over a field $F$.
 For the action $(g,h)(a\otimes b)=ga\otimes hb$, the canonical map
 \[
@@ -1329,9 +1331,39 @@ Finally, tensoring the two injective factor inclusions is injective,
 proving the asserted isomorphism onto the invariant subspace.
 \end{proof}
 
+\begin{lemma}[Invariants for a finite family of independent factors]
+\label{lem:finite-independent-tensor-invariants}
+\uses{lem:independent-tensor-invariants}\notready
+Let $I$ be a finite set, and for each $i\in I$ let $G_i$ act linearly
+on an $F$-vector space $M_i$. The natural map
+\[
+ \bigotimes_{i\in I}M_i^{G_i}\longrightarrow
+ \left(\bigotimes_{i\in I}M_i\right)^{\prod_{i\in I}G_i}
+\]
+is an isomorphism. No dimension or group-order hypothesis is required.
+\end{lemma}
+\begin{proof}
+Each invariant subspace inclusion admits a linear left inverse over a
+field. Tensoring these left inverses gives a left inverse to the natural
+map, proving injectivity. Pure tensors of invariant vectors are fixed
+under the product action, so the image is contained in the fixed subspace.
+For the reverse inclusion, induct on $|I|$. If $I$ is empty, both tensor
+products are $F$ and the natural map is the identity. Otherwise choose
+$i_0\in I$ and put $J=I\setminus\{i_0\}$. Canonically regroup the ambient
+tensor as $(\bigotimes_{j\in J}M_j)\otimes M_{i_0}$. Regrouping commutes
+with every tensor of factor maps, as is verified on pure tensors.
+Every independent choice of an element of $\prod_{j\in J}G_j$ and of
+$G_{i_0}$ extends to an element of $\prod_{i\in I}G_i$. Thus a fixed
+tensor lies in
+$(\bigotimes_{j\in J}M_j)^{\prod_{j\in J}G_j}\otimes M_{i_0}^{G_{i_0}}$
+by the two-factor theorem. The inductive hypothesis identifies the first
+factor with $\bigotimes_{j\in J}M_j^{G_j}$. Regrouping back gives a
+preimage in the asserted source, completing the induction.
+\end{proof}
+
 \begin{lemma}[Nonvanishing in unbounded degrees]
 \label{lem:contraction-nonzero}
-\uses{def:geometric-semistability,lem:invariant-base-change,lem:canonical-contraction,lem:rectangular-invariants,lem:independent-tensor-invariants}
+\uses{def:geometric-semistability,lem:invariant-base-change,lem:canonical-contraction,lem:rectangular-invariants,lem:finite-independent-tensor-invariants}
 \source{bost-specht-manuscript:page-0010}\notready
 If the Pl\"ucker line of $V_K$ is geometrically semistable, then there
 is a positive integer $d_0$, divisible by $s,a_1,\ldots,a_N$, such
