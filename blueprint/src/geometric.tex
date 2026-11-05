@@ -422,7 +422,7 @@ The free determinant map commutes with base change from $S$ to $T$.
 It also commutes with the cancellation isomorphism on the module,
 by naturality for linear maps. Combining these two identities with
 the exterior and tensor identities just established proves the
-asserted equality on $t\otimes(\eta\otimes(1\otimes x))$.
+asserted equality on $\eta\otimes(1\otimes x)$.
 These elements span $P$, so the compatibility holds for every $p$.
 Frame independence permits any choice of the final basis $c$.
 If $S$ is flat over $\mathbb Z$, its free determinant map is
@@ -464,7 +464,8 @@ covers the zero ring, where the empty set generates the unit ideal.
 \label{lem:projective-determinant-inclusion}
 \uses{lem:finite-projective-frames,lem:determinant-chart-tower,lem:tensor-localization-descent}
 \source{bost-specht-manuscript:page-0009}
-\notready
+\lean{BostConjecture.Geometry.existsUnique_projectiveDeterminantMap,BostConjecture.Geometry.projectiveDeterminantMap,BostConjecture.Geometry.projectiveDeterminantMap_baseChange_of_basis,BostConjecture.Geometry.projectiveDeterminantMap_injective}
+\leanok
 Let $R$ be a commutative ring, $M$ a finite projective $R$-module
 of constant stalk rank $a$, and $t$ a tableau of shape $(k^a)$,
 $k>0$. There is a unique linear map
@@ -474,6 +475,9 @@ $k>0$. There is a unique linear map
 \]
 whose localization on each principal open where $M$ is free is the
 free determinant map under the intrinsic base-change isomorphisms.
+For every commutative $R$-algebra $S$ for which $S\otimes_R M$
+is free of rank $a$, the scalar extension $S\otimes_R j_M$ is
+the free determinant map under the same intrinsic identifications.
 If $R$ is flat over $\mathbb Z$, then $j_M$ is injective.
 \end{lemma}
 \begin{proof}
@@ -486,9 +490,12 @@ identity compares both $x_f$ and $x_g$ to the value in this frame,
 so they agree on overlaps. The scalar-extension descent lemma
 gives a unique $j_M(p)$. Local linearity and uniqueness show that
 $j_M$ preserves sums and scalar multiples. The same argument on
-the common refinement of two covers proves independence of the
-cover and frames, and recovers the free map on every principal
-open by comparing on its induced cover. If $R$ is flat over
+a further commutative algebra $S$ with a frame on $S\otimes_R M$
+compares its free map with each $x_f$ in $(R_f\otimes_R S)\otimes_R Q$.
+These are the localizations at $f$ of $S\otimes_R Q$, so equality
+on this cover proves the claimed scalar-extension formula. In
+particular it holds on every principal open where $M$ is free.
+Uniqueness on the original cover shows independence of all choices. If $R$ is flat over
 $\mathbb Z$, then every $R_f$ is flat over $\mathbb Z$, since
 localization is flat and flatness is preserved under composition.
 Each chart is then injective. Thus $j_M(p)=0$ implies $p/1=0$
