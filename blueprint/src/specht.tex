@@ -641,9 +641,27 @@ are invariant under sorting the coordinates, so the same bound
 holds for the prefix distribution.
 \end{proof}
 
+\begin{lemma}[The one-row case]
+\label{lem:one-row-covolume}\uses{def:rectangular-specht,lem:rectangular-initial-norm,lem:integral-specht-covolume-nonneg}
+\lean{BostConjecture.Specht.oneRowIntegralEquiv,BostConjecture.Specht.oneRowIntegralBasis,BostConjecture.Specht.oneRow_covolume_eq_one,BostConjecture.Specht.rectangleLogCovolume_one,BostConjecture.Specht.tendsto_rectangleLogCovolume_one_div}
+\source{bost-specht-manuscript:page-0004}\leanok
+The one-row lattice is isomorphic to $\mathbb Z$ with a unit-length
+generator. Thus $\covol L_{1,k}=1$, $c_1(k)=0$ and
+$c_1(k)/k\to0$.
+\end{lemma}
+\begin{proof}
+There is exactly one row word. Evaluation at it sends an integral
+lattice vector to its sole coordinate and has inverse
+$z\mapsto z e_t$, since the row-word coefficient of $e_t$ is one.
+Thus $e_t$ is an integral basis. Its squared norm is $(1!)^k=1$,
+so the one-by-one Gram determinant gives covolume one. Taking its
+logarithm gives zero, and the sequence of normalized logarithmic
+covolumes is identically zero.
+\end{proof}
+
 \begin{theorem}[Sublinear rectangular Specht covolume]
 \label{thm:specht-sublinear-covolume}
-\uses{def:rectangular-specht,lem:rectangular-covolume-nonneg,lem:seminormal-norms,lem:seminormal-covolume,lem:prefix-separation}
+\uses{def:rectangular-specht,lem:rectangular-covolume-nonneg,lem:one-row-covolume,lem:seminormal-norms,lem:seminormal-covolume,lem:prefix-separation}
 \source{bost-specht-manuscript:page-0008}\notready
 For every fixed positive integer $a$,
 $c_a(ak)\geq0$ and $c_a(ak)/(ak)\to0$ as $k\to\infty$.

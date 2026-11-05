@@ -7,6 +7,7 @@ public import BostConjecture.Specht.Metric
 public import BostConjecture.Specht.Norm
 public import BostConjecture.Specht.Rectangle
 public import BostConjecture.Specht.Standard
+public import BostConjecture.Specht.OneRow
 public import OAI.NumberTheory.ArithmeticGroups.Lattices.FrameMatrices
 public import OAI.RepresentationTheory.Saxl.SpechtSubmodule
 public import HarderNarasimhan.Filtration.Unique

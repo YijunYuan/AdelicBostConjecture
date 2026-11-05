@@ -34,3 +34,8 @@ import BostConjecture
 #print axioms BostConjecture.Specht.ColumnStandard.rowWord_lt
 #print axioms BostConjecture.Specht.ColumnStandard.rowWord_le_of_polytabloid_ne_zero
 #print axioms BostConjecture.Specht.linearIndependent_standard_polytabloid
+#print axioms BostConjecture.Specht.oneRowIntegralEquiv
+#print axioms BostConjecture.Specht.oneRowIntegralBasis
+#print axioms BostConjecture.Specht.oneRow_covolume_eq_one
+#print axioms BostConjecture.Specht.rectangleLogCovolume_one
+#print axioms BostConjecture.Specht.tendsto_rectangleLogCovolume_one_div
