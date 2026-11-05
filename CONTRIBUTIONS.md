@@ -259,6 +259,46 @@ for nonfree finite projective lines over every number field. Source blobs,
 `verification/ARITHMETIC.md`. Determinant/higher-rank degree calculus and
 intrinsic Harder–Narasimhan specialization remain open.
 
+## Prefix restriction and branching support — session 0015
+
+`Specht/Prefix.lean`, `Specht/Branching.lean` and `Specht/Filtration.lean`
+are original local proofs in the existing word/tableau model; no external
+source is copied. They reuse Mathlib's `YoungDiagram`, finite equivalences,
+`Equiv.Perm.extendDomain` and `sign_extendDomain` at the pinned revision,
+and substantively consume the checked local standard basis and central
+content action. The latter retains the attributed OpenAI rank-one dependency
+above. Consumers are the smaller polytabloid slice, the sliced central action,
+and the invariant largest-label support filtration. The branching quotient,
+colexicographic triangularity and general covolume limit remain open.
+
+## Determinant scalar-extension integration — session 0015
+
+`Geometry/DeterminantBaseChange.lean` (checked handoff `3ac7a36`) is now a
+root import, including the top exterior-power frame twist and tensor
+scalar-extension map. Its original exact checks and 38 foundational-only
+axiom probes are recorded in `verification/GEOMETRY.md`. It consumes the
+attributed exterior-power and tensor-coordinate APIs above; no new external
+code is copied. The equality is the scalar-extension square on elementary
+inputs for arbitrary source and target frames. Projective descent and global
+injectivity remain separate unproved obligations. The checked
+`Geometry/DeterminantNaturality.lean` (7c76270) is also imported; it proves
+naturality for arbitrary maps between free modules of the same rank. The
+lightweight determinant-coordinate extraction d470bdb is shared with arithmetic.
+Its 42-export audit and post-extraction build are recorded in the same evidence.
+
+## Determinant degree construction integration — session 0015
+
+`Arithmetic/Degree.lean` (checked source 6429efa and 5d59bb0; evidence
+af132a7) is now imported. The actual finite-projective determinant line and
+its complex Gram metric consume the attributed exterior base-change API
+and Mathlib at the existing pins, with the shared lightweight local
+`Geometry/DeterminantCoordinates.lean`; no additional external source is
+copied. The construction, normalized degree/slope and actual determinant
+quotient formula apply to arbitrary number fields and nonfree modules.
+The 40-probe audit and 3,241-job module check are recorded in
+`verification/ARITHMETIC.md`. Metric uniqueness/frame independence,
+zero/rank-one normalization, degree calculus and intrinsic HN remain open.
+
 ## Verification
 
 Run `horizon --root ../.. check --json` from this project, then

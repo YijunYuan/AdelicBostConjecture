@@ -2,6 +2,7 @@ module
 
 public import BostConjecture.Slope.Subspace
 public import BostConjecture.Arithmetic.HermitianLine
+public import BostConjecture.Arithmetic.Degree
 public import BostConjecture.LinearAlgebra.AlternatingTensorPower
 public import BostConjecture.LinearAlgebra.ExteriorPower.BaseChange
 public import BostConjecture.LinearAlgebra.PiTensorProduct.Projective
@@ -9,6 +10,7 @@ public import BostConjecture.Analysis.InnerProductSpace.Polar
 public import BostConjecture.Geometry.TensorRealization
 public import BostConjecture.Geometry.FreeEmbedding
 public import BostConjecture.Geometry.DeterminantBaseChange
+public import BostConjecture.Geometry.DeterminantNaturality
 public import BostConjecture.Tensor.Evaluation
 public import BostConjecture.Lattice.Covolume
 public import BostConjecture.Specht.Tableau
