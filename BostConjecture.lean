@@ -20,6 +20,8 @@ public import BostConjecture.Arithmetic.IntegralDeterminantProduct
 public import BostConjecture.Arithmetic.IntegralExactDeterminant
 public import BostConjecture.Arithmetic.ExactDegree
 public import BostConjecture.Arithmetic.TensorDegree
+public import BostConjecture.Arithmetic.ArchimedeanFiniteness
+public import BostConjecture.Arithmetic.SubspaceHN
 public import BostConjecture.LinearAlgebra.AlternatingTensorPower
 public import BostConjecture.LinearAlgebra.ExteriorPower.BaseChange
 public import BostConjecture.LinearAlgebra.PiTensorProduct.Projective
@@ -28,6 +30,7 @@ public import BostConjecture.Balanced.PluckerNorm
 public import BostConjecture.Balanced.SpectralExpansion
 public import BostConjecture.Balanced.TensorExponential
 public import BostConjecture.Balanced.SpecialLinearPolar
+public import BostConjecture.Balanced.OrbitNorm
 public import BostConjecture.InvariantTheory.Semistability
 public import BostConjecture.Geometry.TensorRealization
 public import BostConjecture.Geometry.FreeEmbedding
@@ -44,6 +47,7 @@ public import BostConjecture.Geometry.InvariantBaseChange
 public import BostConjecture.Geometry.PiInvariants
 public import BostConjecture.Geometry.PolynomialTensor
 public import BostConjecture.Geometry.PolynomialPolarization
+public import BostConjecture.Geometry.DegreeDivisibility
 public import BostConjecture.Tensor.Evaluation
 public import BostConjecture.Tensor.EvaluationBaseChange
 public import BostConjecture.Tensor.DualRegroupBaseChange
@@ -70,6 +74,7 @@ public import BostConjecture.Specht.Content
 public import BostConjecture.Specht.Central
 public import BostConjecture.Specht.Seminormal
 public import BostConjecture.Specht.OneRow
+public import BostConjecture.Specht.Asymptotic
 public import OAI.NumberTheory.ArithmeticGroups.Lattices.FrameMatrices
 public import OAI.RepresentationTheory.Saxl.SpechtSubmodule
 public import HarderNarasimhan.Filtration.Unique

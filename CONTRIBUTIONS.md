@@ -119,8 +119,9 @@ changes. The installed mathlib revision is pinned in `lake-manifest.json`.
   The copied formula's dependency cone is kernel-checked and audited through
   this consumer. Downstream `Specht/ShiftedCount.lean` proves the shifted
   factorial product; `PrefixCount.lean` and `PrefixWeights.lean` prove the
-  prefix bijection and exact binomial weight. Labelled normalization and
-  concentration remain obligations for the rectangular prefix law (§5).
+  prefix bijection and exact binomial weight. `PrefixNormalizer.lean`,
+  `Separation.lean` and `Asymptotic.lean` now consume these counts through
+  labelled normalization and concentration to prove the covolume limit.
 
 ## Gram determinants and covolumes — The Tau Ceti contributors
 
@@ -249,9 +250,10 @@ from importing them.
   `Mathlib/Analysis/InnerProductSpace/{Abs,Polar}.lean` is ported to
   `BostConjecture/Analysis/InnerProductSpace/` with one relocated import
   and documentation corrections; the 30 declarations and proofs are
-  unchanged. Intended consumer: polar factorization in the balanced
-  Plucker argument. This API is for complex Hilbert spaces; the unitary,
-  logarithm and determinant adapters remain open.
+  unchanged. Actual consumers: `Balanced.SpecialLinearPolar` and
+  `Balanced.OrbitNorm`, proving unitary/logarithm/determinant adapters and
+  the full special-linear orbit norm bound on complex Hilbert spaces.
+  The algebraic orbit criterion remains open.
   [Provenance and license](vendor/mathlib-prs/45002/PROVENANCE.json).
 
 The parent checked all three narrow module builds and all 45 export axiom
@@ -512,6 +514,71 @@ The invariant-polynomial handoff imports unchanged
 `Mathlib/RepresentationTheory/Invariants.lean` at the same pinned revision
 and license. Their consumers are the owners' intrinsic polynomial evaluation,
 homogeneous subspace, action and invariant-to-semistability proofs.
+
+## Sublinear Specht covolume — session 0030
+
+The proofs in `Specht/WeightedGap.lean`, `BulkGap.lean`,
+`GapAsymptotics.lean`, `PrefixEvent.lean`, `Separation.lean`,
+`LogInsertion.lean`, `LogExpectation.lean`, and `Asymptotic.lean` are
+original local code. They use unchanged Mathlib at
+`56a005855ea17e0b0958f73ec801ae140b0a1679` (Apache-2.0):
+`Matrix.det_vandermonde` in `Mathlib/LinearAlgebra/Vandermonde.lean`;
+real-power/exponential limits in
+`Mathlib/Analysis/SpecialFunctions/Pow/Asymptotics.lean` and
+`Pow/Real.lean`; finite expectations in
+`Mathlib/Algebra/{,Order/}BigOperators/Expect.lean`; ceiling bounds in
+`Mathlib/Algebra/Order/Floor/Semiring.lean`; and reciprocal limits in
+`Mathlib/Analysis/SpecificLimits/Basic.lean`.
+The actual consumers are the weighted bad-gap estimate, its uniform
+bulk decay, the actual-tableau logarithmic average and the canonical
+orbit lattice limit. No probability, invariant-space or semistability
+conclusion is assumed. The sufficient concentration constant and the
+full-rank standard-sublattice comparison are documented adaptations of
+the manuscript; the original integral orbit lattice is unchanged.
+
+## Symmetric polarization — The Tau Ceti contributors
+
+- Repository: <https://github.com/TauCetiProject/TauCeti>.
+- Exact revision: `3c3a32baea963db05c302adeb307b22baae4de78`.
+- Original paths: `TauCeti/LinearAlgebra/SymmetricPower/{Basic,Lift,Algebra}.lean`.
+  Copyright 2026 The Tau Ceti contributors; Apache-2.0. Exact hashes,
+  immutable upstream files and the license are retained in
+  [vendor provenance](vendor/tauceti-polarization/PROVENANCE.md).
+- Local paths: `BostConjecture/LinearAlgebra/SymmetricPower/`.
+  The selected quotient/lift, tensor section, factorial-composite,
+  naturality and homogeneous-algebra comparison declarations are retained.
+  The algebra namespace is changed to `BostConjecture.SymmetricPower`;
+  Lean 4.35 imports and elaboration are adapted as listed in provenance.
+  Basis, monomial and WordFiltration cones are omitted.
+- Actual consumers: `Geometry.PolynomialPolarization` constructs the
+  equivariant symmetric lift with nonzero evaluation;
+  `PluckerPolarization` and `DegreeDivisibility` apply it to the actual
+  Plucker polynomial. Port commits `47c79f2`, `d56b70d`; initial consumer
+  `c55300f`. The 226-probe owner audit uses only foundational axioms.
+  Upstream Lean 4.36.0-rc2 is adapted to this project's unchanged Lean 4.35.
+  Rectangular invariant spanning and coaction are separate obligations.
+
+## Additional integrated consumers — session 0030
+
+The arithmetic tensor degree, subspace supermodularity, bounded-sections
+and HN interval proofs are original local code. `Arithmetic.SubspaceHN`
+and `Slope.FiniteLength` consume `GameValue`, `NashEquilibrium`, and
+`Filtration.Exists` from the already attributed pinned HarderNarasimhan
+revision `14b3090e`; they prove actual intermediate quotient slope bounds.
+Full integral-submodule semistability and HN uniqueness remain open.
+`Arithmetic.ArchimedeanFiniteness` uses unchanged Mathlib
+`NumberField.Embeddings.finite_of_norm_le` and finite-projective coordinate
+embeddings to prove finiteness of bounded actual integral sections.
+This does not assert bounded-degree finiteness. Exact owner checks are in
+`verification/ARITHMETIC.md`.
+
+`Balanced.SpecialLinearPolar` uses unchanged Mathlib continuous functional
+calculus logarithms (`Analysis/SpecialFunctions/ContinuousFunctionalCalculus/ExpLog/Basic.lean`,
+Frédéric Dupuis, Apache-2.0) and trace/eigenvalue/determinant formulas.
+`Balanced.OrbitNorm` consumes this polar factorization and the checked
+tensor exponential identity to exclude zero from the Euclidean orbit
+closure. Exact declarations and audits are in `verification/BALANCED.md`.
+All Mathlib imports here use the pinned revision above without copying.
 
 ## Verification
 

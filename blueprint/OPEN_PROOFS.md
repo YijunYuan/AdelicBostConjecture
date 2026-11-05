@@ -44,10 +44,12 @@ increasing legal paths. `PrefixNorm.lean` and `PrefixNormInitial.lean` prove
 the concrete prefix product, positivity, swap ratio and initial value.
 `Seminormal.lean` identifies the actual squared norms with that product,
 evaluates the standard Gram determinant, and proves the canonical orbit
-covolume bound by the uniform logarithmic average. The invariant-space
-identification and general covolume asymptotic remain open.
+covolume bound by the uniform logarithmic average. `Asymptotic.lean`
+now proves the general sublinear covolume limit for every fixed positive
+height, using actual prefix separation and logarithmic expectations.
+The invariant-space identification and number-field main theorem remain open.
 
-The following producers still need complete source-backed mathematical proofs:
+Current boundaries and remaining producers:
 
 - The standard-basis frontier is closed through rational straightening and
   real transport. The all-polytabloid lattice is retained; the standard
@@ -59,8 +61,8 @@ The following producers still need complete source-backed mathematical proofs:
   tensor-product scalar-extension equivalence. Characteristic-zero descent
   and the invariant-space identification remain open.
 - The Gram producer is closed, including the coefficient-one normalization
-  and the actual prefix norm formula. Uniform bulk separation is proved;
-  its next asymptotic consumer is the logarithmic expectation bound.
+  and the actual prefix norm formula. Uniform bulk separation and its
+  logarithmic expectation consumer are proved.
   `Complement.lean` and `PrefixCount.lean`
   prove the rotated complement and actual prefix-fiber bijection, yielding
   the exact product of the two smaller standard-tableau counts.
@@ -80,8 +82,12 @@ The following producers still need complete source-backed mathematical proofs:
   tending to zero. `PrefixEvent.lean` transports symmetric observables
   through actual prefix fibers and sorting; `Separation.lean` proves
   uniform bulk separation for the actual standard-tableau prefixes.
-  The first unmet producer is the insertion-log estimate and its averaged
-  bulk/boundary bound, followed by the final covolume squeeze.
+  `LogInsertion.lean` and `LogExpectation.lean` prove the insertion-log
+  estimates and the actual averaged bulk/boundary bound.
+  `Asymptotic.lean` consumes this bound and the unchanged orbit-lattice
+  Gram comparison to prove `tendsto_rectangleLogCovolume_div`.
+  The stated covolume asymptotic objective is complete; it does not use
+  or close the independent rectangular invariant-space identification.
   `HookCount.lean`
   bridges the imported hook formula
   to the accepted tableau indexing; `ShiftedCount.lean` proves the row hook

@@ -5,7 +5,7 @@ intrinsic partial traces, actual exponential-frame Gram first variation, and
 the basis-independent complex Gram metric on the full exterior power, actual
 Plücker norm stationarity, Hermitian exterior exponential convexity, determinant-one
 polar factorization, and the full actual special-linear orbit norm bound and
-Euclidean closure exclusion. It also supplies intrinsic polynomial evaluation, homogeneous invariants,
+Euclidean closure exclusion. It also supplies polynomial matrix coefficients and the forward coordinate pullback on every homogeneous degree, intrinsic polynomial evaluation, homogeneous invariants,
 and the elementary implication from a nonvanishing homogeneous invariant to
 zero excluded from orbit closure. The converse orbit criterion is unproved.
 
@@ -234,10 +234,11 @@ was left running for this batch.
 ## Remaining mathematical producers
 
 1. Complete root integration of the newest checked producers.
-2. The coordinate coaction for the actual tensor/exterior representation
-   and base-change/detection bridges, coordinated with GEOM in `I-0047`.
-   Intrinsic polynomials, homogeneous degree, finite dimensionality and
-   homogeneous invariants are checked; so is the actual Plücker representation.
+2. Rational-point detection and scalar-extension compatibility for the checked
+   coordinate pullback, coordinated with GEOM in `I-0047`. The full and
+   homogeneous pullbacks now evaluate to the actual Plücker action. The
+   converse from rational-point invariance to coefficientwise fixedness is open;
+   the sufficient coefficientwise-fixed implication is checked.
 3. Constructible images and comparison of complex/Zariski closures,
    special-unitary Zariski density, and finite-degree Haar averaging.
    The blueprint now supplies the mathematical arguments, but there is no
@@ -279,7 +280,7 @@ copyright/license notices are retained. Reference retrieval and the visual
 excerpt were performed by the proof owner because an additional writable
 helper was prohibited. Read-only source/mathematical review was used.
 
-## Epistemic checkpoint
+## Prior analytic epistemic checkpoint
 
 Claim class: **proved producers**. Before this session: actual tensor exponential-frame Gram stationarity was
 proved but the complex exterior metric was missing. After: the full complex
@@ -304,8 +305,11 @@ The interface confirmed by GEOM in `I-0047/C-0010` uses existing `Representation
 `SpecialLinearGroup`, `exteriorPower`, and `SymmetricAlgebra`; it creates no
 second polynomial-function representation. Below, `K` is a field, `U`, `W`
 and `X` are finite-dimensional `K`-spaces, and `G` is a group. Polynomial,
-PolynomialAction, Semistability and the actual PluckerAction below are checked.
-Algebraicity of that action and Coaction remain unproved, as does the
+PolynomialAction, Semistability, PluckerAction, PluckerCoordinates,
+SpecialLinearCoordinates and the coordinate pullbacks in Coaction are checked.
+The concrete matrix polynomiality and evaluated degree map are proved.
+Rational-point detection, the converse fixed-point bridge, coordinate Hopf
+identities and scalar-extension compatibility remain open, as does the
 Euclidean-to-algebraic orbit-closure comparison.
 
 - `InvariantTheory/PluckerAction.lean`:
@@ -313,7 +317,8 @@ Euclidean-to-algebraic orbit-closure comparison.
   (SpecialLinearGroup K U × SpecialLinearGroup K W)
   (⋀[K]^s (U ⊗[K] W))`, sending `(g,h)` to
   `exteriorPower.map s (TensorProduct.map g.val.toLinearMap h.val.toLinearMap)`.
-  Algebraicity will be proved for this concrete action by its matrix coefficients.
+  `PluckerCoordinates` now proves polynomiality of its actual matrix coefficients
+  and every orbit map in tensor/exterior bases.
 - `InvariantTheory/Polynomial.lean`:
   `polynomialEval (x : X) : SymmetricAlgebra K (Module.Dual K X) →ₐ[K] K`
   is the universal lift of evaluation of linear forms at `x`;
@@ -336,52 +341,92 @@ Euclidean-to-algebraic orbit-closure comparison.
   prove equivalence with `∃ d > 0, ∃ p : homogeneousInvariants ρ d,
   polynomialEval x p ≠ 0`. No equivalence for arbitrary abstract representations
   is claimed.
-- `InvariantTheory/Coaction.lean`: in chosen bases, form the coordinate algebra
-  `A` of the pair of special linear groups by quotienting the polynomial ring
-  on the two matrix-entry sets by the two determinant-minus-one relations.
-  Construct the concrete degree coaction
+- `InvariantTheory/SpecialLinearCoordinates.lean` forms the finite-type coordinate
+  algebra `A` by the two determinant-minus-one relations and proves that its
+  algebra-valued points are actual pairs of Mathlib special linear matrices.
+- `InvariantTheory/Coaction.lean` constructs the concrete degree map
   `pluckerPolynomialCoaction bU bW s d : homogeneousPolynomials K X d →ₗ[K]
   A ⊗[K] homogeneousPolynomials K X d`, where `X = ⋀[K]^s (U ⊗[K] W)`.
   Fix the left-coaction convention `δ(p)(g,x) = p(ρ(g)x)`; its evaluated
   pullbacks are related by group inversion to `polynomialRepresentation ρ`.
   This avoids mixing the inverse-action representation with the forward
   coordinate coaction.
-  The coefficient kernel of `δ - (p ↦ 1 ⊗ p)` is the finite-degree invariant
-  module that GEOM can transport under scalar extension. Prove its equivalence
+  The intended coefficient kernel is `ker (δ - (p ↦ 1 ⊗ p))`.
+  Coefficientwise fixedness implies the existing homogeneous-invariant predicate.
+  Before GEOM transports invariants under scalar extension, prove its equivalence
   with the preceding invariant submodule over the needed infinite fields;
   do not assume that invariants under rational points commute with base change.
 
 The use of bases is confined to constructing the coordinate coaction. The
 Plücker vector space, polynomial algebra, degree, evaluation and invariant
 submodule are intrinsic. GEOM confirmation is complete; the coordinate
-coaction implementation remains pending. Polynomial laws were inspected but do not provide a finite-degree
+pullback and its degree restriction are implemented. No Hopf coaction structure
+or its identities are claimed by this checkpoint. Polynomial laws were inspected but do not provide a finite-degree
 coefficient API in the pinned library.
 
 Independent review found the proposed objects faithful and requested the
 explicit coaction convention above. Remaining interface proofs include the
-homogeneous decomposition, coordinate-polynomial evaluation/zero-locus
-comparison, the degree-subtype coaction kernel versus fixed vectors,
+homogeneous decomposition, zero-locus comparison,
+the degree-subtype coefficient kernel versus fixed vectors,
 rational-point detection over the needed
 infinite fields, and scalar-extension compatibility of these maps. Flatness
 of a field extension then gives kernel base change; the coordinate coaction's
 codomain need not itself be finite-dimensional.
 
-## Next-session handoff
+## Algebraic coordinate checkpoint
 
-Parent `I-0069` requests a fresh LSP session after this analytic checkpoint;
-the task remains open and there is no unfinished owned Lean draft. Begin
-with the concrete algebraic action and its coordinate coaction: express the
-matrix coefficients of the checked tensor/exterior action as polynomials,
-then identify forward pullback with the agreed coaction. GEOM is proving
-polynomial evaluation extensionality and the Plücker pullback/equivariance
-consumer in `Geometry/PluckerPolynomial.lean` (`I-0068`); reuse those results.
-Keep the existing canonical polynomial definitions unchanged.
+Run `0006`, session `0006-horizon-BOST-BALANCED` adds three checked producers:
 
-The next source-facing conclusion is Euclidean/Zariski closure comparison
-for this algebraic orbit. Implement the reviewed constructible-image and
-finite-normalization density proof in the blueprint, matching each algebraic
-ingredient to checked Mathlib results. After that, implement special-unitary
-density and finite-degree Haar averaging, then extract a nonzero
-positive-degree homogeneous invariant. These conclusions are all required;
-the checked norm bound alone does not prove Lemma 7.2. The outstanding root
-handoff is `I-0060` and stays open until SPECHT confirms the newest imports.
+| Commit / module | Checked conclusion | Serialized build |
+| --- | --- | --- |
+| `d0bf835`, `InvariantTheory.PluckerCoordinates` | The universal tensor entries and exterior minors evaluate to the actual action on every exterior vector. | `33a63fa2553139f3`, 2,034 jobs, warning-free (21.8s). |
+| `392ba05`, `InvariantTheory.SpecialLinearCoordinates` | The determinant-one quotient is finite type and represents actual SL pairs over every commutative base algebra. | `7ff26a0219378861`, 1,816 jobs, warning-free (2.8s). |
+| `InvariantTheory.Coaction` | Full and degree-restricted coordinate pullbacks evaluate to the existing intrinsic forward action; coefficientwise fixedness implies homogeneous invariance. | `c0f9424df17fc9eb`, 2,406 jobs, warning-free (6.3s). |
+
+All commands use `"$HORIZON_BIN" --root /home/yijunyuan/bc-workspace check`
+with the named module. Guarded LSP diagnostics are clear. The first coordinate-ring
+build failed on two quotient-evaluation coercions; the corrected build above
+passed. A rewriting step in the fixedness implication hit the default heartbeat
+limit; an explicit congruence proof removed it without raising any limit.
+Deprecated tensor induction calls were replaced before the accepted build.
+The expanded `BalancedAxioms.lean` serialized check passed all **120** transitive
+probes in 2.6s, each reporting a subset of `propext`, `Classical.choice`, and
+`Quot.sound`, with no `sorryAx` or custom axioms. Its preceding 105-probe check
+also passed; these are separate source snapshots.
+
+Independent honesty/source review accepted the actual objects, arbitrary-vector
+consumers, dimension-zero and over-rank cases, quotient point equivalence,
+forward convention and flatness-based degree restriction. Its two metadata
+corrections were applied: the coordinate ring has no false dependency on the
+Plücker minor lemma, and the degree node no longer claims an unexported
+uniqueness theorem. These are proved producers, not invariant-existence results.
+
+The new modules import, without copying or modifying, Mathlib at the pinned
+Apache-2.0 revision above: `Module.Basis.tensorProduct_repr_tmul_apply` from
+`LinearAlgebra/TensorProduct/Basis.lean`; `basis_coord`, `basis_apply` and
+`ιMultiDual_apply_ιMulti` from `LinearAlgebra/ExteriorPower/Basis.lean`;
+`RingHom.map_det` and `LinearMap.det_toMatrix` from `LinearAlgebra/Determinant.lean`;
+`Matrix.SpecialLinearGroup` from `LinearAlgebra/Matrix/SpecialLinearGroup.lean`;
+`Ideal.Quotient.liftₐ` and `Algebra.FiniteType.quotient`; and
+`Submodule.toBaseChange.toLinearEquiv` from `RingTheory/Flat/Basic.lean`.
+Consumers are the three named modules; GEOM's invariant base-change consumer
+still needs the converse fixedness/detection and scalar-extension proofs.
+Shared attribution and root imports remain SPECHT-owned.
+
+## Next-producer handoff
+
+The actual polynomial action, determinant-one coordinate algebra and forward
+homogeneous coordinate map are now implemented. The next algebraic producer
+is rational-point detection for this coordinate algebra over the needed infinite
+fields. This must turn invariance at every actual group element into the
+coefficient identity `δ(p) = 1 ⊗ p`; then scalar extension of that coefficient
+kernel can be identified with GEOM's canonical homogeneous invariant space.
+GEOM's checked `Geometry.PluckerPolynomial` API at `c8b4a4b` supplies
+`polynomial_ext`, the Plücker pullback and its degree/equivariance consumer.
+
+The next source-facing conclusion remains Euclidean/Zariski closure comparison
+for the actual algebraic orbit. Its constructible-image and finite-normalization
+density proof is in the blueprint. Special-unitary density, finite-degree Haar
+averaging and homogeneous extraction are also still required. The norm bound
+alone does not prove Lemma 7.2. Root integration remains with SPECHT in `I-0060`;
+no completion claim is made for this task.

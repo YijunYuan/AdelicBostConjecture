@@ -503,7 +503,6 @@ orbit argument of the source.
 
 \begin{lemma}[Coordinate algebra of two special linear groups]
 \label{lem:balanced-special-linear-coordinates}
-\uses{lem:balanced-plucker-coordinates}
 \source{bost-specht-manuscript:page-0012}
 \lean{BostConjecture.InvariantTheory.SpecialLinearPairCoordinateRing,BostConjecture.InvariantTheory.specialLinearPairPointEquiv,BostConjecture.InvariantTheory.specialLinearPairEval_mk}\leanok
 Let $K$ be a commutative ring and let $I,J$ be finite index sets. The algebra
@@ -582,6 +581,64 @@ intersection. A subspace of the finite-dimensional space $P_d(X)$ is
 finite-dimensional. Replacing $g$ by $g^{-1}$ identifies forward and
 inverse fixed-point equations. Evaluation of the forward equation gives
 $p(\rho(g)x)=p(x)$.
+\end{proof}
+
+\begin{lemma}[Coordinate pullback of the Pl\"ucker action]
+\label{lem:balanced-plucker-coordinate-pullback}
+\uses{lem:balanced-plucker-coordinates,lem:balanced-special-linear-coordinates,lem:balanced-polynomial-action}
+\source{bost-specht-manuscript:page-0012}
+\lean{BostConjecture.InvariantTheory.pluckerCoordinatePullback,BostConjecture.InvariantTheory.polynomialCoefficientEval_comp_pluckerCoordinatePullback,BostConjecture.InvariantTheory.polynomialEval_pluckerCoordinatePullback}\leanok
+Let $K$ be a field, $U,W$ finite-dimensional $K$-spaces with chosen bases,
+$X=\bigwedge^s(U\otimes_K W)$, $P=\operatorname{Sym}_K(X^*)$, and let $A$
+be the coordinate algebra of the pair of special linear groups.
+There is an algebra homomorphism $\delta:P\to A\otimes_K P$ whose
+specialization at every $g\in\SL(U)\times\SL(W)$ is exactly forward
+pullback by $\rho(g)$. In particular
+\[
+ ((\operatorname{ev}_g\otimes\operatorname{ev}_z)\delta)(p)
+    =p(\rho(g)z).
+\]
+\end{lemma}
+\begin{proof}
+Write $e_Q$ for the exterior tensor basis, $\epsilon_Q$ for its dual,
+and $\overline M_{P,Q}$ for the class of the matrix-coefficient polynomial
+in $A$. Define
+$\delta(\epsilon_P)=\sum_Q\overline M_{P,Q}\otimes\epsilon_Q$,
+extend linearly on $X^*$, then extend uniquely to its symmetric algebra.
+Specialization at $g$ sends $\overline M_{P,Q}$ to the $P,Q$ coefficient
+of $\rho(g)$ by the polynomial-coordinate identity. Thus the specialized
+linear generator is $\epsilon_P\circ\rho(g)$: both sides agree on every
+basis vector. Algebra homomorphisms agreeing on the linear generators
+agree on $P$, proving the pullback identity. Evaluation at $z$ gives the
+displayed formula. The group matrices here are the coordinate matrices
+of the intrinsic determinant-one automorphisms, so the representation
+is precisely the one already defined.
+\end{proof}
+
+\begin{lemma}[Homogeneous coordinate pullback]
+\label{lem:balanced-homogeneous-coaction}
+\uses{lem:balanced-plucker-coordinate-pullback,lem:balanced-intrinsic-polynomials}
+\source{bost-specht-manuscript:page-0012}
+\lean{BostConjecture.InvariantTheory.pluckerPolynomialCoaction,BostConjecture.InvariantTheory.pluckerPolynomialCoaction_include,BostConjecture.InvariantTheory.polynomialCoefficientEval_pluckerPolynomialCoaction,BostConjecture.InvariantTheory.mem_homogeneousInvariants_of_pluckerPolynomialCoaction_eq}\leanok
+In the setting of the coordinate pullback lemma, for every $d\geq0$
+the homomorphism $\delta$ restricts to a $K$-linear map
+$\delta_d:P_d(X)\to A\otimes_K P_d(X)$.
+Its specialization at $g$ is forward pullback on $P_d(X)$.
+If $\delta_d(p)=1\otimes p$, then $p$ belongs to the intrinsic
+homogeneous invariant subspace of the Pl\"ucker representation.
+\end{lemma}
+\begin{proof}
+Each linear generator is sent to an $A$-linear combination of linear
+generators, so a product of $d$ generators is sent to an $A$-linear
+combination of products of $d$ generators. The same holds for their
+$K$-linear span, including constants when $d=0$. The inclusion
+$P_d(X)\hookrightarrow P(X)$ remains injective after tensoring over the
+field $K$, so its image identifies with $A\otimes_K P_d(X)$ and the
+restriction is unique. Specialization followed by this inclusion is the
+full pullback already proved, hence gives the asserted degree action.
+Finally, specialization sends $1\otimes p$ to $p$. The coefficientwise
+identity therefore gives $p\circ\rho(g)=p$ for every $g$, exactly the
+forward fixed-point description of the homogeneous invariant subspace.
 \end{proof}
 
 \begin{definition}[Semistability of a complex vector by orbit closure]

@@ -162,12 +162,13 @@ determinant of $\Lambda_t$.
 
 \begin{lemma}[Norm of an integral polytabloid]
 \label{lem:polytabloid-norm}\uses{lem:real-specht-lattice,lem:integral-specht-all-tableaux}
-\lean{BostConjecture.Specht.column_rowWord_injective,BostConjecture.Specht.polytabloid_summands_orthonormal,BostConjecture.Specht.norm_polytabloidInt_sq}
+\lean{BostConjecture.Specht.column_rowWord_injective,BostConjecture.Specht.polytabloid_summands_orthonormal,BostConjecture.Specht.norm_polytabloidInt_sq,BostConjecture.Specht.sum_polytabloidInt_sq}
 \source{bost-specht-manuscript:page-0005}\leanok
 For every enumerating tableau $t$, its integral polytabloid satisfies
 \[
- \|j_\mathbb R(e_t)\|^2=|C_t|.
+ \|j_\mathbb R(e_t)\|^2=\sum_w e_t(w)^2=|C_t|.
 \]
+The coefficient sum identity holds in $\mathbb Z$.
 \end{lemma}
 \begin{proof}
 Distinct column permutations give distinct row words. Indeed, if
@@ -177,7 +178,8 @@ box and is the identity. The vectors $\delta_{w_t\circ g^{-1}}$
 are therefore pairwise orthogonal unit vectors. In the defining sum
 for $e_t$, each occurs with coefficient $\operatorname{sgn}(g)$,
 whose square is one. Pythagoras gives the claimed sum of $|C_t|$
-ones.
+ones. The coordinate formula for the orthonormal word metric gives the
+integer sum identity by injectivity of $\mathbb Z\hookrightarrow\mathbb R$.
 \end{proof}
 
 \begin{definition}[The canonical rectangular Specht lattice]
@@ -1897,7 +1899,8 @@ uniform finite expectation and divide by $d>0$.
 \begin{theorem}[Sublinear rectangular Specht covolume]
 \label{thm:specht-sublinear-covolume}
 \uses{def:rectangular-specht,lem:rectangular-covolume-nonneg,lem:one-row-covolume,lem:seminormal-covolume,lem:total-log-average}
-\source{bost-specht-manuscript:page-0008}\notready
+\lean{BostConjecture.Specht.tendsto_average_log_prefixNormProduct_div,BostConjecture.Specht.tendsto_rectangleLogCovolume_div}
+\source{bost-specht-manuscript:page-0008}\leanok
 For every fixed positive integer $a$,
 $c_a(ak)\geq0$ and $c_a(ak)/(ak)\to0$ as $k\to\infty$.
 \end{theorem}
