@@ -7,6 +7,8 @@ public import BostConjecture.Arithmetic.DegreeNormalization
 public import BostConjecture.Arithmetic.LineContraction
 public import BostConjecture.Arithmetic.MetricScaling
 public import BostConjecture.Arithmetic.SubspaceDegree
+public import BostConjecture.Arithmetic.QuotientMetric
+public import BostConjecture.Arithmetic.TensorMetric
 public import BostConjecture.LinearAlgebra.AlternatingTensorPower
 public import BostConjecture.LinearAlgebra.ExteriorPower.BaseChange
 public import BostConjecture.LinearAlgebra.PiTensorProduct.Projective
@@ -18,7 +20,8 @@ public import BostConjecture.Geometry.LocalizationDescent
 public import BostConjecture.Geometry.DeterminantNaturality
 public import BostConjecture.Geometry.ProjectiveEmbedding
 public import BostConjecture.Tensor.Evaluation
-public import BostConjecture.Tensor.Hilbert
+public import BostConjecture.Tensor.HilbertRegroup
+public import BostConjecture.Tensor.DualRegroup
 public import BostConjecture.Lattice.Covolume
 public import BostConjecture.Specht.Tableau
 public import BostConjecture.Specht.Metric

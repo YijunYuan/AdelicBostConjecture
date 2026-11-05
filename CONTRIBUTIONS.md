@@ -6,7 +6,7 @@ No claim of authorship is made for upstream code. Only needed module closures
 are imported. Each copied file retains upstream notices and identifies local
 changes. The installed mathlib revision is pinned in `lake-manifest.json`.
 
-## Hilbert tensor products and orthogonalization — Mathlib
+## Hilbert tensors, regrouping and orthogonalization — Mathlib
 
 - Repository: <https://github.com/leanprover-community/mathlib4>.
 - Revision: `56a005855ea17e0b0958f73ec801ae140b0a1679` (`v4.35.0`).
@@ -17,9 +17,18 @@ changes. The installed mathlib revision is pinned in `lake-manifest.json`.
   `Mathlib/Analysis/InnerProductSpace/GramSchmidtOrtho.lean` supplies
   `gramSchmidtBasis`, `gramSchmidt_def''`, `span_gramSchmidt_Iio`, and
   `gramSchmidt_inv_triangular`.
+  `Mathlib/LinearAlgebra/TensorProduct/Associator.lean` supplies
+  `TensorProduct.tensorTensorTensorComm` and its pure-tensor formula;
+  `Mathlib/LinearAlgebra/PiTensorProduct/Generators.lean` supplies
+  `PiTensorProduct.submodule_span_eq_top` for nested pure-tensor spanning.
 - Consumers: `BostConjecture/Tensor/Hilbert.lean` constructs the positive
   finite tensor form and proves its pure-tensor formula, uniqueness and
   compatibility with factor isometries and reindexing.
+  `Tensor/Regroup.lean`, `Tensor/HilbertRegroup.lean` and
+  `Tensor/DualRegroup.lean` use the associator and spanning results to prove
+  finite tensor interchange, preservation of its Hilbert form and integral
+  projective-dual regrouping. Duality-metric compatibility and determinant
+  isometry remain separate obligations.
   `Specht/Orthogonal.lean` and `Specht/Spectral.lean` use the actual
   standard-polytabloid basis for monic orthogonalization and content
   eigenvalues. These imports do not supply the adjacent-transposition

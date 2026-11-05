@@ -21,6 +21,13 @@ All checks used the explicit workspace root and shared serialized check slot:
   **9,141 jobs**, passed without warnings at
   **2026-11-05 18:42:11 UTC**, fingerprint `975bdb23135a0d4a`.
   This includes the final Specht source and updated root imports.
+- Final fixed-import integration retry of the same configured command:
+  **9,148 jobs**, passed without warnings at
+  **2026-11-05 19:08:01 UTC**, fingerprint `975bdb23135a0d4a`.
+  The previous attempt failed at **19:01:35 UTC** because
+  `Tensor/Hilbert.olean` disappeared after its successful build during
+  concurrent lane work. The retry rebuilt the missing dependency; no Specht
+  proof failed and no source weakening was used.
 - `horizon --root /home/yijunyuan/bc-workspace check --lean
   verification/SpechtSpectralAxioms.lean --json`: passed at
   **2026-11-05 18:43:36 UTC**, fingerprint `297cf1b95f748e89`.
@@ -54,7 +61,22 @@ determinant inclusion and finite Hilbert tensor form (I-0031). Their owners'
 84-probe arithmetic and 78-plus-six-probe geometry evidence remains in the
 respective verification reports. Direct Mathlib Hilbert/Gram-Schmidt reuse is
 recorded in `CONTRIBUTIONS.md`. Other lanes continued writing after the above
-build snapshot; their later drafts are not certified by this report.
+initial build snapshot.
+
+The final integration cutoff (I-0033) adds exactly
+`Arithmetic.QuotientMetric`, `Arithmetic.TensorMetric`,
+`Tensor.HilbertRegroup` and `Tensor.DualRegroup` to that earlier import set
+(the latter Hilbert import subsumes `Tensor.Hilbert`). Their owners reported
+107 arithmetic and 100 geometry foundational-only probes at handoffs
+`a97e1b5` and `2690920`. The final root blob is
+`f37b37ee86b1e3820dc3dcd50e780670199c9c69`.
+The build also includes the concurrent Hilbert helper refactoring:
+`Tensor/Hilbert.lean` blob `ac3a51871db7d821fed4266df4ab11bdb484478e` and
+`Tensor/HilbertRegroup.lean` blob `01291d38462b1fac50709e4d7be6d03c7ec1f702`.
+That build evidence does not extend the 32-probe Specht audit to new geometry
+producers. Their separate audits remain with their owner. Later nested-quotient,
+orthonormal-coordinate and determinant-metric imports are deferred to the
+next round; neither their completion nor their integration is claimed here.
 
 Graph sync completed: **128 blueprint nodes, 931 Lean declarations, 534 edges**;
 no missing-reference or stale-node warning. The **532 unattached** imported/helper
