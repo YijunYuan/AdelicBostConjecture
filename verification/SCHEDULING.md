@@ -1,6 +1,6 @@
 # Parallel Horizon scheduling
 
-Coordinator checkpoint: 2026-11-06 05:05 Asia/Shanghai (2026-11-05 21:05 UTC).
+Coordinator checkpoint: 2026-11-06 05:27 Asia/Shanghai (2026-11-05 21:27 UTC).
 
 The user assigned the parent session scheduling only, with no spending cap. The user subsequently authorized a fourth dedicated
 Lemma 7.2 lane if memory pressure is low; the total cap is now four proof
@@ -64,13 +64,20 @@ and 138 foundational-only probes. The 9,190-job root batch now includes
 `Geometry.ContractionMetric`, `Tensor.EvaluationBaseChange`, and
 `Tensor.DualRegroupBaseChange`. Later undelivered leaves are excluded.
 
-The current sessions are SPECHT `0026`, ARITH `0010`, GEOM `0012`, and BALANCED `0002`.
+The current sessions are SPECHT `0026`, ARITH `0012`, GEOM `0012`, and BALANCED `0002`.
+ARITH `0010` handed off with final evidence `1c0421a` and 171
+foundational-only probes. Its exact exterior-product and finite-free
+determinant-product producers await root integration in `I-0050`;
+ARITH `0012` continues the nonfree projective descent.
 The saved hook-count and evaluation-base-change drafts have been repaired,
 checked and integrated. GEOM's full pairing transport and global contraction
 consumer remain in progress. BALANCED has checked intrinsic partial traces
 (`fdb954d`), their actual orthogonal-projection consumer (`3361234`), and the
-Gram determinant first variation (`ee2abe7`); its initial axiom audit passed
-at 21:04:53 UTC. These leaves are not yet the full Lemma 7.2 or part of the
+Gram determinant first variation (`ee2abe7`); its 16-probe axiom audit passed
+at 21:04:53 UTC with standard foundational axioms only, and the scoped honesty
+review was satisfactory. Their root handoff is `I-0049`; the actual
+exponential-flow consumer is still being checked. These leaves are not yet
+the full Lemma 7.2 or part of the
 9,190-job root boundary. Use the owners' exact source
 revisions and checks in [RESULTS.md](RESULTS.md), [ARITHMETIC.md](ARITHMETIC.md),
 and [GEOMETRY.md](GEOMETRY.md), rather than treating live drafts as accepted.
@@ -138,7 +145,8 @@ and parent ancestry:
 - BALANCED `0002`: wrapper PIDs `391121`/`391456`, Codex `390896`, run PID `390675`.
 
 These PIDs record the completed guarded-client rollout; SPECHT subsequently
-continued in session `0026`. The old sessions ended normally. Temporary transition protection `I-0034` is
+continued in session `0026`, whose guarded launcher PID `409947` was verified
+under Codex `409818` and run PID `409475`. The old sessions ended normally. Temporary transition protection `I-0034` is
 archived; guarded diagnostics are permitted and kernel builds still use the
 shared Horizon check slot. The launcher and configuration remain in effect.
 Handoff hints `I-0042` and `I-0043` are archived after verifying continuation;
@@ -176,5 +184,8 @@ extension: new `references/maithani-reynolds/` and
 and their entries in `blueprint/src/refs.bib`. Only the used pages/results
 should be registered; SPECHT retains shared root/progress-file ownership.
 Exact semistability API signatures are still being settled in `I-0047`.
-At 21:03 UTC, available memory was 9.35 GiB and PSI avg10 was 0.00%; no
+The coordinator requested these signatures at the next coherent exponential
+proof boundary, before GEOM begins its invariant consumer.
+At 21:26 UTC, available memory was 7.11 GiB, PSI avg10 1.36% and avg60
+0.90%; pressure varies during elaboration, so monitoring continues. No
 resource condition currently requires reducing the four proof lanes.
