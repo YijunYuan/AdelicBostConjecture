@@ -4,6 +4,7 @@ import BostConjecture.Geometry.DeterminantFrame
 import BostConjecture.Tensor.Evaluation
 import BostConjecture.Geometry.DeterminantBaseChange
 import BostConjecture.Geometry.DeterminantNaturality
+import BostConjecture.Geometry.LocalizationDescent
 
 #print axioms BostConjecture.Geometry.tensorCoordinates
 #print axioms BostConjecture.Geometry.tensorCoordinates_tprod
@@ -52,3 +53,21 @@ import BostConjecture.Geometry.DeterminantNaturality
 #print axioms BostConjecture.Geometry.determinantPowerCoordinates_map
 #print axioms BostConjecture.Geometry.map_freeDeterminantMap_tmul
 #print axioms BostConjecture.Geometry.map_freeDeterminantMap
+
+#print axioms BostConjecture.Tensor.baseChangeMap
+#print axioms BostConjecture.Tensor.optionEquiv
+#print axioms BostConjecture.Tensor.baseChangeMap_bijective
+#print axioms BostConjecture.Tensor.baseChangeEquiv
+#print axioms BostConjecture.Tensor.baseChangeEquiv_tmul
+#print axioms BostConjecture.Tensor.baseChangeEquiv_symm_tprod
+#print axioms BostConjecture.Tensor.scalarExtension_map
+#print axioms BostConjecture.Tensor.baseChangeEquiv_natural
+#print axioms BostConjecture.Tensor.scalarExtension_trans
+#print axioms BostConjecture.Geometry.determinantPowerBaseChangeEquiv
+#print axioms BostConjecture.Geometry.determinantPowerBaseChangeEquiv_tmul
+#print axioms BostConjecture.Geometry.determinantTwistBaseChangeEquiv
+#print axioms BostConjecture.Geometry.determinantTwistBaseChangeEquiv_tmul
+#print axioms BostConjecture.Geometry.freeDeterminantMap_baseChange
+#print axioms BostConjecture.Geometry.existsUnique_of_localization_compatible
+#print axioms BostConjecture.Geometry.existsUnique_linearMap_of_localization_compatible
+#print axioms BostConjecture.Geometry.injective_of_localizedMap_injective

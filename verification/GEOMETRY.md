@@ -128,13 +128,50 @@ invertibility nor flatness is assumed.
   extraction. Blueprint nodes distinguish the top exterior coordinates from
   their Specht-dependent consumers.
 
-The next source-facing producers are `lem:tensor-base-change-equivalence`
-and `lem:linear-map-localization-descent`. Their complete mathematical proofs
-are in the blueprint, with `notready` status. The current tensor scalar-extension
-map is only the canonical forward map; it has not been proved an equivalence
-for general finite projective modules. Descent of maps between the existing
-intrinsic modules avoids introducing a second glued-module representation.
-The pinned Stacks module-gluing file was inspected, not copied or imported.
+## Tensor equivalences and principal-cover descent
+
+`e4812e5` extends `Tensor/BaseChange.lean` to the canonical equivalence
+for every finite family of modules over a commutative algebra. It proves the
+inverse pure-tensor formula, naturality in module maps, and compatibility
+with coefficient towers. No flatness or freeness assumption is used.
+`Geometry/DeterminantBaseChange.lean` consumes it in the actual determinant
+power and determinant-twisted lattice source, then proves the full
+scalar-linear compatibility square for any free target frame.
+
+`f58c467` adds `Geometry/LocalizationDescent.lean`. It clears denominators
+and uses a unit-ideal combination to glue compatible localized elements
+inside the original module. The actual consumer descends linear maps
+uniquely and recovers their full localizations. A final theorem detects
+injectivity locally. No glued-module or bundle representation is introduced.
+The pinned Stacks module-gluing file was inspected only; no source was copied.
+
+- The repaired full square passed the serialized file check
+  `166c0aadf3533522` at 2026-11-05 17:27:14 UTC. Earlier universe,
+  simplifier, and scalar-instance rewrite failures were repaired.
+- The complete descent file passed `a8a05478d0b32244` at 17:29:07 UTC.
+- The combined module build of `Geometry.DeterminantBaseChange` and
+  `Geometry.LocalizationDescent` passed 9068 jobs at 17:29:52 UTC,
+  fingerprint `4a935afc19caf820`, without warnings. Every check used
+  `--root /home/yijunyuan/bc-workspace` and the shared serialized slot.
+- All 59 transitive probes in `GeometryAxioms.lean` passed at 17:31:37 UTC,
+  fingerprint `ffefd7bf352d83dc`: only `propext`, `Classical.choice`, and
+  `Quot.sound`, with no `sorryAx` or additional axioms. Fingerprints identify
+  commands; the content pins are the commits above.
+- LSP repeatedly returned partial elaboration on the large determinant
+  import cone. Narrow serialized file checks supplied the missing feedback;
+  further iterative repairs follow the human request in I-0025 to minimize
+  shared-slot occupancy.
+- The read-only honesty reviewer found substantive producer use and no
+  certificate, vacuity, or overclaim. Its blueprint clarifications about
+  varying denominator exponents and compatibility on original elements
+  were applied. Five new blueprint nodes are checked; the global
+  determinant-isotypic node remains unproved.
+
+The first unmet construction is now the assembly of finite-projective local
+frames and transport of their determinant maps onto double localizations,
+followed by application of the checked descent theorem. This is needed to
+construct the global injection; the general descent producer alone does not
+supply it.
 
 ## Remaining boundaries
 
@@ -147,9 +184,10 @@ Arithmetic interface coordination selected
 `BostConjecture.Arithmetic.ComplexFiber` and `HermitianMetric` on existing
 modules; no second bundle or degree representation is introduced here.
 
-The latest graph sync had no missing-reference or stale-node warning; 413
-unattached imported/helper declarations across the shared project remain an
-intentional coverage warning, not verification of concurrent drafts. An arithmetic
-Mathlib attachment warning was sent to its owner and repaired. The read-only
-roadmap hygiene review intentionally retained the nine active nested lane/ancestor
-items. Scratch cleanup found no stale candidates.
+The latest graph sync has 111 blueprint nodes, 787 Lean declarations and 429
+edges, with no missing-reference or stale-node warning. Its 458 unattached
+helper/imported declarations include concurrent work and remain an intentional
+coverage warning. Read-only hygiene review retained the nine active nested
+lane/ancestor items; completed-parent warnings were sent to their owners.
+Scratch cleanup found no stale candidates. I-0026 requests root integration
+of the new descent import; this session does not claim that integration check.
