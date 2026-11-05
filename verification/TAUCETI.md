@@ -13,8 +13,10 @@ orbit span, prove its all-polytabloid and equivariant complexification bridges,
 and give the Gram theorem a concrete discrete Hilbert-lattice consumer.
 `Standard.lean` now proves independence by an original leading-word argument;
 `Rectangle.lean` and `Norm.lean` give the concrete word realization and initial
-norm. The next producer is rational standard-polytabloid spanning in this word
-model. The rational-versus-integral warning in §2 below remains in force.
+norm. `Garnir`, `GarnirSets`, and `Straightening` now selectively adapt rational
+standard spanning into this word model; `Basis` constructs its real standard
+basis, rank count and unconditional standard Gram upper bound. The next
+producer is the monic seminormal action formula. The rational-versus-integral warning in §2 below remains in force.
 
 Inspected 2026-11-05 for the Bost manuscript's integral Specht/Gram and tensor-invariant prerequisites. **Recommendation: first adapt only the covolume–Gram and lattice-inclusion lemmas below; then adapt the rational standard-polytabloid proof into the existing word-space model. Do not require TauCeti as a Lake dependency.**
 
@@ -92,15 +94,11 @@ These are actual mutual centralizer statements for the diagonal general-linear a
 - The finite-group Hilbert-ideal/null-cone material returned by broad searches does not establish the needed general-linear/special-linear reductive-group criterion.
 - Other project searches were stopped once the concrete TauCeti candidates above were identified, per the instruction to prioritize quick, selective reuse.
 
-## Next Horizon task
+## Remaining frontier
 
-Adapt only the rational straightening argument into the existing word model.
-The lattice, metric, Gram comparison, and standard independence are already
-proved locally. Rational spanning and real transport must supply the basis
-hypothesis of `BostConjecture.Specht.covolume_sq_le_det_gram`; the seminormal
-Gram identity remains a separate obligation.
-
-The unported TauCeti source remains an **unverified candidate source**.
-Accepted local proof/build evidence and scoped honesty review are recorded in
-`RESULTS.md`; no source inspection alone discharges the remaining producers.
-
+The selective Garnir/straightening adaptation is now integrated; see
+`CONTRIBUTIONS.md` for exact paths and modifications and `RESULTS.md` for
+checked evidence. The proof pieces outside that selected adaptation remain
+unverified candidates. Rational spanning and real transport now discharge
+the basis hypothesis of `covolume_sq_le_det_gram`. The monic seminormal action,
+Gram product, prefix estimates and general sublinear limit remain open.

@@ -108,8 +108,9 @@ changes. The installed mathlib revision is pinned in `lake-manifest.json`.
   `covolume_sq_le_det_gram` now consumes the copied lattice-inclusion theorem
   and span Gram formula for an integral real basis, with that hypothesis
   explicit. `oneRow_covolume_eq_one` supplies an actual integral basis and
-  computes its covolume. Rational standard spanning and the seminormal Gram
-  formula remain open. No TauCeti Lake
+  computes its covolume. `standardRealBasis` now supplies the standard
+  integral real basis to `covolume_sq_le_det_standard_gram`; the seminormal
+  Gram formula remains open. No TauCeti Lake
   dependency was added.
 
 ## Rational Garnir straightening — The Tau Ceti contributors
@@ -138,8 +139,9 @@ changes. The installed mathlib revision is pinned in `lake-manifest.json`.
   standardness predicate and prove the label/cardinality bridge. No alternate
   tableau, representation or lattice was introduced.
 - Consumer: `BostConjecture.Specht.polytabloidRat_mem_span_standard` supplies
-  the missing rational spanning theorem for the standard real basis and its
-  Gram/covolume comparison. Division by a positive internal multiplicity
+  rational spanning to `Basis.lean`, whose original scalar-extension and
+  basis proofs construct `standardRealBasis`, establish the integral rank
+  formula, and apply `covolume_sq_le_det_standard_gram`. Division by a positive internal multiplicity
   occurs over the rationals: no integral basis claim is made.
 - Only these needed proof pieces are adapted, with their local dependency cone
   checked. Source hashes and target modules are recorded in

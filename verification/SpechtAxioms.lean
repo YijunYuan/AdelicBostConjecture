@@ -39,3 +39,17 @@ import BostConjecture
 #print axioms BostConjecture.Specht.oneRow_covolume_eq_one
 #print axioms BostConjecture.Specht.rectangleLogCovolume_one
 #print axioms BostConjecture.Specht.tendsto_rectangleLogCovolume_one_div
+
+-- Rational straightening and its actual standard real-basis consumers.
+#print axioms BostConjecture.Specht.polytabloidInt_relabel_of_mem_columnGroup
+#print axioms BostConjecture.Specht.sum_sign_smul_polytabloidInt_relabel_eq_zero
+#print axioms BostConjecture.Specht.polytabloidRat_mem_span_relabel
+#print axioms BostConjecture.Specht.card_garnirSet
+#print axioms BostConjecture.Specht.mem_columnGroup_iff_image_garnirSetLeft_eq
+#print axioms BostConjecture.Specht.polytabloidRat_mem_span_standard
+#print axioms BostConjecture.Specht.realSpan_eq_span_standard
+#print axioms BostConjecture.Specht.standardRealBasis
+#print axioms BostConjecture.Specht.standardRealBasis_mem_spanLattice
+#print axioms BostConjecture.Specht.finrank_orbitLattice_eq_card_standard
+#print axioms BostConjecture.Specht.covolume_sq_le_det_standard_gram
+#print axioms BostConjecture.Specht.two_mul_log_covolume_le_log_det_standard_gram
