@@ -397,6 +397,25 @@ slope, and strictly stable if every nonzero proper saturated submodule has
 strictly smaller slope. It is normalized if its slope is zero.
 \end{definition}
 
+\begin{lemma}[Contraction between intrinsic Hermitian lines]
+\label{lem:line-degree-contraction}
+\uses{lem:line-degree-quotient-formula}\notready
+Let $L,L'$ be finite projective rank-one Hermitian modules, and let
+$f:L\to L'$ be an injective integral linear map satisfying
+$\|f(x)\|_\sigma\leq\|x\|_\sigma$ for every embedding $\sigma$ and
+integral section $x$. Then $\degn(L)\leq\degn(L')$.
+\end{lemma}
+\begin{proof}
+Choose $0\ne x\in L$. The induced map
+$L/\Ocal x\to L'/\Ocal f(x)$ is injective: if $f(y)=a f(x)$ then
+injectivity gives $y=ax$. Both quotients are finite, so their positive
+cardinalities satisfy the same inequality. The logarithm is increasing
+on positive reals; hence the finite term in the section formula for $L$
+is at most that for $L'$. The norm hypothesis gives
+$-\log\|x\|_\sigma\leq-\log\|f(x)\|_\sigma$ at each embedding.
+Sum these inequalities and divide by $D>0$ to obtain the degree inequality.
+\end{proof}
+
 \begin{lemma}[Determinant identities and contraction]
 \label{lem:degree-calculus}\uses{def:hermitian-degree}
 \source{bost-specht-manuscript:page-0003}\notready
