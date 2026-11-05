@@ -1,5 +1,85 @@
 # Dependency integration evidence — 2026-11-05
 
+
+## Prefix restriction, branching support and integration — session 0015
+
+`Specht/Prefix.lean` constructs the actual standard prefix diagrams, their
+restricted enumerating tableaux and content increments. `Branching.lean`
+proves integral frozen-tail polytabloid restriction, prefix-action equivariance,
+lifts of smaller orbit-lattice vectors and the restricted central scalar.
+`Filtration.lean` proves that the standard-basis largest-label filtration
+is exactly the ambient word-support filtration, hence invariant under the
+smaller symmetric group. The canonical integral orbit lattice and Hilbert
+metric are unchanged.
+
+- Prefix narrow check `17655f663782b993` passed **16:36:31 UTC**;
+  module check `565d8487544c37ab` passed **9,063 jobs**, **16:41:12 UTC**.
+- Branching module `a3cbd455f062cbbc` passed **9,064 jobs**, **16:47:17 UTC**.
+- Configured explicit-root `horizon check --json`, command identifier
+  `975bdb23135a0d4a`, passed **9,120 jobs** at **16:55:11 UTC**,
+  including Filtration and the determinant scalar-extension integration.
+- The independent honesty reviewer replayed
+  `check --lean verification/SpechtBranchingAxioms.lean --json`:
+  all **44** exact public declaration probes passed, `89b03e5cd92a3ea9`,
+  **16:57:16 UTC**, 61.097 seconds, not reused. Axiom sets are subsets
+  of `propext`, `Classical.choice`, and `Quot.sound`; no `sorryAx` or
+  custom axiom occurs.
+- After the additional checked ARITH/GEOM handoffs, the configured build
+  was rerun for the changed root imports: **9,124 jobs**, **17:00:01 UTC**,
+  the same command identifier, 92.450 seconds, not reused.
+  All timestamps in this section are **2026-11-05 UTC**.
+
+LSP was queried throughout but repeatedly stalled at imports. Narrow serialized
+kernel checks supplied the fallback. Initial Prefix, Branching and Filtration
+elaboration failures were repaired; accepted source diagnostics and final
+kernel checks pass. The root LSP remained partial; its evidence is the
+completed configured build. Shared-check waits were observed and honored.
+
+Explicit proof commits are `7318256`, `afbc76f`, and `cd412f7`.
+Automatic snapshot `5a9146c` captured the owned Filtration source and blueprint
+before the explicit boundary commit; snapshot `5831213` captured the latest
+owned root imports and contribution notes. These snapshots are not proof
+evidence: the exact checks above certify the owned source. Filtration SHA256:
+`debdb7c8574fbdcdc8ba3e764e0e1b1363310bd3aaf0445964c96def4956e1a8`.
+Root SHA256:
+`b41e5b8a32bc0b62d6602009418c2888f0794915a4725bfa7c4a9e443a17a176`.
+Concurrent uncommitted work in other teams' files is not certified by these
+claims, nor is a later edit covered merely by an earlier successful build.
+
+The root now imports checked `Geometry.DeterminantBaseChange` (3ac7a36),
+`Geometry.DeterminantNaturality` (7c76270, coordinate extraction d470bdb),
+and `Arithmetic.Degree` (6429efa/5d59bb0, evidence af132a7). Their exact
+producer audits are in `GEOMETRY.md` and `ARITHMETIC.md`, and their existing
+pinned reuse consumers are recorded in `CONTRIBUTIONS.md`. Geometry still
+requires projective descent; arithmetic still requires determinant-metric
+uniqueness/frame independence, normalization, calculus and intrinsic HN.
+No additional source was copied.
+
+Honesty-reviewer: **used, satisfactory**. The read-only audit found substantive
+producer use, matching checked blueprint attachments, no hidden target
+assumption and no replacement lattice. Its exact 44-probe replay is recorded
+under this session's `checks/2026-11-05T16-57-16.345024+00-00-89b03e5cd92a3ea9.json`.
+The reviewer did not certify the unproved downstream route or later ARITH/GEOM
+integration. A separate strategy review supported the explicit replacement
+of the stronger dominance claim by sufficient colexicographic triangularity.
+
+Claim class: **proved producers**. Frontier before: prefix restriction and
+content-triangular action. Frontier after: `lem:specht-branching-quotient`,
+then recursive colex triangularity and monic seminormal norms. Consumers:
+`prefixSlice_central_polytabloidInt` and
+`realSpechtRep_mem_lastRowSubspace`, then the branching quotient and Gram
+norm formula. The quotient, general covolume asymptotic and main theorem
+remain unproved; BOST-SPECHT stays open.
+
+Final graph sync observed **101** blueprint nodes, **708** Lean declarations and
+**386** edges, with no missing-reference warning. The **406** unattached
+helper/imported declarations remain intentional coverage warnings. The
+source-scope symlink is preserved. Read-only janitor review retained the nine
+active roadmap rows as nested ancestors of three live proof lanes; the
+transient all-children-done warning was resolved by the pending branching
+quotient. Scratch cleanup found no stale candidates. Integration conversations
+are left for their initiating teams to close; standing protections remain open.
+
 ## Content action and checked geometry integration — session 0013
 
 `Content.lean` computes the integral transposition coefficient at the original
