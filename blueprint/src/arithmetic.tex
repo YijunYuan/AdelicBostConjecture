@@ -760,6 +760,38 @@ The generic tensor product of two one-dimensional vector spaces is
 one-dimensional, so this computation applies to the intrinsic line degree.
 \end{proof}
 
+\begin{lemma}[Scalar extension and conjugation for the intrinsic dual]
+\label{lem:dual-fiber-base-change}\uses{def:hermitian-metric,lem:hermitian-fiber-conjugation}\notready
+Let $P$ be a finite projective module over a commutative ring $R$ and
+$S$ a commutative $R$-algebra. The canonical map
+\[
+ S\otimes_R P^\vee\longrightarrow(S\otimes_R P)^\vee,
+ \qquad (s\otimes f)(t\otimes x)=st f(x),
+\]
+is an isomorphism. For $R=\Ocal$ and $S=\mathbb C$ at an embedding
+$\sigma$, denote it by $d_\sigma$. If $c$ denotes canonical fiber
+conjugation, then for all dual-fiber vectors $\varphi$ and fiber vectors $x$,
+\[
+ d_{\bar\sigma}(c\varphi)(cx)
+   =\overline{d_\sigma(\varphi)(x)}.
+\]
+\end{lemma}
+\begin{proof}
+Finite projectivity gives the canonical tensor--Hom isomorphism
+$P^\vee\otimes_R S\simeq\operatorname{Hom}_R(P,S)$: indeed a
+finite dual family $p_i,f_i$ with $x=\sum_i f_i(x)p_i$ gives the
+inverse $u\mapsto\sum_i f_i\otimes u(p_i)$. Applying the evaluation
+formula verifies both inverse identities. Tensor symmetry followed by
+this isomorphism and the scalar-extension adjunction
+$\operatorname{Hom}_R(P,S)\simeq
+\operatorname{Hom}_S(S\otimes_R P,S)$ gives the displayed map, proving
+bijectivity. Its formula shows $S$-linearity, so it is an $S$-linear
+isomorphism. On $\varphi=z\otimes f$ and $x=w\otimes m$, conjugation
+changes the value $zw\sigma(f(m))$ to
+$\bar z\bar w\bar\sigma(f(m))$. This proves the conjugation identity
+on pure tensors. Additivity in both variables extends it to all vectors.
+\end{proof}
+
 \begin{lemma}[Determinant identities and contraction]
 \label{lem:degree-calculus}\uses{def:hermitian-degree,lem:quotient-hermitian-metric,lem:arithmetic-tensor-metric,lem:line-tensor-degree,lem:determinant-contraction,lem:saturation-degree,lem:degree-metric-scaling}
 \source{bost-specht-manuscript:page-0003}\notready
