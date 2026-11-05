@@ -14,6 +14,8 @@ public import BostConjecture.Specht.ColumnTensor
 public import BostConjecture.Specht.Covariance
 public import BostConjecture.Specht.Standard
 public import BostConjecture.Specht.Basis
+public import BostConjecture.Specht.Orthogonal
+public import BostConjecture.Specht.RealAction
 public import BostConjecture.Specht.OneRow
 public import OAI.NumberTheory.ArithmeticGroups.Lattices.FrameMatrices
 public import OAI.RepresentationTheory.Saxl.SpechtSubmodule

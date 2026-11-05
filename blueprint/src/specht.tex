@@ -557,8 +557,88 @@ absolute irreducibility and the full invariant generic fiber remain
 separate properties of the all-polytabloid construction.
 \end{remark}
 
+\begin{lemma}[Monic orthogonalization of standard polytabloids]
+\label{lem:orthogonal-standard-basis}\uses{lem:real-standard-basis,lem:standard-gram-covolume}
+\lean{BostConjecture.Specht.orthogonalStandardBasis,BostConjecture.Specht.orthogonalStandardBasis_eq_sub_sum,BostConjecture.Specht.orthogonalStandardBasis_orthogonal,BostConjecture.Specht.orthogonalStandardBasis_triangular,BostConjecture.Specht.orthogonalStandardBasis_monic,BostConjecture.Specht.det_orthogonalStandardBasis,BostConjecture.Specht.det_standard_gram_eq_prod_orthogonal_norm_sq,BostConjecture.Specht.two_mul_log_covolume_le_sum_log_orthogonal_norm_sq}
+\source{ryom-hansen-seminormal-denominators-v1}\leanok
+For any total ordering of the standard tableaux, define recursively
+\[
+ f_t=e_t-\sum_{s<t}\frac{\langle f_s,e_t\rangle}{\|f_s\|^2}f_s.
+\]
+This is an orthogonal basis of $V_t$. Its change-of-basis matrix from
+the standard polytabloids is triangular with diagonal entries one, and
+\[
+ \det\Gram((e_t))=\prod_t\|f_t\|^2,\qquad
+ 2\log\covol\Lambda_t\leq\sum_t\log\|f_t\|^2.
+\]
+\end{lemma}
+\begin{proof}
+Induction on the ordering shows that $f_t-e_t$ belongs to the span of
+the earlier standard polytabloids, and that the earlier $f_s$ span the
+same subspace. Thus $f_t$ is nonzero by independence of the $e_t$.
+For $s<t$, taking the inner product with $f_s$ in the displayed
+recursion cancels exactly the summand indexed by $s$; all other
+summands vanish by inductive orthogonality. The resulting triangular
+matrix has diagonal entries one, hence determinant one. Transformation
+of Gram matrices preserves their determinant under this change of
+basis. The new Gram matrix is diagonal with positive entries
+$\|f_t\|^2$, giving the product formula. Take logarithms and apply
+the standard Gram covolume bound.
+\end{proof}
+
+\begin{lemma}[Real isometric permutation action]
+\label{lem:real-specht-action}\uses{lem:integral-specht-all-tableaux,lem:real-specht-lattice}
+\lean{BostConjecture.Specht.wordRepReal,BostConjecture.Specht.realSpechtRep,BostConjecture.Specht.inner_realSpechtRep,BostConjecture.Specht.realSpechtRep_swap_symmetric,BostConjecture.Specht.realSpechtRep_standardRealBasis_coe}
+\source{bost-specht-manuscript:page-0004}\leanok
+The position action $P_gx(w)=x(w\circ g)$ preserves the real
+Specht span and its word inner product. It agrees with relabeling
+on polytabloids. Every transposition acts by a symmetric operator.
+\end{lemma}
+\begin{proof}
+Composition of position permutations gives $P_gP_h=P_{gh}$.
+The map $w\mapsto w\circ g$ is a bijection on words; reindexing
+the finite sum defining the inner product proves
+$\langle P_gx,P_gy\rangle=\langle x,y\rangle$.
+The integral lattice is stable under $P_g$, and taking its real
+span preserves stability. The integral relabeling identity extends
+coefficientwise to real vectors. Applying the inner-product identity
+to $x$ and $P_{g^{-1}}y$ gives
+$\langle P_gx,y\rangle=\langle x,P_{g^{-1}}y\rangle$.
+For a transposition $g^{-1}=g$, proving symmetry.
+\end{proof}
+
+\begin{lemma}[Symmetric commuting Murphy operators]
+\label{lem:murphy-operators}\uses{lem:real-specht-action}
+\lean{BostConjecture.Specht.murphyOperator,BostConjecture.Specht.murphyOperator_symmetric,BostConjecture.Specht.murphyOperator_commute}\leanok
+On the real Specht span, with labels $0,\ldots,n-1$, put
+$J_j=\sum_{i<j}P_{(i,j)}$. Each $J_j$ is symmetric and the
+operators $J_j$ commute pairwise.
+\end{lemma}
+\begin{proof}
+Symmetry follows by summing the symmetry of the transpositions.
+If a permutation $g$ fixes $j$ and permutes the labels below $j$,
+then conjugation sends $(i,j)$ to $(g(i),j)$ and hence fixes $J_j$
+after reindexing its sum. For $h<j$ every transposition $(i,h)$
+with $i<h$ has this property. Consequently every summand of $J_h$
+commutes with $J_j$, and so does $J_h$. Equal indices commute
+trivially; reversed indices follow by symmetry of commutation.
+\end{proof}
+
+\begin{lemma}[Adjacent Murphy recurrence]
+\label{lem:murphy-recurrence}\uses{lem:murphy-operators}
+\lean{BostConjecture.Specht.murphyOperator_succ,BostConjecture.Specht.murphyOperator_mul_swap}\leanok
+For $s=P_{(i,i+1)}$, one has $J_{i+1}=sJ_i s+s$ and
+$J_{i+1}s=sJ_i+1$.
+\end{lemma}
+\begin{proof}
+Conjugation by $(i,i+1)$ sends each $(k,i)$ with $k<i$ to
+$(k,i+1)$. Their sum is $J_{i+1}$ minus its last summand $s$,
+proving the first identity. Multiply on the right by $s$ and use
+$s^2=1$ to obtain the second.
+\end{proof}
+
 \begin{theorem}[Monic seminormal basis]
-\label{lem:monic-seminormal}\uses{lem:real-standard-basis}
+\label{lem:monic-seminormal}\uses{lem:orthogonal-standard-basis,lem:murphy-recurrence}
 \source{bost-specht-manuscript:page-0005,ryom-hansen-seminormal-denominators-v1:classical_formula}\notready
 Order standard tableaux by an extension of dominance of every prefix,
 starting with the column-reading tableau $t_0$. Monic orthogonalization
