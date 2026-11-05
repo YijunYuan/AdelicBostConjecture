@@ -1650,12 +1650,15 @@ as claimed.
 
 \begin{lemma}[Labelled hypergeometric concentration]
 \label{lem:occupancy-concentration}\uses{lem:labelled-occupancy,lem:sampling-exponential-moment}
-\source{bost-specht-manuscript:page-0007}\notready
+\lean{BostConjecture.Specht.occupancyMass_concentration,BostConjecture.Specht.occupancyMass_max_concentration}
+\source{bost-specht-manuscript:page-0007}\leanok
 Let $a,M\geq1$ and $0<A\leq aM$. Under the labelled occupancy
 law $B$, for every coordinate $i$ and $u>0$,
 \[
  \mathbb P_B(|b_i-A/a|\geq u)\leq2e^{-u^2/(4A)}.
 \]
+Consequently the probability that any coordinate has deviation at least $u$
+is at most $2a e^{-u^2/(4A)}$.
 \end{lemma}
 \begin{proof}
 Put $N=aM$ and $p=M/N=1/a$. The labelled occupancy law is the
@@ -1676,11 +1679,39 @@ because $0\leq b_i\leq A$ and $0\leq A/a\leq A$.
 This weaker numerical constant than the manuscript's Hoeffding estimate
 suffices for the sublinear limit and uses only the quadratic exponential
 remainder.
+Summing the single-coordinate bounds proves the simultaneous bound.
 
 \end{proof}
 
+\begin{lemma}[Finite weighted bad-gap bound]
+\label{lem:weighted-bad-gap-bound}\uses{lem:labelled-occupancy,lem:occupancy-concentration}
+\source{bost-specht-manuscript:page-0007}\notready
+Let $a\geq2$, $M\geq1$, $0<A\leq aM$, and put $c=a(a-1)/2$.
+For the labelled occupancy law $B$, set
+$Z=\mathbb E_B V(b)^2$ and suppose $Z>0$.
+For $L,u>0$, the probability under the normalized weighted law satisfies
+\[
+ \frac{\mathbb E_B\bigl[V(b)^2
+   \mathbf1_{\{\exists i<j:\ |b_i-b_j|\leq L\}}\bigr]}{Z}
+ \leq\frac{L^2(2u)^{2(c-1)}+
+       2aM^{2c}e^{-u^2/(4A)}}{Z}.
+\]
+\end{lemma}
+\begin{proof}
+Split the event according as some $|b_i-A/a|\geq u$ or all
+these deviations are less than $u$. On the latter event every pair
+difference has absolute value at most $2u$. The bad-gap condition
+singles out one of the $c$ Vandermonde factors with absolute value
+at most $L$, so $V(b)^2\leq L^2(2u)^{2(c-1)}$.
+Its unweighted probability is at most one. On the former event,
+all coordinates lie in $[0,M]$, so $V(b)^2\leq M^{2c}$.
+The union bound and the preceding concentration estimate give probability
+at most $2a e^{-u^2/(4A)}$. Add the two nonnegative weighted bounds
+and divide by $Z>0$.
+\end{proof}
+
 \begin{lemma}[Uniform separation of bulk prefix coordinates]
-\label{lem:prefix-separation}\uses{lem:prefix-distribution,lem:prefix-normalizer-lower,lem:occupancy-concentration}
+\label{lem:prefix-separation}\uses{lem:prefix-distribution,lem:prefix-normalizer-lower,lem:weighted-bad-gap-bound}
 \source{bost-specht-manuscript:page-0007}\notready
 For fixed $a\geq2$, $0<\varepsilon<1/2$, and $L>0$,
 \[
@@ -1691,15 +1722,10 @@ For fixed $a\geq2$, $0<\varepsilon<1/2$, and $L>0$,
 \end{lemma}
 \begin{proof}
 Put $\eta=1/(4c)$ and $u=k^{1/2+\eta}$. Since $A\leq aM\leq a^2k$,
-the union bound gives
-$\mathbb P_B(\max_i|b_i-A/a|>u)\leq2a e^{-k^{2\eta}/(4a^2)}$.
-On the complementary event all pairwise differences are at most
-$2u$. If one difference is at most $L$, then
-$V(b)^2\leq L^2(2u)^{2(c-1)}$.
-Dividing by the lower bound for $Z$ bounds the weighted probability
-of this event by a constant times
+the finite weighted bound and the lower bound for $Z$ bound the central
+contribution by a constant times
 $k^{-1+2\eta(c-1)}=k^{-1/2-1/(2c)}$, tending to zero. On the tail
-event use $V(b)^2\leq M^{2c}$; its weighted probability is at most a
+event, the same finite bound gives weighted probability at most a
 constant times $k^c e^{-k^{2\eta}/(4a^2)}$, also tending to zero.
 The constants are independent of $t$ in the stated range. Both events
 are invariant under sorting the coordinates, so the same bound

@@ -1,3 +1,65 @@
+## Bulk normalization and occupancy concentration (session 0028)
+
+Claim class: **proved producers**. The bulk normalizer lower bound, finite
+sampling moments, actual occupancy exponential bound, and coordinate/union
+concentration bounds are checked. The first unmet producer is the finite
+Vandermonde-weighted bad-gap estimate, followed by uniform separation and
+the logarithmic-expectation squeeze. BOST-SPECHT and the general covolume
+limit remain open. The canonical integral lattice, Hilbert metric, and
+arbitrary-number-field target are unchanged.
+
+The configured explicit-root `horizon check --json` passed **9,223 jobs
+without warnings** at **2026-11-05 22:47:30 UTC**, fingerprint
+`975bdb23135a0d4a`. Root blob:
+`1e82a0a65cf1c08b5cb2f375cfa2f0c6c580183c`.
+The checked integration includes `Arithmetic.ExactDegree`,
+`Geometry.ContractionNorm`, `Balanced.SpectralExpansion`, and
+`InvariantTheory.Semistability`, using the owners' scoped checks and
+201-, 163-, and 67-probe audit handoffs. Later tensor-flow, tensor-degree
+and invariant-base-change work is outside this fixed integration boundary.
+
+New Specht evidence:
+
+| Source | Kernel check | Transitive axiom audit |
+| --- | --- | --- |
+| `BulkNormalizer.lean` | `c50f0cd492a66fd3`, 9,082 jobs, 22:19:53 UTC | `SpechtBulkAxioms.lean`: 5 probes, `0345708ab90c082c` |
+| `Sampling.lean` | `d7b19a514abaaf6e`, 1,586 jobs, 22:33:22 UTC | `SpechtSamplingAxioms.lean`: 8 probes, `45c4ee8f5c46ddf3` |
+| `OccupancyMGF.lean` | `e0d356bec76fba87`, 1,587 jobs; final union delta included in configured root | `SpechtConcentrationAxioms.lean`: 9 probes, `772635051cd91c86`, 22:48:20 UTC |
+
+All **22 probes** report only `propext`, `Classical.choice`, and `Quot.sound`.
+No sorry, extra axiom or unproved concentration assumption is introduced.
+Source blobs, in the table order:
+`a4c8e408ee79bb1b5ab572a03e0a1b2071b0c8f8`,
+`cbfc86f948e043621b85dc10b9747b291d94dff7`,
+`f012fae9e0ba6c1aef0eb27d663aeab32fda97c4`.
+Explicit checkpoints: `76b7bf8`, `914e020`, `417784e`, `48da5e6`, `4cf74b3`.
+Concurrent snapshots may also contain earlier source; the checks certify the
+listed source and imports.
+
+The concentration proof specializes the manuscript symmetric-mean step
+to Bernoulli populations by counting actual subset incidences. Its tail
+bound is `2 exp(-u²/(4A))`, using the checked quadratic exponential
+remainder, rather than the sharper manuscript constant. The blueprint
+records this adaptation and adjusts the separation constants; both give
+the same required vanishing polynomial-times-exponential tail. The union
+bound uses no independence assumption.
+
+**Honesty-reviewer: used, satisfactory**, separately for the normalizer,
+sampling moments, all-parameter MGF, actual-law concentration, and union
+delta. Each generic analytic hypothesis is discharged by the actual
+occupancy consumer. Guarded LSP guided every proof edit; temporary local
+elaboration errors were repaired. The umbrella LSP reported stale imports
+while other lanes edited dependencies; the final serialized root check
+supersedes that diagnostic. No accepted kernel check failed.
+
+Janitor's read-only roadmap review found the active-count warning reflects
+the four authorized lanes and their ancestors. It is intentionally retained;
+no proof status was downgraded to hide it. Scratch cleanup found no stale
+candidates and protected all four live runs. Idle parent/reviewer LSP workers
+were released after their checks to reduce swap pressure. No other team's
+processes were stopped. The self-addressed housekeeping thread I-0058 was
+archived after consumption.
+
 ## Exact labelled prefix distribution (session 0026)
 
 Claim class: **proved producers**. The finite prefix-distribution frontier is

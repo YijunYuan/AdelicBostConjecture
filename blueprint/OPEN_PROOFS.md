@@ -69,12 +69,15 @@ The following producers still need complete source-backed mathematical proofs:
   `OccupancySort.lean`, and `ShiftedShapes.lean` prove the labelled law,
   sorting multiplicity, and equivalence with actual rectangular subdiagrams.
   `PrefixDistribution.lean` and `PrefixNormalizer.lean` prove the closed
-  normalizer and exact prefix probability formula. The next separate
+  normalizer and exact prefix probability formula. The uniform
   bulk lower bound for that normalizer is proved in `BulkNormalizer.lean`.
-  The labelled hypergeometric concentration inequality and its weighted bad-gap
-  consequence are still unproved. The concentration proof uses binomial
-  moments of finite subset sampling, a sufficient Bernoulli-population
-  special case of the manuscript symmetric-mean inequality. `HookCount.lean`
+  `Sampling.lean` proves actual finite-subset binomial moments and the
+  Bernoulli exponential-moment bound; `OccupancyMGF.lean` transports it to
+  the labelled law and proves two-sided and simultaneous concentration.
+  The explicitly documented weaker tail constant suffices for the limit.
+  The first unmet producer is now the finite Vandermonde-weighted bad-gap
+  bound, followed by its uniform limit and transfer to actual tableau prefixes.
+  `HookCount.lean`
   bridges the imported hook formula
   to the accepted tableau indexing; `ShiftedCount.lean` proves the row hook
   interval partition and the factorial/Vandermonde enumeration.

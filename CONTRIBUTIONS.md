@@ -472,7 +472,7 @@ page-201 file is a normalized statement excerpt, not a full transcription.
 No Lean code was copied from either reference. The orbit criterion and its
 used external results remain unproved Lean obligations.
 
-## Verification
+## Finite sampling and concentration — session 0028
 
 Session 0028 adds original finite-product and subset-counting proofs in
 `Specht/BulkNormalizer.lean` and `Specht/Sampling.lean`. They import unchanged
@@ -487,12 +487,29 @@ the subset count and falling-factorial inequality. No external source was copied
 
 The new integration imports are original owner-delivered
 `Arithmetic.ExactDegree`, `Geometry.ContractionNorm`, and
-`Balanced.SpectralExpansion`. The latter uses unchanged Mathlib
+`Balanced.SpectralExpansion`, together with `InvariantTheory.Semistability`.
+The spectral expansion uses unchanged Mathlib
 `Mathlib/Analysis/InnerProductSpace/Spectrum.lean`,
-`Mathlib/Analysis/Normed/Algebra/Exponential.lean`, and
+`Mathlib/Analysis/SpecialFunctions/Exponential.lean`, and
 `Mathlib/Analysis/Convex/Deriv.lean` at the same revision and license for the
 actual exterior-norm spectral expansion and convexity. The owner audit files
 record their exact consumers and remaining theorem boundaries.
+
+`Specht/OccupancyMGF.lean` uses the unchanged
+`Real.norm_exp_sub_one_sub_id_le` and `Real.add_one_le_exp` in
+`Mathlib/Analysis/Complex/Exponential.lean` to bound the centered exponential
+moment, then proves finite exponential Markov and union bounds locally.
+The actual occupancy law is retained through `occupancyEquiv`. The sufficient
+tail constant is weaker than the manuscript's Hoeffding constant; the
+blueprint explicitly records that adaptation and its asymptotic sufficiency.
+The invariant-polynomial handoff imports unchanged
+`Mathlib/LinearAlgebra/SymmetricAlgebra/Basic.lean`,
+`Mathlib/RingTheory/Finiteness/Subalgebra.lean`, and
+`Mathlib/RepresentationTheory/Invariants.lean` at the same pinned revision
+and license. Their consumers are the owners' intrinsic polynomial evaluation,
+homogeneous subspace, action and invariant-to-semistability proofs.
+
+## Verification
 
 Run `horizon --root ../.. check --json` from this project, then
 `horizon --root ../.. check --lean verification/ReuseAxioms.lean --json`.
