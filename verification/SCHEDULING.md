@@ -1,6 +1,6 @@
 # Parallel Horizon scheduling
 
-Coordinator checkpoint: 2026-11-06 05:27 Asia/Shanghai (2026-11-05 21:27 UTC).
+Coordinator checkpoint: 2026-11-06 05:44 Asia/Shanghai (2026-11-05 21:44 UTC).
 
 The user assigned the parent session scheduling only, with no spending cap. The user subsequently authorized a fourth dedicated
 Lemma 7.2 lane if memory pressure is low; the total cap is now four proof
@@ -64,7 +64,7 @@ and 138 foundational-only probes. The 9,190-job root batch now includes
 `Geometry.ContractionMetric`, `Tensor.EvaluationBaseChange`, and
 `Tensor.DualRegroupBaseChange`. Later undelivered leaves are excluded.
 
-The current sessions are SPECHT `0026`, ARITH `0012`, GEOM `0012`, and BALANCED `0002`.
+The current sessions are SPECHT `0026`, ARITH `0012`, GEOM `0012`, and BALANCED `0004`.
 ARITH `0010` handed off with final evidence `1c0421a` and 171
 foundational-only probes. Its exact exterior-product and finite-free
 determinant-product producers await root integration in `I-0050`;
@@ -75,8 +75,14 @@ consumer remain in progress. BALANCED has checked intrinsic partial traces
 (`fdb954d`), their actual orthogonal-projection consumer (`3361234`), and the
 Gram determinant first variation (`ee2abe7`); its 16-probe axiom audit passed
 at 21:04:53 UTC with standard foundational axioms only, and the scoped honesty
-review was satisfactory. Their root handoff is `I-0049`; the actual
-exponential-flow consumer is still being checked. These leaves are not yet
+review was satisfactory. The actual exponential-flow consumer subsequently
+passed 2,821 jobs at 21:28:53 UTC (`5e76175`), with all 19 export probes
+foundational-only at 21:30:33 UTC. Evidence `9cddfb6` records satisfactory
+source, mathematical and honesty reviews. Their updated root handoff is
+`I-0049`. BALANCED `0002` ended successfully at 21:38:47 UTC and `0004`
+started at 21:40:05 UTC after the coordinator's checkpoint hint `I-0053`.
+The next analytic step uses the existing exterior-power inner-product API
+to connect Gram variation with the Plucker norm. These leaves are not yet
 the full Lemma 7.2 or part of the
 9,190-job root boundary. Use the owners' exact source
 revisions and checks in [RESULTS.md](RESULTS.md), [ARITHMETIC.md](ARITHMETIC.md),
@@ -185,7 +191,22 @@ and their entries in `blueprint/src/refs.bib`. Only the used pages/results
 should be registered; SPECHT retains shared root/progress-file ownership.
 Exact semistability API signatures are still being settled in `I-0047`.
 The coordinator requested these signatures at the next coherent exponential
-proof boundary, before GEOM begins its invariant consumer.
-At 21:26 UTC, available memory was 7.11 GiB, PSI avg10 1.36% and avg60
-0.90%; pressure varies during elaboration, so monitoring continues. No
+proof boundary, before GEOM begins its invariant consumer. BALANCED has
+proposed concrete signatures in its verification record; GEOM confirmation
+is still pending.
+
+A bounded read-only strategy review identified the current curve-based
+Euclidean/Zariski closure comparison as a costly dependency cone, and checked
+existing Noether-normalization, constructibility, Cauchy-bound, minpoly and
+lying-over declarations. In `I-0054`, the coordinator handed BALANCED a
+candidate finite-map/root-persistence route for independent mathematical
+review before any blueprint replacement. The candidate is not an accepted
+proof, source attribution, or Lean result. The analytic lane continues while
+Horizon decides whether this smaller affine route is valid and useful.
+
+At 21:43 UTC, available memory was 7.64 GiB, PSI avg10 7.92% and avg60
+4.07%, with zero OOM kills. Swap occupancy rose during transient pressure;
+the process sample shows substantial shared Lean-library mappings alongside
+active elaboration. Monitor actual available memory, swap deltas and sustained
+PSI rather than summing per-process RSS. No
 resource condition currently requires reducing the four proof lanes.
