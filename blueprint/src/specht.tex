@@ -1565,7 +1565,8 @@ factorials are positive and $0\leq t+c\leq aM$.
 
 \begin{lemma}[Bulk lower bound for the prefix normalizer]
 \label{lem:prefix-normalizer-lower}\uses{lem:prefix-distribution}
-\source{bost-specht-manuscript:page-0007}\notready
+\lean{BostConjecture.Specht.sum_occupancyWeight_bulk_lower}
+\source{bost-specht-manuscript:page-0007}\leanok
 Let $a\geq2$, $k\geq1$, $d=ak$, $c=a(a-1)/2$,
 $0<\varepsilon<1/2$, and $\varepsilon d\leq t\leq(1-\varepsilon)d$.
 Then
@@ -1588,8 +1589,40 @@ Here $\prod_{j=1}^{a-1}(k+j)^j\geq k^{\sum_{j=1}^{a-1}j}=k^c$,
 and every binomial coefficient being divided by is positive.
 \end{proof}
 
+\begin{lemma}[Binomial moments of sampling without replacement]
+\label{lem:sampling-binomial-moments}
+\source{bost-specht-manuscript:page-0007}\notready
+Let $\Omega$ have $N$ elements, let $T\subseteq\Omega$ have $M$
+elements, and let $0\leq r\leq A\leq N$. Then
+\[
+ \sum_{\substack{S\subseteq\Omega\\|S|=A}}
+   \binom{|S\cap T|}{r}
+ =\binom Mr\binom{N-r}{A-r}.
+\]
+Consequently, for a uniformly chosen $A$-element subset $S$,
+\[
+ \mathbb E\binom{|S\cap T|}{r}
+ =\binom Ar\frac{M^{\underline r}}{N^{\underline r}}
+ \leq\binom Ar(M/N)^r
+\]
+when $N>0$, where $x^{\underline r}=x(x-1)\cdots(x-r+1)$.
+\end{lemma}
+\begin{proof}
+Count pairs $(S,U)$ with $|S|=A$, $|U|=r$, and $U\subseteq S\cap T$.
+For fixed $S$ there are $\binom{|S\cap T|}{r}$ choices of $U$.
+For fixed $U\subseteq T$, removing $U$ identifies the admissible $S$
+with the $(A-r)$-element subsets of $\Omega\setminus U$, giving the
+first identity. Divide by $\binom NA>0$ and cancel factorials to
+obtain the second expression. If $r>M$, the numerator vanishes.
+Otherwise every denominator factor is positive and
+$(M-j)/(N-j)\leq M/N$ for $0\leq j<r$, because $M\leq N$.
+Multiplying these inequalities proves the bound, including $r=0$.
+This supplies the Bernoulli-population special case of the symmetric-mean
+estimate used in the manuscript.
+\end{proof}
+
 \begin{lemma}[Labelled hypergeometric concentration]
-\label{lem:occupancy-concentration}\uses{lem:labelled-occupancy}
+\label{lem:occupancy-concentration}\uses{lem:labelled-occupancy,lem:sampling-binomial-moments}
 \source{bost-specht-manuscript:page-0007}\notready
 Let $a,M\geq1$ and $0<A\leq aM$. Under the labelled occupancy
 law $B$, for every coordinate $i$ and $u>0$,
@@ -1598,22 +1631,16 @@ law $B$, for every coordinate $i$ and $u>0$,
 \]
 \end{lemma}
 \begin{proof}
-Under the unweighted hypergeometric law, the moment-generating
-function of $b_i$ is the normalized $A$th elementary symmetric
-polynomial of $aM$ positive numbers, of which $M$ equal $e^\theta$
-and the others equal one. For positive numbers with fixed sum, this
-normalized polynomial is at most the $A$th power of their mean.
-An all-equal tuple gives equality, including the case $aM=1$.
-Otherwise replace distinct largest and smallest entries by their mean.
-With their sum fixed, the symmetric polynomial is affine
-in their product with nonnegative coefficient, so does not decrease.
-The sum of squared deviations from the mean drops by half their
-squared difference, at least the previous sum of squared deviations
-divided by $2aM$. Repeating converges to the constant tuple; continuity
-proves the claim. Consequently
+Put $N=aM$ and $p=M/N=1/a$. For $\theta\geq0$, expand
+$e^{\theta b_i}=(1+(e^\theta-1))^{b_i}$ and apply the binomial-moment
+bound term by term. All coefficients are nonnegative, and terms above
+$b_i$ vanish, so
 \[
  \mathbb E_B e^{\theta b_i}\leq(1-1/a+e^\theta/a)^A.
 \]
+For $\theta<0$, apply the same argument to the number $A-b_i$ of
+selected elements outside block $i$, with success fraction $1-p$,
+and multiply by $e^{\theta A}$. This gives the same inequality.
 For $p=1/a$, the second derivative of
 $\log(1-p+pe^\theta)$ is at most $1/4$, so subtracting its tangent
 at zero yields

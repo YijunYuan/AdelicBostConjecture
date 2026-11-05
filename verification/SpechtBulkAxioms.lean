@@ -1,0 +1,7 @@
+import BostConjecture.Specht.BulkNormalizer
+
+#print axioms BostConjecture.Specht.choose_ratio_eq_ascFactorial
+#print axioms BostConjecture.Specht.pow_le_choose_ratio
+#print axioms BostConjecture.Specht.rectangle_occupancy_population_le
+#print axioms BostConjecture.Specht.pow_staircaseSum_le_prod
+#print axioms BostConjecture.Specht.sum_occupancyWeight_bulk_lower
