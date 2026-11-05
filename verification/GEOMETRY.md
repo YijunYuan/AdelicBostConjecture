@@ -122,6 +122,8 @@ invertibility nor flatness is assumed.
   determinant metric is a substantive consumer; no bundle representation changed.
 - Post-extraction combined build `2636613889bd279e` passed at 16:45:50 UTC,
   9068 jobs, covering both new modules and `DeterminantFrame`.
+- The post-extraction 42-probe audit passed at 16:49:35 UTC
+  (`ffefd7bf352d83dc`), again with only the three foundational axioms.
 - The read-only honesty reviewer approved the naturality scope and the exact
   extraction. Blueprint nodes distinguish the top exterior coordinates from
   their Specht-dependent consumers.
@@ -145,7 +147,9 @@ Arithmetic interface coordination selected
 `BostConjecture.Arithmetic.ComplexFiber` and `HermitianMetric` on existing
 modules; no second bundle or degree representation is introduced here.
 
-The final graph sync had no missing-reference or stale-node warning; 388
+The latest graph sync had no missing-reference or stale-node warning; 413
 unattached imported/helper declarations across the shared project remain an
-intentional coverage warning, not verification of concurrent drafts. The
-read-only roadmap hygiene review retained the nested active-lane count.
+intentional coverage warning, not verification of concurrent drafts. An arithmetic
+Mathlib attachment warning was sent to its owner and repaired. The read-only
+roadmap hygiene review intentionally retained the nine active nested lane/ancestor
+items. Scratch cleanup found no stale candidates.
