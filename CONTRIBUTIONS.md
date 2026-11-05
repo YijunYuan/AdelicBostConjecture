@@ -164,8 +164,12 @@ changes. The installed mathlib revision is pinned in `lake-manifest.json`.
   Extraction was durably recorded at workspace-ledger commit `c1ce881`.
 - Consumer: the original bridge `Specht/ColumnTensor.lean` identifies the
   existing rectangular polytabloid coefficients with a product of `altVec`
-  coordinates. This supplies the column decomposition for determinant covariance
-  in word coordinates. Projective-module gluing and invariant-space equality
+  coordinates. `Specht/Covariance.lean` consumes the extracted
+  `Matrix.sum_tensorPow_mul_altVec` to prove the actual word matrix action
+  on every rectangular polytabloid, integral lattice vector, its scalar span,
+  and the checked complex Specht module is multiplication by `det u ^ k`.
+  Its pure-tensor formula applies the matrix separately to each factor.
+  Projective-module gluing and invariant-space equality
   remain separate mathematical obligations.
 - The extraction's eight transitive axiom probes are in
   `verification/StacksAxioms.lean`; the module and all probes were checked by

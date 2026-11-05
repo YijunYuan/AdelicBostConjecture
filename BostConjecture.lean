@@ -8,6 +8,7 @@ public import BostConjecture.Specht.Metric
 public import BostConjecture.Specht.Norm
 public import BostConjecture.Specht.Rectangle
 public import BostConjecture.Specht.ColumnTensor
+public import BostConjecture.Specht.Covariance
 public import BostConjecture.Specht.Standard
 public import BostConjecture.Specht.Basis
 public import BostConjecture.Specht.OneRow

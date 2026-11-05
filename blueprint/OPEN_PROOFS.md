@@ -12,7 +12,11 @@ basis, proves its integrality and rank count, and discharges that hypothesis.
 `Rectangle.lean` identifies balanced row words and proves the initial norm
 `(a!)^k`. `Standard.lean` proves standard-polytabloid independence over any
 ring by lexicographic triangularity. `OneRow.lean` proves covolume one and
-the sublinear limit for the one-row case. The standard Gram bound is now
+the sublinear limit for the one-row case. `ColumnTensor.lean` identifies
+the existing polytabloids with products of unnormalized alternating columns;
+`Covariance.lean` proves determinant covariance for the word matrix action
+on the integral lattice, its scalar span over every commutative ring, and the
+checked complex Specht module. The standard Gram bound is now
 unconditional; its seminormal evaluation, the invariant-space identification,
 and the general covolume asymptotic remain open.
 
@@ -43,8 +47,9 @@ the blueprint's mathematical proofs still require independent review.
 
 The seminormal Gram identity is for the standard family. For the orbit lattice
 it yields only `0 ≤ 2c_a(d) ≤ E log γ`; the sublinear limit follows by squeezing.
-Determinant covariance for local-frame gluing and the full invariant generic
-fiber for nonvanishing stay independent requirements of the contraction route.
+Determinant covariance in word coordinates is proved. Identification with
+abstract tensor maps, projective local-frame gluing, and the full invariant
+generic fiber for nonvanishing remain requirements of the contraction route.
 
 All cited manuscript page anchors resolve to registered vision transcriptions
 that were read before attachment. The shifted-coordinate tableau count has

@@ -242,7 +242,7 @@ polytabloid norm lemma gives the asserted squared norm.
 \label{lem:rectangular-column-tensor}
 \lean{BostConjecture.Specht.rectangleColumnGroupOf_sign,BostConjecture.Specht.polytabloidInt_rectangle_eq_prod}
 \uses{lem:rectangular-row-words,lem:rectangular-initial-norm}
-\source{bost-specht-manuscript:page-0008}\leanok
+\source{bost-specht-manuscript:page-0008,bost-specht-manuscript:page-0009}\leanok
 Let $k>0$ and let $t$ enumerate the $a$ by $k$ rectangle. Write
 $p_t(i,j)$ for the entry in row $i$, column $j$. For a word $w$ in
 $a$ letters, let $w_j(i)=w(p_t(i,j))$. Define
@@ -266,8 +266,9 @@ If any $w_j$ is not a permutation, both sides vanish.
 
 \begin{lemma}[Determinant covariance in word coordinates]
 \label{lem:rectangular-word-covariance}
+\lean{BostConjecture.Specht.wordTensorAction,BostConjecture.Specht.wordTensorAction_polytabloid,BostConjecture.Specht.wordTensorAction_of_mem_orbitLattice,BostConjecture.Specht.wordTensorAction_of_mem_span}
 \uses{lem:rectangular-column-tensor,lem:integral-all-polytabloids}
-\source{bost-specht-manuscript:page-0008}\notready
+\source{bost-specht-manuscript:page-0008,bost-specht-manuscript:page-0009}\leanok
 For a commutative ring $R$ and an $a$ by $a$ matrix $u$, define the
 matrix action on word coefficients by
 \[
