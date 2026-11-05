@@ -419,6 +419,12 @@ The concrete tuple equivalence consumes sorting; determinant permutation
 and nonvanishing prove the actual squared-Vandermonde weight's symmetry
 and collision vanishing, feeding its factorial sum identity.
 
+`Specht/ShiftedShapes.lean` uses the unchanged `YoungDiagram.ofRowLens`
+and `YoungDiagram.rowLen_ofRowLens` from
+`Mathlib/Combinatorics/Young/YoungDiagram.lean` to construct actual
+subdiagrams after staircase subtraction. Both inverse identities and the
+cardinality statement are local proofs; no alternate partition model is added.
+
 ## Orbit-criterion mathematical references — session 0026
 
 The BALANCED lane registered Maithani, *Splittings and the Reynolds Operator*,

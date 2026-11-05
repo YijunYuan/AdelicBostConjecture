@@ -18,6 +18,13 @@ Stale-import LSP diagnostics after the queued dependency build were cleared
 by reloading the import header; the final audit import is restored to the
 single import used by the successful serialized check.
 
+`Specht/ShiftedShapes.lean` constructs the actual Young diagram from the
+decreasing tuple and proves the inverse equivalence with rectangular
+subdiagrams of prescribed cardinality. Check `2bd6e141377444f5` passed 9,077
+jobs; all twelve probes in `SpechtShapeAxioms.lean` passed in
+`5ee99f0a5b8eb90d`, with only foundational axioms. Honesty review accepted
+the narrow equivalence node, including zero-height and zero-width cases.
+
 ## Tableau enumeration and prefix weights checkpoint (session 0023)
 
 Claim class: **proved producers**. The accepted enumerating tableaux now
