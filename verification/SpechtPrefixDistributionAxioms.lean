@@ -1,0 +1,7 @@
+import BostConjecture.Specht.PrefixDistribution
+
+#print axioms BostConjecture.Specht.rectanglePrefixShape
+#print axioms BostConjecture.Specht.sum_card_rectanglePrefix
+#print axioms BostConjecture.Specht.det_vandermonde_shifted_sq
+#print axioms BostConjecture.Specht.occupancyWeight_rectangleShape
+#print axioms BostConjecture.Specht.sum_occupancyWeight_eq_tableau_count

@@ -25,6 +25,13 @@ jobs; all twelve probes in `SpechtShapeAxioms.lean` passed in
 `5ee99f0a5b8eb90d`, with only foundational axioms. Honesty review accepted
 the narrow equivalence node, including zero-height and zero-width cases.
 
+`Specht/PrefixDistribution.lean` partitions the actual standard tableaux by
+prefix shape and evaluates the labelled Vandermonde normalizer in terms of
+their cardinality. Module check `6e6d524e78cff26d` passed 9,080 jobs; the five
+probes in `SpechtPrefixDistributionAxioms.lean` passed in 197.9 seconds,
+each with only `propext`, `Classical.choice`, and `Quot.sound`.
+Independent honesty review accepted the producer and its narrow attachment.
+
 ## Tableau enumeration and prefix weights checkpoint (session 0023)
 
 Claim class: **proved producers**. The accepted enumerating tableaux now

@@ -62,7 +62,8 @@ theorem det_vandermonde_shifted_sq (μ : YoungDiagram) (a : ℕ) :
   intro i _
   apply prod_congr rfl
   intro j hj
-  have hij := shiftedRowLength_strictAnti μ (mem_Ioi.mp hj) j.isLt
+  have hij' : i < j := mem_Ioi.mp hj
+  have hij := shiftedRowLength_strictAnti μ hij' j.isLt
   rw [Nat.cast_sub hij.le]
   ring
 
@@ -91,7 +92,8 @@ theorem occupancyWeight_rectangleShape (a k m l : ℕ) (hml : m + l = a * k)
     exact_mod_cast hc
   unfold occupancyWeight occupancyMass
   simp_rw [rectangleShapeOccupancy_apply]
-  rw [det_vandermonde_shifted_sq, Fin.prod_univ_eq_prod_range, hc']
+  rw [det_vandermonde_shifted_sq,
+    Fin.prod_univ_eq_prod_range (fun r => ((k + a - 1).choose (shiftedRowLength μ.val a r) : ℝ)), hc']
   have hm : (m.factorial : ℝ) ≠ 0 := by positivity
   have hl' : (l.factorial : ℝ) ≠ 0 := by positivity
   rw [div_mul_eq_div_div]

@@ -1491,7 +1491,8 @@ staircase are inverse on every row, establishing the bijection.
 
 \begin{lemma}[Vandermonde normalizer from the tableau count]
 \label{lem:prefix-normalizer-count}
-\uses{lem:prefix-binomial-weight,lem:occupancy-sorting,lem:shifted-shape-equivalence}\notready
+\uses{lem:prefix-binomial-weight,lem:occupancy-sorting,lem:shifted-shape-equivalence}
+\lean{BostConjecture.Specht.sum_card_rectanglePrefix,BostConjecture.Specht.det_vandermonde_shifted_sq,BostConjecture.Specht.occupancyWeight_rectangleShape,BostConjecture.Specht.sum_occupancyWeight_eq_tableau_count}\leanok
 Let $m+l=ak$, $M=k+a-1$, $c=\sum_{r<a}(a-r-1)$, and
 $F=f^{(k^a)}$. Then the labelled occupancy law at total $m+c$ satisfies
 \[
@@ -1513,7 +1514,7 @@ the sorting formula multiplies it by $a!$ to give the labelled sum.
 \label{lem:prefix-distribution}\uses{lem:tableau-count,lem:prefix-binomial-weight,lem:labelled-occupancy,lem:occupancy-sorting,lem:shifted-shape-equivalence,lem:prefix-normalizer-count}
 \source{bost-specht-manuscript:page-0006}\notready
 Fix $a\geq2$, $k\geq1$, $d=ak$, $c=a(a-1)/2$, $M=k+a-1$,
-and $V_0=\prod_{j=1}^{a-1}j!$. For a uniform standard tableau of
+and $V_0=\prod_{j=1}^{a-1}j!$. Let $0\leq t\leq d$. For a uniform standard tableau of
 $(k^a)$, write $\nu$ for the prefix after $t$ entries and put
 $b_i=\nu_i+a-i$, $A=t+c$. Its distribution is obtained by weighting
 the labelled multivariate hypergeometric distribution
@@ -1550,7 +1551,15 @@ zero Vandermonde weight. Summing the probabilities therefore gives
 \]
 Use $aM=d+2c$ and
 $(M!)^a/\prod_{j=0}^{a-1}(k+j)!=\prod_{j=1}^{a-1}(k+j)^j$
-to obtain the stated expression.
+to obtain the stated expression. For completeness, the latter factorial
+identity follows by induction on $a$. Write
+$D_a=\prod_{j<a}(k+j)!$ and $Q_a=\prod_{j<a}(k+j)^j$.
+At $a=0$ both sides are one. The product $D_{a+1}Q_{a+1}$ is
+$D_aQ_a(k+a)!(k+a)^a$; the induction hypothesis and
+$(k+a)!=(k+a)(k+a-1)!$ turn this into $((k+a)!)^{a+1}$.
+The zero-indexed factors $0!$ and $k^0$ equal one, so this is the
+displayed product convention. All denominators are positive: the
+factorials are positive and $0\leq t+c\leq aM$.
 \end{proof}
 
 \begin{lemma}[Uniform separation of bulk prefix coordinates]
