@@ -1,8 +1,11 @@
 module
 
 public import Mathlib.Data.Fintype.Powerset
-public import Mathlib.Algebra.BigOperators.Group.Finset.Pi
-public import Mathlib.Data.Real.Basic
+public import Mathlib.Data.Fintype.BigOperators
+public import Mathlib.Data.Fintype.Prod
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+public import Mathlib.Algebra.BigOperators.Field
+public import Mathlib.Basic.Real.Basic
 
 /-!
 # Labelled occupancy counting
@@ -36,7 +39,7 @@ theorem sum_card_blockFiber {a M : ℕ} (s : Finset (Fin a × Fin M)) :
     apply card_bij (fun j _ => (i, j))
     · intro j hj
       simp only [mem_filter, mem_blockFiber] at *
-      exact ⟨hj, rfl⟩
+      exact ⟨hj, trivial⟩
     · intro j _ l _ h
       exact (Prod.mk.inj h).2
     · intro p hp
@@ -73,16 +76,18 @@ def occupancyEquiv (a M A : ℕ) :
     have hf (i : Fin a) :
         blockFiber (univ.filter fun p : Fin a × Fin M => p.2 ∈ (u p.1).val) i =
           (u i).val := by ext j; simp
-    simp_rw [hf]
-    have hb : (fun i => (⟨((u i).val).card, by
-        have := card_le_univ (u i).val
-        simpa using Nat.lt_succ_of_le this⟩ : Fin (M + 1))) = b.val := by
-      funext i
-      exact Fin.ext (u i).property
     apply Sigma.ext
-    · exact Subtype.ext hb
-    · apply heq_of_eq
-      rfl
+    · apply Subtype.ext
+      funext i
+      apply Fin.ext
+      exact (congrArg Finset.card (hf i)).trans (u i).property
+    · apply Function.hfunext rfl
+      intro i j hij
+      have hij' : i = j := eq_of_heq hij
+      subst j
+      apply (Subtype.heq_iff_coe_eq (fun s => ?_)).mpr (hf i)
+      dsimp only
+      rw [hf, (u i).property]
 
 /-- The multivariate Vandermonde identity, by counting actual subsets. -/
 theorem sum_occupancy_choose (a M A : ℕ) :
@@ -98,7 +103,8 @@ def occupancyMass {a M A : ℕ} (b : Occupancy a M A) : ℝ :=
 theorem occupancyMass_nonneg {a M A : ℕ} (b : Occupancy a M A) :
     0 ≤ occupancyMass b := by
   unfold occupancyMass
-  positivity
+  apply div_nonneg _ (Nat.cast_nonneg _)
+  exact_mod_cast Nat.zero_le (∏ i, M.choose (b.val i).val)
 
 /-- Normalization of the labelled law, including the empty sampling case. -/
 theorem sum_occupancyMass {a M A : ℕ} (hA : A ≤ a * M) :

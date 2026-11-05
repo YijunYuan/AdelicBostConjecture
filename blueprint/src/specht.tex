@@ -1422,7 +1422,8 @@ The denominator is positive, so division proves the assertion.
 \end{proof}
 
 \begin{lemma}[Labelled occupancy counting]
-\label{lem:labelled-occupancy}\notready
+\label{lem:labelled-occupancy}
+\lean{BostConjecture.Specht.occupancyEquiv,BostConjecture.Specht.sum_occupancy_choose,BostConjecture.Specht.occupancyMass_nonneg,BostConjecture.Specht.sum_occupancyMass}\leanok
 Partition a set of $aM$ labelled objects into $a$ blocks of size $M$.
 For $0\leq A\leq aM$, the block occupancies of a uniformly chosen
 $A$-element subset have probabilities
@@ -1442,8 +1443,28 @@ partition the $\binom{aM}A$ subsets of size $A$. Summing their sizes
 and dividing by this positive total proves the claim.
 \end{proof}
 
+\begin{lemma}[Sorting distinct labelled occupancies]
+\label{lem:occupancy-sorting}\uses{lem:labelled-occupancy}\notready
+Among bounded occupancy tuples of total $A$, every tuple with distinct
+entries is uniquely a strictly decreasing tuple with a permutation of its
+$a$ labels. Consequently, for any permutation-invariant real weight $w$
+that vanishes on repeated entries,
+\[
+ \sum_b w(b)=a!\sum_{b_1>\cdots>b_a}w(b).
+\]
+\end{lemma}
+\begin{proof}
+Sort the entries in decreasing order. Their distinctness makes both the
+sorted tuple and the permutation recovering the original tuple unique.
+Reordering preserves bounds and total sum, so the construction stays within
+the occupancy set. Thus the distinct tuples are in bijection with pairs
+consisting of a decreasing tuple and a permutation. A repeated-entry tuple
+contributes zero. Each decreasing tuple contributes its unchanged weight
+once for each of the $a!$ permutations, proving the formula.
+\end{proof}
+
 \begin{lemma}[Exact prefix distribution]
-\label{lem:prefix-distribution}\uses{lem:tableau-count,lem:prefix-binomial-weight,lem:labelled-occupancy}
+\label{lem:prefix-distribution}\uses{lem:tableau-count,lem:prefix-binomial-weight,lem:labelled-occupancy,lem:occupancy-sorting}
 \source{bost-specht-manuscript:page-0006}\notready
 Fix $a\geq2$, $k\geq1$, $d=ak$, $c=a(a-1)/2$, $M=k+a-1$,
 and $V_0=\prod_{j=1}^{a-1}j!$. For a uniform standard tableau of

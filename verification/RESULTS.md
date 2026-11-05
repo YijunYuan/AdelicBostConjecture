@@ -1,3 +1,14 @@
+## Labelled occupancy producer (session 0026)
+
+`Specht/Hypergeometric.lean` constructs the actual block-subset bijection,
+counts every occupancy fiber, and proves the labelled hypergeometric masses
+sum to one for `A ≤ a*M`. The explicit-root serialized module check
+`ab20c693fa782992` passed 1,002 jobs without warnings; the five probes in
+`SpechtDistributionAxioms.lean` passed in `85643ebb74bb2ff7`, each with only
+`propext`, `Classical.choice`, and `Quot.sound`. Guarded LSP supplied feedback.
+Honesty-reviewer independently accepted the exact producer and attachment.
+The Vandermonde normalizer, bulk separation and covolume limit remain open.
+
 ## Tableau enumeration and prefix weights checkpoint (session 0023)
 
 Claim class: **proved producers**. The accepted enumerating tableaux now

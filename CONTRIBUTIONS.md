@@ -400,6 +400,17 @@ in `verification/ARITHMETIC.md` and `verification/GEOMETRY.md`. They do not
 close arbitrary-rank degree identities/HN, the restricted pairing norm bound,
 or the main theorem. Later leaves are outside this fixed import batch.
 
+## Labelled occupancy counting — session 0026
+
+`Specht/Hypergeometric.lean` is an original finite-subset proof of the
+multivariate hypergeometric law. It imports unchanged Mathlib declarations
+`Fintype.card_finset_len` (`Mathlib/Data/Fintype/Powerset.lean`),
+`Fintype.card_sigma` and `Fintype.card_pi`
+(`Mathlib/Data/Fintype/BigOperators.lean`) at the pinned revision and
+Apache 2.0 license recorded above. The concrete block bijection consumes
+these counts; its sum identity proves probability normalization.
+No external code was copied and no new dependency was added.
+
 ## Verification
 
 Run `horizon --root ../.. check --json` from this project, then
