@@ -28,7 +28,9 @@ comparison. It changes the algebra namespace to `BostConjecture.SymmetricPower`.
 It omits `toSymmetricAlgebra_symmetricPower_apply` and all Basis,
 BasisComparison, monomial and WordFiltration imports. The homogeneous component
 is the existing submodule expression `range(ι)^d`, with its range proof supplied
-by direct submodule-power induction. No second symmetric algebra, symmetric
+by direct submodule-power induction. Lean 4.35 adaptations explicitly import finite-product identities, parenthesize
+submodule coercions in equivalence codomains, and use `Module.End.mul_apply`
+for endomorphism multiplication. No second symmetric algebra, symmetric
 power, polynomial or homogeneous-space representation is introduced.
 
 Upstream uses Lean 4.36.0-rc2 and mathlib
