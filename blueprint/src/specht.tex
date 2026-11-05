@@ -183,7 +183,8 @@ ones.
 \begin{definition}[The canonical rectangular Specht lattice]
 \label{def:rectangular-specht}
 \uses{def:integral-specht-orbit,lem:integral-specht-all-tableaux,lem:real-specht-lattice}
-\source{bost-specht-manuscript:page-0004}\notready
+\lean{BostConjecture.Specht.rectangle,BostConjecture.Specht.rectangleTableau,BostConjecture.Specht.rectangleLattice,BostConjecture.Specht.rectangleRank,BostConjecture.Specht.rectangleLogCovolume}
+\source{bost-specht-manuscript:page-0004}\leanok
 For $a,k\geq1$ and $d=ak$, let $M^{(k^a)}_\mathbb Z$ be the free
 abelian group on row tabloids of the rectangle with $a$ rows of length
 $k$. Give these tabloids the orthonormal metric. A tableau $t$ labels
@@ -195,14 +196,65 @@ span of all these polytabloids, with the induced metric, and put
  f_{a,d}=\rk_\mathbb Z L_{a,d},\qquad
  c_a(d)=\frac{\log\covol L_{a,d}}{f_{a,d}}.
 \]
-A standard tableau has increasing entries along every row and column.
-Row tabloids identify isometrically with tensor words in $a$ distinct
-orthonormal letters, each appearing $k$ times.
 \end{definition}
+
+\begin{lemma}[Rectangular row-word realization]
+\label{lem:rectangular-row-words}\uses{def:rectangular-specht,lem:real-specht-lattice}
+\lean{BostConjecture.Specht.colLen_rectangle,BostConjecture.Specht.rowLen_rectangle,BostConjecture.Specht.rowWord_hasRectangleContent,BostConjecture.Specht.exists_tableau_rowWord_iff,BostConjecture.Specht.mem_rectangle_rowWord_orbit_iff,BostConjecture.Specht.rectangle_orbitLattice_supported}
+\source{bost-specht-manuscript:page-0004}\leanok
+For $k>0$, the rectangle has $a$ rows. Its row words, and the position
+permutation orbit of any one of them, are exactly the words in $a$
+letters in which each letter occurs $k$ times. Every element of
+$L_{a,d}$ has zero coordinates outside this set. Thus its word metric
+is the orthonormal row-tabloid metric.
+\end{lemma}
+\begin{proof}
+The rectangle is the set of pairs $(i,j)$ with $0\leq i<a$ and
+$0\leq j<k$. In a tableau, entries in row $i$ correspond bijectively
+to its $k$ columns. Conversely, for a word with the stated content,
+choose a bijection between each letter's fiber and the $k$ columns.
+These bijections together give an enumerating tableau with that row
+word. Any two enumerating tableaux differ by a permutation of the
+entries, so all such words form one position-permutation orbit.
+Every summand of every polytabloid is one of these row words, proving
+the support assertion. A row tabloid is exactly the assignment of
+each entry to a row, and distinct word coordinate vectors are
+orthonormal; this proves the metric assertion.
+\end{proof}
+
+\begin{lemma}[Rectangular column count and initial norm]
+\label{lem:rectangular-initial-norm}\uses{def:rectangular-specht,lem:polytabloid-norm}
+\lean{BostConjecture.Specht.rectangleColumnGroupEquiv,BostConjecture.Specht.card_rectangle_columnGroup,BostConjecture.Specht.norm_rectangle_polytabloidInt_sq}
+\source{bost-specht-manuscript:page-0005}\leanok
+For every tableau of the $a$ by $k$ rectangle,
+$|C_t|=(a!)^k$ and $\|e_t\|^2=(a!)^k$.
+\end{lemma}
+\begin{proof}
+Restricting a column permutation to the row indices in each column
+gives a bijection $C_t\simeq\prod_{j=1}^k\mathfrak S_a$.
+Conversely independent row permutations within each column act
+on the entries through the enumerating tableau. These operations
+are inverse, so the cardinality is $(a!)^k$. The preceding
+polytabloid norm lemma gives the asserted squared norm.
+\end{proof}
+
+\begin{lemma}[Positive rectangular rank and nonnegative covolume slope]
+\label{lem:rectangular-covolume-nonneg}\uses{def:rectangular-specht,lem:integral-specht-covolume-nonneg}
+\lean{BostConjecture.Specht.rectangleRank_pos,BostConjecture.Specht.rectangleLogCovolume_nonneg}
+\source{bost-specht-manuscript:page-0004}\leanok
+The rank $f_{a,d}$ is positive and $c_a(d)\geq0$.
+\end{lemma}
+\begin{proof}
+The row-word coefficient of a generating polytabloid is one,
+so the finite free lattice is nonzero and has positive rank.
+Its covolume is at least one. Its logarithm is therefore nonnegative,
+and division by the positive rank preserves that inequality.
+\end{proof}
 
 \begin{theorem}[Rational standard-polytabloid basis]
 \label{lem:rational-standard-basis}\uses{def:rectangular-specht}
 \source{bost-specht-manuscript:page-0004}\notready
+A standard tableau has increasing entries along every row and column.
 The standard polytabloids form a rational basis of
 $\mathbb Q\otimes_\mathbb Z L_{a,d}$ in rational word coordinates.
 \end{theorem}
@@ -288,7 +340,7 @@ where a box in row $r$, column $q$, has content $q-r$.
 \end{theorem}
 
 \begin{lemma}[Seminormal norms]
-\label{lem:seminormal-norms}\uses{lem:monic-seminormal,lem:polytabloid-norm}
+\label{lem:seminormal-norms}\uses{lem:monic-seminormal,lem:rectangular-initial-norm}
 \source{bost-specht-manuscript:page-0005,bost-specht-manuscript:page-0006}\notready
 For a standard tableau $t$, let $\lambda^{(j)}$ be its prefix shape
 after $j$ entries, and let $r_j$ be the row of entry $j$. Set
@@ -500,7 +552,7 @@ holds for the prefix distribution.
 
 \begin{theorem}[Sublinear rectangular Specht covolume]
 \label{thm:specht-sublinear-covolume}
-\uses{def:rectangular-specht,lem:integral-specht-covolume-nonneg,lem:seminormal-norms,lem:seminormal-covolume,lem:prefix-separation}
+\uses{def:rectangular-specht,lem:rectangular-covolume-nonneg,lem:seminormal-norms,lem:seminormal-covolume,lem:prefix-separation}
 \source{bost-specht-manuscript:page-0008}\notready
 For every fixed positive integer $a$,
 $c_a(ak)\geq0$ and $c_a(ak)/(ak)\to0$ as $k\to\infty$.

@@ -22,3 +22,11 @@ import BostConjecture
 #print axioms BostConjecture.Specht.norm_polytabloidInt_sq
 #print axioms BostConjecture.Specht.covolume_sq_le_det_gram
 #print axioms BostConjecture.Specht.two_mul_log_covolume_le_log_det_gram
+#print axioms BostConjecture.Specht.exists_tableau_rowWord_iff
+#print axioms BostConjecture.Specht.mem_rectangle_rowWord_orbit_iff
+#print axioms BostConjecture.Specht.rectangle_orbitLattice_supported
+#print axioms BostConjecture.Specht.rectangleColumnGroupEquiv
+#print axioms BostConjecture.Specht.card_rectangle_columnGroup
+#print axioms BostConjecture.Specht.norm_rectangle_polytabloidInt_sq
+#print axioms BostConjecture.Specht.rectangleRank_pos
+#print axioms BostConjecture.Specht.rectangleLogCovolume_nonneg
