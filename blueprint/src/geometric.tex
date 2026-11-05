@@ -311,7 +311,7 @@ on these generators, and additivity proves the equality of maps.
 
 \begin{lemma}[Compatible localized elements]
 \label{lem:localized-sections-glue}
-\source{bost-specht-manuscript:page-0009}\lean{BostConjecture.Geometry.existsUnique_of_localization_compatible}
+\source{bost-specht-manuscript:page-0009}\lean{BostConjecture.Geometry.existsUnique_of_localization_compatible,BostConjecture.Geometry.existsUnique_of_isLocalizedModule_compatible}
 \leanok
 Let $s$ be a finite subset generating the unit ideal of a commutative
 ring $R$, and let $Q$ be an $R$-module. Suppose $x_f\in Q_f$ for
@@ -334,6 +334,30 @@ $q=\sum_i a_i v_i$ maps to $x_j$ in each localization.
 If $q$ maps to zero in all $Q_{f_i}$, some common power $f_i^K$
 annihilates $q$ for every $i$. The same unit-ideal argument gives
 $q=0$, proving uniqueness.
+\end{proof}
+
+\begin{lemma}[Descent in scalar-extension coordinates]
+\label{lem:tensor-localization-descent}
+\uses{lem:localized-sections-glue}
+\source{bost-specht-manuscript:page-0009}
+\lean{BostConjecture.Geometry.existsUnique_of_tensorLocalization_compatible}
+\leanok
+Let $s\subset R$ be finite and generate the unit ideal, and let
+$Q$ be an $R$-module. If $x_f\in R_f\otimes_R Q$ have equal images
+in $(R_f\otimes_R R_g)\otimes_R Q$ for every $f,g\in s$, then
+there is a unique $q\in Q$ with $1\otimes q=x_f$ for all $f\in s$.
+\end{lemma}
+\begin{proof}
+The map $Q\to R_f\otimes_R Q$, $q\mapsto1\otimes q$,
+is localization at $f$. Likewise, localizing $R_g\otimes_R Q$
+at $f$ gives $(R_f\otimes_R R_g)\otimes_R Q$, with map
+$r\otimes q\mapsto(1\otimes r)\otimes q$. The canonical map
+from $R_f\otimes_R Q$ to this double localization is
+$r\otimes q\mapsto(r\otimes1)\otimes q$: both maps from $Q$
+send $q$ to $(1\otimes1)\otimes q$, which determines their
+localized extensions. The assumed equality is therefore precisely
+compatibility of localized sections. The preceding descent lemma
+now gives existence and uniqueness of $q$.
 \end{proof}
 
 \begin{lemma}[Descent of linear maps on a finite principal cover]
@@ -436,6 +460,42 @@ of elements of $T$ gives the required finite set $s$. This also
 covers the zero ring, where the empty set generates the unit ideal.
 \end{proof}
 
+\begin{lemma}[The global projective determinant inclusion]
+\label{lem:projective-determinant-inclusion}
+\uses{lem:finite-projective-frames,lem:determinant-chart-tower,lem:tensor-localization-descent}
+\source{bost-specht-manuscript:page-0009}
+\notready
+Let $R$ be a commutative ring, $M$ a finite projective $R$-module
+of constant stalk rank $a$, and $t$ a tableau of shape $(k^a)$,
+$k>0$. There is a unique linear map
+\[
+ j_M:(\bigwedge_R^aM)^{\otimes k}\otimes_R(R\otimes_{\mathbb Z}L_t)
+ \longrightarrow M^{\otimes n}
+\]
+whose localization on each principal open where $M$ is free is the
+free determinant map under the intrinsic base-change isomorphisms.
+If $R$ is flat over $\mathbb Z$, then $j_M$ is injective.
+\end{lemma}
+\begin{proof}
+Choose a finite unit-ideal cover with frames $b_f$ on $R_f\otimes_R M$.
+For any source element $p$, let $x_f=u_{b_f}(1\otimes p)$ in
+$R_f\otimes_R M^{\otimes n}$. In $R_f\otimes_R R_g$, extend the
+frame $b_f$ and cancel successive tensor extensions. This gives a
+frame of the common scalar extension of $M$. The chart tower
+identity compares both $x_f$ and $x_g$ to the value in this frame,
+so they agree on overlaps. The scalar-extension descent lemma
+gives a unique $j_M(p)$. Local linearity and uniqueness show that
+$j_M$ preserves sums and scalar multiples. The same argument on
+the common refinement of two covers proves independence of the
+cover and frames, and recovers the free map on every principal
+open by comparing on its induced cover. If $R$ is flat over
+$\mathbb Z$, then every $R_f$ is flat over $\mathbb Z$, since
+localization is flat and flatness is preserved under composition.
+Each chart is then injective. Thus $j_M(p)=0$ implies $p/1=0$
+on the cover, and uniqueness of descent applied to the source
+implies $p=0$.
+\end{proof}
+
 \begin{definition}[Geometric semistability of a Pl\"ucker line]
 \label{def:geometric-semistability}
 \source{bost-specht-manuscript:page-0009}\notready
@@ -469,7 +529,7 @@ a positive degree with nonzero restriction is therefore unchanged.
 
 \begin{lemma}[Determinant-isotypic integral modules]
 \label{lem:determinant-isotypic}
-\uses{def:rectangular-specht,lem:rectangular-invariants,lem:determinant-twisted-free-inclusion,lem:determinant-free-base-change,lem:determinant-free-naturality,lem:tensor-base-change-equivalence,lem:determinant-free-base-change-square,lem:linear-map-localization-descent,lem:determinant-chart-tower,lem:finite-projective-frames,lem:degree-calculus}
+\uses{def:rectangular-specht,lem:rectangular-invariants,lem:determinant-twisted-free-inclusion,lem:determinant-free-base-change,lem:determinant-free-naturality,lem:tensor-base-change-equivalence,lem:determinant-free-base-change-square,lem:linear-map-localization-descent,lem:determinant-chart-tower,lem:finite-projective-frames,lem:projective-determinant-inclusion,lem:degree-calculus}
 \source{bost-specht-manuscript:page-0008,bost-specht-manuscript:page-0009}
 \notready
 For a rank-$a$ projective $\Ocal$-module $A$ and $d=ak>0$, there is
