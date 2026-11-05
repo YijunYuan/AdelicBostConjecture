@@ -1,0 +1,9 @@
+import BostConjecture.Specht.Content
+
+#print axioms BostConjecture.Specht.exists_column_of_polytabloidInt_ne_zero
+#print axioms BostConjecture.Specht.polytabloidInt_rowWord_swap_eq_zero
+#print axioms BostConjecture.Specht.polytabloidInt_rowWord_swap
+#print axioms BostConjecture.Specht.RowStandard.card_earlier_row
+#print axioms BostConjecture.Specht.ColumnStandard.card_earlier_column
+#print axioms BostConjecture.Specht.sum_polytabloidInt_rowWord_swap
+#print axioms BostConjecture.Specht.murphyOperator_standardRealBasis_rowWord

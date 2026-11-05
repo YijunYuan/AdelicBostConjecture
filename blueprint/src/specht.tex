@@ -637,6 +637,63 @@ proving the first identity. Multiply on the right by $s$ and use
 $s^2=1$ to obtain the second.
 \end{proof}
 
+\begin{lemma}[Content coefficient at the leading row word]
+\label{lem:murphy-content-coefficient}
+\lean{BostConjecture.Specht.polytabloidInt_rowWord_swap,BostConjecture.Specht.sum_polytabloidInt_rowWord_swap,BostConjecture.Specht.murphyOperator_standardRealBasis_rowWord}\leanok
+\uses{def:standard-tableau,lem:integral-specht-span,lem:murphy-operators}
+For distinct labels $i,j$ in any tableau $t$,
+\[
+ e_t(w_t\circ(i,j))
+ =\mathbf1_{\operatorname{row}_t(i)=\operatorname{row}_t(j)}
+  -\mathbf1_{\operatorname{col}_t(i)=\operatorname{col}_t(j)}.
+\]
+Consequently, for a standard tableau $t$ and zero-based label $j$,
+\[
+ (J_je_t)(w_t)=\operatorname{col}_t(j)-\operatorname{row}_t(j).
+\]
+This is a word coefficient, without an assertion about the other
+coefficients in the standard-polytabloid expansion.
+\end{lemma}
+\begin{proof}
+If the two labels share a row, the swapped row word is unchanged and
+its coefficient is one. If they share a column, the transposition
+belongs to the column group; column antisymmetry gives coefficient
+minus one. Distinct labels cannot share both coordinates.
+In the remaining case suppose a column permutation $g$ produces the
+swapped row word. Every label other than $i,j$ has unchanged row and
+column and is therefore fixed by $g$. Since $g$ is bijective, it either
+fixes both remaining labels or swaps them. The former forces their
+rows equal and the latter their columns equal, both contradictions.
+There is thus no term contributing to the coefficient, which is zero.
+Summing over $i<j$ counts the earlier labels in the row of $j$ minus
+those in its column. Standardness identifies those sets respectively
+with the boxes strictly to the left and strictly above $j$. Their
+cardinalities are its zero-based column and row coordinates.
+\end{proof}
+
+\begin{lemma}[Central transposition sum acts by total content]
+\label{lem:central-content-action}\notready
+\uses{lem:murphy-content-coefficient,lem:integral-specht-base-change,lem:real-specht-action}
+Let $C_\mu=\sum_{(r,c)\in\mu}(c-r)$ and $Z=\sum_jJ_j$.
+On the integral polytabloid lattice and its real span, $Zx=C_\mu x$.
+\end{lemma}
+\begin{proof}
+The sum $Z$ contains each transposition once. Conjugation by any
+permutation permutes these transpositions, so $Z$ commutes with the
+position action. In complex word coordinates write
+$e_t=A_t\delta_{w_t}$, where $A_t$ is the column antisymmetrizer.
+Then $Ze_t=A_tZ\delta_{w_t}$. The vector $Z\delta_{w_t}$ lies in
+the row-tabloid module. The column antisymmetrizer has image contained
+in $\mathbb C e_t$ on that module, by the Ferrers column argument
+for Specht irreducibility. Thus $Ze_t=\alpha e_t$ for some scalar.
+For a standard $t$, evaluate at $w_t$: the preceding coefficient
+formula gives $\alpha=\sum_j\operatorname{content}_t(j)=C_\mu$.
+Standard polytabloids are a real basis, so linearity proves the
+identity on the real span. Every integral vector embeds in that
+span, and coefficientwise inclusion is injective, giving the
+integral identity as well.
+\end{proof}
+
 \begin{theorem}[Monic seminormal basis]
 \label{lem:monic-seminormal}\uses{lem:orthogonal-standard-basis,lem:murphy-eigenvector-residual}
 \source{bost-specht-manuscript:page-0005,ryom-hansen-seminormal-denominators-v1:classical_formula}\notready
