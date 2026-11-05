@@ -1467,9 +1467,67 @@ formula for $\pi_d$. The descent and factorial identity are the
 \href{https://github.com/TauCetiProject/TauCeti/blob/3c3a32baea963db05c302adeb307b22baae4de78/TauCeti/LinearAlgebra/SymmetricPower/Basic.lean}{Tau Ceti symmetrization construction}.
 \end{proof}
 
+\begin{lemma}[Polynomial identities from evaluation]
+\label{lem:intrinsic-polynomial-ext}
+\notready
+Let $X$ be a finite-dimensional vector space over an infinite field $F$.
+Two elements of $\operatorname{Sym}(X^\vee)$ are equal if their evaluations
+agree at every vector of $X$.
+\end{lemma}
+\begin{proof}
+Choose a basis $b_1,\ldots,b_n$ of $X$. Its dual basis identifies the
+symmetric algebra with $F[T_1,\ldots,T_n]$, taking evaluation at
+$\sum_i a_i b_i$ to substitution $T_i=a_i$. A polynomial vanishing at
+every point is zero: induct on the number of variables, viewing it as a
+polynomial in the last variable. For each fixed choice of the other
+coordinates it has infinitely many roots, so every coefficient vanishes
+at that choice. Induction makes every coefficient zero. Apply this to
+the difference of the two polynomials.
+\end{proof}
+
+\begin{lemma}[Polynomial pullback along the Pl\"ucker map]
+\label{lem:plucker-polynomial-pullback}
+\uses{lem:polynomial-tensor-quotient,lem:projective-tensor-evaluation,lem:intrinsic-polynomial-ext}
+\source{bost-specht-manuscript:page-0010}
+\notready
+Let $V,X$ be finite-dimensional vector spaces over an infinite field $F$,
+and let $b=(b_1,\ldots,b_s)$ be a basis of $V$. Put
+$\eta=b_1\wedge\cdots\wedge b_s$.
+There is an algebra homomorphism
+\[
+ P_b:\operatorname{Sym}((\bigwedge^s X)^\vee)
+ \longrightarrow\operatorname{Sym}(\Hom(V,X)^\vee)
+\]
+such that $(P_b p)(A)=p((\bigwedge^s A)\eta)$. It takes degree $m$
+to degree $sm$. For linear $g:X\to X$ and $h:V\to V$ of determinant
+one, pullback by $A\mapsto gAh$ commutes with $P_b$ and pullback by
+$\bigwedge^s g$. Thus invariant polynomials pull back to invariants for
+independent target actions and the special linear source action, preserving
+nonzero evaluation at any specified map $A$.
+\end{lemma}
+\begin{proof}
+The wedge map $X^{\otimes s}\to\bigwedge^s X$ pulls a linear form on
+the exterior power back to a linear form on $X^{\otimes s}$.
+Finite-dimensional tensor duality writes this as a tensor of linear forms
+on $X$. Pull its $i$th factor back along $A\mapsto A b_i$, and multiply
+the resulting generators in the symmetric algebra of $\Hom(V,X)^\vee$.
+This is linear in the original exterior linear form, so the universal
+property extends it to $P_b$. Evaluation of a pure tensor is the product
+of its factor evaluations; by linearity this proves the displayed
+evaluation identity on generators, hence on the algebra. Each generator
+has degree $s$, so products of $m$ generators and their linear combinations
+have degree $sm$.
+For the action identity, $(\bigwedge^s h)\eta=(\det h)\eta=\eta$.
+Functoriality of exterior powers gives
+$(\bigwedge^s(gAh))\eta=(\bigwedge^s g)(\bigwedge^s A)\eta$.
+The two polynomial expressions therefore have equal evaluations at every
+$A$, and the preceding lemma identifies them. Invariance and nonvanishing
+follow by substituting the invariant polynomial and the specified map.
+\end{proof}
+
 \begin{lemma}[Nonvanishing in unbounded degrees]
 \label{lem:contraction-nonzero}
-\uses{def:geometric-semistability,lem:invariant-base-change,lem:canonical-contraction,lem:rectangular-invariants,lem:finite-independent-tensor-invariants,lem:polynomial-symmetric-lift}
+\uses{def:geometric-semistability,lem:invariant-base-change,lem:canonical-contraction,lem:rectangular-invariants,lem:finite-independent-tensor-invariants,lem:polynomial-symmetric-lift,lem:plucker-polynomial-pullback}
 \source{bost-specht-manuscript:page-0010}\notready
 If the Pl\"ucker line of $V_K$ is geometrically semistable, then there
 is a positive integer $d_0$, divisible by $s,a_1,\ldots,a_N$, such

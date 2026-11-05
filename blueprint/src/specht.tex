@@ -1589,6 +1589,33 @@ Here $\prod_{j=1}^{a-1}(k+j)^j\geq k^{\sum_{j=1}^{a-1}j}=k^c$,
 and every binomial coefficient being divided by is positive.
 \end{proof}
 
+\begin{lemma}[Symmetric observables of the prefix law]
+\label{lem:prefix-observables}\uses{lem:prefix-distribution,lem:occupancy-sorting}
+\source{bost-specht-manuscript:page-0007}\notready
+For $k\geq1$ and $m+l=ak$, let $b(T)$ be the decreasing shifted
+row lengths of the prefix of a standard rectangular tableau $T$.
+For every real-valued function $f$ of labelled occupancies that is
+invariant under permutations of the coordinates,
+\[
+ \frac{1}{F}\sum_T f(b(T))
+ =\frac{\sum_b V(b)^2 B(b) f(b)}{\sum_b V(b)^2 B(b)}.
+\]
+In particular this holds for the indicator that some pairwise gap
+has absolute value at most $L$.
+\end{lemma}
+\begin{proof}
+Partition the tableau sum by its prefix shape. Each summand is constant
+on a fiber, so the sum becomes the fiber cardinality times the value
+of $f$ at the corresponding decreasing tuple. Apply the exact prefix
+probability formula to each fiber. Sorting the labelled sum of
+$V(b)^2B(b)f(b)$ gives $a!$ times the decreasing sum: the summand
+is permutation invariant and vanishes on repeated coordinates.
+The shifted-shape bijection identifies this decreasing sum with the
+shape sum, proving the identity. Permuting coordinates preserves
+the existence of two distinct coordinates whose difference has
+absolute value at most $L$, proving the final assertion.
+\end{proof}
+
 \begin{lemma}[Binomial moments of sampling without replacement]
 \label{lem:sampling-binomial-moments}
 \lean{BostConjecture.Specht.sum_choose_inter,BostConjecture.Specht.sampling_binomialMoment_eq,BostConjecture.Specht.sampling_binomialMoment_le}
@@ -1735,8 +1762,31 @@ Finally divide by the positive lower bound on the normalizer.
 Every quantity in the resulting bound is independent of $m$.
 \end{proof}
 
+\begin{lemma}[Decay of the gap majorant]
+\label{lem:gap-majorant-decay}
+\source{bost-specht-manuscript:page-0007}\notready
+Let $a\geq1$, $c\geq1$, $C>0$, and $L\in\mathbb R$.
+If $r>1/2$ and $2r(c-1)<c$, then
+\[
+ \frac{L^2(2x^r)^{2(c-1)}+
+  2a(ax)^{2c}\exp(-x^{2r}/(4a^2x))}{Cx^c}
+ \longrightarrow0\qquad(x\to+\infty).
+\]
+The choice $r=1/2+1/(4c)$ satisfies these inequalities.
+\end{lemma}
+\begin{proof}
+The first term equals $L^2 2^{2(c-1)}C^{-1}x^{2r(c-1)-c}$,
+whose exponent is negative. The second equals
+$2a^{2c+1}C^{-1}x^c\exp(-x^{2r-1}/(4a^2))$.
+For any $p\in\mathbb R$, $q,b>0$, substituting $y=x^q$ into
+$y^{p/q}e^{-by}\to0$ proves $x^p e^{-bx^q}\to0$.
+Apply this with $p=c$, $q=2r-1$ and $b=1/(4a^2)$.
+For the stated choice, $r>1/2$ and
+$2r(c-1)-c=-1/2-1/(2c)<0$.
+\end{proof}
+
 \begin{lemma}[Uniform separation of bulk prefix coordinates]
-\label{lem:prefix-separation}\uses{lem:prefix-distribution,lem:bulk-gap-bound}
+\label{lem:prefix-separation}\uses{lem:prefix-distribution,lem:bulk-gap-bound,lem:gap-majorant-decay}
 \source{bost-specht-manuscript:page-0007}\notready
 For fixed $a\geq2$, $0<\varepsilon<1/2$, and $L>0$,
 \[

@@ -1393,7 +1393,8 @@ determine the original submodules.
 
 \begin{lemma}[Finite-dimensional convex interval slopes]
 \label{lem:subspace-convex-slopes}
-\source{chen-jeannin-harder-narasimhan-games-v1}\notready
+\source{chen-jeannin-harder-narasimhan-games-v1}
+\lean{BostConjecture.Subspace.intervalRank_pos,BostConjecture.Subspace.slope_isSlopeLike,BostConjecture.Subspace.slope_apply,BostConjecture.Subspace.slope_isConvex}\notready
 Let $V$ be a finite-dimensional vector space and let $\delta$ be a
 real-valued function on its lattice of subspaces. For $X\subsetneq Y$ put
 \[
@@ -1409,8 +1410,6 @@ in the displayed order or its reverse. If
 \]
 then for $X\not\subseteq Y$,
 $\mu(X\cap Y,X)\leq\mu(Y,X+Y)$.
-Every strictly increasing or strictly decreasing chain has at most
-$\dim V$ strict steps.
 \end{lemma}
 \begin{proof}
 Strict subspace inclusions strictly increase dimension. Differences of
@@ -1422,8 +1421,6 @@ The dimension identity
 $\dim X+\dim Y=\dim(X\cap Y)+\dim(X+Y)$ makes the two denominators
 in the convexity assertion equal and positive. Supermodularity of
 $\delta$ gives the numerator inequality, so division proves it.
-Finally, dimensions are integers between zero and $\dim V$; they
-increase, respectively decrease, by at least one at every strict step.
 \end{proof}
 
 \begin{remark}
@@ -1434,10 +1431,23 @@ uses supermodularity of the subspace degree; no modularity of that
 degree is asserted.
 \end{remark}
 
+\begin{lemma}[Length of strict subspace chains]
+\label{lem:subspace-chain-length}\notready
+Every strictly increasing or strictly decreasing chain in the subspace
+lattice of a finite-dimensional vector space $V$ has at most $\dim V$
+strict steps.
+\end{lemma}
+\begin{proof}
+Dimensions are integers between zero and $\dim V$. At every strict
+inclusion they increase by at least one, so the number of strict steps
+is at most $\dim V$. Reverse a decreasing chain to get the same bound.
+\end{proof}
+
 \begin{lemma}[The degree inequality for a sum and intersection]
 \label{lem:submodule-degree-supermodular}
 \uses{lem:nested-quotient-metric,lem:exact-determinant-degree,lem:determinant-contraction,lem:degree-isometry,lem:integral-submodule-projective}
-\source{bost-specht-manuscript:page-0003}\notready
+\source{bost-specht-manuscript:page-0003}
+\lean{BostConjecture.Arithmetic.submoduleQuotientProjective,BostConjecture.Arithmetic.exact_inf_subToSupQuotient,BostConjecture.Arithmetic.exact_inclusion_quotient,BostConjecture.Arithmetic.HermitianMetric.pushforward_norm_le_of_inclusion,BostConjecture.Arithmetic.HermitianMetric.degree_submodule_sup}\notready
 Let $U,V$ be submodules of a finite projective Hermitian bundle $A$,
 and assume that $A/V$ is torsion-free. With the induced metrics,
 \[
@@ -1461,15 +1471,16 @@ gives $\degn(Q,H_U)\leq\degn(Q,H_T)$. Applying exact additivity to
 the two sequences yields the displayed inequality.
 \end{proof}
 
-\begin{lemma}[The Hermitian subspace degree is supermodular]
-\label{lem:hermitian-convex-slopes}
-\uses{lem:submodule-degree-supermodular,lem:nested-quotient-metric,lem:degree-calculus,lem:intrinsic-subspace-degree,lem:integral-part-generic-subspace,lem:subspace-convex-slopes}\notready
+\begin{lemma}[Supermodularity and convexity of Hermitian subspace degree]
+\label{lem:hermitian-subspace-supermodular}
+\uses{lem:submodule-degree-supermodular,lem:saturation-degree,lem:intrinsic-subspace-degree,lem:integral-part-generic-subspace,lem:subspace-convex-slopes}
+\source{bost-specht-manuscript:page-0003}
+\lean{BostConjecture.Arithmetic.HermitianMetric.subspaceDegree_supermodular,BostConjecture.Arithmetic.HermitianMetric.subspaceSlope_isConvex}\notready
 For a Hermitian bundle $A$ put $\delta(X)=\degn(A\cap X)$ on the
 $K$-subspaces of $A_K$, using the induced metrics. Then $\delta$ is
-supermodular. If $X\subsetneq Y$, the interval slope in the preceding
-lemma equals the slope of $(A\cap Y)/(A\cap X)$ with its quotient
-metric. In particular $\mu(0,A_K)=\slope(A)$, and the inequalities
-$\mu(0,X)\leq\mu(0,A_K)$ for $X\ne0$ are exactly semistability.
+supermodular, and its interval slope is convex:
+for $X\not\subseteq Y$,
+$\mu(X\cap Y,X)\leq\mu(Y,X+Y)$.
 \end{lemma}
 \begin{proof}
 Write $U=A\cap X$, $V=A\cap Y$, $I=U\cap V$ and $T=U+V$.
@@ -1477,9 +1488,44 @@ The map $U/I\to T/V$ is contracting: distance to $V$ is no greater
 than distance to $I$. By degree additivity and contraction,
 $\degn(U)+\degn(V)\leq\degn(I)+\degn(T)$. Saturating $T$ gives
 $A\cap(X+Y)$ and can only increase degree. Also
-$I=A\cap(X\cap Y)$, proving supermodularity. For nested subspaces,
-degree additivity identifies the quotient's degree with
-$\delta(Y)-\delta(X)$ and its rank with $\dim Y-\dim X$.
+$I=A\cap(X\cap Y)$, proving supermodularity. Apply
+Lemma~\ref{lem:subspace-convex-slopes} for convexity of the interval slope.
+\end{proof}
+
+\begin{lemma}[Interval slopes are intrinsic quotient slopes]
+\label{lem:hermitian-quotient-interval-slope}
+\uses{lem:exact-determinant-degree,lem:intrinsic-subspace-degree,lem:integral-part-generic-subspace,lem:submodule-degree-supermodular,lem:subspace-convex-slopes}
+\source{bost-specht-manuscript:page-0003}
+\lean{BostConjecture.Arithmetic.HermitianMetric.subspaceDegree_sub_eq_quotient,BostConjecture.Arithmetic.HermitianMetric.subspaceQuotient_finrank,BostConjecture.Arithmetic.HermitianMetric.subspaceSlope_eq_quotient}\notready
+If $X\subseteq Y\subseteq A_K$, give
+$Q=(A\cap Y)/(A\cap X)$ its quotient metric. Then
+\[
+ \degn Q=\delta(Y)-\delta(X),\qquad
+ \rk Q=\dim Y-\dim X.
+\]
+For $X\subsetneq Y$ the interval slope $\mu(X,Y)$ is $\slope(Q)$.
+\end{lemma}
+\begin{proof}
+The quotient embeds in $A/(A\cap X)$, hence is torsion-free and finite
+projective. Apply exact degree additivity to
+$0\to A\cap X\to A\cap Y\to Q\to0$. Restricting the metric
+of $A\cap Y$ to $A\cap X$ is the metric induced from $A$, so this
+gives the stated degree difference. Localizing this exact sequence and
+adding dimensions gives the rank formula. Strict inclusion makes the
+rank difference positive, and division proves the slope identity.
+\end{proof}
+
+\begin{lemma}[Hermitian semistability on the generic subspace lattice]
+\label{lem:hermitian-convex-slopes}
+\uses{lem:hermitian-subspace-supermodular,lem:hermitian-quotient-interval-slope,lem:intrinsic-subspace-degree,lem:saturation-degree}\notready
+For a positive-rank Hermitian bundle $A$, the intrinsic subspace slope
+satisfies $\mu(0,A_K)=\slope(A)$. The inequalities
+$\mu(0,X)\leq\mu(0,A_K)$ for $X\ne0$ are equivalent to
+$\slope(B)\leq\slope(A)$ for every positive-rank submodule $B\subseteq A$.
+\end{lemma}
+\begin{proof}
+The integral part of $A_K$ is $A$, so the initial-interval degree and
+rank formulas give $\mu(0,A_K)=\slope(A)$.
 Every saturated submodule is $A\cap X$ for its generic fiber $X$,
 and saturation increases degree without changing rank; hence checking
 these subspaces is equivalent to checking all submodules.
@@ -1487,7 +1533,7 @@ these subspaces is equivalent to checking all submodules.
 
 \begin{lemma}[Harder--Narasimhan filtration]
 \label{lem:hn-filtration}
-\uses{def:hermitian-degree,lem:degree-calculus,lem:degree-finiteness,lem:hermitian-convex-slopes}
+\uses{def:hermitian-degree,lem:degree-calculus,lem:degree-finiteness,lem:hermitian-convex-slopes,lem:subspace-chain-length}
 \source{bost-specht-manuscript:page-0003}\notready
 Every nonzero Hermitian bundle $A$ has a unique saturated filtration with
 semistable quotient bundles and strictly decreasing slopes. The largest

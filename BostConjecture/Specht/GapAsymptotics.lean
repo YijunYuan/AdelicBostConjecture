@@ -26,7 +26,7 @@ theorem tendsto_rpow_mul_exp_neg_rpow (p : ℝ) {q b : ℝ} (hq : 0 < q) (hb : 0
   rw [← Real.rpow_mul hx, mul_div_cancel₀ _ hq.ne']
 
 /-- The explicit central-plus-tail majorant tends to zero for a suitable cutoff power. -/
-theorem tendsto_gap_majorant {a c : ℕ} (ha : 0 < a) (hc : 0 < c)
+theorem tendsto_gap_majorant {a c : ℕ} (ha : 0 < a)
     {C : ℝ} (hC : 0 < C) (L : ℝ) {r : ℝ}
     (hr : 1 / 2 < r) (hrc : r * (2 * (c - 1 : ℕ)) < c) :
     Tendsto (fun x : ℝ =>
@@ -52,15 +52,31 @@ theorem tendsto_gap_majorant {a c : ℕ} (ha : 0 < a) (hc : 0 < c)
   have ha0 : (a : ℝ) ≠ 0 := haR.ne'
   have hcentral_eq : x ^ (r * (2 * (c - 1 : ℕ)) - c) =
       (x ^ r) ^ (2 * (c - 1)) / x ^ c := by
-    rw [Real.rpow_sub_natCast hx0, Real.rpow_mul_natCast hx.le]
+    rw [Real.rpow_sub_natCast hx0, ← Real.rpow_mul_natCast hx.le]
+    norm_cast
   have hexponent : -(x ^ r) ^ 2 / (4 * (a : ℝ) ^ 2 * x) =
       -(1 / (4 * (a : ℝ) ^ 2)) * x ^ (2 * r - 1) := by
-    rw [Real.rpow_sub_one hx0, mul_comm 2 r, Real.rpow_mul_natCast hx.le]
+    rw [Real.rpow_sub_one hx0, ← Real.rpow_mul_natCast hx.le]
+    norm_num only [Nat.cast_ofNat]
+    rw [mul_comm r 2]
     field_simp
   rw [hcentral_eq, hexponent, Real.rpow_natCast, mul_pow, mul_pow]
   have hpow : x ^ (2 * c) = x ^ c * x ^ c := by rw [two_mul, pow_add]
   rw [hpow]
   field_simp
-  <;> ring
+
+/-- The manuscript cutoff grows faster than a square root while leaving a negative
+central exponent after division by the normalizer. -/
+theorem gap_cutoff_exponent {c : ℕ} (hc : 0 < c) :
+    1 / 2 < (1 / 2 + 1 / (4 * (c : ℝ))) ∧
+      (1 / 2 + 1 / (4 * (c : ℝ))) * (2 * (c - 1 : ℕ)) < c := by
+  have hcR : (0 : ℝ) < c := by positivity
+  constructor
+  · have : (0 : ℝ) < 1 / (4 * (c : ℝ)) := by positivity
+    linarith
+  · rw [Nat.cast_sub (by omega : 1 ≤ c), Nat.cast_one]
+    apply (mul_lt_mul_iff_of_pos_right (show (0 : ℝ) < 4 * c by positivity)).mp
+    field_simp
+    nlinarith
 
 end BostConjecture.Specht

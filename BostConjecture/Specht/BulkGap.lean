@@ -51,7 +51,7 @@ theorem occupancyGapProbability_bulk_le {a k : ℕ} (ha : 2 ≤ a) (hk : 0 < k)
     rw [rectangle_occupancy_population]
     omega
   have hpop := rectangle_occupancy_population_le ha0 hk
-  have hMle : (k + a - 1 : ℕ) ≤ a * k := (Nat.mul_le_mul_left ha0).mp hpop
+  have hMle : (k + a - 1 : ℕ) ≤ a * k := by nlinarith
   have hAle : ((m + staircaseSum a : ℕ) : ℝ) ≤ (a : ℝ) ^ 2 * k := by
     have h := hA.trans hpop
     push_cast at h ⊢
@@ -67,7 +67,7 @@ theorem occupancyGapProbability_bulk_le {a k : ℕ} (ha : 2 ≤ a) (hk : 0 < k)
       ((a : ℝ) * k) ^ (2 * staircaseSum a) :=
     pow_le_pow_left₀ (by positivity) (by exact_mod_cast hMle) _
   have hnum := add_le_add (le_refl (L ^ 2 * (2 * u) ^ (2 * (staircaseSum a - 1))))
-    (mul_le_mul (mul_le_mul_of_nonneg_left hpow (by positivity)) hexp
+    (mul_le_mul (mul_le_mul_of_nonneg_left hpow (show 0 ≤ 2 * (a : ℝ) by positivity)) hexp
       (Real.exp_nonneg _) (by positivity))
   have hden := sum_occupancyWeight_bulk_lower ha0 hk m l hml hε.le hm hl
   have hden0 : 0 < (a.factorial : ℝ) * (∏ j ∈ range a, (j.factorial : ℝ)) *
