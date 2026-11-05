@@ -1025,9 +1025,34 @@ the asserted bound. The finite-projective duality theorem supplies
 bijectivity of the same canonical map.
 \end{proof}
 
+\begin{lemma}[Isometry of canonical dual regrouping]
+\label{lem:dual-regrouping-isometry}
+\uses{lem:hilbert-tensor-duality,lem:hilbert-regrouping,lem:dual-regrouping,lem:finite-hilbert-tensor}
+\source{bost-specht-manuscript:page-0010}
+\notready
+Let $(E_i)_i$ be a finite family of finite-dimensional complex inner
+product spaces and $J$ a finite set. The canonical dual regrouping
+\[
+ \bigotimes_i(E_i^\vee)^{\otimes J}
+ \simeq\left(\left(\bigotimes_iE_i\right)^\vee\right)^{\otimes J}
+\]
+preserves the iterated Hilbert forms, with the canonical dual metric
+on each dual space.
+\end{lemma}
+\begin{proof}
+First transpose the two tensor indices. This is an isometry by the
+Hilbert regrouping lemma. In each $J$-factor, apply the canonical
+Hilbert tensor-duality isometry. A tensor product of maps preserving
+the factor forms preserves their tensor form: on pure tensors this
+is the product of the factor equalities, and spanning extends it in
+both variables. Thus the second step is also isometric. Their
+composite is the canonical dual regrouping already constructed
+algebraically, proving the assertion for that exact map.
+\end{proof}
+
 \begin{lemma}[The canonical contracting pairing]
 \label{lem:canonical-contraction}
-\uses{lem:integral-canonical-pairing,lem:projective-determinant-isometry,lem:finite-hilbert-tensor,lem:hilbert-tensor-duality,lem:dual-regrouping,lem:hilbert-regrouping}
+\uses{lem:integral-canonical-pairing,lem:projective-determinant-isometry,lem:finite-hilbert-tensor,lem:hilbert-tensor-duality,lem:dual-regrouping-isometry}
 \source{bost-specht-manuscript:page-0010}\notready
 Let $i:V\hookrightarrow W=\bigotimes_{j=1}^N E_j$ be a nonzero
 submodule with its induced metrics. Set $s=\rk V$, $a_j=\rk E_j$.

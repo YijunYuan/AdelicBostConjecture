@@ -9,6 +9,10 @@ public import BostConjecture.Arithmetic.MetricScaling
 public import BostConjecture.Arithmetic.SubspaceDegree
 public import BostConjecture.Arithmetic.QuotientMetric
 public import BostConjecture.Arithmetic.TensorMetric
+public import BostConjecture.Arithmetic.NestedQuotient
+public import BostConjecture.Arithmetic.SaturationDegree
+public import BostConjecture.Arithmetic.LineTensorDegree
+public import BostConjecture.Arithmetic.DualFiber
 public import BostConjecture.LinearAlgebra.AlternatingTensorPower
 public import BostConjecture.LinearAlgebra.ExteriorPower.BaseChange
 public import BostConjecture.LinearAlgebra.PiTensorProduct.Projective
@@ -19,9 +23,12 @@ public import BostConjecture.Geometry.DeterminantBaseChange
 public import BostConjecture.Geometry.LocalizationDescent
 public import BostConjecture.Geometry.DeterminantNaturality
 public import BostConjecture.Geometry.ProjectiveEmbedding
+public import BostConjecture.Geometry.ProjectiveMetric
+public import BostConjecture.Geometry.Contraction
 public import BostConjecture.Tensor.Evaluation
 public import BostConjecture.Tensor.HilbertRegroup
 public import BostConjecture.Tensor.DualRegroup
+public import BostConjecture.Tensor.DualMetric
 public import BostConjecture.Lattice.Covolume
 public import BostConjecture.Specht.Tableau
 public import BostConjecture.Specht.Metric
@@ -35,7 +42,7 @@ public import BostConjecture.Specht.Orthogonal
 public import BostConjecture.Specht.RealAction
 public import BostConjecture.Specht.Content
 public import BostConjecture.Specht.Central
-public import BostConjecture.Specht.Spectral
+public import BostConjecture.Specht.Seminormal
 public import BostConjecture.Specht.OneRow
 public import OAI.NumberTheory.ArithmeticGroups.Lattices.FrameMatrices
 public import OAI.RepresentationTheory.Saxl.SpechtSubmodule
