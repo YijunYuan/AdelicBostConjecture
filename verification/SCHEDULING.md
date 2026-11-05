@@ -1,6 +1,6 @@
 # Parallel Horizon scheduling
 
-Coordinator checkpoint: 2026-11-06 06:31 Asia/Shanghai (2026-11-05 22:31 UTC).
+Coordinator checkpoint: 2026-11-06 06:53 Asia/Shanghai (2026-11-05 22:53 UTC).
 
 The user assigned the parent session scheduling only, with no spending cap. The user subsequently authorized a fourth dedicated
 Lemma 7.2 lane if memory pressure is low; the total cap is now four proof
@@ -45,42 +45,49 @@ was four, then resumed run `0003` for another ten rounds. The successor is
 
 ## Accepted evidence and open boundaries
 
-The latest completed joint boundary is SPECHT session `0026`, final evidence
-`4d40509`: the configured root build passed **9,210 jobs without warnings** at
-22:11:39 UTC, and its 38 new Specht axiom probes used only the standard
-foundational axioms. That root includes the intrinsic exact-sequence
-determinant and Plucker norm handoffs, with separate 192- and 30-probe audits,
-as well as the earlier geometry pairing base-change leaf. It does not certify
-later independent producers or any headline result still open below.
+The latest recorded joint boundary is SPECHT session `0028`, evidence
+`8e22cbc`: the configured root build passed **9,223 jobs without warnings** at
+22:47:30 UTC, and its 22 new Specht axiom probes used only the standard
+foundational axioms. That root includes `Arithmetic.ExactDegree`,
+`Geometry.ContractionNorm`, `Balanced.SpectralExpansion`, and
+`InvariantTheory.Semistability`, with the owners' scoped checks and audits.
+It does not certify later tensor-flow, tensor-degree or invariant-base-change
+producers, nor any headline result still open below.
 
 The current sessions are SPECHT `0028`, ARITH `0014`, GEOM `0014`, and BALANCED
 `0004`; all four foreground invocations continue normally.
 
 - **SPECHT:** the canonical integral lattice, Gram bound and exact finite
   prefix distribution are checked. The current round has additionally checked
-  the bulk normalizer bound (`76b7bf8`). Concentration, uniform separation,
+  the bulk normalizer bound, finite sampling moments, actual occupancy MGF
+  and coordinate/union concentration bounds. Weighted separation,
   logarithmic expectation and the general covolume limit remain open.
 - **ARITH:** intrinsic dual degree, the nonfree exact-sequence determinant,
   full complex-fiber determinant isometry and exact-sequence degree additivity
   are checked, including zero ranks and splitting independence. `ExactDegree`
   passed 3,544 warning-free jobs and the final 201 foundational-only probes
-  (`2f716f5`, evidence `9c913aa`, satisfactory independent review). This newer
-  degree endpoint awaits the next root batch. General tensor degree,
+  (`2f716f5`, evidence `9c913aa`, satisfactory independent review). This
+  degree endpoint is root integrated. The lane has since checked tensor-metric
+  compatibility and saturated rank-one reduction for degree induction.
+  General tensor degree,
   finiteness, supermodularity and HN specialization remain open.
 - **GEOM:** the actual canonical contracting pairing is checked through its
   intrinsic dual-fiber norm bound (`fd211a8`, evidence `8045b27`), with 163
-  foundational-only probes and satisfactory honesty review. This newer
-  endpoint awaits a subsequent root batch. The lane is now working on
-  invariant scalar extension and nonzero evaluation; invariant detection and
+  foundational-only probes and satisfactory honesty review, now root integrated.
+  New invariant base-change, independent-factor invariants and polynomial
+  quotient/evaluation producers are separately checked with 184 probes.
+  The invariant tensor lift, rectangular invariant-space identification and
   the full geometric task remain open.
 - **BALANCED:** actual Plucker norm variation (`76a3ad5`) is checked and root
   integrated. The complex exterior metric is an original construction using
   imported mathlib basis/pairing APIs; the existing real-only exterior metric
   was not silently treated as a complex theorem. Spectral expansion, convexity
   and stationary minimum (`eae8dac`) now have a module check, independent
-  review and 40 foundational-only probes. The tensor-flow bridge,
-  determinant-one polar/logarithm reduction and algebraic orbit/invariant
-  criterion remain open. The spectral leaf awaits subsequent root integration.
+  review and 40 foundational-only probes, now root integrated. The actual
+  tensor-flow bridge and balanced norm minimum passed a module check at
+  22:45:07 UTC (`cc2ec60`), followed by its axiom check. The polar/logarithm
+  construction is in progress; determinant-one/traceless specialization and
+  the algebraic orbit/invariant criterion remain open.
 
 Manuscript **Lemma 7.2 and the main theorem remain unproved**. The dedicated
 lane has made substantive analytic progress; no norm estimate, interface
@@ -214,3 +221,15 @@ at 22:28:47 UTC after the verified exact-sequence degree milestone; `0014`
 started at 22:29:07 UTC. Available memory then measured 10.33 GiB, PSI avg10
 0.00% and zero OOM kills. The consumed hint is archived; arithmetic work
 continues without adding a proof writer.
+
+In `I-0063`, GEOM accepted a narrowly scoped TauCeti polarization extraction;
+BALANCED confirmed its existing polynomial/degree/pullback definitions will
+stay fixed. GEOM has temporary ownership of new
+`BostConjecture/LinearAlgebra/SymmetricPower/**` and
+`vendor/tauceti-polarization/**`, including exact attribution and checks.
+SPECHT retains shared root and contribution-file ownership. The immutable
+source survey and remaining bridge obligations are recorded in
+[STACKS_AND_MATHLIB_PRS.md](STACKS_AND_MATHLIB_PRS.md) (`0a1be77`).
+The source-inspected port is not yet verified; no full TauCeti dependency or
+fifth proof writer is authorized. Latest resource sample: 9.36 GiB available,
+PSI avg10 0.00%, zero OOM kills. The dedicated Lemma 7.2 run continues.
