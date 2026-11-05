@@ -33,7 +33,9 @@ theorem tensorCoordinates_scalarExtension (b : Basis (Fin a) R M)
   induction z using PiTensorProduct.induction_on with
   | smul_tprod r v =>
     ext w
-    simp [LinearMapClass.map_smul_of_tower, Algebra.smul_def, tensorCoordinates_tprod]
+    simp only [map_smul, Tensor.scalarExtension_tprod]
+    rw [← algebraMap_smul S r, map_smul]
+    simp [tensorCoordinates_tprod, Algebra.smul_def]
   | add x y hx hy =>
     ext w
     simp only [map_add, hx, hy, Pi.add_apply]
@@ -50,8 +52,10 @@ theorem scalarExtension_freeLatticeMap (hk : 0 < k)
   | tmul r x =>
     apply (tensorCoordinates n (b.baseChange S)).injective
     ext w
-    simp [LinearMapClass.map_smul_of_tower, tensorCoordinates_scalarExtension,
-      freeLatticeMap_tmul, Algebra.smul_def]
+    simp only [TensorProduct.AlgebraTensorModule.map_tmul, Algebra.linearMap_apply,
+      LinearMap.id_apply, freeLatticeMap_tmul, map_smul]
+    rw [← algebraMap_smul S r, map_smul]
+    simp [tensorCoordinates_scalarExtension]
   | add x y hx hy => simp only [map_add, hx, hy]
 
 /-- Scalar extension of the tensor power of the actual determinant line. -/
@@ -68,14 +72,13 @@ theorem determinantCoordinates_baseChange (b : Basis (Fin a) R M) (η : ⋀[R]^a
       (exteriorPower.baseChangeEquiv R M S a (1 ⊗ₜ[R] η)) =
         algebraMap R S (determinantCoordinates b η) := by
   obtain ⟨r, rfl⟩ := (determinantCoordinates b).symm.surjective η
-  simp only [determinantCoordinates_symm_apply, TensorProduct.tmul_smul,
-    LinearMapClass.map_smul_of_tower, determinantCoordinates_ιMulti, Basis.det_self, smul_eq_mul, mul_one]
-  rw [exteriorPower.baseChangeEquiv_apply_tmul]
+  simp only [determinantCoordinates_symm_apply, TensorProduct.tmul_smul]
+  rw [← algebraMap_smul S r, map_smul, map_smul, exteriorPower.baseChangeEquiv_apply_tmul]
   have hb : (TensorProduct.mk R S M 1) ∘ b = b.baseChange S := by
     ext i
     simp
   rw [hb]
-  simp [Basis.det_self, Algebra.smul_def]
+  simp [Basis.det_self]
 
 /-- The determinant power has the same scalar-extension compatibility. -/
 theorem determinantPowerCoordinates_scalarExtension (b : Basis (Fin a) R M)
@@ -85,9 +88,9 @@ theorem determinantPowerCoordinates_scalarExtension (b : Basis (Fin a) R M)
         algebraMap R S (determinantPowerCoordinates k b η) := by
   induction η using PiTensorProduct.induction_on with
   | smul_tprod r v =>
-    simp [determinantPowerScalarExtension, LinearMapClass.map_smul_of_tower,
-      determinantCoordinates_baseChange,
-      Algebra.smul_def]
+    simp only [map_smul]
+    rw [← algebraMap_smul S r, map_smul]
+    simp [determinantPowerScalarExtension, determinantCoordinates_baseChange]
   | add x y hx hy => simp only [map_add, hx, hy]
 
 /-- The actual determinant-twisted inclusion commutes with scalar extension. -/
@@ -103,5 +106,20 @@ theorem scalarExtension_freeDeterminantMap (hk : 0 < k)
   simp only [freeDeterminantMap_tmul, map_smul,
     scalarExtension_freeLatticeMap, determinantPowerCoordinates_scalarExtension]
   rw [algebraMap_smul]
+
+/-- The scalar-extension square is valid for any target frame, as needed on
+localization overlaps. -/
+theorem scalarExtension_freeDeterminantMap_of_basis (hk : 0 < k)
+    (t : OAI.Saxl.Tableau n (Specht.rectangle a k)) (b : Basis (Fin a) R M)
+    (c : Basis (Fin a) S (S ⊗[R] M))
+    (η : ⨂[R] (_ : Fin k), ⋀[R]^a M) (z : R ⊗[ℤ] Specht.orbitLattice t) :
+    Tensor.scalarExtension R S (fun _ : Fin n => M)
+      (freeDeterminantMap hk t b (η ⊗ₜ[R] z)) =
+    freeDeterminantMap hk t c
+      (determinantPowerScalarExtension k a η ⊗ₜ[S]
+        TensorProduct.AlgebraTensorModule.map (Algebra.linearMap R S)
+          (LinearMap.id : Specht.orbitLattice t →ₗ[ℤ] Specht.orbitLattice t) z) := by
+  rw [freeDeterminantMap_eq hk t c (b.baseChange S)]
+  exact scalarExtension_freeDeterminantMap hk t b η z
 
 end BostConjecture.Geometry
