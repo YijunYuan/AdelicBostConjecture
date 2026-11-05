@@ -73,10 +73,23 @@ The graph retains `hgraph/config.yaml -> ../hgraph-sources.yaml`. The first
 checkpoint sync had 154 blueprint nodes, 1,071 Lean declarations and 722
 edges, with 557 intentionally unattached imported/helper declarations and
 no missing references. A later concurrent ARITH draft introduced two missing
-dependency labels; these were reported to its owner in I-0037. Janitor was
+dependency labels; these were reported to its owner in I-0037 and are now
+resolved. The final sync has 157 blueprint nodes, 1,094 Lean declarations
+and 736 edges, no missing-reference warning, and 575 intentionally
+unattached helper/imported declarations (including concurrent drafts). Janitor was
 used for the active-roadmap warning: ten active items represent the three
 live task branches and their ancestors, intentionally retained. Scratch
 cleanup dry-run found no candidates and protected all three live runs.
+
+The coordinator requested a fresh-round handoff in I-0042 after this verified
+Gram milestone. A just-started hook-count comparison draft failed its narrow
+check at **20:15:00 UTC** (`d274bbcd54c58f50`): cell getD/getElem conversion,
+private-definition exposure, inverse equality and dependent diagram rewriting
+remain to repair. Source and draft blueprint were preserved in session attempt
+`0001-hook-count-bridge-draft-begun-before-i-0042-sess`; the draft was removed
+from the active source tree and the verified blueprint restored. It was never
+root-imported or claimed proved. Thus the checked root and six mathematical
+modules remain unchanged. Continue the counting bridge in the next round.
 
 ## Colex content-spectrum checkpoint (session 0019)
 
