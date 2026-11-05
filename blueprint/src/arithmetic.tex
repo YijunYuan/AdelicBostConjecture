@@ -953,8 +953,95 @@ the generic fiber, so their ranks agree. Dividing by their common positive
 rank proves the slope assertion.
 \end{proof}
 
+\begin{lemma}[Exterior product of two summands]
+\label{lem:exterior-product}\uses{lem:integral-determinant-line}\notready
+For modules $P,Q$ over a commutative ring $R$ and nonnegative integers $a,b$,
+there is a canonical linear map
+\[
+ W_{a,b}:\bigwedge^a P\otimes_R\bigwedge^b Q\longrightarrow
+       \bigwedge^{a+b}(P\oplus Q)
+\]
+sending $(p_1\wedge\cdots\wedge p_a)\otimes
+(q_1\wedge\cdots\wedge q_b)$ to
+$(p_1,0)\wedge\cdots\wedge(p_a,0)\wedge
+(0,q_1)\wedge\cdots\wedge(0,q_b)$.
+It is natural in both modules and commutes with extension of scalars.
+\end{lemma}
+\begin{proof}
+Apply the exterior powers of the two inclusions and then the graded
+multiplication of the exterior algebra. Multiplication is bilinear, so it
+factors through the displayed tensor product. The product of elementary
+wedges is their concatenated wedge, proving the formula. A map $P\to P'$
+and a map $Q\to Q'$ act on the concatenation entry by entry, which proves
+naturality on elementary wedges. These wedges generate both exterior
+powers, and pure tensors generate their tensor product, so the identity
+holds everywhere. For an $R$-algebra $S$, the exterior base-change map
+sends $1\otimes(p_1\wedge\cdots\wedge p_a)$ to
+$(1\otimes p_1)\wedge\cdots\wedge(1\otimes p_a)$.
+Thus the two scalar-extension composites agree on these generators;
+$S$-linearity proves their equality on the full scalar extension.
+\end{proof}
+
+\begin{lemma}[Determinant of a direct sum]
+\label{lem:determinant-product}
+\uses{lem:exterior-product,lem:integral-determinant-line}\notready
+Let $R$ be a domain with fraction field $F$, and let $P,Q$ be finite
+projective $R$-modules of generic ranks $a,b$. Then $W_{a,b}$ is an
+isomorphism $\det P\otimes_R\det Q\simeq\det(P\oplus Q)$, using
+$\rk_F(F\otimes_R(P\oplus Q))=a+b$ to identify the target degree.
+\end{lemma}
+\begin{proof}
+Localize at any maximal ideal $\mathfrak m$ of $R$. Finite projective
+modules over the local ring $R_{\mathfrak m}$ are finite free. Their ranks
+are $a,b$, since further extension to $F$ preserves the cardinality of
+a basis. Choose local bases of $P_{\mathfrak m}$ and $Q_{\mathfrak m}$.
+Their concatenation is a basis of the direct sum, and the preceding wedge
+formula sends the tensor of their determinant generators to its determinant
+generator. Thus the localized map is bijective. Scalar extension commutes
+with exterior powers and tensor products, so this is precisely the
+localization of $W_{a,b}$. A linear map is bijective if all its maximal-ideal
+localizations are bijective: localization detects both its kernel and
+cokernel. This proves the assertion without choosing global bases.
+\end{proof}
+
+\begin{lemma}[Exact-sequence determinant isometry and degree]
+\label{lem:exact-determinant-degree}
+\uses{lem:determinant-product,lem:quotient-hermitian-metric,lem:determinant-metric,lem:line-tensor-degree,lem:line-degree-isometry,def:intrinsic-determinant-degree}
+\source{bost-specht-manuscript:page-0003}\notready
+Let $0\to A\xrightarrow{i}B\xrightarrow{q}C\to0$ be an exact sequence
+of finite projective $\Ocal$-modules. Equip $B$ with a Hermitian metric,
+$A$ with the induced metric and $C$ with the quotient metric.
+There is a canonical isometry
+\[
+ \det A\otimes_\Ocal\det C\simeq\det B,
+\]
+and $\degn(B)=\degn(A)+\degn(C)$, including zero ranks.
+\end{lemma}
+\begin{proof}
+Projectivity of $C$ gives a linear section $s$ of $q$.
+The map $(a,c)\mapsto i(a)+s(c)$ is an isomorphism $A\oplus C\simeq B$:
+surjectivity follows by subtracting $s(q(b))$, and injectivity follows by
+applying $q$ and then using injectivity of $i$.
+Compose its top exterior power with the preceding determinant isomorphism.
+Another section has the form $s+i\circ t$ for a linear map $t:C\to A$.
+The resulting change on $A\oplus C$ is block upper triangular with identity
+diagonal, hence has determinant $1$ after extending to $K$. The integral
+determinant line is torsion-free, so the two integral maps are equal.
+This proves independence of the section and hence canonicity.
+
+At an embedding $\sigma$, the same independence permits the orthogonal
+section of $q_\sigma$. Choose orthonormal bases of $A_\sigma$ and
+$C_\sigma$. Their images in $B_\sigma$ form an orthonormal basis, since
+the orthogonal section realizes exactly the quotient metric. The
+determinant map therefore sends the tensor of two unit determinant
+generators to a unit determinant generator. Between complex lines this
+implies preservation of all norms. This also applies to an empty basis.
+Isometry invariance of line degree and tensor additivity for projective
+lines now give the asserted degree identity.
+\end{proof}
+
 \begin{lemma}[Determinant identities and contraction]
-\label{lem:degree-calculus}\uses{def:hermitian-degree,lem:quotient-hermitian-metric,lem:arithmetic-tensor-metric,lem:dual-degree,lem:line-tensor-degree,lem:determinant-contraction,lem:saturation-degree,lem:degree-metric-scaling}
+\label{lem:degree-calculus}\uses{def:hermitian-degree,lem:exact-determinant-degree,lem:arithmetic-tensor-metric,lem:dual-degree,lem:line-tensor-degree,lem:determinant-contraction,lem:saturation-degree,lem:degree-metric-scaling}
 \source{bost-specht-manuscript:page-0003}\notready
 Degrees are additive in an exact sequence with induced and quotient
 metrics. For positive-rank bundles $A,B$ and a line bundle $L$,
@@ -970,12 +1057,8 @@ decrease degree. Multiplying all norms by $e^t$ subtracts $t$ from every
 positive-rank submodule's slope.
 \end{lemma}
 \begin{proof}
-For an exact sequence, the determinant isomorphism
-$\det A\otimes\det C\simeq\det B$ is an isometry: at each place choose
-an orthonormal basis of the subspace and lift an orthonormal basis of the
-quotient to its orthogonal complement. Local bases at finite primes show
-that the corresponding determinant ideals multiply. Substituting these
-two facts in the definition gives additivity. In orthonormal bases the
+Exact-sequence additivity is Lemma~\ref{lem:exact-determinant-degree},
+and duality is Lemma~\ref{lem:dual-degree}. In orthonormal bases the
 determinant identities
 $\det(A\otimes B)\simeq(\det A)^{\otimes\rk B}\otimes
 (\det B)^{\otimes\rk A}$ and $\det(A^\vee)\simeq(\det A)^\vee$

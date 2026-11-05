@@ -483,3 +483,71 @@ the nested live branches; the health review is not repeated for the same
 collection warning. The mathematical completion markers apply only to the six
 scoped proved nodes above. I-0040 is closed; I-0037 remains open for SPECHT's
 pending root integration, including the final DualFiber leaf if feasible.
+
+## Session 0010: intrinsic dual metric and arbitrary-rank dual degree
+
+The actual integral dual now has a conjugation-compatible operator metric.
+Its coefficient ideal in rank one is the inverse fractional ideal, and the
+coordinate length is reciprocal. These two proved facts give rank-one dual
+degree negation. Perfect exterior evaluation for finite projective modules,
+proved by a finite-free summand argument, commutes with scalar extension.
+The complex Gram determinant calculation then proves that the canonical
+integral determinant-duality map is an isometry. Its section-norm consumer
+feeds line-degree invariance and proves `HermitianMetric.degree_dual` and
+`slope_dual` in every rank over every number field. There is no integral
+freeness hypothesis; the determinant argument includes rank zero.
+
+Checked source units: `ba2f037` (DualMetric), `0a78001` (DualCoordinate),
+`fcf7f49` (LineDualDegree), `23ac7ae` (ExteriorDual), `49b13ce`
+(DeterminantDual final proof), and `9869294` (axiom audit/blueprint).
+Concurrent automatic boundary snapshots captured parts of ExteriorDual,
+ComplexDualDeterminant, ExteriorDualBaseChange and DeterminantDual before
+explicit arithmetic commits. Those snapshots are not evidence for other
+lanes' drafts. The final arithmetic source blobs covered by the checks are:
+
+| File | Blob |
+| --- | --- |
+| DualMetric.lean | `a3000bcbabd067fb199d6a2b3414cc7c8d4e4edd` |
+| DualCoordinate.lean | `837ede69b59e825d16e447319ad691729d334cfe` |
+| LineDualDegree.lean | `99a2bbe4be5c10900d3145ab9c4001f48932ef5f` |
+| ExteriorDual.lean | `166f8f918b1f515019bbdd07f275fbc42fdb5e86` |
+| ComplexDualDeterminant.lean | `705dcc68245bde6e64ba7a6e12390203020ff6e6` |
+| ExteriorDualBaseChange.lean | `77d58e96e12b603e0e1fa4cb090a68e06e6956c7` |
+| DeterminantDual.lean | `5cd635591d5cd8d1447f38ac774b3945dab2e1ea` |
+
+All checks used the serialized command prefix
+`"$HORIZON_BIN" --root /home/yijunyuan/bc-workspace check`.
+The final `BostConjecture.Arithmetic.DeterminantDual` build passed **3525 jobs**
+at 2026-11-05 20:39:30 UTC (fingerprint `a40a91a973f052f9`, 57.412 seconds).
+`--lean verification/ArithmeticAxioms.lean` passed **165 probes** at
+20:40:51 UTC (`590174f2cda53d26`, 32.527 seconds, not reused). Every probe
+reported only `propext`, `Classical.choice`, and `Quot.sound`; there is no
+`sorryAx` or custom mathematical axiom. Earlier scoped builds and the
+141/150-probe intermediate audits also passed. Tactical errors were repaired
+in the LSP loop before the accepted source checks. The audit file's LSP kept
+a stale “imports out of date” notification after its import changed; the
+subsequent serialized kernel check verified the exact final file.
+
+Read-only honesty review approved the six scoped nodes for actual dual metric,
+inverse dual ideal, line dual degree, projective exterior duality,
+determinant-dual isometry, and arbitrary-rank dual degree. It inspected both
+the producer-to-consumer route and the transitive axiom output. No package
+assumes the desired calculus. The new `dualPullbackCore` is a constructed
+positive form proved equal to the existing determinant metric.
+
+The dual-degree frontier is closed. **General tensor degree, exact-sequence
+degree, degree finiteness, supermodularity, and actual HN specialization remain
+open**, as does manuscript Theorem 1.1. The next route is split into canonical
+exterior product, determinant product by local freeness, and exact-sequence
+determinant isometry in the blueprint. I-0045 tracks the shared-root batch
+containing the checked dual leaf; the newer exterior-product work is excluded
+from that batch.
+
+Operational health was reviewed once by a read-only helper. The active-count
+warning concerns nested ancestors and the now four user-authorized proof
+lanes (I-0046); no additional proof writer was spawned. Older arithmetic
+ancestor summaries were refreshed. One broad offline declaration search was
+interrupted after sustained CPU use without results; scoped source searches
+found the canonical wedge, product-tensor and localization APIs. The LSP
+symbol index reports an error, so source-text searches, not empty index
+results, were used. Toolchain and dependencies remain fixed.
