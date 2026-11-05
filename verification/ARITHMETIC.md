@@ -727,3 +727,56 @@ owned-source scope remains intact. I-0061 explicitly requests ending this
 round after this verified milestone so the live run resumes with fresh Lean
 clients. All authored Lean is checked and committed; no unfinished draft
 is left. The overall task is not marked done.
+
+## Session 0014: arbitrary-rank intrinsic tensor degree
+
+`TensorCompatibility` compares the entire complex tensor fiber with the
+canonical Hilbert form and proves induced-metric compatibility.
+`ComplexTensorQuotient` proves that the tensor of the orthogonal right
+inverse is the actual orthogonal right inverse of the tensor map. Its
+consumer `TensorExactMetric.tensor_pushforward` identifies the intrinsic
+quotient tensor metric. `RankOneReduction` constructs an actual saturated
+line in every positive-rank projective module.
+
+`DegreeIsometry` derives isometry invariance from the two determinant
+contraction inequalities. `TensorDegree.degree_tensor_exact` consumes
+both tensor metric identities and exact determinant additivity. Strong
+induction on the sum of generic ranks then proves `degree_tensor`, using
+the established nonfree rank-one formula. `slope_tensor` gives average
+slope additivity for positive ranks. All number fields and nonfree finite
+projective modules remain supported; rank-zero degree is also covered.
+No tensor semistability or degree-calculus field is assumed.
+
+| Checked target | Fingerprint | Completion UTC | Result |
+| --- | --- | --- | --- |
+| `TensorCompatibility` | `e8fe46c5dc16170c` | 2026-11-05 22:44:20 | 3454 jobs, no warnings |
+| `ComplexTensorQuotient` | `8fe6c93c9f092ba2` | 22:48:49 | 2816 jobs, no warnings |
+| `TensorExactMetric` + `RankOneReduction` | `9805439ef2e1aa04` | 22:50:49 | 3537 jobs, no warnings |
+| `DegreeIsometry` | `dbe6b369698a2dfb` | 22:52:06 | 3511 jobs, no warnings |
+| `TensorDegree` | `d8e541c6d3f18016` | 22:55:16 | 3551 jobs, no warnings |
+| `ArithmeticAxioms.lean` | `590174f2cda53d26` | 22:56:17 | 221 transitive probes, foundational axioms only |
+
+Each check used the serialized Horizon slot with explicit workspace root.
+The audit reports only `propext`, `Classical.choice`, and `Quot.sound`.
+The first source units are explicit commits `d5bdba7` and `16fe3bf`.
+Concurrent automatic snapshot `5455f7f` captured the final two source files
+before the explicit commit: TensorDegree blob
+`a8a477a69e3ed78da04c2b3e80e4b92738f651ec`, DegreeIsometry blob
+`be9c9e1f89633e60e7ceabbda23011e5e1f9c05e`. This snapshot is not evidence
+for other tasks' files. No Lean edit followed the final accepted module
+check. The expanded axiom audit and reviewed blueprint attachments are
+committed explicitly afterward.
+
+LSP was available for the proof loop. A stale-import diagnostic persisted
+for TensorExactMetric after its dependency build, so its serialized module
+build was the faithful fallback. Earlier elaboration failures concerned
+induction hypotheses retaining membership assumptions, explicit quotient
+lift surjectivity arguments and unfolding induced metrics; all were fixed.
+Two independent scoped honesty passes approved the producers and their
+actual degree/slope consumers, including the four new checked nodes.
+
+The arbitrary-rank degree proof follows intrinsic exact determinants and
+rank-one reduction. It does not construct a separate canonical general
+tensor-determinant isomorphism. Supermodularity, arithmetic degree
+finiteness and intrinsic HN remain open; the aggregate calculus marker is
+still pending. No claim for maximal slopes or manuscript Theorem 1.1 follows.

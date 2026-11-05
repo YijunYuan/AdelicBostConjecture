@@ -1,3 +1,4 @@
+import BostConjecture.Arithmetic.TensorDegree
 import BostConjecture.Arithmetic.ExactDegree
 import BostConjecture.Arithmetic.QuotientMetric
 import BostConjecture.Arithmetic.IntegralDeterminantProduct
@@ -228,3 +229,24 @@ import BostConjecture.Arithmetic.DeterminantProduct
 #print axioms BostConjecture.Arithmetic.HermitianMetric.determinantExactEquiv_isometry
 #print axioms BostConjecture.Arithmetic.HermitianMetric.determinantExactEquiv_fiber_isometry
 #print axioms BostConjecture.Arithmetic.HermitianMetric.degree_exact
+
+#print axioms BostConjecture.Arithmetic.span_fiberSection
+#print axioms BostConjecture.Arithmetic.span_fiberSection_tmul
+#print axioms BostConjecture.Arithmetic.binaryTensorFiberEquiv
+#print axioms BostConjecture.Arithmetic.binaryTensorFiberEquiv_rTensor
+#print axioms BostConjecture.Arithmetic.HermitianMetric.tensor_inner_section
+#print axioms BostConjecture.Arithmetic.HermitianMetric.tensor_inner
+#print axioms BostConjecture.Arithmetic.HermitianMetric.ext_inner
+#print axioms BostConjecture.Arithmetic.HermitianMetric.ext_section_inner
+#print axioms BostConjecture.Arithmetic.HermitianMetric.tensor_pullback
+#print axioms BostConjecture.Arithmetic.ComplexQuotient.lift_rTensor
+#print axioms BostConjecture.Arithmetic.ComplexQuotient.core_rTensor_inner
+#print axioms BostConjecture.Arithmetic.HermitianMetric.tensor_pushforward
+#print axioms BostConjecture.Arithmetic.generic_finrank_submodule_quotient
+#print axioms BostConjecture.Arithmetic.exists_rank_one_submodule
+#print axioms BostConjecture.Arithmetic.HermitianMetric.degree_eq_of_equiv
+#print axioms BostConjecture.Arithmetic.HermitianMetric.tensor_comm_inner
+#print axioms BostConjecture.Arithmetic.HermitianMetric.degree_tensor_comm
+#print axioms BostConjecture.Arithmetic.HermitianMetric.degree_tensor_exact
+#print axioms BostConjecture.Arithmetic.HermitianMetric.degree_tensor
+#print axioms BostConjecture.Arithmetic.HermitianMetric.slope_tensor

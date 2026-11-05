@@ -1235,7 +1235,7 @@ projective lines now give the asserted degree identity.
 \begin{lemma}[Isometry invariance of determinant degree]
 \label{lem:degree-isometry}
 \uses{lem:determinant-contraction}
-\source{bost-specht-manuscript:page-0003}\notready
+\source{bost-specht-manuscript:page-0003}\lean{BostConjecture.Arithmetic.HermitianMetric.degree_eq_of_equiv}\leanok
 An integral isomorphism of finite projective Hermitian bundles which
 preserves the forms on all complex fibers preserves normalized degree.
 \end{lemma}
@@ -1248,7 +1248,7 @@ of the real order.
 \begin{lemma}[Tensor products preserve induced and quotient metrics]
 \label{lem:tensor-exact-metrics}
 \uses{lem:arithmetic-tensor-metric,lem:induced-hermitian-metric,lem:quotient-hermitian-metric}
-\source{bost-specht-manuscript:page-0003}\notready
+\source{bost-specht-manuscript:page-0003}\lean{BostConjecture.Arithmetic.HermitianMetric.tensor_inner,BostConjecture.Arithmetic.HermitianMetric.tensor_pullback,BostConjecture.Arithmetic.ComplexQuotient.lift_rTensor,BostConjecture.Arithmetic.HermitianMetric.tensor_pushforward}\leanok
 Let $0\to A'\xrightarrow{i}A\xrightarrow{q}A''\to0$ be an exact
 sequence of finite projective $\Ocal$-modules. Give $A'$ and $A''$ the
 induced and quotient metrics from a Hermitian metric on $A$. For every
@@ -1277,7 +1277,7 @@ and sesquilinearity.
 \begin{lemma}[Rank-one saturated reduction]
 \label{lem:rank-one-saturated-reduction}
 \uses{lem:integral-part-generic-subspace}
-\source{bost-specht-manuscript:page-0002}\notready
+\source{bost-specht-manuscript:page-0002}\lean{BostConjecture.Arithmetic.exists_rank_one_submodule}\leanok
 Every finite projective $\Ocal$-module $A$ of positive generic rank $a$
 contains a saturated rank-one submodule $L$ whose quotient is finite
 projective of rank $a-1$.
@@ -1293,7 +1293,7 @@ gives $\rk(A/L)=a-1$.
 \begin{lemma}[Tensor degree in arbitrary rank]
 \label{lem:tensor-degree}
 \uses{lem:tensor-exact-metrics,lem:rank-one-saturated-reduction,lem:exact-determinant-degree,lem:line-tensor-degree,lem:degree-rank-zero,lem:degree-isometry}
-\source{bost-specht-manuscript:page-0003}\notready
+\source{bost-specht-manuscript:page-0003}\lean{BostConjecture.Arithmetic.HermitianMetric.degree_tensor,BostConjecture.Arithmetic.HermitianMetric.slope_tensor}\leanok
 For finite projective Hermitian bundles $A,B$ of generic ranks $a,b$,
 \[
  \degn(A\otimes B)=b\degn(A)+a\degn(B).
