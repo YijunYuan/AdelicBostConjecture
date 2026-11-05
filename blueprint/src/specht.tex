@@ -914,7 +914,7 @@ first, and belongs to the same subspace.
 \begin{lemma}[Extension at a fixed removable corner]
 \label{lem:standard-corner-extension}
 \uses{lem:standard-prefix-diagram,lem:polytabloid-prefix-restriction,lem:real-standard-basis}
-\lean{BostConjecture.Specht.extendTableau_isStandard,BostConjecture.Specht.prefixSliceReal_extendTableau,BostConjecture.Specht.tableauColexLT_extendTableau_iff,BostConjecture.Specht.prefixSliceReal_cornerLift,BostConjecture.Specht.cornerLift_mem_colexSubspace}\leanok
+\lean{BostConjecture.Specht.extendTableau_isStandard,BostConjecture.Specht.prefixSliceReal_extendTableau,BostConjecture.Specht.tableauColexLT_extendTableau_iff,BostConjecture.Specht.cornerLift_mem_lastRowSubspace,BostConjecture.Specht.prefixSliceReal_cornerLift,BostConjecture.Specht.cornerLift_mem_colexSubspace}\leanok
 Let $t$ be standard on $n+1$ labels and let $\nu$ be its diagram
 after deleting the largest label. Every standard tableau $u$ of
 $\nu$ extends to a standard tableau $\widehat u$ of the original
@@ -974,8 +974,30 @@ $J_ne_t-\operatorname{content}_t(n)e_t$ directly in $F_{<r}$.
 Every tableau in that subspace is earlier, completing the induction.
 \end{proof}
 
+\begin{lemma}[Content eigenvalues of the monic orthogonal basis]
+\label{lem:orthogonal-content-eigenvalues}
+\uses{lem:orthogonal-standard-basis,lem:murphy-operators,lem:prefix-content-triangular}\notready
+For the colexicographic monic orthogonal basis, every Murphy operator
+acts diagonally:
+\[
+ J_j f_t=\operatorname{content}_t(j) f_t.
+\]
+\end{lemma}
+\begin{proof}
+Let $V_{<t}$ be the span of the earlier standard polytabloids.
+Triangularity implies that $J_j$ preserves this span: the image of
+each earlier generator is its content multiple plus still earlier
+generators. Orthogonalization gives $f_t-e_t\in V_{<t}$ and
+$f_t\perp V_{<t}$. Therefore
+$z=J_j f_t-\operatorname{content}_t(j)f_t$ belongs to $V_{<t}$.
+For every $y\in V_{<t}$, symmetry gives
+$\langle z,y\rangle=\langle f_t,J_jy\rangle-
+\operatorname{content}_t(j)\langle f_t,y\rangle=0$.
+Taking $y=z$ proves $\|z\|^2=0$, hence $z=0$.
+\end{proof}
+
 \begin{theorem}[Monic seminormal basis]
-\label{lem:monic-seminormal}\uses{lem:orthogonal-standard-basis,lem:murphy-eigenvector-residual,lem:prefix-content-triangular}
+\label{lem:monic-seminormal}\uses{lem:orthogonal-standard-basis,lem:murphy-eigenvector-residual,lem:orthogonal-content-eigenvalues}
 \source{bost-specht-manuscript:page-0005,ryom-hansen-seminormal-denominators-v1:classical_formula}\notready
 Order standard tableaux colexicographically by their row words,
 starting with the column-reading tableau $t_0$. Monic orthogonalization
