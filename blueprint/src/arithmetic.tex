@@ -1127,7 +1127,8 @@ exterior powers, so they apply to arbitrary $x,y$ as asserted.
 
 \begin{lemma}[Arbitrary sections after scalar extension]
 \label{lem:exact-determinant-field-section}
-\uses{lem:exact-determinant-base-change,lem:exact-determinant-algebra}\notready
+\uses{lem:exact-determinant-base-change,lem:exact-determinant-algebra}
+\lean{exteriorPower.map_coprod_prodMap_eq_of_sections,exteriorPower.exactEquiv_baseChange_field_section}\leanok
 In the setting of Lemma~\ref{lem:exact-determinant-base-change}, suppose
 $T$ is a field and $R\to T$ is injective. The displayed formula remains
 valid with any $T$-linear section $s_T:C_T\to B_T$ of $q_T$, whether
@@ -1147,7 +1148,8 @@ replacement gives precisely the asserted formula.
 
 \begin{lemma}[Determinant norm of orthogonal summands]
 \label{lem:orthogonal-determinant-norm}
-\uses{lem:exterior-product,lem:determinant-metric,lem:quotient-hermitian-metric}\notready
+\uses{lem:exterior-product,lem:determinant-metric,lem:quotient-hermitian-metric}
+\lean{BostConjecture.Arithmetic.ComplexDeterminant.norm_prodMap,BostConjecture.Arithmetic.ComplexQuotient.norm_determinant_lift}\leanok
 Let $E,F,G$ be complex Hermitian spaces of dimensions $a,b,a+b$.
 Let $i:E\to G$ and $j:F\to G$ preserve inner products and have
 orthogonal images. For $x\in\bigwedge^a E$ and $y\in\bigwedge^b F$,
@@ -1176,7 +1178,8 @@ to the kernel of $q$, which contains the image of $i$.
 
 \begin{lemma}[Exact determinant norms on integral pure tensors]
 \label{lem:exact-determinant-pure-norm}
-\uses{lem:exact-determinant-field-section,lem:orthogonal-determinant-norm,lem:quotient-hermitian-metric,lem:determinant-metric}\notready
+\uses{lem:exact-determinant-field-section,lem:orthogonal-determinant-norm,lem:quotient-hermitian-metric,lem:determinant-metric}
+\lean{BostConjecture.Arithmetic.determinantExactEquiv_section,BostConjecture.Arithmetic.HermitianMetric.determinantExactEquiv_sectionNorm}\leanok
 For an exact sequence $0\to A\xrightarrow{i}B\xrightarrow{q}C\to0$
 of finite projective $\Ocal$-modules, give $A$ the metric induced from $B$
 and $C$ the quotient metric. Write $D:\det A\otimes\det C\simeq\det B$
@@ -1200,7 +1203,8 @@ the stated equality on the intrinsic integral determinant lines.
 \begin{lemma}[Exact-sequence determinant isometry and degree]
 \label{lem:exact-determinant-degree}
 \uses{lem:exact-determinant-algebra,lem:exact-determinant-pure-norm,lem:quotient-hermitian-metric,lem:determinant-metric,lem:line-tensor-degree,lem:line-degree-isometry,def:intrinsic-determinant-degree}
-\source{bost-specht-manuscript:page-0003}\notready
+\source{bost-specht-manuscript:page-0003}
+\lean{BostConjecture.Arithmetic.HermitianMetric.determinantExactEquiv_isometry,BostConjecture.Arithmetic.HermitianMetric.determinantExactEquiv_fiber_isometry,BostConjecture.Arithmetic.HermitianMetric.degree_exact}\leanok
 Let $0\to A\xrightarrow{i}B\xrightarrow{q}C\to0$ be an exact sequence
 of finite projective $\Ocal$-modules. Equip $B$ with a Hermitian metric,
 $A$ with the induced metric and $C$ with the quotient metric.

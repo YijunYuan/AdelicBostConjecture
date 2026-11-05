@@ -662,3 +662,68 @@ no number-field restriction or assumed degree calculus was introduced.
 Remaining: the complex-fiber comparison with an arbitrary orthogonal section,
 the determinant isometry and exact degree identity, arbitrary-rank tensor
 identity, degree finiteness/supermodularity and the actual HN specialization.
+
+## Exact determinant isometry and degree (run0004 round5)
+
+The exact-sequence identity is now proved for arbitrary number fields and
+nonfree finite projective modules, including rank-zero summands:
+`HermitianMetric.degree_exact` uses the actual induced and quotient metrics.
+`determinantExactEquiv_fiber_isometry` proves norm preservation on the entire
+complex determinant fiber, not just on integral generators.
+
+- `OrthogonalDeterminant`: 3517 jobs, `1e42044f8102ba14`,22:14:28 UTC;
+  explicit commit `3a03d9c`. The generic orthogonal formula is consumed by
+  the actual orthogonal-quotient lemma and the intrinsic exact metric proof.
+- `ExactDeterminantBaseChange`: 3373 jobs, `c966a478c62e1b93`,22:16:36 UTC;
+  commit `0848924`. It permits arbitrary sections after extension to a
+  faithful field, including the complex orthogonal section.
+- `ExactDeterminantMetric`: 3534 jobs, `cac74a1f025f4fba`,22:18:56 UTC;
+  commit `8b595d4`. Rank transports connect that formula to the existing
+  intrinsic determinant lines and their constructed metrics.
+- `ExactDegree`: final warning-free3544-job check `5c3b6c9b72179523`,
+  2026-11-05 22:22:18 UTC, commit `2f716f5`. All integral sections are
+  compared by clearing denominators from a nonzero pure determinant tensor;
+  the full-fiber extension uses its actual dimension one. The degree theorem
+  consumes this isometry, intrinsic line-degree invariance and proved tensor
+  additivity of nonfree lines.
+- Final 201-probe audit `590174f2cda53d26`,22:22:42 UTC: only `propext`,
+  `Classical.choice`, `Quot.sound`; no `sorryAx` or added axioms. Full output
+  is run0004/session0012 `arithmetic-axioms-exact-degree.log`.
+
+The metric files received clean LSP diagnostics; the audit's stale-import
+LSP state was superseded by the serialized kernel check. Initial local
+elaboration errors involved finite-index separation, proof-only hypotheses,
+rank transport rewriting and a nonexistent lemma namespace; all were fixed.
+Two passing ExactDegree builds emitted unused-projectivity warnings; the
+final build removes both warnings. No failed proof remains in these files.
+
+The previous algebra handoff was integrated by SPECHT in the warning-free
+9210-job root check at22:11:39 UTC, commit `4d40509`. The newer ExactDegree
+import and its transitive metric leaves were sent in I-0050 for integration.
+No new external source copy or dependency change was made.
+
+Remaining mathematical frontier: arbitrary-rank tensor determinant/degree,
+restriction-of-scalars covolume and degree finiteness, supermodularity, then
+the actual HN specialization. The source Theorem1.1 and BOST-ARITH remain open.
+
+Honesty-reviewer inspected the final201-probe log and the exact source at
+`2f716f552f703e587659239635beef2c134ff158`; verdict satisfactory, no actionable
+findings. It approved precisely the orthogonal-norm, arbitrary-field-section,
+intrinsic pure-norm and exact-isometry/degree nodes. Their blueprint markers
+now name the substantive checked producers. EXACT-DET and its two child units
+are closed; the BOST-ARITH task remains active. The next roadmap producer is
+the nonfree integral tensor determinant identity.
+
+The janitor checkpoint found no actionable hygiene defects. The remaining
+active-item count warning is intentional: the count includes ancestors of
+the four authorized proof lanes, as recorded in I-0017. Temporary cleanup
+found no stale candidates and protected all live runs. I-0050 remains open
+for the new shared-root integration result; SPECHT acknowledged the handoff.
+
+Final graph sync:208 blueprint nodes,1391 Lean declarations,972 generated
+edges; no missing-reference warning. The719 unattached helper/imported
+nodes are intentional coverage warnings, recorded in I-0004; the configured
+owned-source scope remains intact. I-0061 explicitly requests ending this
+round after this verified milestone so the live run resumes with fresh Lean
+clients. All authored Lean is checked and committed; no unfinished draft
+is left. The overall task is not marked done.
