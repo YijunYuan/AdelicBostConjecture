@@ -906,6 +906,48 @@ Thus $Q$ is a two-sided inverse. This uses a finite free summand presentation,
 not a basis of $P$.
 \end{proof}
 
+\begin{lemma}[Determinant duality is an isometry]
+\label{lem:determinant-dual-isometry}
+\uses{lem:projective-exterior-duality,lem:dual-fiber-base-change,lem:arithmetic-dual-metric,lem:determinant-metric,lem:determinant-metric-unique}\notready
+The canonical isomorphism $\det(M^\vee)\simeq(\det M)^\vee$ of a finite
+projective Hermitian $\Ocal$-module is an isometry at every embedding.
+\end{lemma}
+\begin{proof}
+Exterior evaluation commutes with scalar extension: on wedges its value is
+a determinant, and applying an embedding commutes with determinants.
+Multilinearity and the spanning property of integral sections extend this
+identity to all complex vectors. Fix an embedding and an orthonormal basis
+$b_1,\ldots,b_r$ of its complex fiber. Put $\zeta=b_1\wedge\cdots\wedge b_r$.
+The determinant metric makes $\zeta$ a unit vector. On its dual line the
+inner product of functionals $F,G$ is $\overline{F(\zeta)}G(\zeta)$,
+as follows either from Riesz representation or direct evaluation in the
+unit coordinate $\zeta$. For dual vectors $f_1,\ldots,f_r$, the canonical
+exterior functional has value $\det(f_j(b_i))$ on $\zeta$.
+The dual Gram matrix is $A^*A$, where $A_{ij}=f_j(b_i)$, since the operator
+dual inner product is $\sum_i\overline{f(b_i)}g(b_i)$.
+Consequently its determinant is $\overline{\det A}\det A$, exactly the
+squared norm of the exterior functional. Uniqueness of the determinant
+metric now proves the isometry. Empty determinants are $1$, so rank zero
+is included.
+\end{proof}
+
+\begin{lemma}[Degree and slope of the intrinsic dual]
+\label{lem:dual-degree}
+\uses{lem:determinant-dual-isometry,lem:line-dual-degree,lem:line-degree-isometry,def:intrinsic-determinant-degree}\notready
+For every finite projective Hermitian $\Ocal$-module $M$,
+$\degn(M^\vee)=-\degn(M)$. For positive rank,
+$\slope(M^\vee)=-\slope(M)$.
+\end{lemma}
+\begin{proof}
+The determinant duality isometry identifies the line degree of
+$\det(M^\vee)$ with that of $(\det M)^\vee$. The determinant is a projective
+line, whose dual degree is the negative of its degree by
+Lemma~\ref{lem:line-dual-degree}. This proves the degree assertion by
+definition. Scalar extension identifies the integral dual with the dual of
+the generic fiber, so their ranks agree. Dividing by their common positive
+rank proves the slope assertion.
+\end{proof}
+
 \begin{lemma}[Determinant identities and contraction]
 \label{lem:degree-calculus}\uses{def:hermitian-degree,lem:quotient-hermitian-metric,lem:arithmetic-tensor-metric,lem:arithmetic-dual-metric,lem:line-tensor-degree,lem:determinant-contraction,lem:saturation-degree,lem:degree-metric-scaling}
 \source{bost-specht-manuscript:page-0003}\notready

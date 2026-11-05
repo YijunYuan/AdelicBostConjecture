@@ -1266,6 +1266,26 @@ $\log\det\Gram((e_t))=\sum_t\log\gamma_t$. Divide by the
 positive number of standard tableaux, which equals $f_{a,d}$.
 \end{proof}
 
+\begin{lemma}[Hook enumeration of standard tableaux]
+\label{lem:standard-hook-count}\uses{def:standard-tableau}
+\source{bost-specht-manuscript:page-0004}\notready
+For a Young diagram $\mu$ with $n$ boxes, let
+$h_\mu(r,q)=\mu_r+\mu'_q-r-q-1$, using zero-based coordinates.
+Then
+\[
+ |\operatorname{SYT}(\mu)|\prod_{(r,q)\in\mu}h_\mu(r,q)=n!.
+\]
+\end{lemma}
+\begin{proof}
+Inversion identifies a standard enumerating bijection from the labels
+$0,\ldots,n-1$ to the boxes of $\mu$ with a bijective filling of those
+boxes by the labels, increasing in both rows and columns. The inverse
+construction inverts the filling. These constructions preserve the box
+coordinates and are mutually inverse. The hook-length formula for
+increasing fillings therefore gives the displayed identity for the
+standard enumerating tableaux.
+\end{proof}
+
 \begin{lemma}[Tableau enumeration in shifted coordinates]
 \label{lem:tableau-count}
 \source{bost-specht-manuscript:page-0004,bost-specht-manuscript:page-0006}\notready
