@@ -721,9 +721,72 @@ span, and coefficientwise inclusion is injective, giving the
 integral identity as well.
 \end{proof}
 
+\begin{lemma}[Standard prefix diagrams and their contents]
+\label{lem:standard-prefix-diagram}\uses{def:standard-tableau,lem:central-content-action}
+\lean{BostConjecture.Specht.prefixShape,BostConjecture.Specht.prefixTableau,BostConjecture.Specht.prefixTableau_isStandard,BostConjecture.Specht.card_prefixShape,BostConjecture.Specht.prefixShape_mono,BostConjecture.Specht.diagramContent_prefixShape,BostConjecture.Specht.diagramContent_prefixShape_succ}\leanok
+For a standard tableau $t$ on $n$ boxes and $0\leq m\leq n$, the
+boxes carrying labels $0,\ldots,m-1$ form a Young diagram
+$\lambda_t^{(m)}$ of cardinality $m$. Restricting $t$ to these labels
+is a standard enumerating tableau of this diagram. These diagrams
+increase with $m$, and
+\[
+ C_{\lambda_t^{(m)}}=\sum_{j<m}\operatorname{content}_t(j).
+\]
+For $m<n$, the difference between the contents at $m+1$ and $m$
+is the content of the box carrying $m$.
+\end{lemma}
+\begin{proof}
+The label in a box weakly northwest of a second box is no larger:
+move first along its row to the second column, then down that column,
+and use row and column standardness. Thus every box northwest of a
+box with label less than $m$ also has label less than $m$. This proves
+the Young diagram property. The original enumerating bijection
+restricts to a bijection from the first $m$ labels onto these boxes,
+and row and column inequalities are inherited. The inclusion of
+initial label sets gives monotonicity. Summing box contents through
+the restricted bijection gives the displayed equality; the next
+prefix adds exactly the box carrying $m$, giving the difference.
+\end{proof}
+
+\begin{lemma}[Frozen-tail restriction of a polytabloid]
+\label{lem:polytabloid-prefix-restriction}
+\uses{lem:standard-prefix-diagram,lem:integral-specht-all-tableaux}\notready
+Let $u$ be the restriction of a standard tableau $t$ to its first $m$
+labels. Extend a row word $w$ for $u$ to a row word $\widetilde w$
+on all labels by keeping the rows of $t$ on the remaining labels.
+Then $e_t(\widetilde w)=e_u(w)$. This coefficient restriction is
+an integral linear map and intertwines permutations of the first
+$m$ labels, extended by the identity on the other labels.
+\end{lemma}
+\begin{proof}
+A column permutation contributing to $e_t(\widetilde w)$ must
+preserve the row of each label at least $m$. Since it also preserves
+that label's column, it fixes the label itself. The remaining action
+is a column permutation of $u$. Conversely each column permutation
+of $u$ extends uniquely by fixing the other labels, preserves its
+sign, and contributes precisely its original term. This bijection
+of the nonzero summands proves the formula. Restricting coordinates
+is integral linear. Precomposing the word with a permutation of the
+first $m$ labels commutes with extending it by the fixed tail, which
+proves equivariance.
+\end{proof}
+
+\begin{lemma}[Support at the largest label]
+\label{lem:polytabloid-last-support}
+\uses{def:standard-tableau,lem:integral-specht-span}\notready
+If the largest label of a column-standard tableau $t$ lies in row
+$r$, every word in the support of $e_t$ assigns that label a row
+at most $r$.
+\end{lemma}
+\begin{proof}
+A nonzero coefficient comes from a column permutation. The image of
+the largest label is a label in its column. Column standardness
+implies that its row is at most the row of the largest label.
+\end{proof}
+
 \begin{lemma}[Prefix dominance and triangular Murphy action]
 \label{lem:prefix-content-triangular}
-\uses{lem:central-content-action,lem:real-standard-basis}\notready
+\uses{lem:standard-prefix-diagram,lem:central-content-action,lem:real-standard-basis}\notready
 For a standard tableau $t$, let $\lambda_t^{(m)}$ be the shape of
 its first $m$ labels. Write $s\preceq t$ when, for every $m$ and
 row cutoff $r$, the first $r$ rows of $\lambda_s^{(m)}$ have at most
