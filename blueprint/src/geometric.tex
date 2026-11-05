@@ -1084,9 +1084,38 @@ Thus the second ambient norm equals $\|z\|$. Substitution proves the
 bound on all tensors, with no purity restriction on $u$ or $z$.
 \end{proof}
 
+\begin{lemma}[Tensor evaluation commutes with scalar extension]
+\label{lem:tensor-evaluation-base-change}
+\uses{lem:projective-tensor-evaluation,lem:tensor-base-change-equivalence,lem:dual-fiber-base-change}
+\source{bost-specht-manuscript:page-0010}
+\notready
+Let $R\to S$ be a homomorphism of commutative rings and let $(M_i)$
+be a finite family of finite projective $R$-modules. Under the canonical
+isomorphisms for tensor and dual scalar extension, the evaluation map
+\[
+ (\bigotimes_i M_i^\vee)\times(\bigotimes_i M_i)\longrightarrow R
+\]
+becomes the evaluation map of the corresponding $S$-modules. In
+particular this applies to evaluation of the tensor power of a linear
+map into a finite projective module.
+\end{lemma}
+\begin{proof}
+For $u=\bigotimes_i f_i$ and $x=\bigotimes_i x_i$, both routes give
+$\prod_i \alpha(f_i(x_i))$, where $\alpha:R\to S$ is the structure
+map. The dual scalar-extension isomorphism sends $1\otimes f_i$
+to the functional $s\otimes x_i\mapsto s\alpha(f_i(x_i))$, and
+tensor scalar extension sends each pure tensor to the tensor of these
+scalar-extended factors. Additivity and balanced scalar multiplication
+extend the equality first to arbitrary original tensors and then to
+arbitrary elements of both scalar extensions. Applying this identity
+to $i^{\otimes n}z$, and using naturality of tensor scalar extension
+for the linear map $i$, gives the tensor-power pairing identity.
+No basis or flatness assumption on $S$ is needed.
+\end{proof}
+
 \begin{lemma}[The canonical contracting pairing]
 \label{lem:canonical-contraction}
-\uses{lem:integral-canonical-pairing,lem:projective-determinant-isometry,lem:finite-hilbert-tensor,lem:hilbert-tensor-duality,lem:dual-regrouping-isometry,lem:free-determinant-contraction}
+\uses{lem:integral-canonical-pairing,lem:projective-determinant-isometry,lem:finite-hilbert-tensor,lem:hilbert-tensor-duality,lem:dual-regrouping-isometry,lem:free-determinant-contraction,lem:tensor-evaluation-base-change}
 \source{bost-specht-manuscript:page-0010}\notready
 Let $i:V\hookrightarrow W=\bigotimes_{j=1}^N E_j$ be a nonzero
 submodule with its induced metrics. Set $s=\rk V$, $a_j=\rk E_j$.

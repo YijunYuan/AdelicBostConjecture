@@ -795,7 +795,9 @@ on pure tensors. Additivity in both variables extends it to all vectors.
 
 \begin{lemma}[The intrinsic dual Hermitian metric]
 \label{lem:arithmetic-dual-metric}
-\uses{lem:dual-fiber-base-change,lem:dual-hilbert-metric,lem:hermitian-fiber-conjugation}\notready
+\uses{lem:dual-fiber-base-change,lem:dual-hilbert-metric,lem:hermitian-fiber-conjugation}
+\lean{BostConjecture.Arithmetic.HermitianMetric.dual,BostConjecture.Arithmetic.HermitianMetric.dualFiber_norm,BostConjecture.Arithmetic.HermitianMetric.dual_section_evaluation_le}\leanok
+\source{bost-specht-manuscript:page-0003}
 For a finite projective Hermitian $\Ocal$-module $M$, the operator dual
 norms define a conjugation-compatible Hermitian metric on the actual
 integral dual $M^\vee=\operatorname{Hom}_\Ocal(M,\Ocal)$. Under
@@ -827,6 +829,81 @@ the displayed identity and antiunitarity therefore prove its conjugation
 compatibility. Finally the operator-norm evaluation inequality, applied
 through $d_\sigma$ and its integral-section formula, gives the asserted
 integral bound.
+\end{proof}
+
+\begin{lemma}[The coefficient ideal of an integral dual line]
+\label{lem:dual-coordinate-ideal}
+\uses{lem:line-coordinate-ideal}
+\lean{BostConjecture.Arithmetic.dualCoordinate_mul,BostConjecture.Arithmetic.dualCoordinate_injective,BostConjecture.Arithmetic.coordinateIdeal_dualCoordinate}\leanok
+Let $M$ be a nonzero finite projective $\Ocal$-module with an injective
+coordinate $q:M\to K$, and fix $0\ne x\in M$. The map
+\[
+ q^\vee:M^\vee\longrightarrow K,\qquad
+ q^\vee(f)=f(x)/q(x),
+\]
+is injective and satisfies $q^\vee(f)q(y)=f(y)$ for every $y\in M$.
+Its coefficient ideal is $q(M)^{-1}$.
+\end{lemma}
+\begin{proof}
+For $y\in M$, clear the denominator of $q(y)/q(x)$ to obtain
+$a,b\in\Ocal$, $b\ne0$, with $a q(x)=b q(y)$. Injectivity gives
+$ax=by$, hence $af(x)=bf(y)$ for every integral functional $f$.
+Cancellation in $K$ yields the asserted evaluation identity. If $q^\vee(f)=0$,
+that identity gives $f(y)=0$ for every $y$, proving injectivity.
+The same identity shows $q^\vee(f)q(M)\subseteq\Ocal$, hence membership
+in the inverse ideal. Conversely, if $c q(M)\subseteq\Ocal$, define
+$f_c(y)=c q(y)$ as an $\Ocal$-valued map. It is linear because the
+inclusion $\Ocal\hookrightarrow K$ is injective and $q$ is linear.
+Then $q^\vee(f_c)=c$, proving equality of the ideals.
+\end{proof}
+
+\begin{lemma}[Degree of the intrinsic dual line]
+\label{lem:line-dual-degree}
+\uses{lem:dual-coordinate-ideal,lem:arithmetic-dual-metric,lem:intrinsic-line-degree,lem:degree-rank-one}
+\lean{BostConjecture.Arithmetic.HermitianMetric.degree_dual_of_rank_one}\leanok
+\source{bost-specht-manuscript:page-0003}
+For a Hermitian projective line $L$ over $\Ocal$ with its operator dual
+metric, $\degn(L^\vee)=-\degn(L)$.
+\end{lemma}
+\begin{proof}
+Use the mutually dual generic coordinates $q,q^\vee$ of
+Lemma~\ref{lem:dual-coordinate-ideal}. At an embedding $\sigma$, write the
+norm in coordinate $q$ as $\rho_\sigma|z|$. Every complex linear functional
+has the form $z\mapsto cz$, so its operator norm is
+$|c|/\rho_\sigma$: the upper bound follows for every $z$, and equality
+holds at any nonzero $z$. Thus the dual coordinate length is
+$\rho_\sigma^{-1}$. The coefficient ideals are mutually inverse, so their
+logarithmic norms have opposite signs. The archimedean logarithmic sums
+also have opposite signs. The coordinate degree formula, divided by
+$[K:\mathbb Q]$, proves the result. Rank-one determinant normalization
+identifies these line degrees with the intrinsic bundle degrees.
+\end{proof}
+
+\begin{lemma}[Perfect exterior duality for projective modules]
+\label{lem:projective-exterior-duality}\uses{lem:integral-determinant-line}\notready
+For a finite projective module $P$ over a commutative ring $R$, the canonical
+map
+\[
+ \bigwedge^n P^\vee\longrightarrow(\bigwedge^n P)^\vee,
+ \qquad (f_1\wedge\cdots\wedge f_n)(x_1\wedge\cdots\wedge x_n)
+       =\det(f_j(x_i))_{i,j},
+\]
+is an isomorphism for every $n$. It is natural under every linear map.
+\end{lemma}
+\begin{proof}
+Naturality holds on elementary wedges because both evaluations are
+$\det(f_j(u(x_i)))$, and these wedges generate the exterior powers.
+For a finite free module, the wedge basis of the dual maps to the dual of
+the wedge basis, proving bijectivity. In general choose a finite free module
+$F$ and maps $i:P\to F$, $p:F\to P$ with $pi=1$. Write $D_P,D_F$ for
+the canonical maps. Define
+\[
+ Q=(\bigwedge^n i^\vee)D_F^{-1}(\bigwedge^n p)^\vee.
+\]
+Naturality gives $D_P Q=(\bigwedge^n i)^\vee(\bigwedge^n p)^\vee=1$
+and $Q D_P=(\bigwedge^n i^\vee)(\bigwedge^n p^\vee)=1$.
+Thus $Q$ is a two-sided inverse. This uses a finite free summand presentation,
+not a basis of $P$.
 \end{proof}
 
 \begin{lemma}[Determinant identities and contraction]

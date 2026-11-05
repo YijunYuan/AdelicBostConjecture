@@ -11,7 +11,7 @@ import BostConjecture.Arithmetic.DegreeNormalization
 import BostConjecture.Arithmetic.NestedQuotient
 import BostConjecture.Arithmetic.SaturationDegree
 import BostConjecture.Arithmetic.LineTensorDegree
-import BostConjecture.Arithmetic.DualFiber
+import BostConjecture.Arithmetic.LineDualDegree
 
 #print axioms BostConjecture.Arithmetic.HermitianMetric
 #print axioms BostConjecture.Arithmetic.dualBaseChangeMap_bijective
@@ -152,3 +152,20 @@ import BostConjecture.Arithmetic.DualFiber
 #print axioms BostConjecture.Arithmetic.HermitianMetric.degree_le_of_injective
 #print axioms BostConjecture.Arithmetic.HermitianMetric.degree_submodule_le_of_le
 #print axioms BostConjecture.Arithmetic.HermitianMetric.degree_le_saturation
+
+#print axioms BostConjecture.Arithmetic.HermitianMetric.dualRiesz_inner
+#print axioms BostConjecture.Arithmetic.HermitianMetric.dualRiesz_conjugate
+#print axioms BostConjecture.Arithmetic.HermitianMetric.dual
+#print axioms BostConjecture.Arithmetic.HermitianMetric.dualFiber_norm
+#print axioms BostConjecture.Arithmetic.HermitianMetric.dual_evaluation_le
+#print axioms BostConjecture.Arithmetic.HermitianMetric.dual_section_evaluation_le
+
+#print axioms BostConjecture.Arithmetic.dualCoordinate_mul
+#print axioms BostConjecture.Arithmetic.dualCoordinate_injective
+#print axioms BostConjecture.Arithmetic.coordinateIdeal_dualCoordinate
+#print axioms BostConjecture.Arithmetic.logIdealNorm_dualCoordinate
+#print axioms BostConjecture.Arithmetic.dual_generic_finrank
+#print axioms BostConjecture.Arithmetic.HermitianMetric.dual_sectionNorm_mul_of_rank_one
+#print axioms BostConjecture.Arithmetic.HermitianMetric.coordinateLength_dual
+#print axioms BostConjecture.Arithmetic.HermitianMetric.degreeInCoordinate_dual
+#print axioms BostConjecture.Arithmetic.HermitianMetric.degree_dual_of_rank_one

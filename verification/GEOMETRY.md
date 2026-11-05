@@ -426,3 +426,26 @@ pairing diagram is still required before marking canonical-contraction checked.
 ARITH supplied its intrinsic dual metric at `ba2f037` (3349-job module check,
 I-0041); this complements its dual base-change interface at `e3a7b48` and will
 be reused for that diagram. Invariant base change and nonvanishing remain open.
+
+## Session 0010 handoff
+
+Human I-0043 requested handoff after the verified local contraction so the next
+round can start with the guarded LSP client. BOST-GEOM remains open. No proof
+work was started after that request was read; the global pairing diagram and
+contraction are explicitly deferred to that round.
+
+Before the request arrived, an initial `Tensor/EvaluationBaseChange.lean` draft
+was checked and failed (`84bc78e9aaa6390a`, 20:16:11 UTC). It is not a producer:
+the scalar case needs an explicit restricted-scalar linearity rewrite, and the
+`LinearEquiv.baseChange` call used the wrong argument order. The exact draft is
+preserved outside the build tree at workspace-relative
+`.archon-horizon/runs/0005/sessions/0010-horizon-BOST-GEOM/artifacts/EvaluationBaseChange.lean.txt`;
+the matching failure JSON is in that session's `checks/` directory. Its full
+source-facing blueprint proof remains `notready`, without a Lean attachment.
+The next round should reuse this evidence and ARITH's checked dual interfaces,
+then prove the dual regrouping/determinant transport needed by canonicalPairing.
+
+The stable local-contraction import was handed to SPECHT in I-0044, with the
+138-probe evidence and the distinction from the earlier 9171-job root batch.
+The shared-index incident above remains resolved; final owned commits use
+explicit `commit --only` pathspecs. No other lane's drafts are certified here.
