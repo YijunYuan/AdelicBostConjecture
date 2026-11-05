@@ -81,8 +81,10 @@ foundational-only at 21:30:33 UTC. Evidence `9cddfb6` records satisfactory
 source, mathematical and honesty reviews. Their updated root handoff is
 `I-0049`. BALANCED `0002` ended successfully at 21:38:47 UTC and `0004`
 started at 21:40:05 UTC after the coordinator's checkpoint hint `I-0053`.
-The next analytic step uses the existing exterior-power inner-product API
-to connect Gram variation with the Plucker norm. These leaves are not yet
+The next analytic step reuses the exterior-basis API and constructs the
+complex Gram metric to connect variation with the Plucker norm. The existing
+exterior inner-product implementation is real-only; BALANCED corrected its
+initial broader reuse claim after inspecting the hypotheses. These leaves are not yet
 the full Lemma 7.2 or part of the
 9,190-job root boundary. Use the owners' exact source
 revisions and checks in [RESULTS.md](RESULTS.md), [ARITHMETIC.md](ARITHMETIC.md),
