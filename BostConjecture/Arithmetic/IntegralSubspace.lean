@@ -112,4 +112,38 @@ instance integralPartQuotientProjective [Module.Finite (𝓞 K) M]
     Module.finitePresentation_of_finite (𝓞 K) _
   exact Module.Flat.projective_of_finitePresentation
 
+/-- The integral part of a generic span is exactly the saturation of the
+original submodule, expressed by clearing a nonzero integral denominator. -/
+lemma mem_integralPart_baseChange_iff [Module.Projective (𝓞 K) M]
+    (P : Submodule (𝓞 K) M) (x : M) :
+    x ∈ integralPart (P.baseChange K) ↔ ∃ a : 𝓞 K, a ≠ 0 ∧ a • x ∈ P := by
+  constructor
+  · intro hx
+    rw [mem_integralPart, baseChange_eq_localized, Submodule.mem_localized'] at hx
+    obtain ⟨m, hm, s, hs⟩ := hx
+    have he := IsLocalizedModule.mk'_eq_iff.mp hs
+    have hm' : m = (s : 𝓞 K) • x :=
+      Module.Flat.tensorProduct_mk_injective (𝓞 K) M K
+        (he.trans (map_smul (TensorProduct.mk (𝓞 K) K M 1) (s : 𝓞 K) x).symm)
+    exact ⟨s, nonZeroDivisors.ne_zero s.property, hm' ▸ hm⟩
+  · rintro ⟨a, ha, hx⟩
+    apply mem_integralPart_of_smul_mem _ ha
+    exact Submodule.tmul_mem_baseChange_of_mem 1 hx
+
+/-- A submodule with torsion-free quotient is recovered from its generic span. -/
+lemma integralPart_baseChange [Module.Projective (𝓞 K) M]
+    (P : Submodule (𝓞 K) M) [Module.IsTorsionFree (𝓞 K) (M ⧸ P)] :
+    integralPart (P.baseChange K) = P := by
+  ext x
+  rw [mem_integralPart_baseChange_iff]
+  constructor
+  · rintro ⟨a, ha, hx⟩
+    apply (Submodule.Quotient.mk_eq_zero P).mp
+    have hz : a • P.mkQ x = 0 := by
+      rw [← map_smul]
+      exact (Submodule.Quotient.mk_eq_zero P).mpr hx
+    exact (smul_eq_zero.mp hz).resolve_left ha
+  · intro hx
+    exact ⟨1, one_ne_zero, by simpa using hx⟩
+
 end BostConjecture.Arithmetic
