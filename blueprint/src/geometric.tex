@@ -718,6 +718,61 @@ is zero. Thus the tensor basis is orthonormal. Expand $x$ and $y$ in
 this finite basis and use sesquilinearity to obtain the coordinate formula.
 \end{proof}
 
+\begin{lemma}[The integral lattice realization is isometric in an orthonormal frame]
+\label{lem:free-lattice-isometry}
+\uses{lem:orthonormal-tensor-coordinates}
+\source{bost-specht-manuscript:page-0010}
+\notready
+Let $k>0$ and let $t$ be a tableau with $n$ boxes of rectangular shape
+$(k^a)$. Equip the complex scalar extension $L_{t,\mathbb C}$ of its
+integral orbit lattice with
+the Hermitian form obtained by its canonical inclusion into complex
+word coefficients, the words being orthonormal. This is positive
+definite. For an orthonormal frame of $E$, the canonical free lattice
+realization into $E^{\otimes n}$ preserves this form.
+\end{lemma}
+\begin{proof}
+The complex coefficient inclusion is injective because scalar extension
+from $\mathbb Z$ to $\mathbb C$ is flat; hence restriction of the positive
+word-coordinate form is positive definite. The free realization is
+the inverse tensor-coordinate map composed with relabelling the word
+alphabet and this inclusion. Orthonormal tensor coordinates compute
+the target form as the sum of the conjugate first coefficient times
+the second coefficient. Relabelling only permutes that finite sum,
+so it equals the form on the complex lattice. On integral vectors
+this form is the integer Gram sum, thus agrees with the complexification
+of the real lattice metric.
+\end{proof}
+
+\begin{lemma}[Local isometry of the determinant-twisted inclusion]
+\label{lem:free-determinant-isometry}
+\uses{lem:free-lattice-isometry,lem:finite-hilbert-tensor,lem:determinant-twisted-free-inclusion,lem:determinant-metric}
+\source{bost-specht-manuscript:page-0010}
+\notready
+Let $k>0$, let $t$ be a tableau with $n$ boxes of rectangular shape
+$(k^a)$, and let $b$ be an orthonormal frame of the $a$-dimensional
+complex space $E$. Equip
+$\det E$ with its Gram determinant metric and the integral lattice's
+complexification with its word metric. The canonical map
+\[
+ (\det E)^{\otimes k}\otimes L_{t,\mathbb C}\longrightarrow E^{\otimes n}
+\]
+is an isometry for the tensor product metrics.
+\end{lemma}
+\begin{proof}
+The determinant coordinate of the wedge of $b$ is one and this wedge
+has norm one. Thus the determinant metric in this coordinate is
+$\overline{\eta}\xi$, and the same is true on its $k$th tensor power.
+For simple tensors $\eta\otimes x$ and $\xi\otimes y$, the image pairing
+is the lattice image pairing multiplied by
+$\overline{\det_b^{\otimes k}(\eta)}\det_b^{\otimes k}(\xi)$.
+The free lattice realization is isometric, so this is exactly the
+source tensor metric. Simple tensors span, and sesquilinearity extends
+the equality to all pairs of tensors. The determinant metric used here
+is the one characterized by the cross Gram determinant formula, hence
+the conclusion is independent of the chosen orthonormal frame.
+\end{proof}
+
 \begin{lemma}[Regrouping preserves the Hilbert form]
 \label{lem:hilbert-regrouping}
 \uses{lem:tensor-regrouping,lem:finite-hilbert-tensor}

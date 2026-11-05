@@ -33,6 +33,40 @@ private theorem coreOfEquiv_inner {V W : Type*} [AddCommGroup V] [Module ℂ V]
     [NormedAddCommGroup W] [InnerProductSpace ℂ W] (e : V ≃ₗ[ℂ] W) (x y : V) :
     (coreOfEquiv e).inner x y = inner ℂ (e x) (e y) := rfl
 
+/-- Equality of pulled-back Hermitian forms can be checked on any spanning family. -/
+theorem inner_ext_of_span {A V W γ : Type*}
+    [AddCommGroup A] [Module ℂ A] [AddCommGroup V] [Module ℂ V]
+    [AddCommGroup W] [Module ℂ W] (v : γ → A)
+    (hv : Submodule.span ℂ (Set.range v) = ⊤)
+    (c : InnerProductSpace.Core ℂ V) (d : InnerProductSpace.Core ℂ W)
+    (f : A →ₗ[ℂ] V) (g : A →ₗ[ℂ] W)
+    (h : ∀ i j, c.inner (f (v i)) (f (v j)) = d.inner (g (v i)) (g (v j)))
+    (x y : A) : c.inner (f x) (f y) = d.inner (g x) (g y) := by
+  let c' : PreInnerProductSpace.Core ℂ V := { __ := c }
+  let d' : PreInnerProductSpace.Core ℂ W := { __ := d }
+  have hx : x ∈ Submodule.span ℂ (Set.range v) := hv.symm ▸ Submodule.mem_top
+  have hy : y ∈ Submodule.span ℂ (Set.range v) := hv.symm ▸ Submodule.mem_top
+  induction hx, hy using Submodule.span_induction₂ with
+  | mem_mem x y hx hy =>
+    obtain ⟨i, rfl⟩ := hx
+    obtain ⟨j, rfl⟩ := hy
+    exact h i j
+  | zero_left y hy =>
+    simp only [map_zero, InnerProductSpace.Core.inner_zero_left (c := c'),
+      InnerProductSpace.Core.inner_zero_left (c := d')]
+  | zero_right x hx =>
+    simp only [map_zero, InnerProductSpace.Core.inner_zero_right (c := c'),
+      InnerProductSpace.Core.inner_zero_right (c := d')]
+  | add_left x y z hx hy hz h₁ h₂ =>
+    simp only [map_add, c.add_left, d.add_left, h₁, h₂]
+  | add_right x y z hx hy hz h₁ h₂ =>
+    simp only [map_add, InnerProductSpace.Core.inner_add_right (c := c'),
+      InnerProductSpace.Core.inner_add_right (c := d'), h₁, h₂]
+  | smul_left r x y hx hy h => simp only [map_smul, c.smul_left, d.smul_left, h]
+  | smul_right r x y hx hy h =>
+    simp only [map_smul, InnerProductSpace.Core.inner_smul_right (c := c'),
+      InnerProductSpace.Core.inner_smul_right (c := d'), h]
+
 variable {ι : Type*} (E : ι → Type*) [∀ i, NormedAddCommGroup (E i)]
   [∀ i, InnerProductSpace ℂ (E i)]
 
@@ -175,5 +209,31 @@ theorem tensorCore_toCore [Finite ι] :
     tensorCore (fun i => InnerProductSpace.toCore (𝕜 := ℂ) (E := E i)) = hilbertCore E := by
   apply hilbertCore_unique
   exact tensorCore_inner_tprod _
+
+variable {V W : Type*} [AddCommGroup V] [Module ℂ V] [AddCommGroup W] [Module ℂ W]
+
+/-- The binary Hilbert tensor form for two given Hermitian cores. -/
+@[instance_reducible]
+def binaryCore (c : InnerProductSpace.Core ℂ V) (d : InnerProductSpace.Core ℂ W) :
+    InnerProductSpace.Core ℂ (V ⊗[ℂ] W) := by
+  let := c
+  let := d
+  let := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := V)
+  let := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := W)
+  let := InnerProductSpace.ofCore (inferInstance : PreInnerProductSpace.Core ℂ V)
+  let := InnerProductSpace.ofCore (inferInstance : PreInnerProductSpace.Core ℂ W)
+  exact InnerProductSpace.toCore
+
+/-- The binary tensor form multiplies the two factor pairings. -/
+theorem binaryCore_inner_tmul (c : InnerProductSpace.Core ℂ V) (d : InnerProductSpace.Core ℂ W)
+    (x x' : V) (y y' : W) :
+    (binaryCore c d).inner (x ⊗ₜ[ℂ] y) (x' ⊗ₜ[ℂ] y') = c.inner x x' * d.inner y y' := by
+  let := c
+  let := d
+  let := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := V)
+  let := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := W)
+  let := InnerProductSpace.ofCore (inferInstance : PreInnerProductSpace.Core ℂ V)
+  let := InnerProductSpace.ofCore (inferInstance : PreInnerProductSpace.Core ℂ W)
+  exact TensorProduct.inner_tmul (𝕜 := ℂ) x x' y y'
 
 end BostConjecture.Tensor
