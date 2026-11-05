@@ -242,7 +242,7 @@ Grouping the embedding sum by its infinite place gives precisely the weights $w_
 
 \begin{lemma}[The integral determinant line]
 \label{lem:integral-determinant-line}
-\lean{exteriorPower.instFinite,exteriorPower.instProjective,BostConjecture.Arithmetic.determinantGenericEquiv,BostConjecture.Arithmetic.determinant_generic_finrank,BostConjecture.Arithmetic.determinantComplexEquiv,BostConjecture.Arithmetic.determinantComplexEquiv_section,BostConjecture.Arithmetic.determinant_complex_finrank}\leanok
+\lean{exteriorPower.instProjective,BostConjecture.Arithmetic.determinantGenericEquiv,BostConjecture.Arithmetic.determinant_generic_finrank,BostConjecture.Arithmetic.determinantComplexEquiv,BostConjecture.Arithmetic.determinantComplexEquiv_section,BostConjecture.Arithmetic.determinant_complex_finrank}\leanok
 For a finite projective $\Ocal$-module $M$ of generic rank $r$,
 $\det M=\bigwedge^r_{\Ocal}M$ is finite projective and its generic fiber
 has dimension one. Formation of this exterior power commutes with
@@ -263,7 +263,7 @@ Its top wedge is a basis of its top exterior power, proving dimension one.
 
 \begin{lemma}[The complex determinant metric]
 \label{lem:determinant-metric}
-\uses{def:hermitian-metric,lem:integral-determinant-line}
+\uses{def:hermitian-metric,lem:integral-determinant-line,lem:determinant-coordinates}
 \source{bost-specht-manuscript:page-0003}\notready
 There is a Hermitian metric on $\det M$ such that, in every complex
 fiber of dimension $r$,

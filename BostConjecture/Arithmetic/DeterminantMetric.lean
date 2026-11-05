@@ -1,7 +1,7 @@
 module
 
 public import BostConjecture.Arithmetic.DeterminantLine
-public import BostConjecture.Geometry.DeterminantFrame
+public import BostConjecture.Geometry.DeterminantCoordinates
 public import Mathlib.Analysis.InnerProductSpace.GramMatrix
 
 /-!
@@ -76,6 +76,25 @@ def determinantFiber (h : HermitianMetric (K := K) M) (σ : K →+* ℂ) :
   letI := InnerProductSpace.induced e.toLinearMap
   exact InnerProductSpace.toCore
 
+/-- The determinant pairing on arbitrary complex fiber wedges is the cross
+Gram determinant, transported through the canonical base-change equivalence. -/
+lemma determinantFiber_inner_ιMulti (h : HermitianMetric (K := K) M) (σ : K →+* ℂ)
+    (x y : Fin (Module.finrank K (K ⊗[𝓞 K] M)) → ComplexFiber M σ) :
+    (h.determinantFiber σ).inner
+        ((determinantComplexEquiv M σ).symm (ιMulti ℂ _ x))
+        ((determinantComplexEquiv M σ).symm (ιMulti ℂ _ y)) =
+      (Matrix.of fun i j => (h.fiber σ).inner (x i) (y j)).det := by
+  let : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
+  let := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber M σ)
+  let := InnerProductSpace.ofCore (inferInstance : PreInnerProductSpace.Core ℂ (ComplexFiber M σ))
+  let b := (stdOrthonormalBasis ℂ (ComplexFiber M σ)).reindex
+    (finCongr (complexFiber_finrank M σ))
+  change (ComplexDeterminant.core b).inner
+    (determinantComplexEquiv M σ ((determinantComplexEquiv M σ).symm (ιMulti ℂ _ x)))
+    (determinantComplexEquiv M σ ((determinantComplexEquiv M σ).symm (ιMulti ℂ _ y))) = _
+  rw [LinearEquiv.apply_symm_apply, LinearEquiv.apply_symm_apply]
+  exact ComplexDeterminant.core_inner_ιMulti b x y
+
 /-- Pairing integral wedges is the determinant of the original fiber pairings. -/
 lemma determinantFiber_inner_wedge (h : HermitianMetric (K := K) M) (σ : K →+* ℂ)
     (x y : Fin (Module.finrank K (K ⊗[𝓞 K] M)) → M) :
@@ -84,16 +103,13 @@ lemma determinantFiber_inner_wedge (h : HermitianMetric (K := K) M) (σ : K →+
         (fiberSection (DeterminantLine (K := K) M) σ (ιMulti (𝓞 K) _ y)) =
       (Matrix.of fun i j => (h.fiber σ).inner
         (fiberSection M σ (x i)) (fiberSection M σ (y j))).det := by
-  let : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
-  let := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber M σ)
-  let := InnerProductSpace.ofCore (inferInstance : PreInnerProductSpace.Core ℂ (ComplexFiber M σ))
-  let b := (stdOrthonormalBasis ℂ (ComplexFiber M σ)).reindex
-    (finCongr (complexFiber_finrank M σ))
-  change (ComplexDeterminant.core b).inner
-    (determinantComplexEquiv M σ _)
-    (determinantComplexEquiv M σ _) = _
-  rw [determinantComplexEquiv_section, determinantComplexEquiv_section]
-  exact ComplexDeterminant.core_inner_ιMulti b (fiberSection M σ ∘ x) (fiberSection M σ ∘ y)
+  have hs (z : Fin (Module.finrank K (K ⊗[𝓞 K] M)) → M) :
+      fiberSection (DeterminantLine (K := K) M) σ (ιMulti (𝓞 K) _ z) =
+        (determinantComplexEquiv M σ).symm (ιMulti ℂ _ (fiberSection M σ ∘ z)) := by
+    apply (determinantComplexEquiv M σ).injective
+    rw [LinearEquiv.apply_symm_apply, determinantComplexEquiv_section]
+  rw [hs x, hs y, h.determinantFiber_inner_ιMulti]
+  rfl
 
 /-- The determinant forms inherit conjugation compatibility on every integral
 section, proved from the spanning integral wedges. -/
