@@ -10,8 +10,17 @@ import BostConjecture.Arithmetic.LineContraction
 import BostConjecture.Arithmetic.DegreeNormalization
 import BostConjecture.Arithmetic.NestedQuotient
 import BostConjecture.Arithmetic.SaturationDegree
+import BostConjecture.Arithmetic.LineTensorDegree
 
 #print axioms BostConjecture.Arithmetic.HermitianMetric
+#print axioms BostConjecture.Arithmetic.tensorCoordinate_injective
+#print axioms BostConjecture.Arithmetic.coordinateIdeal_tensor
+#print axioms BostConjecture.Arithmetic.logIdealNorm_tensorCoordinate
+#print axioms BostConjecture.Arithmetic.binaryTensorEquiv_tmul
+#print axioms BostConjecture.Arithmetic.HermitianMetric.sectionNorm_tensor_tmul
+#print axioms BostConjecture.Arithmetic.tensor_generic_finrank
+#print axioms BostConjecture.Arithmetic.HermitianMetric.degreeInCoordinate_tensor
+#print axioms BostConjecture.Arithmetic.HermitianMetric.degree_tensor_of_rank_one
 #print axioms BostConjecture.Arithmetic.fiberSection_injective
 #print axioms BostConjecture.Arithmetic.HermitianMetric.sectionNorm_smul
 #print axioms BostConjecture.Arithmetic.HermitianMetric.sectionNorm_pos

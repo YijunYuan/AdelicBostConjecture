@@ -708,7 +708,8 @@ This proves the last inequality without a freeness assumption.
 \end{proof}
 
 \begin{lemma}[Tensor coordinates and coefficient ideals]
-\label{lem:tensor-coordinate-ideal}\uses{lem:line-coordinate-ideal}\notready
+\label{lem:tensor-coordinate-ideal}\uses{lem:line-coordinate-ideal}
+\lean{BostConjecture.Arithmetic.tensorCoordinate_injective,BostConjecture.Arithmetic.coordinateIdeal_tensor,BostConjecture.Arithmetic.logIdealNorm_tensorCoordinate}\leanok
 Let $M,N$ be finite projective $\Ocal$-modules with injective integral
 coordinates $f:M\to K$ and $g:N\to K$. The linear map
 $t:M\otimes_\Ocal N\to K$ determined by $t(x\otimes y)=f(x)g(y)$
@@ -736,7 +737,8 @@ norms therefore give the logarithmic identity.
 
 \begin{lemma}[Tensor degree of intrinsic lines]
 \label{lem:line-tensor-degree}
-\uses{lem:tensor-coordinate-ideal,lem:intrinsic-line-degree,lem:arithmetic-tensor-metric}\notready
+\uses{lem:tensor-coordinate-ideal,lem:intrinsic-line-degree,lem:arithmetic-tensor-metric,lem:degree-rank-one,lem:induced-hermitian-metric}
+\lean{BostConjecture.Arithmetic.binaryTensorEquiv_tmul,BostConjecture.Arithmetic.HermitianMetric.sectionNorm_tensor_tmul,BostConjecture.Arithmetic.tensor_generic_finrank,BostConjecture.Arithmetic.HermitianMetric.coordinateLength_tensor_tmul,BostConjecture.Arithmetic.HermitianMetric.degreeInCoordinate_tensor,BostConjecture.Arithmetic.HermitianMetric.degree_tensor_of_rank_one}\leanok
 For finite projective Hermitian lines $L_1,L_2$ with their Hilbert tensor
 metric, $\degn(L_1\otimes L_2)=\degn(L_1)+\degn(L_2)$.
 \end{lemma}
