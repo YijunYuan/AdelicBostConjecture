@@ -18,3 +18,5 @@ import BostConjecture
 #print axioms BostConjecture.Specht.covolume_sq_eq_integer_gram
 #print axioms BostConjecture.Specht.one_le_covolume
 #print axioms BostConjecture.Specht.log_covolume_nonneg
+#print axioms BostConjecture.Specht.column_rowWord_injective
+#print axioms BostConjecture.Specht.norm_polytabloidInt_sq

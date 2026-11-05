@@ -137,6 +137,26 @@ one. Taking the nonnegative square root and then the logarithm gives
 the two inequalities. A finite integral basis exists by finite freeness.
 \end{proof}
 
+\begin{lemma}[Norm of an integral polytabloid]
+\label{lem:polytabloid-norm}\uses{lem:real-specht-lattice,lem:integral-specht-all-tableaux}
+\lean{BostConjecture.Specht.column_rowWord_injective,BostConjecture.Specht.polytabloid_summands_orthonormal,BostConjecture.Specht.norm_polytabloidInt_sq}
+\source{bost-specht-manuscript:page-0005}\leanok
+For every enumerating tableau $t$, its integral polytabloid satisfies
+\[
+ \|j_\mathbb R(e_t)\|^2=|C_t|.
+\]
+\end{lemma}
+\begin{proof}
+Distinct column permutations give distinct row words. Indeed, if
+$w_t\circ g^{-1}=w_t\circ h^{-1}$, the permutation $h^{-1}g$
+preserves the row and column of each labelled box, so it fixes every
+box and is the identity. The vectors $\delta_{w_t\circ g^{-1}}$
+are therefore pairwise orthogonal unit vectors. In the defining sum
+for $e_t$, each occurs with coefficient $\operatorname{sgn}(g)$,
+whose square is one. Pythagoras gives the claimed sum of $|C_t|$
+ones.
+\end{proof}
+
 \begin{definition}[The canonical rectangular Specht lattice]
 \label{def:rectangular-specht}
 \uses{def:integral-specht-orbit,lem:integral-specht-all-tableaux,lem:real-specht-lattice}
