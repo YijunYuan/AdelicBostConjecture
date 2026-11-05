@@ -1551,7 +1551,8 @@ rank difference positive, and division proves the slope identity.
 
 \begin{lemma}[Ordinary semistability in a finite-length slope game]
 \label{lem:finite-length-slope-game}
-\source{chen-jeannin-harder-narasimhan-games-v1}\notready
+\source{chen-jeannin-harder-narasimhan-games-v1}
+\lean{BostConjecture.Slope.adcc_of_wellFoundedLT,BostConjecture.Slope.isSemistable_iff,BostConjecture.Slope.isSemistable_restrict_iff,BostConjecture.Slope.A_eq_of_isSemistable}\leanok
 Let $\mathcal L$ be a bounded lattice with no infinite strictly ascending
 or descending chain, and let $\mu$ be a slope-like payoff in a complete
 linear order. For $I=[a,b]$ with $a<b$, put
@@ -1604,7 +1605,8 @@ these subspaces is equivalent to checking all submodules.
 \begin{lemma}[Intrinsic Hermitian HN interval flag]
 \label{lem:hermitian-hn-interval-flag}
 \uses{lem:finite-length-slope-game,lem:hermitian-subspace-supermodular,lem:hermitian-quotient-interval-slope,lem:integral-part-generic-subspace}
-\source{chen-jeannin-harder-narasimhan-games-v1}\notready
+\source{chen-jeannin-harder-narasimhan-games-v1}
+\lean{BostConjecture.Arithmetic.HermitianMetric.hnFlag,BostConjecture.Arithmetic.HermitianMetric.hnSubmodule,BostConjecture.Arithmetic.HermitianMetric.hnSubmodule_zero,BostConjecture.Arithmetic.HermitianMetric.hnSubmodule_length,BostConjecture.Arithmetic.HermitianMetric.hnSubmodule_monotone,BostConjecture.Arithmetic.HermitianMetric.hnSubmodule_lt_succ,BostConjecture.Arithmetic.HermitianMetric.hnStep,BostConjecture.Arithmetic.HermitianMetric.hnSlope,BostConjecture.Arithmetic.HermitianMetric.hnStep_quotient_slope_le,BostConjecture.Arithmetic.HermitianMetric.hnSlope_succ_lt}\leanok
 For a positive-rank Hermitian bundle $A$ there is a canonical generic
 flag $0=X_0\subsetneq\cdots\subsetneq X_q=A_K$. Its integral parts
 $A_i=A\cap X_i$ form a saturated filtration from zero to $A$.
@@ -1633,47 +1635,47 @@ preserved. This argument does not use bounded-degree finiteness.
 
 \begin{lemma}[Harder--Narasimhan filtration]
 \label{lem:hn-filtration}
-\uses{def:hermitian-degree,lem:degree-calculus,lem:degree-finiteness,lem:hermitian-convex-slopes,lem:subspace-chain-length}
+\uses{def:hermitian-degree,lem:hermitian-hn-interval-flag,lem:nested-quotient-metric,lem:exact-determinant-degree,lem:determinant-contraction,lem:saturation-degree,lem:hermitian-convex-slopes}
 \source{bost-specht-manuscript:page-0003}\notready
 Every nonzero Hermitian bundle $A$ has a unique saturated filtration with
 semistable quotient bundles and strictly decreasing slopes. The largest
 slope of a nonzero submodule is attained, equals the first quotient's
 slope, and is denoted by $\maxslope(A)$. The first filtration term is
-the unique submodule of largest rank among those of slope $\maxslope(A)$.
+the unique saturated submodule of largest rank among those of slope $\maxslope(A)$,
+and contains every maximal-slope submodule.
 Every isometric automorphism preserves the filtration.
 \end{lemma}
 \begin{proof}
-For each possible positive rank, degree finiteness above any one attained
-degree shows that the supremum of degrees is a maximum. There are finitely
-many ranks, so maximal slope is attained. Choose a saturated submodule
-$M$ of maximal slope $\mu$, with greatest rank among these.
-For saturated submodules $U,V$, let $I=U\cap V$ and let $T$ be the
-saturation of $U+V$. Supermodularity of the Hermitian subspace degree gives
-\[
- \degn(U)+\degn(V)\leq\degn(I)+\degn(T).
-\]
-The right-hand side is at most
-$\mu(\rk I+\rk T)=\mu(\rk U+\rk V)$. If $U,V$ have slope $\mu$,
-equality follows throughout, including when $I=0$ using $\degn(0)=0$.
-Thus $T$ also has slope $\mu$. Maximality of the rank
-of $M$ forces every maximal-slope submodule to lie in $M$, proving its
-uniqueness. It is semistable by the definition of $\mu$.
+Take the saturated interval flag of Lemma~\ref{lem:hermitian-hn-interval-flag}.
+Let $N$ be a positive-rank submodule of a grade $A_{i+1}/A_i$.
+Saturate $N$ in that grade, and let $P$ be its inverse image in $A_{i+1}$.
+Then $P$ is saturated in $A_{i+1}$ and in $A$, so $P=A\cap Y$ for
+$X_i\subsetneq Y\subseteq X_{i+1}$. The nested-quotient metric lemma
+identifies the induced metric on $P/A_i$ with its quotient metric from
+$P$. Saturation preserves rank and increases degree. The interval bound
+therefore gives $\slope(N)\leq\slope(A_{i+1}/A_i)$, proving that
+every grade is semistable. The interval flag already gives strict slope
+decrease.
 
-For a positive-rank submodule $N\subseteq A/M$, let $P\subseteq A$ be
-its inverse image. The quotient metric on $P/M$ is the induced metric
-on $N$: orthogonal projection of a vector in $P$ off $M$ stays in $P$.
-Thus $\degn(P)=\degn(M)+\degn(N)$. If $\slope(N)>\mu$, the slope
-of $P$ exceeds $\mu$; if $\slope(N)=\mu$, then $P$ has slope $\mu$
-and greater rank. Both are impossible. Repeating on $A/M$ constructs
-the filtration, with strictly decreasing slopes, in at most $\rk A$
-steps. For uniqueness, in any filtration with semistable decreasing
-grades, intersect a submodule with each step; its quotient maps
-contractingly into the corresponding grade. Summing degrees bounds its
-slope by the first grade's slope, with equality only if all its nonzero
-images occur in grades of that slope. Strict decrease therefore places
-every maximal-slope submodule in the first term. The first term is $M$,
-and induction proves uniqueness. Isometries preserve slopes and ranks,
-so uniqueness proves the last assertion.
+In any saturated filtration with semistable decreasing grades, intersect
+a positive-rank submodule $B$ with every term. Its successive quotients
+inject contractingly into the corresponding grades: quotient distance
+can only decrease when the space of lifts is enlarged. Compare each
+quotient with its image, using equal-rank contraction, and then use the
+semistability of that grade. Exact additivity and rank additivity give
+\[
+ \degn(B)\leq\sum_i\mu_i\rk((B\cap A_{i+1})/(B\cap A_i))
+ \leq\mu_0\rk(B).
+\]
+The first term itself has slope $\mu_0$, so the maximal slope is attained
+and equals $\mu_0$. Equality forces all positive-rank quotients to occur
+in the first grade, by strict decrease. Since $A/A_1$ is torsion-free,
+rank zero of the image of $B$ there implies $B\subseteq A_1$.
+Thus $A_1$ contains every maximal-slope submodule and is the unique
+saturated one of largest rank. Applied to two such filtrations, this
+identifies their first terms; induction on the quotient proves uniqueness.
+Isometries preserve induced and quotient slopes, so uniqueness proves
+invariance of the filtration.
 \end{proof}
 
 \begin{lemma}[Irreducible isometric actions imply semistability]

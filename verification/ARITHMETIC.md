@@ -855,3 +855,42 @@ prove the actual semistability bridge from game values to quotient slopes;
 `NashEquilibrium` and `IsSlopeLike.min_eq_A` provide the relevant imported
 results. This inventory is not a checked intrinsic HN specialization or a
 replacement for the outstanding degree-finiteness objective.
+
+
+## Session 0014: actual Hermitian HN interval flag
+
+`Slope.FiniteLength` proves the ordinary-slope interpretation of game
+semistability on finite-length lattices and identifies a semistable interval's
+game value with its payoff. `Arithmetic.SubspaceHN` applies the pinned HN
+constructor to actual `subspaceDegree`, using proved supermodularity and
+finite-dimensional subspace chain conditions. It constructs saturated
+integral terms, proves their endpoints and strict steps, and proves actual
+quotient slope bounds for every intermediate generic subspace and strict
+successive decrease. The real-cut order supplies admissibility; no degree
+finiteness or semistability conclusion is assumed.
+
+| Target | Fingerprint | Accepted completion (UTC) | Result |
+| --- | --- | --- | --- |
+| `Slope.FiniteLength` | `ecc531e6f2e5ff99` | 2026-11-05 23:32:17.321136 | 1062 jobs, warning-free |
+| `Arithmetic.SubspaceHN` | `2c8936e24d757242` | 2026-11-05 23:34:30.183074 | 3571 jobs, warning-free |
+| `verification/ArithmeticAxioms.lean` | `590174f2cda53d26` | 2026-11-05 23:35:06.767899 | 252 probes, passed |
+
+Explicit source commits are `09c8bf5` and `49d4769`. The honesty reviewer
+checked the constructor's substantive hypotheses, its actual quotient
+consumers, and all 252 probes in the original serialized log. Only `propext`,
+`Classical.choice`, and `Quot.sound` occur. Source comparison used the
+Chen–Jeannin labels `Thm: equivalence of stability conditions` and
+`Def: HN filtration`; the imported code remains at the pinned revision in
+CONTRIBUTIONS. The two precise blueprint nodes were approved as checked.
+After validation, only the stale module docstring in `SubspaceDegree` was
+corrected; no definition or proof changed. Its LSP diagnostics are clean.
+
+The blueprint now routes full HN through this actual interval flag. The
+remaining producer must translate intermediate generic subspace inequalities
+into semistability against every integral submodule of each quotient, then
+prove the maximal-slope bound, greatest destabilizing submodule, uniqueness,
+and isometry invariance. The largest-rank uniqueness assertion is explicitly
+about saturated submodules; containment of every maximal-slope submodule is
+also stated. These statements and the separate arithmetic degree-finiteness
+objective remain unverified. `lem:hn-filtration` is still notready; no
+completion claim for BOST-ARITH or manuscript Theorem 1.1 is made.

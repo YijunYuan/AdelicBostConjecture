@@ -11,8 +11,9 @@ public import BostConjecture.Slope.Subspace
 The degree of a generic subspace is the proved determinant degree of its
 actual saturated integral part with the induced metric. The payoff from the
 abstract subspace API therefore has the actual Hermitian slope on intervals
-starting at zero. Convexity and HN attainment still require supermodularity
-and arithmetic finiteness, which are not assumptions hidden in this definition.
+starting at zero. Later modules prove its supermodularity and construct its
+HN interval flag. Arithmetic degree finiteness is a separate result; none of
+these conclusions is an assumption hidden in this definition.
 -/
 
 @[expose] public section
