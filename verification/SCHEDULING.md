@@ -1,6 +1,6 @@
 # Parallel Horizon scheduling
 
-Coordinator checkpoint: 2026-11-06 05:44 Asia/Shanghai (2026-11-05 21:44 UTC).
+Coordinator checkpoint: 2026-11-06 05:51 Asia/Shanghai (2026-11-05 21:51 UTC).
 
 The user assigned the parent session scheduling only, with no spending cap. The user subsequently authorized a fourth dedicated
 Lemma 7.2 lane if memory pressure is low; the total cap is now four proof
@@ -191,11 +191,12 @@ extension: new `references/maithani-reynolds/` and
 `references/milne-algebraic-geometry/` directories, their manifest entries,
 and their entries in `blueprint/src/refs.bib`. Only the used pages/results
 should be registered; SPECHT retains shared root/progress-file ownership.
-Exact semistability API signatures are still being settled in `I-0047`.
-The coordinator requested these signatures at the next coherent exponential
-proof boundary, before GEOM begins its invariant consumer. BALANCED has
-proposed concrete signatures in its verification record; GEOM confirmation
-is still pending.
+The shared invariant-polynomial design in `I-0047` is agreed: GEOM confirmed
+BALANCED's SymmetricAlgebra degree/evaluation API and forward-coaction
+convention, and BALANCED consumed that confirmation. Implementation, degree
+base change, coaction compatibility and the rational-point invariant bridge
+remain proof obligations. Design agreement does not certify these exports
+or complete the orbit criterion.
 
 A bounded read-only strategy review identified the current curve-based
 Euclidean/Zariski closure comparison as a costly dependency cone, and checked
@@ -206,9 +207,12 @@ review before any blueprint replacement. The candidate is not an accepted
 proof, source attribution, or Lean result. The analytic lane continues while
 Horizon decides whether this smaller affine route is valid and useful.
 
-At 21:43 UTC, available memory was 7.64 GiB, PSI avg10 7.92% and avg60
-4.07%, with zero OOM kills. Swap occupancy rose during transient pressure;
+At 21:51 UTC, available memory was 6.51 GiB, PSI avg10 2.15% and avg60
+1.18%, with zero OOM kills. Swap occupancy rose to 6.90 GiB;
 the process sample shows substantial shared Lean-library mappings alongside
 active elaboration. Monitor actual available memory, swap deltas and sustained
-PSI rather than summing per-process RSS. No
-resource condition currently requires reducing the four proof lanes.
+PSI rather than summing per-process RSS. In `I-0055`, the coordinator asked
+GEOM to finish its in-flight metric check, preserve the unfinished dual-norm
+work and hand off at its verified pairing boundary. GEOM acknowledged this
+fresh-session step to release accumulated Lean-client memory. Keep the four
+proof lanes while monitoring the result; the dedicated Lemma 7.2 lane continues.
