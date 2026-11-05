@@ -625,6 +625,42 @@ duality isomorphism realizes this functional by a tensor of dual vectors,
 which contradicts $C_i(z)=0$.
 \end{proof}
 
+\begin{lemma}[Distributing and regrouping finite tensor products]
+\label{lem:tensor-regrouping}
+\source{bost-specht-manuscript:page-0010}
+\notready
+For finite sets $I,J$ and modules $M_{ij}$ over a commutative ring $R$,
+there is a canonical linear equivalence
+\[
+ \bigotimes_{i\in I}\left(\bigotimes_{j\in J}M_{ij}\right)
+ \simeq
+ \bigotimes_{j\in J}\left(\bigotimes_{i\in I}M_{ij}\right),
+\]
+which sends $\bigotimes_i\bigotimes_j x_{ij}$ to
+$\bigotimes_j\bigotimes_i x_{ij}$. No freeness assumption is needed.
+\end{lemma}
+\begin{proof}
+First construct the distribution equivalence
+$(\bigotimes_i A_i)\otimes(\bigotimes_i B_i)
+\simeq\bigotimes_i(A_i\otimes B_i)$ by induction on $I$.
+For the empty set both sides are identified with $R$ by multiplication
+of scalars. On adjoining one index, separate its factor and apply the
+four-factor interchange
+$(A\otimes A')\otimes(B\otimes B')\simeq
+(A\otimes B)\otimes(A'\otimes B')$ and the induction hypothesis.
+These operations have the claimed formula on pure tensors.
+Now induct on $J$. If $J$ is empty, the left side is a finite tensor
+product of copies of $R$, identified with $R$ by multiplication, as
+is the right side. Adjoining a column separates its factors in every
+row. Apply the inverse distribution equivalence, the induction
+hypothesis to the earlier columns, and then reattach the new column.
+This yields the stated formula. Relabelling either finite set merely
+relabels the same pure factors. Finally, nested pure tensors span:
+expand each inner tensor as a sum of scalar multiples of pure tensors,
+then use multilinearity of the outer tensor. Thus the displayed
+formula determines the equivalence uniquely.
+\end{proof}
+
 \begin{lemma}[The Hermitian form on a finite tensor product]
 \label{lem:finite-hilbert-tensor}
 \source{bost-specht-manuscript:page-0010}
