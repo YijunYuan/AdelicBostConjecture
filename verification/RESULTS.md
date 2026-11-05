@@ -64,6 +64,21 @@ and dominance triangularity remain the first unmet producer. Consumer:
 `lem:prefix-content-triangular`, then `lem:monic-seminormal` and the Gram bound.
 The general normalized-covolume asymptotic and main theorem remain unproved.
 
+## Intrinsic arithmetic root integration — session 0013
+
+After the Specht audit, the arithmetic team supplied the checked
+`BostConjecture.Arithmetic.HermitianLine` import. Its exact source blobs,
+3,100-job module check and 22 foundational-only probes are recorded in
+`ARITHMETIC.md`. This adds the intrinsic, choice-independent quotient-cardinality
+degree formula for nonfree finite projective lines over arbitrary number
+fields. It does not close determinant/higher-rank calculus or intrinsic HN.
+
+The root import was checked by a fresh configured build after this import
+change: **9,113 jobs**, command identifier `975bdb23135a0d4a`, passed at
+**2026-11-05 16:19:14 UTC** (58.898 seconds, not reused). The Specht source and
+its seventeen-probe audit are unchanged. No extra source was copied; local
+consumers and the existing Mathlib pin are recorded in `CONTRIBUTIONS.md`.
+
 ## Monic orthogonalization and Murphy operators — session 0011
 
 `Orthogonal.lean` constructs a monic orthogonal basis from the existing

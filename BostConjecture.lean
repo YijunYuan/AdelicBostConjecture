@@ -1,6 +1,7 @@
 module
 
 public import BostConjecture.Slope.Subspace
+public import BostConjecture.Arithmetic.HermitianLine
 public import BostConjecture.LinearAlgebra.AlternatingTensorPower
 public import BostConjecture.LinearAlgebra.ExteriorPower.BaseChange
 public import BostConjecture.LinearAlgebra.PiTensorProduct.Projective

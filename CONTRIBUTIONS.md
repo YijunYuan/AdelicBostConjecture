@@ -247,6 +247,18 @@ covariance and frame transition hold over every commutative ring.
 Projective gluing, restricted isotypic nonvanishing, invariant-space equality,
 and the archimedean norm estimate remain separate obligations.
 
+## Intrinsic arithmetic line integration — session 0013
+
+`Arithmetic/HermitianLine.lean` is now a root import. It consumes Mathlib's
+checked product formula, fractional-ideal norm, lattice-index and
+projective/flat APIs at the existing pinned Mathlib revision; no external
+code is copied or modified. Its local consumers include choice-independent
+intrinsic line degree and the actual finite quotient-cardinality formula
+for nonfree finite projective lines over every number field. Source blobs,
+22 foundational-only axiom probes and original checks are recorded in
+`verification/ARITHMETIC.md`. Determinant/higher-rank degree calculus and
+intrinsic Harder–Narasimhan specialization remain open.
+
 ## Verification
 
 Run `horizon --root ../.. check --json` from this project, then
