@@ -1421,8 +1421,29 @@ $N_\mu(M!)^a=m!\,l!\,V(b)^2\prod_r\binom M{b_r}$.
 The denominator is positive, so division proves the assertion.
 \end{proof}
 
+\begin{lemma}[Labelled occupancy counting]
+\label{lem:labelled-occupancy}\notready
+Partition a set of $aM$ labelled objects into $a$ blocks of size $M$.
+For $0\leq A\leq aM$, the block occupancies of a uniformly chosen
+$A$-element subset have probabilities
+\[
+ B(b)=\frac{\prod_{i<a}\binom M{b_i}}{\binom{aM}A},
+ \qquad b_i\in\{0,\ldots,M\},\quad\sum_i b_i=A.
+\]
+In particular these nonnegative weights sum to one.
+\end{lemma}
+\begin{proof}
+Intersect a subset with each labelled block. This is a bijection between
+subsets with occupancy $b$ and tuples of subsets of the individual blocks
+having respective sizes $b_i$: the inverse takes their disjoint union.
+There are $\binom M{b_i}$ choices in block $i$, hence the fiber has size
+$\prod_i\binom M{b_i}$. The fibers over the tuples with total $A$
+partition the $\binom{aM}A$ subsets of size $A$. Summing their sizes
+and dividing by this positive total proves the claim.
+\end{proof}
+
 \begin{lemma}[Exact prefix distribution]
-\label{lem:prefix-distribution}\uses{lem:tableau-count,lem:prefix-binomial-weight}
+\label{lem:prefix-distribution}\uses{lem:tableau-count,lem:prefix-binomial-weight,lem:labelled-occupancy}
 \source{bost-specht-manuscript:page-0006}\notready
 Fix $a\geq2$, $k\geq1$, $d=ak$, $c=a(a-1)/2$, $M=k+a-1$,
 and $V_0=\prod_{j=1}^{a-1}j!$. For a uniform standard tableau of
