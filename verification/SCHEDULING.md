@@ -1,6 +1,6 @@
 # Parallel Horizon scheduling
 
-Coordinator checkpoint: 2026-11-06 03:43 Asia/Shanghai (2026-11-05 19:43 UTC).
+Coordinator checkpoint: 2026-11-06 04:09 Asia/Shanghai (2026-11-05 20:09 UTC).
 
 The user assigned the parent session scheduling only, with at most three
 concurrent proof tasks and no spending cap. Horizon owns the mathematics.
@@ -9,8 +9,8 @@ The standing ownership rule is inbox `I-0012`; configuration was committed in
 
 | Run | Task | Proof ownership | Current frontier |
 | --- | --- | --- | --- |
-| `0003` | `BOST-SPECHT` | `Specht/**`, `Lattice/**`, Specht blueprint | Seminormal norm product from adjacent ratios and legal-swap paths, then covolume asymptotics |
-| `0004` | `BOST-ARITH` | `Arithmetic/**`, `Slope/**`, arithmetic blueprint | Tensor-product degree identity, remaining degree calculus and intrinsic HN specialization |
+| `0003` | `BOST-SPECHT` | `Specht/**`, `Lattice/**`, Specht blueprint | Tableau enumeration and prefix-distribution estimates for covolume asymptotics |
+| `0004` | `BOST-ARITH` | `Arithmetic/**`, `Slope/**`, arithmetic blueprint | Dual degree, general tensor/exact-sequence identities and intrinsic HN specialization |
 | `0005` | `BOST-GEOM` | `Geometry/**`, `Tensor/**`, geometry blueprint | Actual integral pairing and its norm bound, consuming projective isometry and equivariance |
 
 Each task owns its corresponding verification files. BOST-SPECHT is the sole
@@ -61,6 +61,17 @@ Current drafts and later additions need their own evidence.
 Detailed source revisions, checks and remaining claims
 belong in [RESULTS.md](RESULTS.md), [ARITHMETIC.md](ARITHMETIC.md), and
 [GEOMETRY.md](GEOMETRY.md).
+
+Update at 20:09 UTC: `333c037` proves the seminormal norm product, rectangular
+Gram determinant and canonical orbit-lattice covolume bound. The root build
+passed 9,171 jobs at 20:05:06 UTC and `SpechtSeminormalAxioms.lean` passed
+at 20:06:19 UTC; the session's final integration report is still in progress.
+ARITH session `0008` exited normally at 20:03:40 UTC, committed through
+`3131d4b`, with 135 foundational-only probes. Its successor `0010` is active
+and has checked the intrinsic dual metric (`ba2f037`). GEOM additionally
+committed tensor-duality and dual-regrouping isometry as `178980b`; the
+determinant-pairing norm consumer is still being checked. None of these
+updates proves the covolume asymptotic or manuscript main theorem.
 
 Automatic project-wide boundary snapshots can capture another task's drafts;
 their presence in a commit is not verification. Use explicit owned pathspecs
@@ -116,10 +127,12 @@ The change takes effect when an MCP process starts. Old unwrapped clients must
 continue using serialized kernel feedback; protection `I-0034` tracks that
 transition. New guarded clients may use LSP without compiling dependencies.
 The repair is committed as `d0f37d5`; its four tracked files were rechecked
-against ledger HEAD. At this checkpoint the live sessions remain SPECHT `0021`,
-ARITH `0008`, and GEOM `0010`, all predating the wrapper. Their existing clients
-remain kernel-only until normal session turnover. A new configuration listing
-alone is not evidence that an already-running MCP process was replaced.
+against ledger HEAD. ARITH's new session `0010` has actual guarded launcher
+processes `364426`/`364450`, traced through Codex `364286` to run `0004` PID
+`161941`, and has successfully used LSP diagnostics. SPECHT `0021` and GEOM
+`0010` still have old clients and remain kernel-only until normal session
+turnover. A configuration listing alone is not evidence that a running MCP
+process was replaced.
 The completed previous integration-cutoff thread `I-0033` is archived.
 
 The coordinator has made no mathematical edits: all proof changes above were
