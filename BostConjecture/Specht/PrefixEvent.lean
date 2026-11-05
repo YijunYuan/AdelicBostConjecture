@@ -109,8 +109,8 @@ theorem rectanglePrefixGapProbability_eq (a : ℕ) {k : ℕ} (hk : 0 < k)
     _ = (∑ b : Occupancy a (k + a - 1) (m + staircaseSum a),
         if HasSmallGap (fun i => ((b.val i).val : ℝ)) L then occupancyWeight b else 0) /
         (∑ b : Occupancy a (k + a - 1) (m + staircaseSum a), occupancyWeight b) := by
-      convert h using 1 <;>
-        simp only [rectanglePrefixGapProbability, rectangleShapeOccupancy_apply]
+      convert h using 1
+      simp only [rectanglePrefixGapProbability, rectangleShapeOccupancy_apply]
       congr 1
     _ = _ := by
       unfold occupancyGapProbability

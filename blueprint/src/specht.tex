@@ -1827,9 +1827,30 @@ logarithm gives zero, and the sequence of normalized logarithmic
 covolumes is identically zero.
 \end{proof}
 
+\begin{lemma}[Logarithmic insertion bounds]
+\label{lem:log-insertion-bounds}\uses{lem:seminormal-norms,lem:prefix-observables}
+\source{bost-specht-manuscript:page-0008}\notready
+For a standard rectangular tableau, every insertion contributes
+$\ell\in[0,(a-1)\log2]$ to the logarithm of its prefix norm product.
+If the preceding prefix has all shifted coordinate gaps greater than
+$L\geq2$, then $\ell\leq(a-1)/(L-1)$.
+\end{lemma}
+\begin{proof}
+Insert a box in row $r$. For each row $i<r$, the corresponding
+axial distance is $D=b_i-b_r\geq2$, using the shifted row lengths
+of the preceding prefix. Thus $1\leq D/(D-1)\leq2$ and
+\[
+ 0\leq\log(D/(D-1))\leq\log2,\qquad
+ \log(D/(D-1))\leq D/(D-1)-1=1/(D-1).
+\]
+There are $r\leq a-1$ such factors. If every gap exceeds $L$,
+then each $D>L$, so every latter bound is at most $1/(L-1)$.
+Sum the logarithms of the positive factors to obtain both claims.
+\end{proof}
+
 \begin{theorem}[Sublinear rectangular Specht covolume]
 \label{thm:specht-sublinear-covolume}
-\uses{def:rectangular-specht,lem:rectangular-covolume-nonneg,lem:one-row-covolume,lem:seminormal-norms,lem:seminormal-covolume,lem:prefix-separation}
+\uses{def:rectangular-specht,lem:rectangular-covolume-nonneg,lem:one-row-covolume,lem:seminormal-norms,lem:seminormal-covolume,lem:prefix-separation,lem:log-insertion-bounds}
 \source{bost-specht-manuscript:page-0008}\notready
 For every fixed positive integer $a$,
 $c_a(ak)\geq0$ and $c_a(ak)/(ak)\to0$ as $k\to\infty$.
