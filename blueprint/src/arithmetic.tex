@@ -1662,6 +1662,40 @@ changing rank. Hence $\slope(N)\leq\mu(X,Z)\leq\mu(X,Y)$.
 This proves the assertion with the actual induced quotient metric.
 \end{proof}
 
+\begin{lemma}[Semistable HN grades and attained maximal slope]
+\label{lem:hermitian-hn-maximal-slope}
+\uses{lem:hermitian-hn-interval-flag,lem:quotient-interval-semistable,lem:hermitian-subspace-supermodular,lem:saturation-degree}
+\notready
+Every actual quotient $A_{i+1}/A_i$ of the canonical saturated HN flag
+is semistable. The maximum of the slopes of positive-rank integral
+submodules is attained by $A_1$. Every submodule with this slope is
+contained in $A_1$.
+\end{lemma}
+\begin{proof}
+Semistability follows by applying the preceding lemma to each HN
+interval. Put $m=\slope(A_1)=\mu_0$ and $\delta(X)=\degn(A\cap X)$.
+We first prove $\delta(X)\leq m\dim X$ for $X\subseteq X_i$, by
+induction on $i$. At $i=0$ this is $0\leq0$. If $X\subseteq X_i$,
+the induction hypothesis applies. Otherwise put $U=X\cap X_i$ and
+$V=X+X_i$; then $X_i\subsetneq V\subseteq X_{i+1}$ and
+\[
+ \delta(X)\leq\delta(U)+\delta(V)-\delta(X_i)
+ \leq m\dim U+\mu_i(\dim V-\dim X_i)
+ \leq m\dim X.
+\]
+Here the first inequality is supermodularity, the second uses induction
+and semistability of the interval, and the third uses $\mu_i\leq m$
+and $\dim U+\dim V=\dim X+\dim X_i$.
+If $X\not\subseteq X_1$, repeat this induction until a step with
+$X\not\subseteq X_i$; it has $i>0$, so $\mu_i<m$ and
+$\dim V-\dim X_i>0$. The last inequality is then strict.
+For an arbitrary integral submodule $B$, saturation increases degree
+and preserves rank, giving $\slope(B)\leq m$. The term $A_1$ itself
+has positive rank and slope $m$. Equality for $B$ excludes
+$B_K\not\subseteq X_1$ by the strict inequality just proved, hence
+$B\subseteq A\cap X_1=A_1$.
+\end{proof}
+
 \begin{lemma}[Harder--Narasimhan filtration]
 \label{lem:hn-filtration}
 \uses{def:hermitian-degree,lem:hermitian-hn-interval-flag,lem:nested-quotient-metric,lem:exact-determinant-degree,lem:determinant-contraction,lem:saturation-degree,lem:hermitian-convex-slopes}
