@@ -1469,7 +1469,8 @@ formula for $\pi_d$. The descent and factorial identity are the
 
 \begin{lemma}[Polynomial identities from evaluation]
 \label{lem:intrinsic-polynomial-ext}
-\notready
+\lean{BostConjecture.Geometry.polynomial_ext}
+\leanok
 Let $X$ be a finite-dimensional vector space over an infinite field $F$.
 Two elements of $\operatorname{Sym}(X^\vee)$ are equal if their evaluations
 agree at every vector of $X$.
@@ -1489,7 +1490,8 @@ the difference of the two polynomials.
 \label{lem:plucker-polynomial-pullback}
 \uses{lem:polynomial-tensor-quotient,lem:projective-tensor-evaluation,lem:intrinsic-polynomial-ext}
 \source{bost-specht-manuscript:page-0010}
-\notready
+\lean{BostConjecture.Geometry.pluckerPolynomialPullback,BostConjecture.Geometry.polynomialEval_pluckerPolynomialPullback,BostConjecture.Geometry.pluckerPolynomialPullback_mem_homogeneous,BostConjecture.Geometry.pluckerPolynomialPullback_naturality,BostConjecture.Geometry.homSpecialLinearRepresentation,BostConjecture.Geometry.pluckerPolynomialPullback_mem_invariants,BostConjecture.Geometry.polynomialEval_pluckerPolynomialPullback_ne_zero}
+\leanok
 Let $V,X$ be finite-dimensional vector spaces over an infinite field $F$,
 and let $b=(b_1,\ldots,b_s)$ be a basis of $V$. Put
 $\eta=b_1\wedge\cdots\wedge b_s$.
@@ -1499,8 +1501,8 @@ There is an algebra homomorphism
  \longrightarrow\operatorname{Sym}(\Hom(V,X)^\vee)
 \]
 such that $(P_b p)(A)=p((\bigwedge^s A)\eta)$. It takes degree $m$
-to degree $sm$. For linear $g:X\to X$ and $h:V\to V$ of determinant
-one, pullback by $A\mapsto gAh$ commutes with $P_b$ and pullback by
+to degree $sm$. For arbitrary linear $g:X\to X$ and determinant-one
+$h:V\to V$, pullback by $A\mapsto gAh$ commutes with $P_b$ and pullback by
 $\bigwedge^s g$. Thus invariant polynomials pull back to invariants for
 independent target actions and the special linear source action, preserving
 nonzero evaluation at any specified map $A$.

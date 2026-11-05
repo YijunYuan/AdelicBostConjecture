@@ -710,3 +710,30 @@ attached. The one-time hygiene review retained nested active lane ancestors;
 GEOM has one next proof leaf, BOST-GEOM-NONZERO. Scratch cleanup found no stale
 candidates. Human I-0063 stays open for its initiator; I-0066 tracks the remaining
 shared root/attribution integration of the polarization batch.
+
+## Actual Pluecker polynomial pullback
+
+`Geometry/PluckerPolynomial.lean` constructs the algebra pullback along
+`A ↦ wedge (A b)` using the existing finite-projective tensor duality and
+polynomial tensor quotient. It proves evaluation, multiplication of homogeneous
+degrees by the source rank, and equivariance for arbitrary target linear maps
+and determinant-one source maps. The resulting invariant theorem uses Mathlib's
+`Representation.linHom` with independent target and special-linear source
+actions. No polynomial-map certificate or new arithmetic representation is used.
+
+- Module `b1a46f37f453cfb2` passed 2410 jobs at 2026-11-05 23:18:05 UTC.
+- All 212 transitive probes passed at 23:18:54 UTC (`ffefd7bf352d83dc`),
+  with only `propext`, `Classical.choice`, and `Quot.sound`. No custom axioms
+  or `sorryAx` occur. LSP proof/coercion errors were repaired before these checks.
+- The read-only honesty review found substantive producer consumption and
+  faithful scope. Its clarification that only the source map must have
+  determinant one was applied to the blueprint. Both limited nodes are checked.
+- No external code was copied. Polynomial extensionality uses unchanged
+  Mathlib symmetric-algebra coordinates and multivariate polynomial extensionality.
+
+The remaining local consumer combines the actual pullback with polarization,
+then regroups Hom-dual tensor powers into the determinant-isotypic factors.
+Rectangular invariant identification and polynomial coaction base change are
+still separate boundaries. I-0067 was consumed by the completed session0014
+handoff; session0016 is its fresh continuation. The one-time read-only hygiene
+review retained 12 active roadmap rows as four frontiers and eight ancestors.

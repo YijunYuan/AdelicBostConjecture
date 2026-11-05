@@ -27,6 +27,18 @@ import BostConjecture.Geometry.IndependentInvariants
 import BostConjecture.Geometry.PiInvariants
 import BostConjecture.Geometry.PolynomialTensor
 import BostConjecture.Geometry.PolynomialPolarization
+import BostConjecture.Geometry.PluckerPolynomial
+
+#print axioms BostConjecture.Geometry.polynomial_ext
+#print axioms BostConjecture.Geometry.pluckerLinearPolynomial
+#print axioms BostConjecture.Geometry.pluckerPolynomialPullback
+#print axioms BostConjecture.Geometry.polynomialEval_pluckerPolynomialPullback
+#print axioms BostConjecture.Geometry.pluckerPolynomialPullback_mem_homogeneous
+#print axioms BostConjecture.Geometry.map_basis_wedge_of_det_eq_one
+#print axioms BostConjecture.Geometry.pluckerPolynomialPullback_naturality
+#print axioms BostConjecture.Geometry.homSpecialLinearRepresentation
+#print axioms BostConjecture.Geometry.pluckerPolynomialPullback_mem_invariants
+#print axioms BostConjecture.Geometry.polynomialEval_pluckerPolynomialPullback_ne_zero
 
 #print axioms SymmetricPower.toTensorPower
 #print axioms SymmetricPower.mk_comp_toTensorPower
