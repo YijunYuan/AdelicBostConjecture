@@ -1146,8 +1146,76 @@ $i+1$ and its new row is earlier. Induction in the finite colex order
 reaches $t_0$. Reverse the swaps to obtain the stated path.
 \end{proof}
 
+\begin{definition}[Prefix insertion product]
+\label{def:prefix-norm-product}\uses{def:standard-tableau}
+\lean{BostConjecture.Specht.prefixRowCount,BostConjecture.Specht.prefixAxialDistance,BostConjecture.Specht.prefixInsertionFactor,BostConjecture.Specht.prefixNormProduct}\leanok
+For an enumerating tableau $t$, let $N_t(m,r)$ be the number of labels
+strictly less than $m$ in row $r$. If label $m$ occupies $(s,q)$, put
+\[
+ D_t(m,r)=N_t(m,r)-q+s-r,\qquad
+ P(t)=\prod_m\prod_{r<s}\frac{D_t(m,r)}{D_t(m,r)-1}.
+\]
+All row and column indices here start at zero.
+\end{definition}
+
+\begin{lemma}[Positive insertion denominators]
+\label{lem:prefix-norm-positive}\uses{def:prefix-norm-product}
+\lean{BostConjecture.Specht.prefixRowCount_self,BostConjecture.Specht.col_add_one_le_prefixRowCount,BostConjecture.Specht.two_le_prefixAxialDistance,BostConjecture.Specht.prefixNormProduct_pos}\leanok
+For a standard tableau with label $m$ in $(s,q)$, one has
+$N_t(m,s)=q$ and $N_t(m,r)\geq q+1$ for every $r<s$.
+Consequently $D_t(m,r)\geq2$ for $r<s$ and $P(t)>0$.
+\end{lemma}
+\begin{proof}
+The earlier labels of row $s$ occupy exactly its boxes in columns
+$0,\ldots,q-1$, by row standardness. For $r<s$, the boxes
+$(r,0),\ldots,(r,q)$ all belong to the diagram because $(s,q)$ does.
+Each is strictly northwest of $(s,q)$, so its label is strictly
+smaller than $m$. These $q+1$ distinct boxes give the lower bound.
+Since $s-r\geq1$, the displayed formula for $D_t(m,r)$ is at least
+two. Every numerator and denominator in the finite product is positive.
+\end{proof}
+
+\begin{lemma}[Adjacent ratio of the prefix product]
+\label{lem:prefix-norm-swap}\uses{lem:prefix-norm-positive}
+\lean{BostConjecture.Specht.prefixNormProduct_relabel_adjacent,BostConjecture.Specht.prefixAxialDistance_eq_content_sub,BostConjecture.Specht.two_le_prefixAxialDistance}\leanok
+Let $t$ be standard, with consecutive labels $m,m+1$ in rows $s,r$
+where $r<s$, and let $u=(m,m+1)t$. Put
+$\Delta=\operatorname{content}_t(m+1)-\operatorname{content}_t(m)$.
+Then $\Delta\geq2$ and
+\[
+ P(u)=(1-\Delta^{-2})P(t).
+\]
+\end{lemma}
+\begin{proof}
+Only the prefix between the two labels changes. The upper insertion
+has identical factors in both tableaux because the lower row contributes
+to none of its upper-row counts. For the lower insertion, only the factor
+belonging to the upper row $r$ changes. Its distance increases from
+$D$ to $D+1$. The ratio of these factors is
+\[
+ \frac{(D+1)/D}{D/(D-1)}=1-D^{-2}.
+\]
+The upper row's count before the lower insertion is the column of label
+$m+1$: adding the lower box does not change that count. Hence $D$ equals
+the displayed content difference $\Delta$, and positivity gives $D\geq2$.
+All other factors are unchanged, proving the product identity.
+\end{proof}
+
+\begin{lemma}[Column-reading prefix product]
+\label{lem:prefix-norm-initial}\uses{def:prefix-norm-product,lem:column-reading-initial}\notready
+For column reading $t_0$ of the $a$ by $k$ rectangle,
+$P(t_0)=(a!)^k$.
+\end{lemma}
+\begin{proof}
+For a box in row $s$, column $q$, each row $r<s$ has exactly $q+1$
+earlier entries, namely its boxes in columns $0,\ldots,q$.
+Thus $D_{t_0}(m,r)=s-r+1$ and the insertion product telescopes:
+$\prod_{r<s}(s-r+1)/(s-r)=s+1$.
+Multiplication down each column gives $a!$, and there are $k$ columns.
+\end{proof}
+
 \begin{lemma}[Seminormal norms]
-\label{lem:seminormal-norms}\uses{lem:monic-seminormal,lem:column-reading-initial,lem:standard-adjacent-path,lem:orthogonal-standard-basis}
+\label{lem:seminormal-norms}\uses{lem:monic-seminormal,lem:column-reading-initial,lem:standard-adjacent-path,lem:prefix-norm-swap,lem:prefix-norm-initial,lem:orthogonal-standard-basis}
 \source{bost-specht-manuscript:page-0005,bost-specht-manuscript:page-0006}\notready
 For a standard tableau $t$, let $\lambda^{(j)}$ be its prefix shape
 after $j$ entries, and let $r_j$ be the row of entry $j$. Set
