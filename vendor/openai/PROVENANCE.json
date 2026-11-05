@@ -1,0 +1,142 @@
+{
+  "repository": "https://github.com/openai/math",
+  "revision": "4eaee87548250b2682affda7d05d947c05554bae",
+  "license": "Apache-2.0",
+  "license_path": "lean/LICENSE",
+  "files": [
+    {
+      "module": "OAI.NumberTheory.ArithmeticGroups.Lattices.BasisLift",
+      "upstream_path": "lean/OAI/NumberTheory/ArithmeticGroups/Lattices/BasisLift.lean",
+      "upstream_sha256": "2efb098132cefafc3ca13cc50c19b5ac36160b0a9ce4e6188155c3a138452ed9",
+      "local_path": "OAI/NumberTheory/ArithmeticGroups/Lattices/BasisLift.lean",
+      "changes": [
+        "Lean 4.35 module header; public imports and exposed public declarations",
+        "Added source and modification notice"
+      ],
+      "local_sha256": "d54c42d399b95a621ad628214de3a7fa13a390e9cb3aa02f4d29f282d7b9be08"
+    },
+    {
+      "module": "OAI.NumberTheory.ArithmeticGroups.Lattices.BoundedBasis",
+      "upstream_path": "lean/OAI/NumberTheory/ArithmeticGroups/Lattices/BoundedBasis.lean",
+      "upstream_sha256": "b76a63270eaa76d57100868cca674d1e12718f40c00c2760e0985ae5b057409d",
+      "local_path": "OAI/NumberTheory/ArithmeticGroups/Lattices/BoundedBasis.lean",
+      "changes": [
+        "Lean 4.35 module header; public imports and exposed public declarations",
+        "Added source and modification notice"
+      ],
+      "local_sha256": "c3c87d40388457e7a3ff56673f8ef9596da3242677b67814b1cfe9f05063065b"
+    },
+    {
+      "module": "OAI.NumberTheory.ArithmeticGroups.Lattices.FrameMatrices",
+      "upstream_path": "lean/OAI/NumberTheory/ArithmeticGroups/Lattices/FrameMatrices.lean",
+      "upstream_sha256": "e028ebb012fe5310e9e66565c4e7190f70197317a513fa4f8456aac79a9ab81f",
+      "local_path": "OAI/NumberTheory/ArithmeticGroups/Lattices/FrameMatrices.lean",
+      "changes": [
+        "Lean 4.35 module header; public imports and exposed public declarations",
+        "Added source and modification notice"
+      ],
+      "local_sha256": "13982104f74cad77240975dbd331bc8e534fa5a63f46e436abed2757a32299d1"
+    },
+    {
+      "module": "OAI.NumberTheory.ArithmeticGroups.Lattices.Minkowski.Ellipsoid",
+      "upstream_path": "lean/OAI/NumberTheory/ArithmeticGroups/Lattices/Minkowski/Ellipsoid.lean",
+      "upstream_sha256": "3462d4239da0e0cf6d3bb38016c2b262e72ad645606d1991db44f49abdfc7a61",
+      "local_path": "OAI/NumberTheory/ArithmeticGroups/Lattices/Minkowski/Ellipsoid.lean",
+      "changes": [
+        "Lean 4.35 module header; public imports and exposed public declarations",
+        "Added source and modification notice"
+      ],
+      "local_sha256": "1731d82e696f619bedb11f0475323c9a9343fe326b6c55e7a702a9c6d3eec863"
+    },
+    {
+      "module": "OAI.NumberTheory.ArithmeticGroups.Lattices.OrthogonalStretch",
+      "upstream_path": "lean/OAI/NumberTheory/ArithmeticGroups/Lattices/OrthogonalStretch.lean",
+      "upstream_sha256": "5515b7d9bc92f367ceaf0bbe6ebd65da4875fd3877ade5373b6c099fd47e9e5e",
+      "local_path": "OAI/NumberTheory/ArithmeticGroups/Lattices/OrthogonalStretch.lean",
+      "changes": [
+        "Lean 4.35 module header; public imports and exposed public declarations",
+        "Added source and modification notice"
+      ],
+      "local_sha256": "5ae7ef8fde5360d36f7bddba7205ff50f160e6cab8af5cfdf37dc80a75e09055"
+    },
+    {
+      "module": "OAI.NumberTheory.ArithmeticGroups.Lattices.ProjectedLattice",
+      "upstream_path": "lean/OAI/NumberTheory/ArithmeticGroups/Lattices/ProjectedLattice.lean",
+      "upstream_sha256": "f13d83c995270cce3778a684667b5c54aed6095c0838b6776f8e4e6bbe72266a",
+      "local_path": "OAI/NumberTheory/ArithmeticGroups/Lattices/ProjectedLattice.lean",
+      "changes": [
+        "Lean 4.35 module header; public imports and exposed public declarations",
+        "Added source and modification notice"
+      ],
+      "local_sha256": "1f29cc5107a3bac37bd47f99a59ce598f824b24973bcdd50a6f659f9c258a0a6"
+    },
+    {
+      "module": "OAI.NumberTheory.ArithmeticGroups.Lattices.ShortestVector",
+      "upstream_path": "lean/OAI/NumberTheory/ArithmeticGroups/Lattices/ShortestVector.lean",
+      "upstream_sha256": "93cb9ff5462e6f9b3a65058fee3afc7a0ea5cc84c465c7ec35636f195c75e10b",
+      "local_path": "OAI/NumberTheory/ArithmeticGroups/Lattices/ShortestVector.lean",
+      "changes": [
+        "Lean 4.35 module header; public imports and exposed public declarations",
+        "Added source and modification notice"
+      ],
+      "local_sha256": "c55899d898d471160ecb6552f98ce725a76f7a332f53bb80906b7ea8b82168e1"
+    },
+    {
+      "module": "OAI.NumberTheory.ArithmeticGroups.Lattices.UniformShortSpan",
+      "upstream_path": "lean/OAI/NumberTheory/ArithmeticGroups/Lattices/UniformShortSpan.lean",
+      "upstream_sha256": "96dc3a5973c462b0ad7507237570064376879cb900b75d9c473067f6a2266006",
+      "local_path": "OAI/NumberTheory/ArithmeticGroups/Lattices/UniformShortSpan.lean",
+      "changes": [
+        "Lean 4.35 module header; public imports and exposed public declarations",
+        "Added source and modification notice"
+      ],
+      "local_sha256": "59e6afc8c9243d1f64e5bdfa30a83dd6b02cd30e6d9c31afd9e274d6bc51fab7"
+    },
+    {
+      "module": "OAI.RepresentationTheory.Saxl.Model",
+      "upstream_path": "lean/OAI/RepresentationTheory/Saxl/Model.lean",
+      "upstream_sha256": "b612d450e3d2b10d0f12a49915c4319641dc07ccf1a63a27f49a1a33a05def81",
+      "local_path": "OAI/RepresentationTheory/Saxl/Model.lean",
+      "changes": [
+        "Lean 4.35 module header; public imports and exposed public declarations",
+        "Added source and modification notice",
+        "Removed unused Kronecker multiplicity, staircase and Saxl conjecture definitions"
+      ],
+      "local_sha256": "ad65e5579261456de4ab4741688148d2989e4309b3985f61d241456d7e3d0915"
+    },
+    {
+      "module": "OAI.RepresentationTheory.Saxl.Basic",
+      "upstream_path": "lean/OAI/RepresentationTheory/Saxl/Basic.lean",
+      "upstream_sha256": "2fe79e7fb88eb9ae2de602af57517d18bf1351c8797b16ba73b179b231a128d4",
+      "local_path": "OAI/RepresentationTheory/Saxl/Basic.lean",
+      "changes": [
+        "Lean 4.35 module header; public imports and exposed public declarations",
+        "Added source and modification notice",
+        "Removed unused Hom criterion and staircase cardinality lemmas"
+      ],
+      "local_sha256": "8328c4991fafc066496d840ab52c18cf80fc0b35911449b8f6fc34bef6edcc01"
+    },
+    {
+      "module": "OAI.RepresentationTheory.Saxl.Polytabloid",
+      "upstream_path": "lean/OAI/RepresentationTheory/Saxl/Polytabloid.lean",
+      "upstream_sha256": "457cd6a6e3590714c2e749a817a476aa415f4d19bc3549e1d86866691df45f31",
+      "local_path": "OAI/RepresentationTheory/Saxl/Polytabloid.lean",
+      "changes": [
+        "Lean 4.35 module header; public imports and exposed public declarations",
+        "Added source and modification notice"
+      ],
+      "local_sha256": "9ccad1ccc19ccc2d7284eb0322233f7c73004933f8e41b7fe7e55801bf63fe14"
+    },
+    {
+      "module": "OAI.RepresentationTheory.Saxl.SpechtSubmodule",
+      "upstream_path": "lean/OAI/RepresentationTheory/Saxl/SpechtSubmodule.lean",
+      "upstream_sha256": "d6f137f4b1e63c172f43d97dc33a137513b664bd783fbfb1d2642d40eb57453b",
+      "local_path": "OAI/RepresentationTheory/Saxl/SpechtSubmodule.lean",
+      "changes": [
+        "Lean 4.35 module header; public imports and exposed public declarations",
+        "Added source and modification notice"
+      ],
+      "local_sha256": "b1f07c8df1ae73d03cfd6889ffe5e7f3e7e78add1922ea2a4aed3a836a790ed3"
+    }
+  ]
+}

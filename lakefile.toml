@@ -7,5 +7,18 @@ name = "mathlib"
 git = "https://github.com/leanprover-community/mathlib4.git"
 rev = "v4.35.0"
 
+[[require]]
+name = "HarderNarasimhan"
+git = "https://github.com/YijunYuan/HarderNarasimhan.git"
+rev = "14b3090e1e169b77fe381102a1289f24c2b08a11"
+
 [[lean_lib]]
 name = "BostConjecture"
+
+[[lean_lib]]
+name = "OAI"
+srcDir = "vendor/openai"
+
+[[lean_lib]]
+name = "RepresentationTheory"
+srcDir = "vendor/etingof"
