@@ -55,7 +55,7 @@ Explicit mathematical checkpoints include `ce93c5f`, `9a8438a`, `a9a2924`,
 `35a9b36`, and `4c5e607`. Concurrent integration snapshots also captured
 some already checked source and final metadata (notably `35770db`); the
 checks and source blobs, rather than snapshot membership, define the evidence.
-The blueprint now attaches the exact limit with `\\leanok`, separates the
+The blueprint now attaches the exact limit with `\leanok`, separates the
 weighted, separation and expectation producers, and leaves invariant-space
 nodes open. Final sync found 249 blueprint nodes, 1,707 Lean declarations,
 and no unresolved source/declaration attachments. The 824 unattached helper
