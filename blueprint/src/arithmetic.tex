@@ -1,7 +1,88 @@
 \chapter{Arithmetic degrees and maximal slopes}
 
+\begin{definition}[Compatible metrics on intrinsic fibers]
+\label{def:hermitian-metric}
+\source{bost-specht-manuscript:page-0002}\notready
+Let $M$ be a finite projective $\Ocal$-module. For every embedding
+$\sigma:K\hookrightarrow\mathbb C$, put
+$M_\sigma=\mathbb C\otimes_{\Ocal,\sigma}M$ and $j_\sigma(x)=1\otimes x$.
+A Hermitian metric on $M$ is a positive-definite Hermitian form $h_\sigma$
+on each $M_\sigma$ such that
+\[
+ h_{\bar\sigma}(j_{\bar\sigma}(x),j_{\bar\sigma}(y))
+ =\overline{h_\sigma(j_\sigma(x),j_\sigma(y))}\qquad(x,y\in M).
+\]
+Here a Hermitian form is conjugate-linear in its first variable. This
+condition is equivalent to compatibility with the canonical conjugate-linear
+map $c_\sigma(z\otimes x)=\bar z\otimes x$: both sides are sesquilinear,
+and the $j_\sigma(x)$ span the complex fiber. Indeed, expanding on two finite
+linear combinations reduces the equality to the displayed equality, with
+coefficients $z_i\overline{w_j}$ on both sides. The map $c_\sigma$ is
+well-defined because $\overline{\sigma(a)z}=\bar\sigma(a)\bar z$ for
+$a\in\Ocal$. At a real embedding its fixed subspace is the real fiber,
+and the form restricts to a positive-definite real inner product there.
+\end{definition}
+
+\begin{lemma}[Logarithmic product formula]
+\label{lem:log-product-formula}
+\source{bost-specht-manuscript:page-0003}\notready
+For $a\in K^\times$, let $(a)$ denote its principal fractional ideal.
+Then
+\[
+ \log N((a))=\sum_{v\mid\infty} w_v\log|a|_v.
+\]
+\end{lemma}
+\begin{proof}
+The norm of $(a)$ is $|N_{K/\mathbb Q}(a)|$. The field norm is the product
+of the images of $a$ under all complex embeddings. Taking absolute values
+and grouping conjugate embeddings gives
+$N((a))=\prod_v |a|_v^{w_v}$. Every factor is positive because $a\ne0$.
+Taking logarithms gives the asserted sum.
+\end{proof}
+
+\begin{definition}[Degree in a generic line coordinate]
+\label{def:coordinate-line-degree}\notready
+Let $I\subset K$ be a nonzero fractional ideal and let $\rho_v>0$ for each
+infinite place. Regard $Ie$ as an integral lattice in the generic line $Ke$,
+with $\|e\|_v=\rho_v$. Its coordinate degree is
+\[
+ d(I,\rho)=\frac{-\log N(I)-\sum_v w_v\log\rho_v}{D}.
+\]
+This permits nonprincipal $I$; it makes no choice of an integral basis of
+$Ie$.
+\end{definition}
+
+\begin{lemma}[Independence of the generic section]
+\label{lem:line-degree-section-independence}
+\uses{def:coordinate-line-degree,lem:log-product-formula}
+\source{bost-specht-manuscript:page-0003}\notready
+For $a\in K^\times$,
+\[
+ d((a^{-1})I,(|a|_v\rho_v)_v)=d(I,\rho).
+\]
+Also, for any $x\in K^\times$,
+\[
+ \frac{\log\bigl(N((x))/N(I)\bigr)
+       -\sum_v w_v\log(|x|_v\rho_v)}{D}=d(I,\rho).
+\]
+\end{lemma}
+\begin{proof}
+The norm of every nonzero fractional ideal is positive. Multiplicativity
+of ideal norms gives
+$\log N((a^{-1})I)=\log N(I)-\log N((a))$.
+Moreover,
+$\sum_v w_v\log(|a|_v\rho_v)
+ =\sum_v w_v\log|a|_v+\sum_v w_v\log\rho_v$.
+The logarithmic product formula cancels the two terms involving $a$.
+For the second identity, expand the logarithm of the quotient and the
+logarithms of the products, and cancel the terms involving $x$ in the
+same way. The first identity is precisely the change from $e$ to $ae$,
+since $Ie=((a^{-1})I)(ae)$.
+\end{proof}
+
 \begin{definition}[Hermitian bundles and normalized degree]
 \label{def:hermitian-degree}
+\uses{def:hermitian-metric,lem:line-degree-section-independence}
 \source{bost-specht-manuscript:page-0002,bost-specht-manuscript:page-0003}\notready
 A Hermitian bundle $\overline A$ is a finite projective $\Ocal$-module $A$
 with a positive-definite Hermitian metric on each complex archimedean fiber,
