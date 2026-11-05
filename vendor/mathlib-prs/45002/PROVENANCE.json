@@ -34,7 +34,7 @@
       "source_sha256": "34e2dbda3b4a1d5060b5ff60b4bcd9f2fbbf905e800bcc4bb71bf76b6eb2cea2",
       "source_lines": 90,
       "local_path": "BostConjecture/Analysis/InnerProductSpace/Abs.lean",
-      "local_sha256": "443fd3f75e2203757c3862446bc728df9d48d5b5bcd1abb4b710e776642d984e",
+      "local_sha256": "7155d94d566b2f22b685ece2aa14844fb91e31dacf9aac00f40830fe1d050285",
       "declarations": [
         "ContinuousLinearMap.abs",
         "ContinuousLinearMap.abs_apply",
@@ -55,7 +55,7 @@
       "source_sha256": "eb5f99aa312a1fd58ef98ac6e8a00c4f76792fa24520d4e5210723a73a4d7cbb",
       "source_lines": 279,
       "local_path": "BostConjecture/Analysis/InnerProductSpace/Polar.lean",
-      "local_sha256": "415561a202922867efb58a3f11551204b06561d99a929cf5e043a133212c2f8c",
+      "local_sha256": "c5a407015e941e67559c2cfc0b38fa00d9dda45418ae6815458bed31d52ebcd9",
       "declarations": [
         "ContinuousLinearMap.polarₚₗᵢ",
         "ContinuousLinearMap.polarₚₗᵢ_apply",
@@ -83,7 +83,8 @@
     "Polar import Mathlib.Analysis.InnerProductSpace.Abs relocated to BostConjecture.Analysis.InnerProductSpace.Abs.",
     "Abs documentation cross-reference abs_eq_abs corrected to actual abs_eq_cfcAbs.",
     "Polar documentation corrected to source/target range closures: upstream describes image as T.ker orthogonal, which is not the codomain for distinct spaces.",
-    "All definition and theorem signatures and proof bodies retained unchanged, including module/public/expose syntax supported by Lean 4.35."
+    "All definition and theorem signatures and proof bodies retained unchanged, including module/public/expose syntax supported by Lean 4.35.",
+    "Post-check comment-only packaging: each modified source header now identifies its local modifications and points to this provenance record; executable declarations and proofs are unchanged."
   ],
   "scope": {
     "proved_producers": "Positive modulus and polar decomposition for continuous complex-linear maps between arbitrary complex Hilbert spaces; kernel, range, projection, adjoint, uniqueness, and norm identities.",
@@ -119,6 +120,11 @@
       "sorry_or_custom_axiom": false,
       "warnings": []
     },
-    "axiom_probe_sha256": "5a6c3b2f6d2a8dfa77716ef4d9e56b14b52a327f026566285aec5ed6e2ae4635"
+    "axiom_probe_sha256": "5a6c3b2f6d2a8dfa77716ef4d9e56b14b52a327f026566285aec5ed6e2ae4635",
+    "post_check_comment_only_packaging": {
+      "description": "Added modified-source notices to original copyright header comments in Abs.lean and Polar.lean.",
+      "proof_signature_text_unchanged": true,
+      "verification": "Compared source with comments removed before/after; LSP inspected before and after. No kernel/build repetition for comment-only edits."
+    }
   }
 }

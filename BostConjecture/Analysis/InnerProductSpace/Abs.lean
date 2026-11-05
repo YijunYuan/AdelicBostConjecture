@@ -2,6 +2,9 @@
 Copyright (c) 2026 Tjeerd Jan Heeringa. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Tjeerd Jan Heeringa
+
+Modified for BostConjecture: documentation cross-reference corrected.
+Source and changes: vendor/mathlib-prs/45002/PROVENANCE.json
 -/
 module
 
