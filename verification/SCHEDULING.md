@@ -59,3 +59,41 @@ The manuscript main theorem remains unproved. General Specht asymptotics,
 arithmetic degree calculus/HN, projective assembly, metric contraction, and
 invariant/nonvanishing arguments still require work. A successful local batch
 does not close those tasks.
+
+## LSP dependency-build race and recovery
+
+On 2026-11-05 at 19:01 UTC, a root build reached 9,147/9,148 jobs but
+could not load `Tensor/Hilbert.olean` after its successful build. A process
+snapshot subsequently showed an LSP `lake setup-file` compiling that same
+dependency while a Horizon-serialized build was running. Pausing those LSP
+queries allowed the root retry to pass 9,148 jobs at 19:08:01 UTC. This is a
+build-artifact incident, not a Specht proof failure.
+
+`tools/lean_lsp_no_build.py` now launches the workspace MCP with
+`lean-lsp-mcp==0.33.0` and `leanclient==0.13.2`. It forces LSP document opens
+to use `dependencyBuildMode=never` and disables the client's internal
+stale-import retry that otherwise switches to `once`. Diagnostic errors remain
+visible. Build imports with explicit-root `horizon check`, then query LSP again.
+The uncoordinated `lean_build` MCP tool is disabled in the Codex configuration.
+
+The tracked `config.yaml` harness arguments carry this launch configuration.
+The generated, ledger-excluded `.codex/config.toml` also carries it so new
+sessions of already-running Horizon processes receive the fix. Project-level
+MCP configuration is documented in the
+[official Codex documentation](https://learn.chatgpt.com/docs/extend/mcp?surface=cli).
+Installed packages, user-wide configuration, and the user's separate
+HarderNarasimhan process were not modified.
+
+Validation: `codex mcp get lean-lsp --json` from the member project resolves
+the guarded launcher; Horizon harness/TOML parsing succeeds. The isolated
+end-to-end smoke test passes all four checks: missing imports reported,
+normal diagnostics working, stale imports reported, and dependency artifacts
+unchanged. Reproduce with:
+
+```sh
+uvx --from lean-lsp-mcp==0.33.0 --with leanclient==0.13.2 python tools/check_lean_lsp_no_build.py
+```
+
+The change takes effect when an MCP process starts. Old unwrapped clients must
+continue using serialized kernel feedback; protection `I-0034` tracks that
+transition. New guarded clients may use LSP without compiling dependencies.
