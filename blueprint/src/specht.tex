@@ -1122,8 +1122,31 @@ These statements assume the two eigenvalue equations; they do not
 identify the eigenvalues of the orthogonalized standard polytabloids.
 \end{proof}
 
+\begin{lemma}[Legal adjacent paths from column reading]
+\label{lem:standard-adjacent-path}
+\uses{lem:column-reading-initial,def:standard-tableau}\notready
+Every standard tableau of a rectangle can be reached from column reading
+by a finite sequence of legal adjacent swaps, each increasing colex order.
+\end{lemma}
+\begin{proof}
+Let $t$ differ from column reading $t_0$ and form the permutation
+$p=t_0^{-1}t$ of the labels. A strictly increasing permutation of a finite
+chain is the identity, so some consecutive labels $i,i+1$ satisfy
+$p(i)>p(i+1)$. Their boxes in $t$ must lie in different columns, with
+$i$ in the later column: column reading orders columns first, and
+standardness orders labels within each column. The box of $i$ is in a
+strictly earlier row, since otherwise the box of $i+1$ is northwest of
+it, contradicting standardness. Thus the two boxes have different rows
+and columns. Swapping their consecutive labels preserves every row and
+column comparison: only the relative order of these two labels changes,
+and they share neither a row nor a column. The resulting tableau is
+strictly earlier in colex order, since the largest changed label is
+$i+1$ and its new row is earlier. Induction in the finite colex order
+reaches $t_0$. Reverse the swaps to obtain the stated path.
+\end{proof}
+
 \begin{lemma}[Seminormal norms]
-\label{lem:seminormal-norms}\uses{lem:monic-seminormal,lem:column-reading-initial,lem:orthogonal-standard-basis}
+\label{lem:seminormal-norms}\uses{lem:monic-seminormal,lem:column-reading-initial,lem:standard-adjacent-path,lem:orthogonal-standard-basis}
 \source{bost-specht-manuscript:page-0005,bost-specht-manuscript:page-0006}\notready
 For a standard tableau $t$, let $\lambda^{(j)}$ be its prefix shape
 after $j$ entries, and let $r_j$ be the row of entry $j$. Set
