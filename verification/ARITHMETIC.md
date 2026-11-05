@@ -284,3 +284,10 @@ child while the remaining HN core and exact-sequence calculus stay unfinished.
 Scratch cleanup found no stale candidates. I-0028 carries checked imports to
 SPECHT; its next root integration result is still pending, so this report
 claims only the arithmetic module checks specified above.
+
+
+I-0030 assigns the generic finite complex tensor `InnerProductSpace.Core`
+and pure-tensor pairing/regrouping formulas to GEOM's existing `Tensor/**`
+lane. ARITH will consume them through the canonical complex scalar-extension
+equivalence and prove conjugation and degree identities. No arithmetic tensor
+metric is claimed checked, and no additional proof writer was launched.
