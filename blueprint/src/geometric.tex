@@ -1170,7 +1170,7 @@ proves the equality on arbitrary extended tensors.
 
 \begin{lemma}[Dimension after extension of a constant-rank projective module]
 \label{lem:projective-fiber-frames}
-\notready
+\lean{BostConjecture.Geometry.scalarExtension_finrank_of_rankAtStalk}\leanok
 Let $M$ be a finite projective module of constant rank $a$ over a
 commutative ring $R$, and let $F$ be a field with an $R$-algebra structure.
 Then $\dim_F(F\otimes_R M)=a$.
@@ -1185,7 +1185,8 @@ dimension.
 \begin{lemma}[Contraction on the intrinsic complex fibers]
 \label{lem:intrinsic-pairing-contraction}
 \uses{lem:canonical-pairing-base-change,lem:free-determinant-contraction,lem:finite-hilbert-tensor,lem:arithmetic-tensor-metric,lem:induced-hermitian-metric,lem:projective-fiber-frames}
-\source{bost-specht-manuscript:page-0010}\notready
+\lean{BostConjecture.Geometry.tensorSubmoduleFiberIsometry,BostConjecture.Geometry.canonicalPairing_fiber_le}\leanok
+\source{bost-specht-manuscript:page-0010}
 Let $E_j$ be finite projective modules over the integers of a number field,
 with Hermitian metrics, and let $i:V\hookrightarrow\bigotimes_j E_j$ be an
 injection from a finite projective module. Give $V$ the induced metric.
