@@ -880,7 +880,8 @@ identifies these line degrees with the intrinsic bundle degrees.
 \end{proof}
 
 \begin{lemma}[Perfect exterior duality for projective modules]
-\label{lem:projective-exterior-duality}\uses{lem:integral-determinant-line}\notready
+\label{lem:projective-exterior-duality}\uses{lem:integral-determinant-line}
+\lean{exteriorPower.pairingDual_natural,exteriorPower.pairingDual_bijective,exteriorPower.pairingDualEquiv}\leanok
 For a finite projective module $P$ over a commutative ring $R$, the canonical
 map
 \[
@@ -908,7 +909,9 @@ not a basis of $P$.
 
 \begin{lemma}[Determinant duality is an isometry]
 \label{lem:determinant-dual-isometry}
-\uses{lem:projective-exterior-duality,lem:dual-fiber-base-change,lem:arithmetic-dual-metric,lem:determinant-metric,lem:determinant-metric-unique}\notready
+\uses{lem:projective-exterior-duality,lem:dual-fiber-base-change,lem:arithmetic-dual-metric,lem:determinant-metric,lem:determinant-metric-unique,lem:determinant-contraction}
+\source{bost-specht-manuscript:page-0003}
+\lean{BostConjecture.Arithmetic.determinantDualEquiv,BostConjecture.Arithmetic.exteriorPairing_baseChange,BostConjecture.Arithmetic.HermitianMetric.determinantDual_fiber_norm,BostConjecture.Arithmetic.HermitianMetric.determinantDual_sectionNorm}\leanok
 The canonical isomorphism $\det(M^\vee)\simeq(\det M)^\vee$ of a finite
 projective Hermitian $\Ocal$-module is an isometry at every embedding.
 \end{lemma}
@@ -933,7 +936,9 @@ is included.
 
 \begin{lemma}[Degree and slope of the intrinsic dual]
 \label{lem:dual-degree}
-\uses{lem:determinant-dual-isometry,lem:line-dual-degree,lem:line-degree-isometry,def:intrinsic-determinant-degree}\notready
+\uses{lem:determinant-dual-isometry,lem:line-dual-degree,lem:line-degree-isometry,def:intrinsic-determinant-degree}
+\source{bost-specht-manuscript:page-0003}
+\lean{BostConjecture.Arithmetic.HermitianMetric.degree_dual,BostConjecture.Arithmetic.HermitianMetric.slope_dual}\leanok
 For every finite projective Hermitian $\Ocal$-module $M$,
 $\degn(M^\vee)=-\degn(M)$. For positive rank,
 $\slope(M^\vee)=-\slope(M)$.
@@ -949,7 +954,7 @@ rank proves the slope assertion.
 \end{proof}
 
 \begin{lemma}[Determinant identities and contraction]
-\label{lem:degree-calculus}\uses{def:hermitian-degree,lem:quotient-hermitian-metric,lem:arithmetic-tensor-metric,lem:arithmetic-dual-metric,lem:line-tensor-degree,lem:determinant-contraction,lem:saturation-degree,lem:degree-metric-scaling}
+\label{lem:degree-calculus}\uses{def:hermitian-degree,lem:quotient-hermitian-metric,lem:arithmetic-tensor-metric,lem:dual-degree,lem:line-tensor-degree,lem:determinant-contraction,lem:saturation-degree,lem:degree-metric-scaling}
 \source{bost-specht-manuscript:page-0003}\notready
 Degrees are additive in an exact sequence with induced and quotient
 metrics. For positive-rank bundles $A,B$ and a line bundle $L$,

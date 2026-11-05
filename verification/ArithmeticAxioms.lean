@@ -11,7 +11,7 @@ import BostConjecture.Arithmetic.DegreeNormalization
 import BostConjecture.Arithmetic.NestedQuotient
 import BostConjecture.Arithmetic.SaturationDegree
 import BostConjecture.Arithmetic.LineTensorDegree
-import BostConjecture.Arithmetic.LineDualDegree
+import BostConjecture.Arithmetic.DeterminantDual
 
 #print axioms BostConjecture.Arithmetic.HermitianMetric
 #print axioms BostConjecture.Arithmetic.dualBaseChangeMap_bijective
@@ -169,3 +169,19 @@ import BostConjecture.Arithmetic.LineDualDegree
 #print axioms BostConjecture.Arithmetic.HermitianMetric.coordinateLength_dual
 #print axioms BostConjecture.Arithmetic.HermitianMetric.degreeInCoordinate_dual
 #print axioms BostConjecture.Arithmetic.HermitianMetric.degree_dual_of_rank_one
+
+#print axioms exteriorPower.pairingDual_natural
+#print axioms exteriorPower.pairingDual_bijective
+#print axioms exteriorPower.pairingDualEquiv
+#print axioms BostConjecture.Arithmetic.exteriorPairing_baseChange_section
+#print axioms BostConjecture.Arithmetic.exteriorPairing_baseChange
+#print axioms BostConjecture.Arithmetic.ComplexDeterminant.dualCore_inner_eval
+#print axioms BostConjecture.Arithmetic.ComplexDeterminant.dualPullbackCore
+#print axioms BostConjecture.Arithmetic.ComplexDeterminant.dualPullbackCore_eq
+#print axioms BostConjecture.Arithmetic.determinantDualEquiv
+#print axioms BostConjecture.Arithmetic.determinantDual_fiber_eval
+#print axioms BostConjecture.Arithmetic.HermitianMetric.determinant_dualFiber_inner_eval
+#print axioms BostConjecture.Arithmetic.HermitianMetric.determinantDual_fiber_norm
+#print axioms BostConjecture.Arithmetic.HermitianMetric.determinantDual_sectionNorm
+#print axioms BostConjecture.Arithmetic.HermitianMetric.degree_dual
+#print axioms BostConjecture.Arithmetic.HermitianMetric.slope_dual
