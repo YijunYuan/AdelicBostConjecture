@@ -550,3 +550,18 @@ BALANCED exports remain pending. The final scratch dry-run has no stale
 candidates. The roadmap's 15-active warning still counts nested ancestors of
 the four authorized lanes; GEOM has one active proof leaf and has not changed
 other owners' items.
+
+The final serialized `--lean verification/GeometryAxioms.lean` check passed
+at 21:58:27 UTC (fingerprint `ffefd7bf352d83dc`, 31.6 seconds after waiting for
+the shared slot). All 159 probes report only `propext`, `Classical.choice`,
+and `Quot.sound`; no `sorryAx` or custom axioms occur. This includes the three
+IntrinsicContraction exports and their transitive dependencies. Their source
+unit is `38aaf59`; automatic snapshots before that commit are not separate
+verification evidence. Blueprint completion markers were committed at `b97bb77`.
+
+Final scoped graph sync: 195 blueprint nodes, 1317 Lean declarations and 898
+edges, with no missing labels/declarations reported. Its 692 unattached helper
+warnings are retained as coverage information, not a proof-completion claim;
+the new source-facing producers are attached. SPECHT received the checked
+three-module import batch in I-0052; root integration of that batch is subsequent
+and is not asserted by the leaf checks above.
