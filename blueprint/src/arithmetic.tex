@@ -1549,6 +1549,42 @@ adding dimensions gives the rank formula. Strict inclusion makes the
 rank difference positive, and division proves the slope identity.
 \end{proof}
 
+\begin{lemma}[Ordinary semistability in a finite-length slope game]
+\label{lem:finite-length-slope-game}
+\source{chen-jeannin-harder-narasimhan-games-v1}\notready
+Let $\mathcal L$ be a bounded lattice with no infinite strictly ascending
+or descending chain, and let $\mu$ be a slope-like payoff in a complete
+linear order. For $I=[a,b]$ with $a<b$, put
+\[
+ \mu_{\min}(I)=\inf_{a\leq x<b}\mu(x,b),\quad
+ \mu_{\max}(I)=\sup_{a<y\leq b}\mu(a,y),\quad
+ A(I)=\inf_{a\leq x<b}\sup_{x<y\leq b}\mu(x,y).
+\]
+The game's descending-chain condition holds. Game semistability on $I$
+is equivalent to $\mu(a,x)\leq\mu(a,b)$ for all $a<x\leq b$.
+On a semistable interval, $A(I)=\mu(a,b)$.
+\end{lemma}
+\begin{proof}
+There is no strictly descending infinite sequence, so both descending
+conditions hold; similarly the ascending condition holds. Restriction
+to $[a,b]$ preserves these conditions and the seesaw property.
+The slope-game value identities give $A(I)=\mu_{\min}(I)$ and
+$B(I)=\mu_{\max}(I)$, where $B$ is the dual game value. Game
+semistability is equivalent to $A(I)=B(I)$ under these chain conditions.
+The seesaw property gives
+\[
+ \mu_{\max}(I)=\mu(a,b)
+ \quad\Longleftrightarrow\quad
+ \mu_{\min}(I)=\mu_{\max}(I)
+ \quad\Longleftrightarrow\quad
+ \mu_{\min}(I)=\mu(a,b).
+\]
+For example, if all initial slopes are at most the total slope, seesaw
+makes all final slopes at least it. Since the total interval occurs in
+both extremizations, both extrema equal its slope. Reversing the roles
+gives the converse. These identities prove the assertions.
+\end{proof}
+
 \begin{lemma}[Hermitian semistability on the generic subspace lattice]
 \label{lem:hermitian-convex-slopes}
 \uses{lem:hermitian-subspace-supermodular,lem:hermitian-quotient-interval-slope,lem:intrinsic-subspace-degree,lem:saturation-degree}\notready
@@ -1563,6 +1599,36 @@ rank formulas give $\mu(0,A_K)=\slope(A)$.
 Every saturated submodule is $A\cap X$ for its generic fiber $X$,
 and saturation increases degree without changing rank; hence checking
 these subspaces is equivalent to checking all submodules.
+\end{proof}
+
+\begin{lemma}[Intrinsic Hermitian HN interval flag]
+\label{lem:hermitian-hn-interval-flag}
+\uses{lem:finite-length-slope-game,lem:hermitian-subspace-supermodular,lem:hermitian-quotient-interval-slope,lem:integral-part-generic-subspace}
+\source{chen-jeannin-harder-narasimhan-games-v1}\notready
+For a positive-rank Hermitian bundle $A$ there is a canonical generic
+flag $0=X_0\subsetneq\cdots\subsetneq X_q=A_K$. Its integral parts
+$A_i=A\cap X_i$ form a saturated filtration from zero to $A$.
+Write $\mu_i=\slope(A_{i+1}/A_i)$, using induced quotient metrics.
+Then $\mu_{i+1}<\mu_i$. For every $X_i\subsetneq Y\subseteq X_{i+1}$,
+\[
+ \slope((A\cap Y)/A_i)\leq\mu_i.
+\]
+\end{lemma}
+\begin{proof}
+Apply the Harder--Narasimhan game filtration theorem to the subspace
+lattice of $A_K$ and the payoff of its intrinsic degree, valued in the
+complete linear order of real cuts. The subspace lattice has both chain
+conditions, since strict inclusion changes dimension. Its payoff is
+slope-like and convex by the proved supermodularity. The game's descent
+condition follows from the absence of infinite descending chains, and
+the total codomain supplies admissibility. The theorem therefore gives
+the canonical flag with semistable successive intervals and strictly
+decreasing game values. The finite-length slope-game lemma identifies
+these values with the interval slopes and gives the displayed inequalities.
+The quotient-interval lemma identifies all these slopes with the stated
+Hermitian quotient slopes. Taking integral parts gives saturated modules;
+localization recovers each $X_i$, so strictness and the two endpoints are
+preserved. This argument does not use bounded-degree finiteness.
 \end{proof}
 
 \begin{lemma}[Harder--Narasimhan filtration]
