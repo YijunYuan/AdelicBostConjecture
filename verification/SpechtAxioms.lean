@@ -30,3 +30,7 @@ import BostConjecture
 #print axioms BostConjecture.Specht.norm_rectangle_polytabloidInt_sq
 #print axioms BostConjecture.Specht.rectangleRank_pos
 #print axioms BostConjecture.Specht.rectangleLogCovolume_nonneg
+#print axioms BostConjecture.Specht.RowStandard.eq_of_rowWord_eq
+#print axioms BostConjecture.Specht.ColumnStandard.rowWord_lt
+#print axioms BostConjecture.Specht.ColumnStandard.rowWord_le_of_polytabloid_ne_zero
+#print axioms BostConjecture.Specht.linearIndependent_standard_polytabloid

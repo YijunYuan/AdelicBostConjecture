@@ -7,12 +7,16 @@ is at least one using an integer Gram determinant. Its covolume square is
 bounded above by the Gram determinant of any integral family that is a real
 basis; that basis hypothesis is not yet discharged for standard polytabloids.
 `Norm.lean` proves that a polytabloid's squared norm is the column-group order.
+`Rectangle.lean` identifies balanced row words and proves the initial norm
+`(a!)^k`. `Standard.lean` proves standard-polytabloid independence over any
+ring by lexicographic triangularity. Rational spanning remains unproved.
 This does not establish the rational standard basis,
 the invariant-space identification, or the covolume asymptotic.
 
-Three theorem nodes still need complete source-backed mathematical proofs:
+The following producers still need complete source-backed mathematical proofs:
 
-- `lem:rational-standard-basis` and its real-transport consumer
+- `lem:rational-standard-spanning` is the first unmet basis producer;
+  independence is now checked. `lem:rational-standard-basis` and its real-transport consumer
   `lem:real-standard-basis` remain open. The all-polytabloid lattice is retained:
   a rational standard basis gives a full-rank sublattice and the Gram upper
   bound, so integral straightening is unnecessary for this route.
@@ -23,7 +27,10 @@ Three theorem nodes still need complete source-backed mathematical proofs:
   characteristic-zero descent, and invariant-space identification remain open.
 - `lem:monic-seminormal`: construction of the monic seminormal basis and its
   correctly normalized adjacent-transposition formula. The following norm
-  formula is proved from this precise input.
+  formula is proved mathematically from this precise input. Ryom-Hansen
+  arXiv:0904.4243v1, Section 2, equation (1), supplies the exact source
+  normalization but recalls Murphy's theorem rather than proving the action
+  formula locally. This source is not a Lean axiom or a completed producer.
 - `lem:invariant-orbit-criterion`: equality of Euclidean and Zariski orbit
   closures, and detection by homogeneous invariants for products of special
   linear groups. The following balanced-projection argument uses both parts.
