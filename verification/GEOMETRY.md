@@ -354,10 +354,10 @@ conjugation transport. No duplicate module, bundle, or arithmetic metric is adde
   using `FiniteDimensional.complete` and a direct rewrite, without raising limits.
 - Read-only honesty review approved the canonical dual construction and actual
   norm/evaluation consumer. The new dual-metric blueprint node is checked.
-- The first remaining metric producer is now isometry of the canonical
+- At this checkpoint the next metric producer was isometry of the canonical
   `dualDistribEquivOfProjective` for these dual/Hilbert forms. Its full
-  source-facing Riesz-vector proof is in the pending Hilbert-tensor-duality
-  blueprint node. This is then consumed by the restricted pairing norm bound;
+  source-facing Riesz-vector proof is now checked in the Hilbert-tensor-duality
+  node, as recorded below. This is consumed by the restricted pairing norm bound;
   invariant-space equality is not a prerequisite for that norm argument.
 
 Commit `eecbe72` incidentally captured ARITH's staged `BinaryTensorMetric.lean`
@@ -382,3 +382,22 @@ and fiber/conjugation interface in `Arithmetic/DualFiber.lean` at `e3a7b48`
 (I-0040; module `71e786e1c6fa94d7`, 3344 jobs at 19:55:00 UTC). Its expanded
 ARITH audit is maintained separately. This is the agreed algebraic transport
 for the next metric consumer; it does not prove Hilbert tensor-duality isometry.
+
+## Hilbert tensor duality and its actual regrouping consumer
+
+`Tensor/DualCompatibility.lean` proves that the Riesz vector of a pure tensor
+functional is the tensor of the factor Riesz vectors. Spanning then proves
+inner preservation by the actual `dualDistribEquivOfProjective`, and the exact
+dual norm gives the evaluation bound for arbitrary tensors. `HilbertMap.lean`
+provides the standard Core-input factor-preservation theorem.
+`DualRegroupMetric.lean` consumes these results and Hilbert regrouping to prove
+metric preservation by the actual `dualRegroupEquiv` used in the pairing.
+Its statement has no isometry-certificate hypothesis.
+
+Final module check `1ea58e5bee1a69c5` passed 2832 jobs at 20:03:04 UTC without
+warnings; all 136 transitive axiom probes passed with only the three standard
+foundational axioms. Earlier notation and unused-simp feedback was repaired.
+Read-only honesty review approved the source/blueprint correspondence and
+substantive use of the generic map lemma. Both duality metric nodes are checked.
+The restricted determinant pairing norm bound and its scalar-extension
+identification remain the next consumers; invariant detection remains separate.
