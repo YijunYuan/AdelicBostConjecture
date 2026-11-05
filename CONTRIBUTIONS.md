@@ -299,6 +299,33 @@ The 40-probe audit and 3,241-job module check are recorded in
 `verification/ARITHMETIC.md`. Metric uniqueness/frame independence,
 zero/rank-one normalization, degree calculus and intrinsic HN remain open.
 
+## Branching quotient and last content action — session 0017
+
+`Specht/Quotient.lean` and `Specht/LastMurphy.lean` are original local
+proofs, with no new external source copying. They retain the canonical
+orbit lattice and its Hilbert word realization. They consume the existing
+standard basis, prefix restriction and support filtration, Mathlib's
+`LinearMap.quotKerEquivOfSurjective` and `Submodule.quotEquivOfEq`, and
+`Function.Injective.map_swap` at the pinned Mathlib revision above.
+The exact kernel theorem is consumed to prove central prefix action modulo
+the preceding filtration step, then the last Murphy content scalar. The
+OpenAI antisymmetrizer theorem remains a transitive dependency of the central
+content producer, with its attribution unchanged. Recursive colex triangularity,
+seminormal norms and the general covolume limit are still open.
+
+## Principal-cover descent integration — session 0017
+
+Checked handoffs `e4812e5` and `f58c467` extend the determinant-twist
+base-change identity to its full scalar-linear square and provide
+`Geometry/LocalizationDescent.lean`, now a root import. Original proofs
+clear denominators and combine a unit-ideal relation to descend compatible
+linear maps and detect injectivity. No additional code was copied from
+Stacks or any other external project. The pinned tensor/exterior APIs above
+are retained; `verification/GEOMETRY.md` records the 9,068-job build and
+59 foundational-only axiom probes. Finite-projective local frames and
+overlap transport must still be supplied before constructing the global
+integral injection.
+
 ## Verification
 
 Run `horizon --root ../.. check --json` from this project, then

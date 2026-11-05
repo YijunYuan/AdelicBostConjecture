@@ -1,5 +1,39 @@
 ## Branching quotient checkpoint (session 0017)
 
+Final configured check `horizon --root /home/yijunyuan/bc-workspace check
+--json` passed **9,127 jobs** without warnings at **2026-11-05 17:40:28 UTC**
+(command fingerprint `975bdb23135a0d4a`). This includes the updated root imports.
+The owned quotient unit is recorded in `a1aee82`; the LastMurphy source was
+captured by concurrent automatic snapshot `a1924a2`, and its verified owned
+boundary and blueprint/axiom update are recorded in `6ecf788`. The automatic
+snapshot alone is not the verification evidence.
+
+Graph sync: 112 blueprint nodes, 788 Lean declarations, 431 generated edges;
+no missing-reference or stale-node warning. The 457 unattached helper/imported
+declarations remain an intentional coverage warning and include concurrent
+work. `hgraph/config.yaml -> ../hgraph-sources.yaml` is preserved. The
+read-only janitor checkpoint retained the active nested lane/ancestor statuses;
+new colex and last-Murphy children remove the Specht completed-parent warning.
+Scratch cleanup found no stale candidates. Other lanes retain ownership of
+any outstanding parent-status warnings.
+
+Claim class: **proved producers**. Frontier before: smaller Specht branching
+quotient. Frontier after: recursive colex triangularity for all labels; the
+last-label quotient action is proved. Consumer: the monic seminormal basis and
+its Gram norm formula. The general covolume limit and Theorem 1.1 remain open.
+
+`Specht/LastMurphy.lean` subsequently transports the smaller central content
+identity through this exact kernel: on each branching quotient, the last
+Murphy operator acts by the last box content. The 9,067-job module check
+passed at 2026-11-05 17:34:35 UTC. Its independent delta honesty review was
+satisfactory, with the column-minus-row sign convention confirmed. The expanded
+`SpechtQuotientAxioms.lean` check passed at 17:37:25 UTC; all **34**
+new-producer probes use exactly the same three foundational axioms.
+
+The geometry handoff `e4812e5`/`f58c467` is integrated in the root imports
+and shared boundary notes. Its 9,068-job combined module check and 59-probe
+audit are recorded by its owner in `verification/GEOMETRY.md`.
+
 `Specht/Quotient.lean` proves the real coefficient restriction has the smaller
 Specht space as its image and exactly the preceding largest-label filtration
 step as its kernel. `branchingQuotientEquiv` uses both results, and its

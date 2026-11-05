@@ -10,6 +10,7 @@ public import BostConjecture.Analysis.InnerProductSpace.Polar
 public import BostConjecture.Geometry.TensorRealization
 public import BostConjecture.Geometry.FreeEmbedding
 public import BostConjecture.Geometry.DeterminantBaseChange
+public import BostConjecture.Geometry.LocalizationDescent
 public import BostConjecture.Geometry.DeterminantNaturality
 public import BostConjecture.Tensor.Evaluation
 public import BostConjecture.Lattice.Covolume
@@ -25,7 +26,7 @@ public import BostConjecture.Specht.Orthogonal
 public import BostConjecture.Specht.RealAction
 public import BostConjecture.Specht.Content
 public import BostConjecture.Specht.Central
-public import BostConjecture.Specht.Quotient
+public import BostConjecture.Specht.LastMurphy
 public import BostConjecture.Specht.OneRow
 public import OAI.NumberTheory.ArithmeticGroups.Lattices.FrameMatrices
 public import OAI.RepresentationTheory.Saxl.SpechtSubmodule
