@@ -887,7 +887,8 @@ its formula on generators and its equivariance.
 
 \begin{lemma}[Last Murphy operator on a branching quotient]
 \label{lem:last-murphy-branching}
-\uses{lem:specht-branching-quotient,lem:standard-prefix-diagram,lem:central-content-action}\notready
+\uses{lem:specht-branching-quotient,lem:standard-prefix-diagram,lem:central-content-action}
+\lean{BostConjecture.Specht.prefixCentralOperator_sub_content_mem,BostConjecture.Specht.murphyOperator_last_sub_content_mem}\leanok
 Let $t$ be a standard tableau on labels $0,\ldots,n$, set
 $r=\operatorname{row}_t(n)$, and let $\nu=\lambda_t^{(n)}$.
 Let $Z_n$ be the sum of transpositions of the first $n$ labels,
@@ -933,11 +934,9 @@ the branching-quotient isomorphism and the induction hypothesis
 show that $J_je_t-\operatorname{content}_t(j)e_t$ is a combination
 of earlier tableaux in the same group, modulo $F_{<r}$. Every
 tableau in $F_{<r}$ is earlier as well, proving the assertion.
-Finally $J_n=Z_{n+1}-\sum_{j<n}J_j$. The central operator is the
-scalar $C_\mu$; subtracting the triangular formulas already proved
-gives diagonal coefficient $C_\mu-\sum_{j<n}\operatorname{content}_t(j)
-=\operatorname{content}_t(n)$, by the prefix content identity.
-All off-diagonal terms are still earlier, completing the induction.
+For $j=n$, the last-Murphy branching lemma places
+$J_ne_t-\operatorname{content}_t(n)e_t$ directly in $F_{<r}$.
+Every tableau in that subspace is earlier, completing the induction.
 \end{proof}
 
 \begin{theorem}[Monic seminormal basis]

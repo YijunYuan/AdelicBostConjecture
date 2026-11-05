@@ -1,4 +1,4 @@
-import BostConjecture.Specht.Quotient
+import BostConjecture.Specht.LastMurphy
 
 #print axioms BostConjecture.Specht.standardRealBasis_repr_eq_zero_of_leading_zero
 #print axioms BostConjecture.Specht.RowStandard.last_col_eq_of_row_eq
@@ -25,3 +25,13 @@ import BostConjecture.Specht.Quotient
 #print axioms BostConjecture.Specht.branchingQuotientEquiv_mk_apply
 #print axioms BostConjecture.Specht.branchingMap_equivariant
 #print axioms BostConjecture.Specht.branchingQuotientEquiv_mk_action
+
+#print axioms BostConjecture.Specht.prefixPerm_swap
+#print axioms BostConjecture.Specht.prefixCentralOperator
+#print axioms BostConjecture.Specht.prefixCentralOperator_mem_lastRowSubspace
+#print axioms BostConjecture.Specht.prefixSliceReal_prefixCentralOperator
+#print axioms BostConjecture.Specht.prefixCentralOperator_sub_content_mem
+#print axioms BostConjecture.Specht.prefixCentralOperator_eq_sum
+#print axioms BostConjecture.Specht.prefixCentralOperator_add_last
+#print axioms BostConjecture.Specht.diagramContent_sub_prefixShape
+#print axioms BostConjecture.Specht.murphyOperator_last_sub_content_mem
