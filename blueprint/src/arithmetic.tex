@@ -982,9 +982,29 @@ Thus the two scalar-extension composites agree on these generators;
 $S$-linearity proves their equality on the full scalar extension.
 \end{proof}
 
+\begin{lemma}[Determinant product in a finite free frame]
+\label{lem:determinant-product-free}\uses{lem:exterior-product}\notready
+Let $p_1,\ldots,p_a$ and $q_1,\ldots,q_b$ be bases of $P$ and $Q$
+over a commutative ring $R$. Let $d_P,d_Q$ be the corresponding
+determinant coordinates and $d_{P\oplus Q}$ the coordinate of their
+concatenated basis. For all exterior vectors $x,y$,
+\[
+ d_{P\oplus Q}(W_{a,b}(x\otimes y))=d_P(x)d_Q(y).
+\]
+Consequently $W_{a,b}$ is bijective.
+\end{lemma}
+\begin{proof}
+Write $x=r(p_1\wedge\cdots\wedge p_a)$ and
+$y=s(q_1\wedge\cdots\wedge q_b)$ using their determinant coordinates.
+The elementary-wedge formula gives the concatenated basis wedge multiplied
+by $rs$. Its coordinate is $rs$, proving the formula. In these coordinates
+the map is the canonical isomorphism $R\otimes_R R\to R$ sending
+$r\otimes s$ to $rs$. Hence it is bijective, including empty bases.
+\end{proof}
+
 \begin{lemma}[Determinant of a direct sum]
 \label{lem:determinant-product}
-\uses{lem:exterior-product,lem:integral-determinant-line}\notready
+\uses{lem:determinant-product-free,lem:integral-determinant-line}\notready
 Let $R$ be a domain with fraction field $F$, and let $P,Q$ be finite
 projective $R$-modules of generic ranks $a,b$. Then $W_{a,b}$ is an
 isomorphism $\det P\otimes_R\det Q\simeq\det(P\oplus Q)$, using
