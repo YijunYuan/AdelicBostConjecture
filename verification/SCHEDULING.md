@@ -1,5 +1,31 @@
 # Parallel Horizon scheduling
 
+## Live transition at 2026-11-05 23:55 UTC
+
+SPECHT is complete and run `0003` exited normally after session `0030` at
+23:50:16 UTC. The exact canonical-lattice covolume limit, 14 final
+foundational-only axiom probes and independent review passed; the final
+integrated root passed 9,263 warning-free jobs at 23:42:25 UTC. Checked
+shared-file handoff: `e2e7039`, evidence typography `8d57641`, root blob
+`30f3a016666f4a42f99e905a434b65f63c1f8770`.
+
+ARITH `0016`, GEOM `0016` and BALANCED `0006` continue. The successor task
+`BOST-CLOSURE` is queued, not running, for the exact polynomial-image closure
+interface in `BALANCED.md`. Its exclusive paths are `InvariantTheory/ComplexClosure/**`,
+`blueprint/src/complex_closure.tex`, `verification/ComplexClosureAxioms.lean`
+and `verification/COMPLEX_CLOSURE.md`. BALANCED prepared the two blueprint
+nodes; both migration files match committed HEAD. Shared integration is to
+pass to GEOM through `I-0073`, with parent activation still pending. `I-0072`
+tracks the closure split. No fifth proof writer has been launched.
+
+Standing permissions allow tasks/runs with a four-session cap and no budget
+limit. After SPECHT exited, memory measured 10.55 GiB available, PSI avg10
+0.00%, zero OOM kills. The old three-writer wording in the ARITH/GEOM task
+objectives was corrected without changing their mathematical objectives.
+Lemma 7.2 remains open at algebraic closure comparison and invariant extraction.
+
+## Earlier checkpoints
+
 Coordinator checkpoint: 2026-11-06 07:20 Asia/Shanghai (2026-11-05 23:20 UTC).
 
 The user assigned the parent session scheduling only, with no spending cap. The user subsequently authorized a fourth dedicated
