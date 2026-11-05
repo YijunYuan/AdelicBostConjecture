@@ -438,7 +438,7 @@ to the inclusion for a submodule.
 
 \begin{lemma}[Integral parts of generic subspaces]
 \label{lem:integral-part-generic-subspace}
-\uses{lem:integral-submodule-projective}\notready
+\uses{lem:integral-submodule-projective}\lean{BostConjecture.Arithmetic.integralPart,BostConjecture.Arithmetic.baseChange_integralPart,BostConjecture.Arithmetic.integralPartGenericEquiv,BostConjecture.Arithmetic.integralPart_generic_finrank,BostConjecture.Arithmetic.integralPart_mono,BostConjecture.Arithmetic.integralPart_inf,BostConjecture.Arithmetic.integralPart_top,BostConjecture.Arithmetic.integralPart_bot,BostConjecture.Arithmetic.integralPartQuotientProjective,BostConjecture.Arithmetic.mem_integralPart_baseChange_iff,BostConjecture.Arithmetic.integralPart_baseChange}\leanok
 For a finite projective $\Ocal$-module $M$ put $V=K\otimes_\Ocal M$.
 For a $K$-subspace $X\subseteq V$ let
 $P_X=\{m\in M:1\otimes m\in X\}$. Then $P_X$ is finite projective,
@@ -520,7 +520,7 @@ projective by the preceding lemma.
 
 \begin{lemma}[Intrinsic degree on generic subspaces]
 \label{lem:intrinsic-subspace-degree}
-\uses{lem:integral-part-generic-subspace,lem:induced-hermitian-metric,def:intrinsic-determinant-degree,lem:degree-rank-zero,lem:degree-metric-scaling}\notready
+\uses{lem:integral-part-generic-subspace,lem:induced-hermitian-metric,def:intrinsic-determinant-degree,lem:degree-rank-zero,lem:degree-metric-scaling}\lean{BostConjecture.Arithmetic.HermitianMetric.subspaceDegree,BostConjecture.Arithmetic.HermitianMetric.subspaceDegree_bot,BostConjecture.Arithmetic.HermitianMetric.subspaceDegree_div_finrank,BostConjecture.Arithmetic.HermitianMetric.subspaceDegree_rescale,BostConjecture.Arithmetic.HermitianMetric.subspaceSlope_apply_bot}\leanok
 Let $M$ be a finite projective Hermitian module and $V=K\otimes_\Ocal M$.
 Define $\delta_h(X)=\degn(P_X,h|_{P_X})$ for $X\subseteq V$.
 Then $\delta_h(0)=0$, and for $X\ne0$,
@@ -541,8 +541,42 @@ induced metrics commute with uniform rescaling, and the degree scaling
 formula subtracts $t$ times the generic rank, namely $t\dim X$.
 \end{proof}
 
+\begin{lemma}[Canonical quotient Hermitian metric]
+\label{lem:quotient-hermitian-metric}
+\uses{lem:hermitian-fiber-conjugation,lem:induced-hermitian-metric,lem:integral-part-generic-subspace}
+\source{bost-specht-manuscript:page-0003}\notready
+Let $P\subseteq M$ be a saturated submodule of a finite projective
+Hermitian $\Ocal$-module, and put $Q=M/P$. Then $Q$ is finite projective.
+There is a unique Hermitian metric on $Q$ such that, at each embedding,
+$P_\sigma^\perp\to Q_\sigma$ induced by the quotient map is an isometry.
+For every $v\in M_\sigma$ it satisfies
+\[
+ \|[v]\|_{Q,\sigma}=\min_{u\in P_\sigma}\|v-u\|_{M,\sigma}.
+\]
+If $P\subseteq T\subseteq M$, the quotient metric on $T/P$ agrees
+with the metric induced by its inclusion in $M/P$.
+\end{lemma}
+\begin{proof}
+Saturation identifies $P$ with the integral part of its generic span,
+so the quotient is finite projective by the integral-part lemma.
+Flatness of $\mathbb C$ over $\Ocal$ identifies $Q_\sigma$ canonically
+with $M_\sigma/P_\sigma$. Finite-dimensional orthogonal decomposition
+gives $M_\sigma=P_\sigma\oplus P_\sigma^\perp$; the quotient map
+therefore restricts to an isomorphism on the second summand. Transport
+its positive Hermitian form to $Q_\sigma$. This also proves uniqueness.
+Writing $v=v_P+v_\perp$, the Pythagorean identity gives
+$\|v-u\|^2=\|v_P-u\|^2+\|v_\perp\|^2$ for $u\in P_\sigma$.
+The minimum occurs at $u=v_P$, proving the formula.
+Conjugation on the ambient fibers is antiunitary and takes $P_\sigma$
+to $P_{\bar\sigma}$, hence takes their orthogonal complements to each
+other. The transported quotient forms thus satisfy conjugation
+compatibility. Finally, if $v\in T_\sigma$, then $v_P\in P_\sigma$
+and $v-v_P\in T_\sigma$, so the same orthogonal representative computes
+both metrics on $T_\sigma/P_\sigma$. This proves their agreement.
+\end{proof}
+
 \begin{lemma}[Determinant identities and contraction]
-\label{lem:degree-calculus}\uses{def:hermitian-degree}
+\label{lem:degree-calculus}\uses{def:hermitian-degree,lem:quotient-hermitian-metric,lem:line-degree-contraction,lem:degree-metric-scaling}
 \source{bost-specht-manuscript:page-0003}\notready
 Degrees are additive in an exact sequence with induced and quotient
 metrics. For positive-rank bundles $A,B$ and a line bundle $L$,
@@ -670,7 +704,7 @@ degree is asserted.
 
 \begin{lemma}[The Hermitian subspace degree is supermodular]
 \label{lem:hermitian-convex-slopes}
-\uses{lem:degree-calculus,lem:subspace-convex-slopes}\notready
+\uses{lem:degree-calculus,lem:intrinsic-subspace-degree,lem:integral-part-generic-subspace,lem:subspace-convex-slopes}\notready
 For a Hermitian bundle $A$ put $\delta(X)=\degn(A\cap X)$ on the
 $K$-subspaces of $A_K$, using the induced metrics. Then $\delta$ is
 supermodular. If $X\subsetneq Y$, the interval slope in the preceding

@@ -232,3 +232,43 @@ Lean LSP tools are unavailable in this session; serialized file checks are
 the development fallback. The Lean-search MCP endpoint also points at the
 member directory rather than the workspace root, so searches use explicit-root
 Horizon CLI calls. Toolchain and dependencies are unchanged.
+
+
+## Integral parts and intrinsic subspace degree
+
+`IntegralSubspace` uses the canonical Mathlib tensor-localization instance,
+localization Galois insertion, and `Submodule.toBaseChange.toLinearEquiv`.
+It constructs the actual inverse image of a generic subspace and proves its
+generic-fiber identification, rank, saturation criterion, saturated-submodule
+recovery and projectivity of its quotient. Its final source blob is
+`92b8319ff502fc2893735fef648c4e0c9896047f` (commits `ebede0f`, `3d4a629`).
+The tensor-localization API was compared with BOST-GEOM in I-0029: both lanes
+use Mathlib directly, with no new shared identification or ownership handoff.
+
+`SubspaceDegree` defines degree using the actual induced metric on that
+integral part. It proves zero normalization, the rank denominator, rescaling,
+and the bottom-interval interpretation of the existing slope payoff. The
+final blob is `8ca9e38a2463015de64efae09be6c1293d03d71d` (`4206a6d`).
+This is a concrete degree producer, not a package assuming HN or convexity.
+
+- Final `BostConjecture.Arithmetic.SubspaceDegree` build: 3520 jobs passed
+  without warnings at 2026-11-05 18:03:32 UTC, `2e482a197f00b9e5`.
+- Expanded 84-probe `verification/ArithmeticAxioms.lean` audit passed at
+  18:05:12 UTC, `590174f2cda53d26`. Audit blob
+  `b85e1bf4d5225dbb12f0ad07059995e26ec75b74`, commit `ecec46c`.
+  Every probe uses only `propext`, `Classical.choice`, and `Quot.sound`.
+- Read-only honesty review approved both scoped nodes against these source
+  blobs and the accepted build; no duplicate check was launched.
+
+Development checks failed on scalar-action elaboration, an explicit quotient
+lemma argument, misplaced `omit`, and two namespaces; these were repaired
+before the accepted build. There are no remaining broken arithmetic proofs
+in this checked cone. The Lean LSP fallback described above remains in use.
+
+The next producer is the canonical quotient metric: the blueprint now gives
+its complete orthogonal-complement construction and compatibility with
+induced metrics, kept `notready`. Full fiber conjugation precedes this
+construction. Quotient-interval slope compatibility, higher-rank contraction,
+saturation-degree monotonicity, dual/tensor/exact-sequence identities,
+arithmetic finiteness, supermodularity and the HN filtration remain open.
+The task has not been marked done and no main-theorem check is claimed.
