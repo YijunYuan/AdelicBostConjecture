@@ -73,6 +73,18 @@ base change and polar proofs are unchanged. Tensor duality expands two missing
 reindex simplification lemmas inline, preserving public statements. No dependency
 or toolchain revision changed.
 
+An independent read-only API review found no blocker: the maps retain their
+canonical upstream projections, and the only new instance is the proposition
+`Module.Projective`, with no new scalar/module/norm structure. It confirmed
+source fidelity, notices, hashes, probe coverage and successful check records;
+it did not repeat builds or certify the future Bost consumers. Polar's per-file
+modification notices were completed at `fbdf672` with comment-only edits.
+Its historical check commands omitted the workspace `--root`, so used a
+project-local cache/resource lock; `a963872` records the exact locations and
+hashes. Their kernel results are valid, but shared-workspace serialization was
+not established for those commands. Subsequent checks must use the explicit
+workspace root.
+
 | PR and exact inspected head | Producer and intended consumer | Remaining bridge |
 | --- | --- | --- |
 | [#40948](https://github.com/leanprover-community/mathlib4/pull/40948), `b642b6723caf97b7b462dd5ddeabb0226c3b5433`, Lean 4.36.0-rc2 | `exteriorPower.baseChangeEquiv` and pure-tensor formulas; determinant/Plücker scalar extension. New exterior-power module plus a small exterior-algebra retraction helper. | Determinant-line specialization, equivariance/naturality as needed, and Hermitian compatibility. This is not invariant-kernel base change. |
