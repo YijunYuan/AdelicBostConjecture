@@ -40,9 +40,27 @@ The read-only honesty review of commit `0d893d5` classified its five exports
 as proved producers with faithful finite-free blueprint scope. Root integration
 has been requested from BOST-SPECHT; no root check is claimed here.
 
+## Actual integral inclusion after flat base change
+
+`BostConjecture/Geometry/FreeEmbedding.lean` constructs
+`freeLatticeMap : R ⊗[ℤ] orbitLattice t →ₗ[R] M` with codomain understood as
+the actual tensor power of the framed module. Its source is the scalar
+extension of the integral lattice itself. Injectivity requires `Module.Flat ℤ R`;
+the map, its pure tensor formula, determinant covariance and frame transition
+are defined and proved over every commutative coefficient ring.
+
+- Module kernel check `59698c2181f89f97`, passed at 15:48:07 UTC (9061 jobs).
+- Seventeen combined transitive axiom probes passed at 15:51:06 UTC,
+  `ffefd7bf352d83dc`, using only the three standard foundational axioms.
+- Blueprint `lem:free-integral-tensor-embedding` is checked. The determinant
+  line twist and finite-projective gluing are still subsequent constructions.
+
+The additional read-only review of `1c0ac0c` found the ambient evaluation and
+zero-detection proofs substantive and the blueprint scope faithful.
+
 ## Remaining boundaries
 
-Projective gluing, the determinant-twisted integral injection, the metric
+Projective gluing, the determinant-twisted global integral injection, the metric
 isometry, regrouping and restricted canonical contraction, invariant base change and
 nonvanishing detection remain open. The geometric slope inequality and
 number-field target are not proved by these producers.

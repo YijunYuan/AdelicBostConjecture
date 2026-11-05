@@ -1,4 +1,5 @@
 import BostConjecture.Geometry.TensorRealization
+import BostConjecture.Geometry.FreeEmbedding
 import BostConjecture.Tensor.Evaluation
 
 #print axioms BostConjecture.Geometry.tensorCoordinates
@@ -14,3 +15,9 @@ import BostConjecture.Tensor.Evaluation
 #print axioms BostConjecture.Tensor.tensorPowerPairing_reindex
 #print axioms BostConjecture.Tensor.tensorPowerPairing_reindex_left
 #print axioms BostConjecture.Tensor.tensorPowerPairing_eq_zero_iff
+
+#print axioms BostConjecture.Geometry.freeLatticeMap
+#print axioms BostConjecture.Geometry.freeLatticeMap_tmul
+#print axioms BostConjecture.Geometry.freeLatticeMap_injective
+#print axioms BostConjecture.Geometry.map_freeLatticeMap
+#print axioms BostConjecture.Geometry.freeLatticeMap_change_basis

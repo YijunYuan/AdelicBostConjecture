@@ -52,6 +52,40 @@ The tensor power of the identity is the identity, and the rectangular
 word-coordinate action is multiplication by $(\det U)^k$.
 \end{proof}
 
+\begin{lemma}[The scalar-extended integral lattice in a free tensor power]
+\label{lem:free-integral-tensor-embedding}
+\uses{lem:rectangular-tensor-realization,lem:rectangular-change-frame,def:rectangular-specht}
+\source{bost-specht-manuscript:page-0009}
+\lean{BostConjecture.Geometry.freeLatticeMap,BostConjecture.Geometry.freeLatticeMap_injective,BostConjecture.Geometry.map_freeLatticeMap,BostConjecture.Geometry.freeLatticeMap_change_basis}
+\leanok
+Let $R$ be a commutative ring, $M$ a free rank-$a$ module with basis $b$,
+and $t$ a tableau of rectangular shape $(k^a)$, $k>0$, with integral orbit
+lattice $L_t$. There is a linear map
+\[
+ j_b:R\otimes_{\mathbb Z}L_t\longrightarrow M^{\otimes n},\qquad
+ r\otimes x\longmapsto r\,b^{\otimes n}x.
+\]
+If $R$ is flat over $\mathbb Z$, this map is injective.
+For a linear map $f:M\to N$ into another free module with basis $c$,
+\[
+ f^{\otimes n}j_b(z)=\det([f]_{c,b})^k j_c(z).
+\]
+In particular $j_b=\det([1]_{c,b})^k j_c$ for two bases of $M$.
+\end{lemma}
+\begin{proof}
+Extend the inclusion $L_t\hookrightarrow\mathbb Z^{\mathrm{words}}$
+by scalars to $R$. The scalar extension of the finite coordinate module
+is canonically $R^{\mathrm{words}}$; relabel the rectangular alphabet
+and apply the inverse tensor coordinate isomorphism. This composite
+has the displayed formula. Flatness preserves the injectivity of the
+original inclusion, and each remaining map is an isomorphism.
+For $z=r\otimes x$, the covariance identity follows from the tensor
+coordinate lemma applied to the coefficient extension of $x$; its
+coordinates belong to the scalar span by definition. Linearity extends
+the identity to every $z$, since elementary tensors span. Taking $f=1$
+gives the change-of-frame identity.
+\end{proof}
+
 \begin{definition}[Geometric semistability of a Pl\"ucker line]
 \label{def:geometric-semistability}
 \source{bost-specht-manuscript:page-0009}\notready
@@ -85,7 +119,7 @@ a positive degree with nonzero restriction is therefore unchanged.
 
 \begin{lemma}[Determinant-isotypic integral modules]
 \label{lem:determinant-isotypic}
-\uses{def:rectangular-specht,lem:rectangular-invariants,lem:rectangular-change-frame,lem:degree-calculus}
+\uses{def:rectangular-specht,lem:rectangular-invariants,lem:free-integral-tensor-embedding,lem:degree-calculus}
 \source{bost-specht-manuscript:page-0008,bost-specht-manuscript:page-0009}
 \notready
 For a rank-$a$ projective $\Ocal$-module $A$ and $d=ak>0$, there is
