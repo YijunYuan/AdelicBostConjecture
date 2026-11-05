@@ -894,3 +894,23 @@ about saturated submodules; containment of every maximal-slope submodule is
 also stated. These statements and the separate arithmetic degree-finiteness
 objective remain unverified. `lem:hn-filtration` is still notready; no
 completion claim for BOST-ARITH or manuscript Theorem 1.1 is made.
+
+### Session 0014 boundary maintenance
+
+The final scoped graph sync reported 249 blueprint nodes, 1707 Lean
+declarations and 1224 generated edges, with no unresolved source or
+declaration attachments. The 827 unattached helper/imported declarations
+remain intentional coverage warnings. The one newly stale node is the
+removed, unused quantitative chain-length side goal; the chosen route uses
+Mathlib's well-founded subspace orders. The source-scope symlink is intact.
+The scratch-cleanup dry run found no stale candidates and protected all four
+live runs. The operational ground review and warning disposition are recorded
+in I-0017 and I-0004.
+
+At the finalization recheck, all ARITH-owned paths were clean. Remaining
+workspace changes belonged to the concurrent root/SPECHT, GEOM and BALANCED
+lanes (root imports and attribution, Specht, geometric/compactness blueprints,
+Balanced verification, invariant/representation theory and vendor paths),
+or were pre-existing workspace configuration/reference files. None was
+staged or committed by this task. I-0065 stays open for the root integration
+result; the delivered arithmetic imports were acknowledged by both consumers.
