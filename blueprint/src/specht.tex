@@ -414,12 +414,14 @@ holds for the prefix distribution.
 
 \begin{theorem}[Sublinear rectangular Specht covolume]
 \label{thm:specht-sublinear-covolume}
-\uses{def:rectangular-specht,lem:seminormal-norms,lem:prefix-separation}
+\uses{def:rectangular-specht,lem:integral-specht-covolume-nonneg,lem:seminormal-norms,lem:prefix-separation}
 \source{bost-specht-manuscript:page-0008}\notready
 For every fixed positive integer $a$,
 $c_a(ak)\geq0$ and $c_a(ak)/(ak)\to0$ as $k\to\infty$.
 \end{theorem}
 \begin{proof}
+The integral Gram determinant lemma gives $c_a(d)\geq0$, since the
+lattice has positive rank.
 For $a=1$, the lattice has one orthonormal generator, so $c_1(d)=0$.
 For $a\geq2$, each insertion contributes a number between zero and
 $(a-1)\log2$ to $\log\gamma_t$. If all shifted coordinate gaps of
@@ -437,6 +439,5 @@ with the bound valid for every next legal row, gives
 For fixed $\varepsilon,L$ the last term tends to zero. Taking the
 upper limit in $k$, then taking $L\to\infty$ and
 $\varepsilon\to0$, proves $\mathbb E\log\gamma_t/d\to0$.
-The seminormal norm identity converts this to $2c_a(d)/d\to0$
-and gives nonnegativity as well.
+The seminormal norm identity converts this to $2c_a(d)/d\to0$.
 \end{proof}

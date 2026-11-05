@@ -7,6 +7,13 @@ relative-index formula to avoid the separate fundamental-domain helper.
 See `CONTRIBUTIONS.md` and `vendor/tauceti/PROVENANCE.json`. The rest of this
 document records the original source survey; its larger candidates remain unported.
 
+Specht integration update (run 0003): the original project proofs in
+`BostConjecture/Specht/{Integral,Tableau,Metric}.lean` now construct the integral
+orbit span, prove its all-polytabloid and equivariant complexification bridges,
+and give the Gram theorem a concrete discrete Hilbert-lattice consumer.
+The next producer is standard-polytabloid spanning/independence in this word
+model. The rational-versus-integral warning in §2 below remains in force.
+
 Inspected 2026-11-05 for the Bost manuscript's integral Specht/Gram and tensor-invariant prerequisites. **Recommendation: first adapt only the covolume–Gram and lattice-inclusion lemmas below; then adapt the rational standard-polytabloid proof into the existing word-space model. Do not require TauCeti as a Lake dependency.**
 
 ## Revision, licence, and evidence

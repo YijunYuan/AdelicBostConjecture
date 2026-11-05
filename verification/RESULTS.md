@@ -1,5 +1,47 @@
 # Dependency integration evidence — 2026-11-05
 
+## Integral Specht producers — run 0003
+
+Commits `45d3fe4`, `f34d7fc`, and `c78c52b` add
+`BostConjecture/Specht/{Integral,Tableau,Metric}.lean`:
+
+- A nonzero finite free integral orbit span, equal to the span of all
+  polytabloids of the shape, with permutation stability.
+- An injective complex tensor-extension map onto `OAI.Saxl.Specht`, with
+  an explicit linear equivalence and equivariance.
+- An orthonormal word metric in `EuclideanSpace`, a discrete full lattice
+  in its own real span, and a concrete consumer of the reused covolume–Gram
+  theorem. Its Gram determinant is an integer, yielding covolume at least one.
+
+The configured `horizon --root /home/yijunyuan/bc-workspace check --json`
+passed at **13:40:32 UTC** (9,084 jobs, 15.856 seconds). The serialized
+`check --lean verification/SpechtAxioms.lean --json` passed at
+**13:41:48 UTC** (6.486 seconds). All 17 transitive axiom probes report
+only `propext`, `Classical.choice`, and `Quot.sound`; there is no `sorryAx`
+or additional axiom. LSP diagnostics were used throughout; initial local
+elaboration errors were repaired before the successful builds. No accepted
+proof or build remains broken.
+
+Claim class: **proved producers**. Frontier before: missing integral orbit,
+scalar extension, and Hilbert realization. Frontier after: the rectangular
+specialization and integral standard-polytabloid basis, then monic seminormal
+Gram formula and prefix/asymptotic producers. The standard-polytabloid span
+has not been identified with the all-polytabloid lattice in Lean. Neither
+the sublinear limit nor manuscript Theorem 1.1 is formalized.
+Consumer: `covolume_sq_eq_integer_gram` and `one_le_covolume`, then the
+nonnegativity step of `thm:specht-sublinear-covolume`.
+
+Honesty-reviewer: **used**; its read-only source/body and artifact review
+found no honesty defect in the seven new checked blueprint nodes and confirmed
+that the standard-basis boundary stays open. It identified the need to sync
+the generated graph, which is now done. The graph has 43 blueprint nodes,
+292 Lean declarations, seven checked blueprint nodes, and no stale nodes.
+The 198 unattached helper/imported declarations are an intentional coverage
+warning, not completion evidence. The source-scope symlink is preserved.
+The known Horizon 0.1.5 resource-slot message recurred with recorded waits
+of 0–0.001 seconds; no actual contention was observed. Scratch cleanup's
+dry run found no stale candidates. Parent task BOST-SPECHT remains open.
+
 ## Accepted Lean state
 
 - Lean `leanprover/lean4:v4.35.0`.
