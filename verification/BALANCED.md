@@ -194,6 +194,17 @@ license and port are unchanged. It also imports the pinned Mathlib CFC
 (Frédéric Dupuis, Apache-2.0), the Hermitian trace/eigenvalue identities,
 and standard determinant/adjoint formulas, without copying source.
 
+## Full Plücker action checkpoint
+
+`InvariantTheory.PluckerAction` passed the explicit-root serialized scoped
+build: **2,027 jobs, warning-free**, 23.9s. It is the actual exterior power
+of the forward tensor action of the two Mathlib special linear groups.
+Its source was captured by automatic cross-lane snapshot `f55b9fd` before
+the owning evidence commit. Independent honesty review accepted its group
+law, wedge formula and use by the full-orbit norm proof. The blueprint
+uses the intended finite-dimensional setting; the generic Lean construction
+also allows Mathlib's totalized determinant convention outside that setting.
+
 ## Remaining mathematical producers
 
 1. Complete root integration of the tensor exponential producer; the actual
