@@ -819,3 +819,39 @@ was requested from SPECHT in I-0065 and remains separate.
 Degree finiteness, attained maximal slope, and the intrinsic HN filtration
 remain open. The checked convexity instance alone does not establish these
 or manuscript Theorem 1.1.
+
+
+## Session 0014: bounded integral sections
+
+`Arithmetic.ArchimedeanFiniteness` proves `finite_bounded_sections` for the
+actual integral sections and arbitrary real bounds at every complex
+embedding. Its coordinate-bound producer uses the canonical dual-fiber
+comparison and finite-dimensional operator norms. The final proof embeds the
+finite projective module into a finite free module and uses Mathlib's
+`NumberField.Embeddings.finite_of_norm_le` on each coordinate. It does not
+assume the original module is free. Negative bounds and rank zero are allowed.
+
+The final serialized module build `b82cac78155fb967` passed 3345 jobs without
+warnings at 2026-11-05 23:22:44.320552 UTC. The earlier 23:20:25 build had one
+unused-section-variable warning; that warning was fixed before the final
+build. The 237-probe audit `590174f2cda53d26` passed at
+23:26:06.791297 UTC. The honesty reviewer parsed both original logs and
+confirmed all probes use only the three standard foundational axioms.
+Source and audit are in explicit commit `484fba6`; the module blob is
+`a0566db856afbbee3e65058949d97d7bf6aad7e5`. No source edit followed its final
+module check. Only the bounded-sections node is marked checked.
+
+This is a concrete precursor to discreteness under restriction of scalars.
+It does not assert a degree bound, bounded-degree finiteness of submodules,
+maximal-slope attainment, or an intrinsic HN filtration. Those remain open.
+
+The next source inventory found Mathlib's canonical/mixed embedding lattice
+bases, the mixed integer-lattice discriminant covolume, and ZLattice's
+covolume/index and discrete-lattice rank APIs. A second possible HN route is
+available in the pinned library: finite-dimensional subspace lattices have
+both well-founded strict orders, and `PayoffFunction.hnFiltration` uses
+convexity, ADCC and a total complete codomain. Before using it for the target,
+prove the actual semistability bridge from game values to quotient slopes;
+`NashEquilibrium` and `IsSlopeLike.min_eq_A` provide the relevant imported
+results. This inventory is not a checked intrinsic HN specialization or a
+replacement for the outstanding degree-finiteness objective.

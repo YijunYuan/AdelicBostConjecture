@@ -1349,7 +1349,8 @@ Lemma~\ref{lem:degree-metric-scaling}.
 
 \begin{lemma}[Finiteness of bounded integral sections]
 \label{lem:bounded-integral-sections}
-\uses{def:hermitian-metric,lem:dual-fiber-base-change}\notready
+\uses{def:hermitian-metric,lem:dual-fiber-base-change}
+\lean{BostConjecture.Arithmetic.HermitianMetric.exists_coordinate_bound,BostConjecture.Arithmetic.HermitianMetric.finite_bounded_sections}\leanok
 Let $A$ be a finite projective Hermitian module over $\Ocal$ and let
 $b_\sigma\in\mathbb R$ be prescribed for every complex embedding
 $\sigma:K\hookrightarrow\mathbb C$. Then
@@ -1376,7 +1377,7 @@ is injective, proving the assertion without an integral basis of $A$.
 \end{proof}
 
 \begin{lemma}[Restriction of scalars and covolume]
-\label{lem:restriction-covolume}\uses{def:hermitian-degree}
+\label{lem:restriction-covolume}\uses{def:hermitian-degree,lem:bounded-integral-sections}
 \source{bost-specht-manuscript:page-0011}\notready
 Give $A\otimes_{\mathbb Z}\mathbb R$ the Euclidean norm
 $\|x\|^2=\sum_v w_v\|x_v\|_v^2$. For $a=\rk_\Ocal A$,
@@ -1385,6 +1386,11 @@ $\|x\|^2=\sum_v w_v\|x_v\|_v^2$. For $a=\rk_\Ocal A$,
 \]
 \end{lemma}
 \begin{proof}
+The underlying abelian group of $A$ is finite free and spans its real
+scalar extension. A bounded set for the displayed Euclidean norm bounds
+every archimedean section norm. Lemma~\ref{lem:bounded-integral-sections}
+therefore makes its intersection with $A$ finite, so $A$ is a full
+discrete lattice in this real space.
 For $A=\Ocal^a$ with the standard metrics, the Gram determinant of an
 integral basis of $\Ocal$ for this real trace metric is $\Delta_K$.
 Indeed, the matrix of embeddings gives the trace discriminant; replacing
