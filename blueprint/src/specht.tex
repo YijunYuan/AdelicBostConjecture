@@ -1591,7 +1591,8 @@ and every binomial coefficient being divided by is positive.
 
 \begin{lemma}[Symmetric observables of the prefix law]
 \label{lem:prefix-observables}\uses{lem:prefix-distribution,lem:occupancy-sorting}
-\source{bost-specht-manuscript:page-0007}\notready
+\lean{BostConjecture.Specht.rectanglePrefix_average_eq_weighted,BostConjecture.Specht.hasSmallGap_perm_iff,BostConjecture.Specht.rectanglePrefixGapProbability_eq}
+\source{bost-specht-manuscript:page-0007}\leanok
 For $k\geq1$ and $m+l=ak$, let $b(T)$ be the decreasing shifted
 row lengths of the prefix of a standard rectangular tableau $T$.
 For every real-valued function $f$ of labelled occupancies that is
@@ -1788,8 +1789,9 @@ $2r(c-1)-c=-1/2-1/(2c)<0$.
 \end{proof}
 
 \begin{lemma}[Uniform separation of bulk prefix coordinates]
-\label{lem:prefix-separation}\uses{lem:prefix-distribution,lem:bulk-gap-bound,lem:gap-majorant-decay}
-\source{bost-specht-manuscript:page-0007}\notready
+\label{lem:prefix-separation}\uses{lem:prefix-observables,lem:bulk-gap-bound,lem:gap-majorant-decay}
+\lean{BostConjecture.Specht.occupancyGapProbability_uniform,BostConjecture.Specht.rectanglePrefixGapProbability_uniform}
+\source{bost-specht-manuscript:page-0007}\leanok
 For fixed $a\geq2$, $0<\varepsilon<1/2$, and $L>0$,
 \[
  \sup_{\varepsilon d\leq t\leq(1-\varepsilon)d}
@@ -1829,7 +1831,8 @@ covolumes is identically zero.
 
 \begin{lemma}[Logarithmic insertion bounds]
 \label{lem:log-insertion-bounds}\uses{lem:seminormal-norms,lem:prefix-observables}
-\source{bost-specht-manuscript:page-0008}\notready
+\lean{BostConjecture.Specht.log_prefixInsertionFactor_nonneg,BostConjecture.Specht.log_prefixInsertionFactor_le,BostConjecture.Specht.prefixAxialDistance_eq_shifted,BostConjecture.Specht.log_prefixInsertionFactor_le_of_not_gap,BostConjecture.Specht.log_prefixNormProduct}
+\source{bost-specht-manuscript:page-0008}\leanok
 For a standard rectangular tableau, every insertion contributes
 $\ell\in[0,(a-1)\log2]$ to the logarithm of its prefix norm product.
 If the preceding prefix has all shifted coordinate gaps greater than
@@ -1848,9 +1851,28 @@ then each $D>L$, so every latter bound is at most $1/(L-1)$.
 Sum the logarithms of the positive factors to obtain both claims.
 \end{proof}
 
+\begin{lemma}[Expected logarithmic insertion]
+\label{lem:expected-log-insertion}\uses{lem:log-insertion-bounds,lem:prefix-separation}
+\source{bost-specht-manuscript:page-0008}\notready
+Let $p_m(L)$ be the probability that the prefix preceding insertion
+$m$ has a shifted coordinate gap at most $L\geq2$.
+Then its logarithmic contribution satisfies
+\[
+ \mathbb E\ell_m\leq \frac{a-1}{L-1}+(a-1)\log2\,p_m(L).
+\]
+\end{lemma}
+\begin{proof}
+On the event without a small gap use the small insertion bound;
+on its complement use the uniform insertion bound. Both bounds
+are nonnegative, so pointwise the contribution is at most
+$(a-1)/(L-1)+(a-1)\log2$ times the bad-event indicator, with the
+first summand present everywhere. Taking the uniform finite
+average gives the displayed inequality.
+\end{proof}
+
 \begin{theorem}[Sublinear rectangular Specht covolume]
 \label{thm:specht-sublinear-covolume}
-\uses{def:rectangular-specht,lem:rectangular-covolume-nonneg,lem:one-row-covolume,lem:seminormal-norms,lem:seminormal-covolume,lem:prefix-separation,lem:log-insertion-bounds}
+\uses{def:rectangular-specht,lem:rectangular-covolume-nonneg,lem:one-row-covolume,lem:seminormal-norms,lem:seminormal-covolume,lem:prefix-separation,lem:expected-log-insertion}
 \source{bost-specht-manuscript:page-0008}\notready
 For every fixed positive integer $a$,
 $c_a(ak)\geq0$ and $c_a(ak)/(ak)\to0$ as $k\to\infty$.

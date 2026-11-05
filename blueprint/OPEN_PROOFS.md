@@ -59,8 +59,8 @@ The following producers still need complete source-backed mathematical proofs:
   tensor-product scalar-extension equivalence. Characteristic-zero descent
   and the invariant-space identification remain open.
 - The Gram producer is closed, including the coefficient-one normalization
-  and the actual prefix norm formula. Its first unmet asymptotic consumer is
-  bulk separation, followed by the logarithmic expectation bound.
+  and the actual prefix norm formula. Uniform bulk separation is proved;
+  its next asymptotic consumer is the logarithmic expectation bound.
   `Complement.lean` and `PrefixCount.lean`
   prove the rotated complement and actual prefix-fiber bijection, yielding
   the exact product of the two smaller standard-tableau counts.
@@ -75,8 +75,13 @@ The following producers still need complete source-backed mathematical proofs:
   Bernoulli exponential-moment bound; `OccupancyMGF.lean` transports it to
   the labelled law and proves two-sided and simultaneous concentration.
   The explicitly documented weaker tail constant suffices for the limit.
-  The first unmet producer is now the finite Vandermonde-weighted bad-gap
-  bound, followed by its uniform limit and transfer to actual tableau prefixes.
+  `WeightedGap.lean`, `BulkGap.lean` and `GapAsymptotics.lean` prove the
+  finite weighted bad-gap bound and a prefix-time-independent majorant
+  tending to zero. `PrefixEvent.lean` transports symmetric observables
+  through actual prefix fibers and sorting; `Separation.lean` proves
+  uniform bulk separation for the actual standard-tableau prefixes.
+  The first unmet producer is the insertion-log estimate and its averaged
+  bulk/boundary bound, followed by the final covolume squeeze.
   `HookCount.lean`
   bridges the imported hook formula
   to the accepted tableau indexing; `ShiftedCount.lean` proves the row hook
