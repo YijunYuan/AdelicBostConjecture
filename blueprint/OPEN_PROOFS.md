@@ -60,10 +60,10 @@ The following producers still need complete source-backed mathematical proofs:
   and the invariant-space identification remain open.
 - The Gram producer is closed, including the coefficient-one normalization
   and the actual prefix norm formula. Its first unmet asymptotic consumer is
-  `lem:tableau-count`, the shifted-coordinate count for standard tableaux,
-  followed by the exact rectangular prefix distribution and the logarithmic
+  the exact rectangular prefix distribution, followed by the logarithmic
   expectation bound. `HookCount.lean` now bridges the imported hook formula
-  to the accepted tableau indexing; the shifted-coordinate product remains open. No seminormal theorem is assumed: the
+  to the accepted tableau indexing; `ShiftedCount.lean` proves the row hook
+  interval partition and the factorial/Vandermonde enumeration. No seminormal theorem is assumed: the
   action and norms are now proved in the canonical word realization.
 - `lem:invariant-orbit-criterion`: equality of Euclidean and Zariski orbit
   closures, and detection by homogeneous invariants for products of special
@@ -88,8 +88,8 @@ invariant generic fiber for nonvanishing remain requirements of the route.
 
 All cited manuscript page anchors resolve to registered vision transcriptions
 that were read before attachment. The shifted-coordinate tableau count has
-an explicit corner-recurrence proof, supplementing the manuscript's use of
-the hook-length formula. The compact lattice-frame lemma has an explicit
+an explicit row-hook partition proof, converting the checked hook-length
+formula into the coordinates used by the manuscript. The compact lattice-frame lemma has an explicit
 bounded-basis proof, supplementing its appeal to Mahler compactness.
 
 The finite-dimensional convex-interval lemma specializes Chen–Jeannin §4.3

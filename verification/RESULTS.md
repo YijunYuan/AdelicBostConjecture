@@ -709,3 +709,10 @@ for every Young diagram. The serialized module check passed 9,065 jobs;
 `verification/SpechtHookCountAxioms.lean` checks all five new declarations,
 with only `propext`, `Classical.choice`, and `Quot.sound`. No shifted-coordinate
 count, prefix distribution, or general covolume limit is claimed here.
+
+`Specht/ShiftedCount.lean` proves the disjoint exhaustive row-hook interval
+partition and the resulting shifted factorial/Vandermonde enumeration. The
+serialized module check passed 9,066 jobs. All seven transitive probes in
+`verification/SpechtShiftedCountAxioms.lean` show only the three foundational
+axioms above. This closes the counting producer, including empty diagrams
+and padding with zero rows; rectangular prefix distribution remains open.

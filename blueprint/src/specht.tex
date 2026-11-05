@@ -1287,9 +1287,36 @@ increasing fillings therefore gives the displayed identity for the
 standard enumerating tableaux.
 \end{proof}
 
+\begin{lemma}[Hooks and shifted differences in a row]
+\label{lem:row-hook-complement}
+\lean{BostConjecture.Specht.row_hooks_union_shiftedDifferences,BostConjecture.Specht.row_hookProduct_mul_shiftedDifferences}\leanok
+Let $\mu$ have at most $a$ rows, put $b_r=\mu_r+a-r-1$ using
+zero-based indices, and fix $0\leq r<a$. The row hooks
+$h_\mu(r,q)$, $0\leq q<\mu_r$, together with the differences
+$b_r-b_j$, $r<j<a$, partition the integers $1,\ldots,b_r$.
+Consequently
+\[
+ \left(\prod_{q<\mu_r}h_\mu(r,q)\right)
+ \left(\prod_{r<j<a}(b_r-b_j)\right)=b_r!.
+\]
+\end{lemma}
+\begin{proof}
+The row hooks are positive, at most $b_r$, and strictly decrease
+with $q$, since column lengths weakly decrease. The shifted lengths
+$b_j$ strictly decrease, so the positive differences $b_r-b_j$ are
+distinct and at most $b_r$. A hook cannot equal a difference: if
+$q<\mu_j$, then $j<\mu'_q$, and
+$h_\mu(r,q)>\mu_r-\mu_j+j-r=b_r-b_j$; if $q\geq\mu_j$,
+then $\mu'_q\leq j$ and the strict reverse inequality holds.
+Thus the two sets are disjoint and contained in the stated interval.
+Their total size is $\mu_r+a-r-1=b_r$, so they exhaust it.
+Multiplication gives the identity, including an empty row or interval.
+\end{proof}
+
 \begin{lemma}[Tableau enumeration in shifted coordinates]
-\label{lem:tableau-count}
-\source{bost-specht-manuscript:page-0004,bost-specht-manuscript:page-0006}\notready
+\label{lem:tableau-count}\uses{lem:row-hook-complement,lem:standard-hook-count}
+\lean{BostConjecture.Specht.hookProduct_mul_shiftedVandermonde,BostConjecture.Specht.card_standard_mul_shiftedFactorials,BostConjecture.Specht.card_standard_eq_shifted_formula}
+\source{bost-specht-manuscript:page-0004,bost-specht-manuscript:page-0006}\leanok
 For a partition $\nu$ of $t$ with at most $a$ rows, set
 $b_i=\nu_i+a-i$, $1\leq i\leq a$, and
 $V(b)=\prod_{i<j}(b_i-b_j)$. The number of standard tableaux is
@@ -1299,37 +1326,12 @@ $V(b)=\prod_{i<j}(b_i-b_j)$. The number of standard tableaux is
 Equivalently it is $t!$ divided by the product of all hook lengths.
 \end{lemma}
 \begin{proof}
-We derive the shifted-coordinate form by corner recursion, giving a
-direct proof of the enumeration formula used in the manuscript.
-Put $c=a(a-1)/2$, so $t=\sum_i b_i-c$. For distinct $b_i$, expand
-\[
- R(z)=\prod_i\frac{z-b_i-1}{z-b_i}
- =1-\sum_i\frac{p_i}{z-b_i},\qquad
- p_i=\prod_{j\ne i}\frac{b_i-b_j-1}{b_i-b_j}.
-\]
-The residues prove this identity: the difference has no poles and
-tends to zero at infinity. The coefficient of $z^{-2}$ in the
-product is $c-\sum_i b_i=-t$; in the partial fraction expression
-it is $-\sum_i b_ip_i$. Hence $\sum_i b_ip_i=t$.
-For $t>0$ and a legal decrease of $b_i$ by one, the ratio of the
-proposed new count to the proposed old count is $b_ip_i/t$.
-An illegal decrease contributes zero: either $b_i=0$, or
-$b_i-b_{i+1}=1$, which makes the corresponding factor of $p_i$ zero.
-Legal decreases are precisely removal of a corner box. The identity
-therefore says the proposed count is the sum of its counts after
-all possible corner removals. Standard tableaux satisfy the same
-recurrence, since their largest entry lies in a unique removable
-corner. The empty partition has $b_i=a-i$ and proposed count one,
-since $V(a-1,\ldots,0)=\prod_{j=1}^{a-1}j!$.
-Induction on $t$ proves the count.
-
-For the hook version, the hook lengths in row $i$ are exactly the
-integers $1,\ldots,b_i$ with $b_i-b_j$ omitted for $j>i$.
-Indeed, for columns satisfying $\nu_{r+1}<q\leq\nu_r$ with $r\geq i$,
-the hook length is $\nu_i-q+r-i+1$; the consecutive intervals of
-these values have exactly those omitted endpoints. Multiplying row
-products gives the hook product $\prod_i b_i!/V(b)$, proving the
-equivalent formula.
+Multiply the row identities in Lemma~\ref{lem:row-hook-complement}.
+Each hook occurs once and each pair of distinct rows occurs once,
+so the total hook product times $V(b)$ is $\prod_i b_i!$.
+All factors of $V(b)$ and all factorials are positive. Combining
+this identity with Lemma~\ref{lem:standard-hook-count} gives
+$f^\nu\prod_i b_i!=t!V(b)$, hence the displayed quotient formula.
 \end{proof}
 
 \begin{lemma}[Exact prefix distribution]
