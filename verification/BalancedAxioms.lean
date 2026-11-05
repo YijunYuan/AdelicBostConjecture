@@ -1,5 +1,6 @@
 import BostConjecture.Balanced.ExponentialFlow
 import BostConjecture.Balanced.ExteriorMetric
+import BostConjecture.Balanced.PluckerNorm
 
 #print axioms BostConjecture.Balanced.trace_starProjection_comp
 #print axioms BostConjecture.Balanced.trace_starProjection_comp_eq_sum
@@ -28,3 +29,6 @@ import BostConjecture.Balanced.ExteriorMetric
 #print axioms BostConjecture.Balanced.exterior_norm_sq_ιMulti
 #print axioms BostConjecture.Balanced.exteriorOrthonormalBasis
 #print axioms BostConjecture.Balanced.exteriorOrthonormalBasis_apply
+#print axioms BostConjecture.Balanced.exterior_map_inner
+#print axioms BostConjecture.Balanced.plucker_norm_sq
+#print axioms BostConjecture.Balanced.IsBalanced.hasDerivAt_plucker_norm_sq_tensor_exp_zero

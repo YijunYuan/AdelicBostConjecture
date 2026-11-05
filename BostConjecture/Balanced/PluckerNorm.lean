@@ -1,7 +1,7 @@
 module
 
-public import BostConjecture.Balanced.ExteriorMetric
 public import BostConjecture.Balanced.ExponentialFlow
+public import BostConjecture.Balanced.ExteriorMetric
 
 /-!
 # Plücker norms and balanced first variation
@@ -59,7 +59,8 @@ theorem IsBalanced.hasDerivAt_plucker_norm_sq_tensor_exp_zero
       (TensorProduct.map (NormedSpace.exp (t • LinearMap.toContinuousLinearMap H)).toLinearMap
         (NormedSpace.exp (t • LinearMap.toContinuousLinearMap J)).toLinearMap)
       (ιMulti ℂ s (fun i => (v i : U ⊗[ℂ] W)))‖ ^ 2) 0 0 := by
-  simpa only [map_apply_ιMulti, exterior_norm_sq_ιMulti, Function.comp_apply] using
+  simpa only [map_apply_ιMulti, exterior_norm_sq_ιMulti, Function.comp_apply,
+    TensorProduct.mapL_apply] using
     hS.hasDerivAt_re_gramDet_tensor_exp_zero v H J hH hJ
 
 end BostConjecture.Balanced

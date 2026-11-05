@@ -45,8 +45,9 @@ updated axiom file's LSP retained a stale-import error after the producer
 build; the serialized kernel check passed all 19 probes in 36.0s.
 No unguarded build was used.
 
-Root integration was handed to SPECHT in `I-0049`; it is pending in this
-checkpoint and is not implied by the scoped builds.
+SPECHT confirmed root integration through `Balanced.ExponentialFlow` in
+`I-0049/C-0010`: check `975bdb23135a0d4a`, **9,205 jobs warning-free**.
+The new exterior metric and Plücker norm leaf require the next root batch.
 
 ## Current exterior-metric checkpoint
 
@@ -56,7 +57,9 @@ command: **2,841 jobs, warning-free**, 115.8s including setup. The updated
 `verification/BalancedAxioms.lean` kernel check passed **27 probes** in 2.6s;
 all report only `propext`, `Classical.choice`, and `Quot.sound`.
 Guarded LSP diagnostics are clear for the metric and its new Plücker norm
-consumer. The latter's kernel check is pending at this checkpoint.
+consumer. The `PluckerNorm` serialized build subsequently passed **2,853 jobs**,
+warning-free (15.8s including setup), and all **30** updated transitive axiom
+probes passed in 3.8s with only the same foundational axioms.
 
 Independent `honesty-reviewer` accepted the actual exterior object, Gram
 formula, spanning uniqueness, degree-zero/over-rank cases, instance pattern,
@@ -67,7 +70,7 @@ stopped without results, and acceptance uses the owner's serialized checks.
 Automatic GEOM integration `497b5b1` captured BALANCED's in-flight new files
 and blueprint edits, including a then-unfixed coercion in `PluckerNorm`.
 The scoped metric check verifies the accepted metric; the Plücker consumer's
-coercion is now fixed and awaits its own check. Root integration remains a
+coercion is fixed and its scoped build and axiom probes pass. Root integration remains a
 separate SPECHT handoff. The automatic cross-lane snapshot was reported in
 `I-0049`; it is not evidence that every file in that commit built.
 
@@ -92,7 +95,7 @@ and actual source inspection supplied the used declarations.
 ## Remaining mathematical producers
 
 1. Spectral exponential expansion and convexity for the now-constructed
-   complex exterior Gram norm; final acceptance of the actual norm-variation bridge.
+   complex exterior Gram norm. The actual Plücker norm-variation bridge is checked.
 2. Determinant-one unitary/logarithm adapters for the already checked polar
    decomposition port (`TJHeeringa/mathlib4`, revision
    `41260205df493c627e1ac0e54812cfdeb6517fbc`, PR 45002).
@@ -143,8 +146,8 @@ helper was prohibited. Read-only source/mathematical review was used.
 Claim class: **proved producers**. Before this session: actual tensor exponential-frame Gram stationarity was
 proved but the complex exterior metric was missing. After: the full complex
 exterior Gram metric and orthonormal basis are checked; the first analytic
-unmet producer is spectral expansion/convexity, with the actual norm-variation
-bridge awaiting its kernel check.
+unmet producer is spectral expansion/convexity, and the actual Plücker norm-variation
+bridge is checked.
 Consumer: `lem:balanced-plucker`, still unproved. The source-backed orbit route
 is mathematical blueprint only, with all formal dependencies still open.
 Honesty reviewer: used; actual projection and both balance equations are
