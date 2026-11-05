@@ -438,10 +438,26 @@ concentration or asymptotic result is imported or assumed.
 
 The checked root batch includes the owners' original
 `Arithmetic.DeterminantProduct`, `IntegralDeterminantProduct`,
-`DeterminantShear`, `Geometry.ContractionBaseChange`, and
-`Balanced.ExponentialFlow` leaves. Their provenance and separate scoped
+`IntegralExactDeterminant` (including projective determinant shear),
+`Geometry.ContractionBaseChange`, and `Balanced.PluckerNorm`
+(including exponential flow) leaves. Their provenance and separate scoped
 audits remain in the arithmetic, geometry and balanced verification records.
 The shared root build is integration evidence, not completion of those tasks.
+
+The complex exterior Gram metric and Plücker consumer delivered at `76a3ad5`
+reuse Mathlib revision `56a005855ea17e0b0958f73ec801ae140b0a1679`
+(Apache-2.0): `Module.Basis.exteriorPower` and its coordinate API in
+`Mathlib/LinearAlgebra/ExteriorPower/Basis.lean`, `pairingDual` and
+`pairingDual_ιMulti_ιMulti` in `Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean`,
+and Euclidean coordinate transport in `Mathlib/Analysis/InnerProductSpace/PiL2.lean`.
+These imports are unchanged; no source was copied. Original local proofs
+construct the full complex exterior metric, identify its Gram norms, and prove
+the actual exterior isometry and balanced Plücker norm stationarity.
+They also consume the existing `Tensor.inner_ext_of_span` uniqueness lemma.
+The real-only Mathlib exterior metric is not used as a substitute for this
+complex producer. The separate analytic convexity and semistability results
+remain open. The intrinsic exact-determinant handoff at `9ed74af` is original
+local code using the already attributed exterior and projective infrastructure.
 
 ## Orbit-criterion mathematical references — session 0026
 

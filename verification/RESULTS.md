@@ -7,9 +7,11 @@ integral orbit lattice, orthonormal Hilbert metric and arbitrary-number-field
 main target are unchanged.
 
 The final explicit-root configured `horizon check` (`975bdb23135a0d4a`)
-passed **9,205 jobs** without warnings at 22:04:15 UTC on 2026-11-05.
-It integrates the delivered arithmetic determinant product/integral/shear,
-geometry contraction base-change and balanced exponential-flow leaves.
+passed **9,210 jobs** without warnings at 22:11:39 UTC on 2026-11-05.
+It integrates the delivered arithmetic determinant product/integral/shear
+and intrinsic exact-sequence determinant, geometry contraction base-change,
+and balanced Plücker norm leaves. The final arithmetic and balanced handoffs
+had separate 192- and 30-probe foundational-only audits and independent reviews.
 The four new audit files contain **38 distinct probes**, all foundational-only.
 Honesty-reviewer independently accepted the producers and finite-node
 completion; the separated lower-bound and concentration nodes remain
@@ -59,6 +61,25 @@ identities. Bounded Horizon and LeanSearch queries did not locate the needed
 sampling-without-replacement concentration theorem; this is not a proof of
 absence. Guarded LSP briefly retained stale imports, while the serialized
 checks above verified the accepted files. No kernel check failed this session.
+
+Final checked root blob: `d29b590246c8925d6cce74559397b56db2cc8de5`.
+Coherent verified milestones are `fbe2d42`, `ceb6ad1`, `0d8c6f3`,
+`a9f9fd2`, and `7c70506`; concurrent automatic snapshots captured some source
+before those commits. The stated builds and audits certify the source, not
+the existence of an automatic snapshot.
+
+Graph sync reports 199 blueprint nodes, 1,323 declarations and 912 edges,
+with no missing references. Its 693 unattached helper/imported declarations,
+including concurrent drafts, remain an intentional coverage warning recorded
+in I-0004. The graph frontier exposes the two unproved separation producers.
+The source-scope symlink is intact. Janitor reviewed the active-roadmap
+warning; the remaining 13 active items represent the four live lanes and
+their ancestors. The scratch cleanup dry-run found no candidates.
+The ledger excludes `hgraph/` through its runtime `info/exclude`; an attempted
+graph-comment commit was rejected. That exclusion is preserved. The source
+blueprint is committed, and the node comment remains in Horizon's graph state.
+The I-0003 description now reflects the proved seminormal and distribution
+results while retaining the invariant-space, orbit and asymptotic obligations.
 
 ## Tableau enumeration and prefix weights checkpoint (session 0023)
 

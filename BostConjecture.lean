@@ -17,12 +17,12 @@ public import BostConjecture.Arithmetic.LineDualDegree
 public import BostConjecture.Arithmetic.DeterminantDual
 public import BostConjecture.Arithmetic.DeterminantProduct
 public import BostConjecture.Arithmetic.IntegralDeterminantProduct
-public import BostConjecture.Arithmetic.DeterminantShear
+public import BostConjecture.Arithmetic.IntegralExactDeterminant
 public import BostConjecture.LinearAlgebra.AlternatingTensorPower
 public import BostConjecture.LinearAlgebra.ExteriorPower.BaseChange
 public import BostConjecture.LinearAlgebra.PiTensorProduct.Projective
 public import BostConjecture.Analysis.InnerProductSpace.Polar
-public import BostConjecture.Balanced.ExponentialFlow
+public import BostConjecture.Balanced.PluckerNorm
 public import BostConjecture.Geometry.TensorRealization
 public import BostConjecture.Geometry.FreeEmbedding
 public import BostConjecture.Geometry.DeterminantBaseChange
