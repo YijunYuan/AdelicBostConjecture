@@ -646,3 +646,67 @@ at 2026-11-05 22:47:59 UTC (`ffefd7bf352d83dc`, 27.552 seconds after
 custom axiom in their transitive dependencies. The full log is
 session0014/polynomial-tensor-axioms.log. The final polynomial quotient marker
 was added only after this audit and the read-only honesty review.
+
+## Pinned polarization port and actual invariant lift
+
+Human I-0063 authorizes the extra `LinearAlgebra/SymmetricPower/**` and
+`vendor/tauceti-polarization/**` paths. The selective port retains TauCeti's
+commuting-operator comparison and symmetrization proof, pinned at
+`3c3a32baea963db05c302adeb307b22baae4de78`. Verbatim sources, exact hashes,
+Apache-2.0 license, authors and adaptations are in the vendor provenance record.
+No basis, monomial, WordFiltration or repository dependency was imported.
+
+- `47c79f2`: `SymmetricPower/Basic.lean`; module `880e87cdefa7c2d8` passed
+  at 22:52:52 UTC.
+- `d56b70d`: `SymmetricPower/Lift.lean` and `Algebra.lean`; the latter module
+  `4251d1bff1cb50f2` passed 1567 jobs at 22:55:33 UTC. Its first check failed
+  on missing finite-product imports, submodule coercion parentheses and the
+  newer upstream endomorphism multiplication rewrite. Explicit imports,
+  parentheses and `Module.End.mul_apply` repaired these compatibility errors.
+- `c55300f`: `Geometry/PolynomialPolarization.lean`; module
+  `4df483df0e24e340` passed 2379 jobs at 22:59:38 UTC. It proves the actual
+  normalized section of `polynomialTensorMap`, naturality for every linear
+  pullback, permutation invariance, uniqueness among symmetric tensors, and
+  `exists_invariant_tensor_evaluation_ne_zero`. The last theorem consumes
+  BALANCED's unchanged intrinsic polynomial invariants and the existing
+  finite-projective evaluation identity. The quotient-preimage gap is closed.
+
+The port's scalar type convention `R : Type` is inherited from Mathlib's
+symmetric power indexed by `Fin d`; it imposes no freeness or rank restriction.
+The algebra comparison works over commutative semirings and arbitrary modules;
+factorial normalization needs characteristic zero. The concrete evaluation
+consumer uses finite-dimensional vector spaces. No orbit criterion or
+rectangular invariant-space equality is encoded as an assumption package.
+
+The earlier root batch through `PolynomialTensor` passed 9227 jobs without
+warnings at 22:51:43 UTC (`975bdb23135a0d4a`, root blob
+`3cc15b902cb12270bbe0b37a82b6fc3141cff1b2`). The new polarization batch and
+its CONTRIBUTIONS entry are a separate handoff to SPECHT. The preceding
+source-scope graph sync had 219 blueprint nodes, 1453 declarations and 1043
+edges; its 728 unattached helper warnings are intentional coverage information,
+not checks of concurrent drafts. The graph CLI initially rejected `sync --json`;
+the corrected plain sync succeeded. No source/build claim relies on that
+rejected CLI command.
+
+The final 202-probe audit passed at 2026-11-05 23:01:48 UTC
+(`ffefd7bf352d83dc`, 48.022 seconds), with only `propext`, `Classical.choice`
+and `Quot.sound`. Both the read-only honesty review and a fresh source-fidelity
+review found no actionable mismatch, assumption package or provenance defect.
+The latter checked the raw hashes/license, selected proof closure and actual
+consumer. Accordingly the homogeneous comparison and symmetric invariant-lift
+nodes are marked checked. No transitive custom axiom or `sorryAx` occurs.
+
+The next local nonvanishing producer is the actual pullback of a Pluecker
+invariant to `Hom(V, tensor E)`, with its degree and group invariance, followed
+by degree divisibility and canonical tensor regrouping. Polynomial coaction
+scalar-extension/rational-point compatibility and rectangular SL-fixed-tensor
+spanning remain separate unmet producers. They are not implied by this port,
+the earlier kernel lemma or the clean root build. BOST-GEOM remains incomplete.
+
+Final scoped graph sync: 226 blueprint nodes, 1547 Lean declarations and 1093
+edges, with no missing-reference warning. The 760 unattached helpers/imports
+remain intentional coverage information; checked source-facing producers are
+attached. The one-time hygiene review retained nested active lane ancestors;
+GEOM has one next proof leaf, BOST-GEOM-NONZERO. Scratch cleanup found no stale
+candidates. Human I-0063 stays open for its initiator; I-0066 tracks the remaining
+shared root/attribution integration of the polarization batch.

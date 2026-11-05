@@ -26,6 +26,26 @@ import BostConjecture.Geometry.InvariantBaseChange
 import BostConjecture.Geometry.IndependentInvariants
 import BostConjecture.Geometry.PiInvariants
 import BostConjecture.Geometry.PolynomialTensor
+import BostConjecture.Geometry.PolynomialPolarization
+
+#print axioms SymmetricPower.toTensorPower
+#print axioms SymmetricPower.mk_comp_toTensorPower
+#print axioms SymmetricPower.toTensorPower_comp_map
+#print axioms SymmetricPower.lift
+#print axioms SymmetricPower.consMul_comm
+#print axioms BostConjecture.SymmetricPower.range_toSymmetricAlgebra
+#print axioms BostConjecture.SymmetricPower.toSymmetricAlgebra_injective
+#print axioms BostConjecture.SymmetricPower.equivHomogeneous
+#print axioms BostConjecture.Geometry.toSymmetricAlgebra_mk
+#print axioms BostConjecture.Geometry.symmetricPowerPolynomialEquiv
+#print axioms BostConjecture.Geometry.symmetricPowerPolynomialEquiv_coe
+#print axioms BostConjecture.Geometry.polynomialTensorMap_toTensorPower
+#print axioms BostConjecture.Geometry.polynomialSymmetricLift
+#print axioms BostConjecture.Geometry.polynomialTensorMap_symmetricLift
+#print axioms BostConjecture.Geometry.polynomialSymmetricLift_pullback
+#print axioms BostConjecture.Geometry.polynomialSymmetricLift_reindex
+#print axioms BostConjecture.Geometry.polynomialSymmetricLift_eq_of_symmetric
+#print axioms BostConjecture.Geometry.exists_invariant_tensor_evaluation_ne_zero
 
 #print axioms BostConjecture.Geometry.polynomialTensorMap
 #print axioms BostConjecture.Geometry.polynomialTensorMap_tprod

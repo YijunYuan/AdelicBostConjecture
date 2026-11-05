@@ -1403,7 +1403,8 @@ preimage supplied by the image claim to obtain the last conclusion.
 
 \begin{lemma}[Symmetric tensor powers and homogeneous components]
 \label{lem:symmetric-power-homogeneous}
-\notready
+\lean{BostConjecture.SymmetricPower.range_toSymmetricAlgebra,BostConjecture.SymmetricPower.toSymmetricAlgebra_injective,BostConjecture.SymmetricPower.equivHomogeneous}
+\leanok
 Let $R$ be a commutative semiring and $M$ an $R$-module. Multiplication
 of generators identifies the symmetric tensor power $\operatorname{Sym}^d(M)$,
 defined by quotienting tensor words by permutation, with
@@ -1433,7 +1434,9 @@ restricted to the homogeneous component.
 
 \begin{lemma}[The canonical symmetric lift of homogeneous invariants]
 \label{lem:polynomial-symmetric-lift}
-\uses{lem:polynomial-tensor-quotient,lem:symmetric-power-homogeneous}\notready
+\uses{lem:polynomial-tensor-quotient,lem:symmetric-power-homogeneous}
+\lean{BostConjecture.Geometry.symmetricPowerPolynomialEquiv,BostConjecture.Geometry.polynomialSymmetricLift,BostConjecture.Geometry.polynomialTensorMap_symmetricLift,BostConjecture.Geometry.polynomialSymmetricLift_pullback,BostConjecture.Geometry.polynomialSymmetricLift_reindex,BostConjecture.Geometry.polynomialSymmetricLift_eq_of_symmetric,BostConjecture.Geometry.exists_invariant_tensor_evaluation_ne_zero}
+\leanok
 Let $X$ be a finite-dimensional vector space over a characteristic-zero
 field $F$. The restriction of $\pi_d$ to the tensors fixed by permutation
 of their $d$ positions is an isomorphism onto the degree-$d$ polynomial
