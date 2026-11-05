@@ -25,8 +25,13 @@ Murphy operators. `Content.lean` computes the concrete Murphy coefficient at the
 row word as the box content. `Central.lean` uses the checked complex
 column-antisymmetrizer line theorem to prove that the sum of all Murphy
 operators acts by total diagram content on the actual real span and
-integral orbit lattice. Individual content eigenvalues still require
-prefix restriction and dominance triangularity. The standard Gram bound is now
+integral orbit lattice. `Prefix.lean` now constructs the actual standard prefix diagrams and
+content increments. `Branching.lean` proves frozen-tail integral restriction,
+prefix equivariance, lifts of smaller lattice vectors and the sliced central
+scalar. `Filtration.lean` identifies the standard-basis largest-label
+filtration with the ambient word-support filtration and proves its stability.
+Individual content eigenvalues still require identification of the successive
+branching quotients and the resulting colexicographic triangularity. The standard Gram bound is now
 unconditional; its explicit seminormal evaluation, the invariant-space identification,
 and the general covolume asymptotic remain open.
 
@@ -41,9 +46,12 @@ The following producers still need complete source-backed mathematical proofs:
   Its complex orbit representation now has an explicit integral model and
   tensor-product scalar-extension equivalence. Characteristic-zero descent
   and the invariant-space identification remain open.
-- `lem:prefix-content-triangular` is the first unmet Gram producer: prefix
-  restriction and content-triangular Murphy action on standard polytabloids.
-  `lem:monic-seminormal` then requires a compatible dominance ordering,
+- `lem:specht-branching-quotient` is the first unmet Gram producer: identify
+  the successive largest-label filtration quotient with the smaller Specht
+  module, using the proved restriction and support filtration. The written
+  induction then gives `lem:prefix-content-triangular` in the sufficient
+  colexicographic total order; it no longer requires the stronger partial-order
+  dominance statement. `lem:monic-seminormal` then requires the spectral identification
   and the resulting correctly normalized adjacent-transposition formula.
   Monic orthogonalization and the abstract Gram norm-product identity are
   proved; no assertion that these actual norms equal the prefix product is
