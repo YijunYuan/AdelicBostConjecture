@@ -65,6 +65,13 @@ theorem dualCore_evaluation_le (f : Dual ℂ E) (x : E) :
   rw [dualCore_norm]
   exact f.toContinuousLinearMap.le_opNorm x
 
+/-- A bound on every evaluation bounds the canonical dual norm. -/
+theorem dualCore_norm_le (f : Dual ℂ E) {C : ℝ} (hC : 0 ≤ C)
+    (h : ∀ x : E, ‖f x‖ ≤ C * ‖x‖) :
+    Real.sqrt (((dualCore E).inner f f).re) ≤ C := by
+  rw [dualCore_norm]
+  exact f.toContinuousLinearMap.opNorm_le_bound hC h
+
 /-- In any orthonormal frame the dual metric is the coefficient Gram form. -/
 theorem dualCore_inner_basis {ι : Type*} [Fintype ι]
     (b : OrthonormalBasis ι ℂ E) (f g : Dual ℂ E) :

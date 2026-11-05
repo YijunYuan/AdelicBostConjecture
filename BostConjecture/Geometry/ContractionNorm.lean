@@ -163,15 +163,15 @@ theorem canonicalPairing_fiber_norm_le
   letI := InnerProductSpace.ofCore
     (inferInstance : PreInnerProductSpace.Core ℂ (ℂ ⊗[𝓞 K] (⨂[𝓞 K] j, (⨂[𝓞 K] (_ : Fin (k j)), ⋀[𝓞 K]^(a j) (Dual (𝓞 K) (E j))) ⊗[𝓞 K]
       ((𝓞 K) ⊗[ℤ] Specht.orbitLattice (t j)))))
-  letI : NormedSpace ℂ (ℂ ⊗[𝓞 K] (⨂[𝓞 K] j, (⨂[𝓞 K] (_ : Fin (k j)), ⋀[𝓞 K]^(a j) (Dual (𝓞 K) (E j))) ⊗[𝓞 K]
-      ((𝓞 K) ⊗[ℤ] Specht.orbitLattice (t j)))) := InnerProductSpace.Core.toNormedSpace
   ∀ (z : ℂ ⊗[𝓞 K] ((⨂[𝓞 K] (_ : Fin l), ⋀[𝓞 K]^s V) ⊗[𝓞 K]
       ((𝓞 K) ⊗[ℤ] Specht.orbitLattice v))),
     let z' := determinantTwistBaseChangeEquiv (R := 𝓞 K) (S := ℂ) (M := V)
       (Specht.orbitLattice v) l s z
-    ‖(Arithmetic.dualBaseChangeMap (𝓞 K) ℂ (⨂[𝓞 K] j, (⨂[𝓞 K] (_ : Fin (k j)), ⋀[𝓞 K]^(a j) (Dual (𝓞 K) (E j))) ⊗[𝓞 K]
+    let f := Arithmetic.dualBaseChangeMap (𝓞 K) ℂ (⨂[𝓞 K] j, (⨂[𝓞 K] (_ : Fin (k j)), ⋀[𝓞 K]^(a j) (Dual (𝓞 K) (E j))) ⊗[𝓞 K]
       ((𝓞 K) ⊗[ℤ] Specht.orbitLattice (t j)))
-      ((canonicalPairing E hk t ha hl v hs i).baseChange ℂ z)).toContinuousLinearMap‖ ≤
+      ((canonicalPairing E hk t ha hl v hs i).baseChange ℂ z)
+    Real.sqrt (((Tensor.dualCore (ℂ ⊗[𝓞 K] (⨂[𝓞 K] j, (⨂[𝓞 K] (_ : Fin (k j)), ⋀[𝓞 K]^(a j) (Dual (𝓞 K) (E j))) ⊗[𝓞 K]
+      ((𝓞 K) ⊗[ℤ] Specht.orbitLattice (t j))))).inner f f).re) ≤
       Real.sqrt (((Tensor.binaryCore
         (Tensor.tensorCore (fun _ : Fin l => Arithmetic.ComplexDeterminant.core bV))
         (latticeComplexCore v)).inner z' z').re) := by
@@ -203,10 +203,8 @@ theorem canonicalPairing_fiber_norm_le
   let := InnerProductSpace.ofCore
     (inferInstance : PreInnerProductSpace.Core ℂ (ℂ ⊗[𝓞 K] (⨂[𝓞 K] j, (⨂[𝓞 K] (_ : Fin (k j)), ⋀[𝓞 K]^(a j) (Dual (𝓞 K) (E j))) ⊗[𝓞 K]
       ((𝓞 K) ⊗[ℤ] Specht.orbitLattice (t j)))))
-  let : NormedSpace ℂ (ℂ ⊗[𝓞 K] (⨂[𝓞 K] j, (⨂[𝓞 K] (_ : Fin (k j)), ⋀[𝓞 K]^(a j) (Dual (𝓞 K) (E j))) ⊗[𝓞 K]
-      ((𝓞 K) ⊗[ℤ] Specht.orbitLattice (t j)))) := InnerProductSpace.Core.toNormedSpace
   intro z
-  apply ContinuousLinearMap.opNorm_le_bound _ (Real.sqrt_nonneg _)
+  apply Tensor.dualCore_norm_le _ _ (Real.sqrt_nonneg _)
   intro u
   exact canonicalPairing_fiber_le E hE σ i hi hk t ha hl v hs bV b z u
 
