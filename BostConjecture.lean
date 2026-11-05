@@ -8,6 +8,7 @@ public import BostConjecture.LinearAlgebra.PiTensorProduct.Projective
 public import BostConjecture.Analysis.InnerProductSpace.Polar
 public import BostConjecture.Geometry.TensorRealization
 public import BostConjecture.Geometry.FreeEmbedding
+public import BostConjecture.Geometry.DeterminantBaseChange
 public import BostConjecture.Tensor.Evaluation
 public import BostConjecture.Lattice.Covolume
 public import BostConjecture.Specht.Tableau
@@ -22,6 +23,7 @@ public import BostConjecture.Specht.Orthogonal
 public import BostConjecture.Specht.RealAction
 public import BostConjecture.Specht.Content
 public import BostConjecture.Specht.Central
+public import BostConjecture.Specht.Filtration
 public import BostConjecture.Specht.OneRow
 public import OAI.NumberTheory.ArithmeticGroups.Lattices.FrameMatrices
 public import OAI.RepresentationTheory.Saxl.SpechtSubmodule

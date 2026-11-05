@@ -811,7 +811,8 @@ stated scalar.
 
 \begin{lemma}[Largest-label support filtration]
 \label{lem:specht-last-row-filtration}
-\uses{lem:polytabloid-last-support,lem:standard-polytabloid-independent,lem:real-standard-basis,lem:real-specht-action}\notready
+\uses{lem:polytabloid-last-support,lem:standard-polytabloid-independent,lem:real-standard-basis,lem:real-specht-action}
+\lean{BostConjecture.Specht.lastRowSubspace,BostConjecture.Specht.standardRealBasis_repr_eq_zero_of_last_support,BostConjecture.Specht.mem_lastRowSubspace_iff,BostConjecture.Specht.realSpechtRep_mem_lastRowSubspace}\leanok
 In the real Specht space of a diagram with $n+1$ boxes, let $F_r$
 be the span of standard polytabloids whose largest label occupies
 row at most $r$. Then
@@ -837,28 +838,74 @@ the final letter of each word and preserves the Specht space;
 thus it preserves the displayed support condition and $F_r$.
 \end{proof}
 
-\begin{lemma}[Prefix dominance and triangular Murphy action]
+\begin{lemma}[Successive branching quotients]
+\label{lem:specht-branching-quotient}
+\uses{lem:specht-last-row-filtration,lem:polytabloid-prefix-restriction,lem:real-standard-basis}\notready
+Suppose row $r$ ends in a removable corner of $\mu$, and let $\nu$
+be the diagram obtained by deleting it. Let $F_{<r}$ be the span of
+standard polytabloids with largest-label row strictly less than $r$.
+Restriction to words assigning the largest label to row $r$ induces
+an $\mathfrak S_n$-equivariant isomorphism
+\[
+ F_r/F_{<r}\simeq S^\nu_{\mathbb R}.
+\]
+It sends the class of each standard polytabloid with largest-label
+row $r$ to the polytabloid obtained by deleting that label.
+\end{lemma}
+\begin{proof}
+The largest label is at the end of its row, because row labels
+increase, and at the bottom of its column, because column labels
+increase. Thus its position is the unique removable corner in that
+row. Deleting it gives a standard tableau of $\nu$. Conversely,
+adjoining the largest label at this corner to any standard tableau
+of $\nu$ gives a standard tableau of $\mu$. These operations are inverse.
+The support bound annihilates all generators with largest-label row
+less than $r$. Frozen-tail restriction sends every remaining generator
+to the associated smaller polytabloid. They form a basis of the
+smaller Specht space. Therefore the kernel on $F_r$ is exactly
+$F_{<r}$, and the image is the whole smaller space. The support
+filtration is invariant, and restriction commutes with the position
+action on the first $n$ labels, proving equivariance of the induced
+isomorphism.
+\end{proof}
+
+\begin{lemma}[Colexicographic triangular Murphy action]
 \label{lem:prefix-content-triangular}
-\uses{lem:standard-prefix-diagram,lem:central-content-action,lem:real-standard-basis}\notready
-For a standard tableau $t$, let $\lambda_t^{(m)}$ be the shape of
-its first $m$ labels. Write $s\preceq t$ when, for every $m$ and
-row cutoff $r$, the first $r$ rows of $\lambda_s^{(m)}$ have at most
-as many boxes as those of $\lambda_t^{(m)}$.
-For every label $j$,
+\uses{lem:specht-branching-quotient,lem:standard-prefix-diagram,lem:central-content-action}\notready
+Order standard tableaux by comparing their row words at the largest
+label where they differ; the tableau with the smaller row there is
+earlier. For every label $j$,
 \[
  J_je_t-\operatorname{content}_t(j)e_t
- \in\operatorname{span}_{\mathbb R}\{e_s:s\preceq t,\ s\ne t\}.
+ \in\operatorname{span}_{\mathbb R}\{e_s:s<t\}.
 \]
+This total order is sufficient for monic orthogonalization; the assertion
+does not require triangularity for the stronger partial order comparing
+every prefix in dominance order.
 \end{lemma}
+\begin{proof}
+Induct on the number of labels. With no labels the assertion is empty.
+For a diagram with $n+1$ boxes, the order first groups tableaux by
+the row of label $n$. Inside a fixed group it is exactly the same
+order on the tableaux obtained by deleting that label. For $j<n$,
+the branching-quotient isomorphism and the induction hypothesis
+show that $J_je_t-\operatorname{content}_t(j)e_t$ is a combination
+of earlier tableaux in the same group, modulo $F_{<r}$. Every
+tableau in $F_{<r}$ is earlier as well, proving the assertion.
+Finally $J_n=Z_{n+1}-\sum_{j<n}J_j$. The central operator is the
+scalar $C_\mu$; subtracting the triangular formulas already proved
+gives diagonal coefficient $C_\mu-\sum_{j<n}\operatorname{content}_t(j)
+=\operatorname{content}_t(n)$, by the prefix content identity.
+All off-diagonal terms are still earlier, completing the induction.
+\end{proof}
 
 \begin{theorem}[Monic seminormal basis]
 \label{lem:monic-seminormal}\uses{lem:orthogonal-standard-basis,lem:murphy-eigenvector-residual,lem:prefix-content-triangular}
 \source{bost-specht-manuscript:page-0005,ryom-hansen-seminormal-denominators-v1:classical_formula}\notready
-Order standard tableaux by an extension of dominance of every prefix,
+Order standard tableaux colexicographically by their row words,
 starting with the column-reading tableau $t_0$. Monic orthogonalization
 of the standard polytabloids gives an orthogonal basis $f_t$ with
-$f_{t_0}=e_{t_0}$. For a legal adjacent swap $u=(j,j+1)t$ with $u$
-more dominant than $t$,
+$f_{t_0}=e_{t_0}$. For a legal adjacent swap $u=(j,j+1)t$ with $t<u$,
 \[
  (j,j+1)f_t=\rho f_t+f_u,\qquad
  \rho=\frac{1}{\operatorname{content}_t(j+1)-\operatorname{content}_t(j)},

@@ -1,5 +1,6 @@
 import BostConjecture.Arithmetic.HermitianLine
 import BostConjecture.Arithmetic.DeterminantLine
+import BostConjecture.Arithmetic.Degree
 
 #print axioms BostConjecture.Arithmetic.HermitianMetric
 #print axioms BostConjecture.Arithmetic.fiberSection_injective
@@ -30,3 +31,14 @@ import BostConjecture.Arithmetic.DeterminantLine
 #print axioms BostConjecture.Arithmetic.determinantComplexEquiv
 #print axioms BostConjecture.Arithmetic.determinantComplexEquiv_section
 #print axioms BostConjecture.Arithmetic.determinant_complex_finrank
+#print axioms BostConjecture.Arithmetic.ComplexDeterminant.core
+#print axioms BostConjecture.Arithmetic.ComplexDeterminant.core_inner_ιMulti
+#print axioms BostConjecture.Arithmetic.HermitianMetric.determinantFiber
+#print axioms BostConjecture.Arithmetic.HermitianMetric.determinantFiber_inner_ιMulti
+#print axioms BostConjecture.Arithmetic.HermitianMetric.determinantFiber_conjugate
+#print axioms BostConjecture.Arithmetic.HermitianMetric.determinant
+#print axioms BostConjecture.Arithmetic.HermitianMetric.determinant_sectionNorm_wedge_sq
+#print axioms BostConjecture.Arithmetic.HermitianMetric.degree
+#print axioms BostConjecture.Arithmetic.HermitianMetric.slope
+#print axioms BostConjecture.Arithmetic.HermitianMetric.degree_eq
+#print axioms BostConjecture.Arithmetic.HermitianMetric.determinant_quotient_finite
