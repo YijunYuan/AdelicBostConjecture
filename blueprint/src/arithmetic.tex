@@ -1125,6 +1125,26 @@ The naturality identities hold on elementary wedges, which span the
 exterior powers, so they apply to arbitrary $x,y$ as asserted.
 \end{proof}
 
+\begin{lemma}[Arbitrary sections after scalar extension]
+\label{lem:exact-determinant-field-section}
+\uses{lem:exact-determinant-base-change,lem:exact-determinant-algebra}\notready
+In the setting of Lemma~\ref{lem:exact-determinant-base-change}, suppose
+$T$ is a field and $R\to T$ is injective. The displayed formula remains
+valid with any $T$-linear section $s_T:C_T\to B_T$ of $q_T$, whether
+or not $s_T$ extends an integral section.
+\end{lemma}
+\begin{proof}
+The integral sequence splits, since $C$ is projective. Its splitting
+extends to $T$ and proves that the extended sequence is exact and that
+$i_T$ is injective. The ranks of $A_T,C_T$ are $a,c$: scalar extension
+along an injective map from a domain to a field preserves the ranks of
+finite projective modules. Apply the preceding scalar-extension formula
+using an integral section. Over the field $T$, section independence of
+the exact determinant replaces its extended section by the prescribed
+$s_T$. The two exterior degrees agree by the rank identities, so this
+replacement gives precisely the asserted formula.
+\end{proof}
+
 \begin{lemma}[Determinant norm of orthogonal summands]
 \label{lem:orthogonal-determinant-norm}
 \uses{lem:exterior-product,lem:determinant-metric,lem:quotient-hermitian-metric}\notready
@@ -1156,7 +1176,7 @@ to the kernel of $q$, which contains the image of $i$.
 
 \begin{lemma}[Exact-sequence determinant isometry and degree]
 \label{lem:exact-determinant-degree}
-\uses{lem:exact-determinant-algebra,lem:exact-determinant-base-change,lem:orthogonal-determinant-norm,lem:quotient-hermitian-metric,lem:determinant-metric,lem:line-tensor-degree,lem:line-degree-isometry,def:intrinsic-determinant-degree}
+\uses{lem:exact-determinant-algebra,lem:exact-determinant-field-section,lem:orthogonal-determinant-norm,lem:quotient-hermitian-metric,lem:determinant-metric,lem:line-tensor-degree,lem:line-degree-isometry,def:intrinsic-determinant-degree}
 \source{bost-specht-manuscript:page-0003}\notready
 Let $0\to A\xrightarrow{i}B\xrightarrow{q}C\to0$ be an exact sequence
 of finite projective $\Ocal$-modules. Equip $B$ with a Hermitian metric,
