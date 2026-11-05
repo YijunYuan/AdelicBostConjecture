@@ -1217,7 +1217,8 @@ exactly the transported determinant and orbit-lattice norms in the statement.
 \begin{lemma}[The norm on the actual dual fiber]
 \label{lem:canonical-pairing-dual-norm}
 \uses{lem:intrinsic-pairing-contraction,lem:determinant-twist-base-change-equivalence,lem:dual-fiber-base-change}
-\source{bost-specht-manuscript:page-0010}\notready
+\lean{BostConjecture.Geometry.dualDeterminantTensorBaseChange_bijective,BostConjecture.Geometry.dualDeterminantFiberCore,BostConjecture.Geometry.canonicalPairing_fiber_norm_le}\leanok
+\source{bost-specht-manuscript:page-0010}
 In the setting of the intrinsic fiber contraction, the canonical transport
 from the complex fiber of $D_d$ to the tensor of its complex determinant
 and orbit-lattice factors is an isomorphism. Pull back their positive
@@ -1242,8 +1243,9 @@ the asserted inequality, including $z=0$ and zero-dimensional fibers.
 
 \begin{lemma}[The canonical contracting pairing]
 \label{lem:canonical-contraction}
-\uses{lem:integral-canonical-pairing,lem:projective-determinant-isometry,lem:finite-hilbert-tensor,lem:hilbert-tensor-duality,lem:dual-regrouping-isometry,lem:free-determinant-contraction,lem:canonical-pairing-base-change,lem:intrinsic-pairing-contraction}
-\source{bost-specht-manuscript:page-0010}\notready
+\uses{lem:integral-canonical-pairing,lem:projective-determinant-isometry,lem:finite-hilbert-tensor,lem:hilbert-tensor-duality,lem:dual-regrouping-isometry,lem:free-determinant-contraction,lem:canonical-pairing-base-change,lem:intrinsic-pairing-contraction,lem:canonical-pairing-dual-norm}
+\lean{BostConjecture.Geometry.canonicalPairing,BostConjecture.Geometry.canonicalPairing_apply,BostConjecture.Geometry.canonicalPairing_reindex_left,BostConjecture.Geometry.canonicalPairing_fiber_norm_le}\leanok
+\source{bost-specht-manuscript:page-0010}
 Let $i:V\hookrightarrow W=\bigotimes_{j=1}^N E_j$ be a nonzero
 submodule with its induced metrics. Set $s=\rk V$, $a_j=\rk E_j$.
 For any positive $d$ divisible by $s,a_1,\ldots,a_N$, put

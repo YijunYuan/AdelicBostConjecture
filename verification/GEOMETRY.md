@@ -565,3 +565,36 @@ warnings are retained as coverage information, not a proof-completion claim;
 the new source-facing producers are attached. SPECHT received the checked
 three-module import batch in I-0052; root integration of that batch is subsequent
 and is not asserted by the leaf checks above.
+
+## Canonical contraction in the actual dual fiber
+
+`fd211a8` supplies the final dual-norm endpoint in
+`Geometry/ContractionNorm.lean`. The canonical tensor transport is bijective;
+its pullback of the prescribed determinant/lattice tensor form is positive.
+`canonicalPairing_fiber_norm_le` bounds the actual scalar extension of
+`canonicalPairing`, identified with the complex dual by `dualBaseChangeMap`.
+`Tensor.dualCore_norm_le` and the existing `dualCore_norm` identify this with
+the operator norm, with no certificate assumption. No external code was copied.
+
+- Module `edec714a5cf09fb0` passed 9108 jobs at 2026-11-05 22:16:29 UTC.
+  The earlier file check `60a0192492a979c0` failed on a continuous-scalar
+  instance-search timeout. Factoring the general dual-norm characterization
+  into the existing `Tensor/DualMetric.lean` API repaired that failure.
+- The expanded 163-probe transitive audit passed at 22:17:45 UTC
+  (`ffefd7bf352d83dc`); only `propext`, `Classical.choice`, and `Quot.sound`
+  occur. The full log is in session0014/contraction-norm-axioms.log.
+- The read-only honesty reviewer found substantive use of the actual pairing
+  and prescribed metric, with no vacuity or hidden certificate. The new norm
+  node and `lem:canonical-contraction` are checked; the latter attaches the
+  actual integral definition, application, equivariance and norm declarations.
+- Root import integration is owned by SPECHT and is not asserted by these leaf
+  checks. Intermediate automatic boundary commits captured incomplete drafts;
+  the explicit content pin above and successful checks certify the final unit.
+
+The canonical contracting pairing is now proved. Invariant-space identification,
+invariant base change and nonvanishing in unbounded degrees remain open, as do
+the geometric slope inequality and number-field target. BALANCED confirms its
+concrete polynomial/coaction exports are pending; independent-factor invariants
+and the generic flat-kernel/evaluation argument can proceed independently.
+The one-time read-only hygiene review retained the 15 active roadmap rows as
+four live proof leaves and eleven ancestors; no status churn is needed.
