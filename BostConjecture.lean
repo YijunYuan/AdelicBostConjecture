@@ -1,11 +1,13 @@
 module
 
 public import BostConjecture.Slope.Subspace
+public import BostConjecture.LinearAlgebra.AlternatingTensorPower
 public import BostConjecture.Lattice.Covolume
 public import BostConjecture.Specht.Tableau
 public import BostConjecture.Specht.Metric
 public import BostConjecture.Specht.Norm
 public import BostConjecture.Specht.Rectangle
+public import BostConjecture.Specht.ColumnTensor
 public import BostConjecture.Specht.Standard
 public import BostConjecture.Specht.Basis
 public import BostConjecture.Specht.OneRow

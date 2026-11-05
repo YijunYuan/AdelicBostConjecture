@@ -148,6 +148,29 @@ changes. The installed mathlib revision is pinned in `lake-manifest.json`.
   `vendor/tauceti/PROVENANCE.json`; transitive axiom probes are recorded in
   `verification/SpechtAxioms.lean` and results in `verification/RESULTS.md`.
 
+## Alternating-tensor determinant covariance — AxiomMath/Stacks
+
+- Repository: <https://github.com/AxiomMath/Stacks>, revision
+  `012108f61d7f92a6ffc35ec3f263b6da5d438125`.
+- Original path: `StacksFrontier/LinearAlgebra/Matrix/AlternatingTensorPower.lean`.
+  Exactly eight declarations, from `Matrix.altVec` through
+  `Matrix.sum_tensorPow_mul_altVec`, are extracted into
+  `BostConjecture/LinearAlgebra/AlternatingTensorPower.lean`.
+- License: Apache-2.0; the exact license is retained in `vendor/stacks/LICENSE`.
+  [Per-declaration provenance](vendor/stacks/PROVENANCE.json) records hashes,
+  modifications, toolchain versions, and the checked dependency cone.
+- Changes: scoped module documentation and deprecated conditional-lemma names
+  updated for Lean/mathlib 4.35. Only three Mathlib imports; no Stacks dependency.
+  Extraction was durably recorded at workspace-ledger commit `c1ce881`.
+- Consumer: the original bridge `Specht/ColumnTensor.lean` identifies the
+  existing rectangular polytabloid coefficients with a product of `altVec`
+  coordinates. This supplies the column decomposition for determinant covariance
+  in word coordinates. Projective-module gluing and invariant-space equality
+  remain separate mathematical obligations.
+- The extraction's eight transitive axiom probes are in
+  `verification/StacksAxioms.lean`; the module and all probes were checked by
+  the parent extraction session, separately from the preceding Specht build.
+
 ## Verification
 
 Run `horizon --root ../.. check --json` from this project, then

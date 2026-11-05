@@ -238,6 +238,63 @@ are inverse, so the cardinality is $(a!)^k$. The preceding
 polytabloid norm lemma gives the asserted squared norm.
 \end{proof}
 
+\begin{lemma}[Rectangular polytabloids as alternating columns]
+\label{lem:rectangular-column-tensor}
+\lean{BostConjecture.Specht.rectangleColumnGroupOf_sign,BostConjecture.Specht.polytabloidInt_rectangle_eq_prod}
+\uses{lem:rectangular-row-words,lem:rectangular-initial-norm}
+\source{bost-specht-manuscript:page-0008}\leanok
+Let $k>0$ and let $t$ enumerate the $a$ by $k$ rectangle. Write
+$p_t(i,j)$ for the entry in row $i$, column $j$. For a word $w$ in
+$a$ letters, let $w_j(i)=w(p_t(i,j))$. Define
+$\epsilon(f)=\operatorname{sgn}(f)$ if $f$ is a permutation of the
+$a$ letters, and $\epsilon(f)=0$ otherwise. Then
+\[
+ e_t(w)=\prod_{j=1}^k\epsilon(w_j).
+\]
+\end{lemma}
+\begin{proof}
+Every column permutation is uniquely a tuple $(\sigma_j)_{j=1}^k$
+of permutations of the rows. Its sign is $\prod_j\operatorname{sgn}(\sigma_j)$:
+the column permutations have disjoint supports, so their signs multiply,
+and transporting a permutation along a bijection preserves its sign.
+Its contribution to $e_t(w)$ is nonzero exactly when
+$w_j=\sigma_j^{-1}$ for every $j$. Such a tuple exists if and only
+if all $w_j$ are permutations, and then it is unique. Its sign is
+$\prod_j\operatorname{sgn}(w_j)$, since inversion preserves sign.
+If any $w_j$ is not a permutation, both sides vanish.
+\end{proof}
+
+\begin{lemma}[Determinant covariance in word coordinates]
+\label{lem:rectangular-word-covariance}
+\uses{lem:rectangular-column-tensor,lem:integral-all-polytabloids}
+\source{bost-specht-manuscript:page-0008}\notready
+For a commutative ring $R$ and an $a$ by $a$ matrix $u$, define the
+matrix action on word coefficients by
+\[
+ (T_u x)(w)=\sum_v\left(\prod_{q=1}^{ak}u_{w(q),v(q)}\right)x(v).
+\]
+For every rectangular polytabloid, and hence every vector in the
+$R$-span of the coefficientwise image of $L_{a,ak}$, one has
+$T_u x=(\det u)^k x$. No invertibility or characteristic assumption
+is required.
+\end{lemma}
+\begin{proof}
+For one column and a function $f$ on its row indices, expansion of
+the determinant gives
+\[
+ \sum_g\prod_i u_{f(i),g(i)}\epsilon(g)
+ =\det(u_{f(i),j})_{i,j}=\epsilon(f)\det u.
+\]
+If $f$ is bijective this is the row-permutation rule for determinants;
+otherwise two rows coincide and both sides are zero. The word sum
+for a rectangular polytabloid factors into $k$ independent column
+sums by distributivity. Applying the one-column identity to each
+factor and the preceding coefficient formula proves
+$T_u e_t=(\det u)^k e_t$. Every lattice vector is an integer linear
+combination of polytabloids, so linearity proves the assertion on
+the stated scalar span.
+\end{proof}
+
 \begin{lemma}[Positive rectangular rank and nonnegative covolume slope]
 \label{lem:rectangular-covolume-nonneg}\uses{def:rectangular-specht,lem:integral-specht-covolume-nonneg}
 \lean{BostConjecture.Specht.rectangleRank_pos,BostConjecture.Specht.rectangleLogCovolume_nonneg}
