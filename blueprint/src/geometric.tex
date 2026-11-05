@@ -628,7 +628,8 @@ which contradicts $C_i(z)=0$.
 \begin{lemma}[Distributing and regrouping finite tensor products]
 \label{lem:tensor-regrouping}
 \source{bost-specht-manuscript:page-0010}
-\notready
+\lean{BostConjecture.Tensor.tensorDistribEquiv,BostConjecture.Tensor.regroupEquiv,BostConjecture.Tensor.regroupEquiv_tprod,BostConjecture.Tensor.tensorTensor_ext,BostConjecture.Tensor.regroupEquiv_symm}
+\leanok
 For finite sets $I,J$ and modules $M_{ij}$ over a commutative ring $R$,
 there is a canonical linear equivalence
 \[
@@ -695,9 +696,55 @@ is unchanged by a finite permutation; the spanning argument again
 extends this equality to all tensors.
 \end{proof}
 
+\begin{lemma}[Regrouping preserves the Hilbert form]
+\label{lem:hilbert-regrouping}
+\uses{lem:tensor-regrouping,lem:finite-hilbert-tensor}
+\source{bost-specht-manuscript:page-0010}
+\lean{BostConjecture.Tensor.tensorCore,BostConjecture.Tensor.tensorCore_toCore,BostConjecture.Tensor.regroupEquiv_inner}
+\leanok
+For a finite rectangular family of complex spaces with positive
+Hermitian forms, the regrouping equivalence preserves the iterated
+Hilbert tensor form.
+\end{lemma}
+\begin{proof}
+On two nested pure tensors the source pairing is
+$\prod_i\prod_j\langle x_{ij},y_{ij}\rangle$, while the target
+pairing is $\prod_j\prod_i\langle x_{ij},y_{ij}\rangle$.
+These are equal by commutativity of multiplication and finiteness.
+Nested pure tensors span both spaces, and the two pairings are
+conjugate linear in the first variable and linear in the second.
+Extending the equality in each variable proves preservation for
+arbitrary tensors. Positivity then gives preservation of norms.
+\end{proof}
+
+\begin{lemma}[Finite-projective dual regrouping]
+\label{lem:dual-regrouping}
+\uses{lem:tensor-regrouping,lem:projective-tensor-evaluation}
+\source{bost-specht-manuscript:page-0010}
+\lean{BostConjecture.Tensor.dualRegroupEquiv,BostConjecture.Tensor.dualRegroupEquiv_tprod,BostConjecture.Tensor.dualRegroupEquiv_reindex}
+\leanok
+Let $E_i$ be a finite family of finite projective $R$-modules and
+let $J$ be a finite set. There is a canonical equivalence
+\[
+ \bigotimes_i (E_i^\vee)^{\otimes J}
+ \simeq \left(\left(\bigotimes_i E_i\right)^\vee\right)^{\otimes J}.
+\]
+It sends $\bigotimes_i\bigotimes_j f_{ij}$ to the tensor over $j$
+of the functional $\bigotimes_i x_i\mapsto\prod_i f_{ij}(x_i)$,
+and intertwines simultaneous permutations of $J$ in all factors.
+\end{lemma}
+\begin{proof}
+Regroup the source as $\bigotimes_j\bigotimes_i E_i^\vee$ and
+apply the canonical finite-projective duality equivalence in each
+$j$-factor. Both steps are isomorphisms over $R$ and their composite
+has the stated formula. Permuting $J$ before or after this composite
+gives the same formula on every nested pure tensor. The spanning
+property extends this identity to the whole source.
+\end{proof}
+
 \begin{lemma}[The canonical contracting pairing]
 \label{lem:canonical-contraction}
-\uses{lem:determinant-isotypic,lem:projective-tensor-evaluation,lem:finite-hilbert-tensor}
+\uses{lem:determinant-isotypic,lem:dual-regrouping,lem:hilbert-regrouping}
 \source{bost-specht-manuscript:page-0010}\notready
 Let $i:V\hookrightarrow W=\bigotimes_{j=1}^N E_j$ be a nonzero
 submodule with its induced metrics. Set $s=\rk V$, $a_j=\rk E_j$.

@@ -6,7 +6,8 @@ import BostConjecture.Geometry.DeterminantBaseChange
 import BostConjecture.Geometry.DeterminantNaturality
 import BostConjecture.Geometry.LocalizationDescent
 import BostConjecture.Geometry.ProjectiveEmbedding
-import BostConjecture.Tensor.Hilbert
+import BostConjecture.Tensor.HilbertRegroup
+import BostConjecture.Tensor.DualRegroup
 
 #print axioms BostConjecture.Geometry.tensorCoordinates
 #print axioms BostConjecture.Geometry.tensorCoordinates_tprod
@@ -100,3 +101,19 @@ import BostConjecture.Tensor.Hilbert
 #print axioms BostConjecture.Tensor.hilbertCore_unique
 #print axioms BostConjecture.Tensor.hilbertCore_map_inner
 #print axioms BostConjecture.Tensor.hilbertCore_reindex_inner
+#print axioms BostConjecture.Tensor.tensorCore
+#print axioms BostConjecture.Tensor.tensorCore_inner_tprod
+#print axioms BostConjecture.Tensor.tensorCore_toCore
+#print axioms BostConjecture.Tensor.exists_tensorDistribEquiv
+#print axioms BostConjecture.Tensor.tensorDistribEquiv
+#print axioms BostConjecture.Tensor.tensorDistribEquiv_tprod
+#print axioms BostConjecture.Tensor.tensorDistribEquiv_symm_tprod
+#print axioms BostConjecture.Tensor.exists_regroupEquiv
+#print axioms BostConjecture.Tensor.regroupEquiv
+#print axioms BostConjecture.Tensor.regroupEquiv_tprod
+#print axioms BostConjecture.Tensor.tensorTensor_ext
+#print axioms BostConjecture.Tensor.regroupEquiv_symm
+#print axioms BostConjecture.Tensor.regroupEquiv_inner
+#print axioms BostConjecture.Tensor.dualRegroupEquiv
+#print axioms BostConjecture.Tensor.dualRegroupEquiv_tprod
+#print axioms BostConjecture.Tensor.dualRegroupEquiv_reindex

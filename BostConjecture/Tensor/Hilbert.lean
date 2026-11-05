@@ -146,4 +146,34 @@ theorem hilbertCore_reindex_inner [Finite ι] {κ : Type*} (e : ι ≃ κ)
     hilbertCore_inner_tprod]
   exact finprod_comp_equiv e.symm (f := fun i => inner ℂ (x i) (y i))
 
+variable {M : ι → Type*} [∀ i, AddCommGroup (M i)] [∀ i, Module ℂ (M i)]
+
+/-- Tensor the given Hermitian cores, using their induced norms only locally. -/
+@[instance_reducible]
+def tensorCore [Finite ι] (c : ∀ i, InnerProductSpace.Core ℂ (M i)) :
+    InnerProductSpace.Core ℂ (⨂[ℂ] i, M i) := by
+  let : ∀ i, InnerProductSpace.Core ℂ (M i) := c
+  let : ∀ i, NormedAddCommGroup (M i) := fun i =>
+    InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ)
+  let : ∀ i, InnerProductSpace ℂ (M i) := fun i =>
+    InnerProductSpace.ofCore (inferInstance : PreInnerProductSpace.Core ℂ (M i))
+  exact hilbertCore M
+
+/-- The tensor of Hermitian cores has the same pure-product formula. -/
+theorem tensorCore_inner_tprod [Finite ι] (c : ∀ i, InnerProductSpace.Core ℂ (M i))
+    (x y : ∀ i, M i) :
+    (tensorCore c).inner (tprod ℂ x) (tprod ℂ y) = ∏ᶠ i, (c i).inner (x i) (y i) := by
+  let : ∀ i, InnerProductSpace.Core ℂ (M i) := c
+  let : ∀ i, NormedAddCommGroup (M i) := fun i =>
+    InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ)
+  let : ∀ i, InnerProductSpace ℂ (M i) := fun i =>
+    InnerProductSpace.ofCore (inferInstance : PreInnerProductSpace.Core ℂ (M i))
+  exact hilbertCore_inner_tprod _ x y
+
+/-- Starting with inner product spaces recovers the original canonical tensor core. -/
+theorem tensorCore_toCore [Finite ι] :
+    tensorCore (fun i => InnerProductSpace.toCore (𝕜 := ℂ) (E := E i)) = hilbertCore E := by
+  apply hilbertCore_unique
+  exact tensorCore_inner_tprod _
+
 end BostConjecture.Tensor
