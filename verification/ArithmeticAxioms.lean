@@ -1,5 +1,6 @@
 import BostConjecture.Arithmetic.TensorDegree
 import BostConjecture.Arithmetic.SubspaceSupermodular
+import BostConjecture.Arithmetic.ArchimedeanFiniteness
 import BostConjecture.Arithmetic.ExactDegree
 import BostConjecture.Arithmetic.QuotientMetric
 import BostConjecture.Arithmetic.IntegralDeterminantProduct
@@ -266,3 +267,5 @@ import BostConjecture.Arithmetic.DeterminantProduct
 #print axioms BostConjecture.Arithmetic.HermitianMetric.subspaceDegree_sub_eq_quotient
 #print axioms BostConjecture.Arithmetic.HermitianMetric.subspaceQuotient_finrank
 #print axioms BostConjecture.Arithmetic.HermitianMetric.subspaceSlope_eq_quotient
+#print axioms BostConjecture.Arithmetic.HermitianMetric.exists_coordinate_bound
+#print axioms BostConjecture.Arithmetic.HermitianMetric.finite_bounded_sections
