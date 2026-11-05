@@ -1,6 +1,6 @@
 # Parallel Horizon scheduling
 
-Coordinator checkpoint: 2026-11-06 05:51 Asia/Shanghai (2026-11-05 21:51 UTC).
+Coordinator checkpoint: 2026-11-06 06:03 Asia/Shanghai (2026-11-05 22:03 UTC).
 
 The user assigned the parent session scheduling only, with no spending cap. The user subsequently authorized a fourth dedicated
 Lemma 7.2 lane if memory pressure is low; the total cap is now four proof
@@ -64,14 +64,19 @@ and 138 foundational-only probes. The 9,190-job root batch now includes
 `Geometry.ContractionMetric`, `Tensor.EvaluationBaseChange`, and
 `Tensor.DualRegroupBaseChange`. Later undelivered leaves are excluded.
 
-The current sessions are SPECHT `0026`, ARITH `0012`, GEOM `0012`, and BALANCED `0004`.
+The current sessions are SPECHT `0026`, ARITH `0012`, GEOM `0014`, and BALANCED `0004`.
 ARITH `0010` handed off with final evidence `1c0421a` and 171
 foundational-only probes. Its exact exterior-product and finite-free
 determinant-product producers await root integration in `I-0050`;
 ARITH `0012` continues the nonfree projective descent.
 The saved hook-count and evaluation-base-change drafts have been repaired,
-checked and integrated. GEOM's full pairing transport and global contraction
-consumer remain in progress. BALANCED has checked intrinsic partial traces
+checked and integrated. GEOM `0012` subsequently checked the full pairing
+scalar-extension formula (`b42d795`) and intrinsic fiberwise bilinear bound
+(`38aaf59`), with 159 foundational-only probes and satisfactory honesty review
+(`c4a17e6`). Its root integration remains a separate pending boundary. The
+actual dual-fiber operator-norm endpoint and full global contraction still
+require proof; the unfinished transport is preserved as attempt `0002`.
+BALANCED has checked intrinsic partial traces
 (`fdb954d`), their actual orthogonal-projection consumer (`3361234`), and the
 Gram determinant first variation (`ee2abe7`); its 16-probe axiom audit passed
 at 21:04:53 UTC with standard foundational axioms only, and the scoped honesty
@@ -203,16 +208,21 @@ Euclidean/Zariski closure comparison as a costly dependency cone, and checked
 existing Noether-normalization, constructibility, Cauchy-bound, minpoly and
 lying-over declarations. In `I-0054`, the coordinator handed BALANCED a
 candidate finite-map/root-persistence route for independent mathematical
-review before any blueprint replacement. The candidate is not an accepted
-proof, source attribution, or Lean result. The analytic lane continues while
-Horizon decides whether this smaller affine route is valid and useful.
+review. Horizon's independent review accepted that mathematical route,
+requiring the actual minimal polynomial and `ker_eval` for root lifting.
+BALANCED is replacing the curve proof and pruning its unused dependencies;
+all complex-point adapters and Lean closure conclusions remain open. The
+route decision in `I-0054` is concluded, without claiming formalization or
+attributing the entire alternative to the partial external source lead.
 
-At 21:51 UTC, available memory was 6.51 GiB, PSI avg10 2.15% and avg60
-1.18%, with zero OOM kills. Swap occupancy rose to 6.90 GiB;
+At 21:56 UTC, available memory was 7.46 GiB, PSI avg10 6.76% and avg60
+6.93%, with zero OOM kills. Swap occupancy had risen to 8.64 GiB;
 the process sample shows substantial shared Lean-library mappings alongside
 active elaboration. Monitor actual available memory, swap deltas and sustained
 PSI rather than summing per-process RSS. In `I-0055`, the coordinator asked
 GEOM to finish its in-flight metric check, preserve the unfinished dual-norm
-work and hand off at its verified pairing boundary. GEOM acknowledged this
-fresh-session step to release accumulated Lean-client memory. Keep the four
-proof lanes while monitoring the result; the dedicated Lemma 7.2 lane continues.
+work and hand off at its verified pairing boundary. GEOM `0012` ended
+successfully at 22:01:50 UTC; `0014` started at 22:02:58 UTC. After this
+client recycling, available memory rose to 10.36 GiB and PSI avg10 fell to
+0.00% (avg60 0.17%), with zero OOM kills. The four proof lanes continue,
+including the dedicated Lemma 7.2 lane; continue resource monitoring.
