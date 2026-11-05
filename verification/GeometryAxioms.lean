@@ -19,6 +19,14 @@ import BostConjecture.Geometry.ContractionMetric
 import BostConjecture.Tensor.EvaluationBaseChange
 import BostConjecture.Tensor.DualRegroupBaseChange
 import BostConjecture.Tensor.PairingBaseChange
+import BostConjecture.Geometry.ContractionBaseChange
+
+#print axioms BostConjecture.Geometry.dualDeterminantTwistBaseChange
+#print axioms BostConjecture.Geometry.projectiveDualDeterminantMap_baseChange
+#print axioms BostConjecture.Geometry.dualDeterminantTwistBaseChange_bijective
+#print axioms BostConjecture.Geometry.dualDeterminantTensorBaseChange
+#print axioms BostConjecture.Geometry.dualDeterminantMap_baseChange
+#print axioms BostConjecture.Geometry.canonicalPairing_baseChange
 
 #print axioms BostConjecture.Geometry.tensorCoordinates
 #print axioms BostConjecture.Geometry.tensorCoordinates_tprod

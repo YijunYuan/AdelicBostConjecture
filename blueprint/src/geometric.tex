@@ -1142,7 +1142,8 @@ This proves the assertion without choosing bases.
 \begin{lemma}[Scalar extension of the restricted pairing]
 \label{lem:canonical-pairing-base-change}
 \uses{lem:integral-canonical-pairing,lem:projective-determinant-inclusion,lem:determinant-free-naturality,lem:dual-regrouping-base-change,lem:tensor-evaluation-base-change}
-\source{bost-specht-manuscript:page-0010}\notready
+\lean{BostConjecture.Geometry.dualDeterminantTwistBaseChange,BostConjecture.Geometry.projectiveDualDeterminantMap_baseChange,BostConjecture.Geometry.dualDeterminantTwistBaseChange_bijective,BostConjecture.Geometry.dualDeterminantTensorBaseChange,BostConjecture.Geometry.dualDeterminantMap_baseChange,BostConjecture.Geometry.canonicalPairing_baseChange}\leanok
+\source{bost-specht-manuscript:page-0010}
 Let $R\to S$ be a commutative algebra, and let $V,E_j$ be finite
 projective $R$-modules of the constant ranks used in the integral
 pairing. Suppose the scalar-extended modules $S\otimes_R V$ and
@@ -1167,9 +1168,36 @@ evaluation, since $f(e^{-1}e(x))=f(x)$. Composing these identities
 proves the equality on arbitrary extended tensors.
 \end{proof}
 
+\begin{lemma}[Contraction on the intrinsic complex fibers]
+\label{lem:intrinsic-pairing-contraction}
+\uses{lem:canonical-pairing-base-change,lem:free-determinant-contraction,lem:finite-hilbert-tensor,lem:arithmetic-tensor-metric,lem:induced-hermitian-metric}
+\source{bost-specht-manuscript:page-0010}\notready
+Let $E_j$ be finite projective modules over the integers of a number field,
+with Hermitian metrics, and let $i:V\hookrightarrow\bigotimes_j E_j$ be an
+injection from a finite projective module. Give $V$ the induced metric.
+At a complex embedding, choose orthonormal frames of $V_\sigma$ and
+$E_{j,\sigma}^{\vee}$ of the ranks used in the determinant twists.
+Transport the determinant and orbit-lattice tensor forms through the canonical
+exterior-power and dual scalar-extension maps. For arbitrary complex fiber
+vectors $z,u$, the scalar extension of the integral pairing satisfies
+\[
+ |\Psi_{d,\sigma}(z)(u)|\leq\|z\|\,\|u\|.
+\]
+The estimate holds for every choice of these orthonormal frames.
+\end{lemma}
+\begin{proof}
+The fiber map of $i$, followed by the canonical tensor fiber equivalence,
+preserves inner products: the metric on $V$ is the pullback of the tensor
+metric along this very map. Thus it is a linear isometry. The scalar-extension
+identity for the integral pairing identifies its value on $z,u$ with the
+free determinant pairing on their canonical transports. Apply the free
+determinant contraction estimate to the fiber isometry. Its two factors are
+exactly the transported determinant and orbit-lattice norms in the statement.
+\end{proof}
+
 \begin{lemma}[The canonical contracting pairing]
 \label{lem:canonical-contraction}
-\uses{lem:integral-canonical-pairing,lem:projective-determinant-isometry,lem:finite-hilbert-tensor,lem:hilbert-tensor-duality,lem:dual-regrouping-isometry,lem:free-determinant-contraction,lem:canonical-pairing-base-change}
+\uses{lem:integral-canonical-pairing,lem:projective-determinant-isometry,lem:finite-hilbert-tensor,lem:hilbert-tensor-duality,lem:dual-regrouping-isometry,lem:free-determinant-contraction,lem:canonical-pairing-base-change,lem:intrinsic-pairing-contraction}
 \source{bost-specht-manuscript:page-0010}\notready
 Let $i:V\hookrightarrow W=\bigotimes_{j=1}^N E_j$ be a nonzero
 submodule with its induced metrics. Set $s=\rk V$, $a_j=\rk E_j$.

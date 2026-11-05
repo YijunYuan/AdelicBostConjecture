@@ -32,6 +32,22 @@ variable {R S M : Type*} [CommRing R] [CommRing S] [Algebra R S]
   [AddCommGroup M] [Module R M] [Module.Finite R M] [Module.Projective R M]
   {n a k : ℕ}
 
+private theorem restrictedPairing_baseChange
+    {A B X Y : Type*} [AddCommMonoid A] [Module R A]
+    [AddCommGroup B] [Module R B] [AddCommMonoid X] [Module R X]
+    [AddCommGroup Y] [Module R Y]
+    (F : X →ₗ[R] Dual R Y) (g : A →ₗ[R] X) (h : B →ₗ[R] Y)
+    (z : S ⊗[R] A) (u : S ⊗[R] B) :
+    Arithmetic.dualBaseChangeMap R S B ((h.dualMap ∘ₗ F ∘ₗ g).baseChange S z) u =
+    Arithmetic.dualBaseChangeMap R S Y (F.baseChange S (g.baseChange S z))
+      (h.baseChange S u) := by
+  induction z using TensorProduct.inductionOn with
+  | tmul a z =>
+    induction u using TensorProduct.inductionOn with
+    | tmul b u => simp
+    | add u w hu hw => simp only [map_add, hu, hw]
+  | add x y hx hy => simp only [map_add, LinearMap.add_apply, hx, hy]
+
 /-- The determinant twist of the integral dual is transported using the actual
 dual base-change equivalence on every exterior factor. -/
 def dualDeterminantTwistBaseChange (L : Type*) [AddCommGroup L] (k a : ℕ) :
@@ -137,6 +153,7 @@ variable {V : Type*} [AddCommGroup V] [Module R V]
   (hs : ∀ p : PrimeSpectrum R, Module.rankAtStalk V p = s)
   (bV : Basis (Fin s) S (S ⊗[R] V))
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The scalar extension of the actual integral pairing is the free determinant
 pairing, on arbitrary vectors in both scalar-extended sources. -/
 theorem canonicalPairing_baseChange (i : V →ₗ[R] (⨂[R] j, E j))
@@ -155,7 +172,6 @@ theorem canonicalPairing_baseChange (i : V →ₗ[R] (⨂[R] j, E j))
       (Tensor.dualRegroupEquiv S (fun j => S ⊗[R] E j)
         (map (fun j => freeDeterminantMap (hk j) (t j) (b j))
           (dualDeterminantTensorBaseChange (R := R) (S := S) E t u))) := by
-  rw [← dualDeterminantMap_baseChange E hk t ha b u]
   have hz : freeDeterminantMap hl v bV
       (determinantTwistBaseChangeEquiv (R := R) (S := S) (M := V)
         (Specht.orbitLattice v) l s z) =
@@ -164,20 +180,15 @@ theorem canonicalPairing_baseChange (i : V →ₗ[R] (⨂[R] j, E j))
     rw [projectiveDeterminantMap_baseChange_of_basis hl v hs bV]
     simp [determinantChart]
   let iS := (Tensor.baseChangeEquiv R S E).toLinearMap ∘ₗ i.baseChange S
-  let uS := map (fun _ : Fin n => (Tensor.tensorDualBaseChangeEquiv R S E).toLinearMap)
-    (Tensor.baseChangeEquiv R S (fun _ : Fin n => Dual R (⨂[R] j, E j))
-      ((dualDeterminantMap E hk t ha).baseChange S u))
-  refine Eq.trans ?_ (congrArg (fun w => Tensor.tensorPowerPairing iS w uS) hz).symm
-  refine Eq.trans ?_ (Tensor.tensorPowerPairing_tensorBaseChange R S E i
+  have h := Tensor.tensorPowerPairing_tensorBaseChange R S E i
     ((projectiveDeterminantMap (R := R) (M := V) hl v hs).baseChange S z)
-    ((dualDeterminantMap E hk t ha).baseChange S u)).symm
-  induction z using TensorProduct.inductionOn with
-  | tmul a z =>
-    induction u using TensorProduct.inductionOn with
-    | tmul b u =>
-      simp only [LinearMap.baseChange_tmul, Arithmetic.dualBaseChangeMap_tmul,
-        Arithmetic.dualBaseChangeEquiv_tmul, canonicalPairing_apply]
-    | add u w hu hw => simp only [map_add, hu, hw]
-  | add x y hx hy => simp only [map_add, LinearMap.add_apply, hx, hy]
+    ((dualDeterminantMap E hk t ha).baseChange S u)
+  have h₀ := restrictedPairing_baseChange
+    (Y := ⨂[R] (_ : Fin n), Dual R (⨂[R] j, E j)) (Tensor.tensorPowerPairing i)
+    (projectiveDeterminantMap (R := R) (M := V) hl v hs) (dualDeterminantMap E hk t ha) z u
+  have hg := congrArg₂
+    (fun x y => Tensor.tensorPowerPairing (W := ⨂[S] j, S ⊗[R] E j) iS x y)
+    hz.symm (dualDeterminantMap_baseChange E hk t ha b u)
+  exact h₀.trans (h.symm.trans hg)
 
 end BostConjecture.Geometry
