@@ -8,6 +8,7 @@ import BostConjecture.Geometry.LocalizationDescent
 import BostConjecture.Geometry.ProjectiveEmbedding
 import BostConjecture.Tensor.HilbertRegroup
 import BostConjecture.Tensor.DualRegroup
+import BostConjecture.Geometry.DeterminantMetric
 
 #print axioms BostConjecture.Geometry.tensorCoordinates
 #print axioms BostConjecture.Geometry.tensorCoordinates_tprod
@@ -117,3 +118,13 @@ import BostConjecture.Tensor.DualRegroup
 #print axioms BostConjecture.Tensor.dualRegroupEquiv
 #print axioms BostConjecture.Tensor.dualRegroupEquiv_tprod
 #print axioms BostConjecture.Tensor.dualRegroupEquiv_reindex
+#print axioms BostConjecture.Tensor.inner_ext_of_span
+#print axioms BostConjecture.Tensor.binaryCore
+#print axioms BostConjecture.Tensor.binaryCore_inner_tmul
+#print axioms BostConjecture.Geometry.tensorCoordinates_inner
+#print axioms BostConjecture.Geometry.latticeComplexCore
+#print axioms BostConjecture.Geometry.latticeComplexCore_inner
+#print axioms BostConjecture.Geometry.latticeComplexCore_inner_integral
+#print axioms BostConjecture.Geometry.freeLatticeMap_inner
+#print axioms BostConjecture.Geometry.determinantPowerCore_inner
+#print axioms BostConjecture.Geometry.freeDeterminantMap_inner

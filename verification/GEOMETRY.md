@@ -176,21 +176,21 @@ supply it.
 ## Remaining boundaries
 
 The global integral injection and finite Hilbert tensor core are proved below.
-The determinant metric isometry, regrouping and restricted canonical contraction, invariant base change and
-nonvanishing detection remain open. The geometric slope inequality and
+Regrouping and the local determinant isometry are also proved below. The
+restricted canonical contraction with its norm bound and equivariance, invariant
+base change, and nonvanishing detection remain open. The geometric slope inequality and
 number-field target are not proved by these producers.
 
 Arithmetic interface coordination selected
 `BostConjecture.Arithmetic.ComplexFiber` and `HermitianMetric` on existing
 modules; no second bundle or degree representation is introduced here.
 
-The latest graph sync has 111 blueprint nodes, 787 Lean declarations and 429
-edges, with no missing-reference or stale-node warning. Its 458 unattached
-helper/imported declarations include concurrent work and remain an intentional
-coverage warning. Read-only hygiene review retained the nine active nested
-lane/ancestor items; completed-parent warnings were sent to their owners.
-Scratch cleanup found no stale candidates. I-0026 requests root integration
-of the new descent import; this session does not claim that integration check.
+Graph coverage includes intentionally unattached helper/imported declarations;
+source-facing nodes carry the proved attachment and completion claims. Read-only
+hygiene review retained active nested lane/ancestor items. Scratch cleanup found
+no stale candidates. Root integration through the regrouping batch passed 9148
+jobs at 19:08:01 UTC (`975bdb23135a0d4a`, SPECHT pin `75b41aa`); later metric
+leaf imports remain a subsequent integration batch.
 
 ## Global finite-projective determinant inclusion
 
@@ -233,8 +233,7 @@ injectivity; no freeness of the original module is assumed.
 The next consumers are determinant isometry,
 regrouping, and the restricted contracting pairing. Arithmetic requested the generic
 finite tensor Hermitian core in `Tensor/**` and retains ownership of arithmetic
-conjugation and degree integration (I-0030). I-0031 requests root integration;
-that integration is not certified by these module checks.
+conjugation and degree integration (I-0030). The corresponding I-0031 root integration subsequently passed at `75b41aa`.
 
 ## Canonical finite Hilbert tensor form
 
@@ -254,3 +253,39 @@ instance, arithmetic metric representation, or assumed metric certificate is add
   transport, determinant isometry and the contraction remain subsequent consumers.
 - Checked API sent to ARITH in I-0030 and root-integration/provenance owner
   SPECHT in I-0031. All external reuse is by direct unchanged Mathlib imports.
+
+## Regrouping and actual local metric preservation
+
+`Tensor/Regroup.lean` at `b112a8d` constructs canonical binary distribution and
+rectangular regrouping over every commutative ring by finite induction, with
+pure-tensor formulas and an inverse. `2690920` adds preservation of the Hilbert
+form and `Tensor/DualRegroup.lean`, using the checked finite-projective duality
+equivalence without assuming freeness. The latter has actual permutation
+compatibility; its dual-metric compatibility is still a separate open consumer.
+
+`Geometry/TensorMetric.lean`, `LatticeMetric.lean` and `DeterminantMetric.lean`
+prove orthonormal tensor coordinates, the canonical positive complex orbit-lattice
+form with its integral Gram formula, and preservation of the prescribed metrics
+by the actual free lattice and determinant maps. The determinant form is imported
+from ARITH's stable `Arithmetic.ComplexDeterminant` API (I-0032), and the finite
+and binary tensor forms use the actual tensor objects. No certificate hypothesis,
+new Hermitian bundle representation, or external copied code was introduced.
+
+- Regrouping module check `4b32f0baa09efcc0` passed 1324 jobs at 18:40:54 UTC.
+  The dual/metric regrouping combined check `011f15acf813f299` passed 2828 jobs
+  at 18:47:58 UTC; its 100-probe audit passed at 18:48:54 UTC.
+- Final local metric combined check `c90072712db1300c` passed 9079 jobs at
+  19:19:54 UTC, without warnings. The repaired determinant file also passed
+  `20f0564e1f884ccb` at 19:17:35 UTC. Earlier elaboration and instance failures
+  were repaired with explicit canonical tensor instances and public formulas.
+- The expanded 110 transitive axiom probes passed with only `propext`,
+  `Classical.choice`, and `Quot.sound`; no `sorryAx` or additional axioms occur.
+  A mistaken build-target invocation of the audit file failed with unknown
+  package `verification`; the corrected `check --lean` invocation passed.
+- All checks used the explicit workspace root and serialized slot. Following
+  standing I-0034, no LSP queries or artifact cleanup were performed during the
+  integration freeze. The root retry resolved the earlier missing-artifact race.
+- The read-only honesty reviewer approved the actual metric proofs and blueprint
+  attachments, finding no hidden isometry assumption or global-contraction
+  overclaim. The three new metric nodes are checked; the full determinant
+  isotypic/invariant theorem and canonical contraction remain unproved.

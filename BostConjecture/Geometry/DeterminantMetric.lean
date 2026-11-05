@@ -54,6 +54,9 @@ theorem freeDeterminantMap_inner (hk : 0 < k)
     (Tensor.binaryCore
       (Tensor.tensorCore (fun _ : Fin k => Arithmetic.ComplexDeterminant.core b))
       (latticeComplexCore t)).inner x y := by
+  let : AddCommGroup ((⨂[ℂ] (_ : Fin k), ⋀[ℂ]^a M) ⊗[ℂ]
+      (ℂ ⊗[ℤ] Specht.orbitLattice t)) := TensorProduct.addCommGroup
+        (R := ℂ) (M := ⨂[ℂ] (_ : Fin k), ⋀[ℂ]^a M) (N := ℂ ⊗[ℤ] Specht.orbitLattice t)
   let c := Tensor.hilbertCore (fun _ : Fin n => M)
   let c' : PreInnerProductSpace.Core ℂ (⨂[ℂ] (_ : Fin n), M) := { __ := c }
   apply Tensor.inner_ext_of_span
@@ -67,12 +70,16 @@ theorem freeDeterminantMap_inner (hk : 0 < k)
       (latticeComplexCore t))
     (freeDeterminantMap hk t b.toBasis) LinearMap.id _ x y
   · convert TensorProduct.span_tmul_eq_top (R := ℂ)
+      (⨂[ℂ] (_ : Fin k), ⋀[ℂ]^a M) (ℂ ⊗[ℤ] Specht.orbitLattice t) using 1
+    congr 1
     ext z
-    simp only [Set.mem_range, Set.mem_setOf_eq, Prod.exists]
+    simp only [Set.mem_range, Set.mem_ofPred_eq, Prod.exists]
   · rintro ⟨η, z⟩ ⟨ξ, w⟩
-    simp only [freeDeterminantMap_tmul, LinearMap.id_apply, Tensor.binaryCore_inner_tmul]
+    simp only [freeDeterminantMap_tmul, LinearMap.id_apply]
     change c.inner (determinantPowerCoordinates k b.toBasis η • freeLatticeMap hk t b.toBasis z)
-      (determinantPowerCoordinates k b.toBasis ξ • freeLatticeMap hk t b.toBasis w) = _
+      (determinantPowerCoordinates k b.toBasis ξ • freeLatticeMap hk t b.toBasis w) =
+      (Tensor.tensorCore (fun _ : Fin k => Arithmetic.ComplexDeterminant.core b)).inner η ξ *
+        (latticeComplexCore t).inner z w
     rw [c.smul_left, InnerProductSpace.Core.inner_smul_right (c := c'),
       freeLatticeMap_inner, determinantPowerCore_inner]
     simp only [RCLike.star_def]
