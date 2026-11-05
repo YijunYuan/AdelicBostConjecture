@@ -498,3 +498,24 @@ intentional: it counts nested ancestors of the four authorized live proof
 lanes. I-0044 remains open for SPECHT integration; the human owns I-0047 until
 BALANCED provides its canonical semistability signatures and GEOM confirms the
 consumer interface. Scratch dry-run found no stale candidates.
+
+`Geometry/ContractionBaseChange.lean` proves the scalar-extension formula for
+`canonicalPairing` on arbitrary vectors in both extended determinant sources.
+It consumes the actual projective determinant naturality, dual regrouping and
+evaluation squares; it assumes neither a compatibility certificate nor a metric
+bound. Full module check `659b4191811118f7` passed 9089 jobs at 21:27:59 UTC;
+the subsequent 156-probe transitive axiom audit passed at 21:33:18 UTC, with only
+`propext`, `Classical.choice`, and `Quot.sound`. Read-only honesty review approved
+the exact source-facing statement and proof chain before its blueprint node was
+marked. Earlier LSP elaboration timeouts were resolved by specifying the ambient
+tensor module and composing generic evaluation identities. The earlier prefix
+check `e899af9a611cfc31` is not evidence for the full theorem. Source and blueprint
+were committed at `b42d795` (earlier automatic snapshots held partial source).
+
+I-0044 was closed after SPECHT confirmed its fixed 9190-job root integration
+batch. The newer pairing transport and determinant assembly are outside that
+batch. I-0051 confirmed ARITH's stable `piTensor`, `pullback`, `pullback_inner`
+and `fiberMap_injective` interfaces. The intrinsic metric consumer is in
+progress; its invalid namespace-instance setup is preserved in session0012
+attempt0001. I-0047 remains human-owned while BALANCED selects its exact action
+and invariant-polynomial signatures.
