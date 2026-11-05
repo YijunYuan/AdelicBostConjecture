@@ -3,6 +3,7 @@ import BostConjecture.Geometry.FreeEmbedding
 import BostConjecture.Geometry.DeterminantFrame
 import BostConjecture.Tensor.Evaluation
 import BostConjecture.Geometry.DeterminantBaseChange
+import BostConjecture.Geometry.DeterminantNaturality
 
 #print axioms BostConjecture.Geometry.tensorCoordinates
 #print axioms BostConjecture.Geometry.tensorCoordinates_tprod
@@ -46,3 +47,8 @@ import BostConjecture.Geometry.DeterminantBaseChange
 #print axioms BostConjecture.Geometry.determinantPowerCoordinates_scalarExtension
 #print axioms BostConjecture.Geometry.scalarExtension_freeDeterminantMap
 #print axioms BostConjecture.Geometry.scalarExtension_freeDeterminantMap_of_basis
+
+#print axioms BostConjecture.Geometry.determinantCoordinates_map
+#print axioms BostConjecture.Geometry.determinantPowerCoordinates_map
+#print axioms BostConjecture.Geometry.map_freeDeterminantMap_tmul
+#print axioms BostConjecture.Geometry.map_freeDeterminantMap

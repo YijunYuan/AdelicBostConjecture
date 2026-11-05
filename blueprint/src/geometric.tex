@@ -86,9 +86,34 @@ the identity to every $z$, since elementary tensors span. Taking $f=1$
 gives the change-of-frame identity.
 \end{proof}
 
+\begin{lemma}[Coordinates on the top exterior power]
+\label{lem:determinant-coordinates}
+\source{bost-specht-manuscript:page-0009}
+\lean{BostConjecture.Geometry.determinantCoordinates,BostConjecture.Geometry.determinantCoordinates_ιMulti,BostConjecture.Geometry.determinantCoordinates_symm_apply,BostConjecture.Geometry.determinantCoordinates_change_basis}
+\leanok
+Let $b=(b_1,\ldots,b_a)$ be a basis of a module $M$ over a commutative
+ring $R$. There is a coordinate isomorphism
+$\delta_b:\bigwedge^aM\to R$ taking $v_1\wedge\cdots\wedge v_a$ to
+$\det([v]_b)$, with inverse $r\mapsto r(b_1\wedge\cdots\wedge b_a)$.
+For a second basis $c$,
+$\delta_c=\det([1]_{c,b})\delta_b$.
+\end{lemma}
+\begin{proof}
+The determinant is alternating and multilinear in its columns, so it
+induces the asserted linear map on the exterior power. Its value on the
+basis wedge is one. Expanding any wedge in the basis, terms with a
+repeated index vanish by alternation, and the remaining terms are indexed
+by permutations. Their signed coefficient sum is the determinant.
+Thus every wedge is its determinant coordinate times the basis wedge.
+Since wedges span, the two displayed maps are inverse on the entire
+exterior power. To compare bases, write an arbitrary element as $r$
+times the $b$-wedge. Its $c$-coordinate is $r\det([1]_{c,b})$ by the
+same determinant formula, while its $b$-coordinate is $r$.
+\end{proof}
+
 \begin{lemma}[Frame independence of the determinant-twisted free inclusion]
 \label{lem:determinant-twisted-free-inclusion}
-\uses{lem:free-integral-tensor-embedding}
+\uses{lem:free-integral-tensor-embedding,lem:determinant-coordinates}
 \source{bost-specht-manuscript:page-0009}
 \lean{BostConjecture.Geometry.freeDeterminantMap,BostConjecture.Geometry.freeDeterminantMap_injective,BostConjecture.Geometry.freeDeterminantMap_eq,BostConjecture.Geometry.freeDeterminantMap_basis}
 \leanok
@@ -103,13 +128,8 @@ which sends $(b_1\wedge\cdots\wedge b_a)^{\otimes k}\otimes z$
 to $j_b(z)$ for every basis $b$. The formula is independent of $b$.
 \end{lemma}
 \begin{proof}
-The top exterior power has coordinate isomorphism $\delta_b$ characterized
-by $\delta_b(v_1\wedge\cdots\wedge v_a)=\det([v]_{b})$.
-Its inverse sends $r$ to $r(b_1\wedge\cdots\wedge b_a)$: the two
-composites are the identity on scalars and on wedge products. The latter
-identity follows by expanding the vectors in $b$, discarding repeated
-indices by alternation, and collecting the remaining permutation terms
-with their signs. Tensoring $k$ copies and multiplying the scalar factors
+Use the coordinate isomorphism $\delta_b$ on the top exterior power.
+Tensoring $k$ copies and multiplying the scalar factors
 gives an isomorphism $\delta_b^{(k)}$ to $R$.
 Define the displayed map by
 $\eta\otimes z\mapsto\delta_b^{(k)}(\eta)j_b(z)$.
@@ -192,6 +212,71 @@ to the full square. Independence of the chosen basis follows from
 frame independence over both rings.
 \end{proof}
 
+\begin{lemma}[Tensor products and extension of scalars]
+\label{lem:tensor-base-change-equivalence}
+\source{bost-specht-manuscript:page-0009}\notready
+For a commutative $R$-algebra $S$ and a finite family of $R$-modules
+$(M_i)_{i\in I}$, the canonical map
+\[
+ S\otimes_R\bigotimes_{i\in I}M_i\longrightarrow
+ \bigotimes_{i\in I,S}(S\otimes_R M_i),\qquad
+ s\otimes\bigotimes_i m_i\longmapsto
+ s\bigotimes_i(1\otimes m_i)
+\]
+is an isomorphism. It is natural in the modules and in the coefficient
+algebra. In particular, tensor products commute with localization.
+\end{lemma}
+\begin{proof}
+The displayed rule is $R$-multilinear in the $m_i$ and balanced with
+respect to the leading scalar, so it defines an $S$-linear map.
+For the inverse, prescribe
+$\bigotimes_i(s_i\otimes m_i)\mapsto(\prod_i s_i)\otimes\bigotimes_i m_i$.
+In each slot this is additive in $s_i$ and $m_i$. Replacing
+$(s_i r,m_i)$ by $(s_i,rm_i)$ leaves the result unchanged by the
+balancing relation in the target. Thus it descends through the inner
+tensor products. Multiplying any slot by $s\in S$ multiplies the
+output by $s$, so the rule descends through the outer tensor product
+as an $S$-linear map. The two composites fix all displayed pure
+tensors, which span their respective modules. For the empty family
+both maps are the canonical identity on $S$. Naturality follows by
+applying each composite to the same pure generators.
+\end{proof}
+
+\begin{lemma}[Descent of linear maps on a finite principal cover]
+\label{lem:linear-map-localization-descent}
+\source{bost-specht-manuscript:page-0009}\notready
+Let $f_1,\ldots,f_m$ generate the unit ideal of a commutative ring $R$,
+and let $P,Q$ be $R$-modules. A family of $R_{f_i}$-linear maps
+$u_i:P_{f_i}\to Q_{f_i}$ whose extensions agree on every
+$R_{f_i f_j}$ comes from a unique $R$-linear map $u:P\to Q$.
+If all $u_i$ are injective, then $u$ is injective.
+\end{lemma}
+\begin{proof}
+First consider compatible elements $x_i\in Q_{f_i}$. Choose
+$q_i\in Q$ and exponents $n_i$ with $x_i=q_i/f_i^{n_i}$.
+For each $i,j$, compatibility means that in $(Q_{f_j})_{f_i}$
+the element $q_i-f_i^{n_i}x_j$ is zero. Hence a power of $f_i$
+annihilates this difference in $Q_{f_j}$. Finiteness permits one
+integer $N\geq n_i$ for all $i$ such that
+$v_i=f_i^{N-n_i}q_i$ has image $f_i^N x_j$ in $Q_{f_j}$ for every $j$.
+The ideal generated by the $f_i^N$ is the unit ideal: a proper ideal
+would lie in a maximal ideal containing every $f_i$, a contradiction.
+Choose $a_i\in R$ with $\sum_i a_i f_i^N=1$. Then
+$q=\sum_i a_i v_i$ maps to $x_j$ in each localization.
+If $q$ maps to zero in all $Q_{f_i}$, some common power $f_i^K$
+annihilates $q$ for every $i$. The same unit-ideal argument gives
+$q=0$, proving uniqueness.
+
+For $p\in P$, apply this construction to $x_i=u_i(p/1)$.
+Define $u(p)$ as the unique resulting element of $Q$. The local
+identities for sums and scalar multiples, together with uniqueness,
+show that $u$ is $R$-linear. Its localization is $u_i$, since they
+agree on all $p/1$ and these elements generate $P_{f_i}$ over $R_{f_i}$.
+Uniqueness of the map follows pointwise. If $u(p)=0$ and each $u_i$
+is injective, then $p/1=0$ in every $P_{f_i}$. Applying the same
+uniqueness argument to $P$ gives $p=0$.
+\end{proof}
+
 \begin{definition}[Geometric semistability of a Pl\"ucker line]
 \label{def:geometric-semistability}
 \source{bost-specht-manuscript:page-0009}\notready
@@ -225,7 +310,7 @@ a positive degree with nonzero restriction is therefore unchanged.
 
 \begin{lemma}[Determinant-isotypic integral modules]
 \label{lem:determinant-isotypic}
-\uses{def:rectangular-specht,lem:rectangular-invariants,lem:determinant-twisted-free-inclusion,lem:determinant-free-base-change,lem:determinant-free-naturality,lem:degree-calculus}
+\uses{def:rectangular-specht,lem:rectangular-invariants,lem:determinant-twisted-free-inclusion,lem:determinant-free-base-change,lem:determinant-free-naturality,lem:tensor-base-change-equivalence,lem:linear-map-localization-descent,lem:degree-calculus}
 \source{bost-specht-manuscript:page-0008,bost-specht-manuscript:page-0009}
 \notready
 For a rank-$a$ projective $\Ocal$-module $A$ and $d=ak>0$, there is
@@ -252,7 +337,12 @@ frame $b_1,\ldots,b_a$ the formula
  (b_1\wedge\cdots\wedge b_a)^{\otimes k}\otimes x
  \longmapsto b^{\otimes d}x
 \]
-is consequently independent of the frame, and glues over $\Ocal$.
+is consequently independent of the frame. Choose a finite principal
+cover on which $A$ is free. Exterior-power and tensor base change
+identify the local sources and targets with localizations of the
+intrinsic global modules. Scalar-extension compatibility and frame
+independence make the local maps agree on every overlap. Descent of
+linear maps therefore gives a unique global map over $\Ocal$.
 The local inclusion of the Specht lattice into the word lattice stays
 injective after scalar extension because $\Ocal$ and its localizations
 are torsion-free, hence flat, over $\mathbb Z$. This proves injectivity.

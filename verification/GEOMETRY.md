@@ -105,6 +105,35 @@ compatibility identity for localization overlaps; it is not projective gluing.
   scope. Its requests for explicit tableau hypotheses and the global consumer
   dependency edge were applied. No new external code was copied.
 
+## Naturality and the lightweight determinant API
+
+`Geometry/DeterminantNaturality.lean` proves the determinant-coordinate
+formula for the actual exterior-power map, its tensor-power consequence,
+and naturality of the twisted inclusion as an equality of linear maps.
+Arbitrary maps between free modules of the same rank are allowed; neither
+invertibility nor flatness is assumed.
+
+- Module `de84f98189cb1a15` passed at 16:38:35 UTC, 9063 jobs; explicit
+  proof pin `7c76270`. All 42 exports passed the combined axiom audit at
+  16:41:55 UTC, with only the same three foundational axioms.
+- At BOST-ARITH's request, the four existing determinant-coordinate
+  declarations were moved unchanged into `Geometry/DeterminantCoordinates.lean`,
+  importing only `ExteriorPower.Basic` and `Determinant`. Arithmetic's complex
+  determinant metric is a substantive consumer; no bundle representation changed.
+- Post-extraction combined build `2636613889bd279e` passed at 16:45:50 UTC,
+  9068 jobs, covering both new modules and `DeterminantFrame`.
+- The read-only honesty reviewer approved the naturality scope and the exact
+  extraction. Blueprint nodes distinguish the top exterior coordinates from
+  their Specht-dependent consumers.
+
+The next source-facing producers are `lem:tensor-base-change-equivalence`
+and `lem:linear-map-localization-descent`. Their complete mathematical proofs
+are in the blueprint, with `notready` status. The current tensor scalar-extension
+map is only the canonical forward map; it has not been proved an equivalence
+for general finite projective modules. Descent of maps between the existing
+intrinsic modules avoids introducing a second glued-module representation.
+The pinned Stacks module-gluing file was inspected, not copied or imported.
+
 ## Remaining boundaries
 
 Projective gluing of the global integral injection, the metric
