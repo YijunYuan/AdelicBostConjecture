@@ -1,6 +1,7 @@
 import BostConjecture.Arithmetic.TensorDegree
 import BostConjecture.Arithmetic.SubspaceSupermodular
 import BostConjecture.Arithmetic.ArchimedeanFiniteness
+import BostConjecture.Arithmetic.SubspaceHN
 import BostConjecture.Arithmetic.ExactDegree
 import BostConjecture.Arithmetic.QuotientMetric
 import BostConjecture.Arithmetic.IntegralDeterminantProduct
@@ -269,3 +270,19 @@ import BostConjecture.Arithmetic.DeterminantProduct
 #print axioms BostConjecture.Arithmetic.HermitianMetric.subspaceSlope_eq_quotient
 #print axioms BostConjecture.Arithmetic.HermitianMetric.exists_coordinate_bound
 #print axioms BostConjecture.Arithmetic.HermitianMetric.finite_bounded_sections
+
+#print axioms BostConjecture.Slope.adcc_of_wellFoundedLT
+#print axioms BostConjecture.Slope.isSemistable_iff
+#print axioms BostConjecture.Slope.isSemistable_restrict_iff
+#print axioms BostConjecture.Slope.A_eq_of_isSemistable
+#print axioms BostConjecture.Arithmetic.HermitianMetric.hnFlag
+#print axioms BostConjecture.Arithmetic.HermitianMetric.hnSubmodule
+#print axioms BostConjecture.Arithmetic.HermitianMetric.hnSubmodule_zero
+#print axioms BostConjecture.Arithmetic.HermitianMetric.hnSubmodule_length
+#print axioms BostConjecture.Arithmetic.HermitianMetric.hnSubmodule_monotone
+#print axioms BostConjecture.Arithmetic.HermitianMetric.hnSubmodule_lt_succ
+#print axioms BostConjecture.Arithmetic.HermitianMetric.hnStep
+#print axioms BostConjecture.Arithmetic.HermitianMetric.hnSlope
+#print axioms BostConjecture.Arithmetic.HermitianMetric.hnStep_payoff
+#print axioms BostConjecture.Arithmetic.HermitianMetric.hnStep_quotient_slope_le
+#print axioms BostConjecture.Arithmetic.HermitianMetric.hnSlope_succ_lt
