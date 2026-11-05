@@ -229,17 +229,27 @@ algebra. In particular, tensor products commute with localization.
 \begin{proof}
 The displayed rule is $R$-multilinear in the $m_i$ and balanced with
 respect to the leading scalar, so it defines an $S$-linear map.
-For the inverse, prescribe
-$\bigotimes_i(s_i\otimes m_i)\mapsto(\prod_i s_i)\otimes\bigotimes_i m_i$.
-In each slot this is additive in $s_i$ and $m_i$. Replacing
-$(s_i r,m_i)$ by $(s_i,rm_i)$ leaves the result unchanged by the
-balancing relation in the target. Thus it descends through the inner
-tensor products. Multiplying any slot by $s\in S$ multiplies the
-output by $s$, so the rule descends through the outer tensor product
-as an $S$-linear map. The two composites fix all displayed pure
-tensors, which span their respective modules. For the empty family
-both maps are the canonical identity on $S$. Naturality follows by
-applying each composite to the same pure generators.
+For the empty family the tensor product is $R$, and the map is the
+canonical isomorphism $S\otimes_R R\simeq S$.
+Suppose the assertion holds for a finite family indexed by $J$, and
+add one module $M_*$. Separate that last factor and apply the binary
+base-change isomorphism
+\[
+ S\otimes_R(P\otimes_R M_*)\simeq
+ (S\otimes_R P)\otimes_S(S\otimes_R M_*),
+ \quad s\otimes(p\otimes m)\mapsto(s\otimes p)\otimes(1\otimes m),
+\]
+whose inverse sends $(s\otimes p)\otimes(t\otimes m)$ to
+$st\otimes(p\otimes m)$. Balancing verifies both maps, and their
+composites are identities on pure tensors. Apply the induction
+hypothesis to $P=\bigotimes_{j\in J}M_j$ and recombine the factors.
+The resulting isomorphism has the displayed formula. Relabelling the
+finite index set commutes with pure tensors, so finite induction proves
+the assertion for every finite family. The formula determines the map
+uniquely since pure tensors span. Its inverse therefore sends
+$\bigotimes_i(s_i\otimes m_i)$ to
+$(\prod_i s_i)\otimes\bigotimes_i m_i$.
+Naturality follows by applying each composite to the same pure generators.
 \end{proof}
 
 \begin{lemma}[Descent of linear maps on a finite principal cover]
