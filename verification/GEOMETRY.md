@@ -167,11 +167,8 @@ The pinned Stacks module-gluing file was inspected only; no source was copied.
   were applied. Five new blueprint nodes are checked; the global
   determinant-isotypic node remains unproved.
 
-The first unmet construction is now the assembly of finite-projective local
-frames and transport of their determinant maps onto double localizations,
-followed by application of the checked descent theorem. This is needed to
-construct the global injection; the general descent producer alone does not
-supply it.
+The chart assembly and global-map consumer of these descent producers are
+proved in the next section. Descent by itself was not a global injection claim.
 
 ## Remaining boundaries
 
@@ -299,14 +296,14 @@ norm instances. Over arbitrary rings it claims a global map; integral injectivit
 still requires the earlier integer-flatness hypothesis.
 `Geometry/Permutation.lean` transports position permutations through tensor
 coordinates and proves actual equivariance for the free lattice and determinant
-maps. The global projective permutation descent is a subsequent consumer.
+maps. The global projective permutation theorem below consumes this free identity.
 
 The combined module check `8f5fd4cb8257389e` passed 9085 jobs at 19:34:02 UTC;
 all 114 transitive probes then passed with only the foundational axioms. Initial
 canonical-module instance and alphabet-relabelling elaboration failures were
 repaired. Read-only honesty review approved the two source/blueprint nodes.
-The full contraction still needs dual-metric/evaluation compatibility and
-restricted equivariance; no contraction completion claim is made.
+The global equivariance and restricted algebraic pairing consumers are checked
+below; no metric-contraction completion claim follows from this checkpoint.
 
 ## Global projective permutation equivariance
 
@@ -338,9 +335,9 @@ Module check `e7f3f665e66ab94b` passed 9081 jobs at 19:42:59 UTC without
 warnings. All 124 transitive probes passed with only `propext`,
 `Classical.choice`, and `Quot.sound`. Read-only honesty review approved the
 actual producer route; its finite-family/evaluation notation clarifications
-were applied to the checked blueprint node. The first metric boundary is now
-the genuine dual Hilbert metric and evaluation bound, coordinated with ARITH
-in I-0038; invariant base change and nonvanishing remain later producers.
+were applied to the checked blueprint node. The dual metric and evaluation
+bound are proved next; tensor-duality compatibility, invariant base change and
+nonvanishing remain subsequent producers.
 
 ## Canonical dual form and the current metric frontier
 
@@ -351,8 +348,8 @@ this generic interface in I-0038 and owns arithmetic dual scalar-extension and
 conjugation transport. No duplicate module, bundle, or arithmetic metric is added.
 
 - Module check `14e934fc56245088` passed 2486 jobs at 19:51:41 UTC without
-  warnings. The expanded 131-probe audit passed with only the standard
-  foundational axioms and no `sorryAx` or additional assumptions.
+  warnings. The expanded 131-probe audit `ffefd7bf352d83dc` passed at
+  19:52:52 UTC with only the standard foundational axioms and no `sorryAx` or additional assumptions.
 - Earlier missing completeness and semilinear simplifier failures were repaired
   using `FiniteDimensional.complete` and a direct rewrite, without raising limits.
 - Read-only honesty review approved the canonical dual construction and actual
@@ -369,3 +366,19 @@ evidence for those paths. ARITH independently verified the module before staging
 (`94052864d5cf1949`, 3450 jobs at 19:43:46 UTC); the parent confirmed no deletion
 or content mismatch. I-0039 records the resolution. Subsequent GEOM commits use
 `commit --only` with explicit owned paths as well as explicit staging.
+
+Final boundary sync: 151 blueprint nodes, 1059 Lean declarations and 683 generated
+edges, with no stale/missing-reference warning. The 570 unattached declarations
+are intentional helper/imported coverage, including concurrent lane work.
+Read-only hygiene review retained 13 active nested items across the three proof
+lanes and corrected stale frontier wording. Scratch dry-run found no stale
+candidates. I-0038 and I-0039 are resolved; I-0036 awaits SPECHT's root-integration
+result for the stable new imports. All GEOM checks have completed, and this report
+does not certify any later root batch. I-0034 still forbids this session's legacy
+LSP client; every post-freeze feedback check used the serialized kernel slot.
+
+ARITH subsequently supplied the actual finite-projective dual scalar-extension
+and fiber/conjugation interface in `Arithmetic/DualFiber.lean` at `e3a7b48`
+(I-0040; module `71e786e1c6fa94d7`, 3344 jobs at 19:55:00 UTC). Its expanded
+ARITH audit is maintained separately. This is the agreed algebraic transport
+for the next metric consumer; it does not prove Hilbert tensor-duality isometry.
