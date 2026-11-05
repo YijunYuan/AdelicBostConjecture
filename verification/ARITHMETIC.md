@@ -371,3 +371,115 @@ SPECHT subsequently confirmed the earlier arithmetic imports (through
 `SubspaceDegree`) in root commit `2072f12`, with a 9141-job root check at
 18:42:11 UTC (`975bdb23135a0d4a`). That snapshot does not certify this round's
 new metric imports; I-0028 now tracks only their remaining integration.
+
+## Nested quotients, determinant contraction, tensor lines and dual fibers (session 0008)
+
+Claim class: **proved producers**, with actual intrinsic arithmetic consumers.
+This advances BOST-ARITH; it does not complete its degree calculus or HN objective.
+
+- `OrthogonalLift` / `NestedQuotient`: naturality of the canonical orthogonal
+  representative proves equality of the quotient-of-induced and
+  induced-quotient metrics for nested integral submodules (`9321666`).
+- `ExteriorMap` / `DeterminantContraction` / `SaturationDegree`: canonical
+  exterior maps commute with scalar extension; injective fiber contractions
+  contract **every complex determinant vector**. The intrinsic line-degree
+  inequality then proves equal-rank degree monotonicity and actual saturation
+  monotonicity (`b13c978`, strengthened in `d15ab3e`).
+- `TensorCoordinate`: multiplication of actual integral coordinates is
+  injective, its fractional ideal is the product ideal, and the finite
+  logarithmic contribution is additive (`4f53c5a`).
+- `BinaryTensorMetric` / `LineTensorDegree`: the binary metric pulls back the
+  existing finite-family metric through canonical Mathlib equivalences. Its
+  pure norm formula and the product-ideal producer both feed
+  `degreeInCoordinate_tensor`, then rank-one determinant normalization proves
+  `degree_tensor_of_rank_one` (`bdcafbc`). This covers nonfree projective lines
+  over arbitrary number fields, not only rational or principal lines.
+- `DualFiber`: Mathlib's finite-projective tensor--Hom equivalence and scalar
+  extension adjunction prove bijectivity of the canonical dual base-change
+  map. Its arithmetic specialization commutes with conjugation on arbitrary
+  dual and original fiber vectors (`e3a7b48`). No integral basis is assumed.
+
+All checks below ran with explicit workspace root and the shared serialized
+slot. Times are 2026-11-05 UTC; fingerprints identify commands, so the finish
+time distinguishes revised checks of the same command.
+
+| Target | Final result | Finished | Fingerprint |
+| --- | --- | --- | --- |
+| `Arithmetic.NestedQuotient` | 3341 jobs, passed | 19:08:30.646874 | `f11f65a7fc29184d` |
+| `Arithmetic.SaturationDegree` | 3512 jobs, passed | 19:30:41.708237 | `aaa1ccb1a7ef948d` |
+| `Arithmetic.TensorCoordinate` | 3104 jobs, passed | 19:38:46.720761 | `dbaf90bd7087e71c` |
+| `Arithmetic.BinaryTensorMetric` | 3450 jobs, passed | 19:43:46.155444 | `94052864d5cf1949` |
+| `Arithmetic.LineTensorDegree` | 3516 jobs, passed | 19:46:29.409694 | `e5c14e80f15b60d1` |
+| `Arithmetic.DualFiber` | 3344 jobs, passed | 19:55:00.665920 | `71e786e1c6fa94d7` |
+| `--lean verification/ArithmeticAxioms.lean` | 135 probes, passed | 19:57:25.476725 | `590174f2cda53d26` |
+
+These final module checks have no warnings. All 135 transitive axiom probes
+report only `propext`, `Classical.choice` and `Quot.sound`; none reports
+`sorryAx` or an additional axiom. Earlier 123- and 131-probe audits passed at
+19:32:08 and 19:47:24 respectively. Records live in run 0004, session
+`0008-horizon-BOST-ARITH`, under `checks/`.
+
+Final source blobs:
+
+| Source | Git blob |
+| --- | --- |
+| `OrthogonalLift.lean` | `df850f0cd33e083744a79631faccb3c905f461b0` |
+| `NestedQuotient.lean` | `296e2501706c4e855282998d3e631e273b2d6662` |
+| `ExteriorMap.lean` | `176270e2c80127cdb7ba73be603ad8034f764020` |
+| `DeterminantContraction.lean` | `e9d2c2b58209dd9c4022c59591609e3662fba3e3` |
+| `SaturationDegree.lean` | `3fb76afdf9046eebee682a461e0257d771b36603` |
+| `TensorCoordinate.lean` | `62fb090d96f685bc961a8dabfd0d17ee70cc1a2d` |
+| `BinaryTensorMetric.lean` | `4d416fe1f49099443e8831ab35475b8683610eaa` |
+| `LineTensorDegree.lean` | `bbe1fe037b6366fabe9aaf6cb96b7732a0df5b75` |
+| `DualFiber.lean` | `dfb576f308eb40c4068be50101f12f128747d3a5` |
+| `ArithmeticAxioms.lean` | `5044ca87bacbde4cb15f6c18f62d358ca57755ba` |
+
+Development failures were repaired: exterior fiber extensionality and coercion
+errors, one premature axiom audit after a failed import build, fractional-ideal
+coercion and `omit` placement, dependent binary-family reduction, and dual
+base-change associativity/local-universe errors. The first line tensor check
+had a `letI` style warning; its final check above is clean. No failed attempt
+is being used as proof evidence. I-0034 prohibits this session's legacy LSP
+client from building dependencies; all feedback after that protection used
+serialized kernel checks, without artifact cleanup or configuration changes.
+
+`BinaryTensorMetric.lean` and its accompanying blueprint prose were incidentally
+captured in GEOM commit `eecbe72` during shared-index staging. The independent
+ARITH check above preceded that commit. I-0039 records matching blobs and the
+agreement to use explicit paths on `git commit --only`; no history rewrite or
+source repair was needed. Other ARITH commits used explicit owned paths.
+
+Honesty-reviewer was used for all new scoped completion claims and independently
+inspected the recorded builds, audit output, proofs, consumers and blueprint.
+Verdict: **satisfactory, honest partial progress**. Requested full-fiber wording,
+proof alignment and dependency edges were repaired. The six new checked nodes
+are nested quotient compatibility, determinant contraction, saturation degree,
+tensor coefficient ideals, line tensor degree, and dual fiber base change.
+
+The frontier is now the **actual arithmetic dual metric**, followed by the
+dual, arbitrary-rank tensor and exact-sequence determinant isometries/degree
+identities. `lem:arithmetic-dual-metric` has a complete mathematical proof but
+remains `notready`. GEOM delivered the checked canonical algebraic dual Core
+in `90d9c82` (I-0038); the arithmetic scalar-extension half is now checked and
+was acknowledged in I-0040. Degree finiteness, supermodularity and actual HN
+specialization remain open. No main-theorem completion is claimed.
+
+Earlier metric imports were integrated by SPECHT in `75b41aa` (9148 jobs,
+19:08:01 UTC); that is not evidence for this session's later leaves. I-0037
+tracks the checked new integration batch. The prior graph synchronization
+reported 150 blueprint nodes, 1054 Lean declarations and 672 edges, with no
+unresolved attachment warning. Its 572 unattached helper declarations are a
+coverage warning, not proof failure; the final graph count is recorded below.
+Read-only operational review found the active roadmap rows to be nested
+branches and ancestors of the three authorized writers. The current count
+grew as concrete subgoals were split; no extra proof writer was spawned.
+Scratch cleanup found no stale candidates and preserved all three live runs.
+
+Final graph sync: **152 blueprint nodes, 1068 Lean declarations, 702 generated
+edges**; no unresolved attachment warning. The remaining 565 unattached
+declarations include low-level helpers and imported APIs; their coverage warning
+is retained intentionally. The roadmap currently reports 13 active rows across
+the nested live branches; the health review is not repeated for the same
+collection warning. The mathematical completion markers apply only to the six
+scoped proved nodes above. I-0040 is closed; I-0037 remains open for SPECHT's
+pending root integration, including the final DualFiber leaf if feasible.

@@ -11,8 +11,13 @@ import BostConjecture.Arithmetic.DegreeNormalization
 import BostConjecture.Arithmetic.NestedQuotient
 import BostConjecture.Arithmetic.SaturationDegree
 import BostConjecture.Arithmetic.LineTensorDegree
+import BostConjecture.Arithmetic.DualFiber
 
 #print axioms BostConjecture.Arithmetic.HermitianMetric
+#print axioms BostConjecture.Arithmetic.dualBaseChangeMap_bijective
+#print axioms BostConjecture.Arithmetic.dualBaseChangeEquiv
+#print axioms BostConjecture.Arithmetic.dualFiberEquiv_section
+#print axioms BostConjecture.Arithmetic.dualFiberEquiv_conjugate
 #print axioms BostConjecture.Arithmetic.tensorCoordinate_injective
 #print axioms BostConjecture.Arithmetic.coordinateIdeal_tensor
 #print axioms BostConjecture.Arithmetic.logIdealNorm_tensorCoordinate

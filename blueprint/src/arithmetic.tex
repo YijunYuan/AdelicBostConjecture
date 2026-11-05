@@ -761,7 +761,8 @@ one-dimensional, so this computation applies to the intrinsic line degree.
 \end{proof}
 
 \begin{lemma}[Scalar extension and conjugation for the intrinsic dual]
-\label{lem:dual-fiber-base-change}\uses{def:hermitian-metric,lem:hermitian-fiber-conjugation}\notready
+\label{lem:dual-fiber-base-change}\uses{def:hermitian-metric,lem:hermitian-fiber-conjugation}
+\lean{BostConjecture.Arithmetic.dualBaseChangeEquiv,BostConjecture.Arithmetic.dualBaseChangeEquiv_tmul,BostConjecture.Arithmetic.dualFiberEquiv_section,BostConjecture.Arithmetic.dualFiberEquiv_conjugate}\leanok
 Let $P$ be a finite projective module over a commutative ring $R$ and
 $S$ a commutative $R$-algebra. The canonical map
 \[
@@ -792,8 +793,44 @@ $\bar z\bar w\bar\sigma(f(m))$. This proves the conjugation identity
 on pure tensors. Additivity in both variables extends it to all vectors.
 \end{proof}
 
+\begin{lemma}[The intrinsic dual Hermitian metric]
+\label{lem:arithmetic-dual-metric}
+\uses{lem:dual-fiber-base-change,lem:dual-hilbert-metric,lem:hermitian-fiber-conjugation}\notready
+For a finite projective Hermitian $\Ocal$-module $M$, the operator dual
+norms define a conjugation-compatible Hermitian metric on the actual
+integral dual $M^\vee=\operatorname{Hom}_\Ocal(M,\Ocal)$. Under
+$d_\sigma$ its norm is the complex operator norm. In particular
+\[
+ |\sigma(f(x))|\leq\|j_\sigma(f)\|_{M^\vee}\,
+                         \|j_\sigma(x)\|_M
+ \qquad(f\in M^\vee,\ x\in M).
+\]
+\end{lemma}
+\begin{proof}
+The integral dual of a finite projective module is finite projective.
+Transport the canonical dual Hilbert form through $d_\sigma$.
+It is positive definite because $d_\sigma$ is an isomorphism, and its
+norm is the operator norm by Lemma~\ref{lem:dual-hilbert-metric}.
+To check conjugation, write $R_\sigma(\varphi)$ for the Riesz vector
+characterized by $\varphi(x)=h_\sigma(R_\sigma(\varphi),x)$.
+Let $\varphi'$ be the conjugate dual vector, so
+$\varphi'(cx)=\overline{\varphi(x)}$ by
+Lemma~\ref{lem:dual-fiber-base-change}. Antiunitarity of $c$ gives
+\[
+ h_{\bar\sigma}(cR_\sigma(\varphi),cx)
+  =\overline{h_\sigma(R_\sigma(\varphi),x)}=\varphi'(cx).
+\]
+Surjectivity of $c$ and uniqueness of Riesz representation imply
+$R_{\bar\sigma}(\varphi')=cR_\sigma(\varphi)$.
+The dual inner product is $h_\sigma(R_\sigma(\psi),R_\sigma(\varphi))$;
+the displayed identity and antiunitarity therefore prove its conjugation
+compatibility. Finally the operator-norm evaluation inequality, applied
+through $d_\sigma$ and its integral-section formula, gives the asserted
+integral bound.
+\end{proof}
+
 \begin{lemma}[Determinant identities and contraction]
-\label{lem:degree-calculus}\uses{def:hermitian-degree,lem:quotient-hermitian-metric,lem:arithmetic-tensor-metric,lem:line-tensor-degree,lem:determinant-contraction,lem:saturation-degree,lem:degree-metric-scaling}
+\label{lem:degree-calculus}\uses{def:hermitian-degree,lem:quotient-hermitian-metric,lem:arithmetic-tensor-metric,lem:arithmetic-dual-metric,lem:line-tensor-degree,lem:determinant-contraction,lem:saturation-degree,lem:degree-metric-scaling}
 \source{bost-specht-manuscript:page-0003}\notready
 Degrees are additive in an exact sequence with induced and quotient
 metrics. For positive-rank bundles $A,B$ and a line bundle $L$,
