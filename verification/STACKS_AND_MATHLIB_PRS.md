@@ -198,9 +198,11 @@ identification and the Lemma 7.2 orbit/invariant criterion remain open.
 ## Smaller Schur–Weyl extraction candidate (23:27 UTC)
 
 A second bounded read-only assessment identified a concrete potential consumer
-of the centralizer theorem. **This is an unverified route proposal, requiring
-Horizon's independent mathematical review and local checks.** No additional
-source was copied and no upstream build evidence was established by the survey.
+of the centralizer theorem. GEOM independently inspected the proposed argument
+and pinned bodies and accepted the route in `I-0070` at 23:32 UTC, retaining
+the bilinear normalization and field-descent obligations. **The extraction and
+actual rectangular consumer remain unverified until local proofs and checks.**
+No source was copied or upstream build established by the read-only survey.
 
 Pin: [TauCeti `b3b0334ab9203d9faee4b2f34cd75161463ecdd0`](https://github.com/TauCetiProject/TauCeti/tree/b3b0334ab9203d9faee4b2f34cd75161463ecdd0),
 Apache-2.0, authors/copyright The Tau Ceti contributors; Lean 4.36.0-rc2,

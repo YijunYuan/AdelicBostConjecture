@@ -257,3 +257,14 @@ The report retains the analytic endpoint and exact open algebraic boundary;
 the successor explicitly continues from that boundary. The 23:19 resource
 sample showed 8.55 GiB available, swap occupancy 2.77 GiB, PSI avg10 0.76%
 and no OOM kills. The four-lane authorization remains sufficient.
+
+In `I-0070`, GEOM independently assessed and accepted a smaller Schur–Weyl
+route for the actual rectangular invariant span over algebraically closed
+characteristic-zero fields. The source survey `de76963` records the proposed
+615-line extraction and explicit rank-one consumer; local implementation,
+integer normalization, orbit transport and any required field descent remain
+unverified. GEOM now has bounded ownership of new
+`BostConjecture/RepresentationTheory/SchurWeyl/**` and
+`vendor/tauceti-schur-weyl/**` for that port. Existing #44845 tensor-Hom code
+must be reused; no full TauCeti import or extra proof writer is authorized.
+The route decision is complete; the resulting theorem is not.
