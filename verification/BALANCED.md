@@ -51,8 +51,11 @@ No unguarded build was used.
 
 SPECHT confirmed root integration through `Balanced.PluckerNorm` at
 `4d40509`, root blob `d29b590246c8925d6cce74559397b56db2cc8de5`:
-**9,210 jobs warning-free** at 2026-11-05 22:11:39 UTC, check
-`975bdb23135a0d4a`. SpectralExpansion requires the next root batch.
+**9,210 jobs warning-free** at 2026-11-05 22:11:39 UTC. It subsequently
+integrated SpectralExpansion and InvariantTheory.Semistability: **9,223 jobs
+warning-free** at 22:47:30 UTC, check `975bdb23135a0d4a`, root blob
+`1e82a0a65cf1c08b5cb2f375cfa2f0c6c580183c`. TensorExponential and the
+new polar leaves require the next root batch.
 
 ## Current exterior-metric checkpoint
 
@@ -138,7 +141,7 @@ intrinsically by pullback, not by their values as functions. Its attachment
 correction was also incorporated: `def:balanced-vector-semistability` records
 the complex vector orbit-closure predicate, while the source's Plücker-line
 invariant-existence definition and its equivalence remain under the open
-orbit criterion. Root integration of these new modules is pending SPECHT.
+orbit criterion. Root integration of these three modules passed in the 9,223-job batch above.
 
 Imports reuse Mathlib's `SymmetricAlgebra.lift`, dual evaluation/transposition,
 `Submodule.pow_induction_on_left'`, `Submodule.FG.pow`,
@@ -166,13 +169,37 @@ The latest graph sync recorded 218 blueprint nodes, 1441 Lean declarations,
 1030 edges and no unresolved-reference warnings. The 728 unattached
 helper/import declarations are intentional, consistent with `I-0004`.
 
+## Determinant-one polar checkpoint
+
+`Balanced.PolarLog` passed **3,128 jobs** (3.4s),
+`Balanced.ExponentialDeterminant` **2,863 jobs** (14.0s), and
+`Balanced.SpecialLinearPolar` **3,178 jobs** (19.0s), all warning-free
+under explicit-root serialization. The expanded **86-probe** kernel audit
+passed in 12.1s with only `propext`, `Classical.choice`, and `Quot.sound`.
+The exact export `specialLinear_polar` constructs a determinant-one unitary
+equivalence and a traceless Hermitian operator whose exponential gives the
+factorization of the supplied actual `SpecialLinearGroup` element.
+Independent honesty review accepted the actual polar factor, proved strict
+positivity for the totalized CFC logarithm, positive determinant root choice,
+real-trace argument and dimension-zero case. Root integration is pending.
+The audit LSP still reports stale imports; the serialized kernel check passed
+all 86 probes. This stale-editor diagnostic is not reported as a build failure.
+
+This substantively consumes the checked PR45002 `abs`, `ker_abs_eq`,
+`norm_abs_apply`, `abs_comp_abs`, `polar` and `polar_comp_abs` at upstream
+revision `41260205df493c627e1ac0e54812cfdeb6517fbc`; its existing attribution,
+license and port are unchanged. It also imports the pinned Mathlib CFC
+`log`, `IsSelfAdjoint.log` and `exp_log` from
+`Analysis/SpecialFunctions/ContinuousFunctionalCalculus/ExpLog/Basic.lean`
+(Frédéric Dupuis, Apache-2.0), the Hermitian trace/eigenvalue identities,
+and standard determinant/adjoint formulas, without copying source.
+
 ## Remaining mathematical producers
 
 1. Complete root integration of the tensor exponential producer; the actual
    tensor-flow bridge and balanced norm minimum pass kernel and axiom checks.
-2. Determinant-one unitary/logarithm adapters for the already checked polar
-   decomposition port (`TJHeeringa/mathlib4`, revision
-   `41260205df493c627e1ac0e54812cfdeb6517fbc`, PR 45002).
+2. Assemble the norm bound for the full special-linear Plücker orbit from
+   the checked tensor minimum and determinant-one polar reduction.
 3. The canonical algebraic tensor/exterior representation, coordinate coaction
    and base-change/detection bridges, coordinated with GEOM in `I-0047`.
    Intrinsic polynomials, homogeneous degree, finite dimensionality and
@@ -195,7 +222,7 @@ The orbit criterion is restricted to the needed pair of special linear
 groups with an **algebraic linear action**. It does not apply to arbitrary
 abstract linear representations. The finite-degree separation argument uses
 neither finite generation of the invariant ring nor a semistability axiom.
-The orbit-criterion and polar blueprint nodes remain `notready`. Only the
+The orbit-criterion blueprint nodes remain `notready`. Only the
 checked analytic producers carry `leanok`; Lemma 7.2 remains open.
 
 ## Source registration
@@ -224,7 +251,8 @@ Claim class: **proved producers**. Before this session: actual tensor exponentia
 proved but the complex exterior metric was missing. After: the full complex
 exterior Gram metric, Plücker norm stationarity and Hermitian spectral
 expansion/convexity are checked. The first unmet analytic producer is the
-tensor-flow bridge, followed by determinant-one polar/log reduction.
+assembly of the full special-linear orbit norm bound. Tensor-flow and
+determinant-one polar/log reduction are now checked.
 Consumer: `lem:balanced-plucker`, still unproved. The source-backed orbit route
 is mathematical blueprint only, with all formal dependencies still open.
 Honesty reviewer: used; actual projection and both balance equations are

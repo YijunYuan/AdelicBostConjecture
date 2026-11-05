@@ -3,6 +3,7 @@ import BostConjecture.Balanced.ExteriorMetric
 import BostConjecture.Balanced.PluckerNorm
 import BostConjecture.Balanced.SpectralExpansion
 import BostConjecture.Balanced.TensorExponential
+import BostConjecture.Balanced.SpecialLinearPolar
 import BostConjecture.InvariantTheory.Semistability
 
 #print axioms BostConjecture.Balanced.trace_starProjection_comp
@@ -80,3 +81,19 @@ import BostConjecture.InvariantTheory.Semistability
 #print axioms BostConjecture.Balanced.exp_tensorSum
 #print axioms BostConjecture.Balanced.convexOn_exterior_tensor_exp_norm_sq
 #print axioms BostConjecture.Balanced.IsBalanced.one_le_plucker_norm_sq_tensor_exp
+
+#print axioms BostConjecture.Balanced.abs_injective
+#print axioms BostConjecture.Balanced.abs_bijective
+#print axioms BostConjecture.Balanced.abs_isStrictlyPositive
+#print axioms BostConjecture.Balanced.norm_polar_apply
+#print axioms BostConjecture.Balanced.polarIsometry
+#print axioms BostConjecture.Balanced.log_abs_isSymmetric
+#print axioms BostConjecture.Balanced.exp_log_abs
+#print axioms BostConjecture.Balanced.polarIsometry_comp_exp_log_abs
+#print axioms BostConjecture.Balanced.det_eq_prod_of_basis
+#print axioms BostConjecture.Balanced.det_exp_of_isSymmetric
+#print axioms BostConjecture.Balanced.trace_eq_zero_of_det_exp_eq_one
+#print axioms BostConjecture.Balanced.det_adjoint
+#print axioms BostConjecture.Balanced.det_abs_eq_one
+#print axioms BostConjecture.Balanced.trace_log_abs_eq_zero
+#print axioms BostConjecture.Balanced.specialLinear_polar

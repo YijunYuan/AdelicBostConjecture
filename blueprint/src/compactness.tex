@@ -386,7 +386,8 @@ the lower bound one.
 \end{proof}
 
 \begin{lemma}[Invertible polar factor and positive logarithm]
-\label{lem:balanced-polar-log}\notready
+\label{lem:balanced-polar-log}
+\lean{BostConjecture.Balanced.abs_bijective,BostConjecture.Balanced.abs_isStrictlyPositive,BostConjecture.Balanced.polarIsometry,BostConjecture.Balanced.log_abs_isSymmetric,BostConjecture.Balanced.exp_log_abs,BostConjecture.Balanced.polarIsometry_comp_exp_log_abs}\leanok
 Let $T$ be an injective endomorphism of a finite-dimensional complex
 Hermitian space, $p=(T^*T)^{1/2}$ its positive modulus, and $u$ its
 polar factor. Then $p$ is invertible, $u$ is a linear isometry, and
@@ -410,7 +411,8 @@ has one element, and all the identities hold.
 \end{proof}
 
 \begin{lemma}[Determinant of a Hermitian exponential]
-\label{lem:balanced-hermitian-exp-determinant}\notready
+\label{lem:balanced-hermitian-exp-determinant}
+\lean{BostConjecture.Balanced.det_eq_prod_of_basis,BostConjecture.Balanced.det_exp_of_isSymmetric,BostConjecture.Balanced.trace_eq_zero_of_det_exp_eq_one}\leanok
 For a Hermitian endomorphism $H$ of a finite-dimensional complex
 Hermitian space, $\det(e^H)=\exp(\operatorname{Re}\Tr H)$, a positive
 real number. If $\det(e^H)=1$, then $\Tr H=0$.
@@ -427,24 +429,27 @@ the same formulas in dimension zero.
 \end{proof}
 
 \begin{lemma}[Determinant-one polar reduction]
-\label{lem:balanced-special-linear-polar}\notready
+\label{lem:balanced-special-linear-polar}
+\lean{BostConjecture.Balanced.det_adjoint,BostConjecture.Balanced.det_abs_eq_one,BostConjecture.Balanced.trace_log_abs_eq_zero,BostConjecture.Balanced.specialLinear_polar}\leanok
 \uses{lem:balanced-polar-log,lem:balanced-hermitian-exp-determinant}
 For a finite-dimensional complex Hermitian space $U$ and $g\in\SL(U)$,
 there exist a unitary $u$ and a traceless Hermitian $H$ such that
 $g=ue^H$. The unitary $u$ also has determinant one.
 \end{lemma}
 \begin{proof}
-Put $p=(g^*g)^{1/2}$ and $u=gp^{-1}$. Positivity and invertibility
-of $g^*g$ imply those of $p$, and $u^*u=p^{-1}g^*gp^{-1}=I$;
-in finite dimension this makes $u$ unitary. Also
-$(\det p)^2=\det(g^*g)=|\det g|^2=1$.
-All eigenvalues of $p$ are positive, so $\det p>0$ and $\det p=1$.
-Choose an orthonormal eigenbasis of $p$, with eigenvalues $a_i>0$,
-and define $H$ in that basis by eigenvalues $\log a_i$. Then $H$ is
-Hermitian, $e^H=p$, and $\Tr H=\sum_i\log a_i=\log\prod_i a_i=0$.
-Finally $\det u=\det g/\det p=1$.
-In dimension zero all the maps are the unique endomorphism and the
-assertions hold with $H=0$.
+Apply the preceding polar/log lemma to $g$, obtaining $p=|g|$,
+$u$ and the Hermitian operator $H=\log p$ with $g=up=ue^H$.
+In an orthonormal basis the adjoint matrix is the conjugate transpose,
+so its determinant is the complex conjugate determinant. Hence
+\[
+ (\det p)^2=\det(p^2)=\det(g^*g)=\overline{\det g}\det g=1.
+\]
+The Hermitian exponential determinant formula applied to $H$ shows
+$\det p=\exp(\operatorname{Re}\Tr H)>0$. The positive real root of
+$x^2=1$ is one, so $\det p=1$. The same formula and Hermitian reality
+of the trace give $\Tr H=0$. The isometry $u$ is injective, hence
+surjective in finite dimension, so it is unitary. Taking determinants
+in $g=up$ gives $\det u=1$. Dimension zero is included throughout.
 \end{proof}
 
 \begin{lemma}[Intrinsic homogeneous polynomials]
