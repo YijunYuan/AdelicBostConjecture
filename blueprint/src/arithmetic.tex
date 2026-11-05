@@ -1232,8 +1232,82 @@ rank one. Isometry invariance of line degree and tensor additivity for
 projective lines now give the asserted degree identity.
 \end{proof}
 
+\begin{lemma}[Tensor products preserve induced and quotient metrics]
+\label{lem:tensor-exact-metrics}
+\uses{lem:arithmetic-tensor-metric,lem:induced-hermitian-metric,lem:quotient-hermitian-metric}
+\source{bost-specht-manuscript:page-0003}\notready
+Let $0\to A'\xrightarrow{i}A\xrightarrow{q}A''\to0$ be an exact
+sequence of finite projective $\Ocal$-modules. Give $A'$ and $A''$ the
+induced and quotient metrics from a Hermitian metric on $A$. For every
+Hermitian bundle $B$, tensoring this sequence with $B$ is exact, and its
+induced and quotient metrics agree with the Hilbert tensor metrics on
+$A'\otimes B$ and $A''\otimes B$, respectively. The same statement holds
+when tensoring on the left.
+\end{lemma}
+\begin{proof}
+Projectivity of $B$ implies flatness, hence preservation of exactness and
+injectivity; right exactness gives the surjection. Scalar extension
+identifies the complex fibers with the tensor products of the original
+fibers and intertwines their maps. The pure-tensor inner-product formula
+and sesquilinearity identify the induced forms. Write $U=\ker q_\sigma$
+and let $s:A''_\sigma\to U^\perp$ be the orthogonal right inverse.
+Then $s\otimes1$ is a right inverse of $q_\sigma\otimes1$. Its image is
+orthogonal to $U\otimes B_\sigma$: the pairing of $u\otimes b$ with
+$s(c)\otimes d$ is $\langle u,s(c)\rangle\langle b,d\rangle=0$,
+and pure tensors span both spaces. Exactness identifies $U\otimes
+B_\sigma$ with the kernel. Uniqueness of the orthogonal representative
+therefore identifies $s\otimes1$ with the quotient lift. Its inner product
+is the tensor product of the quotient pairing with the pairing on $B$.
+Interchanging the factors is an isometry by the pure-tensor formula, so
+the left-tensor statement follows as well.
+\end{proof}
+
+\begin{lemma}[Rank-one saturated reduction]
+\label{lem:rank-one-saturated-reduction}
+\uses{lem:integral-part-generic-subspace}
+\source{bost-specht-manuscript:page-0002}\notready
+Every finite projective $\Ocal$-module $A$ of positive generic rank $a$
+contains a saturated rank-one submodule $L$ whose quotient is finite
+projective of rank $a-1$.
+\end{lemma}
+\begin{proof}
+Choose a nonzero vector $v\in A_K$ and take $L=A\cap Kv$. Its generic
+fiber is $Kv$, which has dimension one. The integral-part construction
+makes $L$ saturated, so both $L$ and $A/L$ are finite projective. Tensoring
+$0\to L\to A\to A/L\to0$ with $K$ and adding vector-space dimensions
+gives $\rk(A/L)=a-1$.
+\end{proof}
+
+\begin{lemma}[Tensor degree in arbitrary rank]
+\label{lem:tensor-degree}
+\uses{lem:tensor-exact-metrics,lem:rank-one-saturated-reduction,lem:exact-determinant-degree,lem:line-tensor-degree,lem:degree-rank-zero}
+\source{bost-specht-manuscript:page-0003}\notready
+For finite projective Hermitian bundles $A,B$ of generic ranks $a,b$,
+\[
+ \degn(A\otimes B)=b\degn(A)+a\degn(B).
+\]
+For $a,b>0$ this gives $\slope(A\otimes B)=\slope(A)+\slope(B)$.
+\end{lemma}
+\begin{proof}
+Induct on $a+b$. If either rank is zero, its module and the tensor module
+are zero, and both sides vanish. If $a=b=1$, apply the rank-one tensor
+formula. If $a>1$, take a saturated line $L\subset A$, set $C=A/L$, and
+use the induced and quotient metrics. The tensor exact-metric lemma and
+exact degree additivity give
+\[
+ \degn(A\otimes B)=\degn(L\otimes B)+\degn(C\otimes B).
+\]
+Both rank sums are smaller. The induction hypothesis makes the right side
+$b\degn(L)+\degn(B)+b\degn(C)+(a-1)\degn(B)$, which equals
+$b\degn(A)+a\degn(B)$ by exact additivity for $A$. If $a=1$ and $b>1$,
+apply the same argument to a saturated line in $B$ and tensor on the left.
+Finally $\rk(A\otimes B)=ab$; division by $ab$ gives the slope formula.
+This proves the degree identity through intrinsic exact determinants and
+rank-one tensors, without choosing an integral basis of either bundle.
+\end{proof}
+
 \begin{lemma}[Determinant identities and contraction]
-\label{lem:degree-calculus}\uses{def:hermitian-degree,lem:exact-determinant-degree,lem:arithmetic-tensor-metric,lem:dual-degree,lem:line-tensor-degree,lem:determinant-contraction,lem:saturation-degree,lem:degree-metric-scaling}
+\label{lem:degree-calculus}\uses{def:hermitian-degree,lem:exact-determinant-degree,lem:tensor-degree,lem:arithmetic-tensor-metric,lem:dual-degree,lem:line-tensor-degree,lem:determinant-contraction,lem:saturation-degree,lem:degree-metric-scaling}
 \source{bost-specht-manuscript:page-0003}\notready
 Degrees are additive in an exact sequence with induced and quotient
 metrics. For positive-rank bundles $A,B$ and a line bundle $L$,
@@ -1250,12 +1324,9 @@ positive-rank submodule's slope.
 \end{lemma}
 \begin{proof}
 Exact-sequence additivity is Lemma~\ref{lem:exact-determinant-degree},
-and duality is Lemma~\ref{lem:dual-degree}. In orthonormal bases the
-determinant identities
-$\det(A\otimes B)\simeq(\det A)^{\otimes\rk B}\otimes
-(\det B)^{\otimes\rk A}$ and $\det(A^\vee)\simeq(\det A)^\vee$
-are isometries. Their local determinant ideals obey the same identities,
-which proves all three slope formulas.
+and duality is Lemma~\ref{lem:dual-degree}. The arbitrary-rank tensor
+formula is Lemma~\ref{lem:tensor-degree}; its rank-one specialization
+gives the line-twist formula.
 
 The equal-rank contraction assertion is precisely
 Lemma~\ref{lem:determinant-contraction}; saturation monotonicity is
