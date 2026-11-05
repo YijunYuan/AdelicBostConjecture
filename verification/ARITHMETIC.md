@@ -551,3 +551,35 @@ interrupted after sustained CPU use without results; scoped source searches
 found the canonical wedge, product-tensor and localization APIs. The LSP
 symbol index reports an error, so source-text searches, not empty index
 results, were used. Toolchain and dependencies remain fixed.
+
+Final round delta: the warning-free **9190-job shared-root build** integrated
+the duality dependency cone through DeterminantDual (SPECHT handoff I-0045,
+now archived). It does not certify the later product leaves. `ExteriorProduct`
+passed **1951 jobs** at 20:58:47 UTC (`603c83032a097b42`, commit `f6ba49d`).
+`DeterminantProduct` passed **1962 jobs** at 21:04:14 UTC
+(`99d4ae8bf4f46353`). Its final source was captured in concurrent snapshot
+`c649b88`, blob `e59c9109187b1e73919f6c7a39b68f49a7ca5ef9`; the subsequent
+explicit arithmetic commit command found no remaining diff. This is evidence
+for that source blob only.
+
+The final axiom audit passed **171 probes** at 21:05:11 UTC
+(`590174f2cda53d26`, 14.6 seconds). Full output is retained in this session's
+`arithmetic-axioms-final.log`; parsing all 171 entries gives exactly the same
+three foundational axioms. Six new probes cover the actual exterior product,
+its wedge formula, naturality, scalar-extension generator identity, determinant
+coordinate multiplication and finite-free bijectivity. The latter identifies
+the canonical product map with a tensor-coordinate isomorphism and is a real
+consumer. The general projective determinant isomorphism remains unproved;
+these local calculations do not close it. Its next implementation uses
+Mathlib's `bijective_of_isLocalized_maximal`, localization/base-change
+compatibility, projective freeness over local rings, and localization rank
+invariance. No further mathematical hypothesis is to be added.
+
+The scratch cleanup dry run found no stale candidates and preserved all four
+live run directories. The source-scope graph symlink was preserved.
+
+Read-only honesty review also approved `lem:exterior-product` and
+`lem:determinant-product-free`, inspecting their kernel records, substantive
+coordinate consumer, generator-form scalar extension, and all six new axiom
+probes. Only these two product producer nodes receive completion markers;
+`lem:determinant-product` and `lem:exact-determinant-degree` stay `notready`.

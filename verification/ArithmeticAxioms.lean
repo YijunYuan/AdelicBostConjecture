@@ -12,6 +12,7 @@ import BostConjecture.Arithmetic.NestedQuotient
 import BostConjecture.Arithmetic.SaturationDegree
 import BostConjecture.Arithmetic.LineTensorDegree
 import BostConjecture.Arithmetic.DeterminantDual
+import BostConjecture.Arithmetic.DeterminantProduct
 
 #print axioms BostConjecture.Arithmetic.HermitianMetric
 #print axioms BostConjecture.Arithmetic.dualBaseChangeMap_bijective
@@ -185,3 +186,10 @@ import BostConjecture.Arithmetic.DeterminantDual
 #print axioms BostConjecture.Arithmetic.HermitianMetric.determinantDual_sectionNorm
 #print axioms BostConjecture.Arithmetic.HermitianMetric.degree_dual
 #print axioms BostConjecture.Arithmetic.HermitianMetric.slope_dual
+
+#print axioms exteriorPower.prodMap
+#print axioms exteriorPower.prodMap_ιMulti
+#print axioms exteriorPower.prodMap_natural
+#print axioms exteriorPower.prodMap_baseChange_section
+#print axioms exteriorPower.prodMap_coordinates
+#print axioms exteriorPower.prodMap_bijective_of_basis

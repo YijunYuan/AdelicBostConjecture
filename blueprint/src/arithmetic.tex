@@ -954,7 +954,8 @@ rank proves the slope assertion.
 \end{proof}
 
 \begin{lemma}[Exterior product of two summands]
-\label{lem:exterior-product}\uses{lem:integral-determinant-line}\notready
+\label{lem:exterior-product}\uses{lem:integral-determinant-line}
+\lean{exteriorPower.prodMap,exteriorPower.prodMap_ιMulti,exteriorPower.prodMap_natural,exteriorPower.prodMap_baseChange_section}\leanok
 For modules $P,Q$ over a commutative ring $R$ and nonnegative integers $a,b$,
 there is a canonical linear map
 \[
@@ -983,7 +984,8 @@ $S$-linearity proves their equality on the full scalar extension.
 \end{proof}
 
 \begin{lemma}[Determinant product in a finite free frame]
-\label{lem:determinant-product-free}\uses{lem:exterior-product}\notready
+\label{lem:determinant-product-free}\uses{lem:exterior-product}
+\lean{exteriorPower.prodMap_coordinates,exteriorPower.prodMap_bijective_of_basis}\leanok
 Let $p_1,\ldots,p_a$ and $q_1,\ldots,q_b$ be bases of $P$ and $Q$
 over a commutative ring $R$. Let $d_P,d_Q$ be the corresponding
 determinant coordinates and $d_{P\oplus Q}$ the coordinate of their
