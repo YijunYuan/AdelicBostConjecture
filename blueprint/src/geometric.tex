@@ -515,9 +515,31 @@ $G$-invariant polynomial of positive degree on $\bigwedge^sW$ is
 nonzero on a nonzero vector of $\bigwedge^sV$.
 \end{definition}
 
+\begin{lemma}[Evaluation on a kernel after faithfully flat extension]
+\label{lem:kernel-evaluation-base-change}
+\notready
+Let $R\to S$ be a faithfully flat homomorphism of commutative rings,
+and let $f:M\to N$ and $e:M\to P$ be linear maps. The canonical
+isomorphism $S\otimes_R\ker f\simeq\ker(1\otimes f)$ identifies the
+restriction of $1\otimes e$ with the scalar extension of $e|_{\ker f}$.
+Consequently, this restriction is nonzero if and only if
+$e|_{\ker f}$ is nonzero. No finite-generation hypothesis is needed.
+\end{lemma}
+\begin{proof}
+Flatness preserves the exact sequence $0\to\ker f\to M\to N$,
+giving the canonical kernel isomorphism. On a generator $s\otimes x$,
+both evaluation maps give $s\otimes e(x)$; linearity gives the identity
+on the entire tensor product. If $e$ vanishes on $\ker f$, its extension
+vanishes on that tensor product and hence on the extended kernel.
+Conversely, if $x\in\ker f$ and $e(x)\ne0$, then
+$1\otimes x\in\ker(1\otimes f)$ and its image is $1\otimes e(x)$.
+This image is nonzero: faithful flatness makes the unit map
+$P\to S\otimes_R P$ injective. These arguments prove both implications.
+\end{proof}
+
 \begin{lemma}[Scalar extension for invariant detection]
 \label{lem:invariant-base-change}
-\uses{def:geometric-semistability}\notready
+\uses{def:geometric-semistability,lem:kernel-evaluation-base-change}\notready
 The geometric semistability condition is unchanged by extending the
 characteristic-zero ground field. In any fixed degree the invariant
 polynomials and the kernel of evaluation at a rational vector commute
