@@ -750,7 +750,8 @@ prefix adds exactly the box carrying $m$, giving the difference.
 
 \begin{lemma}[Frozen-tail restriction of a polytabloid]
 \label{lem:polytabloid-prefix-restriction}
-\uses{lem:standard-prefix-diagram,lem:integral-specht-all-tableaux}\notready
+\uses{lem:standard-prefix-diagram,lem:integral-specht-all-tableaux}
+\lean{BostConjecture.Specht.prefixSlice,BostConjecture.Specht.prefixSlice_polytabloidInt,BostConjecture.Specht.prefixSlice_wordRepInt}\leanok
 Let $u$ be the restriction of a standard tableau $t$ to its first $m$
 labels. Extend a row word $w$ for $u$ to a row word $\widetilde w$
 on all labels by keeping the rows of $t$ on the remaining labels.
@@ -773,7 +774,8 @@ proves equivariance.
 
 \begin{lemma}[Support at the largest label]
 \label{lem:polytabloid-last-support}
-\uses{def:standard-tableau,lem:integral-specht-span}\notready
+\uses{def:standard-tableau,lem:integral-specht-span}
+\lean{BostConjecture.Specht.ColumnStandard.last_row_le_of_polytabloidInt_ne_zero}\leanok
 If the largest label of a column-standard tableau $t$ lies in row
 $r$, every word in the support of $e_t$ assigns that label a row
 at most $r$.
@@ -782,6 +784,57 @@ at most $r$.
 A nonzero coefficient comes from a column permutation. The image of
 the largest label is a label in its column. Column standardness
 implies that its row is at most the row of the largest label.
+\end{proof}
+
+\begin{lemma}[Integral lifts and central action under restriction]
+\label{lem:prefix-slice-central}
+\uses{lem:polytabloid-prefix-restriction,lem:central-content-action}
+\lean{BostConjecture.Specht.orbitLattice_le_map_prefixSlice,BostConjecture.Specht.prefixSlice_central_polytabloidInt}\leanok
+Let $R_{t,m}$ be frozen-tail restriction and $u=t|_{\{0,\ldots,m-1\}}$.
+Every vector of the integral lattice $L_u$ is $R_{t,m}(x)$ for some
+$x\in L_t$. If $Z_m$ is the sum of transpositions of the first $m$
+labels, acting on the original word space, then
+\[
+ R_{t,m}(Z_m e_t)=C_{\lambda_t^{(m)}}e_u.
+\]
+This identity concerns the restricted coefficients only.
+\end{lemma}
+\begin{proof}
+Each generating orbit vector $g e_u$ lifts to $\widetilde g e_t$,
+where $\widetilde g$ fixes the tail. These are integral vectors of
+$L_t$, so their integral combinations give every required lift.
+Equivariance and the polytabloid restriction formula identify
+$R_{t,m}(Z_m e_t)$ with the smaller central operator applied to $e_u$.
+The central content theorem on that smaller Specht module gives the
+stated scalar.
+\end{proof}
+
+\begin{lemma}[Largest-label support filtration]
+\label{lem:specht-last-row-filtration}
+\uses{lem:polytabloid-last-support,lem:standard-polytabloid-independent,lem:real-standard-basis,lem:real-specht-action}\notready
+In the real Specht space of a diagram with $n+1$ boxes, let $F_r$
+be the span of standard polytabloids whose largest label occupies
+row at most $r$. Then
+\[
+ F_r=\{x:x(w)=0\text{ whenever }w(n)>r\}.
+\]
+Every permutation fixing the largest label preserves $F_r$.
+\end{lemma}
+\begin{proof}
+The support lemma gives one inclusion. For the converse write $x$
+in the standard basis. If a coefficient with largest-label row
+exceeding $r$ is nonzero, choose among these the tableau $t$ with
+lexicographically least row word. Evaluate the expansion at $w_t$.
+A tableau with largest-label row at most $r$ contributes zero by
+the support lemma. For every remaining nonzero coefficient, a
+nonzero evaluation forces its leading row word to be no larger
+than $w_t$, by column standardness. Minimality forces equality,
+and row standardness then forces the tableau to be $t$.
+The evaluation is therefore exactly the nonzero coefficient of $t$,
+contradicting the assumed support. All coefficients outside $F_r$
+vanish, proving the equality. A permutation fixing $n$ preserves
+the final letter of each word and preserves the Specht space;
+thus it preserves the displayed support condition and $F_r$.
 \end{proof}
 
 \begin{lemma}[Prefix dominance and triangular Murphy action]
