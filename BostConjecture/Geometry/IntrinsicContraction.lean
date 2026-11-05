@@ -22,8 +22,8 @@ theorem scalarExtension_finrank_of_rankAtStalk
     [AddCommGroup M] [Module R M] [Module.Finite R M] [Module.Projective R M]
     {a : ℕ} (ha : ∀ p : PrimeSpectrum R, Module.rankAtStalk M p = a) :
     Module.finrank F (F ⊗[R] M) = a := by
-  let p : PrimeSpectrum F := ⟨⊥, Ideal.bot_prime⟩
-  simpa only [Module.rankAtStalk_eq_finrank_of_free] using
+  let p : PrimeSpectrum F := ⟨⊥, inferInstance⟩
+  simpa [Module.rankAtStalk_eq_finrank_of_free] using
     (Module.rankAtStalk_baseChange (R := R) (M := M) p).trans
       (ha (p.comap (algebraMap R F)))
 
@@ -110,8 +110,13 @@ theorem canonicalPairing_fiber_le
   letI := ((HermitianMetric.piTensor hE).pullback i hi).fiber σ
   letI := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber V σ)
   letI := InnerProductSpace.ofCore (inferInstance : PreInnerProductSpace.Core ℂ (ComplexFiber V σ))
-  ∀ (bV : OrthonormalBasis (Fin s) ℂ (ComplexFiber V σ))
-    (b : ∀ j, OrthonormalBasis (Fin (a j)) ℂ (Dual ℂ (ComplexFiber (E j) σ)))
+  ∀ (bV : OrthonormalBasis (Fin s) ℂ (ComplexFiber V σ) :=
+      (stdOrthonormalBasis ℂ (ComplexFiber V σ)).reindex
+        (finCongr (scalarExtension_finrank_of_rankAtStalk hs)))
+    (b : ∀ j, OrthonormalBasis (Fin (a j)) ℂ (Dual ℂ (ComplexFiber (E j) σ)) :=
+      fun j => (stdOrthonormalBasis ℂ (Dual ℂ (ComplexFiber (E j) σ))).reindex
+        (finCongr (((Arithmetic.dualBaseChangeEquiv (𝓞 K) ℂ (E j)).finrank_eq).symm.trans
+          (scalarExtension_finrank_of_rankAtStalk (ha j)))))
     (z : ℂ ⊗[𝓞 K] ((⨂[𝓞 K] (_ : Fin l), ⋀[𝓞 K]^s V) ⊗[𝓞 K]
       ((𝓞 K) ⊗[ℤ] Specht.orbitLattice v)))
     (u : ℂ ⊗[𝓞 K] (⨂[𝓞 K] j,

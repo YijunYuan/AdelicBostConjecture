@@ -20,6 +20,11 @@ import BostConjecture.Tensor.EvaluationBaseChange
 import BostConjecture.Tensor.DualRegroupBaseChange
 import BostConjecture.Tensor.PairingBaseChange
 import BostConjecture.Geometry.ContractionBaseChange
+import BostConjecture.Geometry.IntrinsicContraction
+
+#print axioms BostConjecture.Geometry.scalarExtension_finrank_of_rankAtStalk
+#print axioms BostConjecture.Geometry.tensorSubmoduleFiberIsometry
+#print axioms BostConjecture.Geometry.canonicalPairing_fiber_le
 
 #print axioms BostConjecture.Geometry.dualDeterminantTwistBaseChange
 #print axioms BostConjecture.Geometry.projectiveDualDeterminantMap_baseChange

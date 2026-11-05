@@ -519,3 +519,34 @@ and `fiberMap_injective` interfaces. The intrinsic metric consumer is in
 progress; its invalid namespace-instance setup is preserved in session0012
 attempt0001. I-0047 remains human-owned while BALANCED selects its exact action
 and invariant-polynomial signatures.
+
+`Geometry/IntrinsicContraction.lean` constructs the actual isometric fiber
+inclusion using ARITH's `piTensor` and `pullback`, then proves
+`canonicalPairing_fiber_le` for the prescribed determinant/lattice tensor
+forms. Default orthonormal frames are constructed from constant stalk rank;
+no frame-existence, determinant-isometry or contraction certificate is assumed.
+Module `16ecb6e32b5ff94b` passed 9107 jobs without warnings at 21:53:18 UTC.
+Source SHA256: `cc133ccb15fe891ae8bbcf4797b2eddcccfed4137e263d05e36c7ffb0dbdf52c`.
+Final read-only honesty review accepted the exact dimension and intrinsic
+bilinear-bound nodes. The full `lem:canonical-contraction` stays unmarked.
+
+The next required endpoint is the norm bound in the actual dual fiber.
+Session0012 attempt0002 preserves `ContractionNorm.lean` (only an unfinished
+bijectivity lemma); it was removed from source, and no check is claimed for it.
+Prove bijectivity of `dualDeterminantTensorBaseChange` by tensoring the checked
+factor equivalences and composing with `Tensor.baseChangeEquiv`. Transport the
+explicit positive tensor form through this map; finite projectivity of the
+source follows from the existing exterior-power, orbit-lattice and tensor
+instances. Then apply `Tensor.dualCore_norm` and the operator-norm bound theorem
+to `canonicalPairing_fiber_le`, identifying scalar extension of the integral
+dual with its complex dual by the existing canonical equivalence. ARITH's
+`HermitianMetric.dualFiber_norm` provides the intrinsic metric identification.
+No new Hermitian-bundle or degree representation is needed.
+
+Parent conversation I-0055 requests this round end after the metric check to
+recycle long-lived Lean clients under increased swap pressure. BOST-GEOM stays
+open. The invariant interface proposal in I-0047 is agreed, but its concrete
+BALANCED exports remain pending. The final scratch dry-run has no stale
+candidates. The roadmap's 15-active warning still counts nested ancestors of
+the four authorized lanes; GEOM has one active proof leaf and has not changed
+other owners' items.

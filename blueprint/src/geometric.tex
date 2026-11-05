@@ -1168,21 +1168,18 @@ evaluation, since $f(e^{-1}e(x))=f(x)$. Composing these identities
 proves the equality on arbitrary extended tensors.
 \end{proof}
 
-\begin{lemma}[Frames after extension of a constant-rank projective module]
+\begin{lemma}[Dimension after extension of a constant-rank projective module]
 \label{lem:projective-fiber-frames}
 \notready
 Let $M$ be a finite projective module of constant rank $a$ over a
-commutative ring $R$, and let $R\to F$ be an algebra over a field $F$.
-Then $\dim_F(F\otimes_R M)=a$. In particular, a positive Hermitian form
-on a complex fiber admits an orthonormal frame indexed by $a$ elements.
-The dual of that fiber has the same dimension.
+commutative ring $R$, and let $F$ be a field with an $R$-algebra structure.
+Then $\dim_F(F\otimes_R M)=a$.
 \end{lemma}
 \begin{proof}
 The rank at the zero prime of $F$ is the rank at its inverse-image
 prime of $R$, because rank at a stalk commutes with scalar extension
 for finite projective modules. Over a field this rank is the vector-space
-dimension. Gram--Schmidt provides an orthonormal basis, which can therefore
-be indexed by $a$ elements. Finite-dimensional duality preserves dimension.
+dimension.
 \end{proof}
 
 \begin{lemma}[Contraction on the intrinsic complex fibers]
@@ -1203,6 +1200,10 @@ vectors $z,u$, the scalar extension of the integral pairing satisfies
 The estimate holds for every choice of these orthonormal frames.
 \end{lemma}
 \begin{proof}
+The constant-rank dimension formula supplies the frame sizes. For each
+dual factor use its canonical dual base-change equivalence to identify
+dimensions. A finite-dimensional Hermitian space has an orthonormal basis,
+so all the required frames exist.
 The fiber map of $i$, followed by the canonical tensor fiber equivalence,
 preserves inner products: the metric on $V$ is the pullback of the tensor
 metric along this very map. Thus it is a linear isometry. The scalar-extension
