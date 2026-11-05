@@ -1334,6 +1334,25 @@ this identity with Lemma~\ref{lem:standard-hook-count} gives
 $f^\nu\prod_i b_i!=t!V(b)$, hence the displayed quotient formula.
 \end{proof}
 
+\begin{lemma}[Rotated rectangular complement]
+\label{lem:rectangle-complement}\notready
+Let $\mu\subseteq(k^a)$. Rotation by $180$ degrees sends the omitted
+boxes to the Young diagram $\mu^c$ with row lengths
+$\mu^c_r=k-\mu_{a-1-r}$. The disjoint union of the boxes of $\mu$
+and $\mu^c$, rotating the second summand, is the rectangle.
+In particular $|\mu|+|\mu^c|=ak$ and $(\mu^c)^c=\mu$.
+\end{lemma}
+\begin{proof}
+Rotation sends $(r,q)$ to $(a-1-r,k-1-q)$ and reverses both coordinate
+orders. The boxes omitted from a lower set form an upper set within
+the rectangle, hence their rotations form a lower set. A box $(r,q)$
+is in the rotated complement exactly when $r<a$, $q<k$, and
+$k-1-q\geq\mu_{a-1-r}$, equivalent to
+$q<k-\mu_{a-1-r}$. Rotation is an involution, so the complement
+construction is involutive and the two stated summands partition
+the rectangle. Counting gives the cardinality identity.
+\end{proof}
+
 \begin{lemma}[Exact prefix distribution]
 \label{lem:prefix-distribution}\uses{lem:tableau-count}
 \source{bost-specht-manuscript:page-0006}\notready
