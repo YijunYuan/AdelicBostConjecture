@@ -5,6 +5,7 @@ import BostConjecture.Tensor.Evaluation
 import BostConjecture.Geometry.DeterminantBaseChange
 import BostConjecture.Geometry.DeterminantNaturality
 import BostConjecture.Geometry.LocalizationDescent
+import BostConjecture.Geometry.ProjectiveEmbedding
 
 #print axioms BostConjecture.Geometry.tensorCoordinates
 #print axioms BostConjecture.Geometry.tensorCoordinates_tprod
@@ -71,3 +72,23 @@ import BostConjecture.Geometry.LocalizationDescent
 #print axioms BostConjecture.Geometry.existsUnique_of_localization_compatible
 #print axioms BostConjecture.Geometry.existsUnique_linearMap_of_localization_compatible
 #print axioms BostConjecture.Geometry.injective_of_localizedMap_injective
+
+#print axioms BostConjecture.Geometry.exists_principal_frame
+#print axioms BostConjecture.Geometry.exists_finite_principal_frames
+#print axioms BostConjecture.Geometry.exteriorPowerScalarExtension_trans
+#print axioms BostConjecture.Geometry.determinantPowerScalarExtension_trans
+#print axioms BostConjecture.Geometry.freeDeterminantMap_scalarExtension_trans
+#print axioms BostConjecture.Geometry.determinantChart
+#print axioms BostConjecture.Geometry.determinantChart_tmul
+#print axioms BostConjecture.Geometry.determinantChart_injective
+#print axioms BostConjecture.Geometry.determinantChart_trans
+#print axioms BostConjecture.Geometry.existsUnique_of_isLocalizedModule_compatible
+#print axioms BostConjecture.Geometry.existsUnique_of_tensorLocalization_compatible
+#print axioms BostConjecture.Geometry.determinantChart_overlap
+#print axioms BostConjecture.Geometry.existsUnique_determinantMap_of_frames
+#print axioms BostConjecture.Geometry.determinantMap_baseChange_of_frames
+#print axioms BostConjecture.Geometry.existsUnique_projectiveDeterminantMap
+#print axioms BostConjecture.Geometry.projectiveDeterminantMap
+#print axioms BostConjecture.Geometry.projectiveDeterminantMap_baseChange
+#print axioms BostConjecture.Geometry.projectiveDeterminantMap_baseChange_of_basis
+#print axioms BostConjecture.Geometry.projectiveDeterminantMap_injective
