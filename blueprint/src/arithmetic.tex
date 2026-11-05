@@ -265,7 +265,7 @@ Its top wedge is a basis of its top exterior power, proving dimension one.
 \label{lem:determinant-metric}
 \uses{def:hermitian-metric,lem:integral-determinant-line}
 \source{bost-specht-manuscript:page-0003}\notready
-There is a unique Hermitian metric on $\det M$ such that, in every complex
+There is a Hermitian metric on $\det M$ such that, in every complex
 fiber of dimension $r$,
 \[
  \|x_1\wedge\cdots\wedge x_r\|^2
@@ -286,8 +286,7 @@ and the top wedge becomes $(\det A)e$. Since
 $\det(A^*GA)=|\det A|^2\det G$, the two definitions coincide.
 For arbitrary $x_i$ with coordinate matrix $X$, their wedge is
 $(\det X)e$ and their Gram matrix is $X^*GX$, which proves the formula
-also when the $x_i$ are dependent. A nonzero top wedge spans the line,
-so the formula determines the metric uniquely.
+also when the $x_i$ are dependent.
 For coordinate matrices $X,Y$ of two families, the cross Gram matrix is
 $X^*GY$ and its determinant is $\overline{\det X}\det Y\det G$,
 which proves the stated pairing formula.
@@ -297,9 +296,47 @@ therefore commutes with conjugation. Transfer the forms to the complex
 fibers of $\det M$ through the exterior-power scalar-extension isomorphisms.
 \end{proof}
 
+\begin{lemma}[Uniqueness of the determinant metric]
+\label{lem:determinant-metric-unique}\uses{lem:determinant-metric}\notready
+The Gram-determinant norm formula uniquely determines the metric on each
+complex determinant fiber. In particular the construction is independent
+of its auxiliary orthonormal frames.
+\end{lemma}
+\begin{proof}
+Choose a basis of the original complex fiber and let $e$ be its top wedge.
+This is a nonzero vector spanning the determinant line, also in rank zero
+where the empty wedge is its unit. The norm formula prescribes
+$h(e,e)=\det G$ for its Gram matrix $G$. Sesquilinearity then prescribes
+$h(te,se)=\bar t s\det G$ for every $t,s\in\mathbb C$. Hence any two
+metrics with the stated norm formula agree on every pair of vectors.
+\end{proof}
+
+\begin{definition}[Intrinsic determinant degree and slope]
+\label{def:intrinsic-determinant-degree}
+\uses{lem:line-degree-quotient-formula,lem:integral-determinant-line,lem:determinant-metric}
+\source{bost-specht-manuscript:page-0003}\notready
+For a finite projective Hermitian module $M$, define its normalized determinant
+degree as the intrinsic line degree of its metrized determinant line.
+For generic rank $r>0$, its slope is this degree divided by $r$.
+For every nonzero $\xi\in\det M$ this degree is
+\[
+ \frac{\log\#(\det M/\Ocal\xi)
+ -\sum_{\sigma:K\hookrightarrow\mathbb C}\log\|j_\sigma(\xi)\|_{\det}}{D}.
+\]
+The quotient is finite. This formula is independent of $\xi$ and applies
+to nonfree modules without any choice of an integral frame.
+\end{definition}
+\begin{proof}
+The integral determinant is finite projective of generic rank one and its
+constructed metric is compatible with conjugation. Thus the intrinsic
+line-degree construction and its finite-quotient formula apply verbatim.
+Their section independence proves that the displayed expression does not
+depend on $\xi$.
+\end{proof}
+
 \begin{definition}[Hermitian bundles and normalized degree]
 \label{def:hermitian-degree}
-\uses{def:hermitian-metric,lem:line-degree-quotient-formula,lem:determinant-metric}
+\uses{def:hermitian-metric,def:intrinsic-determinant-degree}
 \source{bost-specht-manuscript:page-0002,bost-specht-manuscript:page-0003}\notready
 A Hermitian bundle $\overline A$ is a finite projective $\Ocal$-module $A$
 with a positive-definite Hermitian metric on each complex archimedean fiber,
