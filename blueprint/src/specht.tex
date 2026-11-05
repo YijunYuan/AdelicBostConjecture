@@ -998,25 +998,103 @@ $\langle z,y\rangle=\langle f_t,J_jy\rangle-
 Taking $y=z$ proves $\|z\|^2=0$, hence $z=0$.
 \end{proof}
 
-\begin{theorem}[Monic seminormal basis]
-\label{lem:monic-seminormal}\uses{lem:orthogonal-standard-basis,lem:murphy-eigenvector-residual,lem:orthogonal-content-eigenvalues}
-\source{bost-specht-manuscript:page-0005,ryom-hansen-seminormal-denominators-v1:classical_formula}\notready
-Order standard tableaux colexicographically by their row words,
-starting with the column-reading tableau $t_0$. Monic orthogonalization
-of the standard polytabloids gives an orthogonal basis $f_t$ with
-$f_{t_0}=e_{t_0}$. For a legal adjacent swap $u=(j,j+1)t$ with $t<u$,
+\begin{lemma}[Content sequences distinguish standard tableaux]
+\label{lem:standard-content-separation}
+\uses{def:standard-tableau}
+\lean{BostConjecture.Specht.IsStandard.eq_of_tableauContent_eq}\leanok
+Two standard tableaux of the same shape with the same content at every
+label are equal.
+\end{lemma}
+\begin{proof}
+Induct on the label, assuming the boxes of all smaller labels agree.
+The two boxes of the current label lie on the same diagonal, so they
+are comparable in the northwest order. If distinct, the northwest box
+has a strictly smaller label in the tableau where the current label
+occupies the southeast box: labels are monotone along rows and columns.
+The induction hypothesis then puts that smaller label into the same box
+in the other tableau, contradicting its current label. Thus the two
+boxes coincide, completing the induction.
+\end{proof}
+
+\begin{lemma}[Adjacent spectral support]
+\label{lem:adjacent-spectral-support}
+\uses{lem:standard-content-separation,lem:orthogonal-content-eigenvalues,lem:murphy-recurrence}
+\lean{BostConjecture.Specht.eq_smul_orthogonalStandardBasis_of_eigenvalues,BostConjecture.Specht.murphyOperator_swap_residual,BostConjecture.Specht.exists_swap_orthogonalStandardBasis_eq}\leanok
+Suppose $u=(i,i+1)t$ is standard and
+$\Delta=\operatorname{content}_t(i+1)-\operatorname{content}_t(i)\ne0$.
+Then $s f_t-\Delta^{-1}f_t$ is a scalar multiple of $f_u$, where
+$s$ is the position transposition $(i,i+1)$.
+\end{lemma}
+\begin{proof}
+For labels other than $i,i+1$, the Murphy operator commutes with $s$.
+For larger labels this follows by permuting the summands of the Murphy
+sum; for smaller labels every transposition in that sum has disjoint
+support from $s$. The adjacent recurrence gives
+$J_{i+1}s=sJ_i+1$ and $J_i s=sJ_{i+1}-1$.
+Applying these identities to $f_t$ shows that the residual has the
+content eigenvalues of $u$: the two adjacent eigenvalues are exchanged,
+and all other eigenvalues are unchanged.
+Expand the residual in the orthogonal basis. Symmetry of each Murphy
+operator forces a nonzero coefficient to have all the same eigenvalues
+as the residual. Content separation forces its index to be $u$.
+\end{proof}
+
+\begin{theorem}[Normalized adjacent action on the monic basis]
+\label{lem:monic-seminormal}\uses{lem:orthogonal-standard-basis,lem:murphy-eigenvector-residual,lem:adjacent-spectral-support}
+\lean{BostConjecture.Specht.realSpechtRep_swap_orthogonalStandardBasis,BostConjecture.Specht.norm_orthogonalStandardBasis_swap_sq}
+\source{bost-specht-manuscript:page-0005,ryom-hansen-seminormal-denominators-v1:classical_formula}\leanok
+Order standard tableaux colexicographically by their row words.
+For a legal adjacent swap $u=(j,j+1)t$ with $t<u$, the monic
+orthogonal basis satisfies
 \[
  (j,j+1)f_t=\rho f_t+f_u,\qquad
- \rho=\frac{1}{\operatorname{content}_t(j+1)-\operatorname{content}_t(j)},
+ \|f_u\|^2=(1-\rho^2)\|f_t\|^2,\qquad
+ \rho=\frac{1}{\operatorname{content}_t(j+1)-\operatorname{content}_t(j)}.
 \]
-where a box in row $r$, column $q$, has content $q-r$.
 These are the rational polytabloid normalization and left action of
 \cite{ryom-hansen-seminormal}, Section 2, equation (1), after replacing
 its index $i$ by $j+1$ and extending the rational inner product to
-the real word realization. That source recalls the action theorem;
-the action formula and its scalar-extension identification are
-the separate representation-theoretic input here.
+the real word realization.
 \end{theorem}
+\begin{proof}
+The two contents differ: if they were equal, the legal swap would
+preserve the entire content sequence and hence the tableau, contrary
+to injectivity of its labeling. Spectral support gives
+$sf_t=\rho f_t+c f_u$ and $sf_u\in\operatorname{span}(f_t,f_u)$.
+Let $z=f_t-e_t$. It belongs to the earlier-tableau span $V_{<t}$,
+which is perpendicular to both $f_t$ and $f_u$ since $t<u$.
+Symmetry of $s$ gives $\langle f_u,sz\rangle=\langle sf_u,z\rangle=0$.
+Literal relabeling of polytabloids gives $se_t=e_u$. Therefore
+\[
+ \langle f_u,sf_t\rangle=\langle f_u,e_u\rangle=\|f_u\|^2.
+\]
+The spectral-support formula makes the left side $c\|f_u\|^2$;
+nonvanishing of $f_u$ gives $c=1$. Substituting the normalized action
+in the adjacent residual norm identity proves the squared-norm ratio.
+\end{proof}
+
+\begin{lemma}[Initial column-reading vector]
+\label{lem:column-reading-initial}
+\uses{def:standard-tableau,lem:orthogonal-standard-basis,lem:rectangular-initial-norm}\notready
+The column-reading tableau $t_0$ of the $a$ by $k$ rectangle is
+standard and is first in colexicographic order. Consequently
+$f_{t_0}=e_{t_0}$ and $\|f_{t_0}\|^2=(a!)^k$.
+\end{lemma}
+\begin{proof}
+Compare any standard tableau $t$ with $t_0$, starting at the largest
+label. Suppose all larger labels occupy their column-reading boxes,
+and let $m$ be the first label placed differently. Its box in $t$
+cannot be a box with larger column-reading label, because those are
+already occupied. Thus its column is no greater than that of $m$
+in $t_0$. If its row were also no greater, its box would lie strictly
+northwest of the column-reading box of $m$. Standardness would force
+the latter box to have a label larger than $m$, contradicting the
+fixed larger-label boxes. Hence its row is greater. In particular
+the largest differing row makes $t_0<t$. The column-reading tableau
+itself is standard since its label in row $r$, column $q$ is $aq+r$.
+Orthogonalization leaves the first vector unchanged, and its initial
+squared norm is the column-group order $(a!)^k$.
+\end{proof}
 
 \begin{lemma}[Adjacent eigenvector residual]
 \label{lem:murphy-eigenvector-residual}\uses{lem:murphy-recurrence,lem:real-specht-action}
@@ -1044,7 +1122,7 @@ identify the eigenvalues of the orthogonalized standard polytabloids.
 \end{proof}
 
 \begin{lemma}[Seminormal norms]
-\label{lem:seminormal-norms}\uses{lem:monic-seminormal,lem:rectangular-initial-norm,lem:orthogonal-standard-basis}
+\label{lem:seminormal-norms}\uses{lem:monic-seminormal,lem:column-reading-initial,lem:orthogonal-standard-basis}
 \source{bost-specht-manuscript:page-0005,bost-specht-manuscript:page-0006}\notready
 For a standard tableau $t$, let $\lambda^{(j)}$ be its prefix shape
 after $j$ entries, and let $r_j$ be the row of entry $j$. Set
