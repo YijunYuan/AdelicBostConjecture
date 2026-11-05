@@ -598,3 +598,38 @@ source changed during finalization. The remaining workspace diff belongs to
 GEOM (`Geometry/ContractionBaseChange.lean`); the untracked workspace-root
 configuration/instruction files and reference PDFs predate this checkpoint.
 Those paths were left untouched and excluded from arithmetic commits.
+
+
+## Projective determinant descent (run 0004, round 5)
+
+`DeterminantProduct` now proves bijectivity of the canonical product of
+exterior powers for finite projective modules over an arbitrary domain.
+It uses Mathlib maximal-local detection, derived local freeness, rank
+invariance, and the actual exterior-product scalar-extension comparison.
+`IntegralDeterminantProduct.determinantProdEquiv` consumes this proof on the
+intrinsic determinant lines over the ring of integers. No global integral
+basis or degree-calculus hypothesis is assumed; zero ranks are included.
+
+The serialized product build passed 2381 jobs at 21:38:00 UTC
+(`99d4ae8bf4f46353`, 92.1 seconds). The checked product source is blob
+`4883dff7e5e9bfe7984930a17a214ac18462313e`, captured by concurrent
+boundary snapshot `30ea45b`; the explicit pathspec commit found no diff.
+This evidence applies only to the checked source, not to other drafts in
+that snapshot. The integral specialization passed a serialized file check
+at 21:43:06 UTC (`1763aec1d5eebeba`, 59.3 seconds). The combined
+`IntegralDeterminantProduct` / `DeterminantShear` build passed 3476 jobs
+at 21:44:48 UTC (`98178eeaa63148c2`, 96.4 seconds). Commit `cb6db8d`
+records the final finite-frame shear fix.
+
+Read-only honesty review found no scoped defect: the projective descent
+uses its local producers, the integral equivalence consumes bijectivity,
+and the finite-frame shear identity includes empty bases. Independent
+`lean_verify` on `prodMap_bijective_generic` found only `propext`,
+`Classical.choice`, and `Quot.sound`. The broader final axiom audit and
+completion-marker reconciliation are recorded below when finished.
+
+GEOM consumed the stable piTensor/pullback/fiberMap interface and closed
+I-0051. I-0050 now hands the new checked product and shear imports to SPECHT.
+The roadmap hygiene review recommends retaining its 14 active rows: ten
+are ancestors and four are the authorized active proof leaves; I-0017
+already records this intentional count warning.
