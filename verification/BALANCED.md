@@ -154,9 +154,9 @@ warning-free, 45.4s. It proves the actual tensor-sum exponential identity,
 Hermitian symmetry of the generator, tensor exterior convexity and the
 balanced Plücker squared-norm lower bound one. Independent honesty review
 accepted the object/instance alignment and substantive use of balance,
-traces, Hermitian symmetry and the initial norm. The expanded 71-probe audit
-is queued in the shared serialized slot; this checkpoint does not yet mark
-the new blueprint node complete.
+traces, Hermitian symmetry and the initial norm. The expanded **71-probe**
+audit passed in 12.5s with only foundational axioms; the producer node now
+carries `leanok`. Root integration is handed to SPECHT.
 
 Local aliases of the existing tensor normed-group and complex normed-space
 instances resolved a typeclass inference failure; no metric was changed.
@@ -168,8 +168,8 @@ helper/import declarations are intentional, consistent with `I-0004`.
 
 ## Remaining mathematical producers
 
-1. Complete the tensor exponential axiom/root audit; the actual tensor-flow
-   bridge and balanced norm minimum now pass the scoped kernel build.
+1. Complete root integration of the tensor exponential producer; the actual
+   tensor-flow bridge and balanced norm minimum pass kernel and axiom checks.
 2. Determinant-one unitary/logarithm adapters for the already checked polar
    decomposition port (`TJHeeringa/mathlib4`, revision
    `41260205df493c627e1ac0e54812cfdeb6517fbc`, PR 45002).

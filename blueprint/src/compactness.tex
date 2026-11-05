@@ -362,7 +362,7 @@ at $t=0$ equality holds.
 
 \begin{lemma}[The balanced tensor exponential minimum]
 \label{lem:balanced-tensor-exponential-minimum}
-\lean{BostConjecture.Balanced.isSymmetric_tensorSum,BostConjecture.Balanced.exp_tensorSum,BostConjecture.Balanced.convexOn_exterior_tensor_exp_norm_sq,BostConjecture.Balanced.IsBalanced.one_le_plucker_norm_sq_tensor_exp}\notready
+\lean{BostConjecture.Balanced.isSymmetric_tensorSum,BostConjecture.Balanced.exp_tensorSum,BostConjecture.Balanced.convexOn_exterior_tensor_exp_norm_sq,BostConjecture.Balanced.IsBalanced.one_le_plucker_norm_sq_tensor_exp}\leanok
 \uses{lem:balanced-plucker-norm-variation,lem:balanced-exponential-convexity}
 Let $H$ and $J$ be Hermitian operators on finite-dimensional complex
 Hermitian spaces $U,W$. Then $A=H\otimes I+I\otimes J$ is Hermitian,
@@ -385,8 +385,50 @@ the minimum theorem and the orthonormal Pl\"ucker norm identity give
 the lower bound one.
 \end{proof}
 
+\begin{lemma}[Invertible polar factor and positive logarithm]
+\label{lem:balanced-polar-log}\notready
+Let $T$ be an injective endomorphism of a finite-dimensional complex
+Hermitian space, $p=(T^*T)^{1/2}$ its positive modulus, and $u$ its
+polar factor. Then $p$ is invertible, $u$ is a linear isometry, and
+$H=\log p$ is Hermitian with $e^H=p$ and $T=ue^H$.
+\end{lemma}
+\begin{proof}
+The modulus identity $\|px\|=\|Tx\|$ implies $\ker p=\ker T=0$.
+Finite dimension makes $p$ surjective as well as injective, hence
+invertible. Given $x=py$, polar decomposition gives
+$\|ux\|=\|Ty\|=\|py\|=\|x\|$, so $u$ is a full isometry.
+The spectrum of the positive invertible operator $p$ consists of
+positive real eigenvalues. Its continuous functional calculus sends
+a real function on this finite spectrum to the Hermitian operator
+which multiplies each corresponding eigenspace by the function value.
+Thus $H=\log p$ is Hermitian. Composition of functions in this calculus,
+or equality on each eigenspace, gives $e^H=p$, since
+$e^{\log a}=a$ for every positive spectral value $a$.
+Substitution in $T=up$ proves the claimed factorization. Empty spectrum
+in dimension zero causes no exception: the endomorphism space then
+has one element, and all the identities hold.
+\end{proof}
+
+\begin{lemma}[Determinant of a Hermitian exponential]
+\label{lem:balanced-hermitian-exp-determinant}\notready
+For a Hermitian endomorphism $H$ of a finite-dimensional complex
+Hermitian space, $\det(e^H)=\exp(\operatorname{Re}\Tr H)$, a positive
+real number. If $\det(e^H)=1$, then $\Tr H=0$.
+\end{lemma}
+\begin{proof}
+In an orthonormal eigenbasis of $H$ its real eigenvalues are $a_i$.
+The exponential series makes $e^H$ diagonal with entries $e^{a_i}$.
+The determinant of a diagonal matrix is the product of its entries,
+so $\det(e^H)=\prod_i e^{a_i}=e^{\sum_i a_i}$; the trace is
+$\sum_i a_i$, which is real. Positivity follows from positivity of the
+real exponential. If this value is one, injectivity of the real exponential
+gives $\sum_i a_i=0$, hence zero trace. The empty product and sum give
+the same formulas in dimension zero.
+\end{proof}
+
 \begin{lemma}[Determinant-one polar reduction]
 \label{lem:balanced-special-linear-polar}\notready
+\uses{lem:balanced-polar-log,lem:balanced-hermitian-exp-determinant}
 For a finite-dimensional complex Hermitian space $U$ and $g\in\SL(U)$,
 there exist a unitary $u$ and a traceless Hermitian $H$ such that
 $g=ue^H$. The unitary $u$ also has determinant one.

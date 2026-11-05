@@ -1232,6 +1232,19 @@ rank one. Isometry invariance of line degree and tensor additivity for
 projective lines now give the asserted degree identity.
 \end{proof}
 
+\begin{lemma}[Isometry invariance of determinant degree]
+\label{lem:degree-isometry}
+\uses{lem:determinant-contraction}
+\source{bost-specht-manuscript:page-0003}\notready
+An integral isomorphism of finite projective Hermitian bundles which
+preserves the forms on all complex fibers preserves normalized degree.
+\end{lemma}
+\begin{proof}
+The isomorphism and its inverse are contractions of equal generic rank.
+Apply the determinant degree inequality to both maps and use antisymmetry
+of the real order.
+\end{proof}
+
 \begin{lemma}[Tensor products preserve induced and quotient metrics]
 \label{lem:tensor-exact-metrics}
 \uses{lem:arithmetic-tensor-metric,lem:induced-hermitian-metric,lem:quotient-hermitian-metric}
@@ -1241,8 +1254,7 @@ sequence of finite projective $\Ocal$-modules. Give $A'$ and $A''$ the
 induced and quotient metrics from a Hermitian metric on $A$. For every
 Hermitian bundle $B$, tensoring this sequence with $B$ is exact, and its
 induced and quotient metrics agree with the Hilbert tensor metrics on
-$A'\otimes B$ and $A''\otimes B$, respectively. The same statement holds
-when tensoring on the left.
+$A'\otimes B$ and $A''\otimes B$, respectively.
 \end{lemma}
 \begin{proof}
 Projectivity of $B$ implies flatness, hence preservation of exactness and
@@ -1258,8 +1270,8 @@ and pure tensors span both spaces. Exactness identifies $U\otimes
 B_\sigma$ with the kernel. Uniqueness of the orthogonal representative
 therefore identifies $s\otimes1$ with the quotient lift. Its inner product
 is the tensor product of the quotient pairing with the pairing on $B$.
-Interchanging the factors is an isometry by the pure-tensor formula, so
-the left-tensor statement follows as well.
+Interchanging the factors preserves pairings by the pure-tensor formula
+and sesquilinearity.
 \end{proof}
 
 \begin{lemma}[Rank-one saturated reduction]
@@ -1280,7 +1292,7 @@ gives $\rk(A/L)=a-1$.
 
 \begin{lemma}[Tensor degree in arbitrary rank]
 \label{lem:tensor-degree}
-\uses{lem:tensor-exact-metrics,lem:rank-one-saturated-reduction,lem:exact-determinant-degree,lem:line-tensor-degree,lem:degree-rank-zero}
+\uses{lem:tensor-exact-metrics,lem:rank-one-saturated-reduction,lem:exact-determinant-degree,lem:line-tensor-degree,lem:degree-rank-zero,lem:degree-isometry}
 \source{bost-specht-manuscript:page-0003}\notready
 For finite projective Hermitian bundles $A,B$ of generic ranks $a,b$,
 \[
@@ -1300,7 +1312,8 @@ exact degree additivity give
 Both rank sums are smaller. The induction hypothesis makes the right side
 $b\degn(L)+\degn(B)+b\degn(C)+(a-1)\degn(B)$, which equals
 $b\degn(A)+a\degn(B)$ by exact additivity for $A$. If $a=1$ and $b>1$,
-apply the same argument to a saturated line in $B$ and tensor on the left.
+interchange the two tensor factors isometrically and apply the same
+argument to a saturated line in $B$.
 Finally $\rk(A\otimes B)=ab$; division by $ab$ gives the slope formula.
 This proves the degree identity through intrinsic exact determinants and
 rank-one tensors, without choosing an integral basis of either bundle.
