@@ -601,7 +601,8 @@ compatibility.
 \end{proof}
 
 \begin{lemma}[Compatibility of nested quotient metrics]
-\label{lem:nested-quotient-metric}\uses{lem:quotient-hermitian-metric,lem:induced-hermitian-metric}\notready
+\label{lem:nested-quotient-metric}\uses{lem:quotient-hermitian-metric,lem:induced-hermitian-metric}
+\lean{BostConjecture.Arithmetic.ComplexQuotient.lift_natural,BostConjecture.Arithmetic.submoduleQuotientMap_injective,BostConjecture.Arithmetic.HermitianMetric.fiberLift_submodule,BostConjecture.Arithmetic.HermitianMetric.quotient_submodule,BostConjecture.Arithmetic.HermitianMetric.sectionNorm_quotient_submodule}\leanok
 Let $M$ be a finite Hermitian $\Ocal$-module and $P\subseteq T\subseteq M$
 be submodules. The map
 $j:T/(P\cap T)\to M/P$, $[t]\mapsto[t]$, is injective.
@@ -653,8 +654,9 @@ which gives the norm formula, including for the empty family.
 
 \begin{lemma}[Contraction on the intrinsic determinant line]
 \label{lem:determinant-contraction}
-\uses{lem:integral-determinant-line,lem:determinant-metric-unique,lem:line-degree-contraction}
-\source{bost-specht-manuscript:page-0003}\notready
+\uses{lem:integral-determinant-line,lem:determinant-metric-unique,lem:line-degree-contraction,lem:induced-hermitian-metric,def:intrinsic-determinant-degree}
+\source{bost-specht-manuscript:page-0003}
+\lean{BostConjecture.Arithmetic.exteriorMap_injective,BostConjecture.Arithmetic.determinantMap_injective,BostConjecture.Arithmetic.ComplexDeterminant.norm_map_le,BostConjecture.Arithmetic.HermitianMetric.determinantFiber_norm_map_le,BostConjecture.Arithmetic.HermitianMetric.degree_le_of_injective}\leanok
 Let $f:M\to N$ be an injective integral map between finite projective
 Hermitian modules of the same generic rank $r$. Suppose every complex
 fiber map satisfies $\|f_\sigma(v)\|\leq\|v\|$ for all $v\in M_\sigma$.
@@ -687,7 +689,8 @@ lemma now gives the stated degree inequality.
 
 \begin{lemma}[Saturation increases intrinsic degree]
 \label{lem:saturation-degree}
-\uses{lem:determinant-contraction,lem:integral-part-generic-subspace,lem:induced-hermitian-metric}\notready
+\uses{lem:determinant-contraction,lem:integral-part-generic-subspace,lem:induced-hermitian-metric}
+\lean{BostConjecture.Arithmetic.HermitianMetric.submodule_inner_inclusion,BostConjecture.Arithmetic.HermitianMetric.degree_submodule_le_of_le,BostConjecture.Arithmetic.HermitianMetric.degree_le_saturation}\leanok
 If $P\subseteq T\subseteq M$ are integral submodules of a finite projective
 Hermitian module and $\rk P=\rk T$, then $\degn(P)\leq\degn(T)$
 for their induced metrics. In particular
@@ -704,8 +707,55 @@ with $KP$, so the ranks agree; moreover $P\subseteq M\cap KP$.
 This proves the last inequality without a freeness assumption.
 \end{proof}
 
+\begin{lemma}[Tensor coordinates and coefficient ideals]
+\label{lem:tensor-coordinate-ideal}\uses{lem:line-coordinate-ideal}\notready
+Let $M,N$ be finite projective $\Ocal$-modules with injective integral
+coordinates $f:M\to K$ and $g:N\to K$. The linear map
+$t:M\otimes_\Ocal N\to K$ determined by $t(x\otimes y)=f(x)g(y)$
+is injective, and its coefficient ideal is $I_t=I_fI_g$.
+If both modules are nonzero, then
+$\log N(I_t)=\log N(I_f)+\log N(I_g)$.
+\end{lemma}
+\begin{proof}
+The map $t$ is the composite of $f\otimes g$ with multiplication
+$K\otimes_\Ocal K\to K$. To see that multiplication is invertible,
+write $b=u/s$ with $u,s\in\Ocal$ and $s\ne0$.
+Multiplication by $s$ on the first factor gives
+$s(a\otimes b)=a\otimes u=au\otimes1=s(ab\otimes1)$.
+Since this tensor product is a vector space under the first $K$-action,
+cancel $s$ to obtain $a\otimes b=ab\otimes1$. Thus the inverse is
+$z\mapsto z\otimes1$. Flatness of $N$ makes
+$f\otimes1_N:M\otimes N\to K\otimes N$ injective, and flatness of
+the localization $K$ makes $1_K\otimes g:K\otimes N\to K\otimes K$
+injective. Hence $t$ is injective.
+Its image consists of the finite sums of products $f(x)g(y)$, exactly
+the product of the coefficient ideals. Nonzero modules have nonzero
+coefficient ideals; multiplicativity and positivity of their absolute
+norms therefore give the logarithmic identity.
+\end{proof}
+
+\begin{lemma}[Tensor degree of intrinsic lines]
+\label{lem:line-tensor-degree}
+\uses{lem:tensor-coordinate-ideal,lem:intrinsic-line-degree,lem:arithmetic-tensor-metric}\notready
+For finite projective Hermitian lines $L_1,L_2$ with their Hilbert tensor
+metric, $\degn(L_1\otimes L_2)=\degn(L_1)+\degn(L_2)$.
+\end{lemma}
+\begin{proof}
+Choose nonzero integral sections $x_i$ and injective coordinates $f_i$.
+The tensor coordinate of the preceding lemma takes $x_1\otimes x_2$
+to the nonzero product $f_1(x_1)f_2(x_2)$, so this tensor is nonzero.
+The norm of this pure tensor is $\|x_1\|_v\|x_2\|_v$ at each place.
+Dividing by $|f_1(x_1)f_2(x_2)|_v$ shows that the coordinate length
+of the tensor line is the product of the two coordinate lengths.
+Its coefficient ideal is $I_{f_1}I_{f_2}$. Insert these identities into
+the coordinate formula for degree, use multiplicativity of ideal norms
+and the logarithm of a positive product, and divide by $D$.
+The generic tensor product of two one-dimensional vector spaces is
+one-dimensional, so this computation applies to the intrinsic line degree.
+\end{proof}
+
 \begin{lemma}[Determinant identities and contraction]
-\label{lem:degree-calculus}\uses{def:hermitian-degree,lem:quotient-hermitian-metric,lem:arithmetic-tensor-metric,lem:determinant-contraction,lem:saturation-degree,lem:degree-metric-scaling}
+\label{lem:degree-calculus}\uses{def:hermitian-degree,lem:quotient-hermitian-metric,lem:arithmetic-tensor-metric,lem:line-tensor-degree,lem:determinant-contraction,lem:saturation-degree,lem:degree-metric-scaling}
 \source{bost-specht-manuscript:page-0003}\notready
 Degrees are additive in an exact sequence with induced and quotient
 metrics. For positive-rank bundles $A,B$ and a line bundle $L$,
@@ -733,15 +783,10 @@ $\det(A\otimes B)\simeq(\det A)^{\otimes\rk B}\otimes
 are isometries. Their local determinant ideals obey the same identities,
 which proves all three slope formulas.
 
-For an equal-rank injection, identify the generic fibers by $f$. The
-finite-index inclusion of determinant modules contributes
-$D^{-1}\log|B/f(A)|\geq0$ to $\degn(B)-\degn(A)$. The metric
-contribution is
-$-D^{-1}\sum_v w_v\log\|\det f\|_v\geq0$, since each singular value
-of $f$ is at most one. A submodule and its saturation have identical
-generic fibers and metrics, so this also proves the saturation claim.
-Finally, a rank-$b$ determinant norm is multiplied by $e^{bt}$ under
-uniform scaling, so its normalized degree decreases by $bt$.
+The equal-rank contraction assertion is precisely
+Lemma~\ref{lem:determinant-contraction}; saturation monotonicity is
+Lemma~\ref{lem:saturation-degree}. Uniform scaling is
+Lemma~\ref{lem:degree-metric-scaling}.
 \end{proof}
 
 \begin{lemma}[Restriction of scalars and covolume]
