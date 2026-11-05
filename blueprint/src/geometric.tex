@@ -1467,6 +1467,112 @@ formula for $\pi_d$. The descent and factorial identity are the
 \href{https://github.com/TauCetiProject/TauCeti/blob/3c3a32baea963db05c302adeb307b22baae4de78/TauCeti/LinearAlgebra/SymmetricPower/Basic.lean}{Tau Ceti symmetrization construction}.
 \end{proof}
 
+\begin{lemma}[Symmetric tensors are spanned by pure powers]
+\label{lem:symmetric-tensor-pure-power-span}
+\notready
+Let $R$ be a commutative ring, $M$ an $R$-module, and $I$ a finite set of
+size $d$, with $d!$ invertible in $R$. The tensors fixed by permutation of
+the $I$ positions are exactly the span of $x^{\otimes I}$ for $x\in M$.
+\end{lemma}
+\begin{proof}
+For a family $(x_i)_{i\in I}$, multilinear expansion gives
+\[
+ \sum_{S\subseteq I}(-1)^{|S|}
+       \left(\sum_{i\notin S}x_i\right)^{\otimes I}
+ =\sum_{\sigma\in\mathfrak S_I}\bigotimes_{i\in I}x_{\sigma(i)}.
+\]
+Indeed a function $f:I\to I$ in the expansion has coefficient
+$\sum_{S\subseteq I\setminus\operatorname{im}f}(-1)^{|S|}$, which is
+zero unless $f$ is surjective, in which case it is one. A surjective
+endomap of a finite set is a permutation. Thus symmetrizations of pure
+tensors lie in the pure-power span, and linearity gives the same conclusion
+for every tensor. The symmetrization of a fixed tensor is $d!$ times that
+tensor; divide by $d!$. Conversely each pure power is fixed, so its span is
+fixed. This is the inclusion-exclusion proof in
+\href{https://github.com/TauCetiProject/TauCeti/blob/b3b0334ab9203d9faee4b2f34cd75161463ecdd0/TauCeti/LinearAlgebra/Multilinear/Polarization.lean}{Tau Ceti's multilinear polarization}.
+\end{proof}
+
+\begin{lemma}[The permutation commutant]
+\label{lem:permutation-tensor-commutant}
+\uses{lem:symmetric-tensor-pure-power-span}
+\notready
+For a finite projective $R$-module $M$ and $d!$ invertible in $R$, an
+endomorphism of $M^{\otimes d}$ commutes with all position permutations
+if and only if it is in the span of $f^{\otimes d}$ for $f\in\End_R(M)$.
+\end{lemma}
+\begin{proof}
+Finite projectivity gives the canonical isomorphism
+$\End_R(M)^{\otimes d}\simeq\End_R(M^{\otimes d})$, sending pure
+tensors to factorwise maps. On pure tensors, permuting its source factors
+corresponds to conjugating its image by the same position permutation;
+linearity extends this equality. Hence commuting endomorphisms correspond
+exactly to fixed tensors. The preceding lemma identifies these with pure
+powers, whose images are the stated diagonal operators. This is the
+comparison-map proof in
+\href{https://github.com/TauCetiProject/TauCeti/blob/b3b0334ab9203d9faee4b2f34cd75161463ecdd0/TauCeti/RepresentationTheory/Symmetric/TensorAction/Centralizer.lean}{Tau Ceti's centralizer theorem}.
+\end{proof}
+
+\begin{lemma}[The diagonal commutant and invertible operators]
+\label{lem:schur-weyl-permutation-span}
+\uses{lem:permutation-tensor-commutant}
+\notready
+Let $M$ be a finite-dimensional vector space over an infinite field $F$
+in which $d!\ne0$. Every endomorphism of $M^{\otimes d}$ commuting
+with $g^{\otimes d}$ for all $g\in\GL(M)$ lies in the linear span of
+the position permutations.
+\end{lemma}
+\begin{proof}
+Let $A$ be the image of $F[\mathfrak S_d]$ in $\End_F(M^{\otimes d})$.
+Maschke's theorem makes $F[\mathfrak S_d]$, hence its quotient $A$,
+semisimple. Its double centralizer is $A$: an element commuting with
+$A'$ is an $\End_A(M^{\otimes d})$-linear endomorphism, and semisimple
+module density expresses it as multiplication by an element of $A$.
+The needed finiteness follows from finite dimension over $F$.
+The preceding lemma identifies $A'$ with the span of all diagonal
+endomorphisms. Invertible endomorphisms give the same span: any linear
+functional annihilating their span gives a polynomial function
+$f\mapsto\lambda(f^{\otimes d})$ in the matrix entries. Invertible matrices
+are Zariski dense over an infinite field, so this polynomial vanishes on
+every matrix. Dual annihilators detect subspace membership, giving equality
+of the spans. Thus the stated commutant is $A''=A$.
+The algebra image is the span of the permutation operators, since the
+group elements span their group algebra. This is the image-level argument
+in \href{https://github.com/TauCetiProject/TauCeti/blob/b3b0334ab9203d9faee4b2f34cd75161463ecdd0/TauCeti/RepresentationTheory/Symmetric/TensorAction/SchurWeyl.lean}{Tau Ceti's Schur--Weyl theorem}; no faithfulness of the group-algebra action is required.
+\end{proof}
+
+\begin{lemma}[Actual rectangular orbit spanning over an algebraic closure]
+\label{lem:rectangular-tensor-span-algclosed}
+\uses{lem:schur-weyl-permutation-span,lem:rectangular-tensor-realization,lem:free-integral-tensor-embedding}
+\source{bost-specht-manuscript:page-0009}
+\notready
+Let $F$ be algebraically closed of characteristic zero, let $M$ have
+positive dimension $a$, and let $k>0$, $d=ak$. The $\SL(M)$-fixed vectors
+in $M^{\otimes d}$ are the image of the actual scalar-extended rectangular
+orbit lattice under its frame realization.
+\end{lemma}
+\begin{proof}
+Choose a frame and let $z$ be the actual integral rectangular polytabloid
+in tensor coordinates. Covariance gives $g^{\otimes d}z=(\det g)^kz$.
+Define the bilinear coefficient covector
+$\phi(x)=\sum_w z(w)x(w)$. Transposition of the tensor matrix gives
+$\phi(g^{\otimes d}x)=(\det g)^k\phi(x)$, by applying covariance to
+$g^{\mathsf T}$. Distinct column permutations give distinct coefficient
+positions, each with coefficient $\pm1$, so
+$\phi(z)=(a!)^k\ne0$ in $F$.
+For an $\SL(M)$-fixed vector $v$ and $g\in\GL(M)$, choose $c$ with
+$c^a=\det g$. Then $c\ne0$ and $c^{-1}g\in\SL(M)$, so
+$g^{\otimes d}v=c^d v=(\det g)^kv$. Consequently
+$T(x)=\phi(x)v$ commutes with every $g^{\otimes d}$.
+The preceding lemma writes $T$ as a linear combination of position
+permutations. Evaluate at $z$ and divide by $\phi(z)$ to put $v$ in the
+span of those permutations of $z$. The integral orbit lattice is by
+definition the integer span of this orbit; scalar extension and the
+frame realization have precisely its $F$-span as image. Covariance
+gives the reverse inclusion. No Hermitian conjugation or positivity of
+the bilinear form is used. Frame independence follows from the already
+proved determinant-twisted transition identity.
+\end{proof}
+
 \begin{lemma}[Polynomial identities from evaluation]
 \label{lem:intrinsic-polynomial-ext}
 \lean{BostConjecture.Geometry.polynomial_ext}
