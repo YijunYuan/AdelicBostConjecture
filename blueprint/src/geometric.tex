@@ -923,9 +923,10 @@ property extends this identity to the whole source.
 \label{lem:integral-canonical-pairing}
 \uses{lem:projective-determinant-permutation,lem:dual-regrouping,lem:projective-tensor-evaluation}
 \source{bost-specht-manuscript:page-0010}
-\notready
-Let $R$ be a commutative ring, $V$ and $E_j$ finite projective
-$R$-modules, and $i:V\to\bigotimes_j E_j$ an $R$-linear map.
+\lean{BostConjecture.Geometry.dualDeterminantMap,BostConjecture.Geometry.dualDeterminantMap_reindex,BostConjecture.Geometry.canonicalPairing,BostConjecture.Geometry.canonicalPairing_apply,BostConjecture.Geometry.canonicalPairing_reindex_left}
+\leanok
+Let $R$ be a commutative ring, $V$ a finite projective $R$-module,
+and $(E_j)_j$ a finite family of finite projective $R$-modules, and $i:V\to\bigotimes_j E_j$ an $R$-linear map.
 Suppose $V$ has constant rank $s$ and $E_j^\vee$ has constant rank
 $a_j$. Choose rectangular tableaux $v,t_j$ of shapes $(\ell^s)$
 and $(k_j^{a_j})$, all with the same number $n$ of boxes, where
@@ -941,7 +942,9 @@ canonical $R$-linear map $\Psi:B\to D^\vee$ given by
 \[
  \Psi(z)(u)=U_D(u)\bigl(i^{\otimes n}(U_V(z))\bigr).
 \]
-It satisfies $\Psi(\tau z)(u)=\Psi(z)(\tau^{-1}u)$ for the
+Here evaluation uses the canonical finite-projective identification
+$(W^\vee)^{\otimes n}\simeq(W^{\otimes n})^\vee$, with
+$W=\bigotimes_jE_j$. It satisfies $\Psi(\tau z)(u)=\Psi(z)(\tau^{-1}u)$ for the
 integral orbit action on the source lattice and the simultaneous
 orbit action on the factors of $D$.
 \end{lemma}

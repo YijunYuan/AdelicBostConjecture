@@ -323,3 +323,21 @@ unneeded finiteness hypothesis from the scalar-extension lemma. All 119
 transitive probes then passed with only the standard foundational axioms.
 Read-only honesty review found substantive use of the global cover and actual
 producers, with faithful source-facing blueprint attachments.
+
+## The actual integral equivariant restricted pairing
+
+`Geometry/Contraction.lean` defines `dualDeterminantMap` from the constructed
+projective determinant maps and finite-projective dual regrouping. Its
+`canonicalPairing` restricts the actual tensor-power evaluation through those
+maps, and `canonicalPairing_reindex_left` proves contragredient equivariance.
+Everything is defined over the original commutative ring with finite projective
+modules. The theorem claims an algebraic map and equivariance, without assuming
+or claiming injectivity, metric contraction, or nonvanishing.
+
+Module check `e7f3f665e66ab94b` passed 9081 jobs at 19:42:59 UTC without
+warnings. All 124 transitive probes passed with only `propext`,
+`Classical.choice`, and `Quot.sound`. Read-only honesty review approved the
+actual producer route; its finite-family/evaluation notation clarifications
+were applied to the checked blueprint node. The first metric boundary is now
+the genuine dual Hilbert metric and evaluation bound, coordinated with ARITH
+in I-0038; invariant base change and nonvanishing remain later producers.
