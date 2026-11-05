@@ -3,6 +3,7 @@ module
 public import BostConjecture.Arithmetic.DegreeNormalization
 public import BostConjecture.Arithmetic.LineContraction
 public import BostConjecture.Arithmetic.SubmoduleMetric
+public import BostConjecture.Arithmetic.ExteriorMap
 public import Mathlib.Analysis.InnerProductSpace.GramSchmidtOrtho
 
 /-!
@@ -31,13 +32,15 @@ variable {E F : Type*} [NormedAddCommGroup E] [InnerProductSpace ℂ E]
 lemma norm_eq_coordinate (b : OrthonormalBasis (Fin r) ℂ E) (x : ⋀[ℂ]^r E) :
     Real.sqrt (((core b).inner x x).re) = ‖Geometry.determinantCoordinates b.toBasis x‖ := by
   rw [core_inner]
-  exact Complex.sq_sqrt_normSq _
+  rw [Complex.star_def, ← Complex.normSq_eq_conj_mul_self, Complex.ofReal_re]
+  exact (Complex.norm_def _).symm
 
 /-- Hadamard's bound in an orthonormal frame, with unit-length column bounds. -/
 lemma norm_det_le_one (b : OrthonormalBasis (Fin r) ℂ F) (v : Fin r → F)
     (hv : ∀ i, ‖v i‖ ≤ 1) : ‖b.toBasis.det v‖ ≤ 1 := by
-  let c := InnerProductSpace.gramSchmidtOrthonormalBasis
-    (by simpa using (Module.finrank_eq_card_basis b.toBasis).symm) v
+  let : FiniteDimensional ℂ F := b.toBasis.finiteDimensional_of_finite
+  let c : OrthonormalBasis (Fin r) ℂ F := InnerProductSpace.gramSchmidtOrthonormalBasis
+    (Module.finrank_eq_card_basis b.toBasis) v
   have he := core_eq b c
   have hn : ‖b.toBasis.det v‖ = ‖c.toBasis.det v‖ := by
     rw [← Geometry.determinantCoordinates_ιMulti, ← Geometry.determinantCoordinates_ιMulti,
@@ -45,7 +48,7 @@ lemma norm_det_le_one (b : OrthonormalBasis (Fin r) ℂ F) (v : Fin r → F)
   rw [hn, InnerProductSpace.gramSchmidtOrthonormalBasis_det, norm_prod]
   calc
     ∏ i, ‖inner ℂ (c i) (v i)‖ ≤ ∏ _i : Fin r, (1 : ℝ) := by
-      apply Finset.prod_le_prod (fun _ _ => norm_nonneg _)
+      apply Finset.prod_le_prod₀ (fun _ _ => norm_nonneg _)
       intro i _
       simpa only [c.norm_eq_one, one_mul] using (norm_inner_le_norm (c i) (v i)).trans
         (mul_le_mul_of_nonneg_left (hv i) (norm_nonneg (c i)))
@@ -64,6 +67,89 @@ lemma norm_map_le (b : OrthonormalBasis (Fin r) ℂ E) (c : OrthonormalBasis (Fi
   exact mul_le_of_le_one_right (norm_nonneg a)
     (norm_det_le_one c (f ∘ b) (fun i => (hf (b i)).trans_eq (b.norm_eq_one i)))
 
+/-- Transport of the exterior degree preserves its intrinsic determinant norm. -/
+lemma norm_degreeCongr {s : ℕ} (hrs : r = s)
+    (b : OrthonormalBasis (Fin r) ℂ E) (c : OrthonormalBasis (Fin s) ℂ E)
+    (x : ⋀[ℂ]^r E) :
+    Real.sqrt (((core c).inner (degreeCongr hrs x) (degreeCongr hrs x)).re) =
+      Real.sqrt (((core b).inner x x).re) := by
+  subst s
+  change Real.sqrt (((core c).inner x x).re) = _
+  rw [core_eq c b]
+
 end ComplexDeterminant
+
+namespace HermitianMetric
+
+variable {K : Type*} [Field K]
+variable {M : Type*} [AddCommGroup M] [Module (𝓞 K) M] [Module.Finite (𝓞 K) M]
+
+/-- The intrinsic determinant fiber has the exterior norm in every orthonormal frame. -/
+lemma determinantFiber_norm_eq (h : HermitianMetric (K := K) M) (σ : K →+* ℂ) :
+    letI : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
+    letI := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber M σ)
+    letI := InnerProductSpace.ofCore
+      (inferInstance : PreInnerProductSpace.Core ℂ (ComplexFiber M σ))
+    ∀ (b : OrthonormalBasis (Fin (Module.finrank K (K ⊗[𝓞 K] M))) ℂ (ComplexFiber M σ))
+      (x : ComplexFiber (DeterminantLine (K := K) M) σ),
+      Real.sqrt (((h.determinantFiber σ).inner x x).re) =
+        Real.sqrt (((ComplexDeterminant.core b).inner (determinantComplexEquiv M σ x)
+          (determinantComplexEquiv M σ x)).re) := by
+  let : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
+  let := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber M σ)
+  let := InnerProductSpace.ofCore
+    (inferInstance : PreInnerProductSpace.Core ℂ (ComplexFiber M σ))
+  intro b x
+  let b₀ := (stdOrthonormalBasis ℂ (ComplexFiber M σ)).reindex
+    (finCongr (complexFiber_finrank M σ))
+  change Real.sqrt (((ComplexDeterminant.core b₀).inner (determinantComplexEquiv M σ x)
+    (determinantComplexEquiv M σ x)).re) = _
+  rw [ComplexDeterminant.core_eq b₀ b]
+
+variable {N : Type*} [AddCommGroup N] [Module (𝓞 K) N] [Module.Finite (𝓞 K) N]
+
+/-- Fiberwise contraction descends to contraction of every integral determinant section. -/
+theorem determinant_sectionNorm_map_le (h : HermitianMetric (K := K) M)
+    (g : HermitianMetric (K := K) N) (f : M →ₗ[𝓞 K] N)
+    (hr : Module.finrank K (K ⊗[𝓞 K] M) = Module.finrank K (K ⊗[𝓞 K] N))
+    (hc : ∀ (σ : K →+* ℂ) (x : ComplexFiber M σ),
+      Real.sqrt (((g.fiber σ).inner (fiberMap f σ x) (fiberMap f σ x)).re) ≤
+        Real.sqrt (((h.fiber σ).inner x x).re))
+    (σ : K →+* ℂ) (x : DeterminantLine (K := K) M) :
+    g.determinant.sectionNorm σ (determinantMap f hr x) ≤ h.determinant.sectionNorm σ x := by
+  let : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
+  let := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber M σ)
+  let := InnerProductSpace.ofCore
+    (inferInstance : PreInnerProductSpace.Core ℂ (ComplexFiber M σ))
+  let : InnerProductSpace.Core ℂ (ComplexFiber N σ) := g.fiber σ
+  let := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber N σ)
+  let := InnerProductSpace.ofCore
+    (inferInstance : PreInnerProductSpace.Core ℂ (ComplexFiber N σ))
+  let b := (stdOrthonormalBasis ℂ (ComplexFiber M σ)).reindex
+    (finCongr (complexFiber_finrank M σ))
+  let c := (stdOrthonormalBasis ℂ (ComplexFiber N σ)).reindex
+    (finCongr (complexFiber_finrank N σ))
+  let d := c.reindex (finCongr hr.symm)
+  change Real.sqrt (((g.determinantFiber σ).inner
+    (fiberSection _ σ (determinantMap f hr x)) (fiberSection _ σ (determinantMap f hr x))).re) ≤
+      Real.sqrt (((h.determinantFiber σ).inner (fiberSection _ σ x) (fiberSection _ σ x)).re)
+  rw [g.determinantFiber_norm_eq σ c, h.determinantFiber_norm_eq σ b,
+    determinantMap_section, ComplexDeterminant.norm_degreeCongr hr d c]
+  exact ComplexDeterminant.norm_map_le b d (fiberMap f σ) (hc σ) _
+
+variable [NumberField K] [Module.Projective (𝓞 K) M] [Module.Projective (𝓞 K) N]
+
+/-- An injective contraction of equal generic rank increases intrinsic arithmetic degree. -/
+theorem degree_le_of_injective (h : HermitianMetric (K := K) M)
+    (g : HermitianMetric (K := K) N) (f : M →ₗ[𝓞 K] N) (hf : Function.Injective f)
+    (hr : Module.finrank K (K ⊗[𝓞 K] M) = Module.finrank K (K ⊗[𝓞 K] N))
+    (hc : ∀ (σ : K →+* ℂ) (x : ComplexFiber M σ),
+      Real.sqrt (((g.fiber σ).inner (fiberMap f σ x) (fiberMap f σ x)).re) ≤
+        Real.sqrt (((h.fiber σ).inner x x).re)) : h.degree ≤ g.degree :=
+  h.determinant.lineDegree_le_of_injective g.determinant (determinantMap f hr)
+    (determinantMap_injective f hf hr) (determinant_generic_finrank M)
+    (determinant_generic_finrank N) (h.determinant_sectionNorm_map_le g f hr hc)
+
+end HermitianMetric
 
 end BostConjecture.Arithmetic

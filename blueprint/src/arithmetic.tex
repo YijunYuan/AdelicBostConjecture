@@ -651,8 +651,61 @@ the square root of their product is the product of their square roots,
 which gives the norm formula, including for the empty family.
 \end{proof}
 
+\begin{lemma}[Contraction on the intrinsic determinant line]
+\label{lem:determinant-contraction}
+\uses{lem:integral-determinant-line,lem:determinant-metric-unique,lem:line-degree-contraction}
+\source{bost-specht-manuscript:page-0003}\notready
+Let $f:M\to N$ be an injective integral map between finite projective
+Hermitian modules of the same generic rank $r$. Suppose every complex
+fiber map satisfies $\|f_\sigma(v)\|\leq\|v\|$ for all $v\in M_\sigma$.
+Then $\bigwedge^r f:\det M\to\det N$ is injective and contracts
+every determinant norm. Consequently $\degn(M)\leq\degn(N)$.
+\end{lemma}
+\begin{proof}
+Exterior powers commute with scalar extension. Fix a complex embedding
+of $K$. Its scalar extension is flat over $\Ocal$, so $f_\sigma$ is
+injective and admits a complex-linear left inverse. Applying the exterior
+functor proves that $\bigwedge^r f_\sigma$ is injective. The integral
+determinant module is projective and hence injects into this complex
+fiber. These facts prove injectivity of the integral exterior map.
+
+At a complex embedding choose an orthonormal basis $e_1,\ldots,e_r$
+of the source. Every determinant vector is $a(e_1\wedge\cdots\wedge e_r)$
+and has norm $|a|$. Apply Gram--Schmidt to the ordered family
+$f_\sigma(e_1),\ldots,f_\sigma(e_r)$, extending the resulting orthonormal
+family to a basis if a dependent vector occurs. In the resulting
+orthonormal basis the coordinate matrix is upper triangular, so its
+determinant is the product of its diagonal entries. Each entry is an
+inner product of a unit vector with $f_\sigma(e_i)$ and has modulus at
+most $\|f_\sigma(e_i)\|\leq1$ by Cauchy--Schwarz. The determinant
+therefore has modulus at most one. The Gram determinant formula identifies
+this modulus with the norm of the image of the unit wedge. Multiplying
+by $|a|$ proves contraction on every determinant vector, also for $r=0$
+where the product is empty and equals one. The intrinsic line contraction
+lemma now gives the stated degree inequality.
+\end{proof}
+
+\begin{lemma}[Saturation increases intrinsic degree]
+\label{lem:saturation-degree}
+\uses{lem:determinant-contraction,lem:integral-part-generic-subspace,lem:induced-hermitian-metric}\notready
+If $P\subseteq T\subseteq M$ are integral submodules of a finite projective
+Hermitian module and $\rk P=\rk T$, then $\degn(P)\leq\degn(T)$
+for their induced metrics. In particular
+$\degn(P)\leq\degn(M\cap KP)$.
+\end{lemma}
+\begin{proof}
+Both submodules are finite projective. The composite of the inclusion
+$P\to T$ with $T\to M$ is $P\to M$. After scalar extension the same
+identity holds, so pullback of the ambient Hermitian form gives exactly
+the same form on $P$ through either inclusion. Thus $P\to T$ is
+fiberwise isometric, and the equal-rank determinant contraction theorem
+applies. For $T=M\cap KP$, localization identifies both generic fibers
+with $KP$, so the ranks agree; moreover $P\subseteq M\cap KP$.
+This proves the last inequality without a freeness assumption.
+\end{proof}
+
 \begin{lemma}[Determinant identities and contraction]
-\label{lem:degree-calculus}\uses{def:hermitian-degree,lem:quotient-hermitian-metric,lem:arithmetic-tensor-metric,lem:line-degree-contraction,lem:degree-metric-scaling}
+\label{lem:degree-calculus}\uses{def:hermitian-degree,lem:quotient-hermitian-metric,lem:arithmetic-tensor-metric,lem:determinant-contraction,lem:saturation-degree,lem:degree-metric-scaling}
 \source{bost-specht-manuscript:page-0003}\notready
 Degrees are additive in an exact sequence with induced and quotient
 metrics. For positive-rank bundles $A,B$ and a line bundle $L$,
