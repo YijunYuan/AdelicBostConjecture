@@ -457,14 +457,16 @@ Sum these inequalities and divide by $D>0$ to obtain the degree inequality.
 
 \begin{lemma}[Uniform metric scaling]
 \label{lem:degree-metric-scaling}
-\uses{def:intrinsic-determinant-degree,lem:determinant-metric-unique}\notready
+\uses{def:intrinsic-determinant-degree,lem:determinant-metric-unique,lem:induced-hermitian-metric,lem:integral-submodule-projective}\notready
 For $t\in\mathbb R$ let $h[t]_\sigma=e^{2t}h_\sigma$, so that every
 norm is multiplied by $e^t$. If $M$ has generic rank $r$, then
 \[
  \det(h[t])=(\det h)[rt],\qquad
  \degn(M,h[t])=\degn(M,h)-rt.
 \]
-For $r>0$ its slope decreases by $t$.
+For $r>0$ its slope decreases by $t$, so scaling by its original slope
+produces slope zero. The same degree and slope formulas hold for every
+integral submodule with the induced metrics.
 \end{lemma}
 \begin{proof}
 The positive real factor $e^{2t}$ preserves positivity, sesquilinearity
@@ -476,7 +478,10 @@ of the section formula is unchanged, while each logarithmic section
 norm increases by $t$. There are exactly $D$ complex embeddings, so
 normalized line degree decreases by $t$. Apply this to the determinant
 line with scaling parameter $rt$ to obtain the second equality, and
-divide by $r$ for the slope statement.
+divide by $r$ for the slope statement. Pullback of the form along an
+inclusion commutes with multiplication by $e^{2t}$, so the same result
+applies to each induced submodule metric; these submodules are finite
+projective by the preceding lemma.
 \end{proof}
 
 \begin{lemma}[Determinant identities and contraction]

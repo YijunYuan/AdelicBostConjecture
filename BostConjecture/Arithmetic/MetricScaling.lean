@@ -1,6 +1,7 @@
 module
 
 public import BostConjecture.Arithmetic.Degree
+public import BostConjecture.Arithmetic.SubmoduleMetric
 
 /-!
 # Uniform rescaling of intrinsic Hermitian metrics
@@ -54,7 +55,8 @@ def rescale (h : HermitianMetric (K := K) M) (t : ℝ) : HermitianMetric (K := K
       (fiberSection M (ComplexEmbedding.conjugate σ) y) =
       star ((Real.exp (2 * t) : ℂ) * (h.fiber σ).inner
         (fiberSection M σ x) (fiberSection M σ y))
-    rw [h.conjugate, map_mul, Complex.star_def, Complex.conj_ofReal]
+    rw [h.conjugate, star_mul, Complex.star_def, Complex.conj_ofReal]
+    exact mul_comm _ _
 
 lemma rescale_inner (h : HermitianMetric (K := K) M) (t : ℝ) (σ : K →+* ℂ)
     (x y : ComplexFiber M σ) :
@@ -82,6 +84,22 @@ lemma ext {h g : HermitianMetric (K := K) M}
       cases hfg
       rfl
 
+/-- Rescaling commutes with an actual induced metric. -/
+lemma pullback_rescale [NumberField K]
+    {N : Type*} [AddCommGroup N] [Module (𝓞 K) N]
+    (h : HermitianMetric (K := K) M) (f : N →ₗ[𝓞 K] M)
+    (hf : Function.Injective f) (t : ℝ) :
+    (h.rescale t).pullback f hf = (h.pullback f hf).rescale t := by
+  apply ext
+  intro σ
+  rfl
+
+/-- Every integral submodule inherits the same uniform norm scaling. -/
+lemma submodule_rescale [NumberField K] (h : HermitianMetric (K := K) M)
+    (P : Submodule (𝓞 K) M) (t : ℝ) :
+    (h.rescale t).submodule P = (h.submodule P).rescale t :=
+  h.pullback_rescale P.subtype P.injective_subtype t
+
 variable [Module.Finite (𝓞 K) M]
 
 /-- Uniform rescaling commutes with the intrinsic determinant metric, with
@@ -95,7 +113,9 @@ theorem determinant_rescale (h : HermitianMetric (K := K) M) (t : ℝ) :
   apply (h.rescale t).determinantFiber_unique σ
   intro x
   simp only [rescale_inner]
-  rw [h.determinantFiber_inner_ιMulti]
+  change ((Real.exp (2 * ((Module.finrank K (K ⊗[𝓞 K] M) : ℝ) * t)) : ℂ) *
+    (h.determinantFiber σ).inner ((determinantComplexEquiv M σ).symm (ιMulti ℂ _ x)) ((determinantComplexEquiv M σ).symm (ιMulti ℂ _ x))).re = _
+  rw [h.determinantFiber_inner_ιMulti σ x x]
   have hm : (Matrix.of fun i j => (Real.exp (2 * t) : ℂ) *
       (h.fiber σ).inner (x i) (x j)) =
       (Real.exp (2 * t) : ℂ) • (Matrix.of fun i j => (h.fiber σ).inner (x i) (x j)) := rfl
@@ -136,5 +156,23 @@ theorem slope_rescale (h : HermitianMetric (K := K) M)
     (hr : Module.finrank K (K ⊗[𝓞 K] M) ≠ 0) (t : ℝ) :
     (h.rescale t).slope = h.slope - t := by
   rw [slope, slope, degree_rescale, sub_div, mul_div_cancel_left₀ t (Nat.cast_ne_zero.mpr hr)]
+
+/-- Rescaling by the original slope produces a bundle of slope zero. -/
+theorem slope_rescale_self (h : HermitianMetric (K := K) M)
+    (hr : Module.finrank K (K ⊗[𝓞 K] M) ≠ 0) : (h.rescale h.slope).slope = 0 := by
+  rw [slope_rescale h hr, sub_self]
+
+/-- Degree scaling for every actual integral submodule of a Hermitian bundle. -/
+theorem degree_submodule_rescale (h : HermitianMetric (K := K) M)
+    (P : Submodule (𝓞 K) M) (t : ℝ) :
+    ((h.rescale t).submodule P).degree = (h.submodule P).degree -
+      (Module.finrank K (K ⊗[𝓞 K] P) : ℝ) * t := by
+  rw [submodule_rescale, degree_rescale]
+
+/-- Every positive-rank submodule's slope decreases by the same parameter. -/
+theorem slope_submodule_rescale (h : HermitianMetric (K := K) M)
+    (P : Submodule (𝓞 K) M) (hr : Module.finrank K (K ⊗[𝓞 K] P) ≠ 0) (t : ℝ) :
+    ((h.rescale t).submodule P).slope = (h.submodule P).slope - t := by
+  rw [submodule_rescale, slope_rescale _ hr]
 
 end BostConjecture.Arithmetic.HermitianMetric
