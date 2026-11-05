@@ -38,6 +38,26 @@ their ancestors intentionally remain active. The fourth BALANCED lane was
 subsequently authorized by protection I-0046. The scratch dry-run found zero
 cleanup candidates. Source ownership and the scoped graph symlink are preserved.
 
+Final checked root blob: `375b296c3e5355a577e3ca28c2e41f8ef2b6960a`.
+The root check `975bdb23135a0d4a` passed at 20:56:40 UTC on 2026-11-05;
+the final eight-probe check `a4220ca03f0a0f7e` passed at 20:57:14 UTC.
+Verified commits for this session: `e2c501f`, `c3fbb73`, `12f39e6`, `250caa4`.
+Concurrent automatic snapshots captured some earlier source; only the stated
+kernel checks and audits certify the accepted source.
+
+Final graph sync has 178 blueprint nodes, 1,210 Lean declarations and 829
+edges, with no missing references. The stale node for the renamed private
+row-length helper was deleted; 631 unattached helper/imported declarations
+are intentional coverage warnings, including other teams' concurrent drafts.
+The roadmap separates proved prefix fibers and weights from open labelled
+normalization, bulk separation and expectation. BOST-SPECHT remains open.
+
+All SPECHT-owned authored changes are committed. Other tasks' source and
+blueprint drafts, plus pre-existing untracked workspace instructions,
+configuration and PDFs, were left untouched. I-0048 grants BALANCED the
+bounded reference-only extension; its new references/bibliography entries
+remain owned by that lane. No publication or push was performed.
+
 ## Session 0023: hook-count producer
 
 `Specht/HookCount.lean` identifies enumerating standard tableaux with the

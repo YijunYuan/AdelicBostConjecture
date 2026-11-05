@@ -117,8 +117,10 @@ changes. The installed mathlib revision is pinned in `lake-manifest.json`.
   same revision, preserving coordinates and attribution. The inverse-tableau
   proofs are new; Lean 4.35 visibility and dependent rewriting are adapted.
   The copied formula's dependency cone is kernel-checked and audited through
-  this consumer. Shifted-coordinate products and prefix bijections remain
-  separate obligations for the rectangular prefix law (§5).
+  this consumer. Downstream `Specht/ShiftedCount.lean` proves the shifted
+  factorial product; `PrefixCount.lean` and `PrefixWeights.lean` prove the
+  prefix bijection and exact binomial weight. Labelled normalization and
+  concentration remain obligations for the rectangular prefix law (§5).
 
 ## Gram determinants and covolumes — The Tau Ceti contributors
 
