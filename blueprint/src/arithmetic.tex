@@ -1214,10 +1214,18 @@ section of $q_\sigma$. Choose orthonormal bases of $A_\sigma$ and
 $C_\sigma$. Their images in $B_\sigma$ form an orthonormal basis, since
 the orthogonal section realizes exactly the quotient metric. The
 determinant map therefore sends the tensor of two unit determinant
-generators to a unit determinant generator. Between complex lines this
-implies preservation of all norms. This also applies to an empty basis.
-Isometry invariance of line degree and tensor additivity for projective
-lines now give the asserted degree identity.
+generators to a unit determinant generator. Choose nonzero integral vectors $x\in\det A$ and $y\in\det C$;
+their tensor $z_0$ is nonzero, since the tensor of injective generic line
+coordinates sends it to a product of two nonzero scalars. The pure-tensor
+norm formula gives the isometry equality on $z_0$. For every integral
+$z\in\det A\otimes\det C$, rank one supplies $u,v\in\Ocal$ with
+$v\ne0$ and $u z_0=v z$. Applying both norms, homogeneity and the equality
+on $z_0$, and cancelling $|\sigma(v)|>0$, gives equality on $z$.
+The integral sections span the complex determinant fiber, which has
+dimension one, so this also proves the complex-line isometry. The argument
+includes rank-zero summands because their determinant lines still have
+rank one. Isometry invariance of line degree and tensor additivity for
+projective lines now give the asserted degree identity.
 \end{proof}
 
 \begin{lemma}[Determinant identities and contraction]

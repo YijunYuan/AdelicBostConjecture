@@ -1,3 +1,4 @@
+import BostConjecture.Arithmetic.ExactDegree
 import BostConjecture.Arithmetic.QuotientMetric
 import BostConjecture.Arithmetic.IntegralDeterminantProduct
 import BostConjecture.Arithmetic.IntegralExactDeterminant
@@ -217,3 +218,13 @@ import BostConjecture.Arithmetic.DeterminantProduct
 #print axioms BostConjecture.Arithmetic.generic_finrank_exact
 #print axioms BostConjecture.Arithmetic.determinantExactEquiv
 #print axioms BostConjecture.Arithmetic.determinantExactEquiv_apply_of_section
+
+#print axioms BostConjecture.Arithmetic.ComplexDeterminant.norm_prodMap
+#print axioms BostConjecture.Arithmetic.ComplexQuotient.norm_determinant_lift
+#print axioms exteriorPower.map_coprod_prodMap_eq_of_sections
+#print axioms exteriorPower.exactEquiv_baseChange_field_section
+#print axioms BostConjecture.Arithmetic.determinantExactEquiv_section
+#print axioms BostConjecture.Arithmetic.HermitianMetric.determinantExactEquiv_sectionNorm
+#print axioms BostConjecture.Arithmetic.HermitianMetric.determinantExactEquiv_isometry
+#print axioms BostConjecture.Arithmetic.HermitianMetric.determinantExactEquiv_fiber_isometry
+#print axioms BostConjecture.Arithmetic.HermitianMetric.degree_exact
