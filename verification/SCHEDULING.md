@@ -1,6 +1,6 @@
 # Parallel Horizon scheduling
 
-Coordinator checkpoint: 2026-11-06 06:21 Asia/Shanghai (2026-11-05 22:21 UTC).
+Coordinator checkpoint: 2026-11-06 06:31 Asia/Shanghai (2026-11-05 22:31 UTC).
 
 The user assigned the parent session scheduling only, with no spending cap. The user subsequently authorized a fourth dedicated
 Lemma 7.2 lane if memory pressure is low; the total cap is now four proof
@@ -53,18 +53,20 @@ determinant and Plucker norm handoffs, with separate 192- and 30-probe audits,
 as well as the earlier geometry pairing base-change leaf. It does not certify
 later independent producers or any headline result still open below.
 
-The current sessions are SPECHT `0028`, ARITH `0012`, GEOM `0014`, and BALANCED
+The current sessions are SPECHT `0028`, ARITH `0014`, GEOM `0014`, and BALANCED
 `0004`; all four foreground invocations continue normally.
 
 - **SPECHT:** the canonical integral lattice, Gram bound and exact finite
   prefix distribution are checked. The current round has additionally checked
   the bulk normalizer bound (`76b7bf8`). Concentration, uniform separation,
   logarithmic expectation and the general covolume limit remain open.
-- **ARITH:** intrinsic dual degree and the nonfree exact-sequence determinant
-  construction are checked, including zero ranks and splitting independence.
-  The current metric work has checked the norm formula on integral pure tensors
-  (`8b595d4`). The full determinant isometry/degree identity, general tensor
-  degree, finiteness, supermodularity and HN specialization remain open.
+- **ARITH:** intrinsic dual degree, the nonfree exact-sequence determinant,
+  full complex-fiber determinant isometry and exact-sequence degree additivity
+  are checked, including zero ranks and splitting independence. `ExactDegree`
+  passed 3,544 warning-free jobs and the final 201 foundational-only probes
+  (`2f716f5`, evidence `9c913aa`, satisfactory independent review). This newer
+  degree endpoint awaits the next root batch. General tensor degree,
+  finiteness, supermodularity and HN specialization remain open.
 - **GEOM:** the actual canonical contracting pairing is checked through its
   intrinsic dual-fiber norm bound (`fd211a8`, evidence `8045b27`), with 163
   foundational-only probes and satisfactory honesty review. This newer
@@ -206,3 +208,9 @@ successfully at 22:01:50 UTC; `0014` started at 22:02:58 UTC. After this
 client recycling, available memory rose to 10.36 GiB and PSI avg10 fell to
 0.00% (avg60 0.17%), with zero OOM kills. The four proof lanes continue,
 including the dedicated Lemma 7.2 lane; continue resource monitoring.
+
+The same bounded handoff was used for ARITH in `I-0061`: `0012` ended normally
+at 22:28:47 UTC after the verified exact-sequence degree milestone; `0014`
+started at 22:29:07 UTC. Available memory then measured 10.33 GiB, PSI avg10
+0.00% and zero OOM kills. The consumed hint is archived; arithmetic work
+continues without adding a proof writer.
