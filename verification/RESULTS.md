@@ -8,15 +8,20 @@ the logarithmic-expectation squeeze. BOST-SPECHT and the general covolume
 limit remain open. The canonical integral lattice, Hilbert metric, and
 arbitrary-number-field target are unchanged.
 
-The configured explicit-root `horizon check --json` passed **9,223 jobs
-without warnings** at **2026-11-05 22:47:30 UTC**, fingerprint
+The configured explicit-root `horizon check --json` passed **9,227 jobs
+without warnings** at **2026-11-05 22:51:43 UTC**, fingerprint
 `975bdb23135a0d4a`. Root blob:
-`1e82a0a65cf1c08b5cb2f375cfa2f0c6c580183c`.
+`3cc15b902cb12270bbe0b37a82b6fc3141cff1b2`.
 The checked integration includes `Arithmetic.ExactDegree`,
 `Geometry.ContractionNorm`, `Balanced.SpectralExpansion`, and
-`InvariantTheory.Semistability`, using the owners' scoped checks and
-201-, 163-, and 67-probe audit handoffs. Later tensor-flow, tensor-degree
-and invariant-base-change work is outside this fixed integration boundary.
+`InvariantTheory.Semistability`, plus the final geometry handoff
+`InvariantBaseChange`, `PiInvariants`, and `PolynomialTensor`, using the
+owners' scoped checks and 201-, 184-, and 67-probe audit handoffs.
+The preceding root batch passed 9,223 jobs at 22:47:30 UTC, with blob
+`1e82a0a65cf1c08b5cb2f375cfa2f0c6c580183c`.
+The later `Balanced.TensorExponential` handoff (`cc2ec60`, 71-probe owner
+audit, I-0060) is reserved for the next root batch. Tensor degree, the orbit
+criterion and rectangular invariant identification are outside this boundary.
 
 New Specht evidence:
 
@@ -59,6 +64,13 @@ candidates and protected all four live runs. Idle parent/reviewer LSP workers
 were released after their checks to reduce swap pressure. No other team's
 processes were stopped. The self-addressed housekeeping thread I-0058 was
 archived after consumption.
+
+Graph sync recorded 219 blueprint nodes, 1,453 declarations and 1,043 edges,
+with no missing-reference warnings. The 728 unattached helper/imported
+declarations are intentional coverage warnings recorded in I-0004.
+`hgraph/config.yaml -> ../hgraph-sources.yaml` is preserved. The new finite
+weighted bad-gap node remains `notready`, and the concentration completion
+does not mark separation or the covolume limit complete.
 
 ## Exact labelled prefix distribution (session 0026)
 

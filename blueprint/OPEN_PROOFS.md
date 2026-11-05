@@ -101,8 +101,9 @@ overlap transport and the global determinant injection are proved.
 The finite Hilbert tensor form and its pure-tensor formula are proved.
 Determinant metric compatibility, the actual integral pairing and its
 equivariance are proved in the delivered geometry modules. Generic dual
-evaluation is bounded. The restricted pairing norm bound and the full
-invariant generic fiber for nonvanishing remain requirements of the route.
+evaluation and the restricted pairing are bounded, the latter in
+`ContractionNorm.lean`. The full invariant generic fiber for nonvanishing
+remains a requirement of the route.
 
 All cited manuscript page anchors resolve to registered vision transcriptions
 that were read before attachment. The shifted-coordinate tableau count has

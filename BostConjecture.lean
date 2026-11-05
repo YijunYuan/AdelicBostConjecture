@@ -37,6 +37,9 @@ public import BostConjecture.Geometry.Contraction
 public import BostConjecture.Geometry.ContractionMetric
 public import BostConjecture.Geometry.ContractionBaseChange
 public import BostConjecture.Geometry.ContractionNorm
+public import BostConjecture.Geometry.InvariantBaseChange
+public import BostConjecture.Geometry.PiInvariants
+public import BostConjecture.Geometry.PolynomialTensor
 public import BostConjecture.Tensor.Evaluation
 public import BostConjecture.Tensor.EvaluationBaseChange
 public import BostConjecture.Tensor.DualRegroupBaseChange

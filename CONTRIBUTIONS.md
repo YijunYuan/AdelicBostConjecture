@@ -488,6 +488,10 @@ the subset count and falling-factorial inequality. No external source was copied
 The new integration imports are original owner-delivered
 `Arithmetic.ExactDegree`, `Geometry.ContractionNorm`, and
 `Balanced.SpectralExpansion`, together with `InvariantTheory.Semistability`.
+The final geometry batch also includes the original local
+`Geometry.InvariantBaseChange`, `PiInvariants`, and `PolynomialTensor`;
+their pinned-library reuse and 184-probe audit are recorded in
+`verification/GEOMETRY.md`. No external source was copied by this integration.
 The spectral expansion uses unchanged Mathlib
 `Mathlib/Analysis/InnerProductSpace/Spectrum.lean`,
 `Mathlib/Analysis/SpecialFunctions/Exponential.lean`, and
