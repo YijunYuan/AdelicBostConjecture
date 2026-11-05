@@ -2,7 +2,8 @@
 
 \begin{definition}[Compatible metrics on intrinsic fibers]
 \label{def:hermitian-metric}
-\source{bost-specht-manuscript:page-0002}\notready
+\source{bost-specht-manuscript:page-0002}
+\lean{BostConjecture.Arithmetic.HermitianMetric}\leanok
 Let $M$ be a finite projective $\Ocal$-module. For every embedding
 $\sigma:K\hookrightarrow\mathbb C$, put
 $M_\sigma=\mathbb C\otimes_{\Ocal,\sigma}M$ and $j_\sigma(x)=1\otimes x$.
@@ -12,20 +13,52 @@ on each $M_\sigma$ such that
  h_{\bar\sigma}(j_{\bar\sigma}(x),j_{\bar\sigma}(y))
  =\overline{h_\sigma(j_\sigma(x),j_\sigma(y))}\qquad(x,y\in M).
 \]
-Here a Hermitian form is conjugate-linear in its first variable. This
-condition is equivalent to compatibility with the canonical conjugate-linear
-map $c_\sigma(z\otimes x)=\bar z\otimes x$: both sides are sesquilinear,
+Here a Hermitian form is conjugate-linear in its first variable.
+\end{definition}
+
+\begin{lemma}[Conjugation on the full archimedean fiber]
+\label{lem:hermitian-fiber-conjugation}\uses{def:hermitian-metric}\notready
+The compatibility condition on integral generators is equivalent to compatibility with the canonical conjugate-linear
+map $c_\sigma(z\otimes x)=\bar z\otimes x$.
+At a real embedding its fixed subspace is the real fiber, on which the
+form restricts to a positive-definite real inner product.
+\end{lemma}
+\begin{proof}
+Both sides are sesquilinear,
 and the $j_\sigma(x)$ span the complex fiber. Indeed, expanding on two finite
 linear combinations reduces the equality to the displayed equality, with
 coefficients $z_i\overline{w_j}$ on both sides. The map $c_\sigma$ is
 well-defined because $\overline{\sigma(a)z}=\bar\sigma(a)\bar z$ for
 $a\in\Ocal$. At a real embedding its fixed subspace is the real fiber,
-and the form restricts to a positive-definite real inner product there.
-\end{definition}
+and conjugation invariance makes the restricted inner product real.
+Positivity and definiteness are inherited from the complex form.
+The fixed-subspace identification follows by choosing a real basis of
+$M\otimes_{\Ocal,\sigma}\mathbb R$; a vector in its complexification is
+fixed exactly when every coefficient in that basis is real.
+\end{proof}
+
+\begin{lemma}[Norms of integral sections]
+\label{lem:hermitian-section-norm}\uses{def:hermitian-metric}\notready
+For a projective $\Ocal$-module $M$, the map $j_\sigma$ into each complex
+fiber is injective. For a Hermitian metric, the norm of $j_\sigma(x)$ is
+positive when $x\ne0$, is unchanged by conjugating $\sigma$, and satisfies
+$\|j_\sigma(ax)\|=|\sigma(a)|\,\|j_\sigma(x)\|$ for $a\in\Ocal$.
+\end{lemma}
+\begin{proof}
+A projective module is flat. Tensoring the injective map
+$\Ocal\hookrightarrow\mathbb C$ with $M$ therefore remains injective;
+under $\Ocal\otimes_{\Ocal}M\simeq M$ it is $j_\sigma$.
+Positive definiteness gives positivity on nonzero sections. The conjugation
+identity for the Hermitian form has equal real parts on the diagonal,
+so taking square roots proves equality of norms at conjugate embeddings.
+The balancing relation gives $j_\sigma(ax)=\sigma(a)j_\sigma(x)$, and
+homogeneity of a Hermitian norm proves the last assertion.
+\end{proof}
 
 \begin{lemma}[Logarithmic product formula]
 \label{lem:log-product-formula}
-\source{bost-specht-manuscript:page-0003}\notready
+\source{bost-specht-manuscript:page-0003}
+\lean{BostConjecture.Arithmetic.logIdealNorm_spanSingleton}\leanok
 For $a\in K^\times$, let $(a)$ denote its principal fractional ideal.
 Then
 \[
@@ -41,7 +74,8 @@ Taking logarithms gives the asserted sum.
 \end{proof}
 
 \begin{definition}[Degree in a generic line coordinate]
-\label{def:coordinate-line-degree}\notready
+\label{def:coordinate-line-degree}
+\lean{BostConjecture.Arithmetic.lineDegree}\leanok
 Let $I\subset K$ be a nonzero fractional ideal and let $\rho_v>0$ for each
 infinite place. Regard $Ie$ as an integral lattice in the generic line $Ke$,
 with $\|e\|_v=\rho_v$. Its coordinate degree is
@@ -55,7 +89,8 @@ $Ie$.
 \begin{lemma}[Independence of the generic section]
 \label{lem:line-degree-section-independence}
 \uses{def:coordinate-line-degree,lem:log-product-formula}
-\source{bost-specht-manuscript:page-0003}\notready
+\source{bost-specht-manuscript:page-0003}
+\lean{BostConjecture.Arithmetic.lineDegree_changeSection,BostConjecture.Arithmetic.lineDegree_eq_section}\leanok
 For $a\in K^\times$,
 \[
  d((a^{-1})I,(|a|_v\rho_v)_v)=d(I,\rho).
@@ -78,6 +113,79 @@ For the second identity, expand the logarithm of the quotient and the
 logarithms of the products, and cancel the terms involving $x$ in the
 same way. The first identity is precisely the change from $e$ to $ae$,
 since $Ie=((a^{-1})I)(ae)$.
+\end{proof}
+
+\begin{lemma}[The coefficient ideal of an integral module]
+\label{lem:line-coordinate-ideal}\notready
+Let $M$ be a finite $\Ocal$-module and $f:M\to K$ an $\Ocal$-linear map.
+Its image $I_f=f(M)$ is a fractional ideal. For $a\in K$,
+$I_{af}=(a)I_f$. If $M\ne0$ and $f$ is injective, $I_f\ne0$, and
+$f$ identifies $M$ with $I_f$ as an integral module.
+\end{lemma}
+\begin{proof}
+Choose finite generators of $M$. Their images generate $f(M)$, and the
+product of denominators of these finitely many images sends $f(M)$ into
+$\Ocal$. Thus the image is fractional. The equality for $af$ follows
+because both sides consist of all $af(x)$, $x\in M$. If $f$ is injective,
+its corestriction to its image is a bijective linear map, and a nonzero
+element of $M$ has nonzero image.
+\end{proof}
+
+\begin{lemma}[Comparison of integral line coordinates]
+\label{lem:integral-line-coordinates}\uses{lem:line-coordinate-ideal}\notready
+Let $f:M\hookrightarrow K$ be an injective $\Ocal$-linear map and let
+$0\ne x\in M$. For every $y\in M$ there exist $a,b\in\Ocal$, with
+$b\ne0$, such that $ax=by$. Consequently any other linear map $g:M\to K$
+satisfies $g=(g(x)/f(x))f$.
+\end{lemma}
+\begin{proof}
+Write $f(y)/f(x)=a/b$ with $b\ne0$. Cross multiplication gives
+$a f(x)=b f(y)$; injectivity of $f$ gives $ax=by$. Applying $g$ gives
+$a g(x)=b g(y)$. Multiplying the first equality by $g(x)$ and the second
+by $f(x)$ and subtracting gives
+$b(f(x)g(y)-g(x)f(y))=0$. Cancel the nonzero scalars $b,f(x)$.
+\end{proof}
+
+\begin{lemma}[Intrinsic metric length in a line coordinate]
+\label{lem:line-coordinate-length}
+\uses{lem:hermitian-section-norm,lem:integral-line-coordinates}\notready
+Let $M$ be a nonzero finite projective $\Ocal$-module equipped with a
+Hermitian metric and an injective coordinate $f:M\hookrightarrow K$.
+For $0\ne x\in M$ put
+\[
+ \rho_v(f,x)=\frac{\|j_{\sigma_v}(x)\|}{|f(x)|_v},
+\]
+where $\sigma_v$ is either embedding representing $v$. These positive
+lengths are independent of $x$ and of the representative $\sigma_v$.
+\end{lemma}
+\begin{proof}
+Both numerator and denominator are positive. Replacing an embedding by
+its conjugate changes neither. For two nonzero sections $x,y$, choose
+$a,b\in\Ocal$ with $b\ne0$ and $ax=by$. Homogeneity gives
+$|a|_v\|x\|_v=|b|_v\|y\|_v$, and applying $f$ gives
+$|a|_v|f(x)|_v=|b|_v|f(y)|_v$. Multiplying these equalities by
+$|f(x)|_v$ and $\|x\|_v$, respectively, and cancelling the nonzero
+$|b|_v$ proves $\|x\|_v|f(y)|_v=\|y\|_v|f(x)|_v$.
+Divide by the positive product $|f(x)|_v|f(y)|_v$.
+\end{proof}
+
+\begin{lemma}[Intrinsic line degree from coordinates]
+\label{lem:intrinsic-line-degree}
+\uses{lem:line-coordinate-ideal,lem:line-coordinate-length,
+lem:line-degree-section-independence}\notready
+For a nonzero finite projective Hermitian module $M$ of generic rank one,
+choose any injective coordinate $f:M\hookrightarrow K$ and any nonzero
+$x\in M$. The number $d(I_f,\rho(f,x))$ is independent of both choices.
+Such a coordinate exists for every such $M$.
+\end{lemma}
+\begin{proof}
+Scalar extension gives the one-dimensional $K$-space
+$K\otimes_{\Ocal}M$. A linear isomorphism of this space with $K$, composed
+with its injective integral-section map, gives $f$. Independence of $x$
+is the preceding lemma. Given another coordinate $g$, put
+$c=g(x)/f(x)\ne0$. The coordinate comparison lemma gives $g=cf$, hence
+$I_g=(c)I_f$ and $\rho_v(g,x)=|c|_v^{-1}\rho_v(f,x)$.
+Apply generic-section independence with $a=c^{-1}$.
 \end{proof}
 
 \begin{definition}[Hermitian bundles and normalized degree]

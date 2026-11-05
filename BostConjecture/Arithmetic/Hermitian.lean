@@ -4,6 +4,7 @@ public import Mathlib.NumberTheory.NumberField.InfinitePlace.Basic
 public import Mathlib.Analysis.InnerProductSpace.Defs
 public import Mathlib.LinearAlgebra.TensorProduct.Basic
 public import Mathlib.RingTheory.Finiteness.Projective
+public import Mathlib.RingTheory.Flat.Basic
 
 /-!
 # Hermitian metrics on intrinsic arithmetic fibers
@@ -30,12 +31,12 @@ variable (M : Type*) [AddCommGroup M] [Module (𝓞 K) M]
 
 /-- The canonical complex fiber at an embedding. -/
 abbrev ComplexFiber (σ : K →+* ℂ) :=
-  letI : Algebra (𝓞 K) ℂ := (σ.comp (algebraMap (𝓞 K) K)).toAlgebra
+  let : Algebra (𝓞 K) ℂ := (σ.comp (algebraMap (𝓞 K) K)).toAlgebra
   ℂ ⊗[𝓞 K] M
 
 /-- The canonical map from the integral module into its complex fiber. -/
 def fiberSection (σ : K →+* ℂ) (x : M) : ComplexFiber M σ :=
-  letI : Algebra (𝓞 K) ℂ := (σ.comp (algebraMap (𝓞 K) K)).toAlgebra
+  let : Algebra (𝓞 K) ℂ := (σ.comp (algebraMap (𝓞 K) K)).toAlgebra
   1 ⊗ₜ[𝓞 K] x
 
 /-- Positive-definite fiber metrics compatible with complex conjugation. -/
@@ -48,6 +49,24 @@ structure HermitianMetric where
       (fiberSection M (ComplexEmbedding.conjugate σ) x)
       (fiberSection M (ComplexEmbedding.conjugate σ) y) =
     star ((fiber σ).inner (fiberSection M σ x) (fiberSection M σ y))
+
+/-- Integral sections scale by the chosen embedding on the complex fiber. -/
+lemma fiberSection_smul (σ : K →+* ℂ) (a : 𝓞 K) (x : M) :
+    fiberSection M σ (a • x) = σ a • fiberSection M σ x := by
+  let : Algebra (𝓞 K) ℂ := (σ.comp (algebraMap (𝓞 K) K)).toAlgebra
+  change (1 : ℂ) ⊗ₜ[𝓞 K] (a • x) = σ a • ((1 : ℂ) ⊗ₜ[𝓞 K] x)
+  rw [TensorProduct.tmul_smul, TensorProduct.smul_tmul', TensorProduct.smul_tmul']
+  congr 1
+
+/-- Scalar extension at an embedding preserves nonzero integral sections of a
+projective module, even when the module is not free. -/
+lemma fiberSection_injective [Module.Projective (𝓞 K) M] (σ : K →+* ℂ) :
+    Function.Injective (fiberSection M σ) := by
+  let : Algebra (𝓞 K) ℂ := (σ.comp (algebraMap (𝓞 K) K)).toAlgebra
+  let : FaithfulSMul (𝓞 K) ℂ :=
+    (faithfulSMul_iff_algebraMap_injective (𝓞 K) ℂ).mpr
+      (σ.injective.comp RingOfIntegers.coe_injective)
+  exact Module.Flat.tensorProduct_mk_injective (𝓞 K) M ℂ
 
 namespace HermitianMetric
 
@@ -62,6 +81,28 @@ lemma sectionNorm_conjugate (h : HermitianMetric (K := K) M)
     (σ : K →+* ℂ) (x : M) :
     h.sectionNorm (ComplexEmbedding.conjugate σ) x = h.sectionNorm σ x := by
   simp only [sectionNorm, h.conjugate, Complex.star_def, Complex.conj_re]
+
+/-- Fiber norms scale by the archimedean absolute value. -/
+lemma sectionNorm_smul (h : HermitianMetric (K := K) M)
+    (σ : K →+* ℂ) (a : 𝓞 K) (x : M) :
+    h.sectionNorm σ (a • x) = ‖σ a‖ * h.sectionNorm σ x := by
+  let : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
+  let := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber M σ)
+  let := InnerProductSpace.ofCore (inferInstance : PreInnerProductSpace.Core ℂ (ComplexFiber M σ))
+  change ‖fiberSection M σ (a • x)‖ = ‖σ a‖ * ‖fiberSection M σ x‖
+  rw [fiberSection_smul, norm_smul]
+
+lemma sectionNorm_pos [Module.Projective (𝓞 K) M]
+    (h : HermitianMetric (K := K) M) (σ : K →+* ℂ) {x : M} (hx : x ≠ 0) :
+    0 < h.sectionNorm σ x := by
+  let : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
+  let := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber M σ)
+  change 0 < ‖fiberSection M σ x‖
+  apply norm_pos_iff.mpr
+  intro heq
+  apply hx
+  apply fiberSection_injective M σ
+  simpa only [fiberSection, TensorProduct.tmul_zero] using heq
 
 end HermitianMetric
 end BostConjecture.Arithmetic
