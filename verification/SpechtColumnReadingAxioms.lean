@@ -1,0 +1,10 @@
+import BostConjecture.Specht.ColumnReading
+
+#print axioms BostConjecture.Specht.rectangleColumnTableau
+#print axioms BostConjecture.Specht.rectangleColumnTableau_symm_val
+#print axioms BostConjecture.Specht.rectangleColumnTableau_label
+#print axioms BostConjecture.Specht.rectangleColumnTableau_isStandard
+#print axioms BostConjecture.Specht.rectangleColumnTableau_colexLT
+#print axioms BostConjecture.Specht.rectangleColumnTableau_isLeast
+#print axioms BostConjecture.Specht.orthogonalStandardBasis_rectangleColumnTableau
+#print axioms BostConjecture.Specht.norm_orthogonalStandardBasis_rectangleColumnTableau_sq
