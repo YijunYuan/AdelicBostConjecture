@@ -194,3 +194,75 @@ Determinant covariance, Specht irreducibility and Schur–Weyl centralizer
 identities alone do not establish that spanning assertion. The polarization
 section would solve the invariant-preimage step only; rectangular
 identification and the Lemma 7.2 orbit/invariant criterion remain open.
+
+## Smaller Schur–Weyl extraction candidate (23:27 UTC)
+
+A second bounded read-only assessment identified a concrete potential consumer
+of the centralizer theorem. **This is an unverified route proposal, requiring
+Horizon's independent mathematical review and local checks.** No additional
+source was copied and no upstream build evidence was established by the survey.
+
+Pin: [TauCeti `b3b0334ab9203d9faee4b2f34cd75161463ecdd0`](https://github.com/TauCetiProject/TauCeti/tree/b3b0334ab9203d9faee4b2f34cd75161463ecdd0),
+Apache-2.0, authors/copyright The Tau Ceti contributors; Lean 4.36.0-rc2,
+Mathlib `1b1ccf4b088b32fa3f23f2de1127433254a81e1e`. Target pins stay unchanged.
+
+The candidate starts over an algebraically closed characteristic-zero field,
+with positive rectangle dimensions `a,k` and `d=a*k`. Use the actual integral
+rectangular polytabloid tensor `z`, transported by `freeLatticeMap`; its known
+word coefficients define a **bilinear**, not Hermitian, covector
+`phi(x) = sum_w z(w)*x(w)`. The proposed proof uses transpose covariance to
+obtain `phi(rho(g)x) = det(g)^k*phi(x)`, and the actual coefficient-square
+identity to obtain `phi(z) = (a!)^k != 0`. For an SL-fixed vector `v`,
+scalar-times-SL factorization supplies the same GL weight. Hence the rank-one
+operator `x -> phi(x)*v` should commute with GL. A Schur–Weyl commutant
+expression as a sum of position permutations, evaluated at `z`, would place
+`v` in the span of the actual polytabloid orbit. This inference needs review;
+none of these new bridges is certified by the existing covariance theorem alone.
+
+Use the span-level endpoint in `RepresentationTheory/Symmetric/TensorAction/SchurWeyl.lean`:
+`centralizer_span_range_map_const_eq_range_permTensorActionAlgHom` and
+`mem_range_permTensorActionAlgHom_iff_forall_commute`. Its assumptions are a
+field and invertibility of `d!`; there is no `d <= a` condition. This endpoint
+commutes with every diagonal endomorphism tensor power; the two density slices
+below pass from invertible operators to all operators.
+
+The reviewer traced these declaration slices (paths relative to `TauCeti/`):
+
+| Source | Required slice |
+| --- | --- |
+| `RepresentationTheory/Symmetric/TensorAction/Basic.lean` | `PiTensorProduct.reindexRepresentation`, application/commutation, optional group-algebra wrappers; omit Kronecker/basis imports. |
+| `RepresentationTheory/AsAlgebraHom.lean` | Range-submodule span, commutation propagation and `mem_centralizer_range_asAlgebraHom_iff`; omit transport/quotient/antisymmetrizer sections. |
+| `Data/Finset/Basic.lean` | Only `sum_powerset_neg_one_pow_card_of_ring`, a short cast of a Mathlib identity. |
+| `LinearAlgebra/Multilinear/Polarization.lean` | Two finite-sum rearrangements, multilinear inclusion–exclusion and tensor specialization; distinct from the checked polynomial section. |
+| `RepresentationTheory/Symmetric/TensorAction/Invariants.lean` | `tprod_const_mem_invariants`, `sum_reindexRepresentation_mem_span`, `invariants_reindexRepresentation`; omit symmetric-power corollaries. |
+| `RepresentationTheory/Invariants.lean` | Only `averageMap_eq_invOf_card_smul_norm`, `range_norm_eq_invariants`, using Mathlib averaging; omit categorical/projective imports. |
+| `RepresentationTheory/Symmetric/TensorAction/Centralizer.lean` | Comparison-map permutation compatibility and `PiTensorProduct.mem_span_range_map_const_iff_forall_commute`. |
+| `LinearAlgebra/End/Centralizer.lean` | Only `Subalgebra.restrictScalars_mem_centralizer`. |
+| `RingTheory/Semisimple/DoubleCentralizer.lean` | Only `Subalgebra.centralizer_centralizer_of_isSemisimpleModule`, `AlgHom.centralizer_centralizer_range`; omit simple-ring and vector-movement branches. |
+| `RepresentationTheory/Symmetric/TensorAction/SchurWeyl.lean` | Maschke/double-centralizer argument and terminal membership criterion. |
+| `LinearAlgebra/Matrix/GeneralLinearGroup/Multilinear.lean` | `exists_mvPolynomial_eval_eq_apply_const`, `apply_const_eq_zero_of_eq_zero_on_gl`. |
+| `LinearAlgebra/PiTensorProduct/GeneralLinear.lean` | `map_const_mem_span_range_map_const_units`, `span_range_map_const_units_eq_span_range_map_const`. |
+
+Do not port `PiTensorProduct/Hom.lean`: the checked #44845 extraction already
+provides the same canonical `piTensorHomEquiv`; only adapt its pure-tensor
+rewrite. Existing Mathlib supplies `Representation.asAlgebraHom`, polynomial
+density on GL, `Module.Finite.toModuleEnd_moduleEnd_surjective`, semisimple
+quotient/module transfer and Maschke infrastructure.
+
+Selected source windows total approximately **615 lines of signatures/proofs**,
+before local adaptation and consumers. This is an estimate, not a compiled
+minimal dependency graph. It avoids the former 40-file/9,075-line reserve,
+bundled GL representation, FDRep, and highest-weight/classification branches.
+The inspected action, polarization, centralizer, double-centralizer and density
+bodies contain no `sorry`, custom `axiom`, `unsafe` or `implemented_by`.
+
+Open local bridges: transpose pairing; the characteristic-zero normalization
+from the integer coefficient-square identity; SL-to-GL weight; GL density;
+permutation span versus the actual `freeLatticeMap` range (existing
+`tensorCoordinates_reindex`/`freeLatticeMap_reindex` are leads); determinant
+twist and frame transport. Prove the algebraically closed case first. Descent
+to an arbitrary characteristic-zero field still requires explicit coaction and
+span-membership compatibility, not merely generic flat-kernel lemmas.
+The proposed first delivery is a checked centralizer criterion with an actual
+determinant-covariant rectangular tensor consumer; source-facing invariant
+identification must wait for all required bridges. Lemma 7.2 stays separate.
