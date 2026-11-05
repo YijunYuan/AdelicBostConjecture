@@ -1,4 +1,5 @@
 import BostConjecture.Arithmetic.HermitianLine
+import BostConjecture.Arithmetic.DeterminantLine
 
 #print axioms BostConjecture.Arithmetic.HermitianMetric
 #print axioms BostConjecture.Arithmetic.fiberSection_injective
@@ -22,3 +23,10 @@ import BostConjecture.Arithmetic.HermitianLine
 #print axioms BostConjecture.Arithmetic.HermitianMetric.sum_log_sectionNorm
 #print axioms BostConjecture.Arithmetic.HermitianMetric.lineDegree_eq_sum_embeddings
 #print axioms BostConjecture.Arithmetic.line_quotient_finite
+#print axioms exteriorPower.instProjective
+#print axioms BostConjecture.Arithmetic.determinant_generic_finrank
+#print axioms BostConjecture.Arithmetic.determinant_nontrivial
+#print axioms BostConjecture.Arithmetic.complexFiber_finrank
+#print axioms BostConjecture.Arithmetic.determinantComplexEquiv
+#print axioms BostConjecture.Arithmetic.determinantComplexEquiv_section
+#print axioms BostConjecture.Arithmetic.determinant_complex_finrank
