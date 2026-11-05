@@ -173,7 +173,7 @@ private theorem apply_mem_of_forall_notMem {α : Type*} {X : Finset α} {σ : Eq
 downwards.  The Garnir set of `t` at `(i, j)` is this set together with the labels in column
 `j + 1` from row `i` upwards, and the permutations of the Garnir set that preserve the columns of
 `t` are exactly those preserving this half
-(`TauCeti.YoungTableau.mem_columnGroup_iff_image_garnirSetLeft_eq`). -/
+(`BostConjecture.Specht.mem_columnGroup_iff_image_garnirSetLeft_eq`). -/
 def garnirSetLeft (t : Tableau n μ) (i j : ℕ) : Finset (Fin n) :=
   {k | colIndex t k = j ∧ i ≤ rowIndex t k}
 
@@ -220,7 +220,7 @@ theorem mem_columnGroup_iff_image_garnirSetLeft_eq {t : Tableau n μ} {i j : ℕ
     · exact absurd hc (by omega)
   · intro himg
     change (∀ k, colIndex t (σ k) = colIndex t k)
-    
+
     intro k
     by_cases hk : k ∈ garnirSet t i j
     · by_cases hkl : k ∈ garnirSetLeft t i j

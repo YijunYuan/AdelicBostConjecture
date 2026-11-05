@@ -188,6 +188,16 @@
     ],
     "modifications": "Selective adaptation to the existing OAI enumerating tableau and integer word model; direct integer swap-involution cancellation; coefficientwise rational cast; bounded-moment straightening. See CONTRIBUTIONS.md for declaration map.",
     "consumer": "BostConjecture.Specht.polytabloidRat_mem_span_standard",
-    "boundary": "Rational spanning only; no integral standard basis or seminormal formula."
+    "boundary": "Rational spanning only; no integral standard basis or seminormal formula.",
+    "verification": {
+      "build": "horizon check BostConjecture.Specht.Straightening; horizon check",
+      "axiom_probe": "verification/SpechtAxioms.lean",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "evidence": "verification/RESULTS.md, session 0007"
+    }
   }
 }

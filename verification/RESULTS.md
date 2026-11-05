@@ -1,5 +1,54 @@
 # Dependency integration evidence — 2026-11-05
 
+## Rational spanning and the actual standard Gram bound — session 0007
+
+Commits `e29f2ab` and `54e9cbf` prove integral Garnir cancellation,
+rational standard-polytabloid spanning by a bounded-moment induction,
+coefficientwise transport to the actual standard real basis, the equality
+of integral orbit rank with standard-tableau count, and the unconditional
+standard Gram covolume and logarithmic inequalities. The pinned TauCeti
+adaptation uses the existing word/tableau model; no alternate representation
+or integral standard-basis assertion is introduced.
+
+- `horizon --root /home/yijunyuan/bc-workspace check BostConjecture.Specht.Straightening --json`
+  passed at **14:22:29 UTC** (9,056 jobs, 8.441 seconds).
+- `horizon --root /home/yijunyuan/bc-workspace check --json` passed at
+  **14:29:33 UTC** (9,092 jobs, 13.012 seconds).
+- `horizon --root /home/yijunyuan/bc-workspace check --lean verification/SpechtAxioms.lean --json`
+  passed at **14:30:50 UTC** (14.908 seconds). All **50** transitive probes
+  report only `propext`, `Classical.choice`, and `Quot.sound`.
+
+LSP diagnostics were used throughout. Initial Garnir doc-comment placement
+errors were repaired; no build or proof failure remains. The only later
+Lean change cleans comment references and trailing whitespace. Known
+resource-slot notices had recorded waits of 0.001 seconds (I-0001).
+
+Claim class: **proved producers**. Frontier before:
+`lem:rational-standard-spanning`; after: `lem:monic-seminormal`.
+Consumer: `standardRealBasis` and its lattice membership now discharge
+`covolume_sq_le_det_gram` to yield `covolume_sq_le_det_standard_gram` and
+its logarithmic version. The real basis is explicitly in the coordinate
+real span; no unproved real tensor-equivalence is claimed by its node.
+The seminormal Gram formula, prefix law, general sublinear limit and
+manuscript Theorem 1.1 remain unproved.
+
+Honesty-reviewer: **used, satisfactory**. Two reviewer attempts were unable
+to start because of model capacity; the subsequent `gpt-6.1-sol` high-effort
+review completed and independently reproduced the spanning and logarithmic
+bound axiom checks. Its blueprint/integration findings were applied:
+coordinate-span wording, explicit column moment, root import, new probes,
+and removal of stale open-frontier prose. No target-shaped hypothesis,
+vacuity or unused spanning scaffold was found.
+
+Final graph: 58 blueprint nodes, 408 Lean declarations, 23 checked blueprint
+nodes, zero stale nodes. The obsolete rational tensor-basis plan node was
+removed; the actual consumer uses rational spanning directly. The 236
+unattached helper/imported declarations remain intentional coverage warnings
+(I-0004). Source-scope symlink is preserved; scratch cleanup found no stale
+candidates. I-0008 was acknowledged: the parent owns the new Stacks alternating
+tensor extraction; its rectangular determinant-covariance bridge remains
+separate downstream work, not part of this session's verification claim.
+
 ## Rectangular and standard-family producers — session 0005
 
 Commits `38d00f7`, `4f1312f`, `5fcb018`, `8ee59c6`, and `fa614ea`
