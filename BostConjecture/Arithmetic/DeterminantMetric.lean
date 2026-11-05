@@ -24,6 +24,38 @@ namespace BostConjecture.Arithmetic
 
 namespace ComplexDeterminant
 
+/-- A Hermitian form on a complex line is determined by the squared norm of
+one coordinate unit. -/
+lemma core_ext_of_unit {F : Type*} [AddCommGroup F] [Module ℂ F]
+    (e : F ≃ₗ[ℂ] ℂ) (c d : InnerProductSpace.Core ℂ F)
+    (he : (c.inner (e.symm 1) (e.symm 1)).re =
+      (d.inner (e.symm 1) (e.symm 1)).re) : c = d := by
+  have him (h : InnerProductSpace.Core ℂ F) (x : F) : (h.inner x x).im = 0 := by
+    let := h
+    exact InnerProductSpace.Core.inner_self_im (𝕜 := ℂ) x
+  have he' : c.inner (e.symm 1) (e.symm 1) = d.inner (e.symm 1) (e.symm 1) :=
+    Complex.ext he (by rw [him, him])
+  have hs (h : InnerProductSpace.Core ℂ F) (a b : ℂ) :
+      h.inner (e.symm a) (e.symm b) = star a * b * h.inner (e.symm 1) (e.symm 1) := by
+    let := h
+    have ha : e.symm a = a • e.symm 1 := by
+      rw [← map_smul, smul_eq_mul, mul_one]
+    have hb : e.symm b = b • e.symm 1 := by
+      rw [← map_smul, smul_eq_mul, mul_one]
+    rw [ha, hb, InnerProductSpace.Core.inner_smul_left,
+      InnerProductSpace.Core.inner_smul_right]
+    simp only [RCLike.star_def]
+    ring
+  have hinner : c.inner = d.inner := by
+    funext x y
+    obtain ⟨a, rfl⟩ := e.symm.surjective x
+    obtain ⟨b, rfl⟩ := e.symm.surjective y
+    rw [hs c a b, hs d a b, he']
+  rcases c with ⟨⟨⟨ci⟩, cs, cp, ca, cm⟩, cd⟩
+  rcases d with ⟨⟨⟨di⟩, ds, dp, da, dm⟩, dd⟩
+  cases hinner
+  rfl
+
 variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℂ E] {r : ℕ}
 
 /-- The positive Hermitian core transported from the orthonormal top-wedge coordinate. -/
@@ -54,6 +86,19 @@ lemma core_inner_ιMulti (b : OrthonormalBasis (Fin r) ℂ E) (x y : Fin r → E
     simp [Matrix.mul_apply, Module.Basis.toMatrix_apply, b.repr_apply_apply,
       b.sum_inner_mul_inner]
   rw [hgram, Matrix.det_mul, Matrix.det_conjTranspose]
+
+/-- The Gram norm formula determines the determinant metric uniquely. -/
+lemma core_unique (b : OrthonormalBasis (Fin r) ℂ E)
+    (c : InnerProductSpace.Core ℂ (⋀[ℂ]^r E))
+    (hc : ∀ x : Fin r → E, (c.inner (ιMulti ℂ r x) (ιMulti ℂ r x)).re =
+      ((Matrix.of fun i j => inner ℂ (x i) (x j)).det).re) : c = core b := by
+  apply core_ext_of_unit (Geometry.determinantCoordinates b.toBasis)
+  simpa only [Geometry.determinantCoordinates_symm_apply, one_smul,
+    core_inner_ιMulti] using hc b.toBasis
+
+/-- Different orthonormal frames define the same Hermitian form. -/
+lemma core_eq (b c : OrthonormalBasis (Fin r) ℂ E) : core b = core c :=
+  core_unique c (core b) (fun x => congrArg Complex.re (core_inner_ιMulti b x x))
 
 end ComplexDeterminant
 
@@ -94,6 +139,26 @@ lemma determinantFiber_inner_ιMulti (h : HermitianMetric (K := K) M) (σ : K �
     (determinantComplexEquiv M σ ((determinantComplexEquiv M σ).symm (ιMulti ℂ _ y))) = _
   rw [LinearEquiv.apply_symm_apply, LinearEquiv.apply_symm_apply]
   exact ComplexDeterminant.core_inner_ιMulti b x y
+
+/-- The Gram norm identity uniquely characterizes the actual complex determinant
+fiber metric, including in rank zero. -/
+lemma determinantFiber_unique (h : HermitianMetric (K := K) M) (σ : K →+* ℂ)
+    (c : InnerProductSpace.Core ℂ (ComplexFiber (DeterminantLine (K := K) M) σ))
+    (hc : ∀ x : Fin (Module.finrank K (K ⊗[𝓞 K] M)) → ComplexFiber M σ,
+      (c.inner ((determinantComplexEquiv M σ).symm (ιMulti ℂ _ x))
+        ((determinantComplexEquiv M σ).symm (ιMulti ℂ _ x))).re =
+      ((Matrix.of fun i j => (h.fiber σ).inner (x i) (x j)).det).re) :
+    c = h.determinantFiber σ := by
+  let : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
+  let := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber M σ)
+  let := InnerProductSpace.ofCore (inferInstance : PreInnerProductSpace.Core ℂ (ComplexFiber M σ))
+  let b := (stdOrthonormalBasis ℂ (ComplexFiber M σ)).reindex
+    (finCongr (complexFiber_finrank M σ))
+  apply ComplexDeterminant.core_ext_of_unit
+    (determinantComplexEquiv M σ ≪≫ₗ Geometry.determinantCoordinates b.toBasis)
+  simp only [LinearEquiv.symm_trans_apply,
+    Geometry.determinantCoordinates_symm_apply, one_smul]
+  rw [hc, h.determinantFiber_inner_ιMulti]
 
 /-- Pairing integral wedges is the determinant of the original fiber pairings. -/
 lemma determinantFiber_inner_wedge (h : HermitianMetric (K := K) M) (σ : K →+* ℂ)

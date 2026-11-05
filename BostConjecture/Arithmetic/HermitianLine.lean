@@ -205,6 +205,37 @@ theorem lineDegree_eq_sum_embeddings (h : HermitianMetric (K := K) M)
         ∑ σ : K →+* ℂ, Real.log (h.sectionNorm σ x)) / (Module.finrank ℚ K : ℝ) := by
   rw [h.lineDegree_eq hrank hx, h.sum_log_sectionNorm]
 
+/-- An integral isometry preserves the intrinsic degree of a projective line.
+The underlying modules need not admit integral bases. -/
+theorem lineDegree_eq_of_equiv
+    {N : Type*} [AddCommGroup N] [Module (𝓞 K) N]
+    [Module.Finite (𝓞 K) N] [Module.Projective (𝓞 K) N] [Nontrivial N]
+    (h : HermitianMetric (K := K) M) (g : HermitianMetric (K := K) N)
+    (e : M ≃ₗ[𝓞 K] N)
+    (hM : Module.finrank K (K ⊗[𝓞 K] M) = 1)
+    (hN : Module.finrank K (K ⊗[𝓞 K] N) = 1)
+    (he : ∀ (σ : K →+* ℂ) (x : M), h.sectionNorm σ x = g.sectionNorm σ (e x)) :
+    h.lineDegree hM = g.lineDegree hN := by
+  obtain ⟨x, hx⟩ := exists_ne (0 : M)
+  let f := lineCoordinate (M := N) hN
+  have hf := lineCoordinate_injective (M := N) hN
+  have hi : coordinateIdeal (f.comp e.toLinearMap) = coordinateIdeal f := by
+    ext z
+    simp only [mem_coordinateIdeal, LinearMap.comp_apply, LinearEquiv.coe_coe]
+    constructor
+    · rintro ⟨y, hy⟩
+      exact ⟨e y, hy⟩
+    · rintro ⟨y, hy⟩
+      obtain ⟨w, rfl⟩ := e.surjective y
+      exact ⟨w, hy⟩
+  rw [h.lineDegree_eq_degreeInCoordinate hM (f.comp e.toLinearMap)
+    (hf.comp e.injective) hx,
+    g.lineDegree_eq_degreeInCoordinate hN f hf (e.map_ne_zero_iff.mpr hx)]
+  simp only [degreeInCoordinate, hi]
+  congr 1
+  funext v
+  simp only [coordinateLength, LinearMap.comp_apply, LinearEquiv.coe_coe, he]
+
 end HermitianMetric
 
 /-- A nonzero section of an intrinsic projective line has finite quotient. -/

@@ -336,6 +336,47 @@ Their section independence proves that the displayed expression does not
 depend on $\xi$.
 \end{proof}
 
+\begin{lemma}[Isometries preserve intrinsic line degree]
+\label{lem:line-degree-isometry}
+\uses{lem:line-degree-quotient-formula}\notready
+Let $L,L'$ be finite projective rank-one modules with Hermitian metrics,
+and let $f:L\simeq L'$ be an integral linear isomorphism preserving all
+archimedean section norms. Then $\degn(L)=\degn(L')$.
+\end{lemma}
+\begin{proof}
+Choose an injective generic coordinate $g:L'\to K$ and $0\ne x\in L$.
+The image fractional ideals of $g\circ f$ and $g$ coincide, since $f$
+is surjective. The coordinate lengths computed from $x$ and $f(x)$ also
+coincide: their numerators are equal by the norm hypothesis, and their
+coordinate denominators are identical. The intrinsic coordinate formula
+for the line degree therefore gives the same value for $L$ and $L'$.
+\end{proof}
+
+\begin{lemma}[Rank-one determinant normalization]
+\label{lem:degree-rank-one}
+\uses{def:intrinsic-determinant-degree,lem:line-degree-isometry}\notready
+If $L$ has generic rank one, its determinant degree is its original
+intrinsic line degree.
+\end{lemma}
+\begin{proof}
+The canonical isomorphism $\bigwedge^1 L\simeq L$ sends the wedge of a
+single vector $x$ to $x$. The determinant Gram matrix in this case is
+the one-entry matrix $(h_\sigma(x,x))$, so the isomorphism preserves
+section norms. Apply invariance of line degree under integral isometries.
+\end{proof}
+
+\begin{lemma}[Rank-zero determinant normalization]
+\label{lem:degree-rank-zero}
+\uses{def:intrinsic-determinant-degree}\notready
+A Hermitian module of generic rank zero has determinant degree zero.
+\end{lemma}
+\begin{proof}
+Its determinant is $\bigwedge^0 M\simeq\Ocal$. The empty wedge corresponds
+to $1$, generates this integral line, and has norm one at every embedding,
+since the empty Gram determinant equals one. The section formula is therefore
+$(\log 1-\sum_\sigma\log 1)/D=0$.
+\end{proof}
+
 \begin{definition}[Hermitian bundles and normalized degree]
 \label{def:hermitian-degree}
 \uses{def:hermitian-metric,def:intrinsic-determinant-degree}
