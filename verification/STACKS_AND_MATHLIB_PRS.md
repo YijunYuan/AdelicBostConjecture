@@ -170,9 +170,9 @@ Paths below are relative to `TauCeti/LinearAlgebra/`:
 The upstream homogeneous submodule is literally `LinearMap.range (SymmetricAlgebra.ι R M) ^ d`;
 with `M = Module.Dual K X`, it matches BALANCED's existing definition.
 The implemented characteristic-zero section composes `equivHomogeneous.symm`
-with symmetrization and divides by the factorial. GEOM must prove compatibility
-with its actual quotient and with BALANCED's pullback representation; these
-integration statements, originally open at handoff, are now checked in
+with symmetrization and divides by the factorial. Compatibility with the actual
+quotient and with BALANCED's pullback representation, originally open at
+handoff, is now checked in
 `Geometry.PolynomialPolarization`, including invariant lifting and preservation
 of nonzero evaluation.
 
