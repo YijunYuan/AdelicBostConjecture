@@ -67,8 +67,10 @@ are recorded under `vendor/mathlib-prs/<number>/PROVENANCE.json`.
 | [45002 provenance](../vendor/mathlib-prs/45002/PROVENANCE.json) | `898c6c5` | `e1559dd0c1901505` | `8bd3125875ce00b6`, 30 exports |
 
 All 45 exported declarations use only the standard foundational axioms
-(`propext`, `Classical.choice`, `Quot.sound`). These are narrow checks; combined
-root-build evidence belongs to the subsequent Horizon integration. Exterior
+(`propext`, `Classical.choice`, `Quot.sound`). These are narrow checks. Horizon
+then integrated all three root imports and contribution links; the combined
+configured build passed on 2026-11-05 at 14:56:32 UTC (9,101 jobs), including
+the final Polar comment-only repairs. See `verification/RESULTS.md`. Exterior
 base change and polar proofs are unchanged. Tensor duality expands two missing
 reindex simplification lemmas inline, preserving public statements. No dependency
 or toolchain revision changed.
