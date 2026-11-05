@@ -468,6 +468,39 @@ composition of linear maps, giving the group law. The formula on wedges
 is the defining functoriality formula for exterior powers.
 \end{proof}
 
+\begin{lemma}[Polynomial coordinates of the Pl\"ucker action]
+\label{lem:balanced-plucker-coordinates}
+\uses{def:balanced-plucker-action}
+\source{bost-specht-manuscript:page-0012}
+\lean{BostConjecture.InvariantTheory.aeval_tensorMatrixPolynomial,BostConjecture.InvariantTheory.aeval_pluckerMatrixPolynomial,BostConjecture.InvariantTheory.aeval_pluckerOrbitPolynomial,BostConjecture.InvariantTheory.aeval_pluckerOrbitPolynomial_specialLinear}\leanok
+Choose finite bases $(u_i)_{i\in I}$ and $(w_j)_{j\in J}$ over a field $K$,
+and a total ordering of $I\times J$. Let $X_{ab}$ and $Y_{cd}$ be independent
+matrix-entry variables. The matrix coefficient of
+$\bigwedge^s(A\otimes B)$ from the exterior basis vector indexed by
+$Q$ to the one indexed by $P$ is the polynomial
+\[
+ M_{P,Q}(X,Y)=\det\bigl(X_{p_a^{(1)},q_b^{(1)}}
+                                  Y_{p_a^{(2)},q_b^{(2)}}\bigr)_{a,b=1}^s.
+\]
+Consequently, for every fixed vector $z=\sum_Q z_Q e_Q$, the $P$-coordinate
+of $\bigwedge^s(A\otimes B)z$ is the evaluation of
+$\sum_Q z_Q M_{P,Q}(X,Y)$ at the matrix entries of $A,B$.
+This also holds on restricting $A,B$ to the two special linear groups.
+\end{lemma}
+\begin{proof}
+The coefficient of $u_i\otimes w_j$ in
+$(A\otimes B)(u_k\otimes w_l)$ is $A_{ik}B_{jl}$, by the coordinate
+formula for a pure tensor. The coefficient of an exterior basis vector in
+the wedge of $s$ vectors is the determinant of their corresponding
+coordinates. Applying that formula to the images of the vectors indexed
+by $Q$ gives the displayed minor. Evaluation commutes with sums, products
+and determinants, so evaluating this polynomial gives that coefficient
+over any field. Linearity gives the assertion for $z$. The restriction
+to determinant-one matrices changes none of these identities.
+This supplies the concrete polynomial orbit map used in the algebraic
+orbit argument of the source.
+\end{proof}
+
 \begin{lemma}[Intrinsic homogeneous polynomials]
 \label{lem:balanced-intrinsic-polynomials}
 \lean{BostConjecture.InvariantTheory.polynomialEval,BostConjecture.InvariantTheory.polynomialEval_ι,BostConjecture.InvariantTheory.polynomialPullback_id,BostConjecture.InvariantTheory.polynomialPullback_comp,BostConjecture.InvariantTheory.polynomialEval_pullback,BostConjecture.InvariantTheory.homogeneousPolynomials,BostConjecture.InvariantTheory.polynomialEval_smul_of_mem_homogeneous,BostConjecture.InvariantTheory.polynomialEval_zero_of_mem_homogeneous,BostConjecture.InvariantTheory.polynomialPullback_mem_homogeneous,BostConjecture.InvariantTheory.finiteDimensional_homogeneousPolynomials}\leanok
