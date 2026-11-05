@@ -16,8 +16,13 @@ the sublinear limit for the one-row case. `ColumnTensor.lean` identifies
 the existing polytabloids with products of unnormalized alternating columns;
 `Covariance.lean` proves determinant covariance for the word matrix action
 on the integral lattice, its scalar span over every commutative ring, and the
-checked complex Specht module. The standard Gram bound is now
-unconditional; its seminormal evaluation, the invariant-space identification,
+checked complex Specht module. `Orthogonal.lean` constructs the monic
+orthogonal basis for any total order, proves its determinant-one basis change,
+and expresses the standard Gram determinant as the product of its actual
+squared norms. `RealAction.lean` constructs the real isometric action and
+proves symmetry, commutation, and the adjacent recurrence of the concrete
+Murphy operators. The standard Gram bound is now
+unconditional; its explicit seminormal evaluation, the invariant-space identification,
 and the general covolume asymptotic remain open.
 
 The following producers still need complete source-backed mathematical proofs:
@@ -31,12 +36,20 @@ The following producers still need complete source-backed mathematical proofs:
   Its complex orbit representation now has an explicit integral model and
   tensor-product scalar-extension equivalence. Characteristic-zero descent
   and the invariant-space identification remain open.
-- `lem:monic-seminormal` is the first unmet Gram producer: construction of the monic seminormal basis and its
-  correctly normalized adjacent-transposition formula. The following norm
+- `lem:monic-seminormal` is the first unmet Gram producer: content-triangular
+  Murphy action on standard polytabloids, a compatible dominance ordering,
+  and the resulting correctly normalized adjacent-transposition formula.
+  Monic orthogonalization and the abstract Gram norm-product identity are
+  proved; no assertion that these actual norms equal the prefix product is
+  yet available. The following norm
   formula is proved mathematically from this precise input. Ryom-Hansen
   arXiv:0904.4243v1, Section 2, equation (1), supplies the exact source
   normalization but recalls Murphy's theorem rather than proving the action
   formula locally. This source is not a Lean axiom or a completed producer.
+  Retrieval of the cited Murphy 1981 paper reached bibliographic metadata
+  only; `references/murphy-seminormal-1981/notes.md` records the access boundary.
+  The checked eigenvector diagonal-coefficient lemma explicitly assumes two
+  eigenvalue equations and does not discharge the content-spectrum producer.
 - `lem:invariant-orbit-criterion`: equality of Euclidean and Zariski orbit
   closures, and detection by homogeneous invariants for products of special
   linear groups. The following balanced-projection argument uses both parts.
