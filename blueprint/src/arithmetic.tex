@@ -38,7 +38,8 @@ fixed exactly when every coefficient in that basis is real.
 \end{proof}
 
 \begin{lemma}[Norms of integral sections]
-\label{lem:hermitian-section-norm}\uses{def:hermitian-metric}\notready
+\label{lem:hermitian-section-norm}\uses{def:hermitian-metric}
+\lean{BostConjecture.Arithmetic.fiberSection_injective,BostConjecture.Arithmetic.HermitianMetric.sectionNorm_pos,BostConjecture.Arithmetic.HermitianMetric.sectionNorm_conjugate,BostConjecture.Arithmetic.HermitianMetric.sectionNorm_smul}\leanok
 For a projective $\Ocal$-module $M$, the map $j_\sigma$ into each complex
 fiber is injective. For a Hermitian metric, the norm of $j_\sigma(x)$ is
 positive when $x\ne0$, is unchanged by conjugating $\sigma$, and satisfies
@@ -116,7 +117,8 @@ since $Ie=((a^{-1})I)(ae)$.
 \end{proof}
 
 \begin{lemma}[The coefficient ideal of an integral module]
-\label{lem:line-coordinate-ideal}\notready
+\label{lem:line-coordinate-ideal}
+\lean{BostConjecture.Arithmetic.coordinateIdeal,BostConjecture.Arithmetic.coordinateIdeal_smul,BostConjecture.Arithmetic.coordinateEquiv,BostConjecture.Arithmetic.coordinateIdeal_ne_zero}\leanok
 Let $M$ be a finite $\Ocal$-module and $f:M\to K$ an $\Ocal$-linear map.
 Its image $I_f=f(M)$ is a fractional ideal. For $a\in K$,
 $I_{af}=(a)I_f$. If $M\ne0$ and $f$ is injective, $I_f\ne0$, and
@@ -132,7 +134,8 @@ element of $M$ has nonzero image.
 \end{proof}
 
 \begin{lemma}[Comparison of integral line coordinates]
-\label{lem:integral-line-coordinates}\uses{lem:line-coordinate-ideal}\notready
+\label{lem:integral-line-coordinates}\uses{lem:line-coordinate-ideal}
+\lean{BostConjecture.Arithmetic.exists_smul_eq_of_injective,BostConjecture.Arithmetic.linearMap_eq_smul_of_injective}\leanok
 Let $f:M\hookrightarrow K$ be an injective $\Ocal$-linear map and let
 $0\ne x\in M$. For every $y\in M$ there exist $a,b\in\Ocal$, with
 $b\ne0$, such that $ax=by$. Consequently any other linear map $g:M\to K$
@@ -148,7 +151,8 @@ $b(f(x)g(y)-g(x)f(y))=0$. Cancel the nonzero scalars $b,f(x)$.
 
 \begin{lemma}[Intrinsic metric length in a line coordinate]
 \label{lem:line-coordinate-length}
-\uses{lem:hermitian-section-norm,lem:integral-line-coordinates}\notready
+\uses{lem:hermitian-section-norm,lem:integral-line-coordinates}
+\lean{BostConjecture.Arithmetic.HermitianMetric.coordinateLength_pos,BostConjecture.Arithmetic.HermitianMetric.coordinateLength_eq,BostConjecture.Arithmetic.HermitianMetric.sectionNorm_eq_of_place_eq}\leanok
 Let $M$ be a nonzero finite projective $\Ocal$-module equipped with a
 Hermitian metric and an injective coordinate $f:M\hookrightarrow K$.
 For $0\ne x\in M$ put
@@ -172,7 +176,8 @@ Divide by the positive product $|f(x)|_v|f(y)|_v$.
 \begin{lemma}[Intrinsic line degree from coordinates]
 \label{lem:intrinsic-line-degree}
 \uses{lem:line-coordinate-ideal,lem:line-coordinate-length,
-lem:line-degree-section-independence}\notready
+lem:line-degree-section-independence,lem:integral-line-coordinates}
+\lean{BostConjecture.Arithmetic.lineCoordinate_injective,BostConjecture.Arithmetic.HermitianMetric.degreeInCoordinate_eq,BostConjecture.Arithmetic.HermitianMetric.lineDegree,BostConjecture.Arithmetic.HermitianMetric.lineDegree_eq_degreeInCoordinate}\leanok
 For a nonzero finite projective Hermitian module $M$ of generic rank one,
 choose any injective coordinate $f:M\hookrightarrow K$ and any nonzero
 $x\in M$. The number $d(I_f,\rho(f,x))$ is independent of both choices.
@@ -189,7 +194,8 @@ Apply generic-section independence with $a=c^{-1}$.
 \end{proof}
 
 \begin{lemma}[Fractional-ideal index and norm]
-\label{lem:fractional-ideal-index}\notready
+\label{lem:fractional-ideal-index}
+\lean{BostConjecture.Arithmetic.fractionalIdeal_relIndex}\leanok
 For nonzero fractional ideals $J\subseteq I\subset K$,
 \[
  [I:J]=N(J)/N(I).
@@ -209,7 +215,8 @@ is nonzero.
 
 \begin{lemma}[The quotient formula for intrinsic line degree]
 \label{lem:line-degree-quotient-formula}
-\uses{lem:intrinsic-line-degree,lem:fractional-ideal-index}\notready
+\uses{lem:intrinsic-line-degree,lem:fractional-ideal-index}
+\lean{BostConjecture.Arithmetic.coordinate_quotient_card,BostConjecture.Arithmetic.coordinate_quotient_finite,BostConjecture.Arithmetic.line_quotient_finite,BostConjecture.Arithmetic.HermitianMetric.lineDegree_eq,BostConjecture.Arithmetic.HermitianMetric.lineDegree_eq_sum_embeddings}\leanok
 For every nonzero finite projective Hermitian module $M$ of generic rank
 one and every nonzero $x\in M$, the quotient $M/\Ocal x$ is finite and
 \[
