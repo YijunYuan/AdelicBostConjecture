@@ -213,7 +213,9 @@ $(s/m)\Tr H+(s/n)\Tr J=0$.
 \label{lem:balanced-gram-variation}
 \uses{lem:balanced-projection-trace}
 \lean{BostConjecture.Balanced.hasDerivAt_gramDet, BostConjecture.Balanced.hasDerivAt_re_gramDet}\leanok
-Let $v_1,\ldots,v_s$ be an orthonormal basis of $S\subset E$,
+Let $E$ be a finite-dimensional complex Hermitian space, $S\subset E$
+a subspace, $P$ its orthogonal projection, and $A\in\operatorname{End}(E)$.
+Let $v_1,\ldots,v_s$ be an orthonormal basis of $S$,
 and let differentiable curves $v_i(t)$ satisfy $v_i(0)=v_i$ and
 $v_i'(0)=Av_i$. If $G(t)_{ij}=\langle v_i(t),v_j(t)\rangle$, then
 \[
@@ -290,14 +292,181 @@ In dimension zero all the maps are the unique endomorphism and the
 assertions hold with $H=0$.
 \end{proof}
 
+\begin{lemma}[Constructible images]
+\label{lem:balanced-constructible-image}
+\source{milne-algebraic-geometry:page-0201}\notready
+A regular map of complex affine algebraic varieties sends constructible
+sets to constructible sets.
+\end{lemma}
+\begin{proof}
+We first prove that a dominant map of irreducible affine varieties has
+image containing a nonempty open subset. Its map of coordinate rings
+is an inclusion $A\subseteq B$ of finitely generated complex domains,
+with $B$ finitely generated over $A$. Choose a maximal algebraically
+independent subset $t_1,\ldots,t_r$ of a finite set of generators of
+$B$ over $\operatorname{Frac}(A)$. The remaining generators are
+algebraic over $\operatorname{Frac}(A)(t_1,\ldots,t_r)$. Clear the
+finitely many denominators in their algebraic equations and invert
+the product $q(t)$ of their leading coefficients. After also inverting
+some $0\ne a\in A$, the algebra
+$B[1/a,1/q]$ is finite integral over $A[1/a][t_1,\ldots,t_r,1/q]$.
+Increase $a$ by a nonzero coefficient of $q$, so the specialization
+$q_y$ is nonzero at every closed point $y\in D(a)$.
+Since $\mathbb C$ is infinite, choose $t\in\mathbb C^r$ with
+$q_y(t)\ne0$. Evaluation at $(y,t)$ gives a maximal ideal of the
+latter algebra. Lying over supplies a maximal ideal of the former;
+its residue field is $\mathbb C$ by the weak Nullstellensatz. Thus
+$y$ lies in the image, proving the assertion about $D(a)$.
+
+For the general assertion, use Noetherian induction on the closure of
+the constructible set $C$. Splitting into finitely many irreducible
+components and restricting to affine open subsets reduces to $C$ dense
+in an irreducible affine variety $Y$. Expressing $C$ as a finite union
+of locally closed subsets shows that one of those subsets contains a
+nonempty open subset $V$ of $Y$: otherwise their closures could not
+cover the irreducible $Y$. Choose a nonempty affine open inside $V$.
+Apply the first paragraph to its map into the closure $Z$ of the
+image. There is a nonempty open $O\subseteq Z$ contained in the
+image of $C$. Then
+$f(C)=O\cup f(C\cap f^{-1}(Z\setminus O))$.
+The second term is constructible by induction, because its source
+has proper closed closure in $Y$. This proves the assertion.
+This is the affine form of \cite[Theorem 9.7]{milne-algebraic-geometry}.
+\end{proof}
+
+\begin{lemma}[Complex and Zariski constructible closures]
+\label{lem:balanced-constructible-closure}
+\source{milne-algebraic-geometry:page-0201}\notready
+A constructible subset of a complex affine variety has the same
+Euclidean and Zariski closures.
+\end{lemma}
+\begin{proof}
+It suffices to prove that a nonempty Zariski open subset of an
+irreducible affine variety $Y$ is Euclidean dense: decompose a
+constructible set into finitely many locally closed subsets and
+then into irreducible components of their closures. Write the open
+subset as $Y\setminus Z$, with $Z$ proper closed, and fix $p\in Y$.
+For $\dim Y=0$ the assertion is immediate. Otherwise choose finite
+Noether normalization $\pi:Y\to\mathbb A^d$, $d=\dim Y$.
+The finite image $\pi(Z)$ is closed and has dimension less than $d$.
+Choose a line $L$ through $\pi(p)$ not contained in $\pi(Z)$.
+
+The inverse image $\pi^{-1}L$ is cut out in $Y$ by $d-1$ equations.
+The dimension theorem for intersections therefore gives dimension
+at least one to every irreducible component through $p$. Finiteness
+of $\pi$ bounds their dimension by one, so such a component $C$ is
+a curve and maps onto $L$. In particular $C\not\subseteq Z$, and
+$C\cap Z$ is finite. Normalize $C$. Normalization of an affine
+complex curve is finite and surjective, and the normal curve is
+nonsingular. A point above $p$ has a complex analytic coordinate
+disk, by the implicit function theorem. The inverse image of
+$C\cap Z$ is finite. Points in that disk outside this finite set
+approach the chosen point, and their images approach $p$ through
+$Y\setminus Z$. This proves the required density. The reverse
+closure inclusion follows because polynomial zero sets are
+Euclidean closed. The statement is
+\cite[Aside 9.8]{milne-algebraic-geometry}; the curve argument supplies
+the density step not proved in that aside.
+\end{proof}
+
+\begin{lemma}[Special-unitary Zariski density]
+\label{lem:balanced-unitary-density}
+\source{maithani-reynolds:prop:SU-SL-dense}\notready
+The subgroup $K=\SU(U)\times\SU(W)$ is Zariski dense in
+$G=\SL(U)\times\SL(W)$ for finite-dimensional complex Hermitian
+spaces $U,W$.
+\end{lemma}
+\begin{proof}
+In orthonormal coordinates, first consider $\mathrm U(n)$ in
+$\mathrm{GL}_n(\mathbb C)$, with Zariski closure $C$.
+A polynomial vanishing on $\mathrm U(n)$ vanishes on all diagonal
+unitary matrices. Its restriction to diagonal matrices is a polynomial
+vanishing on a product of infinite unit circles, hence is zero:
+fix all but one variable, apply the finite-root theorem, and induct
+on the number of variables. Thus $C$ contains all invertible diagonal
+matrices.
+
+The set $C$ is a subgroup. Inversion preserves it, and each left or
+right translation by an element of $\mathrm U(n)$ preserves it.
+For fixed $c\in C$, the inverse image of $C$ under the regular map
+$g\mapsto gc$ is closed and contains $\mathrm U(n)$, hence contains
+$C$. Therefore $CC\subseteq C$. Polar decomposition and diagonalizing
+its positive factor express any invertible matrix as $u d v$ with
+$u,v$ unitary and $d$ invertible diagonal. Consequently $C=\mathrm{GL}_n$.
+
+For $n>0$, the regular retraction
+$r(g)=\operatorname{diag}((\det g)^{-1},1,\ldots,1)g$
+onto $\mathrm{SL}_n$ sends unitary matrices into $\mathrm{SU}_n$.
+Its continuity and the established density imply that $\mathrm{SU}_n$
+is dense in $\mathrm{SL}_n$. Dimension zero gives the trivial group.
+For the product, a regular function vanishing on the product of the
+two compact groups vanishes first for all elements of the first
+special linear factor with the second fixed compact, and then for
+all elements of the second factor. This proves product density.
+The retraction argument follows
+\cite[Appendix A, Proposition A.6]{maithani-reynolds}; the subgroup
+argument uses separate regular translations, without asserting joint
+continuity for the product of the point-set Zariski topologies.
+\end{proof}
+
+\begin{lemma}[Finite-degree compact averaging]
+\label{lem:balanced-polynomial-average}
+\uses{lem:balanced-unitary-density}
+\source{maithani-reynolds:thm:reynolds-for-lie-group}\notready
+Let $G=\SL(U)\times\SL(W)$ act algebraically and linearly on $X$,
+and put $K=\SU(U)\times\SU(W)$. For every polynomial $q$ on $X$,
+\[
+ Rq(y)=\int_K q(k^{-1}y)\,dk
+\]
+is a $G$-invariant polynomial, where $dk$ is probability Haar measure.
+The operation $R$ preserves homogeneous degrees. If $q$ has constant
+value $c$ on a $G$-orbit, so does $Rq$ on that orbit.
+\end{lemma}
+\begin{proof}
+The action preserves the finite-dimensional space of polynomials of
+degree at most $\deg q$. In a monomial basis, its coefficient functions
+on $K$ are continuous. Compactness makes them integrable, so their
+integrals define a polynomial; evaluation, a linear map on this finite
+space, commutes with integration. This proves the displayed formula.
+The same construction stays in one homogeneous degree when $q$ does.
+For $h\in K$, substitute $k=h\ell$ and use left invariance of Haar
+measure to obtain $Rq(hy)=Rq(y)$. For fixed $y$, the regular function
+$g\mapsto Rq(gy)-Rq(y)$ vanishes on $K$, hence on $G$ by Zariski
+density. This proves $G$-invariance. If $q$ is constant on an orbit,
+its integrand is that same constant at every point of that orbit;
+the Haar measure has total mass one. This is the finite-degree part
+of \cite[Theorem 5.6]{maithani-reynolds}.
+\end{proof}
+
 \begin{lemma}[Invariant detection of orbit closure]
-\label{lem:invariant-orbit-criterion}\notready
-For a product $G$ of complex special linear groups acting algebraically and linearly on
+\label{lem:invariant-orbit-criterion}
+\uses{lem:balanced-constructible-image,lem:balanced-constructible-closure,lem:balanced-polynomial-average}
+\source{bost-specht-manuscript:page-0012,maithani-reynolds:thm:reynolds-for-lie-group,milne-algebraic-geometry:page-0201}\notready
+For $G=\SL(U)\times\SL(W)$ acting algebraically and linearly on
 a finite-dimensional complex vector space $X$, a nonzero $x\in X$
 has $0\notin\overline{Gx}^{\mathrm{Zar}}$ if and only if some
 positive-degree homogeneous $G$-invariant polynomial is nonzero at $x$.
 The Euclidean and Zariski closures of $Gx$ coincide.
 \end{lemma}
+\begin{proof}
+The orbit map $g\mapsto gx$ is regular, so its image is constructible.
+The constructible closure comparison proves the last assertion.
+Suppose zero is outside $C=\overline{Gx}^{\mathrm{Zar}}$.
+By the definition of Zariski closure there is a polynomial $f$ that
+vanishes on $Gx$ with $f(0)\ne0$. Put $q=1-f/f(0)$.
+Then $q(0)=0$ and $q$ is identically one on the orbit. Compact
+averaging gives an invariant polynomial $Rq$ with $Rq(0)=0$ and
+$Rq(x)=1$. Decompose $Rq$ into its finitely many homogeneous
+components. The action is linear, so each component is invariant.
+The constant component is zero, and the evaluations of the remaining
+components sum to one. At least one positive-degree component is
+therefore nonzero at $x$.
+
+Conversely, if a homogeneous invariant $p$ of positive degree has
+$p(x)\ne0$, then $p-p(x)$ vanishes on $Gx$ and hence on $C$.
+But $p(0)=0$, so $p(0)-p(x)\ne0$, and $0\notin C$.
+No finite-generation assertion for the invariant ring is needed.
+\end{proof}
 
 \begin{lemma}[Balanced projections give geometric semistability]
 \label{lem:balanced-plucker}

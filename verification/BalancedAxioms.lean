@@ -1,2 +1,18 @@
 import BostConjecture.Balanced.GramDerivative
 
+#print axioms BostConjecture.Balanced.trace_starProjection_comp
+#print axioms BostConjecture.Balanced.trace_starProjection_comp_eq_sum
+#print axioms BostConjecture.Balanced.IsBalanced
+#print axioms BostConjecture.Balanced.IsBalanced.sum_inner_tensorSum_eq_zero
+#print axioms BostConjecture.Balanced.hasDerivAt_det_of_eq_one
+#print axioms BostConjecture.Balanced.hasDerivAt_gramDet
+#print axioms BostConjecture.Balanced.hasDerivAt_re_gramDet
+#print axioms BostConjecture.Balanced.IsBalanced.hasDerivAt_re_gramDet_zero
+#print axioms BostConjecture.Balanced.partialTraceRight
+#print axioms BostConjecture.Balanced.partialTraceLeft
+#print axioms BostConjecture.Balanced.partialTraceRight_map
+#print axioms BostConjecture.Balanced.partialTraceLeft_map
+#print axioms BostConjecture.Balanced.trace_partialTraceRight_comp
+#print axioms BostConjecture.Balanced.trace_partialTraceLeft_comp
+#print axioms BostConjecture.Balanced.trace_comp_tensorSum_of_partialTrace_eq_smul
+#print axioms BostConjecture.Balanced.trace_comp_tensorSum_eq_zero
