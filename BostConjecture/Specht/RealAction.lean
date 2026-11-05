@@ -4,10 +4,11 @@ public import BostConjecture.Specht.Basis
 public import Mathlib.Analysis.InnerProductSpace.Symmetric
 
 /-!
-# The real isometric action on the Specht span
+# The real isometric action and Murphy operators on the Specht span
 
 Position permutations act on the existing Hilbert word realization. Restriction
-to the actual real orbit span supplies the operators used in seminormal theory.
+to the actual real orbit span supplies symmetric commuting Murphy operators
+and their adjacent recurrence. Content eigenvalues are a separate open step.
 -/
 
 @[expose] public section
@@ -200,5 +201,33 @@ theorem inner_swap_of_murphy_eigenvector (t : Tableau n μ) (i j : Fin n)
     inner_add_right, real_inner_self_eq_norm_sq] at hs
   apply (eq_div_iff hab).mpr
   nlinarith
+
+/-- Removing the forced diagonal component leaves an orthogonal vector.
+This lemma does not assert that a standard orthogonal vector has content eigenvalues. -/
+theorem inner_swap_residual_of_murphy_eigenvector (t : Tableau n μ) (i j : Fin n)
+    (hij : i.val + 1 = j.val) (x : realSpan t) (a b : ℝ)
+    (hi : murphyOperator t i x = a • x) (hj : murphyOperator t j x = b • x)
+    (hab : b - a ≠ 0) :
+    inner ℝ x (realSpechtRep t (Equiv.swap i j) x - (b - a)⁻¹ • x) = 0 := by
+  rw [inner_sub_right, real_inner_smul_right (F := realSpan t), real_inner_self_eq_norm_sq,
+    inner_swap_of_murphy_eigenvector t i j hij x a b hi hj hab]
+  simp [div_eq_mul_inv, mul_comm]
+
+/-- The squared-norm ratio forced by two distinct adjacent Murphy eigenvalues.
+Identification of the residual with the next monic standard vector remains separate. -/
+theorem norm_swap_residual_of_murphy_eigenvector (t : Tableau n μ) (i j : Fin n)
+    (hij : i.val + 1 = j.val) (x : realSpan t) (a b : ℝ)
+    (hi : murphyOperator t i x = a • x) (hj : murphyOperator t j x = b • x)
+    (hab : b - a ≠ 0) :
+    ‖realSpechtRep t (Equiv.swap i j) x - (b - a)⁻¹ • x‖ ^ 2 =
+      (1 - ((b - a)⁻¹) ^ 2) * ‖x‖ ^ 2 := by
+  have hn : ‖realSpechtRep t (Equiv.swap i j) x‖ ^ 2 = ‖x‖ ^ 2 := by
+    simpa only [real_inner_self_eq_norm_sq] using inner_realSpechtRep t (Equiv.swap i j) x x
+  rw [norm_sub_sq_real, real_inner_smul_right (F := realSpan t),
+    real_inner_comm (F := realSpan t) (realSpechtRep t (Equiv.swap i j) x) x,
+    inner_swap_of_murphy_eigenvector t i j hij x a b hi hj hab,
+    hn, norm_smul, mul_pow, Real.norm_eq_abs, sq_abs]
+  simp only [div_eq_mul_inv]
+  ring
 
 end BostConjecture.Specht
