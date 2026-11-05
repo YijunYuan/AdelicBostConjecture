@@ -368,7 +368,8 @@ uniqueness argument to $P$ gives $p=0$.
 \label{lem:determinant-chart-tower}
 \uses{lem:determinant-free-base-change-square,lem:determinant-free-naturality}
 \source{bost-specht-manuscript:page-0009}
-\notready
+\lean{BostConjecture.Geometry.determinantChart,BostConjecture.Geometry.determinantChart_trans,BostConjecture.Geometry.determinantChart_injective}
+\leanok
 Let $R\to S\to T$ be a tower of commutative rings, $M$ an
 $R$-module, and $t$ a tableau of shape $(k^a)$ with $k>0$.
 Suppose $S\otimes_R M$ and $T\otimes_R M$ have $a$-element bases
@@ -378,8 +379,10 @@ and $Q=M^{\otimes n}$. Transporting the free determinant map through
 the canonical base-change isomorphisms gives
 $u_b:S\otimes_R P\to S\otimes_R Q$ and
 $u_c:T\otimes_R P\to T\otimes_R Q$. They are compatible with
-further scalar extension: under $T\otimes_S(S\otimes_R X)\simeq
-T\otimes_R X$, one has $T\otimes_S u_b=u_c$.
+further scalar extension on the original module: for each $p\in P$,
+the image of $u_b(1\otimes p)$ in $T\otimes_R Q$ equals
+$u_c(1\otimes p)$. If $S$ is flat over $\mathbb Z$, then $u_b$
+is injective.
 \end{lemma}
 \begin{proof}
 The exterior-power base-change map sends a decomposable wedge
@@ -396,8 +399,11 @@ It also commutes with the cancellation isomorphism on the module,
 by naturality for linear maps. Combining these two identities with
 the exterior and tensor identities just established proves the
 asserted equality on $t\otimes(\eta\otimes(1\otimes x))$.
-These elements span the source, so the two linear maps agree.
+These elements span $P$, so the compatibility holds for every $p$.
 Frame independence permits any choice of the final basis $c$.
+If $S$ is flat over $\mathbb Z$, its free determinant map is
+injective, and transport by the two base-change isomorphisms
+preserves injectivity.
 \end{proof}
 
 \begin{lemma}[Finite principal frames of constant rank]

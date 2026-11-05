@@ -43,10 +43,16 @@ theorem exteriorPowerScalarExtension_trans (η : ⋀[R]^a M) :
   have h : (exteriorPower.map a
       (TensorProduct.AlgebraTensorModule.cancelBaseChange R S T T M).toLinearMap
         ).restrictScalars R ∘ₗ eST.restrictScalars R ∘ₗ eRS = eRT := by
-    ext v
-    simp only [LinearMap.compAlternatingMap_apply, LinearMap.comp_apply,
-      LinearMap.restrictScalars_apply, LinearEquiv.coe_coe, eRS, eST, eRT,
-      exteriorPower.baseChangeEquiv_apply_tmul, exteriorPower.map_apply_ιMulti]
+    apply exteriorPower.linearMap_ext
+    apply AlternatingMap.ext
+    intro v
+    change exteriorPower.map a
+      (TensorProduct.AlgebraTensorModule.cancelBaseChange R S T T M).toLinearMap
+      (exteriorPower.baseChangeEquiv S (S ⊗[R] M) T a
+        (1 ⊗ₜ[S] exteriorPower.baseChangeEquiv R M S a (1 ⊗ₜ[R] ιMulti R a v))) =
+      exteriorPower.baseChangeEquiv R M T a (1 ⊗ₜ[R] ιMulti R a v)
+    rw [exteriorPower.baseChangeEquiv_apply_tmul, exteriorPower.baseChangeEquiv_apply_tmul,
+      exteriorPower.map_apply_ιMulti, exteriorPower.baseChangeEquiv_apply_tmul]
     congr 1
     ext i
     simp [Function.comp_def]
@@ -70,5 +76,93 @@ theorem determinantPowerScalarExtension_trans (η : ⨂[R] (_ : Fin k), ⋀[R]^a
     funext i
     exact exteriorPowerScalarExtension_trans (S := S) (v i)
   | add x y hx hy => simp only [map_add, hx, hy]
+
+/-- After cancelling successive scalar extensions, local tensor realizations agree. -/
+theorem freeDeterminantMap_scalarExtension_trans (hk : 0 < k)
+    (t : OAI.Saxl.Tableau n (Specht.rectangle a k))
+    (b : Basis (Fin a) S (S ⊗[R] M)) (c : Basis (Fin a) T (T ⊗[R] M))
+    (η : ⨂[R] (_ : Fin k), ⋀[R]^a M) (x : Specht.orbitLattice t) :
+    PiTensorProduct.map (fun _ : Fin n =>
+      (TensorProduct.AlgebraTensorModule.cancelBaseChange R S T T M).toLinearMap)
+      (Tensor.scalarExtension S T (fun _ : Fin n => S ⊗[R] M)
+        (freeDeterminantMap hk t b
+          (determinantPowerScalarExtension k a η ⊗ₜ[S] (1 ⊗ₜ[ℤ] x)))) =
+      freeDeterminantMap hk t c
+        (determinantPowerScalarExtension k a η ⊗ₜ[T] (1 ⊗ₜ[ℤ] x)) := by
+  rw [scalarExtension_freeDeterminantMap]
+  simp only [TensorProduct.AlgebraTensorModule.map_tmul, Algebra.linearMap_apply,
+    map_one, LinearMap.id_apply]
+  rw [map_freeDeterminantMap_tmul hk t (b.baseChange T) c,
+    determinantPowerScalarExtension_trans]
+
+/-- The actual determinant chart, expressed on scalar extensions of the global
+source and target. It needs only a frame after extension, not a frame over `R`. -/
+def determinantChart (hk : 0 < k)
+    (t : OAI.Saxl.Tableau n (Specht.rectangle a k))
+    (b : Basis (Fin a) S (S ⊗[R] M)) :
+    S ⊗[R] ((⨂[R] (_ : Fin k), ⋀[R]^a M) ⊗[R] (R ⊗[ℤ] Specht.orbitLattice t)) →ₗ[S]
+      S ⊗[R] (⨂[R] (_ : Fin n), M) :=
+  (Tensor.baseChangeEquiv R S (fun _ : Fin n => M)).symm.toLinearMap ∘ₗ
+    freeDeterminantMap hk t b ∘ₗ
+      (determinantTwistBaseChangeEquiv (Specht.orbitLattice t) k a).toLinearMap
+
+/-- Normalization of the chart on the intrinsic generators. -/
+theorem determinantChart_tmul (hk : 0 < k)
+    (t : OAI.Saxl.Tableau n (Specht.rectangle a k))
+    (b : Basis (Fin a) S (S ⊗[R] M))
+    (s : S) (η : ⨂[R] (_ : Fin k), ⋀[R]^a M) (x : Specht.orbitLattice t) :
+    determinantChart hk t b (s ⊗ₜ[R] (η ⊗ₜ[R] (1 ⊗ₜ[ℤ] x))) =
+      s • (Tensor.baseChangeEquiv R S (fun _ : Fin n => M)).symm
+        (freeDeterminantMap hk t b
+          (determinantPowerScalarExtension k a η ⊗ₜ[S] (1 ⊗ₜ[ℤ] x))) := by
+  simp [determinantChart]
+
+/-- Each chart is injective over any coefficient ring flat over the integers. -/
+theorem determinantChart_injective [Module.Flat ℤ S] (hk : 0 < k)
+    (t : OAI.Saxl.Tableau n (Specht.rectangle a k))
+    (b : Basis (Fin a) S (S ⊗[R] M)) : Function.Injective (determinantChart hk t b) :=
+  (Tensor.baseChangeEquiv R S (fun _ : Fin n => M)).symm.injective.comp
+    ((freeDeterminantMap_injective hk t b).comp
+      (determinantTwistBaseChangeEquiv (Specht.orbitLattice t) k a).injective)
+
+private theorem tensorBaseChange_tower (z : S ⊗[R] (⨂[R] (_ : Fin n), M)) :
+    Tensor.baseChangeEquiv R T (fun _ : Fin n => M)
+      (TensorProduct.map (IsScalarTower.toAlgHom R S T).toLinearMap LinearMap.id z) =
+    PiTensorProduct.map (fun _ : Fin n =>
+      (TensorProduct.AlgebraTensorModule.cancelBaseChange R S T T M).toLinearMap)
+      (Tensor.scalarExtension S T (fun _ : Fin n => S ⊗[R] M)
+        (Tensor.baseChangeEquiv R S (fun _ : Fin n => M) z)) := by
+  induction z using TensorProduct.inductionOn with
+  | tmul s z =>
+    change algebraMap S T s • Tensor.scalarExtension R T (fun _ : Fin n => M) z =
+      PiTensorProduct.map (fun _ : Fin n =>
+        (TensorProduct.AlgebraTensorModule.cancelBaseChange R S T T M).toLinearMap)
+        (Tensor.scalarExtension S T (fun _ : Fin n => S ⊗[R] M)
+          (s • Tensor.scalarExtension R S (fun _ : Fin n => M) z))
+    simp only [map_smul, LinearMap.map_smul_of_tower, Tensor.scalarExtension_trans,
+      algebraMap_smul]
+  | add x y hx hy => simp only [map_add, hx, hy]
+
+/-- Charts computed in any two successive local frames agree on the original source. -/
+theorem determinantChart_trans (hk : 0 < k)
+    (t : OAI.Saxl.Tableau n (Specht.rectangle a k))
+    (b : Basis (Fin a) S (S ⊗[R] M)) (c : Basis (Fin a) T (T ⊗[R] M))
+    (p : (⨂[R] (_ : Fin k), ⋀[R]^a M) ⊗[R] (R ⊗[ℤ] Specht.orbitLattice t)) :
+    TensorProduct.map (IsScalarTower.toAlgHom R S T).toLinearMap LinearMap.id
+      (determinantChart hk t b (1 ⊗ₜ[R] p)) =
+        determinantChart hk t c (1 ⊗ₜ[R] p) := by
+  induction p using TensorProduct.inductionOn with
+  | tmul η z =>
+    induction z using TensorProduct.inductionOn with
+    | tmul r x =>
+      rw [show r ⊗ₜ[ℤ] x = r • (1 ⊗ₜ[ℤ] x) by simp [TensorProduct.smul_tmul']]
+      simp only [TensorProduct.tmul_smul, map_smul, LinearMap.map_smul_of_tower]
+      congr 1
+      apply (Tensor.baseChangeEquiv R T (fun _ : Fin n => M)).injective
+      rw [tensorBaseChange_tower]
+      simp only [determinantChart_tmul, one_smul, LinearEquiv.apply_symm_apply]
+      exact freeDeterminantMap_scalarExtension_trans hk t b c η x
+    | add x y hx hy => simp only [TensorProduct.tmul_add, map_add, hx, hy]
+  | add x y hx hy => simp only [TensorProduct.tmul_add, map_add, hx, hy]
 
 end BostConjecture.Geometry
