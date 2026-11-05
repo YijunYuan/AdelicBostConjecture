@@ -1,0 +1,11 @@
+import BostConjecture.Specht.OccupancyMGF
+
+#print axioms BostConjecture.Specht.sum_occupancyMass_apply
+#print axioms BostConjecture.Specht.card_blockFiber_eq_inter
+#print axioms BostConjecture.Specht.sum_occupancyMass_exp_le
+#print axioms BostConjecture.Specht.bernoulli_exp_le
+#print axioms BostConjecture.Specht.sum_occupancyMass_centered_exp_le
+#print axioms BostConjecture.Specht.sum_tail_le_exp_mul_sum
+#print axioms BostConjecture.Specht.sum_abs_tail_le_of_exp_bound
+#print axioms BostConjecture.Specht.occupancyMass_concentration
+#print axioms BostConjecture.Specht.occupancyMass_max_concentration

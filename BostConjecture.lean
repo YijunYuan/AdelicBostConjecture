@@ -25,6 +25,7 @@ public import BostConjecture.LinearAlgebra.PiTensorProduct.Projective
 public import BostConjecture.Analysis.InnerProductSpace.Polar
 public import BostConjecture.Balanced.PluckerNorm
 public import BostConjecture.Balanced.SpectralExpansion
+public import BostConjecture.InvariantTheory.Semistability
 public import BostConjecture.Geometry.TensorRealization
 public import BostConjecture.Geometry.FreeEmbedding
 public import BostConjecture.Geometry.DeterminantBaseChange
@@ -54,6 +55,7 @@ public import BostConjecture.Specht.Basis
 public import BostConjecture.Specht.PrefixWeights
 public import BostConjecture.Specht.PrefixNormalizer
 public import BostConjecture.Specht.BulkNormalizer
+public import BostConjecture.Specht.OccupancyMGF
 public import BostConjecture.Specht.Orthogonal
 public import BostConjecture.Specht.RealAction
 public import BostConjecture.Specht.Content

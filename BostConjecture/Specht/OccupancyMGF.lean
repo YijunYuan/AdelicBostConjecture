@@ -216,4 +216,32 @@ theorem occupancyMass_concentration {a M A : ℕ} (ha : 0 < a) (hM : 0 < M)
   · intro θ hθ
     simpa only [mul_comm θ] using sum_occupancyMass_centered_exp_le ha hM hA i hθ
 
+/-- Union bound for simultaneous deviations of the labelled coordinates. -/
+theorem occupancyMass_max_concentration {a M A : ℕ} (ha : 0 < a) (hM : 0 < M)
+    (hA0 : 0 < A) (hA : A ≤ a * M) {u : ℝ} (hu : 0 < u) :
+    ∑ b ∈ (univ : Finset (Occupancy a M A)).filter
+        (fun b => ∃ i : Fin a, u ≤ |((b.val i).val : ℝ) - A / a|), occupancyMass b ≤
+      2 * a * Real.exp (-u ^ 2 / (4 * (A : ℝ))) := by
+  classical
+  calc
+    _ ≤ ∑ i : Fin a, ∑ b ∈ (univ : Finset (Occupancy a M A)).filter
+        (fun b => u ≤ |((b.val i).val : ℝ) - A / a|), occupancyMass b := by
+      simp only [sum_filter]
+      rw [sum_comm]
+      apply sum_le_sum
+      intro b _
+      split_ifs with hb
+      · obtain ⟨i, hi⟩ := hb
+        have h := single_le_sum
+          (f := fun j : Fin a => if u ≤ |((b.val j).val : ℝ) - A / a|
+            then occupancyMass b else 0)
+          (fun j _ => by split_ifs <;> simp [occupancyMass_nonneg]) (mem_univ i)
+        simpa only [hi, ↓reduceIte] using h
+      · apply sum_nonneg
+        intro i _
+        split_ifs <;> simp [occupancyMass_nonneg]
+    _ ≤ ∑ _i : Fin a, 2 * Real.exp (-u ^ 2 / (4 * (A : ℝ))) :=
+      sum_le_sum (fun i _ => occupancyMass_concentration ha hM hA0 hA i hu)
+    _ = _ := by simp only [sum_const, card_univ, Fintype.card_fin, nsmul_eq_mul]; ring
+
 end BostConjecture.Specht
