@@ -1,13 +1,16 @@
 The mathematical reduction is written in `src/`, but its dependency cone is
-not yet closed. Every node is marked `notready`; there are no accepted Lean
-attachments or `leanok` claims in this blueprint.
+not yet closed. The integral word orbit span and its complex scalar-extension
+map are proved in `BostConjecture/Specht/Integral.lean`; their three precise
+nodes carry Lean attachments. This does not establish the integral standard
+basis, the invariant-space identification, or the covolume asymptotic.
 
 Three theorem nodes still need complete source-backed mathematical proofs:
 
-- `lem:rectangular-invariants`: the integral standard-polytabloid basis,
-  absolute irreducibility, and the rectangular special-linear invariant-space
-  identification. The copied complex Specht irreducibility result covers only
-  one part; it does not supply integral or invariant-space bridges.
+- `lem:rectangular-invariants` is split into `lem:integral-standard-basis`,
+  `lem:rectangular-absolute-irreducible`, and `lem:rectangular-sl-invariants`.
+  Its complex orbit representation now has an explicit integral model and
+  tensor-product scalar-extension equivalence. The standard-basis theorem,
+  characteristic-zero descent, and invariant-space identification remain open.
 - `lem:monic-seminormal`: construction of the monic seminormal basis and its
   correctly normalized adjacent-transposition formula. The following norm
   formula is proved from this precise input.

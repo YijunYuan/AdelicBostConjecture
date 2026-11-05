@@ -1,7 +1,85 @@
 \chapter{Rectangular Specht covolumes}
 
+\begin{definition}[Integral orbit span in word coordinates]
+\label{def:integral-specht-orbit}
+\lean{BostConjecture.Specht.wordRepInt,BostConjecture.Specht.polytabloidInt,BostConjecture.Specht.orbitLattice}
+\source{bost-specht-manuscript:page-0004}\leanok
+Let $\mu$ be a Young diagram with $n$ boxes and $r$ rows, and let
+$t:\{1,\ldots,n\}\longrightarrow\mu$ be a bijection. Set
+$W=\{1,\ldots,r\}^{\{1,\ldots,n\}}$ and $P_\mathbb Z=\mathbb Z^W$.
+The action is $(g x)(w)=x(w\circ g)$. Write $w_t(i)$ for the row of
+$t(i)$, $\delta_w$ for a coordinate vector, and define
+\[
+ e_t=\sum_{h\in C_t}\operatorname{sgn}(h)h\delta_{w_t},\qquad
+ L_t=\sum_{g\in\mathfrak S_n}\mathbb Z\,g e_t\subset P_\mathbb Z.
+\]
+This construction applies to every Young diagram and uses the same
+column antisymmetrizer as the rectangular construction in the manuscript.
+\end{definition}
+
+\begin{lemma}[Integrality, finite generation, and complex span]
+\label{lem:integral-specht-span}\uses{def:integral-specht-orbit}
+\lean{BostConjecture.Specht.orbitLattice_fg,BostConjecture.Specht.orbitLattice_ne_bot,BostConjecture.Specht.wordRepInt_mem_orbitLattice,BostConjecture.Specht.complexCast_injective,BostConjecture.Specht.complexCast_polytabloid,BostConjecture.Specht.complex_span_orbitLattice}
+\source{bost-specht-manuscript:page-0004}\leanok
+The group $L_t$ is a nonzero finite free abelian group, stable under
+$\mathfrak S_n$. Coefficientwise inclusion $j:P_\mathbb Z\to\mathbb C^W$
+is injective, sends $e_t$ to its complex polytabloid, and satisfies
+\[
+ \operatorname{span}_\mathbb C j(L_t)
+ =\operatorname{span}_\mathbb C\{g j(e_t):g\in\mathfrak S_n\}.
+\]
+\end{lemma}
+\begin{proof}
+All terms of $e_t$ have integer coefficients. Its finite permutation
+orbit generates $L_t$. A submodule of the finite free module $\mathbb Z^W$
+is free, since $\mathbb Z$ is a principal ideal domain. Multiplication
+by $g$ permutes the generators, proving stability. The injective
+coordinate map $\mathbb Z\hookrightarrow\mathbb C$ commutes with sums,
+integer multiples and permutations, so it preserves the antisymmetrizer.
+The coefficient of $w_t$ in $e_t$ is one: a column permutation preserving
+$w_t$ preserves both coordinates of every box and hence is the identity.
+Thus $L_t$ is nonzero. Every integral combination maps into the complex
+orbit span; conversely every orbit vector belongs to $j(L_t)$. These
+inclusions prove the equality of spans.
+\end{proof}
+
+\begin{lemma}[Scalar extension of the integral orbit span]
+\label{lem:integral-specht-base-change}\uses{lem:integral-specht-span}
+\lean{BostConjecture.Specht.complexification_injective,BostConjecture.Specht.range_complexification,BostConjecture.Specht.complexSpechtEquiv,BostConjecture.Specht.complexSpechtEquiv_tmul}
+\source{bost-specht-manuscript:page-0004}\leanok
+The map $\mathbb C\otimes_\mathbb Z L_t\to\mathbb C^W$ given by
+$z\otimes x\mapsto zj(x)$ is injective and identifies its image with
+the complex Specht orbit span of $e_t$.
+\end{lemma}
+\begin{proof}
+The torsion-free $\mathbb Z$-module $\mathbb C$ is flat. Tensoring the
+inclusion $L_t\hookrightarrow\mathbb Z^W$ therefore preserves injectivity.
+The coordinate isomorphism
+$\mathbb C\otimes_\mathbb Z\mathbb Z^W\simeq\mathbb C^W$ sends
+$z\otimes x$ to $zj(x)$. The image of the resulting injection is the
+complex span of $j(L_t)$, since pure tensors span the tensor product.
+The preceding lemma identifies that span.
+\end{proof}
+
+\begin{lemma}[Independence of the enumerating tableau]
+\label{lem:integral-specht-all-tableaux}\uses{def:integral-specht-orbit}
+\source{bost-specht-manuscript:page-0004}\notready
+For $u=t\circ g^{-1}$ one has $e_u=g e_t$. Consequently $L_t$ is
+independent of $t$ and equals the integral span of all polytabloids
+of shape $\mu$.
+\end{lemma}
+\begin{proof}
+One has $w_u=w_t\circ g^{-1}$ and $C_u=g C_t g^{-1}$.
+Substituting $h=g q g^{-1}$ into the antisymmetrizer gives
+$\operatorname{sgn}(h)=\operatorname{sgn}(q)$ and
+$h\delta_{w_u}=gq\delta_{w_t}$, hence $e_u=g e_t$.
+Every enumerating tableau has this form for a unique $g$, so the set
+of all polytabloids is exactly the orbit used to define $L_t$.
+\end{proof}
+
 \begin{definition}[The canonical rectangular Specht lattice]
 \label{def:rectangular-specht}
+\uses{def:integral-specht-orbit,lem:integral-specht-all-tableaux}
 \source{bost-specht-manuscript:page-0004}\notready
 For $a,k\geq1$ and $d=ak$, let $M^{(k^a)}_\mathbb Z$ be the free
 abelian group on row tabloids of the rectangle with $a$ rows of length
@@ -19,8 +97,31 @@ Row tabloids identify isometrically with tensor words in $a$ distinct
 orthonormal letters, each appearing $k$ times.
 \end{definition}
 
+\begin{theorem}[Integral standard-polytabloid basis]
+\label{lem:integral-standard-basis}\uses{def:rectangular-specht}
+\source{bost-specht-manuscript:page-0004}\notready
+The standard polytabloids form an integral basis of $L_{a,d}$.
+\end{theorem}
+
+\begin{theorem}[Absolute irreducibility of the rectangular Specht lattice]
+\label{lem:rectangular-absolute-irreducible}
+\uses{def:rectangular-specht,lem:integral-specht-base-change}
+\source{bost-specht-manuscript:page-0004}\notready
+The characteristic-zero representation of $\mathfrak S_d$ on
+$L_{a,d}$ is absolutely irreducible.
+\end{theorem}
+
+\begin{theorem}[Rectangular invariant-space identification]
+\label{lem:rectangular-sl-invariants}\uses{def:rectangular-specht}
+\source{bost-specht-manuscript:page-0004}\notready
+For every $a$-dimensional vector space $A$ over a characteristic-zero
+field, the image of $(\det A)^{\otimes k}\otimes L_{a,d}$ in
+$A^{\otimes d}$ is exactly $(A^{\otimes d})^{\SL(A)}$.
+\end{theorem}
+
 \begin{theorem}[Rectangular Specht realization]
-\label{lem:rectangular-invariants}\uses{def:rectangular-specht}
+\label{lem:rectangular-invariants}
+\uses{lem:integral-standard-basis,lem:rectangular-absolute-irreducible,lem:rectangular-sl-invariants}
 \source{bost-specht-manuscript:page-0004}\notready
 The standard polytabloids form an integral basis of $L_{a,d}$.
 Its characteristic-zero representation of $\mathfrak S_d$ is
@@ -29,6 +130,10 @@ over a characteristic-zero field, the image of
 $(\det A)^{\otimes k}\otimes L_{a,d}$ in $A^{\otimes d}$ is exactly
 $(A^{\otimes d})^{\SL(A)}$.
 \end{theorem}
+\begin{proof}
+Apply the integral standard-basis theorem, the absolute irreducibility
+theorem and the invariant-space identification to the same lattice.
+\end{proof}
 
 \begin{remark}
 The lattice may equivalently be defined by all polytabloids or by the
@@ -39,7 +144,7 @@ the contraction argument.
 \end{remark}
 
 \begin{theorem}[Monic seminormal basis]
-\label{lem:monic-seminormal}\uses{lem:rectangular-invariants}
+\label{lem:monic-seminormal}\uses{lem:integral-standard-basis}
 \source{bost-specht-manuscript:page-0005}\notready
 Order standard tableaux by an extension of dominance of every prefix,
 starting with the column-reading tableau $t_0$. Monic orthogonalization
