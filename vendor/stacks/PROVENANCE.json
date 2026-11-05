@@ -1,0 +1,128 @@
+{
+  "repository": "AxiomMath/Stacks",
+  "commit": "012108f61d7f92a6ffc35ec3f263b6da5d438125",
+  "retrieved_on": "2026-11-05",
+  "access": "connected GitHub fetch_file",
+  "path": "StacksFrontier/LinearAlgebra/Matrix/AlternatingTensorPower.lean",
+  "url": "https://github.com/AxiomMath/Stacks/blob/012108f61d7f92a6ffc35ec3f263b6da5d438125/StacksFrontier/LinearAlgebra/Matrix/AlternatingTensorPower.lean",
+  "lean": "leanprover/lean4:v4.34.0-rc2",
+  "mathlib": "16edf57de7933555826307a3d81b4391a3657a09",
+  "local_lean": "leanprover/lean4:v4.35.0",
+  "local_mathlib": "56a005855ea17e0b0958f73ec801ae140b0a1679",
+  "license": "Apache-2.0",
+  "imports": [
+    "Mathlib.LinearAlgebra.Matrix.Determinant.Basic",
+    "Mathlib.Algebra.BigOperators.Ring.Finset",
+    "Mathlib.Data.Fintype.Perm"
+  ],
+  "target": "Matrix.sum_tensorPow_mul_altVec",
+  "local_declaration_cone": [
+    "Matrix.altVec",
+    "Matrix.sum_mul_altVec",
+    "Matrix.altVec_coe_perm",
+    "Matrix.altVec_eq_zero_of_not_bijective",
+    "Matrix.det_submatrix_left",
+    "Matrix.tensorPow",
+    "Matrix.tensorPow_apply",
+    "Matrix.sum_tensorPow_mul_altVec"
+  ],
+  "consumer": "lem:determinant-isotypic free-frame determinant covariance; k rectangular columns require det(g)^k",
+  "remaining_bridge": "Identify Bost word-polytabloid column tensor with altVec; identify actual tensor action with tensorPow; tensor k columns and commute position permutations; then glue local frames.",
+  "audit": "Local module kernel build and transitive #print axioms passed on Lean/mathlib 4.35. All eight declarations depend only on propext, Classical.choice, Quot.sound. No sorry/admit/custom axiom/native_decide in extracted Lean source. Only the three Mathlib imports; no Stacks dependency.",
+  "upstream_files": {
+    "AlternatingTensorPower.lean": {
+      "bytes": 12271,
+      "sha256": "b72d2544ac807e19c65049b0e3bffbee4c392e1aaad33fb03d4c0f76ad33069a",
+      "git_blob_sha1": "b0078088580d01ce8a463b0d608e3d7b8c33b9cd"
+    },
+    "LICENSE": {
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "git_blob_sha1": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64"
+    },
+    "source-metadata.json": {
+      "bytes": 1650,
+      "sha256": "c11bd5d8b936ba5e05aa4ebc1f5598ed3bbcb6b36ea582bbcf8f3c2d09c1de70",
+      "git_blob_sha1": "4a56293420e7917d23360f385001277a39cb6aba"
+    }
+  },
+  "license_url": "https://github.com/AxiomMath/Stacks/blob/012108f61d7f92a6ffc35ec3f263b6da5d438125/LICENSE",
+  "local_path": "BostConjecture/LinearAlgebra/AlternatingTensorPower.lean",
+  "local_sha256": "e57dc6e3af6daea446ca4d02174286f241a97a5dd0ece947a531e7b938219351",
+  "local_declarations": {
+    "Matrix.altVec": {
+      "hash_scope": "UTF-8 declaration block including original docstring, no trailing newline",
+      "changes": [],
+      "upstream_block_sha256": "b16a150dc81ff7c087ac7c6edd88892f04f79ed519e4974a645ff73c7bf86bec",
+      "local_block_sha256": "b16a150dc81ff7c087ac7c6edd88892f04f79ed519e4974a645ff73c7bf86bec"
+    },
+    "Matrix.sum_mul_altVec": {
+      "hash_scope": "UTF-8 declaration block including original docstring, no trailing newline",
+      "changes": [
+        "Replaced deprecated if_pos/if_neg names with ite_eq_left/ite_eq_right."
+      ],
+      "upstream_block_sha256": "e4fb9a368bed3eff4ed64d0bf22ac23332ae4f0448d27ed48681790b4f9949b6",
+      "local_block_sha256": "081de8086a5ad1f1c11ca775c4e085be18c22d064d4ef35f8806d6fa4ddac965"
+    },
+    "Matrix.altVec_coe_perm": {
+      "hash_scope": "UTF-8 declaration block including original docstring, no trailing newline",
+      "changes": [
+        "Replaced deprecated if_pos/if_neg names with ite_eq_left/ite_eq_right."
+      ],
+      "upstream_block_sha256": "682c099d3945b039e7d607c72686ba04ed46dd80adc276b54c5f0b3efce0073f",
+      "local_block_sha256": "49bc9bbb932dd3980aca10eaf099f9e251e2256568005629e75926c4dffbef60"
+    },
+    "Matrix.altVec_eq_zero_of_not_bijective": {
+      "hash_scope": "UTF-8 declaration block including original docstring, no trailing newline",
+      "changes": [
+        "Replaced deprecated if_pos/if_neg names with ite_eq_left/ite_eq_right."
+      ],
+      "upstream_block_sha256": "d3bb88cc26ea551e8ed03211c3a49e180b14403400259c1c1e05381afd68a102",
+      "local_block_sha256": "116246b28b33cfed1f5c6b85519897174b2f98dbf0587f6d658885212f858d4f"
+    },
+    "Matrix.det_submatrix_left": {
+      "hash_scope": "UTF-8 declaration block including original docstring, no trailing newline",
+      "changes": [],
+      "upstream_block_sha256": "bf27542bbcd8c14355f669c4cf049f148e7d09c8792c4dff72f517a759140c03",
+      "local_block_sha256": "bf27542bbcd8c14355f669c4cf049f148e7d09c8792c4dff72f517a759140c03"
+    },
+    "Matrix.tensorPow": {
+      "hash_scope": "UTF-8 declaration block including original docstring, no trailing newline",
+      "changes": [],
+      "upstream_block_sha256": "50fc940785363cef0aeea0b7a9c6804f90a9bcf408718343dca217b1be415dc5",
+      "local_block_sha256": "50fc940785363cef0aeea0b7a9c6804f90a9bcf408718343dca217b1be415dc5"
+    },
+    "Matrix.tensorPow_apply": {
+      "hash_scope": "UTF-8 declaration block including original docstring, no trailing newline",
+      "changes": [],
+      "upstream_block_sha256": "00972f9d45782bc10f5544e99973202dc7374f5a1f10dec59902d47717c38ed1",
+      "local_block_sha256": "00972f9d45782bc10f5544e99973202dc7374f5a1f10dec59902d47717c38ed1"
+    },
+    "Matrix.sum_tensorPow_mul_altVec": {
+      "hash_scope": "UTF-8 declaration block including original docstring, no trailing newline",
+      "changes": [],
+      "upstream_block_sha256": "9a02bd81324c77eb3e8c58060669bc3be35e848a0ddd50bb9e73b7f8e47f1532",
+      "local_block_sha256": "9a02bd81324c77eb3e8c58060669bc3be35e848a0ddd50bb9e73b7f8e47f1532"
+    }
+  },
+  "changes": [
+    "Extracted only the eight-declaration left determinant-covariance dependency cone.",
+    "Replaced upstream module documentation with a scoped description and source/license pointers.",
+    "Retained module/public syntax, imports, declaration statements, and proof structure; replaced deprecated if_pos/if_neg with ite_eq_left/ite_eq_right for Lean/mathlib 4.35. No Stacks dependency or Lake changes."
+  ],
+  "verification": {
+    "module_command": "/home/yijunyuan/.local/bin/horizon --root /home/yijunyuan/bc-workspace check BostConjecture.LinearAlgebra.AlternatingTensorPower --timeout 300 --json",
+    "axiom_command": "/home/yijunyuan/.local/bin/horizon --root /home/yijunyuan/bc-workspace check --lean verification/StacksAxioms.lean --timeout 300 --json",
+    "status": "passed",
+    "module_fingerprint": "00296386572144c3",
+    "module_finished_at": "2026-11-05T14:33:06.082198+00:00",
+    "axiom_fingerprint": "3469b45b67413c5d",
+    "axiom_finished_at": "2026-11-05T14:33:32.834055+00:00",
+    "transitive_axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "scope": "All eight extracted declarations; no broad project build."
+  }
+}
