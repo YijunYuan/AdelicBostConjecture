@@ -452,6 +452,21 @@ surjective in finite dimension, so it is unitary. Taking determinants
 in $g=up$ gives $\det u=1$. Dimension zero is included throughout.
 \end{proof}
 
+\begin{definition}[The intrinsic Pl\"ucker representation]
+\label{def:balanced-plucker-action}\notready
+For $K$-vector spaces $U,W$ and $s\geq0$, define the representation of
+$\SL(U)\times\SL(W)$ on $X=\bigwedge^s(U\otimes_K W)$ by
+$\rho(g,h)=\bigwedge^s(g\otimes h)$. It sends a decomposable vector
+$v_1\wedge\cdots\wedge v_s$ to
+$(g\otimes h)v_1\wedge\cdots\wedge(g\otimes h)v_s$.
+\end{definition}
+\begin{proof}
+The identity maps induce the identity on the tensor product and its
+exterior power. Tensor products and exterior powers both preserve
+composition of linear maps, giving the group law. The formula on wedges
+is the defining functoriality formula for exterior powers.
+\end{proof}
+
 \begin{lemma}[Intrinsic homogeneous polynomials]
 \label{lem:balanced-intrinsic-polynomials}
 \lean{BostConjecture.InvariantTheory.polynomialEval,BostConjecture.InvariantTheory.polynomialEval_ι,BostConjecture.InvariantTheory.polynomialPullback_id,BostConjecture.InvariantTheory.polynomialPullback_comp,BostConjecture.InvariantTheory.polynomialEval_pullback,BostConjecture.InvariantTheory.homogeneousPolynomials,BostConjecture.InvariantTheory.polynomialEval_smul_of_mem_homogeneous,BostConjecture.InvariantTheory.polynomialEval_zero_of_mem_homogeneous,BostConjecture.InvariantTheory.polynomialPullback_mem_homogeneous,BostConjecture.InvariantTheory.finiteDimensional_homogeneousPolynomials}\leanok
@@ -757,6 +772,27 @@ Conversely, if a homogeneous invariant $p$ of positive degree has
 $p(x)\ne0$, then $p-p(x)$ vanishes on $Gx$ and hence on $C$.
 But $p(0)=0$, so $p(0)-p(x)\ne0$, and $0\notin C$.
 No finite-generation assertion for the invariant ring is needed.
+\end{proof}
+
+\begin{lemma}[Balanced Pl\"ucker orbit norm bound]
+\label{lem:balanced-plucker-orbit-norm}\notready
+\uses{def:balanced-plucker-action,lem:balanced-tensor-exponential-minimum,lem:balanced-special-linear-polar}
+Let $S\subset U\otimes W$ be balanced in finite-dimensional complex
+Hermitian spaces, let $v_1,\ldots,v_s$ be an orthonormal basis of $S$,
+and let $z=v_1\wedge\cdots\wedge v_s$. For every
+$g\in\SL(U)\times\SL(W)$, $\|\rho(g)z\|^2\geq1$.
+Consequently zero is outside the Euclidean closure of the orbit.
+\end{lemma}
+\begin{proof}
+Write each component of $g$ as a unitary factor times the exponential
+of a traceless Hermitian operator. Functoriality of tensor and exterior
+powers expresses $\rho(g)z$ as the exterior tensor unitary applied to
+$\bigwedge^s(e^H\otimes e^J)z$. Tensoring isometries is an isometry,
+and preservation of the Gram inner product shows that its exterior power
+is also an isometry. The balanced tensor exponential minimum at $t=1$
+therefore gives the asserted bound. The set $\{y:\|y\|^2\geq1\}$ is
+Euclidean closed by continuity of the norm, contains the orbit, and
+excludes zero, proving the closure conclusion.
 \end{proof}
 
 \begin{lemma}[Balanced projections give geometric semistability]
