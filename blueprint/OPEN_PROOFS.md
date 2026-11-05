@@ -34,8 +34,11 @@ filtration with the ambient word-support filtration and proves its stability.
 box of any standard tableau with its smaller real Specht space, by an actual
 surjective coefficient restriction and an exact kernel calculation. `LastMurphy.lean` uses that kernel
 to identify prefix central and last-Murphy content actions modulo earlier
-rows. Individual content eigenvalues for all labels still require the recursive
-colexicographic triangularity. The standard Gram bound is now
+rows. `Extension.lean` and `Colex.lean` construct the actual standard-tableau
+corner lift and its order compatibility. `Triangular.lean` proves recursive
+colexicographic Murphy triangularity for all labels; `Spectral.lean` uses it
+and symmetry to prove the content eigenvalues of the actual monic orthogonal
+basis. The standard Gram bound is now
 unconditional; its explicit seminormal evaluation, the invariant-space identification,
 and the general covolume asymptotic remain open.
 
@@ -52,11 +55,11 @@ The following producers still need complete source-backed mathematical proofs:
   and the invariant-space identification remain open.
 - `lem:specht-branching-quotient` is now proved for the last box of each
   standard tableau. The last-label case is proved by `lem:last-murphy-branching`. The first
-  unmet Gram producer is the recursive induction giving
-  `lem:prefix-content-triangular` in the sufficient
-  colexicographic total order; it no longer requires the stronger partial-order
-  dominance statement. `lem:monic-seminormal` then requires the spectral identification
-  and the resulting correctly normalized adjacent-transposition formula.
+  unmet Gram producer is now the correctly normalized adjacent-transposition
+  formula in `lem:monic-seminormal`. The recursive colexicographic triangularity
+  and `lem:orthogonal-content-eigenvalues` are proved; the stronger partial-order
+  dominance statement is not needed for these results. Content eigenvalues alone
+  do not identify the coefficient of the neighboring monic basis vector.
   Monic orthogonalization and the abstract Gram norm-product identity are
   proved; no assertion that these actual norms equal the prefix product is
   yet available. The following norm
@@ -66,8 +69,9 @@ The following producers still need complete source-backed mathematical proofs:
   formula locally. This source is not a Lean axiom or a completed producer.
   Retrieval of the cited Murphy 1981 paper reached bibliographic metadata
   only; `references/murphy-seminormal-1981/notes.md` records the access boundary.
-  The checked eigenvector diagonal-coefficient lemma explicitly assumes two
-  eigenvalue equations and does not discharge the content-spectrum producer.
+  The abstract eigenvector diagonal-coefficient lemma assumes two eigenvalue
+  equations; these equations are now proved for the actual monic basis.
+  The normalized adjacent-vector identity remains a separate obligation.
 - `lem:invariant-orbit-criterion`: equality of Euclidean and Zariski orbit
   closures, and detection by homogeneous invariants for products of special
   linear groups. The following balanced-projection argument uses both parts.
@@ -80,10 +84,12 @@ The seminormal Gram identity is for the standard family. For the orbit lattice
 it yields only `0 ≤ 2c_a(d) ≤ E log γ`; the sublinear limit follows by squeezing.
 Determinant covariance in word coordinates is proved. Identification with
 abstract tensor maps and flat scalar-extended injectivity in a free frame
-are proved by the geometry modules. The full determinant-twist base-change square and general finite-principal-cover
-descent are proved. Finite-projective local frames, their overlap transport
-and assembly into the global injection, and the full invariant generic fiber
-for nonvanishing remain requirements of the contraction route.
+are proved by the geometry modules. The full determinant-twist base-change square,
+general finite-principal-cover descent, finite-projective local frames,
+overlap transport and the global determinant injection are proved.
+The finite Hilbert tensor form and its pure-tensor formula are proved.
+Compatibility of determinant metrics, the contracting pairing and the full
+invariant generic fiber for nonvanishing remain requirements of the contraction route.
 
 All cited manuscript page anchors resolve to registered vision transcriptions
 that were read before attachment. The shifted-coordinate tableau count has

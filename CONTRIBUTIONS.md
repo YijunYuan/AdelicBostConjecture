@@ -6,6 +6,27 @@ No claim of authorship is made for upstream code. Only needed module closures
 are imported. Each copied file retains upstream notices and identifies local
 changes. The installed mathlib revision is pinned in `lake-manifest.json`.
 
+## Hilbert tensor products and orthogonalization — Mathlib
+
+- Repository: <https://github.com/leanprover-community/mathlib4>.
+- Revision: `56a005855ea17e0b0958f73ec801ae140b0a1679` (`v4.35.0`).
+- License: Apache-2.0; upstream notices remain in the pinned Lake dependency.
+- Direct imports, with no source copying or modifications:
+  `Mathlib/Analysis/InnerProductSpace/TensorProduct.lean` supplies the binary
+  Hilbert tensor inner product and `TensorProduct.inner_tmul`;
+  `Mathlib/Analysis/InnerProductSpace/GramSchmidtOrtho.lean` supplies
+  `gramSchmidtBasis`, `gramSchmidt_def''`, `span_gramSchmidt_Iio`, and
+  `gramSchmidt_inv_triangular`.
+- Consumers: `BostConjecture/Tensor/Hilbert.lean` constructs the positive
+  finite tensor form and proves its pure-tensor formula, uniqueness and
+  compatibility with factor isometries and reindexing.
+  `Specht/Orthogonal.lean` and `Specht/Spectral.lean` use the actual
+  standard-polytabloid basis for monic orthogonalization and content
+  eigenvalues. These imports do not supply the adjacent-transposition
+  normalization or the covolume asymptotic.
+- Toolchain compatibility and transitive axioms are checked in the project
+  build and the exact geometry/Specht probes recorded in `verification/`.
+
 ## Harder–Narasimhan games — Yijun Yuan
 
 - Repository: <https://github.com/YijunYuan/HarderNarasimhan>

@@ -1,3 +1,70 @@
+## Colex content-spectrum checkpoint (session 0019)
+
+Claim class: **proved producers**. `Extension.lean` constructs standard
+corner extensions and their polytabloid restriction formula. `Colex.lean`
+proves order compatibility and constructs the linear lift of the smaller
+standard basis. `Triangular.lean` consumes the actual branching kernel to
+prove all-label Murphy content triangularity. `Spectral.lean` consumes that
+result, symmetry and monic orthogonalization to prove the actual content
+eigenvalues, without assuming eigenvector equations.
+
+Owned verified commits: `f115b5c`, `c430cf7`, `581d464`, `953bec0`.
+Some intermediate source was also captured by concurrent automatic snapshots;
+those snapshots are not the verification evidence.
+
+All checks used the explicit workspace root and shared serialized check slot:
+
+- `horizon --root /home/yijunyuan/bc-workspace check
+  BostConjecture.Specht.Triangular`: **9,070 jobs**, passed at
+  **2026-11-05 18:33:10 UTC**, fingerprint `9bf31f1c64448755`.
+- `horizon --root /home/yijunyuan/bc-workspace check --json`:
+  **9,141 jobs**, passed without warnings at
+  **2026-11-05 18:42:11 UTC**, fingerprint `975bdb23135a0d4a`.
+  This includes the final Specht source and updated root imports.
+- `horizon --root /home/yijunyuan/bc-workspace check --lean
+  verification/SpechtSpectralAxioms.lean --json`: passed at
+  **2026-11-05 18:43:36 UTC**, fingerprint `297cf1b95f748e89`.
+  All **32 exact new-declaration probes** report only `propext`,
+  `Classical.choice` and `Quot.sound`; no `sorryAx` or additional axiom.
+
+Initial elaboration errors were repaired. LSP became slow/stalled, so the
+proof loop used narrow serialized kernel checks. The local-equivalence
+transport was rejected after a kernel heartbeat timeout; the accepted proof
+compares coordinate spans directly and has no increased heartbeat option.
+The exact rejected version is preserved in session attempt `0002` (attempt
+`0001` raced with replacement and captured the following draft). The reviewer's
+duplicate scratch check was canceled and supplies no evidence. The final
+source scan finds no `sorry`, `admit`, axiom declaration or option override.
+
+Honesty-reviewer: **used, satisfactory**. It checked the final source,
+three new completion attachments, the producer-to-consumer route and raw
+axiom output. The colex induction substantively uses the branching kernel
+and standard lift; the spectral theorem uses the actual orthogonal basis.
+The canonical all-polytabloid lattice and orthonormal word metric are retained.
+
+Frontier before: recursive colex content triangularity. Frontier after:
+**normalized adjacent-transposition action**, especially the coefficient of
+the neighboring monic basis vector. Consumer: the seminormal norm product
+and standard Gram evaluation. Neither the general covolume asymptotic nor
+manuscript Theorem 1.1 is proved; BOST-SPECHT stays open.
+
+The root also integrates the checked arithmetic normalization, line contraction,
+metric scaling and subspace degree handoff (I-0028), plus the finite-projective
+determinant inclusion and finite Hilbert tensor form (I-0031). Their owners'
+84-probe arithmetic and 78-plus-six-probe geometry evidence remains in the
+respective verification reports. Direct Mathlib Hilbert/Gram-Schmidt reuse is
+recorded in `CONTRIBUTIONS.md`. Other lanes continued writing after the above
+build snapshot; their later drafts are not certified by this report.
+
+Graph sync completed: **128 blueprint nodes, 931 Lean declarations, 534 edges**;
+no missing-reference or stale-node warning. The **532 unattached** imported/helper
+declarations remain an intentional coverage warning, including concurrent work.
+`hgraph/config.yaml -> ../hgraph-sources.yaml` is preserved. The first sync
+invocation rejected unsupported `--json`; the plain sync succeeded. Read-only
+janitor review found the active nested/multilane roadmap focus justified;
+completed content subtrees are now closed and the adjacent/norm obligations
+are explicit. The scratch dry-run found no stale candidates.
+
 ## Branching quotient checkpoint (session 0017)
 
 Final configured check `horizon --root /home/yijunyuan/bc-workspace check
