@@ -671,9 +671,36 @@ with the boxes strictly to the left and strictly above $j$. Their
 cardinalities are its zero-based column and row coordinates.
 \end{proof}
 
+\begin{lemma}[Column antisymmetrizer on the tabloid module]
+\label{lem:column-antisymmetrizer-line}
+\uses{def:integral-specht-orbit}
+\lean{OAI.Saxl.columnAlt_tabloid}\leanok
+Let $P_t$ be the complex span of the permutation orbit of
+$\delta_{w_t}$ and let $A_t=\sum_{g\in C_t}\operatorname{sgn}(g)P_g$.
+Then $A_t(P_t)\subseteq\mathbb C e_t$.
+\end{lemma}
+\begin{proof}
+It suffices to consider a word in the orbit of $w_t$. If two labels
+in a column have the same letter, their transposition fixes the word;
+pairing terms of the antisymmetrizer cancels them. Otherwise each
+column has distinct letters. The number of occurrences of letter $r$
+is the length of row $r$. Letter $0$ therefore occurs in every nonempty
+column: there are exactly as many such columns as its multiplicity,
+and each contains it at most once. Remove its occurrence from each
+column. Inductively, after removing letters below $r$, the remaining
+columns are exactly those of height greater than $r$, whose number is
+the multiplicity of $r$. Thus each of these columns contains letter
+$r$. Consequently the letters in each column are exactly its original
+row indices. A unique column permutation carries the original row
+word to this word. Reindexing the antisymmetrizer then gives its sign
+times $e_t$. In either case the image belongs to the stated line;
+linearity completes the proof.
+\end{proof}
+
 \begin{lemma}[Central transposition sum acts by total content]
-\label{lem:central-content-action}\notready
-\uses{lem:murphy-content-coefficient,lem:integral-specht-base-change,lem:real-specht-action}
+\label{lem:central-content-action}
+\lean{BostConjecture.Specht.diagramContent,BostConjecture.Specht.centralWordOperator_polytabloid,BostConjecture.Specht.sum_murphyOperator_eq,BostConjecture.Specht.sum_wordRepInt_eq_content_of_mem_orbitLattice}\leanok
+\uses{lem:murphy-content-coefficient,lem:column-antisymmetrizer-line,lem:real-standard-basis,lem:real-specht-action}
 Let $C_\mu=\sum_{(r,c)\in\mu}(c-r)$ and $Z=\sum_jJ_j$.
 On the integral polytabloid lattice and its real span, $Zx=C_\mu x$.
 \end{lemma}
@@ -694,8 +721,22 @@ span, and coefficientwise inclusion is injective, giving the
 integral identity as well.
 \end{proof}
 
+\begin{lemma}[Prefix dominance and triangular Murphy action]
+\label{lem:prefix-content-triangular}
+\uses{lem:central-content-action,lem:real-standard-basis}\notready
+For a standard tableau $t$, let $\lambda_t^{(m)}$ be the shape of
+its first $m$ labels. Write $s\preceq t$ when, for every $m$ and
+row cutoff $r$, the first $r$ rows of $\lambda_s^{(m)}$ have at most
+as many boxes as those of $\lambda_t^{(m)}$.
+For every label $j$,
+\[
+ J_je_t-\operatorname{content}_t(j)e_t
+ \in\operatorname{span}_{\mathbb R}\{e_s:s\preceq t,\ s\ne t\}.
+\]
+\end{lemma}
+
 \begin{theorem}[Monic seminormal basis]
-\label{lem:monic-seminormal}\uses{lem:orthogonal-standard-basis,lem:murphy-eigenvector-residual}
+\label{lem:monic-seminormal}\uses{lem:orthogonal-standard-basis,lem:murphy-eigenvector-residual,lem:prefix-content-triangular}
 \source{bost-specht-manuscript:page-0005,ryom-hansen-seminormal-denominators-v1:classical_formula}\notready
 Order standard tableaux by an extension of dominance of every prefix,
 starting with the column-reading tableau $t_0$. Monic orthogonalization

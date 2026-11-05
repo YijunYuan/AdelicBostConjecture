@@ -22,8 +22,11 @@ and expresses the standard Gram determinant as the product of its actual
 squared norms. `RealAction.lean` constructs the real isometric action and
 proves symmetry, commutation, and the adjacent recurrence of the concrete
 Murphy operators. `Content.lean` computes the concrete Murphy coefficient at the original
-row word as the box content; it does not yet give triangularity or an
-eigenvalue equation. The standard Gram bound is now
+row word as the box content. `Central.lean` uses the checked complex
+column-antisymmetrizer line theorem to prove that the sum of all Murphy
+operators acts by total diagram content on the actual real span and
+integral orbit lattice. Individual content eigenvalues still require
+prefix restriction and dominance triangularity. The standard Gram bound is now
 unconditional; its explicit seminormal evaluation, the invariant-space identification,
 and the general covolume asymptotic remain open.
 
@@ -38,8 +41,9 @@ The following producers still need complete source-backed mathematical proofs:
   Its complex orbit representation now has an explicit integral model and
   tensor-product scalar-extension equivalence. Characteristic-zero descent
   and the invariant-space identification remain open.
-- `lem:monic-seminormal` is the first unmet Gram producer: content-triangular
-  Murphy action on standard polytabloids, a compatible dominance ordering,
+- `lem:prefix-content-triangular` is the first unmet Gram producer: prefix
+  restriction and content-triangular Murphy action on standard polytabloids.
+  `lem:monic-seminormal` then requires a compatible dominance ordering,
   and the resulting correctly normalized adjacent-transposition formula.
   Monic orthogonalization and the abstract Gram norm-product identity are
   proved; no assertion that these actual norms equal the prefix product is

@@ -1,4 +1,4 @@
-import BostConjecture.Specht.Content
+import BostConjecture.Specht.Central
 
 #print axioms BostConjecture.Specht.exists_column_of_polytabloidInt_ne_zero
 #print axioms BostConjecture.Specht.polytabloidInt_rowWord_swap_eq_zero
@@ -7,3 +7,14 @@ import BostConjecture.Specht.Content
 #print axioms BostConjecture.Specht.ColumnStandard.card_earlier_column
 #print axioms BostConjecture.Specht.sum_polytabloidInt_rowWord_swap
 #print axioms BostConjecture.Specht.murphyOperator_standardRealBasis_rowWord
+
+#print axioms OAI.Saxl.columnAlt_tabloid
+#print axioms BostConjecture.Specht.wordRep_commute_centralWordOperator
+#print axioms BostConjecture.Specht.centralWordOperator_polytabloid_mem
+#print axioms BostConjecture.Specht.sum_tableauContent
+#print axioms BostConjecture.Specht.centralWordOperator_polytabloid_rowWord
+#print axioms BostConjecture.Specht.centralWordOperator_polytabloid
+#print axioms BostConjecture.Specht.sum_wordRepInt_polytabloid_eq_content
+#print axioms BostConjecture.Specht.sum_murphyOperator_standardRealBasis
+#print axioms BostConjecture.Specht.sum_murphyOperator_eq
+#print axioms BostConjecture.Specht.sum_wordRepInt_eq_content_of_mem_orbitLattice

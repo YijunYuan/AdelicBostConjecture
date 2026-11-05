@@ -4,16 +4,65 @@
 
 `Content.lean` computes the integral transposition coefficient at the original
 row word and identifies its Murphy sum with the box content. The final theorem
-uses the actual real standard basis. These are word coefficients; the statement
-does not assert triangularity or content eigenvalues.
+uses the actual real standard basis. `Central.lean` then consumes the checked
+`OAI.Saxl.columnAlt_tabloid` rank-one theorem and proves that the sum of all
+Murphy operators acts by total diagram content, on the actual real Specht
+span and canonical integral orbit lattice. No individual content eigenvalue
+or prefix-triangularity premise is assumed.
 
-The serialized module check passed **9,061 jobs** (fingerprint
-`8bb511124ccb9cf5`). All **seven** transitive probes in
-`SpechtContentAxioms.lean` passed (`35ede571115c9a69`), reporting only
-`propext`, `Classical.choice`, and `Quot.sound`. Content LSP diagnostics were
-clean. Subsequent Central/root LSP queries repeatedly remained partial at the
-imports; the central proof loop therefore uses serialized narrow kernel
-checks. Draft elaboration errors are being repaired before acceptance.
+- Content module: **9,061 jobs**, check `8bb511124ccb9cf5`.
+- Central narrow kernel check: `7845e703cf5f6dbf`, passed at
+  **2026-11-05 16:08:23 UTC**.
+- Configured explicit-root `horizon check --json`: **9,108 jobs**, check
+  `975bdb23135a0d4a`, passed at **16:12:57 UTC**.
+- `check --lean verification/SpechtContentAxioms.lean --json`: **17** exact
+  transitive probes, check `35ede571115c9a69`, passed at **16:14:45 UTC**.
+  All use only `propext`, `Classical.choice`, and `Quot.sound`; none uses
+  `sorryAx` or a new axiom. The command identifier also names the earlier
+  seven-probe run; the final seventeen-probe evidence is the later timestamp.
+
+The configured build includes the three checked geometry imports from
+`0d893d5`, `1c0ac0c`, and `922a2f4`: tensor realization, finite-projective
+ambient evaluation, and flat scalar-extended free embedding. It does not
+include the later determinant-frame module. Its mathematical boundaries and
+reuse consumers are recorded in `CONTRIBUTIONS.md`; projective gluing,
+isotypic nonvanishing and the metric estimate remain open.
+
+Content LSP diagnostics were clean. Central/root LSP queries repeatedly
+remained partial at imports, so central proof iterations used narrow
+serialized kernel checks; initial elaboration failures were repaired.
+Final Central LSP diagnostics and kernel checks are clean. No build failure
+remains in the accepted owned sources. The root build does not certify
+unimported concurrent drafts.
+
+Automatic GEOM boundary snapshot `82de93e` captured the owned Central source,
+root imports and some evidence text while this session was running. Its
+source is certified by the exact checks above, not by that snapshot.
+Central SHA256: `6a4962d46d097cb5ff720ee5f626263052593dd3f73a3c4203a60f54262f9ae1`.
+Explicit owned-path commits record the final integration and proof boundary.
+
+Graph sync: **88** blueprint nodes, **621** Lean declarations, **294** edges.
+The **383** unattached helper/imported declarations (including concurrent
+arithmetic work) remain intentional coverage warnings; no missing attachment
+or dependency warning occurred. The source-scope symlink is preserved.
+Janitor review confirmed the nine active roadmap rows are intentional nested
+ancestors across three proof lanes, and the temporary all-children-done warning
+is resolved by the pending prefix child. Scratch dry-run found zero stale
+candidates. No other team's source or status was changed.
+
+Honesty-reviewer: **used, satisfactory**. The independent review checked the
+actual coefficient-to-central-scalar proof chain, the final seventeen-probe
+output and finite acyclic blueprint cones. It found no hidden eigenvalue
+hypothesis, vacuity or target-shaped certificate, and confirmed that this
+session reduces the persistent triangular-action frontier. Its scope did not
+include a full mathematical audit of unrelated source dependencies.
+
+Claim class: **proved producers**, using a checked imported rank-one lemma.
+Frontier before: content-triangular Murphy action. Frontier after: concrete
+content coefficients and the full central scalar are proved; prefix restriction
+and dominance triangularity remain the first unmet producer. Consumer:
+`lem:prefix-content-triangular`, then `lem:monic-seminormal` and the Gram bound.
+The general normalized-covolume asymptotic and main theorem remain unproved.
 
 ## Monic orthogonalization and Murphy operators — session 0011
 

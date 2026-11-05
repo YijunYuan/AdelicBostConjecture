@@ -20,6 +20,7 @@ public import BostConjecture.Specht.Basis
 public import BostConjecture.Specht.Orthogonal
 public import BostConjecture.Specht.RealAction
 public import BostConjecture.Specht.Content
+public import BostConjecture.Specht.Central
 public import BostConjecture.Specht.OneRow
 public import OAI.NumberTheory.ArithmeticGroups.Lattices.FrameMatrices
 public import OAI.RepresentationTheory.Saxl.SpechtSubmodule

@@ -221,6 +221,18 @@ probes before this session integrated their root imports. See
 [reuse survey](verification/STACKS_AND_MATHLIB_PRS.md) for the parent review
 and the exact separation between these producers and their future consumers.
 
+## Central Specht action consumer — session 0013
+
+`Specht/Central.lean` substantively consumes `OAI.Saxl.columnAlt_tabloid`
+from the already pinned OpenAI copy (original path
+`lean/OAI/RepresentationTheory/Saxl/SpechtSubmodule.lean`, revision
+`4eaee87548250b2682affda7d05d947c05554bae`, Apache-2.0).
+No additional source is copied or modified. The consumer proves that the
+central transposition sum acts by total diagram content, first on complex
+standard polytabloids, then on the actual real Specht span and integral orbit
+lattice. Its scalar is computed by the new local `Content.lean` proofs.
+The transitive axiom probe includes this imported rank-one producer.
+
 ## Geometry integration consumers — session 0013
 
 The checked local modules `Geometry/TensorRealization.lean` (0d893d5),
