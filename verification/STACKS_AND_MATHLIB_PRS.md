@@ -56,10 +56,22 @@ closure comparison needed here.
 
 ## Mathlib PRs approved for selective port
 
-The user approved these three ports. Each worker must preserve upstream
-attribution and record local changes and kernel/axiom evidence under
-`vendor/mathlib-prs/<number>/PROVENANCE.json`. Their checked status is recorded
-there when complete; this survey records the selection decision.
+All three approved ports are now committed and individually kernel-checked.
+Attribution, exact source/local hashes, adaptations and verification evidence
+are recorded under `vendor/mathlib-prs/<number>/PROVENANCE.json`.
+
+| Port | Workspace commit | Module check | Transitive axiom check |
+| --- | --- | --- | --- |
+| [40948 provenance](../vendor/mathlib-prs/40948/PROVENANCE.json) | `3cb8de3` | `e427c60dadb0e721` | `1408901b6978ba73`, 5 exports |
+| [44845 provenance](../vendor/mathlib-prs/44845/PROVENANCE.json) | `34a095a` | `36e15fc5f32630ac` | `a1952e5fc1e7963f`, 10 exports and 3 generic consumer examples |
+| [45002 provenance](../vendor/mathlib-prs/45002/PROVENANCE.json) | `898c6c5` | `e1559dd0c1901505` | `8bd3125875ce00b6`, 30 exports |
+
+All 45 exported declarations use only the standard foundational axioms
+(`propext`, `Classical.choice`, `Quot.sound`). These are narrow checks; combined
+root-build evidence belongs to the subsequent Horizon integration. Exterior
+base change and polar proofs are unchanged. Tensor duality expands two missing
+reindex simplification lemmas inline, preserving public statements. No dependency
+or toolchain revision changed.
 
 | PR and exact inspected head | Producer and intended consumer | Remaining bridge |
 | --- | --- | --- |
