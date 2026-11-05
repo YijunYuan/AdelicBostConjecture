@@ -416,6 +416,30 @@ $-\log\|x\|_\sigma\leq-\log\|f(x)\|_\sigma$ at each embedding.
 Sum these inequalities and divide by $D>0$ to obtain the degree inequality.
 \end{proof}
 
+\begin{lemma}[Uniform metric scaling]
+\label{lem:degree-metric-scaling}
+\uses{def:intrinsic-determinant-degree,lem:determinant-metric-unique}\notready
+For $t\in\mathbb R$ let $h[t]_\sigma=e^{2t}h_\sigma$, so that every
+norm is multiplied by $e^t$. If $M$ has generic rank $r$, then
+\[
+ \det(h[t])=(\det h)[rt],\qquad
+ \degn(M,h[t])=\degn(M,h)-rt.
+\]
+For $r>0$ its slope decreases by $t$.
+\end{lemma}
+\begin{proof}
+The positive real factor $e^{2t}$ preserves positivity, sesquilinearity
+and conjugation compatibility, and its square root is $e^t$.
+Every $r$-by-$r$ Gram matrix is multiplied by $e^{2t}$; hence its
+determinant is multiplied by $e^{2rt}$. Uniqueness of the determinant
+metric proves the first equality. For a line, the finite quotient term
+of the section formula is unchanged, while each logarithmic section
+norm increases by $t$. There are exactly $D$ complex embeddings, so
+normalized line degree decreases by $t$. Apply this to the determinant
+line with scaling parameter $rt$ to obtain the second equality, and
+divide by $r$ for the slope statement.
+\end{proof}
+
 \begin{lemma}[Determinant identities and contraction]
 \label{lem:degree-calculus}\uses{def:hermitian-degree}
 \source{bost-specht-manuscript:page-0003}\notready
