@@ -9,7 +9,8 @@ basis; that basis hypothesis is not yet discharged for standard polytabloids.
 `Norm.lean` proves that a polytabloid's squared norm is the column-group order.
 `Rectangle.lean` identifies balanced row words and proves the initial norm
 `(a!)^k`. `Standard.lean` proves standard-polytabloid independence over any
-ring by lexicographic triangularity. Rational spanning remains unproved.
+ring by lexicographic triangularity. `OneRow.lean` proves covolume one and
+the sublinear limit for the one-row case. Rational spanning remains unproved.
 This does not establish the rational standard basis,
 the invariant-space identification, or the covolume asymptotic.
 

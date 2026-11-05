@@ -56,8 +56,12 @@ changes. The installed mathlib revision is pinned in `lake-manifest.json`.
   Specht cone to construct the integral orbit lattice, prove its equality
   with the all-polytabloid span, identify its complex scalar extension
   equivariantly, and realize its orthonormal word metric. These are original
-  bridge proofs using the unmodified vendor declarations. Still required:
-  integral standard basis and determinant-isotypic bridges; for
+  bridge proofs using the unmodified vendor declarations. The original local
+  `Norm`, `Rectangle`, `Standard`, and `OneRow` modules add the rectangular
+  word realization, initial norm, standard-family independence, and one-row
+  covolume calculation. `Standard` uses an original lexicographic proof;
+  no TauCeti straightening code has been copied. Still required:
+  rational standard spanning and determinant-isotypic bridges; for
   compactness, restriction of scalars, arithmetic covolume/systole formulas,
   persistence of the integer-ring action, and degree continuity.
 
@@ -100,8 +104,12 @@ changes. The installed mathlib revision is pinned in `lake-manifest.json`.
   orbit lattice is now constructed as `BostConjecture.Specht.spanLattice`,
   with discreteness and fullness proved. The consumer
   `BostConjecture.Specht.covolume_sq_eq_integer_gram` applies the copied
-  Gram theorem, and `one_le_covolume` derives its lower bound. The standard
-  basis and its seminormal Gram upper bound remain open. No TauCeti Lake
+  Gram theorem, and `one_le_covolume` derives its lower bound.
+  `covolume_sq_le_det_gram` now consumes the copied lattice-inclusion theorem
+  and span Gram formula for an integral real basis, with that hypothesis
+  explicit. `oneRow_covolume_eq_one` supplies an actual integral basis and
+  computes its covolume. Rational standard spanning and the seminormal Gram
+  formula remain open. No TauCeti Lake
   dependency was added.
 
 ## Verification

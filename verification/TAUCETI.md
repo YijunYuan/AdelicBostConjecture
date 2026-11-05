@@ -11,7 +11,9 @@ Specht integration update (run 0003): the original project proofs in
 `BostConjecture/Specht/{Integral,Tableau,Metric}.lean` now construct the integral
 orbit span, prove its all-polytabloid and equivariant complexification bridges,
 and give the Gram theorem a concrete discrete Hilbert-lattice consumer.
-The next producer is standard-polytabloid spanning/independence in this word
+`Standard.lean` now proves independence by an original leading-word argument;
+`Rectangle.lean` and `Norm.lean` give the concrete word realization and initial
+norm. The next producer is rational standard-polytabloid spanning in this word
 model. The rational-versus-integral warning in §2 below remains in force.
 
 Inspected 2026-11-05 for the Bost manuscript's integral Specht/Gram and tensor-invariant prerequisites. **Recommendation: first adapt only the covolume–Gram and lattice-inclusion lemmas below; then adapt the rational standard-polytabloid proof into the existing word-space model. Do not require TauCeti as a Lake dependency.**
@@ -92,7 +94,13 @@ These are actual mutual centralizer statements for the diagonal general-linear a
 
 ## Next Horizon task
 
-Adapt the seven covolume/Gram declarations into a small project-local module with exact upstream attribution, reusing local Mathlib producers. Run the narrow Lean 4.35 kernel check and `#print axioms`, then give the module a real Specht-lattice consumer. Continue with rational standard-polytabloid spanning/independence in the existing representation model; avoid importing a second large Specht abstraction stack.
+Adapt only the rational straightening argument into the existing word model.
+The lattice, metric, Gram comparison, and standard independence are already
+proved locally. Rational spanning and real transport must supply the basis
+hypothesis of `BostConjecture.Specht.covolume_sq_le_det_gram`; the seminormal
+Gram identity remains a separate obligation.
 
-Claim class: **unverified candidate source**. Frontier unchanged: integral Specht lattice/scalar-extension/metric and seminormal Gram producers remain open. No proof completion or main-theorem claim is made. Honesty-reviewer skipped: this bounded task acquires and distinguishes source statements; it introduces no Lean certificate, accepted theorem, or completion marker.
+The unported TauCeti source remains an **unverified candidate source**.
+Accepted local proof/build evidence and scoped honesty review are recorded in
+`RESULTS.md`; no source inspection alone discharges the remaining producers.
 

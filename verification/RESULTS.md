@@ -1,5 +1,44 @@
 # Dependency integration evidence — 2026-11-05
 
+## Rectangular and standard-family producers — session 0005
+
+Commits `38d00f7`, `4f1312f`, `5fcb018`, `8ee59c6`, and `fa614ea`
+prove the polytabloid norm, integral-real-basis Gram upper bound,
+rectangular word realization and factorial initial norm, standard-polytabloid
+independence over every ring, and the one-row covolume/limit respectively.
+
+`horizon check --json` passed at **14:09:21 UTC** (9,088 jobs,
+6.784 seconds). `horizon check --lean verification/SpechtAxioms.lean --json`
+passed at **14:10:06 UTC** (10.499 seconds). All 38 transitive probes report
+only `propext`, `Classical.choice`, and `Quot.sound`. No `sorryAx` or new
+axioms occur. LSP feedback was used throughout. An early Standard inverse
+coercion error and local proof attempts were repaired before these checks;
+no accepted proof is broken. The known resource-slot message again had
+recorded wait at most 0.001 seconds.
+
+Claim class: **proved producers**, with an explicit **conditional interface**
+for the Gram bound requiring an integral real basis. Frontier before:
+rectangular specialization and standard basis. Frontier after:
+`lem:rational-standard-spanning`, then real transport and seminormal action.
+Consumer: the standard real basis will feed `covolume_sq_le_det_gram`;
+the actual one-row integral basis already feeds `oneRow_covolume_eq_one`.
+The general covolume limit and manuscript Theorem 1.1 remain unproved.
+
+The reviewed minimal route uses the all-polytabloid orbit lattice and the
+full-rank standard sublattice, so the exact standard-family Gram identity
+gives `0 ≤ 2c_a(d) ≤ E log γ`. No integral standard-spanning theorem or
+index estimate is assumed. Ryom-Hansen v1 is attached as the precise source
+of the still-open seminormal action formula, not as Lean proof evidence.
+
+Honesty-reviewer: **used**, satisfactory through `fa614ea`, including the
+one-row attachment and build/axiom records. Final graph sync reports 56
+blueprint nodes, 339 Lean declarations, 18 checked blueprint nodes and zero
+stale nodes. Its 212 unattached helper/imported declarations are intentional
+coverage warnings recorded in I-0004. The source-scope symlink is unchanged;
+scratch cleanup found no stale candidates.
+The janitor boundary review confirmed consistent roadmap children, no open
+conversations, and no additional cleanup needed.
+
 ## Integral Specht producers — run 0003
 
 Commits `45d3fe4`, `f34d7fc`, and `c78c52b` add
