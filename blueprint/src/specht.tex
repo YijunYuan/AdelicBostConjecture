@@ -913,7 +913,8 @@ first, and belongs to the same subspace.
 
 \begin{lemma}[Extension at a fixed removable corner]
 \label{lem:standard-corner-extension}
-\uses{lem:standard-prefix-diagram,lem:polytabloid-prefix-restriction}\notready
+\uses{lem:standard-prefix-diagram,lem:polytabloid-prefix-restriction,lem:real-standard-basis}
+\lean{BostConjecture.Specht.extendTableau_isStandard,BostConjecture.Specht.prefixSliceReal_extendTableau,BostConjecture.Specht.tableauColexLT_extendTableau_iff,BostConjecture.Specht.prefixSliceReal_cornerLift,BostConjecture.Specht.cornerLift_mem_colexSubspace}\leanok
 Let $t$ be standard on $n+1$ labels and let $\nu$ be its diagram
 after deleting the largest label. Every standard tableau $u$ of
 $\nu$ extends to a standard tableau $\widehat u$ of the original
@@ -921,6 +922,10 @@ diagram by putting label $n$ in the deleted box. Restriction of
 $e_{\widehat u}$ at that last row is $e_u$. Colexicographic
 comparison of two such extensions agrees with comparison of their
 prefix row words.
+The linear extension of this assignment is a right inverse to
+restriction, with image in the chosen largest-label filtration
+step, and it sends every earlier-prefix span into the corresponding
+earlier-tableau span.
 \end{lemma}
 \begin{proof}
 The removed box is at the right end of its row and the bottom of
@@ -934,6 +939,11 @@ identifies the restricted polytabloid with $e_u$. The last row
 agrees for both extensions, and their earlier row entries are
 exactly those of the two prefixes. Their last differing label and
 the row comparison at that label are consequently unchanged.
+Extend the assignment linearly using the standard basis. The
+restriction identity on basis vectors proves the right-inverse
+identity on the whole smaller Specht space. Each image basis
+vector has the prescribed final row; the order comparison just
+proved gives the assertion on earlier spans.
 \end{proof}
 
 \begin{lemma}[Colexicographic triangular Murphy action]
