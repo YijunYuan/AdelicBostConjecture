@@ -1642,6 +1642,26 @@ therefore gives the degree formula. Localization preserves this exact
 sequence, so dimension additivity gives the rank formula.
 \end{proof}
 
+\begin{lemma}[Semistability of induced quotient intervals]
+\label{lem:quotient-interval-semistable}
+\uses{lem:quotient-submodule-degree,lem:hermitian-convex-slopes,lem:saturation-degree,lem:hermitian-quotient-interval-slope}
+\notready
+Let $X\subsetneq Y\subseteq A_K$. Suppose every $X\subsetneq Z\subseteq Y$
+satisfies $\mu(X,Z)\leq\mu(X,Y)$. Then the actual quotient bundle
+$(A\cap Y)/(A\cap X)$ is semistable against all positive-rank integral
+submodules.
+\end{lemma}
+\begin{proof}
+For such a submodule $N$, let $T$ be its inverse image in $A\cap Y$,
+viewed as a submodule of $A$, and put $Z=T_K$. Then $X\subseteq Z\subseteq Y$.
+The preceding lemma gives
+$\degn N=\degn T-\degn(A\cap X)$ and
+$\rk N=\dim Z-\dim X>0$. Thus $X\subsetneq Z$.
+Saturating $T$ in $A$ gives $A\cap Z$ and increases degree without
+changing rank. Hence $\slope(N)\leq\mu(X,Z)\leq\mu(X,Y)$.
+This proves the assertion with the actual induced quotient metric.
+\end{proof}
+
 \begin{lemma}[Harder--Narasimhan filtration]
 \label{lem:hn-filtration}
 \uses{def:hermitian-degree,lem:hermitian-hn-interval-flag,lem:nested-quotient-metric,lem:exact-determinant-degree,lem:determinant-contraction,lem:saturation-degree,lem:hermitian-convex-slopes}
