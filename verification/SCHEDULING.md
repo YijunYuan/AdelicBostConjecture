@@ -5,7 +5,7 @@ Coordinator checkpoint: 2026-11-06 04:34 Asia/Shanghai (2026-11-05 20:34 UTC).
 The user assigned the parent session scheduling only, with no spending cap. The user subsequently authorized a fourth dedicated
 Lemma 7.2 lane if memory pressure is low; the total cap is now four proof
 writers, including writable helpers. Horizon owns all mathematical work.
-The new four-slot ownership protection supersedes the original `I-0012`;
+The new four-slot ownership protection `I-0046` supersedes the archived `I-0012`;
 existing proof ownership is retained. No publishing or pushing is authorized by this arrangement.
 
 | Run | Task | Proof ownership | Current frontier |
@@ -13,7 +13,7 @@ existing proof ownership is retained. No publishing or pushing is authorized by 
 | `0003` | `BOST-SPECHT` | `Specht/**`, `Lattice/**`, Specht blueprint | Tableau enumeration and prefix-distribution estimates for covolume asymptotics |
 | `0004` | `BOST-ARITH` | `Arithmetic/**`, `Slope/**`, arithmetic blueprint | Dual degree, general tensor/exact-sequence identities and intrinsic HN specialization |
 | `0005` | `BOST-GEOM` | `Geometry/**`, `Tensor/**`, geometry blueprint | Scalar extension of the integral pairing, global contraction, then invariant/nonvanishing arguments |
-| Pending launch | `BOST-BALANCED` | `Balanced/**`, `InvariantTheory/**`, balanced/orbit sections of compactness blueprint | Exact manuscript Lemma 7.2, including the needed analytic and orbit-closure/invariant criteria |
+| `0006` | `BOST-BALANCED` | `Balanced/**`, `InvariantTheory/**`, balanced/orbit sections of compactness blueprint | Exact manuscript Lemma 7.2, including the needed analytic and orbit-closure/invariant criteria |
 
 Each task owns its corresponding verification files. BOST-SPECHT is the sole
 editor of the shared root import, `CONTRIBUTIONS.md`, `RESULTS.md`, and shared
@@ -23,8 +23,8 @@ The arithmetic and geometry lanes share the existing `ComplexFiber`,
 
 ## Continuing the runs
 
-The original three foreground runs remain active; the fourth lane is being
-registered and launched in the foreground. Before resuming any
+All four foreground runs are active. Run `0006` started at 20:35:37 UTC with
+session `0002-horizon-BOST-BALANCED`, PID `390675`. Before resuming any
 run, inspect `horizon ps --json` and its terminal session status. Resume an exited
 run with meaningful remaining work, keeping the total at four. For example:
 
@@ -54,7 +54,7 @@ committed through `5344b4d`: local contraction at `00eec3c` passed 9,088 jobs
 and 138 foundational-only probes. That newer metric batch awaits the next root
 integration through `I-0044`; it is not included in the 9,171-job result above.
 
-The current sessions are SPECHT `0023`, ARITH `0010`, and GEOM `0012`.
+The current sessions are SPECHT `0023`, ARITH `0010`, GEOM `0012`, and BALANCED `0002`.
 SPECHT `0023` is the last currently planned round of run `0003`; resume the
 run after it exits if the task remains incomplete, without exceeding four
 proof writers. The saved hook-count draft has since been repaired and checked.
@@ -116,12 +116,13 @@ unchanged. Reproduce with:
 uvx --from lean-lsp-mcp==0.33.0 --with leanclient==0.13.2 python tools/check_lean_lsp_no_build.py
 ```
 
-The repair is committed as `d0f37d5`. All three current proof sessions now have
+The repair is committed as `d0f37d5`. All four current proof sessions now have
 actual guarded MCP processes, verified by command and parent ancestry:
 
 - ARITH `0010`: wrapper PIDs `364426`/`364450`, Codex `364286`, run PID `161941`.
 - SPECHT `0023`: wrapper PIDs `375430`/`375478`, Codex `375307`, run PID `76365`.
 - GEOM `0012`: wrapper PIDs `379185`/`379198`, Codex `379060`, run PID `163151`.
+- BALANCED `0002`: wrapper PIDs `391121`/`391456`, Codex `390896`, run PID `390675`.
 
 The old sessions ended normally. Temporary transition protection `I-0034` is
 archived; guarded diagnostics are permitted and kernel builds still use the
@@ -140,10 +141,12 @@ Before authorizing the fourth run, the coordinator measured 23.46 GiB total
 RAM and 8.86 GiB available, memory pressure avg10 0.03%, and no sustained swap
 out in the interval sample. About 4.49 GiB of swap was already occupied; this
 is recorded separately from active swapping. Keep builds serialized and
-monitor memory after startup.
+monitor memory after startup. The immediate postlaunch sample retained
+8.63 GiB available with memory-pressure avg10 0.18%. A read-only operational
+review is checking the four-lane count and roadmap ancestor warnings.
 
 BALANCED owns the shared geometric-semistability and orbit-criterion API and
-coordinates its consumers with GEOM. Its proof must cover the actual source
+coordinates its consumers with GEOM through `I-0047`. Its proof must cover the actual source
 conclusion, including all external results it uses; an analytic norm bound
 alone does not complete Lemma 7.2. The parent will notify the user in this chat
 only after the exact theorem, transitive axioms, independent review and required
