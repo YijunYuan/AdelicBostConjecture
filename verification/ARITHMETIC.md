@@ -162,3 +162,10 @@ construction from its still-unchecked uniqueness theorem; it likewise keeps
 zero normalization and the later calculus/HN boundary separate. The imported
 Mathlib finiteness instance is recorded here rather than attached to a graph
 restricted to project sources.
+
+The final graph sync reported 101 blueprint nodes, 700 project declarations
+and 386 generated edges, with no unresolved attachment warning. The 399
+unattached imported/helper declarations remain an intentional shared-project
+coverage warning; graph enumeration is not kernel evidence for concurrent
+drafts. The nested active-roadmap count was independently reviewed and left
+intact; only the three authorized proof lanes were used.
