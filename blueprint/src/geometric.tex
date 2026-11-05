@@ -696,6 +696,28 @@ is unchanged by a finite permutation; the spanning argument again
 extends this equality to all tensors.
 \end{proof}
 
+\begin{lemma}[Orthonormal tensor coordinates]
+\label{lem:orthonormal-tensor-coordinates}
+\uses{lem:finite-hilbert-tensor}
+\source{bost-specht-manuscript:page-0010}
+\notready
+If $b_1,\ldots,b_a$ is an orthonormal basis of a complex inner product
+space $E$, then the canonical word-indexed tensor basis of $E^{\otimes n}$
+is orthonormal. Consequently, for tensors $x,y$ with word coordinates
+$x_w,y_w$,
+\[
+ \langle x,y\rangle=\sum_{w:\{1,\ldots,n\}\to\{1,\ldots,a\}}
+   \overline{x_w}\,y_w.
+\]
+\end{lemma}
+\begin{proof}
+The pairing of two tensor basis elements indexed by $w,v$ is
+$\prod_q\langle b_{w(q)},b_{v(q)}\rangle$. It is one if $w=v$;
+otherwise some $q$ has $w(q)\ne v(q)$ and the corresponding factor
+is zero. Thus the tensor basis is orthonormal. Expand $x$ and $y$ in
+this finite basis and use sesquilinearity to obtain the coordinate formula.
+\end{proof}
+
 \begin{lemma}[Regrouping preserves the Hilbert form]
 \label{lem:hilbert-regrouping}
 \uses{lem:tensor-regrouping,lem:finite-hilbert-tensor}
