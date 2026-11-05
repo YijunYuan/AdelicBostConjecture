@@ -1,4 +1,4 @@
-import BostConjecture.Balanced.GramDerivative
+import BostConjecture.Balanced.ExponentialFlow
 
 #print axioms BostConjecture.Balanced.trace_starProjection_comp
 #print axioms BostConjecture.Balanced.trace_starProjection_comp_eq_sum
@@ -16,3 +16,6 @@ import BostConjecture.Balanced.GramDerivative
 #print axioms BostConjecture.Balanced.trace_partialTraceLeft_comp
 #print axioms BostConjecture.Balanced.trace_comp_tensorSum_of_partialTrace_eq_smul
 #print axioms BostConjecture.Balanced.trace_comp_tensorSum_eq_zero
+#print axioms BostConjecture.Balanced.hasDerivAt_exp_apply_zero
+#print axioms BostConjecture.Balanced.hasDerivAt_tensor_exp_zero
+#print axioms BostConjecture.Balanced.IsBalanced.hasDerivAt_re_gramDet_tensor_exp_zero
