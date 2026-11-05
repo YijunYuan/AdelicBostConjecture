@@ -91,6 +91,16 @@ from the active source tree and the verified blueprint restored. It was never
 root-imported or claimed proved. Thus the checked root and six mathematical
 modules remain unchanged. Continue the counting bridge in the next round.
 
+Finalization ownership audit: all SPECHT-owned source, blueprint, attribution
+and audit changes are committed. Remaining shared-tree edits at the boundary
+belong to ARITH (`Arithmetic/LineDualDegree.lean`, `blueprint/src/arithmetic.tex`,
+`verification/ArithmeticAxioms.lean`) and GEOM (`blueprint/src/geometric.tex`).
+Pre-existing untracked workspace configuration/instruction files and the two
+reference PDFs were left untouched. None was staged or committed by SPECHT.
+New handoff I-0044 delivers `Geometry.ContractionMetric` (`00eec3c`) for the
+next root batch; it is acknowledged but was not root-integrated or rechecked
+in this session. LSP and a build covering later concurrent leaves were not run.
+
 ## Colex content-spectrum checkpoint (session 0019)
 
 Claim class: **proved producers**. `Extension.lean` constructs standard
