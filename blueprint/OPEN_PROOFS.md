@@ -3,16 +3,23 @@ not yet closed. The integral word orbit span and its complex scalar-extension
 map are proved in `BostConjecture/Specht/Integral.lean`. `Tableau.lean`
 identifies the orbit with all polytabloids; `Metric.lean` constructs the
 discrete full Hilbert lattice in its own real span and proves its covolume
-is at least one using an integer Gram determinant. Seven precise nodes carry
-Lean attachments. This does not establish the integral standard basis,
+is at least one using an integer Gram determinant. Its covolume square is
+bounded above by the Gram determinant of any integral family that is a real
+basis; that basis hypothesis is not yet discharged for standard polytabloids.
+`Norm.lean` proves that a polytabloid's squared norm is the column-group order.
+This does not establish the rational standard basis,
 the invariant-space identification, or the covolume asymptotic.
 
 Three theorem nodes still need complete source-backed mathematical proofs:
 
-- `lem:rectangular-invariants` is split into `lem:integral-standard-basis`,
-  `lem:rectangular-absolute-irreducible`, and `lem:rectangular-sl-invariants`.
+- `lem:rational-standard-basis` and its real-transport consumer
+  `lem:real-standard-basis` remain open. The all-polytabloid lattice is retained:
+  a rational standard basis gives a full-rank sublattice and the Gram upper
+  bound, so integral straightening is unnecessary for this route.
+- `lem:rectangular-invariants` depends independently on
+  `lem:rectangular-absolute-irreducible` and `lem:rectangular-sl-invariants`.
   Its complex orbit representation now has an explicit integral model and
-  tensor-product scalar-extension equivalence. The standard-basis theorem,
+  tensor-product scalar-extension equivalence. The rational standard-basis theorem,
   characteristic-zero descent, and invariant-space identification remain open.
 - `lem:monic-seminormal`: construction of the monic seminormal basis and its
   correctly normalized adjacent-transposition formula. The following norm
@@ -24,6 +31,11 @@ Three theorem nodes still need complete source-backed mathematical proofs:
 These are unproved producer obligations, not assumptions under which the
 main result is declared finished. The current manuscript proposes the route;
 the blueprint's mathematical proofs still require independent review.
+
+The seminormal Gram identity is for the standard family. For the orbit lattice
+it yields only `0 ≤ 2c_a(d) ≤ E log γ`; the sublinear limit follows by squeezing.
+Determinant covariance for local-frame gluing and the full invariant generic
+fiber for nonvanishing stay independent requirements of the contraction route.
 
 All cited manuscript page anchors resolve to registered vision transcriptions
 that were read before attachment. The shifted-coordinate tableau count has

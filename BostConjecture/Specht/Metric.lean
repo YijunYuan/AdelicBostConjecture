@@ -179,4 +179,28 @@ theorem log_covolume_nonneg (t : Tableau n μ) :
     0 ≤ Real.log (ZLattice.covolume (spanLattice t)) :=
   Real.log_nonneg (one_le_covolume t)
 
+/-- Integral vectors forming a real basis give a Gram upper bound, without
+requiring them to form an integral basis of the full orbit lattice. -/
+theorem covolume_sq_le_det_gram (t : Tableau n μ) {ι : Type*}
+    [Fintype ι] [DecidableEq ι] (b : Basis ι ℝ (realSpan t))
+    (hb : ∀ i, b i ∈ spanLattice t) :
+    ZLattice.covolume (spanLattice t) ^ 2 ≤ (Matrix.gram ℝ b).det := by
+  have hle : Submodule.span ℤ (Set.range b) ≤ spanLattice t := by
+    rw [Submodule.span_le]
+    rintro _ ⟨i, rfl⟩
+    exact hb i
+  rw [← ZLattice.covolume_span_sq_eq_det_gram b]
+  exact pow_le_pow_left₀ (ZLattice.covolume_pos (spanLattice t) volume).le
+    (ZLattice.covolume_le_covolume_of_le hle) 2
+
+/-- The logarithmic Gram bound used for the full-rank standard sublattice route. -/
+theorem two_mul_log_covolume_le_log_det_gram (t : Tableau n μ) {ι : Type*}
+    [Fintype ι] [DecidableEq ι] (b : Basis ι ℝ (realSpan t))
+    (hb : ∀ i, b i ∈ spanLattice t) :
+    2 * Real.log (ZLattice.covolume (spanLattice t)) ≤ Real.log (Matrix.gram ℝ b).det := by
+  have h := Real.log_le_log
+    (sq_pos_of_pos (ZLattice.covolume_pos (spanLattice t) volume))
+    (covolume_sq_le_det_gram t b hb)
+  simpa only [Real.log_pow, Nat.cast_ofNat] using h
+
 end BostConjecture.Specht

@@ -137,6 +137,29 @@ one. Taking the nonnegative square root and then the logarithm gives
 the two inequalities. A finite integral basis exists by finite freeness.
 \end{proof}
 
+\begin{lemma}[Covolume bound from an integral real basis]
+\label{lem:specht-covolume-upper}\uses{lem:integral-specht-covolume-nonneg}
+\lean{BostConjecture.Specht.covolume_sq_le_det_gram,BostConjecture.Specht.two_mul_log_covolume_le_log_det_gram}
+\source{bost-specht-manuscript:page-0004,bost-specht-manuscript:page-0005}\leanok
+Let $(v_i)_{i\in I}$ be a real basis of $V_t$ consisting of vectors
+of $\Lambda_t$, and let $G=(\langle v_i,v_j\rangle)_{i,j\in I}$.
+Then
+\[
+ 1\leq\covol(\Lambda_t)^2\leq\det G,\qquad
+ 0\leq2\log\covol(\Lambda_t)\leq\log\det G.
+\]
+\end{lemma}
+\begin{proof}
+The subgroup $S=\sum_i\mathbb Z v_i$ is a full lattice contained
+in $\Lambda_t$, because the $v_i$ are a real basis. Its covolume
+is $[\Lambda_t:S]\covol(\Lambda_t)$, and the finite index is a
+positive integer. Thus $\covol(\Lambda_t)\leq\covol(S)$.
+The Gram formula gives $\covol(S)^2=\det G$. Both covolumes
+are positive, so squaring and taking logarithms preserve the
+inequalities. The lower bounds follow from the integral Gram
+determinant of $\Lambda_t$.
+\end{proof}
+
 \begin{lemma}[Norm of an integral polytabloid]
 \label{lem:polytabloid-norm}\uses{lem:real-specht-lattice,lem:integral-specht-all-tableaux}
 \lean{BostConjecture.Specht.column_rowWord_injective,BostConjecture.Specht.polytabloid_summands_orthonormal,BostConjecture.Specht.norm_polytabloidInt_sq}
@@ -177,11 +200,32 @@ Row tabloids identify isometrically with tensor words in $a$ distinct
 orthonormal letters, each appearing $k$ times.
 \end{definition}
 
-\begin{theorem}[Integral standard-polytabloid basis]
-\label{lem:integral-standard-basis}\uses{def:rectangular-specht}
+\begin{theorem}[Rational standard-polytabloid basis]
+\label{lem:rational-standard-basis}\uses{def:rectangular-specht}
 \source{bost-specht-manuscript:page-0004}\notready
-The standard polytabloids form an integral basis of $L_{a,d}$.
+The standard polytabloids form a rational basis of
+$\mathbb Q\otimes_\mathbb Z L_{a,d}$ in rational word coordinates.
 \end{theorem}
+
+\begin{lemma}[Real standard basis and full-rank sublattice]
+\label{lem:real-standard-basis}\uses{lem:rational-standard-basis,def:rectangular-specht}
+\source{bost-specht-manuscript:page-0004}\notready
+The standard polytabloids form a real basis of $V=L_{a,d}\otimes\mathbb R$.
+Their integral span $S_{a,d}\subseteq L_{a,d}$ is a full-rank sublattice,
+and their number equals $f_{a,d}$.
+\end{lemma}
+\begin{proof}
+Rational spanning expresses each orbit generator as a rational linear
+combination of standard polytabloids, hence also as a real linear
+combination. The standard coordinate matrix has independent columns
+over $\mathbb Q$, so some square minor of their number is nonzero.
+That rational determinant remains nonzero in $\mathbb R$, proving
+real independence. Each standard polytabloid belongs to the integral
+orbit lattice. Their integral span is the integer span of a real
+basis and is therefore a full lattice in $V$. Finally the rank of
+$L_{a,d}$ equals the dimension of its rational scalar extension,
+which is the cardinality of the stated rational basis.
+\end{proof}
 
 \begin{theorem}[Absolute irreducibility of the rectangular Specht lattice]
 \label{lem:rectangular-absolute-irreducible}
@@ -201,30 +245,35 @@ $A^{\otimes d}$ is exactly $(A^{\otimes d})^{\SL(A)}$.
 
 \begin{theorem}[Rectangular Specht realization]
 \label{lem:rectangular-invariants}
-\uses{lem:integral-standard-basis,lem:rectangular-absolute-irreducible,lem:rectangular-sl-invariants}
+\uses{lem:rectangular-absolute-irreducible,lem:rectangular-sl-invariants}
 \source{bost-specht-manuscript:page-0004}\notready
-The standard polytabloids form an integral basis of $L_{a,d}$.
-Its characteristic-zero representation of $\mathfrak S_d$ is
+The characteristic-zero representation of $\mathfrak S_d$ on $L_{a,d}$ is
 absolutely irreducible. For every $a$-dimensional vector space $A$
 over a characteristic-zero field, the image of
 $(\det A)^{\otimes k}\otimes L_{a,d}$ in $A^{\otimes d}$ is exactly
 $(A^{\otimes d})^{\SL(A)}$.
 \end{theorem}
 \begin{proof}
-Apply the integral standard-basis theorem, the absolute irreducibility
-theorem and the invariant-space identification to the same lattice.
+Apply the absolute irreducibility theorem and the invariant-space
+identification to the same lattice.
 \end{proof}
 
 \begin{remark}
-The lattice may equivalently be defined by all polytabloids or by the
-standard polytabloids: the integral basis theorem identifies these
-definitions. Its image need not be the saturated invariant lattice.
-Only its integral embedding and its full invariant generic fiber enter
-the contraction argument.
+The manuscript defines its lattice by standard polytabloids. Here
+$L_{a,d}$ is the all-polytabloid orbit lattice, and $S_{a,d}$ denotes
+the manuscript's standard-polytabloid lattice. The argument uses
+$S_{a,d}\subseteq L_{a,d}$ and their equal rational spans; it does
+not require equality over the integers. The Gram identity below
+belongs to $S_{a,d}$ and gives an upper bound for the covolume of
+$L_{a,d}$. Integral contraction uses $L_{a,d}$ itself, and its degree
+is computed using any integral basis of that lattice. Its image
+need not be the saturated invariant lattice. Determinant covariance,
+absolute irreducibility and the full invariant generic fiber remain
+separate properties of the all-polytabloid construction.
 \end{remark}
 
 \begin{theorem}[Monic seminormal basis]
-\label{lem:monic-seminormal}\uses{lem:integral-standard-basis}
+\label{lem:monic-seminormal}\uses{lem:real-standard-basis}
 \source{bost-specht-manuscript:page-0005}\notready
 Order standard tableaux by an extension of dominance of every prefix,
 starting with the column-reading tableau $t_0$. Monic orthogonalization
@@ -239,7 +288,7 @@ where a box in row $r$, column $q$, has content $q-r$.
 \end{theorem}
 
 \begin{lemma}[Seminormal norms]
-\label{lem:seminormal-norms}\uses{lem:monic-seminormal}
+\label{lem:seminormal-norms}\uses{lem:monic-seminormal,lem:polytabloid-norm}
 \source{bost-specht-manuscript:page-0005,bost-specht-manuscript:page-0006}\notready
 For a standard tableau $t$, let $\lambda^{(j)}$ be its prefix shape
 after $j$ entries, and let $r_j$ be the row of entry $j$. Set
@@ -249,7 +298,7 @@ Then each relevant $\delta$ is at least two, and
  \gamma_t:=\|f_t\|^2
  =\prod_{j=1}^d\prod_{i<r_j}\frac{\delta_{i,r_j}(j)}{\delta_{i,r_j}(j)-1},
  \qquad
- 2c_a(d)=\mathbb E_{t\in\SYT(k^a)}\log\gamma_t.
+ \det\Gram((e_t)_{t\in\SYT(k^a)})=\prod_t\gamma_t.
 \]
 \end{lemma}
 \begin{proof}
@@ -277,11 +326,28 @@ it, or the two linear extensions would disagree with the partial
 order. Repeat on the remaining entries. Thus the initial value and
 swap ratios identify the norm product everywhere.
 
-The monic triangular change of basis has determinant one, so the Gram
-determinant of the integral standard basis is $\prod_t\gamma_t$.
-Its logarithm is twice the logarithm of the lattice covolume. Divide
-by the number of standard tableaux, which is $f_{a,d}$, to obtain
-the expectation formula.
+The monic triangular change of basis has determinant one. The Gram
+matrix of the orthogonal family $(f_t)$ is diagonal with entries
+$\gamma_t$. Transformation of the Gram determinant therefore gives
+the asserted product for the standard polytabloid family.
+\end{proof}
+
+\begin{lemma}[Seminormal upper bound for orbit covolume]
+\label{lem:seminormal-covolume}
+\uses{lem:seminormal-norms,lem:real-standard-basis,lem:specht-covolume-upper}
+\source{bost-specht-manuscript:page-0005,bost-specht-manuscript:page-0006}\notready
+For the all-polytabloid lattice,
+\[
+ 0\leq2c_a(d)\leq\mathbb E_{t\in\SYT(k^a)}\log\gamma_t.
+\]
+\end{lemma}
+\begin{proof}
+The standard polytabloids are integral vectors forming a real basis,
+so the covolume bound gives $0\leq2\log\covol L_{a,d}\leq
+\log\det\Gram((e_t))$. Each $\gamma_t$ is positive. Taking the
+logarithm of the seminormal Gram identity gives
+$\log\det\Gram((e_t))=\sum_t\log\gamma_t$. Divide by the
+positive number of standard tableaux, which equals $f_{a,d}$.
 \end{proof}
 
 \begin{lemma}[Tableau enumeration in shifted coordinates]
@@ -434,7 +500,7 @@ holds for the prefix distribution.
 
 \begin{theorem}[Sublinear rectangular Specht covolume]
 \label{thm:specht-sublinear-covolume}
-\uses{def:rectangular-specht,lem:integral-specht-covolume-nonneg,lem:seminormal-norms,lem:prefix-separation}
+\uses{def:rectangular-specht,lem:integral-specht-covolume-nonneg,lem:seminormal-norms,lem:seminormal-covolume,lem:prefix-separation}
 \source{bost-specht-manuscript:page-0008}\notready
 For every fixed positive integer $a$,
 $c_a(ak)\geq0$ and $c_a(ak)/(ak)\to0$ as $k\to\infty$.
@@ -459,5 +525,6 @@ with the bound valid for every next legal row, gives
 For fixed $\varepsilon,L$ the last term tends to zero. Taking the
 upper limit in $k$, then taking $L\to\infty$ and
 $\varepsilon\to0$, proves $\mathbb E\log\gamma_t/d\to0$.
-The seminormal norm identity converts this to $2c_a(d)/d\to0$.
+The inequalities $0\leq2c_a(d)/d\leq\mathbb E\log\gamma_t/d$
+then give $c_a(d)/d\to0$ by squeezing.
 \end{proof}

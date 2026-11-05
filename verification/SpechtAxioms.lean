@@ -20,3 +20,5 @@ import BostConjecture
 #print axioms BostConjecture.Specht.log_covolume_nonneg
 #print axioms BostConjecture.Specht.column_rowWord_injective
 #print axioms BostConjecture.Specht.norm_polytabloidInt_sq
+#print axioms BostConjecture.Specht.covolume_sq_le_det_gram
+#print axioms BostConjecture.Specht.two_mul_log_covolume_le_log_det_gram
