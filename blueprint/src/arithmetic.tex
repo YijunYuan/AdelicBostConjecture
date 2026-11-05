@@ -1174,9 +1174,32 @@ orthogonal lift, which is therefore isometric. Its image is perpendicular
 to the kernel of $q$, which contains the image of $i$.
 \end{proof}
 
+\begin{lemma}[Exact determinant norms on integral pure tensors]
+\label{lem:exact-determinant-pure-norm}
+\uses{lem:exact-determinant-field-section,lem:orthogonal-determinant-norm,lem:quotient-hermitian-metric,lem:determinant-metric}\notready
+For an exact sequence $0\to A\xrightarrow{i}B\xrightarrow{q}C\to0$
+of finite projective $\Ocal$-modules, give $A$ the metric induced from $B$
+and $C$ the quotient metric. Write $D:\det A\otimes\det C\simeq\det B$
+for the canonical map. At every embedding $\sigma$ and for all integral
+determinant vectors $x,y$,
+\[
+ \|D(x\otimes y)\|_\sigma=\|x\|_\sigma\|y\|_\sigma.
+\]
+\end{lemma}
+\begin{proof}
+Scalar extension computes $D$ using any complex section, so choose the
+orthogonal right inverse of $q_\sigma$. The inclusion $i_\sigma$ is
+isometric for the induced metric, while the orthogonal lift is isometric
+for the quotient metric and perpendicular to its image. The preceding
+orthogonal-summand formula applies to the two extended determinant vectors.
+The determinant fiber metric is precisely the top exterior metric, and
+transport along the generic-rank identities does not change it. This gives
+the stated equality on the intrinsic integral determinant lines.
+\end{proof}
+
 \begin{lemma}[Exact-sequence determinant isometry and degree]
 \label{lem:exact-determinant-degree}
-\uses{lem:exact-determinant-algebra,lem:exact-determinant-field-section,lem:orthogonal-determinant-norm,lem:quotient-hermitian-metric,lem:determinant-metric,lem:line-tensor-degree,lem:line-degree-isometry,def:intrinsic-determinant-degree}
+\uses{lem:exact-determinant-algebra,lem:exact-determinant-pure-norm,lem:quotient-hermitian-metric,lem:determinant-metric,lem:line-tensor-degree,lem:line-degree-isometry,def:intrinsic-determinant-degree}
 \source{bost-specht-manuscript:page-0003}\notready
 Let $0\to A\xrightarrow{i}B\xrightarrow{q}C\to0$ be an exact sequence
 of finite projective $\Ocal$-modules. Equip $B$ with a Hermitian metric,
