@@ -360,6 +360,31 @@ If $\phi'(0)=0$, both inequalities imply $\phi(t)\geq\phi(0)$;
 at $t=0$ equality holds.
 \end{proof}
 
+\begin{lemma}[The balanced tensor exponential minimum]
+\label{lem:balanced-tensor-exponential-minimum}
+\lean{BostConjecture.Balanced.isSymmetric_tensorSum,BostConjecture.Balanced.exp_tensorSum,BostConjecture.Balanced.convexOn_exterior_tensor_exp_norm_sq,BostConjecture.Balanced.IsBalanced.one_le_plucker_norm_sq_tensor_exp}\notready
+\uses{lem:balanced-plucker-norm-variation,lem:balanced-exponential-convexity}
+Let $H$ and $J$ be Hermitian operators on finite-dimensional complex
+Hermitian spaces $U,W$. Then $A=H\otimes I+I\otimes J$ is Hermitian,
+$e^{tA}=e^{tH}\otimes e^{tJ}$, and
+$t\mapsto\|\bigwedge^s(e^{tH}\otimes e^{tJ})z\|^2$ is convex for every
+$z\in\bigwedge^s(U\otimes W)$.
+If $S$ is balanced, $z$ is its orthonormal Pl\"ucker vector, and
+$\Tr H=\Tr J=0$, this function is at least one for every real $t$.
+\end{lemma}
+\begin{proof}
+Taking adjoints commutes with tensor products and sums, so $A^*=A$.
+Choose orthonormal eigenbases $u_i,w_j$ for $H,J$, with real eigenvalues
+$a_i,b_j$. The tensors $u_i\otimes w_j$ form a basis, and $A$ has
+eigenvalue $a_i+b_j$ on each. The exponential series therefore acts by
+$e^{t(a_i+b_j)}=e^{ta_i}e^{tb_j}$, which is exactly the action of the
+tensor product of exponentials. Equality on this basis proves the
+operator identity. Apply Hermitian exterior convexity to $A$.
+Balanced Pl\"ucker first variation gives derivative zero at $t=0$;
+the minimum theorem and the orthonormal Pl\"ucker norm identity give
+the lower bound one.
+\end{proof}
+
 \begin{lemma}[Determinant-one polar reduction]
 \label{lem:balanced-special-linear-polar}\notready
 For a finite-dimensional complex Hermitian space $U$ and $g\in\SL(U)$,
@@ -689,7 +714,7 @@ No finite-generation assertion for the invariant ring is needed.
 
 \begin{lemma}[Balanced projections give geometric semistability]
 \label{lem:balanced-plucker}
-\uses{def:geometric-semistability,lem:invariant-orbit-criterion,lem:balanced-plucker-norm-variation,lem:balanced-exponential-convexity,lem:balanced-special-linear-polar}
+\uses{def:geometric-semistability,lem:invariant-orbit-criterion,lem:balanced-tensor-exponential-minimum,lem:balanced-special-linear-polar}
 \source{bost-specht-manuscript:page-0012}\notready
 Let $S\subset U\otimes W$ be a nonzero subspace of complex Hermitian
 spaces of dimensions $m,n$, and put $s=\dim S$. If its orthogonal

@@ -147,11 +147,29 @@ pinned Apache-2.0 revision above, without copying or modifying source.
 Project consumers are PolynomialAction and Semistability, followed by the
 pending Plücker/coaction/orbit criterion and GEOM base-change consumers.
 
+## Tensor exponential checkpoint
+
+`Balanced.TensorExponential` passed its serialized scoped build: **2,869 jobs**,
+warning-free, 45.4s. It proves the actual tensor-sum exponential identity,
+Hermitian symmetry of the generator, tensor exterior convexity and the
+balanced Plücker squared-norm lower bound one. Independent honesty review
+accepted the object/instance alignment and substantive use of balance,
+traces, Hermitian symmetry and the initial norm. The expanded 71-probe audit
+is queued in the shared serialized slot; this checkpoint does not yet mark
+the new blueprint node complete.
+
+Local aliases of the existing tensor normed-group and complex normed-space
+instances resolved a typeclass inference failure; no metric was changed.
+A guarded `lean_multi_attempt` timed out after 300s during this diagnosis;
+ordinary final LSP diagnostics and the subsequent kernel build are clear.
+The latest graph sync recorded 218 blueprint nodes, 1441 Lean declarations,
+1030 edges and no unresolved-reference warnings. The 728 unattached
+helper/import declarations are intentional, consistent with `I-0004`.
+
 ## Remaining mathematical producers
 
-1. Identify the tensor product of Hermitian exponentials with the exponential
-   of the tensor-sum generator and prove that generator Hermitian, connecting
-   checked Plücker stationarity with checked exterior convexity.
+1. Complete the tensor exponential axiom/root audit; the actual tensor-flow
+   bridge and balanced norm minimum now pass the scoped kernel build.
 2. Determinant-one unitary/logarithm adapters for the already checked polar
    decomposition port (`TJHeeringa/mathlib4`, revision
    `41260205df493c627e1ac0e54812cfdeb6517fbc`, PR 45002).

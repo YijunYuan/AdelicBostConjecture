@@ -2,6 +2,7 @@ import BostConjecture.Balanced.ExponentialFlow
 import BostConjecture.Balanced.ExteriorMetric
 import BostConjecture.Balanced.PluckerNorm
 import BostConjecture.Balanced.SpectralExpansion
+import BostConjecture.Balanced.TensorExponential
 import BostConjecture.InvariantTheory.Semistability
 
 #print axioms BostConjecture.Balanced.trace_starProjection_comp
@@ -74,3 +75,8 @@ import BostConjecture.InvariantTheory.Semistability
 #print axioms BostConjecture.InvariantTheory.IsGeometricallySemistable
 #print axioms BostConjecture.InvariantTheory.IsGeometricallySemistable.ne_zero
 #print axioms BostConjecture.InvariantTheory.isGeometricallySemistable_of_homogeneousInvariant
+
+#print axioms BostConjecture.Balanced.isSymmetric_tensorSum
+#print axioms BostConjecture.Balanced.exp_tensorSum
+#print axioms BostConjecture.Balanced.convexOn_exterior_tensor_exp_norm_sq
+#print axioms BostConjecture.Balanced.IsBalanced.one_le_plucker_norm_sq_tensor_exp
