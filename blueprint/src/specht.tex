@@ -1335,7 +1335,8 @@ $f^\nu\prod_i b_i!=t!V(b)$, hence the displayed quotient formula.
 \end{proof}
 
 \begin{lemma}[Rotated rectangular complement]
-\label{lem:rectangle-complement}\notready
+\label{lem:rectangle-complement}
+\lean{BostConjecture.Specht.rectangleComplement,BostConjecture.Specht.rectangleSplitEquiv,BostConjecture.Specht.rectangleComplement_involutive,BostConjecture.Specht.card_add_card_rectangleComplement,BostConjecture.Specht.rowLen_rectangleComplement}\leanok
 Let $\mu\subseteq(k^a)$. Rotation by $180$ degrees sends the omitted
 boxes to the Young diagram $\mu^c$ with row lengths
 $\mu^c_r=k-\mu_{a-1-r}$. The disjoint union of the boxes of $\mu$
@@ -1353,8 +1354,49 @@ construction is involutive and the two stated summands partition
 the rectangle. Counting gives the cardinality identity.
 \end{proof}
 
+\begin{lemma}[Rectangular prefix and complement bijection]
+\label{lem:rectangle-prefix-count}
+\uses{lem:rectangle-complement,def:standard-tableau}
+\lean{BostConjecture.Specht.rectanglePrefixEquiv,BostConjecture.Specht.card_rectanglePrefix}\leanok
+Let $\mu\subseteq(k^a)$ have $m$ boxes and let $l=ak-m$.
+Standard tableaux of the rectangle whose first $m$ boxes form $\mu$
+are in bijection with
+$\operatorname{SYT}(\mu)\times\operatorname{SYT}(\mu^c)$.
+Consequently their number is $f^\mu f^{\mu^c}$.
+\end{lemma}
+\begin{proof}
+Restrict a tableau to its first $m$ entries. Rotate the remaining
+boxes and replace each original label $i\in\{m,\ldots,ak-1\}$
+by $ak-1-i$. Both row and column orders are reversed twice, so
+this gives a standard tableau of $\mu^c$.
+Conversely, retain the labels of a standard tableau on $\mu$ and
+rotate a standard tableau on $\mu^c$, replacing label $j$ by
+$ak-1-j$. Within each summand the labels increase in rows and
+columns. A box in the complementary summand cannot precede a box
+of $\mu$ in either row or column, because $\mu$ is a lower set.
+In the opposite mixed case the label from $\mu$ is smaller.
+Thus the glued tableau is standard and its prefix is exactly $\mu$.
+The two constructions undo each other on every label and box.
+Taking cardinalities gives the product formula.
+\end{proof}
+
+\begin{lemma}[Complementary shifted Vandermonde]
+\label{lem:complement-vandermonde}\uses{lem:rectangle-complement}\notready
+For $\mu\subseteq(k^a)$ put $b_r=\mu_r+a-r-1$ and $M=k+a-1$.
+The shifted coordinates of $\mu^c$ are $M-b_{a-1-r}$, and
+$V(\mu^c)=V(\mu)$.
+\end{lemma}
+\begin{proof}
+The row-length identity gives
+$\mu^c_r+a-r-1=k-\mu_{a-1-r}+a-r-1=M-b_{a-1-r}$.
+Thus the complementary difference for $r<j$ is
+$b_{a-1-j}-b_{a-1-r}$. Reindexing pairs by
+$(r,j)\mapsto(a-1-j,a-1-r)$ preserves the set of strictly ordered
+pairs and is an involution. Multiplying gives the Vandermonde identity.
+\end{proof}
+
 \begin{lemma}[Exact prefix distribution]
-\label{lem:prefix-distribution}\uses{lem:tableau-count}
+\label{lem:prefix-distribution}\uses{lem:tableau-count,lem:rectangle-prefix-count,lem:complement-vandermonde}
 \source{bost-specht-manuscript:page-0006}\notready
 Fix $a\geq2$, $k\geq1$, $d=ak$, $c=a(a-1)/2$, $M=k+a-1$,
 and $V_0=\prod_{j=1}^{a-1}j!$. For a uniform standard tableau of

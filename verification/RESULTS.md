@@ -716,3 +716,12 @@ serialized module check passed 9,066 jobs. All seven transitive probes in
 `verification/SpechtShiftedCountAxioms.lean` show only the three foundational
 axioms above. This closes the counting producer, including empty diagrams
 and padding with zero rows; rectangular prefix distribution remains open.
+
+`Specht/Complement.lean` and `Specht/PrefixCount.lean` prove the rotated
+complement, the actual glue/extract equivalence, and the exact prefix-fiber
+cardinality as a product of standard-tableau counts. Serialized checks
+`6e545c6818cc2a06` and `8a2b321cc8db8b14` passed 9,066 and 9,074 jobs.
+The 14 transitive probes in `SpechtPrefixCountAxioms.lean` passed, each with
+only `propext`, `Classical.choice`, and `Quot.sound`. Honesty review accepted
+the actual constructions and the two matching blueprint completion markers.
+Root integration and the weighted hypergeometric law are separate boundaries.
