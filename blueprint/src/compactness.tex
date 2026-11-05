@@ -248,6 +248,32 @@ The Gram variation formula gives twice the real part of the balanced
 frame sum, which vanishes.
 \end{proof}
 
+\begin{lemma}[Tensor exponential first variation]
+\label{lem:balanced-exponential-variation}
+\uses{lem:balanced-gram-variation-zero}
+\lean{BostConjecture.Balanced.hasDerivAt_exp_apply_zero, BostConjecture.Balanced.hasDerivAt_tensor_exp_zero, BostConjecture.Balanced.IsBalanced.hasDerivAt_re_gramDet_tensor_exp_zero}\leanok
+Let $U,W$ be finite-dimensional complex Hermitian spaces, and let
+$H\in\operatorname{End}(U)$ and $J\in\operatorname{End}(W)$.
+For every $z\in U\otimes W$,
+\[
+ \left.\frac{d}{dt}(e^{tH}\otimes e^{tJ})z\right|_{t=0}
+   =(H\otimes1+1\otimes J)z.
+\]
+Consequently, if $S$ is balanced, $H,J$ are traceless, and $v_i$ is an
+orthonormal basis of $S$, the real Gram determinant of the frame
+$(e^{tH}\otimes e^{tJ})v_i$ has derivative zero at $t=0$.
+\end{lemma}
+\begin{proof}
+The convergent operator exponential series has derivative $H$ at zero.
+Continuous linear evaluation therefore gives
+$\left.\frac{d}{dt}e^{tH}u\right|_{t=0}=Hu$, and similarly for $J$.
+The tensor product is continuous bilinear, so its product rule gives
+$Hu\otimes w+u\otimes Jw$ for a pure tensor $u\otimes w$.
+Every tensor is a finite sum of pure tensors, proving the displayed
+identity. At zero the frame is $v_i$ itself; the vanishing assertion
+now follows from balanced Gram variation.
+\end{proof}
+
 \begin{lemma}[Convexity along Hermitian exponentials]
 \label{lem:balanced-exponential-convexity}\notready
 Let $A$ be Hermitian on a finite-dimensional complex Hermitian space
@@ -310,7 +336,7 @@ finitely many denominators in their algebraic equations and invert
 the product $q(t)$ of their leading coefficients. After also inverting
 some $0\ne a\in A$, the algebra
 $B[1/a,1/q]$ is finite integral over $A[1/a][t_1,\ldots,t_r,1/q]$.
-Increase $a$ by a nonzero coefficient of $q$, so the specialization
+Multiply $a$ by a nonzero numerator of one coefficient of $q$, so the specialization
 $q_y$ is nonzero at every closed point $y\in D(a)$.
 Since $\mathbb C$ is infinite, choose $t\in\mathbb C^r$ with
 $q_y(t)\ne0$. Evaluation at $(y,t)$ gives a maximal ideal of the
@@ -413,7 +439,8 @@ continuity for the product of the point-set Zariski topologies.
 \label{lem:balanced-polynomial-average}
 \uses{lem:balanced-unitary-density}
 \source{maithani-reynolds:thm:reynolds-for-lie-group}\notready
-Let $G=\SL(U)\times\SL(W)$ act algebraically and linearly on $X$,
+Let $G=\SL(U)\times\SL(W)$ act algebraically and linearly on a
+finite-dimensional complex vector space $X$,
 and put $K=\SU(U)\times\SU(W)$. For every polynomial $q$ on $X$,
 \[
  Rq(y)=\int_K q(k^{-1}y)\,dk
