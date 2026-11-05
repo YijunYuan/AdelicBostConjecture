@@ -436,6 +436,32 @@ square root of the corresponding diagonal pairing. Apply the construction
 to the inclusion for a submodule.
 \end{proof}
 
+\begin{lemma}[Integral parts of generic subspaces]
+\label{lem:integral-part-generic-subspace}
+\uses{lem:integral-submodule-projective}\notready
+For a finite projective $\Ocal$-module $M$ put $V=K\otimes_\Ocal M$.
+For a $K$-subspace $X\subseteq V$ let
+$P_X=\{m\in M:1\otimes m\in X\}$. Then $P_X$ is finite projective,
+its canonical generic fiber is $X$, and its rank is $\dim_K X$.
+Moreover $M/P_X$ is finite projective. The assignment $X\mapsto P_X$
+is increasing, preserves intersections, and sends $0,V$ to $0,M$.
+\end{lemma}
+\begin{proof}
+Every vector in $V$ is $a^{-1}(1\otimes m)$ for some $0\ne a\in\Ocal$
+and $m\in M$, by clearing the finitely many denominators in a tensor
+expression. If that vector lies in $X$, then $1\otimes m$ lies in $X$.
+Thus $K P_X=X$. Localization is flat, so the inclusion $P_X\to M$
+remains injective after tensoring with $K$. Its image is precisely $X$,
+which proves the canonical identification and the rank formula.
+The finite projectivity of $P_X$ follows from the submodule lemma.
+If $a m\in P_X$ for $a\ne0$, then multiplying $1\otimes am\in X$
+by $a^{-1}\in K$ shows $m\in P_X$. Hence $M/P_X$ is torsion-free;
+it is finite, and the same Dedekind flatness and finite-presentation
+argument makes it projective. Monotonicity and intersections follow by
+inverse images. The inverse image of $V$ is $M$; that of zero is zero
+because the localization map on the torsion-free module $M$ is injective.
+\end{proof}
+
 \begin{lemma}[Contraction between intrinsic Hermitian lines]
 \label{lem:line-degree-contraction}
 \uses{lem:line-degree-quotient-formula}\lean{BostConjecture.Arithmetic.quotient_span_card_le,BostConjecture.Arithmetic.HermitianMetric.lineDegree_le_of_injective}\leanok
