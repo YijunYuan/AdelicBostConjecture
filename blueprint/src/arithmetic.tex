@@ -241,7 +241,8 @@ Grouping the embedding sum by its infinite place gives precisely the weights $w_
 \end{proof}
 
 \begin{lemma}[The integral determinant line]
-\label{lem:integral-determinant-line}\notready
+\label{lem:integral-determinant-line}
+\lean{exteriorPower.instFinite,exteriorPower.instProjective,BostConjecture.Arithmetic.determinantGenericEquiv,BostConjecture.Arithmetic.determinant_generic_finrank,BostConjecture.Arithmetic.determinantComplexEquiv,BostConjecture.Arithmetic.determinantComplexEquiv_section,BostConjecture.Arithmetic.determinant_complex_finrank}\leanok
 For a finite projective $\Ocal$-module $M$ of generic rank $r$,
 $\det M=\bigwedge^r_{\Ocal}M$ is finite projective and its generic fiber
 has dimension one. Formation of this exterior power commutes with
@@ -271,6 +272,8 @@ fiber of dimension $r$,
    =\det\bigl(h_\sigma(x_i,x_j)\bigr)_{1\le i,j\le r}.
 \]
 It is compatible with conjugation, including when $r=0$.
+More generally its pairing on two wedges is
+$h_{\det}(\bigwedge_i x_i,\bigwedge_j y_j)=\det(h_\sigma(x_i,y_j))$.
 \end{lemma}
 \begin{proof}
 Choose a complex basis $e_1,\ldots,e_r$ and write $e=e_1\wedge\cdots\wedge e_r$.
@@ -285,6 +288,9 @@ For arbitrary $x_i$ with coordinate matrix $X$, their wedge is
 $(\det X)e$ and their Gram matrix is $X^*GX$, which proves the formula
 also when the $x_i$ are dependent. A nonzero top wedge spans the line,
 so the formula determines the metric uniquely.
+For coordinate matrices $X,Y$ of two families, the cross Gram matrix is
+$X^*GY$ and its determinant is $\overline{\det X}\det Y\det G$,
+which proves the stated pairing formula.
 Conjugation sends a basis to a basis and conjugates its Gram matrix;
 its positive real determinant is unchanged. The displayed construction
 therefore commutes with conjugation. Transfer the forms to the complex

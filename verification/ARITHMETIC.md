@@ -77,12 +77,36 @@ missing representative-independence theorem was supplied as
 line-degree unit. Only the corresponding rank-one blueprint nodes are marked
 checked.
 
+## Integral determinant line
+
+`Arithmetic/DeterminantLine.lean` proves exterior projectivity from an actual
+finite-free splitting and uses Mathlib's exterior finiteness instance. Its
+`DeterminantLine` is the top exterior power at the generic rank. The canonical
+generic and complex base-change equivalences identify the fibers, prove they
+have dimension one, and identify integral wedges with fiber wedges. Rank zero
+is included. No freeness hypothesis is imposed on the original module.
+
+The final warning-free module check `62776c8f61c41cfa` passed 3134 jobs at
+2026-11-05 16:23:44.549726 UTC. The expanded 29-probe axiom audit
+`590174f2cda53d26` passed at 16:25:42.794952 UTC, with only the same three
+foundational axioms. Source was captured in boundary snapshot `0dd8464`;
+explicit commit `ad2ea7e` records the extended axiom audit. The read-only
+honesty review verified both the source and the accepted checks, and approved
+the `lem:integral-determinant-line` attachment. The complex determinant metric
+is a separate subsequent producer.
+
+SPECHT reported integration of `HermitianLine` into the configured root build:
+9113 jobs passed at 16:19:14 UTC, fingerprint `975bdb23135a0d4a`. This report
+does not extend that root evidence to subsequent determinant sources.
+
+## Remaining boundary
+
 The full conjugate-linear fiber map and real fixed-fiber identification remain
-an explicit unchecked equivalence lemma. The next producer is the finite
-projective determinant line and its complex Gram-determinant metric. Mathlib's
+an explicit unchecked equivalence lemma. The next producer is the complex
+Gram-determinant metric on the checked integral determinant line. Mathlib's
 existing exterior inner product is real-only; it does not supply that complex
-metric. Complete mathematical statements and proofs for these next two
-producers are in `blueprint/src/arithmetic.tex`, still marked `notready`.
+metric. Its complete mathematical statement and proof are in
+`blueprint/src/arithmetic.tex`, still marked `notready`.
 
 Higher-rank determinant degree, dual/tensor/exact-sequence identities,
 contraction and saturation inequalities, degree finiteness/supermodularity,
