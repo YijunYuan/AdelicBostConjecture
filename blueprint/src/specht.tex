@@ -1,0 +1,277 @@
+\chapter{Rectangular Specht covolumes}
+
+\begin{definition}[The canonical rectangular Specht lattice]
+\label{def:rectangular-specht}
+\source{bost-specht-manuscript:page-0004}\notready
+For $a,k\geq1$ and $d=ak$, let $M^{(k^a)}_\mathbb Z$ be the free
+abelian group on row tabloids of the rectangle with $a$ rows of length
+$k$. Give these tabloids the orthonormal metric. A tableau $t$ labels
+its boxes by $1,\ldots,d$; its polytabloid is
+$e_t=\sum_{\sigma\in C_t}\operatorname{sgn}(\sigma)\{\sigma t\}$,
+where $C_t$ permutes entries within each column. Let $L_{a,d}$ be the
+span of all these polytabloids, with the induced metric, and put
+\[
+ f_{a,d}=\rk_\mathbb Z L_{a,d},\qquad
+ c_a(d)=\frac{\log\covol L_{a,d}}{f_{a,d}}.
+\]
+A standard tableau has increasing entries along every row and column.
+Row tabloids identify isometrically with tensor words in $a$ distinct
+orthonormal letters, each appearing $k$ times.
+\end{definition}
+
+\begin{theorem}[Rectangular Specht realization]
+\label{lem:rectangular-invariants}\uses{def:rectangular-specht}
+\source{bost-specht-manuscript:page-0004}\notready
+The standard polytabloids form an integral basis of $L_{a,d}$.
+Its characteristic-zero representation of $\mathfrak S_d$ is
+absolutely irreducible. For every $a$-dimensional vector space $A$
+over a characteristic-zero field, the image of
+$(\det A)^{\otimes k}\otimes L_{a,d}$ in $A^{\otimes d}$ is exactly
+$(A^{\otimes d})^{\SL(A)}$.
+\end{theorem}
+
+\begin{remark}
+The lattice may equivalently be defined by all polytabloids or by the
+standard polytabloids: the integral basis theorem identifies these
+definitions. Its image need not be the saturated invariant lattice.
+Only its integral embedding and its full invariant generic fiber enter
+the contraction argument.
+\end{remark}
+
+\begin{theorem}[Monic seminormal basis]
+\label{lem:monic-seminormal}\uses{lem:rectangular-invariants}
+\source{bost-specht-manuscript:page-0005}\notready
+Order standard tableaux by an extension of dominance of every prefix,
+starting with the column-reading tableau $t_0$. Monic orthogonalization
+of the standard polytabloids gives an orthogonal basis $f_t$ with
+$f_{t_0}=e_{t_0}$. For a legal adjacent swap $u=(j,j+1)t$ with $u$
+more dominant than $t$,
+\[
+ (j,j+1)f_t=\rho f_t+f_u,\qquad
+ \rho=\frac{1}{\operatorname{content}_t(j+1)-\operatorname{content}_t(j)},
+\]
+where a box in row $r$, column $q$, has content $q-r$.
+\end{theorem}
+
+\begin{lemma}[Seminormal norms]
+\label{lem:seminormal-norms}\uses{lem:monic-seminormal}
+\source{bost-specht-manuscript:page-0005,bost-specht-manuscript:page-0006}\notready
+For a standard tableau $t$, let $\lambda^{(j)}$ be its prefix shape
+after $j$ entries, and let $r_j$ be the row of entry $j$. Set
+$\delta_{i,r_j}(j)=\lambda_i^{(j-1)}-\lambda_{r_j}^{(j-1)}+r_j-i$.
+Then each relevant $\delta$ is at least two, and
+\[
+ \gamma_t:=\|f_t\|^2
+ =\prod_{j=1}^d\prod_{i<r_j}\frac{\delta_{i,r_j}(j)}{\delta_{i,r_j}(j)-1},
+ \qquad
+ 2c_a(d)=\mathbb E_{t\in\SYT(k^a)}\log\gamma_t.
+\]
+\end{lemma}
+\begin{proof}
+A legal insertion in row $r$ requires every row above it to have at
+least one more box, which implies $\delta_{i,r}\geq2$.
+For the column-reading tableau, each inserted row-$r$ box contributes
+$\prod_{i<r}(r-i+1)/(r-i)=r$ to the product. Its total is $(a!)^k$,
+the squared norm of $e_{t_0}$, whose $(a!)^k$ distinct tabloid terms
+have coefficients $\pm1$.
+
+An adjacent legal swap changes the order of two consecutive insertions.
+Suppose the first is in a lower row $r$ and the second in a higher
+row $q<r$, and let $\nu$ be the shape preceding both. With
+$\Delta=\nu_q-\nu_r+r-q\geq2$, only the pair $(q,r)$ changes in
+the proposed norm product; its ratio after the swap is
+$((\Delta+1)/\Delta)/(\Delta/(\Delta-1))=1-\Delta^{-2}$.
+The seminormal formula and orthogonality, together with the isometry
+of the transposition, give the same ratio for the squared norms:
+$\gamma_u/\gamma_t=1-\rho^2=1-\Delta^{-2}$.
+All standard tableaux are connected by adjacent swaps of incomparable
+entries. To prove this, compare two linear extensions of the box
+partial order; move the first entry of the desired extension leftward
+through the other extension. Every entry crossed is incomparable with
+it, or the two linear extensions would disagree with the partial
+order. Repeat on the remaining entries. Thus the initial value and
+swap ratios identify the norm product everywhere.
+
+The monic triangular change of basis has determinant one, so the Gram
+determinant of the integral standard basis is $\prod_t\gamma_t$.
+Its logarithm is twice the logarithm of the lattice covolume. Divide
+by the number of standard tableaux, which is $f_{a,d}$, to obtain
+the expectation formula.
+\end{proof}
+
+\begin{lemma}[Tableau enumeration in shifted coordinates]
+\label{lem:tableau-count}
+\source{bost-specht-manuscript:page-0004,bost-specht-manuscript:page-0006}\notready
+For a partition $\nu$ of $t$ with at most $a$ rows, set
+$b_i=\nu_i+a-i$, $1\leq i\leq a$, and
+$V(b)=\prod_{i<j}(b_i-b_j)$. The number of standard tableaux is
+\[
+ f^\nu=\frac{t!V(b)}{\prod_i b_i!}.
+\]
+Equivalently it is $t!$ divided by the product of all hook lengths.
+\end{lemma}
+\begin{proof}
+We derive the shifted-coordinate form by corner recursion, giving a
+direct proof of the enumeration formula used in the manuscript.
+Put $c=a(a-1)/2$, so $t=\sum_i b_i-c$. For distinct $b_i$, expand
+\[
+ R(z)=\prod_i\frac{z-b_i-1}{z-b_i}
+ =1-\sum_i\frac{p_i}{z-b_i},\qquad
+ p_i=\prod_{j\ne i}\frac{b_i-b_j-1}{b_i-b_j}.
+\]
+The residues prove this identity: the difference has no poles and
+tends to zero at infinity. The coefficient of $z^{-2}$ in the
+product is $c-\sum_i b_i=-t$; in the partial fraction expression
+it is $-\sum_i b_ip_i$. Hence $\sum_i b_ip_i=t$.
+For $t>0$ and a legal decrease of $b_i$ by one, the ratio of the
+proposed new count to the proposed old count is $b_ip_i/t$.
+An illegal decrease contributes zero: either $b_i=0$, or
+$b_i-b_{i+1}=1$, which makes the corresponding factor of $p_i$ zero.
+Legal decreases are precisely removal of a corner box. The identity
+therefore says the proposed count is the sum of its counts after
+all possible corner removals. Standard tableaux satisfy the same
+recurrence, since their largest entry lies in a unique removable
+corner. The empty partition has $b_i=a-i$ and proposed count one,
+since $V(a-1,\ldots,0)=\prod_{j=1}^{a-1}j!$.
+Induction on $t$ proves the count.
+
+For the hook version, the hook lengths in row $i$ are exactly the
+integers $1,\ldots,b_i$ with $b_i-b_j$ omitted for $j>i$.
+Indeed, for columns satisfying $\nu_{r+1}<q\leq\nu_r$ with $r\geq i$,
+the hook length is $\nu_i-q+r-i+1$; the consecutive intervals of
+these values have exactly those omitted endpoints. Multiplying row
+products gives the hook product $\prod_i b_i!/V(b)$, proving the
+equivalent formula.
+\end{proof}
+
+\begin{lemma}[Exact prefix distribution]
+\label{lem:prefix-distribution}\uses{lem:tableau-count}
+\source{bost-specht-manuscript:page-0006}\notready
+Fix $a\geq2$, $k\geq1$, $d=ak$, $c=a(a-1)/2$, $M=k+a-1$,
+and $V_0=\prod_{j=1}^{a-1}j!$. For a uniform standard tableau of
+$(k^a)$, write $\nu$ for the prefix after $t$ entries and put
+$b_i=\nu_i+a-i$, $A=t+c$. Its distribution is obtained by weighting
+the labelled multivariate hypergeometric distribution
+\[
+ B(b)=\frac{\prod_i\binom M{b_i}}{\binom{aM}A},\qquad
+ 0\leq b_i\leq M,\quad \sum_i b_i=A,
+\]
+by $V(b)^2$ and sorting into decreasing order. The normalizing factor is
+\[
+ Z_{k,t}:=\mathbb E_B V(b)^2
+ =a!V_0\prod_{j=1}^{a-1}(k+j)^j
+   \frac{\binom dt}{\binom{d+2c}{t+c}}.
+\]
+\end{lemma}
+\begin{proof}
+The exact prefix probability is $f^\nu f^{\nu^c}/f^{(k^a)}$, where
+$\nu^c=(k-\nu_a,\ldots,k-\nu_1)$. The first $t$ entries fill $\nu$
+arbitrarily as a standard tableau. Rotation by $180$ degrees and
+reversal of labels identifies standard fillings of the remaining
+skew diagram with those of $\nu^c$, proving that probability.
+The shifted coordinates of the complement are $M-b_{a+1-i}$, with
+the same positive Vandermonde product. The enumeration formula gives
+\[
+ f^\nu=\frac{t!V(b)}{\prod_i b_i!},\quad
+ f^{\nu^c}=\frac{(d-t)!V(b)}{\prod_i(M-b_i)!},\quad
+ f^{(k^a)}=\frac{d!V_0}{\prod_{j=0}^{a-1}(k+j)!}.
+\]
+Their ratio is a constant times $V(b)^2B(b)$. Every decreasing tuple
+has $a!$ labelled permutations, and repeated coordinates contribute
+zero Vandermonde weight. Summing the probabilities therefore gives
+\[
+ Z_{k,t}=a!V_0\frac{(M!)^a}{\prod_{j=0}^{a-1}(k+j)!}
+             \frac{\binom dt}{\binom{aM}{t+c}}.
+\]
+Use $aM=d+2c$ and
+$(M!)^a/\prod_{j=0}^{a-1}(k+j)!=\prod_{j=1}^{a-1}(k+j)^j$
+to obtain the stated expression.
+\end{proof}
+
+\begin{lemma}[Uniform separation of bulk prefix coordinates]
+\label{lem:prefix-separation}\uses{lem:prefix-distribution}
+\source{bost-specht-manuscript:page-0007}\notready
+For fixed $a\geq2$, $0<\varepsilon<1/2$, and $L>0$,
+\[
+ \sup_{\varepsilon d\leq t\leq(1-\varepsilon)d}
+ \mathbb P\left(\min_{i<j}|b_i-b_j|\leq L\right)\longrightarrow0
+ \qquad(k\to\infty).
+\]
+\end{lemma}
+\begin{proof}
+The exact normalization satisfies
+\[
+ \frac{\binom dt}{\binom{d+2c}{t+c}}
+ =\frac{\prod_{j=1}^c(t+j)(d-t+j)}{\prod_{j=1}^{2c}(d+j)}.
+\]
+For the stated range of $t$, every numerator factor is at least
+$\varepsilon d$, while every denominator factor is at most
+$d+2c=a(k+a-1)\leq ad$. Thus
+$Z_{k,t}\geq a!V_0(\varepsilon/a)^{2c}k^c$.
+
+Under the unweighted hypergeometric law, the moment-generating
+function of $b_i$ is the normalized $A$th elementary symmetric
+polynomial of $aM$ positive numbers, of which $M$ equal $e^\theta$
+and the others equal one. For positive numbers with fixed sum, this
+normalized polynomial is at most the $A$th power of their mean.
+To prove that inequality, replace a largest and a smallest entry by
+their mean. With their sum fixed, the symmetric polynomial is affine
+in their product with nonnegative coefficient, so does not decrease.
+The sum of squared deviations from the mean drops by half their
+squared difference, at least the previous sum of squared deviations
+divided by $2aM$. Repeating converges to the constant tuple; continuity
+proves the claim. Consequently
+\[
+ \mathbb E_B e^{\theta b_i}\leq(1-1/a+e^\theta/a)^A.
+\]
+For $p=1/a$, the second derivative of
+$\log(1-p+pe^\theta)$ is at most $1/4$, so subtracting its tangent
+at zero yields
+$\mathbb E_Be^{\theta(b_i-A/a)}\leq e^{A\theta^2/8}$.
+Markov's inequality with $\theta=4u/A$ and $-4u/A$ gives
+$\mathbb P_B(|b_i-A/a|>u)\leq2e^{-2u^2/A}$.
+
+Put $\eta=1/(4c)$ and $u=k^{1/2+\eta}$. Since $A\leq aM\leq a^2k$,
+the union bound gives
+$\mathbb P_B(\max_i|b_i-A/a|>u)\leq2a e^{-2k^{2\eta}/a^2}$.
+On the complementary event all pairwise differences are at most
+$2u$. If one difference is at most $L$, then
+$V(b)^2\leq L^2(2u)^{2(c-1)}$.
+Dividing by the lower bound for $Z$ bounds the weighted probability
+of this event by a constant times
+$k^{-1+2\eta(c-1)}=k^{-1/2-1/(2c)}$, tending to zero. On the tail
+event use $V(b)^2\leq M^{2c}$; its weighted probability is at most a
+constant times $k^c e^{-2k^{2\eta}/a^2}$, also tending to zero.
+The constants are independent of $t$ in the stated range. Both events
+are invariant under sorting the coordinates, so the same bound
+holds for the prefix distribution.
+\end{proof}
+
+\begin{theorem}[Sublinear rectangular Specht covolume]
+\label{thm:specht-sublinear-covolume}
+\uses{def:rectangular-specht,lem:seminormal-norms,lem:prefix-separation}
+\source{bost-specht-manuscript:page-0008}\notready
+For every fixed positive integer $a$,
+$c_a(ak)\geq0$ and $c_a(ak)/(ak)\to0$ as $k\to\infty$.
+\end{theorem}
+\begin{proof}
+For $a=1$, the lattice has one orthonormal generator, so $c_1(d)=0$.
+For $a\geq2$, each insertion contributes a number between zero and
+$(a-1)\log2$ to $\log\gamma_t$. If all shifted coordinate gaps of
+the preceding prefix exceed $L\geq2$, each factor contributes at
+most $1/(L-1)$, using $\log(1+x)\leq x$. Let $p_{k,\varepsilon,L}$
+be the supremum of the bad-prefix probabilities in the preceding
+lemma. There are at most $2\varepsilon d+2$ insertion times whose
+preceding prefix lies outside the bulk. Linearity of expectation,
+with the bound valid for every next legal row, gives
+\[
+ 0\leq\frac{\mathbb E\log\gamma_t}{d}
+ \leq(2\varepsilon+2/d)(a-1)\log2
+    +\frac{a-1}{L-1}+(a-1)\log2\,p_{k,\varepsilon,L}.
+\]
+For fixed $\varepsilon,L$ the last term tends to zero. Taking the
+upper limit in $k$, then taking $L\to\infty$ and
+$\varepsilon\to0$, proves $\mathbb E\log\gamma_t/d\to0$.
+The seminormal norm identity converts this to $2c_a(d)/d\to0$
+and gives nonnegativity as well.
+\end{proof}

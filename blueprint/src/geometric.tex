@@ -1,0 +1,197 @@
+\chapter{Integral contractions and the geometric slope inequality}
+
+\begin{definition}[Geometric semistability of a Pl\"ucker line]
+\label{def:geometric-semistability}
+\source{bost-specht-manuscript:page-0009}\notready
+For vector spaces $E_1,\ldots,E_N$ over a characteristic-zero field $k$,
+put $W=\bigotimes_j E_j$ and $G=\prod_j\SL(E_j)$. An $s$-dimensional
+subspace $V\subset W$, $s>0$, has geometrically semistable Pl\"ucker
+line if, after extension to an algebraic closure, a homogeneous
+$G$-invariant polynomial of positive degree on $\bigwedge^sW$ is
+nonzero on a nonzero vector of $\bigwedge^sV$.
+\end{definition}
+
+\begin{lemma}[Scalar extension for invariant detection]
+\label{lem:invariant-base-change}
+\uses{def:geometric-semistability}\notready
+The geometric semistability condition is unchanged by extending the
+characteristic-zero ground field. In any fixed degree the invariant
+polynomials and the kernel of evaluation at a rational vector commute
+with field extension.
+\end{lemma}
+\begin{proof}
+For a finite-dimensional representation $M$ of an affine algebraic
+group, invariants are the kernel of the linear map
+$M\to M\otimes k[G]$, $m\mapsto\rho(m)-m\otimes1$, defined by the
+coaction. Tensoring with a field extension is exact, so commutes with
+this kernel. Apply this to each homogeneous polynomial space. Evaluation
+is a linear map to $k$, and its kernel also commutes with scalar
+extension. Its restriction to the invariant space is nonzero after
+extension if and only if it was nonzero before extension. Existence of
+a positive degree with nonzero restriction is therefore unchanged.
+\end{proof}
+
+\begin{lemma}[Determinant-isotypic integral modules]
+\label{lem:determinant-isotypic}
+\uses{def:rectangular-specht,lem:rectangular-invariants,lem:degree-calculus}
+\source{bost-specht-manuscript:page-0008,bost-specht-manuscript:page-0009}
+\notready
+For a rank-$a$ projective $\Ocal$-module $A$ and $d=ak>0$, there is
+a canonical injection
+\[
+ \iota_A:\mathcal S_{a,d}(A):=
+ (\det A)^{\otimes k}\otimes_\mathbb Z L_{a,d}\longrightarrow A^{\otimes d}.
+\]
+It is isometric for the determinant and canonical Specht metrics and
+satisfies
+\[
+ \slope(\mathcal S_{a,d}(\overline A))=d\slope(\overline A)-c_a(d).
+\]
+Its generic fiber is the full $\SL(A_K)$-invariant subspace of
+$A_K^{\otimes d}$, with absolutely irreducible isometric $\mathfrak S_d$
+action.
+\end{lemma}
+\begin{proof}
+In a free module, a rectangular polytabloid is a permutation of a
+tensor product of $k$ unnormalized determinant tensors. Thus every
+change-of-frame matrix $g$ acts on it by $(\det g)^k$. For a local
+frame $b_1,\ldots,b_a$ the formula
+\[
+ (b_1\wedge\cdots\wedge b_a)^{\otimes k}\otimes x
+ \longmapsto b^{\otimes d}x
+\]
+is consequently independent of the frame, and glues over $\Ocal$.
+The local inclusion of the Specht lattice into the word lattice stays
+injective after scalar extension because $\Ocal$ and its localizations
+are torsion-free, hence flat, over $\mathbb Z$. This proves injectivity.
+
+At each archimedean place choose an orthonormal frame. Tensor words are
+orthonormal, as are the corresponding row tabloids, and the determinant
+vector of the frame has norm one. The formula is therefore an isometry.
+In particular, no division by a factorial is made: the norm
+$\sqrt{a!}$ of an unnormalized determinant tensor already belongs to
+the polytabloid's metric.
+
+If $f=\rk_\mathbb Z L_{a,d}$, a basis wedge of
+$\Ocal\otimes_\mathbb Z L_{a,d}$ has norm $\covol L_{a,d}$ at every
+embedding and generates its determinant module. Its normalized degree
+is $-\log\covol L_{a,d}$. The line-twist identity gives the slope
+$k\degn(\det A)-f^{-1}\log\covol L_{a,d}$, which is the asserted
+formula. The rectangular invariant-space theorem identifies the
+generic fiber and its absolute irreducibility. Permutation of tensor
+positions preserves the lattice and the ambient Hilbert tensor norm,
+and commutes with changes of frame, proving the isometric action.
+\end{proof}
+
+\begin{lemma}[The canonical contracting pairing]
+\label{lem:canonical-contraction}
+\uses{lem:determinant-isotypic}
+\source{bost-specht-manuscript:page-0010}\notready
+Let $i:V\hookrightarrow W=\bigotimes_{j=1}^N E_j$ be a nonzero
+submodule with its induced metrics. Set $s=\rk V$, $a_j=\rk E_j$.
+For any positive $d$ divisible by $s,a_1,\ldots,a_N$, put
+\[
+ B_d=\mathcal S_{s,d}(V),\qquad
+ D_d=\bigotimes_j\mathcal S_{a_j,d}(E_j^\vee).
+\]
+Regrouping tensor positions embeds $D_d$ isometrically into
+$(W^\vee)^{\otimes d}$. The map
+\[
+ \Psi_d:B_d\to D_d^\vee,\qquad
+ \Psi_d(v)(u)=\langle u,i^{\otimes d}(\iota_V(v))\rangle
+\]
+is integral, contracting at every archimedean place, and equivariant
+for the simultaneous permutation action of $\mathfrak S_d$.
+\end{lemma}
+\begin{proof}
+All maps and pairings in the formula are defined over $\Ocal$, proving
+integrality. Each determinant-isotypic embedding is an isometry, and
+regrouping Hilbert tensor factors is an isometry. The inclusion $i$ is
+isometric by its induced metric, hence so is $i^{\otimes d}$. For
+$v\in B_{d,v}$, the functional on the ambient dual tensor space given
+by evaluation on $i^{\otimes d}\iota_V(v)$ has norm $\|v\|$.
+Its restriction to $D_{d,v}$ has no larger norm. Thus $\|\Psi_d\|\leq1$.
+Finally, evaluation satisfies
+$\langle u,\tau z\rangle=\langle\tau^{-1}u,z\rangle$, and
+$i^{\otimes d}$ commutes with permutations of its $d$ positions.
+These two identities give
+$\Psi_d(\tau v)(u)=\Psi_d(v)(\tau^{-1}u)$, precisely equivariance
+into the dual representation.
+\end{proof}
+
+\begin{lemma}[Nonvanishing in unbounded degrees]
+\label{lem:contraction-nonzero}
+\uses{def:geometric-semistability,lem:invariant-base-change,lem:canonical-contraction,lem:rectangular-invariants}
+\source{bost-specht-manuscript:page-0010}\notready
+If the Pl\"ucker line of $V_K$ is geometrically semistable, then there
+is a positive integer $d_0$, divisible by $s,a_1,\ldots,a_N$, such
+that $\Psi_{\ell d_0}\ne0$ for every positive integer $\ell$.
+\end{lemma}
+\begin{proof}
+Extend scalars temporarily to an algebraic closure. Choose
+$0\ne\eta\in\det V_K$ and a positive-degree homogeneous invariant
+$p$ with $p((\bigwedge^s i)\eta)\ne0$. On $\Hom(V_K,W_K)$ define
+$q(A)=p((\bigwedge^s A)\eta)$. It is homogeneous of degree
+$d_0=s\deg p>0$, is nonzero at $i$, and is invariant for
+$A\mapsto(\bigotimes_jg_j)Ah^{-1}$ with
+$(g_1,\ldots,g_N,h)\in\prod_j\SL(E_j)\times\SL(V)$.
+A scalar $a_j$-th root of unity in the $j$th factor acts by scalar
+multiplication on $A$. Since $q$ is nonzero and homogeneous, invariance
+forces its $d_0$th power to be one for every such root, so $a_j\mid d_0$.
+Also $s\mid d_0$ by its definition.
+
+For $d=\ell d_0$, polarization identifies $q^\ell$ with a symmetric
+tensor in $(\Hom(V_K,W_K)^\vee)^{\otimes d}$: the inverse to the
+symmetric quotient is averaging over permutations with factor $1/d!$.
+This identification commutes with the group action and evaluation on
+$A^{\otimes d}$. After regrouping, its invariant tensor belongs to
+\[
+ \left(\bigotimes_j(E_j^\vee)^{\otimes d}\otimes V^{\otimes d}\right)
+ ^{\prod_j\SL(E_j)\times\SL(V)}=D_{d,\overline K}\otimes B_{d,\overline K}.
+\]
+For independent group actions, the equality of invariants follows by
+expanding in a basis of every factor except one and imposing invariance
+in that factor successively; the rectangular invariant-space theorem
+identifies each resulting factor. Write the tensor as
+$\sum_\nu u_\nu\otimes v_\nu$. Evaluation gives
+$q(i)^\ell=\sum_\nu\Psi_d(v_\nu)(u_\nu)\ne0$.
+Therefore $\Psi_d$ is nonzero after extension, and hence before it.
+The polarized tensor is used only for nonvanishing; no integral or
+metric bound for its coefficients enters the argument.
+\end{proof}
+
+\begin{theorem}[Geometric slope inequality]
+\label{thm:geometric-slope}
+\uses{lem:contraction-nonzero,lem:canonical-contraction,lem:determinant-isotypic,lem:irreducible-semistable,lem:degree-calculus,thm:specht-sublinear-covolume}
+\source{bost-specht-manuscript:page-0009,bost-specht-manuscript:page-0010}
+\notready
+For arbitrary positive-rank Hermitian bundles $E_1,\ldots,E_N$ and
+a nonzero submodule $V\subseteq\bigotimes_j E_j$, geometric
+semistability of the Pl\"ucker line of $V_K$ implies
+\[
+ \slope(\overline V)\leq\sum_j\slope(\overline E_j).
+\]
+The factors need not be arithmetically semistable.
+\end{theorem}
+\begin{proof}
+Take the unbounded sequence $d=\ell d_0$ from the nonvanishing lemma.
+The kernel of $\Psi_{d,K}$ is invariant for the simultaneous
+$\mathfrak S_d$ action. Absolute irreducibility of $B_{d,K}$ and
+nonvanishing force that kernel to be zero. Torsion-freeness gives
+injectivity over $\Ocal$. Let $J_d$ be the actual image, with metric
+induced from $D_d^\vee$. The isomorphism of modules $B_d\to J_d$
+is contracting, so $\slope(B_d)\leq\slope(J_d)$.
+
+Each factor of $D_d$ has absolutely irreducible isometric permutation
+action. Their tensor product is absolutely irreducible for the
+independent product of permutation groups. Its dual is semistable by
+the irreducible-action lemma. Thus, including when $J_d$ is not
+saturated, $\slope(J_d)\leq\slope(D_d^\vee)$. The determinant and
+average tensor-slope formulas give
+\[
+ d\slope(V)-c_s(d)\leq\slope(J_d)
+ \leq d\sum_j\slope(E_j)+\sum_jc_{a_j}(d).
+\]
+Divide by $d$ and let $\ell\to\infty$. The sublinear Specht covolume
+theorem makes every error term tend to zero, giving the claim.
+\end{proof}

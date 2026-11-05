@@ -1,0 +1,172 @@
+\chapter{Tensor semistability and the maximal-slope identity}
+
+\begin{lemma}[Extensions and line twists]
+\label{lem:extensions-and-twists}\uses{lem:degree-calculus}\notready
+An extension of normalized semistable bundles, with induced and
+quotient metrics, is normalized semistable. Tensoring by a Hermitian
+line bundle preserves semistability and shifts every slope by the
+line's degree.
+\end{lemma}
+\begin{proof}
+For $0\to A\to E\to Q\to0$ and a nonzero submodule $S\subset E$,
+let $B=S\cap A$ and let $I$ be its actual image in $Q$. The
+isomorphism $S/B\to I$ is contracting, because distance to $A$ is
+no greater than distance to $B$. Degree additivity and contraction
+therefore give
+$\degn(S)\leq\degn(B)+\degn(I)\leq0$.
+Also $\degn(E)=\degn(A)+\degn(Q)=0$, proving the first assertion.
+
+An invertible module $L$ gives inverse correspondences
+$B\mapsto L\otimes B$ and $C\mapsto L^\vee\otimes C$ between
+submodules of $E$ and of $L\otimes E$. Local trivializations show
+that ranks and saturation are preserved. At each archimedean place,
+the line tensor factor multiplies every vector norm by the norm of a
+line generator; hence these correspondences preserve the induced
+metric up to that same line twist. The degree formula shifts every
+submodule slope, as well as the ambient slope, by $\degn(L)$, so
+their comparisons are unchanged.
+\end{proof}
+
+\begin{proposition}[Tensor semistability]
+\label{thm:tensor-semistability}
+\uses{lem:degree-calculus,lem:extensions-and-twists,lem:arithmetic-compactness,lem:degree-maximum-continuity,lem:balanced-plucker,lem:invariant-base-change,thm:geometric-slope}
+\source{bost-specht-manuscript:page-0012,bost-specht-manuscript:page-0013}
+\notready
+For every number field $K$ and all positive-rank semistable Hermitian
+$\Ocal_K$-bundles $E,F$, their Hilbert tensor product is semistable.
+\end{proposition}
+\begin{proof}
+Uniformly scale the norms on each factor to make its slope zero.
+This does not change semistability, and changes every slope of the
+tensor product by the sum of the two shifts. Suppose a normalized
+counterexample exists and choose one with $m+n$ minimal, where
+$m=\rk E$ and $n=\rk F$. The line-twist lemma implies $m,n\geq2$.
+
+The function $\mathcal D(E\otimes F)$ is bounded above and attains
+its supremum on normalized semistable pairs of these ranks. Indeed,
+otherwise a sequence of values tending to infinity, or to an unattained
+finite supremum, would by arithmetic compactness have a subsequence
+with fixed modules and convergent metrics; tensor metrics converge
+and continuity of $\mathcal D$ gives the corresponding finite limiting
+value, a contradiction in the first case and attainment in the second.
+Choose a maximizing pair and a saturated submodule $S\subset E\otimes F$
+of maximal degree. Since a counterexample exists, $\degn(S)>0$.
+
+If $E$ had a nonzero proper saturated submodule $A$ of degree zero,
+then $A$ is normalized semistable by restriction of the inequalities
+for $E$. Its quotient $E/A$ is normalized semistable too: the inverse
+image of a submodule of positive degree would, by degree additivity,
+have positive degree in $E$. By minimality of $m+n$, both
+$A\otimes F$ and $(E/A)\otimes F$ are normalized semistable. Tensoring
+the exact sequence by the projective module $F$ preserves exactness.
+Its induced and quotient metrics agree with the Hilbert tensor
+metrics, by an orthogonal decomposition of $E$ along $A$.
+The extension lemma makes $E\otimes F$ semistable, a contradiction.
+Thus $E$ is strictly stable. The same reasoning proves strict stability
+of $F$.
+
+Fix an archimedean place $v$. By openness of strict stability, small
+determinant-preserving variations of the metrics at $v$ remain
+normalized semistable; at complex places vary its conjugate as well.
+The degree of the fixed module $S$ has a local maximum at the chosen
+pair, since it is bounded above by $\mathcal D$ for each nearby pair,
+and that function is bounded above by its chosen global maximum.
+Let $P$ be the orthogonal projection onto $S_v$ and $s=\rk S$.
+For a traceless Hermitian endomorphism $H$ of $E_v$, change its norm
+to $x\mapsto\|e^{tH}x\|$. Differentiating the determinant norm of
+$S_v$, using an orthonormal basis of $S_v$, gives
+\[
+ \left.\frac{d}{dt}\degn(S)\right|_{t=0}
+ =-\frac{w_v}{D}\Tr(P(H\otimes\Id))=0.
+\]
+Consequently $\Tr_F P$ is orthogonal under the trace pairing to all
+traceless Hermitian matrices. Taking
+$H=\Tr_F P-(\Tr P/m)\Id$ shows that the trace of its square is
+zero; since it is Hermitian, it is zero. As $\Tr P=s$, this gives
+$\Tr_F P=(s/m)\Id$. Varying $F$ similarly gives
+$\Tr_E P=(s/n)\Id$. At a real place the same argument uses real
+symmetric matrices, and its resulting matrix identities persist after
+complexification.
+
+The balanced-projection lemma shows that the Pl\"ucker line of $S$
+is geometrically semistable at this complex embedding. Scalar-extension
+invariance descends that condition to $K$. The geometric slope
+inequality therefore gives $\slope(S)\leq\slope(E)+\slope(F)=0$,
+contradicting $\degn(S)>0$. No counterexample exists.
+\end{proof}
+
+\begin{lemma}[Slope bound from a metrized filtration]
+\label{lem:filtered-slope-bound}\uses{lem:degree-calculus,lem:hn-filtration}\notready
+If a saturated filtration of $A$ has semistable Hermitian quotients
+of slopes at most $c$, then every nonzero submodule of $A$ has slope
+at most $c$.
+\end{lemma}
+\begin{proof}
+For a submodule $B$, intersect with every filtration step and take
+successive quotients. Each quotient maps injectively and contractingly
+into its actual image in the corresponding ambient grade: the ambient
+quotient norm takes an infimum over a larger subspace. Semistability
+bounds the degree of that image by $c$ times its rank. Contraction
+bounds the quotient degree by the image degree. Add these inequalities;
+quotient ranks sum to $\rk B$ and quotient degrees to $\degn B$.
+Thus $\degn B\leq c\rk B$.
+\end{proof}
+
+\begin{theorem}[Maximal-slope identity]
+\label{thm:bost-main}
+\uses{lem:hn-filtration,lem:degree-calculus,thm:tensor-semistability,lem:filtered-slope-bound}
+\source{bost-specht-manuscript:page-0001,bost-specht-manuscript:page-0013}
+\notready
+For every number field $K$ and every pair of positive-rank Hermitian
+vector bundles $\overline E,\overline F$ over $\Ocal_K$,
+\[
+ \maxslope(\overline E\otimes\overline F)
+ =\maxslope(\overline E)+\maxslope(\overline F).
+\]
+\end{theorem}
+\begin{proof}
+Let $0=E_0\subset\cdots\subset E_p=E$ and
+$0=F_0\subset\cdots\subset F_q=F$ be their Harder--Narasimhan
+filtrations. In lexicographic order use the steps
+$E_{i-1}\otimes F+E_i\otimes F_j$ for $1\leq i\leq p$ and
+$0\leq j\leq q$, identifying the repeated endpoint at each change of
+$i$. Local splittings of the projective flag quotients show that this
+is a saturated filtration whose grades are
+$(E_i/E_{i-1})\otimes(F_j/F_{j-1})$. At each place take orthogonal
+decompositions adapted to both flags. Their tensor decomposition is
+orthogonal, so the grade quotient metrics are precisely the Hilbert
+tensor metrics.
+
+Each grade is semistable by tensor semistability, with slope the sum
+of its factor slopes. This is at most
+$c=\maxslope(E)+\maxslope(F)$. The filtration bound implies
+$\maxslope(E\otimes F)\leq c$.
+Conversely, choose saturated submodules $E'\subset E$, $F'\subset F$
+attaining the two maximal slopes. Local splittings make
+$E'\otimes F'\to E\otimes F$ injective, and the Hilbert metric is
+the induced metric. Its average slope is $c$ by the tensor determinant
+identity, so the maximal slope of the ambient tensor product is at
+least $c$. The inequalities give equality.
+\end{proof}
+
+\begin{corollary}[Finite families]
+\label{cor:bost-finite-family}\uses{thm:bost-main,lem:degree-calculus}
+\source{bost-specht-manuscript:page-0001,bost-specht-manuscript:page-0013}
+\notready
+For every finite nonempty family of positive-rank Hermitian
+$\Ocal_K$-bundles $(E_j)_{j=1}^N$,
+\[
+ \maxslope\left(\bigotimes_{j=1}^N E_j\right)
+ =\sum_{j=1}^N\maxslope(E_j).
+\]
+If every factor is semistable, so is the tensor product.
+\end{corollary}
+\begin{proof}
+Induct on $N$. The one-factor identity is tautological; the inductive
+step applies the two-factor theorem to the tensor product of the
+first $N-1$ factors and the last one. Hilbert tensor associativity is
+an isometry, so parenthesization does not alter slopes. For semistable
+factors the sum of their maximal slopes is the sum of their average
+slopes, which is the average slope of the tensor product. Equality of
+maximal and average slope is exactly semistability.
+\end{proof}
