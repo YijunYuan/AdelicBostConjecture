@@ -905,3 +905,31 @@ The graph command rejects `sync --json`; the corrected plain sync is used.
 The full dual-target rectangular restriction, nonzero canonical determinant
 pairing, field descent and coaction square remain open. This is a proved
 producer milestone, not BOST-GEOM or Theorem1.1 completion.
+
+## Independent dual factors through projective regrouping
+
+`Tensor/DualRegroup.lean` proves actual duality/regrouping naturality for
+arbitrary factor endomorphisms over commutative rings and finite projective
+modules. Its consumer `Geometry/DualInvariants.lean` transports actual
+ambient dual fixedness to the tensor of individual contragredient fixed
+subspaces, then consumes the invariant Hom pairing to select a pure family
+with nonzero evaluation. Empty factor index and degree zero are covered.
+
+Scoped checks: DualRegroup **1,733 jobs** at00:37:40UTC (`99db6d55ce044a37`);
+DualInvariants **9,094 jobs** at00:40:29UTC (`7a0c36f251e4eb40`). Both warning-free.
+The configured explicit-root build passed **9,299 jobs warning-free** at
+**2026-11-06 00:43:05UTC**, `975bdb23135a0d4a`; all **273 transitive probes**
+passed **00:44:00UTC**, `ffefd7bf352d83dc`, foundational-only. Root blob:
+`ab1b101156ac69d996273b529949f5d22dbae8e1`; DualRegroup blob:
+`566476ac3357aa4f6bf0431840f99b396ac07fa9`; DualInvariants blob:
+`97b05e34803937d2b0414215bd67d3706ed524f4`. Owner source checkpoint: `ef59449`.
+Logs are session0016 `dual-regroup-naturality.log`, `dual-invariants.log`,
+`dual-final-root.log` and `dual-final-axioms.log`.
+
+Independent honesty review accepted the actual producer route and degenerate
+cases; its correction to bind degree d in the blueprint is applied. Initial
+LSP issues were an inherited tensor group instance path and induction retaining
+hypotheses depending on the induction variable; both are repaired. The two
+producer nodes alone are checked. The individual dual-factor rectangular
+restriction, full canonical determinant pairing nonvanishing and field descent
+remain subsequent obligations.

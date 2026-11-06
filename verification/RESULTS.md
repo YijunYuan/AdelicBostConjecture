@@ -1,3 +1,22 @@
+## Integrated dual independent factors and two further lane producers
+
+The explicit-root configured build passed **9,299 jobs warning-free at
+2026-11-06 00:43:05UTC**, root blob `ab1b101156ac69d996273b529949f5d22dbae8e1`.
+All **273 geometry axiom probes** passed00:44:00UTC, using only the three
+standard foundational axioms. Independent honesty review was satisfactory.
+`Geometry.DualInvariants` consumes actual finite-projective dual regrouping
+naturality to extract independently invariant pure dual factors with nonzero
+pairing. Exact checks/source blobs are in GEOMETRY.md; source checkpointef59449.
+
+The same root includes checked `InvariantTheory.HomogeneousComponents`
+(6524042/926a4d5, delivered156 foundational-only probes) and
+`ComplexClosure.Normalization` (06c1747, delivered23 foundational-only probes).
+The latter proves openness for an actual integral injective normalization map;
+normalization construction/density were outside this checked root boundary.
+Later delivered `ComplexClosure.Density` and `CompactAverage` await the next
+root batch. Neither these producers nor this build completes Lemma7.2,
+BOST-GEOM, or Theorem1.1.
+
 ## Integrated independent invariant pairing and checked lane deliveries
 
 Claim class: **proved prerequisite producers**. The configured explicit-root
