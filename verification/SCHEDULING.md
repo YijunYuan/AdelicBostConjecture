@@ -1,127 +1,98 @@
 # Parallel Horizon scheduling
 
-## Live checkpoint at 2026-11-06 03:00 UTC
+## Live checkpoint at 2026-11-06 03:13 UTC
 
-The user explicitly requests **four continuing Horizon proof lanes until the
-entire main theorem is complete**, with no budget cap. The parent only schedules,
-reviews handoffs and monitors memory; Horizon owns all mathematical authorship.
-The four-writer cap includes writable helpers. Keep runs in foreground tool
-sessions, refill completed slots with actual remaining dependencies, and reduce
-concurrency at safe checkpoints if memory pressure is sustained. Do not restart
-a completed task merely to fill a slot. No push/publication is authorized.
-
-**Original Lemma 7.2 is fully verified and the user was notified in this chat
-at approximately 01:47 UTC.** The exact theorem is
-`BostConjecture.Balanced.IsBalanced.plucker_semistable` in
-`Balanced/PluckerSemistability.lean:118`, including an actual positive-degree
-homogeneous invariant nonzero on each nonzero intrinsic Plucker representative.
-Its scoped build passed 3,619 jobs; all 195 transitive axiom probes are
-foundational-only. Independent source, mathematical and honesty reviews accepted
-the original statement. Integration `cf391765` passed 9,329 warning-free root
-jobs at 01:44:09 UTC. Blueprint attachments and completion markers are accepted.
-The final theorem blob is `74e9fb060b2cacbc37a15d35bac52921477a659f`.
-No additional build is needed for this milestone.
+The user requests **four continuing Horizon proof lanes until the entire main
+theorem and its used dependencies are complete**, with no budget cap. The parent
+only schedules, reviews handoffs and monitors memory; Horizon owns mathematical
+Lean and blueprint authorship. The four-writer cap includes writable helpers.
+Keep runs in foreground tool sessions and refill completed slots with substantive
+remaining work. Never resume a completed task simply to fill a slot. Reduce
+concurrency at a safe checkpoint if memory pressure is sustained. No publication
+or push is authorized.
 
 | Run | Task | Current responsibility |
 | --- | --- | --- |
-| `0005` | `BOST-GEOM` | Session `0018`: terminal binary consumer and shared integration |
-| `0010` | `BOST-COMPACTNESS` | Metric continuity, arithmetic compactness and maximizing pairs |
-| `0008` | `BOST-COVOLUME` | Actual restriction-of-scalars trace-metric covolume |
-| `0009` | `BOST-SPECHT-SLOPE` | Actual determinant-Specht bundles and geometric slope inequality |
+| `0009` | `BOST-SPECHT-SLOPE` | Actual determinant-Specht slope and geometric slope inequality |
+| `0010` | `BOST-COMPACTNESS` | Arithmetic compactness and maximizing pairs |
+| `0011` | `BOST-MAIN` | HN tensor filtration, maximal-slope theorem and shared integration |
+| `0012` | `BOST-TENSOR-SEMI` | Arithmetic first variation, extremal-to-balance and tensor semistability |
 
-ARITH run `0004` finished normally at 01:50:45 UTC, with its full task marked
-done. Its arbitrary-number-field, nonfree-projective degree calculus, actual HN
-specialization and all-rank degree finiteness are checked: 366 foundational-only
-probes, root `cf391765`, final evidence `c4f4348`. Do not resume it.
-SPECHT run `0003` completed the canonical-lattice covolume limit at 23:50:16 UTC
-(evidence `e2e7039`/`8d57641`, root 9,263 jobs). CLOSURE run `0007` completed at
-01:16:41 UTC (proof `53f1119`, integration `d29f2d3`, evidence `f7ffd4f`, 40
-foundational-only probes). Neither completion implies the main theorem is done.
+MAIN started at 03:12:19 UTC (PID 765334); TENSOR-SEMI at 03:12:26 (PID 765881).
+Their foreground tool sessions remain open. Standing protection `I-0104`
+supersedes archived `I-0095`. The accepted migration is `439d654`; its
+handoff `I-0102` is archived. `I-0106` coordinates the live ownership transfer.
 
-Standing ownership is `I-0104`, superseding `I-0095`. GEOM
-alone edits the shared root, attribution, results and blueprint index files.
-COVOLUME owns only `Arithmetic/RestrictionCovolume/**`,
-`blueprint/src/restriction_covolume.tex`, `verification/RestrictionCovolumeAxioms.lean`
-and `verification/RESTRICTION_COVOLUME.md`; its stable input handoff is in
-`ARITHMETIC.md`. Completed source APIs stay stable unless parent coordinates a
-specific extension. The remaining main theorem, contraction and compactness
-claims are open. The bounded read-only review and GEOM handshake accepted the two successors
-in `I-0094`. GEOM committed the complete blueprint migration and includes at `1e56d1d`.
-The two successors started at 02:01:05/02:01:13 UTC (PIDs 714087/714164),
-restoring four live foreground runs. Their first sessions are both `0002`. SPECHT-SLOPE owns `Arithmetic/Specht/**`, `Slope/Geometric/**`,
-`specht_slope.tex` and its verification pair. COMPACTNESS owns
-`Arithmetic/Compactness/**`, `arithmetic_compactness.tex` and its verification
-pair. Metric continuity and arithmetic reconstruction can proceed before the
-pending covolume identity. One complex irreducible fiber suffices for the
-actual Specht application; do not expand to a general irreducibility library.
-The generic coaction square has no remaining consumer on this route and its
-roadmap item is retired, without claiming it proved.
+MAIN is now the sole editor of root `BostConjecture.lean`, `CONTRIBUTIONS.md`,
+`verification/RESULTS.md`, and shared blueprint includes/index/OPEN_PROOFS.
+Its proof scope is `Main/MaxSlope/**`, `main.tex` and its verification pair.
+TENSOR-SEMI owns `Main/TensorSemistability/**`, `tensor_semistability.tex`
+and its verification pair. It owns extensions/twists and the actual arithmetic
+local-maximum-to-balance argument, then consumes COMPACTNESS, SPECHT-SLOPE and
+accepted Lemma 7.2. MAIN consumes its proved tensor semistability for the final
+HN upper bound; the dependency does not run in reverse. Lower-bound and
+filtration work can proceed independently. No unfinished producer may become
+an assumed premise of a claimed completed source theorem.
 
-At 01:57 UTC, before successor startup, available memory was 15.15 GiB,
-PSI avg10 0.00%, swap used 3.12 GiB and OOM kills zero; swap-out was unchanged.
-Independent read-only warmup review at 02:02:50 UTC accepted exactly four
-engines on gpt-6-astra/xhigh/subscription, actual guarded successor MCPs
-714795/714952, no extra writer or source overlap, 14.48 GiB available, PSI
-avg10 zero, unchanged swap-out, OOM zero and dashboard HTTP 200. GEOM and
-both successors acknowledged the completed migration in I-0094. All active proof runs use the guarded Lean LSP; broad checks
-remain serialized through explicit-root Horizon checks. Dashboard remains on
-port 8765. Advisory `I-0084` records global search-index rebuild costs: batch
-searches at stable checkpoints and avoid redundant forced reindexing.
+SPECHT-SLOPE retains `Arithmetic/Specht/**`, `Slope/Geometric/**`,
+`specht_slope.tex` and its verification pair. COMPACTNESS retains
+`Arithmetic/Compactness/**`, `arithmetic_compactness.tex` and its pair.
+Completed APIs stay stable unless the parent coordinates an exact extension.
+Late compactness `870179a` was outside the final GEOM root scope and is a
+checked handoff for MAIN; subsequent Specht handoffs likewise go to MAIN.
 
-A 02:16 read-only memory follow-up found 6.75 GiB available, PSI avg10 6.02%
-(avg60 2.21%), 78 MiB additional swap-out and no OOM after builds ended.
-GEOM PSS was 6.04 GiB, including a second guarded LSP tree loading the same
-BinaryPlucker module (2.09 GiB PSS). This identifies duplication, not a leak.
-In I-0097 the parent requests a normal session handoff at the nearest coherent
-checkpoint, preserving current attempts/diagnostics and continuing the unfinished
-task next round. Keep four task lanes; no emergency termination is warranted.
+## Accepted completed producers
 
-GEOM accepted the normal-boundary request and ended session `0016` cleanly
-at 02:34:44 UTC, checkpoint `0475c91`; session `0018` is active, round 8/10.
-Its accepted binary transport prefix (`e771072`) and root 9,334 jobs/290
-foundational-only probes do **not** include the terminal binary sequence theorem.
-That attempted theorem and its exact `whnf200000` failure are preserved in
-session0016 `attempts/0001-terminal-binary-consumer-reaches-closed-tactic-g`;
-the final declaration was removed from accepted source and remains notready.
-The task and shared integration remain with GEOM. At 02:35 UTC, available memory
-recovered to 13.13 GiB with PSI avg10 zero and OOM zero; all four runs continue.
-I-0097 records the accepted handoff and closes the temporary memory request.
+**Original Lemma 7.2 is fully verified; the user was notified around 01:47 UTC.**
+The exact theorem is `Balanced.IsBalanced.plucker_semistable` in
+`Balanced/PluckerSemistability.lean:118`, including an actual positive-degree
+homogeneous invariant nonzero on each nonzero intrinsic Plucker representative.
+Scoped build: 3,619 jobs; 195 foundational-only transitive axiom probes;
+independent exact-source, mathematical and honesty acceptance. Root `cf391765`
+passed 9,329 warning-free jobs. Final theorem blob:
+`74e9fb060b2cacbc37a15d35bac52921477a659f`. BALANCED exited normally at
+01:53:33, final evidence `65ac4e1`. Do not resume it or re-notify as a new result.
 
-A bounded read-only route review accepted two disjoint successors in `I-0102`.
-Both tasks are created **queued**, without new proof writers:
+GEOM completed and exited normally at **03:11:03 UTC**. Terminal
+`exists_canonicalPairing_nonzero_sequence_of_binary_invariant` is committed at
+`1557324`, blob `ae575df89d7dbf17b767bec176ec4b9cc9f7aa7b`. Its 9,121-job
+module check and all 291 foundational-only probes passed. Failed conversion
+attempts remain preserved, not accepted as proofs. The direct original-ring
+contraction route is proved; the unused generic coaction descent remains retired.
 
-- `BOST-TENSOR-SEMI` replaces COVOLUME after accepted completion and exit. It
-  owns `Main/TensorSemistability/**`, `tensor_semistability.tex` and its
-  verification pair. Its producers are extensions/twists, strict-stability
-  reduction, actual arithmetic first variation and local-maximum-to-balance;
-  it then consumes COMPACTNESS, SPECHT-SLOPE and Lemma 7.2 for unconditional
-  tensor semistability. Existing balance-to-stationarity is not that converse.
-- `BOST-MAIN` replaces GEOM after accepted completion and exit. It owns
-  `Main/MaxSlope/**`, `main.tex` and its verification pair, then becomes sole
-  shared integrator. Its independent work is the maximal-slope lower bound
-  and actual saturated HN tensor filtration/quotient metrics; its final upper
-  bound consumes the proved TENSOR-SEMI endpoint. There is no reverse dependency.
+COVOLUME completed and exited normally at **03:11:14 UTC**. Exact
+`HermitianMetric.traceCovolume_eq_discr_degree` at `5144157` covers arbitrary
+number fields, nonfree projectives and rank zero. Identical canonical trace-basis
+relocation `739e58a` was reconciled with COMPACTNESS. Rebuilt target: 3,652 jobs;
+63 foundational-only probes; independent source, mathematical and honesty
+acceptance. Final evidence `1a816f3`.
 
-GEOM acknowledged the bounded migration of `lem:extensions-and-twists` and
-`thm:tensor-semistability` into `tensor_semistability.tex`, preserving their
-complete mathematics and adding the include. New owners await its committed
-handoff. GEOM retains shared integration until normal exit. Roadmap
-`BOST-COMPACT-EXTREMAL` records the missing tensor-semistability producer;
-the parent compactness milestone and whole main theorem remain open.
+Both were integrated at **`ec99c23`**, with **9,354 warning-free root jobs**
+at 03:04:06 UTC. Independent read-only handoff review accepted exact endpoints,
+axiom outputs, root imports and migration `439d654`. The latter preserves
+the two tensor-semistability nodes and their complete mathematics, with no
+duplicate labels. Both predecessor foreground commands returned exit 0 before
+either successor was launched. These completions do not prove the main theorem.
 
-GEOM's exact terminal binary invariant-to-nonvanishing-sequence theorem now
-passed its serialized kernel build (9,121 jobs, 02:53:11 UTC), source `1557324`.
-The 291-probe audit passed at 02:57:18; root integration and final acceptance
-are still pending. Its preserved earlier conversion failures remain evidence,
-not accepted proofs. COVOLUME's general exact formula passed the rebuilt
-3,652-job target at 02:55:28 and all 63 foundational-only probes at 02:57:55;
-independent source, mathematical and honesty reviews accepted it. Shared
-trace-basis cleanup with COMPACTNESS and root integration remain pending.
-These are progress checkpoints, not premature task completion.
+Other completed predecessors: ARITH `0004` exited 01:50:45, evidence `c4f4348`,
+366 foundational-only probes; SPECHT `0003` exited 23:50:16, exact canonical
+covolume asymptotic `e2e7039`/`8d57641`; CLOSURE `0007` exited 01:16:41,
+proof `53f1119`, root `d29f2d3`, evidence `f7ffd4f`, 40 probes. Do not resume.
 
-At 02:56 UTC available memory was 10.97 GiB, PSI avg10 zero, swap 3.33 GiB,
-unchanged swap-out and zero OOM kills. Four foreground runs remain active;
-no fifth proof writer or emergency memory intervention is warranted.
+## Resource and runtime checkpoint
+
+Before successor startup: 15.41 GiB available, PSI avg10 zero, swap 2.42 GiB,
+unchanged swap-out counter 9,146,901 and zero OOM kills. A bounded read-only
+startup review checks the four engines, old-process cleanup, guarded LSP and
+dashboard. All new runs retain gpt-6-astra/xhigh/subscription. Broad checks use
+the explicit workspace root and one serialized Horizon check slot.
+Dashboard remains at port 8765. No fifth proof writer is authorized.
+
+Earlier transient pressure at 02:16 was traced to two GEOM LSP trees loading
+the same module. Its normal 0016→0018 handoff removed the duplication; all
+old trees were confirmed gone. No emergency kill or user HN process change
+occurred. Advisory `I-0084` records global search-index rebuild costs:
+batch searches at stable checkpoints and avoid redundant forced reindexing.
 
 ## Earlier checkpoints
 
