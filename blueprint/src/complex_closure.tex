@@ -114,7 +114,8 @@ This is the affine form of \cite[Theorem 9.7]{milne-algebraic-geometry}.
 \end{proof}
 
 \begin{lemma}[Lifting roots of the actual minimal polynomial]
-\label{lem:complex-closure-integral-lifting}\notready
+\label{lem:complex-closure-integral-lifting}
+\lean{BostConjecture.InvariantTheory.exists_algHom_of_minpoly_eq_zero}\leanok
 Let $K$ be algebraically closed, let $R\subseteq B$ be an inclusion of
 $K$-domains with $R$ integrally closed, and suppose $B$ is integral over
 $R$ and finitely generated over $K$. For $u\in B$, let $F\in R[T]$ be
@@ -140,7 +141,8 @@ $\psi$ extends $\chi$ and sends $u$ to $z$.
 \end{proof}
 
 \begin{lemma}[Polynomial separation on a finite set]
-\label{lem:complex-closure-finite-separator}\notready
+\label{lem:complex-closure-finite-separator}
+\lean{BostConjecture.InvariantTheory.exists_polynomial_separator}\leanok
 Let $S$ be a finite subset of $K^T$, where $K$ is a field, and let
 $p\in K^T\setminus S$. There is a polynomial $u\in K[X_i\mid i\in T]$
 such that $u(p)=1$ and $u(q)=0$ for every $q\in S$.
@@ -157,9 +159,34 @@ and the factor indexed by $q$ vanishes at $q$. The empty product is one,
 so the assertion includes $S=\varnothing$ and empty coordinate arity.
 \end{proof}
 
+\begin{lemma}[Finite fibers and bounded lifts]
+\label{lem:complex-closure-finite-fibers}
+\uses{lem:complex-closure-root-bounds}
+\lean{BostConjecture.InvariantTheory.finite_zeroLocus_fiber,BostConjecture.InvariantTheory.exists_bound_zeroLocus_fibers}\leanok
+Let $I\subseteq K[X_1,\ldots,X_N]$ be an ideal and let
+$q=(q_1,\ldots,q_d)$ be a polynomial map. Suppose its coordinate
+homomorphism
+$K[T_1,\ldots,T_d]\to K[X_1,\ldots,X_N]/I$
+is integral. Then every fiber of $q:V(I)\to K^d$ is finite.
+For $K=\mathbb C$ and $a_k\to a$ in $\mathbb C^d$, each coordinate has
+a bound independent of $k$ and of the point chosen in
+$q^{-1}(a_k)\cap V(I)$.
+\end{lemma}
+\begin{proof}
+For every ambient coordinate $X_j$, integrality provides a monic polynomial
+$F_j\in K[T_1,\ldots,T_d][Z]$ annihilating its class in the quotient.
+Evaluation at $x\in V(I)$ factors through that quotient and yields
+$F_j(q(x),x_j)=0$. In the fiber over $a$, each $x_j$ thus belongs to
+the finite root set of the nonzero monic polynomial $F_j(a,Z)$.
+The fiber is contained in the finite product of these root sets, proving
+finiteness, also when the fiber or the ambient coordinate set is empty.
+In the complex case the uniform root bound applied to each $F_j$ and
+the sequence $a_k$ bounds every coordinate of every lift.
+\end{proof}
+
 \begin{lemma}[Complex and Zariski constructible closures]
 \label{lem:balanced-constructible-closure}
-\uses{lem:complex-closure-root-persistence,lem:complex-closure-root-bounds,lem:complex-closure-coordinates,lem:complex-closure-integral-lifting,lem:complex-closure-finite-separator}
+\uses{lem:complex-closure-root-persistence,lem:complex-closure-root-bounds,lem:complex-closure-coordinates,lem:complex-closure-integral-lifting,lem:complex-closure-finite-separator,lem:complex-closure-finite-fibers}
 \source{milne-algebraic-geometry:page-0201}\notready
 A constructible subset of a complex affine variety has the same
 Euclidean and Zariski closures.

@@ -79,6 +79,42 @@ Weber), `Data/Finset/Max.lean` (`Multiset.exists_min_image`), and
 copied. The intended consumer is the pending finite-normalization openness
 proof, not a semistability certificate.
 
+## Checked integral lifting and finite fibers
+
+`ComplexClosure.IntegralLifting` proves extension of a closed point of a
+subalgebra through an integral finite-type algebra, then lifts a root of
+the actual specialized minimal polynomial. The latter proof uses
+`minpoly.ker_eval` to descend evaluation and the former extension theorem
+to finish. It assumes only the normalization setting: a domain over an
+integrally closed domain, an injective (torsion-free) integral inclusion,
+and finite type over an algebraically closed ground field.
+
+`ComplexClosure.FiniteFiber` constructs the coordinate-product separator
+and proves monic coordinate equations on the canonical `zeroLocus`.
+Those equations feed both actual fiber finiteness and a coordinatewise
+uniform bound on all lifts of a converging base sequence. No root lifting,
+constructibility, openness or density conclusion is an assumed certificate.
+
+Explicit-root serialized builds passed warning-free:
+IntegralLifting **2,047 jobs** at 00:20:53 UTC; FiniteFiber **3,005 jobs** at
+00:24:03 UTC (2026-11-06). The expanded audit passed **19 transitive probes**
+at 00:24:38 UTC with only the three foundational axioms. Final source LSP
+diagnostics are clear; the audit LSP reported stale imports before the
+FiniteFiber build, while the subsequent serialized audit passed. Independent
+honesty/mathematical review inspected these checks and accepted the exact
+minimal-polynomial use, hypotheses, empty cases and substantive consumers.
+Its coordinatewise-bound precision edit is incorporated in the blueprint.
+
+Additional imported, unmodified producers at the same pinned Mathlib revision:
+`FieldTheory/Minpoly/IsIntegrallyClosed.lean` (`minpoly.ker_eval`, Riccardo
+Brasca, Paul Lezeau, Junyan Xu), `RingTheory/Ideal/GoingUp.lean`
+(`exists_ideal_over_maximal_of_isIntegral`, Anne Baanen, Yongle Hu),
+`RingTheory/Jacobson/Ring.lean` (`finite_of_finite_type_of_isJacobsonRing`),
+`FieldTheory/IsAlgClosed/Basic.lean` (`IsAlgClosed.lift`), and
+`RingTheory/Ideal/Quotient/Operations.lean` (`AlgHom.liftOfSurjective`).
+The dependency cones are covered by the transitive probes. Consumer:
+finite-normalization openness/density, still unproved. No copied source.
+
 ## Operational boundary
 
 The read-only ground review accepted the finite-normalization blueprint

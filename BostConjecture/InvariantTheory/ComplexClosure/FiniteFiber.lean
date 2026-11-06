@@ -83,7 +83,7 @@ theorem finite_zeroLocus_fiber {K σ τ : Type*} [Field K] [Finite τ]
     ((hF i).map (MvPolynomial.eval a)).ne_zero)).subset ?_
   intro x hx i
   have he : (fun j => MvPolynomial.eval x (q j)) = a := funext hx.2
-  simpa only [he] using hroot i x hx.1
+  simpa only [he, Set.mem_ofPred_eq] using hroot i x hx.1
 
 /-- Coordinates of all lifts of a convergent base sequence are uniformly bounded. -/
 theorem exists_bound_zeroLocus_fibers {σ τ : Type*}
