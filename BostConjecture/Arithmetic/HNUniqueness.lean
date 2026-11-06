@@ -62,4 +62,62 @@ theorem hnFlag_unique (h : HermitianMetric (K := K) M)
   have he : G = h.hnFlag := Subsingleton.elim _ _
   exact congrArg (fun f : μ.HarderNarasimhanFiltration => f.toFun) he
 
+/-- Uniqueness for actual saturated integral flags, with their actual induced quotient metrics. -/
+theorem hnSubmodule_unique (h : HermitianMetric (K := K) M)
+    (F : ℕ → Submodule (𝓞 K) M) [∀ i, Module.IsTorsionFree (𝓞 K) (M ⧸ F i)]
+    (n : ℕ) (hmono : Monotone F) (hzero : F 0 = ⊥) (htop : F n = ⊤)
+    (hstrict : StrictMonoOn F (Set.Iic n))
+    (hss : ∀ i < n, ((h.submodule (F (i + 1))).quotient
+      ((F i).comap (F (i + 1)).subtype)).IsSemistable)
+    (hdec : ∀ i, i + 1 < n →
+      ((h.submodule (F (i + 2))).quotient
+        ((F (i + 1)).comap (F (i + 2)).subtype)).slope <
+      ((h.submodule (F (i + 1))).quotient
+        ((F i).comap (F (i + 1)).subtype)).slope) : F = h.hnSubmodule := by
+  let X (i : ℕ) := (F i).baseChange K
+  have hsat (i : ℕ) : integralPart (X i) = F i := integralPart_baseChange (F i)
+  have hxmono : Monotone X := fun _ _ hij => Submodule.baseChange_mono K (hmono hij)
+  have hxzero : X 0 = ⊥ := by simp [X, hzero]
+  have hxtop : X n = ⊤ := by simp [X, htop]
+  have hxstrict : StrictMonoOn X (Set.Iic n) := by
+    intro i hi j hj hij
+    apply lt_of_le_of_ne (hxmono hij.le)
+    intro he
+    exact (hstrict hi hj hij).ne ((hsat i).symm.trans ((congrArg integralPart he).trans (hsat j)))
+  have hxss : ∀ i < n, ((h.submodule (integralPart (X (i + 1)))).quotient
+      ((integralPart (X i)).comap (integralPart (X (i + 1))).subtype)).IsSemistable := by
+    intro i hi
+    have transfer (A B : Submodule (𝓞 K) M)
+        [Module.IsTorsionFree (𝓞 K) (M ⧸ A)]
+        (ha : integralPart (X i) = A) (hb : integralPart (X (i + 1)) = B)
+        (hh : ((h.submodule B).quotient (A.comap B.subtype)).IsSemistable) :
+        ((h.submodule (integralPart (X (i + 1)))).quotient
+          ((integralPart (X i)).comap (integralPart (X (i + 1))).subtype)).IsSemistable := by
+      subst A B
+      exact hh
+    exact transfer (F i) (F (i + 1)) (hsat i) (hsat (i + 1)) (hss i hi)
+  have hxdec : ∀ i, i + 1 < n →
+      ((h.submodule (integralPart (X (i + 2)))).quotient
+        ((integralPart (X (i + 1))).comap (integralPart (X (i + 2))).subtype)).slope <
+      ((h.submodule (integralPart (X (i + 1)))).quotient
+        ((integralPart (X i)).comap (integralPart (X (i + 1))).subtype)).slope := by
+    intro i hi
+    have transfer (A B C : Submodule (𝓞 K) M)
+        [Module.IsTorsionFree (𝓞 K) (M ⧸ A)] [Module.IsTorsionFree (𝓞 K) (M ⧸ B)]
+        (ha : integralPart (X i) = A) (hb : integralPart (X (i + 1)) = B)
+        (hc : integralPart (X (i + 2)) = C)
+        (hh : ((h.submodule C).quotient (B.comap C.subtype)).slope <
+          ((h.submodule B).quotient (A.comap B.subtype)).slope) :
+        ((h.submodule (integralPart (X (i + 2)))).quotient
+          ((integralPart (X (i + 1))).comap (integralPart (X (i + 2))).subtype)).slope <
+        ((h.submodule (integralPart (X (i + 1)))).quotient
+          ((integralPart (X i)).comap (integralPart (X (i + 1))).subtype)).slope := by
+      subst A B C
+      exact hh
+    exact transfer (F i) (F (i + 1)) (F (i + 2)) (hsat i) (hsat (i + 1))
+      (hsat (i + 2)) (hdec i hi)
+  have he := h.hnFlag_unique X n hxmono hxzero hxtop hxstrict hxss hxdec
+  funext i
+  exact (hsat i).symm.trans (congrArg integralPart (congrFun he i))
+
 end BostConjecture.Arithmetic.HermitianMetric

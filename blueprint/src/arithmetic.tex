@@ -1740,7 +1740,7 @@ assertion for its integral terms.
 
 \begin{lemma}[Harder--Narasimhan filtration]
 \label{lem:hn-filtration}
-\uses{def:hermitian-degree,lem:hermitian-hn-interval-flag,lem:nested-quotient-metric,lem:exact-determinant-degree,lem:determinant-contraction,lem:saturation-degree,lem:hermitian-convex-slopes}
+\uses{lem:hermitian-hn-maximal-slope,lem:hermitian-hn-unique,lem:hermitian-hn-isometry,lem:integral-part-generic-subspace}
 \source{bost-specht-manuscript:page-0003}\notready
 Every nonzero Hermitian bundle $A$ has a unique saturated filtration with
 semistable quotient bundles and strictly decreasing slopes. The largest
@@ -1751,51 +1751,44 @@ and contains every maximal-slope submodule.
 Every isometric automorphism preserves the filtration.
 \end{lemma}
 \begin{proof}
-Take the saturated interval flag of Lemma~\ref{lem:hermitian-hn-interval-flag}.
-Let $N$ be a positive-rank submodule of a grade $A_{i+1}/A_i$.
-Saturate $N$ in that grade, and let $P$ be its inverse image in $A_{i+1}$.
-Then $P$ is saturated in $A_{i+1}$ and in $A$, so $P=A\cap Y$ for
-$X_i\subsetneq Y\subseteq X_{i+1}$. The nested-quotient metric lemma
-identifies the induced metric on $P/A_i$ with its quotient metric from
-$P$. Saturation preserves rank and increases degree. The interval bound
-therefore gives $\slope(N)\leq\slope(A_{i+1}/A_i)$, proving that
-every grade is semistable. The interval flag already gives strict slope
-decrease.
+The actual HN grade and maximal-slope lemma constructs the filtration,
+proves semistability of its quotient bundles against all integral
+submodules and proves attainment and containment of all maximizers.
+The uniqueness lemma applies to any saturated integral flag: localization
+is monotone and preserves strictness, since a saturated submodule is
+recovered from its generic fiber by taking its integral part. The degree,
+metric and semistability data of each term are thereby exactly those of
+the associated generic flag. Generic uniqueness and taking integral
+parts identify the original flags.
 
-In any saturated filtration with semistable decreasing grades, intersect
-a positive-rank submodule $B$ with every term. Its successive quotients
-inject contractingly into the corresponding grades: quotient distance
-can only decrease when the space of lifts is enlarged. Compare each
-quotient with its image, using equal-rank contraction, and then use the
-semistability of that grade. Exact additivity and rank additivity give
-\[
- \degn(B)\leq\sum_i\mu_i\rk((B\cap A_{i+1})/(B\cap A_i))
- \leq\mu_0\rk(B).
-\]
-The first term itself has slope $\mu_0$, so the maximal slope is attained
-and equals $\mu_0$. Equality forces all positive-rank quotients to occur
-in the first grade, by strict decrease. Since $A/A_1$ is torsion-free,
-rank zero of the image of $B$ there implies $B\subseteq A_1$.
-Thus $A_1$ contains every maximal-slope submodule and is the unique
-saturated one of largest rank. Applied to two such filtrations, this
-identifies their first terms; induction on the quotient proves uniqueness.
-Isometries preserve induced and quotient slopes, so uniqueness proves
-invariance of the filtration.
+Containment in the first term bounds the rank of every maximizer by its
+rank. If a saturated maximizer has that rank, its included generic fiber
+has the same finite dimension as the first term's generic fiber and
+therefore equals it. Taking integral parts gives equality of the integral
+modules. Finally the isometry lemma preserves every term of this flag.
 \end{proof}
 
 \begin{lemma}[Irreducible isometric actions imply semistability]
 \label{lem:irreducible-semistable}\uses{lem:hn-filtration}
 \source{bost-specht-manuscript:page-0003}\notready
-If a finite group acts isometrically on $A$ and its action on $A_K$ is
-irreducible, then $A$ is semistable. Independent tensor products and duals
-of absolutely irreducible isometric finite-group representations satisfy
-the same conclusion.
+If a group acts by integral isometries on $A$ and its representation on
+$A_K$ is irreducible, then $A$ is semistable.
 \end{lemma}
 \begin{proof}
-The unique maximal destabilizing submodule is preserved by every group
-element. Its generic fiber is a nonzero invariant subspace; irreducibility
-makes it the full generic fiber. Saturation then makes it all of $A$.
+The first HN submodule is preserved by every group element. Its generic
+fiber is nonzero, and irreducibility therefore makes it all of $A_K$.
+Saturation makes the first term all of $A$. Consequently its attained
+maximal slope equals the average slope of $A$, which is exactly
+semistability against all positive-rank integral submodules.
+\end{proof}
 
+\begin{lemma}[Independent absolutely irreducible factors]
+\label{lem:independent-irreducible-semistable}
+\uses{lem:irreducible-semistable}\notready
+Independent tensor products and duals of absolutely irreducible
+isometric finite-group representations on Hermitian bundles are semistable.
+\end{lemma}
+\begin{proof}
 Over an algebraically closed characteristic-zero field, representations
 of a finite group are completely reducible: average any projection to an
 invariant subspace over the group to obtain an invariant projection.
@@ -1807,11 +1800,15 @@ Consequently, for irreducible $V,W$ of groups $G,H$,
  =\operatorname{End}_G(V)\otimes\operatorname{End}_H(W)
  \simeq k.
 \]
-The equality follows by expanding an endomorphism in a basis of one
-endomorphism factor and imposing the two independent commuting conditions.
-A nontrivial direct-sum decomposition would give a nonscalar projection,
-so $V\otimes W$ is irreducible. The annihilator of a proper invariant
-subspace of $V^\vee$ would give a proper invariant subspace of $V$;
-hence duals are irreducible too. Descent and the first paragraph complete
-the proof.
+To verify the equality, write an endomorphism in a basis of
+$\operatorname{End}(W)$. Commutation with $G$ forces every coefficient
+in $\operatorname{End}(V)$ to commute with $G$, hence to be scalar.
+The endomorphism is therefore $1\otimes b$; commutation with $H$
+forces $b$ to be scalar too. A nontrivial direct-sum decomposition
+would give a nonscalar projection, so $V\otimes W$ is irreducible.
+The annihilator of a proper nonzero invariant subspace of $V^\vee$
+is proper and nonzero in $V$, so duals are irreducible. Any invariant
+proper subspace before scalar extension would remain proper and
+invariant afterwards; thus irreducibility descends. Apply the preceding
+lemma to these actual integral isometric representations.
 \end{proof}
