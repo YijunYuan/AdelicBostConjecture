@@ -214,8 +214,8 @@ identity simultaneously, at every complex embedding.
 \uses{lem:hn-tensor-grades,lem:hn-filtration,lem:degree-calculus}
 \source{bost-specht-manuscript:page-0013}
 \lean{BostConjecture.Arithmetic.HermitianMetric.hnGrade_rank_pos,BostConjecture.Arithmetic.HermitianMetric.hnTensorGrade_slope,BostConjecture.Arithmetic.HermitianMetric.hnTensorGrade_slope_le}
-Every consecutive grade of the HN tensor filtration has positive rank
-and slope
+For $0\leq i<p$ and $0\leq j<q$, the corresponding consecutive grade
+of the HN tensor filtration has slope
 \[
  \mu(A_{iq+j+1}/A_{iq+j})
  =\mu(E_{i+1}/E_i)+\mu(F_{j+1}/F_j)
@@ -317,8 +317,28 @@ $\mu(P)=\maxslope(E)$ this proves the inequality. For an isomorphism,
 apply it also to the inverse, whose fiber map is again an isometry.
 \end{proof}
 
+\begin{lemma}[Unconditional finite-family lower bound]
+\label{lem:max-slope-finite-lower}
+\uses{lem:max-slope-tensor-lower,lem:max-slope-isometry,lem:degree-calculus}
+\source{bost-specht-manuscript:page-0013}
+\lean{BostConjecture.Arithmetic.HermitianMetric.piTensorGenericNontrivial,BostConjecture.Arithmetic.HermitianMetric.sum_maxSlope_le_piTensor}
+For a finite family of positive-rank Hermitian bundles,
+$\sum_j\maxslope(E_j)\leq\maxslope(\bigotimes_j E_j)$.
+The empty tensor is the degree-zero unit line and is allowed here.
+\end{lemma}
+\begin{proof}
+The generic tensor rank is the product of the positive factor ranks,
+so each partial tensor has positive rank, including the empty tensor.
+For the empty family, its average slope is zero and is at most its
+maximal slope. Induct by separating one factor. The canonical
+regrouping is an integral isometry, so maximal slope is unchanged.
+Apply the binary lower bound to the remaining tensor and the separated
+factor, and then the induction hypothesis. Reindexing the family is
+also an integral isometry, so the result is independent of its enumeration.
+\end{proof}
+
 \begin{corollary}[Finite families]
-\label{cor:bost-finite-family}\uses{thm:bost-main,lem:degree-calculus,lem:max-slope-isometry}
+\label{cor:bost-finite-family}\uses{thm:bost-main,lem:degree-calculus,lem:max-slope-isometry,lem:max-slope-finite-lower}
 \source{bost-specht-manuscript:page-0001,bost-specht-manuscript:page-0013}
 \notready
 For every finite nonempty family of positive-rank Hermitian
@@ -330,10 +350,11 @@ $\Ocal_K$-bundles $(E_j)_{j=1}^N$,
 If every factor is semistable, so is the tensor product.
 \end{corollary}
 \begin{proof}
-Induct on $N$. The one-factor identity is tautological; the inductive
-step applies the two-factor theorem to the tensor product of the
-first $N-1$ factors and the last one. Hilbert tensor associativity is
-an isometry, so parenthesization does not alter slopes. For semistable
+The lower bound is the preceding lemma. For the upper bound induct on
+$N$. The one-factor identity is tautological; the inductive step applies
+the two-factor theorem to the tensor product of the first $N-1$ factors
+and the last one. Hilbert tensor associativity is an isometry, so
+parenthesization does not alter slopes. For semistable
 factors the sum of their maximal slopes is the sum of their average
 slopes, which is the average slope of the tensor product. Equality of
 maximal and average slope is exactly semistability.
