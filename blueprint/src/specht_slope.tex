@@ -1,0 +1,94 @@
+\chapter{Determinant--Specht bundles and the geometric slope inequality}
+
+\begin{lemma}[Determinant-isotypic integral modules]
+\label{lem:determinant-isotypic}
+\uses{def:rectangular-specht,lem:rectangular-invariants,lem:determinant-twisted-free-inclusion,lem:determinant-free-base-change,lem:determinant-free-naturality,lem:tensor-base-change-equivalence,lem:determinant-free-base-change-square,lem:linear-map-localization-descent,lem:determinant-chart-tower,lem:finite-projective-frames,lem:projective-determinant-inclusion,lem:degree-calculus}
+\source{bost-specht-manuscript:page-0008,bost-specht-manuscript:page-0009}
+\notready
+For a rank-$a$ projective $\Ocal$-module $A$ and $d=ak>0$, there is
+a canonical injection
+\[
+ \iota_A:\mathcal S_{a,d}(A):=
+ (\det A)^{\otimes k}\otimes_\mathbb Z L_{a,d}\longrightarrow A^{\otimes d}.
+\]
+It is isometric for the determinant and canonical Specht metrics and
+satisfies
+\[
+ \slope(\mathcal S_{a,d}(\overline A))=d\slope(\overline A)-c_a(d).
+\]
+Its generic fiber is the full $\SL(A_K)$-invariant subspace of
+$A_K^{\otimes d}$, with absolutely irreducible isometric $\mathfrak S_d$
+action.
+\end{lemma}
+\begin{proof}
+In a free module, a rectangular polytabloid is a permutation of a
+tensor product of $k$ unnormalized determinant tensors. Thus every
+change-of-frame matrix $g$ acts on it by $(\det g)^k$. For a local
+frame $b_1,\ldots,b_a$ the formula
+\[
+ (b_1\wedge\cdots\wedge b_a)^{\otimes k}\otimes x
+ \longmapsto b^{\otimes d}x
+\]
+is consequently independent of the frame. Choose a finite principal
+cover on which $A$ is free. Exterior-power and tensor base change
+identify the local sources and targets with localizations of the
+intrinsic global modules. Scalar-extension compatibility and frame
+independence make the local maps agree on every overlap. Descent of
+linear maps therefore gives a unique global map over $\Ocal$.
+The local inclusion of the Specht lattice into the word lattice stays
+injective after scalar extension because $\Ocal$ and its localizations
+are torsion-free, hence flat, over $\mathbb Z$. This proves injectivity.
+
+At each archimedean place choose an orthonormal frame. Tensor words are
+orthonormal, as are the corresponding row tabloids, and the determinant
+vector of the frame has norm one. The formula is therefore an isometry.
+In particular, no division by a factorial is made: the norm
+$\sqrt{a!}$ of an unnormalized determinant tensor already belongs to
+the polytabloid's metric.
+
+If $f=\rk_\mathbb Z L_{a,d}$, a basis wedge of
+$\Ocal\otimes_\mathbb Z L_{a,d}$ has norm $\covol L_{a,d}$ at every
+embedding and generates its determinant module. Its normalized degree
+is $-\log\covol L_{a,d}$. The line-twist identity gives the slope
+$k\degn(\det A)-f^{-1}\log\covol L_{a,d}$, which is the asserted
+formula. The rectangular invariant-space theorem identifies the
+generic fiber and its absolute irreducibility. Permutation of tensor
+positions preserves the lattice and the ambient Hilbert tensor norm,
+and commutes with changes of frame, proving the isometric action.
+\end{proof}
+
+\begin{theorem}[Geometric slope inequality]
+\label{thm:geometric-slope}
+\uses{lem:contraction-nonzero,lem:canonical-contraction,lem:determinant-isotypic,lem:irreducible-semistable,lem:degree-calculus,thm:specht-sublinear-covolume}
+\source{bost-specht-manuscript:page-0009,bost-specht-manuscript:page-0010}
+\notready
+For arbitrary positive-rank Hermitian bundles $E_1,\ldots,E_N$ and
+a nonzero submodule $V\subseteq\bigotimes_j E_j$, geometric
+semistability of the Pl\"ucker line of $V_K$ implies
+\[
+ \slope(\overline V)\leq\sum_j\slope(\overline E_j).
+\]
+The factors need not be arithmetically semistable.
+\end{theorem}
+\begin{proof}
+Take the unbounded sequence $d=\ell d_0$ from the nonvanishing lemma.
+The kernel of $\Psi_{d,K}$ is invariant for the simultaneous
+$\mathfrak S_d$ action. Absolute irreducibility of $B_{d,K}$ and
+nonvanishing force that kernel to be zero. Torsion-freeness gives
+injectivity over $\Ocal$. Let $J_d$ be the actual image, with metric
+induced from $D_d^\vee$. The isomorphism of modules $B_d\to J_d$
+is contracting, so $\slope(B_d)\leq\slope(J_d)$.
+
+Each factor of $D_d$ has absolutely irreducible isometric permutation
+action. Their tensor product is absolutely irreducible for the
+independent product of permutation groups. Its dual is semistable by
+the irreducible-action lemma. Thus, including when $J_d$ is not
+saturated, $\slope(J_d)\leq\slope(D_d^\vee)$. The determinant and
+average tensor-slope formulas give
+\[
+ d\slope(V)-c_s(d)\leq\slope(J_d)
+ \leq d\sum_j\slope(E_j)+\sum_jc_{a_j}(d).
+\]
+Divide by $d$ and let $\ell\to\infty$. The sublinear Specht covolume
+theorem makes every error term tend to zero, giving the claim.
+\end{proof}
