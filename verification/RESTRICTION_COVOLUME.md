@@ -28,8 +28,9 @@ the existing restriction-covolume node.
 
 Kernel check: workspace-root serialized Horizon check of
 `BostConjecture.Arithmetic.RestrictionCovolume.TraceSpace` passed, 3353 jobs,
-fingerprint `95819e0a2a987609`. The dedicated axiom probe lists the actual
-construction and all exported lattice/tensor bridges.
+fingerprint `95819e0a2a987609`. The dedicated 14-declaration axiom probe
+passed (fingerprint `2bec001e17d69f56`); every listed construction and
+lattice/tensor bridge uses only `propext`, `Classical.choice`, and `Quot.sound`.
 
 ## Remaining calculation
 
