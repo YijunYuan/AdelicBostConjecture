@@ -1,3 +1,8 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.InvariantTheory.ComplexClosure.ConstructibleClosure
@@ -29,7 +34,7 @@ theorem closure_coordinate_polynomial_image_zeroLocus {σ τ : Type*} [Finite σ
 
 /-- The complex polynomial-image closure comparison used in Lemma 7.2. -/
 theorem closure_polynomial_image_zeroLocus
-    {σ τ E : Type*} [Fintype σ] [Fintype τ]
+    {σ τ E : Type*} [Finite σ] [Fintype τ]
     [NormedAddCommGroup E] [NormedSpace ℂ E]
     (b : Module.Basis τ ℂ E) (I : Ideal (MvPolynomial σ ℂ))
     (q : τ → MvPolynomial σ ℂ) :

@@ -1,10 +1,16 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Main.TensorSemistability.BalancedSlope
 public import BostConjecture.Main.TensorSemistability.TensorRescale
 public import BostConjecture.Main.StrictReduction.MaximizingCounterexample
 
-/-! # Tensor semistability over arbitrary number fields
+/-!
+# Tensor semistability over arbitrary number fields
 
 The actual compact maximizing pair, strict reduction, metric variations,
 intrinsic Plücker semistability and geometric slope inequality rule out every

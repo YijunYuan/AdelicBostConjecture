@@ -1,10 +1,21 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Arithmetic.Specht.DeterminantBundle
-public import BostConjecture.Arithmetic.TensorCompatibility
-public import BostConjecture.Tensor.HilbertMap
+public import BostConjecture.Arithmetic.Tensor.Compatibility
+public import BostConjecture.Tensor.Metric.Map
 
-/-! # The canonical determinant–Specht metric as an arithmetic tensor metric -/
+/-!
+# The canonical determinant–Specht metric as an arithmetic tensor metric
+
+The determinant–Specht bundle metric agrees with the arithmetic Hilbert
+tensor metric. This comparison allows the tensor degree formulas to apply
+to the auxiliary bundles used in Section 6 of this paper.
+-/
 
 @[expose] public section
 

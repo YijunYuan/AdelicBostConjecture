@@ -1,7 +1,12 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
-public import BostConjecture.Arithmetic.TensorSubmodule
-public import BostConjecture.Arithmetic.Compactness.MetricTransport
+public import BostConjecture.Arithmetic.Tensor.Submodule
+public import BostConjecture.Arithmetic.Compactness.Topology.MetricTransport
 public import BostConjecture.Main.TensorSemistability.Extensions
 
 /-!
@@ -10,7 +15,7 @@ public import BostConjecture.Main.TensorSemistability.Extensions
 The shared integral tensor image and quotient isometries identify both pieces
 of the tensor exact sequence with their actual Hilbert tensor metrics.
 
-Reference: bost_specht_manuscript.pdf, Proposition 7.3, pages 12–13.
+Reference: this paper, Proposition 7.3, pages 12–13.
 -/
 
 @[expose] public section

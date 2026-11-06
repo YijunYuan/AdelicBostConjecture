@@ -1,3 +1,8 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import Mathlib.Analysis.InnerProductSpace.Trace
@@ -46,7 +51,8 @@ variable {U W : Type*} [NormedAddCommGroup U] [InnerProductSpace ℂ U]
   [FiniteDimensional ℂ U] [NormedAddCommGroup W] [InnerProductSpace ℂ W]
   [FiniteDimensional ℂ W]
 
-/-- The balanced equations concern the actual orthogonal projection on the Hilbert tensor product. -/
+/-- The balanced equations concern the actual orthogonal projection
+on the Hilbert tensor product. -/
 def IsBalanced (S : Submodule ℂ (U ⊗[ℂ] W)) : Prop :=
   partialTraceRight ℂ U W S.starProjection.toLinearMap =
       ((Module.finrank ℂ S : ℂ) / Module.finrank ℂ U) • LinearMap.id ∧

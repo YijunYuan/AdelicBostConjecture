@@ -1,3 +1,8 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Balanced.ProjectionTrace
@@ -7,7 +12,7 @@ public import BostConjecture.Balanced.ProjectionTrace
 
 These finite-dimensional identities are used by the arithmetic extremal
 metric argument, with the actual projection onto a tensor submodule fiber.
-Reference: bost_specht_manuscript.pdf, Proposition 7.3, page 13.
+Reference: this paper, Proposition 7.3, page 13.
 -/
 
 @[expose] public section

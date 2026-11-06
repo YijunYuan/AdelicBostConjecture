@@ -1,0 +1,180 @@
+{
+  "record_scope": "Historical extraction record: original local paths, hashes, commands, dependency boundaries and checks below describe the initial port. Current source locations and checksums are listed in current_source_tree; original upstream source paths and hashes remain unchanged.",
+  "schema_version": 1,
+  "contribution": "Selective finite-projective tensor and duality port",
+  "upstream": {
+    "repository": "DanielJHorton/mathlib4",
+    "pull_request": "https://github.com/leanprover-community/mathlib4/pull/44845",
+    "head_commit": "47365e3b9fd4329f058c31ac7aa9565a6036b17d",
+    "status_when_retrieved": "open/unmerged",
+    "authors": [
+      "Daniel Horton"
+    ],
+    "license": "Apache-2.0",
+    "retrieved_utc": "2026-11-05T14:49:39.773070+00:00",
+    "access": "Connected GitHub fetch_file at exact head; cross-checked saved survey diff; source git blob hashes independently recomputed",
+    "sources": [
+      {
+        "path": "Mathlib/LinearAlgebra/PiTensorProduct/Projective.lean",
+        "url": "https://github.com/DanielJHorton/mathlib4/blob/47365e3b9fd4329f058c31ac7aa9565a6036b17d/Mathlib/LinearAlgebra/PiTensorProduct/Projective.lean",
+        "git_blob_sha1": "04c7a68ef3bccc944bf00e37cdbc4309087945d5",
+        "sha256": "7a0af1e9b2caf702d024c77e070f39ab17b6d803e231619838fb19cd6b8ebad2",
+        "use": "Full module selectively ported; two proof expansions only."
+      },
+      {
+        "path": "Mathlib/LinearAlgebra/Dual/Defs.lean",
+        "url": "https://github.com/DanielJHorton/mathlib4/blob/47365e3b9fd4329f058c31ac7aa9565a6036b17d/Mathlib/LinearAlgebra/Dual/Defs.lean",
+        "git_blob_sha1": "ef97da868718ec5c43dad00d3bd3cb867fbb27c8",
+        "sha256": "fe391d1a203e510e70382f3c4ed4e96adfa592a7a5395a7d07278f44e822f8cc",
+        "use": "Only the three new dualBaseRingEquiv declarations extracted."
+      },
+      {
+        "path": "Mathlib/LinearAlgebra/PiTensorProduct/Basic.lean",
+        "url": "https://github.com/DanielJHorton/mathlib4/blob/47365e3b9fd4329f058c31ac7aa9565a6036b17d/Mathlib/LinearAlgebra/PiTensorProduct/Basic.lean",
+        "git_blob_sha1": "323fe9c687a4294b7b2a9199df47fa8367a0eace",
+        "sha256": "d5b437651369edcdf0586bb6ed739326aa5a8c8db4d619cc1d9544c12476e3f6",
+        "use": "Inspected missing reindex simp lemmas; their two-line proofs expanded inline, no declarations copied."
+      },
+      {
+        "path": "LICENSE",
+        "url": "https://github.com/DanielJHorton/mathlib4/blob/47365e3b9fd4329f058c31ac7aa9565a6036b17d/LICENSE",
+        "git_blob_sha1": "8dada3edaf50dbc082c9a125058f25def75e625a",
+        "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
+        "use": "Exact unchanged Apache-2.0 license."
+      }
+    ]
+  },
+  "local_environment": {
+    "lean_toolchain": "leanprover/lean4:v4.35.0",
+    "mathlib_commit": "56a005855ea17e0b0958f73ec801ae140b0a1679",
+    "dependency_changes": false
+  },
+  "local_files": [
+    {
+      "path": "BostConjecture/LinearAlgebra/PiTensorProduct/DualBaseRing.lean",
+      "sha256": "1ab97b5629c1c2149893e00a3174b72261985845be75c5a7fe170551ec94bd92"
+    },
+    {
+      "path": "BostConjecture/LinearAlgebra/PiTensorProduct/Projective.lean",
+      "sha256": "a7bbe7c42c144fba0f9046ac346c06bfe120e97a5aced908d0180724f371ffc5"
+    },
+    {
+      "path": "verification/ProjectiveTensorAxioms.lean",
+      "sha256": "043190a7b249990180242c3b3154f2a6a276bd6db2c67cb69acf0b07dce4f0ce"
+    },
+    {
+      "path": "vendor/mathlib-prs/44845/LICENSE",
+      "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1"
+    }
+  ],
+  "exports": [
+    "Module.Dual.dualBaseRingEquiv",
+    "Module.Dual.dualBaseRingEquiv_apply",
+    "Module.Dual.dualBaseRingEquiv_symm_apply",
+    "PiTensorProduct.Projective",
+    "PiTensorProduct.piTensorHomEquiv",
+    "PiTensorProduct.piTensorHomEquiv_toLinearMap",
+    "PiTensorProduct.piTensorHomEquiv_apply",
+    "PiTensorProduct.dualDistribEquivOfProjective",
+    "PiTensorProduct.dualDistribEquivOfProjective_toLinearMap",
+    "PiTensorProduct.dualDistribEquivOfProjective_tprod_tprod"
+  ],
+  "counts": {
+    "public_declarations": 10,
+    "private_recursive_helpers": 2,
+    "new_axioms": 0,
+    "sorries": 0
+  },
+  "adaptations": [
+    "Preserved the Projective.lean copyright notice and all canonical declaration names and statement hypotheses. Added project-local DualBaseRing import and prominent modification notice.",
+    "Extracted only Module.Dual.dualBaseRingEquiv and its two simp lemmas from Dual/Defs into DualBaseRing.lean with original proof text. Full upstream Defs authors retained and Daniel Horton attributed.",
+    "In private piTensorHomEquiv_of_Fin_tprod, replaced missing reindex_symm_symm_tprod invocation with reindex.injective followed by simp.",
+    "In piTensorHomEquiv bijectivity proof, replaced missing reindex_symm_tprod invocation with reindex.injective followed by simp.",
+    "The binary TensorProduct.homTensorHomEquiv and dualDistribEquiv already belong to pinned Mathlib; no duplicate was introduced."
+  ],
+  "verification": {
+    "lsp": "Before/after queries performed; final producer and prerequisite diagnostics clean; axiom probe contains only expected informational output. Initial target queries pre-creation returned file-not-found.",
+    "build": {
+      "command": "horizon --root /home/yijunyuan/bc-workspace check BostConjecture.LinearAlgebra.PiTensorProduct.Projective --timeout 300 --json",
+      "cwd": "projects/BostConjecture",
+      "fingerprint": "36e15fc5f32630ac",
+      "status": "passed",
+      "duration_seconds": 3.579,
+      "finished_at": "2026-11-05T14:48:08.949882+00:00"
+    },
+    "axioms": {
+      "command": "horizon --root /home/yijunyuan/bc-workspace check --lean verification/ProjectiveTensorAxioms.lean --timeout 300 --json",
+      "fingerprint": "a1952e5fc1e7963f",
+      "status": "passed",
+      "duration_seconds": 5.334,
+      "finished_at": "2026-11-05T14:48:50.698928+00:00",
+      "audited": [
+        "Module.Dual.dualBaseRingEquiv",
+        "Module.Dual.dualBaseRingEquiv_apply",
+        "Module.Dual.dualBaseRingEquiv_symm_apply",
+        "PiTensorProduct.Projective",
+        "PiTensorProduct.piTensorHomEquiv",
+        "PiTensorProduct.piTensorHomEquiv_toLinearMap",
+        "PiTensorProduct.piTensorHomEquiv_apply",
+        "PiTensorProduct.dualDistribEquivOfProjective",
+        "PiTensorProduct.dualDistribEquivOfProjective_toLinearMap",
+        "PiTensorProduct.dualDistribEquivOfProjective_tprod_tprod"
+      ],
+      "base_ring_exports": [
+        "propext",
+        "Quot.sound"
+      ],
+      "remaining_exports": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "sorryAx": false
+    },
+    "consumer_examples": "Projectivity instance synthesis, bijectivity of canonical dualDistrib, and pure-tensor evaluation compile under finite projective hypotheses without Module.Free.",
+    "broad_build": "Not run; narrow module and transitive axiom probes are the verification boundary.",
+    "operational_warning": "Horizon reported resource-slot waiting; measured waits 0.003s and 0.002s; known spurious message tracked as workspace inbox I-0001."
+  },
+  "mathematical_boundary": {
+    "claim_class": "proved producers ported from an unmerged external proposal and checked locally",
+    "hypotheses": "Finite index type; commutative semiring; additive commutative monoid modules. Hom and dual equivalences require each source module finite projective, with no freeness assumption.",
+    "intended_consumer": "Canonical integral contraction on finite projective O_K-modules, including nonfree modules.",
+    "remaining_work": [
+      "Specialize and connect these algebraic equivalences to the project integral contraction construction over O_K.",
+      "Any norm, metric, isometry, arithmetic slope or covolume estimates require separate proofs."
+    ],
+    "source_claim": "No claim that upstream PR is merged or that Bost/Specht analytic or arithmetic objectives have been discharged.",
+    "honesty_reviewer": "Skipped for this mechanical selective port; parent coordinates independent review and downstream frontier."
+  },
+  "relocation_2026_11_06": {
+    "note": "Compiled sources were relocated beneath BostConjecture/ExternalCode; module imports and source documentation were updated. Historical source hashes, commands and diffs describe the original extraction and remain unchanged.",
+    "path_map": {
+      "BostConjecture/LinearAlgebra/PiTensorProduct/Projective.lean": "BostConjecture/ExternalCode/MathlibPRs/PR44845/LinearAlgebra/PiTensorProduct/Projective.lean",
+      "BostConjecture/LinearAlgebra/PiTensorProduct/DualBaseRing.lean": "BostConjecture/ExternalCode/MathlibPRs/PR44845/LinearAlgebra/PiTensorProduct/DualBaseRing.lean"
+    },
+    "namespace_note": "Canonical upstream declaration namespaces are retained. The symmetric algebra port restores TauCeti.SymmetricPower and private Schur-Weyl helpers restore TauCeti; Garnir/straightening retains the documented BostConjecture.Specht adaptation to the project word model."
+  },
+  "current_source_tree": {
+    "note": "The preceding hashes and verification records describe the historical extraction. These current paths identify the reorganized sources; original proof declarations remain in their upstream namespaces except for the explicitly documented project word-model adaptation.",
+    "modules": [
+      "BostConjecture/ExternalCode/MathlibPRs/PR44845/LinearAlgebra/PiTensorProduct/DualBaseRing.lean",
+      "BostConjecture/ExternalCode/MathlibPRs/PR44845/LinearAlgebra/PiTensorProduct/Projective.lean"
+    ],
+    "organization_changes": [
+      "Compiled together in the single BostConjecture library.",
+      "Module imports relocated under BostConjecture.ExternalCode; no separate OAI or RepresentationTheory Lake libraries.",
+      "Source attribution added to module docstrings; proof-local classical inference and mathlib style fixes applied.",
+      "Redundant upstream source snapshots removed; pinned original paths and hashes remain available."
+    ],
+    "files": [
+      {
+        "path": "BostConjecture/ExternalCode/MathlibPRs/PR44845/LinearAlgebra/PiTensorProduct/DualBaseRing.lean",
+        "sha256": "606a8aa01b7999f404fdf2ca1a37504a0107867dae1c34fb869f7ef76d10e25f"
+      },
+      {
+        "path": "BostConjecture/ExternalCode/MathlibPRs/PR44845/LinearAlgebra/PiTensorProduct/Projective.lean",
+        "sha256": "b351df4f1d7e5cc8630dbce4455882cb5b20bbf1d9b12f162c74a9571aa6f162"
+      }
+    ]
+  }
+}

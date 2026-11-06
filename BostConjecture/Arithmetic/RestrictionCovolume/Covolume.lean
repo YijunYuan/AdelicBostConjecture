@@ -1,8 +1,13 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Arithmetic.RestrictionCovolume.Conjugation
-public import BostConjecture.Arithmetic.DegreeNormalization
-public import BostConjecture.Lattice.Covolume
+public import BostConjecture.Arithmetic.Degree.Normalization
+public import BostConjecture.ExternalCode.TauCeti.Lattice.Covolume
 public import Mathlib.NumberTheory.NumberField.Discriminant.Basic
 
 /-!

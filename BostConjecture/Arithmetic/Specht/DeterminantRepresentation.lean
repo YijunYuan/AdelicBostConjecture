@@ -1,8 +1,13 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Arithmetic.Specht.Representation
-public import BostConjecture.Geometry.ProjectivePermutation
-public import BostConjecture.Geometry.IntrinsicContraction
+public import BostConjecture.Geometry.Descent.Permutation
+public import BostConjecture.Geometry.Contraction.Intrinsic
 
 /-!
 # The determinant-twisted integral Specht action
@@ -12,7 +17,7 @@ and by its orbit-lattice action on the second factor. After complex scalar
 extension, determinant coordinates identify this representation with the
 accepted complex Specht representation.
 
-Reference: `bost_specht_manuscript.pdf`, Lemma 6.1, pages 8–9.
+Reference: this paper, Lemma 6.1, pages 8–9.
 -/
 
 @[expose] public section
@@ -32,7 +37,7 @@ local instance (t : OAI.Saxl.Tableau n (rectangle a k)) :
     AddCommGroup ((⨂[R] (_ : Fin k), ⋀[R]^a M) ⊗[R] (R ⊗[ℤ] orbitLattice t)) :=
   Module.addCommMonoidToAddCommGroup R
 
-/-- The position action on GEOM's actual determinant-twisted module. -/
+/-- The position action on the determinant-twisted module. -/
 def determinantRepresentation (t : OAI.Saxl.Tableau n (rectangle a k)) :
     Representation R (Equiv.Perm (Fin n))
       ((⨂[R] (_ : Fin k), ⋀[R]^a M) ⊗[R] (R ⊗[ℤ] orbitLattice t)) :=

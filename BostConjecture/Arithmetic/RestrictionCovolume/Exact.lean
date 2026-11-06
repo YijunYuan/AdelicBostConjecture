@@ -1,3 +1,8 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Arithmetic.RestrictionCovolume.Quotient
@@ -18,7 +23,7 @@ Gram matrices, so their Euclidean Haar covolumes multiply.
 noncomputable section
 
 open NumberField TensorProduct Module
-open scoped Classical
+
 
 namespace BostConjecture.Arithmetic.HermitianMetric
 

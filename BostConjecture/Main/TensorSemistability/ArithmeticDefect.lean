@@ -1,8 +1,19 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Main.TensorSemistability.ArithmeticTensorFiber
 
-/-! # Compatible traceless defects of actual arithmetic partial traces -/
+/-!
+# Compatible traceless defects of actual arithmetic partial traces
+
+The traceless parts of the partial traces satisfy complex-conjugation
+compatibility at all embeddings. They therefore define admissible arithmetic
+metric variations in the extremal argument of Section 7 of this paper.
+-/
 
 @[expose] public section
 

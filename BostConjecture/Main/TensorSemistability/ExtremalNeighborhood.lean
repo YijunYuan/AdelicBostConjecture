@@ -1,8 +1,13 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Main.TensorSemistability.VariationTopology
 public import BostConjecture.Main.TensorSemistability.Extensions
-public import BostConjecture.Arithmetic.Compactness.MaximizingPair
+public import BostConjecture.Arithmetic.Compactness.Maximum.MaximizingPair
 public import Mathlib.Analysis.Calculus.LocalExtr.Basic
 
 /-!
@@ -10,7 +15,7 @@ public import Mathlib.Analysis.Calculus.LocalExtr.Basic
 
 Global maximality in the realized value set bounds each fixed saturated
 submodule along admissible metric variations. Reference:
-bost_specht_manuscript.pdf, Proposition 7.3, pages 12–13.
+this paper, Proposition 7.3, pages 12–13.
 -/
 
 @[expose] public section

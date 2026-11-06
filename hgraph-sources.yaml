@@ -1,8 +1,0 @@
-# Source scope for the regenerable Horizon semantic graph.
-# Install: mkdir -p hgraph && ln -s ../hgraph-sources.yaml hgraph/config.yaml
-blueprint: blueprint/src/content.tex
-lean:
-  - BostConjecture.lean
-  - BostConjecture
-  - vendor/openai/OAI
-  - vendor/etingof/RepresentationTheory

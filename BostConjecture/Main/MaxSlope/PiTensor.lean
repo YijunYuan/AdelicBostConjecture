@@ -1,9 +1,20 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Main.MaxSlope.Tensor
 public import BostConjecture.Main.MaxSlope.PiLowerBound
 
-/-! # Maximal-slope additivity and semistability for finite Hilbert tensor products -/
+/-!
+# Maximal-slope additivity and semistability for finite Hilbert tensor products
+
+The binary maximal-slope identity extends to a finite family using tensor
+regrouping. The resulting equality and semistability consequence complete
+Theorem 1.1 of this paper; the empty family has degree and maximal slope zero.
+-/
 
 @[expose] public section
 noncomputable section

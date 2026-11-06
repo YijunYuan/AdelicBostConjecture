@@ -1,9 +1,13 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Main.MaxSlope.FilteredBound
 public import BostConjecture.Main.MaxSlope.HNGrades
 public import BostConjecture.Main.TensorSemistability.TensorSemistability
-public import BostConjecture.Arithmetic.Compactness.MetricTransport
 
 /-!
 # Maximal-slope additivity for the Hilbert tensor product
@@ -27,7 +31,6 @@ variable {K M N : Type u} [Field K] [NumberField K]
     [Module.Finite (𝓞 K) N] [Module.Projective (𝓞 K) N]
     [Nontrivial (K ⊗[𝓞 K] M)] [Nontrivial (K ⊗[𝓞 K] N)]
 
-set_option maxHeartbeats 800000 in
 /-- Every actual Hermitian grade in the flattened HN tensor flag is semistable. -/
 theorem hnTensorGrade_isSemistable (h : HermitianMetric (K := K) M)
     (g : HermitianMetric (K := K) N) (k : ℕ)
@@ -40,8 +43,7 @@ theorem hnTensorGrade_isSemistable (h : HermitianMetric (K := K) M)
   have hs := IsSemistable.tensor (h.hn_quotient_isSemistable i) (g.hn_quotient_isSemistable j)
     (h.hnGrade_rank_pos i) (g.hnGrade_rank_pos j)
   obtain ⟨e, he⟩ := h.exists_hnTensorGrade_isometry g k
-  convert hs.pullback_equiv e using 1
-  exact ext_inner (fun σ x y => (he σ x y).symm)
+  exact (isSemistable_iff_of_equiv _ _ e he).mpr hs
 
 /-- The actual HN tensor filtration gives the maximal-slope upper bound. -/
 theorem maxSlope_tensor_le (h : HermitianMetric (K := K) M)

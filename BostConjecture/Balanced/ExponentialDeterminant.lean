@@ -1,10 +1,20 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Balanced.SpectralExpansion
 public import Mathlib.Analysis.InnerProductSpace.Trace
 public import Mathlib.LinearAlgebra.Determinant
 
-/-! # Determinants of Hermitian exponentials -/
+/-!
+# Determinants of Hermitian exponentials
+
+The determinant of a Hermitian exponential is the exponential of its trace.
+Traceless generators therefore produce determinant-one metric variations.
+-/
 
 @[expose] public section
 

@@ -1,9 +1,14 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Arithmetic.RestrictionCovolume.Exact
 public import BostConjecture.Arithmetic.RestrictionCovolume.Line
-public import BostConjecture.Arithmetic.ExactDegree
-public import BostConjecture.Arithmetic.RankOneReduction
+public import BostConjecture.Arithmetic.Degree.Exact
+public import BostConjecture.Arithmetic.Line.RankOneReduction
 
 /-!
 # Exact restriction-of-scalars covolume

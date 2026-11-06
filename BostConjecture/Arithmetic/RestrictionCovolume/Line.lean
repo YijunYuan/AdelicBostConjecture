@@ -1,3 +1,8 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Arithmetic.RestrictionCovolume.Free
@@ -16,7 +21,7 @@ the discriminant formula without assuming that the original line is free.
 noncomputable section
 
 open NumberField TensorProduct
-open scoped Classical
+
 
 namespace BostConjecture.Arithmetic.HermitianMetric
 

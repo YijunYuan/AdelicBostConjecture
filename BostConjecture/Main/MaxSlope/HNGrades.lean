@@ -1,3 +1,8 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Main.MaxSlope.TensorGrades
@@ -49,7 +54,6 @@ lemma hnTensorFlag_succ (h : HermitianMetric (K := K) M)
     have hz : (k + 1) % g.hnFlag.length ≠ 0 := by omega
     simp only [hnTensorFlag, Nat.succ_div_of_mod_ne_zero hz, hm']
 
-set_option maxHeartbeats 800000 in
 /-- The consecutive actual integral HN tensor grade is isometric to the tensor
 of the actual factor grades, including transitions between blocks. -/
 theorem exists_hnTensorGrade_isometry (h : HermitianMetric (K := K) M)
@@ -62,7 +66,9 @@ theorem exists_hnTensorGrade_isometry (h : HermitianMetric (K := K) M)
         (g.hnSubmodule (k % g.hnFlag.length + 1) ⧸
           (g.hnSubmodule (k % g.hnFlag.length)).comap
             (g.hnSubmodule (k % g.hnFlag.length + 1)).subtype)),
-      ∀ σ x y,
+      ∀ (σ : K →+* ℂ)
+        (x y : ComplexFiber (h.hnTensorFlag g (k + 1) ⧸
+          (h.hnTensorFlag g k).comap (h.hnTensorFlag g (k + 1)).subtype) σ),
         ((((h.submodule (h.hnSubmodule (k / g.hnFlag.length + 1))).quotient
             ((h.hnSubmodule (k / g.hnFlag.length)).comap
               (h.hnSubmodule (k / g.hnFlag.length + 1)).subtype)).tensor
@@ -73,15 +79,17 @@ theorem exists_hnTensorGrade_isometry (h : HermitianMetric (K := K) M)
         ((((h.tensor g).submodule (h.hnTensorFlag g (k + 1))).quotient
           ((h.hnTensorFlag g k).comap (h.hnTensorFlag g (k + 1)).subtype)).fiber σ).inner x y := by
   rw [h.hnTensorFlag_succ g k]
-  simp only [hnTensorFlag, hnTensorStep]
-  refine ⟨tensorGradeEquiv
-    (h.hnSubmodule_monotone (Nat.le_succ (k / g.hnFlag.length)))
-    (g.hnSubmodule (k % g.hnFlag.length))
-    (g.hnSubmodule (k % g.hnFlag.length + 1)), ?_⟩
+  dsimp only [hnTensorFlag, hnTensorStep]
+  -- Keep the grade indices in `+ 1` form so the quotient metric instances match directly.
+  have hP : h.hnSubmodule (k / g.hnFlag.length) ≤
+      h.hnSubmodule (k / g.hnFlag.length + 1) :=
+    h.hnSubmodule_monotone (Nat.le_succ (k / g.hnFlag.length))
+  have hQ : g.hnSubmodule (k % g.hnFlag.length) ≤
+      g.hnSubmodule (k % g.hnFlag.length + 1) :=
+    g.hnSubmodule_monotone (Nat.le_succ (k % g.hnFlag.length))
+  refine ⟨tensorGradeEquiv hP _ _, ?_⟩
   intro σ x y
-  exact tensorGradeEquiv_inner h g
-    (h.hnSubmodule_monotone (Nat.le_succ (k / g.hnFlag.length)))
-    (g.hnSubmodule_monotone (Nat.le_succ (k % g.hnFlag.length))) σ x y
+  exact tensorGradeEquiv_inner h g hP hQ σ x y
 
 omit [Module.Finite (𝓞 K) N] [Module.Projective (𝓞 K) N]
     [Nontrivial (K ⊗[𝓞 K] N)] in

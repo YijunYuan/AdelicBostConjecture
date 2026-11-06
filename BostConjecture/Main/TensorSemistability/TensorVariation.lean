@@ -1,7 +1,12 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Main.TensorSemistability.SubmoduleVariation
-public import BostConjecture.Arithmetic.TensorCompatibility
+public import BostConjecture.Arithmetic.Tensor.Compatibility
 
 /-!
 # Tensor products of actual archimedean metric variations
@@ -9,7 +14,7 @@ public import BostConjecture.Arithmetic.TensorCompatibility
 The canonical scalar-extension equivalence transports tensor products of
 fiber automorphisms to the actual arithmetic tensor fiber. Conjugation and
 the actual Hilbert metric are preserved by this transport.
-Reference: bost_specht_manuscript.pdf, Proposition 7.3, page 13.
+Reference: this paper, Proposition 7.3, page 13.
 -/
 
 @[expose] public section

@@ -1,8 +1,13 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Arithmetic.Specht.Bundle
 public import BostConjecture.Arithmetic.RestrictionCovolume.Free
-public import BostConjecture.Specht.Metric
+public import BostConjecture.Specht.Lattice.Metric
 
 /-!
 # Intrinsic degree of the arithmetic Specht lattice
@@ -11,7 +16,7 @@ The actual integral lattice basis has the same Gram determinant in every
 archimedean fiber. The intrinsic free-basis degree formula therefore gives
 minus the logarithm of the existing lattice covolume.
 
-Reference: `bost_specht_manuscript.pdf`, Lemma 6.1, pages 8–9.
+Reference: this paper, Lemma 6.1, pages 8–9.
 -/
 
 @[expose] public section

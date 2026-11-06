@@ -1,10 +1,21 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Slope.Geometric.ImageSlope
 public import BostConjecture.Arithmetic.Specht.DeterminantDegree
-public import BostConjecture.Arithmetic.DeterminantDual
+public import BostConjecture.Arithmetic.Determinant.Dual
 
-/-! # The finite-degree inequality from the actual canonical pairing -/
+/-!
+# The finite-degree inequality from the actual canonical pairing
+
+The integral determinant pairing is injective and contracting. Comparing
+its source and target degrees yields the finite-degree slope estimate
+whose Specht error tends to zero.
+-/
 
 @[expose] public section
 

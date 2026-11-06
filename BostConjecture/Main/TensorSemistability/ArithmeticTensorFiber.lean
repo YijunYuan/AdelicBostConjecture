@@ -1,9 +1,15 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Main.TensorSemistability.ProjectionConjugation
 public import BostConjecture.Main.TensorSemistability.TensorVariation
 
-/-! # Concrete arithmetic tensor subspaces and their partial traces
+/-!
+# Concrete arithmetic tensor subspaces and their partial traces
 
 The range is that of the actual scalar-extension injection, transported by
 canonical binary scalar extension. All projections use the given Hilbert metric.

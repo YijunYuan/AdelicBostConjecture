@@ -1,9 +1,19 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Main.TensorSemistability.Extensions
-public import BostConjecture.Arithmetic.TensorCompatibility
+public import BostConjecture.Arithmetic.Tensor.Compatibility
 
-/-! # Uniform rescaling of the actual Hilbert tensor metric -/
+/-!
+# Uniform rescaling of the actual Hilbert tensor metric
+
+Uniform rescaling commutes with the Hilbert tensor construction. These
+identities transport the normalized semistability result to arbitrary slopes.
+-/
 
 @[expose] public section
 

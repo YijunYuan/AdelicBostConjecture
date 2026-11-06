@@ -1,10 +1,21 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Main.TensorSemistability.ExtremalBalance
 public import BostConjecture.Balanced.PluckerSemistability
 public import BostConjecture.Slope.Geometric.BinaryInvariantSlope
 
-/-! # The geometric slope inequality for an actual balanced tensor submodule -/
+/-!
+# The geometric slope inequality for an actual balanced tensor submodule
+
+The balanced Plücker vector satisfies the geometric invariant criterion.
+Applying the contraction slope bound gives the arithmetic inequality needed
+for the extremal tensor submodule.
+-/
 
 @[expose] public section
 
@@ -77,12 +88,15 @@ theorem slope_submodule_tensor_le_of_invariant
   let E := binaryTensorFamily M N
   let hE : ∀ j, HermitianMetric (K := K) (E j) :=
     fun j => Sum.casesOn j (fun _ => h) (fun _ => k)
-  let : ∀ j, Module.Finite (𝓞 K) (E j) := fun j => Sum.casesOn j (fun _ => inferInstance) (fun _ => inferInstance)
-  let : ∀ j, Module.Projective (𝓞 K) (E j) := fun j => Sum.casesOn j (fun _ => inferInstance) (fun _ => inferInstance)
+  let : ∀ j, Module.Finite (𝓞 K) (E j) := fun j =>
+    Sum.casesOn j (fun _ => inferInstance) (fun _ => inferInstance)
+  let : ∀ j, Module.Projective (𝓞 K) (E j) := fun j =>
+    Sum.casesOn j (fun _ => inferInstance) (fun _ => inferInstance)
   let i := (binaryTensorEquiv (𝓞 K) M N).toLinearMap.comp P.subtype
   have hi : Function.Injective i := (binaryTensorEquiv (𝓞 K) M N).injective.comp P.injective_subtype
   let a (j : Unit ⊕ Unit) := Module.finrank K (K ⊗[𝓞 K] E j)
-  have ha (j : Unit ⊕ Unit) (q : PrimeSpectrum (𝓞 K)) : Module.rankAtStalk (Module.Dual (𝓞 K) (E j)) q = a j := by
+  have ha (j : Unit ⊕ Unit) (q : PrimeSpectrum (𝓞 K)) :
+      Module.rankAtStalk (Module.Dual (𝓞 K) (E j)) q = a j := by
     rw [rankAtStalk_eq_genericRank]
     exact (dualBaseChangeEquiv (𝓞 K) K (E j)).finrank_eq.trans Subspace.dual_finrank_eq
   have hs' (q : PrimeSpectrum (𝓞 K)) : Module.rankAtStalk P q = s :=

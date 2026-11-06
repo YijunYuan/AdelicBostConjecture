@@ -1,3 +1,8 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Main.MaxSlope.Isometry
@@ -21,10 +26,11 @@ variable {K : Type u} [Field K] [NumberField K]
 
 /-- Every actual finite tensor of positive-rank modules has positive generic rank,
 including the unit tensor of an empty family. -/
-instance piTensorGenericNontrivial {ι : Type} [Fintype ι] (M : ι → Type u)
+instance piTensorGenericNontrivial {ι : Type} [Finite ι] (M : ι → Type u)
     [∀ i, AddCommGroup (M i)] [∀ i, Module (𝓞 K) (M i)]
     [∀ i, Module.Finite (𝓞 K) (M i)] [∀ i, Nontrivial (K ⊗[𝓞 K] M i)] :
     Nontrivial (K ⊗[𝓞 K] (⨂[𝓞 K] i, M i)) := by
+  let := Fintype.ofFinite ι
   apply Module.nontrivial_of_finrank_pos (R := K)
   rw [Specht.piTensor_generic_finrank]
   exact Finset.prod_pos (fun i _ => Module.finrank_pos)

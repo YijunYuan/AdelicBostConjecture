@@ -1,14 +1,19 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Main.TensorSemistability.ExponentialVariation
-public import BostConjecture.Arithmetic.Compactness.StabilityTopology
+public import BostConjecture.Arithmetic.Compactness.Topology.StabilityTopology
 
 /-!
 # Admissible neighborhoods along actual exponential metric variations
 
 The exponential metric curve is continuous in the topology of actual fiber
 forms. Strict stability remains valid near zero for a traceless compatible
-generator family. Reference: bost_specht_manuscript.pdf, page 13.
+generator family. Reference: this paper, page 13.
 -/
 
 @[expose] public section

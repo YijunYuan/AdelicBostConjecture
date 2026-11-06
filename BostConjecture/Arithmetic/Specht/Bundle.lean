@@ -1,7 +1,12 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Arithmetic.Specht.Representation
-public import BostConjecture.Arithmetic.ComplexIrreducibleSemistable
+public import BostConjecture.Arithmetic.Representation.ComplexIrreducibleSemistable
 
 /-!
 # The canonical arithmetic Specht bundle
@@ -10,7 +15,7 @@ The existing integral orbit lattice is extended to the ring of integers.
 The canonical word Gram form defines all of its archimedean metrics, and the
 actual permutation action proves intrinsic semistability.
 
-Reference: `bost_specht_manuscript.pdf`, Lemma 6.1, pages 8–9.
+Reference: this paper, Lemma 6.1, pages 8–9.
 -/
 
 @[expose] public section
@@ -53,7 +58,7 @@ def latticeFiber (t : OAI.Saxl.Tableau n μ) (σ : K →+* ℂ) :
   definite := by
     intro x hx
     apply (latticeFiberEquiv t σ).injective
-    simpa only [map_zero] using (Geometry.latticeComplexCore t).definite _ hx
+    simpa only [LinearEquiv.map_zero] using (Geometry.latticeComplexCore t).definite _ hx
 
 /-- Word coefficients conjugate when the arithmetic embedding is conjugated. -/
 lemma latticeFiberEquiv_conjugate_coeff (t : OAI.Saxl.Tableau n μ) (σ : K →+* ℂ)

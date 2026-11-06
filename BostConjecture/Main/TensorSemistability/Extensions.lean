@@ -1,7 +1,12 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
-public import BostConjecture.Arithmetic.QuotientSemistable
-public import BostConjecture.Arithmetic.MetricScaling
+public import BostConjecture.Arithmetic.HN.QuotientSemistable
+public import BostConjecture.Arithmetic.Bundle.Scaling
 
 /-!
 # Normalized semistable extensions
@@ -11,7 +16,7 @@ degrees. Exact degree and the sum/intersection inequality prove extension
 closure and semistability of the two pieces cut out by a degree-zero
 submodule. All modules are finite projective over the full ring of integers.
 
-Reference: bost_specht_manuscript.pdf, Proposition 7.3, pages 12–13.
+Reference: this paper, Proposition 7.3, pages 12–13.
 -/
 
 @[expose] public section

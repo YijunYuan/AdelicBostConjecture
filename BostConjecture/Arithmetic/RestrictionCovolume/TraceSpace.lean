@@ -1,8 +1,13 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
-public import BostConjecture.Arithmetic.RestrictionOfScalars
-public import BostConjecture.Arithmetic.ArchimedeanFiniteness
-public import BostConjecture.Arithmetic.FiberConjugation
+public import BostConjecture.Arithmetic.Bundle.RestrictionOfScalars
+public import BostConjecture.Arithmetic.Degree.ArchimedeanFiniteness
+public import BostConjecture.Arithmetic.Bundle.Conjugation
 public import Mathlib.Algebra.Module.ZLattice.Basic
 public import Mathlib.LinearAlgebra.TensorProduct.Basis
 
@@ -15,7 +20,7 @@ Bounded-section finiteness makes the actual integral image discrete. Its
 integer basis then extends to a real basis, identifying this space with
 `ℝ ⊗[ℤ] M` without a freeness assumption over the ring of integers.
 
-Reference: bost_specht_manuscript.pdf, page 11.
+Reference: this paper, page 11.
 -/
 
 @[expose] public section

@@ -2,6 +2,12 @@ name = "bostConjecture"
 version = "0.1.0"
 defaultTargets = ["BostConjecture"]
 
+[leanOptions]
+pp.unicode.fun = true # pretty-prints `fun a ↦ b`
+relaxedAutoImplicit = false
+weak.linter.mathlibStandardSet = true
+maxSynthPendingDepth = 3
+
 [[require]]
 name = "mathlib"
 git = "https://github.com/leanprover-community/mathlib4.git"
@@ -14,11 +20,3 @@ rev = "14b3090e1e169b77fe381102a1289f24c2b08a11"
 
 [[lean_lib]]
 name = "BostConjecture"
-
-[[lean_lib]]
-name = "OAI"
-srcDir = "vendor/openai"
-
-[[lean_lib]]
-name = "RepresentationTheory"
-srcDir = "vendor/etingof"

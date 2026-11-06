@@ -1,0 +1,159 @@
+{
+  "record_scope": "Historical extraction record: original local paths, hashes, commands, dependency boundaries and checks below describe the initial port. Current source locations and checksums are listed in current_source_tree; original upstream source paths and hashes remain unchanged.",
+  "repository": "https://github.com/mathlib-initiative/Etingof-RepresentationTheory-draft1",
+  "revision": "c6d86a8bd52065aafb8251fa1cdcd55b609743ef",
+  "upstream_subdirectory": "clean-code/release",
+  "license": "Apache-2.0",
+  "upstream_toolchain": "leanprover/lean4:v4.32.2",
+  "ported_toolchain": "leanprover/lean4:v4.35.0",
+  "upstream_notices": [
+    {
+      "path": "LICENSE",
+      "upstream_path": "clean-code/release/LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "path": "NOTICE",
+      "upstream_path": "clean-code/release/NOTICE",
+      "sha256": "3f30f2c25dbc5042f999af57f7ece7ebbd5f919b765507b17dd797261b26270d"
+    }
+  ],
+  "port_summary": [
+    "Preserve all upstream declaration names and theorem statements.",
+    "Migrate module visibility and source-reference metadata to the Lean 4.35 module system.",
+    "Expose the partition/tableau and hook-product definitions needed by consumers.",
+    "Replace deprecated if/dif lemma spellings and normalize dependent conditionals in the tableau branching inverse proof.",
+    "Use a tactic proof for the exported definitional-compatibility theorem.",
+    "Add two module docstrings, preserve upstream namespace API with its duplicate-namespace linter disabled locally, and fix unused-binder/style warnings."
+  ],
+  "files": [
+    {
+      "upstream_path": "clean-code/release/RepresentationTheory/Alignment/Attribute.lean",
+      "vendored_path": "RepresentationTheory/Alignment/Attribute.lean",
+      "upstream_sha256": "4fddd4b051f6b510fa881c1e05ee4a37705befaa8e22da27fb699237f1f9b224",
+      "vendored_sha256": "cc2f3992422042279b4a5de410bc7315ecc0bd265a64d3c071ffeca87a01e599",
+      "upstream_bytes": 6148,
+      "vendored_bytes": 6273,
+      "upstream_lines": 159,
+      "vendored_lines": 164,
+      "added_lines": 6,
+      "removed_lines": 1,
+      "unified_diff": "--- upstream/clean-code/release/RepresentationTheory/Alignment/Attribute.lean\n+++ vendor/etingof/RepresentationTheory/Alignment/Attribute.lean\n@@ -3,7 +3,10 @@\n Released under Apache 2.0 license as described in the file LICENSE.\n Authors: Kim Morrison\n -/\n-import Lean\n+module\n+\n+/- Ported to Lean 4.35.0 for BostConjecture; see the project's CONTRIBUTIONS.md. -/\n+public meta import Lean\n \n /-!\n # Source-reference metadata\n@@ -11,6 +14,8 @@\n This module provides persistent declaration metadata, canonical docstring\n citations, and deterministic JSON export.\n -/\n+\n+public meta section\n \n open Lean Elab Command\n \n"
+    },
+    {
+      "upstream_path": "clean-code/release/RepresentationTheory/Combinatorics/YoungDiagram/CornerStatistics.lean",
+      "vendored_path": "RepresentationTheory/Combinatorics/YoungDiagram/CornerStatistics.lean",
+      "upstream_sha256": "c51efaf06a8b9910020fed8eddf86774b6a14ef1a0df1a2df65d52e801df2779",
+      "vendored_sha256": "1181539de8508847dade501202742dc754eb40ebf65fb99243c073e6c51f2d38",
+      "upstream_bytes": 104518,
+      "vendored_bytes": 105334,
+      "upstream_lines": 2037,
+      "vendored_lines": 2056,
+      "added_lines": 58,
+      "removed_lines": 39,
+      "unified_diff": "--- upstream/clean-code/release/RepresentationTheory/Combinatorics/YoungDiagram/CornerStatistics.lean\n+++ vendor/etingof/RepresentationTheory/Combinatorics/YoungDiagram/CornerStatistics.lean\n@@ -3,22 +3,41 @@\n Released under Apache 2.0 license as described in the file LICENSE.\n Authors: mathlib-initiative\n -/\n-\n-import RepresentationTheory.YoungDiagram.PartitionConstructions\n-import RepresentationTheory.Partition.YoungDiagram\n-import RepresentationTheory.Alignment.Attribute\n+module\n+\n+/- Ported to Lean 4.35.0 for BostConjecture; see the project's CONTRIBUTIONS.md. -/\n+\n+public import RepresentationTheory.YoungDiagram.PartitionConstructions\n+public import RepresentationTheory.Partition.YoungDiagram\n+public import RepresentationTheory.Alignment.Attribute\n+\n+/-!\n+# The hook-length formula for standard Young tableaux\n+\n+Corner removal gives the tableau recurrence. A rational hook-walk identity\n+then proves that the number of standard tableaux times the hook product is\n+the factorial of the partition size.\n+\n+Reference: Etingof et al., *Introduction to Representation Theory*,\n+Chapter 5, discussion of the hook-length derivation.\n+-/\n+\n+public section\n+\n+-- Preserve the upstream declaration names for compatibility.\n+set_option linter.dupNamespace false\n \n namespace RepresentationTheory.Combinatorics.YoungDiagram.CornerStatistics\n \n /-- An auxiliary natural-number statistic of a Young diagram at two indices. -/\n-@[source_ref \"Chapter5/Discussion_hook_length_derivation\" (role := supporting)]\n-def YoungDiagram.auxiliaryCellStatistic (μ : YoungDiagram) (i j : ℕ) : ℕ :=\n+@[expose, source_ref \"Chapter5/Discussion_hook_length_derivation\" (role := supporting)]\n+ def YoungDiagram.auxiliaryCellStatistic (μ : YoungDiagram) (i j : ℕ) : ℕ :=\n   μ.rowLen i + μ.colLen j - i - j - 1\n \n \n /-- An auxiliary natural-number statistic of a Young diagram. -/\n-@[source_ref \"Chapter5/Discussion_hook_length_derivation\" (role := supporting)]\n-noncomputable def YoungDiagram.auxiliaryDiagramStatistic (μ : YoungDiagram) : ℕ :=\n+@[expose, source_ref \"Chapter5/Discussion_hook_length_derivation\" (role := supporting)]\n+ noncomputable def YoungDiagram.auxiliaryDiagramStatistic (μ : YoungDiagram) : ℕ :=\n   μ.cells.prod (fun c => (YoungDiagram.auxiliaryCellStatistic μ) c.1 c.2)\n \n \n@@ -210,11 +229,11 @@\n   have h_hook : (YoungDiagram.auxiliaryDiagramStatistic (RepresentationTheory.YoungDiagram.PartitionConstructions.auxiliaryYoungDiagramOfPartition la)) = 1 := by\n     simp [YoungDiagram.auxiliaryDiagramStatistic, h_empty]\n   have h_sorted := partition_zero_sortedParts la\n-  haveI : Unique (RepresentationTheory.SymmetricGroup.PartitionAuxiliaryConstructions.AuxiliaryPartitionSource 0 la) := by\n+  have : Unique (RepresentationTheory.SymmetricGroup.PartitionAuxiliaryConstructions.AuxiliaryPartitionSource 0 la) := by\n     unfold RepresentationTheory.SymmetricGroup.PartitionAuxiliaryConstructions.AuxiliaryPartitionSource\n     rw [h_sorted]\n     simp only [List.length_nil, List.getD_nil]\n-    haveI : IsEmpty { c : ℕ × ℕ // c.1 < 0 ∧ c.2 < 0 } :=\n+    have : IsEmpty { c : ℕ × ℕ // c.1 < 0 ∧ c.2 < 0 } :=\n       ⟨fun c => absurd c.2.1 (by omega)⟩\n     exact {\n       toInhabited := ⟨⟨isEmptyElim, ⟨fun a => isEmptyElim a, fun b => Fin.elim0 b⟩,\n@@ -443,13 +462,13 @@\n     · intro v\n       by_cases hv : v = Fin.last n\n       · have hcorner_cell := (sytCell_iff_mem_toYoungDiagram la corner.val).mpr hcorner.1\n-        exact ⟨⟨corner.val, hcorner_cell⟩, by simp [f, dif_pos, hv]⟩\n+        exact ⟨⟨corner.val, hcorner_cell⟩, by simp [f, dite_eq_left, hv]⟩\n       · have hv_lt : v.val < n := Nat.lt_of_le_of_ne\n           (Nat.lt_succ_iff.mp v.isLt) (Fin.val_ne_of_ne hv)\n         obtain ⟨cell', hcell'⟩ := t'.property.1.surjective ⟨v.val, hv_lt⟩\n         refine ⟨⟨cell'.val, reducedCell_mem_original (hcorner := hcorner)\n           cell'.property⟩, ?_⟩\n-        simp only [f, dif_neg (reducedCell_ne_corner (hcorner := hcorner) cell'.property)]\n+        simp only [f, dite_eq_right (reducedCell_ne_corner (hcorner := hcorner) cell'.property)]\n         ext\n         have : (⟨cell'.val, originalCell_mem_reduced (hcorner := hcorner)\n             (reducedCell_mem_original (hcorner := hcorner) cell'.property)\n@@ -499,8 +518,8 @@\n   · have hc₀_spec := (t.property.1.surjective (Fin.last n)).choose_spec\n     have h_eq : cell = (t.property.1.surjective (Fin.last n)).choose := Subtype.ext h\n     rw [h_eq, hc₀_spec]\n-  · apply Fin.ext\n-    rfl\n+    simp\n+  · simp [h]\n \n \n \n@@ -529,7 +548,7 @@\n \n     have hval₂ : (sytBranchingInvFun n la ⟨c₂, t₂⟩).val ⟨c₁.val, hc₁_cell⟩ ≠ Fin.last n := by\n       simp only [sytBranchingInvFun]\n-      simp only [dif_neg hne]\n+      simp only [dite_eq_right hne]\n       exact Fin.castSucc_ne_last _\n \n     exact hval₂ (by rw [← hval₁]; exact (congrFun hfun ⟨c₁.val, hc₁_cell⟩).symm)\n@@ -549,10 +568,10 @@\n     (hcorner := YoungDiagram.mem_auxiliaryCellPairFinset_iff.mp c₁.property) c'.property\n   have h₁ : (sytBranchingInvFun n la ⟨c₁, t₁⟩).val ⟨c'.val, hc'_la⟩ =\n     Fin.castSucc (t₁.val c') := by\n-    simp only [sytBranchingInvFun, dif_neg hne]\n+    simp only [sytBranchingInvFun, dite_eq_right hne]\n   have h₂ : (sytBranchingInvFun n la ⟨c₁, t₂⟩).val ⟨c'.val, hc'_la⟩ =\n     Fin.castSucc (t₂.val c') := by\n-    simp only [sytBranchingInvFun, dif_neg hne]\n+    simp only [sytBranchingInvFun, dite_eq_right hne]\n   have := congrFun hfun ⟨c'.val, hc'_la⟩\n   rw [h₁, h₂] at this\n   exact Fin.castSucc_injective _ this\n@@ -967,7 +986,7 @@\n     (hc : (YoungDiagram.auxiliaryCellPredicate μ) i j) :\n     (YoungDiagram.auxiliaryCellWeight μ) i j (i, j) = 1 := by\n   unfold YoungDiagram.auxiliaryCellWeight\n-  rw [dif_pos hc.1, if_pos (YoungDiagram.hookLength_eq_one_of_isOuterCorner hc), if_pos rfl]\n+  rw [dite_eq_left hc.1, ite_eq_left (YoungDiagram.hookLength_eq_one_of_isOuterCorner hc), ite_eq_left rfl]\n \n \n /-- The auxiliary weight from an outer corner to a distinct pair of indices is zero. -/\n@@ -976,14 +995,14 @@\n     (hc : (YoungDiagram.auxiliaryCellPredicate μ) i j) (hne : (i, j) ≠ (i', j')) :\n     (YoungDiagram.auxiliaryCellWeight μ) i j (i', j') = 0 := by\n   unfold YoungDiagram.auxiliaryCellWeight\n-  rw [dif_pos hc.1, if_pos (YoungDiagram.hookLength_eq_one_of_isOuterCorner hc), if_neg hne]\n+  rw [dite_eq_left hc.1, ite_eq_left (YoungDiagram.hookLength_eq_one_of_isOuterCorner hc), ite_eq_right hne]\n \n \n /-- If a pair of indices is not a cell, every auxiliary weight originating at those indices is zero. -/\n lemma YoungDiagram.auxiliaryCellWeight_eq_zero_of_not_mem\n     {μ : YoungDiagram} {i j : ℕ} (h : (i, j) ∉ μ.cells)\n     (c : ℕ × ℕ) : (YoungDiagram.auxiliaryCellWeight μ) i j c = 0 := by\n-  rw [YoungDiagram.auxiliaryCellWeight, dif_neg h]\n+  rw [YoungDiagram.auxiliaryCellWeight, dite_eq_right h]\n \n \n \n@@ -1058,12 +1077,12 @@\n     have hsummand : ∀ c ∈ (YoungDiagram.auxiliaryCellPairFinset μ),\n         (YoungDiagram.auxiliaryCellWeight μ) i j c = if (i, j) = c then 1 else 0 := by\n       intro c _\n-      rw [YoungDiagram.auxiliaryCellWeight, dif_pos hmem, if_pos hone]\n+      rw [YoungDiagram.auxiliaryCellWeight, dite_eq_left hmem, ite_eq_left hone]\n     rw [Finset.sum_congr rfl hsummand]\n     rw [Finset.sum_eq_single (i, j)\n-      (fun b _ hne => if_neg (Ne.symm hne))\n+      (fun b _ hne => ite_eq_right (Ne.symm hne))\n       (fun h => absurd hcorner h),\n-      if_pos rfl]\n+      ite_eq_left rfl]\n   ·\n \n     have hsummand : ∀ c ∈ (YoungDiagram.auxiliaryCellPairFinset μ),\n@@ -1072,7 +1091,7 @@\n             YoungDiagram.auxiliaryCellWeight μ v.1 v.2 c) /\n             ((YoungDiagram.auxiliaryCellStatistic μ) i j - 1 : ℚ) := by\n       intro c _\n-      rw [YoungDiagram.auxiliaryCellWeight, dif_pos hmem, if_neg hone]\n+      rw [YoungDiagram.auxiliaryCellWeight, dite_eq_left hmem, ite_eq_right hone]\n     rw [Finset.sum_congr rfl hsummand]\n \n     rw [← Finset.sum_div]\n@@ -1107,10 +1126,10 @@\n     {μ : YoungDiagram} {a b : ℕ} (hmem : (a, b) ∈ μ.cells)\n     (hne : (YoungDiagram.auxiliaryCellStatistic μ) a b ≠ 1) (c : ℕ × ℕ) :\n     (YoungDiagram.auxiliaryCellWeight μ) a b c =\n-      (((YoungDiagram.auxiliaryCellFinset μ) a b).attach.sum fun ⟨v, hv⟩ =>\n+      (((YoungDiagram.auxiliaryCellFinset μ) a b).attach.sum fun ⟨v, _hv⟩ =>\n         (YoungDiagram.auxiliaryCellWeight μ) v.1 v.2 c) /\n         ((YoungDiagram.auxiliaryCellStatistic μ) a b - 1 : ℚ) := by\n-  rw [YoungDiagram.auxiliaryCellWeight, dif_pos hmem, if_neg hne]\n+  rw [YoungDiagram.auxiliaryCellWeight, dite_eq_left hmem, ite_eq_right hne]\n \n \n \n@@ -1118,8 +1137,8 @@\n     {μ : YoungDiagram} {a b i j : ℕ}\n     (hoc : (YoungDiagram.auxiliaryCellPredicate μ) a b) (hne : (a, b) ≠ (i, j)) :\n     (YoungDiagram.auxiliaryCellWeight μ) a b (i, j) = 0 := by\n-  rw [YoungDiagram.auxiliaryCellWeight, dif_pos hoc.1,\n-      if_pos (YoungDiagram.hookLength_eq_one_of_isOuterCorner hoc), if_neg hne]\n+  rw [YoungDiagram.auxiliaryCellWeight, dite_eq_left hoc.1,\n+      ite_eq_left (YoungDiagram.hookLength_eq_one_of_isOuterCorner hoc), ite_eq_right hne]\n \n \n private lemma YoungDiagram.hookWalkWeight_zero_of_not_mem\n@@ -1158,7 +1177,7 @@\n         have := YoungDiagram.mem_iff_lt_rowLen.mp (hai ▸ hmem')\n         omega\n \n-    rw [if_pos ⟨hai, hblt⟩]\n+    rw [ite_eq_left ⟨hai, hblt⟩]\n     congr 1\n     rw [hai, YoungDiagram.removeCorner_hookLength_eq_sub_one_of_lt_col hc hblt]\n     have hpos := YoungDiagram.auxiliaryCellStatistic_pos μ i b (hai ▸ hmem')\n@@ -1173,13 +1192,13 @@\n           have := YoungDiagram.mem_iff_lt_colLen.mp (hbj ▸ hmem')\n           omega\n \n-      rw [if_neg (fun h => hai h.1), if_pos ⟨hbj, halt⟩]\n+      rw [ite_eq_right (fun h => hai h.1), ite_eq_left ⟨hbj, halt⟩]\n       congr 1\n       rw [hbj, YoungDiagram.removeCorner_hookLength_eq_sub_one_of_lt_row hc halt]\n       have hpos := YoungDiagram.auxiliaryCellStatistic_pos μ a j (hbj ▸ hmem')\n       simp [Nat.cast_sub (by omega : 1 ≤ (YoungDiagram.auxiliaryCellStatistic μ) a j)]\n     ·\n-      rw [if_neg (fun h => hai h.1), if_neg (fun h => hbj h.1)]\n+      rw [ite_eq_right (fun h => hai h.1), ite_eq_right (fun h => hbj h.1)]\n       rw [YoungDiagram.removeCorner_hookLength_eq_of_row_ne_of_col_ne hc hai hbj]\n       have hpos := YoungDiagram.auxiliaryCellStatistic_pos μ a b hmem'\n       exact div_self (by positivity)\n@@ -1206,8 +1225,8 @@\n   | ind n ih =>\n     intro a b ha hmem hlen\n     by_cases hone : (YoungDiagram.auxiliaryCellStatistic μ) a b = 1\n-    · rw [YoungDiagram.auxiliaryCellWeight, dif_pos hmem, if_pos hone,\n-          if_neg (by intro h; exact absurd (congr_arg Prod.fst h).symm (by omega))]\n+    · rw [YoungDiagram.auxiliaryCellWeight, dite_eq_left hmem, ite_eq_left hone,\n+          ite_eq_right (by intro h; exact absurd (congr_arg Prod.fst h).symm (by omega))]\n     · rw [YoungDiagram.hookWalkWeight_unfold_noncorner hmem hone]\n       rw [Finset.sum_eq_zero, zero_div]\n       intro ⟨v, hv⟩ _\n@@ -1233,8 +1252,8 @@\n   | ind n ih =>\n     intro a b hb hmem hlen\n     by_cases hone : (YoungDiagram.auxiliaryCellStatistic μ) a b = 1\n-    · rw [YoungDiagram.auxiliaryCellWeight, dif_pos hmem, if_pos hone,\n-          if_neg (by intro h; exact absurd (congr_arg Prod.snd h).symm (by omega))]\n+    · rw [YoungDiagram.auxiliaryCellWeight, dite_eq_left hmem, ite_eq_left hone,\n+          ite_eq_right (by intro h; exact absurd (congr_arg Prod.snd h).symm (by omega))]\n     · rw [YoungDiagram.hookWalkWeight_unfold_noncorner hmem hone]\n       rw [Finset.sum_eq_zero, zero_div]\n       intro ⟨v, hv⟩ _\n@@ -1254,7 +1273,7 @@\n \n private lemma YoungDiagram.hookLength_sub_one_decomp\n     {μ : YoungDiagram} {i j : ℕ} (hc : (YoungDiagram.auxiliaryCellPredicate μ) i j)\n-    {a b : ℕ} (ha : a ≤ i) (hb : b ≤ j) (hmem : (a, b) ∈ μ.cells) :\n+    {a b : ℕ} (ha : a ≤ i) (hb : b ≤ j) (_hmem : (a, b) ∈ μ.cells) :\n     (YoungDiagram.auxiliaryCellStatistic μ) a b - 1 = ((YoungDiagram.auxiliaryCellStatistic μ) a j - 1) + ((YoungDiagram.auxiliaryCellStatistic μ) i b - 1) := by\n   have hrl := YoungDiagram.rowLen_eq_succ_of_isOuterCorner hc\n   have hcl := YoungDiagram.colLen_eq_succ_of_isOuterCorner hc\n@@ -1671,7 +1690,7 @@\n     · have hblt : b < j := by\n         have := YoungDiagram.mem_iff_lt_rowLen.mp (hai ▸ hmem')\n         have : b ≠ j := fun h => hne (Prod.ext hai h); omega\n-      rw [if_pos (Or.inl hai)]\n+      rw [ite_eq_left (Or.inl hai)]\n       have hmem_ib := hai ▸ hmem'\n       have h_pos := YoungDiagram.auxiliaryCellStatistic_pos μ i b hmem_ib\n       congr 1\n@@ -1682,14 +1701,14 @@\n       · have halt : a < i := by\n           have := YoungDiagram.mem_iff_lt_colLen.mp (hbj ▸ hmem')\n           omega\n-        rw [if_pos (Or.inr hbj)]\n+        rw [ite_eq_left (Or.inr hbj)]\n         have hmem_aj := hbj ▸ hmem'\n         have h_pos := YoungDiagram.auxiliaryCellStatistic_pos μ a j hmem_aj\n         congr 1\n         simp only\n         rw [hbj, YoungDiagram.removeCorner_hookLength_eq_sub_one_of_lt_row hc halt]\n         exact Nat.cast_sub (by omega)\n-      · rw [if_neg (by push Not; exact ⟨hai, hbj⟩)]\n+      · rw [ite_eq_right (by push Not; exact ⟨hai, hbj⟩)]\n         simp only\n         rw [YoungDiagram.removeCorner_hookLength_eq_of_row_ne_of_col_ne hc hai hbj]\n         have h_pos := YoungDiagram.auxiliaryCellStatistic_pos μ a b hmem'\n"
+    },
+    {
+      "upstream_path": "clean-code/release/RepresentationTheory/Partition/YoungDiagram.lean",
+      "vendored_path": "RepresentationTheory/Partition/YoungDiagram.lean",
+      "upstream_sha256": "7f39d08a4adec545716be2ce561a0d083218c4c1515bbd4949af293620c07ed4",
+      "vendored_sha256": "74c1f5986b1c2a154abec3789c925911ca12f6daf73b4852e206790c0cd9bf2a",
+      "upstream_bytes": 3882,
+      "vendored_bytes": 4202,
+      "upstream_lines": 82,
+      "vendored_lines": 94,
+      "added_lines": 14,
+      "removed_lines": 2,
+      "unified_diff": "--- upstream/clean-code/release/RepresentationTheory/Partition/YoungDiagram.lean\n+++ vendor/etingof/RepresentationTheory/Partition/YoungDiagram.lean\n@@ -3,8 +3,20 @@\n Released under Apache 2.0 license as described in the file LICENSE.\n Authors: mathlib-initiative\n -/\n-import Mathlib\n-import RepresentationTheory.SymmetricGroup.PartitionAuxiliaryConstructions\n+module\n+\n+/- Ported to Lean 4.35.0 for BostConjecture; see the project's CONTRIBUTIONS.md. -/\n+public import Mathlib\n+public import RepresentationTheory.SymmetricGroup.PartitionAuxiliaryConstructions\n+\n+/-!\n+# Finiteness of standard tableaux of a partition\n+\n+The partition cells are finite, and consequently the type of bijective,\n+row- and column-increasing fillings by `Fin n` is finite.\n+-/\n+\n+@[expose] public section\n \n namespace RepresentationTheory.Partition.YoungDiagram\n \n"
+    },
+    {
+      "upstream_path": "clean-code/release/RepresentationTheory/SymmetricGroup/PartitionAuxiliaryConstructions.lean",
+      "vendored_path": "RepresentationTheory/SymmetricGroup/PartitionAuxiliaryConstructions.lean",
+      "upstream_sha256": "fb3a16854fbed3d2dd073a9e24db71854fd86c6a9ff2876768509184485f353f",
+      "vendored_sha256": "13ff0cab67ed0d93756766d6b384fea029375ef1c8a303308eb05812693aa4c4",
+      "upstream_bytes": 17084,
+      "vendored_bytes": 17234,
+      "upstream_lines": 327,
+      "vendored_lines": 332,
+      "added_lines": 16,
+      "removed_lines": 11,
+      "unified_diff": "--- upstream/clean-code/release/RepresentationTheory/SymmetricGroup/PartitionAuxiliaryConstructions.lean\n+++ vendor/etingof/RepresentationTheory/SymmetricGroup/PartitionAuxiliaryConstructions.lean\n@@ -3,11 +3,16 @@\n Released under Apache 2.0 license as described in the file LICENSE.\n Authors: Kim Morrison\n -/\n-\n-import Mathlib\n-import RepresentationTheory.Alignment.Attribute\n+module\n+\n+/- Ported to Lean 4.35.0 for BostConjecture; see the project's CONTRIBUTIONS.md. -/\n+\n+public import Mathlib\n+public import RepresentationTheory.Alignment.Attribute\n \n /-! # Auxiliary constructions indexed by partitions -/\n+\n+public section\n \n namespace RepresentationTheory.SymmetricGroup.PartitionAuxiliaryConstructions\n \n@@ -22,7 +27,7 @@\n   | p :: ps, k => if k < p then k else flatIndexColumn ps (k - p)\n \n /-- Associates an auxiliary list of natural numbers with a partition. -/\n-noncomputable def auxiliaryPartitionNatList {n : ℕ} (la : Nat.Partition n) : List ℕ :=\n+@[expose] noncomputable def auxiliaryPartitionNatList {n : ℕ} (la : Nat.Partition n) : List ℕ :=\n   la.parts.sort (· ≥ ·)\n \n /-- A second auxiliary type indexed by a natural number and a partition of it. -/\n@@ -33,7 +38,7 @@\n   { f : Cell → Fin n // Function.Bijective f }\n \n /-- An auxiliary type indexed by a natural number and a partition of it. -/\n-noncomputable def AuxiliaryPartitionSource (n : ℕ) (la : Nat.Partition n) : Type :=\n+@[expose] noncomputable def AuxiliaryPartitionSource (n : ℕ) (la : Nat.Partition n) : Type :=\n   let parts := (auxiliaryPartitionNatList la)\n   let Cell := { c : ℕ × ℕ // c.1 < parts.length ∧ c.2 < parts.getD c.1 0 }\n   { f : Cell → Fin n //\n@@ -209,10 +214,10 @@\n   | nil => simp [List.sum_nil] at hk\n   | cons p ps ih =>\n     by_cases hlt : k < p\n-    · simp only [flatIndexRow, flatIndexColumn, hlt, if_true, auxiliaryListPairIndex, List.take_zero,\n+    · simp only [flatIndexRow, flatIndexColumn, hlt, ite_true, auxiliaryListPairIndex, List.take_zero,\n         List.sum_nil, Nat.zero_add]\n     · have hk' : k - p < ps.sum := by simp [List.sum_cons] at hk; omega\n-      simp only [flatIndexRow, flatIndexColumn, hlt, if_false, auxiliaryListPairIndex]\n+      simp only [flatIndexRow, flatIndexColumn, hlt, ite_false, auxiliaryListPairIndex]\n       rw [show 1 + flatIndexRow ps (k - p) = flatIndexRow ps (k - p) + 1 from Nat.add_comm _ _,\n           List.take_succ_cons, List.sum_cons]\n       have := ih (k - p) hk'\n@@ -231,7 +236,7 @@\n       have hcp : c < p := by rwa [List.getD_cons_zero] at hc\n       refine ⟨?_, ?_⟩ <;>\n         simp only [auxiliaryListPairIndex, List.take_zero, List.sum_nil, Nat.zero_add, flatIndexRow, flatIndexColumn,\n-          hcp, if_true]\n+          hcp, ite_true]\n     | succ r =>\n       have hr' : r < ps.length := by simpa using hr\n       have hc' : c < ps.getD r 0 := by rwa [List.getD_cons_succ] at hc\n@@ -241,8 +246,8 @@\n       obtain ⟨ih1, ih2⟩ := ih r hr' hc'\n       have hge : ¬ (p + auxiliaryListPairIndex ps (r, c) < p) := by omega\n       refine ⟨?_, ?_⟩\n-      · simp only [flatIndexRow, hge, if_false, Nat.add_sub_cancel_left, ih1]; omega\n-      · simp only [flatIndexColumn, hge, if_false, Nat.add_sub_cancel_left, ih2]\n+      · simp only [flatIndexRow, hge, ite_false, Nat.add_sub_cancel_left, ih1]; omega\n+      · simp only [flatIndexColumn, hge, ite_false, Nat.add_sub_cancel_left, ih2]\n \n private theorem posOfCell_lt_sum (parts : List ℕ) (r c : ℕ)\n     (hr : r < parts.length) (hc : c < parts.getD r 0) :\n@@ -321,7 +326,7 @@\n /-- The displayed conversion sends the selected auxiliary source object to the selected auxiliary target object. -/\n theorem chosenAuxiliaryPartitionObjects_compatible (n : ℕ) (la : Nat.Partition n) :\n     (chosenAuxiliaryPartitionSource n la).toAuxiliaryPartitionTarget =\n-      chosenAuxiliaryPartitionTarget n la :=\n+      chosenAuxiliaryPartitionTarget n la := by\n   rfl\n \n end RepresentationTheory.SymmetricGroup.PartitionAuxiliaryConstructions\n"
+    },
+    {
+      "upstream_path": "clean-code/release/RepresentationTheory/YoungDiagram/PartitionConstructions.lean",
+      "vendored_path": "RepresentationTheory/YoungDiagram/PartitionConstructions.lean",
+      "upstream_sha256": "4a578b76a2bd77b8aadf74a33a949d18b70720a983093b27208c44c7d99edf44",
+      "vendored_sha256": "fb5a4dd2820e5142fcf84a8e138fc86033a205d351208b3d3c56bd56a98b9fb8",
+      "upstream_bytes": 1207,
+      "vendored_bytes": 1339,
+      "upstream_lines": 27,
+      "vendored_lines": 32,
+      "added_lines": 7,
+      "removed_lines": 2,
+      "unified_diff": "--- upstream/clean-code/release/RepresentationTheory/YoungDiagram/PartitionConstructions.lean\n+++ vendor/etingof/RepresentationTheory/YoungDiagram/PartitionConstructions.lean\n@@ -3,11 +3,16 @@\n Released under Apache 2.0 license as described in the file LICENSE.\n Authors: Kim Morrison\n -/\n+module\n \n-import Mathlib\n-import RepresentationTheory.Alignment.Attribute\n+/- Ported to Lean 4.35.0 for BostConjecture; see the project's CONTRIBUTIONS.md. -/\n+\n+public import Mathlib\n+public import RepresentationTheory.Alignment.Attribute\n \n /-! # Auxiliary partition constructions -/\n+\n+@[expose] public section\n \n namespace RepresentationTheory.YoungDiagram.PartitionConstructions\n \n"
+    }
+  ],
+  "checked_declarations": [
+    "RepresentationTheory.Combinatorics.YoungDiagram.CornerStatistics.Partition.auxiliaryCard_mul_hookLengthProduct_eq_factorial",
+    "RepresentationTheory.Combinatorics.YoungDiagram.CornerStatistics.Partition.auxiliaryCard_eq_factorial_div_hookLengthProduct"
+  ],
+  "transitive_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "intended_consumer": "The hook-product/cardinality step of the Specht-lattice covolume argument; the bridge to integral Specht rank is not yet supplied by this import.",
+  "relocation_2026_11_06": {
+    "note": "Compiled sources were relocated beneath BostConjecture/ExternalCode; module imports and source documentation were updated. Historical source hashes, commands and diffs describe the original extraction and remain unchanged.",
+    "path_map": {
+      "vendor/etingof/RepresentationTheory/Alignment/Attribute.lean": "BostConjecture/ExternalCode/Etingof/RepresentationTheory/Alignment/Attribute.lean",
+      "vendor/etingof/RepresentationTheory/YoungDiagram/PartitionConstructions.lean": "BostConjecture/ExternalCode/Etingof/RepresentationTheory/YoungDiagram/PartitionConstructions.lean",
+      "vendor/etingof/RepresentationTheory/Partition/YoungDiagram.lean": "BostConjecture/ExternalCode/Etingof/RepresentationTheory/Partition/YoungDiagram.lean",
+      "vendor/etingof/RepresentationTheory/SymmetricGroup/PartitionAuxiliaryConstructions.lean": "BostConjecture/ExternalCode/Etingof/RepresentationTheory/SymmetricGroup/PartitionAuxiliaryConstructions.lean",
+      "vendor/etingof/RepresentationTheory/Combinatorics/YoungDiagram/CornerStatistics.lean": "BostConjecture/ExternalCode/Etingof/RepresentationTheory/Combinatorics/YoungDiagram/CornerStatistics.lean"
+    },
+    "namespace_note": "Canonical upstream declaration namespaces are retained. The symmetric algebra port restores TauCeti.SymmetricPower and private Schur-Weyl helpers restore TauCeti; Garnir/straightening retains the documented BostConjecture.Specht adaptation to the project word model."
+  },
+  "current_source_tree": {
+    "note": "The preceding hashes and verification records describe the historical extraction. These current paths identify the reorganized sources; original proof declarations remain in their upstream namespaces except for the explicitly documented project word-model adaptation.",
+    "modules": [
+      "BostConjecture/ExternalCode/Etingof/RepresentationTheory/Alignment/Attribute.lean",
+      "BostConjecture/ExternalCode/Etingof/RepresentationTheory/Combinatorics/YoungDiagram/CornerStatistics.lean",
+      "BostConjecture/ExternalCode/Etingof/RepresentationTheory/Partition/YoungDiagram.lean",
+      "BostConjecture/ExternalCode/Etingof/RepresentationTheory/SymmetricGroup/PartitionAuxiliaryConstructions.lean",
+      "BostConjecture/ExternalCode/Etingof/RepresentationTheory/YoungDiagram/PartitionConstructions.lean"
+    ],
+    "organization_changes": [
+      "Compiled together in the single BostConjecture library.",
+      "Module imports relocated under BostConjecture.ExternalCode; no separate OAI or RepresentationTheory Lake libraries.",
+      "Source attribution added to module docstrings; proof-local classical inference and mathlib style fixes applied.",
+      "Redundant upstream source snapshots removed; pinned original paths and hashes remain available.",
+      "Replaced all umbrella Mathlib imports with the required Young-diagram, partition, finite-type, factorial and tactic modules.",
+      "Pruned SymmetricGroup/PartitionAuxiliaryConstructions to auxiliaryPartitionNatList and AuxiliaryPartitionSource; omitted unused canonical-filling and group-algebra constructions.",
+      "Pruned YoungDiagram/PartitionConstructions to auxiliaryYoungDiagramOfPartition; omitted unused auxiliaryPartitionPairNat and semistandard-tableau dependency.",
+      "Normalized formatting, documented source_ref parser whitespace, and made simplification dependencies explicit without changing retained theorem statements or mathematical proofs."
+    ],
+    "files": [
+      {
+        "path": "BostConjecture/ExternalCode/Etingof/RepresentationTheory/Alignment/Attribute.lean",
+        "sha256": "42648eee6940a372ac835a996ded771f2dd21ea65f89d6409090b45db36d92f6"
+      },
+      {
+        "path": "BostConjecture/ExternalCode/Etingof/RepresentationTheory/Combinatorics/YoungDiagram/CornerStatistics.lean",
+        "sha256": "2caeac3308e45ff5738c69561c0d31c1d4f94a113f56280ec531ecbd53dd04f5"
+      },
+      {
+        "path": "BostConjecture/ExternalCode/Etingof/RepresentationTheory/Partition/YoungDiagram.lean",
+        "sha256": "e0b6d501bf8bda13ade3e31c5e77cb554543559d5775e7917090454ac9d6eaca"
+      },
+      {
+        "path": "BostConjecture/ExternalCode/Etingof/RepresentationTheory/SymmetricGroup/PartitionAuxiliaryConstructions.lean",
+        "sha256": "4719baf6b29f73abcd2eb46a28441118264193aa75a9eb7aeec54ba592a194b6"
+      },
+      {
+        "path": "BostConjecture/ExternalCode/Etingof/RepresentationTheory/YoungDiagram/PartitionConstructions.lean",
+        "sha256": "98c0742a58c71821204973a84fcf939881de67c61611639652455c6ee686dcc9"
+      }
+    ]
+  }
+}

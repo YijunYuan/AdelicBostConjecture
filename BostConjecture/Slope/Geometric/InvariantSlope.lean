@@ -1,10 +1,21 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Slope.Geometric.PairingSlope
-public import BostConjecture.Geometry.PluckerNonvanishing
-public import BostConjecture.Specht.Asymptotic
+public import BostConjecture.Geometry.Plucker.Nonvanishing
+public import BostConjecture.Specht.Asymptotics.Limit
 
-/-! # The geometric slope inequality from an actual complex invariant -/
+/-!
+# The geometric slope inequality from an actual complex invariant
+
+Nonvanishing invariants give determinant pairings in arbitrarily large
+degrees. The sublinear Specht covolume estimate removes their error terms,
+yielding the geometric slope inequality in Section 6 of this paper.
+-/
 
 @[expose] public section
 
@@ -76,7 +87,8 @@ theorem slope_le_of_nonzero_pairings (hspos : 0 < s) (hapos : ∀ j, 0 < a j)
     have hb := div_le_div_of_nonneg_right (hbound r) hp.le
     simp only [sub_div, add_div, Finset.sum_div, mul_div_cancel_left₀ _ (ne_of_gt hp)] at hb
     simpa only [← hv r, ← ht r] using hb
-  have hsLim' := (tendsto_const_nhds (x := ((HermitianMetric.piTensor hE).pullback i hi).slope)).sub hsLim
+  have hsLim' :=
+    (tendsto_const_nhds (x := ((HermitianMetric.piTensor hE).pullback i hi).slope)).sub hsLim
   have haLim' := (tendsto_const_nhds (x := ∑ j, (hE j).slope)).add
     (tendsto_finsetSum Finset.univ (fun j _ => haLim j))
   simpa only [sub_zero, Finset.sum_const_zero, add_zero] using

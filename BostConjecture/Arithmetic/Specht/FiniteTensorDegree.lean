@@ -1,9 +1,19 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
-public import BostConjecture.Arithmetic.TensorDegree
-public import BostConjecture.Arithmetic.IndependentPiSemistable
+public import BostConjecture.Arithmetic.Degree.Tensor
+public import BostConjecture.Arithmetic.Representation.IndependentPiSemistable
 
-/-! # Average slopes of finite Hilbert tensor products -/
+/-!
+# Average slopes of finite Hilbert tensor products
+
+Binary degree additivity extends to finite Hilbert tensor products.
+These are average-slope identities and do not assume tensor semistability.
+-/
 
 @[expose] public section
 

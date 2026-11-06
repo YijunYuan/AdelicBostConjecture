@@ -1,3 +1,8 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Main.TensorSemistability.GramDegree
@@ -8,7 +13,7 @@ public import BostConjecture.Main.TensorSemistability.ExponentialVariation
 
 The intrinsic Gram formula converts differentiation of archimedean
 automorphisms into the degree derivative of a fixed integral submodule.
-Reference: bost_specht_manuscript.pdf, Proposition 7.3, page 13.
+Reference: this paper, Proposition 7.3, page 13.
 -/
 
 @[expose] public section

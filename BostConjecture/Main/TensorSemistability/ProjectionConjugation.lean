@@ -1,9 +1,15 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Main.TensorSemistability.ConjugateBasis
 public import BostConjecture.Main.TensorSemistability.PartialTraceDefect
 
-/-! # Conjugate transport of orthogonal projections and partial traces
+/-!
+# Conjugate transport of orthogonal projections and partial traces
 
 These identities provide the conjugation compatibility of the actual
 arithmetic partial-trace defect variations.
@@ -69,7 +75,8 @@ theorem partialTraceRight_conjugate (e : U ≃ₗ⋆[ℂ] V) (f : W ≃ₗ⋆[�
     inner_partialTraceRight b, star_sum]
   apply Finset.sum_congr rfl
   intro i _
-  simp only [conjugateOrthonormalBasis_apply, ← TensorProduct.congr_tmul, hPQ, inner_tensor_conjugate e f he hf]
+  simp only [conjugateOrthonormalBasis_apply, ← TensorProduct.congr_tmul, hPQ,
+    inner_tensor_conjugate e f he hf]
 
 /-- Left partial trace commutes with conjugate-isometric tensor transport. -/
 theorem partialTraceLeft_conjugate (e : U ≃ₗ⋆[ℂ] V) (f : W ≃ₗ⋆[ℂ] X)
@@ -87,6 +94,7 @@ theorem partialTraceLeft_conjugate (e : U ≃ₗ⋆[ℂ] V) (f : W ≃ₗ⋆[ℂ
     inner_partialTraceLeft b, star_sum]
   apply Finset.sum_congr rfl
   intro i _
-  simp only [conjugateOrthonormalBasis_apply, ← TensorProduct.congr_tmul, hPQ, inner_tensor_conjugate e f he hf]
+  simp only [conjugateOrthonormalBasis_apply, ← TensorProduct.congr_tmul, hPQ,
+    inner_tensor_conjugate e f he hf]
 
 end BostConjecture.Balanced

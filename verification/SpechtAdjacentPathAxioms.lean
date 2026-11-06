@@ -1,6 +1,0 @@
-import BostConjecture.Specht.AdjacentPath
-
-#print axioms BostConjecture.Specht.IsStandard.relabel_adjacent
-#print axioms BostConjecture.Specht.exists_rectangle_adjacent_descent
-#print axioms BostConjecture.Specht.tableauColexLT_relabel_adjacent
-#print axioms BostConjecture.Specht.rectangle_standard_adjacent_path

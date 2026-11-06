@@ -1,18 +1,23 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Arithmetic.Specht.Bundle
 public import BostConjecture.Arithmetic.Specht.DeterminantRepresentation
-public import BostConjecture.Geometry.ProjectiveMetric
-public import BostConjecture.Arithmetic.IndependentPiSemistable
+public import BostConjecture.Geometry.Descent.Metric
+public import BostConjecture.Arithmetic.Representation.IndependentPiSemistable
 
 /-!
 # The actual determinant–Specht Hermitian bundle
 
-The canonical metric is induced by GEOM's projective determinant inclusion.
+The canonical metric is induced by the projective determinant inclusion.
 Its permutation action is isometric in every complex fiber and irreducible
 at one complex embedding, proving intrinsic arithmetic semistability.
 
-Reference: `bost_specht_manuscript.pdf`, Lemma 6.1, pages 8–9.
+Reference: this paper, Lemma 6.1, pages 8–9.
 -/
 
 @[expose] public section

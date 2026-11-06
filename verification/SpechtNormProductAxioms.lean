@@ -1,8 +1,0 @@
-import BostConjecture.Specht.Seminormal
-
-#print axioms BostConjecture.Specht.prefixRowCount_eq_rowLen_prefixShape
-#print axioms BostConjecture.Specht.row_lt_of_standard_adjacent_lt
-#print axioms BostConjecture.Specht.norm_orthogonalStandardBasis_sq_eq_prefixNormProduct
-#print axioms BostConjecture.Specht.det_standard_gram_eq_prod_prefixNormProduct
-#print axioms BostConjecture.Specht.two_mul_log_covolume_le_sum_log_prefixNormProduct
-#print axioms BostConjecture.Specht.two_mul_rectangleLogCovolume_le_average_log_prefixNormProduct

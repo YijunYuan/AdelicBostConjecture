@@ -1,6 +1,11 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
-public import BostConjecture.Arithmetic.Degree
+public import BostConjecture.Arithmetic.Degree.Basic
 public import Mathlib.Analysis.SpecialFunctions.Log.Deriv
 public import Mathlib.Analysis.SpecialFunctions.Sqrt
 
@@ -12,7 +17,7 @@ arithmetic derivative is therefore the negative embedding sum of logarithmic
 derivatives of the determinant section norms. No freeness or integral basis
 is used.
 
-Reference: bost_specht_manuscript.pdf, Proposition 7.3, page 13.
+Reference: this paper, Proposition 7.3, page 13.
 -/
 
 @[expose] public section

@@ -1,10 +1,21 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Balanced.PolarLog
 public import BostConjecture.Balanced.ExponentialDeterminant
 public import Mathlib.LinearAlgebra.SpecialLinearGroup
 
-/-! # Determinant-one polar reduction -/
+/-!
+# Determinant-one polar reduction
+
+A determinant-one complex automorphism decomposes into a unitary map and
+the exponential of a traceless Hermitian map. This reduces the orbit norm
+inequality to the exponential estimate used in Section 7 of this paper.
+-/
 
 @[expose] public section
 

@@ -1,0 +1,163 @@
+{
+  "record_scope": "Historical extraction record: original local paths, hashes, commands, dependency boundaries and checks below describe the initial port. Current source locations and checksums are listed in current_source_tree; original upstream source paths and hashes remain unchanged.",
+  "schema_version": 1,
+  "kind": "selective-source-port",
+  "pr": {
+    "number": 40948,
+    "url": "https://github.com/leanprover-community/mathlib4/pull/40948",
+    "title": "feat(LinearAlgebra): exterior power commute with base change",
+    "state_at_retrieval": "open",
+    "repository": "Thmoas-Guan/mathlib4_fork",
+    "head_commit": "b642b6723caf97b7b462dd5ddeabb0226c3b5433",
+    "upstream_toolchain": "leanprover/lean4:v4.36.0-rc2"
+  },
+  "retrieved_utc": "2026-11-05",
+  "access": "Pinned files and LICENSE fetched with connected GitHub fetch_file; compared to the previously saved complete PR diff. No mutable branch is used as source.",
+  "license": {
+    "spdx": "Apache-2.0",
+    "file": "LICENSE",
+    "upstream_url": "https://github.com/Thmoas-Guan/mathlib4_fork/blob/b642b6723caf97b7b462dd5ddeabb0226c3b5433/LICENSE",
+    "upstream_git_blob_sha1": "8dada3edaf50dbc082c9a125058f25def75e625a",
+    "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
+    "notice": "Original copyright/author notices retained; modified files identify the extraction and import adaptation."
+  },
+  "local_environment": {
+    "lean": "leanprover/lean4:v4.35.0",
+    "mathlib_commit": "56a005855ea17e0b0958f73ec801ae140b0a1679",
+    "dependencies_changed": false
+  },
+  "files": [
+    {
+      "original_path": "Mathlib/LinearAlgebra/ExteriorPower/BaseChange.lean",
+      "original_url": "https://github.com/Thmoas-Guan/mathlib4_fork/blob/b642b6723caf97b7b462dd5ddeabb0226c3b5433/Mathlib/LinearAlgebra/ExteriorPower/BaseChange.lean",
+      "original_git_blob_sha1": "755520f1b0b9a3c2c2d1e74d6a0606475773475d",
+      "original_sha256": "d1967e8b7259539698ae0f57dce9549c4bce77a7903275bbad34b85a6dcc297d",
+      "original_authors": [
+        "Nailin Guan"
+      ],
+      "local_path": "BostConjecture/LinearAlgebra/ExteriorPower/BaseChange.lean",
+      "local_sha256": "9856261de51b28d22ed8154c674a4e539e6127c19912df0d54788f450cb3952b",
+      "declarations": 14,
+      "public_declarations": [
+        "exteriorPower.baseChangeEquiv",
+        "exteriorPower.baseChangeEquiv_apply_tmul",
+        "exteriorPower.baseChangeEquiv_symm_apply_tmul"
+      ],
+      "adaptations": [
+        "Replace Mathlib.LinearAlgebra.ExteriorAlgebra.Grading import by BostConjecture.LinearAlgebra.ExteriorPower.Projection, which itself imports Grading.",
+        "Add a modified-source notice.",
+        "All text from noncomputable section to end is identical to the pinned source, including the eleven private construction/proof helpers."
+      ]
+    },
+    {
+      "original_path": "Mathlib/LinearAlgebra/ExteriorAlgebra/Grading.lean",
+      "original_url": "https://github.com/Thmoas-Guan/mathlib4_fork/blob/b642b6723caf97b7b462dd5ddeabb0226c3b5433/Mathlib/LinearAlgebra/ExteriorAlgebra/Grading.lean",
+      "original_git_blob_sha1": "aaa8adfd0e53ac19927f3f45d64ce5d4db4669cf",
+      "original_sha256": "1f675575bc2d7d98da02d8a45d5becc68d5606612e25dbb43ebd05e0aa11679d",
+      "original_file_authors": [
+        "Eric Wieser"
+      ],
+      "new_projection_contributor": "Nailin Guan",
+      "local_path": "BostConjecture/LinearAlgebra/ExteriorPower/Projection.lean",
+      "local_sha256": "ab6621e54e63bd5e7b6421f3eb7d4a0914f8f3f322bd73de524cec68c5012af3",
+      "declarations": 2,
+      "public_declarations": [
+        "ExteriorAlgebra.toExteriorPower",
+        "ExteriorAlgebra.toExteriorPower_eq"
+      ],
+      "adaptations": [
+        "Extract only the two new homogeneous projection declarations into a project module, importing the existing pinned Mathlib Grading module.",
+        "Retain the upstream @[expose] public section visibility for these declarations.",
+        "Retain original author/license notice; identify extraction and Nailin Guan's PR contribution.",
+        "Projection declarations and proofs are text-identical to the pinned source."
+      ]
+    },
+    {
+      "local_path": "verification/ExteriorBaseChangeAxioms.lean",
+      "local_sha256": "10229a30463055de8ec67acf8ca5dbbe377e4ad130001f38564d738fb3e07d3f",
+      "purpose": "Transitive #print axioms for all five exported declarations, including both pure-tensor formulas."
+    }
+  ],
+  "imports": {
+    "base_change": [
+      "Mathlib.LinearAlgebra.ExteriorAlgebra.BaseChange",
+      "BostConjecture.LinearAlgebra.ExteriorPower.Projection",
+      "Mathlib.LinearAlgebra.ExteriorPower.Basic"
+    ],
+    "projection": [
+      "Mathlib.LinearAlgebra.ExteriorAlgebra.Grading"
+    ]
+  },
+  "checks": [
+    {
+      "command": "horizon --root /home/yijunyuan/bc-workspace check BostConjecture.LinearAlgebra.ExteriorPower.BaseChange --timeout 300 --json",
+      "cwd": "projects/BostConjecture",
+      "status": "passed",
+      "fingerprint": "e427c60dadb0e721",
+      "duration_seconds": 12.767,
+      "returncode": 0,
+      "warnings": []
+    },
+    {
+      "command": "horizon --root /home/yijunyuan/bc-workspace check --lean verification/ExteriorBaseChangeAxioms.lean --timeout 300 --json",
+      "cwd": "projects/BostConjecture",
+      "status": "passed",
+      "fingerprint": "1408901b6978ba73",
+      "duration_seconds": 4.131,
+      "returncode": 0,
+      "axiom_results": "All five exported producers depend only on [propext, Classical.choice, Quot.sound]; no sorryAx or added axioms."
+    }
+  ],
+  "source_comparison": {
+    "base_change_proof_body_identical": true,
+    "projection_declarations_identical": true
+  },
+  "consumer": {
+    "intended": "Determinant/exterior-line scalar extension and Plucker scalar extension in the Hermitian number-field route to Bost tensor semistability.",
+    "implemented_by_port": "For every commutative R-algebra S, S tensor_R exteriorPower_R^i M is S-linearly equivalent to exteriorPower_S^i (S tensor_R M), with forward unit pure-tensor and inverse arbitrary pure-tensor formulas.",
+    "status": "Producer infrastructure only; no determinant/Plucker consumer is claimed to be implemented by this port."
+  },
+  "remaining_boundaries": [
+    "Naturality with respect to module maps and algebra extension towers is not supplied as a named theorem by this port.",
+    "Identification with the project's determinant line and Plucker constructions remains a downstream bridge.",
+    "Compatibility with Hermitian metrics, isometries, covolumes, and Arakelov degree remains open.",
+    "This port does not prove rectangular Specht scalar extension, determinant-character identification, SL-invariant fibers, or the Bost conjecture."
+  ],
+  "epistemic": {
+    "claim_class": "proved producer",
+    "frontier_before": "Exterior-power base-change equivalence absent at the pinned Mathlib revision.",
+    "frontier_after": "Equivalence and pure-tensor formulas checked; determinant/Plucker and Hermitian/naturality bridges remain.",
+    "honesty_reviewer": "skipped — bounded source-identical infrastructure port; transitive axiom probes and exact source-body comparisons performed."
+  },
+  "relocation_2026_11_06": {
+    "note": "Compiled sources were relocated beneath BostConjecture/ExternalCode; module imports and source documentation were updated. Historical source hashes, commands and diffs describe the original extraction and remain unchanged.",
+    "path_map": {
+      "BostConjecture/LinearAlgebra/ExteriorPower/Projection.lean": "BostConjecture/ExternalCode/MathlibPRs/PR40948/LinearAlgebra/ExteriorPower/Projection.lean",
+      "BostConjecture/LinearAlgebra/ExteriorPower/BaseChange.lean": "BostConjecture/ExternalCode/MathlibPRs/PR40948/LinearAlgebra/ExteriorPower/BaseChange.lean"
+    },
+    "namespace_note": "Canonical upstream declaration namespaces are retained. The symmetric algebra port restores TauCeti.SymmetricPower and private Schur-Weyl helpers restore TauCeti; Garnir/straightening retains the documented BostConjecture.Specht adaptation to the project word model."
+  },
+  "current_source_tree": {
+    "note": "The preceding hashes and verification records describe the historical extraction. These current paths identify the reorganized sources; original proof declarations remain in their upstream namespaces except for the explicitly documented project word-model adaptation.",
+    "modules": [
+      "BostConjecture/ExternalCode/MathlibPRs/PR40948/LinearAlgebra/ExteriorPower/BaseChange.lean",
+      "BostConjecture/ExternalCode/MathlibPRs/PR40948/LinearAlgebra/ExteriorPower/Projection.lean"
+    ],
+    "organization_changes": [
+      "Compiled together in the single BostConjecture library.",
+      "Module imports relocated under BostConjecture.ExternalCode; no separate OAI or RepresentationTheory Lake libraries.",
+      "Source attribution added to module docstrings; proof-local classical inference and mathlib style fixes applied.",
+      "Redundant upstream source snapshots removed; pinned original paths and hashes remain available."
+    ],
+    "files": [
+      {
+        "path": "BostConjecture/ExternalCode/MathlibPRs/PR40948/LinearAlgebra/ExteriorPower/BaseChange.lean",
+        "sha256": "2f82096394a0e32e57ee5b58d91c0e4045db616d9edc08e464f0af25ee59a340"
+      },
+      {
+        "path": "BostConjecture/ExternalCode/MathlibPRs/PR40948/LinearAlgebra/ExteriorPower/Projection.lean",
+        "sha256": "2f70a002a0281cad7da2a2faa9bf3b592f74652162b5a013b886e53c26479953"
+      }
+    ]
+  }
+}

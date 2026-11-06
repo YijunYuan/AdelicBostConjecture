@@ -1,1064 +1,220 @@
 # Reused formalizations
 
-The target is manuscript Theorem 1.1 for arbitrary number fields and positive
-ranks. The results below are prerequisites; none proves that theorem by itself.
-No claim of authorship is made for upstream code. Only needed module closures
-are imported. Each copied file retains upstream notices and identifies local
-changes. The installed mathlib revision is pinned in `lake-manifest.json`.
+This project formalizes Theorem 1.1 of this paper for arbitrary number fields
+and positive-rank Hermitian bundles. This file records external source reuse;
+it does not attribute the upstream proofs to the project author.
 
-## Hilbert tensors, regrouping and orthogonalization — Mathlib
+Mathlib and HarderNarasimhan are pinned Lake dependencies. All selectively
+copied or adapted source is under `BostConjecture/ExternalCode/`, grouped by
+origin and compiled as part of the single `BostConjecture` library. Module
+paths describe file organization; public declaration namespaces retain their
+upstream names. The substantially adapted Garnir proofs keep the existing
+`BostConjecture.Specht` namespace because they use this project's integral
+word model. The symmetric-algebra port uses its original
+`TauCeti.SymmetricPower` namespace.
+
+Every external Lean module has a source section identifying its repository,
+exact revision and original files. Copyright, author and license notices are
+preserved. Historical extraction manifests retain the original source hashes,
+modification records and checks; their relocation sections identify current
+paths. Original sources are retrievable from the pinned repositories and revisions;
+redundant upstream source snapshots are omitted. No complete upstream build is
+claimed by checking the selected dependency cone.
+
+## Mathlib
 
 - Repository: <https://github.com/leanprover-community/mathlib4>.
 - Revision: `56a005855ea17e0b0958f73ec801ae140b0a1679` (`v4.35.0`).
-- License: Apache-2.0; upstream notices remain in the pinned Lake dependency.
-- Direct imports, with no source copying or modifications:
-  `Mathlib/Analysis/InnerProductSpace/TensorProduct.lean` supplies the binary
-  Hilbert tensor inner product and `TensorProduct.inner_tmul`;
-  `Mathlib/Analysis/InnerProductSpace/GramSchmidtOrtho.lean` supplies
-  `gramSchmidtBasis`, `gramSchmidt_def''`, `span_gramSchmidt_Iio`, and
-  `gramSchmidt_inv_triangular`.
-  `Mathlib/LinearAlgebra/TensorProduct/Associator.lean` supplies
-  `TensorProduct.tensorTensorTensorComm` and its pure-tensor formula;
-  `Mathlib/LinearAlgebra/PiTensorProduct/Generators.lean` supplies
-  `PiTensorProduct.submodule_span_eq_top` for nested pure-tensor spanning.
-- Consumers: `BostConjecture/Tensor/Hilbert.lean` constructs the positive
-  finite tensor form and proves its pure-tensor formula, uniqueness and
-  compatibility with factor isometries and reindexing.
-  `Tensor/Regroup.lean`, `Tensor/HilbertRegroup.lean` and
-  `Tensor/DualRegroup.lean` use the associator and spanning results to prove
-  finite tensor interchange, preservation of its Hilbert form and integral
-  projective-dual regrouping. Duality-metric compatibility and determinant
-  isometry remain separate obligations.
-  `Specht/Orthogonal.lean` and `Specht/Spectral.lean` use the actual
-  standard-polytabloid basis for monic orthogonalization and content
-  eigenvalues. These imports do not supply the adjacent-transposition
-  normalization or the covolume asymptotic.
-- Toolchain compatibility and transitive axioms are checked in the project
-  build and the exact geometry/Specht probes recorded in `verification/`.
+- License: Apache-2.0; the dependency retains its notices unchanged.
+- Integration: direct imports from the pinned Lake dependency, without source
+  modifications. The separate unmerged PR ports are listed below.
+- Important original APIs include
+  `Analysis/InnerProductSpace/TensorProduct.lean` (`TensorProduct.inner_tmul`),
+  `Analysis/InnerProductSpace/GramSchmidtOrtho.lean` (`gramSchmidtBasis`,
+  `gramSchmidt_def''`, `span_gramSchmidt_Iio`, `gramSchmidt_inv_triangular`),
+  `LinearAlgebra/TensorProduct/Associator.lean`
+  (`TensorProduct.tensorTensorTensorComm`), and
+  `LinearAlgebra/PiTensorProduct/Generators.lean`
+  (`PiTensorProduct.submodule_span_eq_top`).
+- Consumers: the intrinsic tensor Hilbert metric, tensor regrouping, Specht
+  orthogonalization and content eigenvalues. The arithmetic, invariant-theory,
+  compactness and asymptotic modules also directly import Mathlib's existing
+  number-field, projective-module, polynomial, Haar-measure and analysis APIs;
+  their import lists identify the precise modules used.
+- Typeclass refactoring also reuses the Dedekind-domain instance in
+  `Mathlib/RingTheory/Flat/TorsionFree.lean`: torsion-free modules are flat.
+  The arithmetic fiber and tensor proofs infer flatness through this instance
+  instead of installing repeated `IsLocalization.flat` proofs locally.
+  Specht lattice embeddings and permutation actions use `LinearMap.restrict`
+  from `Mathlib/Algebra/Module/Submodule/LinearMap.lean` for their restricted maps.
 
-## Harder–Narasimhan games — Yijun Yuan
+## Harder–Narasimhan games
 
-- Repository: <https://github.com/YijunYuan/HarderNarasimhan>
+- Repository: <https://github.com/YijunYuan/HarderNarasimhan>.
 - Revision: `14b3090e1e169b77fe381102a1289f24c2b08a11`.
-- License: Apache-2.0; copyright and author notices remain in the unmodified
-  Lake dependency. This is the user's project.
-- Integration: pinned Lake dependency, Lean/mathlib `v4.35.0`.
-- Imports: `HarderNarasimhan.Filtration.Unique`,
+- Author: Yijun Yuan; license: Apache-2.0.
+- Integration: unmodified pinned Lake dependency, Lean/mathlib `v4.35.0`.
+- Original modules: `HarderNarasimhan.Filtration.Unique`,
   `HarderNarasimhan.PayoffFunction.Slope`, and
-  `HarderNarasimhan.PayoffFunction.NashEquilibrium` (13-module source closure).
-- Results: HN existence/uniqueness, additive-interval slopes are slope-like,
-  and the game/ordinary slope semistability comparison.
-- Source: Chen–Jeannin, *Harder–Narasimhan games*,
-  <https://arxiv.org/abs/2306.08283>, especially §§2.2, 3.3, 4.3–4.4.
-- Intended consumer: arithmetic HN theory in the manuscript's §§2 and 7.
-  Still required: saturated subobjects versus generic-fibre subspaces,
-  actual Hermitian quotient degrees, degree supermodularity, and Hermitian
-  duality. The library's order-dual operation alone is not Hermitian duality.
-  Interval degree additivity is distinct from modularity of object degree;
-  only supermodularity of the latter is appropriate here.
+  `HarderNarasimhan.PayoffFunction.NashEquilibrium`.
+- Results: HN existence and uniqueness, additive-interval slopes, and the
+  comparison of game semistability with ordinary slope semistability.
+- Consumers: arithmetic HN filtrations and the finite-length slope adapters.
+  The project separately proves the Hermitian degree, quotient and duality
+  bridges; order duality alone is not Hermitian duality.
+- Mathematical source: Chen–Jeannin, *Harder–Narasimhan games*,
+  <https://arxiv.org/abs/2306.08283>, §§2.2, 3.3, 4.3–4.4.
 
-## Complex Specht modules and Euclidean Mahler compactness — openai/math
+## OpenAI: complex Specht modules and Euclidean Mahler compactness
 
-- Repository: <https://github.com/openai/math>
-- Revision: `4eaee87548250b2682affda7d05d947c05554bae` (upstream Lean 4.34.1).
-- License: Apache-2.0, exact upstream `lean/LICENSE` retained at
-  `vendor/openai/LICENSE`.
-- Source map and original SHA-256 hashes: `vendor/openai/PROVENANCE.json`.
-  Local paths preserve the upstream `lean/OAI/` hierarchy under `vendor/openai/OAI/`.
-- Copied Specht cone: `RepresentationTheory/Saxl/{Model,Basic,Polytabloid,SpechtSubmodule}.lean`.
-  Results include `OAI.Saxl.specht_irreducible` and
-  `OAI.Saxl.specht_cyclic_of_ne_zero` for the actual complex orbit span of a
-  column-antisymmetrized row tabloid.
-- Copied Mahler cone: `NumberTheory/ArithmeticGroups/Lattices/` files
+- Repository: <https://github.com/openai/math>.
+- Revision: `4eaee87548250b2682affda7d05d947c05554bae`; upstream Lean 4.34.1.
+- License: Apache-2.0; [license](BostConjecture/ExternalCode/OAI/LICENSE) and
+  [source manifest](BostConjecture/ExternalCode/OAI/PROVENANCE.json).
+- Original source root: `lean/OAI/`; local source root:
+  `BostConjecture/ExternalCode/OAI/`.
+- Specht source: `RepresentationTheory/Saxl/{Model,Basic,Polytabloid,SpechtSubmodule}.lean`.
+  The exports include `OAI.Saxl.specht_irreducible`,
+  `OAI.Saxl.specht_cyclic_of_ne_zero` and `OAI.Saxl.columnAlt_tabloid`.
+- Mahler source: `NumberTheory/ArithmeticGroups/Lattices/` modules
   `ShortestVector`, `ProjectedLattice`, `BasisLift`, `BoundedBasis`,
   `OrthogonalStretch`, `Minkowski/Ellipsoid`, `UniformShortSpan`, `FrameMatrices`.
-  The key result is `FrameMatrices.Construction.exists_compact_lattice_frames`
-  in that namespace: a compact set of nondegenerate frames containing an
-  integral basis of every full discrete real lattice with covolume in a fixed
-  positive interval and a common positive lower bound on nonzero vector norms.
-- Local changes: Lean 4.35 module headers, public imports and exposed public
-  declarations; source/modification notices; removed unused Kronecker
-  multiplicity, staircase and Saxl-conjecture code from `Model` and `Basic`.
-  Retained theorem statements and proof bodies otherwise unchanged.
-- Intended consumers: rectangular Specht irreducibility (§6) and the underlying
-  real-lattice compactness step (§7). The project-local
-  `BostConjecture/Specht/{Integral,Tableau,Metric}.lean` now consumes this
-  Specht cone to construct the integral orbit lattice, prove its equality
-  with the all-polytabloid span, identify its complex scalar extension
-  equivariantly, and realize its orthonormal word metric. These are original
-  bridge proofs using the unmodified vendor declarations. The original local
-  `Norm`, `Rectangle`, `Standard`, and `OneRow` modules add the rectangular
-  word realization, initial norm, standard-family independence, and one-row
-  covolume calculation. `Standard` uses an original lexicographic proof;
-  the separately attributed TauCeti adaptation below supplies rational
-  straightening. Still required: determinant-isotypic bridges; for
-  compactness, restriction of scalars, arithmetic covolume/systole formulas,
-  persistence of the integer-ring action, and degree continuity.
+  The principal result is
+  `OAI.NumberTheory.ArithmeticGroups.Lattices.FrameMatrices.Construction.exists_compact_lattice_frames`.
+- Adaptations: Lean 4.35 module visibility, removal of unused staircase,
+  Kronecker multiplicity and Saxl-conjecture declarations, relocated imports,
+  source documentation and mathlib-style formatting. Umbrella Mathlib imports
+  are replaced by the specific modules used. Classical inference is
+  localized to proofs; unnecessary decidability/finiteness arguments are
+  removed from `finset_eq_of_signed_sum` and `continuous_basis_matrix`.
+- Consumers: the actual integral Specht orbit lattice, standard polytabloids,
+  central content action, and arithmetic compactness via real trace frames.
+  Project-specific scalar-extension, degree and restriction-of-scalars bridges
+  are proved separately in the local modules.
 
-## Hook-length formula — Etingof representation-theory formalization
+## Etingof representation theory: hook-length formula
 
-- Repository: <https://github.com/mathlib-initiative/Etingof-RepresentationTheory-draft1>
-- Revision: `c6d86a8bd52065aafb8251fa1cdcd55b609743ef` (upstream Lean 4.32.2).
-- Source tree: `clean-code/release/RepresentationTheory/`, copied selectively to
-  `vendor/etingof/RepresentationTheory/`. The exact release `LICENSE` and
-  `NOTICE` are retained at `vendor/etingof/`.
-- Root: `RepresentationTheory.Combinatorics.YoungDiagram.CornerStatistics`;
-  the five-file import closure proves
-  `Partition.auxiliaryCard_mul_hookLengthProduct_eq_factorial` in that namespace.
-  Despite the upstream generic naming, the objects counted are bijective
-  increasing fillings of partition cells and the factors are actual hook lengths.
-- Local changes and exact file hashes are recorded in the vendor provenance
-  record. Changes update Lean 4.35 visibility and proof elaboration.
-- Actual consumer: `Specht/HookCount.lean` identifies the existing enumerating
-  standard tableaux with `AuxiliaryPartitionSource` by inversion and derives
-  `card_standard_mul_hookProduct`. Its `partitionCell_mem` and
-  `partitionCellEquiv` adapt the private `sytCell_iff_mem_toYoungDiagram` and
-  `sytCellEquiv` in `Combinatorics/YoungDiagram/CornerStatistics.lean` at the
-  same revision, preserving coordinates and attribution. The inverse-tableau
-  proofs are new; Lean 4.35 visibility and dependent rewriting are adapted.
-  The copied formula's dependency cone is kernel-checked and audited through
-  this consumer. Downstream `Specht/ShiftedCount.lean` proves the shifted
-  factorial product; `PrefixCount.lean` and `PrefixWeights.lean` prove the
-  prefix bijection and exact binomial weight. `PrefixNormalizer.lean`,
-  `Separation.lean` and `Asymptotic.lean` now consume these counts through
-  labelled normalization and concentration to prove the covolume limit.
+- Repository: <https://github.com/mathlib-initiative/Etingof-RepresentationTheory-draft1>.
+- Revision: `c6d86a8bd52065aafb8251fa1cdcd55b609743ef`; upstream Lean 4.32.2.
+- License: Apache-2.0; [license](BostConjecture/ExternalCode/Etingof/LICENSE),
+  [notice](BostConjecture/ExternalCode/Etingof/NOTICE), and
+  [source manifest](BostConjecture/ExternalCode/Etingof/PROVENANCE.json).
+- Original source root: `clean-code/release/RepresentationTheory/`; local root:
+  `BostConjecture/ExternalCode/Etingof/RepresentationTheory/`.
+- Selected five-module closure: `Alignment/Attribute`,
+  `YoungDiagram/PartitionConstructions`, `Partition/YoungDiagram`,
+  `SymmetricGroup/PartitionAuxiliaryConstructions`, and
+  `Combinatorics/YoungDiagram/CornerStatistics`.
+- Principal declaration:
+  `RepresentationTheory.Combinatorics.YoungDiagram.CornerStatistics.Partition.auxiliaryCard_mul_hookLengthProduct_eq_factorial`.
+  The counted objects are increasing bijective fillings of partition cells.
+- Adaptations: Lean 4.35 visibility and proof elaboration, local import paths,
+  source documentation, formatting and explicit simplification dependencies.
+  The original `RepresentationTheory` namespaces are retained. The two
+  auxiliary-construction files retain only `auxiliaryPartitionNatList`,
+  `AuxiliaryPartitionSource`, and `auxiliaryYoungDiagramOfPartition`; unused
+  canonical-filling, group-algebra and semistandard-tableau APIs are omitted.
+  Umbrella Mathlib imports are replaced by the precise prerequisites.
+- Consumers: `Specht` hook and shifted counts, followed by prefix weights and
+  the covolume asymptotic. The hook-count bridge also adapts the upstream
+  private `sytCell_iff_mem_toYoungDiagram` and `sytCellEquiv` as
+  `partitionCell_mem` and `partitionCellEquiv`; the inverse-tableau proofs
+  are project-specific.
 
-## Gram determinants and covolumes — The Tau Ceti contributors
+## TauCeti: covolumes, straightening and Schur–Weyl duality
 
 - Repository: <https://github.com/TauCetiProject/TauCeti>.
-- Revision: `b3b0334ab9203d9faee4b2f34cd75161463ecdd0`.
-- License: Apache-2.0, original `LICENSE` retained at `vendor/tauceti/LICENSE`.
-- Extracted from `TauCeti/Analysis/InnerProductSpace/Gram/Hadamard.lean`
-  and `TauCeti/Algebra/Module/ZLattice/Covolume.lean` into the 95-line
-  `BostConjecture/Lattice/Covolume.lean`. Copyright and attribution are preserved.
-  Exact file/declaration hashes and changes are in `vendor/tauceti/PROVENANCE.json`.
-- Local changes: backport from Lean 4.36.0-rc2 to 4.35; narrow Mathlib imports;
-  derive lattice-inclusion covolume monotonicity using Mathlib's relative-index
-  formula, avoiding an additional fundamental-domain comparison helper.
-- Results: coordinate Gram determinant, volume of orthonormal fundamental
-  domains, Gram formulas for covolumes, and reversal of covolume under lattice
-  inclusion, in arbitrary finite-dimensional real inner product spaces.
-- Intended consumer: the full-rank standard-polytabloid sublattice's Gram
-  determinant bounds the actual integral orbit lattice's covolume. The
-  orbit lattice is now constructed as `BostConjecture.Specht.spanLattice`,
-  with discreteness and fullness proved. The consumer
-  `BostConjecture.Specht.covolume_sq_eq_integer_gram` applies the copied
-  Gram theorem, and `one_le_covolume` derives its lower bound.
-  `covolume_sq_le_det_gram` now consumes the copied lattice-inclusion theorem
-  and span Gram formula for an integral real basis, with that hypothesis
-  explicit. `oneRow_covolume_eq_one` supplies an actual integral basis and
-  computes its covolume. `standardRealBasis` now supplies the standard
-  integral real basis to `covolume_sq_le_det_standard_gram`; the seminormal
-  Gram formula remains open. No TauCeti Lake
-  dependency was added.
+- Revision: `b3b0334ab9203d9faee4b2f34cd75161463ecdd0`; upstream Lean 4.36.0-rc2.
+- Authors: The Tau Ceti contributors; license: Apache-2.0.
+  [License](BostConjecture/ExternalCode/TauCeti/LICENSE),
+  [covolume and straightening provenance](BostConjecture/ExternalCode/TauCeti/PROVENANCE.json),
+  [Schur–Weyl provenance](BostConjecture/ExternalCode/TauCeti/Provenance/SchurWeyl/PROVENANCE.md).
+- Covolumes: selected declarations from
+  `TauCeti/Analysis/InnerProductSpace/Gram/Hadamard.lean` and
+  `TauCeti/Algebra/Module/ZLattice/Covolume.lean` live in
+  `BostConjecture/ExternalCode/TauCeti/Lattice/Covolume.lean`.
+  They include `OrthonormalBasis.det_gram_eq_norm_det_sq`,
+  `OrthonormalBasis.volume_fundamentalDomain`,
+  `OrthonormalBasis.volume_real_fundamentalDomain`,
+  `ZLattice.covolume_sq_eq_det_gram`, `ZLattice.covolume_span_sq_eq_det_gram`,
+  and `ZLattice.covolume_le_covolume_of_le`.
+  The port specializes to real inner-product spaces and uses Mathlib's
+  relative-index formula for lattice inclusion. Specht metric and Gram bounds
+  consume these results.
+- Straightening: `TauCeti/RepresentationTheory/Symmetric/Specht/{Garnir,Straightening}.lean`
+  and selected helpers from `Combinatorics/Young/Diagram.lean`,
+  `Algebra/BigOperators/Finset/Swap.lean`, and
+  `Algebra/Order/BigOperators/Sum/LtSum.lean` are adapted under
+  `BostConjecture/ExternalCode/TauCeti/RepresentationTheory/Specht/`.
+  The proofs replace categorical tabloids with the existing OAI tableaux and
+  integral word coordinates, prove integer cancellation by an involution,
+  and collect multiplicities over the rationals. The consumer
+  `BostConjecture.Specht.polytabloidRat_mem_span_standard` supplies rational
+  spanning to the standard real basis; it does not assert an integral basis.
+- Schur–Weyl: selected sources under `TauCeti/RepresentationTheory/Symmetric/TensorAction/`,
+  `RepresentationTheory/AsAlgebraHom.lean`, `Data/Finset/Basic.lean`,
+  `LinearAlgebra/Multilinear/Polarization.lean`, `LinearAlgebra/End/Centralizer.lean`,
+  `RingTheory/Semisimple/DoubleCentralizer.lean`,
+  `LinearAlgebra/Matrix/GeneralLinearGroup/Multilinear.lean`, and
+  `LinearAlgebra/PiTensorProduct/GeneralLinear.lean` are adapted under
+  `BostConjecture/ExternalCode/TauCeti/RepresentationTheory/SchurWeyl/`.
+  The provenance table records every selected declaration and its source.
+  The port keeps permutation actions, inclusion-exclusion polarization,
+  pure-power spanning, the double centralizer and invertible diagonal span;
+  it reuses the projective tensor-Hom API from PR #44845 and generalizes the
+  coordinate endpoint to arbitrary finite-dimensional modules.
+  `PiTensorProduct.mem_permutation_span_of_commute_units` is consumed by
+  rectangular invariant-space identification. Private helpers retain the
+  upstream `TauCeti` namespace.
 
-## Rational Garnir straightening — The Tau Ceti contributors
+## TauCeti: symmetric-power polarization
 
-- Repository: <https://github.com/TauCetiProject/TauCeti>, revision
-  `b3b0334ab9203d9faee4b2f34cd75161463ecdd0`; Apache-2.0, with the original
-  license at `vendor/tauceti/LICENSE` and notices in each adapted file.
-- `TauCeti/RepresentationTheory/Symmetric/Specht/Garnir.lean`: adapted
-  `exists_ne_rowIndex_relabel_eq`, the signed Garnir relation, Garnir set
-  definitions, cardinality and internal-column-permutation lemmas to
-  `BostConjecture/Specht/{Garnir,GarnirSets}.lean`.
-- `TauCeti/RepresentationTheory/Symmetric/Specht/Straightening.lean`: adapted
-  the collected internal multiplicity and rational span lemmas, bounded
-  straightening weight, strict-progress lemmas and
-  `polytabloid_mem_span_polytabloid_standard` to `Garnir.lean` and
-  `Straightening.lean`.
-- Selected helpers only: `Combinatorics/Young/Diagram.lean`'s
-  `card_filter_fst_lt_filter_snd_eq`; `Algebra/BigOperators/Finset/Swap.lean`'s
-  `sum_swap_apply_add`; `Algebra/Order/BigOperators/Sum/LtSum.lean`'s
-  `sum_lt_sum_of_forall_lt` and `sum_lt_sum_image_sdiff` (all paths under
-  `TauCeti/`). Helpers are private within their consuming modules.
-- Modifications: port to Lean 4.35; use existing `OAI.Saxl.Tableau n μ`
-  and integral word polytabloids; remove the categorical permutation module
-  and all its imports; prove cancellation directly over the integers by a
-  finite-sum involution; extend coefficientwise to rationals; use the existing
-  standardness predicate and prove the label/cardinality bridge. No alternate
-  tableau, representation or lattice was introduced.
-- Consumer: `BostConjecture.Specht.polytabloidRat_mem_span_standard` supplies
-  rational spanning to `Basis.lean`, whose original scalar-extension and
-  basis proofs construct `standardRealBasis`, establish the integral rank
-  formula, and apply `covolume_sq_le_det_standard_gram`. Division by a positive internal multiplicity
-  occurs over the rationals: no integral basis claim is made.
-- Only these needed proof pieces are adapted, with their local dependency cone
-  checked. Source hashes and target modules are recorded in
-  `vendor/tauceti/PROVENANCE.json`; transitive axiom probes are recorded in
-  `verification/SpechtAxioms.lean` and results in `verification/RESULTS.md`.
+- Repository: <https://github.com/TauCetiProject/TauCeti>.
+- Revision: `3c3a32baea963db05c302adeb307b22baae4de78`; upstream Lean 4.36.0-rc2.
+- Authors: The Tau Ceti contributors; license: Apache-2.0.
+  [Detailed provenance and license](BostConjecture/ExternalCode/TauCeti/Provenance/SymmetricPower/PROVENANCE.md).
+- Original files: `TauCeti/LinearAlgebra/SymmetricPower/{Basic,Lift,Algebra}.lean`;
+  local root: `BostConjecture/ExternalCode/TauCeti/LinearAlgebra/SymmetricPower/`.
+- Selected declarations: quotient extensionality and maps, `SymmetricPower.lift`,
+  `consMul`, the natural tensor section and factorial composite, homogeneous
+  multiplication and the symmetric-algebra comparison.
+- Adaptations: Lean 4.35 imports and elaboration; unused basis, monomial and
+  WordFiltration APIs omitted. The homogeneous component remains the existing
+  power of the generator range. The algebra port restores the original
+  `TauCeti.SymmetricPower` namespace.
+- Consumers: geometric polynomial polarization, Plucker polarization and
+  degree divisibility for invariant polynomials.
 
-## Alternating-tensor determinant covariance — AxiomMath/Stacks
+## Stacks: alternating-tensor determinant covariance
 
-- Repository: <https://github.com/AxiomMath/Stacks>, revision
-  `012108f61d7f92a6ffc35ec3f263b6da5d438125`.
+- Repository: <https://github.com/AxiomMath/Stacks>.
+- Revision: `012108f61d7f92a6ffc35ec3f263b6da5d438125`; upstream Lean 4.34.0-rc2.
+- License: Apache-2.0; [license](BostConjecture/ExternalCode/Stacks/LICENSE) and
+  [per-declaration provenance](BostConjecture/ExternalCode/Stacks/PROVENANCE.json).
 - Original path: `StacksFrontier/LinearAlgebra/Matrix/AlternatingTensorPower.lean`.
-  Exactly eight declarations, from `Matrix.altVec` through
-  `Matrix.sum_tensorPow_mul_altVec`, are extracted into
-  `BostConjecture/LinearAlgebra/AlternatingTensorPower.lean`.
-- License: Apache-2.0; the exact license is retained in `vendor/stacks/LICENSE`.
-  [Per-declaration provenance](vendor/stacks/PROVENANCE.json) records hashes,
-  modifications, toolchain versions, and the checked dependency cone.
-- Changes: scoped module documentation and deprecated conditional-lemma names
-  updated for Lean/mathlib 4.35. Only three Mathlib imports; no Stacks dependency.
-  Extraction was durably recorded at workspace-ledger commit `c1ce881`.
-- Consumer: the original bridge `Specht/ColumnTensor.lean` identifies the
-  existing rectangular polytabloid coefficients with a product of `altVec`
-  coordinates. `Specht/Covariance.lean` consumes the extracted
-  `Matrix.sum_tensorPow_mul_altVec` to prove the actual word matrix action
-  on every rectangular polytabloid, integral lattice vector, its scalar span,
-  and the checked complex Specht module is multiplication by `det u ^ k`.
-  Its pure-tensor formula applies the matrix separately to each factor.
-  Projective-module gluing and invariant-space equality
-  remain separate mathematical obligations.
-- The extraction's eight transitive axiom probes are in
-  `verification/StacksAxioms.lean`; the module and all probes were checked by
-  the parent extraction session, separately from the preceding Specht build.
+  Local path: `BostConjecture/ExternalCode/Stacks/LinearAlgebra/Matrix/AlternatingTensorPower.lean`.
+- Eight selected declarations: `Matrix.altVec`, `sum_mul_altVec`,
+  `altVec_coe_perm`, `altVec_eq_zero_of_not_bijective`, `det_submatrix_left`,
+  `tensorPow`, `tensorPow_apply`, and `sum_tensorPow_mul_altVec`.
+- Adaptations: scoped source documentation and replacement of deprecated
+  conditional-lemma names for Lean/mathlib 4.35; the `Matrix` namespace remains.
+- Consumers: Specht column tensors and determinant covariance in the actual
+  rectangular word representation.
 
 ## Selective Mathlib PR ports
 
-These user-approved ports retain the Lean/mathlib 4.35 pins and the exact
-Apache-2.0 licenses and author notices. They are checked local producers
-from proposals that were unmerged when retrieved. Detailed original paths,
-export lists, file hashes, adaptations and axiom checks are in the linked
-provenance records; no arithmetic or analytic Bost bridge follows merely
-from importing them.
-
-- **Exterior base change, #40948 — Nailin Guan.**
-  Repository `Thmoas-Guan/mathlib4_fork`, revision
-  `b642b6723caf97b7b462dd5ddeabb0226c3b5433`.
-  `Mathlib/LinearAlgebra/ExteriorPower/BaseChange.lean` and two projections
-  from `ExteriorAlgebra/Grading.lean` are ported to
-  `BostConjecture/LinearAlgebra/ExteriorPower/` with adjusted imports;
-  proof bodies are unchanged. The five public exports include
-  `exteriorPower.baseChangeEquiv` and both pure-tensor formulas.
-  Intended consumers: determinant and Plucker scalar extension.
-  [Provenance and license](vendor/mathlib-prs/40948/PROVENANCE.json).
-- **Finite projective tensor duality, #44845 — Daniel Horton.**
-  Repository `DanielJHorton/mathlib4`, revision
-  `47365e3b9fd4329f058c31ac7aa9565a6036b17d`.
-  `Mathlib/LinearAlgebra/PiTensorProduct/Projective.lean` and three
-  `Dual/Defs.lean` declarations are ported to
-  `BostConjecture/LinearAlgebra/PiTensorProduct/`; two missing reindex
-  simplifications are proved inline. Ten exports include
-  `PiTensorProduct.piTensorHomEquiv` and
-  `PiTensorProduct.dualDistribEquivOfProjective`.
-  Intended consumer: contractions over nonfree finite projective
-  integer-ring modules. [Provenance and license](vendor/mathlib-prs/44845/PROVENANCE.json).
-- **Polar decomposition, #45002 — Tjeerd Jan Heeringa.**
-  Repository `TJHeeringa/mathlib4`, revision
-  `41260205df493c627e1ac0e54812cfdeb6517fbc`.
-  `Mathlib/Analysis/InnerProductSpace/{Abs,Polar}.lean` is ported to
-  `BostConjecture/Analysis/InnerProductSpace/` with one relocated import
-  and documentation corrections; the 30 declarations and proofs are
-  unchanged. Actual consumers: `Balanced.SpecialLinearPolar` and
-  `Balanced.OrbitNorm`, proving unitary/logarithm/determinant adapters and
-  the full special-linear orbit norm bound on complex Hilbert spaces.
-  The algebraic orbit criterion remains open.
-  [Provenance and license](vendor/mathlib-prs/45002/PROVENANCE.json).
-
-The parent checked all three narrow module builds and all 45 export axiom
-probes before this session integrated their root imports. See
-[reuse survey](verification/STACKS_AND_MATHLIB_PRS.md) for the parent review
-and the exact separation between these producers and their future consumers.
-
-## Central Specht action consumer — session 0013
-
-`Specht/Central.lean` substantively consumes `OAI.Saxl.columnAlt_tabloid`
-from the already pinned OpenAI copy (original path
-`lean/OAI/RepresentationTheory/Saxl/SpechtSubmodule.lean`, revision
-`4eaee87548250b2682affda7d05d947c05554bae`, Apache-2.0).
-No additional source is copied or modified. The consumer proves that the
-central transposition sum acts by total diagram content, first on complex
-standard polytabloids, then on the actual real Specht span and integral orbit
-lattice. Its scalar is computed by the new local `Content.lean` proofs.
-The transitive axiom probe includes this imported rank-one producer.
-
-## Geometry integration consumers — session 0013
-
-The checked local modules `Geometry/TensorRealization.lean` (0d893d5),
-`Tensor/Evaluation.lean` (1c0ac0c), and `Geometry/FreeEmbedding.lean`
-(922a2f4) are now root imports. Tensor realization consumes the attributed
-Stacks tensor-coordinate equivalence and the existing integral Specht
-covariance; evaluation consumes the attributed finite-projective tensor
-and duality port. Free embedding consumes the canonical orbit-lattice
-inclusion and flat scalar extension. No additional external code is copied.
-The free embedding is injective under flatness over the integers; its
-covariance and frame transition hold over every commutative ring.
-Projective gluing, restricted isotypic nonvanishing, invariant-space equality,
-and the archimedean norm estimate remain separate obligations.
-
-## Intrinsic arithmetic line integration — session 0013
-
-`Arithmetic/HermitianLine.lean` is now a root import. It consumes Mathlib's
-checked product formula, fractional-ideal norm, lattice-index and
-projective/flat APIs at the existing pinned Mathlib revision; no external
-code is copied or modified. Its local consumers include choice-independent
-intrinsic line degree and the actual finite quotient-cardinality formula
-for nonfree finite projective lines over every number field. Source blobs,
-22 foundational-only axiom probes and original checks are recorded in
-`verification/ARITHMETIC.md`. Determinant/higher-rank degree calculus and
-intrinsic Harder–Narasimhan specialization remain open.
-
-## Prefix restriction and branching support — session 0015
-
-`Specht/Prefix.lean`, `Specht/Branching.lean` and `Specht/Filtration.lean`
-are original local proofs in the existing word/tableau model; no external
-source is copied. They reuse Mathlib's `YoungDiagram`, finite equivalences,
-`Equiv.Perm.extendDomain` and `sign_extendDomain` at the pinned revision,
-and substantively consume the checked local standard basis and central
-content action. The latter retains the attributed OpenAI rank-one dependency
-above. Consumers are the smaller polytabloid slice, the sliced central action,
-and the invariant largest-label support filtration. The branching quotient,
-colexicographic triangularity and general covolume limit remain open.
-
-## Determinant scalar-extension integration — session 0015
-
-`Geometry/DeterminantBaseChange.lean` (checked handoff `3ac7a36`) is now a
-root import, including the top exterior-power frame twist and tensor
-scalar-extension map. Its original exact checks and 38 foundational-only
-axiom probes are recorded in `verification/GEOMETRY.md`. It consumes the
-attributed exterior-power and tensor-coordinate APIs above; no new external
-code is copied. The equality is the scalar-extension square on elementary
-inputs for arbitrary source and target frames. Projective descent and global
-injectivity remain separate unproved obligations. The checked
-`Geometry/DeterminantNaturality.lean` (7c76270) is also imported; it proves
-naturality for arbitrary maps between free modules of the same rank. The
-lightweight determinant-coordinate extraction d470bdb is shared with arithmetic.
-Its 42-export audit and post-extraction build are recorded in the same evidence.
-
-## Determinant degree construction integration — session 0015
-
-`Arithmetic/Degree.lean` (checked source 6429efa and 5d59bb0; evidence
-af132a7) is now imported. The actual finite-projective determinant line and
-its complex Gram metric consume the attributed exterior base-change API
-and Mathlib at the existing pins, with the shared lightweight local
-`Geometry/DeterminantCoordinates.lean`; no additional external source is
-copied. The construction, normalized degree/slope and actual determinant
-quotient formula apply to arbitrary number fields and nonfree modules.
-The 40-probe audit and 3,241-job module check are recorded in
-`verification/ARITHMETIC.md`. Metric uniqueness/frame independence,
-zero/rank-one normalization, degree calculus and intrinsic HN remain open.
-
-## Branching quotient and last content action — session 0017
-
-`Specht/Quotient.lean` and `Specht/LastMurphy.lean` are original local
-proofs, with no new external source copying. They retain the canonical
-orbit lattice and its Hilbert word realization. They consume the existing
-standard basis, prefix restriction and support filtration, Mathlib's
-`LinearMap.quotKerEquivOfSurjective` and `Submodule.quotEquivOfEq`, and
-`Function.Injective.map_swap` at the pinned Mathlib revision above.
-The exact kernel theorem is consumed to prove central prefix action modulo
-the preceding filtration step, then the last Murphy content scalar. The
-OpenAI antisymmetrizer theorem remains a transitive dependency of the central
-content producer, with its attribution unchanged. Recursive colex triangularity,
-seminormal norms and the general covolume limit are still open.
-
-## Principal-cover descent integration — session 0017
-
-Checked handoffs `e4812e5` and `f58c467` extend the determinant-twist
-base-change identity to its full scalar-linear square and provide
-`Geometry/LocalizationDescent.lean`, now a root import. Original proofs
-clear denominators and combine a unit-ideal relation to descend compatible
-linear maps and detect injectivity. No additional code was copied from
-Stacks or any other external project. The pinned tensor/exterior APIs above
-are retained; `verification/GEOMETRY.md` records the 9,068-job build and
-59 foundational-only axiom probes. Finite-projective local frames and
-overlap transport must still be supplied before constructing the global
-integral injection.
-
-## Normalized seminormal norms and Gram evaluation — session 0021
-
-`Specht/Adjacent.lean`, `ColumnReading.lean`, `AdjacentPath.lean`,
-`PrefixNorm.lean`, `PrefixNormInitial.lean` and `Seminormal.lean` are original
-local proofs in the existing tableau/word representation. No new external
-source was copied. They substantively consume the attributed OpenAI Specht
-cone through the checked content eigenvalues and local standard basis.
-The canonical integral orbit lattice and its orthonormal Hilbert metric are
-unchanged. The normalization and explicit prefix product are now proved,
-not assumed from the Ryom-Hansen/Murphy reference.
-
-Direct Mathlib reuse retains the repository, exact revision and Apache 2.0
-license recorded above. Used declarations include
-`InnerProductSpace.ext_inner_left_basis`
-(`Mathlib/Analysis/InnerProductSpace/Dual.lean`),
-`Fin.strictMono_iff_lt_succ` (`Mathlib/Order/Fin/Basic.lean`),
-`Finset.prod_range_reflect` (`Mathlib/Algebra/BigOperators/Intervals.lean`)
-and `Nat.factorial_eq_prod_range_add_one`
-(`Mathlib/Data/Nat/Factorial/BigOperators.lean`). They are imported unchanged;
-consumers are spectral-line separation, legal paths and the initial product.
-Exact new-producer audits and source blobs are in `verification/RESULTS.md`.
-The general sublinear covolume limit is still open.
-
-## Checked arithmetic and geometric integration — session 0021
-
-The root additionally consumes the owners' checked
-`Arithmetic.NestedQuotient`, `SaturationDegree`, `LineTensorDegree` and
-`DualFiber` leaves, and `Geometry.ProjectiveMetric`, `Contraction` and
-`Tensor.DualMetric` (transitively including the delivered determinant metric,
-position action and projective permutation modules). These are original local
-proofs with the existing pinned dependencies. No new external code was copied.
-Their separate 135-probe arithmetic and 131-probe geometry audits are recorded
-in `verification/ARITHMETIC.md` and `verification/GEOMETRY.md`. They do not
-close arbitrary-rank degree identities/HN, the restricted pairing norm bound,
-or the main theorem. Later leaves are outside this fixed import batch.
-
-## Labelled occupancy counting — session 0026
-
-`Specht/Hypergeometric.lean` is an original finite-subset proof of the
-multivariate hypergeometric law. It imports unchanged Mathlib declarations
-`Fintype.card_finset_len` (`Mathlib/Data/Fintype/Powerset.lean`),
-`Fintype.card_sigma` and `Fintype.card_pi`
-(`Mathlib/Data/Fintype/BigOperators.lean`) at the pinned revision and
-Apache 2.0 license recorded above. The concrete block bijection consumes
-these counts; its sum identity proves probability normalization.
-No external code was copied and no new dependency was added.
-
-`Specht/OccupancySort.lean` additionally imports unchanged
-`Tuple.sort`, `Tuple.monotone_sort`, `Tuple.unique_antitone`
-(`Mathlib/Data/Fin/Tuple/Sort.lean`) and `Matrix.det_vandermonde_ne_zero_iff`
-(`Mathlib/LinearAlgebra/Vandermonde.lean`) at that same revision and license.
-The concrete tuple equivalence consumes sorting; determinant permutation
-and nonvanishing prove the actual squared-Vandermonde weight's symmetry
-and collision vanishing, feeding its factorial sum identity.
-
-`Specht/ShiftedShapes.lean` uses the unchanged `YoungDiagram.ofRowLens`
-and `YoungDiagram.rowLen_ofRowLens` from
-`Mathlib/Combinatorics/Young/YoungDiagram.lean` to construct actual
-subdiagrams after staircase subtraction. Both inverse identities and the
-cardinality statement are local proofs; no alternate partition model is added.
-
-`Specht/PrefixDistribution.lean` uses the unchanged `Equiv.sigmaFiberEquiv`
-from `Mathlib/Logic/Equiv/Sum.lean` to count the actual prefix fibers, then
-combines the preceding original producers with the squared Vandermonde
-determinant identity. It adds no dependency or external copied code.
-
-`Specht/PrefixNormalizer.lean` evaluates the rectangle count and normalizer
-by original finite-product proofs, using unchanged Mathlib factorial and
-interval-product identities at the same pinned revision. Its explicit
-probability theorem consumes the actual prefix-fiber count. No additional
-concentration or asymptotic result is imported or assumed.
-
-The checked root batch includes the owners' original
-`Arithmetic.DeterminantProduct`, `IntegralDeterminantProduct`,
-`IntegralExactDeterminant` (including projective determinant shear),
-`Geometry.ContractionBaseChange`, and `Balanced.PluckerNorm`
-(including exponential flow) leaves. Their provenance and separate scoped
-audits remain in the arithmetic, geometry and balanced verification records.
-The shared root build is integration evidence, not completion of those tasks.
-
-The complex exterior Gram metric and Plücker consumer delivered at `76a3ad5`
-reuse Mathlib revision `56a005855ea17e0b0958f73ec801ae140b0a1679`
-(Apache-2.0): `Module.Basis.exteriorPower` and its coordinate API in
-`Mathlib/LinearAlgebra/ExteriorPower/Basis.lean`, `pairingDual` and
-`pairingDual_ιMulti_ιMulti` in `Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean`,
-and Euclidean coordinate transport in `Mathlib/Analysis/InnerProductSpace/PiL2.lean`.
-These imports are unchanged; no source was copied. Original local proofs
-construct the full complex exterior metric, identify its Gram norms, and prove
-the actual exterior isometry and balanced Plücker norm stationarity.
-They also consume the existing `Tensor.inner_ext_of_span` uniqueness lemma.
-The real-only Mathlib exterior metric is not used as a substitute for this
-complex producer. The separate analytic convexity and semistability results
-remain open. The intrinsic exact-determinant handoff at `9ed74af` is original
-local code using the already attributed exterior and projective infrastructure.
-
-## Orbit-criterion mathematical references — session 0026
-
-The BALANCED lane registered Maithani, *Splittings and the Reynolds Operator*,
-arXiv:2412.18841v2 (11 September 2025), and Milne, *Algebraic Geometry*,
-v6.10 (11 November 2024), at `55fdc42`. Exact original files, SHA256 hashes,
-license notices and source anchors are recorded in `references/manifest.yaml`
-and `verification/BALANCED.md`. Maithani Theorem 5.6 and Proposition A.6
-support the finite-degree averaging and density blueprint; Milne Theorem 9.7
-and Aside 9.8 support constructibility and closure comparison. The Milne
-page-201 file is a normalized statement excerpt, not a full transcription.
-No Lean code was copied from either reference. The orbit criterion and its
-used external results remain unproved Lean obligations.
-
-## Finite sampling and concentration — session 0028
-
-Session 0028 adds original finite-product and subset-counting proofs in
-`Specht/BulkNormalizer.lean` and `Specht/Sampling.lean`. They import unchanged
-Mathlib at `56a005855ea17e0b0958f73ec801ae140b0a1679` (Apache-2.0):
-`Nat.factorial_mul_ascFactorial`, `Nat.ascFactorial_le_pow_add` and
-`Nat.descFactorial_pos` in `Mathlib/Data/Nat/Factorial/Basic.lean`, product
-formulas in `Mathlib/Data/Nat/Factorial/BigOperators.lean`, `Nat.choose_mul`
-in `Mathlib/Data/Nat/Choose/Basic.lean`, and `Finset.card_powersetCard`
-in `Mathlib/Data/Finset/Powerset.lean`. The concrete normalizer lower bound
-consumes the rising-factorial identities; the sampling moment bound consumes
-the subset count and falling-factorial inequality. No external source was copied.
-
-The new integration imports are original owner-delivered
-`Arithmetic.ExactDegree`, `Geometry.ContractionNorm`, and
-`Balanced.SpectralExpansion`, together with `InvariantTheory.Semistability`.
-The final geometry batch also includes the original local
-`Geometry.InvariantBaseChange`, `PiInvariants`, and `PolynomialTensor`;
-their pinned-library reuse and 184-probe audit are recorded in
-`verification/GEOMETRY.md`. No external source was copied by this integration.
-The spectral expansion uses unchanged Mathlib
-`Mathlib/Analysis/InnerProductSpace/Spectrum.lean`,
-`Mathlib/Analysis/SpecialFunctions/Exponential.lean`, and
-`Mathlib/Analysis/Convex/Deriv.lean` at the same revision and license for the
-actual exterior-norm spectral expansion and convexity. The owner audit files
-record their exact consumers and remaining theorem boundaries.
-
-`Specht/OccupancyMGF.lean` uses the unchanged
-`Real.norm_exp_sub_one_sub_id_le` and `Real.add_one_le_exp` in
-`Mathlib/Analysis/Complex/Exponential.lean` to bound the centered exponential
-moment, then proves finite exponential Markov and union bounds locally.
-The actual occupancy law is retained through `occupancyEquiv`. The sufficient
-tail constant is weaker than the manuscript's Hoeffding constant; the
-blueprint explicitly records that adaptation and its asymptotic sufficiency.
-The invariant-polynomial handoff imports unchanged
-`Mathlib/LinearAlgebra/SymmetricAlgebra/Basic.lean`,
-`Mathlib/RingTheory/Finiteness/Subalgebra.lean`, and
-`Mathlib/RepresentationTheory/Invariants.lean` at the same pinned revision
-and license. Their consumers are the owners' intrinsic polynomial evaluation,
-homogeneous subspace, action and invariant-to-semistability proofs.
-
-## Sublinear Specht covolume — session 0030
-
-The proofs in `Specht/WeightedGap.lean`, `BulkGap.lean`,
-`GapAsymptotics.lean`, `PrefixEvent.lean`, `Separation.lean`,
-`LogInsertion.lean`, `LogExpectation.lean`, and `Asymptotic.lean` are
-original local code. They use unchanged Mathlib at
-`56a005855ea17e0b0958f73ec801ae140b0a1679` (Apache-2.0):
-`Matrix.det_vandermonde` in `Mathlib/LinearAlgebra/Vandermonde.lean`;
-real-power/exponential limits in
-`Mathlib/Analysis/SpecialFunctions/Pow/Asymptotics.lean` and
-`Pow/Real.lean`; finite expectations in
-`Mathlib/Algebra/{,Order/}BigOperators/Expect.lean`; ceiling bounds in
-`Mathlib/Algebra/Order/Floor/Semiring.lean`; and reciprocal limits in
-`Mathlib/Analysis/SpecificLimits/Basic.lean`.
-The actual consumers are the weighted bad-gap estimate, its uniform
-bulk decay, the actual-tableau logarithmic average and the canonical
-orbit lattice limit. No probability, invariant-space or semistability
-conclusion is assumed. The sufficient concentration constant and the
-full-rank standard-sublattice comparison are documented adaptations of
-the manuscript; the original integral orbit lattice is unchanged.
-
-## Symmetric polarization — The Tau Ceti contributors
-
-- Repository: <https://github.com/TauCetiProject/TauCeti>.
-- Exact revision: `3c3a32baea963db05c302adeb307b22baae4de78`.
-- Original paths: `TauCeti/LinearAlgebra/SymmetricPower/{Basic,Lift,Algebra}.lean`.
-  Copyright 2026 The Tau Ceti contributors; Apache-2.0. Exact hashes,
-  immutable upstream files and the license are retained in
-  [vendor provenance](vendor/tauceti-polarization/PROVENANCE.md).
-- Local paths: `BostConjecture/LinearAlgebra/SymmetricPower/`.
-  The selected quotient/lift, tensor section, factorial-composite,
-  naturality and homogeneous-algebra comparison declarations are retained.
-  The algebra namespace is changed to `BostConjecture.SymmetricPower`;
-  Lean 4.35 imports and elaboration are adapted as listed in provenance.
-  Basis, monomial and WordFiltration cones are omitted.
-- Actual consumers: `Geometry.PolynomialPolarization` constructs the
-  equivariant symmetric lift with nonzero evaluation;
-  `PluckerPolarization` and `DegreeDivisibility` apply it to the actual
-  Plucker polynomial. Port commits `47c79f2`, `d56b70d`; initial consumer
-  `c55300f`. The 226-probe owner audit uses only foundational axioms.
-  Upstream Lean 4.36.0-rc2 is adapted to this project's unchanged Lean 4.35.
-  Rectangular invariant spanning and coaction are separate obligations.
-
-## Additional integrated consumers — session 0030
-
-The arithmetic tensor degree, subspace supermodularity, bounded-sections
-and HN interval proofs are original local code. `Arithmetic.SubspaceHN`
-and `Slope.FiniteLength` consume `GameValue`, `NashEquilibrium`, and
-`Filtration.Exists` from the already attributed pinned HarderNarasimhan
-revision `14b3090e`; they prove actual intermediate quotient slope bounds.
-The checked `Arithmetic.HermitianHN` consumer at `fb56e97` now proves
-semistability of actual HN grades against all integral submodules, attained
-maximal slope and containment of every maximizer in the first saturated term.
-It uses unchanged Mathlib quotient, submodule correspondence and finite-projective
-APIs, with no additional copied code. The 287-probe owner audit is foundational-only.
-HN uniqueness and bounded-degree finiteness were separate at that checkpoint;
-the completed owner delivery is now integrated at cf39176.
-`Arithmetic.ArchimedeanFiniteness` uses unchanged Mathlib
-`NumberField.Embeddings.finite_of_norm_le` and finite-projective coordinate
-embeddings to prove finiteness of bounded actual integral sections.
-This does not assert bounded-degree finiteness. Exact owner checks are in
-`verification/ARITHMETIC.md`.
-
-`Balanced.SpecialLinearPolar` uses unchanged Mathlib continuous functional
-calculus logarithms (`Analysis/SpecialFunctions/ContinuousFunctionalCalculus/ExpLog/Basic.lean`,
-Frédéric Dupuis, Apache-2.0) and trace/eigenvalue/determinant formulas.
-`Balanced.OrbitNorm` consumes this polar factorization and the checked
-tensor exponential identity to exclude zero from the Euclidean orbit
-closure. Exact declarations and audits are in `verification/BALANCED.md`.
-All Mathlib imports here use the pinned revision above without copying.
-
-`InvariantTheory.PluckerCoordinates`, `SpecialLinearCoordinates` and
-`Coaction` also use that unchanged Mathlib dependency: tensor-product
-basis coordinates (`LinearAlgebra/TensorProduct/Basis.lean`), exterior
-basis/minor formulas (`LinearAlgebra/ExteriorPower/Basis.lean`), determinant
-maps (`LinearAlgebra/Determinant.lean`), `Matrix.SpecialLinearGroup`,
-`Ideal.Quotient.liftₐ`, `Algebra.FiniteType.quotient`, and
-`Submodule.toBaseChange.toLinearEquiv` (`RingTheory/Flat/Basic.lean`).
-Their consumer is the actual degree-restricted polynomial coordinate
-pullback for the Plucker action, with the forward convention documented
-in `verification/BALANCED.md`. The 120-probe owner audit is foundational-only.
-This is not a proof of rational-point detection or invariant base change.
-
-## Schur-Weyl permutation commutant — The Tau Ceti contributors
-
-- Repository: <https://github.com/TauCetiProject/TauCeti>.
-- Exact revision: `b3b0334ab9203d9faee4b2f34cd75161463ecdd0`.
-- License: Apache-2.0; copyright 2026 The Tau Ceti contributors. Original
-  notices and all 14 immutable source/license/toolchain files are preserved
-  under [vendor/tauceti-schur-weyl](vendor/tauceti-schur-weyl/PROVENANCE.md),
-  with SHA256 and git blob hashes in `MANIFEST.json`.
-- Exact original paths/declarations and local mapping are listed individually
-  in the provenance table. The selected slices are multilinear polarization,
-  the generic permutation action and its invariants, finite-projective
-  comparison-map commutant, semisimple image double centralizer, and
-  invertible diagonal density. Local modules are
-  `BostConjecture/RepresentationTheory/SchurWeyl/`.
-- Adaptations: direct averaging replaces the upstream norm-map dependency;
-  the existing checked Mathlib PR44845 `piTensorHomEquiv` replaces TauCeti's
-  tensor-Hom infrastructure; the endpoint is generalized from coordinate
-  spaces to arbitrary finite-dimensional modules. Pinned 4.35 API changes
-  are recorded in the mapping. No full TauCeti dependency, categorical
-  representation layer, highest-weight classification or toolchain change.
-- Actual consumers: `Geometry.RectangularCovector`, `RectangularSpan` and
-  `RectangularInvariants` construct the bilinear coefficient covector,
-  rank-one commutant operator, integral orbit-action transport and determinant
-  root normalization. The final result identifies actual SL-fixed tensors
-  with the scalar-extended rectangular lattice over algebraically closed
-  characteristic-zero fields. Source snapshot `26489ca`, checked evidence
-  pin `2a0d5c6`; all254 transitive owner probes are foundational-only.
-  Independent source review checked raw upstream hashes and all consumer
-  bridges. Field descent and contraction nonvanishing remain open.
-
-`Tensor.HomDual` and `Geometry.HomTensor` are original local composition and
-consumer proofs. They use unchanged pinned Mathlib `Module.evalEquiv`,
-`dualTensorHomEquiv`, `TensorProduct.dualDistribEquiv` and the previously
-attributed finite-projective PiTensor duality, then connect to the actual
-polynomial quotient and canonical tensor pairing. No copied code, freeness
-hypothesis or new arithmetic representation is introduced.
-
-## Verification
-
-Run `horizon --root ../.. check --json` from this project, then
-`horizon --root ../.. check --lean verification/ReuseAxioms.lean --json`.
-The latter audits the transitive axioms of the named reused producers.
-Source inspections and successful prerequisite builds do not certify the
-unwritten arithmetic bridges or main theorem. Current evidence is recorded in
-`verification/RESULTS.md` once the corresponding checks finish.
-
-## Shared integration of invariant detection, HN symmetry and closure prerequisites
-
-All imports in this batch use the unchanged Apache-2.0 Mathlib dependency
-`https://github.com/leanprover-community/mathlib4` at
-`56a005855ea17e0b0958f73ec801ae140b0a1679`; no upstream file was copied or
-modified. The following are original project proofs consuming those APIs.
-
-- `InvariantTheory/LocalizationDetection.lean`, `SpecialLinearDetection.lean`
-  and `InvariantDetection.lean` use localization-away lifting/surjectivity
-  (`RingTheory/Localization/Away/Basic.lean`), infinite-field polynomial
-  extensionality, `TensorProduct.equivFinsuppOfBasisRight`
-  (`LinearAlgebra/TensorProduct/Basis.lean`), and
-  `Matrix.SpecialLinearGroup.toLin_equiv`
-  (`LinearAlgebra/SpecialLinearGroup.lean`). Their actual consumer is the
-  equality of the existing homogeneous invariant space with the kernel of
-  the explicit polynomial coaction minus the trivial coaction.
-- `InvariantTheory/SpecialLinearBaseChange.lean` uses
-  `Algebra.TensorProduct.tensorQuotientEquiv`
-  (`RingTheory/TensorProduct/Quotient.lean`),
-  `MvPolynomial.algebraTensorAlgEquiv`
-  (`RingTheory/TensorProduct/MvPolynomial.lean`) and
-  `Ideal.quotientEquivAlg` (`RingTheory/Ideal/Quotient/Operations.lean`)
-  for the actual determinant-one coordinate-algebra comparison. The
-  homogeneous coaction square remains its next consumer.
-- `InvariantTheory/OrbitImage.lean` uses canonical
-  `MvPolynomial.zeroLocus` from `RingTheory/Nullstellensatz.lean` to identify
-  the actual Plücker orbit with the polynomial image of determinant-one
-  equations. It does not invoke a Nullstellensatz conclusion.
-- `Arithmetic/HNUniqueness.lean`, `HNIsometry.lean` and
-  `IrreducibleSemistable.lean` use canonical quotient/submodule maps, the
-  pinned HarderNarasimhan uniqueness API recorded above,
-  `Module.End.baseChangeHom` and `Representation.IsIrreducible` from
-  `RepresentationTheory/Irreducible.lean`. The consumer is intrinsic
-  semistability of an integral isometric action with irreducible generic
-  representation; tensor/dual irreducibility is a separate producer.
-- `InvariantTheory/ComplexClosure/Coordinates.lean` uses
-  `SymmetricAlgebra.equivMvPolynomial`, `equivMvPolynomial_symm_X`
-  (`LinearAlgebra/SymmetricAlgebra/Basis.lean`), canonical `zeroLocus` and
-  `vanishingIdeal` (`RingTheory/Nullstellensatz.lean`), `continuous_eval`
-  (`Topology/Algebra/MvPolynomial.lean`) and `continuous_equivFun_basis`
-  (`Topology/Algebra/Module/FiniteDimension.lean`). The consumer is the
-  coordinate description of intrinsic polynomial Zariski closure and its
-  one-sided Euclidean closure inclusion.
-- `InvariantTheory/ComplexClosure/Roots.lean` uses `Complex.isAlgClosed`
-  (`Analysis/Complex/Polynomial/Basic.lean`),
-  `Splits.eval_eq_prod_roots_of_monic`, `Splits.natDegree_eq_card_roots`
-  (`Algebra/Polynomial/Splits.lean`), `IsRoot.norm_lt_cauchyBound`
-  (`Analysis/Polynomial/CauchyBound.lean`), `Multiset.exists_min_image`
-  (`Data/Finset/Max.lean`) and `Tendsto.bddAbove_range`
-  (`Topology/Order/LiminfLimsup.lean`). Its intended consumer is the pending
-  finite-normalization openness argument. Neither the closure equality nor
-  Lemma 7.2 follows from these imports.
-
-Exact delivered revisions, kernel checks, axiom probes and independent
-reviews are recorded in `verification/BALANCED.md`, `ARITHMETIC.md` and
-`COMPLEX_CLOSURE.md`; shared root evidence is in `verification/RESULTS.md`.
-
-The same shared batch adds `InvariantTheory/PolynomialBaseChange.lean`
-(`35d1080`): the actual matched-basis polynomial algebra equivalence and
-homogeneous image characterization use the above `equivMvPolynomial` and
-`algebraTensorAlgEquiv` unchanged. The coaction square remains deferred.
-`ComplexClosure/IntegralLifting.lean` and `FiniteFiber.lean` (`e2a0e4d`)
-add closed-point/minimal-polynomial lifting, actual fiber finiteness and
-uniform coordinate bounds, using unmodified `minpoly.ker_eval`
-(`FieldTheory/Minpoly/IsIntegrallyClosed.lean`),
-`exists_ideal_over_maximal_of_isIntegral` (`RingTheory/Ideal/GoingUp.lean`),
-`finite_of_finite_type_of_isJacobsonRing` (`RingTheory/Jacobson/Ring.lean`),
-`IsAlgClosed.lift` (`FieldTheory/IsAlgClosed/Basic.lean`) and
-`AlgHom.liftOfSurjective` (`RingTheory/Ideal/Quotient/Operations.lean`).
-Their finite-normalization openness consumer remains unproved.
-
-`Geometry/HomInvariants.lean` is an original composition of the checked
-project polynomial lift, Hom-dual regrouping, independent invariants and
-rectangular invariant equality. It defines the canonical action by
-`PiTensorProduct.map`, and uses existing `Representation.dual`,
-`TensorProduct.ext` and `Module.addCommMonoidToAddCommGroup`. The latter
-keeps the inherited tensor monoid visible while elaborating the actual
-invariant-subspace restriction; no new module representation is introduced.
-The result supplies nonzero pairing on independent invariant factors and
-its source rectangular lattice restriction. Dual-target rectangular
-restriction and the full canonical determinant contraction remain separate.
-
-## Independent dual factors and further checked shared producers
-
-`Tensor/DualRegroup.lean` and `Geometry/DualInvariants.lean` add original
-finite-projective naturality and fixed-vector transport through the existing
-canonical duality/regrouping equivalence. Their actual consumer extracts a
-nonzero pairing with independently invariant dual factors from the actual
-Hom polynomial. No external code is copied; the Mathlib module, tensor and
-representation APIs above are unchanged.
-
-`InvariantTheory/HomogeneousComponents.lean` (`6524042`/`926a4d5`) imports
-Mathlib `RingTheory/MvPolynomial/Homogeneous.lean` at the pinned revision,
-using `homogeneousSubmodule_one_pow`, `homogeneousComponent_of_mem`, finite
-homogeneous decomposition and its uniqueness to build intrinsic homogeneous
-components and extract a positive-degree invariant. Its consumer is the
-pending complex orbit criterion; compact averaging and density are separate.
-
-`InvariantTheory/ComplexClosure/Normalization.lean` (`06c1747`) uses
-unmodified Mathlib multivariate polynomial UFD and integral-closure instances
-from `RingTheory/Polynomial/UniqueFactorization.lean` and
-`RingTheory/Polynomial/RationalRoot.lean`, `IsCompact.tendsto_subseq` and
-`IsSeqClosed.isClosed` (`Topology/Sequences.lean`), and `isCompact_univ_pi`
-(`Topology/Compactness/Compact.lean`). Its proved openness conclusion assumes
-an actual integral injective polynomial coordinate map; construction of that
-map and density are subsequent obligations. These imports retain the same
-repository/revision/Apache-2.0 license stated above; no source is copied.
-
-## Canonical nonvanishing and closure/averaging integration
-
-`Geometry/DualSpecialLinear.lean` and `Nonvanishing.lean` are original
-compositions using Mathlib's `SpecialLinearGroup.dualMap`,
-`SpecialLinearGroup.congr_linearEquiv` and `Module.evalEquiv` unchanged.
-They feed actual transpose surjectivity into the checked rectangular
-invariant theorem and then into the existing projective determinant pairing.
-The nonzero invariant polynomial is the mathematical input, not a new
-certificate or a replacement for geometric semistability.
-
-BALANCED deliveries `CompactAverage` (`3e7976e`) and `UnitaryDensity`
-(`96d2f1b`) reuse pinned Apache-2.0 Mathlib probability Haar measure,
-Bochner integral translation and continuous-linear-map commutation,
-`Matrix.toEuclideanCLM`, `Matrix.IsHermitian.spectral_theorem`,
-`MvPolynomial.funext_set`, `Circle.exp_injOn_Icc`, and
-`Matrix.det_mvPolynomialX_ne_zero`. No source copied. Their sources are
-the registered Maithani Theorem 5.6, U–GL density proposition and
-product-of-infinite-sets lemma; actual consumers and remaining special-unitary
-averaging obligations are recorded in `verification/BALANCED.md`.
-
-CLOSURE final delivery `53f1119` imports `ComplexClosure.Comparison`,
-consuming the actual normalization, constructibility and principal-open
-density producers to prove `closure_polynomial_image_zeroLocus`.
-Additional unchanged Mathlib imports at the same pinned revision/license:
-`RingTheory/NoetherNormalization.lean` (`exists_integral_inj_algHom_of_fg`),
-`Algebra/MvPolynomial/Funext.lean` (`funext_set`),
-`RingTheory/Ideal/GoingUp.lean` (`Ideal.under_ne_bot`),
-`Topology/Separation/Basic.lean` (`infinite_of_mem_nhds`),
-`RingTheory/Spectrum/Prime/Chevalley.lean`
-(`PrimeSpectrum.isConstructible_range_comap`, including its
-`ChevalleyComplexity` dependency),
-`RingTheory/Spectrum/Prime/ConstructibleSet.lean`
-(`exists_constructibleSetData_iff`),
-`RingTheory/Ideal/MinimalPrime/Noetherian.lean`
-(`finite_minimalPrimes_of_isNoetherianRing`),
-`RingTheory/Ideal/MinimalPrime/Basic.lean` (`exists_minimalPrimes_le`),
-`RingTheory/FinitePresentation.lean` (`of_finiteType`), and
-`Topology/Homeomorph/Defs.lean` (`Homeomorph.preimage_closure`).
-No source copied or dependencies changed. The intended actual consumer is
-BALANCED's checked special-linear polynomial Plücker orbit image (`84a679f`).
-Exact authorship, source review and 40-probe evidence are preserved in
-`verification/COMPLEX_CLOSURE.md`.
-
-
-Shared integration also consumes ARITH's `IndependentPiSemistable` and
-`RestrictionOfScalars` (`a1aa8cb`, `387d06a`; earlier restriction checkpoint
-`11fd898`). The finite-family isometric irreducible-action consumer reuses
-canonical Mathlib density and the attributed projective tensor duality;
-restriction to integers uses `LinearAlgebra/Dimension/Localization.lean`,
-`LinearAlgebra/FreeModule/PID.lean` and `Algebra/Module/Rat.lean` at the pinned
-Mathlib revision/license. No code copied. Exact provenance and the 338-probe
-owner audit are in ARITHMETIC.md. Degree finiteness is now integrated
-through the separate DegreeFiniteness consumer below.
-BALANCED's `PluckerSemistability` (`7f56300`) consumes the proved polynomial
-orbit closure comparison and balanced norm bound, while
-`SpecialUnitaryDensity` (`6da0e3e`) consumes unitary polynomial density and
-the actual determinant-normalization coordinate retraction. These are
-original compositions, with no further copied external code. The delivered
-181-probe audit and positive-dimensional scope are recorded in BALANCED.md;
-actual invariant-polynomial existence was subsequently proved and integrated
-at cf39176, as recorded below.
-
-
-`Geometry/NonvanishingBaseChange.lean` and `PluckerNonvanishing.lean` are
-original compositions of the previously attributed projective tensor/exterior
-scalar-extension equivalences, the checked Plucker polynomial pullback and
-the actual canonical pairing. The positive sequence reuses the unchanged
-accepted `Specht.rectangleTableau` and standard natural-number divisibility;
-no external code, core representation or mathematical axiom is added.
-`InvariantTheory/PolynomialAverage.lean` (`6db192a`) imports unchanged
-Mathlib `RingTheory/Finiteness/Lattice.lean` and
-`Algebra/MvPolynomial/Funext.lean` at the pinned revision/license, and
-substantively consumes the already attributed compact Haar integration
-producer. Its intrinsic bounded-degree continuity and integral polynomial
-consumer are detailed in BALANCED.md. No source is copied.
-
-
-## Exact balanced criterion and arithmetic finiteness integration
-
-BALANCED's `SpecialUnitaryAction`, `PluckerAverage`, `OrbitCriterion` and
-intrinsic `IsBalanced.plucker_semistable` (`a63eae3`, `2c9b7b8`, `d91a68c`)
-consume the checked compact averaging, SU density and polynomial-orbit closure
-comparison. Unmodified additional Mathlib imports are
-`Topology/Algebra/Star/Unitary.lean`, `Topology/Algebra/Group/Matrix.lean` and
-`Topology/Algebra/MvPolynomial.lean`, at the same pinned
-`56a005855ea17e0b0958f73ec801ae140b0a1679` revision and Apache-2.0 license.
-No source is copied. The actual consumer constructs a positive-degree
-homogeneous invariant nonzero on every nonzero vector of the intrinsic
-Plucker line of a nonzero balanced subspace. Exact source and independent
-review evidence, including the 195-probe audit, are in BALANCED.md.
-
-ARITH's `DegreeFiniteness` (`05360d4`, precursors `92e69d7`, `b3c1ac2`,
-`ba9bf02`, `87fd7bc`) consumes actual short determinant sections, the fixed
-ambient exterior lattice and Plucker recovery. It imports unchanged Mathlib
-`NumberTheory/NumberField/CanonicalEmbedding/ConvexBody.lean` and the
-fractional-ideal Minkowski and fundamental-domain-volume APIs, plus
-`LinearAlgebra/ExteriorPower/Basis.lean` and
-`LinearAlgebra/LinearIndependent/Lemmas.lean`, at that same revision/license.
-It reuses the established project `Balanced.ExteriorMetric` without copying
-or changing it. Its finite-degree-superlevel-set conclusion covers saturated
-nonfree projective modules over arbitrary number fields; its 366-probe audit
-and independent honesty/ground acceptance are in ARITHMETIC.md.
-
-
-`Arithmetic/RestrictionCovolume/{TraceSpace,Conjugation,Covolume}.lean`
-is authored by BOST-COVOLUME/run0008 (explicit evidence commits `cafb32d`,
-`9b40453`; earlier source was captured by lifecycle snapshots `21ba17f`,
-`b75a4e2`). It reuses the existing pinned Mathlib lattice/basis APIs and
-`NumberTheory/NumberField/Discriminant/Basic.lean`, and the already attributed
-`Lattice.Covolume` TauCeti extraction, with no new copied source. The actual
-trace space and integer lattice, weighted-place norm, Euclidean Haar Gram
-formula and rank-zero degree/discriminant endpoint are kernel-checked and
-independently accepted. The 24-probe audit at 01:55:18 UTC is foundational-only;
-positive-rank discriminant identification is not part of this handoff.
-
-
-`Tensor/TwoFactors.lean` and
-`Geometry/BinaryPlucker.lean` are original compositions of the unchanged
-Mathlib `PiTensorProduct.tmulEquivDep`, `subsingletonEquiv` and
-`TensorProduct.congr/map` APIs (`LinearAlgebra/PiTensorProduct/Basic.lean`,
-`LinearAlgebra/TensorProduct/Map.lean`, same pinned revision/license).
-Their actual consumer transports the project Plucker invariant through the
-canonical two-factor equivalence. No external source is copied, no core
-representation is duplicated, and no additional axiom is used. The terminal
-original-ring binary sequence application consumes these action/homogeneity
-transports and the canonical polynomial-evaluation and exterior-map identities;
-its actual finite-projective pairing is the previously constructed one.
-
-
-## Final construction and arithmetic successor integration
-
-BOST-COVOLUME/run0008 authored the full
-`Arithmetic/RestrictionCovolume/Main.lean` dependency cone: exact endpoint
-`5144157`, canonical trace-basis consolidation `739e58a`, and final evidence
-`8871998`. `RealForm.lean` was first captured by lifecycle snapshot `05276d0`
-but retains COVOLUME authorship. The intrinsic degree and trace-metric quotient
-comparison prove the formula for nonfree projectives and rank zero as well.
-No external source was copied or modified. Additional canonical imports are
-Mathlib `LinearAlgebra/Matrix/Kronecker.lean` (`det_kronecker`,
-`det_blockDiagonal`), `NumberTheory/NumberField/Discriminant/Basic.lean`
-(`basisMatrix`, `discr_eq_basisMatrix_det_sq`), and
-`Algebra/Exact/Basic.lean` (`Function.Exact.splitSurjectiveEquiv`, consumed by
-`traceSplitEquiv` and `traceCovolume_exact`), all from
-`leanprover-community/mathlib4` revision
-`56a005855ea17e0b0958f73ec801ae140b0a1679`, Apache-2.0. Existing lattice
-extractions retain their attribution above. The final owner audit has 63
-foundational-only probes and independent mathematical/source/honesty acceptance.
-
-BOST-SPECHT-SLOPE/run0009 authored `Arithmetic/Specht/DeterminantBundle`
-(`1eb4f44`) and `LatticeDegree` (`a8b97fe`), composing the already attributed
-Specht representation and GEOM determinant metric with ARITH semistability and
-degree. BOST-COMPACTNESS/run0010 authored the degree-continuity/stability package
-(`98a5c8f`) and actual trace systole (`7b0867c`). These import the unchanged pinned
-Mathlib and project APIs, with no copied external source, new core model or new
-axiom. Their actual consumers and 20/17 foundational-only owner audits are
-recorded in `SPECHT_SLOPE.md` and `ARITHMETIC_COMPACTNESS.md`. Full geometric
-slope and arithmetic compactness are later obligations, not consequences of
-this integration alone.
-
-## Maximal-slope producers and current-owner handoffs
-
-BOST-MAIN/run0011 authored `Main/MaxSlope/{LowerBound,FilteredBound,
-TensorFiltration,TensorFlag}.lean` (`5913d84`, `66d4baa`, `04dd654`). These
-compose the accepted ARITH HN attainment, intrinsic degree, actual quotient
-metrics and tensor degree APIs. Their consumers are the unconditional tensor
-lower bound, the filtration slope estimate and the actual saturated HN tensor
-flag. Consecutive refinement-grade isometries and the main identity remain
-open. No external source was copied or changed. Additional Mathlib APIs are
-`TensorProduct.map_injective_of_flat_flat` in `RingTheory/Flat/Basic.lean`,
-`rTensor_mkQ` and `TensorProduct.map_ker` in
-`LinearAlgebra/TensorProduct/RightExactness.lean`, and
-`LinearMap.quotKerEquivOfSurjective` in `LinearAlgebra/Isomorphisms.lean`,
-from `leanprover-community/mathlib4` revision
-`56a005855ea17e0b0958f73ec801ae140b0a1679`, Apache-2.0.
-`tensor_map_pullback` consumes `map_injective_of_flat_flat`;
-`tensorRightQuotientEquiv` consumes `rTensor_mkQ` and
-`quotKerEquivOfSurjective`; `tensorStep_eq_map_ker` consumes `map_ker`.
-
-Shared integration includes only unchanged files of checked owner handoffs:
-COMPACTNESS `870179a` (`TraceMultiplication`, `IntegralMatrices`,
-`TraceActionFiniteness`, `SemistabilityTopology`); SPECHT-SLOPE's accepted
-tree `e84df35` (`DeterminantTensorMetric`, `FiniteTensorDegree`,
-`DeterminantDegree`); and TENSOR-SEMI `57f5cfc`/`bbafa44` (`Extensions`,
-`MetricVariation`, `DegreeDerivative`). Their authorship remains with the
-respective lanes. Their recorded audits have 26, 28 and 12 foundational-only
-probes, with independent owner review. These use unchanged pinned libraries
-and earlier attributed project code; no additional external code is copied.
-Full compactness, geometric slope, extremal balance and tensor semistability
-are not claimed by this integration.
-
-The later BOST-COMPACTNESS handoff `daad480` is integrated through
-`Arithmetic/Compactness/SequentialCompactness.lean`, consuming the unchanged
-`TraceFrames`, `FixedAction`, `ComplexTraceCoordinates`, `FrameMetric`,
-`FrameLimit` and `MetricTransport` producers. Its owner audit has 34
-foundational-only probes and independent exact-source/honesty acceptance.
-`BostConjecture.Arithmetic.Compactness.exists_compact_trace_frames` is the concrete arithmetic consumer
-of `OAI.NumberTheory.ArithmeticGroups.Lattices.FrameMatrices.Construction.exists_compact_lattice_matrices`
-from `openai/math` revision `4eaee87548250b2682affda7d05d947c05554bae`,
-original `lean/OAI/NumberTheory/ArithmeticGroups/Lattices/FrameMatrices.lean`,
-Apache-2.0, with the already recorded compatibility modifications and retained
-license above. This integration copies or modifies no vendor code. Actual
-fixed-rank normalized arithmetic sequential compactness is proved; the global
-maximizing-pair consequence remains a separate unfinished producer.
-
-The final COMPACTNESS handoff `e81b08b` adds `TensorContinuity`,
-`MaximumTransport` and `MaximizingPair`; all 89 project modules in its import
-cone match the accepted tree. It constructs actual arbitrary nonfree module
-and metric witnesses and a saturated global maximizing submodule. The owner
-proved 40 audited declarations using only foundational axioms. TENSOR-SEMI
-`d173554`/`e68943d` adds `GramDegree` and `ExponentialVariation`: actual degree
-stationarity at a local maximum and determinant-preserving exponential metric
-curves. Their 13/25-module cones match the accepted tree and 21 probes are
-foundational-only. Independent read-only integration review inspected the actual
-logs and these exact cones. These handoffs modify no vendor source and retain
-the pinned provenance above; balance and tensor semistability remain open.
-
-Under parent authorization I-0121, MAIN moved the unchanged
-`Main/MaxSlope/TensorFiltration.lean` declarations and proofs to
-`Arithmetic/TensorSubmodule.lean`, with direct arithmetic imports and a
-compatibility re-export. The declaration body is byte-identical to `f92bf10`;
-no new external code or mathematical statement is introduced. TensorFlag
-imports LowerBound explicitly, so the shared arithmetic leaf has no Main
-dependency. This permits the reserved strict-reduction consumer to reuse the
-actual tensor submodule/quotient APIs without circular dependence on MAIN.
-The leaf and existing MAIN consumers passed3585 jobs at04:13:00UTC.
-
-The final SPECHT-SLOPE handoff `8c80c92` is integrated through
-`Slope/Geometric/BinaryInvariantSlope.lean`. Independent integration review
-compared all220 project modules against this accepted tree and inspected the
-9289-job endpoint check and39 actual foundational-only probe outputs. The
-actual algebraically closed invariant-witness endpoint consumes the original
-GEOM nonvanishing sequence and the intrinsic pairing/image-slope comparison;
-its complex and binary specializations preserve their signatures. No generic
-invariant descent or assumed tensor semistability is used. This completes
-the geometric slope producer, while balance and the main theorem remain open.
-
-MAIN additions `f92bf10`, `f52ada8`, `a135f7e` and `72e704c` prove
-successive quotient metric transport, the actual integral refinement-grade
-isomorphism and its Hilbert isometry, the flattened HN specialization and grade
-slope bound, maximal-slope invariance, and the finite-family lower bound.
-`TensorGrades` consumes the already attributed mathlib right-exactness and
-quotient-isomorphism APIs. `HNGrades` consumes those actual maps, the pinned HN
-flag and intrinsic tensor degree; `PiLowerBound` reuses
-`Arithmetic.Specht.FiniteTensorDegree.piTensor_generic_finrank`,
-`piTensor_option_inner`, `piTensor_reindex_inner`, and `degree_piTensor_empty`
-from the checked SPECHT-SLOPE tree `8c80c92`. All new mathematics is project-local;
-no additional external source is copied or dependency revision changed.
-
-Further current-owner handoffs accepted by independent integration review are
-TENSOR-SEMI `5eee92c` (`VariationTopology`, `ExtremalNeighborhood`), `2fef69d`
-(`SubmoduleVariation`), `e0b0bb1` (`TensorVariation`), and `7fd2332`
-(`PartialTraceDefect`, `ConjugateBasis`). Their exact project cones and actual
-25/29/34/49-probe outputs were inspected; all use only standard foundational
-axioms. These prove actual local maximality, metric derivatives and finite
-linear-algebra producers; actual extremal balance and tensor semistability
-remain separate unfinished consumers.
-
-LINE-TWIST `032df77` (algebra `6f23c6f`) proves all-submodule exact slope
-shifts and both tensor orders of semistability for arbitrary nonprincipal
-Hermitian lines. Its 56-module cone, 3580-job endpoint check and ten transitive
-probes were independently inspected. It reuses the authorized arithmetic
-`TensorSubmodule` leaf and existing dual/projective APIs; no vendor code was
-copied. Its strict-reduction consumer retains separate authorship and evidence.
-
-STRICT-REDUCTION `b49b67f` (foundation `81f0fcf`/`8fb4ac2`, strictness
-`d3bf378`) constructs a minimal-rank normalized counterexample internally,
-then actual strictly stable maximizing factors of ranks at least two and a
-saturated positive-degree tensor submodule. Its 104-module cone matches the
-accepted tree, with a 9171-job endpoint check and ten foundational-only
-probes. Both LINE endpoints substantively exclude rank one; normalized
-extensions and existing compactness supply strictness and attainment. The
-cone has no MAIN import or final tensor-semistability dependency. Independent
-source/math/honesty review accepted this reduction; its remaining consumer is
-TENSOR-SEMI actual balance. No external code was copied.
-
-TENSOR-SEMI `6cc3fd8` hands off the complete `ProjectionConjugation` and
-`ArithmeticTensorFiber` modules, including content initially captured by
-automatic snapshots. Independent read-only review compared the full current
-files to that exact checkpoint and verified the 2816/3537-job checks and all
-59 foundational-only axiom outputs. These prove conjugate-isometric naturality
-of projections and partial traces, the actual tensor-submodule range and rank,
-and arithmetic projection-trace transport. They are inputs to the unfinished
-balance theorem, not a substitute for it. No vendor code was changed.
-
-MAIN `40987f0` reuses the existing `integralPart_baseChange` saturation identity
-to apply the filtered slope bound directly to integral filtrations. The same
-checkpoint proves that the actual empty Hilbert tensor product has maximal
-slope zero using the accepted finite tensor rank/degree formulas. These are
-project-local consumer adapters; toolchain, dependency pins and licenses are
-unchanged.
-
-Final TENSOR-SEMI handoffs `9ba97a4` (actual extremal balance), `392e101`
-(tensor rescaling), `aae85ac` (actual balanced arithmetic slope), and
-`b3236e1` (unconditional tensor semistability) close the producer chain.
-Independent review checked the full 318-module producer cone, the fresh
-9386/9395-job builds, and all 76 transitive axiom outputs. No MAIN maximal-slope
-theorem occurs in that cone. Under the exact I-0141 authorization, `f8975ea`
-replaced only two `binaryTensorFamily` instance bodies with direct
-`Sum.casesOn` branches, preserving names, types, priorities and mathematical
-data. This project-local elaboration repair changes no external dependency.
-
-MAIN `fe9f652` proves actual HN tensor-grade semistability, the filtered upper
-bound, binary maximal-slope equality, and finite-family equality and
-semistability. It directly consumes the unconditional producer above and the
-previously checked attained-submodule lower bounds, integral grade isometries,
-and finite regrouping/reindexing maps. Root/probes `dd5c6b6` integrate only
-accepted owner handoffs; the fresh root passed 9413 warning-free jobs and all
-60 MAIN transitive probes contain only standard foundational axioms. No new
-external code, assumed mathematical result, toolchain or dependency revision
-is introduced. All previously recorded upstream attribution and licenses apply.
+Each port retains its exact Apache-2.0 license, author notices, source hashes
+and original declaration names. These are local checked producers, not a
+replacement Mathlib dependency. All target Lean/mathlib `v4.35.0`.
+
+| PR | Repository and exact revision | Original sources and principal declarations | Local source root and consumers |
+| --- | --- | --- | --- |
+| [#40948](https://github.com/leanprover-community/mathlib4/pull/40948) | `Thmoas-Guan/mathlib4_fork` at `b642b6723caf97b7b462dd5ddeabb0226c3b5433` | Nailin Guan's `Mathlib/LinearAlgebra/ExteriorPower/BaseChange.lean` and two projections from `ExteriorAlgebra/Grading.lean`; `exteriorPower.baseChangeEquiv` and `ExteriorAlgebra.toExteriorPower` | `ExternalCode/MathlibPRs/PR40948/`; arithmetic determinants and geometric Plucker base change |
+| [#44845](https://github.com/leanprover-community/mathlib4/pull/44845) | `DanielJHorton/mathlib4` at `47365e3b9fd4329f058c31ac7aa9565a6036b17d` | Daniel Horton's `Mathlib/LinearAlgebra/PiTensorProduct/Projective.lean` and three declarations from `Dual/Defs.lean`; `PiTensorProduct.Projective`, `piTensorHomEquiv`, `dualDistribEquivOfProjective`, `Module.Dual.dualBaseRingEquiv` | `ExternalCode/MathlibPRs/PR44845/`; integral projective tensor duality, contraction and Schur–Weyl duality |
+| [#45002](https://github.com/leanprover-community/mathlib4/pull/45002) | `TJHeeringa/mathlib4` at `41260205df493c627e1ac0e54812cfdeb6517fbc` | Tjeerd Jan Heeringa's `Mathlib/Analysis/InnerProductSpace/{Abs,Polar}.lean`; `ContinuousLinearMap.abs`, `polarₚₗᵢ`, `polar` and their characterizations | `ExternalCode/MathlibPRs/PR45002/`; balanced special-linear polar decomposition and orbit-norm bounds |
+
+Local roots in the table are relative to `BostConjecture/`. Each contains
+`LICENSE` and `PROVENANCE.json`. PR #40948 extracts a small projection
+prerequisite. PR #44845 expands two unavailable reindex simplifications.
+PR #45002 adjusts local imports and documentation references. All ports also
+have relocated module imports and mathlib-style source documentation.

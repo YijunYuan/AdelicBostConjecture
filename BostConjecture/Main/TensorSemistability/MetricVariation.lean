@@ -1,7 +1,12 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
-public import BostConjecture.Arithmetic.FiberConjugation
-public import BostConjecture.Arithmetic.MetricScaling
+public import BostConjecture.Arithmetic.Bundle.Conjugation
+public import BostConjecture.Arithmetic.Bundle.Scaling
 
 /-!
 # Archimedean changes of an actual Hermitian metric
@@ -10,7 +15,7 @@ Conjugation-compatible complex fiber automorphisms pull back an actual
 Hermitian metric. Determinant-one automorphisms preserve its determinant
 metric and hence its arithmetic degree, without acting on the integral module.
 
-Reference: bost_specht_manuscript.pdf, Proposition 7.3, page 13.
+Reference: this paper, Proposition 7.3, page 13.
 -/
 
 @[expose] public section

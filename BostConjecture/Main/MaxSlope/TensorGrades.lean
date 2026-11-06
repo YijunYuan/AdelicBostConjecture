@@ -1,3 +1,8 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Main.MaxSlope.TensorFlag
@@ -44,7 +49,8 @@ lemma tensorGradeProjection_surjective (P T : Submodule (𝓞 K) M)
   apply (Submodule.Quotient.eq _).mpr
   change TensorProduct.map T.subtype U.subtype w - (x : M ⊗[𝓞 K] N) ∈ tensorStep P T Q
   rw [← he]
-  simpa using (tensorStep P T Q).neg_mem ((show tensorRight N P ≤ tensorStep P T Q from le_sup_left) ha)
+  simpa using (tensorStep P T Q).neg_mem
+    ((show tensorRight N P ≤ tensorStep P T Q from le_sup_left) ha)
 
 /-- Right exactness computes the kernel of the actual consecutive-grade map. -/
 lemma tensorGradeProjection_ker [Module.Flat (𝓞 K) N]

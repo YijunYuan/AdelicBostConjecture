@@ -1,9 +1,19 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Arithmetic.Specht.DeterminantBundle
-public import BostConjecture.Geometry.Contraction
+public import BostConjecture.Geometry.Contraction.Basic
 
-/-! # Injectivity of the actual nonzero canonical pairing -/
+/-!
+# Injectivity of the actual nonzero canonical pairing
+
+Equivariance and irreducibility turn a nonzero determinant pairing into
+an injection. Scalar extension detects its kernel over the ring of integers.
+-/
 
 @[expose] public section
 
@@ -33,7 +43,7 @@ local instance (v : OAI.Saxl.Tableau n (rectangle s l)) :
       (𝓞 K ⊗[ℤ] orbitLattice v)) := Module.addCommMonoidToAddCommGroup (𝓞 K)
 
 /-- Nonvanishing and the actual simultaneous equivariance force injectivity of
-GEOM's canonical original-ring pairing; no injectivity is assumed of this map. -/
+the canonical pairing over the original ring; no injectivity is assumed of this map. -/
 theorem canonicalPairing_injective
     (hk : ∀ j, 0 < k j) (t : ∀ j, OAI.Saxl.Tableau n (rectangle (a j) (k j)))
     (ha : ∀ j (p : PrimeSpectrum (𝓞 K)), Module.rankAtStalk (Dual (𝓞 K) (E j)) p = a j)

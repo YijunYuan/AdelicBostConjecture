@@ -1,42 +1,106 @@
 # BostConjecture
 
-Formalize Theorem 1.1 of `../../bost_specht_manuscript.pdf`: maximal slopes
-add under Hilbert tensor products of Hermitian bundles over every number
-field, with the finite-family consequence. **The main theorem is not yet
-formalized.** Only external results needed for that target belong in this project.
+Lean formalization of Theorem 1.1 of this paper: for positive-rank Hermitian
+vector bundles over the ring of integers of any number field, maximal slopes
+are additive under the Hilbert tensor product. The project also proves the
+finite-family equality and the corresponding semistability statements.
+The underlying modules are finite projective; they need not be free.
 
-- Lean and mathlib: `v4.35.0`; exact dependency commits are in `lake-manifest.json`.
-- Mathematical route: `blueprint/src/content.tex`; remaining unwritten
-  mathematical inputs: `blueprint/OPEN_PROOFS.md`.
-- Reused code, licenses, modifications and application boundaries:
-  `CONTRIBUTIONS.md`; verified prerequisites: `verification/RESULTS.md`.
-- Additional selective code leads: `verification/TAUCETI.md`.
-- Original references and source anchors: `../../references/manifest.yaml`.
+The principal declarations, in namespace
+`BostConjecture.Arithmetic.HermitianMetric`, are:
 
-From this project directory:
+- `maxSlope_tensor`: the binary maximal-slope identity.
+- `maxSlope_piTensor`: the finite-family identity.
+- `IsSemistable.tensor`: semistability of a binary tensor product.
+- `isSemistable_piTensor`: semistability for a finite family.
+
+The entry point is [BostConjecture.lean](BostConjecture.lean).
+The final proofs are in [Main/MaxSlope](BostConjecture/Main/MaxSlope) and
+[Main/TensorSemistability](BostConjecture/Main/TensorSemistability).
+Weighted Harder–Narasimhan compatibility, effective rates and the appendices
+of this paper are outside this formalization's target.
+
+## Organization
+
+Directories follow the mathematical dependencies of this paper. File paths
+organize modules; they do not add layers to the mathematical namespaces.
+
+| Directory | Content | Connection to this paper |
+| --- | --- | --- |
+| `Arithmetic/Bundle`, `Line`, `Exterior`, `Determinant` | Intrinsic fibers, Hermitian metrics and determinant lines | Section 2 |
+| `Arithmetic/Degree`, `Submodule`, `Tensor`, `Dual`, `HN`, `Representation` | Degree calculus, HN filtrations and auxiliary semistability | Section 2 |
+| `Specht/Tableau`, `Lattice`, `Branching`, `Seminormal` | Integral polytabloids, branching and normalized Gram formulas | Sections 3–4 |
+| `Specht/Counting`, `Asymptotics` | Hook counts, prefix distributions and the covolume limit | Section 5 |
+| `Geometry/Tensor`, `Determinant`, `Descent`, `Invariants`, `Polynomial`, `Plucker`, `Contraction` | Integral equivariant determinant contractions | Section 6 |
+| `Arithmetic/Specht`, `Slope/Geometric` | Arithmetic realization and the geometric slope bound | Section 6 |
+| `Arithmetic/RestrictionCovolume`, `Compactness` | Restriction of scalars, frame compactness and maximizing metrics | Section 7 |
+| `Balanced`, `InvariantTheory` | Metric variation, balanced subspaces and the invariant criterion | Sections 6–7 |
+| `Main/LineTwist`, `StrictReduction`, `TensorSemistability`, `MaxSlope` | Reduction to the balanced case and final assembly | Section 7 and Theorem 1.1 |
+| `Tensor`, `Slope` | Shared tensor and finite-length slope constructions | Supporting APIs |
+| `ExternalCode` | Selective upstream ports grouped by source | Standard external inputs |
+
+`Arithmetic/Compactness` is further divided into `Topology`, `Frames`, `Action`
+and `Maximum`. `Tensor` separates `Algebra`, `Metric` and `Dual` constructions;
+`InvariantTheory` separates polynomials, special-linear groups, Plücker actions
+and complex orbit closures.
+
+External sources are grouped under `ExternalCode/OAI`, `Etingof`, `TauCeti`,
+`Stacks` and `MathlibPRs`. Their namespaces, copyright notices and licenses
+are preserved. Substantially adapted Specht bridge lemmas retain the
+project's `BostConjecture.Specht` API. Every external module documents its
+source; [CONTRIBUTIONS.md](CONTRIBUTIONS.md) records exact revisions, selected
+declarations, adaptations and consumers. All local Lean modules belong to
+the single `BostConjecture` library. HarderNarasimhan remains a pinned dependency.
+
+## Build and check
+
+Lean and mathlib are pinned to `v4.35.0`. Install Lean through `elan`, then run:
 
 ```sh
-horizon --root ../.. check --json
-horizon --root ../.. check --lean verification/ReuseAxioms.lean --json
-horizon --root ../.. run BOST-SPECHT --rounds 1 --no-dashboard
+lake exe cache get
+lake build
 ```
 
-The first proof task constructs the actual integral Specht lattice and its
-scalar-extension bridge; its larger milestone is the sublinear covolume bound.
-The roadmap retains the arithmetic/HN specialization, geometric contraction,
-compactness and final assembly as separate outstanding milestones.
+The exact dependency commits are recorded in
+[lake-manifest.json](lake-manifest.json). The package enables the mathlib
+standard linter set, `relaxedAutoImplicit = false` and
+`maxSynthPendingDepth = 3`. Local proofs use Lean's default limits of
+200,000 heartbeats and recursion depth 512.
 
-`hgraph/` is generated state. To restore its source-scope configuration in a
-fresh checkout, run:
+To audit the final statements after building, create a temporary Lean file:
 
 ```sh
-mkdir -p hgraph
-ln -s ../hgraph-sources.yaml hgraph/config.yaml
+cat > /tmp/bost-axioms.lean <<'LEAN'
+import BostConjecture
+
+#print axioms BostConjecture.Arithmetic.HermitianMetric.maxSlope_tensor
+#print axioms BostConjecture.Arithmetic.HermitianMetric.maxSlope_piTensor
+#print axioms BostConjecture.Arithmetic.HermitianMetric.IsSemistable.tensor
+#print axioms BostConjecture.Arithmetic.HermitianMetric.isSemistable_piTensor
+LEAN
+lake env lean /tmp/bost-axioms.lean
 ```
 
-This excludes `.lake` from project graph generation while including copied
-proof code. The workspace uses the Codex harness and its local authentication;
-`.env` currently supplies no API keys. GitHub publishing is disabled. The user
-has authorized Horizon tasks/runs and removed token/cost budget limits; the
-initial scheduler uses one concurrent session and one round per invocation.
-The live local dashboard is started from the workspace with `horizon dashboard`.
+The expected dependencies are Lean's standard foundational axioms
+`propext`, `Classical.choice` and `Quot.sound`; no `sorryAx` or additional
+mathematical axiom is permitted. The proof does not assume tensor semistability.
+
+The refactored source passes `lake build` with **4,238 jobs and no warnings**.
+All **60 transitive axiom probes**, covering the main statements and their
+assembly lemmas, report only the three foundational axioms above. The root
+import cone covers all 351 local Lean modules; source checks find no proof
+placeholders or additional axiom declarations.
+
+## Conventions and license
+
+Code follows the mathlib [style](https://leanprover-community.github.io/contribute/style.html),
+[naming](https://leanprover-community.github.io/contribute/naming.html) and
+[documentation](https://leanprover-community.github.io/contribute/doc.html)
+guidelines. Use existing library results and typeclass inference before adding
+local infrastructure. Enumeration needed only inside a proof uses `Finite`
+with a local `Fintype.ofFinite`. Canonical tensor and dual Hermitian cores have
+scoped instances; metrics chosen as explicit data remain explicit arguments.
+
+Original code is released under [Apache-2.0](LICENSE). External code retains
+its upstream licenses and attribution as recorded in
+[CONTRIBUTIONS.md](CONTRIBUTIONS.md).

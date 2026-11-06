@@ -1,154 +1,21 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
-public import BostConjecture.Slope.Subspace
-public import BostConjecture.Arithmetic.HermitianLine
-public import BostConjecture.Arithmetic.Degree
-public import BostConjecture.Arithmetic.DegreeNormalization
-public import BostConjecture.Arithmetic.LineContraction
-public import BostConjecture.Arithmetic.MetricScaling
-public import BostConjecture.Arithmetic.SubspaceDegree
-public import BostConjecture.Arithmetic.QuotientMetric
-public import BostConjecture.Arithmetic.TensorMetric
-public import BostConjecture.Arithmetic.NestedQuotient
-public import BostConjecture.Arithmetic.SaturationDegree
-public import BostConjecture.Arithmetic.LineTensorDegree
-public import BostConjecture.Arithmetic.DualFiber
-public import BostConjecture.Arithmetic.LineDualDegree
-public import BostConjecture.Arithmetic.DeterminantDual
-public import BostConjecture.Arithmetic.DeterminantProduct
-public import BostConjecture.Arithmetic.IntegralDeterminantProduct
-public import BostConjecture.Arithmetic.IntegralExactDeterminant
-public import BostConjecture.Arithmetic.ExactDegree
-public import BostConjecture.Arithmetic.TensorDegree
-public import BostConjecture.Arithmetic.ArchimedeanFiniteness
-public import BostConjecture.Arithmetic.SubspaceHN
-public import BostConjecture.Arithmetic.HermitianHN
-public import BostConjecture.Arithmetic.IrreducibleSemistable
-public import BostConjecture.Arithmetic.IndependentPiSemistable
-public import BostConjecture.Arithmetic.RestrictionOfScalars
-public import BostConjecture.Arithmetic.DegreeFiniteness
-public import BostConjecture.Arithmetic.RestrictionCovolume.Main
-public import BostConjecture.Arithmetic.Specht.DeterminantBundle
-public import BostConjecture.Arithmetic.Specht.LatticeDegree
-public import BostConjecture.Arithmetic.Specht.DeterminantDegree
-public import BostConjecture.Slope.Geometric.BinaryInvariantSlope
-public import BostConjecture.Arithmetic.Compactness.DegreeContinuity
-public import BostConjecture.Arithmetic.Compactness.StabilityTopology
-public import BostConjecture.Arithmetic.Compactness.TraceSystole
-public import BostConjecture.Arithmetic.Compactness.TraceActionFiniteness
-public import BostConjecture.Arithmetic.Compactness.SemistabilityTopology
-public import BostConjecture.Arithmetic.Compactness.MaximizingPair
-public import BostConjecture.Main.TensorSemistability.Extensions
-public import BostConjecture.Main.TensorSemistability.MetricVariation
-public import BostConjecture.Main.TensorSemistability.DegreeDerivative
-public import BostConjecture.Main.TensorSemistability.GramDegree
-public import BostConjecture.Main.TensorSemistability.ExponentialVariation
-public import BostConjecture.Main.TensorSemistability.ExtremalNeighborhood
-public import BostConjecture.Main.TensorSemistability.SubmoduleVariation
-public import BostConjecture.Main.TensorSemistability.TensorVariation
-public import BostConjecture.Main.TensorSemistability.PartialTraceDefect
-public import BostConjecture.Main.TensorSemistability.ConjugateBasis
-public import BostConjecture.Main.TensorSemistability.ProjectionConjugation
-public import BostConjecture.Main.TensorSemistability.ArithmeticTensorFiber
-public import BostConjecture.Main.TensorSemistability.TensorSemistability
-public import BostConjecture.Main.LineTwist.Semistability
-public import BostConjecture.Main.StrictReduction.MaximizingCounterexample
-public import BostConjecture.Main.MaxSlope.FilteredBound
-public import BostConjecture.Main.MaxSlope.HNGrades
-public import BostConjecture.Main.MaxSlope.PiLowerBound
+public import BostConjecture.Arithmetic.Determinant.IntegralProduct
 public import BostConjecture.Main.MaxSlope.PiTensor
-public import BostConjecture.LinearAlgebra.AlternatingTensorPower
-public import BostConjecture.LinearAlgebra.ExteriorPower.BaseChange
-public import BostConjecture.LinearAlgebra.PiTensorProduct.Projective
-public import BostConjecture.Analysis.InnerProductSpace.Polar
-public import BostConjecture.Balanced.PluckerNorm
-public import BostConjecture.Balanced.SpectralExpansion
-public import BostConjecture.Balanced.TensorExponential
-public import BostConjecture.Balanced.SpecialLinearPolar
-public import BostConjecture.Balanced.OrbitNorm
-public import BostConjecture.Balanced.PluckerSemistability
-public import BostConjecture.InvariantTheory.Semistability
-public import BostConjecture.InvariantTheory.Coaction
-public import BostConjecture.InvariantTheory.InvariantDetection
-public import BostConjecture.InvariantTheory.SpecialLinearBaseChange
-public import BostConjecture.InvariantTheory.PolynomialBaseChange
-public import BostConjecture.InvariantTheory.HomogeneousComponents
-public import BostConjecture.InvariantTheory.CompactAverage
-public import BostConjecture.InvariantTheory.UnitaryDensity
-public import BostConjecture.InvariantTheory.SpecialUnitaryDensity
-public import BostConjecture.InvariantTheory.PolynomialAverage
-public import BostConjecture.InvariantTheory.SpecialUnitaryAction
-public import BostConjecture.InvariantTheory.PluckerAverage
-public import BostConjecture.InvariantTheory.OrbitCriterion
-public import BostConjecture.InvariantTheory.OrbitImage
-public import BostConjecture.InvariantTheory.ComplexClosure.Coordinates
-public import BostConjecture.InvariantTheory.ComplexClosure.Roots
-public import BostConjecture.InvariantTheory.ComplexClosure.IntegralLifting
-public import BostConjecture.InvariantTheory.ComplexClosure.FiniteFiber
-public import BostConjecture.InvariantTheory.ComplexClosure.Normalization
-public import BostConjecture.InvariantTheory.ComplexClosure.Comparison
-public import BostConjecture.Geometry.TensorRealization
-public import BostConjecture.Geometry.FreeEmbedding
-public import BostConjecture.Geometry.DeterminantBaseChange
-public import BostConjecture.Geometry.LocalizationDescent
-public import BostConjecture.Geometry.DeterminantNaturality
-public import BostConjecture.Geometry.ProjectiveEmbedding
-public import BostConjecture.Geometry.ProjectiveMetric
-public import BostConjecture.Geometry.Contraction
-public import BostConjecture.Geometry.ContractionMetric
-public import BostConjecture.Geometry.ContractionBaseChange
-public import BostConjecture.Geometry.ContractionNorm
-public import BostConjecture.Geometry.InvariantBaseChange
-public import BostConjecture.Geometry.PiInvariants
-public import BostConjecture.Geometry.PolynomialTensor
-public import BostConjecture.Geometry.PolynomialPolarization
-public import BostConjecture.Geometry.DegreeDivisibility
-public import BostConjecture.Geometry.RectangularInvariants
-public import BostConjecture.Geometry.HomTensor
-public import BostConjecture.Geometry.HomInvariants
-public import BostConjecture.Geometry.DualInvariants
-public import BostConjecture.Geometry.Nonvanishing
-public import BostConjecture.Geometry.NonvanishingBaseChange
-public import BostConjecture.Geometry.PluckerNonvanishing
-public import BostConjecture.Geometry.BinaryPlucker
-public import BostConjecture.Tensor.Evaluation
-public import BostConjecture.Tensor.EvaluationBaseChange
-public import BostConjecture.Tensor.DualRegroupBaseChange
-public import BostConjecture.Tensor.HilbertRegroup
-public import BostConjecture.Tensor.DualRegroup
-public import BostConjecture.Tensor.DualMetric
-public import BostConjecture.Lattice.Covolume
-public import BostConjecture.Specht.Tableau
-public import BostConjecture.Specht.Metric
-public import BostConjecture.Specht.Norm
-public import BostConjecture.Specht.Rectangle
-public import BostConjecture.Specht.ColumnTensor
-public import BostConjecture.Specht.Covariance
-public import BostConjecture.Specht.Standard
-public import BostConjecture.Specht.Basis
-public import BostConjecture.Specht.PrefixWeights
-public import BostConjecture.Specht.PrefixNormalizer
-public import BostConjecture.Specht.BulkNormalizer
-public import BostConjecture.Specht.OccupancyMGF
-public import BostConjecture.Specht.WeightedGap
-public import BostConjecture.Specht.Orthogonal
-public import BostConjecture.Specht.RealAction
-public import BostConjecture.Specht.Content
-public import BostConjecture.Specht.Central
-public import BostConjecture.Specht.Seminormal
-public import BostConjecture.Specht.OneRow
-public import BostConjecture.Specht.Asymptotic
-public import OAI.NumberTheory.ArithmeticGroups.Lattices.FrameMatrices
-public import OAI.RepresentationTheory.Saxl.SpechtSubmodule
-public import HarderNarasimhan.Filtration.Unique
-public import HarderNarasimhan.PayoffFunction.Slope
-public import HarderNarasimhan.PayoffFunction.NashEquilibrium
-public import RepresentationTheory.Combinatorics.YoungDiagram.CornerStatistics
+public import BostConjecture.InvariantTheory.SpecialLinear.BaseChange
+public import BostConjecture.InvariantTheory.Polynomial.BaseChange
+public import BostConjecture.Geometry.Invariants.BaseChange
+public import BostConjecture.Geometry.Polynomial.DegreeDivisibility
 
 /-!
 # Bost's tensor semistability conjecture
 
-Formalization of Theorem 1.1 of `bost_specht_manuscript.pdf`: maximal-slope
+Formalization of Theorem 1.1 of this paper: maximal-slope
 additivity for Hilbert tensor products over arbitrary number fields, and its
 finite-family equality and semistability consequence.
 See `CONTRIBUTIONS.md` for upstream sources and mathematical boundaries.

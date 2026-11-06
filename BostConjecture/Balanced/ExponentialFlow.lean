@@ -1,3 +1,8 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Balanced.GramDerivative
@@ -5,7 +10,12 @@ public import Mathlib.Analysis.SpecialFunctions.Exponential
 public import Mathlib.Analysis.Calculus.Deriv.Mul
 public import Mathlib.Analysis.Calculus.Deriv.Add
 
-/-! # First variation of the actual tensor exponential flow -/
+/-!
+# First variation of the actual tensor exponential flow
+
+Differentiating the tensor exponential at zero identifies its generator.
+For a balanced subspace, the associated Gram determinant has zero first variation.
+-/
 
 @[expose] public section
 
@@ -59,7 +69,8 @@ theorem IsBalanced.hasDerivAt_re_gramDet_tensor_exp_zero
       (TensorProduct.mapL (NormedSpace.exp (t • LinearMap.toContinuousLinearMap H))
         (NormedSpace.exp (t • LinearMap.toContinuousLinearMap J)) (v i : U ⊗[ℂ] W))
       (TensorProduct.mapL (NormedSpace.exp (t • LinearMap.toContinuousLinearMap H))
-        (NormedSpace.exp (t • LinearMap.toContinuousLinearMap J)) (v j : U ⊗[ℂ] W))).det.re) 0 0 := by
+        (NormedSpace.exp (t • LinearMap.toContinuousLinearMap J))
+        (v j : U ⊗[ℂ] W))).det.re) 0 0 := by
   apply hS.hasDerivAt_re_gramDet_zero v H J hH hJ
   · intro i
     simp

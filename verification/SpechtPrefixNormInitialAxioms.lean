@@ -1,6 +1,0 @@
-import BostConjecture.Specht.PrefixNormInitial
-
-#print axioms BostConjecture.Specht.prefixRowCount_rectangleColumnTableau
-#print axioms BostConjecture.Specht.prefixAxialDistance_rectangleColumnTableau
-#print axioms BostConjecture.Specht.prefixInsertionFactor_rectangleColumnTableau
-#print axioms BostConjecture.Specht.prefixNormProduct_rectangleColumnTableau

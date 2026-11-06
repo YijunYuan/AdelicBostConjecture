@@ -1,9 +1,0 @@
-import BostConjecture.Specht.ShiftedCount
-
-#print axioms BostConjecture.Specht.shiftedRowLength_strictAnti
-#print axioms BostConjecture.Specht.row_hooks_union_shiftedDifferences
-#print axioms BostConjecture.Specht.row_hookProduct_mul_shiftedDifferences
-#print axioms BostConjecture.Specht.hookProduct_eq_prod_rows
-#print axioms BostConjecture.Specht.hookProduct_mul_shiftedVandermonde
-#print axioms BostConjecture.Specht.card_standard_mul_shiftedFactorials
-#print axioms BostConjecture.Specht.card_standard_eq_shifted_formula

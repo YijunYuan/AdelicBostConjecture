@@ -1,8 +1,13 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
-public import BostConjecture.Specht.Integral
-public import BostConjecture.Arithmetic.RepresentationBaseChange
-public import BostConjecture.Geometry.LatticeMetric
+public import BostConjecture.Specht.Lattice.Integral
+public import BostConjecture.Arithmetic.Representation.BaseChange
+public import BostConjecture.Geometry.Tensor.LatticeMetric
 
 /-!
 # The actual integral Specht representation
@@ -11,7 +16,7 @@ The action is the restriction of position permutations to the existing orbit
 lattice. Its complexification is the accepted irreducible Specht representation,
 and preserves the canonical word Gram form.
 
-Reference: `bost_specht_manuscript.pdf`, §§3, 6, pages 4 and 9.
+Reference: this paper, §§3, 6, pages 4 and 9.
 -/
 
 @[expose] public section

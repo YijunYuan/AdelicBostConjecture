@@ -1,0 +1,78 @@
+{
+  "repository": "https://github.com/TauCetiProject/TauCeti",
+  "revision": "b3b0334ab9203d9faee4b2f34cd75161463ecdd0",
+  "license": "Apache-2.0",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
+      "git_blob": "8dada3edaf50dbc082c9a125058f25def75e625a"
+    },
+    {
+      "path": "TauCeti/Data/Finset/Basic.lean",
+      "sha256": "318e92dc853d577b86fbf7adc65b0b132fc27584d24e7d32de27b7d31a565e6d",
+      "git_blob": "9afc8847ad912d2ce50a7abf561a2eefb4b6c159"
+    },
+    {
+      "path": "TauCeti/LinearAlgebra/End/Centralizer.lean",
+      "sha256": "49a1a4ddfc5397a94364e1619deb2d5182fd30a9b30173e1bcee0fd3fd74800c",
+      "git_blob": "a1cd85da6be70fdb41e349c0d18078d9e94124b3"
+    },
+    {
+      "path": "TauCeti/LinearAlgebra/Matrix/GeneralLinearGroup/Multilinear.lean",
+      "sha256": "8c266781c49d2e31ca6471e6ea15d1b2133e4e1baab0095ff9e475fa9abb6d3d",
+      "git_blob": "20f2809c07e455f7cfd9ad99a3bbc8dfa4b84e9a"
+    },
+    {
+      "path": "TauCeti/LinearAlgebra/Multilinear/Polarization.lean",
+      "sha256": "1caa7813ee3a5c56af8564a037ec45e9045795790a7ec207feeca64a404361a7",
+      "git_blob": "92a35c9a4ead6d05bd881be1790f67540fffd7ba"
+    },
+    {
+      "path": "TauCeti/LinearAlgebra/PiTensorProduct/GeneralLinear.lean",
+      "sha256": "bd357368a8e4de2ef94a8169ade0ddcdf3a2edc2b0f165099cc838f1ba6094ee",
+      "git_blob": "f72748b635e5fa0d062cd4334d86dbc92db2eef7"
+    },
+    {
+      "path": "TauCeti/RepresentationTheory/AsAlgebraHom.lean",
+      "sha256": "29d2ac01675208ed478fe9926bd05f496d4071a73eed4d49fe0733a39cbf3eb4",
+      "git_blob": "4711b72e28d911fa0b727140b2ce565142c201e4"
+    },
+    {
+      "path": "TauCeti/RepresentationTheory/Invariants.lean",
+      "sha256": "ef5e7ba1fc86c11eb6131923d7e10447ee76eed4a1cd2ff4016be134c37318d2",
+      "git_blob": "383ac2e01bbc402cf2765ba0f44836f6afade22c"
+    },
+    {
+      "path": "TauCeti/RepresentationTheory/Symmetric/TensorAction/Basic.lean",
+      "sha256": "d358c8a52e30a5115606e2e127f3da82d5c5709feee0575d3c9893231bd5bca5",
+      "git_blob": "47bb73407cc0ef15aee4d088c28f21742b359f13"
+    },
+    {
+      "path": "TauCeti/RepresentationTheory/Symmetric/TensorAction/Centralizer.lean",
+      "sha256": "eaaea17f6ad4eb74f3510538e27f3e1a62ed0a0c3f823ae9aec796c062dcf451",
+      "git_blob": "5d33d61e81561bb176561e33ef095650747b79fa"
+    },
+    {
+      "path": "TauCeti/RepresentationTheory/Symmetric/TensorAction/Invariants.lean",
+      "sha256": "e574e33b4597ac12f4e9512a61688b528453d3d9a9196a0b90f57617b34c7c03",
+      "git_blob": "1fb22356ff919fc140422c6b7656322b56766bdf"
+    },
+    {
+      "path": "TauCeti/RepresentationTheory/Symmetric/TensorAction/SchurWeyl.lean",
+      "sha256": "a4554ea7f02757a42e511195d9e9268ae3fc6df59b0451c140d6fff6ec62adf2",
+      "git_blob": "56e04e6daa457e4efc868f97f1060f44b66829a6"
+    },
+    {
+      "path": "TauCeti/RingTheory/Semisimple/DoubleCentralizer.lean",
+      "sha256": "867ce84ae15c224f09cccd8ff33c9596e1d8a7be8e479f5335648f194012c096",
+      "git_blob": "61a81b5f90a3c1db6931224a0dda5cd234454091"
+    },
+    {
+      "path": "lean-toolchain",
+      "sha256": "11c697aebe5b539d74f5069e497a588e7dfab1c4eeb74313f28357e351c55ca3",
+      "git_blob": "0fc4336929df18cb6edbdcce0498f49d38877271"
+    }
+  ],
+  "snapshot_note": "Redundant local upstream source snapshots were removed. Original source paths and hashes remain unchanged; retrieve the originals at the pinned repository/revision."
+}

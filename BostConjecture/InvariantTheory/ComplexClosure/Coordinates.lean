@@ -1,3 +1,8 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.InvariantTheory.Semistability
@@ -25,7 +30,7 @@ open Module
 
 section Algebra
 
-variable {K E τ : Type*} [Field K] [AddCommGroup E] [Module K E] [Fintype τ]
+variable {K E τ : Type*} [Field K] [AddCommGroup E] [Module K E] [Finite τ]
 
 /-- Evaluation in the dual-basis polynomial coordinates is intrinsic evaluation. -/
 theorem polynomialEval_equivMvPolynomial_symm [DecidableEq τ] (b : Basis τ K E) (x : E)
@@ -74,7 +79,7 @@ end Algebra
 
 section Complex
 
-variable {E τ σ : Type*} [NormedAddCommGroup E] [NormedSpace ℂ E] [Fintype τ]
+variable {E τ σ : Type*} [NormedAddCommGroup E] [NormedSpace ℂ E] [Finite τ]
 
 /-- A coordinate algebraic zero locus is closed for the Euclidean topology. -/
 theorem isClosed_zeroLocus (I : Ideal (MvPolynomial σ ℂ)) :

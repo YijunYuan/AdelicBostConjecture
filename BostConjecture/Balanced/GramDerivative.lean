@@ -1,3 +1,8 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Balanced.ProjectionTrace
@@ -6,7 +11,12 @@ public import Mathlib.Analysis.Calculus.FDeriv.RestrictScalars
 public import Mathlib.Analysis.Calculus.Deriv.Prod
 public import Mathlib.Analysis.InnerProductSpace.Calculus
 
-/-! # First variation of the Gram determinant -/
+/-!
+# First variation of the Gram determinant
+
+The derivative of a Gram determinant is expressed through traces of the
+factor operators. The balanced partial-trace identities make this derivative vanish.
+-/
 
 @[expose] public section
 

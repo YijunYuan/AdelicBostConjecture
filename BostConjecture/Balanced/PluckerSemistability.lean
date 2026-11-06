@@ -1,11 +1,16 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Balanced.OrbitNorm
 public import BostConjecture.InvariantTheory.Semistability
-public import BostConjecture.InvariantTheory.OrbitImage
+public import BostConjecture.InvariantTheory.Plucker.OrbitImage
 public import BostConjecture.InvariantTheory.ComplexClosure.Comparison
-public import BostConjecture.InvariantTheory.OrbitCriterion
-public import BostConjecture.Geometry.DeterminantCoordinates
+public import BostConjecture.InvariantTheory.Plucker.OrbitCriterion
+public import BostConjecture.Geometry.Determinant.Coordinates
 
 /-!
 # Geometric semistability of the actual balanced Plücker vector

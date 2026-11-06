@@ -1,6 +1,11 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
-public import BostConjecture.Arithmetic.HermitianHN
+public import BostConjecture.Arithmetic.HN.Filtration
 
 /-!
 # The slope bound for an actual saturated filtration
@@ -90,7 +95,6 @@ theorem slope_submodule_le_of_filtration (h : HermitianMetric (K := K) M)
       ((integralPart (A i)).comap (integralPart (A (i + 1))).subtype)).slope ≤ c)
     (P : Submodule (𝓞 K) M) (hP : 0 < Module.finrank K (K ⊗[𝓞 K] P)) :
     (h.submodule P).slope ≤ c := by
-  let : Module.Flat (𝓞 K) K := IsLocalization.flat K (nonZeroDivisors (𝓞 K))
   apply (h.slope_le_saturation P).trans
   rw [← subspaceDegree_div_finrank]
   have hr : 0 < Module.finrank K (P.baseChange K) :=

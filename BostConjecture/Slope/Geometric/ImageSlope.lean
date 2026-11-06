@@ -1,9 +1,19 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Slope.Geometric.PairingInjective
 public import BostConjecture.Slope.Geometric.PairingMetric
 
-/-! # Comparing slopes through the actual canonical image -/
+/-!
+# Comparing slopes through the actual canonical image
+
+An injective contraction compares the source slope with the induced
+metric on its image. Semistability of the auxiliary target bounds that image slope.
+-/
 
 @[expose] public section
 

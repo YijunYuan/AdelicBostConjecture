@@ -1,10 +1,21 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Arithmetic.Specht.DeterminantBundle
-public import BostConjecture.Geometry.ContractionNorm
-public import BostConjecture.Tensor.HilbertMap
+public import BostConjecture.Geometry.Contraction.Norm
+public import BostConjecture.Tensor.Metric.Map
 
-/-! # The intrinsic Hermitian metrics of the canonical pairing -/
+/-!
+# The intrinsic Hermitian metrics of the canonical pairing
+
+The determinant and Specht forms define the source metric for the
+canonical pairing. The fiberwise contraction estimates are expressed in
+these intrinsic arithmetic metrics.
+-/
 
 @[expose] public section
 
@@ -91,7 +102,7 @@ private theorem core_ext {W : Type*} [AddCommGroup W] [Module ℂ W]
   cases hi
   rfl
 
-/-- GEOM's prescribed whole fiber form is the intrinsic arithmetic tensor metric. -/
+/-- The prescribed fiber form is the intrinsic arithmetic tensor metric. -/
 theorem dualDeterminantFiberCore_eq (hk : ∀ j, 0 < k j)
     (t : ∀ j, OAI.Saxl.Tableau n (rectangle (a j) (k j)))
     (ha : ∀ j (p : PrimeSpectrum (𝓞 K)), Module.rankAtStalk (Dual (𝓞 K) (E j)) p = a j) :
@@ -106,10 +117,12 @@ theorem dualDeterminantFiberCore_eq (hk : ∀ j, 0 < k j)
   letI : ∀ j, NormedAddCommGroup (Dual ℂ (ComplexFiber (E j) σ)) := fun j =>
     InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := Dual ℂ (ComplexFiber (E j) σ))
   letI : ∀ j, InnerProductSpace ℂ (Dual ℂ (ComplexFiber (E j) σ)) := fun j =>
-    InnerProductSpace.ofCore (inferInstance : PreInnerProductSpace.Core ℂ (Dual ℂ (ComplexFiber (E j) σ)))
+    InnerProductSpace.ofCore
+      (inferInstance : PreInnerProductSpace.Core ℂ (Dual ℂ (ComplexFiber (E j) σ)))
   ∀ b : ∀ j, OrthonormalBasis (Fin (a j)) ℂ (Dual ℂ (ComplexFiber (E j) σ)),
     Geometry.dualDeterminantFiberCore (R := 𝓞 K) E t b =
-      (HermitianMetric.piTensor (fun j => determinantMetric (hE j).dual (hk j) (t j) (ha j))).fiber σ := by
+      (HermitianMetric.piTensor
+        (fun j => determinantMetric (hE j).dual (hk j) (t j) (ha j))).fiber σ := by
   let : Algebra (𝓞 K) ℂ := (σ.comp (algebraMap (𝓞 K) K)).toAlgebra
   let : ∀ j, InnerProductSpace.Core ℂ (ComplexFiber (E j) σ) := fun j => (hE j).fiber σ
   let : ∀ j, NormedAddCommGroup (ComplexFiber (E j) σ) := fun j =>
@@ -121,7 +134,8 @@ theorem dualDeterminantFiberCore_eq (hk : ∀ j, 0 < k j)
   let : ∀ j, NormedAddCommGroup (Dual ℂ (ComplexFiber (E j) σ)) := fun j =>
     InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := Dual ℂ (ComplexFiber (E j) σ))
   let : ∀ j, InnerProductSpace ℂ (Dual ℂ (ComplexFiber (E j) σ)) := fun j =>
-    InnerProductSpace.ofCore (inferInstance : PreInnerProductSpace.Core ℂ (Dual ℂ (ComplexFiber (E j) σ)))
+    InnerProductSpace.ofCore
+      (inferInstance : PreInnerProductSpace.Core ℂ (Dual ℂ (ComplexFiber (E j) σ)))
   intro b
   apply core_ext
   intro x y
@@ -147,7 +161,8 @@ variable {K ι : Type*} [Field K] [NumberField K] [Fintype ι]
   (i : V →ₗ[𝓞 K] (⨂[𝓞 K] j, E j)) (hi : Function.Injective i)
   {n s l : ℕ} {a k : ι → ℕ}
 
-local instance pairingDualDeterminantAddGroup (t : ∀ j, OAI.Saxl.Tableau n (rectangle (a j) (k j))) :
+local instance pairingDualDeterminantAddGroup
+    (t : ∀ j, OAI.Saxl.Tableau n (rectangle (a j) (k j))) :
     ∀ j, AddCommGroup ((⨂[𝓞 K] (_ : Fin (k j)), ⋀[𝓞 K]^(a j) (Dual (𝓞 K) (E j))) ⊗[𝓞 K]
       (𝓞 K ⊗[ℤ] orbitLattice (t j))) := fun _ => Module.addCommMonoidToAddCommGroup (𝓞 K)
 
@@ -181,7 +196,8 @@ theorem canonicalPairing_intrinsic_norm_le (hk : ∀ j, 0 < k j)
   let : ∀ j, NormedAddCommGroup (Dual ℂ (ComplexFiber (E j) σ)) := fun j =>
     InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := Dual ℂ (ComplexFiber (E j) σ))
   let : ∀ j, InnerProductSpace ℂ (Dual ℂ (ComplexFiber (E j) σ)) := fun j =>
-    InnerProductSpace.ofCore (inferInstance : PreInnerProductSpace.Core ℂ (Dual ℂ (ComplexFiber (E j) σ)))
+    InnerProductSpace.ofCore
+      (inferInstance : PreInnerProductSpace.Core ℂ (Dual ℂ (ComplexFiber (E j) σ)))
   let := ((HermitianMetric.piTensor hE).pullback i hi).fiber σ
   let := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber V σ)
   let := InnerProductSpace.ofCore (inferInstance : PreInnerProductSpace.Core ℂ (ComplexFiber V σ))

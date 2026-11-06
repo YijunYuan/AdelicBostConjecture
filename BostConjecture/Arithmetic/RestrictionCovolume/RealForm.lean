@@ -1,7 +1,12 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Arithmetic.RestrictionCovolume.Conjugation
-public import BostConjecture.Arithmetic.DeterminantLine
+public import BostConjecture.Arithmetic.Determinant.Line
 
 /-!
 # The actual trace space as a real form
@@ -17,7 +22,7 @@ needed by trace quotient metrics.
 noncomputable section
 
 open NumberField TensorProduct
-open scoped Classical
+
 
 namespace BostConjecture.Arithmetic.HermitianMetric
 

@@ -1,3 +1,8 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.InvariantTheory.ComplexClosure.Density
@@ -70,7 +75,8 @@ theorem exists_closed_closure_principalOpen {τ : Type*} [Finite τ]
       intro p hp
       exact (MvPolynomial.mem_vanishingIdeal_singleton_iff x p).mpr (hx.1 p hp)
     obtain ⟨J, hJ, hJx⟩ := Ideal.exists_minimalPrimes_le hI
-    have huJ : u ∉ J := fun h => hx.2 ((MvPolynomial.mem_vanishingIdeal_singleton_iff x u).mp (hJx h))
+    have huJ : u ∉ J := fun h =>
+      hx.2 ((MvPolynomial.mem_vanishingIdeal_singleton_iff x u).mp (hJx h))
     exact Set.mem_iUnion.mpr ⟨J, Set.mem_iUnion.mpr ⟨⟨hJ, huJ⟩, hJx⟩⟩
   · intro x hx
     obtain ⟨J, hJ, hxJ⟩ := Set.mem_iUnion₂.mp hx
@@ -78,7 +84,8 @@ theorem exists_closed_closure_principalOpen {τ : Type*} [Finite τ]
     have hxV : x ∈ MvPolynomial.zeroLocus ℂ J := by
       exact (pointToPoint_preimage_zeroLocus J ▸ hxJ)
     rw [← closure_principalOpen_prime J hJ.2] at hxV
-    apply closure_mono (s := {y | y ∈ MvPolynomial.zeroLocus ℂ J ∧ MvPolynomial.eval y u ≠ 0}) ?_ hxV
+    apply closure_mono
+      (s := {y | y ∈ MvPolynomial.zeroLocus ℂ J ∧ MvPolynomial.eval y u ≠ 0}) ?_ hxV
     intro y hy
     exact ⟨MvPolynomial.zeroLocus_anti_mono hJ.1.le hy.1, hy.2⟩
 

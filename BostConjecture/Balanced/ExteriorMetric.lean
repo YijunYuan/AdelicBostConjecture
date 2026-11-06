@@ -1,8 +1,13 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import Mathlib.Analysis.InnerProductSpace.PiL2
 public import Mathlib.LinearAlgebra.ExteriorPower.Basis
-public import BostConjecture.Tensor.Hilbert
+public import BostConjecture.Tensor.Metric.Basic
 
 /-!
 # The complex Gram metric on exterior powers

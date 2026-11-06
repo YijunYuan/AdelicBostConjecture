@@ -1,9 +1,15 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Main.TensorSemistability.ArithmeticDefect
 public import BostConjecture.Main.TensorSemistability.ExtremalNeighborhood
 
-/-! # Actual maximizing Hermitian metrics give balanced tensor fibers
+/-!
+# Actual maximizing Hermitian metrics give balanced tensor fibers
 
 The two global compatible scalar-defect variations force a sum of nonnegative
 squared norms to vanish. Local maximality is obtained from the actual

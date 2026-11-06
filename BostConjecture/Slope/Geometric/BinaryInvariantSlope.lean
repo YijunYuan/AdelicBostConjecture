@@ -1,9 +1,20 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Slope.Geometric.InvariantSlope
-public import BostConjecture.Geometry.BinaryPlucker
+public import BostConjecture.Geometry.Plucker.Binary
 
-/-! # Geometric slope from the actual binary Plücker invariant -/
+/-!
+# Geometric slope from the actual binary Plücker invariant
+
+A nonvanishing binary Plücker invariant supplies the finite-family
+contraction sequence. The geometric slope inequality then applies to
+subspaces of a binary tensor product.
+-/
 
 @[expose] public section
 

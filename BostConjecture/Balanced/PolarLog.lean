@@ -1,6 +1,11 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
-public import BostConjecture.Analysis.InnerProductSpace.Polar
+public import BostConjecture.ExternalCode.MathlibPRs.PR45002.Analysis.InnerProductSpace.Polar
 public import Mathlib.Analysis.SpecialFunctions.ContinuousFunctionalCalculus.ExpLog.Basic
 public import Mathlib.Analysis.InnerProductSpace.Spectrum
 
@@ -34,7 +39,8 @@ theorem abs_bijective (T : E →L[ℂ] E) (hT : Function.Injective T) :
 
 theorem abs_isStrictlyPositive (T : E →L[ℂ] E) (hT : Function.Injective T) :
     IsStrictlyPositive T.abs :=
-  (ContinuousLinearMap.isUnit_iff_bijective.mpr (abs_bijective T hT)).isStrictlyPositive T.abs_nonneg
+  (ContinuousLinearMap.isUnit_iff_bijective.mpr
+    (abs_bijective T hT)).isStrictlyPositive T.abs_nonneg
 
 theorem norm_polar_apply (T : E →L[ℂ] E) (hT : Function.Injective T) (x : E) :
     ‖T.polar x‖ = ‖x‖ := by

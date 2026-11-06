@@ -1,7 +1,12 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Arithmetic.RestrictionCovolume.RealForm
-public import BostConjecture.Arithmetic.QuotientMetric
+public import BostConjecture.Arithmetic.Submodule.QuotientMetric
 public import Mathlib.Algebra.Exact.Basic
 
 /-!
@@ -17,7 +22,7 @@ quotient real trace metrics without any metric-comparison assumptions.
 noncomputable section
 
 open NumberField TensorProduct
-open scoped InnerProductSpace Classical
+open scoped InnerProductSpace
 
 namespace BostConjecture.Arithmetic.HermitianMetric
 

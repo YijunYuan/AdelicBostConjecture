@@ -1,3 +1,8 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Arithmetic.RestrictionCovolume.Covolume
@@ -18,7 +23,7 @@ factor with both members of every conjugate pair counted.
 noncomputable section
 
 open NumberField TensorProduct MeasureTheory exteriorPower
-open scoped Matrix Kronecker Classical
+open scoped Matrix Kronecker
 
 namespace BostConjecture.Arithmetic.HermitianMetric
 
@@ -63,6 +68,7 @@ lemma traceIntegerBasis_apply {r : ℕ} (b : Module.Basis (Fin r) (𝓞 K) M)
     traceIntegerBasis b (i, τ) = RingOfIntegers.basis K (equivReindex K τ) • b i := by
   simp [traceIntegerBasis]
 
+open Classical in
 /-- The embedding matrix has squared absolute determinant equal to the absolute discriminant. -/
 lemma norm_det_basisMatrix_sq : ‖(basisMatrix K).det‖ ^ 2 = |(NumberField.discr K : ℝ)| := by
   classical
@@ -70,6 +76,7 @@ lemma norm_det_basisMatrix_sq : ‖(basisMatrix K).det‖ ^ 2 = |(NumberField.di
   simpa only [norm_pow, Complex.norm_intCast, Int.norm_eq_abs, Int.cast_abs] using hh.symm
 
 omit [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M] in
+open Classical in
 /-- The trace Gram matrix factors through the embedding matrix and the actual fiber Gram blocks. -/
 lemma traceGram_factorization {r : ℕ} (b : Module.Basis (Fin r) (𝓞 K) M) :
     let E := (1 : Matrix (Fin r) (Fin r) ℂ) ⊗ₖ (basisMatrix K).transpose
@@ -87,10 +94,12 @@ lemma traceGram_factorization {r : ℕ} (b : Module.Basis (Fin r) (𝓞 K) M) :
   rw [h.ofReal_traceSection_inner, traceIntegerBasis_apply, traceIntegerBasis_apply]
   simp only [fiberSection_smul, InnerProductSpace.Core.inner_smul_left,
     InnerProductSpace.Core.inner_smul_right]
-  simp [Matrix.mul_apply, Matrix.conjTranspose_apply,
-    Matrix.blockDiagonal_apply, Matrix.one_apply, Fintype.sum_prod_type,
-    basisMatrix, canonicalEmbedding.latticeBasis_apply, integralBasis_apply,
-    apply_ite, ite_mul]
+  simp only [basisMatrix, canonicalEmbedding.latticeBasis_apply, integralBasis_apply,
+    Matrix.mul_apply, Matrix.conjTranspose_apply, Matrix.kroneckerMap_apply, Matrix.one_apply,
+    Matrix.transpose_apply, Matrix.of_apply, canonicalEmbedding.apply_at, ite_mul, one_mul,
+    zero_mul, apply_ite, RCLike.star_def, star_zero, Matrix.blockDiagonal_apply, mul_zero,
+    Fintype.sum_prod_type, Finset.sum_ite_eq', Finset.mem_univ, ↓reduceIte,
+    Finset.sum_ite_irrel, Finset.sum_const_zero]
   apply Finset.sum_congr rfl
   intro σ _
   ring

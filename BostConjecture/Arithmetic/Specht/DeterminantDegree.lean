@@ -1,10 +1,21 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
 module
 
 public import BostConjecture.Arithmetic.Specht.DeterminantTensorMetric
 public import BostConjecture.Arithmetic.Specht.FiniteTensorDegree
 public import BostConjecture.Arithmetic.Specht.LatticeDegree
 
-/-! # Exact intrinsic slope of the canonical determinant–Specht bundle -/
+/-!
+# Exact intrinsic slope of the canonical determinant–Specht bundle
+
+The slope of the auxiliary determinant–Specht bundle is computed from
+the determinant degrees and the canonical Specht covolumes. This formula
+provides the error term in the geometric slope bound.
+-/
 
 @[expose] public section
 
