@@ -2,6 +2,7 @@ import BostConjecture.Main.TensorSemistability.Extensions
 import BostConjecture.Main.TensorSemistability.MetricVariation
 import BostConjecture.Main.TensorSemistability.DegreeDerivative
 import BostConjecture.Main.TensorSemistability.GramDegree
+import BostConjecture.Main.TensorSemistability.ExponentialVariation
 
 #print axioms BostConjecture.Arithmetic.HermitianMetric.isSemistable_iff_degree_nonpos
 #print axioms BostConjecture.Arithmetic.HermitianMetric.isSemistable_rescale_iff
@@ -18,3 +19,9 @@ import BostConjecture.Main.TensorSemistability.GramDegree
 #print axioms BostConjecture.Arithmetic.HermitianMetric.determinant_sectionNorm_sq_eq_gram
 #print axioms BostConjecture.Arithmetic.HermitianMetric.hasDerivAt_degree_of_gram
 #print axioms BostConjecture.Arithmetic.HermitianMetric.sum_gram_deriv_eq_zero_of_isLocalMax
+#print axioms BostConjecture.Arithmetic.expLinearEquiv_conjugate
+#print axioms BostConjecture.Arithmetic.det_expLinearEquiv
+#print axioms BostConjecture.Arithmetic.HermitianMetric.exponentialVariation
+#print axioms BostConjecture.Arithmetic.HermitianMetric.determinant_exponentialVariation
+#print axioms BostConjecture.Arithmetic.HermitianMetric.exponentialVariation_zero
+#print axioms BostConjecture.Arithmetic.HermitianMetric.degree_exponentialVariation

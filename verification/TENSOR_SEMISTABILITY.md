@@ -53,9 +53,24 @@ orthonormal base point, and proves the degree derivative is
 The stationarity lemma is intermediate: its actual metric curve and local
 maximum are hypotheses, and it does not assert balance.
 
-The line-twist, strict-factor reduction, conjugation-compatible exponential
+## Compatible determinant-one exponential variations
+
+`ExponentialVariation.lean` constructs actual metrics from self-adjoint
+generator families compatible with the canonical fiber conjugation. The
+spectral proof establishes semilinear exponential intertwining, and trace-zero
+generators preserve the actual determinant metric and degree. The curve at zero
+is the original metric. No freeness or rational-field restriction occurs.
+
+- Serialized module check: 3524 jobs, no warnings.
+- Expanded serialized axiom audit: twenty-one probes, foundational axioms only.
+- Blueprint: `lem:arithmetic-exponential-variation`, in the source theorem cone.
+- Independent exact-source/mathematical/honesty review accepted the construction,
+  including the explicit real-place commutation restriction; localization to
+  arbitrary allowed single-place directions remains to be proved.
+
+The line-twist, strict-factor reduction, continuity of exponential metric
 curves, actual submodule projection-trace derivative, extremal-to-balance and
-final composition remain open. These two producers do not prove balance.
+final composition remain open. The checked producers do not prove balance.
 COMPACTNESS's maximizing-pair endpoint and SPECHT-SLOPE's geometric endpoint are
 also still producer boundaries. Shared-root integration is pending MAIN's
 acceptance of the checked handoff.

@@ -56,6 +56,11 @@ def expLinearEquiv (A : E →L[ℂ] E) (t : ℝ) : E ≃ₗ[ℂ] E := by
 lemma expLinearEquiv_apply (A : E →L[ℂ] E) (t : ℝ) (x : E) :
     expLinearEquiv A t x = NormedSpace.exp (t • A) x := rfl
 
+@[simp]
+lemma expLinearEquiv_zero_apply (A : E →L[ℂ] E) (x : E) :
+    expLinearEquiv A 0 x = x := by
+  simp only [expLinearEquiv_apply, zero_smul, NormedSpace.exp_zero, one_apply_eq_self]
+
 /-- A conjugate-linear intertwiner commutes with real-time Hermitian
 exponentials. No choice of real or complex embedding is made here. -/
 theorem expLinearEquiv_conjugate (A : Module.End ℂ E) (B : Module.End ℂ F)
@@ -127,10 +132,10 @@ theorem fiberExp_conjugate (h : HermitianMetric (K := K) M)
       fiberConjugate M σ (A σ x)) (t : ℝ) (σ : K →+* ℂ) (x : ComplexFiber M σ) :
     h.fiberExp (ComplexEmbedding.conjugate σ) (A _) t (fiberConjugate M σ x) =
       fiberConjugate M σ (h.fiberExp σ (A σ) t x) := by
-  letI (τ : K →+* ℂ) : InnerProductSpace.Core ℂ (ComplexFiber M τ) := h.fiber τ
-  letI (τ : K →+* ℂ) :=
+  let (τ : K →+* ℂ) : InnerProductSpace.Core ℂ (ComplexFiber M τ) := h.fiber τ
+  let (τ : K →+* ℂ) :=
     InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber M τ)
-  letI (τ : K →+* ℂ) := InnerProductSpace.ofCore
+  let (τ : K →+* ℂ) := InnerProductSpace.ofCore
     (inferInstance : PreInnerProductSpace.Core ℂ (ComplexFiber M τ))
   exact expLinearEquiv_conjugate (A σ) (A _) (hs σ) (fiberConjugate M σ) (hc σ) t x
 
@@ -142,6 +147,61 @@ def exponentialVariation (h : HermitianMetric (K := K) M)
       fiberConjugate M σ (A σ x)) (t : ℝ) : HermitianMetric (K := K) M :=
   h.archimedeanPullback (fun σ => h.fiberExp σ (A σ) t)
     (h.fiberExp_conjugate A hs hc t)
+
+/-- A traceless generator preserves the actual determinant metric. -/
+theorem determinant_exponentialVariation (h : HermitianMetric (K := K) M)
+    (A : ∀ σ : K →+* ℂ, Module.End ℂ (ComplexFiber M σ))
+    (hs : ∀ σ x y, (h.fiber σ).inner (A σ x) y = (h.fiber σ).inner x (A σ y))
+    (hc : ∀ σ x, A (ComplexEmbedding.conjugate σ) (fiberConjugate M σ x) =
+      fiberConjugate M σ (A σ x))
+    (ht : ∀ σ, LinearMap.trace ℂ (ComplexFiber M σ) (A σ) = 0) (t : ℝ) :
+    (h.exponentialVariation A hs hc t).determinant = h.determinant := by
+  apply h.determinant_archimedeanPullback
+  intro σ
+  let : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
+  let := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber M σ)
+  let := InnerProductSpace.ofCore
+    (inferInstance : PreInnerProductSpace.Core ℂ (ComplexFiber M σ))
+  exact det_expLinearEquiv (A σ) (hs σ) (ht σ) t
+
+/-- The variation starts at the prescribed actual metric. -/
+@[simp]
+theorem exponentialVariation_zero (h : HermitianMetric (K := K) M)
+    (A : ∀ σ : K →+* ℂ, Module.End ℂ (ComplexFiber M σ))
+    (hs : ∀ σ x y, (h.fiber σ).inner (A σ x) y = (h.fiber σ).inner x (A σ y))
+    (hc : ∀ σ x, A (ComplexEmbedding.conjugate σ) (fiberConjugate M σ x) =
+      fiberConjugate M σ (A σ x)) :
+    h.exponentialVariation A hs hc 0 = h := by
+  apply HermitianMetric.ext
+  intro σ
+  have hi : ((h.exponentialVariation A hs hc 0).fiber σ).inner = (h.fiber σ).inner := by
+    funext x y
+    change (h.fiber σ).inner (h.fiberExp σ (A σ) 0 x)
+      (h.fiberExp σ (A σ) 0 y) = _
+    have he (z : ComplexFiber M σ) : h.fiberExp σ (A σ) 0 z = z := by
+      let : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
+      let := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber M σ)
+      let := InnerProductSpace.ofCore
+        (inferInstance : PreInnerProductSpace.Core ℂ (ComplexFiber M σ))
+      exact expLinearEquiv_zero_apply (LinearMap.toContinuousLinearMap (A σ)) z
+    rw [he, he]
+  generalize (h.exponentialVariation A hs hc 0).fiber σ = c at *
+  generalize h.fiber σ = d at *
+  rcases c with ⟨⟨⟨ci⟩, cs, cp, ca, cm⟩, cd⟩
+  rcases d with ⟨⟨⟨di⟩, ds, dp, da, dm⟩, dd⟩
+  cases hi
+  rfl
+
+/-- Arithmetic normalization is constant along the determinant-one flow. -/
+theorem degree_exponentialVariation [NumberField K] (h : HermitianMetric (K := K) M)
+    (A : ∀ σ : K →+* ℂ, Module.End ℂ (ComplexFiber M σ))
+    (hs : ∀ σ x y, (h.fiber σ).inner (A σ x) y = (h.fiber σ).inner x (A σ y))
+    (hc : ∀ σ x, A (ComplexEmbedding.conjugate σ) (fiberConjugate M σ x) =
+      fiberConjugate M σ (A σ x))
+    (ht : ∀ σ, LinearMap.trace ℂ (ComplexFiber M σ) (A σ) = 0) (t : ℝ) :
+    (h.exponentialVariation A hs hc t).degree = h.degree := by
+  unfold degree
+  rw [h.determinant_exponentialVariation A hs hc ht t]
 
 end HermitianMetric
 
