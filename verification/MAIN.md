@@ -53,7 +53,7 @@ were applied. This review does not certify the unfinished main theorem.
 
 ## Integration and remaining boundary
 
-The root imports only checked current-owner handoffs: COMPACTNESS `870179a`,
+At `e3516a5`, the root imports only checked current-owner handoffs: COMPACTNESS `870179a`,
 SPECHT-SLOPE tree `e84df35`, and TENSOR-SEMI `57f5cfc`/`bbafa44`. Their imported
 files were compared against these trees and are unchanged. Concurrent drafts
 of compactness reconstruction, geometric pairing metrics and arithmetic Gram
@@ -72,3 +72,25 @@ helper/concurrent-draft declarations are coverage warnings only. A read-only
 Ground hygiene pass accepted nine active roadmap items as four authorized
 lanes, three active subgoals and two ancestors. No stale scratch candidates
 were found, no fifth writer was launched, and MAIN retains shared integration.
+
+## Late checked arithmetic compactness handoff
+
+The finalization hook delivered COMPACTNESS `daad480` after the first root
+checkpoint. `1c4c3f8` adds only the root import of
+`Arithmetic.Compactness.SequentialCompactness`. Its unchanged dependency cone
+contains the actual fixed-rank normalized semistable compactness endpoint,
+including nonfree modules and rank zero. The owner's 9153-job endpoint check
+and 34 foundational-only probes were independently inspected; no unfinished
+`TensorContinuity` or maximizing-pair module occurs in the imported cone.
+
+The updated configured root passed **9375 jobs without warnings at
+2026-11-06 03:46:31 UTC**, source checkpoint `1c4c3f8`, root blob
+`7363db7f533609c86abf84714391459b896a0b26`. The exact log is
+`main-root-compactness.log` in the same session directory. MAIN's source and
+30-probe dependency cones are unchanged, so its accepted axiom audit remains
+applicable without a duplicate check. This supersedes the earlier root count,
+not the explicit remaining consecutive-grade/main-theorem boundary.
+
+All residual uncommitted proof drafts belong to the continuing COMPACTNESS,
+SPECHT-SLOPE and TENSOR-SEMI lanes. Untracked workspace-root support files and
+PDFs predate MAIN. None was staged or accepted through this integration.

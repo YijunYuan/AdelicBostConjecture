@@ -155,8 +155,10 @@ including nonfree modules and rank zero, is checked in
 relocation `739e58a`, final evidence `8871998`). No assumed covolume formula
 is needed by the arithmetic compactness successor. Fixed-module maximum-degree
 attainment/continuity, strict-stability openness and the actual trace systole
-are checked in `Arithmetic.Compactness`; fixed arithmetic actions, compactness
-and maximizing pairs remain that lane's obligations.
+are checked in `Arithmetic.Compactness`. The owner handoff `daad480` also
+checks fixed arithmetic actions, Hermitian reconstruction and actual
+fixed-rank normalized arithmetic sequential compactness, including nonfree
+modules. The maximizing-pair consequence remains that lane's obligation.
 
 `Arithmetic.Specht.DeterminantBundle` constructs the actual irreducible
 isometric determinant-Specht representation and its tensor/dual semistability;

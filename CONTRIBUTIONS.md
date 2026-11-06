@@ -941,3 +941,17 @@ probes, with independent owner review. These use unchanged pinned libraries
 and earlier attributed project code; no additional external code is copied.
 Full compactness, geometric slope, extremal balance and tensor semistability
 are not claimed by this integration.
+
+The later BOST-COMPACTNESS handoff `daad480` is integrated through
+`Arithmetic/Compactness/SequentialCompactness.lean`, consuming the unchanged
+`TraceFrames`, `FixedAction`, `ComplexTraceCoordinates`, `FrameMetric`,
+`FrameLimit` and `MetricTransport` producers. Its owner audit has 34
+foundational-only probes and independent exact-source/honesty acceptance.
+`BostConjecture.Arithmetic.Compactness.exists_compact_trace_frames` is the concrete arithmetic consumer
+of `OAI.NumberTheory.ArithmeticGroups.Lattices.FrameMatrices.Construction.exists_compact_lattice_matrices`
+from `openai/math` revision `4eaee87548250b2682affda7d05d947c05554bae`,
+original `lean/OAI/NumberTheory/ArithmeticGroups/Lattices/FrameMatrices.lean`,
+Apache-2.0, with the already recorded compatibility modifications and retained
+license above. This integration copies or modifies no vendor code. Actual
+fixed-rank normalized arithmetic sequential compactness is proved; the global
+maximizing-pair consequence remains a separate unfinished producer.

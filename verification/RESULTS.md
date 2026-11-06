@@ -1,3 +1,15 @@
+## Late arithmetic compactness handoff integrated
+
+Source checkpoint `1c4c3f8` adds the unchanged COMPACTNESS `daad480` endpoint
+`exists_normalized_semistable_subsequence`. The updated configured root passed
+**9375 jobs without warnings at 2026-11-06 03:46:31 UTC**, root blob
+`7363db7f533609c86abf84714391459b896a0b26`. Independent bounded integration
+review checked the owner's **34 foundational-only probes**, actual imported
+cone and absence of unfinished tensor-continuity/maximizing-pair imports.
+MAIN's accepted **30-probe** cone is unchanged. Exact evidence and attribution
+are in `MAIN.md`, `ARITHMETIC_COMPACTNESS.md` and `CONTRIBUTIONS.md`.
+The main theorem and finite-family corollary remain open.
+
 ## Actual HN tensor flag and unconditional maximal-slope lower bound
 
 MAIN checkpoint `e3516a5` passes the configured root build: **9368 jobs,
