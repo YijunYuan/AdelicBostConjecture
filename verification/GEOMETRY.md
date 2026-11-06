@@ -1116,3 +1116,34 @@ for the actual determinant metric, every-fiber Gram comparison and tensor/dual
 semistability. GEOM acknowledged this for next-round root integration; it is
 not included in the 9,334-job root evidence above. Exact and geometric slopes
 remain the successor's obligations. This finalization adds no Lean claim.
+
+
+## Terminal binary sequence verified — session 0018
+
+The terminal `exists_canonicalPairing_nonzero_sequence_of_binary_invariant`
+now kernel-checks at source blob `ae575df89d7dbf17b767bec176ec4b9cc9f7aa7b`.
+The explicit-root `check BostConjecture.Geometry.BinaryPlucker` passed 9,121
+jobs without warnings at 2026-11-06 02:53:11 UTC; the exact output is
+run0005/session0018 `binary-terminal.log` (fingerprint `09af99536a6e3a1e`).
+The scoped unused-section-variable linter is disabled for this declaration;
+all mathematical hypotheses remain, and the kernel uses the default heartbeat
+budget. No additional axiom, representation or assumed comparison was added.
+
+The failed 800,000-heartbeat diagnostic probe is preserved in this session's
+`attempts/0001-terminal-binary-consumer-still-times-out-at-whnf/` and
+`binary-diagnostics.log`. Explicitly typing the pullback polynomial and applying
+the finite-family sequence theorem isolated the expensive step to evaluation.
+Replacing the costly specialized rewrite with the basic polynomial-pullback
+and exterior-map evaluation identities gave the checked proof. Guarded LSP
+reported no diagnostics for the final source. Removing the scoped linter setting
+caused a long-running diagnostic probe; restoring it returned clean diagnostics.
+Root/audit documents reported stale imports before the module rebuild, so their
+faithful evidence comes from the serialized checks.
+
+The independent read-only honesty/source review found the terminal theorem
+faithful to revised I-0097 and no further construction gap within that scope.
+It uses actual independent SL-action transport and concludes nonvanishing of
+the original-ring canonical pairing at all positive multiples of one degree.
+The geometric slope inequality, downstream balanced-invariant application and
+number-field main theorem remain separate obligations. General coaction
+scalar-extension equality remains deferred, not proved.

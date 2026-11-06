@@ -362,3 +362,5 @@ import BostConjecture.Geometry.HomTensor
 #print axioms BostConjecture.Geometry.twoFactorEquiv_specialLinear
 #print axioms BostConjecture.Geometry.twoFactor_plucker_invariant
 #print axioms BostConjecture.Geometry.twoFactor_plucker_eval
+
+#print axioms BostConjecture.Geometry.exists_canonicalPairing_nonzero_sequence_of_binary_invariant

@@ -64,4 +64,52 @@ theorem twoFactor_plucker_eval {s : ℕ}
 
 end Transport
 
+section ScalarExtension
+
+variable {R : Type*} [CommRing R] {F : Type} [Field F]
+  [Algebra R F] [CharZero F] [IsAlgClosed F]
+  {E : Unit ⊕ Unit → Type*} [∀ i, AddCommGroup (E i)] [∀ i, Module R (E i)]
+  [∀ i, Module.Finite R (E i)] [∀ i, Module.Projective R (E i)]
+  {V : Type*} [AddCommGroup V] [Module R V] [Module.Finite R V] [Module.Projective R V]
+
+attribute [local instance] scalarExtendedTargetAddCommGroup
+
+variable
+    (A : V →ₗ[R] (⨂[R] i, E i)) {s m : ℕ} {a : Unit ⊕ Unit → ℕ}
+    (hspos : 0 < s) (hapos : ∀ i, 0 < a i) (hm : 0 < m)
+    (ha : ∀ i (q : PrimeSpectrum R), Module.rankAtStalk (Dual R (E i)) q = a i)
+    (hs : ∀ q : PrimeSpectrum R, Module.rankAtStalk V q = s)
+    (bV : Basis (Fin s) F (F ⊗[R] V))
+    (bE : ∀ i, Basis (Fin (a i)) F (Dual F (F ⊗[R] E i)))
+    {p : SymmetricAlgebra F
+      (Dual F (⋀[F]^s ((F ⊗[R] E (.inl ())) ⊗[F] (F ⊗[R] E (.inr ())))))}
+    (hp : p ∈ homogeneousInvariants
+      (pluckerRepresentation F (F ⊗[R] E (.inl ())) (F ⊗[R] E (.inr ())) s) m)
+    (hpA : polynomialEval (exteriorPower.ιMulti F s (fun j =>
+      Tensor.twoFactorEquiv F (fun i => F ⊗[R] E i)
+        (((Tensor.baseChangeEquiv R F E).toLinearMap ∘ₗ A.baseChange F) (bV j)))) p ≠ 0)
+
+set_option linter.unusedSectionVars false in
+include hspos hapos hm bV bE hp hpA in
+/-- The canonical binary Plücker invariant supplies the original-ring sequence
+of actual finite-family determinant pairings. -/
+theorem exists_canonicalPairing_nonzero_sequence_of_binary_invariant :
+    ∃ d₀ : ℕ, 0 < d₀ ∧ s ∣ d₀ ∧ (∀ i, a i ∣ d₀) ∧
+      ∀ r : ℕ, 0 < r → ∃ (l : ℕ) (k : Unit ⊕ Unit → ℕ) (hl : 0 < l)
+        (hk : ∀ i, 0 < k i)
+        (t : ∀ i, OAI.Saxl.Tableau (d₀ * r) (Specht.rectangle (a i) (k i)))
+        (v : OAI.Saxl.Tableau (d₀ * r) (Specht.rectangle s l)),
+        canonicalPairing E hk t ha hl v hs A ≠ 0 := by
+  let q : SymmetricAlgebra F (Dual F (⋀[F]^s (⨂[F] i, F ⊗[R] E i))) :=
+    polynomialPullback (exteriorPower.map s
+      (Tensor.twoFactorEquiv F (fun i => F ⊗[R] E i)).toLinearMap) p
+  apply exists_canonicalPairing_nonzero_sequence (R := R) (F := F) (V := V)
+    (s := s) (m := m) (a := a) E A hspos hapos hm ha hs bV bE (p := q)
+  · exact (twoFactor_plucker_invariant (fun i => F ⊗[R] E i) hp).1
+  · exact (twoFactor_plucker_invariant (fun i => F ⊗[R] E i) hp).2
+  · simpa only [q, polynomialEval_pullback, exteriorPower.map_apply_ιMulti,
+      Function.comp_def, LinearEquiv.coe_coe] using hpA
+
+end ScalarExtension
+
 end BostConjecture.Geometry
