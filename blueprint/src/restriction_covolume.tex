@@ -174,8 +174,97 @@ degree formula gives $D\degn\overline A=-\sum_\sigma\log\|\xi\|_\sigma$.
 Exponentiating proves the second equality.
 \end{proof}
 
+\begin{lemma}[Trace covolume of a projective line]
+\label{lem:trace-covolume-line}
+\uses{lem:trace-covolume-free,lem:trace-covolume-index,lem:degree-rank-one,lem:line-degree-quotient-formula}
+\source{bost-specht-manuscript:page-0011}
+\lean{BostConjecture.Arithmetic.HermitianMetric.traceCovolume_eq_discr_degree_of_rank_one}\leanok
+For a projective integral module $A$ of generic rank one,
+\[
+ \covol_{\mathbb Z}(A)=\Delta_K^{1/2}\exp(-D\degn\overline A).
+\]
+\end{lemma}
+\begin{proof}
+Choose a nonzero $x\in A$ and set $P=\Ocal x$. Torsion-freeness makes
+$a\mapsto ax$ an isomorphism $\Ocal\simeq P$, so $P$ has generic rank
+one and $q=\#(A/P)$ is finite and positive. The free-frame formula and
+the induced metric give
+\[
+ q\covol_{\mathbb Z}(A)=\covol_{\mathbb Z}(P)
+ =\Delta_K^{1/2}\prod_\sigma\|x\|_\sigma.
+\]
+In rank one the determinant degree agrees with the intrinsic line degree,
+whose section formula is
+$D\degn\overline A=\log q-\sum_\sigma\log\|x\|_\sigma$.
+Every section norm is positive by injectivity of the fiber section map.
+Exponentiation and division by $q$ prove the claim.
+\end{proof}
+
+\begin{lemma}[Trace metric and saturated quotients]
+\label{lem:trace-quotient-metric}
+\uses{lem:real-trace-lattice,lem:trace-metric-weights,lem:induced-hermitian-metric,lem:quotient-hermitian-metric}
+\source{bost-specht-manuscript:page-0011}\notready
+Let $P\subset A$ be saturated and $Q=A/P$, with the induced and quotient
+Hermitian metrics. The induced map of real trace spaces identifies
+$T(P)$ isometrically with its image in $T(A)$. The quotient map identifies
+$T(Q)$ isometrically with the Euclidean quotient $T(A)/T(P)$.
+\end{lemma}
+\begin{proof}
+On $W(A)=\prod_\sigma A_\sigma$, conjugation of fibers and permutation
+of conjugate embeddings give an antilinear involution $J$.
+The real trace space $T(A)$ is fixed by $J$. If $t=iu$ with $t,u\in T(A)$,
+then applying $J$ gives $t=-iu$, whence $t=u=0$. Thus
+$T(A)\cap iT(A)=0$. Its real dimension is $Da$, whereas $W(A)$ has real
+dimension $2Da$, so $W(A)=T(A)\oplus iT(A)$. Applying $J$ to this
+decomposition shows that its fixed space is exactly $T(A)$.
+The same argument applies to $P$ and $Q$, including zero ranks.
+
+The fiber maps of inclusion and quotient commute with conjugation and
+therefore restrict to the real trace spaces. Inclusion preserves the
+trace pairing because every induced fiber pairing is the restriction of
+the ambient pairing. The componentwise orthogonal right inverse of the
+fiber quotient maps commutes with conjugation: a conjugated orthogonal
+representative is the orthogonal representative of the conjugated vector,
+by uniqueness. It therefore maps $T(Q)$ into $T(A)$ and is a right inverse.
+Consequently the real quotient map is surjective. Its kernel contains
+the image of $T(P)$; dimension additivity for the original exact sequence
+makes these spaces have the same dimension, so they are equal.
+The image of this right inverse is orthogonal to $T(P)$, since every
+fiber representative is orthogonal to the fiber of $P$. Finally its
+trace pairing is precisely the sum of the quotient fiber pairings.
+It is thus the orthogonal right inverse defining the Euclidean quotient
+metric, which proves both assertions.
+\end{proof}
+
+\begin{lemma}[Trace covolume in a saturated exact sequence]
+\label{lem:trace-covolume-exact}
+\uses{lem:trace-quotient-metric,lem:trace-covolume-gram,lem:integral-restriction-rank}
+\source{bost-specht-manuscript:page-0011}\notready
+With the induced and quotient metrics for a saturated submodule
+$P\subset A$, one has
+\[
+ \covol_{\mathbb Z}(A)=\covol_{\mathbb Z}(P)\covol_{\mathbb Z}(A/P).
+\]
+\end{lemma}
+\begin{proof}
+Write $Q=A/P$. Its projectivity gives an integral linear section
+$t:Q\to A$ of the quotient map. Choose integer bases $(p_i)$ and $(q_j)$
+of $P$ and $Q$. Then $(p_i,t(q_j))$ is an integer basis of $A$:
+projecting to $Q$ proves independence and reduces spanning to that of $P$.
+Let $s:T(Q)\to T(A)$ be the orthogonal right inverse from
+Lemma~\ref{lem:trace-quotient-metric}. For each $j$, the difference
+$t(q_j)-s(q_j)$ lies in $T(P)$. Replacing the vectors $t(q_j)$ by $s(q_j)$
+is therefore a block triangular real change of basis with identity
+diagonal blocks and determinant one. The resulting Gram matrix is block
+diagonal: its two blocks are the trace Gram matrices of $(p_i)$ and
+$(q_j)$, since $s$ is an isometry and its image is orthogonal to $T(P)$.
+Taking determinants gives equality of squared covolumes by
+Lemma~\ref{lem:trace-covolume-gram}; their positivity gives the formula.
+Empty bases handle zero-dimensional terms by the same calculation.
+\end{proof}
+
 \begin{lemma}[Restriction of scalars and covolume]
-\label{lem:restriction-covolume}\uses{def:hermitian-degree,lem:bounded-integral-sections,lem:integral-restriction-rank,lem:real-trace-lattice,lem:trace-metric-weights,lem:trace-covolume-gram,lem:trace-covolume-index,lem:trace-covolume-free}
+\label{lem:restriction-covolume}\uses{lem:trace-covolume-gram,lem:trace-covolume-line,lem:trace-covolume-exact,lem:rank-one-saturated-reduction,lem:exact-determinant-degree}
 \source{bost-specht-manuscript:page-0011}\notready
 Give $A\otimes_{\mathbb Z}\mathbb R$ the Euclidean norm
 $\|x\|^2=\sum_v w_v\|x_v\|_v^2$. For $a=\rk_\Ocal A$,
@@ -184,22 +273,20 @@ $\|x\|^2=\sum_v w_v\|x_v\|_v^2$. For $a=\rk_\Ocal A$,
 \]
 \end{lemma}
 \begin{proof}
-The underlying abelian group of $A$ is finite free and spans its real
-scalar extension. A bounded set for the displayed Euclidean norm bounds
-every archimedean section norm. Lemma~\ref{lem:bounded-integral-sections}
-therefore makes its intersection with $A$ finite, so $A$ is a full
-discrete lattice in this real space.
-For $A=\Ocal^a$ with the standard metrics, the Gram determinant of an
-integral basis of $\Ocal$ for this real trace metric is $\Delta_K$.
-Indeed, the matrix of embeddings gives the trace discriminant; replacing
-a conjugate pair by real and imaginary parts and weighting both by $2$
-preserves its absolute squared determinant. Orthogonal direct sum gives
-the standard covolume $\Delta_K^{a/2}$. If the fiber metrics have Gram
-matrices $G_v$, covolume is multiplied by
-$\prod_v(\det G_v)^{w_v/2}$, while the definition of degree multiplies
-$\exp(-D\degn A)$ by precisely that quantity. This proves the formula
-for a free module with arbitrary metrics. For general $A$, choose a
-generic basis lying in $A$ and its finite-index free span $A_0$.
-Then $\covol(A_0)=[A:A_0]\covol(A)$ and
-$D\degn(A)=D\degn(A_0)+\log[A:A_0]$; cancellation proves the claim.
+Induct on the generic rank $a$. For $a=0$, the actual lattice has
+covolume one and intrinsic degree zero by
+Lemma~\ref{lem:trace-covolume-gram}. For $a>0$, choose a saturated
+rank-one submodule $L$ by Lemma~\ref{lem:rank-one-saturated-reduction};
+the quotient $Q=A/L$ is finite projective of rank $a-1$.
+Equip $L$ and $Q$ with the induced and quotient metrics.
+Lemmas~\ref{lem:trace-covolume-line} and \ref{lem:trace-covolume-exact},
+followed by the induction hypothesis, give
+\[
+ \covol(A)
+ =\Delta_K^{1/2}e^{-D\degn L}
+   \Delta_K^{(a-1)/2}e^{-D\degn Q}.
+\]
+The discriminant is nonzero, hence $\Delta_K>0$, so its real powers
+combine to $\Delta_K^{a/2}$. Exact determinant degree additivity gives
+$\degn A=\degn L+\degn Q$. Combining the exponentials proves the claim.
 \end{proof}

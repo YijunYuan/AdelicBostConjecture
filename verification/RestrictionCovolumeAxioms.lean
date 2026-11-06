@@ -1,5 +1,4 @@
-import BostConjecture.Arithmetic.RestrictionCovolume.FiniteIndex
-import BostConjecture.Arithmetic.RestrictionCovolume.Free
+import BostConjecture.Arithmetic.RestrictionCovolume.Line
 
 #print axioms BostConjecture.Arithmetic.archimedeanSection
 #print axioms BostConjecture.Arithmetic.HermitianMetric.traceCore
@@ -40,3 +39,6 @@ import BostConjecture.Arithmetic.RestrictionCovolume.Free
 #print axioms BostConjecture.Arithmetic.HermitianMetric.traceCovolume_eq_discr_mul_prod
 #print axioms BostConjecture.Arithmetic.HermitianMetric.degree_eq_neg_sum_log_of_basis
 #print axioms BostConjecture.Arithmetic.HermitianMetric.traceCovolume_eq_discr_degree_of_basis
+#print axioms BostConjecture.Arithmetic.HermitianMetric.norm_section_inner_self
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceCovolume_principal
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceCovolume_eq_discr_degree_of_rank_one
