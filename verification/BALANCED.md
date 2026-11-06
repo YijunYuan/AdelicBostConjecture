@@ -656,3 +656,33 @@ continuous-linear-map commutation at the pinned revision; no library source
 is copied. This is an ingredient of the polynomial average, whose concrete
 continuity and extension from special-unitary to special-linear invariance
 are still unproved. Lemma 7.2 and its full orbit criterion remain open.
+
+## Full-unitary polynomial density checkpoint
+
+`InvariantTheory.UnitaryDensity` proves polynomial uniqueness on products
+of unit circles, constructs unitary–diagonal–unitary factorization of every
+invertible complex matrix from the selectively ported polar decomposition
+and the Hermitian spectral theorem, and proves
+`polynomial_eq_zero_of_eval_unitary`: a matrix polynomial vanishing on the
+actual full unitary group is zero. Empty index types are included.
+The serialized module build passed **3,152 jobs warning-free** (47.5s),
+and the expanded audit passed **169 foundational-only probes** (20.7s).
+The producer is LSP-clear; the combined audit LSP did not complete, so the
+serialized kernel audit is the authoritative audit evidence.
+
+Independent source/mathematical/honesty review accepted the real objects
+and substantive polar, circle and determinant arguments, and independently
+verified the endpoint axioms. Its requested source-anchor correction is
+applied: Maithani Proposition U-GL density and the product-of-infinite-sets
+lemma are the direct references. The proof uses separate polynomial
+substitution, avoiding the original exposition's point-set Zariski group
+continuity shortcut. New imported Mathlib consumers are `Matrix.toEuclideanCLM`,
+`Matrix.IsHermitian.spectral_theorem`, `MvPolynomial.funext_set`,
+`Circle.exp_injOn_Icc` and `Matrix.det_mvPolynomialX_ne_zero`, at the pinned
+revision and license, with no copied library source.
+
+The special-unitary determinant retraction and concrete polynomial Haar
+averaging are still open. CLOSURE delivered its exact comparison endpoint
+at `53f1119` with 3,394-job warning-free check, 40 foundational-only probes
+and independent source/mathematical/honesty review; BALANCED now consumes
+that endpoint in the actual Plucker orbit assembly.

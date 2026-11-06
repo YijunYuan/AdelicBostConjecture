@@ -924,30 +924,57 @@ Uniqueness also shows that the decomposition is independent of the
 basis chosen to construct it.
 \end{proof}
 
+\begin{lemma}[Polynomial detection on the unitary group]
+\label{lem:balanced-full-unitary-density}
+\uses{lem:balanced-polar-log,lem:balanced-localization-detection}
+\lean{BostConjecture.InvariantTheory.infinite_circle_values,BostConjecture.InvariantTheory.polynomial_eq_zero_of_eval_circle,BostConjecture.InvariantTheory.exists_unitary_diagonal_unitary,BostConjecture.InvariantTheory.eval_eq_zero_unitary_diagonal_unitary,BostConjecture.InvariantTheory.eval_eq_zero_of_unitary_of_isUnit,BostConjecture.InvariantTheory.polynomial_eq_zero_of_eval_unitary}\leanok
+\source{maithani-reynolds:prop:U-GL-dense}\source{maithani-reynolds:lem:vanishing-on-product-infinite-sets}
+Let $n$ be a finite index set. Every invertible complex $n$-by-$n$
+matrix has the form $u\operatorname{diag}(d)v$, with $u,v$ unitary
+and $d\in\mathbb C^n$. If a polynomial in the matrix entries vanishes
+on every unitary matrix, it is the zero polynomial.
+\end{lemma}
+\begin{proof}
+For an invertible operator $T$, its polar factor $P$ is an isometry:
+write $x=|T|y$, then
+$\|Px\|=\|Ty\|=\||T|y\|=\|x\|$. In finite dimension it is unitary.
+The positive Hermitian factor $Q=|T|$ is diagonalized by the Hermitian
+spectral theorem: $Q=w\operatorname{diag}(d)w^*$ for a unitary $w$.
+Thus $T=(Pw)\operatorname{diag}(d)w^*$, proving the first assertion.
+These identities are carried between operators and matrices by their
+star-algebra equivalence in an orthonormal basis.
+
+The complex unit circle is infinite: the exponential $t\mapsto e^{it}$
+is injective on $[0,\pi]$. A polynomial on a product of unit circles
+vanishes identically if it vanishes at all such points, by the finite-root
+bound applied one variable at a time. For fixed unitary $u,v$, substitute
+$u\operatorname{diag}(z)v$ in the given polynomial $p$. Its entries are
+$\sum_k u_{ik}v_{kj}z_k$, so this substitution is a polynomial in $z$.
+For unit-circle coordinates $z$, the substituted matrix is unitary.
+Consequently this polynomial is zero, and $p$ vanishes at every
+$u\operatorname{diag}(d)v$. The first assertion gives vanishing on all
+invertible matrices. Finally the generic determinant $D$ is nonzero
+(it takes value one at the identity). The polynomial $pD$ vanishes on
+all matrices, whether $D$ is zero or nonzero. Polynomial uniqueness
+over the infinite field $\mathbb C$ gives $pD=0$, and the polynomial
+ring is a domain, so $p=0$. This supplies the full-unitary density
+step needed by the special-unitary retraction argument below.
+\end{proof}
+
 \begin{lemma}[Special-unitary Zariski density]
 \label{lem:balanced-unitary-density}
+\uses{lem:balanced-full-unitary-density}
 \source{maithani-reynolds:prop:SU-SL-dense}\notready
 The subgroup $K=\SU(U)\times\SU(W)$ is Zariski dense in
 $G=\SL(U)\times\SL(W)$ for finite-dimensional complex Hermitian
 spaces $U,W$.
 \end{lemma}
 \begin{proof}
-In orthonormal coordinates, first consider $\mathrm U(n)$ in
-$\mathrm{GL}_n(\mathbb C)$, with Zariski closure $C$.
-A polynomial vanishing on $\mathrm U(n)$ vanishes on all diagonal
-unitary matrices. Its restriction to diagonal matrices is a polynomial
-vanishing on a product of infinite unit circles, hence is zero:
-fix all but one variable, apply the finite-root theorem, and induct
-on the number of variables. Thus $C$ contains all invertible diagonal
-matrices.
-
-The set $C$ is a subgroup. Inversion preserves it, and each left or
-right translation by an element of $\mathrm U(n)$ preserves it.
-For fixed $c\in C$, the inverse image of $C$ under the regular map
-$g\mapsto gc$ is closed and contains $\mathrm U(n)$, hence contains
-$C$. Therefore $CC\subseteq C$. Polar decomposition and diagonalizing
-its positive factor express any invertible matrix as $u d v$ with
-$u,v$ unitary and $d$ invertible diagonal. Consequently $C=\mathrm{GL}_n$.
+In orthonormal coordinates, the preceding lemma shows that
+$\mathrm U(n)$ is Zariski dense in $\mathrm{GL}_n(\mathbb C)$.
+Indeed regular functions on the latter are polynomials divided by
+powers of the determinant, and a numerator vanishing on all unitary
+matrices is zero.
 
 For $n>0$, the regular retraction
 $r(g)=\operatorname{diag}((\det g)^{-1},1,\ldots,1)g$
@@ -959,9 +986,8 @@ two compact groups vanishes first for all elements of the first
 special linear factor with the second fixed compact, and then for
 all elements of the second factor. This proves product density.
 The retraction argument follows
-\cite[Appendix A, Proposition A.6]{maithani-reynolds}; the subgroup
-argument uses separate regular translations, without asserting joint
-continuity for the product of the point-set Zariski topologies.
+\cite[Appendix A, Proposition A.6]{maithani-reynolds}; the polynomial test for product density uses separate substitution
+in each factor.
 \end{proof}
 
 \begin{lemma}[Averaging a finite-dimensional compact orbit]

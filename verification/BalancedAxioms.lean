@@ -15,6 +15,7 @@ import BostConjecture.InvariantTheory.SpecialLinearBaseChange
 import BostConjecture.InvariantTheory.PolynomialBaseChange
 import BostConjecture.InvariantTheory.HomogeneousComponents
 import BostConjecture.InvariantTheory.CompactAverage
+import BostConjecture.InvariantTheory.UnitaryDensity
 
 #print axioms BostConjecture.Balanced.trace_starProjection_comp
 #print axioms BostConjecture.Balanced.trace_starProjection_comp_eq_sum
@@ -194,3 +195,10 @@ import BostConjecture.InvariantTheory.CompactAverage
 #print axioms BostConjecture.InvariantTheory.linearMap_compactRepresentationAverage_of_constant
 #print axioms BostConjecture.InvariantTheory.compactRepresentationAverage_of_mem_invariants
 #print axioms BostConjecture.InvariantTheory.exists_probability_leftInvariant_measure
+
+#print axioms BostConjecture.InvariantTheory.infinite_circle_values
+#print axioms BostConjecture.InvariantTheory.polynomial_eq_zero_of_eval_circle
+#print axioms BostConjecture.InvariantTheory.exists_unitary_diagonal_unitary
+#print axioms BostConjecture.InvariantTheory.eval_eq_zero_unitary_diagonal_unitary
+#print axioms BostConjecture.InvariantTheory.eval_eq_zero_of_unitary_of_isUnit
+#print axioms BostConjecture.InvariantTheory.polynomial_eq_zero_of_eval_unitary
