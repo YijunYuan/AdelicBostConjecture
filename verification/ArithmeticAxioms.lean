@@ -5,6 +5,7 @@ import BostConjecture.Arithmetic.IrreducibleSemistable
 import BostConjecture.Arithmetic.RestrictionOfScalars
 import BostConjecture.Arithmetic.IndependentTensorSemistable
 import BostConjecture.Arithmetic.IrreducibleDualSemistable
+import BostConjecture.Arithmetic.IndependentPiSemistable
 import BostConjecture.Arithmetic.ExactDegree
 import BostConjecture.Arithmetic.QuotientMetric
 import BostConjecture.Arithmetic.IntegralDeterminantProduct
@@ -368,3 +369,12 @@ import BostConjecture.Arithmetic.DeterminantProduct
 #print axioms BostConjecture.Arithmetic.HermitianMetric.dualRiesz_action
 #print axioms BostConjecture.Arithmetic.HermitianMetric.dual_action_inner
 #print axioms BostConjecture.Arithmetic.HermitianMetric.isSemistable_dual_of_complex_irreducible
+#print axioms BostConjecture.Arithmetic.span_representation_eq_top
+#print axioms BostConjecture.Arithmetic.isIrreducible_of_span_eq_top
+#print axioms BostConjecture.Arithmetic.independentPiRepresentation
+#print axioms BostConjecture.Arithmetic.span_independentPiRepresentation_eq_top
+#print axioms BostConjecture.Arithmetic.isIrreducible_independentPi
+#print axioms BostConjecture.Arithmetic.span_fiberSection_piTensor
+#print axioms BostConjecture.Arithmetic.complexPiRepresentationEquiv
+#print axioms BostConjecture.Arithmetic.HermitianMetric.piTensor_action_inner
+#print axioms BostConjecture.Arithmetic.HermitianMetric.isSemistable_piTensor_and_dual_of_complex_irreducible
