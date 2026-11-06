@@ -34,6 +34,36 @@ inclusion through the larger submodule proves monotonicity; the endpoint
 claims follow from the zero and identity tensor maps.
 \end{proof}
 
+\begin{lemma}[Composition and tensor products of quotient metrics]
+\label{lem:tensor-quotient-transport}
+\uses{lem:tensor-saturated-submodule}
+\source{bost-specht-manuscript:page-0013}
+\lean{BostConjecture.Arithmetic.HermitianMetric.pushforward_comp,BostConjecture.Arithmetic.HermitianMetric.tensor_map_pushforward}
+For surjections $f:M\to M'$ and $q:M'\to M''$ of finite
+$\Ocal_K$-modules, the successive quotient metric equals the quotient
+metric for $qf$. For two surjections $f:M\to M'$ and $g:N\to N'$,
+the quotient metric on $M'\otimes N'$ induced by $f\otimes g$
+is the Hilbert tensor product of the two quotient metrics.
+\end{lemma}
+\begin{proof}
+At each complex embedding let $s_f$ be the orthogonal right inverse
+of $f$ and let $s_q$ be that of $q$ for the quotient metric.
+For $u\in\ker(qf)$, write $u=s_f(fu)+v$ with $v\in\ker f$.
+Then $fu\in\ker q$, and for every $z$,
+\[
+ \langle u,s_fs_qz\rangle
+ =\langle s_f(fu),s_fs_qz\rangle
+ =\langle fu,s_qz\rangle=0.
+\]
+Also $qf(s_fs_qz)=z$. Thus $s_fs_q$ is the orthogonal right
+inverse of $qf$, proving the first assertion by the definition of
+the quotient inner product. The quotient identity for $f\otimes1$
+is the preceding tensor quotient lemma. The tensor flip is an isometry,
+so it gives the identity for $1\otimes g$. Factoring
+$f\otimes g=(1\otimes g)(f\otimes1)$ and applying the first assertion
+proves the second.
+\end{proof}
+
 \begin{lemma}[Saturated tensor refinement steps]
 \label{lem:tensor-refinement-saturated}
 \uses{lem:tensor-saturated-submodule}
@@ -114,7 +144,7 @@ $E_0=F_0=0$ and $E_p=E$, with remainder zero at $k=pq$.
 
 \begin{lemma}[Hermitian grades of the HN tensor filtration]
 \label{lem:hn-tensor-grades}
-\uses{lem:hn-tensor-filtration,lem:tensor-saturated-submodule}
+\uses{lem:hn-tensor-filtration,lem:tensor-saturated-submodule,lem:tensor-quotient-transport}
 \source{bost-specht-manuscript:page-0013}
 \notready
 With the preceding notation, for $0\leq i<p$, $0\leq j<q$, the
