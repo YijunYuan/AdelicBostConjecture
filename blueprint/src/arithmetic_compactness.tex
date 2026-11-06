@@ -94,9 +94,64 @@ degree remains at most zero in the limit. Thus all semistability
 inequalities persist.
 \end{proof}
 
+\begin{lemma}[Attainment of the maximum saturated degree]
+\label{lem:maximum-saturated-degree}
+\uses{lem:degree-finiteness}
+\lean{BostConjecture.Arithmetic.HermitianMetric.exists_max_degree_submodule,BostConjecture.Arithmetic.HermitianMetric.exists_degree_eq_maxDegree,BostConjecture.Arithmetic.HermitianMetric.maxDegree_nonneg}
+\source{bost-specht-manuscript:page-0011,bost-specht-manuscript:page-0012}
+For a finite projective $\Ocal$-module $A$ with a Hermitian metric $h$,
+there is a saturated submodule $P\subseteq A$ such that
+$\degn_h(Q)\leq\degn_h(P)$ for every saturated $Q\subseteq A$.
+The maximum, denoted $\mathcal D(h)$, is nonnegative.
+\end{lemma}
+\begin{proof}
+The zero submodule is saturated because $A$ is torsion free, and its
+degree is zero. By degree finiteness the set of saturated submodules
+of nonnegative degree is finite and nonempty. Choose a member of
+largest degree in this finite set. Any saturated submodule outside
+the set has negative degree and therefore has degree no greater than
+the chosen member. This proves both assertions, including when $A$
+has rank zero.
+\end{proof}
+
+\begin{lemma}[Uniform comparison of induced degrees]
+\label{lem:metric-degree-comparison}
+\uses{def:hermitian-degree}
+\source{bost-specht-manuscript:page-0012}
+\notready
+Let $h,g$ be Hermitian metrics on a finite projective $\Ocal$-module
+$A$. Suppose $t\geq0$ and
+\[
+ e^{-t}\|x\|_{h,\sigma}\leq\|x\|_{g,\sigma}
+ \leq e^t\|x\|_{h,\sigma}
+\]
+for every complex embedding $\sigma$ and every vector in its complex
+fiber. For every integral submodule $P\subseteq A$ of generic rank $b$,
+\[
+ |\degn_g(P)-\degn_h(P)|\leq bt.
+\]
+Consequently, writing $a=\operatorname{rk}A$,
+$|\mathcal D(g)-\mathcal D(h)|\leq at$.
+\end{lemma}
+\begin{proof}
+The same norm comparisons hold on the induced metrics of $P$, since
+its fiber injects into that of $A$. The identity from the metric
+$e^th$ to $g$ is a contraction, where $e^th$ means that every norm is
+multiplied by $e^t$. The determinant contraction inequality and the
+rescaling formula give
+$\degn_h(P)-bt\leq\degn_g(P)$.
+The lower norm comparison says that the identity from $e^tg$ to $h$
+is a contraction. It gives the reverse bound
+$\degn_g(P)-bt\leq\degn_h(P)$, proving the absolute-value estimate.
+Every submodule has $b\leq a$. Apply the estimate to a saturated
+maximizer for $g$ and then to one for $h$; their existence follows
+from the preceding lemma. The two resulting inequalities give the
+claim for $\mathcal D$.
+\end{proof}
+
 \begin{lemma}[The maximum degree and openness of strict stability]
 \label{lem:degree-maximum-continuity}
-\uses{lem:degree-finiteness,lem:restriction-covolume}
+\uses{lem:degree-finiteness,lem:maximum-saturated-degree,lem:metric-degree-comparison}
 \source{bost-specht-manuscript:page-0011,bost-specht-manuscript:page-0012}
 \notready
 For every Hermitian bundle $A$, the number
