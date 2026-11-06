@@ -1101,3 +1101,18 @@ session LSP trees under memory pressure; no process was killed. GEOM remains
 active, not done or blocked. Scratch cleanup found no stale candidates.
 The graph's unattached-helper coverage warning is the previously recorded
 intentional warning, not a mathematical completion statement.
+
+Finalization retry: the accepted graph snapshot contains 318 blueprint nodes,
+2,126 declarations and 1,639 edges, with no missing-reference warning; the
+1,008 unattached declarations remain the documented helper-coverage warning.
+All GEOM-owned source was already committed at e771072. Remaining dirty paths
+belong to concurrent arithmetic lanes or pre-existing workspace inputs and
+were excluded from this checkpoint.
+
+The new I-0098 handoff 1eb4f44 delivers `Arithmetic.Specht.DeterminantBundle`
+(preceded by f7155b5, e869a94 and 4480ac7). Its owner reports 9,180 checked
+jobs, 16 foundational-only probes and independent honesty/source acceptance
+for the actual determinant metric, every-fiber Gram comparison and tensor/dual
+semistability. GEOM acknowledged this for next-round root integration; it is
+not included in the 9,334-job root evidence above. Exact and geometric slopes
+remain the successor's obligations. This finalization adds no Lean claim.
