@@ -1,6 +1,6 @@
 # Parallel Horizon scheduling
 
-## Live checkpoint at 2026-11-06 04:53 UTC
+## Live checkpoint at 2026-11-06 04:57 UTC
 
 The user requests **four continuing Horizon proof lanes until the entire main
 theorem and its used dependencies are complete**, with no budget cap. The parent
@@ -16,8 +16,8 @@ or push is authorized.
 | `0011` | `BOST-MAIN` | HN tensor filtration, maximal-slope theorem and shared integration |
 | `0012` | `BOST-TENSOR-SEMI` | Arithmetic first variation, extremal-to-balance and tensor semistability |
 
-MAIN and TENSOR started at 03:12 UTC, PIDs 765334/765881. Both currently
-continue in session `0004`; a normal round handoff does not free a slot.
+MAIN and TENSOR started at 03:12 UTC, PIDs 765334/765881. MAIN now continues in
+session `0006`, TENSOR in `0004`; a normal round handoff does not free a slot.
 LINE and STRICT completed and exited 0 at 04:51:03 and 04:52:00 respectively.
 Their accepted scope is now read-only. Remaining runs stay foreground.
 Standing protection **I-0126** supersedes archived I-0104/I-0121/I-0123.
@@ -132,6 +132,17 @@ covolume asymptotic `e2e7039`/`8d57641`; CLOSURE `0007` exited 01:16:41,
 proof `53f1119`, root `d29f2d3`, evidence `f7ffd4f`, 40 probes. Do not resume.
 
 ## Resource and runtime checkpoint
+
+At the 04:57 bounded reassessment, all predecessor handoffs and both final
+successor exits are durably recorded. The remaining proof obligation is actual
+extremal balance, then unconditional tensor semistability and MAIN's binary/
+finite-family equalities. There is no new exploration or replacement task.
+Arithmetic conjugation/trace transport has 59 foundation-only probes and
+independent source/math/honesty acceptance. The newer ArithmeticDefect module
+passed its narrow kernel check at 04:56:59; MAIN's integral/generic filtration
+adapter and tensor unit work passed at 04:57:09. These new checks do not certify
+the still-open balance or main theorem. Scratch dry-run found no stale
+candidates, protected runs 0011/0012, and dashboard HTTP health was 200.
 
 At 04:35, renewed pressure reached PSI avg10 7.59%/avg60 4.30%, with
 5.66 GiB available and increased swap, but no OOM. I-0131 requested a normal
