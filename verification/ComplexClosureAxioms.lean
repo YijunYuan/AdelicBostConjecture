@@ -2,6 +2,7 @@ import BostConjecture.InvariantTheory.ComplexClosure.Coordinates
 import BostConjecture.InvariantTheory.ComplexClosure.Roots
 import BostConjecture.InvariantTheory.ComplexClosure.IntegralLifting
 import BostConjecture.InvariantTheory.ComplexClosure.FiniteFiber
+import BostConjecture.InvariantTheory.ComplexClosure.Normalization
 
 #print axioms BostConjecture.InvariantTheory.polynomialEval_equivMvPolynomial_symm
 #print axioms BostConjecture.InvariantTheory.polynomialEval_eq_eval_equivMvPolynomial
@@ -22,3 +23,7 @@ import BostConjecture.InvariantTheory.ComplexClosure.FiniteFiber
 #print axioms BostConjecture.InvariantTheory.exists_monic_coordinate_relation
 #print axioms BostConjecture.InvariantTheory.finite_zeroLocus_fiber
 #print axioms BostConjecture.InvariantTheory.exists_bound_zeroLocus_fibers
+#print axioms BostConjecture.InvariantTheory.exists_point_of_quotient_algHom
+#print axioms BostConjecture.InvariantTheory.exists_monic_lifting_polynomial
+#print axioms BostConjecture.InvariantTheory.exists_lifts_tendsto_subseq
+#print axioms BostConjecture.InvariantTheory.isOpenMap_polynomial_normalization

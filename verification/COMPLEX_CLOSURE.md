@@ -113,7 +113,33 @@ Brasca, Paul Lezeau, Junyan Xu), `RingTheory/Ideal/GoingUp.lean`
 `FieldTheory/IsAlgClosed/Basic.lean` (`IsAlgClosed.lift`), and
 `RingTheory/Ideal/Quotient/Operations.lean` (`AlgHom.liftOfSurjective`).
 The dependency cones are covered by the transitive probes. Consumer:
-finite-normalization openness/density, still unproved. No copied source.
+finite-normalization openness below, then density, still unproved. No copied source.
+
+## Checked normalization openness
+
+`ComplexClosure.Normalization` proves point detection for quotient characters,
+realization of every specialized root of the actual minimal polynomial, and
+subsequence lifting to a chosen point. It combines the coordinate-product
+separator, root persistence, uniform coordinate bounds and compactness to
+prove `isOpenMap_polynomial_normalization`. The hypotheses are a prime ideal
+and an integral injective polynomial coordinate map; construction of such a
+map by Noether normalization is the next obligation.
+
+The explicit-root kernel build passed **3,332 jobs**, warning-free, at
+00:32:21 UTC on 2026-11-06 (fingerprint `6a59255ca0121606`). The expanded
+audit passed **23 transitive probes** at 00:33:43 UTC, all foundational-only.
+The audit waited 28.717 seconds for the shared slot. Guarded LSP diagnostics
+are clear. Independent honesty/mathematical review accepted the proof and
+empty arities; its two blueprint precision corrections are incorporated:
+the proof uses a convergent subsequence, and only its two stated conclusions
+are attached to the new `leanok` node. Full constructible closure equality
+remains open.
+
+Additional unmodified Mathlib imports at the pinned revision:
+`RingTheory/Polynomial/UniqueFactorization.lean` (multivariate polynomial UFD),
+`RingTheory/Polynomial/RationalRoot.lean` (UFDs are integrally closed),
+`Topology/Sequences.lean` (`IsCompact.tendsto_subseq`, `IsSeqClosed.isClosed`),
+and `Topology/Compactness/Compact.lean` (`isCompact_univ_pi`). No source copied.
 
 ## Operational boundary
 
