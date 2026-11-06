@@ -1,0 +1,5 @@
+import BostConjecture.Arithmetic.Specht.Representation
+
+#print axioms BostConjecture.Arithmetic.Specht.complexRepresentation_irreducible
+#print axioms BostConjecture.Arithmetic.Specht.latticeComplexCore_action_inner
+#print axioms BostConjecture.Arithmetic.Specht.scalarExtensionRepresentationEquiv

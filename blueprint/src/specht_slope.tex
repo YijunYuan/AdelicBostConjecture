@@ -1,5 +1,65 @@
 \chapter{Determinant--Specht bundles and the geometric slope inequality}
 
+\begin{lemma}[The integral Specht action and its complex metric]
+\label{lem:arithmetic-specht-action}
+\uses{def:rectangular-specht}
+\source{bost-specht-manuscript:page-0004,bost-specht-manuscript:page-0009}
+\lean{BostConjecture.Arithmetic.Specht.integralRepresentation,BostConjecture.Arithmetic.Specht.complexRepresentationEquiv,BostConjecture.Arithmetic.Specht.complexRepresentation_irreducible,BostConjecture.Arithmetic.Specht.latticeComplexCore_action_inner,BostConjecture.Arithmetic.Specht.scalarExtensionRepresentationEquiv}
+\leanok
+Let $L$ be the integral orbit lattice of a polytabloid of shape $\lambda$.
+Position permutations define a representation of $\mathfrak S_d$ on $L$.
+Its complexification is equivariantly isomorphic to the complex Specht
+representation of shape $\lambda$, and is irreducible. The Hermitian form
+induced from orthonormal word coordinates is invariant under this action.
+For every commutative ring $R$ with a homomorphism $R\to\mathbb C$, the
+canonical identification
+$\mathbb C\otimes_R(R\otimes_{\mathbb Z}L)\simeq
+\mathbb C\otimes_{\mathbb Z}L$ intertwines the two permutation actions.
+\end{lemma}
+\begin{proof}
+The orbit span is stable under position permutations: applying $g$ to
+$h e_t$ gives $(gh)e_t$, and the action preserves integer linear
+combinations. Restricting the word representation therefore gives the
+asserted integral representation. The complexified inclusion identifies
+its image with the complex span of these same orbit vectors, namely the
+Specht module. It is injective because complex scalar extension is flat
+over $\mathbb Z$. The identification intertwines each permutation on
+integral generators and hence on their complex span. Irreducibility is
+the characteristic-zero irreducibility theorem for complex Specht modules.
+In word coordinates the action sends the coefficient at $w$ to that at
+$w\circ g$. This is a permutation of the finite coordinate set, so it
+preserves $\sum_w\overline{x_w}y_w$. Finally, cancellation of scalar
+extension sends $z\otimes(r\otimes x)$ to $z\,r\otimes x$; applying
+a permutation to $x$ commutes with this formula. Additivity extends the
+identity to all tensors.
+\end{proof}
+
+\begin{lemma}[The arithmetic Specht lattice is semistable]
+\label{lem:arithmetic-specht-semistable}
+\uses{lem:arithmetic-specht-action,lem:irreducible-semistable}
+\source{bost-specht-manuscript:page-0009}
+\notready
+For a number field $K$, equip $\Ocal_K\otimes_{\mathbb Z}L$ with the
+word Gram form at every complex embedding, using the canonical
+scalar-extension cancellation. This is a Hermitian vector bundle, and
+its actual integral permutation representation is isometric in every
+archimedean fiber. The bundle is semistable.
+\end{lemma}
+\begin{proof}
+The integral lattice $L$ is finite free and nonzero, so its scalar
+extension is finite free of the same positive rank. Cancellation of
+scalar extension transports the positive-definite word form to each
+complex fiber. For a pure integral tensor $r\otimes x$, its word
+coefficients at $\sigma$ are $\sigma(r)x_w$. Replacing $\sigma$ by its
+conjugate conjugates these coefficients because $x_w$ is an integer.
+The same identity holds for sums, and shows that the resulting forms
+satisfy conjugation compatibility. The equivariance and invariance in
+Lemma~\ref{lem:arithmetic-specht-action} give the asserted isometric
+action in every fiber. At any one complex embedding the representation
+is irreducible by that lemma. The irreducible isometric action criterion
+therefore gives semistability.
+\end{proof}
+
 \begin{lemma}[Determinant-isotypic integral modules]
 \label{lem:determinant-isotypic}
 \uses{def:rectangular-specht,lem:rectangular-invariants,lem:determinant-twisted-free-inclusion,lem:determinant-free-base-change,lem:determinant-free-naturality,lem:tensor-base-change-equivalence,lem:determinant-free-base-change-square,lem:linear-map-localization-descent,lem:determinant-chart-tower,lem:finite-projective-frames,lem:projective-determinant-inclusion,lem:degree-calculus}
