@@ -1,5 +1,55 @@
 \section{Complex algebraic orbit closures}
 
+\begin{lemma}[Intrinsic polynomials in coordinates]
+\label{lem:complex-closure-coordinates}
+\uses{lem:balanced-intrinsic-polynomials,lem:balanced-invariant-sufficient}
+\lean{BostConjecture.InvariantTheory.polynomialEval_equivMvPolynomial_symm,BostConjecture.InvariantTheory.polynomialEval_eq_eval_equivMvPolynomial,BostConjecture.InvariantTheory.polynomialZariskiClosure_eq_preimage_zeroLocus,BostConjecture.InvariantTheory.isClosed_zeroLocus,BostConjecture.InvariantTheory.continuous_polynomialEval,BostConjecture.InvariantTheory.isClosed_polynomialZariskiClosure,BostConjecture.InvariantTheory.closure_subset_polynomialZariskiClosure}\leanok
+Let $E$ be a finite-dimensional vector space over a field $K$, with basis
+$(b_i)_{i\in T}$ and coordinate isomorphism $c:E\to K^T$. The canonical
+algebra isomorphism
+\[
+ \operatorname{Sym}(E^*)\longrightarrow K[X_i\mid i\in T],
+ \qquad b_i^*\longmapsto X_i,
+\]
+intertwines evaluation at $x$ and at $c(x)$. Consequently, for every
+$S\subseteq E$, its intrinsic polynomial Zariski closure is
+$c^{-1}(V(I(c(S))))$, where $I$ denotes the vanishing ideal.
+If $K=\mathbb C$ and $E$ carries a complex norm, this closure is
+Euclidean closed and contains the Euclidean closure of $S$.
+\end{lemma}
+\begin{proof}
+Both evaluation maps are algebra homomorphisms and agree on each generator
+$b_i^*$, whose value is the $i$th coordinate of $x$. Thus they agree on
+the whole symmetric algebra. The isomorphism is surjective, so testing
+all intrinsic polynomials vanishing on $S$ is equivalent to testing all
+coordinate polynomials vanishing on $c(S)$. This gives the asserted
+zero-locus identity. In the complex case the coordinate map is continuous
+because every linear map on a finite-dimensional normed space is continuous.
+Each coordinate polynomial is continuous, so its zero set is closed.
+Arbitrary intersections of these zero sets, and their preimages under $c$,
+are closed. The intrinsic polynomial closure contains $S$ by definition,
+and therefore contains its Euclidean closure.
+\end{proof}
+
+\begin{lemma}[Persistence of roots of monic polynomials]
+\label{lem:complex-closure-root-persistence}\notready
+Let $F_k\in\mathbb C[T]$ be monic of a fixed positive degree $r$, and
+let $z\in\mathbb C$. If $F_k(z)\to0$, there are roots $z_k$ of $F_k$
+such that $z_k\to z$.
+\end{lemma}
+\begin{proof}
+Each $F_k$ has exactly $r$ roots counted with multiplicity, and at least
+one root since $r>0$. Choose $z_k$ minimizing distance to $z$ among
+these roots. The monic factorization gives
+\[
+ |z_k-z|^r\leq\prod_{w:F_k(w)=0}|z-w|=|F_k(z)|,
+\]
+where the product counts multiplicities. For each $\epsilon>0$, the
+right side is eventually less than $\epsilon^r$, so
+$|z_k-z|<\epsilon$ eventually. This is precisely $z_k\to z$;
+no assumption on multiplicities is needed.
+\end{proof}
+
 \begin{lemma}[Constructible images]
 \label{lem:balanced-constructible-image}
 \source{milne-algebraic-geometry:page-0201}\notready
@@ -44,6 +94,7 @@ This is the affine form of \cite[Theorem 9.7]{milne-algebraic-geometry}.
 
 \begin{lemma}[Complex and Zariski constructible closures]
 \label{lem:balanced-constructible-closure}
+\uses{lem:complex-closure-root-persistence,lem:complex-closure-coordinates}
 \source{milne-algebraic-geometry:page-0201}\notready
 A constructible subset of a complex affine variety has the same
 Euclidean and Zariski closures.

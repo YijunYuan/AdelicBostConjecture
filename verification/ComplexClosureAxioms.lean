@@ -1,0 +1,9 @@
+import BostConjecture.InvariantTheory.ComplexClosure.Coordinates
+
+#print axioms BostConjecture.InvariantTheory.polynomialEval_equivMvPolynomial_symm
+#print axioms BostConjecture.InvariantTheory.polynomialEval_eq_eval_equivMvPolynomial
+#print axioms BostConjecture.InvariantTheory.polynomialZariskiClosure_eq_preimage_zeroLocus
+#print axioms BostConjecture.InvariantTheory.isClosed_zeroLocus
+#print axioms BostConjecture.InvariantTheory.continuous_polynomialEval
+#print axioms BostConjecture.InvariantTheory.isClosed_polynomialZariskiClosure
+#print axioms BostConjecture.InvariantTheory.closure_subset_polynomialZariskiClosure
