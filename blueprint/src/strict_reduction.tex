@@ -1,0 +1,62 @@
+\chapter{Strictly stable maximizing counterexamples}
+
+\begin{lemma}[Minimal-rank strictly stable maximizing factors]
+\label{lem:strict-maximizing-counterexample}
+\uses{lem:line-twist,lem:normalized-semistable-extension,lem:semistable-normalization,lem:degree-calculus,lem:maximizing-semistable-pair}
+\source{bost-specht-manuscript:page-0012,bost-specht-manuscript:page-0013}
+\notready
+Suppose that over a number field $K$ there is a positive-rank pair
+of normalized semistable Hermitian projective $\Ocal_K$-modules
+whose actual Hilbert tensor product is not semistable. Then there
+are actual Hermitian projective modules $E,F$, of ranks $m,n\geq2$,
+with strictly stable degree-zero metrics, and a saturated submodule
+$S\subset E\otimes F$, such that
+\[
+ 0<\degn(S)=\mathcal D(E\otimes F).
+\]
+Moreover $\mathcal D(E\otimes F)$ is the greatest value of the
+tensor maximum degree among all actual normalized semistable pairs
+of ranks $m,n$. This assertion imposes no freeness hypothesis.
+\end{lemma}
+\begin{proof}
+Among positive-rank normalized semistable counterexample pairs choose
+one whose rank sum $m+n$ is least. Such a least sum exists by
+well-ordering of the natural numbers. The line-twist lemma shows
+that neither rank can be one, so $m,n\geq2$. Every normalized
+semistable pair of positive ranks with smaller sum has semistable
+tensor product, by minimality.
+
+The chosen tensor product has degree zero by the tensor degree formula.
+Its failure of semistability therefore gives an integral submodule of
+positive degree. Saturation preserves rank and increases degree,
+so its maximum saturated degree is positive. The actual maximizing-pair
+lemma now gives a normalized semistable pair $E,F$ of the same ranks
+and a saturated submodule $S$ attaining its tensor maximum degree,
+which is greatest among all such pairs. This maximum is at least
+the positive value of the original pair, so $\degn(S)>0$.
+In particular, this new pair is also a counterexample and still has
+the minimal rank sum.
+
+If $E$ had a nonzero proper saturated submodule $A$ of degree zero,
+then $A$ is normalized semistable by restriction of the inequalities
+for $E$. Its quotient $E/A$ is normalized semistable too: the inverse
+image of a submodule of positive degree would, by degree additivity,
+have positive degree in $E$. Both $A$ and $E/A$ are finite projective
+of positive ranks strictly smaller than $m$: saturation gives a
+torsion-free quotient, and over $\Ocal_K$ finite torsion-free modules
+are projective. By minimality, both $A\otimes F$ and $(E/A)\otimes F$
+are normalized semistable. Tensoring the exact sequence by the
+projective module $F$ preserves exactness. Its induced and quotient
+metrics agree with the Hilbert tensor metrics: in each archimedean
+fiber the orthogonal decomposition of $E$ along $A$ tensors to the
+orthogonal decomposition of $E\otimes F$ along $A\otimes F$.
+The normalized extension lemma then makes $E\otimes F$ semistable,
+a contradiction.
+
+All proper nonzero saturated submodules of the semistable normalized
+$E$ have nonpositive degree. The exclusion of equality therefore
+makes all of these degrees strictly negative, which is strict
+stability of $E$. The same argument, with the factors interchanged,
+proves strict stability of $F$. These are the required factors and
+attaining submodule.
+\end{proof}

@@ -1,0 +1,30 @@
+\chapter{Hermitian line twists}
+
+\begin{lemma}[Semistability under a Hermitian line twist]
+\label{lem:line-twist}
+\uses{lem:degree-calculus}
+\source{bost-specht-manuscript:page-0012,bost-specht-manuscript:page-0013}
+\notready
+Let $K$ be any number field, $L$ a rank-one Hermitian projective
+$\Ocal_K$-module, and $E$ a positive-rank Hermitian projective
+$\Ocal_K$-module. Tensoring by $L$ preserves semistability and shifts
+every positive-rank submodule slope, as well as the ambient slope,
+by $\degn(L)$. In particular, if $E$ is semistable, both actual
+Hilbert tensor products $L\otimes E$ and $E\otimes L$ are semistable.
+No principal-ideal or freeness hypothesis on $L$ is imposed.
+\end{lemma}
+\begin{proof}
+An invertible module $L$ gives inverse correspondences
+$B\mapsto L\otimes B$ and $C\mapsto L^\vee\otimes C$ between
+submodules of $E$ and of $L\otimes E$. Local trivializations show
+that ranks and saturation are preserved. At each archimedean place,
+the line tensor factor multiplies every vector norm by the norm of a
+line generator; hence these correspondences preserve the induced
+metric up to that same line twist. The degree formula shifts every
+submodule slope, as well as the ambient slope, by $\degn(L)$, so
+their comparisons are unchanged.
+The tensor symmetry $E\otimes L\simeq L\otimes E$ preserves the
+Hilbert metric: this follows on pure tensors from the product formula
+for the inner product, and then on all tensors by sesquilinearity.
+It therefore transfers the same assertion to the other tensor order.
+\end{proof}
