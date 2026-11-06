@@ -1036,13 +1036,16 @@ fibers; unused strict-stability terminology was removed from this attached
 node. Normalized still means exactly slope=0. The calculus node attaches
 exact/tensor/dual/contraction/saturation/scaling producers; line twisting is
 the rank-one tensor specialization. Honesty review approved this reconciliation.
-Final root integration of the finiteness endpoint is pending.
+Final root integration of the finiteness endpoint is pending. The final
+blueprint marker reconciliation was captured by the successor baseline
+b3a4bcd; its evidence is the independently checked arithmetic producers
+and scoped reviews recorded here, not that whole-workspace snapshot.
 
 Ground independently confirmed the smaller finiteness route: bounded short
 sections in the fixed exterior module, followed by Plucker recovery and
 saturation. The general covolume node was retained for its live compactness
-consumer. I-0085 proposes that as a disjoint successor lane; no ownership
-transfer has yet been activated. I-0084 documents costly global search-index
+consumer. I-0087 activates COVOLUME as the disjoint successor lane; its exclusive
+write set excludes all established arithmetic APIs. I-0084 documents costly global search-index
 rebuilds; guarded local search is used between stable checkpoints.
 
 ### Exact restriction-covolume successor handoff (I-0085)
@@ -1051,7 +1054,8 @@ The complete unproved node `lem:restriction-covolume` is migrated, with its
 source anchor and dependency labels unchanged, to
 `blueprint/src/restriction_covolume.tex`; GEOM owns its shared include.
 The live consumer is `lem:arithmetic-compactness` in compactness.tex.
-No arithmetic API or writer ownership has changed in this handoff.
+I-0087 activates the successor write set below; all established arithmetic
+APIs remain owned by ARITH. GEOM included the new slice at b69f578.
 
 Stable imports are `Arithmetic.RestrictionOfScalars`, `Arithmetic.Degree`,
 `Arithmetic.FiberConjugation`, and `Arithmetic.ArchimedeanFiniteness`.
@@ -1084,7 +1088,7 @@ Canonical Mathlib inputs: `NumberField.mixedEmbedding.covolume_integerLattice`,
 and `euclidean.toMixed`, at fixed mathlib revision
 56a005855ea17e0b0958f73ec801ae140b0a1679. Required source endpoint remains
 manuscript page0011; nonfree projectives, arbitrary number fields, and rank0
-must be covered. Proposed successor write set is only
+must be covered. Activated successor write set is only
 `Arithmetic/RestrictionCovolume/**`, the migrated blueprint slice,
 `verification/RestrictionCovolumeAxioms.lean`, and
 `verification/RESTRICTION_COVOLUME.md`. Standing protection I-0087 now reserves that successor scope for COVOLUME;
