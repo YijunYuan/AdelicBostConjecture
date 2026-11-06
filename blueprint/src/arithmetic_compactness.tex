@@ -130,6 +130,31 @@ Lemma~\ref{lem:trace-multiplication-bound}. Thus the assertion applies
 to its integer matrices in compact lattice frames.
 \end{proof}
 
+\begin{lemma}[Uniform compact frames for actual trace lattices]
+\label{lem:compact-trace-frames}
+\uses{lem:restriction-covolume,lem:trace-semistable-systole,lem:mahler-frames}
+\source{bost-specht-manuscript:page-0011}\notready
+Fix a number field $K$, rank $a$, and a Euclidean space $E$ of dimension
+$Da$, with a fixed orthonormal basis. There is a compact subset
+$S\subset\operatorname{GL}_{Da}(\mathbb R)$ such that every normalized
+semistable Hermitian rank-$a$ bundle, in any orthonormal coordinates on
+its actual trace space, has an integral basis whose coordinate matrix
+belongs to $S$.
+\end{lemma}
+\begin{proof}
+Transport the actual trace lattice isometrically to $E$ using the chosen
+orthonormal coordinates. Linear isometries preserve the Euclidean Haar
+measure and hence covolume. The exact restriction-of-scalars formula and
+degree zero give covolume $\Delta_K^{a/2}>0$; the trace systole is at
+least $\sqrt D>0$. Apply the compact-frame form of Mahler's theorem in
+the single space $E$, with both covolume bounds equal to
+$\Delta_K^{a/2}$. Its compact set is independent of the bundle.
+Pull the resulting integral basis back along the isometry and the
+canonical identification of the module with its trace lattice.
+The coordinate matrix is unchanged, proving the assertion for the
+original, possibly nonfree, integral module.
+\end{proof}
+
 \begin{lemma}[Fixed integral action and actual module identifications]
 \label{lem:fixed-integral-action}
 \uses{lem:compact-frame-integral-actions}
