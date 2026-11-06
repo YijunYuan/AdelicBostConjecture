@@ -1,6 +1,6 @@
 # Parallel Horizon scheduling
 
-## Live transition at 2026-11-05 23:55 UTC
+## Live checkpoint at 2026-11-06 00:06 UTC
 
 SPECHT is complete and run `0003` exited normally after session `0030` at
 23:50:16 UTC. The exact canonical-lattice covolume limit, 14 final
@@ -9,22 +9,47 @@ integrated root passed 9,263 warning-free jobs at 23:42:25 UTC. Checked
 shared-file handoff: `e2e7039`, evidence typography `8d57641`, root blob
 `30f3a016666f4a42f99e905a434b65f63c1f8770`.
 
-ARITH `0016`, GEOM `0016` and BALANCED `0006` continue. The successor task
-`BOST-CLOSURE` is queued, not running, for the exact polynomial-image closure
-interface in `BALANCED.md`. Its exclusive paths are `InvariantTheory/ComplexClosure/**`,
+| Run | Task | Active session | Responsibility |
+| --- | --- | --- | --- |
+| `0004` | `BOST-ARITH` | `0016` | Intrinsic arithmetic HN theory and degree finiteness |
+| `0005` | `BOST-GEOM` | `0016` | Invariant tensor nonvanishing and shared integration |
+| `0006` | `BOST-BALANCED` | `0006` | Invariant extraction, actual orbit identification and full Lemma 7.2 |
+| `0007` | `BOST-CLOSURE` | `0002` | Exact complex polynomial-image closure comparison |
+
+CLOSURE started at 00:00:50 UTC in the freed SPECHT slot, PID `584941`.
+Its exclusive paths are `InvariantTheory/ComplexClosure/**`,
 `blueprint/src/complex_closure.tex`, `verification/ComplexClosureAxioms.lean`
-and `verification/COMPLEX_CLOSURE.md`. BALANCED prepared the two blueprint
-nodes; both migration files match committed HEAD. Shared integration is to
-pass to GEOM through `I-0073`, with parent activation still pending. `I-0072`
-tracks the closure split. No fifth proof writer has been launched.
+and `verification/COMPLEX_CLOSURE.md`. The fixed consumer interface is in
+`BALANCED.md`; BALANCED retains the canonical definitions and final assembly.
+The two complete blueprint proofs were migrated at `ecbcee9` and remain
+formally unproved. GEOM added their shared include and confirmed graph sync
+has no missing dependency references.
+
+Standing protection `I-0074` supersedes archived `I-0046`. GEOM now exclusively
+owns the shared root import, attribution, results and blueprint index files.
+The accepted handoffs in `I-0072` and `I-0073` have been consumed by all owners.
+No fifth proof writer has been launched.
 
 Standing permissions allow tasks/runs with a four-session cap and no budget
-limit. After SPECHT exited, memory measured 10.55 GiB available, PSI avg10
-0.00%, zero OOM kills. The old three-writer wording in the ARITH/GEOM task
-objectives was corrected without changing their mathematical objectives.
+limit. Independent read-only health review confirmed exactly four live runs
+and the guarded LSP in the new CLOSURE process. At 00:05 UTC, memory measured
+10.33 GiB available, PSI avg10 0.00%, zero OOM kills, and no swap-out increase
+over the startup sample. Dashboard HTTP returned 200. The old three-writer
+wording in the ARITH/GEOM objectives was corrected without changing their math.
 Lemma 7.2 remains open at algebraic closure comparison and invariant extraction.
 
+Recent checked advances: ARITH reports 287 foundational-only probes and
+independent review for intrinsic quotient semistability and maximal-slope
+attainment; GEOM has checked the rectangular invariant-space identification
+over algebraically closed characteristic-zero fields with 254 probes and
+source/honesty reviews; BALANCED's invariant-detection module passed its
+kernel build at 00:05 UTC. Later root integration is still pending. These
+claims do not complete the remaining tasks or the manuscript's main theorem.
+
 ## Earlier checkpoints
+
+The sections below preserve dated history; the live table and I-0074 above
+govern current ownership. Do not resume completed SPECHT run `0003`.
 
 Coordinator checkpoint: 2026-11-06 07:20 Asia/Shanghai (2026-11-05 23:20 UTC).
 
@@ -56,7 +81,7 @@ run with meaningful remaining work, keeping the total at four. For example:
 
 ```sh
 /home/yijunyuan/.local/bin/horizon --root /home/yijunyuan/bc-workspace ps --json
-/home/yijunyuan/.local/bin/horizon --root /home/yijunyuan/bc-workspace run --resume 0003 --rounds 10 --no-dashboard --json
+/home/yijunyuan/.local/bin/horizon --root /home/yijunyuan/bc-workspace run --resume 0004 --rounds 10 --no-dashboard --json
 ```
 
 Keep the command in the foreground and monitor it. Writable proof helpers also
