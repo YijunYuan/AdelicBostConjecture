@@ -1,4 +1,4 @@
-import BostConjecture.Arithmetic.RestrictionCovolume.Covolume
+import BostConjecture.Arithmetic.RestrictionCovolume.FiniteIndex
 
 #print axioms BostConjecture.Arithmetic.archimedeanSection
 #print axioms BostConjecture.Arithmetic.HermitianMetric.traceCore
@@ -24,3 +24,9 @@ import BostConjecture.Arithmetic.RestrictionCovolume.Covolume
 #print axioms BostConjecture.Arithmetic.HermitianMetric.traceCovolume_sq_eq_det
 #print axioms BostConjecture.Arithmetic.HermitianMetric.traceCovolume_eq_one_of_rank_zero
 #print axioms BostConjecture.Arithmetic.HermitianMetric.traceCovolume_eq_discr_degree_of_rank_zero
+#print axioms BostConjecture.Arithmetic.HermitianMetric.submoduleTraceLatticeEquiv
+#print axioms BostConjecture.Arithmetic.HermitianMetric.submoduleTraceLattice_discreteTopology
+#print axioms BostConjecture.Arithmetic.HermitianMetric.submoduleTraceLattice_isZLattice
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceCovolume_submodule_eq
+#print axioms BostConjecture.Arithmetic.HermitianMetric.submoduleTraceLattice_relIndex
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceCovolume_submodule

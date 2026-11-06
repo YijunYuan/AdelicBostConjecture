@@ -78,7 +78,7 @@ gives the squared norm equality.
 
 \begin{lemma}[Euclidean Haar covolume and the trace Gram matrix]
 \label{lem:trace-covolume-gram}
-\uses{lem:real-trace-lattice,lem:trace-metric-weights}
+\uses{lem:real-trace-lattice,lem:trace-metric-weights,lem:degree-rank-zero}
 \source{bost-specht-manuscript:page-0011}
 \lean{BostConjecture.Arithmetic.HermitianMetric.traceCovolume_pos,BostConjecture.Arithmetic.HermitianMetric.traceCovolume_sq_eq_det,BostConjecture.Arithmetic.HermitianMetric.traceCovolume_eq_discr_degree_of_rank_zero}\leanok
 For every integer basis $(b_i)$ of $A$, the Euclidean Haar covolume $c$ of
@@ -104,8 +104,36 @@ the intrinsic determinant degree is zero. The claimed rank-zero formula
 follows.
 \end{proof}
 
+\begin{lemma}[Finite-index change of trace covolume]
+\label{lem:trace-covolume-index}
+\uses{lem:trace-covolume-gram,lem:real-trace-lattice}
+\source{bost-specht-manuscript:page-0011}
+\lean{BostConjecture.Arithmetic.HermitianMetric.traceCovolume_submodule}\leanok
+If $P\subseteq A$ has the same generic rank as $A$, equip $P$ with the
+induced Hermitian metrics. Then
+\[
+ \covol_{\mathbb Z}(P)=\#(A/P)\covol_{\mathbb Z}(A).
+\]
+\end{lemma}
+\begin{proof}
+The image $j(P)$ is a subgroup of the discrete group $j(A)$ and hence
+discrete. The real span of a discrete integer subgroup has dimension its
+integer rank, by the basis argument in Lemma~\ref{lem:real-trace-lattice}.
+The equal generic ranks therefore imply that $j(P)$ spans the whole real
+trace space of $A$. For any integer basis of $P$, its Gram matrix using
+the induced metrics agrees with its Gram matrix in that ambient trace
+space. Lemma~\ref{lem:trace-covolume-gram} and positivity thus identify
+its intrinsic covolume with the ambient lattice covolume.
+The change-of-basis matrix from an integer basis of $j(P)$ to an integer
+basis of $j(A)$ is an integral square matrix with nonzero determinant.
+Its absolute determinant equals the index, by integer Smith normal form,
+and multiplies the volume of the fundamental parallelepiped.
+Finally the injective section map identifies $A/P$ with $j(A)/j(P)$.
+This proves the formula and finiteness of the quotient.
+\end{proof}
+
 \begin{lemma}[Restriction of scalars and covolume]
-\label{lem:restriction-covolume}\uses{def:hermitian-degree,lem:bounded-integral-sections,lem:integral-restriction-rank,lem:real-trace-lattice,lem:trace-metric-weights,lem:trace-covolume-gram}
+\label{lem:restriction-covolume}\uses{def:hermitian-degree,lem:bounded-integral-sections,lem:integral-restriction-rank,lem:real-trace-lattice,lem:trace-metric-weights,lem:trace-covolume-gram,lem:trace-covolume-index}
 \source{bost-specht-manuscript:page-0011}\notready
 Give $A\otimes_{\mathbb Z}\mathbb R$ the Euclidean norm
 $\|x\|^2=\sum_v w_v\|x_v\|_v^2$. For $a=\rk_\Ocal A$,

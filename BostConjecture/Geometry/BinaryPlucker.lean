@@ -74,9 +74,7 @@ variable {R : Type*} [CommRing R] {F : Type} [Field F]
 
 attribute [local instance] scalarExtendedTargetAddCommGroup
 
-/-- The canonical binary Plücker invariant supplies the original-ring sequence
-of actual finite-family determinant pairings. -/
-theorem exists_canonicalPairing_nonzero_sequence_of_binary_invariant
+variable
     (A : V →ₗ[R] (⨂[R] i, E i)) {s m : ℕ} {a : Unit ⊕ Unit → ℕ}
     (hspos : 0 < s) (hapos : ∀ i, 0 < a i) (hm : 0 < m)
     (ha : ∀ i (q : PrimeSpectrum R), Module.rankAtStalk (Dual R (E i)) q = a i)
@@ -89,7 +87,13 @@ theorem exists_canonicalPairing_nonzero_sequence_of_binary_invariant
       (pluckerRepresentation F (F ⊗[R] E (.inl ())) (F ⊗[R] E (.inr ())) s) m)
     (hpA : polynomialEval (exteriorPower.ιMulti F s (fun j =>
       Tensor.twoFactorEquiv F (fun i => F ⊗[R] E i)
-        (((Tensor.baseChangeEquiv R F E).toLinearMap ∘ₗ A.baseChange F) (bV j)))) p ≠ 0) :
+        (((Tensor.baseChangeEquiv R F E).toLinearMap ∘ₗ A.baseChange F) (bV j)))) p ≠ 0)
+
+set_option backward.isDefEq.respectTransparency false in
+include hspos hapos hm bV bE hp hpA in
+/-- The canonical binary Plücker invariant supplies the original-ring sequence
+of actual finite-family determinant pairings. -/
+theorem exists_canonicalPairing_nonzero_sequence_of_binary_invariant :
     ∃ d₀ : ℕ, 0 < d₀ ∧ s ∣ d₀ ∧ (∀ i, a i ∣ d₀) ∧
       ∀ r : ℕ, 0 < r → ∃ (l : ℕ) (k : Unit ⊕ Unit → ℕ) (hl : 0 < l)
         (hk : ∀ i, 0 < k i)
@@ -97,8 +101,10 @@ theorem exists_canonicalPairing_nonzero_sequence_of_binary_invariant
         (v : OAI.Saxl.Tableau (d₀ * r) (Specht.rectangle s l)),
         canonicalPairing E hk t ha hl v hs A ≠ 0 := by
   obtain ⟨hq, hi⟩ := twoFactor_plucker_invariant (fun i => F ⊗[R] E i) hp
-  apply exists_canonicalPairing_nonzero_sequence E A hspos hapos hm ha hs bV bE hq hi
-  rwa [twoFactor_plucker_eval]
+  have he := twoFactor_plucker_eval (fun i => F ⊗[R] E i) p
+    (fun j => ((Tensor.baseChangeEquiv R F E).toLinearMap ∘ₗ A.baseChange F) (bV j))
+  have hn := fun hz => hpA (he.symm.trans hz)
+  exact exists_canonicalPairing_nonzero_sequence E A hspos hapos hm ha hs bV bE hq hi hn
 
 end ScalarExtension
 
