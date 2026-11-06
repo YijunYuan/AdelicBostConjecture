@@ -994,6 +994,83 @@ Full configured graph sync repaired the stale nodes caused by a scoped sync;
 only unattached helper declarations remain warned (939 across all slices).
 No missing cross-slice dependency warnings remain in the full sync.
 
-The arithmetic frontier is now the real trace metric and degree-covolume formula,
-then bounded-degree finiteness via primitive exterior integer lattices.
+The arithmetic finiteness frontier now uses short determinant sections and
+Plucker recovery. The general real trace metric and degree-covolume formula
+remain a separate prerequisite of arithmetic compactness.
 This record does not assert general tensor semistability or manuscript Theorem 1.1.
+
+### Short determinant sections and exterior recovery
+
+GEOM root-integrated the finite-family endpoint and scalar restriction at
+`5f4a2ef`: 9318 jobs passed warning-free at 01:16:53 UTC, root blob
+`0042d749fe363f603e838610e6805ca895c3771f`. I-0075 is concluded and archived.
+
+`92e69d7` proves the actual intrinsic short-line theorem via fractional-ideal
+Minkowski boxes: module check3187jobs passed01:12:34 UTC,344-probe audit
+passed01:13:16 UTC. `b3c1ac2` transports the established complex exterior
+Gram metric to actual arithmetic exterior modules and proves determinant
+inclusion isometry:3520jobs passed01:15:07 UTC,355-probe audit01:15:45 UTC.
+Both audits report foundational axioms only. Independent honesty review
+approved both precise blueprint nodes after adding their Lean attachments.
+BALANCED confirmed its exterior metric APIs stable in I-0083, now archived.
+An initial exterior check missed the import defining span_fiberSection;
+adding TensorCompatibility repaired it before the successful check above.
+
+`ba9bf02` proves Plucker recovery from a nonzero determinant image; its
+1953-job check passed. `87fd7bc` identifies integral exterior sections with
+the exterior image of the actual generic subspace; its3523-job check passed.
+An initial generic-image check required explicit codomain arguments to
+exteriorPower.map; the final source does not change transparency options.
+Their axiom probes and the assembled finiteness consumer are pending.
+
+Ground independently confirmed the smaller finiteness route: bounded short
+sections in the fixed exterior module, followed by Plucker recovery and
+saturation. The general covolume node was retained for its live compactness
+consumer. I-0085 proposes that as a disjoint successor lane; no ownership
+transfer has yet been activated. I-0084 documents costly global search-index
+rebuilds; guarded local search is used between stable checkpoints.
+
+### Exact restriction-covolume successor handoff (I-0085)
+
+The complete unproved node `lem:restriction-covolume` is migrated, with its
+source anchor and dependency labels unchanged, to
+`blueprint/src/restriction_covolume.tex`; GEOM owns its shared include.
+The live consumer is `lem:arithmetic-compactness` in compactness.tex.
+No arithmetic API or writer ownership has changed in this handoff.
+
+Stable imports are `Arithmetic.RestrictionOfScalars`, `Arithmetic.Degree`,
+`Arithmetic.FiberConjugation`, and `Arithmetic.ArchimedeanFiniteness`.
+In namespace `BostConjecture.Arithmetic`, use `rationalGenericEquiv`,
+`rationalGenericEquiv_tmul`, `finite_int`, `free_int`, `finrank_int`,
+`HermitianMetric`, `ComplexFiber`, and `fiberSection`. The actual normalized
+rank is `Module.finrank K (K ⊗[𝓞 K] M)`; degree is
+`HermitianMetric.degree`, the constructed determinant metric's intrinsic
+line degree. `HermitianMetric.conjugate` is equality of conjugate pairings
+on all integral sections; `FiberConjugation` proves the resulting full-fiber
+semilinear isometry. No free integral basis, degree-calculus field or
+semistability assumption is available or allowed.
+
+Fixed endpoint: construct the real scalar extension of the underlying
+integer module (canonically `ℝ ⊗[ℤ] M`) and its full integer lattice with
+squared trace norm `sum_v w_v * norm(x_v)^2`, where real places have weight1
+and complex places weight2. Equivalently sum over every complex embedding,
+using conjugation compatibility. For D=[K:Q], a=generic rank and
+Delta=abs(discriminant K), prove
+`covol_Z(M) = Delta^(a/2) * exp(-D * h.degree)`.
+Use the Euclidean Haar volume attached to this trace metric. Mathlib's
+unweighted mixed-space volume has the factor `2^(-r2)`; the weight2 on each
+complex block cancels it. The actual trace metric/lattice and this identity
+remain unproved. The integer rank and rational generic equivalence are
+already checked (source blob46f8a357ebc0191ff350c677f5b731c32da641b1;
+root5f4a2ef,9318jobs; current344/355-probe audit cone foundational-only).
+
+Canonical Mathlib inputs: `NumberField.mixedEmbedding.covolume_integerLattice`,
+`covolume_idealLattice`, `volume_fundamentalDomain_fractionalIdealLatticeBasis`,
+and `euclidean.toMixed`, at fixed mathlib revision
+56a005855ea17e0b0958f73ec801ae140b0a1679. Required source endpoint remains
+manuscript page0011; nonfree projectives, arbitrary number fields, and rank0
+must be covered. Proposed successor write set is only
+`Arithmetic/RestrictionCovolume/**`, the migrated blueprint slice,
+`verification/RestrictionCovolumeAxioms.lean`, and
+`verification/RESTRICTION_COVOLUME.md`. Parent activation is still required;
+ARITH retains the short-section degree-finiteness route and existing files.

@@ -1439,35 +1439,7 @@ above a complex place. Coordinate and section independence of degree
 make this an intrinsic assertion about $\overline L$.
 \end{proof}
 
-\begin{lemma}[Restriction of scalars and covolume]
-\label{lem:restriction-covolume}\uses{def:hermitian-degree,lem:bounded-integral-sections,lem:integral-restriction-rank}
-\source{bost-specht-manuscript:page-0011}\notready
-Give $A\otimes_{\mathbb Z}\mathbb R$ the Euclidean norm
-$\|x\|^2=\sum_v w_v\|x_v\|_v^2$. For $a=\rk_\Ocal A$,
-\[
- \covol_\mathbb Z(A)=\Delta_K^{a/2}\exp(-D\degn(\overline A)).
-\]
-\end{lemma}
-\begin{proof}
-The underlying abelian group of $A$ is finite free and spans its real
-scalar extension. A bounded set for the displayed Euclidean norm bounds
-every archimedean section norm. Lemma~\ref{lem:bounded-integral-sections}
-therefore makes its intersection with $A$ finite, so $A$ is a full
-discrete lattice in this real space.
-For $A=\Ocal^a$ with the standard metrics, the Gram determinant of an
-integral basis of $\Ocal$ for this real trace metric is $\Delta_K$.
-Indeed, the matrix of embeddings gives the trace discriminant; replacing
-a conjugate pair by real and imaginary parts and weighting both by $2$
-preserves its absolute squared determinant. Orthogonal direct sum gives
-the standard covolume $\Delta_K^{a/2}$. If the fiber metrics have Gram
-matrices $G_v$, covolume is multiplied by
-$\prod_v(\det G_v)^{w_v/2}$, while the definition of degree multiplies
-$\exp(-D\degn A)$ by precisely that quantity. This proves the formula
-for a free module with arbitrary metrics. For general $A$, choose a
-generic basis lying in $A$ and its finite-index free span $A_0$.
-Then $\covol(A_0)=[A:A_0]\covol(A)$ and
-$D\degn(A)=D\degn(A_0)+\log[A:A_0]$; cancellation proves the claim.
-\end{proof}
+
 
 \begin{lemma}[Intrinsic exterior metrics and determinant inclusions]
 \label{lem:intrinsic-exterior-metric}
@@ -1493,6 +1465,7 @@ torsion-freeness. This proves the assertion including degree zero.
 
 \begin{lemma}[Recovery from a nonzero Pl\"ucker vector]
 \label{lem:plucker-recovery}\notready
+\lean{BostConjecture.Arithmetic.ιMulti_ne_zero_iff,BostConjecture.Arithmetic.mem_iff_mul_plucker_eq_zero,BostConjecture.Arithmetic.eq_of_plucker_eq,BostConjecture.Arithmetic.eq_of_mem_exterior_ranges}
 Let $V$ be a finite-dimensional vector space over a field $k$, and let
 $W\subseteq V$ have dimension $b$. Every nonzero vector $\xi$ in the
 image of $\bigwedge^b W\to\bigwedge^b V$ determines $W$ uniquely:
