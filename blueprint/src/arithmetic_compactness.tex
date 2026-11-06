@@ -116,9 +116,9 @@ has rank zero.
 
 \begin{lemma}[Uniform comparison of induced degrees]
 \label{lem:metric-degree-comparison}
-\uses{def:hermitian-degree}
+\uses{def:hermitian-degree,lem:determinant-contraction,lem:degree-metric-scaling,lem:maximum-saturated-degree}
+\lean{BostConjecture.Arithmetic.HermitianMetric.abs_degree_submodule_sub_le_of_fiberNorm_le,BostConjecture.Arithmetic.HermitianMetric.abs_maxDegree_sub_le_of_fiberNorm_le}
 \source{bost-specht-manuscript:page-0012}
-\notready
 Let $h,g$ be Hermitian metrics on a finite projective $\Ocal$-module
 $A$. Suppose $t\geq0$ and
 \[
@@ -149,9 +149,39 @@ from the preceding lemma. The two resulting inequalities give the
 claim for $\mathcal D$.
 \end{proof}
 
+\begin{lemma}[Local comparison of actual metrics]
+\label{lem:metric-topology-comparison}
+\uses{lem:metric-degree-comparison}
+\source{bost-specht-manuscript:page-0012}\notready
+Give the Hermitian metrics on a fixed finite projective module the topology
+of pointwise convergence of their fiber forms. For every metric $h$ and
+$t>0$, all sufficiently close metrics $g$ satisfy
+$\|x\|_{g,\sigma}\leq e^t\|x\|_{h,\sigma}$ and
+$\|x\|_{h,\sigma}\leq e^t\|x\|_{g,\sigma}$ for every $\sigma,x$.
+\end{lemma}
+\begin{proof}
+Fix an embedding and a complex basis $e_1,\ldots,e_a$ of its fiber.
+If $x=\sum_i x_i e_i$, then
+$g(x,x)=\sum_{i,j}\overline{x_i}x_j g(e_i,e_j)$.
+This finite sum proves joint continuity in $g,x$, with the fiber carrying
+the topology from $h$; in particular the fiber norm is jointly continuous.
+On the $h$-unit sphere the inequalities
+$e^{-t}<\|x\|_g<e^t$ hold when $g=h$.
+They define an open neighborhood of each pair $(h,x)$.
+The unit sphere is compact, so finitely many product neighborhoods give
+a single neighborhood of $h$ on which both inequalities hold throughout
+the sphere. For $x\ne0$ apply these inequalities to
+$x/\|x\|_h$ and use homogeneity; for $x=0$ both inequalities are equalities.
+The fiber of dimension zero causes no exception, since it contains only
+zero. Finally there are finitely many complex embeddings, so the intersection
+of their neighborhoods is a neighborhood with the asserted simultaneous bounds.
+This also shows that the form topology agrees with convergence of Gram
+matrices in any complex bases.
+\end{proof}
+
 \begin{lemma}[The maximum degree and openness of strict stability]
 \label{lem:degree-maximum-continuity}
-\uses{lem:degree-finiteness,lem:maximum-saturated-degree,lem:metric-degree-comparison}
+\uses{lem:degree-finiteness,lem:maximum-saturated-degree,lem:metric-degree-comparison,lem:metric-topology-comparison}
 \source{bost-specht-manuscript:page-0011,bost-specht-manuscript:page-0012}
 \notready
 For every Hermitian bundle $A$, the number
