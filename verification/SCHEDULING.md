@@ -68,6 +68,18 @@ remain serialized through explicit-root Horizon checks. Dashboard remains on
 port 8765. Advisory `I-0084` records global search-index rebuild costs: batch
 searches at stable checkpoints and avoid redundant forced reindexing.
 
+A second bounded read-only route review reserves GEOM's eventual free slot for
+`BOST-MAIN`, not yet created or launched. Its missing producer is the actual
+arithmetic local-maximum-to-balance variation, followed by tensor semistability
+and HN maximal-slope assembly. Existing analytic balance-to-stationarity results
+do not discharge that converse. Extensions/twists, the maximal-slope lower bound
+and saturated tensor-filtration construction can proceed before compactness and
+geometric-slope endpoints. GEOM's task text now matches the accepted direct
+nonvanishing-descent route; the deferred generic coaction theorem is not claimed.
+The actual BinaryPlucker consumer still needs its final checks, reviews and root
+integration. GEOM retains shared integration until normal completion/exit; any
+successor and ownership transfer must respect the four-writer cap.
+
 ## Earlier checkpoints
 
 The sections below preserve dated history; the live table and I-0095 above
