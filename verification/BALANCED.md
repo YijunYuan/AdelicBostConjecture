@@ -637,3 +637,22 @@ passed at 2026-11-06 00:32:42 UTC, root blob
 next root batch. Homogeneous extraction is a proved producer; the actual
 compact average, special-unitary density and closure comparison remain
 required for Lemma 7.2.
+
+## Compact vector averaging checkpoint
+
+`InvariantTheory.CompactAverage` constructs probability Haar measure and
+proves that the actual Bochner integral of a continuous finite-dimensional
+complex representation orbit is invariant, commutes with linear observation,
+preserves constant observations, and fixes invariant vectors. Its explicit-root
+serialized module check passed **3,073 jobs warning-free** (4.2s); the
+expanded audit passed **163 foundational-only probes** (3.2s). Guarded LSP
+is clear. Independent honesty/mathematical review accepted the substantive
+measure, continuity and integration arguments with no defect.
+
+The source is the finite-dimensional integration argument in Maithani,
+Theorem 5.6, already registered in the reference manifest. Imports reuse
+Mathlib's probability Haar normalization, Bochner integral translation and
+continuous-linear-map commutation at the pinned revision; no library source
+is copied. This is an ingredient of the polynomial average, whose concrete
+continuity and extension from special-unitary to special-linear invariance
+are still unproved. Lemma 7.2 and its full orbit criterion remain open.

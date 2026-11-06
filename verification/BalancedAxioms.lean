@@ -14,6 +14,7 @@ import BostConjecture.InvariantTheory.OrbitImage
 import BostConjecture.InvariantTheory.SpecialLinearBaseChange
 import BostConjecture.InvariantTheory.PolynomialBaseChange
 import BostConjecture.InvariantTheory.HomogeneousComponents
+import BostConjecture.InvariantTheory.CompactAverage
 
 #print axioms BostConjecture.Balanced.trace_starProjection_comp
 #print axioms BostConjecture.Balanced.trace_starProjection_comp_eq_sum
@@ -185,3 +186,11 @@ import BostConjecture.InvariantTheory.HomogeneousComponents
 #print axioms BostConjecture.InvariantTheory.exists_homogeneousInvariant_of_invariant
 
 #print axioms BostConjecture.InvariantTheory.polynomialHomogeneousComponent_of_sum_eq
+
+#print axioms BostConjecture.InvariantTheory.compactRepresentationAverage
+#print axioms BostConjecture.InvariantTheory.integrable_representation_orbit
+#print axioms BostConjecture.InvariantTheory.compactRepresentationAverage_mem_invariants
+#print axioms BostConjecture.InvariantTheory.linearMap_compactRepresentationAverage
+#print axioms BostConjecture.InvariantTheory.linearMap_compactRepresentationAverage_of_constant
+#print axioms BostConjecture.InvariantTheory.compactRepresentationAverage_of_mem_invariants
+#print axioms BostConjecture.InvariantTheory.exists_probability_leftInvariant_measure

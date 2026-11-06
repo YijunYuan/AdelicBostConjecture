@@ -964,9 +964,42 @@ argument uses separate regular translations, without asserting joint
 continuity for the product of the point-set Zariski topologies.
 \end{proof}
 
+\begin{lemma}[Averaging a finite-dimensional compact orbit]
+\label{lem:balanced-compact-vector-average}
+\lean{BostConjecture.InvariantTheory.exists_probability_leftInvariant_measure,BostConjecture.InvariantTheory.compactRepresentationAverage_mem_invariants,BostConjecture.InvariantTheory.linearMap_compactRepresentationAverage,BostConjecture.InvariantTheory.linearMap_compactRepresentationAverage_of_constant,BostConjecture.InvariantTheory.compactRepresentationAverage_of_mem_invariants}\leanok
+\source{maithani-reynolds:thm:reynolds-for-lie-group}
+Let $H$ be a compact topological group and $V$ a finite-dimensional
+complex normed vector space. Let $\rho:H\to\operatorname{GL}(V)$ be
+a representation and suppose $h\mapsto\rho(h)v$ is continuous.
+There exists a left-invariant probability Haar measure $\mu$ on $H$.
+For any such measure the integral
+$Av=\int_H\rho(h)v\,d\mu(h)$ belongs to $V^H$.
+For each linear form $\ell$,
+$\ell(Av)=\int_H\ell(\rho(h)v)\,d\mu(h)$; in particular an
+observation constant with value $c$ on the orbit has value $c$ at $Av$.
+If $v$ is invariant then $Av=v$.
+\end{lemma}
+\begin{proof}
+Normalize Haar measure on the compact set $H$, whose interior is nonempty,
+to have mass one. A continuous orbit map on a compact space is integrable.
+Finite-dimensional complex normed spaces are complete, and every linear
+map between them is continuous. Such maps commute with the Bochner
+integral. For $g\in H$, this gives
+\[
+ \rho(g)Av=\int_H\rho(gh)v\,d\mu(h)
+          =\int_H\rho(h)v\,d\mu(h)=Av,
+\]
+where the second equality is left invariance of the measure.
+Applying the same integral identity to $\ell$ gives its displayed
+formula. The integral of a constant against a probability measure
+is that constant, proving both remaining assertions. This is the
+finite-dimensional integration argument in the cited Reynolds theorem;
+no density or invariant-ring generation result is used here.
+\end{proof}
+
 \begin{lemma}[Finite-degree compact averaging]
 \label{lem:balanced-polynomial-average}
-\uses{lem:balanced-unitary-density}
+\uses{lem:balanced-unitary-density,lem:balanced-compact-vector-average}
 \source{maithani-reynolds:thm:reynolds-for-lie-group}\notready
 Let $G=\SL(U)\times\SL(W)$ act algebraically and linearly on a
 finite-dimensional complex vector space $X$,
