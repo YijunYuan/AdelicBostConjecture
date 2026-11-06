@@ -1,5 +1,5 @@
 import BostConjecture.Arithmetic.RestrictionCovolume.Line
-import BostConjecture.Arithmetic.RestrictionCovolume.RealForm
+import BostConjecture.Arithmetic.RestrictionCovolume.Quotient
 
 #print axioms BostConjecture.Arithmetic.archimedeanSection
 #print axioms BostConjecture.Arithmetic.HermitianMetric.traceCore
@@ -49,3 +49,13 @@ import BostConjecture.Arithmetic.RestrictionCovolume.RealForm
 #print axioms BostConjecture.Arithmetic.HermitianMetric.traceComplexification_injective
 #print axioms BostConjecture.Arithmetic.HermitianMetric.traceComplexification_bijective
 #print axioms BostConjecture.Arithmetic.HermitianMetric.mem_archimedeanSpan_iff_conjugate
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceMap
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceMap_injective
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceLift
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceMap_traceLift
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceLift_inner
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceMap_pullback_inner
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceLift_orthogonal
+#print axioms BostConjecture.Arithmetic.HermitianMetric.ker_traceMap_mkQ
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceSplitEquiv
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceSplitEquiv_symm_snd

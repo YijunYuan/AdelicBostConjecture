@@ -230,7 +230,8 @@ Lemma~\ref{lem:trace-metric-weights}. This includes rank zero.
 \begin{lemma}[Trace metric and saturated quotients]
 \label{lem:trace-quotient-metric}
 \uses{lem:trace-real-form,lem:induced-hermitian-metric,lem:quotient-hermitian-metric,lem:exact-determinant-algebra}
-\source{bost-specht-manuscript:page-0011}\notready
+\source{bost-specht-manuscript:page-0011}
+\lean{BostConjecture.Arithmetic.HermitianMetric.traceMap_pullback_inner,BostConjecture.Arithmetic.HermitianMetric.traceMap_traceLift,BostConjecture.Arithmetic.HermitianMetric.traceLift_inner,BostConjecture.Arithmetic.HermitianMetric.traceLift_orthogonal,BostConjecture.Arithmetic.HermitianMetric.ker_traceMap_mkQ,BostConjecture.Arithmetic.HermitianMetric.traceSplitEquiv}\leanok
 Let $P\subset A$ be saturated and $Q=A/P$, with the induced and quotient
 Hermitian metrics. The induced map of real trace spaces identifies
 $T(P)$ isometrically with its image in $T(A)$. The quotient map identifies
@@ -246,9 +247,12 @@ the ambient pairing. The componentwise orthogonal right inverse of the
 fiber quotient maps commutes with conjugation: a conjugated orthogonal
 representative is the orthogonal representative of the conjugated vector,
 by uniqueness. It therefore maps $T(Q)$ into $T(A)$ and is a right inverse.
-Consequently the real quotient map is surjective. Its kernel contains
-the image of $T(P)$; dimension additivity for the original exact sequence
-makes these spaces have the same dimension, so they are equal.
+Consequently the real quotient map is surjective. A real trace vector in
+its kernel has each component in the image of the corresponding fiber
+of $P$. Choose these preimages; their uniqueness, from injectivity of the
+fiber inclusion, makes the preimage family conjugation-compatible.
+It therefore belongs to $T(P)$. Conversely the image of $T(P)$ is killed
+by the quotient map. Thus the kernel is exactly that image.
 The image of this right inverse is orthogonal to $T(P)$, since every
 fiber representative is orthogonal to the fiber of $P$. Finally its
 trace pairing is precisely the sum of the quotient fiber pairings.
