@@ -608,3 +608,32 @@ extraction, special-unitary density and finite-degree averaging, alongside
 CLOSURE's independent comparison theorem. The read-only health review found
 four active proof leaves and nine active ancestors; the active-row warning
 is intentionally retained.
+
+## Homogeneous extraction checkpoint
+
+`InvariantTheory.HomogeneousComponents` at `6524042` identifies the existing
+intrinsic degree spaces with coordinate homogeneous polynomials, constructs
+the finite decomposition, proves basis independence and naturality under
+all linear pullbacks, and extracts a positive-degree homogeneous invariant
+from an invariant polynomial vanishing at zero and nonzero at the chosen
+vector. An added explicit finite-decomposition uniqueness corollary closes
+the blueprint attachment precisely. The final serialized module check passed
+**2,374 jobs warning-free** (4.3s), and the expanded audit passed **156
+foundational-only probes** (3.6s). LSP is clear on the producer; the audit
+initially retained an old dependency snapshot, while the kernel audit passed.
+
+Independent honesty/mathematical review accepted the actual degree objects,
+the substantive uses of all three endpoint hypotheses and absence of an
+assumed averaging/orbit theorem. It requested the explicit uniqueness
+attachment, which is now supplied. These imports reuse the pinned Mathlib
+`MvPolynomial.homogeneousSubmodule_one_pow`, `homogeneousComponent_of_mem`
+and `sum_homogeneousComponent` from `RingTheory/MvPolynomial/Homogeneous.lean`,
+with no copied or modified library source.
+
+GEOM confirmed root integration of InvariantDetection, OrbitImage,
+SpecialLinearBaseChange and PolynomialBaseChange at `70d1911`: **9,296 jobs**
+passed at 2026-11-06 00:32:42 UTC, root blob
+`57ed74cb5b71c6c523cf463905883c06c310d36e`. HomogeneousComponents requires the
+next root batch. Homogeneous extraction is a proved producer; the actual
+compact average, special-unitary density and closure comparison remain
+required for Lemma 7.2.

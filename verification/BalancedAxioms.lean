@@ -183,3 +183,5 @@ import BostConjecture.InvariantTheory.HomogeneousComponents
 #print axioms BostConjecture.InvariantTheory.polynomialEval_eq_aeval_equivMvPolynomial
 #print axioms BostConjecture.InvariantTheory.polynomialHomogeneousComponent_zero
 #print axioms BostConjecture.InvariantTheory.exists_homogeneousInvariant_of_invariant
+
+#print axioms BostConjecture.InvariantTheory.polynomialHomogeneousComponent_of_sum_eq

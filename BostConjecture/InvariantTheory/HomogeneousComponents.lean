@@ -93,6 +93,20 @@ theorem sum_polynomialHomogeneousComponent (b : Basis ι K X)
     (MvPolynomial.homogeneousComponent d (SymmetricAlgebra.equivMvPolynomial b.dualBasis p)) = _
   rw [← map_sum, MvPolynomial.sum_homogeneousComponent, AlgEquiv.symm_apply_apply]
 
+/-- Uniqueness of any finite homogeneous decomposition, including absent degrees. -/
+theorem polynomialHomogeneousComponent_of_sum_eq (b : Basis ι K X)
+    (D : Finset ℕ) (q : ℕ → SymmetricAlgebra K (Dual K X))
+    (hq : ∀ j ∈ D, q j ∈ homogeneousPolynomials K X j)
+    {p : SymmetricAlgebra K (Dual K X)} (hs : ∑ j ∈ D, q j = p) (d : ℕ) :
+    polynomialHomogeneousComponent b d p = if d ∈ D then q d else 0 := by
+  rw [← hs, map_sum]
+  calc
+    _ = ∑ j ∈ D, if d = j then q j else 0 := by
+      apply Finset.sum_congr rfl
+      intro j hj
+      exact polynomialHomogeneousComponent_of_mem b (hq j hj)
+    _ = _ := by simp
+
 /-- A degree-preserving linear map commutes with the component projections. -/
 theorem polynomialHomogeneousComponent_comm
     {Y κ : Type*} [AddCommGroup Y] [Module K Y] [Fintype κ] [DecidableEq κ]
