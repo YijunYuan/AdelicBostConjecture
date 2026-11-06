@@ -1042,3 +1042,62 @@ Horizon search refreshes; guarded local/semantic lookup is used between edits.
 I-0087 activates the disjoint restriction-covolume successor: its complete
 blueprint slice is included immediately after arithmetic, retaining the
 original label and unproved status. No covolume Lean draft is imported.
+
+
+## Binary action transport: final bounded checkpoint
+
+`Tensor/TwoFactors.lean` composes Mathlib sum-index and singleton equivalences
+and proves actual map naturality. `Geometry/BinaryPlucker.lean` now contains
+only actual SL intertwining, homogeneous Plucker-invariant pullback, and exact
+evaluation transport. The independent honesty/source review accepted this
+producer and corrected its blueprint dependencies to the actual action and
+polynomial nodes. Only `lem:two-factor-plucker-transport` is marked checked.
+
+Serialized explicit-root evidence in run0005/session0016:
+
+- `two-factors.log`: 1,248 jobs, 01:47:24 UTC, fingerprint c7477425fb351a36.
+- `binary-transport-final.log`: 9,121 jobs, 02:24:13 UTC, fingerprint
+  09af99536a6e3a1e; source blob f488e28c1deac156ec25dd41cf01241c6753f516.
+- `transport-boundary-root.log`: 9,334 jobs, 02:25:14 UTC, root blob
+  f6a81998382d2af5857b8617406402410857ae34.
+- `transport-boundary-axioms.log`: 290 probes, 02:25:19 UTC, only
+  propext/Classical.choice/Quot.sound, including all six new declarations.
+
+The terminal theorem `exists_canonicalPairing_nonzero_sequence_of_binary_invariant`
+is NOT in accepted source. Its complete attempted source and exact failed
+kernel output are preserved in this session's
+`attempts/0001-terminal-binary-consumer-reaches-closed-tactic-g/`.
+`binary-plucker-elaboration.log` failed at 02:21:06 UTC after 131 seconds
+of module work with a deterministic whnf heartbeat timeout (200000).
+The tactics reached closed goals, which was insufficient evidence. Higher
+heartbeat attempts, scoped transparency, explicit arguments and disabled
+unused-section-variable lint did not establish a checked declaration.
+Those diagnostic settings are absent from the accepted prefix.
+
+Read-only definition/API review identified the generic versus scalar-extended
+tensor group instance heads as a plausible definitional-conversion seam;
+causality is not proved. Selective unfolding made no progress. The next round
+should isolate that interface in the preserved consumer and use the checked
+transport producer, without introducing an assumed comparison or a new
+representation. `lem:binary-plucker-nonzero-sequence` stays notready.
+
+I-0097 reconciles the construction objective: this binary terminal consumer
+is the remaining GEOM requirement. The unused general coaction base-change
+square is retired from the route, not proved. I-0095 keeps GEOM as sole shared
+integrator across rounds. At 1e56d1d the complete determinant-Specht/slope and
+arithmetic compactness blueprint slices were migrated to the two successor
+owners; those files must no longer be edited by GEOM.
+
+Shared accepted deliveries are cf39176 (exact Lemma7.2 and arithmetic
+finiteness, root9329, owner195/366 probes) and 039cdb2 (actual trace lattice,
+weighted metric, Haar Gram formula and rank0 endpoint, root9332, owner24
+probes). Pending next-round integration: COVOLUME FiniteIndex (e4b0d01/fc5e712,
+30 probes at02:00:46) and Free (d41ef38,39 probes at02:22:12, final review
+handoff in I-0092), plus SPECHT-SLOPE's representation/latticeMetric delivery
+in I-0098. None is silently certified by the current root.
+
+The parent requested a normal round boundary in I-0097 to release duplicate
+session LSP trees under memory pressure; no process was killed. GEOM remains
+active, not done or blocked. Scratch cleanup found no stale candidates.
+The graph's unattached-helper coverage warning is the previously recorded
+intentional warning, not a mathematical completion statement.

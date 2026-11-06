@@ -4,6 +4,7 @@ import BostConjecture.Geometry.DualInvariants
 import BostConjecture.Geometry.Nonvanishing
 import BostConjecture.Geometry.NonvanishingBaseChange
 import BostConjecture.Geometry.PluckerNonvanishing
+import BostConjecture.Geometry.BinaryPlucker
 import BostConjecture.Geometry.FreeEmbedding
 import BostConjecture.Geometry.DeterminantFrame
 import BostConjecture.Tensor.Evaluation
@@ -354,3 +355,10 @@ import BostConjecture.Geometry.HomTensor
 
 #print axioms BostConjecture.Geometry.canonicalPairing_ne_zero_of_plucker_invariant
 #print axioms BostConjecture.Geometry.exists_canonicalPairing_nonzero_sequence
+
+#print axioms BostConjecture.Tensor.twoFactorEquiv
+#print axioms BostConjecture.Tensor.twoFactorEquiv_tprod
+#print axioms BostConjecture.Tensor.twoFactorEquiv_map
+#print axioms BostConjecture.Geometry.twoFactorEquiv_specialLinear
+#print axioms BostConjecture.Geometry.twoFactor_plucker_invariant
+#print axioms BostConjecture.Geometry.twoFactor_plucker_eval

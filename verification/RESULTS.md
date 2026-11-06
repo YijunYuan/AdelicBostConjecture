@@ -1,3 +1,19 @@
+## Binary Plucker action transport verified; terminal consumer remains open
+
+The configured explicit-root build passed **9,334 jobs warning-free at
+2026-11-06 02:25:14 UTC**, root blob
+`f6a81998382d2af5857b8617406402410857ae34`. All **290 geometry axiom probes**
+passed at02:25:19 UTC, using only standard foundational axioms.
+Independent honesty/source review accepted the actual two-factor action,
+homogeneous invariant and evaluation transport.
+
+The attempted terminal binary nonvanishing consumer failed kernel elaboration
+with a whnf heartbeat timeout and is preserved with its diagnostic. It was
+removed from accepted source, remains notready in the blueprint, and is the
+remaining revised GEOM construction obligation. The general coaction square
+is retired as unused, not proved. Exact logs, hashes and the next checkpoint
+are in GEOMETRY.md. No GEOM or main-theorem completion is claimed.
+
 ## Actual trace-space and Haar covolume producers integrated
 
 The explicit-root configured build passed **9,332 jobs warning-free at

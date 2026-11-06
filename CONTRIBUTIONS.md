@@ -866,3 +866,15 @@ trace space and integer lattice, weighted-place norm, Euclidean Haar Gram
 formula and rank-zero degree/discriminant endpoint are kernel-checked and
 independently accepted. The 24-probe audit at 01:55:18 UTC is foundational-only;
 positive-rank discriminant identification is not part of this handoff.
+
+
+`Tensor/TwoFactors.lean` and the accepted transport prefix of
+`Geometry/BinaryPlucker.lean` are original compositions of the unchanged
+Mathlib `PiTensorProduct.tmulEquivDep`, `subsingletonEquiv` and
+`TensorProduct.congr/map` APIs (`LinearAlgebra/PiTensorProduct/Basic.lean`,
+`LinearAlgebra/TensorProduct/Map.lean`, same pinned revision/license).
+Their actual consumer transports the project Plucker invariant through the
+canonical two-factor equivalence. No external source is copied, no core
+representation is duplicated, and no additional axiom is used. The terminal
+original-ring binary sequence application remains an unverified preserved
+attempt, separate from these checked declarations.

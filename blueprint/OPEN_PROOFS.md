@@ -102,8 +102,9 @@ Current boundaries and remaining producers:
   SU coordinate density and `ComplexClosure.Comparison`; the intrinsic
   `IsBalanced.plucker_semistable` endpoint supplies a positive-degree
   homogeneous invariant for every nonzero Plucker representative.
-  The finite-family geometry consumer and invariant coaction base change
-  remain separate obligations.
+  The terminal binary-to-family geometry consumer remains open.
+  The unused general coaction scalar-extension square is retired from the
+  current route, not proved.
 
 These are unproved producer obligations, not assumptions under which the
 main result is declared finished. The current manuscript proposes the route;
@@ -129,9 +130,11 @@ canonical pairing nonzero from a nonzero invariant Hom polynomial.
 `NonvanishingBaseChange.lean` descends this nonvanishing to the original ring;
 `PluckerNonvanishing.lean` produces an actual nonzero sequence in every
 positive multiple of one common degree from a positive-degree Plucker invariant.
-Connecting BALANCED's binary origin-exclusion/invariant criterion to this
-finite-family tensor formulation, and actual invariant coaction base change,
-remain requirements of the route.
+`BinaryPlucker.lean` now proves the actual binary-to-family action,
+homogeneous invariant and evaluation transport. Its terminal application to
+the original-ring sequence remains an unverified preserved elaboration attempt.
+This is the remaining revised GEOM construction obligation. The unused general
+coaction scalar-extension square is retired from this route, not proved.
 
 All cited manuscript page anchors resolve to registered vision transcriptions
 that were read before attachment. The shifted-coordinate tableau count has
