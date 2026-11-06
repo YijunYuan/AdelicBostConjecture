@@ -1,3 +1,16 @@
+## Checked maximizing pairs and metric variation integrated
+
+Root source `ece5ec1` passed **9380 jobs without warnings at
+2026-11-06 04:06:01 UTC**. The explicit-root serialized log is
+run0011/session0004 `main-root-handoffs.log`; it recorded a real shared-slot
+wait of 150.294 seconds and 46.91 seconds execution. Independent integration
+review confirmed all89 project modules of COMPACTNESS `e81b08b` and the13/25
+project modules of TENSOR-SEMI `d173554`/`e68943d` match their accepted trees.
+Their40/21 actual transitive probes contain only standard foundational axioms.
+The root includes actual global maximizing pairs and variation producers;
+the live geometric generalization remains outside this acceptance boundary.
+Theorem1.1 and its finite-family corollary remain open.
+
 ## Late arithmetic compactness handoff integrated
 
 Source checkpoint `1c4c3f8` adds the unchanged COMPACTNESS `daad480` endpoint
