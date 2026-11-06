@@ -977,3 +977,13 @@ imports LowerBound explicitly, so the shared arithmetic leaf has no Main
 dependency. This permits the reserved strict-reduction consumer to reuse the
 actual tensor submodule/quotient APIs without circular dependence on MAIN.
 The leaf and existing MAIN consumers passed3585 jobs at04:13:00UTC.
+
+The final SPECHT-SLOPE handoff `8c80c92` is integrated through
+`Slope/Geometric/BinaryInvariantSlope.lean`. Independent integration review
+compared all220 project modules against this accepted tree and inspected the
+9289-job endpoint check and39 actual foundational-only probe outputs. The
+actual algebraically closed invariant-witness endpoint consumes the original
+GEOM nonvanishing sequence and the intrinsic pairing/image-slope comparison;
+its complex and binary specializations preserve their signatures. No generic
+invariant descent or assumed tensor semistability is used. This completes
+the geometric slope producer, while balance and the main theorem remain open.

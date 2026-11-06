@@ -103,7 +103,8 @@ Current boundaries and remaining producers:
   `IsBalanced.plucker_semistable` endpoint supplies a positive-degree
   homogeneous invariant for every nonzero Plucker representative.
   The terminal binary-to-family original-ring nonvanishing sequence is checked
-  in `Geometry.BinaryPlucker`; its downstream slope application remains open.
+  in `Geometry.BinaryPlucker`; its downstream geometric slope application is
+  checked in `Slope.Geometric.BinaryInvariantSlope`.
   The unused general coaction scalar-extension square is retired from the
   current route, not proved.
 
@@ -165,8 +166,9 @@ with actual nonfree module/metric witnesses and a saturated global maximizer.
 isometric determinant-Specht representation and its tensor/dual semistability;
 `LatticeDegree` proves the exact rectangular lattice slope. The determinant
 tensor metric/degree bridge is checked through the owner handoff `e84df35`;
-the geometric slope inequality remains open in
-`specht_slope.tex`. The subsequent unproved tensor-semistability route now
+the actual geometric slope inequality is checked at `8c80c92` in
+`Slope.Geometric.BinaryInvariantSlope`, including the general algebraically
+closed invariant-witness endpoint and its concrete binary specialization. The subsequent unproved tensor-semistability route now
 lives in `tensor_semistability.tex`; maximal-slope assembly and finite families
 remain in `main.tex`. These successor statements are not marked complete.
 

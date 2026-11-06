@@ -31,6 +31,7 @@ public import BostConjecture.Arithmetic.RestrictionCovolume.Main
 public import BostConjecture.Arithmetic.Specht.DeterminantBundle
 public import BostConjecture.Arithmetic.Specht.LatticeDegree
 public import BostConjecture.Arithmetic.Specht.DeterminantDegree
+public import BostConjecture.Slope.Geometric.BinaryInvariantSlope
 public import BostConjecture.Arithmetic.Compactness.DegreeContinuity
 public import BostConjecture.Arithmetic.Compactness.StabilityTopology
 public import BostConjecture.Arithmetic.Compactness.TraceSystole
