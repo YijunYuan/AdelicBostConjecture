@@ -197,6 +197,56 @@ For the canonical rectangular lattice, its integral rank and logarithmic
 covolume are exactly the rank and covolume defining $c_a(ak)$.
 \end{proof}
 
+\begin{lemma}[Arithmetic tensor description of the canonical metric]
+\label{lem:determinant-specht-tensor-metric}
+\uses{lem:determinant-specht-fiber-metric,lem:arithmetic-specht-semistable,lem:degree-calculus}
+\source{bost-specht-manuscript:page-0009}
+\lean{BostConjecture.Arithmetic.Specht.determinantMetric_eq_tensor}
+\leanok
+Let $A$ be finite projective, let $k>0$, and suppose every stalk rank
+is $a=\operatorname{rk}_K A_K$. Then the canonical metric on
+$\mathcal S_{a,ak}(A)$ is the Hilbert tensor product of the arithmetic
+metric on $(\det A)^{\otimes k}$ and the canonical metric on
+$\Ocal_K\otimes_{\mathbb Z}L_{a,ak}$.
+\end{lemma}
+\begin{proof}
+At a complex embedding choose an orthonormal frame of $A_\sigma$.
+The canonical exterior-power base-change map preserves the determinant
+form: on wedges both forms are the determinant of the same Gram matrix.
+The tensor of these maps therefore preserves the product of the
+$k$ determinant forms. The lattice base-change cancellation preserves
+the word Gram form by definition. The binary tensor of these two maps
+preserves the product form, first on simple tensors and then on the
+whole space by sesquilinearity. Their composite with binary tensor
+base change is exactly the canonical determinant-twist base-change
+map in Lemma~\ref{lem:determinant-specht-fiber-metric}. Hence the two
+metrics agree at every embedding.
+\end{proof}
+
+\begin{lemma}[Finite tensor slope and determinant powers]
+\label{lem:finite-tensor-average-slope}
+\uses{lem:degree-calculus}
+\source{bost-specht-manuscript:page-0009}
+\notready
+For a finite family of positive-rank finite projective Hermitian
+$\Ocal_K$-modules $A_i$, the average slope of their Hilbert tensor
+product is $\sum_i\slope(A_i)$, including the empty family with slope
+zero. Consequently the degree of $(\det A)^{\otimes k}$ is
+$k\degn(A)$.
+\end{lemma}
+\begin{proof}
+The empty tensor is the unit integral line with unit section of norm
+one at every embedding, so its degree and slope are zero. Separating
+one factor is an integral isomorphism preserving all fiber forms:
+on pure tensors both sides pair by the product of the same factor
+pairings, and these tensors span. Reindexing is an isometry for the
+same reason. Induction on the finite index set now applies the binary
+tensor slope identity at each step. The ranks multiply, so every
+intermediate tensor has positive rank. Finally, $\det A$ has rank one
+and its degree is the defining determinant degree of $A$. Applying
+the finite tensor formula to its $k$ copies gives the consequence.
+\end{proof}
+
 \begin{lemma}[Determinant-isotypic integral modules]
 \label{lem:determinant-isotypic}
 \uses{def:rectangular-specht,lem:arithmetic-specht-action,lem:arithmetic-specht-semistable,lem:rectangular-invariants,lem:determinant-twisted-free-inclusion,lem:determinant-free-base-change,lem:determinant-free-naturality,lem:tensor-base-change-equivalence,lem:determinant-free-base-change-square,lem:linear-map-localization-descent,lem:determinant-chart-tower,lem:finite-projective-frames,lem:projective-determinant-inclusion,lem:degree-calculus}

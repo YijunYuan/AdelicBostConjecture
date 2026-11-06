@@ -47,6 +47,13 @@ axiom probe passed (19.5 seconds) with only the three foundational axioms above.
 Independent honesty/source review confirmed the all-embedding normalization,
 absence of a discriminant factor, and the actual real-span covolume.
 
+`Arithmetic/Specht/DeterminantTensorMetric.lean` identifies the actual GEOM
+pullback metric with the existing ARITH tensor metric on the determinant powers
+and lattice. Kernel build passed (9181 jobs, 77.0 seconds), and all twenty-one
+transitive probes passed (31.3 seconds), foundational-only. Independent review
+confirmed the canonical maps, normalization and absence of integral freeness;
+its requested constant-rank/projectivity clarification was added to the blueprint.
+
 The full determinant contribution to the exact intrinsic slope and the geometric
 slope inequality remain open.
 Existing ARITH, SPECHT, and GEOM producers are unchanged.
