@@ -725,6 +725,32 @@ The forward and inverse pullback conventions have the same fixed
 vectors, because inversion permutes the group elements.
 \end{proof}
 
+\begin{lemma}[The Pl\"ucker orbit as a polynomial image]
+\label{lem:balanced-polynomial-orbit-image}
+\uses{lem:balanced-plucker-coordinates,lem:balanced-special-linear-coordinates}
+\source{bost-specht-manuscript:page-0012}
+\lean{BostConjecture.InvariantTheory.mem_specialLinearPair_zeroLocus_iff,BostConjecture.InvariantTheory.pluckerOrbit_polynomial_image}\leanok
+Fix finite bases $b_U,b_W$ over a field $K$, let
+$I=(\det X-1,\det Y-1)$ in the matrix-entry polynomial ring,
+and let $b$ be the induced basis of $\bigwedge^s(U\otimes_KW)$.
+For any exterior vector $z$, let $q_J$ be the coordinate polynomials
+of its orbit map. Then
+\[
+ \left\{\sum_J q_J(a)b_J : a\in V_K(I)\right\}
+   =\{\rho(g)z:g\in\SL(U)\times\SL(W)\}.
+\]
+\end{lemma}
+\begin{proof}
+An entry tuple in $V_K(I)$ defines evaluation on the quotient coordinate
+algebra. Its represented matrix pair has determinant one and precisely
+the original entries. Conversely, evaluating at any determinant-one
+pair kills both generators and hence the ideal. Basis transport
+identifies these matrix pairs with all intrinsic special-linear pairs.
+The orbit-coordinate formula says that $q_J(a)$ is the $J$th
+coordinate of $\rho(g)z$. Summing against the basis reconstructs that
+vector. The two parametrizations therefore have the same image.
+\end{proof}
+
 \begin{definition}[Semistability of a complex vector by orbit closure]
 \label{def:balanced-vector-semistability}
 \lean{BostConjecture.InvariantTheory.polynomialZariskiClosure,BostConjecture.InvariantTheory.IsGeometricallySemistable}\leanok

@@ -5,7 +5,7 @@ intrinsic partial traces, actual exponential-frame Gram first variation, and
 the basis-independent complex Gram metric on the full exterior power, actual
 Plücker norm stationarity, Hermitian exterior exponential convexity, determinant-one
 polar factorization, and the full actual special-linear orbit norm bound and
-Euclidean closure exclusion. It also supplies polynomial matrix coefficients and the forward coordinate pullback on every homogeneous degree, intrinsic polynomial evaluation, homogeneous invariants,
+Euclidean closure exclusion. It also supplies polynomial matrix coefficients, the forward coordinate pullback on every homogeneous degree, rational-point detection, and an explicit coefficient kernel equal to the canonical homogeneous invariant submodule, together with intrinsic polynomial evaluation, homogeneous invariants,
 and the elementary implication from a nonvanishing homogeneous invariant to
 zero excluded from orbit closure. The converse orbit criterion is unproved.
 
@@ -353,9 +353,9 @@ Euclidean-to-algebraic orbit-closure comparison.
   coordinate coaction.
   The intended coefficient kernel is `ker (δ - (p ↦ 1 ⊗ p))`.
   Coefficientwise fixedness implies the existing homogeneous-invariant predicate.
-  Before GEOM transports invariants under scalar extension, prove its equivalence
-  with the preceding invariant submodule over the needed infinite fields;
-  do not assume that invariants under rational points commute with base change.
+  This kernel is now proved equal to the canonical invariant submodule over
+  infinite fields with nonempty bases. Scalar-extension compatibility remains
+  to be proved; rational-point invariance is not assumed to commute with base change.
 
 The use of bases is confined to constructing the coordinate coaction. The
 Plücker vector space, polynomial algebra, degree, evaluation and invariant
@@ -367,9 +367,8 @@ coefficient API in the pinned library.
 Independent review found the proposed objects faithful and requested the
 explicit coaction convention above. Remaining interface proofs include the
 homogeneous decomposition, zero-locus comparison,
-the degree-subtype coefficient kernel versus fixed vectors,
-rational-point detection over the needed
-infinite fields, and scalar-extension compatibility of these maps. Flatness
+and scalar-extension compatibility of these maps. The degree-subtype kernel
+versus fixed vectors and rational-point detection over infinite fields are now proved. Flatness
 of a field extension then gives kernel base change; the coordinate coaction's
 codomain need not itself be finite-dimensional.
 
@@ -410,31 +409,77 @@ Apache-2.0 revision above: `Module.Basis.tensorProduct_repr_tmul_apply` from
 `Ideal.Quotient.liftₐ` and `Algebra.FiniteType.quotient`; and
 `Submodule.toBaseChange.toLinearEquiv` from `RingTheory/Flat/Basic.lean`.
 Consumers are the three named modules; GEOM's invariant base-change consumer
-still needs the converse fixedness/detection and scalar-extension proofs.
-Shared attribution and root imports remain SPECHT-owned.
+still needs scalar-extension compatibility. The converse fixedness and detection
+are now proved below. Shared attribution and root imports transferred to GEOM
+under I-0074 after SPECHT completion.
+
+## Rational-point and invariant-kernel checkpoint
+
+The same session adds the following proved producers:
+
+- `InvariantTheory.LocalizationDetection` (`cd7edda`): a polynomial localization
+  at a nonzero denominator is detected by rational points of its principal open
+  over any infinite field. Check `d8c4a4978c20cdeb`, 1,538 jobs, warning-free, 9.0s.
+- `InvariantTheory.SpecialLinearDetection` (source initially captured by automatic
+  snapshot `31c1bf4`; reviewed completion `7f6bb36`): the determinant-one quotient
+  embeds into the localization at the product of universal determinants, using
+  row normalization with the actual unit inverse. A proved left inverse makes
+  this embedding injective, and actual rational SL pairs detect the quotient.
+  Check `8547ce09ab06d481` passed warning-free in 20.1s.
+- `InvariantTheory.InvariantDetection` (`7896195`, with earlier source captured
+  by the CLOSURE baseline `f07e6af`): tensor coefficient detection proves
+  `mem_homogeneousInvariants_iff_pluckerPolynomialCoaction_eq` and
+  `ker_pluckerInvariantConstraint`. The explicit map is the actual degree
+  coordinate map minus `p ↦ 1 ⊗ p`; its kernel equals the existing homogeneous
+  polynomial representation's invariant submodule. Check `a02d77c1b9e399ed`
+  passed **2,411 jobs warning-free**, 68.6s, at 2026-11-06 00:05:08 UTC.
+
+The small Coaction refactor now reuses Mathlib's canonical
+`Matrix.SpecialLinearGroup.toLin_equiv` rather than rebuilding the matrix
+subtype. Its repeated scoped check passed **2,406 jobs warning-free**, 31.7s,
+at 2026-11-05 23:57:19 UTC. The expanded audit at `1e19bc3` passed **137
+transitive probes** in 18.6s, all reporting subsets of `propext`,
+`Classical.choice`, and `Quot.sound`; no `sorryAx` or custom axiom appears.
+Independent honesty/source/mathematical review accepted the retraction,
+actual-point detection, tensor detection, intrinsic action bridge and exact
+kernel equality. Initial elaboration/coercion errors and default-heartbeat
+failures were repaired by explicit congruence and injectivity proofs without
+raising limits; accepted LSP and kernel checks are warning-free.
+
+These modules additionally import Mathlib's localization-away lifting and
+surjectivity API (`RingTheory/Localization/Away/Basic.lean`), infinite-field
+polynomial extensionality, `TensorProduct.equivFinsuppOfBasisRight`
+(`LinearAlgebra/TensorProduct/Basis.lean`), and `toLin_equiv`
+(`LinearAlgebra/SpecialLinearGroup.lean`), at the same pinned revision and
+Apache-2.0 license. No Mathlib source is copied or modified. The normalization
+argument adapts the retraction in the registered Maithani source's SU/SL
+Zariski-density proof; it does not claim that density theorem is formalized.
+
+SPECHT's completed root handoff `e2e7039` includes OrbitNorm and Coaction:
+root blob `30f3a016666f4a42f99e905a434b65f63c1f8770`, **9,263 jobs warning-free**
+at 2026-11-05 23:42:25 UTC. The new invariant-detection modules were handed
+to GEOM in I-0076 for its next root/attribution batch; that integration remains
+pending at this checkpoint.
 
 ## Next-producer handoff
 
-The actual polynomial action, determinant-one coordinate algebra and forward
-homogeneous coordinate map are now implemented. The next algebraic producer
-is rational-point detection for this coordinate algebra over the needed infinite
-fields. This must turn invariance at every actual group element into the
-coefficient identity `δ(p) = 1 ⊗ p`; then scalar extension of that coefficient
-kernel can be identified with GEOM's canonical homogeneous invariant space.
-GEOM's checked `Geometry.PluckerPolynomial` API at `c8b4a4b` supplies
-`polynomial_ext`, the Plücker pullback and its degree/equivariance consumer.
+The actual polynomial action, determinant-one coordinate algebra, forward
+homogeneous coordinate map, rational-point detection and invariant-kernel
+identification are proved. Scalar-extension compatibility of these maps is the
+remaining algebraic bridge for GEOM's invariant descent consumer. GEOM's checked
+`Geometry.PluckerPolynomial` API at `c8b4a4b` supplies `polynomial_ext`, the
+Plücker pullback and its degree/equivariance consumer.
 
-The next source-facing conclusion remains Euclidean/Zariski closure comparison
-for the actual algebraic orbit. Its constructible-image and finite-normalization
-density proof is in the blueprint. Special-unitary density, finite-degree Haar
-averaging and homogeneous extraction are also still required. The norm bound
-alone does not prove Lemma 7.2. Root integration remains with SPECHT in `I-0060`;
-no completion claim is made for this task.
+The source-facing orbit criterion still requires the closure comparison
+assigned to CLOSURE, special-unitary density, finite-degree Haar averaging and
+homogeneous extraction. BALANCED retains the actual polynomial-image/orbit
+identification and final assembly. The norm bound and invariant-kernel equality
+do not alone prove Lemma 7.2, which remains open.
 
-## Proposed independent complex-closure producer (I-0072)
+## Independent complex-closure producer (I-0072 / I-0074)
 
-This is a scheduling proposal only: no ownership has been transferred and no
-additional writer has been launched. The exact output proposition below was
+Parent activated BOST-CLOSURE in the freed SPECHT slot under I-0074; four
+proof writers remain the maximum. The exact output proposition below was
 type-checked with the existing definitions (the theorem is unproved):
 
 ```lean
@@ -462,19 +507,18 @@ and `lem:balanced-constructible-closure`; source anchors are Milne page 0201
 and manuscript page 0012. The finite-normalization proof is an explicit
 supplement to Milne's unproved closure-comparison aside.
 
-Proposed exclusive paths: `InvariantTheory/ComplexClosure/**`,
+CLOSURE exclusively owns: `InvariantTheory/ComplexClosure/**`,
 `blueprint/src/complex_closure.tex`, `verification/ComplexClosureAxioms.lean`,
-and `verification/COMPLEX_CLOSURE.md`. If authorized, parent and BALANCED should
-migrate the two existing blueprint nodes into that slice and arrange the
-shared include once, so the successor never writes `compactness.tex` or the
-root/shared attribution files.
+and `verification/COMPLEX_CLOSURE.md`. The two complete blueprint nodes were
+moved verbatim (117 lines) under bounded authorization at `ecbcee9`; GEOM has
+added the shared include after compactness and before main. Both nodes remain
+notready; CLOSURE never writes compactness or the root/shared attribution files.
 
 BALANCED retains the canonical polynomial, semistability and Plücker action
 definitions and their source-facing assembly. The concrete consumer takes
 `σ = (ι × ι) ⊕ (κ × κ)`, `I = specialLinearPairIdeal ℂ ι κ`,
 `b = (bU.tensorProduct bW).exteriorPower s`, and
-`q = pluckerOrbitPolynomial bU bW s z`. The checked coordinate evaluation
-identifies the resulting image with the actual orbit; the returned closure
+`q = pluckerOrbitPolynomial bU bW s z`. The actual image/orbit bridge is being checked in `InvariantTheory.OrbitImage`; the returned closure
 equality then turns `IsBalanced.zero_not_mem_closure_plucker_orbit` into
 the existing `IsGeometricallySemistable` predicate. Invariant extraction
 remains BALANCED-owned and is still required for the source's Plücker-line
