@@ -8,6 +8,8 @@ import BostConjecture.Arithmetic.Specht.FiniteTensorDegree
 import BostConjecture.Arithmetic.Specht.DeterminantDegree
 import BostConjecture.Slope.Geometric.PairingInjective
 import BostConjecture.Slope.Geometric.PairingMetric
+import BostConjecture.Slope.Geometric.ImageSlope
+import BostConjecture.Slope.Geometric.PairingSlope
 
 #print axioms BostConjecture.Arithmetic.Specht.complexRepresentation_irreducible
 #print axioms BostConjecture.Arithmetic.Specht.latticeComplexCore_action_inner
@@ -45,3 +47,6 @@ import BostConjecture.Slope.Geometric.PairingMetric
 #print axioms BostConjecture.Slope.Geometric.dualDeterminantTwist_inner
 #print axioms BostConjecture.Slope.Geometric.dualDeterminantFiberCore_eq
 #print axioms BostConjecture.Slope.Geometric.canonicalPairing_intrinsic_norm_le
+#print axioms BostConjecture.Slope.Geometric.slope_le_image_of_injective
+#print axioms BostConjecture.Slope.Geometric.canonicalPairing_image_slope
+#print axioms BostConjecture.Slope.Geometric.canonicalPairing_slope_inequality

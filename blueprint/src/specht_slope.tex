@@ -393,9 +393,10 @@ contraction estimate with these identifications proves the claim.
 
 \begin{lemma}[Slope comparison through the actual image]
 \label{lem:canonical-pairing-image-slope}
+\lean{BostConjecture.Slope.Geometric.slope_le_image_of_injective,BostConjecture.Slope.Geometric.canonicalPairing_image_slope}
+\leanok
 \uses{lem:canonical-pairing-injective,lem:canonical-pairing-intrinsic-contraction,lem:determinant-specht-family-semistable,lem:degree-calculus}
 \source{bost-specht-manuscript:page-0010}
-\notready
 For a nonzero canonical pairing $\Psi_d:B_d\to D_d^\vee$, let
 $J_d=\operatorname{im}\Psi_d$ have its induced metric. Then
 $\slope(B_d)\leq\slope(J_d)\leq\slope(D_d^\vee)$.
@@ -412,9 +413,30 @@ permutation actions. Its defining inequality applies to the submodule
 $J_d$, without any saturation requirement, and gives the second bound.
 \end{proof}
 
+\begin{lemma}[Finite-degree slope estimate]
+\label{lem:canonical-pairing-finite-degree}
+\lean{BostConjecture.Slope.Geometric.canonicalPairing_slope_inequality}
+\leanok
+\uses{lem:canonical-pairing-image-slope,lem:determinant-specht-exact-slope,lem:finite-tensor-average-slope,lem:degree-calculus}
+\source{bost-specht-manuscript:page-0010}
+For any nonzero canonical pairing of degree $d$, with positive source
+rank $s$ and factor ranks $a_j$, one has
+\[
+d\slope(V)-c_s(d)\leq d\sum_j\slope(E_j)+\sum_jc_{a_j}(d).
+\]
+\end{lemma}
+\begin{proof}
+Combine the two inequalities through the actual image. The source
+slope is $d\slope(V)-c_s(d)$. The $j$th factor in $D_d$ is formed
+from $E_j^\vee$, so its slope is $-d\slope(E_j)-c_{a_j}(d)$.
+Average slope is additive on finite Hilbert tensor products, and
+Hermitian duality negates it. Thus the target slope is exactly the
+right side of the displayed inequality.
+\end{proof}
+
 \begin{theorem}[Geometric slope inequality]
 \label{thm:geometric-slope}
-\uses{lem:contraction-nonzero,lem:canonical-contraction,lem:determinant-isotypic,lem:irreducible-semistable,lem:degree-calculus,thm:specht-sublinear-covolume}
+\uses{lem:contraction-nonzero,lem:canonical-pairing-finite-degree,thm:specht-sublinear-covolume}
 \source{bost-specht-manuscript:page-0009,bost-specht-manuscript:page-0010}
 \notready
 For arbitrary positive-rank Hermitian bundles $E_1,\ldots,E_N$ and

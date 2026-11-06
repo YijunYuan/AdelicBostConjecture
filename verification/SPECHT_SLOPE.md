@@ -85,8 +85,15 @@ foundational-only. Independent review accepted the nonfree base-change bridges
 and normalization. The combined import check initially found generated local
 instance-name collisions; explicit names fixed them before the successful probe.
 
-The geometric slope inequality remains open; the next consumer is actual
-image-slope comparison and the verified asymptotic limit.
+`Slope/Geometric/ImageSlope.lean` proves both inequalities through the actual
+image, without saturation, and `PairingSlope.lean` derives the finite-degree
+slope estimate with exact Specht corrections. Kernel builds passed (9184 jobs,
+16.1 seconds; 9203 jobs, 15.2 seconds); all thirty-five transitive probes passed
+(8.5 seconds), foundational-only. Independent reviews accepted the actual range
+metric, rank argument, concrete semistability consumer and duality signs.
+
+The geometric slope inequality remains open; the next consumer is the verified
+asymptotic limit applied to GEOM's actual complex-invariant pairing sequence.
 Existing ARITH, SPECHT, and GEOM producers are unchanged.
 
 Tooling: the first check invocation used unsupported `-p` and did not run Lean;
