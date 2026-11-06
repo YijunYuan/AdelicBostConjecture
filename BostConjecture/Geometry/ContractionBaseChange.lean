@@ -122,6 +122,21 @@ def dualDeterminantTensorBaseChange :
           (R ⊗[ℤ] Specht.orbitLattice (t j)))).toLinearMap
 
 set_option backward.isDefEq.respectTransparency false in
+/-- Canonical scalar extension of the whole dual determinant source is bijective. -/
+theorem dualDeterminantTensorBaseChange_bijective :
+    Function.Bijective (dualDeterminantTensorBaseChange (R := R) (S := S) E t) := by
+  let e i := LinearEquiv.ofBijective
+    (dualDeterminantTwistBaseChange (R := R) (S := S) (M := E i)
+      (Specht.orbitLattice (t i)) (k i) (a i))
+    (dualDeterminantTwistBaseChange_bijective (Specht.orbitLattice (t i)) (k i) (a i))
+  let f := (Tensor.baseChangeEquiv R S (fun i =>
+    (⨂[R] (_ : Fin (k i)), ⋀[R]^(a i) (Dual R (E i))) ⊗[R]
+      (R ⊗[ℤ] Specht.orbitLattice (t i)))).trans (PiTensorProduct.congr e)
+  change Function.Bijective f
+  exact f.bijective
+
+
+set_option backward.isDefEq.respectTransparency false in
 /-- The actual tensor of projective determinant factors, including dual regrouping,
 has the expected free formula after scalar extension. -/
 theorem dualDeterminantMap_baseChange

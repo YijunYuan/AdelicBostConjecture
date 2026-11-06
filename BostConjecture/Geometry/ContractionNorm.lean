@@ -13,39 +13,6 @@ namespace BostConjecture.Geometry
 open Module NumberField PiTensorProduct Arithmetic
 open scoped TensorProduct
 
-section BaseChange
-
-variable {R S ι : Type*} [CommRing R] [CommRing S] [Algebra R S] [Fintype ι]
-  (E : ι → Type*) [∀ j, AddCommGroup (E j)] [∀ j, Module R (E j)]
-  [∀ j, Module.Finite R (E j)] [∀ j, Module.Projective R (E j)]
-  {n : ℕ} {a k : ι → ℕ}
-  (t : ∀ j, OAI.Saxl.Tableau n (Specht.rectangle (a j) (k j)))
-
-local instance : ∀ j, AddCommGroup
-    ((⨂[R] (_ : Fin (k j)), ⋀[R]^(a j) (Dual R (E j))) ⊗[R]
-      (R ⊗[ℤ] Specht.orbitLattice (t j))) :=
-  fun _ => Module.addCommMonoidToAddCommGroup R
-
-local instance : ∀ j, Module R
-    ((⨂[R] (_ : Fin (k j)), ⋀[R]^(a j) (Dual R (E j))) ⊗[R]
-      (R ⊗[ℤ] Specht.orbitLattice (t j))) := fun _ => inferInstance
-
-set_option backward.isDefEq.respectTransparency false in
-/-- The transport of all dual determinant factors is a genuine scalar-extension
-identification, so it transports their positive tensor form. -/
-theorem dualDeterminantTensorBaseChange_bijective :
-    Function.Bijective (dualDeterminantTensorBaseChange (R := R) (S := S) E t) := by
-  let e := (Tensor.baseChangeEquiv R S (fun j =>
-    (⨂[R] (_ : Fin (k j)), ⋀[R]^(a j) (Dual R (E j))) ⊗[R]
-      (R ⊗[ℤ] Specht.orbitLattice (t j)))).trans
-    (PiTensorProduct.congr (fun j => LinearEquiv.ofBijective
-      (dualDeterminantTwistBaseChange (R := R) (S := S) (M := E j)
-        (Specht.orbitLattice (t j)) (k j) (a j))
-      (dualDeterminantTwistBaseChange_bijective (Specht.orbitLattice (t j)) (k j) (a j))))
-  change Function.Bijective e
-  exact e.bijective
-
-end BaseChange
 
 section FiberCore
 
