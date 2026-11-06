@@ -944,4 +944,44 @@ The offline MCP search tool likewise lacked workspace-root discovery; the Horizo
 CLI and guarded LSP searches supplied the required searches instead.
 The previous integration thread I-0065 closed after the accepted root e2e7039;
 these new producers were handed to the successor shared integrator GEOM as I-0075.
-Full HN uniqueness/isometry and degree finiteness remain separate open boundaries.
+The later checks below close HN uniqueness/isometry; degree finiteness remains open.
+
+### Full intrinsic HN and representation consumers
+
+`c030f67`, `c3747d0` and `22be758` complete uniqueness (including arbitrary
+saturated integral flags), invariance under integral isometries, and the
+canonical irreducible-action semistability criterion. The final 3587-job
+consumer check `533e54f9712851e0` passed at 00:16:26 UTC; the 302-probe audit
+passed at 00:17:17 UTC. Honesty review approved the precise full-HN nodes.
+GEOM integrated the delivered endpoint at `70d1911`: its configured 9296-job
+root check passed at 00:32:42 UTC, root blob
+`57ed74cb5b71c6c523cf463905883c06c310d36e`.
+
+`RestrictionOfScalars.lean` (source blob
+`46f8a357ebc0191ff350c677f5b731c32da641b1`, present at `11fd898`) proves
+integer freeness, canonical rational generic-fiber equivalence and the rank
+formula for arbitrary finite projective integral modules. Its serialized
+module check `bcd75114888b2a5e` passed at 00:23:27 UTC; the 308-probe audit
+passed at 00:24:19 UTC. The source was automatically captured in `f9a60e4`;
+that capture is not verification evidence for any unrelated file.
+
+`5d1ff45`, `76c232f`, `89d2734`, `d56e6ff` and `e73bda6` establish dual and
+independent binary tensor irreducibility, scalar-extension invariant submodules,
+the one-complex-embedding semistability criterion, and the actual tensor/dual
+metric consumers. The joint 3603-job consumer check `440a060c199d3fdc` passed
+without warnings at 00:39:04 UTC. The 329-probe audit passed at 00:39:50 UTC
+(`representation-axioms.jsonlog`). All recorded probes report only `propext`,
+`Classical.choice`, and `Quot.sound`. Independent honesty review approved the
+five precise representation and binary-consumer nodes at `e73bda6`.
+
+The LSP occasionally retained stale imported environments after dependency
+edits; serialized narrow checks and import reloads supplied the fallback.
+One tensor-consumer file check failed on an unreduced identity map; this was
+repaired before its successful module check. The first dual builds exposed
+unused number-field hypotheses; these were removed before the final warning-free
+joint check. No admitted proof or custom axiom was introduced.
+
+The finite-family representation consumer is being completed separately.
+The arithmetic frontier is now the real trace metric and degree-covolume formula,
+then bounded-degree finiteness via primitive exterior integer lattices.
+This record does not assert general tensor semistability or manuscript Theorem 1.1.

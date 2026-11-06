@@ -42,4 +42,47 @@ theorem representation_asAlgebraHom_surjective (ρ : Representation k G V)
     (congrArg (fun u : Module.End (Module.End k[G] ρ.asModule) ρ.asModule =>
       u (ρ.asModuleEquiv.symm x)) ha)
 
+/-- The action operators span the full endomorphism space. -/
+theorem span_representation_eq_top (ρ : Representation k G V)
+    [FiniteDimensional k V] [IsAlgClosed k] [Representation.IsIrreducible ρ] :
+    Submodule.span k (Set.range ρ) = ⊤ := by
+  apply top_unique
+  intro f hf
+  clear hf
+  obtain ⟨a, rfl⟩ := representation_asAlgebraHom_surjective ρ f
+  induction a using MonoidAlgebra.induction_on with
+  | of g =>
+    rw [Representation.asAlgebraHom_of]
+    exact Submodule.subset_span (Set.mem_range_self g)
+  | add a b ha hb => simpa only [map_add] using Submodule.add_mem _ ha hb
+  | smul c a ha => simpa only [map_smul] using Submodule.smul_mem _ c ha
+
+/-- A nonzero representation spanning every endomorphism is irreducible. -/
+theorem isIrreducible_of_span_eq_top (ρ : Representation k G V) [Nontrivial V]
+    (hspan : Submodule.span k (Set.range ρ) = ⊤) : Representation.IsIrreducible ρ := by
+  let : Nontrivial (Subrepresentation ρ) :=
+    ⟨⟨⊥, ⊤, fun he => bot_ne_top (congrArg Subrepresentation.toSubmodule he)⟩⟩
+  constructor
+  intro P
+  have hEnd (f : Module.End k V) (x : V) (hx : x ∈ P) : f x ∈ P.toSubmodule := by
+    have hf : f ∈ Submodule.span k (Set.range ρ) := hspan.symm ▸ Submodule.mem_top
+    induction hf using Submodule.span_induction with
+    | mem f hf =>
+      obtain ⟨g, rfl⟩ := hf
+      exact P.apply_mem_toSubmodule g hx
+    | zero => simp
+    | add f g _ _ hf hg => exact P.toSubmodule.add_mem hf hg
+    | smul a f _ hf => exact P.toSubmodule.smul_mem a hf
+  let Q : Submodule (Module.End k V) V :=
+    { P.toSubmodule.toAddSubmonoid with smul_mem' := fun f x hx => hEnd f x hx }
+  rcases eq_bot_or_eq_top Q with hQ | hQ
+  · left
+    apply Subrepresentation.toSubmodule_injective
+    ext x
+    exact show x ∈ Q ↔ x ∈ (⊥ : Submodule (Module.End k V) V) from by rw [hQ]
+  · right
+    apply Subrepresentation.toSubmodule_injective
+    ext x
+    exact show x ∈ Q ↔ x ∈ (⊤ : Submodule (Module.End k V) V) from by rw [hQ]
+
 end BostConjecture.Arithmetic
