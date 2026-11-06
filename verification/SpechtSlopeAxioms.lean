@@ -2,6 +2,7 @@ import BostConjecture.Arithmetic.Specht.Representation
 import BostConjecture.Arithmetic.Specht.Bundle
 import BostConjecture.Arithmetic.Specht.DeterminantRepresentation
 import BostConjecture.Arithmetic.Specht.DeterminantBundle
+import BostConjecture.Arithmetic.Specht.LatticeDegree
 
 #print axioms BostConjecture.Arithmetic.Specht.complexRepresentation_irreducible
 #print axioms BostConjecture.Arithmetic.Specht.latticeComplexCore_action_inner
@@ -19,3 +20,7 @@ import BostConjecture.Arithmetic.Specht.DeterminantBundle
 #print axioms BostConjecture.Arithmetic.Specht.determinantMetric_isSemistable
 #print axioms BostConjecture.Arithmetic.Specht.determinantMetric_fiber_inner
 #print axioms BostConjecture.Arithmetic.Specht.determinantMetric_piTensor_and_dual_isSemistable
+#print axioms BostConjecture.Arithmetic.Specht.latticeMetric_determinant_norm
+#print axioms BostConjecture.Arithmetic.Specht.latticeMetric_degree
+#print axioms BostConjecture.Arithmetic.Specht.latticeMetric_slope
+#print axioms BostConjecture.Arithmetic.Specht.rectangle_latticeMetric_slope

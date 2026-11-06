@@ -169,6 +169,34 @@ tensor metric. It gives semistability of both the tensor bundle and its
 Hermitian dual, with no arithmetic semistability hypothesis on the $A_j$.
 \end{proof}
 
+\begin{lemma}[Intrinsic degree of the arithmetic Specht lattice]
+\label{lem:arithmetic-specht-degree}
+\uses{lem:arithmetic-specht-semistable,lem:degree-calculus,lem:integral-specht-covolume-nonneg}
+\source{bost-specht-manuscript:page-0009}
+\lean{BostConjecture.Arithmetic.Specht.latticeMetric_determinant_norm,BostConjecture.Arithmetic.Specht.latticeMetric_degree,BostConjecture.Arithmetic.Specht.latticeMetric_slope,BostConjecture.Arithmetic.Specht.rectangle_latticeMetric_slope}
+\leanok
+The canonical metric on $\Ocal_K\otimes_{\mathbb Z}L$ has normalized
+degree $-\log\operatorname{covol}L$ and slope
+$-\log\operatorname{covol}L/\operatorname{rk}_{\mathbb Z}L$, where the
+covolume uses the inherited orthonormal word metric.
+For the canonical rectangle this slope is exactly $-c_a(ak)$.
+\end{lemma}
+\begin{proof}
+Choose an integral basis $b_1,\ldots,b_f$ of $L$. Its scalar extension
+is an $\Ocal_K$-basis, so its top wedge generates the intrinsic
+determinant line and the finite quotient term in the degree formula
+is zero. At every complex embedding its Hermitian Gram matrix is the
+integer word Gram matrix $G_{ij}=\sum_w(b_i)_w(b_j)_w$. The squared
+norm of the basis wedge is therefore $\det G$, which is the square
+of the lattice covolume. Both norms are nonnegative, so the wedge norm
+is exactly $\operatorname{covol}L$. Summing its logarithm over all
+$[K:\mathbb Q]$ complex embeddings and dividing by $[K:\mathbb Q]$
+gives the stated degree. Scalar extension preserves the rank $f$,
+which gives the slope formula.
+For the canonical rectangular lattice, its integral rank and logarithmic
+covolume are exactly the rank and covolume defining $c_a(ak)$.
+\end{proof}
+
 \begin{lemma}[Determinant-isotypic integral modules]
 \label{lem:determinant-isotypic}
 \uses{def:rectangular-specht,lem:arithmetic-specht-action,lem:arithmetic-specht-semistable,lem:rectangular-invariants,lem:determinant-twisted-free-inclusion,lem:determinant-free-base-change,lem:determinant-free-naturality,lem:tensor-base-change-equivalence,lem:determinant-free-base-change-square,lem:linear-map-localization-descent,lem:determinant-chart-tower,lem:finite-projective-frames,lem:projective-determinant-inclusion,lem:degree-calculus}

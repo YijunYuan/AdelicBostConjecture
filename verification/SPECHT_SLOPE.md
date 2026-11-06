@@ -37,7 +37,18 @@ with the concrete hypotheses proved here. Kernel build passed (9180 jobs,
 19.1 seconds); all sixteen transitive axiom probes are foundational-only.
 The final scoped honesty/source review found no defect in these consumers.
 
-The exact intrinsic slope and geometric slope inequality remain open.
+`Arithmetic/Specht/LatticeDegree.lean` proves the actual lattice determinant
+norm equals the checked lattice covolume, its normalized arithmetic degree is
+minus the logarithm of that covolume, and its slope is minus
+`rectangleLogCovolume` in the rectangular case. It consumes the stable free-basis
+degree formula at d41ef38; no restriction-covolume comparison is assumed.
+Kernel build passed (9146 jobs, 16.3 seconds), and the complete twenty-declaration
+axiom probe passed (19.5 seconds) with only the three foundational axioms above.
+Independent honesty/source review confirmed the all-embedding normalization,
+absence of a discriminant factor, and the actual real-span covolume.
+
+The full determinant contribution to the exact intrinsic slope and the geometric
+slope inequality remain open.
 Existing ARITH, SPECHT, and GEOM producers are unchanged.
 
 Tooling: the first check invocation used unsupported `-p` and did not run Lean;
