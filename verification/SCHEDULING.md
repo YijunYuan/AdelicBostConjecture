@@ -1,6 +1,6 @@
 # Parallel Horizon scheduling
 
-## Live checkpoint at 2026-11-06 01:54 UTC
+## Live checkpoint at 2026-11-06 01:58 UTC
 
 The user explicitly requests **four continuing Horizon proof lanes until the
 entire main theorem is complete**, with no budget cap. The parent only schedules,
@@ -25,9 +25,9 @@ No additional build is needed for this milestone.
 | Run | Task | Current responsibility |
 | --- | --- | --- |
 | `0005` | `BOST-GEOM` | Binary Plucker/contraction consumers and shared integration |
-| free | BALANCED successor | Lemma 7.2 task exited normally at 01:53:33 UTC |
+| queued | `BOST-COMPACTNESS` | Metric continuity, arithmetic compactness and maximizing pairs |
 | `0008` | `BOST-COVOLUME` | Actual restriction-of-scalars trace-metric covolume |
-| free | Successor selection | Required actual Specht bundle or compactness producer |
+| queued | `BOST-SPECHT-SLOPE` | Actual determinant-Specht bundles and geometric slope inequality |
 
 ARITH run `0004` finished normally at 01:50:45 UTC, with its full task marked
 done. Its arbitrary-number-field, nonfree-projective degree calculus, actual HN
@@ -38,16 +38,23 @@ SPECHT run `0003` completed the canonical-lattice covolume limit at 23:50:16 UTC
 01:16:41 UTC (proof `53f1119`, integration `d29f2d3`, evidence `f7ffd4f`, 40
 foundational-only probes). Neither completion implies the main theorem is done.
 
-Standing ownership is `I-0087` until the successor scopes are assigned. GEOM
+Standing ownership is `I-0095`, superseding archived `I-0087`. GEOM
 alone edits the shared root, attribution, results and blueprint index files.
 COVOLUME owns only `Arithmetic/RestrictionCovolume/**`,
 `blueprint/src/restriction_covolume.tex`, `verification/RestrictionCovolumeAxioms.lean`
 and `verification/RESTRICTION_COVOLUME.md`; its stable input handoff is in
 `ARITHMETIC.md`. Completed source APIs stay stable unless parent coordinates a
 specific extension. The remaining main theorem, contraction and compactness
-claims are open. A bounded read-only dependency review and GEOM handshake will
-choose two disjoint successors; deferred coaction base change is not presumed
-necessary after the checked direct nonvanishing descent.
+claims are open. The bounded read-only review and GEOM handshake accepted the two successors
+in `I-0094`. GEOM is migrating the existing blueprint slices before successor
+edits. SPECHT-SLOPE owns `Arithmetic/Specht/**`, `Slope/Geometric/**`,
+`specht_slope.tex` and its verification pair. COMPACTNESS owns
+`Arithmetic/Compactness/**`, `arithmetic_compactness.tex` and its verification
+pair. Metric continuity and arithmetic reconstruction can proceed before the
+pending covolume identity. One complex irreducible fiber suffices for the
+actual Specht application; do not expand to a general irreducibility library.
+The generic coaction square has no remaining consumer on this route and its
+roadmap item is retired, without claiming it proved.
 
 At 01:52 UTC, available memory was 9.21 GiB, PSI avg10 0.00%, swap used 3.31 GiB
 and OOM kills zero. All active proof runs use the guarded Lean LSP; broad checks
@@ -57,7 +64,7 @@ searches at stable checkpoints and avoid redundant forced reindexing.
 
 ## Earlier checkpoints
 
-The sections below preserve dated history; the live table and I-0087 above
+The sections below preserve dated history; the live table and I-0095 above
 govern current ownership. Do not resume completed SPECHT run `0003`.
 
 Coordinator checkpoint: 2026-11-06 07:20 Asia/Shanghai (2026-11-05 23:20 UTC).
