@@ -73,6 +73,7 @@ theorem hasDerivAt_submodule_degree_archimedeanPullback
       letI := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber M σ)
       letI := InnerProductSpace.ofCore
         (inferInstance : PreInnerProductSpace.Core ℂ (ComplexFiber M σ))
+      letI : NormedSpace ℂ (ComplexFiber M σ) := inferInstance
       HasDerivAt (fun t => g t σ x) (A σ x) 0) :
     HasDerivAt (fun t => ((h.archimedeanPullback (g t) (hc t)).submodule P).degree)
       (-(∑ σ, h.fiberProjectionTrace P σ (A σ)) / (Module.finrank ℚ K : ℝ)) 0 := by
@@ -81,6 +82,7 @@ theorem hasDerivAt_submodule_degree_archimedeanPullback
     InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber M σ)
   let (σ : K →+* ℂ) := InnerProductSpace.ofCore
     (inferInstance : PreInnerProductSpace.Core ℂ (ComplexFiber M σ))
+  let (σ : K →+* ℂ) : NormedSpace ℂ (ComplexFiber M σ) := inferInstance
   let (σ : K →+* ℂ) : InnerProductSpace.Core ℂ (ComplexFiber P σ) := (h.submodule P).fiber σ
   let (σ : K →+* ℂ) :=
     InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber P σ)
