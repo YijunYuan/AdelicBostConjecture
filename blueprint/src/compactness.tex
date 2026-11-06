@@ -1125,8 +1125,9 @@ general reductive-group theorem is required.
 
 \begin{lemma}[Invariant detection of orbit closure]
 \label{lem:invariant-orbit-criterion}
+\lean{BostConjecture.InvariantTheory.exists_homogeneousInvariant_of_plucker_semistable,BostConjecture.InvariantTheory.plucker_semistable_iff_exists_homogeneousInvariant}\leanok
 \uses{def:balanced-vector-semistability,lem:balanced-polynomial-average,lem:balanced-homogeneous-extraction}
-\source{bost-specht-manuscript:page-0012,maithani-reynolds:thm:reynolds-for-lie-group,milne-algebraic-geometry:page-0201}\notready
+\source{bost-specht-manuscript:page-0012,maithani-reynolds:thm:reynolds-for-lie-group}
 Let $U,W$ be positive-dimensional finite-dimensional complex spaces and
 $G=\SL(U)\times\SL(W)$ act on $X=\bigwedge^s(U\otimes W)$ by the
 actual exterior tensor representation. A vector $x\in X$ has $0\notin\overline{Gx}^{\mathrm{Zar}}$ if and only if some
@@ -1202,8 +1203,9 @@ homogeneous-invariant conclusion of Lemma~\ref{lem:invariant-orbit-criterion}.
 
 \begin{lemma}[The intrinsic Pl\"ucker line]
 \label{lem:balanced-intrinsic-plucker-line}
+\lean{BostConjecture.Balanced.range_exteriorPower_subtype_eq_span_plucker,BostConjecture.Balanced.positive_factor_finranks_of_subspace_basis}\leanok
 \uses{lem:determinant-coordinates}
-\notready
+
 Let $U,W$ be complex Hermitian spaces, $S\subseteq U\otimes W$ a subspace
 of dimension $s$, and $v_1,\ldots,v_s$ any basis of $S$. The image of
 $\bigwedge^s S\to\bigwedge^s(U\otimes W)$ induced by inclusion equals
@@ -1221,8 +1223,9 @@ if $s>0$, neither factor dimension can be zero.
 
 \begin{lemma}[Balanced projections give geometric semistability]
 \label{lem:balanced-plucker}
+\lean{BostConjecture.Balanced.IsBalanced.exists_homogeneousInvariant_plucker,BostConjecture.Balanced.IsBalanced.plucker_semistable}\leanok
 \uses{def:balanced-vector-semistability,lem:invariant-orbit-criterion,lem:balanced-plucker-algebraic-exclusion,lem:balanced-intrinsic-plucker-line}
-\source{bost-specht-manuscript:page-0012}\notready
+\source{bost-specht-manuscript:page-0012}
 Let $S\subset U\otimes W$ be a nonzero subspace of complex Hermitian
 spaces of dimensions $m,n$, and put $s=\dim S$. If its orthogonal
 projection $P$ obeys
@@ -1252,8 +1255,9 @@ For $g\in\SL(U)$, polar decomposition writes $g=u e^H$, where $u$
 is unitary and $H$ is traceless Hermitian: the positive factor has
 determinant $|\det g|=1$. The same applies to $W$. Unitary factors
 preserve exterior norms, so every vector in the orbit of $z$ has norm
-at least one. Thus zero is outside its Euclidean closure and, by the
-orbit criterion, outside its Zariski closure. The same criterion gives
+at least one. Thus zero is outside its Euclidean closure and, by
+Lemma~\ref{lem:balanced-plucker-algebraic-exclusion}, outside its Zariski
+closure. The invariant criterion gives
 a nonvanishing homogeneous invariant. Since $S$ is nonzero, the factor
 dimensions are positive, so the proved Pl\"ucker invariant criterion applies.
 Every nonzero vector in the intrinsic line is a nonzero scalar multiple of
