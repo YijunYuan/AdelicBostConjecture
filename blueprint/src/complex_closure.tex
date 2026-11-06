@@ -113,9 +113,53 @@ has proper closed closure in $Y$. This proves the assertion.
 This is the affine form of \cite[Theorem 9.7]{milne-algebraic-geometry}.
 \end{proof}
 
+\begin{lemma}[Lifting roots of the actual minimal polynomial]
+\label{lem:complex-closure-integral-lifting}\notready
+Let $K$ be algebraically closed, let $R\subseteq B$ be an inclusion of
+$K$-domains with $R$ integrally closed, and suppose $B$ is integral over
+$R$ and finitely generated over $K$. For $u\in B$, let $F\in R[T]$ be
+its monic minimal polynomial. If $\chi:R\to K$ is a $K$-algebra
+homomorphism and $F^\chi(z)=0$, then there is a $K$-algebra
+homomorphism $\psi:B\to K$ extending $\chi$ with $\psi(u)=z$.
+\end{lemma}
+\begin{proof}
+The kernel of $R[T]\to B$, $T\mapsto u$, is $(F)$: divide by the
+monic $F$ and use minimality over the fraction field to make the remainder
+zero. Integrally closedness ensures that this monic minimal polynomial
+has coefficients in $R$. Thus evaluation of coefficients by $\chi$ and
+of $T$ by $z$ descends to a $K$-algebra homomorphism
+$\phi:R[u]\to K$. Its kernel is maximal since $\phi$ contains all
+constants in its image. The extension $R[u]\subseteq B$ is integral,
+so lying over provides a maximal ideal $Q\subset B$ contracting to
+$\ker\phi$. The field $B/Q$ is finitely generated as a $K$-algebra,
+hence finite algebraic over $K$ by the weak Nullstellensatz and equal
+to $K$ since $K$ is algebraically closed. Composing the quotient map
+with this $K$-algebra identification gives $\psi$. For $a\in R[u]$,
+$a-\phi(a)$ belongs to $Q$, so $\psi(a)=\phi(a)$. In particular
+$\psi$ extends $\chi$ and sends $u$ to $z$.
+\end{proof}
+
+\begin{lemma}[Polynomial separation on a finite set]
+\label{lem:complex-closure-finite-separator}\notready
+Let $S$ be a finite subset of $K^T$, where $K$ is a field, and let
+$p\in K^T\setminus S$. There is a polynomial $u\in K[X_i\mid i\in T]$
+such that $u(p)=1$ and $u(q)=0$ for every $q\in S$.
+\end{lemma}
+\begin{proof}
+For each $q\in S$, choose $j(q)\in T$ with $p_{j(q)}\ne q_{j(q)}$.
+Set
+\[
+ u(X)=\prod_{q\in S}
+ \frac{X_{j(q)}-q_{j(q)}}{p_{j(q)}-q_{j(q)}}.
+\]
+All denominators are nonzero constants. Every factor is one at $p$,
+and the factor indexed by $q$ vanishes at $q$. The empty product is one,
+so the assertion includes $S=\varnothing$ and empty coordinate arity.
+\end{proof}
+
 \begin{lemma}[Complex and Zariski constructible closures]
 \label{lem:balanced-constructible-closure}
-\uses{lem:complex-closure-root-persistence,lem:complex-closure-root-bounds,lem:complex-closure-coordinates}
+\uses{lem:complex-closure-root-persistence,lem:complex-closure-root-bounds,lem:complex-closure-coordinates,lem:complex-closure-integral-lifting,lem:complex-closure-finite-separator}
 \source{milne-algebraic-geometry:page-0201}\notready
 A constructible subset of a complex affine variety has the same
 Euclidean and Zariski closures.

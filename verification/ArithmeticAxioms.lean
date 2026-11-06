@@ -1,7 +1,7 @@
 import BostConjecture.Arithmetic.TensorDegree
 import BostConjecture.Arithmetic.SubspaceSupermodular
 import BostConjecture.Arithmetic.ArchimedeanFiniteness
-import BostConjecture.Arithmetic.HermitianHN
+import BostConjecture.Arithmetic.IrreducibleSemistable
 import BostConjecture.Arithmetic.ExactDegree
 import BostConjecture.Arithmetic.QuotientMetric
 import BostConjecture.Arithmetic.IntegralDeterminantProduct
@@ -322,3 +322,19 @@ import BostConjecture.Arithmetic.DeterminantProduct
 #print axioms BostConjecture.Arithmetic.HermitianMetric.le_hnSubmodule_one_of_slope_eq
 #print axioms BostConjecture.Arithmetic.HermitianMetric.isGreatest_slopes
 #print axioms BostConjecture.Arithmetic.HermitianMetric.isGreatest_maximalSlope_submodules
+#print axioms BostConjecture.Arithmetic.HermitianMetric.eq_hnSubmodule_one_of_slope_eq_of_rank
+#print axioms BostConjecture.Arithmetic.HermitianMetric.slope_le_maxSlope
+#print axioms BostConjecture.Arithmetic.HermitianMetric.isSemistable_iff_maxSlope_eq
+#print axioms BostConjecture.Arithmetic.HermitianMetric.quotient_isSemistable_iff_interval
+#print axioms BostConjecture.Arithmetic.HermitianMetric.quotient_isSemistable_iff_game
+#print axioms BostConjecture.Arithmetic.HermitianMetric.hnFlag_unique
+#print axioms BostConjecture.Arithmetic.integralPart_map_equiv
+#print axioms BostConjecture.Arithmetic.HermitianMetric.degree_submodule_map_equiv
+#print axioms BostConjecture.Arithmetic.HermitianMetric.subspaceDegree_map_equiv
+#print axioms BostConjecture.Arithmetic.HermitianMetric.hnFlag_map_equiv
+#print axioms BostConjecture.Arithmetic.HermitianMetric.hnSubmodule_map_equiv
+#print axioms BostConjecture.Slope.hnFiltration_eq_of_orderIso
+
+#print axioms BostConjecture.Arithmetic.HermitianMetric.hnSubmodule_unique
+#print axioms BostConjecture.Arithmetic.genericRepresentation
+#print axioms BostConjecture.Arithmetic.HermitianMetric.isSemistable_of_irreducible

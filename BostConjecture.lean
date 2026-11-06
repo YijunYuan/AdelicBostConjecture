@@ -23,6 +23,7 @@ public import BostConjecture.Arithmetic.TensorDegree
 public import BostConjecture.Arithmetic.ArchimedeanFiniteness
 public import BostConjecture.Arithmetic.SubspaceHN
 public import BostConjecture.Arithmetic.HermitianHN
+public import BostConjecture.Arithmetic.IrreducibleSemistable
 public import BostConjecture.LinearAlgebra.AlternatingTensorPower
 public import BostConjecture.LinearAlgebra.ExteriorPower.BaseChange
 public import BostConjecture.LinearAlgebra.PiTensorProduct.Projective
@@ -34,6 +35,11 @@ public import BostConjecture.Balanced.SpecialLinearPolar
 public import BostConjecture.Balanced.OrbitNorm
 public import BostConjecture.InvariantTheory.Semistability
 public import BostConjecture.InvariantTheory.Coaction
+public import BostConjecture.InvariantTheory.InvariantDetection
+public import BostConjecture.InvariantTheory.SpecialLinearBaseChange
+public import BostConjecture.InvariantTheory.OrbitImage
+public import BostConjecture.InvariantTheory.ComplexClosure.Coordinates
+public import BostConjecture.InvariantTheory.ComplexClosure.Roots
 public import BostConjecture.Geometry.TensorRealization
 public import BostConjecture.Geometry.FreeEmbedding
 public import BostConjecture.Geometry.DeterminantBaseChange
@@ -52,6 +58,7 @@ public import BostConjecture.Geometry.PolynomialPolarization
 public import BostConjecture.Geometry.DegreeDivisibility
 public import BostConjecture.Geometry.RectangularInvariants
 public import BostConjecture.Geometry.HomTensor
+public import BostConjecture.Geometry.HomInvariants
 public import BostConjecture.Tensor.Evaluation
 public import BostConjecture.Tensor.EvaluationBaseChange
 public import BostConjecture.Tensor.DualRegroupBaseChange

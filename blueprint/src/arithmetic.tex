@@ -1376,8 +1376,32 @@ a finite set. There are finitely many coordinates, and the coordinate map
 is injective, proving the assertion without an integral basis of $A$.
 \end{proof}
 
+\begin{lemma}[Integral and rational restriction of scalars]
+\label{lem:integral-restriction-rank}
+\uses{def:hermitian-metric}\notready
+If $A$ is a finite projective $\Ocal$-module of generic rank $a$, its
+underlying abelian group is finite free of rank $Da$. The canonical map
+from $A$ into $A_K$ exhibits $A_K$ as the localization of this abelian
+group at the nonzero integers; in particular
+$\mathbb Q\otimes_{\mathbb Z}A\simeq A_K$ as rational vector spaces.
+\end{lemma}
+\begin{proof}
+The ring $\Ocal$ is finite free over $\mathbb Z$. Hence finite generation
+of $A$ over $\Ocal$ implies finite generation over $\mathbb Z$.
+Projectivity makes $A$ torsion-free over $\Ocal$, and thus over
+$\mathbb Z$, so the structure theorem over the principal ideal domain
+$\mathbb Z$ makes it free. The field $K$ is the localization of
+$\Ocal$ at the images of nonzero integers. Tensoring this localization
+with $A$ and restricting scalars therefore identifies $A_K$ with
+localization of $A$ at those integers. Localization preserves rank,
+and the rational dimension of $A_K$ is
+$[K:\mathbb Q]\dim_K A_K=Da$ by the field tower law. This proves the
+rank and rational identification assertions without an integral
+$\Ocal$-basis of $A$.
+\end{proof}
+
 \begin{lemma}[Restriction of scalars and covolume]
-\label{lem:restriction-covolume}\uses{def:hermitian-degree,lem:bounded-integral-sections}
+\label{lem:restriction-covolume}\uses{def:hermitian-degree,lem:bounded-integral-sections,lem:integral-restriction-rank}
 \source{bost-specht-manuscript:page-0011}\notready
 Give $A\otimes_{\mathbb Z}\mathbb R$ the Euclidean norm
 $\|x\|^2=\sum_v w_v\|x_v\|_v^2$. For $a=\rk_\Ocal A$,
@@ -1699,7 +1723,7 @@ $B\subseteq A\cap X_1=A_1$.
 \begin{lemma}[Uniqueness of the intrinsic HN flag]
 \label{lem:hermitian-hn-unique}
 \uses{lem:hermitian-hn-maximal-slope,lem:quotient-interval-semistable,lem:finite-length-slope-game,lem:quotient-submodule-degree}
-\source{chen-jeannin-harder-narasimhan-games-v1}\notready
+\source{chen-jeannin-harder-narasimhan-games-v1}\lean{BostConjecture.Arithmetic.HermitianMetric.hnFlag_unique,BostConjecture.Arithmetic.HermitianMetric.hnSubmodule_unique}\leanok
 Any generic flag from $0$ to $A_K$ whose actual saturated integral
 quotients are semistable with strictly decreasing slopes equals the
 canonical HN flag.
@@ -1721,7 +1745,7 @@ of a saturated integral filtration, so the same uniqueness holds there.
 \begin{lemma}[Isometries preserve the intrinsic HN filtration]
 \label{lem:hermitian-hn-isometry}
 \uses{lem:hermitian-hn-unique,lem:degree-isometry,lem:integral-part-generic-subspace}
-\notready
+\lean{BostConjecture.Arithmetic.HermitianMetric.subspaceDegree_map_equiv,BostConjecture.Arithmetic.HermitianMetric.hnFlag_map_equiv,BostConjecture.Arithmetic.HermitianMetric.hnSubmodule_map_equiv}\leanok
 Every isometric integral automorphism of $A$ preserves every generic and
 integral term of its canonical HN filtration.
 \end{lemma}
@@ -1741,7 +1765,7 @@ assertion for its integral terms.
 \begin{lemma}[Harder--Narasimhan filtration]
 \label{lem:hn-filtration}
 \uses{lem:hermitian-hn-maximal-slope,lem:hermitian-hn-unique,lem:hermitian-hn-isometry,lem:integral-part-generic-subspace}
-\source{bost-specht-manuscript:page-0003}\notready
+\source{bost-specht-manuscript:page-0003}\lean{BostConjecture.Arithmetic.HermitianMetric.hn_quotient_isSemistable,BostConjecture.Arithmetic.HermitianMetric.hnSlope_succ_lt,BostConjecture.Arithmetic.HermitianMetric.isGreatest_slopes,BostConjecture.Arithmetic.HermitianMetric.isGreatest_maximalSlope_submodules,BostConjecture.Arithmetic.HermitianMetric.eq_hnSubmodule_one_of_slope_eq_of_rank,BostConjecture.Arithmetic.HermitianMetric.hnSubmodule_unique,BostConjecture.Arithmetic.HermitianMetric.hnSubmodule_map_equiv}\leanok
 Every nonzero Hermitian bundle $A$ has a unique saturated filtration with
 semistable quotient bundles and strictly decreasing slopes. The largest
 slope of a nonzero submodule is attained, equals the first quotient's
@@ -1770,7 +1794,7 @@ modules. Finally the isometry lemma preserves every term of this flag.
 
 \begin{lemma}[Irreducible isometric actions imply semistability]
 \label{lem:irreducible-semistable}\uses{lem:hn-filtration}
-\source{bost-specht-manuscript:page-0003}\notready
+\source{bost-specht-manuscript:page-0003}\lean{BostConjecture.Arithmetic.HermitianMetric.isSemistable_of_irreducible}\leanok
 If a group acts by integral isometries on $A$ and its representation on
 $A_K$ is irreducible, then $A$ is semistable.
 \end{lemma}
