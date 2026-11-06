@@ -7,6 +7,7 @@ import BostConjecture.Arithmetic.IndependentTensorSemistable
 import BostConjecture.Arithmetic.IrreducibleDualSemistable
 import BostConjecture.Arithmetic.IndependentPiSemistable
 import BostConjecture.Arithmetic.LineMinkowski
+import BostConjecture.Arithmetic.ExteriorMetric
 import BostConjecture.Arithmetic.ExactDegree
 import BostConjecture.Arithmetic.QuotientMetric
 import BostConjecture.Arithmetic.IntegralDeterminantProduct
@@ -385,3 +386,14 @@ import BostConjecture.Arithmetic.DeterminantProduct
 #print axioms BostConjecture.Arithmetic.prod_exp_weighted
 #print axioms BostConjecture.Arithmetic.exists_small_ideal_element
 #print axioms BostConjecture.Arithmetic.HermitianMetric.exists_small_section
+#print axioms BostConjecture.Arithmetic.exteriorFiberEquiv
+#print axioms BostConjecture.Arithmetic.exteriorFiberEquiv_section
+#print axioms BostConjecture.Arithmetic.exteriorMap_fiber
+#print axioms BostConjecture.Arithmetic.HermitianMetric.exteriorFiber
+#print axioms BostConjecture.Arithmetic.HermitianMetric.exteriorFiber_inner_ιMulti
+#print axioms BostConjecture.Arithmetic.HermitianMetric.exteriorFiber_inner_wedge
+#print axioms BostConjecture.Arithmetic.HermitianMetric.exteriorFiber_conjugate
+#print axioms BostConjecture.Arithmetic.HermitianMetric.exterior
+#print axioms BostConjecture.Arithmetic.HermitianMetric.exteriorFiber_top_eq
+#print axioms BostConjecture.Arithmetic.HermitianMetric.exteriorFiber_inner_map
+#print axioms BostConjecture.Arithmetic.HermitianMetric.determinant_submodule_sectionNorm
