@@ -228,5 +228,15 @@ theorem traceSpace_finrank :
   rw [← ZLattice.rank ℝ h.traceLattice, ← h.traceLatticeEquiv.finrank_eq,
     finrank_int (K := K)]
 
+/-- An integer basis extends to a real basis of the actual trace space. -/
+def traceBasis {ι : Type*} (b : Module.Basis ι ℤ M) : Module.Basis ι ℝ h.TraceSpace :=
+  (b.map h.traceLatticeEquiv).ofZLatticeBasis ℝ h.traceLattice
+
+@[simp]
+lemma traceBasis_apply {ι : Type*} (b : Module.Basis ι ℤ M) (i : ι) :
+    h.traceBasis b i = h.traceSection (b i) := by
+  simp only [traceBasis, Module.Basis.ofZLatticeBasis_apply, Module.Basis.map_apply]
+  rfl
+
 end HermitianMetric
 end BostConjecture.Arithmetic

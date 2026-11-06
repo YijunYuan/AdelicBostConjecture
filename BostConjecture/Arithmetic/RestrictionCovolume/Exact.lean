@@ -27,16 +27,6 @@ variable {M : Type*} [AddCommGroup M] [Module (𝓞 K) M]
 variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 variable (h : HermitianMetric (K := K) M)
 
-/-- Extend an actual integer basis using the canonical trace lattice. -/
-def traceBasis {ι : Type*} (b : Basis ι ℤ M) : Basis ι ℝ h.TraceSpace :=
-  (b.map h.traceLatticeEquiv).ofZLatticeBasis ℝ h.traceLattice
-
-@[simp]
-lemma traceBasis_apply {ι : Type*} (b : Basis ι ℤ M) (i : ι) :
-    h.traceBasis b i = h.traceSection (b i) := by
-  simp only [traceBasis, Basis.ofZLatticeBasis_apply, Basis.map_apply]
-  rfl
-
 lemma traceCovolume_sq_eq_gram {ι : Type*} [Fintype ι] [DecidableEq ι]
     (b : Basis ι ℤ M) : h.traceCovolume ^ 2 = (Matrix.gram ℝ (h.traceBasis b)).det := by
   rw [h.traceCovolume_sq_eq_det b]
