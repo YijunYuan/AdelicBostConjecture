@@ -1,6 +1,6 @@
 # Parallel Horizon scheduling
 
-## Live checkpoint at 2026-11-06 01:58 UTC
+## Live checkpoint at 2026-11-06 02:02 UTC
 
 The user explicitly requests **four continuing Horizon proof lanes until the
 entire main theorem is complete**, with no budget cap. The parent only schedules,
@@ -25,9 +25,9 @@ No additional build is needed for this milestone.
 | Run | Task | Current responsibility |
 | --- | --- | --- |
 | `0005` | `BOST-GEOM` | Binary Plucker/contraction consumers and shared integration |
-| queued | `BOST-COMPACTNESS` | Metric continuity, arithmetic compactness and maximizing pairs |
+| `0010` | `BOST-COMPACTNESS` | Metric continuity, arithmetic compactness and maximizing pairs |
 | `0008` | `BOST-COVOLUME` | Actual restriction-of-scalars trace-metric covolume |
-| queued | `BOST-SPECHT-SLOPE` | Actual determinant-Specht bundles and geometric slope inequality |
+| `0009` | `BOST-SPECHT-SLOPE` | Actual determinant-Specht bundles and geometric slope inequality |
 
 ARITH run `0004` finished normally at 01:50:45 UTC, with its full task marked
 done. Its arbitrary-number-field, nonfree-projective degree calculus, actual HN
@@ -46,8 +46,9 @@ and `verification/RESTRICTION_COVOLUME.md`; its stable input handoff is in
 `ARITHMETIC.md`. Completed source APIs stay stable unless parent coordinates a
 specific extension. The remaining main theorem, contraction and compactness
 claims are open. The bounded read-only review and GEOM handshake accepted the two successors
-in `I-0094`. GEOM is migrating the existing blueprint slices before successor
-edits. SPECHT-SLOPE owns `Arithmetic/Specht/**`, `Slope/Geometric/**`,
+in `I-0094`. GEOM committed the complete blueprint migration and includes at `1e56d1d`.
+The two successors started at 02:01:05/02:01:13 UTC (PIDs 714087/714164),
+restoring four live foreground runs. Their first sessions are both `0002`. SPECHT-SLOPE owns `Arithmetic/Specht/**`, `Slope/Geometric/**`,
 `specht_slope.tex` and its verification pair. COMPACTNESS owns
 `Arithmetic/Compactness/**`, `arithmetic_compactness.tex` and its verification
 pair. Metric continuity and arithmetic reconstruction can proceed before the
@@ -56,8 +57,9 @@ actual Specht application; do not expand to a general irreducibility library.
 The generic coaction square has no remaining consumer on this route and its
 roadmap item is retired, without claiming it proved.
 
-At 01:52 UTC, available memory was 9.21 GiB, PSI avg10 0.00%, swap used 3.31 GiB
-and OOM kills zero. All active proof runs use the guarded Lean LSP; broad checks
+At 01:57 UTC, before successor startup, available memory was 15.15 GiB,
+PSI avg10 0.00%, swap used 3.12 GiB and OOM kills zero; swap-out was unchanged.
+An independent read-only startup health review is checking the new four-lane set. All active proof runs use the guarded Lean LSP; broad checks
 remain serialized through explicit-root Horizon checks. Dashboard remains on
 port 8765. Advisory `I-0084` records global search-index rebuild costs: batch
 searches at stable checkpoints and avoid redundant forced reindexing.
