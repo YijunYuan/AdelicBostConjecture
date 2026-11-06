@@ -642,3 +642,60 @@ The latter audits the transitive axioms of the named reused producers.
 Source inspections and successful prerequisite builds do not certify the
 unwritten arithmetic bridges or main theorem. Current evidence is recorded in
 `verification/RESULTS.md` once the corresponding checks finish.
+
+## Shared integration of invariant detection, HN symmetry and closure prerequisites
+
+All imports in this batch use the unchanged Apache-2.0 Mathlib dependency
+`https://github.com/leanprover-community/mathlib4` at
+`56a005855ea17e0b0958f73ec801ae140b0a1679`; no upstream file was copied or
+modified. The following are original project proofs consuming those APIs.
+
+- `InvariantTheory/LocalizationDetection.lean`, `SpecialLinearDetection.lean`
+  and `InvariantDetection.lean` use localization-away lifting/surjectivity
+  (`RingTheory/Localization/Away/Basic.lean`), infinite-field polynomial
+  extensionality, `TensorProduct.equivFinsuppOfBasisRight`
+  (`LinearAlgebra/TensorProduct/Basis.lean`), and
+  `Matrix.SpecialLinearGroup.toLin_equiv`
+  (`LinearAlgebra/SpecialLinearGroup.lean`). Their actual consumer is the
+  equality of the existing homogeneous invariant space with the kernel of
+  the explicit polynomial coaction minus the trivial coaction.
+- `InvariantTheory/SpecialLinearBaseChange.lean` uses
+  `Algebra.TensorProduct.tensorQuotientEquiv`
+  (`RingTheory/TensorProduct/Quotient.lean`),
+  `MvPolynomial.algebraTensorAlgEquiv`
+  (`RingTheory/TensorProduct/MvPolynomial.lean`) and
+  `Ideal.quotientEquivAlg` (`RingTheory/Ideal/Quotient/Operations.lean`)
+  for the actual determinant-one coordinate-algebra comparison. The
+  homogeneous coaction square remains its next consumer.
+- `InvariantTheory/OrbitImage.lean` uses canonical
+  `MvPolynomial.zeroLocus` from `RingTheory/Nullstellensatz.lean` to identify
+  the actual Plücker orbit with the polynomial image of determinant-one
+  equations. It does not invoke a Nullstellensatz conclusion.
+- `Arithmetic/HNUniqueness.lean`, `HNIsometry.lean` and
+  `IrreducibleSemistable.lean` use canonical quotient/submodule maps, the
+  pinned HarderNarasimhan uniqueness API recorded above,
+  `Module.End.baseChangeHom` and `Representation.IsIrreducible` from
+  `RepresentationTheory/Irreducible.lean`. The consumer is intrinsic
+  semistability of an integral isometric action with irreducible generic
+  representation; tensor/dual irreducibility is a separate producer.
+- `InvariantTheory/ComplexClosure/Coordinates.lean` uses
+  `SymmetricAlgebra.equivMvPolynomial`, `equivMvPolynomial_symm_X`
+  (`LinearAlgebra/SymmetricAlgebra/Basis.lean`), canonical `zeroLocus` and
+  `vanishingIdeal` (`RingTheory/Nullstellensatz.lean`), `continuous_eval`
+  (`Topology/Algebra/MvPolynomial.lean`) and `continuous_equivFun_basis`
+  (`Topology/Algebra/Module/FiniteDimension.lean`). The consumer is the
+  coordinate description of intrinsic polynomial Zariski closure and its
+  one-sided Euclidean closure inclusion.
+- `InvariantTheory/ComplexClosure/Roots.lean` uses `Complex.isAlgClosed`
+  (`Analysis/Complex/Polynomial/Basic.lean`),
+  `Splits.eval_eq_prod_roots_of_monic`, `Splits.natDegree_eq_card_roots`
+  (`Algebra/Polynomial/Splits.lean`), `IsRoot.norm_lt_cauchyBound`
+  (`Analysis/Polynomial/CauchyBound.lean`), `Multiset.exists_min_image`
+  (`Data/Finset/Max.lean`) and `Tendsto.bddAbove_range`
+  (`Topology/Order/LiminfLimsup.lean`). Its intended consumer is the pending
+  finite-normalization openness argument. Neither the closure equality nor
+  Lemma 7.2 follows from these imports.
+
+Exact delivered revisions, kernel checks, axiom probes and independent
+reviews are recorded in `verification/BALANCED.md`, `ARITHMETIC.md` and
+`COMPLEX_CLOSURE.md`; shared root evidence is in `verification/RESULTS.md`.

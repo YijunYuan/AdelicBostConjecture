@@ -1668,6 +1668,31 @@ and injectivity transports each fixed-vector equation. Uniqueness
 is injectivity of that isomorphism.
 \end{proof}
 
+\begin{lemma}[Nonzero pairing on independent invariant factors]
+\label{lem:hom-independent-invariant-pairing}
+\uses{lem:hom-polynomial-regrouped-evaluation,lem:polynomial-symmetric-lift,lem:independent-tensor-invariants}
+\notready
+Let $F$ be a field of characteristic zero, let $V,W$ be finite-dimensional,
+and let a group $G$ act linearly on $W$. Suppose a homogeneous polynomial
+of degree $d$ on $\Hom(V,W)$ is invariant under $G\times\SL(V)$,
+acting by $(g,h)A=gAh^{-1}$, and has nonzero value at $A$.
+Then there exist $v\in V^{\otimes d}$ fixed by $\SL(V)$ and
+$\ell\in(W^\vee)^{\otimes d}$ fixed by the contragredient $G$-action
+such that the canonical tensor-power pairing of $A$ at $(v,\ell)$ is nonzero.
+\end{lemma}
+\begin{proof}
+The normalized symmetric lift supplies an invariant Hom-dual tensor with
+the same nonzero evaluation. Regroup it by the preceding isomorphism.
+Pullback under $(g,h)^{-1}$ acts on its two factors as $h$ and the dual
+of $g^{-1}$, so the regrouped tensor is fixed under independent factor
+actions. The independent-invariant theorem puts it in
+$(V^{\otimes d})^{\SL(V)}\otimes((W^\vee)^{\otimes d})^G$.
+Its pairing evaluation is nonzero. If the pairing vanished on every
+pure tensor of these two invariant spaces, linearity and spanning by
+pure tensors would make it vanish on the regrouped tensor, a
+contradiction. Choose a pure tensor on which it is nonzero.
+\end{proof}
+
 \begin{lemma}[Polynomial identities from evaluation]
 \label{lem:intrinsic-polynomial-ext}
 \lean{BostConjecture.Geometry.polynomial_ext}
