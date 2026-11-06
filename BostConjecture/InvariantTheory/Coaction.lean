@@ -156,9 +156,7 @@ variable {K U W ι κ : Type*} [Field K]
 /-- Coordinates of an intrinsic determinant-one automorphism in a supplied basis. -/
 def specialLinearMatrix (b : Basis ι K U) (g : SpecialLinearGroup K U) :
     Matrix.SpecialLinearGroup ι K :=
-  ⟨LinearMap.toMatrix b b (g : U →ₗ[K] U), by
-    rw [LinearMap.det_toMatrix, ← LinearEquiv.coe_det, SpecialLinearGroup.det_coe,
-      Units.val_one]⟩
+  (Matrix.SpecialLinearGroup.toLin_equiv b).symm g
 
 /-- Coordinate-algebra evaluation at the existing intrinsic group element. -/
 def pluckerGroupEval (bU : Basis ι K U) (bW : Basis κ K W)
@@ -177,7 +175,9 @@ theorem pluckerGroupEval_mk (bU : Basis ι K U) (bW : Basis κ K W)
   rw [specialLinearPairEval_mk]
   congr 2
   funext i
-  cases i <;> simp [specialLinearMatrix, matrixPairEntries, LinearMap.toMatrix_apply,
+  cases i <;> simp [specialLinearMatrix,
+    Matrix.SpecialLinearGroup.toLin_equiv.symm_toLinearMap_eq,
+    matrixPairEntries, LinearMap.toMatrix_apply,
     Basis.coord_apply]
 
 variable [LinearOrder (ι × κ)]

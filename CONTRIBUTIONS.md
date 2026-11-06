@@ -592,6 +592,36 @@ pullback for the Plucker action, with the forward convention documented
 in `verification/BALANCED.md`. The 120-probe owner audit is foundational-only.
 This is not a proof of rational-point detection or invariant base change.
 
+## Schur-Weyl permutation commutant — The Tau Ceti contributors
+
+- Repository: <https://github.com/TauCetiProject/TauCeti>.
+- Exact revision: `b3b0334ab9203d9faee4b2f34cd75161463ecdd0`.
+- License: Apache-2.0; copyright 2026 The Tau Ceti contributors. Original
+  notices and all 14 immutable source/license/toolchain files are preserved
+  under [vendor/tauceti-schur-weyl](vendor/tauceti-schur-weyl/PROVENANCE.md),
+  with SHA256 and git blob hashes in `MANIFEST.json`.
+- Exact original paths/declarations and local mapping are listed individually
+  in the provenance table. The selected slices are multilinear polarization,
+  the generic permutation action and its invariants, finite-projective
+  comparison-map commutant, semisimple image double centralizer, and
+  invertible diagonal density. Local modules are
+  `BostConjecture/RepresentationTheory/SchurWeyl/`.
+- Adaptations: direct averaging replaces the upstream norm-map dependency;
+  the existing checked Mathlib PR44845 `piTensorHomEquiv` replaces TauCeti's
+  tensor-Hom infrastructure; the endpoint is generalized from coordinate
+  spaces to arbitrary finite-dimensional modules. Pinned 4.35 API changes
+  are recorded in the mapping. No full TauCeti dependency, categorical
+  representation layer, highest-weight classification or toolchain change.
+- Actual consumers: `Geometry.RectangularCovector`, `RectangularSpan` and
+  `RectangularInvariants` construct the bilinear coefficient covector,
+  rank-one commutant operator, integral orbit-action transport and determinant
+  root normalization. The final result identifies actual SL-fixed tensors
+  with the scalar-extended rectangular lattice over algebraically closed
+  characteristic-zero fields. Source snapshot `26489ca`, checked evidence
+  pin `2a0d5c6`; all254 transitive owner probes are foundational-only.
+  Independent source review checked raw upstream hashes and all consumer
+  bridges. Field descent and contraction nonvanishing remain open.
+
 ## Verification
 
 Run `horizon --root ../.. check --json` from this project, then

@@ -47,7 +47,9 @@ evaluates the standard Gram determinant, and proves the canonical orbit
 covolume bound by the uniform logarithmic average. `Asymptotic.lean`
 now proves the general sublinear covolume limit for every fixed positive
 height, using actual prefix separation and logarithmic expectations.
-The invariant-space identification and number-field main theorem remain open.
+Rectangular SL invariant identification over algebraically closed characteristic-zero
+fields is now checked in `Geometry.RectangularInvariants`. Arbitrary-field descent,
+canonical contraction nonvanishing and the number-field main theorem remain open.
 
 Current boundaries and remaining producers:
 
@@ -58,8 +60,9 @@ Current boundaries and remaining producers:
 - `lem:rectangular-invariants` depends independently on
   `lem:rectangular-absolute-irreducible` and `lem:rectangular-sl-invariants`.
   Its complex orbit representation now has an explicit integral model and
-  tensor-product scalar-extension equivalence. Characteristic-zero descent
-  and the invariant-space identification remain open.
+  tensor-product scalar-extension equivalence. The actual SL-fixed-space is
+  identified over algebraically closed characteristic-zero fields in
+  `Geometry.RectangularInvariants`; arbitrary-field descent remains open.
 - The Gram producer is closed, including the coefficient-one normalization
   and the actual prefix norm formula. Uniform bulk separation and its
   logarithmic expectation consumer are proved.

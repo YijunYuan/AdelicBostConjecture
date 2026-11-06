@@ -130,4 +130,54 @@ theorem quotient_isSemistable_of_interval (h : HermitianMetric (K := K) M)
   obtain ⟨Z, hXZ, hZY, hNZ⟩ := h.quotient_submodule_slope_le_interval hXY.le N hN
   exact hNZ.trans (hs Z hXZ hZY)
 
+/-- Genuine quotient semistability is equivalent to all generic interval inequalities. -/
+theorem quotient_isSemistable_iff_interval (h : HermitianMetric (K := K) M)
+    {X Y : Submodule K (K ⊗[𝓞 K] M)} (hXY : X < Y) :
+    ((h.submodule (integralPart Y)).quotient
+      ((integralPart X).comap (integralPart Y).subtype)).IsSemistable ↔
+    ∀ Z (_ : X < Z), Z ≤ Y →
+      ((h.submodule (integralPart Z)).quotient
+        ((integralPart X).comap (integralPart Z).subtype)).slope ≤
+      ((h.submodule (integralPart Y)).quotient
+        ((integralPart X).comap (integralPart Y).subtype)).slope := by
+  refine ⟨?_, h.quotient_isSemistable_of_interval hXY⟩
+  intro hs Z hXZ hZY
+  let T := integralPart Y
+  let P := (integralPart X).comap T.subtype
+  let R := (integralPart Z).comap T.subtype
+  let N := R.map P.mkQ
+  have hPR : P ≤ R := Submodule.comap_mono (integralPart_mono hXZ.le)
+  have he : N.comap P.mkQ = R := by
+    exact Submodule.comap_map_eq_self (by simpa using hPR)
+  have hrR : Module.finrank K (K ⊗[𝓞 K] R) = Module.finrank K Z :=
+    (finrank_submodule_comap (integralPart_mono hZY)).trans (integralPart_generic_finrank Z)
+  have hrP : Module.finrank K (K ⊗[𝓞 K] P) = Module.finrank K X :=
+    (finrank_submodule_comap (integralPart_mono hXY.le)).trans (integralPart_generic_finrank X)
+  have hrN : Module.finrank K (K ⊗[𝓞 K] N) =
+      Module.finrank K Z - Module.finrank K X := by
+    rw [finrank_quotient_submodule P N, he, hrR, hrP]
+  have hdN : (((h.submodule T).quotient P).submodule N).degree =
+      h.subspaceDegree Z - h.subspaceDegree X := by
+    have hd := (h.submodule T).degree_quotient_submodule P N
+    have he' := congrArg (fun U : Submodule (𝓞 K) T => ((h.submodule T).submodule U).degree) he
+    rw [he', degree_submodule_comap h (integralPart_mono hZY),
+      degree_submodule_comap h (integralPart_mono hXY.le)] at hd
+    exact hd
+  have hN : 0 < Module.finrank K (K ⊗[𝓞 K] N) := by
+    rw [hrN]
+    exact Nat.sub_pos_of_lt (Submodule.finrank_strictMono hXZ)
+  have hb := hs N hN
+  rw [slope, hdN, hrN] at hb
+  rw [slope, ← subspaceDegree_sub_eq_quotient h hXZ.le, subspaceQuotient_finrank hXZ.le]
+  exact hb
+
+/-- The interval game and the actual induced Hermitian quotient have the same semistability. -/
+theorem quotient_isSemistable_iff_game (h : HermitianMetric (K := K) M)
+    {X Y : Submodule K (K ⊗[𝓞 K] M)} (hXY : X < Y) :
+    ((h.submodule (integralPart Y)).quotient
+      ((integralPart X).comap (integralPart Y).subtype)).IsSemistable ↔
+    ((BostConjecture.Subspace.slope h.subspaceDegree).restrict ⟨X, Y, hXY⟩).IsSemistable := by
+  rw [h.quotient_isSemistable_iff_interval hXY, BostConjecture.Slope.isSemistable_restrict_iff]
+  simp only [h.subspaceSlope_eq_quotient, DedekindCut.principal_le_principal]
+
 end BostConjecture.Arithmetic.HermitianMetric

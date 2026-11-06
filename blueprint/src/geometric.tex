@@ -1611,6 +1611,36 @@ when the determinant is one. Frame independence follows from the
 already proved determinant-twisted transition identity.
 \end{proof}
 
+\begin{lemma}[Regrouping Hom-dual tensors with evaluation]
+\label{lem:hom-dual-tensor-regrouping}
+\uses{lem:projective-tensor-evaluation}
+\notready
+For finite projective modules $V,W$ over a commutative ring $R$, the
+canonical map $V\otimes W^\vee\to\Hom(V,W)^\vee$ given by
+$v\otimes\ell\mapsto(A\mapsto\ell(Av))$ is an isomorphism.
+For every finite set $I$, it induces an isomorphism
+\[
+ V^{\otimes I}\otimes(W^\vee)^{\otimes I}
+ \simeq (\Hom(V,W)^\vee)^{\otimes I}
+\]
+whose evaluation at the constant family $A$ is the canonical tensor-power
+pairing of $A$. Under pullback by $A\mapsto gAh$, the factor maps on
+its source are $h^{\otimes I}$ and $(g^\vee)^{\otimes I}$.
+\end{lemma}
+\begin{proof}
+Finite projectivity identifies $\Hom(V,W)$ with $V^\vee\otimes W$.
+Dualizing this isomorphism, applying the canonical tensor-dual
+isomorphism, and using the evaluation isomorphism $V\simeq V^{\vee\vee}$
+gives the first isomorphism. On a decomposable map $A=u^\vee\otimes w$
+its value is $u^\vee(v)\ell(w)=\ell(Av)$; such maps span, so the
+formula holds for every $A$. Distribute the two tensor powers and apply
+this isomorphism factorwise to obtain the second. On pure tensors its
+evaluation is $\prod_i\ell_i(Av_i)$, which is the defining formula for
+the existing tensor-power pairing. Pullback replaces each factor by
+$\ell_i(gAhv_i)=(g^\vee\ell_i)(A(hv_i))$; linearity extends both
+identities to all tensors. No basis or freeness hypothesis is introduced.
+\end{proof}
+
 \begin{lemma}[Polynomial identities from evaluation]
 \label{lem:intrinsic-polynomial-ext}
 \lean{BostConjecture.Geometry.polynomial_ext}

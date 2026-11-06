@@ -49,6 +49,7 @@ public import BostConjecture.Geometry.PiInvariants
 public import BostConjecture.Geometry.PolynomialTensor
 public import BostConjecture.Geometry.PolynomialPolarization
 public import BostConjecture.Geometry.DegreeDivisibility
+public import BostConjecture.Geometry.RectangularInvariants
 public import BostConjecture.Tensor.Evaluation
 public import BostConjecture.Tensor.EvaluationBaseChange
 public import BostConjecture.Tensor.DualRegroupBaseChange
