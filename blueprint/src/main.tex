@@ -34,6 +34,34 @@ inclusion through the larger submodule proves monotonicity; the endpoint
 claims follow from the zero and identity tensor maps.
 \end{proof}
 
+\begin{lemma}[Saturated tensor refinement steps]
+\label{lem:tensor-refinement-saturated}
+\uses{lem:tensor-saturated-submodule}
+\source{bost-specht-manuscript:page-0013}
+\notready
+Let $P\subseteq T\subseteq M$ and $Q\subseteq N$ be saturated
+submodules of finite projective $\Ocal_K$-modules. Then
+\[
+ S(P,T,Q)=P\otimes N+T\otimes Q\subseteq M\otimes N
+\]
+is saturated. It is increasing in each of $P,T,Q$, and
+$S(P,T,0)=P\otimes N$, $S(P,T,N)=T\otimes N$.
+\end{lemma}
+\begin{proof}
+The kernel of the surjection
+$T\otimes N\to(T/P)\otimes(N/Q)$ is the sum of the images of
+$P\otimes N$ and $T\otimes Q$, by right exactness in the two
+factors. Its target is projective and hence torsion free. Thus the
+kernel is saturated in $T\otimes N$. The latter is saturated in
+$M\otimes N$ by the preceding lemma. Saturation is transitive:
+if a nonzero scalar multiple of a section is in the smaller module,
+saturation in the outer quotient first places the section in the
+intermediate module, and saturation there places it in the smaller
+one. This proves the assertion. The sum expression proves
+monotonicity, and substituting zero or the full second factor proves
+the endpoint formulas.
+\end{proof}
+
 \begin{lemma}[The tensor lower bound]
 \label{lem:max-slope-tensor-lower}
 \uses{lem:hn-filtration,lem:degree-calculus}
@@ -56,6 +84,32 @@ identity to the whole fiber. The injection is consequently an isometry
 onto its integral image. That image has positive rank and slope
 $\mu(E_1)+\mu(F_1)$ by the tensor degree formula. Its slope is at most
 the maximal slope of $E\otimes F$, proving the assertion.
+\end{proof}
+
+\begin{lemma}[The underlying HN tensor filtration]
+\label{lem:hn-tensor-filtration}
+\uses{lem:hn-filtration,lem:tensor-refinement-saturated}
+\source{bost-specht-manuscript:page-0013}
+\notready
+Let $(E_i)_{i=0}^p$ and $(F_j)_{j=0}^q$ be the saturated HN flags
+of positive-rank bundles $E,F$. Extend each flag constantly beyond its
+last term. For $k\geq0$, write $k=iq+j$ with $0\leq j<q$ and set
+\[
+ A_k=E_i\otimes F+E_{i+1}\otimes F_j\subseteq E\otimes F.
+\]
+Then $(A_k)$ is increasing, every quotient $(E\otimes F)/A_k$ is
+finite projective, $A_0=0$, and $A_{pq}=E\otimes F$.
+\end{lemma}
+\begin{proof}
+Positive rank implies $q>0$, so the division is defined with the
+stated remainder. Each term is saturated by the preceding lemma,
+and its quotient is finite projective over the Dedekind ring.
+Within a block, monotonicity follows from $F_j\subseteq F_{j+1}$.
+The last term of block $i$ is $E_{i+1}\otimes F$, equal to the
+first term of block $i+1$; all intermediate terms lie between
+$E_i\otimes F$ and $E_{i+1}\otimes F$. These observations give
+monotonicity also across blocks. The endpoint formulas follow from
+$E_0=F_0=0$ and $E_p=E$, with remainder zero at $k=pq$.
 \end{proof}
 
 \begin{lemma}[Slope bound from a metrized filtration]
