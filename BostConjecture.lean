@@ -37,9 +37,12 @@ public import BostConjecture.InvariantTheory.Semistability
 public import BostConjecture.InvariantTheory.Coaction
 public import BostConjecture.InvariantTheory.InvariantDetection
 public import BostConjecture.InvariantTheory.SpecialLinearBaseChange
+public import BostConjecture.InvariantTheory.PolynomialBaseChange
 public import BostConjecture.InvariantTheory.OrbitImage
 public import BostConjecture.InvariantTheory.ComplexClosure.Coordinates
 public import BostConjecture.InvariantTheory.ComplexClosure.Roots
+public import BostConjecture.InvariantTheory.ComplexClosure.IntegralLifting
+public import BostConjecture.InvariantTheory.ComplexClosure.FiniteFiber
 public import BostConjecture.Geometry.TensorRealization
 public import BostConjecture.Geometry.FreeEmbedding
 public import BostConjecture.Geometry.DeterminantBaseChange

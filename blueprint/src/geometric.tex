@@ -1670,8 +1670,9 @@ is injectivity of that isomorphism.
 
 \begin{lemma}[Nonzero pairing on independent invariant factors]
 \label{lem:hom-independent-invariant-pairing}
+\lean{BostConjecture.Geometry.exists_independent_invariant_pairing}
 \uses{lem:hom-polynomial-regrouped-evaluation,lem:polynomial-symmetric-lift,lem:independent-tensor-invariants}
-\notready
+\leanok
 Let $F$ be a field of characteristic zero, let $V,W$ be finite-dimensional,
 and let a group $G$ act linearly on $W$. Suppose a homogeneous polynomial
 of degree $d$ on $\Hom(V,W)$ is invariant under $G\times\SL(V)$,
@@ -1691,6 +1692,26 @@ Its pairing evaluation is nonzero. If the pairing vanished on every
 pure tensor of these two invariant spaces, linearity and spanning by
 pure tensors would make it vanish on the regrouped tensor, a
 contradiction. Choose a pure tensor on which it is nonzero.
+\end{proof}
+
+\begin{lemma}[Nonzero source rectangular restriction]
+\label{lem:hom-rectangular-invariant-pairing}
+\lean{BostConjecture.Geometry.exists_rectangular_invariant_pairing}
+\uses{lem:hom-independent-invariant-pairing,lem:rectangular-tensor-span-algclosed}
+\leanok
+In the preceding lemma suppose $F$ is algebraically closed,
+$\dim V=a>0$, and $d=ak$ with $k>0$. Fix a basis of $V$ and a
+rectangular tableau $t$ of shape $(k^a)$. Then the nonzero pairing can
+be attained with the source tensor in the image of
+$F\otimes_{\mathbb Z}S_{(k^a),\mathbb Z}$ under its actual tensor realization;
+the dual target tensor remains fixed by $G$.
+\end{lemma}
+\begin{proof}
+Choose the two invariant factors supplied by the preceding lemma.
+The actual rectangular invariant-space equality puts the source factor
+in the image of the scalar-extended integral lattice. Choose a preimage
+and substitute its defining equality in the nonzero pairing. The target
+fixed-vector equations are unchanged.
 \end{proof}
 
 \begin{lemma}[Polynomial identities from evaluation]

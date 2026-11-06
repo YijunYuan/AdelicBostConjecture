@@ -4,6 +4,7 @@ public import BostConjecture.Geometry.HomTensor
 public import BostConjecture.Geometry.PluckerPolynomial
 public import BostConjecture.Geometry.PolynomialPolarization
 public import BostConjecture.Geometry.IndependentInvariants
+public import BostConjecture.Geometry.RectangularInvariants
 
 /-! # Nonzero Hom pairing on independent invariant factors
 
@@ -30,9 +31,31 @@ def tensorPowerRepresentation (ρ : Representation F G V) (d : ℕ) :
   map_one' := by simp
   map_mul' g h := by simp only [map_mul, PiTensorProduct.map_mul]
 
+private theorem exists_nonzero_invariant_pair {H : Type*} [Group H]
+    (σ : Representation F G V) (τ : Representation F H W)
+    (B : V →ₗ[F] W →ₗ[F] F) (z : V ⊗[F] W)
+    (hz : TensorProduct.lift B z ≠ 0)
+    (hfix : ∀ g h, TensorProduct.map (σ g) (τ h) z = z) :
+    ∃ (v : V) (w : W), (∀ g, σ g v = v) ∧ (∀ h, τ h w = w) ∧ B v w ≠ 0 := by
+  obtain ⟨y, hy⟩ := (exists_independent_invariants_iff σ τ z).mpr hfix
+  have hex : ∃ (v : σ.invariants) (w : τ.invariants), B v.val w.val ≠ 0 := by
+    by_contra! hall
+    have hzero : (TensorProduct.lift B).comp
+        (TensorProduct.map σ.invariants.subtype τ.invariants.subtype) = 0 := by
+      apply TensorProduct.ext
+      apply LinearMap.ext
+      intro v
+      apply LinearMap.ext
+      intro w
+      exact hall v w
+    apply hz
+    rw [← hy]
+    exact LinearMap.congr_fun hzero y
+  obtain ⟨v, w, hvw⟩ := hex
+  exact ⟨v.val, w.val, v.property, w.property, hvw⟩
+
 variable [FiniteDimensional F V] [FiniteDimensional F W] [CharZero F]
 
-set_option maxHeartbeats 800000 in
 /-- A nonzero invariant Hom polynomial detects a nonzero canonical pairing on
 source special-linear invariants and dual-target invariants separately. -/
 theorem exists_independent_invariant_pairing
@@ -45,6 +68,11 @@ theorem exists_independent_invariant_pairing
         PiTensorProduct.map (fun _ => (h : V →ₗ[F] V)) v = v) ∧
       (∀ g : G, PiTensorProduct.map (fun _ => (ρ g⁻¹).dualMap) ℓ = ℓ) ∧
       Tensor.tensorPowerPairing A v ℓ ≠ 0 := by
+  -- Keep the inherited tensor monoid structures definitionally visible.
+  let : AddCommGroup (⨂[F] (_ : Fin d), V) :=
+    Module.addCommMonoidToAddCommGroup F
+  let : AddCommGroup (⨂[F] (_ : Fin d), Dual F W) :=
+    Module.addCommMonoidToAddCommGroup F
   obtain ⟨u, hu, hufix, _⟩ := exists_invariant_tensor_evaluation_ne_zero
     (homSpecialLinearRepresentation ρ) hp hpA
   obtain ⟨z, _, hz, hzfix⟩ := exists_regrouped_hom_tensor A u (by rwa [hu])
@@ -62,21 +90,30 @@ theorem exists_independent_invariant_pairing
       simp [homSpecialLinearRepresentation_apply]
     rw [he]
     exact hufix (g, h)
-  obtain ⟨y, hy⟩ := (exists_independent_invariants_iff
-    (F := F) (G := SpecialLinearGroup F V) (H := G)
-    (A := ⨂[F] (_ : Fin d), V) (B := ⨂[F] (_ : Fin d), Dual F W) σd τd z).mpr hfix
-  have hex : ∃ (v : σd.invariants) (ℓ : τd.invariants),
-      Tensor.tensorPowerPairing A v.val ℓ.val ≠ 0 := by
-    by_contra! hall
-    have hzero : (TensorProduct.lift (Tensor.tensorPowerPairing A)).comp
-        (TensorProduct.map σd.invariants.subtype τd.invariants.subtype) = 0 := by
-      apply TensorProduct.ext
-      intro v ℓ
-      exact hall v ℓ
-    apply hz
-    rw [← hy]
-    exact LinearMap.congr_fun hzero y
-  obtain ⟨v, ℓ, hvℓ⟩ := hex
-  exact ⟨v.val, ℓ.val, v.property, ℓ.property, hvℓ⟩
+  have hpure : ∃ (v : ⨂[F] (_ : Fin d), V) (ℓ : ⨂[F] (_ : Fin d), Dual F W),
+      (∀ h, σd h v = v) ∧ (∀ g, τd g ℓ = ℓ) ∧
+      Tensor.tensorPowerPairing A v ℓ ≠ 0 := by
+    apply exists_nonzero_invariant_pair σd τd (Tensor.tensorPowerPairing A) z
+    · exact hz
+    · exact hfix
+  obtain ⟨v, ℓ, hv, hℓ, hvℓ⟩ := hpure
+  exact ⟨v, ℓ, hv, hℓ, hvℓ⟩
+
+/-- Over an algebraic closure, the nonzero invariant pairing restricts to the
+actual scalar-extended rectangular lattice on the source side. -/
+theorem exists_rectangular_invariant_pairing [IsAlgClosed F]
+    (ρ : Representation F G W) (A : V →ₗ[F] W) {n a k : ℕ}
+    (ha : 0 < a) (hk : 0 < k)
+    (t : OAI.Saxl.Tableau n (Specht.rectangle a k)) (b : Basis (Fin a) F V)
+    {p : SymmetricAlgebra F (Dual F (V →ₗ[F] W))}
+    (hp : p ∈ homogeneousInvariants (homSpecialLinearRepresentation ρ) n)
+    (hpA : polynomialEval A p ≠ 0) :
+    ∃ (x : F ⊗[ℤ] Specht.orbitLattice t) (ℓ : ⨂[F] (_ : Fin n), Dual F W),
+      (∀ g : G, PiTensorProduct.map (fun _ => (ρ g⁻¹).dualMap) ℓ = ℓ) ∧
+      Tensor.tensorPowerPairing A (freeLatticeMap hk t b x) ℓ ≠ 0 := by
+  obtain ⟨v, ℓ, hv, hℓ, hvℓ⟩ := exists_independent_invariant_pairing ρ A hp hpA
+  obtain ⟨x, hx⟩ :=
+    (mem_range_freeLatticeMap_iff_specialLinear_fixed ha hk t b v).mpr hv
+  exact ⟨x, ℓ, hℓ, by rwa [hx]⟩
 
 end BostConjecture.Geometry

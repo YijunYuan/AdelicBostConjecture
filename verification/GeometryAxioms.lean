@@ -1,4 +1,5 @@
 import BostConjecture.Geometry.TensorRealization
+import BostConjecture.Geometry.HomInvariants
 import BostConjecture.Geometry.FreeEmbedding
 import BostConjecture.Geometry.DeterminantFrame
 import BostConjecture.Tensor.Evaluation
@@ -324,3 +325,7 @@ import BostConjecture.Geometry.HomTensor
 #print axioms BostConjecture.Geometry.polynomialEval_homDualTensorEquiv
 #print axioms BostConjecture.Geometry.homDualTensorEquiv_naturality
 #print axioms BostConjecture.Geometry.exists_regrouped_hom_tensor
+
+#print axioms BostConjecture.Geometry.tensorPowerRepresentation
+#print axioms BostConjecture.Geometry.exists_independent_invariant_pairing
+#print axioms BostConjecture.Geometry.exists_rectangular_invariant_pairing

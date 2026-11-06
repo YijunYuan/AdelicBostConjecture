@@ -872,3 +872,36 @@ Next: use independent-factor invariants to restrict the regrouped tensor to
 the actual rectangular images. InvariantDetection arrived after this root
 boundary (I-0076) and is awaiting its next checked integration; actual coaction
 base-change remains BALANCED's producer. Full BOST-GEOM is still incomplete.
+
+## Independent invariant pairing and source rectangular restriction
+
+`Geometry/HomInvariants.lean` constructs the tensor-power representation from
+`PiTensorProduct.map`. `exists_independent_invariant_pairing` consumes the
+actual normalized polynomial lift, Hom-dual regrouping and independent
+invariant-space theorem to obtain source SL-fixed and dual-target G-fixed
+factors with nonzero canonical tensor-power pairing. Its consumer
+`exists_rectangular_invariant_pairing` restricts the source factor to the
+actual scalar-extended rectangular integral lattice over an algebraically
+closed characteristic-zero field. No invariant equality is an input.
+
+The configured explicit-root check passed **9,296 jobs warning-free** at
+**2026-11-06 00:32:42 UTC** (`975bdb23135a0d4a`). Root blob:
+`57ed74cb5b71c6c523cf463905883c06c310d36e`; HomInvariants blob:
+`efb3626845d8669a816ac494fedff25ca6211030`.
+All **267 transitive geometry probes** passed at **00:33:38 UTC**
+(`ffefd7bf352d83dc`), only `propext`, `Classical.choice`, `Quot.sound`.
+Logs: session0016 `independent-root.log`, `independent-axioms.log`.
+Independent honesty review accepted the actual producer use and boundaries.
+The two matching blueprint nodes alone are marked checked.
+
+Initial elaboration failed at an inherited indexed-tensor additive-group
+instance path, including narrow check `6c1bb9cde7291d8c`. The repair constructs
+the existing tensor monoid's group by `Module.addCommMonoidToAddCommGroup`;
+no higher heartbeat limit remains. The failed diagnostic log is retained as
+`hom-invariants-elaboration.log`. Final source LSP is clear; root/audit LSP
+reported stale imports and the serialized kernel checks above settled them.
+The graph command rejects `sync --json`; the corrected plain sync is used.
+
+The full dual-target rectangular restriction, nonzero canonical determinant
+pairing, field descent and coaction square remain open. This is a proved
+producer milestone, not BOST-GEOM or Theorem1.1 completion.

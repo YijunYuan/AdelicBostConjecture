@@ -116,8 +116,12 @@ The finite Hilbert tensor form and its pure-tensor formula are proved.
 Determinant metric compatibility, the actual integral pairing and its
 equivariance are proved in the delivered geometry modules. Generic dual
 evaluation and the restricted pairing are bounded, the latter in
-`ContractionNorm.lean`. The full invariant generic fiber for nonvanishing
-remains a requirement of the route.
+`ContractionNorm.lean`. The normalized Hom polynomial lift now yields independent invariant factors
+with nonzero tensor pairing (`HomInvariants.lean`), and the source factor
+is restricted to the actual rectangular lattice over algebraically closed
+characteristic-zero fields. Dual-target rectangular restriction, nonvanishing
+of the full canonical determinant pairing, and arbitrary-field descent remain
+requirements of the route.
 
 All cited manuscript page anchors resolve to registered vision transcriptions
 that were read before attachment. The shifted-coordinate tableau count has

@@ -1,3 +1,36 @@
+## Integrated independent invariant pairing and checked lane deliveries
+
+Claim class: **proved prerequisite producers**. The configured explicit-root
+build passed **9,296 jobs warning-free at2026-11-06 00:32:42UTC**,
+`975bdb23135a0d4a`, root blob `57ed74cb5b71c6c523cf463905883c06c310d36e`.
+Geometry's **267 transitive probes** passed00:33:38UTC with only `propext`,
+`Classical.choice`, `Quot.sound`; independent honesty review accepted.
+`Geometry.HomInvariants` proves nonzero pairing on independent invariant
+factors and the source rectangular lattice restriction over an algebraic
+closure. Exact source, failed diagnostic attempt and final evidence are
+recorded in GEOMETRY.md; no sorryAx/custom mathematical axiom occurs.
+
+This root also integrates checked owner handoffs:
+
+- ARITH `IrreducibleSemistable` (c3747d0/22be758): intrinsic HN uniqueness,
+  isometry invariance and the irreducible-action semistability consumer;
+  delivered3,587-job check and302 foundational-only probes.
+- BALANCED `InvariantDetection`, `OrbitImage`, `SpecialLinearBaseChange`,
+  `PolynomialBaseChange` (7896195/84a679f/79ef712/35d1080): actual invariant
+  kernel, orbit image, coordinate-algebra and matched-basis polynomial
+  scalar extension; latest delivered145-probe audit foundational-only.
+- CLOSURE `Coordinates`, `Roots`, `IntegralLifting`, `FiniteFiber`
+  (97184a0/e2a0e4d and recorded Roots checkpoint): intrinsic coordinate
+  closure, root persistence/bounds, closed-point and specialized-root
+  lifting, fiber finiteness and bounded lifts; delivered19-probe audit
+  foundational-only. Full closure equality remains unproved.
+
+Shared provenance is in CONTRIBUTIONS.md; exact owner check records are in
+ARITHMETIC.md, BALANCED.md and COMPLEX_CLOSURE.md. The current root check covers
+these imports together, not other lanes' unimported working drafts.
+Dual-target determinant restriction, full canonical contraction nonvanishing,
+arbitrary-field/coaction descent, Lemma7.2 and Theorem1.1 remain open.
+
 ## Integrated rectangular invariants, Hom regrouping and intrinsic HN grades
 
 Claim class: **proved prerequisite producers**; BOST-GEOM and number-field

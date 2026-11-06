@@ -699,3 +699,28 @@ modified. The following are original project proofs consuming those APIs.
 Exact delivered revisions, kernel checks, axiom probes and independent
 reviews are recorded in `verification/BALANCED.md`, `ARITHMETIC.md` and
 `COMPLEX_CLOSURE.md`; shared root evidence is in `verification/RESULTS.md`.
+
+The same shared batch adds `InvariantTheory/PolynomialBaseChange.lean`
+(`35d1080`): the actual matched-basis polynomial algebra equivalence and
+homogeneous image characterization use the above `equivMvPolynomial` and
+`algebraTensorAlgEquiv` unchanged. The coaction square remains deferred.
+`ComplexClosure/IntegralLifting.lean` and `FiniteFiber.lean` (`e2a0e4d`)
+add closed-point/minimal-polynomial lifting, actual fiber finiteness and
+uniform coordinate bounds, using unmodified `minpoly.ker_eval`
+(`FieldTheory/Minpoly/IsIntegrallyClosed.lean`),
+`exists_ideal_over_maximal_of_isIntegral` (`RingTheory/Ideal/GoingUp.lean`),
+`finite_of_finite_type_of_isJacobsonRing` (`RingTheory/Jacobson/Ring.lean`),
+`IsAlgClosed.lift` (`FieldTheory/IsAlgClosed/Basic.lean`) and
+`AlgHom.liftOfSurjective` (`RingTheory/Ideal/Quotient/Operations.lean`).
+Their finite-normalization openness consumer remains unproved.
+
+`Geometry/HomInvariants.lean` is an original composition of the checked
+project polynomial lift, Hom-dual regrouping, independent invariants and
+rectangular invariant equality. It defines the canonical action by
+`PiTensorProduct.map`, and uses existing `Representation.dual`,
+`TensorProduct.ext` and `Module.addCommMonoidToAddCommGroup`. The latter
+keeps the inherited tensor monoid visible while elaborating the actual
+invariant-subspace restriction; no new module representation is introduced.
+The result supplies nonzero pairing on independent invariant factors and
+its source rectangular lattice restriction. Dual-target rectangular
+restriction and the full canonical determinant contraction remain separate.
