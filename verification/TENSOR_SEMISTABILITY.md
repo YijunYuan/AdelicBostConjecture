@@ -196,3 +196,12 @@ the concrete integral tensor-submodule fiber.
 
 The remaining source frontier is the geometric slope application to this balanced
 fiber and the contradiction/normalization assembly of tensor semistability.
+
+## Tensor normalization compatibility (2026-11-06)
+
+`Main/TensorSemistability/TensorRescale.lean` proves `HermitianMetric.tensor_rescale`
+for the actual binary tensor metric. Pure-section pairings and spanning identify
+rescaling of both factors with rescaling the tensor by the sum. The explicit-root
+serialized target passed 3576 jobs without warnings; the expanded 70-declaration
+axiom audit passed with only `propext`, `Classical.choice`, and `Quot.sound`.
+The final geometric bridge and unconditional tensor theorem remain unverified drafts.

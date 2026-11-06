@@ -4,13 +4,15 @@
 \label{lem:semistable-normalization}
 \uses{lem:degree-calculus}
 \source{bost-specht-manuscript:page-0012}
-\lean{BostConjecture.Arithmetic.HermitianMetric.isSemistable_iff_degree_nonpos,BostConjecture.Arithmetic.HermitianMetric.isSemistable_rescale_iff,BostConjecture.Arithmetic.HermitianMetric.degree_rescale_self,BostConjecture.Arithmetic.HermitianMetric.slope_submodule_rescale}
+\lean{BostConjecture.Arithmetic.HermitianMetric.isSemistable_iff_degree_nonpos,BostConjecture.Arithmetic.HermitianMetric.isSemistable_rescale_iff,BostConjecture.Arithmetic.HermitianMetric.degree_rescale_self,BostConjecture.Arithmetic.HermitianMetric.slope_submodule_rescale,BostConjecture.Arithmetic.HermitianMetric.tensor_rescale}
 \leanok
 For a Hermitian bundle $E$ of degree zero, semistability is equivalent
 to $\degn(B)\leq0$ for every integral submodule $B\subset E$,
 including zero. If $E$ has positive rank, multiplying every norm by
 $e^t$ preserves semistability and subtracts $t$ from every
 positive-rank slope. Taking $t=\slope(E)$ normalizes its degree.
+Rescaling $E,F$ by $e^a,e^b$ rescales their actual Hilbert tensor
+metric by $e^{a+b}$.
 \end{lemma}
 \begin{proof}
 The slope inequality for a positive-rank submodule is its degree
@@ -21,6 +23,10 @@ degree therefore decreases by $bt$, so its slope decreases by $t$.
 The ambient slope changes by the same amount, preserving every
 comparison. The specified parameter makes the ambient slope and
 hence degree zero.
+For the tensor assertion, the pairing of pure tensors is the product
+of the factor pairings, so its multiplier is $e^{2a}e^{2b}=e^{2(a+b)}$.
+Pure integral tensors span every complex tensor fiber; sesquilinearity
+therefore gives the equality of the actual metrics.
 \end{proof}
 
 \begin{lemma}[Normalized extensions and degree-zero pieces]
