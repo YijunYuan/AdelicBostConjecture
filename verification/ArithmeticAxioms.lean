@@ -8,6 +8,8 @@ import BostConjecture.Arithmetic.IrreducibleDualSemistable
 import BostConjecture.Arithmetic.IndependentPiSemistable
 import BostConjecture.Arithmetic.LineMinkowski
 import BostConjecture.Arithmetic.ExteriorMetric
+import BostConjecture.Arithmetic.PluckerBaseChange
+import BostConjecture.Arithmetic.DegreeFiniteness
 import BostConjecture.Arithmetic.ExactDegree
 import BostConjecture.Arithmetic.QuotientMetric
 import BostConjecture.Arithmetic.IntegralDeterminantProduct
@@ -397,3 +399,14 @@ import BostConjecture.Arithmetic.DeterminantProduct
 #print axioms BostConjecture.Arithmetic.HermitianMetric.exteriorFiber_top_eq
 #print axioms BostConjecture.Arithmetic.HermitianMetric.exteriorFiber_inner_map
 #print axioms BostConjecture.Arithmetic.HermitianMetric.determinant_submodule_sectionNorm
+#print axioms BostConjecture.Arithmetic.ιMulti_ne_zero_iff
+#print axioms BostConjecture.Arithmetic.exteriorAlgebra_ιMulti_ne_zero_iff
+#print axioms BostConjecture.Arithmetic.mem_iff_mul_plucker_eq_zero
+#print axioms BostConjecture.Arithmetic.eq_of_plucker_eq
+#print axioms BostConjecture.Arithmetic.integralPartGenericEquiv_tmul
+#print axioms BostConjecture.Arithmetic.integralPart_exterior_section
+#print axioms BostConjecture.Arithmetic.eq_of_mem_exterior_ranges
+#print axioms BostConjecture.Arithmetic.HermitianMetric.exists_small_exterior_section
+#print axioms BostConjecture.Arithmetic.HermitianMetric.finite_subspaces_degree_ge
+#print axioms BostConjecture.Arithmetic.HermitianMetric.finite_subspaces_degree_ge_all
+#print axioms BostConjecture.Arithmetic.HermitianMetric.finite_saturated_submodules_degree_ge
