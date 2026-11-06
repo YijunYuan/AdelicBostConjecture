@@ -441,15 +441,17 @@ right side of the displayed inequality.
 \uses{lem:plucker-invariant-nonzero-sequence,lem:binary-plucker-nonzero-sequence,lem:canonical-pairing-finite-degree,thm:specht-sublinear-covolume}
 \source{bost-specht-manuscript:page-0009,bost-specht-manuscript:page-0010}
 For arbitrary positive-rank Hermitian bundles $E_1,\ldots,E_N$ and
-a nonzero submodule $V\subseteq\bigotimes_j E_j$, geometric
-semistability of the Pl\"ucker line of $V_K$ implies
+a nonzero submodule $V\subseteq\bigotimes_j E_j$, suppose that at
+one complex embedding $\sigma:K\hookrightarrow\mathbb C$ there is a
+positive-degree homogeneous polynomial, invariant under
+$\prod_j\SL((E_j)_\sigma)$, which is nonzero on a nonzero Pl\"ucker
+vector of $V_\sigma$. Then
 \[
  \slope(\overline V)\leq\sum_j\slope(\overline E_j).
 \]
 The factors need not be arithmetically semistable.
-It suffices that at one complex embedding a positive-degree homogeneous
-polynomial, invariant under the product of the special linear groups,
-is nonzero on a nonzero Pl\"ucker vector of $V$. In the two-factor case
+This is the invariant-polynomial formulation of geometric semistability
+at the specified complex embedding. In the two-factor case
 the same assertion applies to the usual binary tensor Pl\"ucker action.
 \end{theorem}
 \begin{proof}

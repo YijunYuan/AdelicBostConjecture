@@ -1,7 +1,13 @@
 # Determinant–Specht and geometric slope evidence
 
-The assigned objective remains open. The first checked producer is the actual
-integral orbit-lattice representation in `Arithmetic/Specht/Representation.lean`.
+The assigned mathematical route is proved: actual determinant–Specht bundles,
+their intrinsic metrics and exact slopes, and the geometric slope inequality
+from actual complex and binary Plücker invariants. All thirty-eight transitive
+axiom probes are foundational-only. Shared root integration is pending with
+MAIN; the whole Bost main theorem is not claimed complete.
+
+The first checked producer is the actual integral orbit-lattice representation
+in `Arithmetic/Specht/Representation.lean`.
 Its complex irreducibility uses the accepted `complexSpechtEquiv`, equivariance,
 and `OAI.Saxl.specht_irreducible`. Its invariant form is GEOM's actual complex
 word Gram form. Scalar-extension cancellation intertwines the actions.
@@ -102,6 +108,10 @@ Module checks passed (9286 jobs, 76.1 seconds; 9289 jobs, 12.6 seconds); all
 thirty-eight transitive probes passed (8.9 seconds), with exactly `propext`,
 `Classical.choice`, and `Quot.sound`. The final honesty review accepted both
 actual-invariant consumers and the finite-projective number-field scope.
+Fresh source review confirmed the actual consumer chain and requested that the
+checked blueprint state its complex invariant witness explicitly. This repair
+was made: the separately unproved algebraic-closure field-extension interface
+is not silently certified by the geometric node.
 
 The requested geometric slope route is proved. Shared root integration and
 the downstream tensor-semistability/main-theorem work are owned by MAIN and
