@@ -1995,6 +1995,36 @@ and has the same nonzero evaluation. Apply the two divisibilities just
 proved; $s\mid sm$ is immediate, and $sm>0$ follows from $s,m>0$.
 \end{proof}
 
+\begin{lemma}[Two-factor tensor and Pl\"ucker transport]
+\label{lem:two-factor-plucker-transport}
+\uses{lem:plucker-invariant-tensor,lem:canonical-pairing-nonzero-descent}
+\source{bost-specht-manuscript:page-0010}\notready
+Let $E$ be a family of modules indexed by the disjoint union of two singleton
+sets, over a commutative ring $R$. The canonical decomposition
+\[
+ \delta:\bigotimes_i E_i\xrightarrow{\sim} E_{\mathrm L}\otimes_R E_{\mathrm R}
+\]
+sends $\bigotimes_i x_i$ to $x_{\mathrm L}\otimes x_{\mathrm R}$ and commutes
+with every family of linear maps. Over a field, pullback along
+$\bigwedge^s\delta$ carries each homogeneous degree-$m$ invariant of
+$\SL(E_{\mathrm L})\times\SL(E_{\mathrm R})$ to an invariant of the independent
+family action, preserving its evaluation at corresponding exterior vectors.
+In particular a nonzero evaluation remains nonzero.
+\end{lemma}
+\begin{proof}
+Compose the inverse of the canonical sum-index tensor equivalence with the
+tensor product of the two singleton evaluation equivalences. Their formulas
+on pure tensors give the stated formula. Naturality follows on pure tensors
+and hence on their linear span. For a family $g_i$ of determinant-one
+maps, this identity intertwines its tensor action with
+$g_{\mathrm L}\otimes g_{\mathrm R}$. Applying the exterior-power functor
+preserves the intertwining identity. Polynomial pullback reverses composition,
+so an invariant polynomial pulls back to a fixed polynomial for every family
+$g_i$. Linear pullback preserves homogeneous degree, and the evaluation
+identity is precisely evaluation of a pulled-back polynomial at a vector.
+No freeness, metric or arithmetic-degree choice enters this construction.
+\end{proof}
+
 \begin{lemma}[Nonvanishing in unbounded degrees]
 \label{lem:contraction-nonzero}
 \uses{def:geometric-semistability,lem:invariant-base-change,lem:canonical-contraction,lem:rectangular-invariants,lem:finite-independent-tensor-invariants,lem:plucker-invariant-tensor,lem:invariant-degree-divisibility}
