@@ -1403,7 +1403,8 @@ $\Ocal$-basis of $A$.
 
 \begin{lemma}[A uniformly short section of a Hermitian line]
 \label{lem:short-hermitian-line}
-\uses{def:hermitian-degree,lem:line-degree-section-independence}\notready
+\lean{BostConjecture.Arithmetic.lineMinkowskiConstant,BostConjecture.Arithmetic.lineMinkowskiConstant_pos,BostConjecture.Arithmetic.exists_small_ideal_element,BostConjecture.Arithmetic.HermitianMetric.exists_small_section}
+\uses{def:hermitian-degree,lem:line-degree-section-independence}\leanok
 Let $D=[K:\mathbb Q]$. There is a constant $C_K>0$, depending only on
 $K$, such that every rank-one Hermitian bundle $\overline L$ has a
 nonzero integral section $x$ satisfying
@@ -1470,7 +1471,8 @@ $D\degn(A)=D\degn(A_0)+\log[A:A_0]$; cancellation proves the claim.
 
 \begin{lemma}[Intrinsic exterior metrics and determinant inclusions]
 \label{lem:intrinsic-exterior-metric}
-\uses{def:hermitian-metric,lem:integral-determinant-line,lem:determinant-metric}\notready
+\lean{BostConjecture.Arithmetic.exteriorFiberEquiv,BostConjecture.Arithmetic.exteriorMap_fiber,BostConjecture.Arithmetic.HermitianMetric.exterior,BostConjecture.Arithmetic.HermitianMetric.exteriorFiber_inner_ιMulti,BostConjecture.Arithmetic.HermitianMetric.exteriorFiber_conjugate,BostConjecture.Arithmetic.HermitianMetric.exteriorFiber_top_eq,BostConjecture.Arithmetic.HermitianMetric.determinant_submodule_sectionNorm,BostConjecture.Arithmetic.exteriorMap_injective}
+\uses{def:hermitian-metric,lem:integral-determinant-line,lem:determinant-metric}\leanok
 For every $b\geq0$, $\bigwedge^b_{\mathcal O_K}A$ has the intrinsic
 Hermitian metric characterized on pure wedges by the cross Gram determinant.
 If $B\subseteq A$ has rank $b$ and the induced metric, the natural injection
