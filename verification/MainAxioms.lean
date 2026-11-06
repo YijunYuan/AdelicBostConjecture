@@ -1,0 +1,33 @@
+import BostConjecture.Main.MaxSlope.FilteredBound
+import BostConjecture.Main.MaxSlope.TensorFlag
+
+#print axioms BostConjecture.Arithmetic.HermitianMetric.tensor_map_pullback
+#print axioms BostConjecture.Arithmetic.HermitianMetric.slope_pullback_eq_range
+#print axioms BostConjecture.Arithmetic.HermitianMetric.slope_pullback_le_maxSlope
+#print axioms BostConjecture.Arithmetic.HermitianMetric.tensorGenericNontrivial
+#print axioms BostConjecture.Arithmetic.HermitianMetric.maxSlope_add_le_tensor
+#print axioms BostConjecture.Arithmetic.HermitianMetric.interval_degree_le_of_quotient_semistable
+#print axioms BostConjecture.Arithmetic.HermitianMetric.subspaceDegree_le_of_filtration
+#print axioms BostConjecture.Arithmetic.HermitianMetric.slope_submodule_le_of_filtration
+#print axioms BostConjecture.Arithmetic.HermitianMetric.maxSlope_le_of_filtration
+#print axioms BostConjecture.Arithmetic.tensorRight_mono
+#print axioms BostConjecture.Arithmetic.tensorRight_bot
+#print axioms BostConjecture.Arithmetic.tensorRight_top
+#print axioms BostConjecture.Arithmetic.tensorRight_eq_ker
+#print axioms BostConjecture.Arithmetic.tensorRightQuotientEquiv
+#print axioms BostConjecture.Arithmetic.tensorRightQuotientProjective
+#print axioms BostConjecture.Arithmetic.tensorRightEquiv
+#print axioms BostConjecture.Arithmetic.HermitianMetric.tensorRightEquiv_inner
+#print axioms BostConjecture.Arithmetic.HermitianMetric.pushforward_equiv_inner
+#print axioms BostConjecture.Arithmetic.HermitianMetric.tensorRightQuotientEquiv_inner
+#print axioms BostConjecture.Arithmetic.tensorStep_eq_map_ker
+#print axioms BostConjecture.Arithmetic.tensorStep_mono
+#print axioms BostConjecture.Arithmetic.tensorStep_bot
+#print axioms BostConjecture.Arithmetic.tensorStep_top
+#print axioms BostConjecture.Arithmetic.tensorStep_quotient_torsionFree
+#print axioms BostConjecture.Arithmetic.HermitianMetric.hnTensorStepQuotientTorsionFree
+#print axioms BostConjecture.Arithmetic.HermitianMetric.hnTensorStepQuotientProjective
+#print axioms BostConjecture.Arithmetic.HermitianMetric.hnTensorFlagQuotientProjective
+#print axioms BostConjecture.Arithmetic.HermitianMetric.hnTensorFlag_zero
+#print axioms BostConjecture.Arithmetic.HermitianMetric.hnTensorFlag_length
+#print axioms BostConjecture.Arithmetic.HermitianMetric.hnTensorFlag_monotone

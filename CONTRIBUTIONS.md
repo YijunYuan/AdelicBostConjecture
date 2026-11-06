@@ -910,3 +910,33 @@ axiom. Their actual consumers and 20/17 foundational-only owner audits are
 recorded in `SPECHT_SLOPE.md` and `ARITHMETIC_COMPACTNESS.md`. Full geometric
 slope and arithmetic compactness are later obligations, not consequences of
 this integration alone.
+
+## Maximal-slope producers and current-owner handoffs
+
+BOST-MAIN/run0011 authored `Main/MaxSlope/{LowerBound,FilteredBound,
+TensorFiltration,TensorFlag}.lean` (`5913d84`, `66d4baa`, `04dd654`). These
+compose the accepted ARITH HN attainment, intrinsic degree, actual quotient
+metrics and tensor degree APIs. Their consumers are the unconditional tensor
+lower bound, the filtration slope estimate and the actual saturated HN tensor
+flag. Consecutive refinement-grade isometries and the main identity remain
+open. No external source was copied or changed. Additional Mathlib APIs are
+`TensorProduct.map_injective_of_flat_flat` in `RingTheory/Flat/Basic.lean`,
+`rTensor_mkQ` and `TensorProduct.map_ker` in
+`LinearAlgebra/TensorProduct/RightExactness.lean`, and
+`LinearMap.quotKerEquivOfSurjective` in `LinearAlgebra/Isomorphisms.lean`,
+from `leanprover-community/mathlib4` revision
+`56a005855ea17e0b0958f73ec801ae140b0a1679`, Apache-2.0. They are consumed
+by `tensor_map_pullback`, `tensorRightQuotientEquiv` and
+`tensorStep_eq_map_ker`, respectively.
+
+Shared integration includes only unchanged files of checked owner handoffs:
+COMPACTNESS `870179a` (`TraceMultiplication`, `IntegralMatrices`,
+`TraceActionFiniteness`, `SemistabilityTopology`); SPECHT-SLOPE's accepted
+tree `e84df35` (`DeterminantTensorMetric`, `FiniteTensorDegree`,
+`DeterminantDegree`); and TENSOR-SEMI `57f5cfc`/`bbafa44` (`Extensions`,
+`MetricVariation`, `DegreeDerivative`). Their authorship remains with the
+respective lanes. Their recorded audits have 26, 28 and 12 foundational-only
+probes, with independent owner review. These use unchanged pinned libraries
+and earlier attributed project code; no additional external code is copied.
+Full compactness, geometric slope, extremal balance and tensor semistability
+are not claimed by this integration.

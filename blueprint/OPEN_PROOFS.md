@@ -161,7 +161,16 @@ and maximizing pairs remain that lane's obligations.
 `Arithmetic.Specht.DeterminantBundle` constructs the actual irreducible
 isometric determinant-Specht representation and its tensor/dual semistability;
 `LatticeDegree` proves the exact rectangular lattice slope. The determinant
-tensor metric/degree bridge and geometric slope inequality remain in
+tensor metric/degree bridge is checked through the owner handoff `e84df35`;
+the geometric slope inequality remains open in
 `specht_slope.tex`. The subsequent unproved tensor-semistability route now
 lives in `tensor_semistability.tex`; maximal-slope assembly and finite families
 remain in `main.tex`. These successor statements are not marked complete.
+
+MAIN's unconditional maximal-slope lower bound, general filtered slope bound,
+actual saturated lexicographic HN tensor flag, and single-factor tensor
+image/quotient metric identifications are checked in `Main/MaxSlope`.
+The next independent obligation is `lem:hn-tensor-grades`: identify every
+consecutive refinement quotient with the Hilbert tensor of the actual HN
+grades. The final upper bound must then consume TENSOR-SEMI's proved endpoint;
+that endpoint, `thm:bost-main` and `cor:bost-finite-family` remain open.

@@ -30,9 +30,17 @@ public import BostConjecture.Arithmetic.DegreeFiniteness
 public import BostConjecture.Arithmetic.RestrictionCovolume.Main
 public import BostConjecture.Arithmetic.Specht.DeterminantBundle
 public import BostConjecture.Arithmetic.Specht.LatticeDegree
+public import BostConjecture.Arithmetic.Specht.DeterminantDegree
 public import BostConjecture.Arithmetic.Compactness.DegreeContinuity
 public import BostConjecture.Arithmetic.Compactness.StabilityTopology
 public import BostConjecture.Arithmetic.Compactness.TraceSystole
+public import BostConjecture.Arithmetic.Compactness.TraceActionFiniteness
+public import BostConjecture.Arithmetic.Compactness.SemistabilityTopology
+public import BostConjecture.Main.TensorSemistability.Extensions
+public import BostConjecture.Main.TensorSemistability.MetricVariation
+public import BostConjecture.Main.TensorSemistability.DegreeDerivative
+public import BostConjecture.Main.MaxSlope.FilteredBound
+public import BostConjecture.Main.MaxSlope.TensorFlag
 public import BostConjecture.LinearAlgebra.AlternatingTensorPower
 public import BostConjecture.LinearAlgebra.ExteriorPower.BaseChange
 public import BostConjecture.LinearAlgebra.PiTensorProduct.Projective

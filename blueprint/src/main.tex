@@ -4,7 +4,7 @@
 \label{lem:tensor-saturated-submodule}
 \uses{lem:degree-calculus}
 \source{bost-specht-manuscript:page-0013}
-\notready
+\lean{BostConjecture.Arithmetic.tensorRightEquiv,BostConjecture.Arithmetic.tensorRightQuotientEquiv,BostConjecture.Arithmetic.tensorRightQuotientProjective,BostConjecture.Arithmetic.tensorRight_mono,BostConjecture.Arithmetic.tensorRight_bot,BostConjecture.Arithmetic.tensorRight_top,BostConjecture.Arithmetic.HermitianMetric.tensorRightEquiv_inner,BostConjecture.Arithmetic.HermitianMetric.tensorRightQuotientEquiv_inner}\leanok
 Let $P\subseteq M$ be a saturated submodule of a finite projective
 $\Ocal_K$-module and let $N$ be finite projective. The actual image
 $P_N$ of $P\otimes N\to M\otimes N$ is saturated, and the natural maps
@@ -38,7 +38,7 @@ claims follow from the zero and identity tensor maps.
 \label{lem:tensor-refinement-saturated}
 \uses{lem:tensor-saturated-submodule}
 \source{bost-specht-manuscript:page-0013}
-\notready
+\lean{BostConjecture.Arithmetic.tensorStep_eq_map_ker,BostConjecture.Arithmetic.tensorStep_quotient_torsionFree,BostConjecture.Arithmetic.tensorStep_mono,BostConjecture.Arithmetic.tensorStep_bot,BostConjecture.Arithmetic.tensorStep_top}\leanok
 Let $P\subseteq T\subseteq M$ and $Q\subseteq N$ be saturated
 submodules of finite projective $\Ocal_K$-modules. Then
 \[
@@ -66,7 +66,7 @@ the endpoint formulas.
 \label{lem:max-slope-tensor-lower}
 \uses{lem:hn-filtration,lem:degree-calculus}
 \source{bost-specht-manuscript:page-0013}
-\notready
+\lean{BostConjecture.Arithmetic.HermitianMetric.maxSlope_add_le_tensor}\leanok
 For positive-rank Hermitian bundles $E,F$ over $\Ocal_K$,
 \[
  \maxslope(E)+\maxslope(F)\leq\maxslope(E\otimes F).
@@ -90,7 +90,7 @@ the maximal slope of $E\otimes F$, proving the assertion.
 \label{lem:hn-tensor-filtration}
 \uses{lem:hn-filtration,lem:tensor-refinement-saturated}
 \source{bost-specht-manuscript:page-0013}
-\notready
+\lean{BostConjecture.Arithmetic.HermitianMetric.hnTensorFlag,BostConjecture.Arithmetic.HermitianMetric.hnTensorFlag_monotone,BostConjecture.Arithmetic.HermitianMetric.hnTensorFlag_zero,BostConjecture.Arithmetic.HermitianMetric.hnTensorFlag_length,BostConjecture.Arithmetic.HermitianMetric.hnTensorFlagQuotientProjective}\leanok
 Let $(E_i)_{i=0}^p$ and $(F_j)_{j=0}^q$ be the saturated HN flags
 of positive-rank bundles $E,F$. Extend each flag constantly beyond its
 last term. For $k\geq0$, write $k=iq+j$ with $0\leq j<q$ and set
@@ -105,15 +105,57 @@ Positive rank implies $q>0$, so the division is defined with the
 stated remainder. Each term is saturated by the preceding lemma,
 and its quotient is finite projective over the Dedekind ring.
 Within a block, monotonicity follows from $F_j\subseteq F_{j+1}$.
-The last term of block $i$ is $E_{i+1}\otimes F$, equal to the
+The endpoint obtained by allowing $j=q$ is $E_{i+1}\otimes F$, equal to the
 first term of block $i+1$; all intermediate terms lie between
 $E_i\otimes F$ and $E_{i+1}\otimes F$. These observations give
 monotonicity also across blocks. The endpoint formulas follow from
 $E_0=F_0=0$ and $E_p=E$, with remainder zero at $k=pq$.
 \end{proof}
 
+\begin{lemma}[Hermitian grades of the HN tensor filtration]
+\label{lem:hn-tensor-grades}
+\uses{lem:hn-tensor-filtration,lem:tensor-saturated-submodule}
+\source{bost-specht-manuscript:page-0013}
+\notready
+With the preceding notation, for $0\leq i<p$, $0\leq j<q$, the
+canonical quotient identification is an isometry
+\[
+ A_{iq+j+1}/A_{iq+j}\simeq
+ (E_{i+1}/E_i)\otimes(F_{j+1}/F_j),
+\]
+where the left side has the induced quotient metric and the right
+side has the Hilbert tensor metric of the HN grades.
+\end{lemma}
+\begin{proof}
+Write $P=E_i$, $T=E_{i+1}$, $Q=F_j$, and $U=F_{j+1}$.
+All successive flag quotients are projective, so choose integral
+splittings $T=P\oplus C$ and $U=Q\oplus D$ and extend them to
+splittings of $E$ and $F$. In these splittings the two sum steps are
+\[
+ P\otimes F\oplus C\otimes Q,
+ \qquad P\otimes F\oplus C\otimes U.
+\]
+Their quotient is $C\otimes D$. This proves that the map induced
+by $t\otimes u\mapsto(t+P)\otimes(u+Q)$ is an integral
+isomorphism to $(T/P)\otimes(U/Q)$. As the formula on pure tensors
+determines the map, it is independent of the chosen splittings.
+At a complex embedding instead choose the orthogonal splittings
+$T_\sigma=P_\sigma\mathbin{\perp}C_\sigma$ and
+$U_\sigma=Q_\sigma\mathbin{\perp}D_\sigma$.
+The orthogonal complement of the first sum step in the second is
+then $C_\sigma\otimes D_\sigma$: it is perpendicular to
+$P_\sigma\otimes F_\sigma$ in the first factor and to
+$C_\sigma\otimes Q_\sigma$ in the second. Its inner product is
+the product inner product. The same canonical quotient map identifies
+$C_\sigma,D_\sigma$ isometrically with the respective quotient
+fibers, which proves the asserted metric identity at every embedding.
+At $j=q-1$ the endpoint formula for the flag identifies the next
+term with the first term of block $i+1$, so this argument also
+covers transitions between blocks.
+\end{proof}
+
 \begin{lemma}[Slope bound from a metrized filtration]
-\label{lem:filtered-slope-bound}\uses{lem:degree-calculus,lem:hn-filtration}\notready
+\label{lem:filtered-slope-bound}\uses{lem:degree-calculus,lem:hn-filtration}\lean{BostConjecture.Arithmetic.HermitianMetric.slope_submodule_le_of_filtration,BostConjecture.Arithmetic.HermitianMetric.maxSlope_le_of_filtration}\leanok
 Let $0=X_0\subseteq\cdots\subseteq X_n=A_K$ be a finite filtration
 of the generic fiber and put $A_i=A\cap X_i$. If every actual
 Hermitian quotient $A_{i+1}/A_i$ is semistable with slope at most $c$,
@@ -145,7 +187,7 @@ the first HN term proves the maximal-slope bound.
 
 \begin{theorem}[Maximal-slope identity]
 \label{thm:bost-main}
-\uses{lem:hn-filtration,lem:degree-calculus,thm:tensor-semistability,lem:filtered-slope-bound,lem:max-slope-tensor-lower}
+\uses{lem:hn-filtration,lem:degree-calculus,thm:tensor-semistability,lem:hn-tensor-grades,lem:filtered-slope-bound,lem:max-slope-tensor-lower}
 \source{bost-specht-manuscript:page-0001,bost-specht-manuscript:page-0013}
 \notready
 For every number field $K$ and every pair of positive-rank Hermitian
