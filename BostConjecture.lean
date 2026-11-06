@@ -36,6 +36,7 @@ public import BostConjecture.Arithmetic.Compactness.StabilityTopology
 public import BostConjecture.Arithmetic.Compactness.TraceSystole
 public import BostConjecture.Arithmetic.Compactness.TraceActionFiniteness
 public import BostConjecture.Arithmetic.Compactness.SemistabilityTopology
+public import BostConjecture.Arithmetic.Compactness.SequentialCompactness
 public import BostConjecture.Main.TensorSemistability.Extensions
 public import BostConjecture.Main.TensorSemistability.MetricVariation
 public import BostConjecture.Main.TensorSemistability.DegreeDerivative
