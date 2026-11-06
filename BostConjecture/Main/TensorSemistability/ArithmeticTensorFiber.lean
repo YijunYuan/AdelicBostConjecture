@@ -179,7 +179,12 @@ theorem fiberProjectionTrace_tensor_transport (h : HermitianMetric (K := K) M)
     (inferInstance : PreInnerProductSpace.Core ℂ (ComplexFiber (M ⊗[𝓞 K] N) σ))
   let e : ComplexFiber (M ⊗[𝓞 K] N) σ ≃ₗᵢ[ℂ]
       ComplexFiber M σ ⊗[ℂ] ComplexFiber N σ :=
-    (binaryTensorFiberEquiv σ).isometryOfInner (fun x y => (h.tensor_inner k σ x y).symm)
+    (binaryTensorFiberEquiv σ).isometryOfInner (by
+      intro x y
+      change (Tensor.binaryCore (h.fiber σ) (k.fiber σ)).inner
+        (binaryTensorFiberEquiv σ x) (binaryTensorFiberEquiv σ y) =
+          ((h.tensor k).fiber σ).inner x y
+      exact (h.tensor_inner k σ x y).symm)
   let S := (fiberMap P.subtype σ).range
   have hS : S.map e.toLinearEquiv.toLinearMap = tensorSubmoduleFiber P σ := by
     exact LinearMap.range_comp _ _ |>.symm
