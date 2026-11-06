@@ -1021,7 +1021,22 @@ adding TensorCompatibility repaired it before the successful check above.
 the exterior image of the actual generic subspace; its3523-job check passed.
 An initial generic-image check required explicit codomain arguments to
 exteriorPower.map; the final source does not change transparency options.
-Their axiom probes and the assembled finiteness consumer are pending.
+`05360d4` completes the actual finiteness consumer, including all ranks:
+`Arithmetic.DegreeFiniteness` passed3621jobs warning-free at01:30:09 UTC,
+fingerprint6ef065c3fa0ed987. The366-probe audit passed01:30:39 UTC;
+all366 results report only propext,Classical.choice,Quot.sound
+(`degree-finiteness-axioms.jsonlog`). Scoped honesty review approved Plucker
+recovery and finiteness, and ground found no missing producer in the enumerated
+arithmetic/HN objective. Initial finiteness compilation required explicit
+submodule type parameters for exteriorPower.map; the final check passed.
+
+The two legacy umbrella nodes now attach their precise proved producers.
+Hermitian-bundle wording uses the implemented conjugation-compatible complex
+fibers; unused strict-stability terminology was removed from this attached
+node. Normalized still means exactly slope=0. The calculus node attaches
+exact/tensor/dual/contraction/saturation/scaling producers; line twisting is
+the rank-one tensor specialization. Honesty review approved this reconciliation.
+Final root integration of the finiteness endpoint is pending.
 
 Ground independently confirmed the smaller finiteness route: bounded short
 sections in the fixed exterior module, followed by Plucker recovery and
@@ -1072,5 +1087,5 @@ manuscript page0011; nonfree projectives, arbitrary number fields, and rank0
 must be covered. Proposed successor write set is only
 `Arithmetic/RestrictionCovolume/**`, the migrated blueprint slice,
 `verification/RestrictionCovolumeAxioms.lean`, and
-`verification/RESTRICTION_COVOLUME.md`. Parent activation is still required;
-ARITH retains the short-section degree-finiteness route and existing files.
+`verification/RESTRICTION_COVOLUME.md`. Standing protection I-0087 now reserves that successor scope for COVOLUME;
+ARITH retains the completed short-section degree-finiteness route and existing files.

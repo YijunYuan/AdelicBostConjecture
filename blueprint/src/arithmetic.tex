@@ -382,12 +382,13 @@ $(\log 1-\sum_\sigma\log 1)/D=0$.
 
 \begin{definition}[Hermitian bundles and normalized degree]
 \label{def:hermitian-degree}
+\lean{BostConjecture.Arithmetic.HermitianMetric,BostConjecture.Arithmetic.HermitianMetric.inner_conjugate,BostConjecture.Arithmetic.HermitianMetric.lineDegree,BostConjecture.Arithmetic.HermitianMetric.lineDegree_eq,BostConjecture.Arithmetic.HermitianMetric.degree,BostConjecture.Arithmetic.HermitianMetric.slope,BostConjecture.Arithmetic.HermitianMetric.IsSemistable,BostConjecture.Arithmetic.HermitianMetric.degree_eq_zero_of_rank_zero,BostConjecture.Arithmetic.HermitianMetric.slope_rescale_self}
 \uses{def:hermitian-metric,def:intrinsic-determinant-degree}
-\source{bost-specht-manuscript:page-0002,bost-specht-manuscript:page-0003}\notready
+\source{bost-specht-manuscript:page-0002,bost-specht-manuscript:page-0003}\leanok
 A Hermitian bundle $\overline A$ is a finite projective $\Ocal$-module $A$
-with a positive-definite Hermitian metric on each complex archimedean fiber,
-invariant under conjugation, and a positive-definite real metric on each real
-fiber. For a rank-one bundle $\overline L$ and $0\ne\ell\in L$, set
+with a positive-definite Hermitian metric on the canonical complex fiber
+at every embedding $K\hookrightarrow\mathbb C$, compatible with conjugation.
+For a rank-one bundle $\overline L$ and $0\ne\ell\in L$, set
 \[
  \degn(\overline L)=\frac{1}{D}\left(
  \log|L/\Ocal\ell|-\sum_v w_v\log\|\ell\|_v\right).
@@ -396,8 +397,7 @@ The product formula makes this independent of $\ell$. For positive rank,
 $\degn(\overline A)=\degn(\det\overline A)$ and
 $\slope(\overline A)=\degn(\overline A)/\rk A$; set $\degn(0)=0$.
 A bundle is semistable if every nonzero submodule has slope at most its own
-slope, and strictly stable if every nonzero proper saturated submodule has
-strictly smaller slope. It is normalized if its slope is zero.
+slope. It is normalized if its slope is zero.
 \end{definition}
 
 \begin{lemma}[Finite projectivity of integral submodules]
@@ -1321,7 +1321,8 @@ rank-one tensors, without choosing an integral basis of either bundle.
 
 \begin{lemma}[Determinant identities and contraction]
 \label{lem:degree-calculus}\uses{def:hermitian-degree,lem:exact-determinant-degree,lem:tensor-degree,lem:arithmetic-tensor-metric,lem:dual-degree,lem:line-tensor-degree,lem:determinant-contraction,lem:saturation-degree,lem:degree-metric-scaling}
-\source{bost-specht-manuscript:page-0003}\notready
+\lean{BostConjecture.Arithmetic.HermitianMetric.degree_exact,BostConjecture.Arithmetic.HermitianMetric.slope_tensor,BostConjecture.Arithmetic.HermitianMetric.slope_dual,BostConjecture.Arithmetic.HermitianMetric.degree_le_of_injective,BostConjecture.Arithmetic.HermitianMetric.degree_le_saturation,BostConjecture.Arithmetic.HermitianMetric.slope_submodule_rescale,BostConjecture.Arithmetic.HermitianMetric.degree_eq_lineDegree}
+\source{bost-specht-manuscript:page-0003}\leanok
 Degrees are additive in an exact sequence with induced and quotient
 metrics. For positive-rank bundles $A,B$ and a line bundle $L$,
 \[
@@ -1464,7 +1465,7 @@ torsion-freeness. This proves the assertion including degree zero.
 \end{proof}
 
 \begin{lemma}[Recovery from a nonzero Pl\"ucker vector]
-\label{lem:plucker-recovery}\notready
+\label{lem:plucker-recovery}\leanok
 \lean{BostConjecture.Arithmetic.ιMulti_ne_zero_iff,BostConjecture.Arithmetic.mem_iff_mul_plucker_eq_zero,BostConjecture.Arithmetic.eq_of_plucker_eq,BostConjecture.Arithmetic.eq_of_mem_exterior_ranges}
 Let $V$ be a finite-dimensional vector space over a field $k$, and let
 $W\subseteq V$ have dimension $b$. Every nonzero vector $\xi$ in the
@@ -1485,9 +1486,11 @@ claim for $b=0$ and $b=\dim V$.
 
 \begin{lemma}[Finiteness of submodules of bounded degree below]
 \label{lem:degree-finiteness}\uses{lem:short-hermitian-line,lem:intrinsic-exterior-metric,lem:plucker-recovery,lem:bounded-integral-sections,lem:integral-part-generic-subspace}
-\source{bost-specht-manuscript:page-0012}\notready
+\lean{BostConjecture.Arithmetic.HermitianMetric.exists_small_exterior_section,BostConjecture.Arithmetic.HermitianMetric.finite_subspaces_degree_ge,BostConjecture.Arithmetic.HermitianMetric.finite_subspaces_degree_ge_all,BostConjecture.Arithmetic.HermitianMetric.finite_saturated_submodules_degree_ge}
+\source{bost-specht-manuscript:page-0012}\leanok
 For a fixed Hermitian bundle $A$, a rank $b$ and a real $c$, only finitely
 many saturated rank-$b$ submodules $B\subseteq A$ satisfy $\degn(B)\geq c$.
+The same finiteness holds without fixing the rank.
 \end{lemma}
 \begin{proof}
 For each such $B$, choose a nonzero short section of its determinant line.
@@ -1500,6 +1503,8 @@ preceding lemma gives equality of the generic subspaces. Saturation recovers
 each integral submodule as $A\cap B_K$, and the submodules therefore agree.
 Thus the chosen-section map is injective into a finite set. For rank zero
 the only saturated submodule is zero, giving the same conclusion directly.
+There are only $\rk A+1$ possible ranks, so their finite union proves the
+last assertion.
 \end{proof}
 
 \begin{lemma}[Finite-dimensional convex interval slopes]

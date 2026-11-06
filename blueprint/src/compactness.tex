@@ -1125,14 +1125,15 @@ general reductive-group theorem is required.
 \label{lem:invariant-orbit-criterion}
 \uses{lem:balanced-constructible-image,lem:balanced-constructible-closure,lem:balanced-polynomial-average,lem:balanced-homogeneous-extraction}
 \source{bost-specht-manuscript:page-0012,maithani-reynolds:thm:reynolds-for-lie-group,milne-algebraic-geometry:page-0201}\notready
-For $G=\SL(U)\times\SL(W)$ acting algebraically and linearly on
-a finite-dimensional complex vector space $X$, a nonzero $x\in X$
-has $0\notin\overline{Gx}^{\mathrm{Zar}}$ if and only if some
+Let $U,W$ be positive-dimensional finite-dimensional complex spaces and
+$G=\SL(U)\times\SL(W)$ act on $X=\bigwedge^s(U\otimes W)$ by the
+actual exterior tensor representation. A vector $x\in X$ has $0\notin\overline{Gx}^{\mathrm{Zar}}$ if and only if some
 positive-degree homogeneous $G$-invariant polynomial is nonzero at $x$.
 The Euclidean and Zariski closures of $Gx$ coincide.
 \end{lemma}
 \begin{proof}
-The orbit map $g\mapsto gx$ is regular, so its image is constructible.
+The explicit Pl\"ucker-coordinate polynomials make the actual orbit a
+polynomial image of the determinant-one zero locus, hence constructible.
 The constructible closure comparison proves the last assertion.
 Suppose zero is outside $C=\overline{Gx}^{\mathrm{Zar}}$.
 By the definition of Zariski closure there is a polynomial $f$ that
