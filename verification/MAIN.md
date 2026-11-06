@@ -6,6 +6,33 @@ and finite-family lower bounds are now proved for arbitrary number fields and
 nonfree finite projective modules. No conditional equality is presented as the
 source theorem.
 
+## Latest checked continuation
+
+Source `0b1826d` passed the configured root build with **9406 jobs**, no
+warnings, at **2026-11-06 05:00:03 UTC**. Root blob:
+`e900eb70e42cff7e6f104d9951664b9fbf891c06`.
+It integrates the complete accepted TENSOR handoff `6cc3fd8` for
+`ProjectionConjugation` and `ArithmeticTensorFiber`; no continuing draft is
+added to the root. Independent honesty/integration review compared the full
+handoff files and verified the actual 2816/3537 checks and 59 probe outputs.
+
+MAIN `40987f0` adds `maxSlope_le_of_integral_filtration` and
+`maxSlope_piTensor_empty`. The former recovers each saturated integral term
+from its generic span without changing its quotient metric; the latter proves
+the actual degree-zero unit case. Both modules passed 3624 jobs at04:57:09UTC.
+All **54 MAIN transitive axiom probes** passed at04:58:32UTC with exactly
+`propext`, `Classical.choice`, and `Quot.sound`. Independent honesty review
+accepted both proofs and blueprint attachments. Their final consumers remain
+unproved; these additions do not claim the source equality.
+
+Evidence is under run0011/session `0006-horizon-BOST-MAIN`:
+`main-root-transport.log`, the three timestamped `checks/*.json` records and
+the actual probe output in `transcript.jsonl`. Earlier diagnostics were fixed;
+no source error or warning remained in these checks. A failed shell invocation
+used unavailable `python`; it was rerun with `python3`. A root-blob lookup used
+a project-relative object path and was corrected to the workspace-root path.
+Neither operational failure affected a source or kernel check.
+
 ## Proved MAIN producers
 
 - `LowerBound.lean`: tensors the actual attained first HN submodules, identifies
@@ -29,7 +56,7 @@ source theorem.
   maximal slope at least the sum of factor maxima, including the empty family.
   It consumes the binary lower bound and existing regrouping/reindexing isometries.
 
-## Exact verification boundary
+## Prior checked root boundary
 
 The configured root at **`d0c9f8a`** passed **9404 jobs without warnings** at
 **2026-11-06 04:47:44 UTC**. Root blob:
@@ -67,13 +94,13 @@ equality remain notready. These reviews certify proved producers only.
 
 ## Current-owner integration
 
-The final root imports the exact independently accepted handoffs:
+The accepted root imports the exact independently accepted handoffs:
 
 | Lane | Source checkpoint | Actual endpoint / evidence |
 | --- | --- | --- |
 | COMPACTNESS | `e81b08b` | Nonfree global maximizing pairs; 40 foundational-only probes |
 | SPECHT-SLOPE | `8c80c92` | Actual geometric slope inequality; 39 probes |
-| TENSOR-SEMI | `5eee92c`, `2fef69d`, `e0b0bb1`, `7fd2332` | Local maximum, actual metric derivatives, scalar defects and conjugate bases; latest 49 probes |
+| TENSOR-SEMI | `5eee92c`, `2fef69d`, `e0b0bb1`, `7fd2332`, `6cc3fd8` | Local maximum, actual metric derivatives, scalar defects, conjugate bases and arithmetic projection transport; latest 59 probes |
 | LINE-TWIST | `032df77` | Both tensor orders for arbitrary nonprincipal lines; 10 probes |
 | STRICT-REDUCTION | `b49b67f` | Internally minimal, strictly stable normalized global maximizing counterexample; 10 probes |
 
@@ -85,7 +112,7 @@ Attribution and pinned external sources remain in `CONTRIBUTIONS.md`.
 
 ## Remaining route and hygiene
 
-TENSOR-SEMI must finish actual arithmetic conjugation/projection-trace transport,
+TENSOR-SEMI must finish compatible arithmetic partial-trace defect vanishing,
 extremal balance and unconditional tensor semistability. MAIN then applies that
 proved theorem to the actual HN grades, transports semistability through the
 checked integral isometry, and applies the filtered bound for the upper bound.
@@ -97,12 +124,11 @@ these unfinished steps.
 
 `BOST-MAIN-FILTRATION` and `BOST-MAIN-LOWER` are done; `BOST-MAIN-UPPER` and
 `BOST-MAIN-FINITE` record the remaining work. BOST-MAIN remains active.
-Graph sync resolves all source/dependency attachments (370 blueprint nodes,
-2423 declarations); 1137 unattached helper/concurrent-draft declarations are
-intentional coverage warnings. This latest graph also sees the ongoing
-ProjectionConjugation draft, which is outside the checked root boundary. Ground found no stale scratch candidates and
-accepted the repaired roadmap with no consistency warnings. All helpers were
-read-only; MAIN retains sole shared integration ownership.
+The previous graph sync resolved all source/dependency attachments; unattached
+helper/concurrent-draft declarations are intentional coverage warnings. The
+latest graph may contain ongoing arithmetic-defect drafts outside the checked
+root boundary. Scratch cleanup found no stale candidates. All review helpers
+are read-only; MAIN retains sole shared integration ownership.
 
 Parent convergence handoff I-0138 confirms that completed LINE/STRICT lanes
 should exit and that no additional writer is needed. MAIN continues solely

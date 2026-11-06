@@ -1,3 +1,20 @@
+## Arithmetic tensor projection transport and MAIN adapters integrated
+
+Root source `0b1826d` passed **9406 jobs without warnings at
+2026-11-06 05:00:03 UTC**; root blob
+`e900eb70e42cff7e6f104d9951664b9fbf891c06`.
+It adds the full independently accepted TENSOR handoff `6cc3fd8`, whose
+2816/3537-job checks and 59 foundational-only probes were inspected.
+MAIN `40987f0` proves the integral-filtration adapter and exact empty-tensor
+maximum; the two modules passed3624 jobs, and all **54 MAIN probes** passed
+at04:58:32UTC with only standard foundations. Independent honesty review
+accepted both mathematical producers. See `MAIN.md` for exact evidence.
+
+Compatible partial-trace defect vanishing, extremal balance, unconditional
+tensor semistability and both maximal-slope equalities remain open. The
+remaining route is stated in `blueprint/OPEN_PROOFS.md`; these prerequisite
+checks are not main-theorem completion evidence.
+
 ## HN tensor grades and all current producer handoffs integrated
 
 Root source `d0c9f8a` passed **9404 jobs without warnings at

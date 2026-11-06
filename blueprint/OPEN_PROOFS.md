@@ -1,190 +1,67 @@
-The mathematical reduction is written in `src/`, but its dependency cone is
-not yet closed. The integral word orbit span and its complex scalar-extension
-map are proved in `BostConjecture/Specht/Integral.lean`. `Tableau.lean`
-identifies the orbit with all polytabloids; `Metric.lean` constructs the
-discrete full Hilbert lattice in its own real span and proves its covolume
-is at least one using an integer Gram determinant. Its covolume square is
-bounded above by the Gram determinant of any integral family that is a real
-basis. `Garnir.lean`, `GarnirSets.lean`, and `Straightening.lean` now prove
-rational standard spanning. `Basis.lean` constructs the actual standard real
-basis, proves its integrality and rank count, and discharges that hypothesis.
-`Norm.lean` proves that a polytabloid's squared norm is the column-group order.
-`Rectangle.lean` identifies balanced row words and proves the initial norm
-`(a!)^k`. `Standard.lean` proves standard-polytabloid independence over any
-ring by lexicographic triangularity. `OneRow.lean` proves covolume one and
-the sublinear limit for the one-row case. `ColumnTensor.lean` identifies
-the existing polytabloids with products of unnormalized alternating columns;
-`Covariance.lean` proves determinant covariance for the word matrix action
-on the integral lattice, its scalar span over every commutative ring, and the
-checked complex Specht module. `Orthogonal.lean` constructs the monic
-orthogonal basis for any total order, proves its determinant-one basis change,
-and expresses the standard Gram determinant as the product of its actual
-squared norms. `RealAction.lean` constructs the real isometric action and
-proves symmetry, commutation, and the adjacent recurrence of the concrete
-Murphy operators. `Content.lean` computes the concrete Murphy coefficient at the original
-row word as the box content. `Central.lean` uses the checked complex
-column-antisymmetrizer line theorem to prove that the sum of all Murphy
-operators acts by total diagram content on the actual real span and
-integral orbit lattice. `Prefix.lean` now constructs the actual standard prefix diagrams and
-content increments. `Branching.lean` proves frozen-tail integral restriction,
-prefix equivariance, lifts of smaller lattice vectors and the sliced central
-scalar. `Filtration.lean` identifies the standard-basis largest-label
-filtration with the ambient word-support filtration and proves its stability.
-`Quotient.lean` identifies the successive branching quotient at the last
-box of any standard tableau with its smaller real Specht space, by an actual
-surjective coefficient restriction and an exact kernel calculation. `LastMurphy.lean` uses that kernel
-to identify prefix central and last-Murphy content actions modulo earlier
-rows. `Extension.lean` and `Colex.lean` construct the actual standard-tableau
-corner lift and its order compatibility. `Triangular.lean` proves recursive
-colexicographic Murphy triangularity for all labels; `Spectral.lean` uses it
-and symmetry to prove the content eigenvalues of the actual monic orthogonal
-basis. `Adjacent.lean` proves the normalized adjacent action;
-`ColumnReading.lean` and `AdjacentPath.lean` supply its initial value and
-increasing legal paths. `PrefixNorm.lean` and `PrefixNormInitial.lean` prove
-the concrete prefix product, positivity, swap ratio and initial value.
-`Seminormal.lean` identifies the actual squared norms with that product,
-evaluates the standard Gram determinant, and proves the canonical orbit
-covolume bound by the uniform logarithmic average. `Asymptotic.lean`
-now proves the general sublinear covolume limit for every fixed positive
-height, using actual prefix separation and logarithmic expectations.
-Rectangular SL invariant identification over algebraically closed characteristic-zero
-fields is now checked in `Geometry.RectangularInvariants`. Arbitrary-field descent,
-nonvanishing from geometric semistability and the number-field main theorem remain open.
+# Remaining main-theorem proof obligations
 
-Current boundaries and remaining producers:
+The target is manuscript Theorem 1.1 over every number field, for arbitrary
+positive-rank finite projective modules over its ring of integers, with the
+actual Hilbert tensor metric. **The binary maximal-slope equality and its
+finite-family equality remain open.** Weighted HN compatibility and the
+appendices are outside the target.
 
-- The standard-basis frontier is closed through rational straightening and
-  real transport. The all-polytabloid lattice is retained; the standard
-  integral sublattice supplies the Gram upper bound, so integral
-  standard spanning is unnecessary for this route.
-- `lem:rectangular-invariants` depends independently on
-  `lem:rectangular-absolute-irreducible` and `lem:rectangular-sl-invariants`.
-  Its complex orbit representation now has an explicit integral model and
-  tensor-product scalar-extension equivalence. The actual SL-fixed-space is
-  identified over algebraically closed characteristic-zero fields in
-  `Geometry.RectangularInvariants`; arbitrary-field descent remains open.
-- The Gram producer is closed, including the coefficient-one normalization
-  and the actual prefix norm formula. Uniform bulk separation and its
-  logarithmic expectation consumer are proved.
-  `Complement.lean` and `PrefixCount.lean`
-  prove the rotated complement and actual prefix-fiber bijection, yielding
-  the exact product of the two smaller standard-tableau counts.
-  `ComplementCount.lean` and `PrefixWeights.lean` turn that count into the
-  exact squared-Vandermonde binomial weight. `Hypergeometric.lean`,
-  `OccupancySort.lean`, and `ShiftedShapes.lean` prove the labelled law,
-  sorting multiplicity, and equivalence with actual rectangular subdiagrams.
-  `PrefixDistribution.lean` and `PrefixNormalizer.lean` prove the closed
-  normalizer and exact prefix probability formula. The uniform
-  bulk lower bound for that normalizer is proved in `BulkNormalizer.lean`.
-  `Sampling.lean` proves actual finite-subset binomial moments and the
-  Bernoulli exponential-moment bound; `OccupancyMGF.lean` transports it to
-  the labelled law and proves two-sided and simultaneous concentration.
-  The explicitly documented weaker tail constant suffices for the limit.
-  `WeightedGap.lean`, `BulkGap.lean` and `GapAsymptotics.lean` prove the
-  finite weighted bad-gap bound and a prefix-time-independent majorant
-  tending to zero. `PrefixEvent.lean` transports symmetric observables
-  through actual prefix fibers and sorting; `Separation.lean` proves
-  uniform bulk separation for the actual standard-tableau prefixes.
-  `LogInsertion.lean` and `LogExpectation.lean` prove the insertion-log
-  estimates and the actual averaged bulk/boundary bound.
-  `Asymptotic.lean` consumes this bound and the unchanged orbit-lattice
-  Gram comparison to prove `tendsto_rectangleLogCovolume_div`.
-  The stated covolume asymptotic objective is complete; it does not use
-  or close the independent rectangular invariant-space identification.
-  `HookCount.lean`
-  bridges the imported hook formula
-  to the accepted tableau indexing; `ShiftedCount.lean` proves the row hook
-  interval partition and the factorial/Vandermonde enumeration.
-  No seminormal theorem is assumed: the
-  action and norms are now proved in the canonical word realization.
-- `lem:invariant-orbit-criterion` and Lemma 7.2 are now proved for the actual
-  complex binary Plucker action. `OrbitCriterion` consumes compact averaging,
-  SU coordinate density and `ComplexClosure.Comparison`; the intrinsic
-  `IsBalanced.plucker_semistable` endpoint supplies a positive-degree
-  homogeneous invariant for every nonzero Plucker representative.
-  The terminal binary-to-family original-ring nonvanishing sequence is checked
-  in `Geometry.BinaryPlucker`; its downstream geometric slope application is
-  checked in `Slope.Geometric.BinaryInvariantSlope`.
-  The unused general coaction scalar-extension square is retired from the
-  current route, not proved.
+## Remaining producer-to-consumer route
 
-These are unproved producer obligations, not assumptions under which the
-main result is declared finished. The current manuscript proposes the route;
-the blueprint's mathematical proofs still require independent review.
+1. **TENSOR-SEMI:** construct the conjugation-compatible traceless partial-trace
+   defects of the actual maximizing tensor submodule. Combine actual metric
+   stationarity with trace-square positivity to prove both defects vanish.
+   This supplies `lem:extremal-to-balance`.
+2. **TENSOR-SEMI:** apply the proved balanced-Plücker geometric semistability
+   and geometric slope inequality to the actual strictly stable maximizing
+   counterexample. Its positive degree contradicts the resulting slope bound.
+   Undo normalization to prove unconditional `thm:tensor-semistability`.
+3. **MAIN:** apply that proved endpoint to each pair of actual HN grades and
+   transport semistability through the checked integral quotient isometry.
+   The integral filtration bound gives the upper bound; the unconditional
+   attained-submodule lower bound gives `thm:bost-main`.
+4. **MAIN:** use the actual finite tensor regrouping isometries and the binary
+   identity to prove `cor:bost-finite-family`. The empty tensor has maximal
+   slope zero, providing the induction base. Average-slope additivity gives
+   the semistability consequence.
 
-The seminormal Gram identity is for the standard family. For the orbit lattice
-it yields only `0 ≤ 2c_a(d) ≤ E log γ`; the sublinear limit follows by squeezing.
-Determinant covariance in word coordinates is proved. Identification with
-abstract tensor maps and flat scalar-extended injectivity in a free frame
-are proved by the geometry modules. The full determinant-twist base-change square,
-general finite-principal-cover descent, finite-projective local frames,
-overlap transport and the global determinant injection are proved.
-The finite Hilbert tensor form and its pure-tensor formula are proved.
-Determinant metric compatibility, the actual integral pairing and its
-equivariance are proved in the delivered geometry modules. Generic dual
-evaluation and the restricted pairing are bounded, the latter in
-`ContractionNorm.lean`. The normalized Hom polynomial lift now yields independent invariant factors
-with nonzero tensor pairing (`HomInvariants.lean`), and the source factor
-is restricted to the actual rectangular lattice over algebraically closed
-characteristic-zero fields. `DualInvariants.lean`, `DualSpecialLinear.lean` and
-`Nonvanishing.lean` now also restrict every dual factor and prove the actual
-canonical pairing nonzero from a nonzero invariant Hom polynomial.
-`NonvanishingBaseChange.lean` descends this nonvanishing to the original ring;
-`PluckerNonvanishing.lean` produces an actual nonzero sequence in every
-positive multiple of one common degree from a positive-degree Plucker invariant.
-`BinaryPlucker.lean` now proves the actual binary-to-family action,
-homogeneous invariant and evaluation transport. Its terminal theorem
-`exists_canonicalPairing_nonzero_sequence_of_binary_invariant` proves the
-original-ring sequence and closes the revised GEOM construction obligation. The unused general
-coaction scalar-extension square is retired from this route, not proved.
+All four headline nodes remain uncompleted. No assumed producer package,
+local-maximum premise in the final theorem, or clean prerequisite build
+substitutes for these steps. The two active owners retain their disjoint
+scopes; completed lanes are not reopened.
 
-All cited manuscript page anchors resolve to registered vision transcriptions
-that were read before attachment. The shifted-coordinate tableau count has
-an explicit row-hook partition proof, converting the checked hook-length
-formula into the coordinates used by the manuscript. The compact lattice-frame lemma has an explicit
-bounded-basis proof, supplementing its appeal to Mahler compactness.
+## Accepted producers used by this route
 
-The finite-dimensional convex-interval lemma specializes Chen–Jeannin §4.3
-to strictly increasing ranks. Its geometric application separately proves
-degree supermodularity and the quotient-degree identification. No modularity
-of Hermitian degree or already-proved tensor semistability is assumed.
+- **Specht:** the actual integral orbit lattice, standard basis, monic
+  seminormal norms, Gram upper bound, exact prefix distribution and sublinear
+  rectangular covolume limit are checked. The orbit lattice uses the bound
+  `0 ≤ 2c_a(d) ≤ E log γ`; equality with the standard integral span is not
+  required or claimed.
+- **GEOM:** determinant tensor realization, canonical contraction, norm bound
+  and the original-ring nonzero sequence are checked through the concrete
+  binary Plücker action. The unused general coaction scalar-extension square
+  is retired from this route, not proved.
+- **COVOLUME / COMPACTNESS:** the trace-metric covolume formula includes
+  nonfree modules and rank zero. Fixed-rank normalized arithmetic compactness
+  and actual globally maximizing pairs are checked (`e81b08b`).
+- **SPECHT-SLOPE:** the determinant-Specht degree calculation and actual
+  geometric slope endpoint are checked (`8c80c92`).
+- **LINE / STRICT:** arbitrary nonprincipal rank-one twists in both tensor
+  orders (`032df77`) are substantively consumed by the internal minimal-rank
+  and strictly stable maximizing-counterexample construction (`b49b67f`).
+- **TENSOR-SEMI:** normalized extensions, actual exponential metric variation,
+  local maximality and degree derivatives, scalar partial-trace defects,
+  conjugate bases, and actual conjugation/projection-trace transport are
+  checked through the full owner handoff `6cc3fd8`. Balance remains separate.
+- **MAIN:** the actual saturated lexicographic HN tensor flag, consecutive
+  integral quotient isomorphisms and all-fiber Hilbert metric identities,
+  grade slope bounds, filtered slope bound, maximal-slope isometry invariance,
+  and binary/finite lower bounds are checked. `40987f0` additionally supplies
+  the integral-filtration adapter and the exact empty-tensor maximum.
 
-
-The actual trace-metric covolume identity for every finite projective module,
-including nonfree modules and rank zero, is checked in
-`Arithmetic.RestrictionCovolume.Main` (COVOLUME `5144157`, canonical basis
-relocation `739e58a`, final evidence `8871998`). No assumed covolume formula
-is needed by the arithmetic compactness successor. Fixed-module maximum-degree
-attainment/continuity, strict-stability openness and the actual trace systole
-are checked in `Arithmetic.Compactness`. The owner handoff `daad480` also
-checks fixed arithmetic actions, Hermitian reconstruction and actual
-fixed-rank normalized arithmetic sequential compactness, including nonfree
-modules. The checked `e81b08b` handoff proves the maximizing-pair consequence
-with actual nonfree module/metric witnesses and a saturated global maximizer.
-
-`Arithmetic.Specht.DeterminantBundle` constructs the actual irreducible
-isometric determinant-Specht representation and its tensor/dual semistability;
-`LatticeDegree` proves the exact rectangular lattice slope. The determinant
-tensor metric/degree bridge is checked through the owner handoff `e84df35`;
-the actual geometric slope inequality is checked at `8c80c92` in
-`Slope.Geometric.BinaryInvariantSlope`, including the general algebraically
-closed invariant-witness endpoint and its concrete binary specialization. The subsequent unproved tensor-semistability route now
-lives in `tensor_semistability.tex`; maximal-slope assembly and finite families
-remain in `main.tex`. These successor statements are not marked complete.
-
-MAIN's unconditional binary and finite-family lower bounds, general filtered
-slope bound, actual saturated lexicographic HN tensor flag, consecutive integral
-grade isomorphisms with all-fiber Hilbert quotient metrics, and grade slope
-bounds are checked in `Main/MaxSlope`. The finite lower bound uses the existing
-actual finite tensor metric and canonical regrouping/reindexing isometries.
-
-Root `d0c9f8a` also integrates both-order arbitrary nonprincipal line twists
-(`032df77`) and the actual strictly stable globally maximizing counterexample
-reduction (`b49b67f`), with substantive LINE-to-STRICT use. TENSOR-SEMI has
-checked actual metric variation, scalar partial-trace defects and conjugate
-bases through `7fd2332`. Its remaining first producer is actual arithmetic
-conjugation/projection-trace transport, then extremal balance and unconditional
-tensor semistability. MAIN's final upper bound must consume that proved
-endpoint on the actual HN grades. `thm:bost-main` and
-`cor:bost-finite-family` remain open; no assumed producer package replaces
-these steps. The current root9404/MAIN52-probe evidence is in `verification/MAIN.md`.
+Source anchors refer to registered vision transcriptions. The blueprint gives
+pure mathematical statements, proofs and dependency edges; current build and
+transitive-axiom boundaries are recorded in `verification/MAIN.md` and the
+owner evidence files. `CONTRIBUTIONS.md` records all pinned external reuse.
+Generated graph counts may include concurrent drafts outside the accepted
+root import closure and are not independent completion evidence.
