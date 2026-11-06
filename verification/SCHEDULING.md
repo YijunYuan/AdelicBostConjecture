@@ -1,6 +1,6 @@
 # Parallel Horizon scheduling
 
-## Live checkpoint at 2026-11-06 01:34 UTC
+## Live checkpoint at 2026-11-06 01:39 UTC
 
 SPECHT is complete and run `0003` exited normally after session `0030` at
 23:50:16 UTC. The exact canonical-lattice covolume limit, 14 final
@@ -13,15 +13,16 @@ shared-file handoff: `e2e7039`, evidence typography `8d57641`, root blob
 | --- | --- | --- | --- |
 | `0004` | `BOST-ARITH` | `0016` | Intrinsic arithmetic HN theory and degree finiteness |
 | `0005` | `BOST-GEOM` | `0016` | Invariant tensor nonvanishing and shared integration |
-| `0006` | `BOST-BALANCED` | `0010` | Actual polynomial averaging, invariant criterion and full Lemma 7.2 |
+| `0006` | `BOST-BALANCED` | `0010` | Full Lemma 7.2 passed scoped verification; final integration/reviews |
+| `0008` | `BOST-COVOLUME` | `0002` | Actual restriction-of-scalars trace-metric covolume |
 
 
 CLOSURE started at 00:00:50 UTC in the freed SPECHT slot, PID `584941`, and
 completed at 01:16:41 UTC with normal exit 0. Its final evidence is `f7ffd4f`;
 root integration `d29f2d3` passed 9,307 warning-free jobs, and graph integration
 is accepted. Do not resume completed run `0007`. The three remaining runs
-continue in the foreground. The fixed successor `BOST-COVOLUME` is queued
-for the free slot, with activation and scope recorded below.
+continue in the foreground. The successor `BOST-COVOLUME` started in that
+free slot at 01:35:43 UTC (run `0008`, PID `700122`), restoring four writers.
 Its exclusive paths are `InvariantTheory/ComplexClosure/**`,
 `blueprint/src/complex_closure.tex`, `verification/ComplexClosureAxioms.lean`
 and `verification/COMPLEX_CLOSURE.md`. The fixed consumer interface is in
@@ -109,18 +110,29 @@ identity for arbitrary finite projectives, including rank zero.
 I-0087 transfers only `Arithmetic/RestrictionCovolume/**`,
 `blueprint/src/restriction_covolume.tex`,
 `verification/RestrictionCovolumeAxioms.lean`, and
-`verification/RESTRICTION_COVOLUME.md` to the queued BOST-COVOLUME task.
+`verification/RESTRICTION_COVOLUME.md` to BOST-COVOLUME.
 ARITH keeps existing arithmetic APIs; GEOM adds the shared include after
 arithmetic. The new task and roadmap `BOST-ARITH-COVOLUME` have these refs;
 active task refs and the stale SPECHT-integrator wording were corrected.
 Standing permission rechecked: runs/tasks allowed, max four writers, no cap.
-No successor process has started at this checkpoint. BALANCED's priority and
-canonical APIs are unchanged. The latest resource sample retained 7.98 GiB
-available with low PSI and no OOM.
+The new run is active and its blueprint include has been added by GEOM.
+Independent startup review observed exactly four writer engines and the
+actual guarded LSP in COVOLUME (700370→700572→700810). Memory remained
+7.28 GiB available, PSI avg10 0.00%, no swap-out increase and no OOM;
+dashboard HTTP returned 200. BALANCED's priority and canonical APIs are unchanged.
+
+The exact source endpoint `BostConjecture.Balanced.IsBalanced.plucker_semistable`
+has now passed its scoped 3,619-job build and 195 foundational-only probes.
+An additional read-only review visually matched manuscript page 12, checked
+actual projections/partial traces, intrinsic Plucker line and action, and the
+constructed positive-degree nonvanishing invariant; no extra mathematical
+premise or vacuity was found. Final owner review records, blueprint attachments
+and shared-root integration are still pending. Do not notify full completion
+until that acceptance boundary is recorded.
 
 ## Earlier checkpoints
 
-The sections below preserve dated history; the live table and I-0074 above
+The sections below preserve dated history; the live table and I-0087 above
 govern current ownership. Do not resume completed SPECHT run `0003`.
 
 Coordinator checkpoint: 2026-11-06 07:20 Asia/Shanghai (2026-11-05 23:20 UTC).
