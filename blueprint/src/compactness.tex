@@ -961,33 +961,49 @@ ring is a domain, so $p=0$. This supplies the full-unitary density
 step needed by the special-unitary retraction argument below.
 \end{proof}
 
-\begin{lemma}[Special-unitary Zariski density]
+\begin{lemma}[Special-unitary detection of regular functions]
 \label{lem:balanced-unitary-density}
-\uses{lem:balanced-full-unitary-density}
-\source{maithani-reynolds:prop:SU-SL-dense}\notready
-The subgroup $K=\SU(U)\times\SU(W)$ is Zariski dense in
-$G=\SL(U)\times\SL(W)$ for finite-dimensional complex Hermitian
-spaces $U,W$.
+\lean{BostConjecture.InvariantTheory.polynomial_eq_zero_of_eval_unitary_pair,BostConjecture.InvariantTheory.normalizeDetMatrix_mem_unitary,BostConjecture.InvariantTheory.map_normalizeDetMatrix_eq,BostConjecture.InvariantTheory.aeval_matrixPairDeterminant,BostConjecture.InvariantTheory.aeval_matrixPairDeterminant_unitary_ne_zero,BostConjecture.InvariantTheory.localizationPolynomialEval_detects_unitary_pair,BostConjecture.InvariantTheory.specialLinearPairEval_detects_of_unitary}\leanok
+\uses{lem:balanced-full-unitary-density,lem:balanced-special-linear-detection}
+\source{maithani-reynolds:prop:SU-SL-dense}
+Let $\iota,\kappa$ be nonempty finite index sets, and let $A$ be the
+coordinate algebra of $\SL_\iota(\mathbb C)\times\SL_\kappa(\mathbb C)$,
+namely the polynomial ring in the two matrices modulo their
+determinant-minus-one equations. If $a\in A$ evaluates to zero on
+every determinant-one pair whose matrices are unitary, then $a=0$.
+Equivalently, the product of the two special-unitary matrix groups is
+Zariski dense in this special-linear product. These are the positive
+dimensions required when a tensor product has a nonzero subspace.
 \end{lemma}
 \begin{proof}
-In orthonormal coordinates, the preceding lemma shows that
-$\mathrm U(n)$ is Zariski dense in $\mathrm{GL}_n(\mathbb C)$.
-Indeed regular functions on the latter are polynomials divided by
-powers of the determinant, and a numerator vanishing on all unitary
-matrices is zero.
+Polynomial detection on unitary matrices implies detection on pairs:
+fix a unitary matrix in the second factor and specialize its variables,
+then apply detection in the first factor. Now fix arbitrary entries in
+the first factor and apply detection in the second. Thus a polynomial
+vanishing on all unitary pairs is zero.
 
-For $n>0$, the regular retraction
-$r(g)=\operatorname{diag}((\det g)^{-1},1,\ldots,1)g$
-onto $\mathrm{SL}_n$ sends unitary matrices into $\mathrm{SU}_n$.
-Its continuity and the established density imply that $\mathrm{SU}_n$
-is dense in $\mathrm{SL}_n$. Dimension zero gives the trivial group.
-For the product, a regular function vanishing on the product of the
-two compact groups vanishes first for all elements of the first
-special linear factor with the second fixed compact, and then for
-all elements of the second factor. This proves product density.
-The retraction argument follows
-\cite[Appendix A, Proposition A.6]{maithani-reynolds}; the polynomial test for product density uses separate substitution
-in each factor.
+Let $D$ be the product of the two generic determinants and
+$B=\mathbb C[\text{matrix entries}][D^{-1}]$. Evaluations at unitary
+pairs are defined since both determinants are nonzero. They detect
+$B$: write $b=p/D^N$; vanishing of $b$ on these pairs implies vanishing
+of $p$, hence $p=0$ by the preceding paragraph and $b=0$.
+
+Choose $i_0\in\iota,j_0\in\kappa$. For an invertible matrix $g$,
+normalize its chosen row by $(\det g)^{-1}$; this is
+$r(g)=\operatorname{diag}(1,\ldots,(\det g)^{-1},\ldots,1)g$.
+Its determinant is one and it fixes determinant-one matrices.
+The resulting coordinate pullback $r^*:A\to B$ is injective since
+restriction back to determinant-one matrices is its left inverse.
+If $g$ is unitary, its determinant has unit modulus, so the diagonal
+normalizing factor is unitary and $r(g)$ is special unitary.
+Normalization commutes with coefficient homomorphisms: these preserve
+matrix multiplication and determinants, and send the inverse of an
+invertible determinant to the inverse of its image. Thus evaluation
+of $r^*a$ at a unitary pair equals evaluation of $a$ at its normalized
+special-unitary pair. The hypothesis makes every such evaluation zero.
+Detection in $B$ gives $r^*a=0$, and injectivity gives $a=0$.
+This is the retraction proof of the cited proposition, written directly
+on regular functions without any point-set Zariski product-topology claim.
 \end{proof}
 
 \begin{lemma}[Averaging a finite-dimensional compact orbit]
@@ -1038,6 +1054,10 @@ The operation $R$ preserves homogeneous degrees. If $q$ has constant
 value $c$ on a $G$-orbit, so does $Rq$ on that orbit.
 \end{lemma}
 \begin{proof}
+A zero-dimensional factor may be replaced by a one-dimensional factor:
+both its special-linear and special-unitary groups are trivial. We may
+therefore use the positive-dimensional matrix density statement after
+choosing orthonormal bases.
 The action preserves the finite-dimensional space of polynomials of
 degree at most $\deg q$. In a monomial basis, its coefficient functions
 on $K$ are continuous. Compactness makes them integrable, so their

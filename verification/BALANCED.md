@@ -708,3 +708,39 @@ node remains notready until homogeneous invariant existence and the full
 requested criterion are proved, since GEOM needs the invariant itself.
 This is algebraic origin exclusion, not yet a claim that BOST-BALANCED is
 complete. Root integration of this producer is handed to GEOM separately.
+
+## Special-unitary coordinate detection checkpoint
+
+`InvariantTheory.SpecialUnitaryDensity` proves polynomial detection on
+unitary pairs, preservation of unitarity by determinant normalization,
+compatibility of normalization with coefficient maps, detection of the
+localized GL-pair coordinate algebra, and the endpoint
+`specialLinearPairEval_detects_of_unitary`. The endpoint concerns the actual
+SL-pair coordinate algebra and actual determinant-one unitary matrix pairs.
+It requires a chosen index in each finite index set: precisely the positive
+dimensions needed by a nonzero subspace of a tensor product. No intrinsic
+compact-group transport or zero-dimensional extension is claimed by it.
+
+The serialized scoped build passed **3,155 jobs warning-free** (3.9s); the
+expanded audit passed **181 foundational-only probes** (6.4s), with no
+`sorryAx`, custom axioms or kernel warnings. The module is LSP-clear; the
+audit LSP had stale imports before the final kernel check. Independent
+source/mathematical/honesty review accepted the genuine normalized points,
+nonvanishing denominator and injective retraction. The revised blueprint
+node has the exact positive-dimensional matrix statement and registered
+Maithani source. No external code was copied in this producer.
+
+GEOM integrated CompactAverage, UnitaryDensity and CLOSURE's Comparison
+at `d29f2d3`; **9,307 jobs warning-free**, 2026-11-06 01:00:22 UTC,
+root blob `3df1683a4e20af6eb4aa70c9461018efa69928cd`. The balanced
+algebraic-exclusion producer `7f56300` and this density producer require
+the following root batch. Main Lemma 7.2 remains notready: the remaining
+cone is the actual finite-degree polynomial-action continuity, compact
+averaging, extension of fixed vectors using this detection theorem, and
+homogeneous invariant existence for GEOM.
+
+Boundary graph sync found no missing dependency/Lean references; the
+936 unattached-declaration warning is the existing broad helper-attachment
+warning, intentionally retained. Health review explains the active-count
+warning as authorized proof leaves plus ancestors. Scratch dry-run found
+no stale candidates. All current producer reviews used the honesty lane.

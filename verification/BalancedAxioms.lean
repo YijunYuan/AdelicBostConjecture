@@ -17,6 +17,7 @@ import BostConjecture.InvariantTheory.PolynomialBaseChange
 import BostConjecture.InvariantTheory.HomogeneousComponents
 import BostConjecture.InvariantTheory.CompactAverage
 import BostConjecture.InvariantTheory.UnitaryDensity
+import BostConjecture.InvariantTheory.SpecialUnitaryDensity
 
 #print axioms BostConjecture.Balanced.trace_starProjection_comp
 #print axioms BostConjecture.Balanced.trace_starProjection_comp_eq_sum
@@ -209,3 +210,11 @@ import BostConjecture.InvariantTheory.UnitaryDensity
 #print axioms BostConjecture.Balanced.closure_pluckerOrbit_eq_polynomialZariskiClosure
 #print axioms BostConjecture.Balanced.IsBalanced.isGeometricallySemistable_plucker
 #print axioms BostConjecture.Balanced.IsBalanced.isGeometricallySemistable_plucker_line
+
+#print axioms BostConjecture.InvariantTheory.polynomial_eq_zero_of_eval_unitary_pair
+#print axioms BostConjecture.InvariantTheory.normalizeDetMatrix_mem_unitary
+#print axioms BostConjecture.InvariantTheory.map_normalizeDetMatrix_eq
+#print axioms BostConjecture.InvariantTheory.aeval_matrixPairDeterminant
+#print axioms BostConjecture.InvariantTheory.aeval_matrixPairDeterminant_unitary_ne_zero
+#print axioms BostConjecture.InvariantTheory.localizationPolynomialEval_detects_unitary_pair
+#print axioms BostConjecture.InvariantTheory.specialLinearPairEval_detects_of_unitary
