@@ -1,0 +1,99 @@
+\chapter{Tensor semistability}
+
+\begin{lemma}[Extensions and line twists]
+\label{lem:extensions-and-twists}\uses{lem:degree-calculus}\notready
+An extension of normalized semistable bundles, with induced and
+quotient metrics, is normalized semistable. Tensoring by a Hermitian
+line bundle preserves semistability and shifts every slope by the
+line's degree.
+\end{lemma}
+\begin{proof}
+For $0\to A\to E\to Q\to0$ and a nonzero submodule $S\subset E$,
+let $B=S\cap A$ and let $I$ be its actual image in $Q$. The
+isomorphism $S/B\to I$ is contracting, because distance to $A$ is
+no greater than distance to $B$. Degree additivity and contraction
+therefore give
+$\degn(S)\leq\degn(B)+\degn(I)\leq0$.
+Also $\degn(E)=\degn(A)+\degn(Q)=0$, proving the first assertion.
+
+An invertible module $L$ gives inverse correspondences
+$B\mapsto L\otimes B$ and $C\mapsto L^\vee\otimes C$ between
+submodules of $E$ and of $L\otimes E$. Local trivializations show
+that ranks and saturation are preserved. At each archimedean place,
+the line tensor factor multiplies every vector norm by the norm of a
+line generator; hence these correspondences preserve the induced
+metric up to that same line twist. The degree formula shifts every
+submodule slope, as well as the ambient slope, by $\degn(L)$, so
+their comparisons are unchanged.
+\end{proof}
+
+\begin{proposition}[Tensor semistability]
+\label{thm:tensor-semistability}
+\uses{lem:degree-calculus,lem:extensions-and-twists,lem:arithmetic-compactness,lem:degree-maximum-continuity,lem:balanced-plucker,lem:binary-plucker-nonzero-sequence,thm:geometric-slope}
+\source{bost-specht-manuscript:page-0012,bost-specht-manuscript:page-0013}
+\notready
+For every number field $K$ and all positive-rank semistable Hermitian
+$\Ocal_K$-bundles $E,F$, their Hilbert tensor product is semistable.
+\end{proposition}
+\begin{proof}
+Uniformly scale the norms on each factor to make its slope zero.
+This does not change semistability, and changes every slope of the
+tensor product by the sum of the two shifts. Suppose a normalized
+counterexample exists and choose one with $m+n$ minimal, where
+$m=\rk E$ and $n=\rk F$. The line-twist lemma implies $m,n\geq2$.
+
+The function $\mathcal D(E\otimes F)$ is bounded above and attains
+its supremum on normalized semistable pairs of these ranks. Indeed,
+otherwise a sequence of values tending to infinity, or to an unattained
+finite supremum, would by arithmetic compactness have a subsequence
+with fixed modules and convergent metrics; tensor metrics converge
+and continuity of $\mathcal D$ gives the corresponding finite limiting
+value, a contradiction in the first case and attainment in the second.
+Choose a maximizing pair and a saturated submodule $S\subset E\otimes F$
+of maximal degree. Since a counterexample exists, $\degn(S)>0$.
+
+If $E$ had a nonzero proper saturated submodule $A$ of degree zero,
+then $A$ is normalized semistable by restriction of the inequalities
+for $E$. Its quotient $E/A$ is normalized semistable too: the inverse
+image of a submodule of positive degree would, by degree additivity,
+have positive degree in $E$. By minimality of $m+n$, both
+$A\otimes F$ and $(E/A)\otimes F$ are normalized semistable. Tensoring
+the exact sequence by the projective module $F$ preserves exactness.
+Its induced and quotient metrics agree with the Hilbert tensor
+metrics, by an orthogonal decomposition of $E$ along $A$.
+The extension lemma makes $E\otimes F$ semistable, a contradiction.
+Thus $E$ is strictly stable. The same reasoning proves strict stability
+of $F$.
+
+Fix an archimedean place $v$. By openness of strict stability, small
+determinant-preserving variations of the metrics at $v$ remain
+normalized semistable; at complex places vary its conjugate as well.
+The degree of the fixed module $S$ has a local maximum at the chosen
+pair, since it is bounded above by $\mathcal D$ for each nearby pair,
+and that function is bounded above by its chosen global maximum.
+Let $P$ be the orthogonal projection onto $S_v$ and $s=\rk S$.
+For a traceless Hermitian endomorphism $H$ of $E_v$, change its norm
+to $x\mapsto\|e^{tH}x\|$. Differentiating the determinant norm of
+$S_v$, using an orthonormal basis of $S_v$, gives
+\[
+ \left.\frac{d}{dt}\degn(S)\right|_{t=0}
+ =-\frac{w_v}{D}\Tr(P(H\otimes\Id))=0.
+\]
+Consequently $\Tr_F P$ is orthogonal under the trace pairing to all
+traceless Hermitian matrices. Taking
+$H=\Tr_F P-(\Tr P/m)\Id$ shows that the trace of its square is
+zero; since it is Hermitian, it is zero. As $\Tr P=s$, this gives
+$\Tr_F P=(s/m)\Id$. Varying $F$ similarly gives
+$\Tr_E P=(s/n)\Id$. At a real place the same argument uses real
+symmetric matrices, and its resulting matrix identities persist after
+complexification.
+
+The balanced-projection lemma supplies a positive-degree homogeneous
+Pl\"ucker invariant nonzero on the exterior vector of $S$ at this complex
+embedding. Binary invariant detection gives nonzero canonical contractions
+over $\Ocal_K$ in every positive multiple of a common degree. The contraction
+and Specht-asymptotic argument of the geometric slope inequality therefore
+gives $\slope(S)\leq\slope(E)+\slope(F)=0$, contradicting
+$\degn(S)>0$. No counterexample exists.
+\end{proof}
+
