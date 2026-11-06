@@ -1,6 +1,6 @@
 # Parallel Horizon scheduling
 
-## Live checkpoint at 2026-11-06 02:18 UTC
+## Live checkpoint at 2026-11-06 02:36 UTC
 
 The user explicitly requests **four continuing Horizon proof lanes until the
 entire main theorem is complete**, with no budget cap. The parent only schedules,
@@ -24,7 +24,7 @@ No additional build is needed for this milestone.
 
 | Run | Task | Current responsibility |
 | --- | --- | --- |
-| `0005` | `BOST-GEOM` | Binary Plucker/contraction consumers and shared integration |
+| `0005` | `BOST-GEOM` | Session `0018`: terminal binary consumer and shared integration |
 | `0010` | `BOST-COMPACTNESS` | Metric continuity, arithmetic compactness and maximizing pairs |
 | `0008` | `BOST-COVOLUME` | Actual restriction-of-scalars trace-metric covolume |
 | `0009` | `BOST-SPECHT-SLOPE` | Actual determinant-Specht bundles and geometric slope inequality |
@@ -75,6 +75,17 @@ BinaryPlucker module (2.09 GiB PSS). This identifies duplication, not a leak.
 In I-0097 the parent requests a normal session handoff at the nearest coherent
 checkpoint, preserving current attempts/diagnostics and continuing the unfinished
 task next round. Keep four task lanes; no emergency termination is warranted.
+
+GEOM accepted the normal-boundary request and ended session `0016` cleanly
+at 02:34:44 UTC, checkpoint `0475c91`; session `0018` is active, round 8/10.
+Its accepted binary transport prefix (`e771072`) and root 9,334 jobs/290
+foundational-only probes do **not** include the terminal binary sequence theorem.
+That attempted theorem and its exact `whnf200000` failure are preserved in
+session0016 `attempts/0001-terminal-binary-consumer-reaches-closed-tactic-g`;
+the final declaration was removed from accepted source and remains notready.
+The task and shared integration remain with GEOM. At 02:35 UTC, available memory
+recovered to 13.13 GiB with PSI avg10 zero and OOM zero; all four runs continue.
+I-0097 records the accepted handoff and closes the temporary memory request.
 
 A second bounded read-only route review reserves GEOM's eventual free slot for
 `BOST-MAIN`, not yet created or launched. Its missing producer is the actual
