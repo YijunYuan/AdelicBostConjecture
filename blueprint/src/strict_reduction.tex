@@ -25,9 +25,33 @@ a smaller sum contradicts this choice. The same equivalence proves
 semistability of every smaller normalized pair.
 \end{proof}
 
+\begin{lemma}[Semistability of a tensor extension]
+\label{lem:normalized-tensor-extension}
+\uses{lem:normalized-semistable-extension,lem:degree-calculus}
+\source{bost-specht-manuscript:page-0012,bost-specht-manuscript:page-0013}
+\lean{BostConjecture.Arithmetic.HermitianMetric.isSemistable_tensor_of_submodule_quotient}
+\notready
+Let $A\subset E$ be a saturated submodule of a Hermitian projective
+$\Ocal_K$-module, and let $F$ be another Hermitian projective module.
+If $A\otimes F$ and $(E/A)\otimes F$, with their Hilbert tensor metrics,
+are degree-zero semistable bundles, then so is $E\otimes F$.
+\end{lemma}
+\begin{proof}
+Projectivity of $F$ makes tensoring exact. Thus the actual image
+$T$ of $A\otimes F$ is isomorphic to $A\otimes F$, and the quotient
+$(E\otimes F)/T$ is isomorphic to $(E/A)\otimes F$.
+Both are projective, so $T$ is saturated. In each complex fiber,
+write $E_\sigma=A_\sigma\mathbin{\perp}A_\sigma^\perp$. Tensoring
+this orthogonal decomposition with $F_\sigma$ shows that the first
+isomorphism preserves the induced metric and the second preserves
+the quotient metric. The integral isomorphisms identify submodules,
+their ranks and their degrees; hence they preserve semistability.
+The normalized extension lemma now applies to $T\subset E\otimes F$.
+\end{proof}
+
 \begin{lemma}[Minimal-rank strictly stable maximizing factors]
 \label{lem:strict-maximizing-counterexample}
-\uses{lem:line-twist,lem:minimal-counterexample-rank-sum,lem:normalized-semistable-extension,lem:semistable-normalization,lem:degree-calculus,lem:maximizing-semistable-pair}
+\uses{lem:line-twist,lem:minimal-counterexample-rank-sum,lem:normalized-tensor-extension,lem:normalized-semistable-extension,lem:semistable-normalization,lem:degree-calculus,lem:maximizing-semistable-pair}
 \source{bost-specht-manuscript:page-0012,bost-specht-manuscript:page-0013}
 \notready
 Suppose that over a number field $K$ there is a positive-rank pair
