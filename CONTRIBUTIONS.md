@@ -955,3 +955,15 @@ Apache-2.0, with the already recorded compatibility modifications and retained
 license above. This integration copies or modifies no vendor code. Actual
 fixed-rank normalized arithmetic sequential compactness is proved; the global
 maximizing-pair consequence remains a separate unfinished producer.
+
+The final COMPACTNESS handoff `e81b08b` adds `TensorContinuity`,
+`MaximumTransport` and `MaximizingPair`; all 89 project modules in its import
+cone match the accepted tree. It constructs actual arbitrary nonfree module
+and metric witnesses and a saturated global maximizing submodule. The owner
+proved 40 audited declarations using only foundational axioms. TENSOR-SEMI
+`d173554`/`e68943d` adds `GramDegree` and `ExponentialVariation`: actual degree
+stationarity at a local maximum and determinant-preserving exponential metric
+curves. Their 13/25-module cones match the accepted tree and 21 probes are
+foundational-only. Independent read-only integration review inspected the actual
+logs and these exact cones. These handoffs modify no vendor source and retain
+the pinned provenance above; balance and tensor semistability remain open.

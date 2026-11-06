@@ -158,7 +158,8 @@ attainment/continuity, strict-stability openness and the actual trace systole
 are checked in `Arithmetic.Compactness`. The owner handoff `daad480` also
 checks fixed arithmetic actions, Hermitian reconstruction and actual
 fixed-rank normalized arithmetic sequential compactness, including nonfree
-modules. The maximizing-pair consequence remains that lane's obligation.
+modules. The checked `e81b08b` handoff proves the maximizing-pair consequence
+with actual nonfree module/metric witnesses and a saturated global maximizer.
 
 `Arithmetic.Specht.DeterminantBundle` constructs the actual irreducible
 isometric determinant-Specht representation and its tensor/dual semistability;
