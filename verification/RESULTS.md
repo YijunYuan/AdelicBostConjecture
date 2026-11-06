@@ -1,3 +1,21 @@
+## Actual HN tensor flag and unconditional maximal-slope lower bound
+
+MAIN checkpoint `e3516a5` passes the configured root build: **9368 jobs,
+warning-free at 2026-11-06 03:39:46 UTC**, root blob
+`0636620c96f45373d116c7370d2bffbd67c4a4e5`. All **30 MAIN transitive probes**
+passed at03:38:50 UTC with exactly `propext`, `Classical.choice`, `Quot.sound`.
+Independent honesty/source/mathematical/evidence review accepted the actual
+lower bound, general filtered slope bound, tensor image/quotient isometries
+and saturated lexicographic HN tensor flag. Five corresponding blueprint nodes
+are checked; exact evidence and consumer paths are in `MAIN.md`.
+
+The root also integrates unchanged checked handoffs from COMPACTNESS870179a,
+SPECHT-SLOPEe84df35 and TENSOR-SEMI57f5cfc/bbafa44. It does not include their
+unfinished successors merely because drafts exist. The next MAIN producer is
+the isometry for every consecutive refinement grade. Unconditional tensor
+semistability, the maximal-slope equality and finite-family corollary remain
+open; this build is not a proof of Theorem1.1.
+
 ## Binary nonvanishing construction complete; shared arithmetic handoffs integrated
 
 `Geometry.exists_canonicalPairing_nonzero_sequence_of_binary_invariant` is

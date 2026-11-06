@@ -925,9 +925,10 @@ open. No external source was copied or changed. Additional Mathlib APIs are
 `LinearAlgebra/TensorProduct/RightExactness.lean`, and
 `LinearMap.quotKerEquivOfSurjective` in `LinearAlgebra/Isomorphisms.lean`,
 from `leanprover-community/mathlib4` revision
-`56a005855ea17e0b0958f73ec801ae140b0a1679`, Apache-2.0. They are consumed
-by `tensor_map_pullback`, `tensorRightQuotientEquiv` and
-`tensorStep_eq_map_ker`, respectively.
+`56a005855ea17e0b0958f73ec801ae140b0a1679`, Apache-2.0.
+`tensor_map_pullback` consumes `map_injective_of_flat_flat`;
+`tensorRightQuotientEquiv` consumes `rTensor_mkQ` and
+`quotKerEquivOfSurjective`; `tensorStep_eq_map_ker` consumes `map_ker`.
 
 Shared integration includes only unchanged files of checked owner handoffs:
 COMPACTNESS `870179a` (`TraceMultiplication`, `IntegralMatrices`,
