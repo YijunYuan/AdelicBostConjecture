@@ -1,3 +1,23 @@
+## Finite-family arithmetic and balanced origin exclusion integrated
+
+The configured explicit-root build passed **9,318 jobs warning-free at
+2026-11-06 01:16:53 UTC**, root blob `0042d749fe363f603e838610e6805ca895c3771f`.
+It includes the previously accepted geometry endpoint and the relocated
+canonical scalar-transport producer (metric consumer check: 9,108 jobs,
+01:12:30 UTC), plus these independently reviewed owner handoffs:
+
+- ARITH `IndependentPiSemistable` and `RestrictionOfScalars`
+  (`a1aa8cb`/`387d06a`, 338 foundational-only owner probes).
+- BALANCED `PluckerSemistability` (`7f56300`) and `SpecialUnitaryDensity`
+  (`6da0e3e`, 181 foundational-only owner probes).
+
+The first proves finite independent tensor/dual semistability using actual
+intrinsic metrics; the second pair proves balanced origin exclusion and
+coordinate detection on positive-dimensional special-unitary pairs.
+Invariant-polynomial existence, degree finiteness and Theorem 1.1 remain
+open. The new geometry scalar-extension nonvanishing file is under repair
+and is excluded from this root evidence.
+
 ## Canonical nonvanishing and exact complex-closure integration
 
 Claim class: **proved prerequisites**. The configured explicit-root build

@@ -793,3 +793,20 @@ No source copied or dependencies changed. The intended actual consumer is
 BALANCED's checked special-linear polynomial Plücker orbit image (`84a679f`).
 Exact authorship, source review and 40-probe evidence are preserved in
 `verification/COMPLEX_CLOSURE.md`.
+
+
+Shared integration also consumes ARITH's `IndependentPiSemistable` and
+`RestrictionOfScalars` (`a1aa8cb`, `387d06a`; earlier restriction checkpoint
+`11fd898`). The finite-family isometric irreducible-action consumer reuses
+canonical Mathlib density and the attributed projective tensor duality;
+restriction to integers uses `LinearAlgebra/Dimension/Localization.lean`,
+`LinearAlgebra/FreeModule/PID.lean` and `Algebra/Module/Rat.lean` at the pinned
+Mathlib revision/license. No code copied. Exact provenance and the 338-probe
+owner audit are in ARITHMETIC.md. Degree finiteness remains separate.
+BALANCED's `PluckerSemistability` (`7f56300`) consumes the proved polynomial
+orbit closure comparison and balanced norm bound, while
+`SpecialUnitaryDensity` (`6da0e3e`) consumes unitary polynomial density and
+the actual determinant-normalization coordinate retraction. These are
+original compositions, with no further copied external code. The delivered
+181-probe audit and positive-dimensional scope are recorded in BALANCED.md;
+actual invariant-polynomial existence is still open.
