@@ -83,8 +83,11 @@ proof `53f1119`, root `d29f2d3`, evidence `f7ffd4f`, 40 probes. Do not resume.
 
 Before successor startup: 15.41 GiB available, PSI avg10 zero, swap 2.42 GiB,
 unchanged swap-out counter 9,146,901 and zero OOM kills. A bounded read-only
-startup review checks the four engines, old-process cleanup, guarded LSP and
-dashboard. All new runs retain gpt-6-astra/xhigh/subscription. Broad checks use
+startup review at 03:13:57 UTC accepted exactly four engines, old GEOM/COVOLUME
+descendants gone, no orphan Lean process, and actual guarded successor MCPs
+765594/766135. Memory after startup: 14.71 GiB available, PSI zero, swap 2.41 GiB,
+unchanged swap-out and no OOM. Dashboard returned HTTP 200 in 0.11 seconds.
+All new runs retain gpt-6-astra/xhigh/subscription. Broad checks use
 the explicit workspace root and one serialized Horizon check slot.
 Dashboard remains at port 8765. No fifth proof writer is authorized.
 
