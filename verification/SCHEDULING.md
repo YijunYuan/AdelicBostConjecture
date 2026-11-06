@@ -1,6 +1,6 @@
 # Parallel Horizon scheduling
 
-## Live checkpoint at 2026-11-06 01:57 UTC
+## Live checkpoint at 2026-11-06 01:54 UTC
 
 The user explicitly requests **four continuing Horizon proof lanes until the
 entire main theorem is complete**, with no budget cap. The parent only schedules,
@@ -25,7 +25,7 @@ No additional build is needed for this milestone.
 | Run | Task | Current responsibility |
 | --- | --- | --- |
 | `0005` | `BOST-GEOM` | Binary Plucker/contraction consumers and shared integration |
-| `0006` | `BOST-BALANCED` | Verified Lemma 7.2; finishing task closure |
+| free | BALANCED successor | Lemma 7.2 task exited normally at 01:53:33 UTC |
 | `0008` | `BOST-COVOLUME` | Actual restriction-of-scalars trace-metric covolume |
 | free | Successor selection | Required actual Specht bundle or compactness producer |
 
