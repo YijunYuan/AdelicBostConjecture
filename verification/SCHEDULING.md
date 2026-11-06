@@ -109,8 +109,10 @@ proof `53f1119`, root `d29f2d3`, evidence `f7ffd4f`, 40 probes. Do not resume.
 At 04:21 UTC, available memory was 12.51 GiB, PSI avg10/avg60 zero, swap
 occupancy 2.67 GiB, swap-out counter 9,579,953 and zero OOM kills. The two
 new successors started after the previous owners' normal exit and accepted
-handoffs. A bounded read-only startup audit checks their actual guarded LSP
-clients, process ancestry and memory. All runs retain gpt-6-astra/xhigh/
+handoffs. The 04:24 read-only startup audit accepted exactly four engines, no old-lane
+descendants or orphan checks, and guarded successor MCPs 816465/816666.
+Available memory recovered to 12.07 GiB with PSI zero, unchanged swap-out and
+no OOM. Dashboard returned HTTP 200 in 0.06 s. All runs retain gpt-6-astra/xhigh/
 subscription; broad checks share the explicit-root Horizon check slot.
 Dashboard remains at port 8765. No fifth proof writer is authorized.
 
