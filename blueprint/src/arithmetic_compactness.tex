@@ -1,7 +1,9 @@
 \chapter{Arithmetic compactness and metric variation}
 
 \begin{lemma}[Bounded lattice bases]
-\label{lem:bounded-lattice-bases}\notready
+\label{lem:bounded-lattice-bases}
+\lean{OAI.NumberTheory.ArithmeticGroups.Lattices.UniformShortSpan.Construction.exists_uniform_lattice_basis_bound}\leanok
+\source{bost-specht-manuscript:page-0011}
 Fix $n\geq1$, $0<c\leq C$ and $\varepsilon>0$. Full lattices
 $\Lambda\subset\mathbb R^n$ with covolume in $[c,C]$ and
 $\|x\|\geq\varepsilon$ for $0\ne x\in\Lambda$ admit bases whose
@@ -39,7 +41,9 @@ the induction.
 \end{proof}
 
 \begin{lemma}[Compact lattice frames]
-\label{lem:mahler-frames}\uses{lem:bounded-lattice-bases}\notready
+\label{lem:mahler-frames}\uses{lem:bounded-lattice-bases}
+\lean{OAI.NumberTheory.ArithmeticGroups.Lattices.FrameMatrices.Construction.exists_compact_lattice_frames,OAI.NumberTheory.ArithmeticGroups.Lattices.FrameMatrices.Construction.exists_compact_lattice_matrices}\leanok
+\source{bost-specht-manuscript:page-0011}
 Under the hypotheses of the preceding lemma, there is a compact set
 of nonsingular real $n\times n$ matrices containing a basis matrix of
 every such lattice.
@@ -133,7 +137,8 @@ to its integer matrices in compact lattice frames.
 \begin{lemma}[Uniform compact frames for actual trace lattices]
 \label{lem:compact-trace-frames}
 \uses{lem:restriction-covolume,lem:trace-semistable-systole,lem:mahler-frames}
-\source{bost-specht-manuscript:page-0011}\notready
+\lean{BostConjecture.Arithmetic.Compactness.exists_compact_trace_frames}\leanok
+\source{bost-specht-manuscript:page-0011}
 Fix a number field $K$, rank $a$, and a Euclidean space $E$ of dimension
 $Da$, with a fixed orthonormal basis. There is a compact subset
 $S\subset\operatorname{GL}_{Da}(\mathbb R)$ such that every normalized
@@ -158,7 +163,8 @@ original, possibly nonfree, integral module.
 \begin{lemma}[Fixed integral action and actual module identifications]
 \label{lem:fixed-integral-action}
 \uses{lem:compact-frame-integral-actions}
-\source{bost-specht-manuscript:page-0011}\notready
+\lean{BostConjecture.Arithmetic.Compactness.action_matrix_eq_of_basis,BostConjecture.Arithmetic.Compactness.linearEquivOfActionMatrices,BostConjecture.Arithmetic.Compactness.exists_module_identifications_of_finite_actions,BostConjecture.Arithmetic.Compactness.exists_module_identifications_of_compact_frames}\leanok
+\source{bost-specht-manuscript:page-0011}
 Fix an integral basis $\alpha_1,\ldots,\alpha_D$ of $\Ocal$.
 Suppose a sequence of integral bases of rank-$n$ underlying abelian
 groups has only finitely many possibilities for each multiplication
@@ -175,6 +181,37 @@ multiplication by each $\alpha_j$, because their matrices are equal.
 Write any $\alpha\in\Ocal$ as an integral linear combination of the
 $\alpha_j$ and distribute scalar multiplication. The same isomorphism
 then intertwines multiplication by $\alpha$, proving $\Ocal$-linearity.
+\end{proof}
+
+\begin{lemma}[Hermitian reconstruction from convergent trace frames]
+\label{lem:hermitian-frame-limit}
+\uses{lem:trace-real-form}
+\source{bost-specht-manuscript:page-0011}\notready
+Fix an integral basis $e_1,\ldots,e_n$ of a finite projective module $A$.
+Let $h_m$ be actual Hermitian metrics whose trace Gram matrices in this
+basis are $B_m^{\mathsf T}B_m$, where $B_m\to B$ in
+$\operatorname{GL}_n(\mathbb R)$. Then the $h_m$ converge to an actual
+conjugation-compatible positive-definite Hermitian metric on $A$.
+\end{lemma}
+\begin{proof}
+Complexification of the actual trace space is canonically
+$\prod_\sigma A_\sigma$. The vectors $e_i$, viewed simultaneously in all
+fibers, therefore form a complex basis of this product. The direct sum
+of the fiber forms of $h_m$ has Gram matrix $B_m^{\mathsf T}B_m$ in
+that basis: on real trace vectors, the sum of the complex pairings is
+real and equals the trace pairing.
+
+For product vectors with coordinates $u,v\in\mathbb C^n$, define
+$H(u,v)=\langle Bu,Bv\rangle_{\mathbb C^n}$. Invertibility of $B$
+makes $H$ positive definite. Its restriction to each individual fiber
+is therefore a positive-definite Hermitian form. The finite Gram expansion
+shows that every fiber pairing of $h_m$ converges to this restriction.
+On integral generators the conjugation equations hold for every $m$;
+continuity of conjugation preserves these equalities in the limit.
+Thus the restricted forms constitute an actual Hermitian metric, and
+the pairing convergence is exactly convergence in the metric topology.
+This complexification argument makes the reconstruction explicit without
+choosing archimedean idempotents.
 \end{proof}
 
 \begin{lemma}[Closedness of normalization and semistability]
@@ -200,7 +237,7 @@ asserted locus. Closed sets contain limits of their convergent sequences.
 
 \begin{lemma}[Arithmetic compactness]
 \label{lem:arithmetic-compactness}
-\uses{def:hermitian-degree,lem:restriction-covolume,lem:mahler-frames,lem:trace-semistable-systole,lem:trace-multiplication-bound,lem:compact-frame-integral-actions,lem:degree-maximum-continuity,lem:normalized-semistable-closed}
+\uses{def:hermitian-degree,lem:compact-trace-frames,lem:fixed-integral-action,lem:hermitian-frame-limit,lem:degree-maximum-continuity,lem:normalized-semistable-closed}
 \source{bost-specht-manuscript:page-0011}\notready
 For fixed $K$ and $a\geq1$, every sequence of normalized semistable
 rank-$a$ Hermitian $\Ocal$-bundles has a subsequence which, after

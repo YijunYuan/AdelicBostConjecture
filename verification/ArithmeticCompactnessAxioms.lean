@@ -3,6 +3,8 @@ import BostConjecture.Arithmetic.Compactness.StabilityTopology
 import BostConjecture.Arithmetic.Compactness.TraceSystole
 import BostConjecture.Arithmetic.Compactness.TraceActionFiniteness
 import BostConjecture.Arithmetic.Compactness.SemistabilityTopology
+import BostConjecture.Arithmetic.Compactness.FixedAction
+import BostConjecture.Arithmetic.Compactness.TraceFrames
 
 /-! Transitive axiom audit of the actual arithmetic compactness producers. -/
 
@@ -32,3 +34,6 @@ import BostConjecture.Arithmetic.Compactness.SemistabilityTopology
 #print axioms BostConjecture.Arithmetic.Compactness.integral_action_mem
 #print axioms BostConjecture.Arithmetic.HermitianMetric.isClosed_normalized_semistable
 #print axioms BostConjecture.Arithmetic.HermitianMetric.normalized_semistable_of_tendsto
+#print axioms BostConjecture.Arithmetic.Compactness.linearEquivOfActionMatrices
+#print axioms BostConjecture.Arithmetic.Compactness.exists_module_identifications_of_compact_frames
+#print axioms BostConjecture.Arithmetic.Compactness.exists_compact_trace_frames

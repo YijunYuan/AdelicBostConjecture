@@ -74,3 +74,12 @@ COVOLUME's checked `traceCovolume_eq_discr_degree` (5144157, canonical basis
 relocation 739e58a) is now available. Remaining work is uniform compact trace
 frames, simultaneous fixed integral actions, actual module identifications,
 positive-definite Hermitian reconstruction, and the maximizing-pair consequence.
+
+`FixedAction` subsequently passed 3532 jobs; it constructs actual ring-linear
+basis-preserving module isomorphisms along a strictly increasing subsequence.
+`TraceFrames` passed 9132 jobs, consuming the exact covolume formula, actual
+systole, measure-preserving isometries, and the accepted pinned Mahler vendor.
+The expanded 29-probe check passed with foundational axioms only. Independent
+honesty/source review accepted these two producers. Their final consumer must
+choose the Euclidean dimension using `traceSpace_finrank`; reconstruction and
+the final compactness statement remain open.
