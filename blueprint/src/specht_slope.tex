@@ -362,9 +362,10 @@ injectivity descends to the original map over $\Ocal_K$.
 
 \begin{lemma}[Intrinsic contraction metric]
 \label{lem:canonical-pairing-intrinsic-contraction}
+\lean{BostConjecture.Slope.Geometric.dualDeterminantTwist_inner,BostConjecture.Slope.Geometric.dualDeterminantFiberCore_eq,BostConjecture.Slope.Geometric.canonicalPairing_intrinsic_norm_le}
+\leanok
 \uses{lem:canonical-contraction,lem:determinant-specht-fiber-metric}
 \source{bost-specht-manuscript:page-0010}
-\notready
 Give $V$ the metric induced by its injection into the Hilbert tensor
 product of the Hermitian $E_j$. Give $B_d$ the canonical
 determinant--Specht metric, and give $D_d^\vee$ the Hermitian dual
@@ -388,6 +389,27 @@ contraction estimate. Its operator dual is therefore exactly the
 intrinsic metric on $D_d^\vee$. The source metric agrees by
 Lemma~\ref{lem:determinant-specht-fiber-metric}. Applying the canonical
 contraction estimate with these identifications proves the claim.
+\end{proof}
+
+\begin{lemma}[Slope comparison through the actual image]
+\label{lem:canonical-pairing-image-slope}
+\uses{lem:canonical-pairing-injective,lem:canonical-pairing-intrinsic-contraction,lem:determinant-specht-family-semistable,lem:degree-calculus}
+\source{bost-specht-manuscript:page-0010}
+\notready
+For a nonzero canonical pairing $\Psi_d:B_d\to D_d^\vee$, let
+$J_d=\operatorname{im}\Psi_d$ have its induced metric. Then
+$\slope(B_d)\leq\slope(J_d)\leq\slope(D_d^\vee)$.
+\end{lemma}
+\begin{proof}
+The proved injectivity identifies the finite projective module $B_d$
+with its actual image $J_d$, so their positive generic ranks agree.
+The induced metric on the image makes this map contracting at every
+embedding by the intrinsic contraction lemma. The determinant degree
+inequality for an injective contraction of equal rank gives
+$\degn(B_d)\leq\degn(J_d)$. Divide by their common positive rank.
+The actual dual tensor target is semistable by its independent
+permutation actions. Its defining inequality applies to the submodule
+$J_d$, without any saturation requirement, and gives the second bound.
 \end{proof}
 
 \begin{theorem}[Geometric slope inequality]

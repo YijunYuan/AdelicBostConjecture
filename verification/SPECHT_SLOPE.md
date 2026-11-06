@@ -77,9 +77,16 @@ complex irreducibility theorem. Kernel build passed (9181 jobs, 127.7 seconds);
 all twenty-nine transitive probes passed (38.8 seconds), foundational-only.
 Independent honesty/source review accepted the diagonal action and descent.
 
-The geometric slope inequality remains open; the next consumer is intrinsic
-contraction-metric identification, image-slope comparison and the verified
-asymptotic limit.
+`Slope/Geometric/PairingMetric.lean` identifies the actual dual determinant
+and finite-family metrics with GEOM's prescribed forms and proves contraction
+of the actual canonical pairing at every embedding. Final module build passed
+(9182 jobs, 226.3 seconds); all thirty-two transitive probes passed (28.4 seconds),
+foundational-only. Independent review accepted the nonfree base-change bridges
+and normalization. The combined import check initially found generated local
+instance-name collisions; explicit names fixed them before the successful probe.
+
+The geometric slope inequality remains open; the next consumer is actual
+image-slope comparison and the verified asymptotic limit.
 Existing ARITH, SPECHT, and GEOM producers are unchanged.
 
 Tooling: the first check invocation used unsupported `-p` and did not run Lean;
