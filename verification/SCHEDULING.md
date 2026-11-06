@@ -1,6 +1,6 @@
 # Parallel Horizon scheduling
 
-## Live checkpoint at 2026-11-06 05:50 UTC
+## Live checkpoint at 2026-11-06 05:58 UTC
 
 The user requests **four continuing Horizon proof lanes until the entire main
 theorem and its used dependencies are complete**, with no budget cap. The parent
@@ -132,6 +132,25 @@ covolume asymptotic `e2e7039`/`8d57641`; CLOSURE `0007` exited 01:16:41,
 proof `53f1119`, root `d29f2d3`, evidence `f7ffd4f`, 40 probes. Do not resume.
 
 ## Resource and runtime checkpoint
+
+The long-interval checkpoint at 05:58 accepts final TENSOR source **b3236e1**
+(blob `267560cd0ecbf2be4dbc3e6c3dc79dc4f5a7ba5d`) and bridge **aae85ac**
+(blob `32492247a02d95bfd60d269cb9428482493f5c76`). The independent reviewer
+matched committed and working source and inspected all **76** actual transitive
+outputs: only `propext`, `Classical.choice` and `Quot.sound`. No hidden balance,
+strictness, maximizing certificate, normalization or freeness premise remains;
+the 318-module project import cone has no cycle or `Main.MaxSlope` dependency.
+TENSOR is now waiting solely for MAIN's direct-consumer/root acceptance.
+
+MAIN resumed normally after automatic compaction completed at 05:55:31; a
+read-only runtime review found no stall and required no intervention. Its first
+actual `Main.MaxSlope.Tensor` check failed at 05:57:44 (`7f58ac0b4232d6eb`,
+68.999 seconds): the HN-grade semistability transport exceeded the default
+heartbeat limit. MAIN owns this localized elaboration repair. The tensor
+producer stays fixed; binary/family identities and final root remain open.
+This is the concrete frontier, not a new mathematical theorem claim. Parent
+continues scheduling only, with no additional proof writer or shared edit.
+The 05:56 scratch dry run had no stale candidates; dashboard returned HTTP 200.
 
 At 05:48, the exact shared instance-body repair **f8975ea** passed its fresh
 core and dependency rebuild. The former geometric application timeout is
