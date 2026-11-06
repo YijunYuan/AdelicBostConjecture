@@ -967,3 +967,13 @@ curves. Their 13/25-module cones match the accepted tree and 21 probes are
 foundational-only. Independent read-only integration review inspected the actual
 logs and these exact cones. These handoffs modify no vendor source and retain
 the pinned provenance above; balance and tensor semistability remain open.
+
+Under parent authorization I-0121, MAIN moved the unchanged
+`Main/MaxSlope/TensorFiltration.lean` declarations and proofs to
+`Arithmetic/TensorSubmodule.lean`, with direct arithmetic imports and a
+compatibility re-export. The declaration body is byte-identical to `f92bf10`;
+no new external code or mathematical statement is introduced. TensorFlag
+imports LowerBound explicitly, so the shared arithmetic leaf has no Main
+dependency. This permits the reserved strict-reduction consumer to reuse the
+actual tensor submodule/quotient APIs without circular dependence on MAIN.
+The leaf and existing MAIN consumers passed3585 jobs at04:13:00UTC.
