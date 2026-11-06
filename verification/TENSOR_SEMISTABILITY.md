@@ -25,8 +25,9 @@ Normalization uses the checked tensor-rescaling identity. The project import
 cone has no `Main.MaxSlope` dependency. Source nodes `lem:extensions-and-twists`,
 `lem:balanced-arithmetic-slope` and `thm:tensor-semistability` have faithful
 Lean attachments and completion markers. Independent source/math/honesty review
-accepted the mathematical route and bounded instance repair; final evidence
-review and MAIN shared-root/consumer integration are being completed.
+accepted the exact final source, fresh9386/9395 build records, all76 axiom outputs,
+the318-module acyclic import cone and bounded instance repair. MAIN shared-root
+and direct HN-consumer integration remains the sole task-closure requirement.
 
 The records below describe earlier checkpoints and their then-open frontiers.
 
