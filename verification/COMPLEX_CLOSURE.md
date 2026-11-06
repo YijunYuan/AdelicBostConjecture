@@ -33,7 +33,9 @@ Independent read-only `honesty-reviewer` accepted the canonical objects,
 evaluation proof, empty/zero-dimensional cases, source-facing statement and
 honest partial status. The coordinate blueprint node alone carries `leanok`;
 the two inherited constructibility/closure nodes remain `notready`.
-Shared root integration is delegated to GEOM and is not yet claimed.
+GEOM integrated Coordinates, Roots, IntegralLifting and FiniteFiber at
+`70d1911`; its root check passed **9,296 jobs** at 00:32:42 UTC.
+Later producer modules await the next shared integration batch.
 
 ## Reuse provenance for shared integration
 
@@ -140,6 +142,30 @@ Additional unmodified Mathlib imports at the pinned revision:
 `RingTheory/Polynomial/RationalRoot.lean` (UFDs are integrally closed),
 `Topology/Sequences.lean` (`IsCompact.tendsto_subseq`, `IsSeqClosed.isClosed`),
 and `Topology/Compactness/Compact.lean` (`isCompact_univ_pi`). No source copied.
+
+## Checked principal-open density
+
+`ComplexClosure.Density` constructs actual polynomial normalization
+coordinates from Mathlib's Noether normalization theorem. It proves the
+identity principle on nonempty complex open sets using `MvPolynomial.funext_set`,
+then uses `Ideal.under_ne_bot` to find a nonzero base polynomial vanishing
+on the image of the zero set of a nonzero regular function. Normalization
+openness yields `dense_principalOpen_zeroLocus`, including zero-dimensional
+and empty-coordinate cases.
+
+The scoped build passed **3,337 jobs**, warning-free, at 00:37:06 UTC on
+2026-11-06 (fingerprint `5d6cbb559571378e`); the **28-probe** audit passed
+at 00:38:11 UTC, foundational-only. Independent honesty/mathematical review
+inspected the code, blueprint and actual logs, and accepted this producer.
+The exact principal-density node carries `leanok`; constructible decomposition
+and the requested final equality remain open.
+
+Further imported, unmodified Mathlib sources at the pinned revision:
+`RingTheory/NoetherNormalization.lean` (`exists_integral_inj_algHom_of_fg`,
+Riccardo Brasca, Sihan Su, Wan Lin, Xiaoyang Su),
+`Algebra/MvPolynomial/Funext.lean` (`funext_set`),
+`RingTheory/Ideal/GoingUp.lean` (`Ideal.under_ne_bot`), and
+`Topology/Separation/Basic.lean` (`infinite_of_mem_nhds`). No source copied.
 
 ## Operational boundary
 

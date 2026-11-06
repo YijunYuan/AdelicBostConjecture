@@ -3,6 +3,7 @@ import BostConjecture.InvariantTheory.ComplexClosure.Roots
 import BostConjecture.InvariantTheory.ComplexClosure.IntegralLifting
 import BostConjecture.InvariantTheory.ComplexClosure.FiniteFiber
 import BostConjecture.InvariantTheory.ComplexClosure.Normalization
+import BostConjecture.InvariantTheory.ComplexClosure.Density
 
 #print axioms BostConjecture.InvariantTheory.polynomialEval_equivMvPolynomial_symm
 #print axioms BostConjecture.InvariantTheory.polynomialEval_eq_eval_equivMvPolynomial
@@ -27,3 +28,8 @@ import BostConjecture.InvariantTheory.ComplexClosure.Normalization
 #print axioms BostConjecture.InvariantTheory.exists_monic_lifting_polynomial
 #print axioms BostConjecture.InvariantTheory.exists_lifts_tendsto_subseq
 #print axioms BostConjecture.InvariantTheory.isOpenMap_polynomial_normalization
+#print axioms BostConjecture.InvariantTheory.exists_integral_inj_polynomial_map
+#print axioms BostConjecture.InvariantTheory.eq_zero_of_eval_zero_on_open
+#print axioms BostConjecture.InvariantTheory.dense_setOf_eval_ne_zero
+#print axioms BostConjecture.InvariantTheory.exists_nonzero_polynomial_vanishing_on_image
+#print axioms BostConjecture.InvariantTheory.dense_principalOpen_zeroLocus

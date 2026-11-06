@@ -238,9 +238,43 @@ subsequence of lifts just constructed would eventually belong to $V$. This contr
 proves openness of $\pi$.
 \end{proof}
 
+\begin{lemma}[Density of principal opens]
+\label{lem:complex-closure-principal-density}
+\uses{lem:complex-closure-normalization-open}
+\lean{BostConjecture.InvariantTheory.dense_principalOpen_zeroLocus}\leanok
+Let $I\subset\mathbb C[X_1,\ldots,X_N]$ be prime and let $u\notin I$.
+Then $\{x\in V(I):u(x)\ne0\}$ is Euclidean dense in $V(I)$.
+\end{lemma}
+\begin{proof}
+Put $B=\mathbb C[X_1,\ldots,X_N]/I$. Noether normalization gives an
+injective integral homomorphism $A=\mathbb C[T_1,\ldots,T_d]\to B$.
+Choose polynomial representatives $q_i$ of the images of $T_i$;
+these define the normalization map $\pi:V(I)\to\mathbb C^d$.
+The preceding lemma makes $\pi$ Euclidean open.
+
+Write $b$ for the nonzero class of $u$ in $B$. The contraction of the
+nonzero ideal $bB$ to $A$ is nonzero. To see this, choose a monic integral
+relation for $b$, remove the largest power of $T$ dividing it, and cancel
+the corresponding power of $b$ in the domain $B$. The remaining relation
+has nonzero constant coefficient $g\in A$, and its evaluation gives
+$g\in bB$. Evaluating in any point of $V(I)$ with $u(x)=0$ gives
+$g(\pi(x))=0$.
+
+The nonvanishing set of the nonzero polynomial $g$ is Euclidean dense
+in $\mathbb C^d$. Indeed, if $g$ vanished on a nonempty open set,
+that set would contain a product of nonempty open subsets of $\mathbb C$,
+each infinite. A polynomial vanishing on a product of infinite sets is
+zero: induct on the number of variables, apply the finite-root bound in
+one variable, and then apply the induction hypothesis to its coefficients.
+This argument includes zero variables, when a polynomial is a constant.
+Every nonempty Euclidean open $U\subseteq V(I)$ has nonempty open image
+$\pi(U)$, so that image contains a point where $g$ does not vanish.
+Any lift in $U$ has $u\ne0$. This proves density.
+\end{proof}
+
 \begin{lemma}[Complex and Zariski constructible closures]
 \label{lem:balanced-constructible-closure}
-\uses{lem:complex-closure-normalization-open,lem:complex-closure-coordinates}
+\uses{lem:complex-closure-principal-density,lem:complex-closure-coordinates}
 \source{milne-algebraic-geometry:page-0201}\notready
 A constructible subset of a complex affine variety has the same
 Euclidean and Zariski closures.
@@ -249,25 +283,12 @@ Euclidean and Zariski closures.
 It suffices to prove that a nonempty Zariski open subset of an
 irreducible affine variety $Y\subseteq\mathbb C^N$ is Euclidean dense:
 decompose a constructible set into finitely many irreducible locally closed
-pieces and take their closures. Let $B$ be the coordinate domain of $Y$.
-Noether normalization gives a finite inclusion
-$A=\mathbb C[t_1,\ldots,t_d]\subseteq B$, inducing
-$\pi:Y\to\mathbb C^d$. By Lemma~\ref{lem:complex-closure-normalization-open}, $\pi$ is Euclidean open.
-
-Now let $Z\subsetneq Y$ be closed. Choose a nonzero $b\in B$ vanishing
-on $Z$. In a monic integral relation for $b$, remove the largest power
-of $T$ dividing the relation. Cancellation is valid because $B$ is a
-domain and $b\ne0$. The remaining relation has nonzero constant
-coefficient $g\in A$, and its evaluation shows $g\in bB$. Consequently
-$\pi(Z)\subseteq V(g)$. A nonzero complex polynomial has zero set with
-empty Euclidean interior: if it vanishes on a product of open disks,
-view it as a polynomial in the last variable, use the finite-root
-bound, and induct on the number of variables to show every coefficient
-is zero. Since $\pi$ is open, the image of every nonempty Euclidean
-open subset of $Y$ meets the complement of $V(g)$. The subset therefore
-meets $Y\setminus Z$, proving density. In dimension zero the coordinate
-domain is finite over $\mathbb C$, hence equals $\mathbb C$, and the
-same conclusion is immediate.
+pieces and take their closures. For a proper closed subset $Z\subsetneq Y$, choose a polynomial $u$
+vanishing on $Z$ but not identically on $Y$. Its class in the
+coordinate ring of $Y$ is nonzero. Lemma~\ref{lem:complex-closure-principal-density}
+shows that $Y\setminus V(u)$ is Euclidean dense in $Y$, and this set is
+contained in $Y\setminus Z$. Thus every nonempty Zariski open is dense,
+as required.
 
 The reverse closure inclusion follows because polynomial zero sets are
 Euclidean closed. The statement is
