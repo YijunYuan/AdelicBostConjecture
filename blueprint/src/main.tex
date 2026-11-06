@@ -1,25 +1,63 @@
 \chapter{The maximal-slope identity}
 
-\begin{lemma}[Slope bound from a metrized filtration]
-\label{lem:filtered-slope-bound}\uses{lem:degree-calculus,lem:hn-filtration}\notready
-If a saturated filtration of $A$ has semistable Hermitian quotients
-of slopes at most $c$, then every nonzero submodule of $A$ has slope
-at most $c$.
+\begin{lemma}[The tensor lower bound]
+\label{lem:max-slope-tensor-lower}
+\uses{lem:hn-filtration,lem:degree-calculus}
+\source{bost-specht-manuscript:page-0013}
+\notready
+For positive-rank Hermitian bundles $E,F$ over $\Ocal_K$,
+\[
+ \maxslope(E)+\maxslope(F)\leq\maxslope(E\otimes F).
+\]
 \end{lemma}
 \begin{proof}
-For a submodule $B$, intersect with every filtration step and take
-successive quotients. Each quotient maps injectively and contractingly
-into its actual image in the corresponding ambient grade: the ambient
-quotient norm takes an infimum over a larger subspace. Semistability
-bounds the degree of that image by $c$ times its rank. Contraction
-bounds the quotient degree by the image degree. Add these inequalities;
-quotient ranks sum to $\rk B$ and quotient degrees to $\degn B$.
-Thus $\degn B\leq c\rk B$.
+Let $E_1,F_1$ be the first nonzero saturated terms of their
+Harder--Narasimhan filtrations. They have positive rank and slopes
+$\maxslope(E),\maxslope(F)$. All submodules of finite projective
+$\Ocal_K$-modules are finite projective. Flatness therefore makes
+$E_1\otimes F_1\to E\otimes F$ injective. On pure tensors in every
+complex fiber, the induced inner product is the product of the two
+induced factor inner products. Sesquilinearity and spanning extend this
+identity to the whole fiber. The injection is consequently an isometry
+onto its integral image. That image has positive rank and slope
+$\mu(E_1)+\mu(F_1)$ by the tensor degree formula. Its slope is at most
+the maximal slope of $E\otimes F$, proving the assertion.
+\end{proof}
+
+\begin{lemma}[Slope bound from a metrized filtration]
+\label{lem:filtered-slope-bound}\uses{lem:degree-calculus,lem:hn-filtration}\notready
+Let $0=X_0\subseteq\cdots\subseteq X_n=A_K$ be a finite filtration
+of the generic fiber and put $A_i=A\cap X_i$. If every actual
+Hermitian quotient $A_{i+1}/A_i$ is semistable with slope at most $c$,
+then every positive-rank integral submodule of $A$ has slope at most $c$.
+In particular, if $A$ has positive rank, then $\maxslope(A)\leq c$.
+\end{lemma}
+\begin{proof}
+Write $d(Y)=\degn(A\cap Y)$ for generic subspaces $Y$.
+We prove $d(Y)\leq c\dim_KY$ for $Y\subseteq X_i$ by induction on
+$i$. For $i=0$ both sides are zero. Suppose $Y\subseteq X_{i+1}$.
+If $Y\subseteq X_i$, use the induction hypothesis. Otherwise
+$X_i\subsetneq Y+X_i\subseteq X_{i+1}$. The induced quotient
+$(A\cap(Y+X_i))/(A\cap X_i)$ is isometric to a submodule of
+$A_{i+1}/A_i$. Semistability and the slope bound on this grade give
+\[
+ d(Y+X_i)-d(X_i)\leq
+ c\bigl(\dim_K(Y+X_i)-\dim_KX_i\bigr).
+\]
+The degree inequality for intersections and sums gives
+$d(Y)+d(X_i)\leq d(Y\cap X_i)+d(Y+X_i)$.
+Apply induction to $Y\cap X_i$ and use
+$\dim(Y\cap X_i)+\dim(Y+X_i)=\dim Y+\dim X_i$ to obtain the
+required bound. Since $X_n=A_K$, it holds for every generic subspace.
+For an integral submodule $B$, its saturation is $A\cap B_K$;
+saturation preserves rank and increases degree. Division by the
+positive rank of $B$ proves the claimed slope bound. Applying it to
+the first HN term proves the maximal-slope bound.
 \end{proof}
 
 \begin{theorem}[Maximal-slope identity]
 \label{thm:bost-main}
-\uses{lem:hn-filtration,lem:degree-calculus,thm:tensor-semistability,lem:filtered-slope-bound}
+\uses{lem:hn-filtration,lem:degree-calculus,thm:tensor-semistability,lem:filtered-slope-bound,lem:max-slope-tensor-lower}
 \source{bost-specht-manuscript:page-0001,bost-specht-manuscript:page-0013}
 \notready
 For every number field $K$ and every pair of positive-rank Hermitian
