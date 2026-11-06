@@ -964,3 +964,39 @@ the actual contragredient action. Final source diagnostics are clear; stale
 root-import LSP diagnostics are superseded by the serialized build. No new
 mathematical axiom or sorry is used. Field descent, invariant existence and
 the full nonvanishing sequence remain open; the next descent node is notready.
+
+
+## Nonvanishing descends to the original coefficient ring
+
+`NonvanishingBaseChange.lean` proves
+`canonicalPairing_ne_zero_of_scalarExtension` using the actual canonical
+base-change formula and the bijective determinant-source transports. The
+algebra itself need not be flat, faithful or free. Its substantive consumer
+`canonicalPairing_ne_zero_of_baseChange_invariant` applies the checked
+algebraically closed invariant-polynomial theorem to the actual extended
+map, then detects the original finite-projective pairing. No invariant
+coaction square is assumed by this argument.
+
+The existing `dualDeterminantTensorBaseChange_bijective` producer was moved
+from ContractionNorm to ContractionBaseChange at `7bb83ed`, removing a
+briefly duplicated draft and avoiding a metric import in the new algebraic
+consumer. The metric consumer still passed 9,108 jobs warning-free at
+01:12:30 UTC (`edec714a5cf09fb0`). The new module passed 9,116 jobs at
+01:19:09 UTC (`d401a25e94740386`). After making four local instance names
+explicit, the configured root passed **9,319 jobs warning-free at
+2026-11-06 01:24:35 UTC**; root blob
+`0c98b66b943e39603586e66a8cca5754e37a7722`. Source blob:
+`cad0b76cfd9fca8b1f1c68695cb05f57ae099910`. All **282 geometry probes** passed
+01:25:08 UTC, only standard foundational axioms. Final logs: session0016
+`descent-final-root.log`, `descent-final-axioms.log`.
+
+Failed elaboration attempts are retained in `nonvanishing-descent-elaboration.log`
+and `nonvanishing-descent.log`: deep definitional transport matching needed
+scoped 800,000 heartbeats and recursion depth 2,048; no proof assumption was
+added. The earlier combined root/audit (`descent-root.log`,
+`descent-axioms.log`) exposed anonymous-local-instance name collisions with
+ContractionNorm. Explicit local names repaired those collisions before the
+successful checks above. Source LSP is clear. Independent honesty review
+accepted the actual descent argument and consumer; its group and free-fiber
+wording corrections are applied. Full invariant existence and the positive
+Plucker-power sequence are subsequent obligations at this checkpoint.

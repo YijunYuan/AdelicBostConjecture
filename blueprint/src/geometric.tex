@@ -1807,7 +1807,7 @@ canonical contraction there. Its proved defining formula is precisely the
 previous nonzero scalar.
 \end{proof}
 
-\begin{lemma}[Nonvanishing descends from a free scalar extension]
+\begin{lemma}[Nonvanishing descends from a scalar extension with free fibers]
 \label{lem:canonical-pairing-nonzero-descent}
 \uses{lem:canonical-pairing-nonzero-algclosed,lem:canonical-pairing-base-change}
 \notready
@@ -1816,8 +1816,9 @@ field. Let $V,E_i$ be finite projective $R$-modules of constant positive
 ranks $s,a_i$, and choose bases of $F\otimes_R V$ and
 $(F\otimes_R E_i)^\vee$ of those ranks. Fix rectangular tableaux with
 $n=s\ell=a_i k_i$ and positive $\ell,k_i$.
-If an actual homogeneous degree-$n$ invariant polynomial on
-$\Hom_F(F\otimes_R V,\bigotimes_i(F\otimes_R E_i))$ is nonzero at the
+If an actual homogeneous degree-$n$ polynomial on
+$\Hom_F(F\otimes_R V,\bigotimes_i(F\otimes_R E_i))$, invariant under
+$(\prod_i\SL(F\otimes_R E_i))\times\SL(F\otimes_R V)$, is nonzero at the
 scalar extension of $A$, then the canonical determinant pairing for $A$
 over $R$ is nonzero.
 \end{lemma}
@@ -1833,6 +1834,44 @@ both transports would then make the free determinant pairing over $F$
 zero. In global bases this is the projective determinant pairing, which
 the preceding nonvanishing lemma proves nonzero. This contradiction proves
 the assertion; faithfulness of the algebra is unnecessary in this direction.
+\end{proof}
+
+\begin{lemma}[Pl\"ucker powers detect the original determinant contraction]
+\label{lem:plucker-power-canonical-nonzero}
+\uses{lem:canonical-pairing-nonzero-descent,lem:plucker-polynomial-pullback}
+\source{bost-specht-manuscript:page-0010}\notready
+In the preceding setting, choose a basis $b$ of $F\otimes_R V$.
+Let $p$ be a homogeneous polynomial of degree $m$ on
+$\bigwedge^s(\bigotimes_i(F\otimes_R E_i))$, fixed by the independent
+target special-linear action, and nonzero on the wedge of $A_F(b)$.
+For any $r\geq0$ and compatible positive rectangular exponents with
+$n=(sm)r=s\ell=a_i k_i$, the original canonical pairing is nonzero.
+\end{lemma}
+\begin{proof}
+The actual Pl\"ucker pullback $q$ is homogeneous of degree $sm$, invariant
+for the independent target and source special-linear groups, and satisfies
+$q(A_F)=p(\bigwedge^s A_F(b))\ne0$. Therefore $q^r$ is homogeneous of
+degree $(sm)r$, remains invariant, and has nonzero value at $A_F$.
+Apply the preceding scalar-extension nonvanishing theorem to $q^r$.
+\end{proof}
+
+\begin{lemma}[A nonzero sequence from an actual Pl\"ucker invariant]
+\label{lem:plucker-invariant-nonzero-sequence}
+\uses{lem:plucker-power-canonical-nonzero}
+\source{bost-specht-manuscript:page-0010}\notready
+Assume the preceding Pl\"ucker polynomial has positive degree $m$.
+There exists $d_0>0$, divisible by $s$ and every $a_i$, such that for
+every positive $r$ there are positive rectangular exponents and tableaux
+of size $d_0r$ for which the original canonical pairing is nonzero.
+\end{lemma}
+\begin{proof}
+Put $P=\prod_i a_i$ (the empty product is one) and $d_0=smP$.
+Positivity of the ranks and $m$ gives $P,d_0>0$; every stated rank
+divides $d_0$. For positive $r$, write $d_0r=s\ell=a_i k_i$.
+Every exponent is positive since its product with a positive rank is
+$d_0r>0$. Reindex the row-reading rectangular tableaux to the common
+size $d_0r$. Apply the preceding lemma to the power $p^{Pr}$ after
+Pl\"ucker pullback, since $(sm)(Pr)=d_0r$.
 \end{proof}
 
 \begin{lemma}[Polynomial identities from evaluation]

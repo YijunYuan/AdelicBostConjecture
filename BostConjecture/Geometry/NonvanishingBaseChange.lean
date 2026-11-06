@@ -21,21 +21,21 @@ variable {R S : Type*} [CommRing R] [CommRing S] [Algebra R S]
   {n : ℕ} {a k : ι → ℕ}
   (t : ∀ i, OAI.Saxl.Tableau n (Specht.rectangle (a i) (k i)))
 
-local instance : ∀ i, AddCommGroup
+local instance nonvanishingSourceFactorAddCommGroup : ∀ i, AddCommGroup
     ((⨂[R] (_ : Fin (k i)), ⋀[R]^(a i) (Dual R (E i))) ⊗[R]
       (R ⊗[ℤ] Specht.orbitLattice (t i))) := fun _ =>
         Module.addCommMonoidToAddCommGroup R
 
-local instance : ∀ i, Module R
+local instance nonvanishingSourceFactorModule : ∀ i, Module R
     ((⨂[R] (_ : Fin (k i)), ⋀[R]^(a i) (Dual R (E i))) ⊗[R]
       (R ⊗[ℤ] Specht.orbitLattice (t i))) := fun _ => inferInstance
 
-local instance : ∀ i, AddCommGroup
+local instance nonvanishingExtendedFactorAddCommGroup : ∀ i, AddCommGroup
     ((⨂[S] (_ : Fin (k i)), ⋀[S]^(a i) (Dual S (S ⊗[R] E i))) ⊗[S]
       (S ⊗[ℤ] Specht.orbitLattice (t i))) := fun _ =>
         Module.addCommMonoidToAddCommGroup S
 
-local instance : ∀ i, Module S
+local instance nonvanishingExtendedFactorModule : ∀ i, Module S
     ((⨂[S] (_ : Fin (k i)), ⋀[S]^(a i) (Dual S (S ⊗[R] E i))) ⊗[S]
       (S ⊗[ℤ] Specht.orbitLattice (t i))) := fun _ => inferInstance
 
@@ -81,6 +81,38 @@ theorem canonicalPairing_ne_zero_of_scalarExtension
   have hf := congrArg (fun f => (LinearMap.baseChange S f) z') hzero
   simp only [LinearMap.baseChange_zero, LinearMap.zero_apply] at hf
   rw [hf, map_zero, LinearMap.zero_apply] at he
-  exact he.symm
+  set_option maxRecDepth 2048 in
+    exact he.symm
+
+section AlgebraicallyClosed
+
+variable {F : Type} [Field F] [CharZero F] [IsAlgClosed F] [Algebra R F]
+
+local instance scalarExtendedTargetAddCommGroup : AddCommGroup (⨂[F] i, F ⊗[R] E i) :=
+  Module.addCommMonoidToAddCommGroup F
+
+/-- An actual invariant at a scalar-extended map detects the original
+canonical projective determinant pairing. -/
+theorem canonicalPairing_ne_zero_of_baseChange_invariant
+    (hspos : 0 < s) (hapos : ∀ i, 0 < a i)
+    (b : ∀ i, Basis (Fin (a i)) F (Dual F (F ⊗[R] E i)))
+    (bV : Basis (Fin s) F (F ⊗[R] V))
+    (A : V →ₗ[R] (⨂[R] i, E i))
+    {p : SymmetricAlgebra F (Dual F ((F ⊗[R] V) →ₗ[F] (⨂[F] i, F ⊗[R] E i)))}
+    (hp : p ∈ InvariantTheory.homogeneousInvariants
+      (homSpecialLinearRepresentation
+        (specialLinearTensorRepresentation F (fun i => F ⊗[R] E i))) n)
+    (hpA : InvariantTheory.polynomialEval
+      ((Tensor.baseChangeEquiv R F E).toLinearMap ∘ₗ A.baseChange F) p ≠ 0) :
+    canonicalPairing E hk t ha hl v hs A ≠ 0 := by
+  have haF (i) (q : PrimeSpectrum F) :
+      Module.rankAtStalk (Dual F (F ⊗[R] E i)) q = a i := by
+    simp [Module.rankAtStalk_eq_finrank_of_free, Module.finrank_eq_card_basis (b i)]
+  have hsF (q : PrimeSpectrum F) : Module.rankAtStalk (F ⊗[R] V) q = s := by
+    simp [Module.rankAtStalk_eq_finrank_of_free, Module.finrank_eq_card_basis bV]
+  apply canonicalPairing_ne_zero_of_scalarExtension (S := F) E t hk ha haF b hl v hs hsF bV A
+  exact canonicalPairing_ne_zero_of_invariant _ hspos hapos hl hk t v haF hsF bV b hp hpA
+
+end AlgebraicallyClosed
 
 end BostConjecture.Geometry

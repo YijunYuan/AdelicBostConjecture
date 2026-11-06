@@ -73,6 +73,7 @@ public import BostConjecture.Geometry.HomTensor
 public import BostConjecture.Geometry.HomInvariants
 public import BostConjecture.Geometry.DualInvariants
 public import BostConjecture.Geometry.Nonvanishing
+public import BostConjecture.Geometry.NonvanishingBaseChange
 public import BostConjecture.Tensor.Evaluation
 public import BostConjecture.Tensor.EvaluationBaseChange
 public import BostConjecture.Tensor.DualRegroupBaseChange

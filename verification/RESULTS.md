@@ -1,3 +1,18 @@
+## Original-ring canonical nonvanishing by scalar extension
+
+The configured explicit-root build passed **9,319 jobs warning-free at
+2026-11-06 01:24:35 UTC**; root blob `0c98b66b943e39603586e66a8cca5754e37a7722`.
+All **282 geometry probes** passed 01:25:08 UTC, with only the standard
+foundational axioms. `NonvanishingBaseChange` proves actual canonical-pairing
+nonvanishing over the original ring from an actual nonzero invariant at
+the scalar-extended map. Finite projectivity is preserved; no faithfulness
+or free-module assumption over the original ring is added.
+
+The reviewed source and repaired elaboration/import failures are recorded
+in GEOMETRY.md. Plucker-power sequence assembly, invariant coaction base
+change and invariant existence remain distinct obligations. BOST-GEOM,
+Lemma 7.2 and Theorem 1.1 are not marked complete.
+
 ## Finite-family arithmetic and balanced origin exclusion integrated
 
 The configured explicit-root build passed **9,318 jobs warning-free at
