@@ -153,3 +153,8 @@ The LINE owner handed off both-order nonprincipal rank-one semistability at
 maximizing endpoint remains in owner assembly. Shared root/graph integration
 of this checkpoint is requested from MAIN. I-0131 asks this round to end at
 this checked checkpoint to recycle clients; the task is not done or paused.
+
+MAIN's I-0137 acknowledgment confirms shared root integration of the actual
+variation producers through e0b0bb1 at 76bf02f, with 9395 warning-free jobs.
+The newer 7fd2332 partial-trace/conjugate-basis checkpoint awaits MAIN's next
+independent review and root integration; its narrow checks above are complete.
