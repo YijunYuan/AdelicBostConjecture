@@ -2,9 +2,11 @@
 
 The assigned mathematical route is proved: actual determinant–Specht bundles,
 their intrinsic metrics and exact slopes, and the geometric slope inequality
-from actual complex and binary Plücker invariants. All thirty-nine transitive
-axiom probes are foundational-only. Shared root integration is pending with
-MAIN; the whole Bost main theorem is not claimed complete.
+from actual complex, binary, and algebraically closed characteristic-zero
+Plücker invariants. All thirty-nine transitive axiom probes are foundational-only.
+MAIN integrated the exact proof revision `8c80c92` at root `d7bdece`; its root
+check passed 9387 jobs without warnings at 2026-11-06 04:14:47 UTC. The assigned
+objective is complete; the whole Bost main theorem is not claimed complete.
 
 The first checked producer is the actual integral orbit-lattice representation
 in `Arithmetic/Specht/Representation.lean`.
@@ -124,9 +126,18 @@ consumer. The complete thirty-nine-declaration probe passed (101.5 seconds)
 with only the three foundational axioms above. Both independent source-fidelity
 and honesty reviewers inspected and accepted the exact implementation.
 
-The requested geometric slope route is proved. Shared root integration and
-the downstream tensor-semistability/main-theorem work are owned by MAIN and
-TENSOR-SEMI. The migrated `lem:determinant-isotypic` remains `notready` solely
+The requested geometric slope route is proved and root-integrated. MAIN recorded
+the root acceptance in `02fa230`, including equality of the checked 220-module
+project dependency cone. Both owner and shared graph refreshes succeeded; the
+final shared refresh reported 356 blueprint nodes and 2360 declarations with no
+unresolved references. Its 1126 unattached helper/draft warnings are coverage
+warnings, not missing theorem dependencies. Direct inspection of
+`thm:geometric-slope` confirms the general invariant statement, all four Lean
+attachments, and `lean_ok`. TENSOR-SEMI accepted the binary endpoint for its
+balance consumer. The downstream tensor-semistability/main-theorem work remains
+owned by TENSOR-SEMI and MAIN.
+
+The migrated `lem:determinant-isotypic` remains `notready` solely
 for its additional, unused full generic SL-fixed-space assertion; this is not
 an assumption or dependency of the proved geometric endpoint. The actual
 complex determinant–Specht representation equivalence is proved separately.
