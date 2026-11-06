@@ -1,6 +1,6 @@
 # Parallel Horizon scheduling
 
-## Live checkpoint at 2026-11-06 04:09 UTC
+## Live checkpoint at 2026-11-06 04:24 UTC
 
 The user requests **four continuing Horizon proof lanes until the entire main
 theorem and its used dependencies are complete**, with no budget cap. The parent
@@ -13,37 +13,60 @@ or push is authorized.
 
 | Run | Task | Current responsibility |
 | --- | --- | --- |
-| `0009` | `BOST-SPECHT-SLOPE` | Actual determinant-Specht slope and geometric slope inequality |
-| `0010` | `BOST-COMPACTNESS` | Arithmetic compactness and maximizing pairs |
 | `0011` | `BOST-MAIN` | HN tensor filtration, maximal-slope theorem and shared integration |
 | `0012` | `BOST-TENSOR-SEMI` | Arithmetic first variation, extremal-to-balance and tensor semistability |
+| `0013` | `BOST-LINE-TWIST` | Both-order semistability under actual nonprincipal rank-one tensor |
+| `0014` | `BOST-STRICT-REDUCTION` | Internally minimal-rank, strictly stable maximizing counterexamples |
 
-MAIN started at 03:12:19 UTC (PID 765334); TENSOR-SEMI at 03:12:26 (PID 765881).
-Their foreground tool sessions remain open. Standing protection `I-0104`
-supersedes archived `I-0095`. The accepted migration is `439d654`; its
-handoff `I-0102` is archived. `I-0106` coordinates the live ownership transfer.
-MAIN continues in session `0004` after normal session `0002` ended at
-03:49:38 UTC. Its run remains live; this did not free a writer slot.
+MAIN and TENSOR started at 03:12 UTC, PIDs 765334/765881. MAIN continues in
+session `0004`; a normal round handoff does not free a slot. LINE and STRICT
+started at 04:23:09/04:23:17, PIDs 815854/816122. All commands remain foreground.
+Standing protection **I-0126** supersedes archived I-0104/I-0121/I-0123.
+The completed SPECHT-SLOPE/COMPACTNESS runs were not resumed.
 
-MAIN is now the sole editor of root `BostConjecture.lean`, `CONTRIBUTIONS.md`,
-`verification/RESULTS.md`, and shared blueprint includes/index/OPEN_PROOFS.
+Paths below are relative to `projects/BostConjecture`.
+MAIN alone owns shared root `BostConjecture.lean`, `CONTRIBUTIONS.md`,
+`verification/RESULTS.md`, and blueprint includes/index/OPEN_PROOFS.
 Its proof scope is `Main/MaxSlope/**`, `main.tex` and its verification pair.
-TENSOR-SEMI owns `Main/TensorSemistability/**`, `tensor_semistability.tex`
-and its verification pair. It owns extensions/twists and the actual arithmetic
-local-maximum-to-balance argument, then consumes COMPACTNESS, SPECHT-SLOPE and
-accepted Lemma 7.2. MAIN consumes its proved tensor semistability for the final
-HN upper bound; the dependency does not run in reverse. Lower-bound and
-filtration work can proceed independently. No unfinished producer may become
-an assumed premise of a claimed completed source theorem.
+TENSOR owns `Main/TensorSemistability/**`, `tensor_semistability.tex` and its
+verification pair: normalized extensions, active variation/balance and final
+contradiction. LINE owns `Main/LineTwist/**`, `line_twist.tex`,
+`LineTwistAxioms.lean`/`LINE_TWIST.md`. STRICT owns `Main/StrictReduction/**`,
+`strict_reduction.tex`, `StrictReductionAxioms.lean`/`STRICT_REDUCTION.md`.
 
-SPECHT-SLOPE retains `Arithmetic/Specht/**`, `Slope/Geometric/**`,
-`specht_slope.tex` and its verification pair. COMPACTNESS retains
-`Arithmetic/Compactness/**`, `arithmetic_compactness.tex` and its pair.
-Completed APIs stay stable unless the parent coordinates an exact extension.
-Late compactness `870179a` was outside the final GEOM root scope and is a
-checked handoff for MAIN; subsequent Specht handoffs likewise go to MAIN.
+The accepted source migration **fd5c695** and shared includes **b5f3eb9**
+preserve complete proofs and source anchors; both new nodes remain notready.
+The unchanged shared tensor submodule/quotient leaf is in tree **de43a48**,
+first captured by lifecycle commit **0e5ac64**, with 3,585 consumer jobs passed.
+`Arithmetic/TensorSubmodule.lean` has only direct arithmetic imports;
+`Main/MaxSlope/TensorFiltration.lean` re-exports it. Independent read-only
+review accepted exact bodies, scope, includes and absence of duplicate labels.
+
+The route is **LINE → STRICT → TENSOR → MAIN**. STRICT also reuses checked
+Extensions, MaximizingPair and shared arithmetic metrics. It builds rank-sum
+minimality and actual normalized strictly stable maximizing factors of ranks
+at least two, with a positive-degree saturated maximizer and the existing
+`IsGreatest` bound. This is a hypothetical counterexample in a proof by
+contradiction, not a discovered counterexample to the manuscript. TENSOR
+consumes these strictness premises in its checked local-maximum theorem.
+No reverse dependence on final tensor semistability or MAIN is allowed.
+Completed APIs stay stable absent exact parent coordination.
 
 ## Accepted completed producers
+
+**COMPACTNESS 0010 completed and exited 0 at 04:12:24 UTC.**
+Actual maximizing-pair source **e81b08b** returns nonfree projective modules,
+normalized semistable metrics and a saturated submodule attaining the greatest
+tensor maximum degree. Kernel: 9,156 jobs; 40 foundation-only probes.
+Root **ece5ec1** passed 9,380 warning-free jobs; final evidence **dccf0c9**.
+Independent source/math/honesty and exact handoff reviews accepted.
+
+**SPECHT-SLOPE 0009 completed and exited 0 at 04:19:42 UTC.**
+Exact generalized invariant source **8c80c92** has 9,289 dependency jobs and
+39 foundation-only probes. Root **d7bdece** passed 9,387 warning-free jobs at
+04:14:47; evidence **02fa230**/**ab0f95a**. Independent handoff review confirms
+source/root equality, generalized graph text, all four correct attachments and
+normal exit. The unused generic coaction descent was not reopened.
 
 **Original Lemma 7.2 is fully verified; the user was notified around 01:47 UTC.**
 The exact theorem is `Balanced.IsBalanced.plucker_semistable` in
@@ -83,77 +106,33 @@ proof `53f1119`, root `d29f2d3`, evidence `f7ffd4f`, 40 probes. Do not resume.
 
 ## Resource and runtime checkpoint
 
-Before successor startup: 15.41 GiB available, PSI avg10 zero, swap 2.42 GiB,
-unchanged swap-out counter 9,146,901 and zero OOM kills. A bounded read-only
-startup review at 03:13:57 UTC accepted exactly four engines, old GEOM/COVOLUME
-descendants gone, no orphan Lean process, and actual guarded successor MCPs
-765594/766135. Memory after startup: 14.71 GiB available, PSI zero, swap 2.41 GiB,
-unchanged swap-out and no OOM. Dashboard returned HTTP 200 in 0.11 seconds.
-All new runs retain gpt-6-astra/xhigh/subscription. Broad checks use
-the explicit workspace root and one serialized Horizon check slot.
+At 04:21 UTC, available memory was 12.51 GiB, PSI avg10/avg60 zero, swap
+occupancy 2.67 GiB, swap-out counter 9,579,953 and zero OOM kills. The two
+new successors started after the previous owners' normal exit and accepted
+handoffs. A bounded read-only startup audit checks their actual guarded LSP
+clients, process ancestry and memory. All runs retain gpt-6-astra/xhigh/
+subscription; broad checks share the explicit-root Horizon check slot.
 Dashboard remains at port 8765. No fifth proof writer is authorized.
 
-Earlier transient pressure at 02:16 was traced to two GEOM LSP trees loading
-the same module. Its normal 0016→0018 handoff removed the duplication; all
-old trees were confirmed gone. No emergency kill or user HN process change
-occurred. Advisory `I-0084` records global search-index rebuild costs:
-batch searches at stable checkpoints and avoid redundant forced reindexing.
+Earlier transient pressure was handled at normal verified round boundaries;
+no user HarderNarasimhan process was changed. Search-index rebuild costs remain
+documented in I-0084. The Specht generated-instance collision was repaired and
+its combined audit rerun; I-0112 is resolved. Avoid redundant proof checks when
+the exact source is unchanged and accepted.
 
-At 03:31:44 a further read-only resource review found exactly four engines,
-8.48 GiB available, no duplicate same-file workers and no OOM. Transient PSI
-had receded; no resource-driven handoff was warranted. Reviewer clients remain
-under their owners' normal lifecycle. The separate Specht combined-import
-failure was a generated-instance name collision, repaired by explicit names;
-its combined axiom audit passed again at 03:38:43. I-0112 is resolved/archived.
-
-At 04:09, all four proof lanes continue. MAIN's lower bound, filtered bound,
-tensor images/quotient metrics and saturated lexicographic flag are checked
-(`5913d84`, `66d4baa`, `04dd654`); its actual consecutive-grade isometries
-remain open. Simultaneous tensor quotient metrics are checked at `f92bf10`.
-TENSOR-SEMI has checked extensions and metric/degree variation
-(`57f5cfc`, `bbafa44`), conjugation-compatible exponential variation (`e68943d`)
-and actual extremal neighborhoods (`5eee92c`); balance remains open.
-COMPACTNESS's exact maximizing-pair endpoint `e81b08b` passed 9,156 module jobs
-and 40 foundational-only probes. Its actual nonfree module/metric/saturated
-global-maximizer witnesses and source route are independently accepted. Root
-`ece5ec1` passed 9,380 warning-free jobs at 04:06:01, evidence `f670cb2`.
-Its task still needs normal closure/exit before reuse of the slot.
-SPECHT-SLOPE's complex/binary invariant result was accepted at `cf57d33`/
-`7249a02` with scope correction `ea93f72`. Subsequent generalization directly
-reuses GEOM's proved original-ring pairing; new source `8c80c92` has a fresh
-dependency build and 39-probe audit. Final root integration/exit remain pending;
-the earlier 38 probes are not evidence for that later source revision.
-These are intermediate producer checks, not a main-theorem completion claim.
-
-A bounded read-only route review and both current owners accepted one future
-split in `I-0113`: actual Hermitian line twists for arbitrary nonprincipal
-rank-one modules, in both factor orders, including real submodule/metric
-transport. Reserve `Main/LineTwist/**`, `line_twist.tex` and a dedicated
-verification pair only after a genuine slot frees and a committed handoff.
-The line-twist result must not import general tensor semistability.
-
-The newly checked maximizing-pair API then made a second split concrete.
-Both owners accepted `I-0120`: reserve `Main/StrictReduction/**`,
-`strict_reduction.tex` and its verification pair. From a normalized actual
-semistable counterexample, construct internally rank-sum minimality and actual
-strictly stable normalized maximizing factors of ranks at least two, with
-positive saturated maximizing submodule and the existing `IsGreatest` bound.
-Inputs are Extensions, MaximizingPair, LINE-TWIST and shared arithmetic tensor
-submodule metrics; no MAIN theorem or variation/balance input is allowed.
-TENSOR-SEMI retains normalization, its active variation/balance chain and final
-contradiction. No successor task or blueprint migration has started yet.
-
-`I-0121` authorizes one bounded MAIN extraction after its in-flight root boundary:
-move the unchanged `TensorFiltration.lean` declarations to
-`Arithmetic/TensorSubmodule.lean` with direct arithmetic imports, preserving
-names/proofs and leaving the old module as a re-export. MAIN confirmed that no
-LowerBound declarations are used. The checked leaf handoff is required before
-StrictReduction starts; avoid a reverse dependency or duplicate proof machinery.
-Both successors launch only after actual free slots and explicit handoffs.
+MAIN's lower bound, filtered bound, tensor images/quotient metrics and
+saturated lexicographic flag are checked. Actual consecutive-grade isometries
+are now checked at **f52ada8**, with specialization to flattened HN grades
+and the final upper bound still in progress. TENSOR has checked extensions,
+conjugation-compatible exponential variations and actual extremal neighborhoods
+(**5eee92c**). Its actual submodule degree derivative/projection-trace identity
+is checked at **2fef69d**, with 29 foundation-only probes; partial-trace balance
+and final tensor semistability remain open. These producer checks do not
+complete the main theorem.
 
 ## Earlier checkpoints
 
-The sections below preserve dated history; the live table and I-0104 above
+The sections below preserve dated history; the live table and I-0126 above
 govern current ownership. Do not resume completed SPECHT run `0003`.
 
 Coordinator checkpoint: 2026-11-06 07:20 Asia/Shanghai (2026-11-05 23:20 UTC).
