@@ -97,6 +97,33 @@ old trees were confirmed gone. No emergency kill or user HN process change
 occurred. Advisory `I-0084` records global search-index rebuild costs:
 batch searches at stable checkpoints and avoid redundant forced reindexing.
 
+At 03:31:44 a further read-only resource review found exactly four engines,
+8.48 GiB available, no duplicate same-file workers and no OOM. Transient PSI
+had receded; no resource-driven handoff was warranted. Reviewer clients remain
+under their owners' normal lifecycle. The separate Specht combined-import
+failure was a generated-instance name collision, repaired by explicit names;
+its combined axiom audit passed again at 03:38:43. I-0112 is resolved/archived.
+
+At 03:42, all four proof lanes continue. MAIN's lower bound, filtered bound,
+tensor images/quotient metrics and saturated lexicographic flag are checked
+(`5913d84`, `66d4baa`, `04dd654`); its actual consecutive-grade isometries
+remain open. TENSOR-SEMI has checked extensions and metric/degree variation
+(`57f5cfc`, `bbafa44`), with its Gram bridge and local-max stationarity
+advancing. COMPACTNESS's sequential compactness module passed at 03:39:54;
+its final maximizing-pair endpoint is still open. SPECHT-SLOPE's actual
+contraction and image-slope modules pass, with the final application/limit open.
+These are intermediate producer checks, not a main-theorem completion claim.
+
+A bounded read-only route review and both current owners accepted one future
+split in `I-0113`: actual Hermitian line twists for arbitrary nonprincipal
+rank-one modules, in both factor orders, including real submodule/metric
+transport. Reserve `Main/LineTwist/**`, `line_twist.tex` and a dedicated
+verification pair only after a genuine slot frees and a committed handoff.
+No task or migration has started. TENSOR-SEMI keeps extensions, minimal-rank
+strictness and its active variation/balance chain; MAIN keeps shared includes.
+The line-twist result must not import general tensor semistability. No second
+comparably clean split was found; do not manufacture independent work.
+
 ## Earlier checkpoints
 
 The sections below preserve dated history; the live table and I-0104 above
