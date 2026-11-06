@@ -35,7 +35,8 @@ The latest configured explicit-root build adds BALANCED's checked
 `dfd710441a44451a4d31b9abbd1a6f383707b6e5`. No unhanded draft is certified.
 Invariant existence for the concrete Plucker action, its binary connection
 to the geometry sequence, and actual coaction base change remain open.
-BOST-GEOM, Lemma7.2 and Theorem1.1 remain incomplete.
+At this earlier checkpoint BOST-GEOM, Lemma7.2 and Theorem1.1 remained
+incomplete; the later cf39176 integration above closes Lemma7.2.
 
 ## Original-ring canonical nonvanishing by scalar extension
 

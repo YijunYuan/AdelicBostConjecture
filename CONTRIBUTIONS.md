@@ -570,7 +570,8 @@ semistability of actual HN grades against all integral submodules, attained
 maximal slope and containment of every maximizer in the first saturated term.
 It uses unchanged Mathlib quotient, submodule correspondence and finite-projective
 APIs, with no additional copied code. The 287-probe owner audit is foundational-only.
-HN uniqueness and bounded-degree finiteness remain open.
+HN uniqueness and bounded-degree finiteness were separate at that checkpoint;
+the completed owner delivery is now integrated at cf39176.
 `Arithmetic.ArchimedeanFiniteness` uses unchanged Mathlib
 `NumberField.Embeddings.finite_of_norm_le` and finite-projective coordinate
 embeddings to prove finiteness of bounded actual integral sections.
@@ -802,14 +803,16 @@ canonical Mathlib density and the attributed projective tensor duality;
 restriction to integers uses `LinearAlgebra/Dimension/Localization.lean`,
 `LinearAlgebra/FreeModule/PID.lean` and `Algebra/Module/Rat.lean` at the pinned
 Mathlib revision/license. No code copied. Exact provenance and the 338-probe
-owner audit are in ARITHMETIC.md. Degree finiteness remains separate.
+owner audit are in ARITHMETIC.md. Degree finiteness is now integrated
+through the separate DegreeFiniteness consumer below.
 BALANCED's `PluckerSemistability` (`7f56300`) consumes the proved polynomial
 orbit closure comparison and balanced norm bound, while
 `SpecialUnitaryDensity` (`6da0e3e`) consumes unitary polynomial density and
 the actual determinant-normalization coordinate retraction. These are
 original compositions, with no further copied external code. The delivered
 181-probe audit and positive-dimensional scope are recorded in BALANCED.md;
-actual invariant-polynomial existence is still open.
+actual invariant-polynomial existence was subsequently proved and integrated
+at cf39176, as recorded below.
 
 
 `Geometry/NonvanishingBaseChange.lean` and `PluckerNonvanishing.lean` are
