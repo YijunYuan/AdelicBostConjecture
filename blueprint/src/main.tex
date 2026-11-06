@@ -142,9 +142,52 @@ monotonicity also across blocks. The endpoint formulas follow from
 $E_0=F_0=0$ and $E_p=E$, with remainder zero at $k=pq$.
 \end{proof}
 
+\begin{lemma}[Hermitian grades of a tensor refinement]
+\label{lem:tensor-refinement-grades}
+\uses{lem:tensor-refinement-saturated,lem:tensor-quotient-transport}
+\source{bost-specht-manuscript:page-0013}
+\lean{BostConjecture.Arithmetic.tensorGradeEquiv,BostConjecture.Arithmetic.tensorGradeEquiv_projection,BostConjecture.Arithmetic.HermitianMetric.tensorGradeEquiv_inner}
+Let $P\subseteq T\subseteq M$ and $Q\subseteq U\subseteq N$ be
+saturated submodules of finite projective $\Ocal_K$-modules. Set
+$A=P\otimes N+T\otimes Q$ and $B=P\otimes N+T\otimes U$, viewed
+as actual integral images in $M\otimes N$. There is a canonical isomorphism
+\[
+ B/A\simeq (T/P)\otimes(U/Q),
+\]
+characterized by sending the class of $t\otimes u$ to
+$(t+P)\otimes(u+Q)$. It preserves the induced quotient Hermitian metric.
+\end{lemma}
+\begin{proof}
+The map $T\otimes U\to B/A$ is surjective: the summand $P\otimes N$
+of $B$ maps to zero. Regard $B$ inside $T\otimes N$ using the injective
+map $T\otimes N\to M\otimes N$. The inverse image of $A$ is the kernel
+of the surjection $q:T\otimes N\to(T/P)\otimes(N/Q)$.
+On $T\otimes U$ this surjection factors as
+\[
+ T\otimes U\longrightarrow (T/P)\otimes(U/Q)
+ \longrightarrow (T/P)\otimes(N/Q).
+\]
+The second arrow is injective by flatness of $T/P$. Thus the kernels
+of the two surjections from $T\otimes U$ are equal, proving the
+canonical integral isomorphism and its stated formula.
+
+The metric on $T\otimes N$ is induced from $M\otimes N$.
+Its quotient by $\ker q$ is the Hilbert metric on
+$(T/P)\otimes(N/Q)$ by the preceding quotient-transport lemma.
+Since $\ker q\subseteq B$, restriction to $B$ commutes with this
+quotient: the ambient orthogonal lift of a quotient class from $B$
+lies in $B$, because subtracting its kernel component from any lift
+in $B$ stays in $B$. The induced metric on $U/Q\subseteq N/Q$
+is its quotient metric, by the same argument for $Q\subseteq U$.
+Tensoring this isometric inclusion by $T/P$ identifies the image of
+$B/A$ with $(T/P)\otimes(U/Q)$ with the product metric at every
+complex embedding. The displayed integral isomorphism has precisely
+this image map, so it is an isometry.
+\end{proof}
+
 \begin{lemma}[Hermitian grades of the HN tensor filtration]
 \label{lem:hn-tensor-grades}
-\uses{lem:hn-tensor-filtration,lem:tensor-saturated-submodule,lem:tensor-quotient-transport}
+\uses{lem:hn-tensor-filtration,lem:tensor-refinement-grades}
 \source{bost-specht-manuscript:page-0013}
 \notready
 With the preceding notation, for $0\leq i<p$, $0\leq j<q$, the
@@ -157,31 +200,13 @@ where the left side has the induced quotient metric and the right
 side has the Hilbert tensor metric of the HN grades.
 \end{lemma}
 \begin{proof}
-Write $P=E_i$, $T=E_{i+1}$, $Q=F_j$, and $U=F_{j+1}$.
-All successive flag quotients are projective, so choose integral
-splittings $T=P\oplus C$ and $U=Q\oplus D$ and extend them to
-splittings of $E$ and $F$. In these splittings the two sum steps are
-\[
- P\otimes F\oplus C\otimes Q,
- \qquad P\otimes F\oplus C\otimes U.
-\]
-Their quotient is $C\otimes D$. This proves that the map induced
-by $t\otimes u\mapsto(t+P)\otimes(u+Q)$ is an integral
-isomorphism to $(T/P)\otimes(U/Q)$. As the formula on pure tensors
-determines the map, it is independent of the chosen splittings.
-At a complex embedding instead choose the orthogonal splittings
-$T_\sigma=P_\sigma\mathbin{\perp}C_\sigma$ and
-$U_\sigma=Q_\sigma\mathbin{\perp}D_\sigma$.
-The orthogonal complement of the first sum step in the second is
-then $C_\sigma\otimes D_\sigma$: it is perpendicular to
-$P_\sigma\otimes F_\sigma$ in the first factor and to
-$C_\sigma\otimes Q_\sigma$ in the second. Its inner product is
-the product inner product. The same canonical quotient map identifies
-$C_\sigma,D_\sigma$ isometrically with the respective quotient
-fibers, which proves the asserted metric identity at every embedding.
-At $j=q-1$ the endpoint formula for the flag identifies the next
-term with the first term of block $i+1$, so this argument also
-covers transitions between blocks.
+Apply the preceding refinement lemma with $P=E_i$, $T=E_{i+1}$,
+$Q=F_j$, and $U=F_{j+1}$. Within a block these are exactly the two
+consecutive terms. When $j=q-1$, the next term is
+$E_{i+1}\otimes F$, equal to the first term of the next block by the
+endpoint formula. Thus the same identification applies at each block
+transition. The refinement lemma proves the integral map and its metric
+identity simultaneously, at every complex embedding.
 \end{proof}
 
 \begin{lemma}[Slope bound from a metrized filtration]

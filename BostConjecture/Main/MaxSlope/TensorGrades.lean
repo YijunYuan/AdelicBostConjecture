@@ -201,4 +201,116 @@ lemma tensorGradeInclusion_eq [Module.Flat (𝓞 K) N]
     rfl
   exact LinearMap.congr_fun hc x
 
+variable [NumberField K]
+
+/-- Scalar extension preserves the kernel of an actual surjection. -/
+lemma ker_fiberMap_of_surjective (f : M →ₗ[𝓞 K] N) (hf : Function.Surjective f)
+    (σ : K →+* ℂ) :
+    LinearMap.ker (fiberMap f σ) = LinearMap.range (fiberMap (LinearMap.ker f).subtype σ) := by
+  let e := f.quotKerEquivOfSurjective hf
+  have hc : e.toLinearMap.comp (LinearMap.ker f).mkQ = f := by ext; rfl
+  have he := congrArg (fun a => fiberMap a σ) hc
+  rw [fiberMap_comp] at he
+  rw [← he, ← ker_fiberMap_mkQ]
+  ext x
+  change fiberMap e.toLinearMap σ (fiberMap (LinearMap.ker f).mkQ σ x) = 0 ↔
+    fiberMap (LinearMap.ker f).mkQ σ x = 0
+  constructor
+  · intro hx
+    apply fiberMap_injective _ e.injective σ
+    simpa only [map_zero] using hx
+  · intro hx
+    rw [hx, map_zero]
+
+/-- The lower tensor quotient kernel lies in the actual upper sum-step fiber. -/
+lemma tensorStepLift_kernel [Module.Flat (𝓞 K) N]
+    {P T : Submodule (𝓞 K) M} (hPT : P ≤ T)
+    {Q U : Submodule (𝓞 K) N} (hQU : Q ≤ U) (σ : K →+* ℂ) :
+    LinearMap.ker (fiberMap (TensorProduct.map (P.comap T.subtype).mkQ Q.mkQ) σ) ≤
+      LinearMap.range (fiberMap (tensorStepLift hPT U) σ) := by
+  let q := TensorProduct.map (P.comap T.subtype).mkQ Q.mkQ
+  let k : LinearMap.ker q →ₗ[𝓞 K] tensorStep P T U :=
+    ((T.subtype.rTensor N).comp (LinearMap.ker q).subtype).codRestrict _ (by
+      intro x
+      apply tensorStep_mono le_rfl le_rfl hQU
+      rw [tensorStep_eq_map_ker hPT Q]
+      exact ⟨x, x.property, rfl⟩)
+  have hl : (tensorStepLift hPT U).comp k = (LinearMap.ker q).subtype := by
+    apply (LinearMap.cancel_left
+      (Module.Flat.rTensor_preserves_injective_linearMap (M := N) T.subtype T.injective_subtype)).mp
+    rw [← LinearMap.comp_assoc, tensorStepLift_comp]
+    rfl
+  rw [ker_fiberMap_of_surjective _
+    (TensorProduct.map_surjective (P.comap T.subtype).mkQ_surjective Q.mkQ_surjective)]
+  rintro x ⟨y, rfl⟩
+  refine ⟨fiberMap k σ y, ?_⟩
+  rw [← LinearMap.comp_apply, ← fiberMap_comp, hl]
+
+namespace HermitianMetric
+
+variable [Module.Finite (𝓞 K) M] [Module.Finite (𝓞 K) N]
+
+omit [Module.Finite (𝓞 K) M] [Module.Finite (𝓞 K) N] in
+/-- The lift of an actual sum step into `T ⊗ N` preserves induced metrics. -/
+lemma tensorStepLift_inner [Module.Flat (𝓞 K) N]
+    (h : HermitianMetric (K := K) M) (g : HermitianMetric (K := K) N)
+    {P T : Submodule (𝓞 K) M} (hPT : P ≤ T) (U : Submodule (𝓞 K) N)
+    (σ : K →+* ℂ) (x y : ComplexFiber (tensorStep P T U) σ) :
+    (((h.submodule T).tensor g).fiber σ).inner
+      (fiberMap (tensorStepLift hPT U) σ x) (fiberMap (tensorStepLift hPT U) σ y) =
+      (((h.tensor g).submodule (tensorStep P T U)).fiber σ).inner x y := by
+  rw [show (h.submodule T).tensor g = (h.tensor g).pullback (T.subtype.rTensor N)
+      (Module.Flat.rTensor_preserves_injective_linearMap T.subtype T.injective_subtype) from
+    (tensor_pullback h g T.subtype T.injective_subtype).symm]
+  change ((h.tensor g).fiber σ).inner
+    (fiberMap (T.subtype.rTensor N) σ (fiberMap (tensorStepLift hPT U) σ x))
+    (fiberMap (T.subtype.rTensor N) σ (fiberMap (tensorStepLift hPT U) σ y)) = _
+  simp only [← LinearMap.comp_apply, ← fiberMap_comp, tensorStepLift_comp]
+  rfl
+
+/-- The canonical integral consecutive-grade isomorphism is a Hilbert isometry
+on every complex fiber. -/
+lemma tensorGradeEquiv_inner [Module.Flat (𝓞 K) N]
+    (h : HermitianMetric (K := K) M) (g : HermitianMetric (K := K) N)
+    {P T : Submodule (𝓞 K) M} (hPT : P ≤ T)
+    {Q U : Submodule (𝓞 K) N} (hQU : Q ≤ U)
+    [Module.Flat (𝓞 K) (T ⧸ P.comap T.subtype)]
+    [Module.Flat (𝓞 K) (U ⧸ Q.comap U.subtype)]
+    (σ : K →+* ℂ)
+    (x y : ComplexFiber
+      (tensorStep P T U ⧸ (tensorStep P T Q).comap (tensorStep P T U).subtype) σ) :
+    ((((h.submodule T).quotient (P.comap T.subtype)).tensor
+        ((g.submodule U).quotient (Q.comap U.subtype))).fiber σ).inner
+      (fiberMap (tensorGradeEquiv hPT Q U).toLinearMap σ x)
+      (fiberMap (tensorGradeEquiv hPT Q U).toLinearMap σ y) =
+      ((((h.tensor g).submodule (tensorStep P T U)).quotient
+        ((tensorStep P T Q).comap (tensorStep P T U).subtype)).fiber σ).inner x y := by
+  have hn := pushforward_natural_inner
+    ((h.tensor g).submodule (tensorStep P T U)) ((h.submodule T).tensor g)
+    (tensorStepLift hPT U) (tensorStepLift_inner h g hPT U)
+    ((tensorStep P T Q).comap (tensorStep P T U).subtype).mkQ
+    ((tensorStep P T Q).comap (tensorStep P T U).subtype).mkQ_surjective
+    (TensorProduct.map (P.comap T.subtype).mkQ Q.mkQ)
+    (TensorProduct.map_surjective (P.comap T.subtype).mkQ_surjective Q.mkQ_surjective)
+    (tensorGradeInclusion hPT Q U) (tensorGradeInclusion_injective hPT Q U)
+    (tensorGradeInclusion_comp hPT Q U).symm (tensorStepLift_kernel hPT hQU) σ x y
+  rw [tensor_map_pushforward (h.submodule T) g (P.comap T.subtype).mkQ
+    (P.comap T.subtype).mkQ_surjective Q.mkQ Q.mkQ_surjective,
+    tensorGradeInclusion_eq, fiberMap_comp] at hn
+  let a := (h.submodule T).quotient (P.comap T.subtype)
+  have hid : a.pullback LinearMap.id Function.injective_id = a := by
+    apply ext_section_inner
+    intro τ v w
+    simp only [pullback_inner, fiberMap_section, LinearMap.id_apply]
+  have ht := tensor_map_pullback a (g.quotient Q) LinearMap.id (submoduleQuotientMap Q U)
+    Function.injective_id (submoduleQuotientMap_injective Q U)
+  rw [hid, ← g.quotient_submodule hQU] at ht
+  have hi := congrArg (fun b : HermitianMetric (K := K)
+      ((T ⧸ P.comap T.subtype) ⊗[𝓞 K] (U ⧸ Q.comap U.subtype)) =>
+    (b.fiber σ).inner (fiberMap (tensorGradeEquiv hPT Q U).toLinearMap σ x)
+      (fiberMap (tensorGradeEquiv hPT Q U).toLinearMap σ y)) ht
+  exact hi.symm.trans hn
+
+end HermitianMetric
+
 end BostConjecture.Arithmetic
