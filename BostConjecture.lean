@@ -48,6 +48,8 @@ public import BostConjecture.Main.TensorSemistability.SubmoduleVariation
 public import BostConjecture.Main.TensorSemistability.TensorVariation
 public import BostConjecture.Main.TensorSemistability.PartialTraceDefect
 public import BostConjecture.Main.TensorSemistability.ConjugateBasis
+public import BostConjecture.Main.TensorSemistability.ProjectionConjugation
+public import BostConjecture.Main.TensorSemistability.ArithmeticTensorFiber
 public import BostConjecture.Main.LineTwist.Semistability
 public import BostConjecture.Main.StrictReduction.MaximizingCounterexample
 public import BostConjecture.Main.MaxSlope.FilteredBound

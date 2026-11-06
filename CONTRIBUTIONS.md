@@ -1026,3 +1026,19 @@ extensions and existing compactness supply strictness and attainment. The
 cone has no MAIN import or final tensor-semistability dependency. Independent
 source/math/honesty review accepted this reduction; its remaining consumer is
 TENSOR-SEMI actual balance. No external code was copied.
+
+TENSOR-SEMI `6cc3fd8` hands off the complete `ProjectionConjugation` and
+`ArithmeticTensorFiber` modules, including content initially captured by
+automatic snapshots. Independent read-only review compared the full current
+files to that exact checkpoint and verified the 2816/3537-job checks and all
+59 foundational-only axiom outputs. These prove conjugate-isometric naturality
+of projections and partial traces, the actual tensor-submodule range and rank,
+and arithmetic projection-trace transport. They are inputs to the unfinished
+balance theorem, not a substitute for it. No vendor code was changed.
+
+MAIN `40987f0` reuses the existing `integralPart_baseChange` saturation identity
+to apply the filtered slope bound directly to integral filtrations. The same
+checkpoint proves that the actual empty Hilbert tensor product has maximal
+slope zero using the accepted finite tensor rank/degree formulas. These are
+project-local consumer adapters; toolchain, dependency pins and licenses are
+unchanged.

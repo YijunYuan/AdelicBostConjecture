@@ -11,6 +11,7 @@ import BostConjecture.Main.MaxSlope.PiLowerBound
 #print axioms BostConjecture.Arithmetic.HermitianMetric.subspaceDegree_le_of_filtration
 #print axioms BostConjecture.Arithmetic.HermitianMetric.slope_submodule_le_of_filtration
 #print axioms BostConjecture.Arithmetic.HermitianMetric.maxSlope_le_of_filtration
+#print axioms BostConjecture.Arithmetic.HermitianMetric.maxSlope_le_of_integral_filtration
 #print axioms BostConjecture.Arithmetic.tensorRight_mono
 #print axioms BostConjecture.Arithmetic.tensorRight_bot
 #print axioms BostConjecture.Arithmetic.tensorRight_top
@@ -53,4 +54,5 @@ import BostConjecture.Main.MaxSlope.PiLowerBound
 #print axioms BostConjecture.Arithmetic.HermitianMetric.maxSlope_le_of_isometric_injection
 #print axioms BostConjecture.Arithmetic.HermitianMetric.maxSlope_eq_of_equiv
 #print axioms BostConjecture.Arithmetic.HermitianMetric.piTensorGenericNontrivial
+#print axioms BostConjecture.Arithmetic.HermitianMetric.maxSlope_piTensor_empty
 #print axioms BostConjecture.Arithmetic.HermitianMetric.sum_maxSlope_le_piTensor
