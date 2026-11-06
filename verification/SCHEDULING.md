@@ -1,134 +1,59 @@
 # Parallel Horizon scheduling
 
-## Live checkpoint at 2026-11-06 01:39 UTC
+## Live checkpoint at 2026-11-06 01:57 UTC
 
-SPECHT is complete and run `0003` exited normally after session `0030` at
-23:50:16 UTC. The exact canonical-lattice covolume limit, 14 final
-foundational-only axiom probes and independent review passed; the final
-integrated root passed 9,263 warning-free jobs at 23:42:25 UTC. Checked
-shared-file handoff: `e2e7039`, evidence typography `8d57641`, root blob
-`30f3a016666f4a42f99e905a434b65f63c1f8770`.
+The user explicitly requests **four continuing Horizon proof lanes until the
+entire main theorem is complete**, with no budget cap. The parent only schedules,
+reviews handoffs and monitors memory; Horizon owns all mathematical authorship.
+The four-writer cap includes writable helpers. Keep runs in foreground tool
+sessions, refill completed slots with actual remaining dependencies, and reduce
+concurrency at safe checkpoints if memory pressure is sustained. Do not restart
+a completed task merely to fill a slot. No push/publication is authorized.
 
-| Run | Task | Active session | Responsibility |
-| --- | --- | --- | --- |
-| `0004` | `BOST-ARITH` | `0016` | Intrinsic arithmetic HN theory and degree finiteness |
-| `0005` | `BOST-GEOM` | `0016` | Invariant tensor nonvanishing and shared integration |
-| `0006` | `BOST-BALANCED` | `0010` | Full Lemma 7.2 passed scoped verification; final integration/reviews |
-| `0008` | `BOST-COVOLUME` | `0002` | Actual restriction-of-scalars trace-metric covolume |
+**Original Lemma 7.2 is fully verified and the user was notified in this chat
+at approximately 01:47 UTC.** The exact theorem is
+`BostConjecture.Balanced.IsBalanced.plucker_semistable` in
+`Balanced/PluckerSemistability.lean:118`, including an actual positive-degree
+homogeneous invariant nonzero on each nonzero intrinsic Plucker representative.
+Its scoped build passed 3,619 jobs; all 195 transitive axiom probes are
+foundational-only. Independent source, mathematical and honesty reviews accepted
+the original statement. Integration `cf391765` passed 9,329 warning-free root
+jobs at 01:44:09 UTC. Blueprint attachments and completion markers are accepted.
+The final theorem blob is `74e9fb060b2cacbc37a15d35bac52921477a659f`.
+No additional build is needed for this milestone.
 
+| Run | Task | Current responsibility |
+| --- | --- | --- |
+| `0005` | `BOST-GEOM` | Binary Plucker/contraction consumers and shared integration |
+| `0006` | `BOST-BALANCED` | Verified Lemma 7.2; finishing task closure |
+| `0008` | `BOST-COVOLUME` | Actual restriction-of-scalars trace-metric covolume |
+| free | Successor selection | Required actual Specht bundle or compactness producer |
 
-CLOSURE started at 00:00:50 UTC in the freed SPECHT slot, PID `584941`, and
-completed at 01:16:41 UTC with normal exit 0. Its final evidence is `f7ffd4f`;
-root integration `d29f2d3` passed 9,307 warning-free jobs, and graph integration
-is accepted. Do not resume completed run `0007`. The three remaining runs
-continue in the foreground. The successor `BOST-COVOLUME` started in that
-free slot at 01:35:43 UTC (run `0008`, PID `700122`), restoring four writers.
-Its exclusive paths are `InvariantTheory/ComplexClosure/**`,
-`blueprint/src/complex_closure.tex`, `verification/ComplexClosureAxioms.lean`
-and `verification/COMPLEX_CLOSURE.md`. The fixed consumer interface is in
-`BALANCED.md`; BALANCED retains the canonical definitions and final assembly.
-The closure blueprint was migrated at `ecbcee9`; all owned nodes now have
-checked implementations. GEOM added its shared include and confirmed graph
-sync has no missing dependency references.
+ARITH run `0004` finished normally at 01:50:45 UTC, with its full task marked
+done. Its arbitrary-number-field, nonfree-projective degree calculus, actual HN
+specialization and all-rank degree finiteness are checked: 366 foundational-only
+probes, root `cf391765`, final evidence `c4f4348`. Do not resume it.
+SPECHT run `0003` completed the canonical-lattice covolume limit at 23:50:16 UTC
+(evidence `e2e7039`/`8d57641`, root 9,263 jobs). CLOSURE run `0007` completed at
+01:16:41 UTC (proof `53f1119`, integration `d29f2d3`, evidence `f7ffd4f`, 40
+foundational-only probes). Neither completion implies the main theorem is done.
 
-Standing protection `I-0087` supersedes archived `I-0074`. GEOM exclusively
-owns the shared root import, attribution, results and blueprint index files.
-The accepted handoffs in `I-0072` and `I-0073` have been consumed by all owners.
-No fifth proof writer has been launched.
+Standing ownership is `I-0087` until the successor scopes are assigned. GEOM
+alone edits the shared root, attribution, results and blueprint index files.
+COVOLUME owns only `Arithmetic/RestrictionCovolume/**`,
+`blueprint/src/restriction_covolume.tex`, `verification/RestrictionCovolumeAxioms.lean`
+and `verification/RESTRICTION_COVOLUME.md`; its stable input handoff is in
+`ARITHMETIC.md`. Completed source APIs stay stable unless parent coordinates a
+specific extension. The remaining main theorem, contraction and compactness
+claims are open. A bounded read-only dependency review and GEOM handshake will
+choose two disjoint successors; deferred coaction base change is not presumed
+necessary after the checked direct nonvanishing descent.
 
-Standing permissions allow tasks/runs with a four-session cap and no budget
-limit. Independent read-only health review confirmed exactly four live runs
-and the guarded LSP in the new CLOSURE process. At 00:05 UTC, memory measured
-10.33 GiB available, PSI avg10 0.00%, zero OOM kills, and no swap-out increase
-over the startup sample. At 00:28 UTC, 9.80 GiB remained available with PSI
-avg10/avg60/avg300 all zero. Dashboard HTTP returned 200. The old three-writer
-wording in the ARITH/GEOM objectives was corrected without changing their math.
-Lemma 7.2 remains open at the actual invariant construction and final assembly;
-the exact closure producer is fully checked, integrated and delivered.
-
-The latest completed shared batch passed 9,299 warning-free root jobs at
-00:43:05 UTC; GEOM's 273-probe audit and independent pairing review passed.
-This precedes the final closure and unitary-density deliveries. Exact import
-boundaries belong to the owners' verification records; these checks do not
-complete their remaining tasks or the manuscript's main theorem.
-
-BALANCED session `0006` ended normally with its 142-probe checked handoff
-through `7b835bd`; session `0008` started at 00:23:27 UTC. The exact actual
-orbit-image equality is checked and delivered to CLOSURE. The closure lane
-has now proved the exact agreed endpoint, as detailed below.
-
-A bounded read-only scheduling review distinguished complex Lemma 7.2 from
-the later scalar-extension/field-descent obligation. In `I-0079`, both BALANCED
-and GEOM accepted this priority: BALANCED finishes only the already in-flight
-`PolynomialBaseChange` checkpoint, then advances homogeneous extraction,
-special-unitary density and finite-degree averaging. Remaining coaction
-scalar-extension work stays a later GEOM-consumer obligation under unchanged
-BALANCED ownership. GEOM confirmed no current consumer requires delaying
-this direct complex route. This is a scheduling decision, not a new mathematical
-proof or a fifth writer; the parent made no Lean or blueprint edits.
-
-The bounded closure result is committed as `53f1119`: the theorem
-`closure_polynomial_image_zeroLocus` in `ComplexClosure.Comparison` passed its
-3,394-job warning-free module build at 00:48:35 UTC. All 40 transitive probes
-passed at 00:51:53 UTC with only standard foundational axioms. Independent
-source, mathematical and honesty reviews accepted the exact theorem, including
-empty arities, and inspected the original source pages. GEOM integration and
-the final task handoff are complete; no additional proof objective has been
-assigned to CLOSURE. See [COMPLEX_CLOSURE.md](COMPLEX_CLOSURE.md).
-
-BALANCED has checked homogeneous extraction and the generic compact-average
-helper, with independent review and 163 foundational-only probes. The
-`UnitaryDensity` and `SpecialUnitaryDensity` endpoints are now checked and
-independently reviewed, with 181 foundational-only probes through `6bac08b`.
-BALANCED also checked `PluckerSemistability` (`7f56300`), proving origin
-exclusion for every nonzero vector of the actual Plucker line. The final
-root batch for that endpoint and special-unitary detection (`6da0e3e`) remains
-pending. Remaining Lemma 7.2 work is continuity and finite-degree averaging
-for the actual polynomial action, the invariant-polynomial criterion and final
-source-facing assembly. A closure
-theorem or generic averaging helper alone is not the requested result.
-
-The 00:40 read-only health sample found exactly four writers, low PSI and no
-OOM. Two guarded BALANCED LSP trees explained its higher measured PSS during
-review; no leak or emergency intervention was inferred. At 00:49, available
-memory was 8.17 GiB and PSI avg10 0.19%. Continue monitoring and use normal
-checked-boundary handoffs if sustained pressure returns.
-
-The read-only tool diagnosis is recorded in advisory inbox `I-0084`: changes
-from parallel writers can repeatedly trigger a full Horizon search-index
-rebuild. The graph scope is intact; consume existing graph results and avoid
-redundant forced indexing. No installed package or tool configuration changed.
-
-In `I-0085`, ARITH and GEOM accepted the independent covolume successor.
-ARITH committed the complete unproved `lem:restriction-covolume` migration
-and the precise convention/interface handoff in `ARITHMETIC.md`. This theorem
-is consumed by `lem:arithmetic-compactness`, independently of ARITH's current
-Minkowski/exterior degree-finiteness proof. It constructs the actual real trace
-metric with place weights 1/2 and proves the discriminant/degree covolume
-identity for arbitrary finite projectives, including rank zero.
-
-I-0087 transfers only `Arithmetic/RestrictionCovolume/**`,
-`blueprint/src/restriction_covolume.tex`,
-`verification/RestrictionCovolumeAxioms.lean`, and
-`verification/RESTRICTION_COVOLUME.md` to BOST-COVOLUME.
-ARITH keeps existing arithmetic APIs; GEOM adds the shared include after
-arithmetic. The new task and roadmap `BOST-ARITH-COVOLUME` have these refs;
-active task refs and the stale SPECHT-integrator wording were corrected.
-Standing permission rechecked: runs/tasks allowed, max four writers, no cap.
-The new run is active and its blueprint include has been added by GEOM.
-Independent startup review observed exactly four writer engines and the
-actual guarded LSP in COVOLUME (700370→700572→700810). Memory remained
-7.28 GiB available, PSI avg10 0.00%, no swap-out increase and no OOM;
-dashboard HTTP returned 200. BALANCED's priority and canonical APIs are unchanged.
-
-The exact source endpoint `BostConjecture.Balanced.IsBalanced.plucker_semistable`
-has now passed its scoped 3,619-job build and 195 foundational-only probes.
-An additional read-only review visually matched manuscript page 12, checked
-actual projections/partial traces, intrinsic Plucker line and action, and the
-constructed positive-degree nonvanishing invariant; no extra mathematical
-premise or vacuity was found. Final owner review records, blueprint attachments
-and shared-root integration are still pending. Do not notify full completion
-until that acceptance boundary is recorded.
+At 01:52 UTC, available memory was 9.21 GiB, PSI avg10 0.00%, swap used 3.31 GiB
+and OOM kills zero. All active proof runs use the guarded Lean LSP; broad checks
+remain serialized through explicit-root Horizon checks. Dashboard remains on
+port 8765. Advisory `I-0084` records global search-index rebuild costs: batch
+searches at stable checkpoints and avoid redundant forced reindexing.
 
 ## Earlier checkpoints
 
