@@ -436,9 +436,10 @@ right side of the displayed inequality.
 
 \begin{theorem}[Geometric slope inequality]
 \label{thm:geometric-slope}
-\uses{lem:contraction-nonzero,lem:canonical-pairing-finite-degree,thm:specht-sublinear-covolume}
+\lean{BostConjecture.Slope.Geometric.slope_le_of_nonzero_pairings,BostConjecture.Slope.Geometric.slope_le_of_complex_invariant,BostConjecture.Slope.Geometric.slope_le_of_binary_complex_invariant}
+\leanok
+\uses{lem:plucker-invariant-nonzero-sequence,lem:binary-plucker-nonzero-sequence,lem:canonical-pairing-finite-degree,thm:specht-sublinear-covolume}
 \source{bost-specht-manuscript:page-0009,bost-specht-manuscript:page-0010}
-\notready
 For arbitrary positive-rank Hermitian bundles $E_1,\ldots,E_N$ and
 a nonzero submodule $V\subseteq\bigotimes_j E_j$, geometric
 semistability of the Pl\"ucker line of $V_K$ implies
@@ -452,23 +453,13 @@ is nonzero on a nonzero Pl\"ucker vector of $V$. In the two-factor case
 the same assertion applies to the usual binary tensor Pl\"ucker action.
 \end{theorem}
 \begin{proof}
-Take the unbounded sequence $d=\ell d_0$ from the nonvanishing lemma.
-The kernel of $\Psi_{d,K}$ is invariant for the simultaneous
-$\mathfrak S_d$ action. Absolute irreducibility of $B_{d,K}$ and
-nonvanishing force that kernel to be zero. Torsion-freeness gives
-injectivity over $\Ocal$. Let $J_d$ be the actual image, with metric
-induced from $D_d^\vee$. The isomorphism of modules $B_d\to J_d$
-is contracting, so $\slope(B_d)\leq\slope(J_d)$.
-
-Each factor of $D_d$ has absolutely irreducible isometric permutation
-action. Their tensor product is absolutely irreducible for the
-independent product of permutation groups. Its dual is semistable by
-the irreducible-action lemma. Thus, including when $J_d$ is not
-saturated, $\slope(J_d)\leq\slope(D_d^\vee)$. The determinant and
-average tensor-slope formulas give
+The actual invariant at the chosen embedding gives the unbounded
+sequence $d=\ell d_0$ of nonzero original-ring canonical pairings
+by Lemma~\ref{lem:plucker-invariant-nonzero-sequence}.
+Lemma~\ref{lem:canonical-pairing-finite-degree}, whose proof compares
+the source with its actual image and the semistable target, gives
 \[
- d\slope(V)-c_s(d)\leq\slope(J_d)
- \leq d\sum_j\slope(E_j)+\sum_jc_{a_j}(d).
+ d\slope(V)-c_s(d)\leq d\sum_j\slope(E_j)+\sum_jc_{a_j}(d).
 \]
 Divide by $d$ and let $\ell\to\infty$. The sublinear Specht covolume
 theorem makes every error term tend to zero, giving the claim.

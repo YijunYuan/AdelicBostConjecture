@@ -10,6 +10,8 @@ import BostConjecture.Slope.Geometric.PairingInjective
 import BostConjecture.Slope.Geometric.PairingMetric
 import BostConjecture.Slope.Geometric.ImageSlope
 import BostConjecture.Slope.Geometric.PairingSlope
+import BostConjecture.Slope.Geometric.InvariantSlope
+import BostConjecture.Slope.Geometric.BinaryInvariantSlope
 
 #print axioms BostConjecture.Arithmetic.Specht.complexRepresentation_irreducible
 #print axioms BostConjecture.Arithmetic.Specht.latticeComplexCore_action_inner
@@ -50,3 +52,6 @@ import BostConjecture.Slope.Geometric.PairingSlope
 #print axioms BostConjecture.Slope.Geometric.slope_le_image_of_injective
 #print axioms BostConjecture.Slope.Geometric.canonicalPairing_image_slope
 #print axioms BostConjecture.Slope.Geometric.canonicalPairing_slope_inequality
+#print axioms BostConjecture.Slope.Geometric.slope_le_of_nonzero_pairings
+#print axioms BostConjecture.Slope.Geometric.slope_le_of_complex_invariant
+#print axioms BostConjecture.Slope.Geometric.slope_le_of_binary_complex_invariant

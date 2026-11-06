@@ -92,8 +92,23 @@ slope estimate with exact Specht corrections. Kernel builds passed (9184 jobs,
 (8.5 seconds), foundational-only. Independent reviews accepted the actual range
 metric, rank argument, concrete semistability consumer and duality signs.
 
-The geometric slope inequality remains open; the next consumer is the verified
-asymptotic limit applied to GEOM's actual complex-invariant pairing sequence.
+`Slope/Geometric/InvariantSlope.lean` proves the geometric slope inequality
+from an actual positive-degree complex Plücker invariant with nonzero evaluation.
+GEOM supplies nonzero pairings over the original ring; the exact finite-degree
+estimate and the accepted Specht asymptotic give the limit. The chosen widths
+tend to infinity because tableau cardinalities force degree = rank × width.
+`BinaryInvariantSlope.lean` consumes GEOM's binary invariant producer directly.
+Module checks passed (9286 jobs, 76.1 seconds; 9289 jobs, 12.6 seconds); all
+thirty-eight transitive probes passed (8.9 seconds), with exactly `propext`,
+`Classical.choice`, and `Quot.sound`. The final honesty review accepted both
+actual-invariant consumers and the finite-projective number-field scope.
+
+The requested geometric slope route is proved. Shared root integration and
+the downstream tensor-semistability/main-theorem work are owned by MAIN and
+TENSOR-SEMI. The migrated `lem:determinant-isotypic` remains `notready` solely
+for its additional, unused full generic SL-fixed-space assertion; this is not
+an assumption or dependency of the proved geometric endpoint. The actual
+complex determinant–Specht representation equivalence is proved separately.
 Existing ARITH, SPECHT, and GEOM producers are unchanged.
 
 Tooling: the first check invocation used unsupported `-p` and did not run Lean;
