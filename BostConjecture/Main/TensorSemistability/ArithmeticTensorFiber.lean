@@ -152,7 +152,7 @@ theorem tensorPartialTraceLeft_conjugate (h : HermitianMetric (K := K) M)
   exact Balanced.partialTraceLeft_conjugate _ _ (h.inner_conjugate σ) (k.inner_conjugate σ)
     _ _ (h.tensorSubmoduleProjection_conjugate k P σ) x
 
-set_option maxHeartbeats 800000 in
+omit [Module.Projective (𝓞 K) M] [Module.Projective (𝓞 K) N] in
 /-- The arithmetic projection trace is the trace on the canonical binary fiber. -/
 theorem fiberProjectionTrace_tensor_transport (h : HermitianMetric (K := K) M)
     (k : HermitianMetric (K := K) N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
@@ -200,7 +200,8 @@ theorem fiberProjectionTrace_tensor_transport (h : HermitianMetric (K := K) M)
       (S.starProjection.toLinearMap.comp
         (e.symm.toLinearEquiv.toLinearMap.comp (C.comp e.toLinearEquiv.toLinearMap))) =
       (h.tensorSubmoduleProjection k P σ).comp C := by
-    ext x
+    apply LinearMap.ext
+    intro x
     change e (S.starProjection (e.symm (C (e (e.symm x))))) = _
     rw [e.apply_symm_apply, ← hp, e.apply_symm_apply]
     rfl

@@ -158,3 +158,24 @@ MAIN's I-0137 acknowledgment confirms shared root integration of the actual
 variation producers through e0b0bb1 at 76bf02f, with 9395 warning-free jobs.
 The newer 7fd2332 partial-trace/conjugate-basis checkpoint awaits MAIN's next
 independent review and root integration; its narrow checks above are complete.
+
+## Actual conjugation and arithmetic projection-trace transport
+
+`ProjectionConjugation.lean` proves conjugate-isometric naturality of projections
+and both partial traces. `ArithmeticTensorFiber.lean` applies this to the actual
+integral-submodule scalar-extension range, proves its generic-rank dimension,
+and identifies arithmetic projection traces through canonical binary scalar extension.
+
+- Serialized builds passed 2816 and 3537 jobs without warnings.
+- All 59 serialized transitive axiom probes passed with only standard foundations.
+- Independent exact-source/mathematical/honesty review accepted both producers;
+  the generic blueprint statement was corrected to require isometric bijections.
+- New blueprint nodes: `lem:conjugate-projection-partial-trace` and
+  `lem:arithmetic-tensor-projection`. Their consumer is `lem:extremal-to-balance`.
+- MAIN integrated all prior producers through 7fd2332 at d0c9f8a (9404 jobs).
+  The new modules await its next shared-root checkpoint.
+
+The remaining frontier is now the compatible traceless arithmetic defect
+families, local-maximum stationarity and their vanishing, followed by the actual
+geometric contradiction and unconditional tensor semistability. LINE032df77 and
+STRICTb49b67f are accepted completed producers; no successor dependency is missing.

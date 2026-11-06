@@ -404,8 +404,8 @@ $y=\sum_i\overline{a_i}ce_i$, proving that the transported vectors span.
 \uses{lem:conjugate-orthonormal-basis,lem:partial-trace-defect}
 \source{bost-specht-manuscript:page-0013}
 \lean{BostConjecture.Balanced.starProjection_conjugate,BostConjecture.Balanced.inner_tensor_conjugate,BostConjecture.Balanced.partialTraceRight_conjugate,BostConjecture.Balanced.partialTraceLeft_conjugate}
-\notready
-Let $c:U\to U'$ and $d:W\to W'$ be conjugate-linear isometries
+\leanok
+Let $c:U\to U'$ and $d:W\to W'$ be conjugate-linear isometric bijections
 between finite-dimensional complex Hilbert spaces. If $c$ carries $S$
 onto $S'$, their orthogonal projections satisfy $P_{S'}c=cP_S$.
 The tensor map $c\otimes d$ is a conjugate-linear isometry.
@@ -438,9 +438,46 @@ with $u_i\otimes x$ gives equality of pairings against every $dx$,
 and nondegeneracy and surjectivity of $d$ finish the proof.
 \end{proof}
 
+\begin{lemma}[Actual tensor fibers, conjugation, and projection traces]
+\label{lem:arithmetic-tensor-projection}
+\uses{lem:conjugate-projection-partial-trace,lem:tensor-metric-variation,lem:degree-calculus}
+\source{bost-specht-manuscript:page-0013}
+\lean{BostConjecture.Arithmetic.finrank_tensorSubmoduleFiber,BostConjecture.Arithmetic.mem_tensorSubmoduleFiber_conjugate,BostConjecture.Arithmetic.HermitianMetric.tensorSubmoduleProjection_conjugate,BostConjecture.Arithmetic.HermitianMetric.tensorPartialTraceRight_conjugate,BostConjecture.Arithmetic.HermitianMetric.tensorPartialTraceLeft_conjugate,BostConjecture.Arithmetic.HermitianMetric.fiberProjectionTrace_tensor_transport}
+\leanok
+Let $E,F$ be finite projective integral modules with Hermitian metrics,
+and $S\subset E\otimes F$ an integral submodule. Write $j_\sigma$
+for its scalar-extension injection and $e_\sigma$ for canonical binary
+scalar extension. The subspace $V_\sigma=\operatorname{im}(e_\sigma j_\sigma)$
+has dimension $\rk S$ and is carried onto $V_{\bar\sigma}$ by canonical
+tensor conjugation. Its orthogonal projection $Q_\sigma$ and both its
+partial traces intertwine these conjugations. If $P_\sigma$ is the
+projection onto $\operatorname{im}j_\sigma$, then every tensor-fiber
+endomorphism $C$ satisfies
+\[
+ \operatorname{Re}\operatorname{Tr}
+  (P_\sigma e_\sigma^{-1}Ce_\sigma)
+ =\operatorname{Re}\operatorname{Tr}(Q_\sigma C).
+\]
+\end{lemma}
+\begin{proof}
+Scalar extension preserves the injection, and $e_\sigma$ is an
+isomorphism, so its range is isomorphic to $S_\sigma$ and has dimension
+$\rk S$. Naturality of canonical conjugation gives
+$c_{E\otimes F}j_\sigma=j_{\bar\sigma}c_S$ and
+$e_{\bar\sigma}c_{E\otimes F}=(c_E\otimes c_F)e_\sigma$.
+These identities and the surjectivity of $c_S$ prove the assertion about
+the ranges. The given metric makes both factor conjugations
+conjugate-isometric, so the preceding conjugation lemma applies to
+the actual projections and partial traces.
+Finally $e_\sigma$ is an isometry for the actual Hilbert tensor metric.
+It sends the range of $j_\sigma$ onto $V_\sigma$, hence
+$Q_\sigma=e_\sigma P_\sigma e_\sigma^{-1}$ by orthogonal projection
+uniqueness. Conjugation invariance of trace gives the displayed identity.
+\end{proof}
+
 \begin{lemma}[Extremal metrics give balanced tensor fibers]
 \label{lem:extremal-to-balance}
-\uses{lem:extremal-degree-local-maximum,lem:exponential-stability-neighborhood,lem:tensor-metric-variation,lem:partial-trace-defect,lem:conjugate-projection-partial-trace,lem:balanced-partial-traces,lem:balanced-projection-trace,def:balanced-subspace}
+\uses{lem:extremal-degree-local-maximum,lem:exponential-stability-neighborhood,lem:tensor-metric-variation,lem:partial-trace-defect,lem:arithmetic-tensor-projection,lem:balanced-partial-traces,lem:balanced-projection-trace,def:balanced-subspace}
 \source{bost-specht-manuscript:page-0013}
 \notready
 Let $E,F$ have positive ranks $m,n$ and strictly stable degree-zero
