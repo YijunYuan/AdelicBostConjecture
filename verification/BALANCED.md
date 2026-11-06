@@ -1,4 +1,4 @@
-# Balanced projections: verified boundary
+# Balanced projections: completed Lemma 7.2
 
 The exact source-shaped endpoint is now kernel-checked as
 `BostConjecture.Balanced.IsBalanced.plucker_semistable`. For every nonzero
@@ -868,3 +868,14 @@ The scalar-extension square remains tracked separately under
 `BOST-BALANCED-COACTION`, pending for GEOM's later descent under I-0079;
 it is not a dependency of this complex lemma. The main Theorem 1.1 is not
 claimed complete.
+
+Reproduce the final scoped proof and transitive axiom checks with:
+
+```sh
+"$HORIZON_BIN" --root /home/yijunyuan/bc-workspace check BostConjecture.Balanced.PluckerSemistability
+"$HORIZON_BIN" --root /home/yijunyuan/bc-workspace check --lean verification/BalancedAxioms.lean
+```
+
+The final acceptance prose was initially captured by ARITH's automatic
+session snapshot `21ba17f`; it records the previously accepted checks and
+does not replace the explicit proof/review/root evidence above.
