@@ -399,9 +399,48 @@ $x=\sum_i a_i e_i$; conjugate linearity gives
 $y=\sum_i\overline{a_i}ce_i$, proving that the transported vectors span.
 \end{proof}
 
+\begin{lemma}[Conjugation of projections and partial traces]
+\label{lem:conjugate-projection-partial-trace}
+\uses{lem:conjugate-orthonormal-basis,lem:partial-trace-defect}
+\source{bost-specht-manuscript:page-0013}
+\lean{BostConjecture.Balanced.starProjection_conjugate,BostConjecture.Balanced.inner_tensor_conjugate,BostConjecture.Balanced.partialTraceRight_conjugate,BostConjecture.Balanced.partialTraceLeft_conjugate}
+\notready
+Let $c:U\to U'$ and $d:W\to W'$ be conjugate-linear isometries
+between finite-dimensional complex Hilbert spaces. If $c$ carries $S$
+onto $S'$, their orthogonal projections satisfy $P_{S'}c=cP_S$.
+The tensor map $c\otimes d$ is a conjugate-linear isometry.
+If endomorphisms $P,Q$ of the two tensor spaces satisfy
+$Q(c\otimes d)=(c\otimes d)P$, then
+\[
+ \operatorname{Tr}_{W'}(Q)c=c\operatorname{Tr}_W(P),\qquad
+ \operatorname{Tr}_{U'}(Q)d=d\operatorname{Tr}_U(P).
+\]
+\end{lemma}
+\begin{proof}
+The vector $cP_Sx$ lies in $S'$. For $z\in S$,
+$\langle cx-cP_Sx,cz\rangle=\overline{\langle x-P_Sx,z\rangle}=0$.
+Every vector of $S'$ is of the form $cz$, so uniqueness of orthogonal
+projection proves the first assertion. The tensor pairing identity on
+pure tensors follows by multiplying the two conjugate pairing
+identities; sesquilinearity extends it to the whole tensor space.
+Choose an orthonormal basis $(w_j)$ of $W$. Its image $(dw_j)$ is an
+orthonormal basis of $W'$. The right partial-trace contraction formula,
+the intertwining hypothesis, and the tensor pairing identity give
+\[
+ \langle cx,\operatorname{Tr}_{W'}(Q)cy\rangle
+ =\sum_j\overline{\langle x\otimes w_j,P(y\otimes w_j)\rangle}
+ =\langle cx,c\operatorname{Tr}_W(P)y\rangle.
+\]
+Nondegeneracy and surjectivity of $c$ prove the right identity.
+For the left identity choose an orthonormal basis $(u_i)$ of $U$ and
+apply the left contraction formula to $(cu_i)$; the same computation
+with $u_i\otimes x$ gives equality of pairings against every $dx$,
+and nondegeneracy and surjectivity of $d$ finish the proof.
+\end{proof}
+
 \begin{lemma}[Extremal metrics give balanced tensor fibers]
 \label{lem:extremal-to-balance}
-\uses{lem:extremal-degree-local-maximum,lem:exponential-stability-neighborhood,lem:tensor-metric-variation,lem:partial-trace-defect,lem:conjugate-orthonormal-basis,lem:balanced-partial-traces,lem:balanced-projection-trace,def:balanced-subspace}
+\uses{lem:extremal-degree-local-maximum,lem:exponential-stability-neighborhood,lem:tensor-metric-variation,lem:partial-trace-defect,lem:conjugate-projection-partial-trace,lem:balanced-partial-traces,lem:balanced-projection-trace,def:balanced-subspace}
 \source{bost-specht-manuscript:page-0013}
 \notready
 Let $E,F$ have positive ranks $m,n$ and strictly stable degree-zero
