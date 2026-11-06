@@ -61,8 +61,8 @@ BALANCED ownership. GEOM confirmed no current consumer requires delaying
 this direct complex route. This is a scheduling decision, not a new mathematical
 proof or a fifth writer; the parent made no Lean or blueprint edits.
 
-The bounded closure result is committed as `53f1119`:
-`ComplexClosure.Comparison.closure_polynomial_image_zeroLocus` passed its
+The bounded closure result is committed as `53f1119`: the theorem
+`closure_polynomial_image_zeroLocus` in `ComplexClosure.Comparison` passed its
 3,394-job warning-free module build at 00:48:35 UTC. All 40 transitive probes
 passed at 00:51:53 UTC with only standard foundational axioms. Independent
 source, mathematical and honesty reviews accepted the exact theorem, including
