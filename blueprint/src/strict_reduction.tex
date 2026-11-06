@@ -27,7 +27,7 @@ semistability of every smaller normalized pair.
 
 \begin{lemma}[Semistability of a tensor extension]
 \label{lem:normalized-tensor-extension}
-\uses{lem:normalized-semistable-extension,lem:degree-calculus}
+\uses{lem:normalized-semistable-extension,lem:tensor-saturated-submodule,lem:degree-calculus}
 \source{bost-specht-manuscript:page-0012,bost-specht-manuscript:page-0013}
 \lean{BostConjecture.Arithmetic.HermitianMetric.isSemistable_tensor_of_submodule_quotient}
 \notready
@@ -49,9 +49,38 @@ their ranks and their degrees; hence they preserve semistability.
 The normalized extension lemma now applies to $T\subset E\otimes F$.
 \end{proof}
 
+\begin{lemma}[Strict factors at the least counterexample rank sum]
+\label{lem:strict-factors-minimal-rank}
+\uses{lem:minimal-counterexample-rank-sum,lem:normalized-tensor-extension,lem:normalized-semistable-extension,lem:degree-calculus}
+\source{bost-specht-manuscript:page-0012,bost-specht-manuscript:page-0013}
+\lean{BostConjecture.Arithmetic.HermitianMetric.isStable_factors_of_minimal_rank_sum,BostConjecture.Arithmetic.generic_ranks_of_saturated_proper}
+\notready
+Let $E,F$ be positive-rank normalized semistable Hermitian projective
+modules with nonsemistable tensor product. If every positive-rank
+normalized semistable pair of smaller rank sum has semistable tensor
+product, then both $E$ and $F$ are strictly stable.
+\end{lemma}
+\begin{proof}
+Every induced submodule of $E$ has nonpositive degree. Suppose a
+nonzero proper saturated $A\subset E$ has degree zero. Its induced
+metric is semistable by restriction. The quotient is degree zero by
+degree additivity and semistable because every quotient submodule
+has the same degree as its inverse image in $E$. The quotient is
+finite torsion-free, hence projective over $\Ocal_K$. Both $A$ and
+$E/A$ are nonzero and torsion-free, so they have positive generic
+ranks. Additivity of rank makes both ranks strictly smaller than
+that of $E$. Consequently $A\otimes F$ and $(E/A)\otimes F$ are
+semistable by the hypothesis on smaller sums, and normalized by the
+tensor degree formula. The tensor extension lemma makes $E\otimes F$
+semistable, a contradiction. Thus every proper nonzero saturated
+submodule of $E$ has negative degree, which is strict stability.
+The tensor flip is an integral fiberwise isometry, so the same
+argument applied to $F,E$ proves strict stability of $F$.
+\end{proof}
+
 \begin{lemma}[Minimal-rank strictly stable maximizing factors]
 \label{lem:strict-maximizing-counterexample}
-\uses{lem:line-twist,lem:minimal-counterexample-rank-sum,lem:normalized-tensor-extension,lem:normalized-semistable-extension,lem:semistable-normalization,lem:degree-calculus,lem:maximizing-semistable-pair}
+\uses{lem:line-twist,lem:minimal-counterexample-rank-sum,lem:strict-factors-minimal-rank,lem:semistable-normalization,lem:degree-calculus,lem:maximizing-semistable-pair}
 \source{bost-specht-manuscript:page-0012,bost-specht-manuscript:page-0013}
 \notready
 Suppose that over a number field $K$ there is a positive-rank pair
