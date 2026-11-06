@@ -1,7 +1,60 @@
 \chapter{Tensor semistability}
 
+\begin{lemma}[Degree criterion and normalization]
+\label{lem:semistable-normalization}
+\uses{lem:degree-calculus}
+\source{bost-specht-manuscript:page-0012}
+\lean{BostConjecture.Arithmetic.HermitianMetric.isSemistable_iff_degree_nonpos,BostConjecture.Arithmetic.HermitianMetric.isSemistable_rescale_iff,BostConjecture.Arithmetic.HermitianMetric.degree_rescale_self,BostConjecture.Arithmetic.HermitianMetric.slope_submodule_rescale}
+\leanok
+For a Hermitian bundle $E$ of degree zero, semistability is equivalent
+to $\degn(B)\leq0$ for every integral submodule $B\subset E$,
+including zero. If $E$ has positive rank, multiplying every norm by
+$e^t$ preserves semistability and subtracts $t$ from every
+positive-rank slope. Taking $t=\slope(E)$ normalizes its degree.
+\end{lemma}
+\begin{proof}
+The slope inequality for a positive-rank submodule is its degree
+inequality divided by its positive rank; a rank-zero submodule has
+degree zero. Uniform scaling changes the determinant norm on a
+rank-$b$ submodule by $e^{bt}$ at every embedding. The normalized
+degree therefore decreases by $bt$, so its slope decreases by $t$.
+The ambient slope changes by the same amount, preserving every
+comparison. The specified parameter makes the ambient slope and
+hence degree zero.
+\end{proof}
+
+\begin{lemma}[Normalized extensions and degree-zero pieces]
+\label{lem:normalized-semistable-extension}
+\uses{lem:degree-calculus,lem:semistable-normalization}
+\source{bost-specht-manuscript:page-0012,bost-specht-manuscript:page-0013}
+\lean{BostConjecture.Arithmetic.HermitianMetric.isSemistable_of_submodule_quotient,BostConjecture.Arithmetic.HermitianMetric.IsSemistable.submodule_of_degree_zero,BostConjecture.Arithmetic.HermitianMetric.IsSemistable.quotient_of_degree_zero}
+\leanok
+Let $A$ be a saturated submodule of a Hermitian bundle $E$ and equip
+$A$ and $Q=E/A$ with induced and quotient metrics.
+If $A,Q$ are semistable of degree zero, then so is $E$.
+Conversely, if $E$ is semistable of degree zero and $\degn(A)=0$,
+then $A,Q$ are both semistable of degree zero.
+\end{lemma}
+\begin{proof}
+For the first assertion, exact degree gives $\degn(E)=0$.
+For any $S\subset E$, put $I=(S+A)/A\subset Q$.
+The sum/intersection inequality and exact quotient degree give
+\[
+ \degn(S)\leq\degn(S\cap A)+\degn(S+A)-\degn(A)
+ =\degn(S\cap A)+\degn(I)\leq0.
+\]
+The two final bounds follow from semistability of $A,Q$, also when
+one of the modules has rank zero. The degree criterion proves
+semistability of $E$.
+For the converse, every submodule of $A$ has the same induced metric
+when viewed in $E$, so it has nonpositive degree. Exact degree gives
+$\degn(Q)=0$. For any submodule $I\subset Q$, its inverse image
+$T\subset E$ satisfies $\degn(I)=\degn(T)-\degn(A)\leq0$.
+The degree criterion applied to $A$ and $Q$ concludes the proof.
+\end{proof}
+
 \begin{lemma}[Extensions and line twists]
-\label{lem:extensions-and-twists}\uses{lem:degree-calculus}\notready
+\label{lem:extensions-and-twists}\uses{lem:degree-calculus,lem:normalized-semistable-extension}\notready
 An extension of normalized semistable bundles, with induced and
 quotient metrics, is normalized semistable. Tensoring by a Hermitian
 line bundle preserves semistability and shifts every slope by the
