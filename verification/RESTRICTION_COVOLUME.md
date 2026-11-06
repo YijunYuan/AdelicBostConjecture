@@ -9,9 +9,43 @@ trace-metric integer lattice equals
 projective module over the ring of integers, including rank zero.
 `HermitianMetric.traceCovolume_eq_discr_degree` in `Main.lean` now proves
 this exact identity for all the stated inputs. Its serialized module check
-passed 3652 jobs at 2026-11-06 02:46:57 UTC (`e742aa919b53262c`). Final
-transitive audit, independent reviews and shared-root integration are
-tracked below; the task is not marked complete before those finish.
+passed 3652 jobs at 2026-11-06 02:46:57 UTC (`e742aa919b53262c`). The final
+transitive audit and independent reviews have accepted the endpoint.
+Shared-root integration is tracked below; the task is not marked complete
+before that finishes.
+
+## Acceptance evidence
+
+The exact theorem is committed at `5144157`. The only subsequent source
+change, `739e58a`, moves the identical `traceBasis` and `traceBasis_apply`
+definitions from `Exact` to `TraceSpace`, making the canonical basis API
+available to the compactness consumer without duplicate definitions.
+The full `Main` dependency build passed again, 3652 jobs, at
+2026-11-06 02:55:28 UTC. The 63-declaration transitive axiom audit passed
+at 02:49:05 UTC and again after relocation at 02:57:55 UTC. Every probe,
+including the exact endpoint, reports only `propext`, `Classical.choice`
+and `Quot.sound`; there are no additional axioms or `sorryAx`.
+
+Independent mathematical/source review inspected all ten source modules,
+the upstream intrinsic-degree APIs, and manuscript equations (18)–(19)
+visually. It accepted the exact normalization and arbitrary-projective
+statement, including rank zero and nonprincipal ideals. Independent
+honesty review accepted the constructed metric/lattice and the substantive
+real-form, quotient, exact-sequence and induction chain, and inspected
+all 63 final probe outputs. Neither review found an actionable defect.
+
+The graph attaches `lem:restriction-covolume` to the exact theorem, retains
+the `page0011` source anchor, and retains `lem:arithmetic-compactness` as
+its consumer. Its duplicate-basis warning prompted the canonical relocation;
+COMPACTNESS owns removal of its identical local copy. GEOM owns the final
+shared-root import and provenance integration in I-0092. Arithmetic
+compactness and manuscript Theorem 1.1 remain downstream work; this result
+discharges only the exact restriction-covolume producer.
+
+The persistent post-relocation LSP buffer reported stale imported
+declarations; the successful serialized rebuild and subsequent axiom audit
+checked the current files. The temporary-directory cleanup dry run found
+no stale candidates and protected all four live runs.
 
 ## Constructed real space and lattice
 
@@ -159,3 +193,8 @@ The new embedding calculation directly imports Mathlib's
 `LinearAlgebra/Matrix/Kronecker.lean`, using `basisMatrix`,
 `discr_eq_basisMatrix_det_sq`, `det_kronecker`, and `det_blockDiagonal`.
 These are canonical pinned-library imports, not adapted copies.
+The exact-sequence construction also reuses
+`Mathlib/Algebra/Exact/Basic.lean` (`Function.Exact.splitSurjectiveEquiv`)
+directly. Its consumer is `HermitianMetric.traceSplitEquiv`, and the
+integral splitting in `traceCovolume_exact` uses the same API. No external
+source was copied or modified, and no dependency or toolchain changed.
