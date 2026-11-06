@@ -1401,6 +1401,43 @@ rank and rational identification assertions without an integral
 $\Ocal$-basis of $A$.
 \end{proof}
 
+\begin{lemma}[A uniformly short section of a Hermitian line]
+\label{lem:short-hermitian-line}
+\uses{def:hermitian-degree,lem:line-degree-section-independence}\notready
+Let $D=[K:\mathbb Q]$. There is a constant $C_K>0$, depending only on
+$K$, such that every rank-one Hermitian bundle $\overline L$ has a
+nonzero integral section $x$ satisfying
+\[
+ \|x\|_\sigma<C_K\exp(-\degn\overline L)
+ \qquad(\sigma:K\hookrightarrow\mathbb C).
+\]
+The integral line need not be free.
+\end{lemma}
+\begin{proof}
+Choose a generic coordinate $L=Ie$, with $I$ a nonzero fractional ideal,
+and put $\rho_v=\|e\|_v>0$. Let $B_K>0$ be $2^D$ times the volume
+of a fundamental domain of the mixed embedding of $\mathcal O_K$.
+The corresponding Minkowski threshold for $I$ is $N(I)B_K$.
+Put $C_K=\exp((\log B_K+1)/D)$ and
+$t=\log C_K-\degn\overline L$. Consider the symmetric convex box
+whose real interval radii and complex disk radii are
+$f_v=\exp(t)/\rho_v$. Its volume is
+\[
+ 2^{r_1}\pi^{r_2}\prod_v f_v^{w_v},\qquad
+ \prod_v f_v^{w_v}
+ =\exp(Dt-\textstyle\sum_v w_v\log\rho_v)
+ =eB_KN(I).
+\]
+The last equality is exactly the intrinsic coordinate formula for degree.
+Since $2^{r_1}\pi^{r_2}\geq1$, this volume strictly exceeds the
+Minkowski threshold. Minkowski's convex body theorem supplies a nonzero
+$a\in I$ with $|a|_v<f_v$ for every place. The section $x=ae$ then
+has norm less than $\exp(t)=C_K\exp(-\degn\overline L)$.
+Conjugation compatibility gives the same assertion at both embeddings
+above a complex place. Coordinate and section independence of degree
+make this an intrinsic assertion about $\overline L$.
+\end{proof}
+
 \begin{lemma}[Restriction of scalars and covolume]
 \label{lem:restriction-covolume}\uses{def:hermitian-degree,lem:bounded-integral-sections,lem:integral-restriction-rank}
 \source{bost-specht-manuscript:page-0011}\notready
@@ -1431,23 +1468,63 @@ Then $\covol(A_0)=[A:A_0]\covol(A)$ and
 $D\degn(A)=D\degn(A_0)+\log[A:A_0]$; cancellation proves the claim.
 \end{proof}
 
+\begin{lemma}[Intrinsic exterior metrics and determinant inclusions]
+\label{lem:intrinsic-exterior-metric}
+\uses{def:hermitian-metric,lem:integral-determinant-line,lem:determinant-metric}\notready
+For every $b\geq0$, $\bigwedge^b_{\mathcal O_K}A$ has the intrinsic
+Hermitian metric characterized on pure wedges by the cross Gram determinant.
+If $B\subseteq A$ has rank $b$ and the induced metric, the natural injection
+$\det B\longrightarrow\bigwedge^b A$ preserves all archimedean norms.
+\end{lemma}
+\begin{proof}
+Transport the usual exterior Hermitian form on $\bigwedge^b A_\sigma$
+through the canonical exterior scalar-extension isomorphism. The cross Gram
+determinant formula determines the form because pure wedges span. Conjugation
+commutes with determinants, so compatibility on integral wedges follows from
+that of $A$; sesquilinearity extends it to all integral exterior sections.
+The map $B_\sigma\to A_\sigma$ is isometric. Its cross Gram matrices agree
+on all tuples, hence its exterior map is isometric by the spanning property.
+At the top degree of $B$ this form is its previously defined determinant
+metric. The integral exterior map is injective by scalar extension and
+torsion-freeness. This proves the assertion including degree zero.
+\end{proof}
+
+\begin{lemma}[Recovery from a nonzero Pl\"ucker vector]
+\label{lem:plucker-recovery}\notready
+Let $V$ be a finite-dimensional vector space over a field $k$, and let
+$W\subseteq V$ have dimension $b$. Every nonzero vector $\xi$ in the
+image of $\bigwedge^b W\to\bigwedge^b V$ determines $W$ uniquely:
+\[
+ W=\{v\in V:v\wedge\xi=0\}.
+\]
+\end{lemma}
+\begin{proof}
+Choose a basis $w_1,\ldots,w_b$ of $W$. Its top wedge is a basis of
+$\bigwedge^b W$, so $\xi$ is a nonzero scalar multiple of
+$w_1\wedge\cdots\wedge w_b$. If $v\in W$, alternation makes
+$v\wedge\xi=0$. Otherwise the tuple $(v,w_1,\ldots,w_b)$ is linearly
+independent, extends to a basis of $V$, and its exterior vector is a
+nonzero basis vector. Thus $v\wedge\xi\ne0$. This also proves the
+claim for $b=0$ and $b=\dim V$.
+\end{proof}
+
 \begin{lemma}[Finiteness of submodules of bounded degree below]
-\label{lem:degree-finiteness}\uses{lem:restriction-covolume}
+\label{lem:degree-finiteness}\uses{lem:short-hermitian-line,lem:intrinsic-exterior-metric,lem:plucker-recovery,lem:bounded-integral-sections,lem:integral-part-generic-subspace}
 \source{bost-specht-manuscript:page-0012}\notready
 For a fixed Hermitian bundle $A$, a rank $b$ and a real $c$, only finitely
 many saturated rank-$b$ submodules $B\subseteq A$ satisfy $\degn(B)\geq c$.
 \end{lemma}
 \begin{proof}
-Saturation over $\Ocal$ implies saturation over $\mathbb Z$: if a
-nonzero integer multiple of $x\in A$ lies in $B$, torsion-freeness of
-$A/B$ gives $x\in B$. A saturated rank-$Db$ sublattice of the underlying
-$\mathbb Z$-lattice is determined by its primitive exterior vector in
-$\bigwedge^{Db}_\mathbb Z A$, up to sign. The norm of this vector is its
-covolume. By the preceding formula that norm is at most
-$\Delta_K^{b/2}e^{-Dc}$. A bounded ball meets a discrete lattice in a
-finite set, and hence only finitely many such primitive exterior vectors
-occur. Their rational spans, and therefore their saturated sublattices,
-determine the original submodules.
+For each such $B$, choose a nonzero short section of its determinant line.
+Its image $\xi_B$ in $\bigwedge^b A$ is nonzero and has norm at most
+$C_K e^{-c}$ at every embedding, since the determinant inclusion is
+isometric and $\degn B\geq c$. Bounded integral sections of this fixed
+finite projective exterior module form a finite set. If two chosen sections
+agree, their generic images are equal nonzero Pl\"ucker vectors, so the
+preceding lemma gives equality of the generic subspaces. Saturation recovers
+each integral submodule as $A\cap B_K$, and the submodules therefore agree.
+Thus the chosen-section map is injective into a finite set. For rank zero
+the only saturated submodule is zero, giving the same conclusion directly.
 \end{proof}
 
 \begin{lemma}[Finite-dimensional convex interval slopes]

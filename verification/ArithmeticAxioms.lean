@@ -6,6 +6,7 @@ import BostConjecture.Arithmetic.RestrictionOfScalars
 import BostConjecture.Arithmetic.IndependentTensorSemistable
 import BostConjecture.Arithmetic.IrreducibleDualSemistable
 import BostConjecture.Arithmetic.IndependentPiSemistable
+import BostConjecture.Arithmetic.LineMinkowski
 import BostConjecture.Arithmetic.ExactDegree
 import BostConjecture.Arithmetic.QuotientMetric
 import BostConjecture.Arithmetic.IntegralDeterminantProduct
@@ -378,3 +379,9 @@ import BostConjecture.Arithmetic.DeterminantProduct
 #print axioms BostConjecture.Arithmetic.complexPiRepresentationEquiv
 #print axioms BostConjecture.Arithmetic.HermitianMetric.piTensor_action_inner
 #print axioms BostConjecture.Arithmetic.HermitianMetric.isSemistable_piTensor_and_dual_of_complex_irreducible
+#print axioms BostConjecture.Arithmetic.minkowskiBound_eq_norm_mul
+#print axioms BostConjecture.Arithmetic.lineMinkowskiConstant
+#print axioms BostConjecture.Arithmetic.lineMinkowskiConstant_pos
+#print axioms BostConjecture.Arithmetic.prod_exp_weighted
+#print axioms BostConjecture.Arithmetic.exists_small_ideal_element
+#print axioms BostConjecture.Arithmetic.HermitianMetric.exists_small_section
