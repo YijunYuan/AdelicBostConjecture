@@ -1,6 +1,6 @@
 # Parallel Horizon scheduling
 
-## Live checkpoint at 2026-11-06 05:14 UTC
+## Live checkpoint at 2026-11-06 05:36 UTC
 
 The user requests **four continuing Horizon proof lanes until the entire main
 theorem and its used dependencies are complete**, with no budget cap. The parent
@@ -132,6 +132,25 @@ covolume asymptotic `e2e7039`/`8d57641`; CLOSURE `0007` exited 01:16:41,
 proof `53f1119`, root `d29f2d3`, evidence `f7ffd4f`, 40 probes. Do not resume.
 
 ## Resource and runtime checkpoint
+
+At 05:36, the bounded Horizon-owned isolator authorized by **I-0140** has
+exited. It used scratch/report ownership only; TENSOR retained production.
+Exact reproduction attempts **0002/0003** are preserved in run0012/session0004.
+The result is a localized dependent-family instance conversion cost: explicit
+transparent factor instances do not definitionally match the compiled data
+instances, and simplifying the partial theorem still exhausts 200k reductions.
+TENSOR requests coordinated replacement of only the binaryTensorFamily
+AddCommGroup/Module instance bodies by direct Sum.casesOn branches, keeping
+names, types and API. This shared change is not yet authorized or verified.
+
+Meanwhile **TensorRescale 392e101** passed 3,576 jobs and 70 foundational-only
+probes. The final TENSOR and MAIN drafts have no added axioms or sorry, but
+remain unverified and excluded from accepted integration. Fresh MAIN review
+accepted their source statements, intrinsic meanings and substantive HN-grade
+consumer route, including the empty tensor base. The exact final exports still
+need kernel checks, transitive probes, root integration and source/status
+reconciliation. Parent has no uncommitted source edits; concurrent TENSOR
+proof/blueprint and MAIN draft changes are left to their owners.
 
 At 05:14, the checked frontier has advanced to **9ba97a4**: actual maximizing
 pairs imply both balance identities, with ArithmeticDefect (3,538 jobs),
