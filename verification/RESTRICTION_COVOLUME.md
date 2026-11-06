@@ -7,8 +7,9 @@ The endpoint remains `lem:restriction-covolume`, consumed by
 trace-metric integer lattice must equal
 `abs(discriminant K)^(a/2) * exp(-[K:ℚ] * h.degree)` for every finite
 projective module over the ring of integers, including rank zero.
-The positive-rank covolume identity is not yet formalized. The exact
-rank-zero instance is proved for the actual lattice and intrinsic degree.
+The identity is proved for every module with a free integral frame and
+in rank zero, for the actual lattice and intrinsic degree. The general
+nonfree projective endpoint is not yet formalized.
 
 ## Constructed real space and lattice
 
@@ -52,10 +53,31 @@ index to the actual integral quotient. Kernel check: 3610 jobs,
 fingerprint `3318ef1836a96ed0`. The 30-probe transitive axiom audit passed
 at 2026-11-06 02:00:46 UTC with only the three foundational axioms.
 
-Remaining: relate the Gram determinant to the number-field discriminant,
-including the complex factor cancellation. Prove that the finite-index
-degree change agrees with the existing intrinsic determinant degree.
-No source-facing completion is claimed for any of these remaining steps.
+`Free.lean` proves the exact formula for an integral basis. The real trace
+Gram matrix, complexified, factors as `E* G E`, with `E` the Kronecker
+product of the identity and the transpose of the all-embedding matrix,
+and `G` the block diagonal matrix of the given fiber Gram matrices.
+Mathlib's `discr_eq_basisMatrix_det_sq` supplies the exact discriminant.
+Conjugation makes the trace pairings real; counting all embeddings
+incorporates the weight-two complex blocks, with no residual power of two.
+The determinant metric and the existing intrinsic degree then give
+`traceCovolume_eq_discr_degree_of_basis`. The serialized module check
+passed 3610 jobs at 2026-11-06 02:21:16 UTC, fingerprint `d689c513700aeb5a`.
+An earlier command used the workspace root as its Lake working directory
+and failed before compilation; the successful command above uses the
+member project directory with explicit Horizon `--root`.
+The expanded 39-probe audit passed at 02:22:12 UTC, with only `propext`,
+`Classical.choice` and `Quot.sound`. The LSP audit buffer retained an
+out-of-date-import diagnostic after the dependency build; the serialized
+kernel audit above checked the actual current imports and declarations.
+
+Remaining: pass to nonfree projectives. The stable APIs include exact
+degree additivity and saturated rank-one reduction. They permit induction
+after proving actual trace covolume multiplicativity for the induced and
+quotient metrics. The rank-one case uses the principal span of a nonzero
+section, the checked finite-index covolume formula and the existing
+intrinsic line quotient formula. No general finite-index determinant-degree
+identity is assumed, and no completion is claimed for the nonfree endpoint.
 
 The fixed TraceSpace producer received independent honesty review:
 **honest/proved producer**, no actionable defect; metric and lattice data
@@ -71,6 +93,11 @@ Conjugation's source was first captured by lifecycle snapshot `b75a4e2`,
 again with COVOLUME/run0008 authorship. The same axiom command fingerprint
 is reused across source revisions; timestamps and probe counts above
 identify the actual checked versions.
+Independent review accepted `FiniteIndex` at `fc5e712` (source first
+captured `e4b0d01`), including the actual quotient index and induced-metric
+comparison. Its two requested dependency edges were added. GEOM integrated
+TraceSpace/Conjugation/Covolume at `039cdb2`, with the shared root check
+passing 9332 jobs at 02:12:49 UTC. Further imports are handed off in I-0092.
 
 ## Reuse
 
@@ -86,3 +113,8 @@ The existing project imports retain their own recorded provenance.
 The Gram computation reuses `BostConjecture.Lattice.Covolume` directly;
 that existing module already records its TauCeti adaptation and license.
 No duplicate lattice or Gram implementation was introduced.
+The new embedding calculation directly imports Mathlib's
+`NumberTheory/NumberField/Discriminant/Basic.lean` and
+`LinearAlgebra/Matrix/Kronecker.lean`, using `basisMatrix`,
+`discr_eq_basisMatrix_det_sq`, `det_kronecker`, and `det_blockDiagonal`.
+These are canonical pinned-library imports, not adapted copies.

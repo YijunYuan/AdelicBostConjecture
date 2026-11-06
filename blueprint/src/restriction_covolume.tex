@@ -106,7 +106,7 @@ follows.
 
 \begin{lemma}[Finite-index change of trace covolume]
 \label{lem:trace-covolume-index}
-\uses{lem:trace-covolume-gram,lem:real-trace-lattice}
+\uses{lem:trace-covolume-gram,lem:real-trace-lattice,lem:induced-hermitian-metric,lem:integral-submodule-projective}
 \source{bost-specht-manuscript:page-0011}
 \lean{BostConjecture.Arithmetic.HermitianMetric.traceCovolume_submodule}\leanok
 If $P\subseteq A$ has the same generic rank as $A$, equip $P$ with the
@@ -132,8 +132,50 @@ Finally the injective section map identifies $A/P$ with $j(A)/j(P)$.
 This proves the formula and finiteness of the quotient.
 \end{proof}
 
+\begin{lemma}[Trace covolume in an integral frame]
+\label{lem:trace-covolume-free}
+\uses{lem:trace-covolume-gram,lem:trace-metric-weights,def:intrinsic-determinant-degree}
+\source{bost-specht-manuscript:page-0011}
+\lean{BostConjecture.Arithmetic.HermitianMetric.traceCovolume_eq_discr_mul_prod,BostConjecture.Arithmetic.HermitianMetric.traceCovolume_eq_discr_degree_of_basis}\leanok
+If $b_1,\dots,b_a$ is an $\Ocal$-basis of $A$ and
+$\xi=b_1\wedge\cdots\wedge b_a$, then
+\[
+ \covol_{\mathbb Z}(A)
+ =\Delta_K^{a/2}\prod_{\sigma:K\hookrightarrow\mathbb C}\|\xi\|_\sigma
+ =\Delta_K^{a/2}\exp(-D\degn\overline A).
+\]
+\end{lemma}
+\begin{proof}
+Choose an integer basis $u_1,\dots,u_D$ of $\Ocal$ and put
+$S_{\sigma,t}=\sigma(u_t)$ and
+$G_\sigma=(\langle b_i,b_j\rangle_\sigma)_{i,j}$.
+The integer basis of $A$ consists of the $u_tb_i$.
+The sum of its Hermitian pairings over all embeddings is real, since
+conjugate embeddings give conjugate pairings. Its real trace Gram matrix,
+viewed over $\mathbb C$, is
+\[
+ (I_a\otimes S)^*G(I_a\otimes S),
+ \qquad G_{(i,\sigma),(j,\tau)}=\delta_{\sigma\tau}(G_\sigma)_{ij}.
+\]
+Thus $G$ uses the interleaved $(i,\sigma)$ order; a simultaneous row and
+column permutation turns it into the usual contiguous block diagonal.
+Indeed, its $((i,t),(j,s))$ entry is
+$\sum_\sigma\overline{\sigma(u_t)}\sigma(u_s)(G_\sigma)_{ij}$,
+which is the pairing of the corresponding integer basis vectors.
+The embeddings formula for the field discriminant gives
+$|\det S|^2=\Delta_K$. Taking determinants of the displayed factorization
+therefore gives
+$\covol_{\mathbb Z}(A)^2=\Delta_K^a\prod_\sigma\det G_\sigma$.
+The determinant metric gives $\det G_\sigma=\|\xi\|_\sigma^2$,
+and all the quantities whose square roots are taken are positive.
+This proves the first equality. The section $\xi$ generates the integral
+determinant line, so its quotient has cardinality one; the intrinsic
+degree formula gives $D\degn\overline A=-\sum_\sigma\log\|\xi\|_\sigma$.
+Exponentiating proves the second equality.
+\end{proof}
+
 \begin{lemma}[Restriction of scalars and covolume]
-\label{lem:restriction-covolume}\uses{def:hermitian-degree,lem:bounded-integral-sections,lem:integral-restriction-rank,lem:real-trace-lattice,lem:trace-metric-weights,lem:trace-covolume-gram,lem:trace-covolume-index}
+\label{lem:restriction-covolume}\uses{def:hermitian-degree,lem:bounded-integral-sections,lem:integral-restriction-rank,lem:real-trace-lattice,lem:trace-metric-weights,lem:trace-covolume-gram,lem:trace-covolume-index,lem:trace-covolume-free}
 \source{bost-specht-manuscript:page-0011}\notready
 Give $A\otimes_{\mathbb Z}\mathbb R$ the Euclidean norm
 $\|x\|^2=\sum_v w_v\|x_v\|_v^2$. For $a=\rk_\Ocal A$,

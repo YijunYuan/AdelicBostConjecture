@@ -1,4 +1,5 @@
 import BostConjecture.Arithmetic.RestrictionCovolume.FiniteIndex
+import BostConjecture.Arithmetic.RestrictionCovolume.Free
 
 #print axioms BostConjecture.Arithmetic.archimedeanSection
 #print axioms BostConjecture.Arithmetic.HermitianMetric.traceCore
@@ -30,3 +31,12 @@ import BostConjecture.Arithmetic.RestrictionCovolume.FiniteIndex
 #print axioms BostConjecture.Arithmetic.HermitianMetric.traceCovolume_submodule_eq
 #print axioms BostConjecture.Arithmetic.HermitianMetric.submoduleTraceLattice_relIndex
 #print axioms BostConjecture.Arithmetic.HermitianMetric.traceCovolume_submodule
+#print axioms BostConjecture.Arithmetic.HermitianMetric.ofReal_traceSection_inner
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceIntegerBasis
+#print axioms BostConjecture.Arithmetic.HermitianMetric.norm_det_basisMatrix_sq
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceGram_factorization
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceCovolume_sq_eq_discr_mul_prod
+#print axioms BostConjecture.Arithmetic.HermitianMetric.norm_det_gram_eq_sectionNorm_sq
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceCovolume_eq_discr_mul_prod
+#print axioms BostConjecture.Arithmetic.HermitianMetric.degree_eq_neg_sum_log_of_basis
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceCovolume_eq_discr_degree_of_basis
