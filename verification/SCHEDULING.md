@@ -1,6 +1,6 @@
 # Parallel Horizon scheduling
 
-## Live checkpoint at 2026-11-06 04:24 UTC
+## Live checkpoint at 2026-11-06 04:53 UTC
 
 The user requests **four continuing Horizon proof lanes until the entire main
 theorem and its used dependencies are complete**, with no budget cap. The parent
@@ -15,14 +15,20 @@ or push is authorized.
 | --- | --- | --- |
 | `0011` | `BOST-MAIN` | HN tensor filtration, maximal-slope theorem and shared integration |
 | `0012` | `BOST-TENSOR-SEMI` | Arithmetic first variation, extremal-to-balance and tensor semistability |
-| `0013` | `BOST-LINE-TWIST` | Both-order semistability under actual nonprincipal rank-one tensor |
-| `0014` | `BOST-STRICT-REDUCTION` | Internally minimal-rank, strictly stable maximizing counterexamples |
 
-MAIN and TENSOR started at 03:12 UTC, PIDs 765334/765881. MAIN continues in
-session `0004`; a normal round handoff does not free a slot. LINE and STRICT
-started at 04:23:09/04:23:17, PIDs 815854/816122. All commands remain foreground.
+MAIN and TENSOR started at 03:12 UTC, PIDs 765334/765881. Both currently
+continue in session `0004`; a normal round handoff does not free a slot.
+LINE and STRICT completed and exited 0 at 04:51:03 and 04:52:00 respectively.
+Their accepted scope is now read-only. Remaining runs stay foreground.
 Standing protection **I-0126** supersedes archived I-0104/I-0121/I-0123.
-The completed SPECHT-SLOPE/COMPACTNESS runs were not resumed.
+Completed tasks are not resumed.
+
+A fresh read-only route review found no substantive untouched producer for a
+replacement lane: TENSOR already owns the remaining conjugation/trace/balance
+work; MAIN owns the final binary and finite-family assembly. The existing
+geometric and regrouping producers suffice. Both owners acknowledged I-0138.
+The four-writer cap remains, with two necessary proof lanes now active; no
+duplicate or overlapping task is created merely to occupy the completed slots.
 
 Paths below are relative to `projects/BostConjecture`.
 MAIN alone owns shared root `BostConjecture.lean`, `CONTRIBUTIONS.md`,
@@ -53,6 +59,27 @@ No reverse dependence on final tensor semistability or MAIN is allowed.
 Completed APIs stay stable absent exact parent coordination.
 
 ## Accepted completed producers
+
+**LINE-TWIST 0013 completed and exited 0 at 04:51:03 UTC.**
+Source **032df77**, submodule producer **6f23c6f**, proves arbitrary nonprincipal
+rank-one tensor semistability in both orders. Kernel: 3,580 jobs; all ten
+transitive probes foundational-only. Exact source and independent source/math/
+honesty reviews accepted. Final evidence **0014ce1**.
+
+**STRICT-REDUCTION 0014 completed and exited 0 at 04:52:00 UTC.**
+Source **b49b67f**, endpoint blob
+`17492acd25749ce2654c1507eb5330c41882d858`, constructs rank-sum minimality
+internally and returns actual normalized strictly stable maximizing factors,
+both ranks at least two, and an actual saturated positive-degree maximizer.
+Both LINE exports are substantive checked consumers. Kernel: 9,171 jobs;
+ten foundational-only probes. Final evidence **db85f89**; TENSOR handoff accepted.
+
+Both are integrated in **d0c9f8a**, with **9,404 warning-free root jobs** at
+04:47:44 UTC. Independent exact-source/root/consumer review accepted. This root
+also includes TENSOR **7fd2332** partial-trace defects and conjugate bases;
+it excludes the newer ongoing ProjectionConjugation work. MAIN has 52 checked
+foundation-only probes and a checked finite-family lower bound. Tensor
+semistability and both maximal-slope equalities remain open.
 
 **COMPACTNESS 0010 completed and exited 0 at 04:12:24 UTC.**
 Actual maximizing-pair source **e81b08b** returns nonfree projective modules,
@@ -105,6 +132,14 @@ covolume asymptotic `e2e7039`/`8d57641`; CLOSURE `0007` exited 01:16:41,
 proof `53f1119`, root `d29f2d3`, evidence `f7ffd4f`, 40 probes. Do not resume.
 
 ## Resource and runtime checkpoint
+
+At 04:35, renewed pressure reached PSI avg10 7.59%/avg60 4.30%, with
+5.66 GiB available and increased swap, but no OOM. I-0131 requested a normal
+checked-unit round handoff. TENSOR committed **7fd2332**, 49 foundational-only
+probes and exact remaining obligations; session `0002` ended normally at
+04:42:19, and `0004` began at 04:43. No task pause, lost work or guessed-process
+kill occurred. I-0131 is resolved/archived. After LINE/STRICT exits, the 04:52
+sample had **16.03 GiB available, PSI zero, swap 3.29 GiB and zero OOM**.
 
 At 04:21 UTC, available memory was 12.51 GiB, PSI avg10/avg60 zero, swap
 occupancy 2.67 GiB, swap-out counter 9,579,953 and zero OOM kills. The two
