@@ -55,7 +55,8 @@ Lemma~\ref{lem:integral-restriction-rank}.
 \begin{lemma}[Conjugation and the trace metric]
 \label{lem:trace-metric-weights}
 \uses{lem:real-trace-lattice,def:hermitian-metric}
-\source{bost-specht-manuscript:page-0011}\notready
+\source{bost-specht-manuscript:page-0011}
+\lean{BostConjecture.Arithmetic.HermitianMetric.traceInclusion_conjugate,BostConjecture.Arithmetic.HermitianMetric.trace_inner_eq_sum_places,BostConjecture.Arithmetic.HermitianMetric.trace_norm_sq_eq_sum_places}\leanok
 Every $x\in E$ satisfies $x_{\bar\sigma}=\overline{x_\sigma}$ under
 canonical fiber conjugation. For $x,y\in E$,
 \[
@@ -75,8 +76,36 @@ place has exactly two. This gives the first equality; setting $y=x$
 gives the squared norm equality.
 \end{proof}
 
+\begin{lemma}[Euclidean Haar covolume and the trace Gram matrix]
+\label{lem:trace-covolume-gram}
+\uses{lem:real-trace-lattice,lem:trace-metric-weights}
+\source{bost-specht-manuscript:page-0011}
+\lean{BostConjecture.Arithmetic.HermitianMetric.traceCovolume_pos,BostConjecture.Arithmetic.HermitianMetric.traceCovolume_sq_eq_det,BostConjecture.Arithmetic.HermitianMetric.traceCovolume_eq_discr_degree_of_rank_zero}\leanok
+For every integer basis $(b_i)$ of $A$, the Euclidean Haar covolume $c$ of
+$j(A)$ is positive and satisfies
+\[
+ c^2=\det\left(\sum_\sigma
+   \operatorname{Re}\langle b_i,b_j\rangle_\sigma\right)_{i,j}.
+\]
+If $a=0$, then $c=1=\Delta_K^{a/2}\exp(-D\degn\overline A)$.
+\end{lemma}
+\begin{proof}
+By Lemma~\ref{lem:real-trace-lattice}, $(j(b_i))$ is a real basis of $E$.
+Choose an orthonormal basis and let $T$ be the coordinate matrix of
+$(j(b_i))$ in it. The half-open unit parallelepiped has Euclidean Haar
+volume one. Change of variables shows that the fundamental
+parallelepiped of $j(A)$ has volume $c=|\det T|>0$. Its Gram matrix is
+$T^{\mathsf T}T$, whose determinant is $(\det T)^2=c^2$.
+The trace-pairing definition gives the displayed entries. In rank zero,
+the integer basis is empty and its Gram determinant is one, so positivity
+gives $c=1$. The integral empty wedge generates the determinant line and
+has norm one at every embedding. Its quotient has cardinality one, so
+the intrinsic determinant degree is zero. The claimed rank-zero formula
+follows.
+\end{proof}
+
 \begin{lemma}[Restriction of scalars and covolume]
-\label{lem:restriction-covolume}\uses{def:hermitian-degree,lem:bounded-integral-sections,lem:integral-restriction-rank,lem:real-trace-lattice,lem:trace-metric-weights}
+\label{lem:restriction-covolume}\uses{def:hermitian-degree,lem:bounded-integral-sections,lem:integral-restriction-rank,lem:real-trace-lattice,lem:trace-metric-weights,lem:trace-covolume-gram}
 \source{bost-specht-manuscript:page-0011}\notready
 Give $A\otimes_{\mathbb Z}\mathbb R$ the Euclidean norm
 $\|x\|^2=\sum_v w_v\|x_v\|_v^2$. For $a=\rk_\Ocal A$,

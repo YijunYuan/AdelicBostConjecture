@@ -1,4 +1,4 @@
-import BostConjecture.Arithmetic.RestrictionCovolume.TraceSpace
+import BostConjecture.Arithmetic.RestrictionCovolume.Covolume
 
 #print axioms BostConjecture.Arithmetic.archimedeanSection
 #print axioms BostConjecture.Arithmetic.HermitianMetric.traceCore
@@ -14,3 +14,13 @@ import BostConjecture.Arithmetic.RestrictionCovolume.TraceSpace
 #print axioms BostConjecture.Arithmetic.HermitianMetric.realTensorEquiv
 #print axioms BostConjecture.Arithmetic.HermitianMetric.realTensorEquiv_tmul
 #print axioms BostConjecture.Arithmetic.HermitianMetric.traceSpace_finrank
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceInclusion_conjugate
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceInclusion_inner_conjugate
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceInclusion_inner_re_eq_of_place_eq
+#print axioms BostConjecture.Arithmetic.HermitianMetric.trace_inner_eq_sum_places
+#print axioms BostConjecture.Arithmetic.HermitianMetric.trace_norm_sq_eq_sum_places
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceCovolume
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceCovolume_pos
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceCovolume_sq_eq_det
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceCovolume_eq_one_of_rank_zero
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceCovolume_eq_discr_degree_of_rank_zero
