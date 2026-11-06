@@ -1,6 +1,6 @@
 # Parallel Horizon scheduling
 
-## Live checkpoint at 2026-11-06 01:17 UTC
+## Live checkpoint at 2026-11-06 01:34 UTC
 
 SPECHT is complete and run `0003` exited normally after session `0030` at
 23:50:16 UTC. The exact canonical-lattice covolume limit, 14 final
@@ -13,14 +13,15 @@ shared-file handoff: `e2e7039`, evidence typography `8d57641`, root blob
 | --- | --- | --- | --- |
 | `0004` | `BOST-ARITH` | `0016` | Intrinsic arithmetic HN theory and degree finiteness |
 | `0005` | `BOST-GEOM` | `0016` | Invariant tensor nonvanishing and shared integration |
-| `0006` | `BOST-BALANCED` | `0008` | Homogeneous extraction, compact averaging and full Lemma 7.2 |
+| `0006` | `BOST-BALANCED` | `0010` | Actual polynomial averaging, invariant criterion and full Lemma 7.2 |
 
 
 CLOSURE started at 00:00:50 UTC in the freed SPECHT slot, PID `584941`, and
 completed at 01:16:41 UTC with normal exit 0. Its final evidence is `f7ffd4f`;
 root integration `d29f2d3` passed 9,307 warning-free jobs, and graph integration
 is accepted. Do not resume completed run `0007`. The three remaining runs
-continue in the foreground; no successor has been assigned to the free slot.
+continue in the foreground. The fixed successor `BOST-COVOLUME` is queued
+for the free slot, with activation and scope recorded below.
 Its exclusive paths are `InvariantTheory/ComplexClosure/**`,
 `blueprint/src/complex_closure.tex`, `verification/ComplexClosureAxioms.lean`
 and `verification/COMPLEX_CLOSURE.md`. The fixed consumer interface is in
@@ -29,7 +30,7 @@ The closure blueprint was migrated at `ecbcee9`; all owned nodes now have
 checked implementations. GEOM added its shared include and confirmed graph
 sync has no missing dependency references.
 
-Standing protection `I-0074` supersedes archived `I-0046`. GEOM now exclusively
+Standing protection `I-0087` supersedes archived `I-0074`. GEOM exclusively
 owns the shared root import, attribution, results and blueprint index files.
 The accepted handoffs in `I-0072` and `I-0073` have been consumed by all owners.
 No fifth proof writer has been launched.
@@ -96,6 +97,26 @@ The read-only tool diagnosis is recorded in advisory inbox `I-0084`: changes
 from parallel writers can repeatedly trigger a full Horizon search-index
 rebuild. The graph scope is intact; consume existing graph results and avoid
 redundant forced indexing. No installed package or tool configuration changed.
+
+In `I-0085`, ARITH and GEOM accepted the independent covolume successor.
+ARITH committed the complete unproved `lem:restriction-covolume` migration
+and the precise convention/interface handoff in `ARITHMETIC.md`. This theorem
+is consumed by `lem:arithmetic-compactness`, independently of ARITH's current
+Minkowski/exterior degree-finiteness proof. It constructs the actual real trace
+metric with place weights 1/2 and proves the discriminant/degree covolume
+identity for arbitrary finite projectives, including rank zero.
+
+I-0087 transfers only `Arithmetic/RestrictionCovolume/**`,
+`blueprint/src/restriction_covolume.tex`,
+`verification/RestrictionCovolumeAxioms.lean`, and
+`verification/RESTRICTION_COVOLUME.md` to the queued BOST-COVOLUME task.
+ARITH keeps existing arithmetic APIs; GEOM adds the shared include after
+arithmetic. The new task and roadmap `BOST-ARITH-COVOLUME` have these refs;
+active task refs and the stale SPECHT-integrator wording were corrected.
+Standing permission rechecked: runs/tasks allowed, max four writers, no cap.
+No successor process has started at this checkpoint. BALANCED's priority and
+canonical APIs are unchanged. The latest resource sample retained 7.98 GiB
+available with low PSI and no OOM.
 
 ## Earlier checkpoints
 
