@@ -582,3 +582,29 @@ has no missing dependency references. Unattached helper declarations remain
 the existing broad-scope warning described by I-0004. Integration of
 InvariantDetection, OrbitImage and SpecialLinearBaseChange is handed to GEOM
 and is not yet certified by a new root build here.
+
+## Matched-basis polynomial extension checkpoint
+
+`InvariantTheory.PolynomialBaseChange` proves the actual polynomial algebra
+coefficient-extension equivalence for matched finite bases and preservation
+of every homogeneous subspace in both directions. Its serialized explicit-root
+module build passed **2,409 jobs warning-free** (4.9s); the expanded axiom
+check passed **145 probes** (3.0s), all using only the standard foundational
+axioms. Guarded LSP is clear. Intermediate coercion and simplifier errors
+were repaired before this accepted check.
+
+This imports Mathlib's `SymmetricAlgebra.equivMvPolynomial` from
+`LinearAlgebra/SymmetricAlgebra/Basis.lean` and
+`MvPolynomial.algebraTensorAlgEquiv` from
+`RingTheory/TensorProduct/MvPolynomial.lean`, at the previously recorded pinned
+revision and Apache-2.0 license; no library code was copied or modified.
+The intended later consumer is the homogeneous coaction scalar-extension
+square, which is still unproved. Canonical exterior transport, evaluation
+compatibility and invariant descent are not claimed by this producer.
+
+Under the parent's priority clarification I-0079, further scalar-extension
+work is deferred: the immediate complex Lemma 7.2 cone is homogeneous
+extraction, special-unitary density and finite-degree averaging, alongside
+CLOSURE's independent comparison theorem. The read-only health review found
+four active proof leaves and nine active ancestors; the active-row warning
+is intentionally retained.

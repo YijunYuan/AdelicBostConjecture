@@ -752,9 +752,35 @@ and the isomorphism descends to the asserted quotient isomorphism.
 The formula on pure tensors follows from the two quotient maps.
 \end{proof}
 
+\begin{lemma}[Homogeneous polynomials in matched scalar-extended coordinates]
+\label{lem:balanced-polynomial-base-change}
+\uses{lem:balanced-intrinsic-polynomials}
+\lean{BostConjecture.InvariantTheory.polynomialBaseChangeEquiv,BostConjecture.InvariantTheory.polynomialBaseChangeEquiv_tmul_ι,BostConjecture.InvariantTheory.polynomialBaseChangeEquiv_mem_homogeneous_iff}\leanok
+Let $L/K$ be a field extension and let $b=(b_i)_{i\in I}$ and
+$c=(c_i)_{i\in I}$ be finite bases of $X/K$ and $Y/L$. There is an
+$L$-algebra isomorphism
+$\Phi:L\otimes_K P(X)\simeq P(Y)$ characterized by
+$\Phi(\lambda\otimes b_i^*)=\lambda c_i^*$.
+For each $d$, $\Phi(z)\in P_d(Y)$ if and only if $z$ belongs to the
+image of $L\otimes_KP_d(X)$ in $L\otimes_KP(X)$.
+\end{lemma}
+\begin{proof}
+Use the dual bases to identify the two symmetric algebras with
+$K[T_i:i\in I]$ and $L[T_i:i\in I]$. The polynomial coefficient
+extension isomorphism sends $\lambda\otimes T_i$ to $\lambda T_i$,
+giving $\Phi$ and the asserted generator formula. Products of exactly
+$d$ linear forms span $P_d(X)$. Expanding each linear form in the dual
+basis shows that $\Phi$ sends these products into $P_d(Y)$; sums and
+$L$-scalar multiples preserve this property. Conversely expand a linear
+form on $Y$ in the basis $(c_i^*)$. The inverse sends each $c_i^*$ to
+$1\otimes b_i^*$, so products of $d$ such forms lie in the extended
+degree subspace. This subspace contains all their sums and scalar
+multiples, proving the reverse inclusion.
+\end{proof}
+
 \begin{lemma}[Scalar extension of the homogeneous invariant equations]
 \label{lem:balanced-coaction-base-change}
-\uses{lem:balanced-coordinate-base-change,lem:balanced-invariant-kernel}\notready
+\uses{lem:balanced-coordinate-base-change,lem:balanced-polynomial-base-change,lem:balanced-invariant-kernel}\notready
 Let $L/K$ be an extension of infinite fields, let $U,W$ have finite
 nonempty bases, and put $X=\bigwedge_K^s(U\otimes_KW)$ and
 $X_L=\bigwedge_L^s(U_L\otimes_LW_L)$, where $U_L=L\otimes_KU$
