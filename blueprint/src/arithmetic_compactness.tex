@@ -52,9 +52,35 @@ The positive lower determinant bound makes every matrix nonsingular,
 and the preceding lemma puts a basis matrix of each lattice in this set.
 \end{proof}
 
+\begin{lemma}[Trace systole of normalized semistable bundles]
+\label{lem:trace-semistable-systole}
+\uses{def:hermitian-degree,lem:degree-rank-one,lem:integral-part-generic-subspace}
+\source{bost-specht-manuscript:page-0011}\notready
+If $A$ is semistable with $\degn(A)=0$, every nonzero $x\in A$
+satisfies $\sum_{\sigma:K\hookrightarrow\mathbb C}\log\|x_\sigma\|\geq0$.
+Its image in the actual trace lattice consequently has norm at least
+$\sqrt{[K:\mathbb Q]}$.
+\end{lemma}
+\begin{proof}
+Let $L=A\cap Kx$. Its generic rank is one, its quotient is torsion free,
+and $x$ is a nonzero integral section of $L$. Semistability gives
+$\degn(L)\leq0$. The line degree formula reads
+\[
+ D\degn(L)=\log\#(L/\Ocal x)-\sum_\sigma\log\|x_\sigma\|.
+\]
+The finite quotient has at least one element, so its logarithmic cardinality
+is nonnegative. This proves the first assertion without assuming $L$ free.
+For every positive $u$, $\log u\leq u-1$. Apply this to
+$u=\|x_\sigma\|^2$ and sum over the $D$ embeddings. The left hand
+sum is twice the nonnegative logarithmic sum. Hence
+$D\leq\sum_\sigma\|x_\sigma\|^2=\|x\|_{\mathrm{tr}}^2$.
+Both norms are nonnegative, giving the asserted systole. This is the
+logarithmic form of the arithmetic--geometric mean step in the source.
+\end{proof}
+
 \begin{lemma}[Arithmetic compactness]
 \label{lem:arithmetic-compactness}
-\uses{def:hermitian-degree,lem:restriction-covolume,lem:mahler-frames}
+\uses{def:hermitian-degree,lem:restriction-covolume,lem:mahler-frames,lem:trace-semistable-systole,lem:degree-maximum-continuity}
 \source{bost-specht-manuscript:page-0011}\notready
 For fixed $K$ and $a\geq1$, every sequence of normalized semistable
 rank-$a$ Hermitian $\Ocal$-bundles has a subsequence which, after
@@ -98,6 +124,7 @@ inequalities persist.
 \label{lem:maximum-saturated-degree}
 \uses{lem:degree-finiteness}
 \lean{BostConjecture.Arithmetic.HermitianMetric.exists_max_degree_submodule,BostConjecture.Arithmetic.HermitianMetric.exists_degree_eq_maxDegree,BostConjecture.Arithmetic.HermitianMetric.maxDegree_nonneg}
+\leanok
 \source{bost-specht-manuscript:page-0011,bost-specht-manuscript:page-0012}
 For a finite projective $\Ocal$-module $A$ with a Hermitian metric $h$,
 there is a saturated submodule $P\subseteq A$ such that
@@ -118,6 +145,7 @@ has rank zero.
 \label{lem:metric-degree-comparison}
 \uses{def:hermitian-degree,lem:determinant-contraction,lem:degree-metric-scaling,lem:maximum-saturated-degree}
 \lean{BostConjecture.Arithmetic.HermitianMetric.abs_degree_submodule_sub_le_of_fiberNorm_le,BostConjecture.Arithmetic.HermitianMetric.abs_maxDegree_sub_le_of_fiberNorm_le}
+\leanok
 \source{bost-specht-manuscript:page-0012}
 Let $h,g$ be Hermitian metrics on a finite projective $\Ocal$-module
 $A$. Suppose $t\geq0$ and
@@ -153,6 +181,7 @@ claim for $\mathcal D$.
 \label{lem:metric-topology-comparison}
 \uses{lem:metric-degree-comparison}
 \lean{BostConjecture.Arithmetic.HermitianMetric.continuous_fiberNorm,BostConjecture.Arithmetic.HermitianMetric.eventually_all_fiberNorm_compare}
+\leanok
 \source{bost-specht-manuscript:page-0012}
 Give the Hermitian metrics on a fixed finite projective module the topology
 of pointwise convergence of their fiber forms. For every metric $h$ and
@@ -183,7 +212,8 @@ matrices in any complex bases.
 \begin{lemma}[Uniform degree gap for strict stability]
 \label{lem:strict-stability-degree-gap}
 \uses{lem:degree-finiteness,lem:metric-degree-comparison}
-\source{bost-specht-manuscript:page-0012}\notready
+\lean{BostConjecture.Arithmetic.HermitianMetric.IsStable.exists_degree_gap,BostConjecture.Arithmetic.HermitianMetric.isStable_of_fiberNorm_compare}\leanok
+\source{bost-specht-manuscript:page-0012}
 If $h$ is normalized and strictly stable, there is $\delta>0$ such
 that $\degn_h(P)\leq-\delta$ for every nonzero proper saturated
 submodule $P$. In particular a normalized metric $g$ with uniform
@@ -205,8 +235,8 @@ these are exactly the strict stability inequalities.
 \begin{lemma}[The maximum degree and openness of strict stability]
 \label{lem:degree-maximum-continuity}
 \uses{lem:degree-finiteness,lem:maximum-saturated-degree,lem:metric-degree-comparison,lem:metric-topology-comparison,lem:strict-stability-degree-gap}
+\lean{BostConjecture.Arithmetic.HermitianMetric.exists_degree_eq_maxDegree,BostConjecture.Arithmetic.HermitianMetric.continuous_maxDegree,BostConjecture.Arithmetic.HermitianMetric.isOpen_isStable_normalized}\leanok
 \source{bost-specht-manuscript:page-0011,bost-specht-manuscript:page-0012}
-\notready
 For every Hermitian bundle $A$, the number
 \[
  \mathcal D(A)=\max\{\degn(B):B\subseteq A\text{ saturated}\},

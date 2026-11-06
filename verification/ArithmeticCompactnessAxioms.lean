@@ -1,0 +1,19 @@
+import BostConjecture.Arithmetic.Compactness.DegreeContinuity
+import BostConjecture.Arithmetic.Compactness.StabilityTopology
+
+/-! Transitive axiom audit of the actual arithmetic compactness producers. -/
+
+#print axioms BostConjecture.Arithmetic.HermitianMetric.exists_max_degree_submodule
+#print axioms BostConjecture.Arithmetic.HermitianMetric.exists_degree_eq_maxDegree
+#print axioms BostConjecture.Arithmetic.HermitianMetric.degree_le_maxDegree
+#print axioms BostConjecture.Arithmetic.HermitianMetric.maxDegree_nonneg
+#print axioms BostConjecture.Arithmetic.HermitianMetric.abs_degree_submodule_sub_le_of_fiberNorm_le
+#print axioms BostConjecture.Arithmetic.HermitianMetric.abs_maxDegree_sub_le_of_fiberNorm_le
+#print axioms BostConjecture.Arithmetic.HermitianMetric.continuous_fiberNorm
+#print axioms BostConjecture.Arithmetic.HermitianMetric.eventually_all_fiberNorm_compare
+#print axioms BostConjecture.Arithmetic.HermitianMetric.continuous_degree
+#print axioms BostConjecture.Arithmetic.HermitianMetric.continuous_degree_submodule
+#print axioms BostConjecture.Arithmetic.HermitianMetric.continuous_maxDegree
+#print axioms BostConjecture.Arithmetic.HermitianMetric.IsStable.exists_degree_gap
+#print axioms BostConjecture.Arithmetic.HermitianMetric.isStable_of_fiberNorm_compare
+#print axioms BostConjecture.Arithmetic.HermitianMetric.isOpen_isStable_normalized

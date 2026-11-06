@@ -7,8 +7,7 @@ public import BostConjecture.Arithmetic.Compactness.MetricComparison
 # Metric comparison of the maximum degree
 
 The uniform estimate for all induced degrees passes to the actual attained
-maximum. Finiteness of degree superlevel sets also provides a uniform negative
-gap for proper submodules at a strictly stable normalized metric.
+maximum. Its bound uses the ambient generic rank for every submodule.
 
 Reference: bost_specht_manuscript.pdf, page 12.
 -/
