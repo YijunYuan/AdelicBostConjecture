@@ -1,6 +1,6 @@
 # Parallel Horizon scheduling
 
-## Live checkpoint at 2026-11-06 05:40 UTC
+## Live checkpoint at 2026-11-06 05:50 UTC
 
 The user requests **four continuing Horizon proof lanes until the entire main
 theorem and its used dependencies are complete**, with no budget cap. The parent
@@ -132,6 +132,21 @@ covolume asymptotic `e2e7039`/`8d57641`; CLOSURE `0007` exited 01:16:41,
 proof `53f1119`, root `d29f2d3`, evidence `f7ffd4f`, 40 probes. Do not resume.
 
 ## Resource and runtime checkpoint
+
+At 05:48, the exact shared instance-body repair **f8975ea** passed its fresh
+core and dependency rebuild. The former geometric application timeout is
+resolved; the remaining pullback-metric identity was proved within TENSOR's
+owned scope. **BalancedSlope** passed 9,386 warning-free jobs at 05:48:15,
+source **aae85ac**. The actual unconditional
+`HermitianMetric.IsSemistable.tensor` passed 9,395 warning-free jobs at 05:48:54
+(check `0f7187e501dc692b`); its transitive audit command passed at 05:49:33
+(`ec828a0a3565bf2a`). Exact audit outputs and committed final source are being
+reconciled. A fresh read-only mathematical review accepts the actual Plucker
+vector, rank and metric bridges, contradiction, and normalization removal.
+This advances the live frontier to MAIN's binary and finite-family slope
+identities; those drafts and the final full root remain unverified. I-0141
+stays open until the repaired tree's final root and endpoint probes pass.
+Memory at 05:47 was 11.02 GiB available, PSI avg10 0%, with no OOM kills.
 
 At 05:36, the bounded Horizon-owned isolator authorized by **I-0140** has
 exited. It used scratch/report ownership only; TENSOR retained production.
