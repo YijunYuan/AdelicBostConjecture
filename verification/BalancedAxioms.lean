@@ -15,6 +15,7 @@ import BostConjecture.InvariantTheory.OrbitImage
 import BostConjecture.InvariantTheory.SpecialLinearBaseChange
 import BostConjecture.InvariantTheory.PolynomialBaseChange
 import BostConjecture.InvariantTheory.HomogeneousComponents
+import BostConjecture.InvariantTheory.PluckerAverage
 import BostConjecture.InvariantTheory.PolynomialAverage
 import BostConjecture.InvariantTheory.CompactAverage
 import BostConjecture.InvariantTheory.UnitaryDensity
@@ -224,3 +225,9 @@ import BostConjecture.InvariantTheory.SpecialUnitaryDensity
 #print axioms BostConjecture.InvariantTheory.continuous_polynomialSubspace_iff
 #print axioms BostConjecture.InvariantTheory.continuous_degreeLEPolynomialRepresentation
 #print axioms BostConjecture.InvariantTheory.exists_compactInvariant_polynomial
+
+#print axioms BostConjecture.InvariantTheory.specialUnitary_compactSpace
+#print axioms BostConjecture.InvariantTheory.continuous_specialUnitaryPlucker_dual
+#print axioms BostConjecture.InvariantTheory.polynomialCoefficientEval_detects_of_unitary
+#print axioms BostConjecture.InvariantTheory.plucker_invariant_of_specialUnitary
+#print axioms BostConjecture.InvariantTheory.exists_pluckerInvariant_average

@@ -1067,35 +1067,58 @@ of products of linear forms. The finite-dimensional averaging lemma now
 makes the integral fixed, and every evaluation commutes with that integral.
 \end{proof}
 
-\begin{lemma}[Finite-degree compact averaging]
-\label{lem:balanced-polynomial-average}
-\uses{lem:balanced-unitary-density,lem:balanced-bounded-polynomial-average}
+\begin{lemma}[The compact subgroup of the Pl\"ucker action]
+\label{lem:balanced-special-unitary-action}
+\uses{lem:balanced-plucker-coordinates}
 \source{maithani-reynolds:thm:reynolds-for-lie-group}\notready
-Let $G=\SL(U)\times\SL(W)$ act algebraically and linearly on a
-finite-dimensional complex vector space $X$,
-and put $K=\SU(U)\times\SU(W)$. For every polynomial $q$ on $X$,
-\[
- Rq(y)=\int_K q(k^{-1}y)\,dk
-\]
-is a $G$-invariant polynomial, where $dk$ is probability Haar measure.
-The operation $R$ preserves homogeneous degrees. If $q$ has constant
-value $c$ on a $G$-orbit, so does $Rq$ on that orbit.
+For finite nonempty index sets $I,J$, the groups $\SU_I(\mathbb C)$ and
+$\SU_J(\mathbb C)$ are compact topological groups. Chosen bases of
+$U,W$ identify their product with a subgroup of
+$\SL(U)\times\SL(W)$. On $X=\bigwedge^s(U\otimes W)$, every linear
+observation of the restricted Pl\"ucker action is continuous.
 \end{lemma}
 \begin{proof}
-A zero-dimensional factor may be replaced by a one-dimensional factor:
-both its special-linear and special-unitary groups are trivial. We may
-therefore use the positive-dimensional matrix density statement after
-choosing orthonormal bases.
-The bounded polynomial averaging lemma gives a polynomial with the
-displayed evaluation formula.
-The same construction stays in one homogeneous degree when $q$ does.
-For $h\in K$, substitute $k=h\ell$ and use left invariance of Haar
-measure to obtain $Rq(hy)=Rq(y)$. For fixed $y$, the regular function
-$g\mapsto Rq(gy)-Rq(y)$ vanishes on $K$, hence on $G$ by Zariski
-density. This proves $G$-invariance. If $q$ is constant on an orbit,
-its integrand is that same constant at every point of that orbit;
-the Haar measure has total mass one. This is the finite-degree part
-of \cite[Theorem 5.6]{maithani-reynolds}.
+Multiplication is continuous in matrix entries; on the unitary group,
+inversion is conjugate transpose and is therefore continuous.
+The equations $A^*A=AA^*=1$ and $\det A=1$ define a closed set.
+Every unitary matrix has operator norm one, so this set is a closed
+subset of a compact ball in the finite-dimensional complex matrix space.
+The inclusion in the special linear group and transport through a basis
+are group homomorphisms. Every coordinate of the exterior tensor action
+is a polynomial in matrix entries by the Pl\"ucker-coordinate formula,
+hence continuous. Expand a linear form on the finite exterior basis:
+its observation is a finite linear combination of those coordinates,
+and is continuous as well. The chosen bases need not be orthonormal
+for this compact subgroup construction.
+\end{proof}
+
+\begin{lemma}[Finite-degree compact averaging for the Pl\"ucker action]
+\label{lem:balanced-polynomial-average}
+\uses{lem:balanced-unitary-density,lem:balanced-bounded-polynomial-average,lem:balanced-special-unitary-action,lem:balanced-plucker-coordinate-pullback}
+\source{maithani-reynolds:thm:reynolds-for-lie-group}\notready
+Let $U,W$ be positive-dimensional finite-dimensional complex spaces,
+$X=\bigwedge^s(U\otimes W)$ and $G=\SL(U)\times\SL(W)$ with its
+actual Pl\"ucker representation. For every polynomial $q$ on $X$ there
+is a $G$-invariant polynomial $r$ that preserves every constant value
+of $q$ on every $G$-orbit: if $q(gy)=c$ for all $g\in G$, then $r(y)=c$.
+\end{lemma}
+\begin{proof}
+Choose bases and the resulting compact subgroup
+$K=\SU_I(\mathbb C)\times\SU_J(\mathbb C)$. The compact action lemma
+and bounded polynomial averaging give a $K$-fixed polynomial $r$ with
+$r(y)=\int_K q(k^{-1}y)\,dk$. To extend its invariance to $G$, let
+$A=\mathbb C[\SL_I\times\SL_J]$ and form
+$z=\delta(r)-1\otimes r\in A\otimes P(X)$ using the proved coordinate
+pullback. Every specialization of $z$ at a special-unitary pair vanishes
+because $r$ is fixed by inverse pullback, equivalently by forward pullback.
+Expand $z$ in a basis of $P(X)$. Each of its finitely many coefficients
+is an element of $A$ vanishing at all special-unitary pairs. The compact
+detection lemma makes every coefficient zero, so $z=0$. Specializing at
+arbitrary $g\in G$ gives $r\circ g=r$. Finally, when $q$ is constantly
+$c$ on an orbit its averaging integrand is constant $c$, and probability
+Haar measure preserves that value. This is the part of
+\cite[Theorem 5.6]{maithani-reynolds} needed here; no finite generation or
+general reductive-group theorem is required.
 \end{proof}
 
 \begin{lemma}[Invariant detection of orbit closure]

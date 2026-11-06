@@ -785,3 +785,15 @@ at `5f4a2ef`: **9,318 jobs warning-free**, root blob
 `0042d749fe363f603e838610e6805ca895c3771f`. I-0080 is resolved.
 The active-item warning remains intentional (three proof branches and their
 ancestors); read-only health review found no stale scratch candidates.
+
+## Concrete special-unitary Plücker averaging
+
+`SpecialUnitaryAction.lean` proves compactness of the existing matrix SU groups,
+transports their inclusion through arbitrary bases, and proves continuity of
+all linear observations of the actual exterior tensor action. Its scoped build
+passed **3,195 jobs**. `PluckerAverage.lean` extends compact invariance through
+the proved coordinate detection to full SL invariance and preserves constant
+values on all orbits; its scoped build passed **3,523 jobs**. Both were
+warning-free. The serialized axiom audit now passes **190 probes**, using
+only `propext`, `Classical.choice`, and `Quot.sound`.
+The invariant orbit criterion and balanced assembly are the remaining consumers.
