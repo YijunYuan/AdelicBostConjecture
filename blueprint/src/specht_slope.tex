@@ -331,6 +331,30 @@ positions preserves the lattice and the ambient Hilbert tensor norm,
 and commutes with changes of frame, proving the isometric action.
 \end{proof}
 
+\begin{lemma}[Injectivity of nonzero canonical pairings]
+\label{lem:canonical-pairing-injective}
+\uses{lem:canonical-contraction,lem:determinant-specht-representation}
+\source{bost-specht-manuscript:page-0009}
+\notready
+Let $V,E_j$ be finite projective $\Ocal_K$-modules with the constant
+ranks required by the canonical rectangular determinant constructions.
+Every nonzero canonical pairing
+$\Psi_d:B_d\longrightarrow D_d^\vee$ is injective.
+\end{lemma}
+\begin{proof}
+Give $B_d$ its actual determinant--Specht permutation action and
+$D_d^\vee$ the contragredient of the simultaneous permutation action
+on all its determinant--Specht factors. The canonical pairing is an
+intertwiner by its integral equivariance formula. At any complex
+embedding it remains an intertwiner and is nonzero: extension of
+scalars is injective on the projective target, so a nonzero integral
+value remains nonzero. Its source is the irreducible complex Specht
+representation tensored with the one-dimensional determinant line.
+Schur's kernel argument therefore makes the complex map injective.
+Finally, the integral source injects into this complex fiber, so
+injectivity descends to the original map over $\Ocal_K$.
+\end{proof}
+
 \begin{theorem}[Geometric slope inequality]
 \label{thm:geometric-slope}
 \uses{lem:contraction-nonzero,lem:canonical-contraction,lem:determinant-isotypic,lem:irreducible-semistable,lem:degree-calculus,thm:specht-sublinear-covolume}
