@@ -987,3 +987,31 @@ GEOM nonvanishing sequence and the intrinsic pairing/image-slope comparison;
 its complex and binary specializations preserve their signatures. No generic
 invariant descent or assumed tensor semistability is used. This completes
 the geometric slope producer, while balance and the main theorem remain open.
+
+MAIN additions `f92bf10`, `f52ada8`, `a135f7e` and `72e704c` prove
+successive quotient metric transport, the actual integral refinement-grade
+isomorphism and its Hilbert isometry, the flattened HN specialization and grade
+slope bound, maximal-slope invariance, and the finite-family lower bound.
+`TensorGrades` consumes the already attributed mathlib right-exactness and
+quotient-isomorphism APIs. `HNGrades` consumes those actual maps, the pinned HN
+flag and intrinsic tensor degree; `PiLowerBound` reuses
+`Arithmetic.Specht.FiniteTensorDegree.piTensor_generic_finrank`,
+`piTensor_option_inner`, `piTensor_reindex_inner`, and `degree_piTensor_empty`
+from the checked SPECHT-SLOPE tree `8c80c92`. All new mathematics is project-local;
+no additional external source is copied or dependency revision changed.
+
+Further current-owner handoffs accepted by independent integration review are
+TENSOR-SEMI `5eee92c` (`VariationTopology`, `ExtremalNeighborhood`), `2fef69d`
+(`SubmoduleVariation`), `e0b0bb1` (`TensorVariation`), and `7fd2332`
+(`PartialTraceDefect`, `ConjugateBasis`). Their exact project cones and actual
+25/29/34/49-probe outputs were inspected; all use only standard foundational
+axioms. These prove actual local maximality, metric derivatives and finite
+linear-algebra producers; actual extremal balance and tensor semistability
+remain separate unfinished consumers.
+
+LINE-TWIST `032df77` (algebra `6f23c6f`) proves all-submodule exact slope
+shifts and both tensor orders of semistability for arbitrary nonprincipal
+Hermitian lines. Its 56-module cone, 3580-job endpoint check and ten transitive
+probes were independently inspected. It reuses the authorized arithmetic
+`TensorSubmodule` leaf and existing dual/projective APIs; no vendor code was
+copied. Its strict-reduction consumer retains separate authorship and evidence.
