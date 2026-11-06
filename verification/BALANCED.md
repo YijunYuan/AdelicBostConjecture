@@ -541,3 +541,43 @@ direction, hidden criterion or defect. The Nullstellensatz module is imported
 for its canonical `MvPolynomial.zeroLocus`; no Nullstellensatz theorem is used
 by this bridge. Initial coordinate coercions were repaired before the accepted
 check. This remains a proved producer, not a proof of Lemma 7.2.
+
+
+## Coordinate-algebra scalar-extension checkpoint
+
+`InvariantTheory.SpecialLinearBaseChange` at `79ef712` proves
+`specialLinearPairBaseChangeEquiv` and its pure-tensor representative formula:
+`L ⊗[K] A_K ≃ₐ[L] A_L` for arbitrary commutative rings. The two determinant
+relations and their generated ideal are explicitly transported. The scoped
+check `ec578f42bc0b9d89` passed **1,830 jobs warning-free**, 3.1s; the expanded
+axiom audit passed **142 probes** in 3.0s, all foundational-only. Independent
+honesty/source/mathematical review accepted the natural equivalence and its
+hypothesis generality. Accepted LSP diagnostics are clear; intermediate
+coercion and unused-variable warnings were repaired.
+
+Reused imports, at the pinned Mathlib revision and Apache-2.0 license, are
+`Algebra.TensorProduct.tensorQuotientEquiv` from
+`RingTheory/TensorProduct/Quotient.lean`, `MvPolynomial.algebraTensorAlgEquiv`
+from `RingTheory/TensorProduct/MvPolynomial.lean`, and
+`Ideal.quotientEquivAlg` from `RingTheory/Ideal/Quotient/Operations.lean`.
+No copied or modified external source is introduced. This is the coefficient
+algebra comparison only, not the full coaction scalar-extension theorem.
+
+The next proof is fixed in `lem:balanced-coaction-base-change` (complete
+mathematical proof, still notready in Lean): transport the actual exterior
+space using existing exterior/tensor base-change maps; transport its dual
+and polynomial algebra via dual bases and `SymmetricAlgebra.equivMvPolynomial`;
+restrict to homogeneous degree; prove the two actual coaction/constraint
+squares and evaluation transport on generators. GEOM then applies its checked
+faithfully-flat kernel/evaluation theorem. No invariant-base-change property
+is supplied as a hypothesis.
+
+Final hygiene: the task and parent orbit milestone remain active, source
+Lemma 7.2 remains notready, and all owned changes are committed. The roadmap
+active-count warning includes ancestors and the four authorized lanes and
+was independently reviewed as intentional. Scratch dry-run had no candidates.
+The graph found one GEOM in-flight dependency-label typo, independently
+localized and handed to its owner in I-0076; unattached helper declarations
+remain the existing broad-scope warning described by I-0004. Integration of
+InvariantDetection, OrbitImage and SpecialLinearBaseChange is handed to GEOM
+and is not yet certified by a new root build here.
