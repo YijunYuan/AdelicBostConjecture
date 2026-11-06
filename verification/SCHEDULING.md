@@ -1,6 +1,6 @@
 # Parallel Horizon scheduling
 
-## Live checkpoint at 2026-11-06 00:30 UTC
+## Live checkpoint at 2026-11-06 00:55 UTC
 
 SPECHT is complete and run `0003` exited normally after session `0030` at
 23:50:16 UTC. The exact canonical-lattice covolume limit, 14 final
@@ -14,16 +14,16 @@ shared-file handoff: `e2e7039`, evidence typography `8d57641`, root blob
 | `0004` | `BOST-ARITH` | `0016` | Intrinsic arithmetic HN theory and degree finiteness |
 | `0005` | `BOST-GEOM` | `0016` | Invariant tensor nonvanishing and shared integration |
 | `0006` | `BOST-BALANCED` | `0008` | Homogeneous extraction, compact averaging and full Lemma 7.2 |
-| `0007` | `BOST-CLOSURE` | `0002` | Exact complex polynomial-image closure comparison |
+| `0007` | `BOST-CLOSURE` | `0002` | Checked closure endpoint; shared-root integration and final handoff |
 
 CLOSURE started at 00:00:50 UTC in the freed SPECHT slot, PID `584941`.
 Its exclusive paths are `InvariantTheory/ComplexClosure/**`,
 `blueprint/src/complex_closure.tex`, `verification/ComplexClosureAxioms.lean`
 and `verification/COMPLEX_CLOSURE.md`. The fixed consumer interface is in
 `BALANCED.md`; BALANCED retains the canonical definitions and final assembly.
-The two complete blueprint proofs were migrated at `ecbcee9` and remain
-formally unproved. GEOM added their shared include and confirmed graph sync
-has no missing dependency references.
+The closure blueprint was migrated at `ecbcee9`; all owned nodes now have
+checked implementations. GEOM added its shared include and confirmed graph
+sync has no missing dependency references.
 
 Standing protection `I-0074` supersedes archived `I-0046`. GEOM now exclusively
 owns the shared root import, attribution, results and blueprint index files.
@@ -37,21 +37,19 @@ and the guarded LSP in the new CLOSURE process. At 00:05 UTC, memory measured
 over the startup sample. At 00:28 UTC, 9.80 GiB remained available with PSI
 avg10/avg60/avg300 all zero. Dashboard HTTP returned 200. The old three-writer
 wording in the ARITH/GEOM objectives was corrected without changing their math.
-Lemma 7.2 remains open at algebraic closure comparison and invariant extraction.
+Lemma 7.2 remains open at the actual invariant construction and final assembly;
+the exact closure producer is now checked, pending shared-root integration.
 
-Recent checked advances: ARITH reports 287 foundational-only probes and
-independent review for intrinsic quotient semistability and maximal-slope
-attainment; GEOM has checked the rectangular invariant-space identification
-over algebraically closed characteristic-zero fields with 254 probes and
-source/honesty reviews; BALANCED's invariant-detection module passed its
-kernel build at 00:05 UTC. Later root integration is still pending. These
-claims do not complete the remaining tasks or the manuscript's main theorem.
+The latest completed shared batch passed 9,299 warning-free root jobs at
+00:43:05 UTC; GEOM's 273-probe audit and independent pairing review passed.
+This precedes the final closure and unitary-density deliveries. Exact import
+boundaries belong to the owners' verification records; these checks do not
+complete their remaining tasks or the manuscript's main theorem.
 
 BALANCED session `0006` ended normally with its 142-probe checked handoff
 through `7b835bd`; session `0008` started at 00:23:27 UTC. The exact actual
 orbit-image equality is checked and delivered to CLOSURE. The closure lane
-has checked coordinates, complex root persistence, integral lifting and finite
-fibers; the reverse closure inclusion is still open.
+has now proved the exact agreed endpoint, as detailed below.
 
 A bounded read-only scheduling review distinguished complex Lemma 7.2 from
 the later scalar-extension/field-descent obligation. In `I-0079`, both BALANCED
@@ -62,6 +60,29 @@ scalar-extension work stays a later GEOM-consumer obligation under unchanged
 BALANCED ownership. GEOM confirmed no current consumer requires delaying
 this direct complex route. This is a scheduling decision, not a new mathematical
 proof or a fifth writer; the parent made no Lean or blueprint edits.
+
+The bounded closure result is committed as `53f1119`:
+`ComplexClosure.Comparison.closure_polynomial_image_zeroLocus` passed its
+3,394-job warning-free module build at 00:48:35 UTC. All 40 transitive probes
+passed at 00:51:53 UTC with only standard foundational axioms. Independent
+source, mathematical and honesty reviews accepted the exact theorem, including
+empty arities, and inspected the original source pages. GEOM integration and
+the final task handoff are pending; no additional proof objective has been
+assigned to CLOSURE. See [COMPLEX_CLOSURE.md](COMPLEX_CLOSURE.md).
+
+BALANCED has checked homogeneous extraction and the generic compact-average
+helper, with independent review and 163 foundational-only probes. The
+`UnitaryDensity` module passed its kernel build at 00:54:24 UTC; its final
+audit/review and determinant-one consumer are still in progress. Remaining
+Lemma 7.2 work is special-unitary density, the actual polynomial averaging
+consumer, the orbit criterion and final source-facing assembly. A closure
+theorem or generic averaging helper alone is not the requested result.
+
+The 00:40 read-only health sample found exactly four writers, low PSI and no
+OOM. Two guarded BALANCED LSP trees explained its higher measured PSS during
+review; no leak or emergency intervention was inferred. At 00:49, available
+memory was 8.17 GiB and PSI avg10 0.19%. Continue monitoring and use normal
+checked-boundary handoffs if sustained pressure returns.
 
 ## Earlier checkpoints
 
