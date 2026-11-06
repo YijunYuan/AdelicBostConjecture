@@ -2,9 +2,11 @@
 
 The required endpoint is exactly `closure_polynomial_image_zeroLocus` from
 `BALANCED.md` (I-0072, f9e8974), in namespace
-`BostConjecture.InvariantTheory`. It remains **unproved**. Constructible
-images on complex points and finite-normalization density remain open;
-neither the reverse closure inclusion nor Lemma 7.2 is claimed here.
+`BostConjecture.InvariantTheory`. It is now **kernel-proved** with the exact
+requested signature in `ComplexClosure.Comparison`. All ideals and finite
+arities, including empty cases, are covered. The final 40-probe audit and both independent reviews passed; shared
+root integration is being completed. This is the closure component only;
+Lemma 7.2 is not claimed here.
 
 ## Checked coordinate bridge
 
@@ -32,7 +34,7 @@ equality and `aeval`/`eval` rewriting issues were fixed before checking.
 Independent read-only `honesty-reviewer` accepted the canonical objects,
 evaluation proof, empty/zero-dimensional cases, source-facing statement and
 honest partial status. The coordinate blueprint node alone carries `leanok`;
-the two inherited constructibility/closure nodes remain `notready`.
+the two inherited constructibility/closure nodes are closed by the final modules below.
 GEOM integrated Coordinates, Roots, IntegralLifting and FiniteFiber at
 `70d1911`; its root check passed **9,296 jobs** at 00:32:42 UTC.
 Later producer modules await the next shared integration batch.
@@ -78,8 +80,7 @@ Junyan Xu, Yury Kudryashov), `Algebra/Polynomial/Splits.lean`
 `Analysis/Polynomial/CauchyBound.lean` (`IsRoot.norm_lt_cauchyBound`, Daniel
 Weber), `Data/Finset/Max.lean` (`Multiset.exists_min_image`), and
 `Topology/Order/LiminfLimsup.lean` (`Tendsto.bddAbove_range`). No source was
-copied. The intended consumer is the pending finite-normalization openness
-proof, not a semistability certificate.
+copied. The direct consumer is the proved finite-normalization openness theorem.
 
 ## Checked integral lifting and finite fibers
 
@@ -115,7 +116,7 @@ Brasca, Paul Lezeau, Junyan Xu), `RingTheory/Ideal/GoingUp.lean`
 `FieldTheory/IsAlgClosed/Basic.lean` (`IsAlgClosed.lift`), and
 `RingTheory/Ideal/Quotient/Operations.lean` (`AlgHom.liftOfSurjective`).
 The dependency cones are covered by the transitive probes. Consumer:
-finite-normalization openness below, then density, still unproved. No copied source.
+finite-normalization openness and principal-open density below. No copied source.
 
 ## Checked normalization openness
 
@@ -125,7 +126,7 @@ subsequence lifting to a chosen point. It combines the coordinate-product
 separator, root persistence, uniform coordinate bounds and compactness to
 prove `isOpenMap_polynomial_normalization`. The hypotheses are a prime ideal
 and an integral injective polynomial coordinate map; construction of such a
-map by Noether normalization is the next obligation.
+map by Noether normalization is discharged in `Density` below.
 
 The explicit-root kernel build passed **3,332 jobs**, warning-free, at
 00:32:21 UTC on 2026-11-06 (fingerprint `6a59255ca0121606`). The expanded
@@ -134,8 +135,7 @@ The audit waited 28.717 seconds for the shared slot. Guarded LSP diagnostics
 are clear. Independent honesty/mathematical review accepted the proof and
 empty arities; its two blueprint precision corrections are incorporated:
 the proof uses a convergent subsequence, and only its two stated conclusions
-are attached to the new `leanok` node. Full constructible closure equality
-remains open.
+are attached to the new `leanok` node. The final closure equality is discharged by the subsequent modules below.
 
 Additional unmodified Mathlib imports at the pinned revision:
 `RingTheory/Polynomial/UniqueFactorization.lean` (multivariate polynomial UFD),
@@ -157,8 +157,8 @@ The scoped build passed **3,337 jobs**, warning-free, at 00:37:06 UTC on
 2026-11-06 (fingerprint `5d6cbb559571378e`); the **28-probe** audit passed
 at 00:38:11 UTC, foundational-only. Independent honesty/mathematical review
 inspected the code, blueprint and actual logs, and accepted this producer.
-The exact principal-density node carries `leanok`; constructible decomposition
-and the requested final equality remain open.
+The exact principal-density node carries `leanok`; the subsequent modules
+discharge constructible decomposition and the requested final equality.
 
 Further imported, unmodified Mathlib sources at the pinned revision:
 `RingTheory/NoetherNormalization.lean` (`exists_integral_inj_algHom_of_fg`,
@@ -176,3 +176,61 @@ active-count warning reflects ancestors and separate authorized proof lanes;
 review found no cross-lane status change warranted. Indexed Horizon search
 stalled and was stopped; guarded local search and LeanSearch supplied the
 checked library declarations. Four proof writers remain the authorized cap.
+
+## Exact endpoint verification
+
+`ComplexClosure.ConstructibleImage` proves the closed-point spectral image
+bridge and `exists_constructible_polynomial_image`. Its actual finite
+presentation feeds Mathlib's proved Chevalley theorem. The weak Nullstellensatz
+then identifies the spectral image trace with the actual polynomial image.
+The scoped build passed **3,386 jobs**, warning-free, at 00:40:48 UTC;
+the **31-probe** audit passed at 00:44:37 UTC, foundational-only.
+
+`ComplexClosure.ConstructibleClosure` decomposes canonical constructible
+sets into finitely many locally closed pieces, then uses finite minimal
+primes and the proved principal-open density theorem to show their Euclidean
+closures are algebraic. It proves
+`closure_constructible_eq_zeroLocus_vanishingIdeal`. Its scoped build passed
+**3,393 jobs**, warning-free, at 00:46:09 UTC.
+
+`ComplexClosure.Comparison` proves the coordinate comparison and exactly
+`closure_polynomial_image_zeroLocus`. The given basis supplies a homeomorphism,
+and the canonical intrinsic-coordinate bridge transports polynomial closure.
+The explicit-root serialized check
+
+```
+horizon --root /home/yijunyuan/bc-workspace check BostConjecture.InvariantTheory.ComplexClosure.Comparison --json
+```
+
+passed **3,394 jobs**, warning-free, at 00:48:35 UTC on 2026-11-06
+(fingerprint `968f26a7e0d43d00`). No extra geometric hypotheses occur.
+The expanded audit passed all **40 transitive probes**, including the exact
+endpoint, at **00:51:53 UTC**: only `propext`, `Classical.choice` and
+`Quot.sound`, with no `sorryAx` or custom mathematical axiom. Its command was
+`horizon --root /home/yijunyuan/bc-workspace check --lean verification/ComplexClosureAxioms.lean --json`.
+It waited 142.142 seconds for the shared slot. Source diagnostics are clear;
+the audit's temporary stale-import diagnostic is superseded by this serialized pass.
+
+Independent `honesty-reviewer` accepted the exact endpoint, substantive
+producer chain and empty cases. The independent source/mathematical review
+accepted the scoped blueprint statements and original PDF correspondence;
+its request to remove implementation-status prose from the blueprint is
+incorporated. This review visually inspected freshly rendered original manuscript
+page 12 and Milne page 201, and checked the actual orbit-image and zero-exclusion
+consumers. All owned blueprint nodes now carry `leanok`. Final acceptance
+requires GEOM shared-root integration; no Lemma 7.2 completion is claimed.
+
+Additional unmodified Apache-2.0 Mathlib producers at the same pinned revision:
+`RingTheory/Spectrum/Prime/Chevalley.lean`
+(`PrimeSpectrum.isConstructible_range_comap`, Andrew Yang), whose proof uses
+`RingTheory/Spectrum/Prime/ChevalleyComplexity.lean`;
+`RingTheory/Spectrum/Prime/ConstructibleSet.lean`
+(`exists_constructibleSetData_iff`, Yaël Dillies, Andrew Yang);
+`RingTheory/Ideal/MinimalPrime/Noetherian.lean`
+(`finite_minimalPrimes_of_isNoetherianRing`, Thomas Browning);
+`RingTheory/Ideal/MinimalPrime/Basic.lean` (`exists_minimalPrimes_le`);
+`RingTheory/FinitePresentation.lean` (`of_finiteType`); and
+`Topology/Homeomorph/Defs.lean` (`Homeomorph.preimage_closure`).
+No copied source, new axioms, changed dependencies or new representations.
+The exact consumer is BALANCED's polynomial Plücker orbit image from
+`84a679f`, with its agreed special-linear-pair ideal and orbit polynomials.

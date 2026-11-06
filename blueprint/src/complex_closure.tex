@@ -73,44 +73,35 @@ is $1$ and has no roots, and the assertion is vacuous.
 
 \begin{lemma}[Constructible images]
 \label{lem:balanced-constructible-image}
-\source{milne-algebraic-geometry:page-0201}\notready
-A regular map of complex affine algebraic varieties sends constructible
-sets to constructible sets.
+\source{milne-algebraic-geometry:page-0201}
+\lean{BostConjecture.InvariantTheory.exists_constructible_polynomial_image}\leanok
+Let $I\subseteq\mathbb C[X_1,\ldots,X_m]$ be any ideal and let
+$q=(q_1,\ldots,q_n)$ be a polynomial map. Then $q(V(I))$ is the inverse
+image of a constructible subset of $\operatorname{Spec}\mathbb C[T_1,\ldots,T_n]$
+under the closed-point map $a\mapsto\ker(\operatorname{ev}_a)$.
+This is the closed-source polynomial-image case of the constructible-image
+theorem needed for the closure comparison.
 \end{lemma}
 \begin{proof}
-We first prove that a dominant map of irreducible affine varieties has
-image containing a nonempty open subset. Its map of coordinate rings
-is an inclusion $A\subseteq B$ of finitely generated complex domains,
-with $B$ finitely generated over $A$. Choose a maximal algebraically
-independent subset $t_1,\ldots,t_r$ of a finite set of generators of
-$B$ over $\operatorname{Frac}(A)$. The remaining generators are
-algebraic over $\operatorname{Frac}(A)(t_1,\ldots,t_r)$. Clear the
-finitely many denominators in their algebraic equations and invert
-the product $q(t)$ of their leading coefficients. After also inverting
-some $0\ne a\in A$, the algebra
-$B[1/a,1/q]$ is finite integral over $A[1/a][t_1,\ldots,t_r,1/q]$.
-Multiply $a$ by a nonzero numerator of one coefficient of $q$, so the specialization
-$q_y$ is nonzero at every closed point $y\in D(a)$.
-Since $\mathbb C$ is infinite, choose $t\in\mathbb C^r$ with
-$q_y(t)\ne0$. Evaluation at $(y,t)$ gives a maximal ideal of the
-latter algebra. Lying over supplies a maximal ideal of the former;
-its residue field is $\mathbb C$ by the weak Nullstellensatz. Thus
-$y$ lies in the image, proving the assertion about $D(a)$.
+Put $A=\mathbb C[T_1,\ldots,T_n]$ and
+$B=\mathbb C[X_1,\ldots,X_m]/I$. The coordinate homomorphism
+$f:A\to B$, $T_i\mapsto q_i$, is finitely presented: $B$ is finitely
+generated over $\mathbb C$, hence over $A$, and $A$ is Noetherian.
+Chevalley's theorem makes the image $S$ of $\operatorname{Spec}B\to
+\operatorname{Spec}A$ constructible. This is the affine spectral version
+of \cite[Theorem 9.7]{milne-algebraic-geometry}.
 
-For the general assertion, use Noetherian induction on the closure of
-the constructible set $C$. Splitting into finitely many irreducible
-components and restricting to affine open subsets reduces to $C$ dense
-in an irreducible affine variety $Y$. Expressing $C$ as a finite union
-of locally closed subsets shows that one of those subsets contains a
-nonempty open subset $V$ of $Y$: otherwise their closures could not
-cover the irreducible $Y$. Choose a nonempty affine open inside $V$.
-Apply the first paragraph to its map into the closure $Z$ of the
-image. There is a nonempty open $O\subseteq Z$ contained in the
-image of $C$. Then
-$f(C)=O\cup f(C\cap f^{-1}(Z\setminus O))$.
-The second term is constructible by induction, because its source
-has proper closed closure in $Y$. This proves the assertion.
-This is the affine form of \cite[Theorem 9.7]{milne-algebraic-geometry}.
+We verify the asserted closed-point trace. Evaluation at $x\in V(I)$
+factors through $B$, and its kernel contracts to the evaluation ideal of
+$q(x)$, so $q(V(I))$ is contained in that trace. Conversely, suppose a
+prime $P\subset B$ contracts to the evaluation ideal of $a\in\mathbb C^n$.
+Choose a maximal ideal $Q\supseteq P$. The weak Nullstellensatz identifies
+$B/Q$ with $\mathbb C$ as a complex algebra. Let $\psi:B\to\mathbb C$
+be the resulting character. For each $i$, $f(T_i-a_i)\in P\subseteq Q$,
+so $\psi(f(T_i))=a_i$. The values of the ambient coordinates under $\psi$
+give a point $x\in V(I)$, and $q(x)=a$. Thus the trace is exactly the
+actual polynomial image. If $I$ is the unit ideal, both source spectra
+and point sets are empty; empty coordinate sets are included throughout.
 \end{proof}
 
 \begin{lemma}[Lifting roots of the actual minimal polynomial]
@@ -275,25 +266,63 @@ Any lift in $U$ has $u\ne0$. This proves density.
 \begin{lemma}[Complex and Zariski constructible closures]
 \label{lem:balanced-constructible-closure}
 \uses{lem:complex-closure-principal-density,lem:complex-closure-coordinates}
-\source{milne-algebraic-geometry:page-0201}\notready
-A constructible subset of a complex affine variety has the same
-Euclidean and Zariski closures.
+\source{milne-algebraic-geometry:page-0201}
+\lean{BostConjecture.InvariantTheory.closure_constructible_eq_zeroLocus_vanishingIdeal}\leanok
+Let $S$ be a constructible subset of
+$\operatorname{Spec}\mathbb C[X_1,\ldots,X_N]$, and let $C$ be its trace
+on complex points. Then the Euclidean closure of $C$ equals $V(I(C))$,
+its coordinate polynomial Zariski closure.
 \end{lemma}
 \begin{proof}
-It suffices to prove that a nonempty Zariski open subset of an
-irreducible affine variety $Y\subseteq\mathbb C^N$ is Euclidean dense:
-decompose a constructible set into finitely many irreducible locally closed
-pieces and take their closures. For a proper closed subset $Z\subsetneq Y$, choose a polynomial $u$
-vanishing on $Z$ but not identically on $Y$. Its class in the
-coordinate ring of $Y$ is nonzero. Lemma~\ref{lem:complex-closure-principal-density}
-shows that $Y\setminus V(u)$ is Euclidean dense in $Y$, and this set is
-contained in $Y\setminus Z$. Thus every nonempty Zariski open is dense,
-as required.
+A spectral constructible set is a finite union of sets
+$V(g_1,\ldots,g_r)\setminus V(u)$; thus its point trace is a finite
+union of sets $V(J)\cap\{u\ne0\}$. There are finitely many minimal
+prime ideals over $J$, since the polynomial ring is Noetherian.
+Every evaluation ideal containing $J$ contains one such minimal prime.
+Consequently the trace is the union of the principal opens
+$V(P)\cap\{u\ne0\}$ over those minimal primes $P$ with $u\notin P$;
+primes containing $u$ contribute the empty set. By
+Lemma~\ref{lem:complex-closure-principal-density}, the closure of each
+nonempty contributing principal open is $V(P)$. Finite unions commute
+with Euclidean closure. Their union is algebraic, being the point trace
+of the finite union of the corresponding spectral closed sets $V(P)$.
+The same reasoning over the finite constructible decomposition shows
+that the Euclidean closure of $C$ is $V(L)$ for some ideal $L$.
 
-The reverse closure inclusion follows because polynomial zero sets are
-Euclidean closed. The statement is
-\cite[Aside 9.8]{milne-algebraic-geometry}; the finite-normalization and
-root-bound argument here supplies a proof of the density assertion
-stated without proof in that aside.
+Since $C\subseteq V(L)$, every element of $L$ vanishes on $C$,
+so $V(I(C))\subseteq V(L)$. Conversely $V(I(C))$ is Euclidean closed
+and contains $C$, and therefore contains its Euclidean closure $V(L)$.
+This proves equality, including empty unions and empty coordinate arities.
+The closure comparison is \cite[Aside 9.8]{milne-algebraic-geometry};
+the finite-normalization proof of principal-open density above is the
+project's explicit supplement to that unproved aside.
 \end{proof}
 
+
+\begin{theorem}[Complex polynomial-image closure comparison]
+\label{thm:complex-polynomial-image-closure}
+\uses{lem:balanced-constructible-image,lem:balanced-constructible-closure,lem:complex-closure-coordinates}
+\source{bost-specht-manuscript:page-0012}
+\lean{BostConjecture.InvariantTheory.closure_polynomial_image_zeroLocus}\leanok
+Let $E$ be a complex normed vector space with finite basis $(b_i)_{i\in T}$,
+let $I\subseteq\mathbb C[X_j\mid j\in\Sigma]$ be any ideal with $\Sigma$
+finite, and let $q_i$ be coordinate polynomials. Put
+$F(a)=\sum_i q_i(a)b_i$. Then
+\[
+ \overline{F(V(I))}^{\,\mathrm{Eucl}}
+ =\overline{F(V(I))}^{\,\mathrm{polynomial}}.
+\]
+Both index sets may be empty.
+\end{theorem}
+\begin{proof}
+The coordinate polynomial image has constructible closed-point trace by
+Lemma~\ref{lem:balanced-constructible-image}, so its Euclidean closure
+is its coordinate polynomial closure by
+Lemma~\ref{lem:balanced-constructible-closure}. The coordinate isomorphism
+associated to the basis is a homeomorphism. It therefore transports
+Euclidean closure to Euclidean closure, while
+Lemma~\ref{lem:complex-closure-coordinates} transports coordinate
+polynomial closure to intrinsic polynomial closure. These two transports
+give the stated equality. This is the closure component used in the proof
+of manuscript Lemma~7.2, without asserting its other conclusions.
+\end{proof}
