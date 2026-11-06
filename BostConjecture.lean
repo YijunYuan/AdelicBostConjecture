@@ -46,6 +46,8 @@ public import BostConjecture.Main.TensorSemistability.ExponentialVariation
 public import BostConjecture.Main.TensorSemistability.ExtremalNeighborhood
 public import BostConjecture.Main.TensorSemistability.SubmoduleVariation
 public import BostConjecture.Main.TensorSemistability.TensorVariation
+public import BostConjecture.Main.TensorSemistability.PartialTraceDefect
+public import BostConjecture.Main.TensorSemistability.ConjugateBasis
 public import BostConjecture.Main.LineTwist.Semistability
 public import BostConjecture.Main.MaxSlope.FilteredBound
 public import BostConjecture.Main.MaxSlope.HNGrades
