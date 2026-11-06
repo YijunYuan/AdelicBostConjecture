@@ -4,7 +4,7 @@ import BostConjecture.Main.TensorSemistability.DegreeDerivative
 import BostConjecture.Main.TensorSemistability.GramDegree
 import BostConjecture.Main.TensorSemistability.ExponentialVariation
 import BostConjecture.Main.TensorSemistability.ExtremalNeighborhood
-import BostConjecture.Main.TensorSemistability.SubmoduleVariation
+import BostConjecture.Main.TensorSemistability.TensorVariation
 
 #print axioms BostConjecture.Arithmetic.HermitianMetric.isSemistable_iff_degree_nonpos
 #print axioms BostConjecture.Arithmetic.HermitianMetric.isSemistable_rescale_iff
@@ -35,3 +35,9 @@ import BostConjecture.Main.TensorSemistability.SubmoduleVariation
 #print axioms BostConjecture.Arithmetic.HermitianMetric.hasDerivAt_submodule_degree_archimedeanPullback
 #print axioms BostConjecture.Arithmetic.HermitianMetric.hasDerivAt_submodule_degree_exponentialVariation
 #print axioms BostConjecture.Arithmetic.HermitianMetric.sum_fiberProjectionTrace_eq_zero_of_isLocalMax
+
+#print axioms BostConjecture.Arithmetic.binaryTensorFiberEquiv_conjugate
+#print axioms BostConjecture.Arithmetic.tensorFiberAutomorphism_conjugate
+#print axioms BostConjecture.Arithmetic.HermitianMetric.tensor_archimedeanPullback
+#print axioms BostConjecture.Arithmetic.HermitianMetric.hasDerivAt_submodule_degree_tensor_exponentialVariation
+#print axioms BostConjecture.Arithmetic.HermitianMetric.sum_tensorFiberProjectionTrace_eq_zero_of_isLocalMax

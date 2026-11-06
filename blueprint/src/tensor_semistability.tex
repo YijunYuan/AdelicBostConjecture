@@ -291,9 +291,54 @@ Since $[K:\mathbb Q]>0$, multiplication by its nonzero denominator
 gives the assertion.
 \end{proof}
 
+\begin{lemma}[Tensor transport of actual metric variations]
+\label{lem:tensor-metric-variation}
+\uses{lem:submodule-projection-trace-derivative,lem:arithmetic-exponential-variation}
+\source{bost-specht-manuscript:page-0013}
+\lean{BostConjecture.Arithmetic.binaryTensorFiberEquiv_conjugate,BostConjecture.Arithmetic.tensorFiberAutomorphism_conjugate,BostConjecture.Arithmetic.HermitianMetric.tensor_archimedeanPullback,BostConjecture.Arithmetic.HermitianMetric.hasDerivAt_submodule_degree_tensor_exponentialVariation,BostConjecture.Arithmetic.HermitianMetric.sum_tensorFiberProjectionTrace_eq_zero_of_isLocalMax}
+\leanok
+Let $E,F$ be finite projective $\Ocal_K$-modules, with actual Hermitian
+metrics $h,k$. Write $e_\sigma:(E\otimes F)_\sigma\simeq
+E_\sigma\otimes_\mathbb C F_\sigma$ for canonical scalar extension.
+For conjugation-compatible automorphisms $g_\sigma,j_\sigma$, put
+$q_\sigma=e_\sigma^{-1}(g_\sigma\otimes j_\sigma)e_\sigma$.
+Then $q$ is conjugation-compatible, and the tensor of the two pulled-back
+metrics equals the pullback of $h\otimes k$ by $q$.
+
+For compatible self-adjoint families $A_\sigma,B_\sigma$, take
+$g_\sigma(t)=e^{tA_\sigma}$ and $j_\sigma(t)=e^{tB_\sigma}$. For every
+integral submodule $S\subset E\otimes F$, its induced degree derivative is
+\[
+ -\frac1{[K:\mathbb Q]}\sum_\sigma
+ \operatorname{Re}\operatorname{Tr}\left(P_\sigma
+ e_\sigma^{-1}(A_\sigma\otimes I+I\otimes B_\sigma)e_\sigma\right),
+\]
+where $P_\sigma$ is the orthogonal projection onto the actual image of
+$S_\sigma$. At an actual local maximum this trace sum is zero.
+\end{lemma}
+\begin{proof}
+Canonical scalar extension sends the section of $x\otimes y$ to the
+tensor of the two sections. Canonical conjugation sends each such
+section to its section at the conjugate embedding, so it commutes with
+$e_\sigma$ after tensoring the two factor conjugations. Extend by
+conjugate linearity and the spanning property of integral sections.
+The assumed compatibility of $g,j$ now gives the compatibility of $q$.
+
+On pure tensors the inner product of the pulled-back factor metrics is
+$\langle gx,gx'\rangle_h\langle jy,jy'\rangle_k$, precisely the
+Hilbert tensor pairing after applying $g\otimes j$. Sesquilinearity and
+spanning extend this identity to all fibers, proving equality of the
+actual arithmetic metrics. Differentiating the two exponentials at zero
+and using the bilinear product rule gives $A\otimes I+I\otimes B$;
+conjugating by the fixed linear equivalence gives the generator above.
+Apply the actual submodule projection-trace degree derivative. Finally,
+a differentiable real function has derivative zero at a local maximum,
+and $[K:\mathbb Q]$ is positive.
+\end{proof}
+
 \begin{lemma}[Extremal metrics give balanced tensor fibers]
 \label{lem:extremal-to-balance}
-\uses{lem:extremal-degree-local-maximum,lem:exponential-stability-neighborhood,lem:submodule-projection-trace-derivative,lem:balanced-partial-traces,lem:balanced-projection-trace,def:balanced-subspace}
+\uses{lem:extremal-degree-local-maximum,lem:exponential-stability-neighborhood,lem:tensor-metric-variation,lem:balanced-partial-traces,lem:balanced-projection-trace,def:balanced-subspace}
 \source{bost-specht-manuscript:page-0013}
 \notready
 Let $E,F$ have positive ranks $m,n$ and strictly stable degree-zero

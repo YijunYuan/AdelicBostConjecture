@@ -109,3 +109,18 @@ review accepted this adaptation, but its Lean proof remains open.
 COMPACTNESS's actual maximizing pair (e81b08b) and SPECHT-SLOPE's geometric
 endpoint (final 8c80c92, unchanged binary interface) have been handed off.
 Shared-root integration of new units is owned by MAIN.
+
+## Actual tensor-factor metric variation
+
+`TensorVariation.lean` proves that tensoring actual conjugation-compatible
+archimedean pullbacks equals the pullback by the canonically transported tensor
+automorphism. The actual degree derivative for a fixed tensor submodule uses
+`A ⊗ I + I ⊗ B`, transported through binary scalar extension. Local maximality
+forces its summed projection trace to vanish.
+
+- Serialized module build passed 3533 jobs without warnings.
+- Expanded serialized axiom audit: thirty-four probes, foundational axioms only.
+- Independent exact-source/mathematical/honesty review accepted the unit; its
+  one blueprint dependency-label typo was repaired before acceptance.
+- Tensor transport is now proved. Conjugation-compatible partial-trace defects,
+  their positivity argument, extremal-to-balance and final composition remain open.
