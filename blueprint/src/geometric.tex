@@ -942,6 +942,27 @@ gives the same formula on every nested pure tensor. The spanning
 property extends this identity to the whole source.
 \end{proof}
 
+\begin{lemma}[Naturality of dual regrouping]
+\label{lem:dual-regrouping-naturality}
+\lean{BostConjecture.Tensor.dualDistribEquiv_map,BostConjecture.Tensor.dualRegroupEquiv_map,BostConjecture.Tensor.dualRegroupEquiv_fixed_iff}
+\uses{lem:dual-regrouping,lem:projective-tensor-evaluation}
+\notready
+For a commutative ring $R$, finite index sets $I,J$, finite projective
+modules $E_i$, and endomorphisms $g_i$ of $E_i$, the canonical dual
+regrouping intertwines the tensor of $(g_i^\vee)^{\otimes J}$ with
+$((\bigotimes_i g_i)^\vee)^{\otimes J}$. In particular it transports
+fixed-vector equations for every family $g_i$ in both directions.
+\end{lemma}
+\begin{proof}
+For functionals $f_i$ and vectors $x_i$, both sides of the duality
+naturality equation evaluate to $\prod_i f_i(g_i x_i)$. Pure tensors
+span both modules, so this equation holds everywhere. Apply it in each
+$J$-position, then interchange the two finite tensor products. The
+regrouping equality again follows by pure-tensor spanning. Its injectivity
+makes a fixed-vector equation equivalent to its transported equation.
+\end{proof}
+
+
 \begin{lemma}[The integral equivariant restricted pairing]
 \label{lem:integral-canonical-pairing}
 \uses{lem:projective-determinant-permutation,lem:dual-regrouping,lem:projective-tensor-evaluation}
@@ -1712,6 +1733,28 @@ The actual rectangular invariant-space equality puts the source factor
 in the image of the scalar-extended integral lattice. Choose a preimage
 and substitute its defining equality in the nonzero pairing. The target
 fixed-vector equations are unchanged.
+\end{proof}
+
+\begin{lemma}[Nonzero dual independent factors]
+\label{lem:dual-independent-invariant-pairing}
+\lean{BostConjecture.Geometry.exists_dual_independent_invariants,BostConjecture.Geometry.exists_independent_dual_pairing}
+\uses{lem:dual-regrouping-naturality,lem:finite-independent-tensor-invariants,lem:hom-independent-invariant-pairing}
+\notready
+Let $F$ be a field of characteristic zero, $V,E_i$ finite-dimensional,
+and $I$ finite. Let $G_i$ act on $E_i$. A homogeneous invariant polynomial of degree $d$
+on $\Hom(V,\bigotimes_i E_i)$ for $(\prod_i G_i)\times\SL(V)$ with
+nonzero value at $A$ supplies $v\in(V^{\otimes d})^{\SL(V)}$ and
+$w_i\in((E_i^\vee)^{\otimes d})^{G_i}$ whose actual dual regrouping
+pairs nontrivially with $A^{\otimes d}v$.
+\end{lemma}
+\begin{proof}
+Apply the independent Hom pairing theorem. Transport the dual-target
+invariance equations back through dual regrouping by its naturality.
+The finite independent-invariant theorem writes that tensor as the image
+of the tensor product of the individual fixed subspaces. If evaluation
+vanished on every pure tensor of these subspaces, it would vanish on
+all their tensors by multilinearity, contradicting the chosen nonzero
+pairing. Choose a pure tensor where it does not vanish.
 \end{proof}
 
 \begin{lemma}[Polynomial identities from evaluation]

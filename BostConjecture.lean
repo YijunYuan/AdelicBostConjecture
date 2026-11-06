@@ -38,11 +38,13 @@ public import BostConjecture.InvariantTheory.Coaction
 public import BostConjecture.InvariantTheory.InvariantDetection
 public import BostConjecture.InvariantTheory.SpecialLinearBaseChange
 public import BostConjecture.InvariantTheory.PolynomialBaseChange
+public import BostConjecture.InvariantTheory.HomogeneousComponents
 public import BostConjecture.InvariantTheory.OrbitImage
 public import BostConjecture.InvariantTheory.ComplexClosure.Coordinates
 public import BostConjecture.InvariantTheory.ComplexClosure.Roots
 public import BostConjecture.InvariantTheory.ComplexClosure.IntegralLifting
 public import BostConjecture.InvariantTheory.ComplexClosure.FiniteFiber
+public import BostConjecture.InvariantTheory.ComplexClosure.Normalization
 public import BostConjecture.Geometry.TensorRealization
 public import BostConjecture.Geometry.FreeEmbedding
 public import BostConjecture.Geometry.DeterminantBaseChange
@@ -62,6 +64,7 @@ public import BostConjecture.Geometry.DegreeDivisibility
 public import BostConjecture.Geometry.RectangularInvariants
 public import BostConjecture.Geometry.HomTensor
 public import BostConjecture.Geometry.HomInvariants
+public import BostConjecture.Geometry.DualInvariants
 public import BostConjecture.Tensor.Evaluation
 public import BostConjecture.Tensor.EvaluationBaseChange
 public import BostConjecture.Tensor.DualRegroupBaseChange

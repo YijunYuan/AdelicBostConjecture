@@ -724,3 +724,29 @@ invariant-subspace restriction; no new module representation is introduced.
 The result supplies nonzero pairing on independent invariant factors and
 its source rectangular lattice restriction. Dual-target rectangular
 restriction and the full canonical determinant contraction remain separate.
+
+## Independent dual factors and further checked shared producers
+
+`Tensor/DualRegroup.lean` and `Geometry/DualInvariants.lean` add original
+finite-projective naturality and fixed-vector transport through the existing
+canonical duality/regrouping equivalence. Their actual consumer extracts a
+nonzero pairing with independently invariant dual factors from the actual
+Hom polynomial. No external code is copied; the Mathlib module, tensor and
+representation APIs above are unchanged.
+
+`InvariantTheory/HomogeneousComponents.lean` (`6524042`/`926a4d5`) imports
+Mathlib `RingTheory/MvPolynomial/Homogeneous.lean` at the pinned revision,
+using `homogeneousSubmodule_one_pow`, `homogeneousComponent_of_mem`, finite
+homogeneous decomposition and its uniqueness to build intrinsic homogeneous
+components and extract a positive-degree invariant. Its consumer is the
+pending complex orbit criterion; compact averaging and density are separate.
+
+`InvariantTheory/ComplexClosure/Normalization.lean` (`06c1747`) uses
+unmodified Mathlib multivariate polynomial UFD and integral-closure instances
+from `RingTheory/Polynomial/UniqueFactorization.lean` and
+`RingTheory/Polynomial/RationalRoot.lean`, `IsCompact.tendsto_subseq` and
+`IsSeqClosed.isClosed` (`Topology/Sequences.lean`), and `isCompact_univ_pi`
+(`Topology/Compactness/Compact.lean`). Its proved openness conclusion assumes
+an actual integral injective polynomial coordinate map; construction of that
+map and density are subsequent obligations. These imports retain the same
+repository/revision/Apache-2.0 license stated above; no source is copied.
