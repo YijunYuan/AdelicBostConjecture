@@ -1,8 +1,33 @@
 \chapter{Strictly stable maximizing counterexamples}
 
+\begin{lemma}[The least counterexample rank sum]
+\label{lem:minimal-counterexample-rank-sum}
+\uses{lem:maximizing-semistable-pair,lem:normalized-semistable-extension,lem:degree-calculus}
+\source{bost-specht-manuscript:page-0012}
+\lean{BostConjecture.Arithmetic.Compactness.exists_minimal_positive_tensorMaxDegree,BostConjecture.Arithmetic.Compactness.isSemistable_tensor_of_smaller_rank_sum,BostConjecture.Arithmetic.HermitianMetric.isSemistable_iff_maxDegree_nonpos,BostConjecture.Arithmetic.HermitianMetric.maxDegree_tensor_pos_of_not_isSemistable}
+\notready
+If some positive-rank normalized semistable pair has nonsemistable
+tensor product, there exist positive integers $a,b$ for which a tensor
+maximum degree is positive, whereas every normalized semistable pair
+of positive ranks $a',b'$ with $a'+b'<a+b$ has semistable tensor product.
+\end{lemma}
+\begin{proof}
+A degree-zero metric is semistable exactly when all its induced
+submodule degrees are nonpositive. Every induced degree is bounded
+above by the maximum saturated degree, since saturation increases
+degree. Conversely an actual saturated submodule attains that maximum.
+Thus semistability is equivalent to nonpositivity of the maximum degree.
+The tensor degree formula makes the tensor of normalized factors
+degree zero. Its failure of semistability therefore gives a positive
+maximum. Among sums of positive ranks for which such a positive value
+is attained, choose the least natural number. Any positive maximum at
+a smaller sum contradicts this choice. The same equivalence proves
+semistability of every smaller normalized pair.
+\end{proof}
+
 \begin{lemma}[Minimal-rank strictly stable maximizing factors]
 \label{lem:strict-maximizing-counterexample}
-\uses{lem:line-twist,lem:normalized-semistable-extension,lem:semistable-normalization,lem:degree-calculus,lem:maximizing-semistable-pair}
+\uses{lem:line-twist,lem:minimal-counterexample-rank-sum,lem:normalized-semistable-extension,lem:semistable-normalization,lem:degree-calculus,lem:maximizing-semistable-pair}
 \source{bost-specht-manuscript:page-0012,bost-specht-manuscript:page-0013}
 \notready
 Suppose that over a number field $K$ there is a positive-rank pair
