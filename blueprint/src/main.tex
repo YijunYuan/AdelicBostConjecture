@@ -1,5 +1,39 @@
 \chapter{The maximal-slope identity}
 
+\begin{lemma}[Tensoring a saturated submodule]
+\label{lem:tensor-saturated-submodule}
+\uses{lem:degree-calculus}
+\source{bost-specht-manuscript:page-0013}
+\notready
+Let $P\subseteq M$ be a saturated submodule of a finite projective
+$\Ocal_K$-module and let $N$ be finite projective. The actual image
+$P_N$ of $P\otimes N\to M\otimes N$ is saturated, and the natural maps
+give isomorphisms
+\[
+ P\otimes N\simeq P_N,\qquad
+ (M\otimes N)/P_N\simeq (M/P)\otimes N.
+\]
+For Hermitian metrics on $M,N$, these are isometries for the induced
+and quotient metrics, respectively. The construction is monotone in
+$P$, takes zero to zero and the full module to the full tensor product.
+\end{lemma}
+\begin{proof}
+Flatness of $N$ preserves the injection $P\to M$. Right exactness
+identifies the kernel of $M\otimes N\to(M/P)\otimes N$ with $P_N$,
+and this map is surjective. The first isomorphism theorem gives the
+second displayed isomorphism. Since $M/P$ and $N$ are finite projective,
+so is their tensor product; hence the quotient by $P_N$ is torsion free.
+The induced metric identity follows by the product formula for inner
+products on pure tensors and sesquilinearity. At each complex embedding,
+write $M_\sigma=P_\sigma\mathbin{\perp}P_\sigma^\perp$.
+Tensoring this orthogonal direct sum by $N_\sigma$ gives an orthogonal
+direct sum with first term $P_\sigma\otimes N_\sigma$. Its orthogonal
+complement identifies with $(M_\sigma/P_\sigma)\otimes N_\sigma$,
+which proves the quotient metric identity. Factoring each nested
+inclusion through the larger submodule proves monotonicity; the endpoint
+claims follow from the zero and identity tensor maps.
+\end{proof}
+
 \begin{lemma}[The tensor lower bound]
 \label{lem:max-slope-tensor-lower}
 \uses{lem:hn-filtration,lem:degree-calculus}
