@@ -61,8 +61,19 @@ family, and the intrinsic determinant-power degree formula. Kernel build passed
 independent honesty/source review accepted the nonfree proof and actual metric
 consumers. No semistability of the factors is needed for average slope additivity.
 
-The full determinant contribution to the exact intrinsic slope and the geometric
-slope inequality remain open.
+`Arithmetic/Specht/DeterminantDegree.lean` proves the exact intrinsic slope
+`n * h.slope - rectangleLogCovolume a k` for the actual canonical bundle,
+for every rectangular tableau and arbitrary number fields/nonfree projective
+modules of positive constant rank. The normalization is exactly the accepted
+asymptotic producer's correction. Kernel build passed (9194 jobs, 9.5 seconds);
+all twenty-eight transitive probes passed (4.1 seconds), foundational-only.
+Independent honesty/source review accepted the normalization and tableau
+independence. A rewrite elaboration timeout was repaired by explicit theorem
+composition without increasing heartbeat limits.
+
+The geometric slope inequality remains open; the next consumer is injectivity
+of the actual nonzero canonical pairing, followed by intrinsic image-slope
+comparison and the verified asymptotic limit.
 Existing ARITH, SPECHT, and GEOM producers are unchanged.
 
 Tooling: the first check invocation used unsupported `-p` and did not run Lean;

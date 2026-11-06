@@ -252,7 +252,8 @@ the finite tensor formula to its $k$ copies gives the consequence.
 \label{lem:determinant-specht-exact-slope}
 \uses{lem:determinant-specht-tensor-metric,lem:finite-tensor-average-slope,lem:arithmetic-specht-degree}
 \source{bost-specht-manuscript:page-0009}
-\notready
+\lean{BostConjecture.Arithmetic.Specht.determinantMetric_slope,BostConjecture.Arithmetic.Specht.rectangle_determinantMetric_slope,BostConjecture.Arithmetic.Specht.determinantMetric_slope_of_pos}
+\leanok
 Let $A$ be a finite projective Hermitian $\Ocal_K$-module of constant
 positive rank $a$, and let $k>0$. For the canonical rectangular lattice,
 \[
@@ -260,7 +261,8 @@ positive rank $a$, and let $k>0$. For the canonical rectangular lattice,
    =ak\slope(A)-c_a(ak).
 \]
 More generally, for any tableau of shape $(k^a)$ the slope is
-$k\degn(A)-\log\operatorname{covol}L/\operatorname{rk}_{\mathbb Z}L$.
+$k\degn(A)-\log\operatorname{covol}L/\operatorname{rk}_{\mathbb Z}L$,
+with the same correction $c_a(ak)$.
 \end{lemma}
 \begin{proof}
 By Lemma~\ref{lem:determinant-specht-tensor-metric} the actual canonical
@@ -270,13 +272,15 @@ and slope $k\degn(A)$ by Lemma~\ref{lem:finite-tensor-average-slope}.
 The second has positive rank and slope
 $-\log\operatorname{covol}L/\operatorname{rk}_{\mathbb Z}L$ by
 Lemma~\ref{lem:arithmetic-specht-degree}. Binary tensor slope additivity
-adds these terms. For the canonical rectangle the second term is
+adds these terms. All tableaux of the same shape generate the identical
+orbit lattice, so both its inherited covolume and its integral rank are
+unchanged. For the canonical rectangle the second term is
 exactly $-c_a(ak)$, and $\degn(A)=a\slope(A)$ since $a>0$.
 \end{proof}
 
 \begin{lemma}[Determinant-isotypic integral modules]
 \label{lem:determinant-isotypic}
-\uses{def:rectangular-specht,lem:arithmetic-specht-action,lem:arithmetic-specht-semistable,lem:rectangular-invariants,lem:determinant-twisted-free-inclusion,lem:determinant-free-base-change,lem:determinant-free-naturality,lem:tensor-base-change-equivalence,lem:determinant-free-base-change-square,lem:linear-map-localization-descent,lem:determinant-chart-tower,lem:finite-projective-frames,lem:projective-determinant-inclusion,lem:degree-calculus}
+\uses{lem:determinant-specht-exact-slope,lem:determinant-specht-semistable,def:rectangular-specht,lem:arithmetic-specht-action,lem:arithmetic-specht-semistable,lem:rectangular-invariants,lem:determinant-twisted-free-inclusion,lem:determinant-free-base-change,lem:determinant-free-naturality,lem:tensor-base-change-equivalence,lem:determinant-free-base-change-square,lem:linear-map-localization-descent,lem:determinant-chart-tower,lem:finite-projective-frames,lem:projective-determinant-inclusion,lem:degree-calculus}
 \source{bost-specht-manuscript:page-0008,bost-specht-manuscript:page-0009}
 \notready
 For a rank-$a$ projective $\Ocal$-module $A$ and $d=ak>0$, there is
