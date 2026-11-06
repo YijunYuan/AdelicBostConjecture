@@ -896,6 +896,33 @@ contradicting $p(0)=0$ and $p(x)\ne0$. Finally the orbit of zero contains
 zero, which belongs to its closure, so zero is not semistable.
 \end{proof}
 
+\begin{lemma}[Homogeneous extraction of an invariant]
+\label{lem:balanced-homogeneous-extraction}
+\uses{lem:balanced-intrinsic-polynomials,lem:balanced-polynomial-action}\notready
+Let $X$ be a finite-dimensional vector space over a field $K$, with a
+linear action of a group $G$. Each polynomial $p\in P(X)$ has a unique
+finite homogeneous decomposition $p=\sum_{d\geq0}p_d$. Every linear
+pullback preserves this decomposition. If $p$ is invariant, $p(0)=0$
+and $p(x)\ne0$, there exist $d>0$ and $q\in P_d(X)^G$ with $q(x)\ne0$.
+\end{lemma}
+\begin{proof}
+Choose a basis of $X$ and identify its polynomial algebra with a
+polynomial ring using the dual basis. Products of $d$ dual generators
+span exactly the monomials of total degree $d$: a monomial is the
+product of its variables with multiplicities, and each product of
+linear forms expands into monomials of that degree. Sorting the finite
+monomial expansion by total degree gives existence and uniqueness
+of the decomposition. A linear substitution preserves each $P_d(X)$,
+so applying it to this finite sum and using uniqueness shows that
+it commutes with every component projection. Consequently every
+component of an invariant polynomial is invariant. The degree-zero
+component is the constant $p(0)$, because all positive-degree
+components vanish at zero. Evaluating the finite sum at $x$ now shows
+that at least one positive-degree component has nonzero value.
+Uniqueness also shows that the decomposition is independent of the
+basis chosen to construct it.
+\end{proof}
+
 \begin{lemma}[Special-unitary Zariski density]
 \label{lem:balanced-unitary-density}
 \source{maithani-reynolds:prop:SU-SL-dense}\notready
@@ -968,7 +995,7 @@ of \cite[Theorem 5.6]{maithani-reynolds}.
 
 \begin{lemma}[Invariant detection of orbit closure]
 \label{lem:invariant-orbit-criterion}
-\uses{lem:balanced-constructible-image,lem:balanced-constructible-closure,lem:balanced-polynomial-average}
+\uses{lem:balanced-constructible-image,lem:balanced-constructible-closure,lem:balanced-polynomial-average,lem:balanced-homogeneous-extraction}
 \source{bost-specht-manuscript:page-0012,maithani-reynolds:thm:reynolds-for-lie-group,milne-algebraic-geometry:page-0201}\notready
 For $G=\SL(U)\times\SL(W)$ acting algebraically and linearly on
 a finite-dimensional complex vector space $X$, a nonzero $x\in X$
