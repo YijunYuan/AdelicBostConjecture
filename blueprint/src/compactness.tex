@@ -691,6 +691,40 @@ and injectivity gives $a=0$. In particular no irreducibility assertion
 about the determinant polynomial or Nullstellensatz is assumed.
 \end{proof}
 
+\begin{lemma}[Coefficient equations for homogeneous invariants]
+\label{lem:balanced-invariant-kernel}
+\uses{lem:balanced-special-linear-detection,lem:balanced-homogeneous-coaction}
+\lean{BostConjecture.InvariantTheory.polynomialCoefficientEval_detects,BostConjecture.InvariantTheory.mem_homogeneousInvariants_iff_pluckerPolynomialCoaction_eq,BostConjecture.InvariantTheory.pluckerInvariantConstraint,BostConjecture.InvariantTheory.ker_pluckerInvariantConstraint}\leanok
+Let $K$ be an infinite field and let $U,W$ have finite nonempty bases
+indexed by $I,J$. Put $A=K[\SL_I\times\SL_J]$ and
+$X=\bigwedge^s(U\otimes_K W)$. For $p\in P_d(X)$,
+\[
+ p\in P_d(X)^{\SL(U)\times\SL(W)}
+ \quad\Longleftrightarrow\quad \delta_d(p)=1\otimes p.
+\]
+Consequently the invariant subspace of the homogeneous polynomial
+representation is the kernel of the $K$-linear map
+$L_d:P_d(X)\to A\otimes_KP_d(X)$, $L_d(p)=\delta_d(p)-1\otimes p$.
+\end{lemma}
+\begin{proof}
+First, evaluations at special-linear pairs detect $A\otimes_KP(X)$.
+Indeed, expand a tensor in any basis of $P(X)$; it has finitely many
+coefficients in $A$. Every coefficient evaluates to zero if the tensor
+does so at every special-linear pair. Rational-point detection makes
+each coefficient zero, hence the tensor is zero.
+
+For invariant $p$, specialize $\delta(p)-1\otimes p$ at any matrix pair.
+The basis equivalence between matrix and intrinsic determinant-one
+automorphisms, and the coordinate pullback formula, identify this
+specialization with $p\circ\rho(g)-p=0$. Tensor detection gives
+$\delta(p)=1\otimes p$. The inclusion $P_d(X)\hookrightarrow P(X)$
+remains injective after tensoring over $K$, so the same identity holds
+for $\delta_d$. The reverse implication is specialization, as already
+proved. Finally $\ker L_d$ consists exactly of these fixed vectors.
+The forward and inverse pullback conventions have the same fixed
+vectors, because inversion permutes the group elements.
+\end{proof}
+
 \begin{definition}[Semistability of a complex vector by orbit closure]
 \label{def:balanced-vector-semistability}
 \lean{BostConjecture.InvariantTheory.polynomialZariskiClosure,BostConjecture.InvariantTheory.IsGeometricallySemistable}\leanok

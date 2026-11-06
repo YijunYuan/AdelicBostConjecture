@@ -90,14 +90,40 @@ theorem mem_homogeneousInvariants_iff_pluckerPolynomialCoaction_eq
         (1 : SpecialLinearPairCoordinateRing K ι κ) ⊗ₜ[K] p := by
   constructor
   · intro hp
-    apply Module.Flat.lTensor_preserves_injective_linearMap
-      (homogeneousPolynomials K (⋀[K]^s (U ⊗[K] W)) d).subtype Subtype.val_injective
-    change (homogeneousPolynomials K (⋀[K]^s (U ⊗[K] W)) d).subtype.baseChange
-      (SpecialLinearPairCoordinateRing K ι κ) _ = _
-    rw [pluckerPolynomialCoaction_include, LinearMap.baseChange_tmul]
-    exact pluckerCoordinatePullback_eq_of_invariant bU bW i₀ j₀ s p
+    have h := pluckerCoordinatePullback_eq_of_invariant bU bW i₀ j₀ s p
       ((mem_homogeneousInvariants_iff _ _ _).mp hp).2
+    apply (homogeneousPolynomials K (⋀[K]^s (U ⊗[K] W)) d).toBaseChange_injective
+      (SpecialLinearPairCoordinateRing K ι κ)
+    apply Subtype.ext
+    exact (pluckerPolynomialCoaction_include bU bW s d p).trans (h.trans (by simp))
   · exact mem_homogeneousInvariants_of_pluckerPolynomialCoaction_eq bU bW s d p
+
+/-- The linear equations expressing invariance in the actual coefficient algebra. -/
+def pluckerInvariantConstraint (bU : Basis ι K U) (bW : Basis κ K W) (s d : ℕ) :
+    homogeneousPolynomials K (⋀[K]^s (U ⊗[K] W)) d →ₗ[K]
+      SpecialLinearPairCoordinateRing K ι κ ⊗[K]
+        homogeneousPolynomials K (⋀[K]^s (U ⊗[K] W)) d :=
+  pluckerPolynomialCoaction bU bW s d -
+    TensorProduct.mk K (SpecialLinearPairCoordinateRing K ι κ) _ 1
+
+/-- The kernel of the explicit coefficient equations is the canonical invariant submodule. -/
+theorem ker_pluckerInvariantConstraint
+    (bU : Basis ι K U) (bW : Basis κ K W) (i₀ : ι) (j₀ : κ) (s d : ℕ) :
+    LinearMap.ker (pluckerInvariantConstraint bU bW s d) =
+      (homogeneousPolynomialRepresentation (pluckerRepresentation K U W s) d).invariants := by
+  ext p
+  constructor
+  · intro hp
+    have he : pluckerPolynomialCoaction bU bW s d p = 1 ⊗ₜ[K] p := sub_eq_zero.mp hp
+    have hi := (mem_homogeneousInvariants_iff_pluckerPolynomialCoaction_eq
+      bU bW i₀ j₀ s d p).mpr he
+    exact fun g => Subtype.ext (hi.2 g)
+  · intro hp
+    have hi : (p : SymmetricAlgebra K (Dual K (⋀[K]^s (U ⊗[K] W)))) ∈
+        homogeneousInvariants (pluckerRepresentation K U W s) d :=
+      ⟨p.property, fun g => congrArg Subtype.val (hp g)⟩
+    exact sub_eq_zero.mpr ((mem_homogeneousInvariants_iff_pluckerPolynomialCoaction_eq
+      bU bW i₀ j₀ s d p).mp hi)
 
 end PluckerInvariants
 
