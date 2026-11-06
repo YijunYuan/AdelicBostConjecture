@@ -10,9 +10,8 @@ projective module over the ring of integers, including rank zero.
 `HermitianMetric.traceCovolume_eq_discr_degree` in `Main.lean` now proves
 this exact identity for all the stated inputs. Its serialized module check
 passed 3652 jobs at 2026-11-06 02:46:57 UTC (`e742aa919b53262c`). The final
-transitive audit and independent reviews have accepted the endpoint.
-Shared-root integration is tracked below; the task is not marked complete
-before that finishes.
+transitive audit, independent reviews, graph and shared-root integration
+have accepted the endpoint. This bounded producer is complete.
 
 ## Acceptance evidence
 
@@ -33,14 +32,28 @@ statement, including rank zero and nonprincipal ideals. Independent
 honesty review accepted the constructed metric/lattice and the substantive
 real-form, quotient, exact-sequence and induction chain, and inspected
 all 63 final probe outputs. Neither review found an actionable defect.
+The honesty reviewer separately rechecked `739e58a` and confirmed that
+the relocation preserves both declarations, all proofs and the verdict.
 
 The graph attaches `lem:restriction-covolume` to the exact theorem, retains
 the `page0011` source anchor, and retains `lem:arithmetic-compactness` as
-its consumer. Its duplicate-basis warning prompted the canonical relocation;
-COMPACTNESS owns removal of its identical local copy. GEOM owns the final
-shared-root import and provenance integration in I-0092. Arithmetic
-compactness and manuscript Theorem 1.1 remain downstream work; this result
-discharges only the exact restriction-covolume producer.
+its consumer. COMPACTNESS removed its identical local basis definitions and
+successfully rebuilt `TraceMultiplication` on the canonical API. The final
+graph sync reports 329 blueprint nodes, 2206 Lean declarations and 1698
+generated edges, with no duplicate or missing-attachment warning. Its 1060
+unattached-declaration warnings concern auxiliary/existing declarations and
+ongoing work in other lanes; they do not indicate an unproved dependency of
+this endpoint.
+
+GEOM integrated `Arithmetic.RestrictionCovolume.Main` in the shared root,
+whose serialized configured build passed **9354 jobs without warnings at
+2026-11-06 03:04:06 UTC**, fingerprint `975bdb23135a0d4a`, root blob
+`c234f9e6ab31c82d4de652bca29437e8e6ef514c`. Shared provenance and results
+are recorded in `CONTRIBUTIONS.md` and `verification/RESULTS.md`. The parent
+reported independent read-only acceptance of this exact handoff, its 63
+probes and the shared root in I-0102 at 03:05:57 UTC. Arithmetic compactness
+and manuscript Theorem 1.1 remain downstream work; this result discharges
+only the exact restriction-covolume producer.
 
 The persistent post-relocation LSP buffer reported stale imported
 declarations; the successful serialized rebuild and subsequent axiom audit
