@@ -38,7 +38,8 @@ identity to all tensors.
 \label{lem:arithmetic-specht-semistable}
 \uses{lem:arithmetic-specht-action,lem:irreducible-semistable}
 \source{bost-specht-manuscript:page-0009}
-\notready
+\lean{BostConjecture.Arithmetic.Specht.latticeMetric,BostConjecture.Arithmetic.Specht.latticeMetric_action_inner,BostConjecture.Arithmetic.Specht.latticeMetric_isSemistable}
+\leanok
 For a number field $K$, equip $\Ocal_K\otimes_{\mathbb Z}L$ with the
 word Gram form at every complex embedding, using the canonical
 scalar-extension cancellation. This is a Hermitian vector bundle, and
@@ -62,7 +63,7 @@ therefore gives semistability.
 
 \begin{lemma}[Determinant-isotypic integral modules]
 \label{lem:determinant-isotypic}
-\uses{def:rectangular-specht,lem:rectangular-invariants,lem:determinant-twisted-free-inclusion,lem:determinant-free-base-change,lem:determinant-free-naturality,lem:tensor-base-change-equivalence,lem:determinant-free-base-change-square,lem:linear-map-localization-descent,lem:determinant-chart-tower,lem:finite-projective-frames,lem:projective-determinant-inclusion,lem:degree-calculus}
+\uses{def:rectangular-specht,lem:arithmetic-specht-action,lem:arithmetic-specht-semistable,lem:rectangular-invariants,lem:determinant-twisted-free-inclusion,lem:determinant-free-base-change,lem:determinant-free-naturality,lem:tensor-base-change-equivalence,lem:determinant-free-base-change-square,lem:linear-map-localization-descent,lem:determinant-chart-tower,lem:finite-projective-frames,lem:projective-determinant-inclusion,lem:degree-calculus}
 \source{bost-specht-manuscript:page-0008,bost-specht-manuscript:page-0009}
 \notready
 For a rank-$a$ projective $\Ocal$-module $A$ and $d=ak>0$, there is

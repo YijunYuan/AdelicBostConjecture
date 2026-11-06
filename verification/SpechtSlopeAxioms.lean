@@ -1,5 +1,11 @@
 import BostConjecture.Arithmetic.Specht.Representation
+import BostConjecture.Arithmetic.Specht.Bundle
 
 #print axioms BostConjecture.Arithmetic.Specht.complexRepresentation_irreducible
 #print axioms BostConjecture.Arithmetic.Specht.latticeComplexCore_action_inner
 #print axioms BostConjecture.Arithmetic.Specht.scalarExtensionRepresentationEquiv
+#print axioms BostConjecture.Arithmetic.Specht.latticeMetric
+#print axioms BostConjecture.Arithmetic.Specht.latticeMetric_action_inner
+#print axioms BostConjecture.Arithmetic.Specht.lattice_generic_finrank
+#print axioms BostConjecture.Arithmetic.Specht.latticeRepresentation_irreducible
+#print axioms BostConjecture.Arithmetic.Specht.latticeMetric_isSemistable
