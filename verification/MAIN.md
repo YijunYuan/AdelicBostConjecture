@@ -1,148 +1,95 @@
-# Maximal-slope proof evidence
+# Maximal-slope theorem: final verification
 
-Theorem 1.1 and its finite-family equality remain **open**. The actual HN
-filtration, its integral Hermitian grades, their slope bounds, and the binary
-and finite-family lower bounds are now proved for arbitrary number fields and
-nonfree finite projective modules. No conditional equality is presented as the
-source theorem.
+Manuscript Theorem 1.1 and its finite-family corollary are proved over every
+number field for positive-rank finite projective modules over its ring of
+integers, including nonfree modules. The metrics are the actual Hilbert tensor
+metrics. No normalization, balance, maximizer or assumed semistability premise
+occurs in either maximal-slope identity.
 
-## Latest checked continuation
+## Exact accepted Lean source
 
-Source `0b1826d` passed the configured root build with **9406 jobs**, no
-warnings, at **2026-11-06 05:00:03 UTC**. Root blob:
-`e900eb70e42cff7e6f104d9951664b9fbf891c06`.
-It integrates the complete accepted TENSOR handoff `6cc3fd8` for
-`ProjectionConjugation` and `ArithmeticTensorFiber`; no continuing draft is
-added to the root. Independent honesty/integration review compared the full
-handoff files and verified the actual 2816/3537 checks and 59 probe outputs.
+- Source revision: `dd5c6b6ed81b960910d4b63c941cbd144a9e87eb`.
+- MAIN consumer checkpoint: `fe9f652`.
+- Root blob: `8878f1ce6ea8f15ceca334713ff837b6b0723fef`.
+- All 335 root-reachable project modules match that source revision. Subsequent
+  evidence/blueprint changes do not alter these Lean sources.
 
-MAIN `40987f0` adds `maxSlope_le_of_integral_filtration` and
-`maxSlope_piTensor_empty`. The former recovers each saturated integral term
-from its generic span without changing its quotient metric; the latter proves
-the actual degree-zero unit case. Both modules passed 3624 jobs at04:57:09UTC.
-All **54 MAIN transitive axiom probes** passed at04:58:32UTC with exactly
-`propext`, `Classical.choice`, and `Quot.sound`. Independent honesty review
-accepted both proofs and blueprint attachments. Their final consumers remain
-unproved; these additions do not claim the source equality.
+`HermitianMetric.maxSlope_tensor` is the binary identity.
+`HermitianMetric.maxSlope_piTensor` is the finite-family identity, including
+empty and singleton families, and `HermitianMetric.isSemistable_piTensor` is
+its semistability consequence. All are exported by `BostConjecture.lean`.
 
-Evidence is under run0011/session `0006-horizon-BOST-MAIN`:
-`main-root-transport.log`, the three timestamped `checks/*.json` records and
-the actual probe output in `transcript.jsonl`. Earlier diagnostics were fixed;
-no source error or warning remained in these checks. A failed shell invocation
-used unavailable `python`; it was rerun with `python3`. A root-blob lookup used
-a project-relative object path and was corrected to the workspace-root path.
-Neither operational failure affected a source or kernel check.
+## Kernel and transitive axiom evidence
 
-## Proved MAIN producers
+Run0011/session `0006-horizon-BOST-MAIN` contains the actual logs and records:
 
-- `LowerBound.lean`: tensors the actual attained first HN submodules, identifies
-  their induced image metric, and proves `maxSlope_add_le_tensor`.
-- `FilteredBound.lean`: actual quotient semistability and bounded grade slopes
-  bound every integral submodule, including nonsaturated ones, and maximal slope.
-- `Arithmetic/TensorSubmodule.lean` and `TensorFlag.lean`: construct actual
-  tensor images and a saturated lexicographic HN tensor filtration. The shared
-  arithmetic extraction `de43a48` is byte-identical to the former declaration
-  body, with a compatibility re-export and no Main dependency.
-- `QuotientTransport.lean` (`f92bf10`): successive quotient metrics and
-  two-factor tensor quotient metrics agree on every complex fiber.
-- `TensorGrades.lean` (`f52ada8`): constructs the actual integral refinement
-  quotient isomorphism using right exactness and proves its Hilbert isometry.
-- `HNGrades.lean` (`a135f7e`): specializes this isometry to every flattened HN
-  grade, including block transitions, and proves the factor-slope sum and its
-  bound by the two maximal slopes. Positive factor-grade ranks are proved.
-- `Isometry.lean` (`a135f7e`): actual integral isometric injections increase
-  maximal slope; integral isomorphisms preserve it.
-- `PiLowerBound.lean` (`72e704c`): the actual finite Hilbert tensor product has
-  maximal slope at least the sum of factor maxima, including the empty family.
-  It consumes the binary lower bound and existing regrouping/reindexing isometries.
+- `main-root-final.log`: explicit-root `horizon check`, **9413 jobs**, exit0,
+  no warnings, finished **2026-11-06 06:02:11.878281 UTC**. Record:
+  `checks/2026-11-06T06-02-11.878281+00-00-975bdb23135a0d4a.json`.
+- `main-final-axioms.log`: explicit-root
+  `horizon check --lean verification/MainAxioms.lean`, exit0, finished
+  **2026-11-06 06:03:07.979012 UTC**. Record:
+  `checks/2026-11-06T06-03-07.979012+00-00-c2186924c8587570.json`.
 
-## Prior checked root boundary
+All **60** probe outputs match the declaration names and order in
+`verification/MainAxioms.lean`. Each contains exactly `propext`,
+`Classical.choice`, and `Quot.sound`. These are Lean's standard foundations;
+there is no `sorryAx` or additional mathematical axiom in any audited
+transitive cone. The six final probes explicitly include tensor semistability,
+HN tensor-grade semistability, the binary upper bound and equality, and both
+finite-family conclusions. Both checks are fresh, with `reused:false`.
 
-The configured root at **`d0c9f8a`** passed **9404 jobs without warnings** at
-**2026-11-06 04:47:44 UTC**. Root blob:
-`b9b9d21ff4d7a46534e763f325b015979669e88f`.
-All **52** declarations in `verification/MainAxioms.lean` have matching
-transitive axiom outputs containing exactly `propext`, `Classical.choice`, and
-`Quot.sound`; the serialized audit passed at **04:46:24 UTC**. Its MAIN source
-cone is unchanged by the final STRICT root import. No `sorryAx` or additional
-mathematical axiom occurs in these audited cones. The final equalities cannot
-be axiom-audited because they are not yet defined.
+The first binary consumer check hit the default 200000-heartbeat limit at the
+HN-grade transport. Its source/diagnostics are preserved in session attempt0002.
+A theorem-local 800000 budget, with unchanged proof and statement, passed the
+fresh 9403-job check at05:58:48.348278 UTC. Guarded LSP retained stale imports
+following the shared instance repair; narrow dependency refreshes and a clean
+full-source `lean_run_code` for PiTensor preceded the final build. No error or
+warning remains in the accepted checks. The CLI's spurious resource-slot
+message is tracked in I-0001; both final records show only0.002s waiting.
 
-```text
-horizon --root /home/yijunyuan/bc-workspace check
-horizon --root /home/yijunyuan/bc-workspace check --lean verification/MainAxioms.lean
-```
+## Actual producer-to-consumer route
 
-Durable logs are in run0011/session `0004-horizon-BOST-MAIN`:
-`main-root-final.log`, `main-axioms-final.log`, `main-graph-final.log`.
-Earlier narrow checks passed for quotient transport (3583 jobs), the authorized
-extraction/consumers (3585), generic tensor grades (3586), and HN grades (3587).
-The HN specialization required a local 800000-heartbeat elaboration budget;
-its kernel build completed in 276 seconds. The root subsequently checked
-Isometry and PiLowerBound in 2.1 and 2.4 seconds respectively.
-Guarded LSP checks guided all Lean edits. Intermediate proof errors were fixed;
-umbrella/audit LSP stale-import diagnostics were superseded by successful
-serialized kernel checks. One commit invocation used a project-relative cwd
-with workspace pathspecs and was corrected. No broken owned proof remains.
+1. `LowerBound` tensors actual attained first HN submodules. The induced image
+   is isometric and its tensor slope is the sum, giving the unconditional lower
+   bound. `PiLowerBound` extends it through actual regrouping isometries and
+   proves the exact empty-unit maximum.
+2. `TensorFlag`, `TensorGrades` and `HNGrades` construct a saturated integral
+   tensor refinement, its consecutive integral quotient isometries, positive
+   factor-grade ranks, and slope bounds, including block transitions.
+3. `Tensor.hnTensorGrade_isSemistable` applies the proved unconditional
+   `IsSemistable.tensor` to the actual HN quotient metrics. `FilteredBound`
+   bounds every positive-rank submodule, including nonsaturated ones. The upper
+   and attained lower bounds give `maxSlope_tensor`.
+4. `PiTensor` consumes the binary equality, the independent finite lower bound,
+   and actual regrouping/reindexing isometries. Average-slope additivity then
+   gives finite tensor semistability.
 
-Independent honesty/source/mathematical reviewers inspected the actual quotient
-maps, nonfree module coverage, block endpoints, grade slope consumers, finite
-induction, exact logs and all axiom outputs. Two blueprint corrections made the
-finite index range explicit and removed an unattached tensor-grade positivity
-assertion. Six new MAIN nodes are now checked; the main theorem and finite-family
-equality remain notready. These reviews certify proved producers only.
+Accepted producer pins are COMPACTNESS `e81b08b`, SPECHT-SLOPE `8c80c92`,
+LINE `032df77`, STRICT `b49b67f`, and TENSOR `b3236e1` with balance `9ba97a4`,
+rescaling `392e101`, and geometric bridge `aae85ac`. The bounded two-instance
+repair `f8975ea` preserves the public arithmetic API. Its dependency cone was
+rebuilt by TENSOR, then the MAIN cone and root were freshly checked above.
+The 318-module TENSOR cone contains no `Main.MaxSlope` dependency.
 
-## Current-owner integration
+## Independent review and source scope
 
-The accepted root imports the exact independently accepted handoffs:
+Independent source-fidelity, mathematical-correctness and honesty reviewers
+accept the final MAIN statements and their substantive consumers. The source
+review uses original manuscript pages1–3 and13, with registered transcriptions;
+`Bost.pdf` is not substituted for the number-field target. The honesty reviewer
+also compared all335 root-reachable project files and all60 actual axiom
+outputs against the exact pin. The independent verification review is recorded
+alongside these in this session's transcript.
 
-| Lane | Source checkpoint | Actual endpoint / evidence |
-| --- | --- | --- |
-| COMPACTNESS | `e81b08b` | Nonfree global maximizing pairs; 40 foundational-only probes |
-| SPECHT-SLOPE | `8c80c92` | Actual geometric slope inequality; 39 probes |
-| TENSOR-SEMI | `5eee92c`, `2fef69d`, `e0b0bb1`, `7fd2332`, `6cc3fd8` | Local maximum, actual metric derivatives, scalar defects, conjugate bases and arithmetic projection transport; latest 59 probes |
-| LINE-TWIST | `032df77` | Both tensor orders for arbitrary nonprincipal lines; 10 probes |
-| STRICT-REDUCTION | `b49b67f` | Internally minimal, strictly stable normalized global maximizing counterexample; 10 probes |
+The blueprint attaches `lem:hn-tensor-grade-semistable`, `thm:bost-main`, and
+`cor:bost-finite-family` to these exact declarations. External reuse remains
+pinned and attributed in `CONTRIBUTIONS.md`; no new external assumption or
+changed dependency is introduced. Weighted HN compatibility, effective rates,
+appendices, and unused general descent interfaces are outside this target.
 
-Review compared each current import cone against its owner checkpoint, including
-56 LINE and 104 STRICT project modules. Both LINE endpoints are substantively
-used by STRICT to exclude rank one. STRICT has no MAIN or final tensor-semista
-dependency. Broad automatic snapshots were not used as acceptance evidence.
-Attribution and pinned external sources remain in `CONTRIBUTIONS.md`.
-
-## Remaining route and hygiene
-
-TENSOR-SEMI balance handoff `9ba97a4` is independently accepted (3538/9181
-jobs and69 foundational-only probes), pending the next shared-root batch.
-TENSOR-SEMI must finish the geometric contradiction and unconditional tensor
-semistability. MAIN then applies that
-proved theorem to the actual HN grades, transports semistability through the
-checked integral isometry, and applies the filtered bound for the upper bound.
-Together with the unconditional lower bound this gives the binary equality.
-The finite equality uses the checked finite lower bound and an upper-bound
-induction on the actual finite tensor metric; average-slope additivity gives
-its semistability consequence. No assumed producer package substitutes for
-these unfinished steps.
-
-`BOST-MAIN-FILTRATION` and `BOST-MAIN-LOWER` are done; `BOST-MAIN-UPPER` and
-`BOST-MAIN-FINITE` record the remaining work. BOST-MAIN remains active.
-The previous graph sync resolved all source/dependency attachments; unattached
-helper/concurrent-draft declarations are intentional coverage warnings. The
-latest graph may contain ongoing arithmetic-defect drafts outside the checked
-root boundary. Scratch cleanup found no stale candidates. All review helpers
-are read-only; MAIN retains sole shared integration ownership.
-
-Parent convergence handoff I-0138 confirms that completed LINE/STRICT lanes
-should exit and that no additional writer is needed. MAIN continues solely
-with the proved TENSOR endpoint as the next input for its remaining consumer
-proofs. The finalization scan found only pre-existing untracked workspace
-configuration/instruction files and the two reference PDFs; these are outside
-MAIN ownership and were not staged. All authored MAIN source and evidence are
-committed.
-
-The latest graph sync has373 blueprint nodes/2446 declarations with no unresolved
-attachments;1144 unattached helper/draft declarations remain intentional coverage
-warnings. A rejected `graph sync --json` invocation was rerun without the
-unsupported flag. The transient roadmap parent/child warning was investigated
-by the read-only ground helper and corrected by TENSOR adding its remaining
-geometric and composition children; the repeated command reports no warnings.
+Claim class: **proved endpoint**. Frontier before: unconditional tensor
+semistability followed by final HN consumers. Frontier after: no unmet producer
+for Theorem1.1 or its finite-family corollary. `honesty-reviewer`: used.
+Earlier prerequisite-only root boundaries remain in `RESULTS.md` and ledger
+history; they are not evidence for this final revision.

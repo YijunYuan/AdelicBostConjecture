@@ -1,3 +1,23 @@
+## Final number-field maximal-slope theorem
+
+Exact Lean source `dd5c6b6ed81b960910d4b63c941cbd144a9e87eb` proves manuscript
+Theorem1.1 and its finite-family equality and semistability consequence for
+arbitrary number fields and nonfree finite projective modules. Root blob
+`8878f1ce6ea8f15ceca334713ff837b6b0723fef` passed **9413 warning-free jobs** at
+**2026-11-06 06:02:11.878281 UTC**. All **60 MAIN transitive axiom probes** passed
+at **06:03:07.979012 UTC**, each with exactly `propext`, `Classical.choice`, and
+`Quot.sound`; no `sorryAx` or custom mathematical axiom occurs.
+
+The root directly integrates accepted unconditional TENSOR `b3236e1` and MAIN
+consumers `fe9f652`, after the bounded instance repair `f8975ea`. Independent
+source/math/honesty review accepts the exact statements and actual producer use;
+all335 project modules in the root cone match the pin. See `MAIN.md` for exact
+commands, actual logs, probe coverage, failed-attempt repair and review scope.
+The blueprint's main theorem and finite-family nodes now name these endpoints.
+
+The entries below are historical boundaries and describe their then-open
+frontiers; the final evidence above supersedes those statuses.
+
 ## Arithmetic tensor projection transport and MAIN adapters integrated
 
 Root source `0b1826d` passed **9406 jobs without warnings at

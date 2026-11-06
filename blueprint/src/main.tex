@@ -272,7 +272,7 @@ in the generic formulation is exactly the original integral quotient metric.
 \label{lem:hn-tensor-grade-semistable}
 \uses{lem:hn-filtration,lem:hn-tensor-grades,thm:tensor-semistability}
 \source{bost-specht-manuscript:page-0013}
-\notready
+\lean{BostConjecture.Arithmetic.HermitianMetric.hnTensorGrade_isSemistable}\leanok
 Every consecutive grade of the saturated HN tensor filtration is
 semistable for its actual induced quotient metric.
 \end{lemma}
@@ -290,7 +290,7 @@ inequalities through the grade isometry proves the assertion.
 \label{thm:bost-main}
 \uses{lem:hn-filtration,lem:degree-calculus,lem:hn-tensor-grade-semistable,lem:hn-tensor-grade-slopes,lem:filtered-slope-bound,lem:max-slope-tensor-lower}
 \source{bost-specht-manuscript:page-0001,bost-specht-manuscript:page-0013}
-\notready
+\lean{BostConjecture.Arithmetic.HermitianMetric.maxSlope_tensor}\leanok
 For every number field $K$ and every pair of positive-rank Hermitian
 vector bundles $\overline E,\overline F$ over $\Ocal_K$,
 \[
@@ -379,7 +379,7 @@ also an integral isometry, so the result is independent of its enumeration.
 \begin{corollary}[Finite families]
 \label{cor:bost-finite-family}\uses{thm:bost-main,lem:degree-calculus,lem:max-slope-isometry,lem:max-slope-finite-lower,lem:max-slope-tensor-unit}
 \source{bost-specht-manuscript:page-0001,bost-specht-manuscript:page-0013}
-\notready
+\lean{BostConjecture.Arithmetic.HermitianMetric.maxSlope_piTensor,BostConjecture.Arithmetic.HermitianMetric.isSemistable_piTensor}\leanok
 For every finite nonempty family of positive-rank Hermitian
 $\Ocal_K$-bundles $(E_j)_{j=1}^N$,
 \[
@@ -387,6 +387,8 @@ $\Ocal_K$-bundles $(E_j)_{j=1}^N$,
  =\sum_{j=1}^N\maxslope(E_j).
 \]
 If every factor is semistable, so is the tensor product.
+The same assertions hold for the empty family, with the degree-zero unit
+line as tensor product and zero as the empty sum.
 \end{corollary}
 \begin{proof}
 The lower bound is the finite-family lower-bound lemma. For the upper

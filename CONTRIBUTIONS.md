@@ -1042,3 +1042,23 @@ checkpoint proves that the actual empty Hilbert tensor product has maximal
 slope zero using the accepted finite tensor rank/degree formulas. These are
 project-local consumer adapters; toolchain, dependency pins and licenses are
 unchanged.
+
+Final TENSOR-SEMI handoffs `9ba97a4` (actual extremal balance), `392e101`
+(tensor rescaling), `aae85ac` (actual balanced arithmetic slope), and
+`b3236e1` (unconditional tensor semistability) close the producer chain.
+Independent review checked the full 318-module producer cone, the fresh
+9386/9395-job builds, and all 76 transitive axiom outputs. No MAIN maximal-slope
+theorem occurs in that cone. Under the exact I-0141 authorization, `f8975ea`
+replaced only two `binaryTensorFamily` instance bodies with direct
+`Sum.casesOn` branches, preserving names, types, priorities and mathematical
+data. This project-local elaboration repair changes no external dependency.
+
+MAIN `fe9f652` proves actual HN tensor-grade semistability, the filtered upper
+bound, binary maximal-slope equality, and finite-family equality and
+semistability. It directly consumes the unconditional producer above and the
+previously checked attained-submodule lower bounds, integral grade isometries,
+and finite regrouping/reindexing maps. Root/probes `dd5c6b6` integrate only
+accepted owner handoffs; the fresh root passed 9413 warning-free jobs and all
+60 MAIN transitive probes contain only standard foundational axioms. No new
+external code, assumed mathematical result, toolchain or dependency revision
+is introduced. All previously recorded upstream attribution and licenses apply.
