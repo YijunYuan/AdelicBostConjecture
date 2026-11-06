@@ -21,8 +21,14 @@ are foundational-only. The follow-up honesty/source review confirmed that this
 is a substantive concrete consumer, with no supplied metric or representation
 hypotheses.
 
-The determinant-twisted representation is in final verification. Its metric,
-semistability, exact slope, and the geometric slope inequality remain open.
+`Arithmetic/Specht/DeterminantRepresentation.lean` constructs the permutation
+representation on GEOM's actual determinant-twisted module, including its
+one-dimensional determinant tensor factor. It identifies the complexification
+equivariantly with the accepted Specht representation and proves irreducibility
+for a finite projective module of constant stalk rank, without an integral basis.
+Its kernel build passed (9110 jobs, 10.4 seconds); three further axiom probes are
+foundational-only. Independent honesty/source review accepted the construction.
+Its metric, semistability, exact slope, and geometric slope remain open.
 Existing ARITH, SPECHT, and GEOM producers are unchanged.
 
 Tooling: the first check invocation used unsupported `-p` and did not run Lean;

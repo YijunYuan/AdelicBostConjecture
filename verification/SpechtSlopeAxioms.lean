@@ -1,5 +1,6 @@
 import BostConjecture.Arithmetic.Specht.Representation
 import BostConjecture.Arithmetic.Specht.Bundle
+import BostConjecture.Arithmetic.Specht.DeterminantRepresentation
 
 #print axioms BostConjecture.Arithmetic.Specht.complexRepresentation_irreducible
 #print axioms BostConjecture.Arithmetic.Specht.latticeComplexCore_action_inner
@@ -9,3 +10,6 @@ import BostConjecture.Arithmetic.Specht.Bundle
 #print axioms BostConjecture.Arithmetic.Specht.lattice_generic_finrank
 #print axioms BostConjecture.Arithmetic.Specht.latticeRepresentation_irreducible
 #print axioms BostConjecture.Arithmetic.Specht.latticeMetric_isSemistable
+#print axioms BostConjecture.Arithmetic.Specht.projectiveDeterminantMap_equivariant
+#print axioms BostConjecture.Arithmetic.Specht.determinantRepresentationEquiv
+#print axioms BostConjecture.Arithmetic.Specht.determinantRepresentation_irreducible_of_rankAtStalk
