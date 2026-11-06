@@ -1,6 +1,7 @@
 import BostConjecture.Main.MaxSlope.FilteredBound
 import BostConjecture.Main.MaxSlope.HNGrades
 import BostConjecture.Main.MaxSlope.PiLowerBound
+import BostConjecture.Main.MaxSlope.PiTensor
 
 #print axioms BostConjecture.Arithmetic.HermitianMetric.tensor_map_pullback
 #print axioms BostConjecture.Arithmetic.HermitianMetric.slope_pullback_eq_range
@@ -56,3 +57,10 @@ import BostConjecture.Main.MaxSlope.PiLowerBound
 #print axioms BostConjecture.Arithmetic.HermitianMetric.piTensorGenericNontrivial
 #print axioms BostConjecture.Arithmetic.HermitianMetric.maxSlope_piTensor_empty
 #print axioms BostConjecture.Arithmetic.HermitianMetric.sum_maxSlope_le_piTensor
+
+#print axioms BostConjecture.Arithmetic.HermitianMetric.IsSemistable.tensor
+#print axioms BostConjecture.Arithmetic.HermitianMetric.hnTensorGrade_isSemistable
+#print axioms BostConjecture.Arithmetic.HermitianMetric.maxSlope_tensor_le
+#print axioms BostConjecture.Arithmetic.HermitianMetric.maxSlope_tensor
+#print axioms BostConjecture.Arithmetic.HermitianMetric.maxSlope_piTensor
+#print axioms BostConjecture.Arithmetic.HermitianMetric.isSemistable_piTensor

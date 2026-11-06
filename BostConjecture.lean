@@ -50,11 +50,13 @@ public import BostConjecture.Main.TensorSemistability.PartialTraceDefect
 public import BostConjecture.Main.TensorSemistability.ConjugateBasis
 public import BostConjecture.Main.TensorSemistability.ProjectionConjugation
 public import BostConjecture.Main.TensorSemistability.ArithmeticTensorFiber
+public import BostConjecture.Main.TensorSemistability.TensorSemistability
 public import BostConjecture.Main.LineTwist.Semistability
 public import BostConjecture.Main.StrictReduction.MaximizingCounterexample
 public import BostConjecture.Main.MaxSlope.FilteredBound
 public import BostConjecture.Main.MaxSlope.HNGrades
 public import BostConjecture.Main.MaxSlope.PiLowerBound
+public import BostConjecture.Main.MaxSlope.PiTensor
 public import BostConjecture.LinearAlgebra.AlternatingTensorPower
 public import BostConjecture.LinearAlgebra.ExteriorPower.BaseChange
 public import BostConjecture.LinearAlgebra.PiTensorProduct.Projective
@@ -146,7 +148,8 @@ public import RepresentationTheory.Combinatorics.YoungDiagram.CornerStatistics
 /-!
 # Bost's tensor semistability conjecture
 
-Checked prerequisites for the formalization of Theorem 1.1 of
-`bost_specht_manuscript.pdf`. The main theorem is not yet formalized.
+Formalization of Theorem 1.1 of `bost_specht_manuscript.pdf`: maximal-slope
+additivity for Hilbert tensor products over arbitrary number fields, and its
+finite-family equality and semistability consequence.
 See `CONTRIBUTIONS.md` for upstream sources and mathematical boundaries.
 -/
