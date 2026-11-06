@@ -59,7 +59,11 @@ roadmap item is retired, without claiming it proved.
 
 At 01:57 UTC, before successor startup, available memory was 15.15 GiB,
 PSI avg10 0.00%, swap used 3.12 GiB and OOM kills zero; swap-out was unchanged.
-An independent read-only startup health review is checking the new four-lane set. All active proof runs use the guarded Lean LSP; broad checks
+Independent read-only warmup review at 02:02:50 UTC accepted exactly four
+engines on gpt-6-astra/xhigh/subscription, actual guarded successor MCPs
+714795/714952, no extra writer or source overlap, 14.48 GiB available, PSI
+avg10 zero, unchanged swap-out, OOM zero and dashboard HTTP 200. GEOM and
+both successors acknowledged the completed migration in I-0094. All active proof runs use the guarded Lean LSP; broad checks
 remain serialized through explicit-root Horizon checks. Dashboard remains on
 port 8765. Advisory `I-0084` records global search-index rebuild costs: batch
 searches at stable checkpoints and avoid redundant forced reindexing.
