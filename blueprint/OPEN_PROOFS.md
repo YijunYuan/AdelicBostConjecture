@@ -172,10 +172,19 @@ closed invariant-witness endpoint and its concrete binary specialization. The su
 lives in `tensor_semistability.tex`; maximal-slope assembly and finite families
 remain in `main.tex`. These successor statements are not marked complete.
 
-MAIN's unconditional maximal-slope lower bound, general filtered slope bound,
-actual saturated lexicographic HN tensor flag, and single-factor tensor
-image/quotient metric identifications are checked in `Main/MaxSlope`.
-The next independent obligation is `lem:hn-tensor-grades`: identify every
-consecutive refinement quotient with the Hilbert tensor of the actual HN
-grades. The final upper bound must then consume TENSOR-SEMI's proved endpoint;
-that endpoint, `thm:bost-main` and `cor:bost-finite-family` remain open.
+MAIN's unconditional binary and finite-family lower bounds, general filtered
+slope bound, actual saturated lexicographic HN tensor flag, consecutive integral
+grade isomorphisms with all-fiber Hilbert quotient metrics, and grade slope
+bounds are checked in `Main/MaxSlope`. The finite lower bound uses the existing
+actual finite tensor metric and canonical regrouping/reindexing isometries.
+
+Root `d0c9f8a` also integrates both-order arbitrary nonprincipal line twists
+(`032df77`) and the actual strictly stable globally maximizing counterexample
+reduction (`b49b67f`), with substantive LINE-to-STRICT use. TENSOR-SEMI has
+checked actual metric variation, scalar partial-trace defects and conjugate
+bases through `7fd2332`. Its remaining first producer is actual arithmetic
+conjugation/projection-trace transport, then extremal balance and unconditional
+tensor semistability. MAIN's final upper bound must consume that proved
+endpoint on the actual HN grades. `thm:bost-main` and
+`cor:bost-finite-family` remain open; no assumed producer package replaces
+these steps. The current root9404/MAIN52-probe evidence is in `verification/MAIN.md`.

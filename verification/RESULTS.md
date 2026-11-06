@@ -1,3 +1,24 @@
+## HN tensor grades and all current producer handoffs integrated
+
+Root source `d0c9f8a` passed **9404 jobs without warnings at
+2026-11-06 04:47:44 UTC**; root blob
+`b9b9d21ff4d7a46534e763f325b015979669e88f`.
+All **52 MAIN transitive axiom probes** passed at04:46:24UTC with exactly
+`propext`, `Classical.choice`, and `Quot.sound`. Independent source/math/honesty
+review accepts actual integral HN grade isometries, their slope bounds,
+maximal-slope isometry invariance and the finite-family lower bound. Full
+combined integration review verified all326 root-reachable project modules
+against the exact source tree. See `MAIN.md` for commands and logs.
+
+The root includes checked COMPACTNESS `e81b08b`, SPECHT-SLOPE `8c80c92`,
+TENSOR-SEMI through `7fd2332`, LINE-TWIST `032df77` and STRICT-REDUCTION
+`b49b67f`. Their actual import cones and recorded axiom outputs were reviewed;
+LINE is substantively consumed by STRICT. Graph369nodes/2416declarations has
+no unresolved references;1134 unattached helpers are intentional coverage
+warnings. Actual arithmetic balance, unconditional tensor semistability,
+Theorem1.1 and the finite-family equality remain open. No clean producer/root
+build is presented as completion of those statements.
+
 ## Final geometric slope producer integrated
 
 Root source `d7bdece` passed **9387 jobs without warnings at
