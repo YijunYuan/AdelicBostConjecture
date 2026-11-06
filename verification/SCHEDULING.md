@@ -1,6 +1,6 @@
 # Parallel Horizon scheduling
 
-## Live checkpoint at 2026-11-06 02:36 UTC
+## Live checkpoint at 2026-11-06 03:00 UTC
 
 The user explicitly requests **four continuing Horizon proof lanes until the
 entire main theorem is complete**, with no budget cap. The parent only schedules,
@@ -38,7 +38,7 @@ SPECHT run `0003` completed the canonical-lattice covolume limit at 23:50:16 UTC
 01:16:41 UTC (proof `53f1119`, integration `d29f2d3`, evidence `f7ffd4f`, 40
 foundational-only probes). Neither completion implies the main theorem is done.
 
-Standing ownership is `I-0095`, superseding archived `I-0087`. GEOM
+Standing ownership is `I-0104`, superseding `I-0095`. GEOM
 alone edits the shared root, attribution, results and blueprint index files.
 COVOLUME owns only `Arithmetic/RestrictionCovolume/**`,
 `blueprint/src/restriction_covolume.tex`, `verification/RestrictionCovolumeAxioms.lean`
@@ -87,21 +87,45 @@ The task and shared integration remain with GEOM. At 02:35 UTC, available memory
 recovered to 13.13 GiB with PSI avg10 zero and OOM zero; all four runs continue.
 I-0097 records the accepted handoff and closes the temporary memory request.
 
-A second bounded read-only route review reserves GEOM's eventual free slot for
-`BOST-MAIN`, not yet created or launched. Its missing producer is the actual
-arithmetic local-maximum-to-balance variation, followed by tensor semistability
-and HN maximal-slope assembly. Existing analytic balance-to-stationarity results
-do not discharge that converse. Extensions/twists, the maximal-slope lower bound
-and saturated tensor-filtration construction can proceed before compactness and
-geometric-slope endpoints. GEOM's task text now matches the accepted direct
-nonvanishing-descent route; the deferred generic coaction theorem is not claimed.
-The actual BinaryPlucker consumer still needs its final checks, reviews and root
-integration. GEOM retains shared integration until normal completion/exit; any
-successor and ownership transfer must respect the four-writer cap.
+A bounded read-only route review accepted two disjoint successors in `I-0102`.
+Both tasks are created **queued**, without new proof writers:
+
+- `BOST-TENSOR-SEMI` replaces COVOLUME after accepted completion and exit. It
+  owns `Main/TensorSemistability/**`, `tensor_semistability.tex` and its
+  verification pair. Its producers are extensions/twists, strict-stability
+  reduction, actual arithmetic first variation and local-maximum-to-balance;
+  it then consumes COMPACTNESS, SPECHT-SLOPE and Lemma 7.2 for unconditional
+  tensor semistability. Existing balance-to-stationarity is not that converse.
+- `BOST-MAIN` replaces GEOM after accepted completion and exit. It owns
+  `Main/MaxSlope/**`, `main.tex` and its verification pair, then becomes sole
+  shared integrator. Its independent work is the maximal-slope lower bound
+  and actual saturated HN tensor filtration/quotient metrics; its final upper
+  bound consumes the proved TENSOR-SEMI endpoint. There is no reverse dependency.
+
+GEOM acknowledged the bounded migration of `lem:extensions-and-twists` and
+`thm:tensor-semistability` into `tensor_semistability.tex`, preserving their
+complete mathematics and adding the include. New owners await its committed
+handoff. GEOM retains shared integration until normal exit. Roadmap
+`BOST-COMPACT-EXTREMAL` records the missing tensor-semistability producer;
+the parent compactness milestone and whole main theorem remain open.
+
+GEOM's exact terminal binary invariant-to-nonvanishing-sequence theorem now
+passed its serialized kernel build (9,121 jobs, 02:53:11 UTC), source `1557324`.
+The 291-probe audit passed at 02:57:18; root integration and final acceptance
+are still pending. Its preserved earlier conversion failures remain evidence,
+not accepted proofs. COVOLUME's general exact formula passed the rebuilt
+3,652-job target at 02:55:28 and all 63 foundational-only probes at 02:57:55;
+independent source, mathematical and honesty reviews accepted it. Shared
+trace-basis cleanup with COMPACTNESS and root integration remain pending.
+These are progress checkpoints, not premature task completion.
+
+At 02:56 UTC available memory was 10.97 GiB, PSI avg10 zero, swap 3.33 GiB,
+unchanged swap-out and zero OOM kills. Four foreground runs remain active;
+no fifth proof writer or emergency memory intervention is warranted.
 
 ## Earlier checkpoints
 
-The sections below preserve dated history; the live table and I-0095 above
+The sections below preserve dated history; the live table and I-0104 above
 govern current ownership. Do not resume completed SPECHT run `0003`.
 
 Coordinator checkpoint: 2026-11-06 07:20 Asia/Shanghai (2026-11-05 23:20 UTC).
