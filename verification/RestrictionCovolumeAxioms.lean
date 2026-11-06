@@ -1,4 +1,5 @@
 import BostConjecture.Arithmetic.RestrictionCovolume.Line
+import BostConjecture.Arithmetic.RestrictionCovolume.RealForm
 
 #print axioms BostConjecture.Arithmetic.archimedeanSection
 #print axioms BostConjecture.Arithmetic.HermitianMetric.traceCore
@@ -42,3 +43,9 @@ import BostConjecture.Arithmetic.RestrictionCovolume.Line
 #print axioms BostConjecture.Arithmetic.HermitianMetric.norm_section_inner_self
 #print axioms BostConjecture.Arithmetic.HermitianMetric.traceCovolume_principal
 #print axioms BostConjecture.Arithmetic.HermitianMetric.traceCovolume_eq_discr_degree_of_rank_one
+#print axioms BostConjecture.Arithmetic.HermitianMetric.sum_inner_im_eq_zero_of_conjugate
+#print axioms BostConjecture.Arithmetic.HermitianMetric.ofReal_trace_inner
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceComplexification
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceComplexification_injective
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceComplexification_bijective
+#print axioms BostConjecture.Arithmetic.HermitianMetric.mem_archimedeanSpan_iff_conjugate

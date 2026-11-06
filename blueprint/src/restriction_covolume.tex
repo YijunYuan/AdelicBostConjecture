@@ -200,9 +200,36 @@ Every section norm is positive by injectivity of the fiber section map.
 Exponentiation and division by $q$ prove the claim.
 \end{proof}
 
+\begin{lemma}[The real form of the product of fibers]
+\label{lem:trace-real-form}
+\uses{lem:real-trace-lattice,lem:trace-metric-weights,lem:integral-determinant-line}
+\source{bost-specht-manuscript:page-0011}
+\lean{BostConjecture.Arithmetic.HermitianMetric.traceComplexification_bijective,BostConjecture.Arithmetic.HermitianMetric.mem_archimedeanSpan_iff_conjugate}\leanok
+The complexification of $T(A)$ is $W(A)=\prod_\sigma A_\sigma$ by the
+extension of the trace inclusion. A family belongs to $T(A)$ exactly when
+fiber conjugation carries its $\sigma$ component to its
+$\overline\sigma$ component.
+\end{lemma}
+\begin{proof}
+For conjugation-compatible families, the sum of fiber pairings is real:
+conjugating this sum permutes its terms. In particular, for $x,y\in T(A)$,
+the sum of fiber pairings equals their real trace pairing.
+Every element of $\mathbb C\otimes_{\mathbb R}T(A)$ can be written
+$1\otimes x+i\otimes y$, by separating real and imaginary parts of each
+scalar in a finite tensor sum. The imaginary part of the sum of the
+pairings of $y$ with $x+iy$ is $\|y\|^2$. If $x+iy=0$, this forces $y=0$;
+injectivity of the trace inclusion then gives $x=0$. Thus complexification
+is injective. Both its source and target have complex dimension $Da$, by
+the real trace dimension and the equal dimensions of the complex fibers,
+so it is bijective. If $z=x+iy$ is conjugation-compatible, the pairing
+sum of $y$ with $z$ is real, again forcing $y=0$. Thus $z\in T(A)$.
+Conversely every real trace vector is conjugation-compatible by
+Lemma~\ref{lem:trace-metric-weights}. This includes rank zero.
+\end{proof}
+
 \begin{lemma}[Trace metric and saturated quotients]
 \label{lem:trace-quotient-metric}
-\uses{lem:real-trace-lattice,lem:trace-metric-weights,lem:induced-hermitian-metric,lem:quotient-hermitian-metric}
+\uses{lem:trace-real-form,lem:induced-hermitian-metric,lem:quotient-hermitian-metric,lem:exact-determinant-algebra}
 \source{bost-specht-manuscript:page-0011}\notready
 Let $P\subset A$ be saturated and $Q=A/P$, with the induced and quotient
 Hermitian metrics. The induced map of real trace spaces identifies
@@ -210,15 +237,8 @@ $T(P)$ isometrically with its image in $T(A)$. The quotient map identifies
 $T(Q)$ isometrically with the Euclidean quotient $T(A)/T(P)$.
 \end{lemma}
 \begin{proof}
-On $W(A)=\prod_\sigma A_\sigma$, conjugation of fibers and permutation
-of conjugate embeddings give an antilinear involution $J$.
-The real trace space $T(A)$ is fixed by $J$. If $t=iu$ with $t,u\in T(A)$,
-then applying $J$ gives $t=-iu$, whence $t=u=0$. Thus
-$T(A)\cap iT(A)=0$. Its real dimension is $Da$, whereas $W(A)$ has real
-dimension $2Da$, so $W(A)=T(A)\oplus iT(A)$. Applying $J$ to this
-decomposition shows that its fixed space is exactly $T(A)$.
-The same argument applies to $P$ and $Q$, including zero ranks.
-
+Use Lemma~\ref{lem:trace-real-form} to identify each real trace space with
+the conjugation-compatible families in its product of complex fibers.
 The fiber maps of inclusion and quotient commute with conjugation and
 therefore restrict to the real trace spaces. Inclusion preserves the
 trace pairing because every induced fiber pairing is the restriction of
