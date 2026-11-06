@@ -57,6 +57,8 @@ The independent `honesty-reviewer` returned **honest / satisfactory**. It checke
 the substantive producer-to-slope-to-semistability route, independently verified
 the left-order endpoint's foundational axioms, and found no prohibited boundary
 in the 56-module project import closure. There is no new certificate structure.
+Its final completion review also accepted the exact external consumer and
+combined shared-root check, resolving the earlier integration caveats.
 
 Blueprint nodes `lem:line-twist-submodules` and `lem:line-twist` contain complete
 mathematical proofs, exact Lean attachments, and source anchors to manuscript
@@ -74,8 +76,21 @@ conclusions. The module passed 9171 jobs at 04:39:47 UTC, and its ten transitive
 axiom probes passed at 04:40:18 with standard foundations only. Thus this is an
 actual checked consumer, not merely an import or planned attachment.
 
-MAIN's checked shared-root and graph acceptance is still pending; the task
-remains active until that final integration evidence is recorded.
+MAIN integrated the producer in shared root `d2111a8`, which passed 9400
+warning-free jobs. Graph synchronization recorded 369 blueprint nodes and
+no unresolved references; both line-twist nodes are checked. The producer
+and its external consumer have therefore both passed kernel verification,
+and the producer is accepted in the shared root. The combined root `d0c9f8a`,
+which imports both producer and STRICT endpoint, passed **9404 warning-free
+jobs** at 04:47:44 UTC. MAIN confirmed that every graph source and dependency
+attachment resolves. Evidence is recorded in run 0011/session 0004,
+`main-root-final.log`, and the corresponding Horizon check record.
+
+**Claim class:** proved producer. **Frontier before/after:** the actual integral
+submodule and metric producer for `lem:line-twist` was missing; the entire
+assigned producer, both-order exports, checked consumer and shared integration
+are now complete. General tensor semistability and the main maximal-slope
+equality remain separate objectives and are not completion claims of this task.
 
 No external code was newly vendored or adapted. The proof uses the pinned
 mathlib and existing attributed project APIs. Shared source and integration files
