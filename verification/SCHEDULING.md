@@ -1,6 +1,6 @@
 # Parallel Horizon scheduling
 
-## Live checkpoint at 2026-11-06 05:36 UTC
+## Live checkpoint at 2026-11-06 05:40 UTC
 
 The user requests **four continuing Horizon proof lanes until the entire main
 theorem and its used dependencies are complete**, with no budget cap. The parent
@@ -141,7 +141,12 @@ transparent factor instances do not definitionally match the compiled data
 instances, and simplifying the partial theorem still exhausts 200k reductions.
 TENSOR requests coordinated replacement of only the binaryTensorFamily
 AddCommGroup/Module instance bodies by direct Sum.casesOn branches, keeping
-names, types and API. This shared change is not yet authorized or verified.
+names, types and API. **I-0141** now authorizes TENSOR exactly those two bodies
+in Arithmetic/BinaryTensorMetric.lean; MAIN holds overlapping integration until
+the checked handoff. Core and actual dependent builds, final full root and
+transitive probes must be fresh at the repaired revision. No expanded shared
+scope or additional helper is authorized; I-0140 is resolved/archived.
+The repair remains unverified until those checks pass.
 
 Meanwhile **TensorRescale 392e101** passed 3,576 jobs and 70 foundational-only
 probes. The final TENSOR and MAIN drafts have no added axioms or sorry, but
