@@ -744,3 +744,20 @@ Boundary graph sync found no missing dependency/Lean references; the
 warning, intentionally retained. Health review explains the active-count
 warning as authorized proof leaves plus ancestors. Scratch dry-run found
 no stale candidates. All current producer reviews used the honesty lane.
+
+Session boundary: accepted producer commits are `35d1080`,
+`6524042`/`926a4d5`, `3e7976e`, `96d2f1b`, `7f56300`, and `6da0e3e`.
+The last two are awaiting GEOM's final root validation in I-0080; all
+preceding producer handoffs are integrated. The task remains open. The
+next resumed batch should start at `lem:balanced-polynomial-average`
+(the graph now marks it ready), transporting the actual compact matrix
+action to the intrinsic homogeneous degree spaces and proving continuity
+of its coefficients before applying the checked Haar averaging theorem.
+Then use the proved special-unitary coordinate detection and homogeneous
+extraction to construct the invariant required by GEOM. No scalar-extension
+expansion is authorized as the immediate frontier under I-0079.
+
+The final graph refresh had no missing references and 940 unattached
+helpers across concurrent project work; this is the same intentional
+coverage warning. All owned source and verification paths match committed
+HEAD. No rejected proof draft or background check is left running.
