@@ -32,7 +32,8 @@ and therefore contains its Euclidean closure.
 \end{proof}
 
 \begin{lemma}[Persistence of roots of monic polynomials]
-\label{lem:complex-closure-root-persistence}\notready
+\label{lem:complex-closure-root-persistence}
+\lean{BostConjecture.InvariantTheory.exists_roots_tendsto}\leanok
 Let $F_k\in\mathbb C[T]$ be monic of a fixed positive degree $r$, and
 let $z\in\mathbb C$. If $F_k(z)\to0$, there are roots $z_k$ of $F_k$
 such that $z_k\to z$.
@@ -48,6 +49,26 @@ where the product counts multiplicities. For each $\epsilon>0$, the
 right side is eventually less than $\epsilon^r$, so
 $|z_k-z|<\epsilon$ eventually. This is precisely $z_k\to z$;
 no assumption on multiplicities is needed.
+\end{proof}
+
+\begin{lemma}[Uniform bounds for roots under specialization]
+\label{lem:complex-closure-root-bounds}
+\lean{BostConjecture.InvariantTheory.exists_bound_roots_specialization}\leanok
+Let $F\in\mathbb C[X_1,\ldots,X_d][T]$ be monic, and let
+$a_k\to a$ in $\mathbb C^d$. There is a constant $B$ such that every
+root of every $F(a_k,T)$ has modulus at most $B$.
+\end{lemma}
+\begin{proof}
+Writing $r=\deg_T F$, monicity ensures that every specialization has
+degree $r$ and leading coefficient $1$. The Cauchy bound gives, for each
+root $w$,
+\[
+ |w|<1+\max_{i<r}|F_i(a_k)|
+       \leq 1+\sum_{i<r}|F_i(a_k)|.
+\]
+The right side is a convergent real sequence, since each coefficient is
+a continuous polynomial, so it is bounded. For $r=0$ the monic polynomial
+is $1$ and has no roots, and the assertion is vacuous.
 \end{proof}
 
 \begin{lemma}[Constructible images]
@@ -94,7 +115,7 @@ This is the affine form of \cite[Theorem 9.7]{milne-algebraic-geometry}.
 
 \begin{lemma}[Complex and Zariski constructible closures]
 \label{lem:balanced-constructible-closure}
-\uses{lem:complex-closure-root-persistence,lem:complex-closure-coordinates}
+\uses{lem:complex-closure-root-persistence,lem:complex-closure-root-bounds,lem:complex-closure-coordinates}
 \source{milne-algebraic-geometry:page-0201}\notready
 A constructible subset of a complex affine variety has the same
 Euclidean and Zariski closures.

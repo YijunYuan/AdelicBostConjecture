@@ -53,6 +53,32 @@ Consumer: the pending exact polynomial-image endpoint, then BALANCED's
 actual Plücker orbit closure comparison. No library source was copied or
 modified and no dependency or toolchain was changed.
 
+## Checked root persistence and bounds
+
+`ComplexClosure.Roots` proves the nearest-root product inequality, persistence
+for arbitrary filters and fixed positive monic degree, its application to
+polynomial specialization, and a uniform Cauchy bound for every root over
+every term of a converging parameter sequence. Repeated roots are included;
+degree-zero root bounds are vacuous because a monic constant is one.
+
+The explicit-root serialized Roots build passed **2,996 jobs**, warning-free,
+at 2026-11-06 00:16:02 UTC. The expanded axiom audit passed all **13 probes**
+at 00:16:48 UTC, again with only the three foundational axioms. A first Roots
+build failed because `zero_le` resolved in the polynomial namespace; the
+explicit nonnegative-real proof fixed it. Final guarded LSP diagnostics are
+clear. Independent honesty review inspected both the proof and actual check
+logs and accepted these two producers; their two blueprint nodes carry `leanok`.
+
+Further unmodified imports from the same pinned Apache-2.0 Mathlib revision:
+`Analysis/Complex/Polynomial/Basic.lean` (`Complex.isAlgClosed`, Chris Hughes,
+Junyan Xu, Yury Kudryashov), `Algebra/Polynomial/Splits.lean`
+(`Splits.eval_eq_prod_roots_of_monic`, `Splits.natDegree_eq_card_roots`),
+`Analysis/Polynomial/CauchyBound.lean` (`IsRoot.norm_lt_cauchyBound`, Daniel
+Weber), `Data/Finset/Max.lean` (`Multiset.exists_min_image`), and
+`Topology/Order/LiminfLimsup.lean` (`Tendsto.bddAbove_range`). No source was
+copied. The intended consumer is the pending finite-normalization openness
+proof, not a semistability certificate.
+
 ## Operational boundary
 
 The read-only ground review accepted the finite-normalization blueprint

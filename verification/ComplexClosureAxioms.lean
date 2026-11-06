@@ -1,4 +1,5 @@
 import BostConjecture.InvariantTheory.ComplexClosure.Coordinates
+import BostConjecture.InvariantTheory.ComplexClosure.Roots
 
 #print axioms BostConjecture.InvariantTheory.polynomialEval_equivMvPolynomial_symm
 #print axioms BostConjecture.InvariantTheory.polynomialEval_eq_eval_equivMvPolynomial
@@ -7,3 +8,9 @@ import BostConjecture.InvariantTheory.ComplexClosure.Coordinates
 #print axioms BostConjecture.InvariantTheory.continuous_polynomialEval
 #print axioms BostConjecture.InvariantTheory.isClosed_polynomialZariskiClosure
 #print axioms BostConjecture.InvariantTheory.closure_subset_polynomialZariskiClosure
+#print axioms BostConjecture.InvariantTheory.exists_root_norm_sub_pow_le
+#print axioms BostConjecture.InvariantTheory.exists_roots_tendsto
+#print axioms BostConjecture.InvariantTheory.continuous_eval_map
+#print axioms BostConjecture.InvariantTheory.exists_roots_tendsto_specialization
+#print axioms BostConjecture.InvariantTheory.norm_root_lt_coeff_sum
+#print axioms BostConjecture.InvariantTheory.exists_bound_roots_specialization
