@@ -1,4 +1,6 @@
 import BostConjecture.Main.TensorSemistability.Extensions
+import BostConjecture.Main.TensorSemistability.MetricVariation
+import BostConjecture.Main.TensorSemistability.DegreeDerivative
 
 #print axioms BostConjecture.Arithmetic.HermitianMetric.isSemistable_iff_degree_nonpos
 #print axioms BostConjecture.Arithmetic.HermitianMetric.isSemistable_rescale_iff
@@ -7,3 +9,8 @@ import BostConjecture.Main.TensorSemistability.Extensions
 #print axioms BostConjecture.Arithmetic.HermitianMetric.IsSemistable.submodule_of_degree_zero
 #print axioms BostConjecture.Arithmetic.HermitianMetric.IsSemistable.quotient_of_degree_zero
 #print axioms BostConjecture.Arithmetic.HermitianMetric.isSemistable_of_submodule_quotient
+#print axioms BostConjecture.Arithmetic.HermitianMetric.archimedeanPullback
+#print axioms BostConjecture.Arithmetic.HermitianMetric.determinant_archimedeanPullback
+#print axioms BostConjecture.Arithmetic.HermitianMetric.degree_archimedeanPullback
+#print axioms BostConjecture.Arithmetic.HermitianMetric.hasDerivAt_degree
+#print axioms BostConjecture.Arithmetic.HermitianMetric.hasDerivAt_degree_of_norm_sq

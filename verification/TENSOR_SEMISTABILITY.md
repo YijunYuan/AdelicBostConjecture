@@ -20,8 +20,25 @@ basis is required.
   `lem:normalized-semistable-extension`; consumer: minimal-rank strict-factor
   reduction for `thm:tensor-semistability`.
 
-The line-twist, strict-factor reduction, actual metric variation, arithmetic
-degree derivative, extremal-to-balance and final composition remain open.
+## Actual metric change and section-formula derivative
+
+`MetricVariation.lean` constructs actual archimedean pullbacks by arbitrary
+conjugation-compatible fiber automorphisms and proves that determinant-one
+families preserve the determinant metric and degree. `DegreeDerivative.lean`
+proves the logarithmic derivative of intrinsic degree, also in squared-norm
+form, along a metric curve with differentiable determinant section norms.
+
+- Serialized two-module build: passed, 3510 jobs, no warnings.
+- Expanded `TensorSemistabilityAxioms.lean`: twelve probes passed, all with only
+  `propext`, `Classical.choice`, `Quot.sound`.
+- Independent source/mathematical/honesty review accepted both bounded producers.
+  Its missing dependency-edge finding was fixed in the source theorem.
+- Blueprint: `lem:arithmetic-metric-variation` and
+  `lem:arithmetic-degree-derivative`, both in the final theorem's dependency cone.
+
+The line-twist, strict-factor reduction, conjugation-compatible exponential
+curves, actual submodule projection-trace derivative, extremal-to-balance and
+final composition remain open. These two producers do not prove balance.
 COMPACTNESS's maximizing-pair endpoint and SPECHT-SLOPE's geometric endpoint are
 also still producer boundaries. Shared-root integration is pending MAIN's
 acceptance of the checked handoff.

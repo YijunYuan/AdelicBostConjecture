@@ -80,9 +80,69 @@ submodule slope, as well as the ambient slope, by $\degn(L)$, so
 their comparisons are unchanged.
 \end{proof}
 
+\begin{lemma}[Conjugation-compatible changes of fiber metric]
+\label{lem:arithmetic-metric-variation}
+\uses{lem:degree-calculus}
+\source{bost-specht-manuscript:page-0013}
+\lean{BostConjecture.Arithmetic.HermitianMetric.archimedeanPullback,BostConjecture.Arithmetic.HermitianMetric.determinant_archimedeanPullback,BostConjecture.Arithmetic.HermitianMetric.degree_archimedeanPullback}
+\leanok
+Let $h$ be a Hermitian metric on a finite projective $\Ocal_K$-module $E$.
+For each complex embedding $\sigma$, let $g_\sigma$ be a complex-linear
+automorphism of $E_\sigma$. Suppose these automorphisms commute with
+the canonical conjugate-linear maps between conjugate fibers.
+Then $h^g_\sigma(x,y)=h_\sigma(g_\sigma x,g_\sigma y)$ is a Hermitian
+metric on the same integral module. If every $\det(g_\sigma)=1$,
+its determinant metric, and hence its degree, agrees with that of $h$.
+\end{lemma}
+\begin{proof}
+Sesquilinearity and positivity follow by pullback along an invertible
+linear map. Commutation with fiber conjugation and conjugation
+compatibility of $h$ give conjugation compatibility of $h^g$.
+On a top exterior power, $g_\sigma$ acts by multiplication by its
+determinant. When the determinant is one, the top wedge is unchanged.
+The cross Gram determinant formula for the determinant metric then
+shows that the two determinant metrics coincide on all decomposable
+top wedges, which span the one-dimensional determinant fiber.
+The integral determinant line is unchanged, so the finite contribution
+and all archimedean contributions to its degree coincide.
+\end{proof}
+
+\begin{lemma}[Derivative of the intrinsic degree]
+\label{lem:arithmetic-degree-derivative}
+\uses{lem:degree-calculus}
+\source{bost-specht-manuscript:page-0013}
+\lean{BostConjecture.Arithmetic.HermitianMetric.hasDerivAt_degree,BostConjecture.Arithmetic.HermitianMetric.hasDerivAt_degree_of_norm_sq}
+\leanok
+Let $h_t$ be metrics on a fixed finite projective module $E$ over
+$\Ocal_K$, and choose a nonzero integral section $\xi$ of its determinant
+line. Write $a_\sigma(t)=\|\xi\|_{\det h_t,\sigma}>0$ and
+$D=[K:\mathbb Q]$. If these functions are differentiable at $t_0$,
+then
+\[
+ \left.\frac{d}{dt}\degn(E,h_t)\right|_{t=t_0}
+ =-\frac1D\sum_\sigma\frac{a'_\sigma(t_0)}{a_\sigma(t_0)}.
+\]
+Equivalently, writing $q_\sigma=a_\sigma^2$, the summand is
+$q'_\sigma(t_0)/(2q_\sigma(t_0))$ whenever $q_\sigma$ is differentiable.
+These formulas apply to a fixed integral submodule with its induced metrics.
+\end{lemma}
+\begin{proof}
+The determinant section formula expresses the degree as
+\[
+ \frac{\log\#(\det E/\Ocal_K\xi)-\sum_\sigma\log a_\sigma(t)}D.
+\]
+The integral quotient and $D$ are independent of $t$. Each section norm
+is positive because $\xi\ne0$. Differentiating the finite sum and using
+the logarithmic derivative proves the first formula.
+For the second, positivity implies $a_\sigma=\sqrt{q_\sigma}$ and
+$\log a_\sigma=\frac12\log q_\sigma$, giving the stated derivative.
+A submodule of a finite projective module over $\Ocal_K$ is again finite
+projective, so the same argument applies to its fixed determinant line.
+\end{proof}
+
 \begin{proposition}[Tensor semistability]
 \label{thm:tensor-semistability}
-\uses{lem:degree-calculus,lem:extensions-and-twists,lem:arithmetic-compactness,lem:degree-maximum-continuity,lem:balanced-plucker,lem:binary-plucker-nonzero-sequence,thm:geometric-slope}
+\uses{lem:degree-calculus,lem:extensions-and-twists,lem:arithmetic-compactness,lem:degree-maximum-continuity,lem:arithmetic-metric-variation,lem:arithmetic-degree-derivative,lem:balanced-plucker,lem:binary-plucker-nonzero-sequence,thm:geometric-slope}
 \source{bost-specht-manuscript:page-0012,bost-specht-manuscript:page-0013}
 \notready
 For every number field $K$ and all positive-rank semistable Hermitian
