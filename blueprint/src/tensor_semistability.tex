@@ -170,6 +170,53 @@ pullback lemma therefore proves equality of determinant metrics and
 degrees. At $t=0$ every exponential is the identity.
 \end{proof}
 
+\begin{lemma}[Admissible neighborhoods along exponential variations]
+\label{lem:exponential-stability-neighborhood}
+\uses{lem:arithmetic-exponential-variation,lem:degree-maximum-continuity}
+\source{bost-specht-manuscript:page-0013}
+\lean{BostConjecture.Arithmetic.HermitianMetric.continuous_exponentialVariation,BostConjecture.Arithmetic.HermitianMetric.IsStable.eventually_exponentialVariation}
+\leanok
+The compatible exponential metric curve $t\mapsto h_t$ is continuous.
+If $h$ is strictly stable of degree zero and its generators have trace
+zero, then $h_t$ is strictly stable of degree zero for all sufficiently
+small real $t$.
+\end{lemma}
+\begin{proof}
+On each finite-dimensional complex fiber the exponential is continuous
+in operator norm, as is $t\mapsto tA_\sigma$. Evaluation and the fixed
+Hermitian form are continuous, so
+$t\mapsto h_\sigma(e^{tA_\sigma}x,e^{tA_\sigma}y)$ is continuous
+for every $\sigma,x,y$. This is the defining topology of actual metrics.
+The determinant-one variation keeps the degree zero and starts at $h$.
+Strict-stability openness in the normalized metric space then supplies
+the asserted neighborhood of zero.
+\end{proof}
+
+\begin{lemma}[Local maximality from a strictly stable maximizing pair]
+\label{lem:extremal-degree-local-maximum}
+\uses{lem:maximizing-semistable-pair,lem:degree-maximum-continuity,lem:semistable-normalization}
+\source{bost-specht-manuscript:page-0012,bost-specht-manuscript:page-0013}
+\lean{BostConjecture.Arithmetic.HermitianMetric.IsStable.isSemistable_of_degree_zero,BostConjecture.Arithmetic.HermitianMetric.isLocalMax_degree_of_maximizing_pair}
+\leanok
+Let $E,F$ be strictly stable degree-zero Hermitian bundles whose tensor
+maximum degree is greatest among all normalized semistable pairs of their
+ranks. Let $S\subset E\otimes F$ be saturated and attain that maximum.
+Along any continuous curves of degree-zero metrics through $E,F$, the
+induced degree of the fixed module $S$ has a local maximum at zero.
+\end{lemma}
+\begin{proof}
+For a normalized strictly stable metric, every proper nonzero saturated
+submodule has negative degree. The zero and whole submodules have degree
+zero, and saturation increases degree, so every integral submodule has
+nonpositive degree. Thus the metric is semistable.
+By strict-stability openness, both curves remain strictly stable near
+zero, hence normalized semistable. Their tensor maximum degrees belong
+to the realized value set of the fixed ranks and are bounded by its
+greatest value, the degree of $S$ at zero. At each nearby time, the
+degree of the fixed saturated $S$ is bounded by that time's tensor
+maximum degree. Combining the two inequalities proves local maximality.
+\end{proof}
+
 \begin{lemma}[Degree variation from fiber Gram determinants]
 \label{lem:arithmetic-gram-derivative}
 \uses{lem:arithmetic-degree-derivative,lem:degree-calculus}
@@ -220,7 +267,7 @@ gives the assertion.
 
 \begin{proposition}[Tensor semistability]
 \label{thm:tensor-semistability}
-\uses{lem:degree-calculus,lem:extensions-and-twists,lem:arithmetic-compactness,lem:degree-maximum-continuity,lem:arithmetic-exponential-variation,lem:arithmetic-degree-stationarity,lem:balanced-plucker,lem:binary-plucker-nonzero-sequence,thm:geometric-slope}
+\uses{lem:degree-calculus,lem:extensions-and-twists,lem:arithmetic-compactness,lem:maximizing-semistable-pair,lem:exponential-stability-neighborhood,lem:extremal-degree-local-maximum,lem:arithmetic-degree-stationarity,lem:balanced-plucker,lem:binary-plucker-nonzero-sequence,thm:geometric-slope}
 \source{bost-specht-manuscript:page-0012,bost-specht-manuscript:page-0013}
 \notready
 For every number field $K$ and all positive-rank semistable Hermitian

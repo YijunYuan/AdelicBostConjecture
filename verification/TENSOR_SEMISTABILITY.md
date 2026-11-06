@@ -68,9 +68,23 @@ is the original metric. No freeness or rational-field restriction occurs.
   including the explicit real-place commutation restriction; localization to
   arbitrary allowed single-place directions remains to be proved.
 
-The line-twist, strict-factor reduction, continuity of exponential metric
-curves, actual submodule projection-trace derivative, extremal-to-balance and
-final composition remain open. The checked producers do not prove balance.
-COMPACTNESS's maximizing-pair endpoint and SPECHT-SLOPE's geometric endpoint are
-also still producer boundaries. Shared-root integration is pending MAIN's
-acceptance of the checked handoff.
+## Continuity and actual local maximality
+
+`VariationTopology.lean` proves continuity in the actual metric topology and
+preservation of normalized strict stability near zero. `ExtremalNeighborhood.lean`
+proves normalized strict stability implies semistability by saturation. It then
+uses the literal maximizing-pair value-set bound and an attaining saturated
+submodule to prove its degree has a local maximum along continuous normalized
+metric curves through strictly stable factors.
+
+- Serialized builds: 3677 and 9171 jobs, no warnings.
+- Independent mathematical/source/honesty review accepted both producers.
+- The expanded twenty-five-probe serialized audit is pending.
+- Strict stability is an explicit premise of the intermediate local-maximum
+  theorem; its construction by minimal-rank reduction is not claimed.
+
+The line-twist, strict-factor reduction, actual submodule projection-trace
+derivative, extremal-to-balance and final composition remain open. The checked
+producers do not prove balance. COMPACTNESS's actual maximizing pair (e81b08b)
+and SPECHT-SLOPE's binary invariant geometric slope endpoint (7249a02) have now
+been handed off. Shared-root integration of new units is owned by MAIN.
