@@ -80,13 +80,24 @@ review uses original manuscript pages1–3 and13, with registered transcriptions
 `Bost.pdf` is not substituted for the number-field target. The honesty reviewer
 also compared all335 root-reachable project files and all60 actual axiom
 outputs against the exact pin. The independent verification review is recorded
-alongside these in this session's transcript.
+alongside these in this session's transcript: it accepted all 352 reachable
+local sources (335 project, 12 OAI and 5 RepresentationTheory modules), all
+715 inspected local dependency-artifact hash edges, and fresh artifacts for
+all 79 modules affected by the instance repair. Toolchain/dependency pins
+match the manifests. A comment-stripped scan found no proof placeholders,
+custom axioms, unsafe declarations or native-decide proofs in this local cone.
 
 The blueprint attaches `lem:hn-tensor-grade-semistable`, `thm:bost-main`, and
 `cor:bost-finite-family` to these exact declarations. External reuse remains
 pinned and attributed in `CONTRIBUTIONS.md`; no new external assumption or
 changed dependency is introduced. Weighted HN compatibility, effective rates,
 appendices, and unused general descent interfaces are outside this target.
+Final graph sync has 375 blueprint nodes, 2456 declarations and 1980 generated
+edges, with no unresolved references. The 1145 unattached helper declarations
+remain intentional coverage warnings, recorded in I-0004. Independent source
+review accepted the installed attachments at blueprint/evidence commit193db46.
+The final ground pass found only roadmap/inbox closure work, subsequently
+resolved; the scratch cleanup dry run had no stale candidates.
 
 Claim class: **proved endpoint**. Frontier before: unconditional tensor
 semistability followed by final HN consumers. Frontier after: no unmet producer
