@@ -97,10 +97,13 @@ Current boundaries and remaining producers:
   interval partition and the factorial/Vandermonde enumeration.
   No seminormal theorem is assumed: the
   action and norms are now proved in the canonical word realization.
-- `lem:invariant-orbit-criterion`: detection by homogeneous invariants for
-  products of special linear groups remains open. Equality of Euclidean and
-  Zariski polynomial-image closures is proved in `ComplexClosure.Comparison`
-  and integrated; the balanced-projection argument consumes both parts.
+- `lem:invariant-orbit-criterion` and Lemma 7.2 are now proved for the actual
+  complex binary Plucker action. `OrbitCriterion` consumes compact averaging,
+  SU coordinate density and `ComplexClosure.Comparison`; the intrinsic
+  `IsBalanced.plucker_semistable` endpoint supplies a positive-degree
+  homogeneous invariant for every nonzero Plucker representative.
+  The finite-family geometry consumer and invariant coaction base change
+  remain separate obligations.
 
 These are unproved producer obligations, not assumptions under which the
 main result is declared finished. The current manuscript proposes the route;

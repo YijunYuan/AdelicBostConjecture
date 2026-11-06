@@ -26,6 +26,7 @@ public import BostConjecture.Arithmetic.HermitianHN
 public import BostConjecture.Arithmetic.IrreducibleSemistable
 public import BostConjecture.Arithmetic.IndependentPiSemistable
 public import BostConjecture.Arithmetic.RestrictionOfScalars
+public import BostConjecture.Arithmetic.DegreeFiniteness
 public import BostConjecture.LinearAlgebra.AlternatingTensorPower
 public import BostConjecture.LinearAlgebra.ExteriorPower.BaseChange
 public import BostConjecture.LinearAlgebra.PiTensorProduct.Projective
@@ -46,6 +47,9 @@ public import BostConjecture.InvariantTheory.CompactAverage
 public import BostConjecture.InvariantTheory.UnitaryDensity
 public import BostConjecture.InvariantTheory.SpecialUnitaryDensity
 public import BostConjecture.InvariantTheory.PolynomialAverage
+public import BostConjecture.InvariantTheory.SpecialUnitaryAction
+public import BostConjecture.InvariantTheory.PluckerAverage
+public import BostConjecture.InvariantTheory.OrbitCriterion
 public import BostConjecture.InvariantTheory.OrbitImage
 public import BostConjecture.InvariantTheory.ComplexClosure.Coordinates
 public import BostConjecture.InvariantTheory.ComplexClosure.Roots

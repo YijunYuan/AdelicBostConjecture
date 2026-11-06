@@ -824,3 +824,30 @@ Mathlib `RingTheory/Finiteness/Lattice.lean` and
 substantively consumes the already attributed compact Haar integration
 producer. Its intrinsic bounded-degree continuity and integral polynomial
 consumer are detailed in BALANCED.md. No source is copied.
+
+
+## Exact balanced criterion and arithmetic finiteness integration
+
+BALANCED's `SpecialUnitaryAction`, `PluckerAverage`, `OrbitCriterion` and
+intrinsic `IsBalanced.plucker_semistable` (`a63eae3`, `2c9b7b8`, `d91a68c`)
+consume the checked compact averaging, SU density and polynomial-orbit closure
+comparison. Unmodified additional Mathlib imports are
+`Topology/Algebra/Star/Unitary.lean`, `Topology/Algebra/Group/Matrix.lean` and
+`Topology/Algebra/MvPolynomial.lean`, at the same pinned
+`56a005855ea17e0b0958f73ec801ae140b0a1679` revision and Apache-2.0 license.
+No source is copied. The actual consumer constructs a positive-degree
+homogeneous invariant nonzero on every nonzero vector of the intrinsic
+Plucker line of a nonzero balanced subspace. Exact source and independent
+review evidence, including the 195-probe audit, are in BALANCED.md.
+
+ARITH's `DegreeFiniteness` (`05360d4`, precursors `92e69d7`, `b3c1ac2`,
+`ba9bf02`, `87fd7bc`) consumes actual short determinant sections, the fixed
+ambient exterior lattice and Plucker recovery. It imports unchanged Mathlib
+`NumberTheory/NumberField/CanonicalEmbedding/ConvexBody.lean` and the
+fractional-ideal Minkowski and fundamental-domain-volume APIs, plus
+`LinearAlgebra/ExteriorPower/Basis.lean` and
+`LinearAlgebra/LinearIndependent/Lemmas.lean`, at that same revision/license.
+It reuses the established project `Balanced.ExteriorMetric` without copying
+or changing it. Its finite-degree-superlevel-set conclusion covers saturated
+nonfree projective modules over arbitrary number fields; its 366-probe audit
+and independent honesty/ground acceptance are in ARITHMETIC.md.

@@ -1,3 +1,23 @@
+## Exact Lemma 7.2 and arithmetic degree finiteness integrated
+
+The explicit-root configured check passed **9,329 jobs warning-free at
+2026-11-06 01:44:09 UTC** (fingerprint `975bdb23135a0d4a`), root blob
+`56d13ab1ed56f846890255e0c4e9e713d2a272bf`. It integrates ARITH's
+`DegreeFiniteness` (`05360d4`) and BALANCED's concrete SU action, averaging,
+`OrbitCriterion` and intrinsic `IsBalanced.plucker_semistable` endpoint
+(`a63eae3`, `2c9b7b8`, final review `d91a68c`). The delivered audits contain
+**366 arithmetic** and **195 balanced** transitive probes, foundational
+axioms only. Their independent reviews and exact source boundaries are
+recorded in ARITHMETIC.md and BALANCED.md. The root log is
+run0005/session0016 `exact-balanced-arithmetic-root.log`.
+
+Lemma 7.2 now has its exact source conclusion and actual homogeneous invariant
+consumer, with no assumed averaging or closure criterion. The general
+restriction-of-scalars trace covolume identity remains the separate COVOLUME
+obligation. Geometry's binary-to-family connection and actual coaction scalar
+extension remain open. This batch does not prove BOST-GEOM, the geometric
+slope inequality or manuscript Theorem 1.1.
+
 ## Plucker-power nonvanishing sequence and polynomial averaging
 
 The actual canonical pairing now has a proved nonzero sequence over the
