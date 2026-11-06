@@ -13,9 +13,9 @@ against the exact source tree. See `MAIN.md` for commands and logs.
 The root includes checked COMPACTNESS `e81b08b`, SPECHT-SLOPE `8c80c92`,
 TENSOR-SEMI through `7fd2332`, LINE-TWIST `032df77` and STRICT-REDUCTION
 `b49b67f`. Their actual import cones and recorded axiom outputs were reviewed;
-LINE is substantively consumed by STRICT. Graph369nodes/2416declarations has
-no unresolved references;1134 unattached helpers are intentional coverage
-warnings. Actual arithmetic balance, unconditional tensor semistability,
+LINE is substantively consumed by STRICT. The latest graph370nodes/2423declarations has
+no unresolved references;1137 unattached helpers are intentional coverage
+warnings, including continuing drafts outside this root. Actual arithmetic balance, unconditional tensor semistability,
 Theorem1.1 and the finite-family equality remain open. No clean producer/root
 build is presented as completion of those statements.
 

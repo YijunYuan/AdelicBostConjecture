@@ -97,8 +97,9 @@ these unfinished steps.
 
 `BOST-MAIN-FILTRATION` and `BOST-MAIN-LOWER` are done; `BOST-MAIN-UPPER` and
 `BOST-MAIN-FINITE` record the remaining work. BOST-MAIN remains active.
-Graph sync resolves all source/dependency attachments (369 blueprint nodes,
-2416 declarations); 1134 unattached helper/concurrent-draft declarations are
-intentional coverage warnings. Ground found no stale scratch candidates and
+Graph sync resolves all source/dependency attachments (370 blueprint nodes,
+2423 declarations); 1137 unattached helper/concurrent-draft declarations are
+intentional coverage warnings. This latest graph also sees the ongoing
+ProjectionConjugation draft, which is outside the checked root boundary. Ground found no stale scratch candidates and
 accepted the repaired roadmap with no consistency warnings. All helpers were
 read-only; MAIN retains sole shared integration ownership.
