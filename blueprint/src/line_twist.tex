@@ -1,8 +1,36 @@
 \chapter{Hermitian line twists}
 
+\begin{lemma}[Recovering integral submodules by line contraction]
+\label{lem:line-twist-submodules}
+\source{bost-specht-manuscript:page-0012,bost-specht-manuscript:page-0013}
+\notready
+Let $L$ be a finite projective rank-one $\Ocal_K$-module and let $M$
+be an $\Ocal_K$-module. Every submodule $C\subseteq M\otimes L$
+is the image of $B\otimes L$ for the submodule
+\[
+ B=\{m\in M: m\otimes l\in C\text{ for every }l\in L\}.
+\]
+The tensor injection identifies $B\otimes L$ with $C$.
+\end{lemma}
+\begin{proof}
+For $f\in L^\vee$ write $c_f(m\otimes l)=f(l)m$.
+For $x,y\in L$ the identity $f(x)y=f(y)x$ holds after extension
+to $K$, where $L_K$ is one-dimensional, and hence in $L$ since
+$L\longrightarrow L_K$ is injective. Consequently
+$c_f(t)\otimes l=f(l)t$ for every $t\in M\otimes L$.
+If $t\in C$, this identity proves $c_f(t)\in B$.
+Finite projectivity gives finitely many $l_i\in L$ and
+$f_i\in L^\vee$ with $\sum_i f_i(l)l_i=l$ for every $l$:
+split a surjection from a finite free module and take its coordinate
+functionals. Thus $t=\sum_i c_{f_i}(t)\otimes l_i$ lies in the
+image of $B\otimes L$ whenever $t\in C$. The reverse inclusion
+follows from the definition of $B$. Finally, $L$ is flat, so tensoring
+the injection $B\hookrightarrow M$ is injective.
+\end{proof}
+
 \begin{lemma}[Semistability under a Hermitian line twist]
 \label{lem:line-twist}
-\uses{lem:degree-calculus}
+\uses{lem:degree-calculus,lem:line-twist-submodules}
 \source{bost-specht-manuscript:page-0012,bost-specht-manuscript:page-0013}
 \notready
 Let $K$ be any number field, $L$ a rank-one Hermitian projective
