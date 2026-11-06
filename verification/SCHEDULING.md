@@ -1,6 +1,6 @@
 # Parallel Horizon scheduling
 
-## Live checkpoint at 2026-11-06 02:02 UTC
+## Live checkpoint at 2026-11-06 02:18 UTC
 
 The user explicitly requests **four continuing Horizon proof lanes until the
 entire main theorem is complete**, with no budget cap. The parent only schedules,
@@ -67,6 +67,14 @@ both successors acknowledged the completed migration in I-0094. All active proof
 remain serialized through explicit-root Horizon checks. Dashboard remains on
 port 8765. Advisory `I-0084` records global search-index rebuild costs: batch
 searches at stable checkpoints and avoid redundant forced reindexing.
+
+A 02:16 read-only memory follow-up found 6.75 GiB available, PSI avg10 6.02%
+(avg60 2.21%), 78 MiB additional swap-out and no OOM after builds ended.
+GEOM PSS was 6.04 GiB, including a second guarded LSP tree loading the same
+BinaryPlucker module (2.09 GiB PSS). This identifies duplication, not a leak.
+In I-0097 the parent requests a normal session handoff at the nearest coherent
+checkpoint, preserving current attempts/diagnostics and continuing the unfinished
+task next round. Keep four task lanes; no emergency termination is warranted.
 
 A second bounded read-only route review reserves GEOM's eventual free slot for
 `BOST-MAIN`, not yet created or launched. Its missing producer is the actual
