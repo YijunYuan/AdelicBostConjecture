@@ -1,7 +1,8 @@
 # Arithmetic compactness verification
 
-The fixed-module maximum-degree and strict-stability portion of manuscript
-Lemma 7.1 (pages 11–12) is proved for the existing `HermitianMetric`, over every
+Arithmetic sequential compactness, maximum-degree continuity and strict
+stability openness from manuscript Lemma 7.1 (pages 11–12) are proved for
+the existing `HermitianMetric`, over every
 number field and every finite projective module over its ring of integers.
 
 - `MaximumDegree`: an actual saturated maximizer, its nonnegative maximum,
@@ -30,7 +31,8 @@ number field and every finite projective module over its ring of integers.
 The source route is `blueprint/src/arithmetic_compactness.tex`. It replaces
 the source's covolume-based finiteness argument with the completed intrinsic
 `finite_saturated_submodules_degree_ge`; no covolume formula is assumed.
-The source-facing compactness and maximizing-pair conclusions remain open.
+The compactness endpoint consumes the proved exact covolume formula.
+The maximizing-pair consequence remains open.
 
 ## Checks
 
@@ -53,8 +55,8 @@ extra `.le` projection; it was repaired and the endpoint checks passed cleanly.
 The read-only `honesty-reviewer` independently checked the source shape,
 actual proof consumers, topology, rank-zero behavior, build evidence and all
 14 axiom outputs. Verdict: honest proved producers; full fixed-module
-`lem:degree-maximum-continuity` may be marked checked. Root integration belongs
-to GEOM and is a separate handoff.
+`lem:degree-maximum-continuity` is checked. Shared root integration now belongs
+to MAIN under I-0104.
 
 The `TraceSystole` module check passed with 3672 jobs. The expanded 17-probe
 axiom check passed at 02:37 UTC, again with only the three foundational axioms.
@@ -71,15 +73,31 @@ COVOLUME moved the identical producer to `TraceSpace` and this lane removed
 its copy. A sum-inference error and a deprecated set notation were repaired.
 
 COVOLUME's checked `traceCovolume_eq_discr_degree` (5144157, canonical basis
-relocation 739e58a) is now available. Remaining work is uniform compact trace
-frames, simultaneous fixed integral actions, actual module identifications,
-positive-definite Hermitian reconstruction, and the maximizing-pair consequence.
+relocation 739e58a) supplies the exact discriminant/degree covolume formula.
 
 `FixedAction` subsequently passed 3532 jobs; it constructs actual ring-linear
 basis-preserving module isomorphisms along a strictly increasing subsequence.
 `TraceFrames` passed 9132 jobs, consuming the exact covolume formula, actual
 systole, measure-preserving isometries, and the accepted pinned Mahler vendor.
 The expanded 29-probe check passed with foundational axioms only. Independent
-honesty/source review accepted these two producers. Their final consumer must
-choose the Euclidean dimension using `traceSpace_finrank`; reconstruction and
-the final compactness statement remain open.
+honesty/source review accepted these two producers.
+
+`ComplexTraceCoordinates`, `FrameMetric`, and `FrameLimit` reconstruct actual
+conjugation-compatible positive-definite metrics using the canonical complexified
+trace space and invertible limiting frames. `MetricTransport` preserves degree
+and semistability under actual integral isomorphisms.
+`SequentialCompactness.exists_normalized_semistable_subsequence` assembles the
+common trace dimension, compact frames, fixed integral actions, metric
+reconstruction, and closedness. Its fixed module is an original sequence member;
+it has no assumed covolume or compactness premise. This also includes rank zero.
+
+The endpoint kernel check passed 9153 jobs at 03:39 UTC on 2026-11-06.
+The expanded 34-probe audit passed at 03:42 UTC, with only `propext`,
+`Classical.choice`, and `Quot.sound` throughout. The read-only honesty reviewer
+independently verified the exact endpoint, producer use, source p11, and check
+records. Its requested blueprint clarification now explicitly retains convergence
+in the compact subset of invertible frames. `lem:hermitian-frame-limit` and
+`lem:arithmetic-compactness` are checked. Initial frame-limit elaboration failures
+and a matrix first-countability inference failure were repaired before these
+checks. Tensor continuity, the global value set and maximizing-pair consequence
+are the remaining assigned frontier.

@@ -185,9 +185,11 @@ then intertwines multiplication by $\alpha$, proving $\Ocal$-linearity.
 
 \begin{lemma}[Hermitian reconstruction from convergent trace frames]
 \label{lem:hermitian-frame-limit}
-\uses{lem:trace-real-form}
-\source{bost-specht-manuscript:page-0011}\notready
-Fix an integral basis $e_1,\ldots,e_n$ of a finite projective module $A$.
+\uses{lem:trace-real-form,lem:metric-topology-comparison}
+\lean{BostConjecture.Arithmetic.HermitianMetric.exists_metric_limit_of_trace_frames}\leanok
+\source{bost-specht-manuscript:page-0011}
+Fix a $\mathbb Z$-basis $e_1,\ldots,e_n$ of the underlying abelian group
+of a finite projective $\Ocal$-module $A$.
 Let $h_m$ be actual Hermitian metrics whose trace Gram matrices in this
 basis are $B_m^{\mathsf T}B_m$, where $B_m\to B$ in
 $\operatorname{GL}_n(\mathbb R)$. Then the $h_m$ converge to an actual
@@ -238,7 +240,8 @@ asserted locus. Closed sets contain limits of their convergent sequences.
 \begin{lemma}[Arithmetic compactness]
 \label{lem:arithmetic-compactness}
 \uses{def:hermitian-degree,lem:compact-trace-frames,lem:fixed-integral-action,lem:hermitian-frame-limit,lem:degree-maximum-continuity,lem:normalized-semistable-closed}
-\source{bost-specht-manuscript:page-0011}\notready
+\lean{BostConjecture.Arithmetic.Compactness.exists_normalized_semistable_subsequence}\leanok
+\source{bost-specht-manuscript:page-0011}
 For fixed $K$ and $a\geq1$, every sequence of normalized semistable
 rank-$a$ Hermitian $\Ocal$-bundles has a subsequence which, after
 $\Ocal$-module isomorphisms, has one fixed underlying module and
@@ -248,29 +251,29 @@ convergent metrics. The limit is normalized and semistable.
 Lemma~\ref{lem:trace-semistable-systole} gives systole at least $\sqrt D$
 for the actual trace lattice, and Lemma~\ref{lem:restriction-covolume}
 gives covolume $\Delta_K^{a/2}$. Compact lattice frames give integral bases
-whose Gram matrices converge to a positive-definite matrix $G$.
+whose coordinate matrices lie in one compact subset
+$S\subset\operatorname{GL}_{Da}(\mathbb R)$.
 
 For $\alpha\in\Ocal$, multiplication by $\alpha$ has operator norm at
-most $\max_v|\alpha_v|$. Convergence of the positive-definite Gram
-matrices bounds their condition numbers and hence bounds all entries
+most $\max_v|\alpha_v|$. Compactness of the frame set bounds the
+matrices and their inverses, and hence bounds all entries
 of these integral multiplication matrices. Choose a fixed integral
 basis $\alpha_1,\ldots,\alpha_D$ of $\Ocal$. There are only finitely
 many possibilities for the associated $D$ matrices, so pass to a
 subsequence on which all are constant. These matrices fix the entire
 $\Ocal$ action, and identify every module in the subsequence with one
-fixed module. The limit is still a positive-definite metric.
+fixed module. Pass to a further subsequence with frames converging to
+$B\in S$. In particular $B$ is invertible, and the Gram matrices
+converge to the positive-definite matrix $B^{\mathsf T}B$.
 
-This metric comes from the required archimedean metrics. Indeed, the
-orthogonal idempotents of $K\otimes_\mathbb Q\mathbb R$ are real
-linear combinations of the fixed multiplication matrices, and are
-self-adjoint in every metric. These are closed matrix equations, so
-they persist in the limit. The components remain orthogonal. On each
-complex component multiplication by $i$ is orthogonal, another closed
-equation, and thus the restriction is a Hermitian metric. Determinants
-are continuous, so the covolume formula gives normalization. For each
-fixed submodule its determinant norm varies continuously, and its
-degree remains at most zero in the limit. Thus all semistability
-inequalities persist.
+Pull the metrics back to the fixed module by these actual integral
+isomorphisms. Isometry invariance of degree preserves normalization;
+mapping each integral submodule along the isomorphism preserves its
+rank and induced degree, hence every semistability inequality.
+Lemma~\ref{lem:hermitian-frame-limit} reconstructs a positive-definite,
+conjugation-compatible Hermitian limit from the convergent frames.
+Lemma~\ref{lem:normalized-semistable-closed} then preserves normalization
+and all the semistability inequalities in this actual metric limit.
 \end{proof}
 
 \begin{lemma}[Attainment of the maximum saturated degree]
@@ -360,6 +363,50 @@ zero. Finally there are finitely many complex embeddings, so the intersection
 of their neighborhoods is a neighborhood with the asserted simultaneous bounds.
 This also shows that the form topology agrees with convergence of Gram
 matrices in any complex bases.
+\end{proof}
+
+\begin{lemma}[Tensor metric continuity and isometry invariance]
+\label{lem:tensor-maximum-continuity}
+\uses{lem:degree-maximum-continuity,lem:metric-topology-comparison}
+\source{bost-specht-manuscript:page-0012}\notready
+On two fixed finite projective modules, the function
+$(h,g)\mapsto\mathcal D(h\otimes g)$ is continuous. Its value is
+unchanged by pulling the two metrics back along integral module isomorphisms.
+\end{lemma}
+\begin{proof}
+In complex bases of the two fibers the tensor Gram coefficients are
+products $h_{ij}g_{kl}$. These depend continuously on the two metrics.
+The finite Gram expansion therefore proves convergence of every tensor
+pairing. Apply continuity of $\mathcal D$ on the fixed tensor module.
+An integral isomorphism identifies saturated submodules bijectively,
+preserving their induced metrics and degrees. Their maximum is consequently
+unchanged. The tensor of two integral isomorphisms is an isometry for the
+pulled-back tensor metrics, as follows first on pure tensors from the
+product pairing formula and then on all vectors by sesquilinearity.
+\end{proof}
+
+\begin{lemma}[A maximizing normalized semistable pair]
+\label{lem:maximizing-semistable-pair}
+\uses{lem:arithmetic-compactness,lem:tensor-maximum-continuity,lem:maximum-saturated-degree}
+\source{bost-specht-manuscript:page-0012,bost-specht-manuscript:page-0013}\notready
+Fix ranks $a,b$ and suppose there is at least one normalized semistable
+pair of these ranks. The set of values $\mathcal D(E\otimes F)$ over
+all such pairs is compact in $\mathbb R$. In particular a pair realizes
+its largest value, and an actual saturated tensor submodule realizes
+that value as its degree.
+\end{lemma}
+\begin{proof}
+For any sequence of values, choose actual pairs realizing them.
+Apply arithmetic compactness to the first factors, then to the second
+factors along that subsequence. Pull back to the two fixed integral
+modules. Both metric sequences converge, and both limits remain normalized
+and semistable. Isometry invariance and tensor maximum continuity show
+that the original values along the composite subsequence converge to
+the value of this limit pair. Thus the value set is sequentially compact,
+and hence compact in $\mathbb R$. A nonempty compact subset of
+$\mathbb R$ contains its supremum. Choose a pair representing this
+value, and apply maximum-degree attainment on its tensor module to
+obtain the asserted saturated submodule.
 \end{proof}
 
 \begin{lemma}[Uniform degree gap for strict stability]

@@ -80,4 +80,19 @@ def frameFiberCore (h : HermitianMetric (K := K) M) (b : Module.Basis ι ℤ M)
     have hz := (h.frameProductCore b B).definite (Pi.single σ x) hx
     simpa using congrFun hz σ
 
+/-- An actual orthonormal coordinate frame gives the asserted trace Gram matrix. -/
+lemma trace_inner_eq_sum_frame (h : HermitianMetric (K := K) M)
+    (b : Module.Basis ι ℤ M) (b₀ : OrthonormalBasis ι ℝ h.TraceSpace)
+    (B : GeneralLinearGroup ι ℝ) (hB : B.val = b₀.toBasis.toMatrix (h.traceBasis b))
+    (i j : ι) :
+    inner ℝ (h.traceSection (b i)) (h.traceSection (b j)) =
+      ∑ k, B.val k i * B.val k j := by
+  have hb (i k : ι) : b₀.repr (h.traceSection (b i)) k = B.val k i := by
+    rw [hB, Module.Basis.toMatrix_apply, traceBasis_apply, b₀.coe_toBasis_repr_apply]
+  rw [← b₀.repr.inner_map_map, EuclideanSpace.inner_eq_star_dotProduct]
+  simp only [dotProduct, star_trivial, hb]
+  apply Finset.sum_congr rfl
+  intro k _
+  exact mul_comm _ _
+
 end BostConjecture.Arithmetic.HermitianMetric

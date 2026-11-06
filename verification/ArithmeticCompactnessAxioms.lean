@@ -5,6 +5,9 @@ import BostConjecture.Arithmetic.Compactness.TraceActionFiniteness
 import BostConjecture.Arithmetic.Compactness.SemistabilityTopology
 import BostConjecture.Arithmetic.Compactness.FixedAction
 import BostConjecture.Arithmetic.Compactness.TraceFrames
+import BostConjecture.Arithmetic.Compactness.FrameLimit
+import BostConjecture.Arithmetic.Compactness.MetricTransport
+import BostConjecture.Arithmetic.Compactness.SequentialCompactness
 
 /-! Transitive axiom audit of the actual arithmetic compactness producers. -/
 
@@ -37,3 +40,8 @@ import BostConjecture.Arithmetic.Compactness.TraceFrames
 #print axioms BostConjecture.Arithmetic.Compactness.linearEquivOfActionMatrices
 #print axioms BostConjecture.Arithmetic.Compactness.exists_module_identifications_of_compact_frames
 #print axioms BostConjecture.Arithmetic.Compactness.exists_compact_trace_frames
+#print axioms BostConjecture.Arithmetic.HermitianMetric.frameFiberCore
+#print axioms BostConjecture.Arithmetic.HermitianMetric.exists_metric_limit_of_trace_frames
+#print axioms BostConjecture.Arithmetic.HermitianMetric.degree_pullback_equiv
+#print axioms BostConjecture.Arithmetic.HermitianMetric.IsSemistable.pullback_equiv
+#print axioms BostConjecture.Arithmetic.Compactness.exists_normalized_semistable_subsequence
