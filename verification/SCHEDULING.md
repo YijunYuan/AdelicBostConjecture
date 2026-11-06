@@ -1,6 +1,6 @@
 # Parallel Horizon scheduling
 
-## Live checkpoint at 2026-11-06 03:13 UTC
+## Live checkpoint at 2026-11-06 04:09 UTC
 
 The user requests **four continuing Horizon proof lanes until the entire main
 theorem and its used dependencies are complete**, with no budget cap. The parent
@@ -22,6 +22,8 @@ MAIN started at 03:12:19 UTC (PID 765334); TENSOR-SEMI at 03:12:26 (PID 765881).
 Their foreground tool sessions remain open. Standing protection `I-0104`
 supersedes archived `I-0095`. The accepted migration is `439d654`; its
 handoff `I-0102` is archived. `I-0106` coordinates the live ownership transfer.
+MAIN continues in session `0004` after normal session `0002` ended at
+03:49:38 UTC. Its run remains live; this did not free a writer slot.
 
 MAIN is now the sole editor of root `BostConjecture.lean`, `CONTRIBUTIONS.md`,
 `verification/RESULTS.md`, and shared blueprint includes/index/OPEN_PROOFS.
@@ -104,14 +106,23 @@ under their owners' normal lifecycle. The separate Specht combined-import
 failure was a generated-instance name collision, repaired by explicit names;
 its combined axiom audit passed again at 03:38:43. I-0112 is resolved/archived.
 
-At 03:42, all four proof lanes continue. MAIN's lower bound, filtered bound,
+At 04:09, all four proof lanes continue. MAIN's lower bound, filtered bound,
 tensor images/quotient metrics and saturated lexicographic flag are checked
 (`5913d84`, `66d4baa`, `04dd654`); its actual consecutive-grade isometries
-remain open. TENSOR-SEMI has checked extensions and metric/degree variation
-(`57f5cfc`, `bbafa44`), with its Gram bridge and local-max stationarity
-advancing. COMPACTNESS's sequential compactness module passed at 03:39:54;
-its final maximizing-pair endpoint is still open. SPECHT-SLOPE's actual
-contraction and image-slope modules pass, with the final application/limit open.
+remain open. Simultaneous tensor quotient metrics are checked at `f92bf10`.
+TENSOR-SEMI has checked extensions and metric/degree variation
+(`57f5cfc`, `bbafa44`), conjugation-compatible exponential variation (`e68943d`)
+and actual extremal neighborhoods (`5eee92c`); balance remains open.
+COMPACTNESS's exact maximizing-pair endpoint `e81b08b` passed 9,156 module jobs
+and 40 foundational-only probes. Its actual nonfree module/metric/saturated
+global-maximizer witnesses and source route are independently accepted. Root
+`ece5ec1` passed 9,380 warning-free jobs at 04:06:01, evidence `f670cb2`.
+Its task still needs normal closure/exit before reuse of the slot.
+SPECHT-SLOPE's complex/binary invariant result was accepted at `cf57d33`/
+`7249a02` with scope correction `ea93f72`. Subsequent generalization directly
+reuses GEOM's proved original-ring pairing; new source `8c80c92` has a fresh
+dependency build and 39-probe audit. Final root integration/exit remain pending;
+the earlier 38 probes are not evidence for that later source revision.
 These are intermediate producer checks, not a main-theorem completion claim.
 
 A bounded read-only route review and both current owners accepted one future
@@ -119,10 +130,26 @@ split in `I-0113`: actual Hermitian line twists for arbitrary nonprincipal
 rank-one modules, in both factor orders, including real submodule/metric
 transport. Reserve `Main/LineTwist/**`, `line_twist.tex` and a dedicated
 verification pair only after a genuine slot frees and a committed handoff.
-No task or migration has started. TENSOR-SEMI keeps extensions, minimal-rank
-strictness and its active variation/balance chain; MAIN keeps shared includes.
-The line-twist result must not import general tensor semistability. No second
-comparably clean split was found; do not manufacture independent work.
+The line-twist result must not import general tensor semistability.
+
+The newly checked maximizing-pair API then made a second split concrete.
+Both owners accepted `I-0120`: reserve `Main/StrictReduction/**`,
+`strict_reduction.tex` and its verification pair. From a normalized actual
+semistable counterexample, construct internally rank-sum minimality and actual
+strictly stable normalized maximizing factors of ranks at least two, with
+positive saturated maximizing submodule and the existing `IsGreatest` bound.
+Inputs are Extensions, MaximizingPair, LINE-TWIST and shared arithmetic tensor
+submodule metrics; no MAIN theorem or variation/balance input is allowed.
+TENSOR-SEMI retains normalization, its active variation/balance chain and final
+contradiction. No successor task or blueprint migration has started yet.
+
+`I-0121` authorizes one bounded MAIN extraction after its in-flight root boundary:
+move the unchanged `TensorFiltration.lean` declarations to
+`Arithmetic/TensorSubmodule.lean` with direct arithmetic imports, preserving
+names/proofs and leaving the old module as a re-export. MAIN confirmed that no
+LowerBound declarations are used. The checked leaf handoff is required before
+StrictReduction starts; avoid a reverse dependency or duplicate proof machinery.
+Both successors launch only after actual free slots and explicit handoffs.
 
 ## Earlier checkpoints
 
