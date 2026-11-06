@@ -72,8 +72,15 @@ annotation. All were repaired before the successful endpoint checks.
 COVOLUME provenance is unchanged: exact formula `5144157`, canonical basis
 relocation `739e58a`. Vendor attribution remains in `CONTRIBUTIONS.md`; MAIN
 owns its consumer list and shared integration. Arithmetic compactness
-`daad480` was integrated at `1c4c3f8`, with root 9375 jobs passing. Final
-maximizing-pair shared-root integration is a separate pending handoff.
+`daad480` was integrated at `1c4c3f8`, with root 9375 jobs passing.
+The final maximizing-pair checkpoint `e81b08b` was integrated by MAIN at
+`ece5ec1`: root **9380 jobs passed without warnings at 04:06:01 UTC**.
+The actual serialized log is workspace-root
+`.archon-horizon/runs/0011/sessions/0004-horizon-BOST-MAIN/main-root-handoffs.log`.
+Independent integration review verified that all 89 project modules in this
+producer cone match the accepted tree and inspected all 40 axiom outputs.
+TENSOR-SEMI accepted the consumer interface in I-0114; I-0118 records the
+final root handoff. Shared `OPEN_PROOFS.md` now removes the stale obligation.
 
 Independent read-only honesty/source review accepted the complete route,
 including the literal value set, universe, nonfree domain, both subsequences,
@@ -82,3 +89,10 @@ source statements and exact check outputs. Blueprint completion markers cover
 these producers only. Strict maximizing-counterexample reduction, extremal
 variation, tensor semistability and maximal-slope additivity belong to the
 other lanes and are not claimed here.
+
+Graph sync resolves every owned source and dependency attachment; both final
+endpoint nodes report `lean_ok`. The 1102 unattached helper/concurrent-draft
+declarations remain coverage warnings, recorded in I-0004, not unresolved
+references. Final read-only hygiene review found the owned paths clean,
+roadmap consistent, and no stale scratch cleanup candidates. All assigned
+mathematical and integration obligations are complete.
