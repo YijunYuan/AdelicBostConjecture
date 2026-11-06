@@ -82,7 +82,8 @@ logarithmic form of the arithmetic--geometric mean step in the source.
 \begin{lemma}[Bounded arithmetic multiplication on trace space]
 \label{lem:trace-multiplication-bound}
 \uses{lem:real-trace-lattice,lem:metric-topology-comparison}
-\source{bost-specht-manuscript:page-0011}\notready
+\lean{BostConjecture.Arithmetic.HermitianMetric.traceMul_mem_traceLattice,BostConjecture.Arithmetic.HermitianMetric.traceMul_norm_le}\leanok
+\source{bost-specht-manuscript:page-0011}
 For $\alpha\in\Ocal$, multiplication on $A$ extends canonically to
 a real-linear endomorphism $T_\alpha$ of its trace space. It preserves
 the actual integral trace lattice. If $C\geq0$ bounds
@@ -107,9 +108,74 @@ Taking nonnegative square roots gives the bound. For example
 $C=\sum_\sigma|\sigma(\alpha)|$ works for every metric.
 \end{proof}
 
+\begin{lemma}[Finitely many integral actions in compact frames]
+\label{lem:compact-frame-integral-actions}
+\uses{lem:trace-multiplication-bound}
+\lean{BostConjecture.Arithmetic.Compactness.finite_bounded_integral_conjugates,BostConjecture.Arithmetic.Compactness.finite_actual_integral_actions,BostConjecture.Arithmetic.Compactness.integral_action_mem}\leanok
+\source{bost-specht-manuscript:page-0011}
+Let $S\subset\operatorname{GL}_n(\mathbb R)$ be compact and $C\geq0$.
+There are only finitely many $N\in M_n(\mathbb Z)$ for which some
+$B\in S$ satisfies $|(BNB^{-1})_{ij}|\leq C$ for all $i,j$.
+\end{lemma}
+\begin{proof}
+Let $T$ be the compact box of real matrices all of whose entries lie
+in $[-C,C]$. The map $(B,A)\mapsto B^{-1}AB$ is continuous on
+$S\times T$, so its image $U$ is compact. Every matrix $N$ in the
+statement belongs to $U$. Entrywise inclusion identifies $M_n(\mathbb Z)$
+with a closed discrete subset of $M_n(\mathbb R)$; its inverse image
+of $U$ is compact and discrete, hence finite. This proves the assertion.
+For multiplication by a fixed $\alpha\in\Ocal$, an orthonormal ambient
+frame bounds every matrix entry by the operator bound in
+Lemma~\ref{lem:trace-multiplication-bound}. Thus the assertion applies
+to its integer matrices in compact lattice frames.
+\end{proof}
+
+\begin{lemma}[Fixed integral action and actual module identifications]
+\label{lem:fixed-integral-action}
+\uses{lem:compact-frame-integral-actions}
+\source{bost-specht-manuscript:page-0011}\notready
+Fix an integral basis $\alpha_1,\ldots,\alpha_D$ of $\Ocal$.
+Suppose a sequence of integral bases of rank-$n$ underlying abelian
+groups has only finitely many possibilities for each multiplication
+matrix of $\alpha_j$. Then a subsequence has all these matrices constant.
+Identifying the corresponding integral bases identifies the actual
+$\Ocal$-modules, not merely their underlying abelian groups.
+\end{lemma}
+\begin{proof}
+The tuple of $D$ integer matrices belongs to a finite product of finite
+sets. One tuple occurs at infinitely many indices. Enumerating those
+indices increasingly gives the required subsequence. The abelian-group
+isomorphism sending one chosen integral basis to another intertwines
+multiplication by each $\alpha_j$, because their matrices are equal.
+Write any $\alpha\in\Ocal$ as an integral linear combination of the
+$\alpha_j$ and distribute scalar multiplication. The same isomorphism
+then intertwines multiplication by $\alpha$, proving $\Ocal$-linearity.
+\end{proof}
+
+\begin{lemma}[Closedness of normalization and semistability]
+\label{lem:normalized-semistable-closed}
+\uses{lem:degree-maximum-continuity}
+\lean{BostConjecture.Arithmetic.HermitianMetric.isClosed_normalized_semistable,BostConjecture.Arithmetic.HermitianMetric.normalized_semistable_of_tendsto}\leanok
+\source{bost-specht-manuscript:page-0011}
+On a fixed finite projective $\Ocal$-module, the normalized semistable
+Hermitian metrics form a closed subset of the space of actual metrics.
+Consequently a convergent sequence of such metrics has a normalized
+semistable limit, provided the limit is an actual positive-definite metric.
+\end{lemma}
+\begin{proof}
+The degree is continuous, so the equation $\degn(A)=0$ is closed.
+For each positive-rank submodule $P$, both slopes
+$\mu(P)=\degn(P)/\operatorname{rk}(P)$ and
+$\mu(A)=\degn(A)/\operatorname{rk}(A)$ are continuous: their
+denominators are fixed. The condition $\mu(P)\leq\mu(A)$ is therefore
+closed. Intersect these closed sets over all positive-rank integral
+submodules and with the normalization equation. This is exactly the
+asserted locus. Closed sets contain limits of their convergent sequences.
+\end{proof}
+
 \begin{lemma}[Arithmetic compactness]
 \label{lem:arithmetic-compactness}
-\uses{def:hermitian-degree,lem:restriction-covolume,lem:mahler-frames,lem:trace-semistable-systole,lem:trace-multiplication-bound,lem:degree-maximum-continuity}
+\uses{def:hermitian-degree,lem:restriction-covolume,lem:mahler-frames,lem:trace-semistable-systole,lem:trace-multiplication-bound,lem:compact-frame-integral-actions,lem:degree-maximum-continuity,lem:normalized-semistable-closed}
 \source{bost-specht-manuscript:page-0011}\notready
 For fixed $K$ and $a\geq1$, every sequence of normalized semistable
 rank-$a$ Hermitian $\Ocal$-bundles has a subsequence which, after

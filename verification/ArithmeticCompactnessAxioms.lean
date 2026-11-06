@@ -1,6 +1,8 @@
 import BostConjecture.Arithmetic.Compactness.DegreeContinuity
 import BostConjecture.Arithmetic.Compactness.StabilityTopology
 import BostConjecture.Arithmetic.Compactness.TraceSystole
+import BostConjecture.Arithmetic.Compactness.TraceActionFiniteness
+import BostConjecture.Arithmetic.Compactness.SemistabilityTopology
 
 /-! Transitive axiom audit of the actual arithmetic compactness producers. -/
 
@@ -21,3 +23,12 @@ import BostConjecture.Arithmetic.Compactness.TraceSystole
 #print axioms BostConjecture.Arithmetic.HermitianMetric.IsSemistable.sum_log_sectionNorm_nonneg
 #print axioms BostConjecture.Arithmetic.HermitianMetric.IsSemistable.traceSection_norm_sq_ge
 #print axioms BostConjecture.Arithmetic.HermitianMetric.IsSemistable.traceLattice_systole
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceMul_mem_traceLattice
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceMul_norm_le
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceMul_matrix_conjugate
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceMul_toMatrix_abs_le
+#print axioms BostConjecture.Arithmetic.Compactness.finite_bounded_integral_conjugates
+#print axioms BostConjecture.Arithmetic.Compactness.finite_actual_integral_actions
+#print axioms BostConjecture.Arithmetic.Compactness.integral_action_mem
+#print axioms BostConjecture.Arithmetic.HermitianMetric.isClosed_normalized_semistable
+#print axioms BostConjecture.Arithmetic.HermitianMetric.normalized_semistable_of_tendsto

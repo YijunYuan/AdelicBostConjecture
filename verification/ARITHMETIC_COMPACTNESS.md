@@ -18,6 +18,14 @@ number field and every finite projective module over its ring of integers.
   module has systole at least the square root of the number-field degree.
   The saturated generic line and logarithmic degree formula supply the bound;
   no covolume identity is used.
+- `TraceMultiplication`: canonical real extension of integral multiplication,
+  preservation of the actual trace lattice, uniform archimedean operator bounds,
+  and conjugacy of the actual integer and real matrices.
+- `IntegralMatrices`, `TraceActionFiniteness`: compact frames and uniformly
+  bounded actual multiplication operators allow only finitely many integer
+  matrices, in a finite set independent of the metric and module.
+- `SemistabilityTopology`: normalization and semistability are closed among
+  actual positive-definite Hermitian metrics.
 
 The source route is `blueprint/src/arithmetic_compactness.tex`. It replaces
 the source's covolume-based finiteness argument with the completed intrinsic
@@ -54,3 +62,15 @@ The reviewer separately verified its source meaning and all three new outputs;
 only the systole node is closed, not arithmetic compactness. The graph sync had
 no unresolved source attachments; its 1029 unattached-helper coverage warnings
 are retained rather than attaching unrelated declarations to these theorems.
+
+The action/closedness endpoint check passed with 3672 jobs at 03:01 UTC;
+the expanded 26-probe audit also passed with foundational axioms only.
+The independent honesty review accepted the three individual nodes.
+An initial integration check exposed duplicate `traceBasis` definitions;
+COVOLUME moved the identical producer to `TraceSpace` and this lane removed
+its copy. A sum-inference error and a deprecated set notation were repaired.
+
+COVOLUME's checked `traceCovolume_eq_discr_degree` (5144157, canonical basis
+relocation 739e58a) is now available. Remaining work is uniform compact trace
+frames, simultaneous fixed integral actions, actual module identifications,
+positive-definite Hermitian reconstruction, and the maximizing-pair consequence.
