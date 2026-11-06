@@ -53,5 +53,6 @@ import BostConjecture.Slope.Geometric.BinaryInvariantSlope
 #print axioms BostConjecture.Slope.Geometric.canonicalPairing_image_slope
 #print axioms BostConjecture.Slope.Geometric.canonicalPairing_slope_inequality
 #print axioms BostConjecture.Slope.Geometric.slope_le_of_nonzero_pairings
+#print axioms BostConjecture.Slope.Geometric.slope_le_of_invariant
 #print axioms BostConjecture.Slope.Geometric.slope_le_of_complex_invariant
 #print axioms BostConjecture.Slope.Geometric.slope_le_of_binary_complex_invariant

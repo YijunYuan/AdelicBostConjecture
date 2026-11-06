@@ -2,7 +2,7 @@
 
 The assigned mathematical route is proved: actual determinant–Specht bundles,
 their intrinsic metrics and exact slopes, and the geometric slope inequality
-from actual complex and binary Plücker invariants. All thirty-eight transitive
+from actual complex and binary Plücker invariants. All thirty-nine transitive
 axiom probes are foundational-only. Shared root integration is pending with
 MAIN; the whole Bost main theorem is not claimed complete.
 
@@ -112,6 +112,17 @@ Fresh source review confirmed the actual consumer chain and requested that the
 checked blueprint state its complex invariant witness explicitly. This repair
 was made: the separately unproved algebraic-closure field-extension interface
 is not silently certified by the geometric node.
+
+The final bounded extension `slope_le_of_invariant` accepts an actual invariant
+over any algebraically closed characteristic-zero field `F : Type`. It directly
+uses GEOM's original-ring nonvanishing producer, then the same arithmetic
+comparison; the complex theorem is its specialization with unchanged signature.
+No map from `F` to ℂ, invariant descent, or field-extension invariance is assumed.
+The final dependency build `check BostConjecture.Slope.Geometric.BinaryInvariantSlope`
+passed (9289 jobs, 257.8 seconds), rebuilding the generalized theorem and binary
+consumer. The complete thirty-nine-declaration probe passed (101.5 seconds)
+with only the three foundational axioms above. Both independent source-fidelity
+and honesty reviewers inspected and accepted the exact implementation.
 
 The requested geometric slope route is proved. Shared root integration and
 the downstream tensor-semistability/main-theorem work are owned by MAIN and

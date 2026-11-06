@@ -82,6 +82,28 @@ theorem slope_le_of_nonzero_pairings (hspos : 0 < s) (hapos : ∀ j, 0 < a j)
   simpa only [sub_zero, Finset.sum_const_zero, add_zero] using
     le_of_tendsto_of_tendsto hsLim' haLim' (Filter.Eventually.of_forall hdiv)
 
+/-- An actual invariant over an algebraically closed characteristic-zero field
+gives the same arithmetic inequality directly through original-ring pairings. -/
+theorem slope_le_of_invariant (F : Type) [Field F] [CharZero F] [IsAlgClosed F]
+    [Algebra (𝓞 K) F] (hspos : 0 < s) (hapos : ∀ j, 0 < a j)
+    (ha : ∀ j (q : PrimeSpectrum (𝓞 K)), Module.rankAtStalk (Dual (𝓞 K) (E j)) q = a j)
+    (hs : ∀ q : PrimeSpectrum (𝓞 K), Module.rankAtStalk V q = s)
+    (bV : Basis (Fin s) F (F ⊗[𝓞 K] V)) {m : ℕ}
+    {p : SymmetricAlgebra F (Dual F (⋀[F]^s (⨂[F] j, F ⊗[𝓞 K] E j)))}
+    (hm : 0 < m)
+    (hp : p ∈ InvariantTheory.homogeneousPolynomials F (⋀[F]^s (⨂[F] j, F ⊗[𝓞 K] E j)) m)
+    (hInv : ∀ g, InvariantTheory.polynomialPullback (exteriorPower.map s
+      (Geometry.specialLinearTensorRepresentation F (fun j => F ⊗[𝓞 K] E j) g)) p = p)
+    (hEval : InvariantTheory.polynomialEval (exteriorPower.ιMulti F s (fun j =>
+      ((Tensor.baseChangeEquiv (𝓞 K) F E).toLinearMap ∘ₗ i.baseChange F) (bV j))) p ≠ 0) :
+    ((HermitianMetric.piTensor hE).pullback i hi).slope ≤ ∑ j, (hE j).slope := by
+  let bE j := (Module.finBasis F (Dual F (F ⊗[𝓞 K] E j))).reindex
+    (finCongr (((dualBaseChangeEquiv (𝓞 K) F (E j)).finrank_eq).symm.trans
+      (Geometry.scalarExtension_finrank_of_rankAtStalk (ha j))))
+  obtain ⟨d₀, hd, _, _, hseq⟩ := Geometry.exists_canonicalPairing_nonzero_sequence
+    E i hspos hapos hm ha hs bV bE hp hInv hEval
+  exact slope_le_of_nonzero_pairings E hE i hi hspos hapos ha hs hd hseq
+
 /-- The geometric slope inequality for an actual positive-degree complex
 Plücker invariant nonzero on the injected determinant line. -/
 theorem slope_le_of_complex_invariant (hspos : 0 < s) (hapos : ∀ j, 0 < a j)
@@ -99,11 +121,6 @@ theorem slope_le_of_complex_invariant (hspos : 0 < s) (hapos : ∀ j, 0 < a j)
     ((HermitianMetric.piTensor hE).pullback i hi).slope ≤ ∑ j, (hE j).slope := by
   let : Algebra (𝓞 K) ℂ := (σ.comp (algebraMap (𝓞 K) K)).toAlgebra
   intro bV m p hm hp hInv hEval
-  let bE j := (Module.finBasis ℂ (Dual ℂ (ComplexFiber (E j) σ))).reindex
-    (finCongr (((dualBaseChangeEquiv (𝓞 K) ℂ (E j)).finrank_eq).symm.trans
-      (Geometry.scalarExtension_finrank_of_rankAtStalk (ha j))))
-  obtain ⟨d₀, hd, _, _, hseq⟩ := Geometry.exists_canonicalPairing_nonzero_sequence
-    (F := ℂ) E i hspos hapos hm ha hs bV bE hp hInv hEval
-  exact slope_le_of_nonzero_pairings E hE i hi hspos hapos ha hs hd hseq
+  exact slope_le_of_invariant E hE i hi ℂ hspos hapos ha hs bV hm hp hInv hEval
 
 end BostConjecture.Slope.Geometric

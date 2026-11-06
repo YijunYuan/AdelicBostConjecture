@@ -436,7 +436,7 @@ right side of the displayed inequality.
 
 \begin{theorem}[Geometric slope inequality]
 \label{thm:geometric-slope}
-\lean{BostConjecture.Slope.Geometric.slope_le_of_nonzero_pairings,BostConjecture.Slope.Geometric.slope_le_of_complex_invariant,BostConjecture.Slope.Geometric.slope_le_of_binary_complex_invariant}
+\lean{BostConjecture.Slope.Geometric.slope_le_of_nonzero_pairings,BostConjecture.Slope.Geometric.slope_le_of_invariant,BostConjecture.Slope.Geometric.slope_le_of_complex_invariant,BostConjecture.Slope.Geometric.slope_le_of_binary_complex_invariant}
 \leanok
 \uses{lem:plucker-invariant-nonzero-sequence,lem:binary-plucker-nonzero-sequence,lem:canonical-pairing-finite-degree,thm:specht-sublinear-covolume}
 \source{bost-specht-manuscript:page-0009,bost-specht-manuscript:page-0010}
@@ -453,11 +453,19 @@ The factors need not be arithmetically semistable.
 This is the invariant-polynomial formulation of geometric semistability
 at the specified complex embedding. In the two-factor case
 the same assertion applies to the usual binary tensor Pl\"ucker action.
+More generally, the invariant may be supplied over any algebraically
+closed characteristic-zero extension of $K$: its nonzero canonical
+pairings are defined over the original ring $\Ocal_K$, and the
+arithmetic comparison is independent of the field in which the
+invariant was found.
 \end{theorem}
 \begin{proof}
-The actual invariant at the chosen embedding gives the unbounded
+The actual invariant, over the chosen complex embedding or over the
+specified algebraically closed characteristic-zero field, gives the unbounded
 sequence $d=\ell d_0$ of nonzero original-ring canonical pairings
 by Lemma~\ref{lem:plucker-invariant-nonzero-sequence}.
+These pairings are over $\Ocal_K$; the invariant's coefficient field
+therefore need not be transported to any archimedean fiber.
 Lemma~\ref{lem:canonical-pairing-finite-degree}, whose proof compares
 the source with its actual image and the semistable target, gives
 \[
