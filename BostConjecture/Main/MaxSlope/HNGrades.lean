@@ -63,9 +63,25 @@ theorem exists_hnTensorGrade_isometry (h : HermitianMetric (K := K) M)
           (fiberMap e.toLinearMap σ x) (fiberMap e.toLinearMap σ y) =
         ((((h.tensor g).submodule (h.hnTensorFlag g (k + 1))).quotient
           ((h.hnTensorFlag g k).comap (h.hnTensorFlag g (k + 1)).subtype)).fiber σ).inner x y := by
-  simp only [hnTensorFlag_succ, hnTensorFlag, hnTensorStep]
-  exact ⟨tensorGradeEquiv (h.hnSubmodule_monotone (Nat.le_succ _)) _ _,
-    tensorGradeEquiv_inner h g (h.hnSubmodule_monotone (Nat.le_succ _))
-      (g.hnSubmodule_monotone (Nat.le_succ _))⟩
+  rw [h.hnTensorFlag_succ g k]
+  simp only [hnTensorFlag, hnTensorStep]
+  let : Module.Flat (𝓞 K) (h.hnSubmodule (k / g.hnFlag.length + 1) ⧸
+      (h.hnSubmodule (k / g.hnFlag.length)).comap
+        (h.hnSubmodule (k / g.hnFlag.length + 1)).subtype) := by
+    unfold hnSubmodule
+    infer_instance
+  let : Module.Flat (𝓞 K) (g.hnSubmodule (k % g.hnFlag.length + 1) ⧸
+      (g.hnSubmodule (k % g.hnFlag.length)).comap
+        (g.hnSubmodule (k % g.hnFlag.length + 1)).subtype) := by
+    unfold hnSubmodule
+    infer_instance
+  refine ⟨tensorGradeEquiv
+    (h.hnSubmodule_monotone (Nat.le_succ (k / g.hnFlag.length)))
+    (g.hnSubmodule (k % g.hnFlag.length))
+    (g.hnSubmodule (k % g.hnFlag.length + 1)), ?_⟩
+  intro σ x y
+  exact tensorGradeEquiv_inner h g
+    (h.hnSubmodule_monotone (Nat.le_succ (k / g.hnFlag.length)))
+    (g.hnSubmodule_monotone (Nat.le_succ (k % g.hnFlag.length))) σ x y
 
 end BostConjecture.Arithmetic.HermitianMetric
