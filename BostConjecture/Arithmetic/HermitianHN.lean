@@ -213,4 +213,36 @@ theorem isGreatest_maximalSlope_submodules (h : HermitianMetric (K := K) M) :
   intro P hP
   exact h.le_hnSubmodule_one_of_slope_eq P hP.1 hP.2
 
+/-- Among saturated maximal-slope submodules, maximal rank characterizes the first term. -/
+theorem eq_hnSubmodule_one_of_slope_eq_of_rank (h : HermitianMetric (K := K) M)
+    (P : Submodule (𝓞 K) M) [Module.IsTorsionFree (𝓞 K) (M ⧸ P)]
+    (he : (h.submodule P).slope = h.maxSlope)
+    (hr : Module.finrank K (K ⊗[𝓞 K] P) =
+      Module.finrank K (K ⊗[𝓞 K] h.hnSubmodule 1)) : P = h.hnSubmodule 1 := by
+  let : Module.Flat (𝓞 K) K := IsLocalization.flat K (nonZeroDivisors (𝓞 K))
+  have hP : 0 < Module.finrank K (K ⊗[𝓞 K] P) := hr ▸ h.hnSubmodule_one_rank_pos
+  have hle := h.le_hnSubmodule_one_of_slope_eq P hP he
+  have heq : P.baseChange K = (h.hnSubmodule 1).baseChange K :=
+    Submodule.eq_of_le_of_finrank_eq (Submodule.baseChange_mono K hle)
+      (((Submodule.toBaseChange.toLinearEquiv K P).finrank_eq.symm.trans hr).trans
+        (Submodule.toBaseChange.toLinearEquiv K (h.hnSubmodule 1)).finrank_eq)
+  rw [← integralPart_baseChange P, heq]
+  simp only [hnSubmodule, baseChange_integralPart]
+
+/-- The ambient slope is bounded by its attained maximal submodule slope. -/
+lemma slope_le_maxSlope (h : HermitianMetric (K := K) M) : h.slope ≤ h.maxSlope := by
+  have hr : 0 < Module.finrank K (K ⊗[𝓞 K] (⊤ : Submodule (𝓞 K) M)) := by
+    rw [(Submodule.topEquiv.baseChange (𝓞 K) K (⊤ : Submodule (𝓞 K) M) M).finrank_eq]
+    exact Module.finrank_pos
+  simpa using h.slope_submodule_le_maxSlope ⊤ hr
+
+/-- Intrinsic semistability is equality of average and maximal slopes. -/
+theorem isSemistable_iff_maxSlope_eq (h : HermitianMetric (K := K) M) :
+    h.IsSemistable ↔ h.maxSlope = h.slope := by
+  constructor
+  · intro hs
+    exact le_antisymm (hs _ h.hnSubmodule_one_rank_pos) h.slope_le_maxSlope
+  · intro he P hP
+    exact (h.slope_submodule_le_maxSlope P hP).trans_eq he
+
 end BostConjecture.Arithmetic.HermitianMetric

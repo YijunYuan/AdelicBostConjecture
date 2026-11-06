@@ -1718,6 +1718,26 @@ identifies it with the canonical flag. Integral parts recover all terms
 of a saturated integral filtration, so the same uniqueness holds there.
 \end{proof}
 
+\begin{lemma}[Isometries preserve the intrinsic HN filtration]
+\label{lem:hermitian-hn-isometry}
+\uses{lem:hermitian-hn-unique,lem:degree-isometry,lem:integral-part-generic-subspace}
+\notready
+Every isometric integral automorphism of $A$ preserves every generic and
+integral term of its canonical HN filtration.
+\end{lemma}
+\begin{proof}
+Let $e$ be the automorphism and $e_K$ its generic scalar extension.
+For each generic subspace $X$,
+$A\cap e_K(X)=e(A\cap X)$: membership follows by applying $e^{-1}$
+to the defining integral section. Restricting $e$ to $A\cap X$ gives
+an isometry onto $A\cap e_K(X)$, so their degrees are equal.
+The ranks are equal as well; thus every interval payoff is preserved.
+The image of an HN flag under $e_K$ has the same endpoints, strict
+inclusions, interval semistability and decreasing slopes. Uniqueness
+identifies it with the original flag. Taking integral parts proves the
+assertion for its integral terms.
+\end{proof}
+
 \begin{lemma}[Harder--Narasimhan filtration]
 \label{lem:hn-filtration}
 \uses{def:hermitian-degree,lem:hermitian-hn-interval-flag,lem:nested-quotient-metric,lem:exact-determinant-degree,lem:determinant-contraction,lem:saturation-degree,lem:hermitian-convex-slopes}
