@@ -1,103 +1,84 @@
 # Arithmetic compactness verification
 
-Arithmetic sequential compactness, maximum-degree continuity and strict
-stability openness from manuscript Lemma 7.1 (pages 11–12) are proved for
-the existing `HermitianMetric`, over every
-number field and every finite projective module over its ring of integers.
+The assigned arithmetic compactness and maximizing-pair producers are proved
+for the existing `HermitianMetric`, over arbitrary number fields and arbitrary
+finite projective modules over their rings of integers. No freeness over the
+ring of integers is assumed. The statements also cover rank zero; positive
+ranks are the manuscript application.
 
-- `MaximumDegree`: an actual saturated maximizer, its nonnegative maximum,
-  and upper bounds for every saturated induced degree.
-- `MetricComparison`, `MaximumComparison`: uniform exponential bounds on
-  actual fiber norms bound changes of induced degrees and their maximum.
-- `MetricTopology`: pointwise convergence of actual fiber forms gives joint
-  norm continuity and local uniform exponential comparisons.
-- `DegreeContinuity`: continuity of degree, every fixed induced degree, and
-  maximum degree in that topology.
-- `Stability`, `StabilityTopology`: a uniform negative degree gap and openness
-  of strict stability in the subtype of degree-zero metrics.
-- `TraceSystole`: the actual integral trace lattice of a normalized semistable
-  module has systole at least the square root of the number-field degree.
-  The saturated generic line and logarithmic degree formula supply the bound;
-  no covolume identity is used.
-- `TraceMultiplication`: canonical real extension of integral multiplication,
-  preservation of the actual trace lattice, uniform archimedean operator bounds,
-  and conjugacy of the actual integer and real matrices.
-- `IntegralMatrices`, `TraceActionFiniteness`: compact frames and uniformly
-  bounded actual multiplication operators allow only finitely many integer
-  matrices, in a finite set independent of the metric and module.
-- `SemistabilityTopology`: normalization and semistability are closed among
-  actual positive-definite Hermitian metrics.
+## Checked route
 
-The source route is `blueprint/src/arithmetic_compactness.tex`. It replaces
-the source's covolume-based finiteness argument with the completed intrinsic
-`finite_saturated_submodules_degree_ge`; no covolume formula is assumed.
-The compactness endpoint consumes the proved exact covolume formula.
-The maximizing-pair consequence remains open.
+- `MaximumDegree` consumes intrinsic all-rank degree finiteness to obtain an
+  actual saturated maximizer and nonnegative `maxDegree`.
+- `MetricComparison`, `MaximumComparison`, `MetricTopology`, and
+  `DegreeContinuity` prove local uniform norm comparisons and continuity of
+  actual degree, induced degree, and maximum degree.
+- `Stability` and `StabilityTopology` prove a uniform negative degree gap and
+  openness of strict stability among normalized metrics.
+- `TraceSystole` proves the actual normalized semistable trace lattice has
+  systole at least the square root of the field degree, independently of
+  covolume, using the saturated generic line and line-degree quotient formula.
+- `TraceMultiplication`, `IntegralMatrices`, and `TraceActionFiniteness` bound
+  actual integral multiplication matrices in compact lattice frames.
+- `TraceFrames` consumes the exact discriminant/degree covolume formula,
+  systole, canonical trace lattice, and accepted pinned Mahler vendor.
+- `FixedAction` selects a subsequence with constant integral multiplication
+  matrices and constructs actual basis-preserving ring-linear isomorphisms.
+- `ComplexTraceCoordinates`, `FrameMetric`, and `FrameLimit` use the canonical
+  complexified trace space and invertible limiting frames to reconstruct
+  positive-definite conjugation-compatible metrics on the actual module.
+- `MetricTransport` and `SemistabilityTopology` preserve normalization and
+  every semistability inequality under those isomorphisms and metric limits.
+- `SequentialCompactness.exists_normalized_semistable_subsequence` assembles
+  these producers. Its fixed module is an original sequence member.
+- `TensorContinuity` and `MaximumTransport` prove joint tensor maximum-degree
+  continuity and invariance under actual integral isomorphisms.
+- `MaximizingPair.isCompact_tensorMaxDegreeValues` proves compactness of the
+  literal set of values realized by actual normalized semistable pairs at fixed
+  ranks. `exists_maximizing_pair` returns actual modules, metrics, and a
+  saturated tensor submodule realizing the global maximum. Its additional
+  premise is existence of one candidate, supplied by `tensor_maxDegree_mem`.
+  This is the agreed TENSOR-SEMI counterexample interface (I-0114).
 
-## Checks
+The source-facing blueprint is `blueprint/src/arithmetic_compactness.tex`,
+with exact manuscript pages 11–13 registered as source anchors. There is no
+second arithmetic-bundle model, assumed covolume producer, assumed tensor
+semistability, or extremal certificate.
 
-Executed with `/home/yijunyuan/bc-workspace` explicitly passed to Horizon:
+## Reproducible checks
 
-```text
-horizon check BostConjecture.Arithmetic.Compactness.DegreeContinuity BostConjecture.Arithmetic.Compactness.StabilityTopology
-  passed: 3668 jobs, 2026-11-06 02:29 UTC
-horizon check --lean verification/ArithmeticCompactnessAxioms.lean
-  passed: 14 transitive axiom probes, 2026-11-06 02:30 UTC
-```
+All commands use `horizon --root /home/yijunyuan/bc-workspace check` and the
+shared serialized resource slot. Endpoint results on 2026-11-06:
+
+| Target | Result |
+| --- | --- |
+| `BostConjecture.Arithmetic.Compactness.SequentialCompactness` | 9153 jobs passed, 03:39 UTC |
+| `BostConjecture.Arithmetic.Compactness.TensorContinuity` | passed in the 3670-job endpoint check |
+| `BostConjecture.Arithmetic.Compactness.MaximumTransport` | 3669 jobs passed |
+| `BostConjecture.Arithmetic.Compactness.MaximizingPair` | 9156 jobs passed, 03:51:59 UTC |
+| `--lean verification/ArithmeticCompactnessAxioms.lean` | 40 transitive probes passed, 03:52:37 UTC |
 
 Every probe reports only Lean's standard foundational axioms `propext`,
-`Classical.choice`, and `Quot.sound`; none reports `sorryAx` or a new axiom.
-The guarded LSP was used before and after edits. Two files initially retained
-stale-import diagnostics after their producers were built; serialized narrow
-Horizon checks supplied feedback. An initial `Stability` check caught an
-extra `.le` projection; it was repaired and the endpoint checks passed cleanly.
+`Classical.choice`, and `Quot.sound`. The compactness source directory has no
+`sorry`, `admit`, or axiom declaration. The endpoint probes cover all transitive
+producers, including exact covolume and the accepted vendor.
 
-The read-only `honesty-reviewer` independently checked the source shape,
-actual proof consumers, topology, rank-zero behavior, build evidence and all
-14 axiom outputs. Verdict: honest proved producers; full fixed-module
-`lem:degree-maximum-continuity` is checked. Shared root integration now belongs
-to MAIN under I-0104.
+Guarded LSP was queried before and after edits. Some workers retained stale
+imports; serialized narrow checks supplied feedback. Initial failed checks
+caught an extra projection, duplicate canonical basis, dependent-instance
+rewrite, function-composition rewrite, and missing value-set universe
+annotation. All were repaired before the successful endpoint checks.
 
-The `TraceSystole` module check passed with 3672 jobs. The expanded 17-probe
-axiom check passed at 02:37 UTC, again with only the three foundational axioms.
-The reviewer separately verified its source meaning and all three new outputs;
-only the systole node is closed, not arithmetic compactness. The graph sync had
-no unresolved source attachments; its 1029 unattached-helper coverage warnings
-are retained rather than attaching unrelated declarations to these theorems.
+COVOLUME provenance is unchanged: exact formula `5144157`, canonical basis
+relocation `739e58a`. Vendor attribution remains in `CONTRIBUTIONS.md`; MAIN
+owns its consumer list and shared integration. Arithmetic compactness
+`daad480` was integrated at `1c4c3f8`, with root 9375 jobs passing. Final
+maximizing-pair shared-root integration is a separate pending handoff.
 
-The action/closedness endpoint check passed with 3672 jobs at 03:01 UTC;
-the expanded 26-probe audit also passed with foundational axioms only.
-The independent honesty review accepted the three individual nodes.
-An initial integration check exposed duplicate `traceBasis` definitions;
-COVOLUME moved the identical producer to `TraceSpace` and this lane removed
-its copy. A sum-inference error and a deprecated set notation were repaired.
-
-COVOLUME's checked `traceCovolume_eq_discr_degree` (5144157, canonical basis
-relocation 739e58a) supplies the exact discriminant/degree covolume formula.
-
-`FixedAction` subsequently passed 3532 jobs; it constructs actual ring-linear
-basis-preserving module isomorphisms along a strictly increasing subsequence.
-`TraceFrames` passed 9132 jobs, consuming the exact covolume formula, actual
-systole, measure-preserving isometries, and the accepted pinned Mahler vendor.
-The expanded 29-probe check passed with foundational axioms only. Independent
-honesty/source review accepted these two producers.
-
-`ComplexTraceCoordinates`, `FrameMetric`, and `FrameLimit` reconstruct actual
-conjugation-compatible positive-definite metrics using the canonical complexified
-trace space and invertible limiting frames. `MetricTransport` preserves degree
-and semistability under actual integral isomorphisms.
-`SequentialCompactness.exists_normalized_semistable_subsequence` assembles the
-common trace dimension, compact frames, fixed integral actions, metric
-reconstruction, and closedness. Its fixed module is an original sequence member;
-it has no assumed covolume or compactness premise. This also includes rank zero.
-
-The endpoint kernel check passed 9153 jobs at 03:39 UTC on 2026-11-06.
-The expanded 34-probe audit passed at 03:42 UTC, with only `propext`,
-`Classical.choice`, and `Quot.sound` throughout. The read-only honesty reviewer
-independently verified the exact endpoint, producer use, source p11, and check
-records. Its requested blueprint clarification now explicitly retains convergence
-in the compact subset of invertible frames. `lem:hermitian-frame-limit` and
-`lem:arithmetic-compactness` are checked. Initial frame-limit elaboration failures
-and a matrix first-countability inference failure were repaired before these
-checks. Tensor continuity, the global value set and maximizing-pair consequence
-are the remaining assigned frontier.
+Independent read-only honesty/source review accepted the complete route,
+including the literal value set, universe, nonfree domain, both subsequences,
+joint continuity, isometry invariance, actual witnesses, saturated maximizer,
+source statements and exact check outputs. Blueprint completion markers cover
+these producers only. Strict maximizing-counterexample reduction, extremal
+variation, tensor semistability and maximal-slope additivity belong to the
+other lanes and are not claimed here.

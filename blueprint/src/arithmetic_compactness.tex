@@ -367,8 +367,9 @@ matrices in any complex bases.
 
 \begin{lemma}[Tensor metric continuity and isometry invariance]
 \label{lem:tensor-maximum-continuity}
-\uses{lem:degree-maximum-continuity,lem:metric-topology-comparison}
-\source{bost-specht-manuscript:page-0012}\notready
+\uses{lem:degree-maximum-continuity,lem:metric-topology-comparison,lem:arithmetic-tensor-metric,lem:saturation-degree}
+\lean{BostConjecture.Arithmetic.HermitianMetric.continuous_tensor,BostConjecture.Arithmetic.HermitianMetric.continuous_tensor_maxDegree,BostConjecture.Arithmetic.HermitianMetric.maxDegree_tensor_pullback_equiv}\leanok
+\source{bost-specht-manuscript:page-0012}
 On two fixed finite projective modules, the function
 $(h,g)\mapsto\mathcal D(h\otimes g)$ is continuous. Its value is
 unchanged by pulling the two metrics back along integral module isomorphisms.
@@ -378,9 +379,12 @@ In complex bases of the two fibers the tensor Gram coefficients are
 products $h_{ij}g_{kl}$. These depend continuously on the two metrics.
 The finite Gram expansion therefore proves convergence of every tensor
 pairing. Apply continuity of $\mathcal D$ on the fixed tensor module.
-An integral isomorphism identifies saturated submodules bijectively,
-preserving their induced metrics and degrees. Their maximum is consequently
-unchanged. The tensor of two integral isomorphisms is an isometry for the
+Saturation does not decrease degree, so every integral submodule degree
+is bounded by the saturated maximum. An integral isomorphism identifies
+all integral submodules bijectively and preserves their induced metrics
+and degrees. Apply this bound to the image of a saturated maximizer and
+then to the inverse image of a saturated maximizer to obtain both
+inequalities between the maxima. The tensor of two integral isomorphisms is an isometry for the
 pulled-back tensor metrics, as follows first on pure tensors from the
 product pairing formula and then on all vectors by sesquilinearity.
 \end{proof}
@@ -388,7 +392,8 @@ product pairing formula and then on all vectors by sesquilinearity.
 \begin{lemma}[A maximizing normalized semistable pair]
 \label{lem:maximizing-semistable-pair}
 \uses{lem:arithmetic-compactness,lem:tensor-maximum-continuity,lem:maximum-saturated-degree}
-\source{bost-specht-manuscript:page-0012,bost-specht-manuscript:page-0013}\notready
+\lean{BostConjecture.Arithmetic.Compactness.tensorMaxDegreeValues,BostConjecture.Arithmetic.Compactness.tensor_maxDegree_mem,BostConjecture.Arithmetic.Compactness.isCompact_tensorMaxDegreeValues,BostConjecture.Arithmetic.Compactness.exists_maximizing_pair}\leanok
+\source{bost-specht-manuscript:page-0012,bost-specht-manuscript:page-0013}
 Fix ranks $a,b$ and suppose there is at least one normalized semistable
 pair of these ranks. The set of values $\mathcal D(E\otimes F)$ over
 all such pairs is compact in $\mathbb R$. In particular a pair realizes

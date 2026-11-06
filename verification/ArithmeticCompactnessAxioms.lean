@@ -8,6 +8,7 @@ import BostConjecture.Arithmetic.Compactness.TraceFrames
 import BostConjecture.Arithmetic.Compactness.FrameLimit
 import BostConjecture.Arithmetic.Compactness.MetricTransport
 import BostConjecture.Arithmetic.Compactness.SequentialCompactness
+import BostConjecture.Arithmetic.Compactness.MaximizingPair
 
 /-! Transitive axiom audit of the actual arithmetic compactness producers. -/
 
@@ -45,3 +46,9 @@ import BostConjecture.Arithmetic.Compactness.SequentialCompactness
 #print axioms BostConjecture.Arithmetic.HermitianMetric.degree_pullback_equiv
 #print axioms BostConjecture.Arithmetic.HermitianMetric.IsSemistable.pullback_equiv
 #print axioms BostConjecture.Arithmetic.Compactness.exists_normalized_semistable_subsequence
+#print axioms BostConjecture.Arithmetic.HermitianMetric.continuous_tensor
+#print axioms BostConjecture.Arithmetic.HermitianMetric.continuous_tensor_maxDegree
+#print axioms BostConjecture.Arithmetic.HermitianMetric.maxDegree_pullback_equiv
+#print axioms BostConjecture.Arithmetic.HermitianMetric.maxDegree_tensor_pullback_equiv
+#print axioms BostConjecture.Arithmetic.Compactness.isCompact_tensorMaxDegreeValues
+#print axioms BostConjecture.Arithmetic.Compactness.exists_maximizing_pair
