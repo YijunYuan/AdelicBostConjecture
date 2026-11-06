@@ -1039,5 +1039,6 @@ geometric slope consumer remain separate. The latter is outside BOST-GEOM.
 Health checkpoint: no stale scratch candidates. Reviewed active-count and
 unattached-helper warnings remain intentional. I-0084 explains costly global
 Horizon search refreshes; guarded local/semantic lookup is used between edits.
-I-0085 prepares a restriction-covolume successor; its shared include awaits
-parent activation, while its proof remains unproved.
+I-0087 activates the disjoint restriction-covolume successor: its complete
+blueprint slice is included immediately after arithmetic, retaining the
+original label and unproved status. No covolume Lean draft is imported.
