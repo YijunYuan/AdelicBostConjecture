@@ -686,3 +686,25 @@ averaging are still open. CLOSURE delivered its exact comparison endpoint
 at `53f1119` with 3,394-job warning-free check, 40 foundational-only probes
 and independent source/mathematical/honesty review; BALANCED now consumes
 that endpoint in the actual Plucker orbit assembly.
+
+## Balanced algebraic origin-exclusion checkpoint
+
+`Balanced.PluckerSemistability` consumes CLOSURE's accepted comparison
+`53f1119` through the actual orbit-image identity, proving equality of
+Euclidean and polynomial Zariski closures for every actual Plucker orbit.
+The balanced norm theorem then proves `IsBalanced.isGeometricallySemistable_plucker`
+and its nonzero-line corollary in the existing canonical origin-exclusion
+predicate. `InvariantTheory.Semistability` proves the general nonzero-scalar
+and span invariance used by that corollary. The scoped build passed
+**3,582 jobs warning-free** (4.5s); **174 transitive probes** passed (3.1s)
+with only foundational axioms. Guarded LSP is clear after rebuilding the
+changed Semistability dependency and refreshing stale imports.
+
+Independent source/mathematical/honesty review accepted the actual projection,
+partial traces, degree linked by the ON basis, actual SL action, closure
+transport and nonzero-line corollary; it independently audited the final
+line endpoint. The new blueprint node is proved. The manuscript Lemma 7.2
+node remains notready until homogeneous invariant existence and the full
+requested criterion are proved, since GEOM needs the invariant itself.
+This is algebraic origin exclusion, not yet a claim that BOST-BALANCED is
+complete. Root integration of this producer is handed to GEOM separately.

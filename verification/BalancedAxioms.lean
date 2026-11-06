@@ -5,6 +5,7 @@ import BostConjecture.Balanced.SpectralExpansion
 import BostConjecture.Balanced.TensorExponential
 import BostConjecture.Balanced.SpecialLinearPolar
 import BostConjecture.Balanced.OrbitNorm
+import BostConjecture.Balanced.PluckerSemistability
 import BostConjecture.InvariantTheory.Semistability
 import BostConjecture.InvariantTheory.PluckerCoordinates
 import BostConjecture.InvariantTheory.SpecialLinearCoordinates
@@ -202,3 +203,9 @@ import BostConjecture.InvariantTheory.UnitaryDensity
 #print axioms BostConjecture.InvariantTheory.eval_eq_zero_unitary_diagonal_unitary
 #print axioms BostConjecture.InvariantTheory.eval_eq_zero_of_unitary_of_isUnit
 #print axioms BostConjecture.InvariantTheory.polynomial_eq_zero_of_eval_unitary
+
+#print axioms BostConjecture.InvariantTheory.IsGeometricallySemistable.smul
+#print axioms BostConjecture.InvariantTheory.IsGeometricallySemistable.of_mem_span_singleton
+#print axioms BostConjecture.Balanced.closure_pluckerOrbit_eq_polynomialZariskiClosure
+#print axioms BostConjecture.Balanced.IsBalanced.isGeometricallySemistable_plucker
+#print axioms BostConjecture.Balanced.IsBalanced.isGeometricallySemistable_plucker_line

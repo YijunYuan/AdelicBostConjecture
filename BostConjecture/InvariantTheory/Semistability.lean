@@ -75,4 +75,29 @@ theorem isGeometricallySemistable_of_homogeneousInvariant (ρ : Representation �
   rw [polynomialEval_zero_of_mem_homogeneous hd hp.1] at hc
   exact hne hc.symm
 
+/-- Geometric semistability is unchanged by multiplying a vector by a nonzero scalar. -/
+theorem IsGeometricallySemistable.smul {ρ : Representation ℂ G E} {x : E}
+    (hx : IsGeometricallySemistable ρ x) {c : ℂ} (hc : c ≠ 0) :
+    IsGeometricallySemistable ρ (c • x) := by
+  intro hz
+  apply hx
+  intro p hp
+  have he := hz (polynomialPullback (c⁻¹ • LinearMap.id) p) (by
+    rintro _ ⟨g, rfl⟩
+    rw [polynomialEval_pullback]
+    simpa only [LinearMap.smul_apply, LinearMap.id_apply, map_smul,
+      smul_smul, mul_inv_cancel₀ hc, one_smul] using hp (ρ g x) ⟨g, rfl⟩)
+  simpa only [polynomialEval_pullback, LinearMap.smul_apply, LinearMap.id_apply,
+    smul_zero] using he
+
+/-- Every nonzero vector on a semistable line is semistable. -/
+theorem IsGeometricallySemistable.of_mem_span_singleton
+    {ρ : Representation ℂ G E} {x y : E} (hx : IsGeometricallySemistable ρ x)
+    (hy : y ∈ Submodule.span ℂ {x}) (hy0 : y ≠ 0) :
+    IsGeometricallySemistable ρ y := by
+  obtain ⟨c, rfl⟩ := Submodule.mem_span_singleton.mp hy
+  apply hx.smul
+  intro hc
+  exact hy0 (hc ▸ zero_smul ℂ x)
+
 end BostConjecture.InvariantTheory

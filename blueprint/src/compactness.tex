@@ -1105,9 +1105,36 @@ Euclidean closed by continuity of the norm, contains the orbit, and
 excludes zero, proving the closure conclusion.
 \end{proof}
 
+\begin{lemma}[Balanced Pl\"ucker orbit excludes zero algebraically]
+\label{lem:balanced-plucker-algebraic-exclusion}
+\lean{BostConjecture.Balanced.closure_pluckerOrbit_eq_polynomialZariskiClosure,BostConjecture.Balanced.IsBalanced.isGeometricallySemistable_plucker,BostConjecture.Balanced.IsBalanced.isGeometricallySemistable_plucker_line,BostConjecture.InvariantTheory.IsGeometricallySemistable.smul,BostConjecture.InvariantTheory.IsGeometricallySemistable.of_mem_span_singleton}\leanok
+\uses{def:balanced-vector-semistability,lem:balanced-polynomial-orbit-image,thm:complex-polynomial-image-closure,lem:balanced-plucker-orbit-norm}
+\source{bost-specht-manuscript:page-0012}
+For finite-dimensional complex Hermitian spaces $U,W$, each orbit of
+$\SL(U)\times\SL(W)$ in $\bigwedge^s(U\otimes W)$ has equal Euclidean
+and polynomial Zariski closures. If $S\subseteq U\otimes W$ has balanced
+orthogonal projection and $(v_i)_{i=1}^s$ is an orthonormal basis of $S$,
+then zero is outside the polynomial Zariski closure of the orbit of
+$z=v_1\wedge\cdots\wedge v_s$. The same conclusion holds for every
+nonzero vector in $\mathbb C z$.
+\end{lemma}
+\begin{proof}
+Choose finite bases of $U,W$ and their induced exterior tensor basis.
+Lemma~\ref{lem:balanced-polynomial-orbit-image} expresses the actual
+orbit as the image of the determinant-one zero locus under its coordinate
+polynomials. The complex polynomial-image closure comparison proves the
+first assertion. The balanced orbit norm bound excludes zero from the
+Euclidean closure, so the same is true of the polynomial Zariski closure.
+For any nonzero scalar $c$, substituting $c^{-1}x$ in a polynomial
+separating zero from the orbit of $z$ gives a polynomial separating zero
+from the orbit of $cz$. Every nonzero member of $\mathbb C z$ has this
+form. This proves origin exclusion without invoking the as-yet separate
+homogeneous-invariant conclusion of Lemma~\ref{lem:invariant-orbit-criterion}.
+\end{proof}
+
 \begin{lemma}[Balanced projections give geometric semistability]
 \label{lem:balanced-plucker}
-\uses{def:geometric-semistability,lem:invariant-orbit-criterion,lem:balanced-plucker-orbit-norm}
+\uses{def:geometric-semistability,lem:invariant-orbit-criterion,lem:balanced-plucker-algebraic-exclusion}
 \source{bost-specht-manuscript:page-0012}\notready
 Let $S\subset U\otimes W$ be a nonzero subspace of complex Hermitian
 spaces of dimensions $m,n$, and put $s=\dim S$. If its orthogonal
