@@ -4,9 +4,9 @@ The required endpoint is exactly `closure_polynomial_image_zeroLocus` from
 `BALANCED.md` (I-0072, f9e8974), in namespace
 `BostConjecture.InvariantTheory`. It is now **kernel-proved** with the exact
 requested signature in `ComplexClosure.Comparison`. All ideals and finite
-arities, including empty cases, are covered. The final 40-probe audit and both independent reviews passed; shared
-root integration is being completed. This is the closure component only;
-Lemma 7.2 is not claimed here.
+arities, including empty cases, are covered. The final 40-probe audit and both
+independent reviews passed. GEOM integrated the endpoint in the shared root
+at `d29f2d3`. This is the closure component only; Lemma 7.2 is not claimed here.
 
 ## Checked coordinate bridge
 
@@ -217,8 +217,8 @@ accepted the scoped blueprint statements and original PDF correspondence;
 its request to remove implementation-status prose from the blueprint is
 incorporated. This review visually inspected freshly rendered original manuscript
 page 12 and Milne page 201, and checked the actual orbit-image and zero-exclusion
-consumers. All owned blueprint nodes now carry `leanok`. Final acceptance
-requires GEOM shared-root integration; no Lemma 7.2 completion is claimed.
+consumers. All owned blueprint nodes now carry `leanok`. No Lemma 7.2
+completion is claimed.
 
 Additional unmodified Apache-2.0 Mathlib producers at the same pinned revision:
 `RingTheory/Spectrum/Prime/Chevalley.lean`
@@ -234,3 +234,18 @@ Additional unmodified Apache-2.0 Mathlib producers at the same pinned revision:
 No copied source, new axioms, changed dependencies or new representations.
 The exact consumer is BALANCED's polynomial Plücker orbit image from
 `84a679f`, with its agreed special-linear-pair ideal and orbit polynomials.
+
+## Shared integration
+
+GEOM integrated the exact endpoint and its complete dependency cone at
+`d29f2d3`, with root blob `3df1683a4e20af6eb4aa70c9461018efa69928cd`.
+The configured explicit-root `horizon check --json` (`lake build`) passed
+**9,307 jobs warning-free at 2026-11-06 01:00:22 UTC**. The owner checked
+the recorded result and confirmed that exact root blob in the integration
+commit. Shared CONTRIBUTIONS, RESULTS and OPEN_PROOFS were updated.
+The subsequent endpoint graph query returned node `180d7cef65ce` with
+`lean_status = lean_ok`, the exact statement and manuscript anchor, three
+producer dependencies, the formalization edge and a downstream consumer.
+BALANCED accepted the handoff and directly consumes the theorem in
+`Balanced.PluckerSemistability` (`7f56300`); its remaining invariant-extraction
+obligations are separate. BOST-CLOSURE is complete at its exact endpoint.
