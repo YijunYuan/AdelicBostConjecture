@@ -1,6 +1,6 @@
 # Parallel Horizon scheduling
 
-## Live checkpoint at 2026-11-06 00:55 UTC
+## Live checkpoint at 2026-11-06 01:17 UTC
 
 SPECHT is complete and run `0003` exited normally after session `0030` at
 23:50:16 UTC. The exact canonical-lattice covolume limit, 14 final
@@ -14,9 +14,13 @@ shared-file handoff: `e2e7039`, evidence typography `8d57641`, root blob
 | `0004` | `BOST-ARITH` | `0016` | Intrinsic arithmetic HN theory and degree finiteness |
 | `0005` | `BOST-GEOM` | `0016` | Invariant tensor nonvanishing and shared integration |
 | `0006` | `BOST-BALANCED` | `0008` | Homogeneous extraction, compact averaging and full Lemma 7.2 |
-| `0007` | `BOST-CLOSURE` | `0002` | Checked closure endpoint; shared-root integration and final handoff |
 
-CLOSURE started at 00:00:50 UTC in the freed SPECHT slot, PID `584941`.
+
+CLOSURE started at 00:00:50 UTC in the freed SPECHT slot, PID `584941`, and
+completed at 01:16:41 UTC with normal exit 0. Its final evidence is `f7ffd4f`;
+root integration `d29f2d3` passed 9,307 warning-free jobs, and graph integration
+is accepted. Do not resume completed run `0007`. The three remaining runs
+continue in the foreground; no successor has been assigned to the free slot.
 Its exclusive paths are `InvariantTheory/ComplexClosure/**`,
 `blueprint/src/complex_closure.tex`, `verification/ComplexClosureAxioms.lean`
 and `verification/COMPLEX_CLOSURE.md`. The fixed consumer interface is in
@@ -38,7 +42,7 @@ over the startup sample. At 00:28 UTC, 9.80 GiB remained available with PSI
 avg10/avg60/avg300 all zero. Dashboard HTTP returned 200. The old three-writer
 wording in the ARITH/GEOM objectives was corrected without changing their math.
 Lemma 7.2 remains open at the actual invariant construction and final assembly;
-the exact closure producer is now checked, pending shared-root integration.
+the exact closure producer is fully checked, integrated and delivered.
 
 The latest completed shared batch passed 9,299 warning-free root jobs at
 00:43:05 UTC; GEOM's 273-probe audit and independent pairing review passed.
@@ -67,15 +71,19 @@ The bounded closure result is committed as `53f1119`: the theorem
 passed at 00:51:53 UTC with only standard foundational axioms. Independent
 source, mathematical and honesty reviews accepted the exact theorem, including
 empty arities, and inspected the original source pages. GEOM integration and
-the final task handoff are pending; no additional proof objective has been
+the final task handoff are complete; no additional proof objective has been
 assigned to CLOSURE. See [COMPLEX_CLOSURE.md](COMPLEX_CLOSURE.md).
 
 BALANCED has checked homogeneous extraction and the generic compact-average
 helper, with independent review and 163 foundational-only probes. The
-`UnitaryDensity` module passed its kernel build at 00:54:24 UTC; its final
-audit/review and determinant-one consumer are still in progress. Remaining
-Lemma 7.2 work is special-unitary density, the actual polynomial averaging
-consumer, the orbit criterion and final source-facing assembly. A closure
+`UnitaryDensity` and `SpecialUnitaryDensity` endpoints are now checked and
+independently reviewed, with 181 foundational-only probes through `6bac08b`.
+BALANCED also checked `PluckerSemistability` (`7f56300`), proving origin
+exclusion for every nonzero vector of the actual Plucker line. The final
+root batch for that endpoint and special-unitary detection (`6da0e3e`) remains
+pending. Remaining Lemma 7.2 work is continuity and finite-degree averaging
+for the actual polynomial action, the invariant-polynomial criterion and final
+source-facing assembly. A closure
 theorem or generic averaging helper alone is not the requested result.
 
 The 00:40 read-only health sample found exactly four writers, low PSI and no
@@ -83,6 +91,11 @@ OOM. Two guarded BALANCED LSP trees explained its higher measured PSS during
 review; no leak or emergency intervention was inferred. At 00:49, available
 memory was 8.17 GiB and PSI avg10 0.19%. Continue monitoring and use normal
 checked-boundary handoffs if sustained pressure returns.
+
+The read-only tool diagnosis is recorded in advisory inbox `I-0084`: changes
+from parallel writers can repeatedly trigger a full Horizon search-index
+rebuild. The graph scope is intact; consume existing graph results and avoid
+redundant forced indexing. No installed package or tool configuration changed.
 
 ## Earlier checkpoints
 
