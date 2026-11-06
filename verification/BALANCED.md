@@ -1,13 +1,18 @@
 # Balanced projections: verified boundary
 
-Manuscript Lemma 7.2 is **not yet formalized**. The accepted code proves the
-intrinsic partial traces, actual exponential-frame Gram first variation, and
-the basis-independent complex Gram metric on the full exterior power, actual
-Plücker norm stationarity, Hermitian exterior exponential convexity, determinant-one
-polar factorization, and the full actual special-linear orbit norm bound and
-Euclidean closure exclusion. It also supplies polynomial matrix coefficients, the forward coordinate pullback on every homogeneous degree, rational-point detection, and an explicit coefficient kernel equal to the canonical homogeneous invariant submodule, together with intrinsic polynomial evaluation, homogeneous invariants,
-and the elementary implication from a nonvanishing homogeneous invariant to
-zero excluded from orbit closure. The converse orbit criterion is unproved.
+The exact source-shaped endpoint is now kernel-checked as
+`BostConjecture.Balanced.IsBalanced.plucker_semistable`. For every nonzero
+subspace of an arbitrary finite-dimensional complex Hermitian tensor product,
+the actual scalar partial-trace equations imply geometric semistability and
+positive-degree homogeneous invariant existence on every nonzero vector of
+the intrinsic top-exterior image. Final independent reviews and root
+integration of this endpoint are pending; the task remains open until those
+acceptance conditions are satisfied.
+
+The proof includes actual Gram differentiation, Hermitian exponential
+convexity, determinant-one polar reduction, Euclidean/algebraic orbit closure
+comparison, compact polynomial Haar averaging, special-unitary coordinate
+detection and homogeneous extraction. No orbit criterion is assumed.
 
 ## Checked producers
 
@@ -797,3 +802,21 @@ values on all orbits; its scoped build passed **3,523 jobs**. Both were
 warning-free. The serialized axiom audit now passes **190 probes**, using
 only `propext`, `Classical.choice`, and `Quot.sound`.
 The invariant orbit criterion and balanced assembly are the remaining consumers.
+
+## Exact Lemma 7.2 endpoint: scoped verification
+
+`OrbitCriterion.lean` passed **3,525 jobs**, and the exact
+`Balanced.PluckerSemistability` endpoint passed **3,619 jobs**, both warning-free.
+The final serialized `verification/BalancedAxioms.lean` check passes
+**195 transitive probes**, each using only `propext`, `Classical.choice`,
+and `Quot.sound`; the exact headline is among them. The endpoint uses
+`LinearMap.range (exteriorPower.map (Module.finrank ℂ S) S.subtype)`, with
+its equality to every basis-generated Plücker line proved using GEOM's
+existing `determinantCoordinates`. Positive factor dimensions follow from
+nonzero S; there are no additional rank or invariant assumptions.
+
+The COVOLUME launch baseline `b3a4bcd` captured the checked OrbitCriterion,
+final PluckerSemistability and axiom file while this session was active.
+The producer checks above, not that operational snapshot, certify those files.
+PolynomialAverage is root-integrated at `fb60f4a`, 9,321 warning-free jobs;
+root integration of the final endpoint remains pending.

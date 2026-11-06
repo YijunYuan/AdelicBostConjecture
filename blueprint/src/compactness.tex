@@ -1069,8 +1069,9 @@ makes the integral fixed, and every evaluation commutes with that integral.
 
 \begin{lemma}[The compact subgroup of the Pl\"ucker action]
 \label{lem:balanced-special-unitary-action}
+\lean{BostConjecture.InvariantTheory.specialUnitary_compactSpace,BostConjecture.InvariantTheory.specialUnitaryPluckerGroupHom,BostConjecture.InvariantTheory.continuous_specialUnitaryPlucker_dual}\leanok
 \uses{lem:balanced-plucker-coordinates}
-\source{maithani-reynolds:thm:reynolds-for-lie-group}\notready
+\source{maithani-reynolds:thm:reynolds-for-lie-group}
 For finite nonempty index sets $I,J$, the groups $\SU_I(\mathbb C)$ and
 $\SU_J(\mathbb C)$ are compact topological groups. Chosen bases of
 $U,W$ identify their product with a subgroup of
@@ -1094,8 +1095,9 @@ for this compact subgroup construction.
 
 \begin{lemma}[Finite-degree compact averaging for the Pl\"ucker action]
 \label{lem:balanced-polynomial-average}
+\lean{BostConjecture.InvariantTheory.polynomialCoefficientEval_detects_of_unitary,BostConjecture.InvariantTheory.plucker_invariant_of_specialUnitary,BostConjecture.InvariantTheory.exists_pluckerInvariant_average}\leanok
 \uses{lem:balanced-unitary-density,lem:balanced-bounded-polynomial-average,lem:balanced-special-unitary-action,lem:balanced-plucker-coordinate-pullback}
-\source{maithani-reynolds:thm:reynolds-for-lie-group}\notready
+\source{maithani-reynolds:thm:reynolds-for-lie-group}
 Let $U,W$ be positive-dimensional finite-dimensional complex spaces,
 $X=\bigwedge^s(U\otimes W)$ and $G=\SL(U)\times\SL(W)$ with its
 actual Pl\"ucker representation. For every polynomial $q$ on $X$ there
@@ -1123,18 +1125,15 @@ general reductive-group theorem is required.
 
 \begin{lemma}[Invariant detection of orbit closure]
 \label{lem:invariant-orbit-criterion}
-\uses{lem:balanced-constructible-image,lem:balanced-constructible-closure,lem:balanced-polynomial-average,lem:balanced-homogeneous-extraction}
+\uses{def:balanced-vector-semistability,lem:balanced-polynomial-average,lem:balanced-homogeneous-extraction}
 \source{bost-specht-manuscript:page-0012,maithani-reynolds:thm:reynolds-for-lie-group,milne-algebraic-geometry:page-0201}\notready
 Let $U,W$ be positive-dimensional finite-dimensional complex spaces and
 $G=\SL(U)\times\SL(W)$ act on $X=\bigwedge^s(U\otimes W)$ by the
 actual exterior tensor representation. A vector $x\in X$ has $0\notin\overline{Gx}^{\mathrm{Zar}}$ if and only if some
 positive-degree homogeneous $G$-invariant polynomial is nonzero at $x$.
-The Euclidean and Zariski closures of $Gx$ coincide.
+This is the invariant-polynomial criterion for the representation used here.
 \end{lemma}
 \begin{proof}
-The explicit Pl\"ucker-coordinate polynomials make the actual orbit a
-polynomial image of the determinant-one zero locus, hence constructible.
-The constructible closure comparison proves the last assertion.
 Suppose zero is outside $C=\overline{Gx}^{\mathrm{Zar}}$.
 By the definition of Zariski closure there is a polynomial $f$ that
 vanishes on $Gx$ with $f(0)\ne0$. Put $q=1-f/f(0)$.
@@ -1201,15 +1200,36 @@ form. This proves origin exclusion without invoking the as-yet separate
 homogeneous-invariant conclusion of Lemma~\ref{lem:invariant-orbit-criterion}.
 \end{proof}
 
+\begin{lemma}[The intrinsic Pl\"ucker line]
+\label{lem:balanced-intrinsic-plucker-line}
+\uses{lem:determinant-coordinates}
+\notready
+Let $U,W$ be complex Hermitian spaces, $S\subseteq U\otimes W$ a subspace
+of dimension $s$, and $v_1,\ldots,v_s$ any basis of $S$. The image of
+$\bigwedge^s S\to\bigwedge^s(U\otimes W)$ induced by inclusion equals
+$\mathbb C(v_1\wedge\cdots\wedge v_s)$. If $s>0$, then both $U,W$
+have positive dimension.
+\end{lemma}
+\begin{proof}
+The determinant-coordinate isomorphism expresses every top exterior
+vector of $S$ uniquely as a scalar multiple of its basis wedge.
+The exterior inclusion preserves scalar multiplication and sends that
+wedge to $v_1\wedge\cdots\wedge v_s$, proving both inclusions of the
+stated subspaces. Moreover $s\leq\dim(U\otimes W)=\dim U\dim W$;
+if $s>0$, neither factor dimension can be zero.
+\end{proof}
+
 \begin{lemma}[Balanced projections give geometric semistability]
 \label{lem:balanced-plucker}
-\uses{def:geometric-semistability,lem:invariant-orbit-criterion,lem:balanced-plucker-algebraic-exclusion}
+\uses{def:balanced-vector-semistability,lem:invariant-orbit-criterion,lem:balanced-plucker-algebraic-exclusion,lem:balanced-intrinsic-plucker-line}
 \source{bost-specht-manuscript:page-0012}\notready
 Let $S\subset U\otimes W$ be a nonzero subspace of complex Hermitian
 spaces of dimensions $m,n$, and put $s=\dim S$. If its orthogonal
 projection $P$ obeys
 $\Tr_W P=(s/m)\Id_U$ and $\Tr_U P=(s/n)\Id_W$, then its Pl\"ucker
-line is geometrically semistable for $\SL(U)\times\SL(W)$.
+line, the image of $\bigwedge^s S$ under exterior inclusion, is geometrically
+semistable for $\SL(U)\times\SL(W)$. Every nonzero representative is
+detected by an actual positive-degree homogeneous invariant polynomial.
 \end{lemma}
 \begin{proof}
 Take an orthonormal basis $v_1,\ldots,v_s$ of $S$ and
@@ -1234,5 +1254,9 @@ determinant $|\det g|=1$. The same applies to $W$. Unitary factors
 preserve exterior norms, so every vector in the orbit of $z$ has norm
 at least one. Thus zero is outside its Euclidean closure and, by the
 orbit criterion, outside its Zariski closure. The same criterion gives
-a nonvanishing homogeneous invariant, as required.
+a nonvanishing homogeneous invariant. Since $S$ is nonzero, the factor
+dimensions are positive, so the proved Pl\"ucker invariant criterion applies.
+Every nonzero vector in the intrinsic line is a nonzero scalar multiple of
+$z$ and is also semistable; applying the same criterion gives the stated
+invariant for each such representative.
 \end{proof}
