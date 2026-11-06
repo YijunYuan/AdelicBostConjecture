@@ -44,9 +44,17 @@ discriminant/degree formula when the generic rank is zero.
 The module checks passed 3354 and 3609 jobs respectively (fingerprints
 `d54fe514bd33c398`, `4654fd507b6b48db`).
 
-Remaining: relate the Gram determinant to Mathlib's mixed-embedding
-discriminant formula, including the complex factor cancellation. Prove the
-finite-index passage agrees with the existing intrinsic determinant degree.
+`FiniteIndex.lean` proves that every equal-generic-rank integral submodule
+has covolume `Nat.card (M ⧸ P) * h.traceCovolume`. It embeds that submodule
+in the original trace space, proves fullness from the discrete-rank theorem,
+identifies the induced Gram matrices, and transfers Mathlib's lattice
+index to the actual integral quotient. Kernel check: 3610 jobs,
+fingerprint `3318ef1836a96ed0`. The 30-probe transitive axiom audit passed
+at 2026-11-06 02:00:46 UTC with only the three foundational axioms.
+
+Remaining: relate the Gram determinant to the number-field discriminant,
+including the complex factor cancellation. Prove that the finite-index
+degree change agrees with the existing intrinsic determinant degree.
 No source-facing completion is claimed for any of these remaining steps.
 
 The fixed TraceSpace producer received independent honesty review:
@@ -57,6 +65,12 @@ were captured by ARITH's lifecycle integration `21ba17f` just before the
 explicit owned-path commit `cafb32d`, which contains only the audit-doc
 delta. Authorship of those files is BOST-COVOLUME/run0008; no manual ARITH
 source edits occurred.
+The extension review also accepted `Conjugation` and `Covolume` at
+`9b40453`; its requested rank-zero blueprint dependency was added.
+Conjugation's source was first captured by lifecycle snapshot `b75a4e2`,
+again with COVOLUME/run0008 authorship. The same axiom command fingerprint
+is reused across source revisions; timestamps and probe counts above
+identify the actual checked versions.
 
 ## Reuse
 
