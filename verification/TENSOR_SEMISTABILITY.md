@@ -221,3 +221,15 @@ instances fail to match the compiled `hE` type. Simplification before supplying
 `p` still exceeds200000 heartbeats. Coordination requests a minimal shared
 instance implementation repair, with unchanged public names/types. No such
 repair, final bridge, or unconditional theorem is claimed checked here.
+
+## Geometric bridge checked after instance repair (2026-11-06)
+
+Under I-0141, commit `f8975ea` changes exactly the two existing
+`binaryTensorFamily` data-instance bodies to direct `Sum.casesOn` branches.
+Independent review accepted unchanged names, types, priorities and factor data.
+The fresh dependency-aware check rebuilt the core and affected cone, removing
+the timeout. After an explicit pullback-composition proof, `BalancedSlope`
+passed all9386 jobs without warnings. Its invariant and balanced-fiber slope
+lemmas now consume the actual geometric slope theorem. No heartbeat override
+or new mathematical premise was introduced. The normalized and final tensor
+semistability declarations are the next checked targets.
