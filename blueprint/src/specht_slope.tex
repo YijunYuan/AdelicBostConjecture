@@ -227,7 +227,8 @@ metrics agree at every embedding.
 \label{lem:finite-tensor-average-slope}
 \uses{lem:degree-calculus}
 \source{bost-specht-manuscript:page-0009}
-\notready
+\lean{BostConjecture.Arithmetic.Specht.slope_piTensor,BostConjecture.Arithmetic.Specht.determinant_piTensor_degree}
+\leanok
 For a finite family of positive-rank finite projective Hermitian
 $\Ocal_K$-modules $A_i$, the average slope of their Hilbert tensor
 product is $\sum_i\slope(A_i)$, including the empty family with slope
@@ -245,6 +246,32 @@ tensor slope identity at each step. The ranks multiply, so every
 intermediate tensor has positive rank. Finally, $\det A$ has rank one
 and its degree is the defining determinant degree of $A$. Applying
 the finite tensor formula to its $k$ copies gives the consequence.
+\end{proof}
+
+\begin{lemma}[Exact determinant--Specht slope]
+\label{lem:determinant-specht-exact-slope}
+\uses{lem:determinant-specht-tensor-metric,lem:finite-tensor-average-slope,lem:arithmetic-specht-degree}
+\source{bost-specht-manuscript:page-0009}
+\notready
+Let $A$ be a finite projective Hermitian $\Ocal_K$-module of constant
+positive rank $a$, and let $k>0$. For the canonical rectangular lattice,
+\[
+ \slope(\mathcal S_{a,ak}(A))
+   =ak\slope(A)-c_a(ak).
+\]
+More generally, for any tableau of shape $(k^a)$ the slope is
+$k\degn(A)-\log\operatorname{covol}L/\operatorname{rk}_{\mathbb Z}L$.
+\end{lemma}
+\begin{proof}
+By Lemma~\ref{lem:determinant-specht-tensor-metric} the actual canonical
+metric is the arithmetic Hilbert tensor metric on the determinant
+power and the scalar-extended lattice. The first factor has rank one
+and slope $k\degn(A)$ by Lemma~\ref{lem:finite-tensor-average-slope}.
+The second has positive rank and slope
+$-\log\operatorname{covol}L/\operatorname{rk}_{\mathbb Z}L$ by
+Lemma~\ref{lem:arithmetic-specht-degree}. Binary tensor slope additivity
+adds these terms. For the canonical rectangle the second term is
+exactly $-c_a(ak)$, and $\degn(A)=a\slope(A)$ since $a>0$.
 \end{proof}
 
 \begin{lemma}[Determinant-isotypic integral modules]

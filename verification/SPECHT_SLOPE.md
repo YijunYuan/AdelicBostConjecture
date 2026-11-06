@@ -54,6 +54,13 @@ transitive probes passed (31.3 seconds), foundational-only. Independent review
 confirmed the canonical maps, normalization and absence of integral freeness;
 its requested constant-rank/projectivity clarification was added to the blueprint.
 
+`Arithmetic/Specht/FiniteTensorDegree.lean` proves rank multiplication and average
+slope additivity for actual finite Hilbert tensor products, including the empty
+family, and the intrinsic determinant-power degree formula. Kernel build passed
+(3620 jobs, 23.1 seconds), all twenty-four probes passed (40.8 seconds), and the
+independent honesty/source review accepted the nonfree proof and actual metric
+consumers. No semistability of the factors is needed for average slope additivity.
+
 The full determinant contribution to the exact intrinsic slope and the geometric
 slope inequality remain open.
 Existing ARITH, SPECHT, and GEOM producers are unchanged.
