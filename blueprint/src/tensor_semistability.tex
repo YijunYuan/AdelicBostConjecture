@@ -140,6 +140,34 @@ A submodule of a finite projective module over $\Ocal_K$ is again finite
 projective, so the same argument applies to its fixed determinant line.
 \end{proof}
 
+\begin{lemma}[Compatible exponential variations]
+\label{lem:arithmetic-exponential-variation}
+\uses{lem:arithmetic-metric-variation}
+\source{bost-specht-manuscript:page-0013}
+Let $h$ be a Hermitian metric on a finite projective $\Ocal_K$-module $E$.
+For each complex embedding $\sigma$, let $A_\sigma$ be self-adjoint for
+$h_\sigma$, with trace zero, and suppose
+$A_{\bar\sigma}c_\sigma=c_\sigma A_\sigma$, where $c_\sigma$ is the
+canonical conjugate-linear identification of fibers. Then
+\[
+ h_{t,\sigma}(x,y)=h_\sigma(e^{tA_\sigma}x,e^{tA_\sigma}y)
+\]
+defines a Hermitian metric on $E$ for every real $t$. Its determinant
+metric and arithmetic degree equal those of $h$, and $h_0=h$.
+\end{lemma}
+\begin{proof}
+The operators $e^{tA_\sigma}$ are invertible with inverses
+$e^{-tA_\sigma}$. In an orthonormal eigenbasis of $A_\sigma$, all
+eigenvalues are real. The intertwining identity carries each eigenvector
+to an eigenvector with the same real eigenvalue, so exponentiation gives
+$e^{tA_{\bar\sigma}}c_\sigma=c_\sigma e^{tA_\sigma}$.
+Consequently the pullback forms obey conjugation compatibility and are
+positive definite. Their automorphisms have determinant
+$\exp(t\operatorname{Tr} A_\sigma)=1$. The determinant-preserving
+pullback lemma therefore proves equality of determinant metrics and
+degrees. At $t=0$ every exponential is the identity.
+\end{proof}
+
 \begin{lemma}[Degree variation from fiber Gram determinants]
 \label{lem:arithmetic-gram-derivative}
 \uses{lem:arithmetic-degree-derivative,lem:degree-calculus}
