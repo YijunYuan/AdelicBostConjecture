@@ -1,3 +1,34 @@
+## Integrated rectangular invariants, Hom regrouping and intrinsic HN grades
+
+Claim class: **proved prerequisite producers**; BOST-GEOM and number-field
+Theorem1.1 remain incomplete. The configured explicit-root check passed
+**9,279 jobs without warnings at2026-11-06 00:10:13UTC**,
+`975bdb23135a0d4a`, root blob `2cb9cf57010e30bd8da24f89e3455668d65dd18e`.
+This is the first shared integration under protection I-0074.
+
+The root now consumes `Geometry.RectangularInvariants`, proving actual
+SL-fixed tensors equal the scalar-extended rectangular lattice over
+algebraically closed characteristic-zero fields; `Geometry.HomTensor`,
+connecting the actual polynomial quotient to canonical tensor pairing;
+and ARITH's `Arithmetic.HermitianHN` at `fb56e97`, proving semistable actual
+HN grades and maximal-slope attainment against integral submodules.
+The bounded Schur-Weyl extraction is pinned and attributed in CONTRIBUTIONS.
+
+Geometry's264 transitive probes passed00:11:39UTC with only the three standard
+foundational axioms; ARITH's delivered287-probe audit passed23:59:04UTC.
+Independent honesty and Schur-Weyl source reviews were satisfactory. Exact
+module checks, reviewed limits and source blobs are in GEOMETRY.md and
+ARITHMETIC.md. No sorryAx or additional mathematical axiom is reported.
+Some stale-import LSP sessions required narrow serialized kernel checks;
+initial local port/rewriting errors were fixed before accepted checks.
+
+The migrated complex_closure blueprint is included with both nodes still
+notready. Arbitrary-field invariant descent, determinant-factor restriction
+of the nonzero Hom tensor, actual coaction scalar-extension compatibility,
+Lemma7.2 and Theorem1.1 are not consequences of this build.
+InvariantDetection (I-0076) arrived after this boundary and is not included
+in this root evidence.
+
 ## Completed rectangular covolume asymptotic (session 0030)
 
 Claim class: **proved target for BOST-SPECHT**.

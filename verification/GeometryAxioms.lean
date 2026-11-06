@@ -30,6 +30,7 @@ import BostConjecture.Geometry.PolynomialPolarization
 import BostConjecture.Geometry.PluckerPolynomial
 import BostConjecture.Geometry.DegreeDivisibility
 import BostConjecture.Geometry.RectangularInvariants
+import BostConjecture.Geometry.HomTensor
 
 #print axioms BostConjecture.Geometry.homogeneousPolynomials_pow
 #print axioms BostConjecture.Geometry.homogeneousInvariants_pow
@@ -312,3 +313,14 @@ import BostConjecture.Geometry.RectangularInvariants
 #print axioms BostConjecture.Geometry.tensorPower_map_smul
 #print axioms BostConjecture.Geometry.determinant_covariant_of_specialLinear_fixed
 #print axioms BostConjecture.Geometry.mem_range_freeLatticeMap_iff_specialLinear_fixed
+
+#print axioms BostConjecture.Tensor.homDualEquiv
+#print axioms BostConjecture.Tensor.homDualEquiv_tmul
+#print axioms BostConjecture.Tensor.homDualEquiv_pullback
+#print axioms BostConjecture.Tensor.homDualTensorEquiv
+#print axioms BostConjecture.Tensor.homDualTensorEquiv_tprod
+#print axioms BostConjecture.Tensor.homDualTensorEquiv_map
+#print axioms BostConjecture.Tensor.homDualTensorEquiv_evaluation
+#print axioms BostConjecture.Geometry.polynomialEval_homDualTensorEquiv
+#print axioms BostConjecture.Geometry.homDualTensorEquiv_naturality
+#print axioms BostConjecture.Geometry.exists_regrouped_hom_tensor

@@ -22,6 +22,7 @@ public import BostConjecture.Arithmetic.ExactDegree
 public import BostConjecture.Arithmetic.TensorDegree
 public import BostConjecture.Arithmetic.ArchimedeanFiniteness
 public import BostConjecture.Arithmetic.SubspaceHN
+public import BostConjecture.Arithmetic.HermitianHN
 public import BostConjecture.LinearAlgebra.AlternatingTensorPower
 public import BostConjecture.LinearAlgebra.ExteriorPower.BaseChange
 public import BostConjecture.LinearAlgebra.PiTensorProduct.Projective
@@ -50,6 +51,7 @@ public import BostConjecture.Geometry.PolynomialTensor
 public import BostConjecture.Geometry.PolynomialPolarization
 public import BostConjecture.Geometry.DegreeDivisibility
 public import BostConjecture.Geometry.RectangularInvariants
+public import BostConjecture.Geometry.HomTensor
 public import BostConjecture.Tensor.Evaluation
 public import BostConjecture.Tensor.EvaluationBaseChange
 public import BostConjecture.Tensor.DualRegroupBaseChange

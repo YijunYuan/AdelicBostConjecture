@@ -827,3 +827,48 @@ actual coaction base-change are separate pending obligations (BALANCED owns the
 coaction producer). No geometric slope inequality or manuscript Theorem1.1 is
 claimed. Shared integration of this extraction follows parent activation in
 I-0073; the earlier root check covers only the Pluecker/divisibility batch.
+
+
+## Finite-projective Hom-dual regrouping and first shared integration
+
+`Tensor/HomDual.lean` composes unchanged Mathlib reflexive duality,
+`dualTensorHomEquiv` and binary tensor duality with the project's finite tensor
+distribution. It proves the actual formula `(v ⊗ ell)(A) = ell(A v)`, independent
+source/dual-target pullback, and equality with the existing tensor-power pairing.
+The hypotheses are finite projectivity over a commutative ring, with no free
+frame. The Hom evaluation uses the canonical `PiTensorProduct.dualDistrib` map;
+the pairing on the target still uses the checked projective dual equivalence.
+
+`Geometry/HomTensor.lean` consumes this construction in the actual polynomial
+quotient. Its inverse regrouping preserves nonzero evaluation and all specified
+source/target pullback invariances. It does not assert that the regrouped tensor
+already belongs to the determinant-factor subspace.
+
+- HomDual module `b2b137b54d3071c3` passed1,733jobs at2026-11-06 00:06:45UTC.
+- The configured root `975bdb23135a0d4a` passed9,279jobs without warnings at
+  00:10:13UTC, explicitly compiling HomTensor, the delivered HermitianHN and
+  the root. Root blob `2cb9cf57010e30bd8da24f89e3455668d65dd18e`;
+  HomDual blob `235dbe3dbba28d5a5a6f89aefd551ce1f62ee8d0`;
+  HomTensor blob `f1d375e2a29f65783402e255c9950af981305975`.
+- All264 GeometryAxioms probes passed at00:11:39UTC (`ffefd7bf352d83dc`),
+  only `propext`, `Classical.choice`, `Quot.sound`; full log
+  `session0016/hom-regroup-axioms.log`. Initial LSP constructor/implicit-argument
+  and scalar-normalization errors were repaired; no failing kernel check in
+  this Hom-regroup batch.
+- Required honesty review approved actual producer consumption, finite
+  projectivity and the canonical inverse image. Its tensor-regrouping blueprint
+  dependency correction was applied. Both limited nodes are now checked.
+
+Parent protection I-0074 transferred shared integration to GEOM after SPECHT
+completion. The root now imports the checked rectangular cone and HomTensor,
+and ARITH's delivered `HermitianHN` (`fb56e97`,287 owner probes). CONTRIBUTIONS
+records the complete Schur-Weyl extraction and actual consumers. The shared
+blueprint includes the migrated complex_closure chapter; its two nodes remain
+notready. Graph sync after that include has no missing dependency references;
+unattached helper/import declarations remain intentional coverage warnings.
+The scratch-cleanup dry run found no stale candidates.
+
+Next: use independent-factor invariants to restrict the regrouped tensor to
+the actual rectangular images. InvariantDetection arrived after this root
+boundary (I-0076) and is awaiting its next checked integration; actual coaction
+base-change remains BALANCED's producer. Full BOST-GEOM is still incomplete.

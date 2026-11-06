@@ -1613,8 +1613,9 @@ already proved determinant-twisted transition identity.
 
 \begin{lemma}[Regrouping Hom-dual tensors with evaluation]
 \label{lem:hom-dual-tensor-regrouping}
-\uses{lem:projective-tensor-evaluation}
-\notready
+\lean{BostConjecture.Tensor.homDualEquiv,BostConjecture.Tensor.homDualEquiv_tmul,BostConjecture.Tensor.homDualEquiv_pullback,BostConjecture.Tensor.homDualTensorEquiv,BostConjecture.Tensor.homDualTensorEquiv_map,BostConjecture.Tensor.homDualTensorEquiv_evaluation}
+\uses{lem:projective-tensor-evaluation,lem:tensor-regrouping}
+\leanok
 For finite projective modules $V,W$ over a commutative ring $R$, the
 canonical map $V\otimes W^\vee\to\Hom(V,W)^\vee$ given by
 $v\otimes\ell\mapsto(A\mapsto\ell(Av))$ is an isomorphism.
@@ -1639,6 +1640,32 @@ evaluation is $\prod_i\ell_i(Av_i)$, which is the defining formula for
 the existing tensor-power pairing. Pullback replaces each factor by
 $\ell_i(gAhv_i)=(g^\vee\ell_i)(A(hv_i))$; linearity extends both
 identities to all tensors. No basis or freeness hypothesis is introduced.
+\end{proof}
+
+\begin{lemma}[Polynomial evaluation after Hom-dual regrouping]
+\label{lem:hom-polynomial-regrouped-evaluation}
+\uses{lem:hom-dual-tensor-regrouping,lem:polynomial-tensor-quotient}
+\lean{BostConjecture.Geometry.polynomialEval_homDualTensorEquiv,BostConjecture.Geometry.homDualTensorEquiv_naturality,BostConjecture.Geometry.exists_regrouped_hom_tensor}
+\leanok
+Over a field, let $V,W$ be finite-dimensional, $A:V\to W$, and
+$z\in V^{\otimes d}\otimes(W^\vee)^{\otimes d}$. Let $\Psi(z)$ be
+its image under Hom-dual regrouping. Evaluation at $A$ of the polynomial
+quotient of $\Psi(z)$ equals the linearized canonical tensor-power
+pairing on $z$. Consequently a Hom-dual tensor with nonzero polynomial
+evaluation has a unique regrouped preimage with nonzero pairing. Every
+invariance under pullback $A\mapsto gAh$ is preserved as invariance of
+that preimage under $h^{\otimes d}\otimes(g^\vee)^{\otimes d}$.
+\end{lemma}
+\begin{proof}
+The polynomial tensor quotient evaluates on a tensor of linear forms
+as the product of their evaluations. For a decomposable tensor $z$,
+the preceding lemma identifies this product with the canonical tensor
+pairing. Decomposable tensors span, proving the evaluation identity
+for every $z$. The same spanning argument extends the preceding
+naturality identity to every $z$. Take the inverse image under the
+regrouping isomorphism; its evaluation is nonzero by the identity,
+and injectivity transports each fixed-vector equation. Uniqueness
+is injectivity of that isomorphism.
 \end{proof}
 
 \begin{lemma}[Polynomial identities from evaluation]

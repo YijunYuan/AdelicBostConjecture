@@ -565,7 +565,12 @@ and HN interval proofs are original local code. `Arithmetic.SubspaceHN`
 and `Slope.FiniteLength` consume `GameValue`, `NashEquilibrium`, and
 `Filtration.Exists` from the already attributed pinned HarderNarasimhan
 revision `14b3090e`; they prove actual intermediate quotient slope bounds.
-Full integral-submodule semistability and HN uniqueness remain open.
+The checked `Arithmetic.HermitianHN` consumer at `fb56e97` now proves
+semistability of actual HN grades against all integral submodules, attained
+maximal slope and containment of every maximizer in the first saturated term.
+It uses unchanged Mathlib quotient, submodule correspondence and finite-projective
+APIs, with no additional copied code. The 287-probe owner audit is foundational-only.
+HN uniqueness and bounded-degree finiteness remain open.
 `Arithmetic.ArchimedeanFiniteness` uses unchanged Mathlib
 `NumberField.Embeddings.finite_of_norm_le` and finite-projective coordinate
 embeddings to prove finiteness of bounded actual integral sections.
@@ -621,6 +626,13 @@ This is not a proof of rational-point detection or invariant base change.
   pin `2a0d5c6`; all254 transitive owner probes are foundational-only.
   Independent source review checked raw upstream hashes and all consumer
   bridges. Field descent and contraction nonvanishing remain open.
+
+`Tensor.HomDual` and `Geometry.HomTensor` are original local composition and
+consumer proofs. They use unchanged pinned Mathlib `Module.evalEquiv`,
+`dualTensorHomEquiv`, `TensorProduct.dualDistribEquiv` and the previously
+attributed finite-projective PiTensor duality, then connect to the actual
+polynomial quotient and canonical tensor pairing. No copied code, freeness
+hypothesis or new arithmetic representation is introduced.
 
 ## Verification
 

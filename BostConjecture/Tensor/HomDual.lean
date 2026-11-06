@@ -61,17 +61,42 @@ theorem homDualTensorEquiv_tprod (v : ι → V) (ℓ : ι → Dual R W) :
       tprod R (fun i => homDualEquiv R V W (v i ⊗ₜ[R] ℓ i)) := by
   simp [homDualTensorEquiv]
 
+/-- Independent source and target maps act through the actual Hom pullback. -/
+theorem homDualTensorEquiv_map (h : V →ₗ[R] V) (g : W →ₗ[R] W)
+    (v : ⨂[R] (_ : ι), V) (ℓ : ⨂[R] (_ : ι), Dual R W) :
+    homDualTensorEquiv R V W
+      (PiTensorProduct.map (fun _ => h) v ⊗ₜ[R]
+        PiTensorProduct.map (fun _ => g.dualMap) ℓ) =
+      PiTensorProduct.map (fun _ => ((g.compRight R).comp (h.lcomp R W)).dualMap)
+        (homDualTensorEquiv R V W (v ⊗ₜ[R] ℓ)) := by
+  induction v using PiTensorProduct.induction_on with
+  | smul_tprod r v =>
+    induction ℓ using PiTensorProduct.induction_on with
+    | smul_tprod s ℓ =>
+      simp only [map_smul, TensorProduct.smul_tmul, TensorProduct.tmul_smul,
+        map_tprod, homDualTensorEquiv_tprod]
+      congr 2
+      congr 1
+      funext i
+      apply LinearMap.ext
+      intro A
+      simp
+    | add x y hx hy => simp only [map_add, TensorProduct.tmul_add, hx, hy]
+  | add x y hx hy => simp only [map_add, TensorProduct.add_tmul, hx, hy]
+
 /-- Evaluation of the Hom-dual tensor is the already constructed pairing. -/
 theorem homDualTensorEquiv_evaluation (A : V →ₗ[R] W)
     (v : ⨂[R] (_ : ι), V) (ℓ : ⨂[R] (_ : ι), Dual R W) :
-    PiTensorProduct.dualDistrib (R := R) (s := fun _ : ι => V →ₗ[R] W)
+    PiTensorProduct.dualDistrib (R := R) (M := fun _ : ι => V →ₗ[R] W)
       (homDualTensorEquiv R V W (v ⊗ₜ[R] ℓ)) (tprod R fun _ => A) =
         tensorPowerPairing A v ℓ := by
   induction v using PiTensorProduct.induction_on with
   | smul_tprod r v =>
     induction ℓ using PiTensorProduct.induction_on with
     | smul_tprod s ℓ =>
-      simp [finprod_eq_prod_of_fintype, TensorProduct.smul_tmul', TensorProduct.tmul_smul]
+      simp only [TensorProduct.smul_tmul, TensorProduct.tmul_smul, map_smul,
+        LinearMap.smul_apply, homDualTensorEquiv_tprod, tensorPowerPairing_tprod_tprod]
+      simp [mul_left_comm]
     | add x y hx hy => simp only [TensorProduct.tmul_add, map_add, LinearMap.add_apply, hx, hy]
   | add x y hx hy => simp only [TensorProduct.add_tmul, map_add, LinearMap.add_apply, hx, hy]
 
