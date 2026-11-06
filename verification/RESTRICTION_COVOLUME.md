@@ -49,7 +49,8 @@ GEOM integrated `Arithmetic.RestrictionCovolume.Main` in the shared root,
 whose serialized configured build passed **9354 jobs without warnings at
 2026-11-06 03:04:06 UTC**, fingerprint `975bdb23135a0d4a`, root blob
 `c234f9e6ab31c82d4de652bca29437e8e6ef514c`. Shared provenance and results
-are recorded in `CONTRIBUTIONS.md` and `verification/RESULTS.md`. The parent
+are committed at `ec99c23` in `CONTRIBUTIONS.md` and
+`verification/RESULTS.md`. The parent
 reported independent read-only acceptance of this exact handoff, its 63
 probes and the shared root in I-0102 at 03:05:57 UTC. Arithmetic compactness
 and manuscript Theorem 1.1 remain downstream work; this result discharges
@@ -59,6 +60,10 @@ The persistent post-relocation LSP buffer reported stale imported
 declarations; the successful serialized rebuild and subsequent axiom audit
 checked the current files. The temporary-directory cleanup dry run found
 no stale candidates and protected all four live runs.
+The final read-only hygiene review confirmed that the task and roadmap are
+done, all COVOLUME-owned paths are committed, and no cleanup blocker remains.
+Untracked files in other active lanes and pre-existing workspace-root
+support/reference files are outside this task and were left untouched.
 
 ## Constructed real space and lattice
 
