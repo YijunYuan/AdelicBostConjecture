@@ -1,6 +1,6 @@
 # Parallel Horizon scheduling
 
-## Live checkpoint at 2026-11-06 05:58 UTC
+## Live checkpoint at 2026-11-06 06:05 UTC
 
 The user requests **four continuing Horizon proof lanes until the entire main
 theorem and its used dependencies are complete**, with no budget cap. The parent
@@ -132,6 +132,27 @@ covolume asymptotic `e2e7039`/`8d57641`; CLOSURE `0007` exited 01:16:41,
 proof `53f1119`, root `d29f2d3`, evidence `f7ffd4f`, 40 probes. Do not resume.
 
 ## Resource and runtime checkpoint
+
+**Final Lean acceptance at 06:05:** the actual main theorem and finite-family
+consequences are proved at **dd5c6b6**. The fresh root passed **9,413 jobs**
+without Lean warnings at 06:02:11; the final audit passed at 06:03:07 with all
+**60 actual outputs** using only `propext`, `Classical.choice`, and `Quot.sound`.
+This includes `IsSemistable.tensor`, `hnTensorGrade_isSemistable`,
+`maxSlope_tensor_le`, `maxSlope_tensor`, `maxSlope_piTensor`, and
+`isSemistable_piTensor`. Independent integration review checked all **352**
+reachable local source files against the committed tree; none depends on an
+untracked draft. Root blob: `8878f1ce6ea8f15ceca334713ff837b6b0723fef`.
+Independent mathematical/source reviews accept both final producer and consumer
+routes, arbitrary number fields, nonfree finite projectives and actual metrics.
+
+The localized MAIN heartbeat issue below is resolved. **I-0141 is archived**:
+its fresh-root and transitive-probe conditions are fulfilled, and the shared
+binary instance module returns to stable ownership. No mathematical producer
+remains open. MAIN owns the remaining blueprint attachments/status and graph,
+README (explicitly added to shared-doc scope), OPEN_PROOFS, evidence and roadmap
+reconciliation; each run owns its task report and normal exit. Both foreground
+runs are still monitored until closure. This is proof acceptance, not a claim
+that the final documentation/lifecycle pass has already completed.
 
 The long-interval checkpoint at 05:58 accepts final TENSOR source **b3236e1**
 (blob `267560cd0ecbf2be4dbc3e6c3dc79dc4f5a7ba5d`) and bridge **aae85ac**
