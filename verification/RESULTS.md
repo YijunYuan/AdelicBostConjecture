@@ -1,3 +1,22 @@
+## Plucker-power nonvanishing sequence and polynomial averaging
+
+The actual canonical pairing now has a proved nonzero sequence over the
+original coefficient ring, given an actual positive-degree Plucker invariant
+after algebraically closed scalar extension. `PluckerNonvanishing` constructs
+the common positive degree, exponents and rectangular tableaux. Independent
+honesty review accepted the exact source-facing statements and consumer chain.
+The **9,320-job root** passed01:29:03 UTC; all **284 geometry axiom probes**
+passed01:29:08 UTC, using only `propext`, `Classical.choice`, `Quot.sound`.
+Exact source blobs, repaired failures and logs are in GEOMETRY.md.
+
+The latest configured explicit-root build adds BALANCED's checked
+`PolynomialAverage` (`6db192a`,185 foundational-only owner probes):
+**9,321 jobs warning-free at2026-11-06 01:31:01 UTC**, root blob
+`dfd710441a44451a4d31b9abbd1a6f383707b6e5`. No unhanded draft is certified.
+Invariant existence for the concrete Plucker action, its binary connection
+to the geometry sequence, and actual coaction base change remain open.
+BOST-GEOM, Lemma7.2 and Theorem1.1 remain incomplete.
+
 ## Original-ring canonical nonvanishing by scalar extension
 
 The configured explicit-root build passed **9,319 jobs warning-free at

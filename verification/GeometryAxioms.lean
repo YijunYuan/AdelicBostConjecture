@@ -3,6 +3,7 @@ import BostConjecture.Geometry.HomInvariants
 import BostConjecture.Geometry.DualInvariants
 import BostConjecture.Geometry.Nonvanishing
 import BostConjecture.Geometry.NonvanishingBaseChange
+import BostConjecture.Geometry.PluckerNonvanishing
 import BostConjecture.Geometry.FreeEmbedding
 import BostConjecture.Geometry.DeterminantFrame
 import BostConjecture.Tensor.Evaluation
@@ -350,3 +351,6 @@ import BostConjecture.Geometry.HomTensor
 
 #print axioms BostConjecture.Geometry.canonicalPairing_ne_zero_of_scalarExtension
 #print axioms BostConjecture.Geometry.canonicalPairing_ne_zero_of_baseChange_invariant
+
+#print axioms BostConjecture.Geometry.canonicalPairing_ne_zero_of_plucker_invariant
+#print axioms BostConjecture.Geometry.exists_canonicalPairing_nonzero_sequence

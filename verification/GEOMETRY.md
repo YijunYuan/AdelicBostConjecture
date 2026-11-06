@@ -1000,3 +1000,44 @@ successful checks above. Source LSP is clear. Independent honesty review
 accepted the actual descent argument and consumer; its group and free-fiber
 wording corrections are applied. Full invariant existence and the positive
 Plucker-power sequence are subsequent obligations at this checkpoint.
+
+
+## Actual Plucker-power nonvanishing sequence
+
+`PluckerNonvanishing.lean` proves
+`canonicalPairing_ne_zero_of_plucker_invariant` by feeding actual Plucker
+pullback powers to the original-ring descent theorem. Its consumer
+`exists_canonicalPairing_nonzero_sequence` constructs
+`d0 = s * m * product(a_i)`, proves positivity and divisibility, and supplies
+positive exponents and actual reindexed row-reading tableaux for every
+positive multiple. It proves the existing original-ring canonical pairing
+is nonzero for these concrete parameters. Empty factor index sets are covered.
+This deliberately enlarges the manuscript degree; minimality is unnecessary.
+
+The scoped check passed **9,119 jobs warning-free at 01:28:05 UTC**
+(`3bae47e9a4e3ea56`). Configured root passed **9,320 jobs warning-free at
+2026-11-06 01:29:03 UTC**, blob
+`4914b5ec1e5b7c87b1d3f150f640ec46f576f67e`. Source blob:
+`79c6e47dc0126f826424cff5ff4377a7cc222e22`. All **284 transitive geometry
+probes** passed01:29:08 UTC, only standard foundational axioms. Independent
+honesty review inspected the source, manuscript page0010, blueprint and
+exact logs, accepting substantive producer use and the empty case. Only
+these two precise nodes and the previously reviewed descent node are checked.
+Logs: session0016 `plucker-sequence-final.log`, `plucker-sequence-root.log`,
+`plucker-sequence-axioms.log`. The initial `plucker-sequence.log` check failed
+on two incorrectly named Nat positivity lemmas; both are repaired. Guarded
+source LSP and the final expanded axiom-file LSP are clear.
+
+The next root adds the owner-audited PolynomialAverage delivery `6db192a`:
+**9,321 jobs warning-free at01:31:01 UTC**, root blob
+`dfd710441a44451a4d31b9abbd1a6f383707b6e5` (`polynomial-average-root.log`).
+Its delivered185-probe evidence remains owner-scoped. No task-wide completion
+follows: actual coaction scalar-extension compatibility is deferred under
+I-0079; the binary BALANCED invariant/origin-exclusion connection and the
+geometric slope consumer remain separate. The latter is outside BOST-GEOM.
+
+Health checkpoint: no stale scratch candidates. Reviewed active-count and
+unattached-helper warnings remain intentional. I-0084 explains costly global
+Horizon search refreshes; guarded local/semantic lookup is used between edits.
+I-0085 prepares a restriction-covolume successor; its shared include awaits
+parent activation, while its proof remains unproved.

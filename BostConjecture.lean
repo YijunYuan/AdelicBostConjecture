@@ -45,6 +45,7 @@ public import BostConjecture.InvariantTheory.HomogeneousComponents
 public import BostConjecture.InvariantTheory.CompactAverage
 public import BostConjecture.InvariantTheory.UnitaryDensity
 public import BostConjecture.InvariantTheory.SpecialUnitaryDensity
+public import BostConjecture.InvariantTheory.PolynomialAverage
 public import BostConjecture.InvariantTheory.OrbitImage
 public import BostConjecture.InvariantTheory.ComplexClosure.Coordinates
 public import BostConjecture.InvariantTheory.ComplexClosure.Roots
@@ -74,6 +75,7 @@ public import BostConjecture.Geometry.HomInvariants
 public import BostConjecture.Geometry.DualInvariants
 public import BostConjecture.Geometry.Nonvanishing
 public import BostConjecture.Geometry.NonvanishingBaseChange
+public import BostConjecture.Geometry.PluckerNonvanishing
 public import BostConjecture.Tensor.Evaluation
 public import BostConjecture.Tensor.EvaluationBaseChange
 public import BostConjecture.Tensor.DualRegroupBaseChange

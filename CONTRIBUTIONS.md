@@ -810,3 +810,17 @@ the actual determinant-normalization coordinate retraction. These are
 original compositions, with no further copied external code. The delivered
 181-probe audit and positive-dimensional scope are recorded in BALANCED.md;
 actual invariant-polynomial existence is still open.
+
+
+`Geometry/NonvanishingBaseChange.lean` and `PluckerNonvanishing.lean` are
+original compositions of the previously attributed projective tensor/exterior
+scalar-extension equivalences, the checked Plucker polynomial pullback and
+the actual canonical pairing. The positive sequence reuses the unchanged
+accepted `Specht.rectangleTableau` and standard natural-number divisibility;
+no external code, core representation or mathematical axiom is added.
+`InvariantTheory/PolynomialAverage.lean` (`6db192a`) imports unchanged
+Mathlib `RingTheory/Finiteness/Lattice.lean` and
+`Algebra/MvPolynomial/Funext.lean` at the pinned revision/license, and
+substantively consumes the already attributed compact Haar integration
+producer. Its intrinsic bounded-degree continuity and integral polynomial
+consumer are detailed in BALANCED.md. No source is copied.

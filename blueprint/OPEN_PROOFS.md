@@ -122,9 +122,13 @@ with nonzero tensor pairing (`HomInvariants.lean`), and the source factor
 is restricted to the actual rectangular lattice over algebraically closed
 characteristic-zero fields. `DualInvariants.lean`, `DualSpecialLinear.lean` and
 `Nonvanishing.lean` now also restrict every dual factor and prove the actual
-canonical pairing nonzero from a nonzero invariant Hom polynomial. Descent
-to the original coefficient ring and the full geometric-semistability
-nonvanishing sequence remain requirements of the route.
+canonical pairing nonzero from a nonzero invariant Hom polynomial.
+`NonvanishingBaseChange.lean` descends this nonvanishing to the original ring;
+`PluckerNonvanishing.lean` produces an actual nonzero sequence in every
+positive multiple of one common degree from a positive-degree Plucker invariant.
+Connecting BALANCED's binary origin-exclusion/invariant criterion to this
+finite-family tensor formulation, and actual invariant coaction base change,
+remain requirements of the route.
 
 All cited manuscript page anchors resolve to registered vision transcriptions
 that were read before attachment. The shifted-coordinate tableau count has

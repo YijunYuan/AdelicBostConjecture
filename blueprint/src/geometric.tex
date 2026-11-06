@@ -1810,7 +1810,8 @@ previous nonzero scalar.
 \begin{lemma}[Nonvanishing descends from a scalar extension with free fibers]
 \label{lem:canonical-pairing-nonzero-descent}
 \uses{lem:canonical-pairing-nonzero-algclosed,lem:canonical-pairing-base-change}
-\notready
+\lean{BostConjecture.Geometry.canonicalPairing_ne_zero_of_scalarExtension,BostConjecture.Geometry.canonicalPairing_ne_zero_of_baseChange_invariant}
+\leanok
 Let $R\to F$ be an algebra to an algebraically closed characteristic-zero
 field. Let $V,E_i$ be finite projective $R$-modules of constant positive
 ranks $s,a_i$, and choose bases of $F\otimes_R V$ and
@@ -1839,7 +1840,8 @@ the assertion; faithfulness of the algebra is unnecessary in this direction.
 \begin{lemma}[Pl\"ucker powers detect the original determinant contraction]
 \label{lem:plucker-power-canonical-nonzero}
 \uses{lem:canonical-pairing-nonzero-descent,lem:plucker-polynomial-pullback}
-\source{bost-specht-manuscript:page-0010}\notready
+\source{bost-specht-manuscript:page-0010}\lean{BostConjecture.Geometry.canonicalPairing_ne_zero_of_plucker_invariant}
+\leanok
 In the preceding setting, choose a basis $b$ of $F\otimes_R V$.
 Let $p$ be a homogeneous polynomial of degree $m$ on
 $\bigwedge^s(\bigotimes_i(F\otimes_R E_i))$, fixed by the independent
@@ -1858,7 +1860,8 @@ Apply the preceding scalar-extension nonvanishing theorem to $q^r$.
 \begin{lemma}[A nonzero sequence from an actual Pl\"ucker invariant]
 \label{lem:plucker-invariant-nonzero-sequence}
 \uses{lem:plucker-power-canonical-nonzero}
-\source{bost-specht-manuscript:page-0010}\notready
+\source{bost-specht-manuscript:page-0010}\lean{BostConjecture.Geometry.exists_canonicalPairing_nonzero_sequence}
+\leanok
 Assume the preceding Pl\"ucker polynomial has positive degree $m$.
 There exists $d_0>0$, divisible by $s$ and every $a_i$, such that for
 every positive $r$ there are positive rectangular exponents and tableaux
