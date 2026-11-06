@@ -53,7 +53,7 @@ Imported, unmodified Mathlib at
 - `Mathlib/Topology/Algebra/Module/FiniteDimension.lean`:
   `continuous_equivFun_basis`, via the normed finite-dimension import.
 
-Consumer: the pending exact polynomial-image endpoint, then BALANCED's
+Consumer: the proved exact polynomial-image endpoint, then BALANCED's
 actual Plücker orbit closure comparison. No library source was copied or
 modified and no dependency or toolchain was changed.
 
