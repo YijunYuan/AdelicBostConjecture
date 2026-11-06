@@ -84,8 +84,28 @@ metric curves through strictly stable factors.
 - Strict stability is an explicit premise of the intermediate local-maximum
   theorem; its construction by minimal-rank reduction is not claimed.
 
-The line-twist, strict-factor reduction, actual submodule projection-trace
-derivative, extremal-to-balance and final composition remain open. The checked
-producers do not prove balance. COMPACTNESS's actual maximizing pair (e81b08b)
-and SPECHT-SLOPE's binary invariant geometric slope endpoint (7249a02) have now
-been handed off. Shared-root integration of new units is owned by MAIN.
+## Actual induced-degree projection-trace derivative
+
+`SubmoduleVariation.lean` proves the arithmetic derivative
+`-sum (Re trace (projection ∘ generator)) / [K:Q]` for actual compatible
+automorphism curves and fixed integral submodules. It specializes to the
+constructed exponential metrics, and actual local maximality forces the trace
+sum to vanish. The proof consumes the accepted Gram variation and intrinsic
+degree derivative, using an actual fiber isometry onto the submodule range.
+
+- Final serialized module build: 3527 jobs, no warnings.
+- Expanded serialized axiom audit: twenty-nine probes, foundational axioms only.
+- Independent source/mathematical/honesty review accepted the factor, sign,
+  real scalar instances and arbitrary nonfree, possibly nonsaturated submodules.
+- Blueprint `lem:submodule-projection-trace-derivative` feeds the explicit
+  still-open `lem:extremal-to-balance` producer.
+
+The line-twist, strict-factor reduction, tensor variation transport,
+conjugation-compatible partial-trace defects, extremal-to-balance and final
+composition remain open. The checked producers do not prove balance.
+The planned balance proof uses global compatible defect families and positivity
+of the sum of their squared Hilbert–Schmidt norms; an independent mathematical
+review accepted this adaptation, but its Lean proof remains open.
+COMPACTNESS's actual maximizing pair (e81b08b) and SPECHT-SLOPE's geometric
+endpoint (final 8c80c92, unchanged binary interface) have been handed off.
+Shared-root integration of new units is owned by MAIN.
