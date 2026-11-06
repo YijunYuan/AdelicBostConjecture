@@ -111,4 +111,26 @@ theorem maxSlope_le_of_filtration [Nontrivial (K ⊗[𝓞 K] M)]
   h.slope_submodule_le_of_filtration A hA h0 n hn c hss hc
     (h.hnSubmodule 1) h.hnSubmodule_one_rank_pos
 
+/-- The same filtration bound for actual saturated integral terms. Passing to
+the generic fiber recovers each term exactly, including its quotient metric. -/
+theorem maxSlope_le_of_integral_filtration [Nontrivial (K ⊗[𝓞 K] M)]
+    (h : HermitianMetric (K := K) M)
+    (A : ℕ → Submodule (𝓞 K) M)
+    [∀ i, Module.IsTorsionFree (𝓞 K) (M ⧸ A i)] (hA : Monotone A)
+    (h0 : A 0 = ⊥) (n : ℕ) (hn : A n = ⊤) (c : ℝ)
+    (hss : ∀ i < n, ((h.submodule (A (i + 1))).quotient
+      ((A i).comap (A (i + 1)).subtype)).IsSemistable)
+    (hc : ∀ i < n, ((h.submodule (A (i + 1))).quotient
+      ((A i).comap (A (i + 1)).subtype)).slope ≤ c) :
+    h.maxSlope ≤ c := by
+  apply h.maxSlope_le_of_filtration (fun i => (A i).baseChange K)
+    (fun _ _ hij => Submodule.baseChange_mono K (hA hij))
+    (by simp [h0]) n (by simp [hn]) c
+  · intro i hi
+    rw [integralPart_baseChange (A i), integralPart_baseChange (A (i + 1))]
+    exact hss i hi
+  · intro i hi
+    rw [integralPart_baseChange (A i), integralPart_baseChange (A (i + 1))]
+    exact hc i hi
+
 end BostConjecture.Arithmetic.HermitianMetric

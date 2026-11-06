@@ -233,12 +233,14 @@ inequalities gives the bound.
 \end{proof}
 
 \begin{lemma}[Slope bound from a metrized filtration]
-\label{lem:filtered-slope-bound}\uses{lem:degree-calculus,lem:hn-filtration}\lean{BostConjecture.Arithmetic.HermitianMetric.slope_submodule_le_of_filtration,BostConjecture.Arithmetic.HermitianMetric.maxSlope_le_of_filtration}\leanok
+\label{lem:filtered-slope-bound}\uses{lem:degree-calculus,lem:hn-filtration}\lean{BostConjecture.Arithmetic.HermitianMetric.slope_submodule_le_of_filtration,BostConjecture.Arithmetic.HermitianMetric.maxSlope_le_of_filtration,BostConjecture.Arithmetic.HermitianMetric.maxSlope_le_of_integral_filtration}\leanok
 Let $0=X_0\subseteq\cdots\subseteq X_n=A_K$ be a finite filtration
 of the generic fiber and put $A_i=A\cap X_i$. If every actual
 Hermitian quotient $A_{i+1}/A_i$ is semistable with slope at most $c$,
 then every positive-rank integral submodule of $A$ has slope at most $c$.
 In particular, if $A$ has positive rank, then $\maxslope(A)\leq c$.
+Equivalently one may start with a saturated integral filtration
+$0=A_0\subseteq\cdots\subseteq A_n=A$ and its actual quotient metrics.
 \end{lemma}
 \begin{proof}
 Write $d(Y)=\degn(A\cap Y)$ for generic subspaces $Y$.
@@ -261,6 +263,9 @@ For an integral submodule $B$, its saturation is $A\cap B_K$;
 saturation preserves rank and increases degree. Division by the
 positive rank of $B$ proves the claimed slope bound. Applying it to
 the first HN term proves the maximal-slope bound.
+For a saturated integral filtration, put $X_i=(A_i)_K$.
+Saturation gives $A\cap X_i=A_i$, so every induced quotient metric
+in the generic formulation is exactly the original integral quotient metric.
 \end{proof}
 
 \begin{theorem}[Maximal-slope identity]
@@ -317,6 +322,22 @@ $\mu(P)=\maxslope(E)$ this proves the inequality. For an isomorphism,
 apply it also to the inverse, whose fiber map is again an isometry.
 \end{proof}
 
+\begin{lemma}[The empty tensor unit]
+\label{lem:max-slope-tensor-unit}
+\uses{lem:hn-filtration,lem:degree-calculus}
+\source{bost-specht-manuscript:page-0013}
+\lean{BostConjecture.Arithmetic.HermitianMetric.maxSlope_piTensor_empty}\leanok
+The Hilbert tensor product of an empty family has maximal slope zero.
+\end{lemma}
+\begin{proof}
+The empty tensor is the unit line with its unit metric, so its rank is one
+and its degree is zero. Every nonzero generic subspace of a one-dimensional
+space is the whole space. Thus every positive-rank integral submodule
+saturates to the unit line. Saturation preserves rank and increases degree,
+so each such submodule has slope at most zero. The unit line itself has
+slope zero, proving that the maximal slope is zero.
+\end{proof}
+
 \begin{lemma}[Unconditional finite-family lower bound]
 \label{lem:max-slope-finite-lower}
 \uses{lem:max-slope-tensor-lower,lem:max-slope-isometry,lem:degree-calculus}
@@ -338,7 +359,7 @@ also an integral isometry, so the result is independent of its enumeration.
 \end{proof}
 
 \begin{corollary}[Finite families]
-\label{cor:bost-finite-family}\uses{thm:bost-main,lem:degree-calculus,lem:max-slope-isometry,lem:max-slope-finite-lower}
+\label{cor:bost-finite-family}\uses{thm:bost-main,lem:degree-calculus,lem:max-slope-isometry,lem:max-slope-finite-lower,lem:max-slope-tensor-unit}
 \source{bost-specht-manuscript:page-0001,bost-specht-manuscript:page-0013}
 \notready
 For every finite nonempty family of positive-rank Hermitian
@@ -350,10 +371,12 @@ $\Ocal_K$-bundles $(E_j)_{j=1}^N$,
 If every factor is semistable, so is the tensor product.
 \end{corollary}
 \begin{proof}
-The lower bound is the preceding lemma. For the upper bound induct on
-$N$. The one-factor identity is tautological; the inductive step applies
-the two-factor theorem to the tensor product of the first $N-1$ factors
-and the last one. Hilbert tensor associativity is an isometry, so
+The lower bound is the finite-family lower-bound lemma. For the upper
+bound, include the empty family and induct on $N$, starting from the
+unit identity. The inductive step applies the two-factor theorem to the
+tensor product of the first $N-1$ factors and the last one; the partial
+tensor has positive rank since its rank is the product of positive
+factor ranks. Hilbert tensor associativity is an isometry, so
 parenthesization does not alter slopes. For semistable
 factors the sum of their maximal slopes is the sum of their average
 slopes, which is the average slope of the tensor product. Equality of

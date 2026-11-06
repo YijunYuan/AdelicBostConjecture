@@ -29,6 +29,27 @@ instance piTensorGenericNontrivial {ι : Type} [Fintype ι] (M : ι → Type u)
   rw [Specht.piTensor_generic_finrank]
   exact Finset.prod_pos (fun i _ => Module.finrank_pos)
 
+/-- The empty Hilbert tensor product has maximal slope zero, so it supplies
+the exact base case for finite tensor induction. -/
+lemma maxSlope_piTensor_empty {ι : Type} [Fintype ι] [IsEmpty ι]
+    (M : ι → Type u) [∀ i, AddCommGroup (M i)] [∀ i, Module (𝓞 K) (M i)]
+    [∀ i, Module.Finite (𝓞 K) (M i)] [∀ i, Module.Projective (𝓞 K) (M i)]
+    [∀ i, Nontrivial (K ⊗[𝓞 K] M i)]
+    (h : ∀ i, HermitianMetric (K := K) (M i)) :
+    (piTensor h).maxSlope = 0 := by
+  have hr : Module.finrank K (K ⊗[𝓞 K] (⨂[𝓞 K] i, M i)) = 1 := by
+    simp [Specht.piTensor_generic_finrank]
+  have hs : (piTensor h).IsSemistable := by
+    apply (piTensor h).isSemistable_iff_subspaces.mpr
+    intro X hX
+    have hp : 0 < Module.finrank K X := by
+      simpa using Submodule.finrank_strictMono hX
+    have hle := Submodule.finrank_le X
+    have htop : X = ⊤ := Submodule.eq_top_of_finrank_eq (by omega)
+    rw [htop, integralPart_top, slope_submodule_top]
+  rw [(piTensor h).isSemistable_iff_maxSlope_eq.mp hs]
+  simp [slope, Specht.degree_piTensor_empty]
+
 /-- The sum of attained maximal slopes is a lower bound for the maximal slope
 of the actual finite tensor product, with no semistability assumption. -/
 theorem sum_maxSlope_le_piTensor {ι : Type} [Fintype ι] (M : ι → Type u)
