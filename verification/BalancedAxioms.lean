@@ -10,6 +10,7 @@ import BostConjecture.InvariantTheory.PluckerCoordinates
 import BostConjecture.InvariantTheory.SpecialLinearCoordinates
 import BostConjecture.InvariantTheory.Coaction
 import BostConjecture.InvariantTheory.InvariantDetection
+import BostConjecture.InvariantTheory.OrbitImage
 
 #print axioms BostConjecture.Balanced.trace_starProjection_comp
 #print axioms BostConjecture.Balanced.trace_starProjection_comp_eq_sum
@@ -157,3 +158,6 @@ import BostConjecture.InvariantTheory.InvariantDetection
 #print axioms BostConjecture.InvariantTheory.mem_homogeneousInvariants_iff_pluckerPolynomialCoaction_eq
 #print axioms BostConjecture.InvariantTheory.pluckerInvariantConstraint
 #print axioms BostConjecture.InvariantTheory.ker_pluckerInvariantConstraint
+
+#print axioms BostConjecture.InvariantTheory.mem_specialLinearPair_zeroLocus_iff
+#print axioms BostConjecture.InvariantTheory.pluckerOrbit_polynomial_image

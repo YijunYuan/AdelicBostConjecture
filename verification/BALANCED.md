@@ -518,8 +518,26 @@ BALANCED retains the canonical polynomial, semistability and Plücker action
 definitions and their source-facing assembly. The concrete consumer takes
 `σ = (ι × ι) ⊕ (κ × κ)`, `I = specialLinearPairIdeal ℂ ι κ`,
 `b = (bU.tensorProduct bW).exteriorPower s`, and
-`q = pluckerOrbitPolynomial bU bW s z`. The actual image/orbit bridge is being checked in `InvariantTheory.OrbitImage`; the returned closure
+`q = pluckerOrbitPolynomial bU bW s z`. The checked `InvariantTheory.OrbitImage.pluckerOrbit_polynomial_image`
+identifies this image with the actual orbit; the returned closure
 equality then turns `IsBalanced.zero_not_mem_closure_plucker_orbit` into
 the existing `IsGeometricallySemistable` predicate. Invariant extraction
 remains BALANCED-owned and is still required for the source's Plücker-line
 conclusion and GEOM consumer.
+
+
+## Actual orbit-image checkpoint
+
+`InvariantTheory.OrbitImage` at `84a679f` proves both the complete zero-locus
+parametrization by intrinsic special-linear pairs and the full equality
+`pluckerOrbit_polynomial_image`. This holds over every field, for arbitrary
+exterior vectors, including empty factor bases, degree zero and over-rank
+exterior powers. It is the actual-image input to CLOSURE's endpoint above.
+The explicit-root serialized module check passed **2,415 jobs warning-free**
+in 16.6s; the expanded `BalancedAxioms.lean` passed **139 transitive probes**
+in 2.3s, all with only the same foundational axioms. Guarded LSP is clear.
+Independent honesty/source/mathematical review found no proxy, missing image
+direction, hidden criterion or defect. The Nullstellensatz module is imported
+for its canonical `MvPolynomial.zeroLocus`; no Nullstellensatz theorem is used
+by this bridge. Initial coordinate coercions were repaired before the accepted
+check. This remains a proved producer, not a proof of Lemma 7.2.
