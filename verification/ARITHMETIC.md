@@ -1,5 +1,38 @@
 # Arithmetic verification
 
+## Completed foundation boundary (2026-11-06)
+
+The enumerated BOST-ARITH objective is verified: intrinsic conjugation-compatible
+Hermitian metrics on arbitrary finite projective modules over rings of integers;
+section-independent normalized line and determinant degree; dual, tensor and
+exact-sequence identities; contraction, saturation and supermodularity; actual
+HN quotient semistability, attained maximal slope, uniqueness and isometries;
+and bounded-degree finiteness for saturated submodules across all ranks.
+The independent-action tensor/dual semistability consumer is also checked.
+
+- Final arithmetic producer: `DegreeFiniteness`, commit `05360d4`, **3621 jobs**,
+  fingerprint `6ef065c3fa0ed987`, passed **2026-11-06 01:30:09 UTC**.
+- Final transitive audit: `verification/ArithmeticAxioms.lean`, **366 probes**,
+  fingerprint `590174f2cda53d26`, passed **01:30:39 UTC**. Only `propext`,
+  `Classical.choice` and `Quot.sound`; no additional axioms or `sorryAx`.
+- Configured root integration: `cf39176`, **9329 jobs warning-free**, fingerprint
+  `975bdb23135a0d4a`, passed **01:44:09 UTC**; root blob
+  `56d13ab1ed56f846890255e0c4e9e713d2a272bf`. The five final arithmetic
+  producers and audit file are unchanged from `05360d4`.
+
+Honesty and ground reviews accepted the actual producer route and task coverage;
+the final umbrella statements now match the implemented complex-fiber data and
+proved calculus. The synchronized finiteness node has its actual attachments,
+dependencies and checked status. Existing unattached-helper coverage warnings
+are documented graph coverage limits, not missing assumptions. Scratch cleanup
+found no stale candidates. Earlier development failures and their repairs are
+retained in the evidence history below; no arithmetic failure remains open.
+
+The general restriction-of-scalars trace covolume identity is a separate,
+**unproved** COVOLUME obligation under I-0087, with the exact handoff below.
+This completion does not establish manuscript Theorem 1.1 or the remaining
+geometric/main-theorem assembly. Dependency versions and toolchain are unchanged.
+
 ## Intrinsic Hermitian line degree
 
 `BostConjecture.Arithmetic.HermitianLine` now constructs normalized degree on
@@ -1036,8 +1069,9 @@ fibers; unused strict-stability terminology was removed from this attached
 node. Normalized still means exactly slope=0. The calculus node attaches
 exact/tensor/dual/contraction/saturation/scaling producers; line twisting is
 the rank-one tensor specialization. Honesty review approved this reconciliation.
-Final root integration of the finiteness endpoint is pending. The final
-blueprint marker reconciliation was captured by the successor baseline
+Final root integration of the finiteness endpoint passed at `cf39176`
+(9329 jobs, 01:44:09 UTC), as recorded above. The final blueprint marker
+reconciliation was captured by the successor baseline
 b3a4bcd; its evidence is the independently checked arithmetic producers
 and scoped reviews recorded here, not that whole-workspace snapshot.
 
