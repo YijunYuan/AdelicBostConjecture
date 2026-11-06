@@ -89,6 +89,22 @@ imaginary part of the pairing with the imaginary component, which equals
 its squared norm. The module check passed 3417 jobs at 02:32:54 UTC,
 fingerprint `299f8d2f9c795120`. This supplies the domain bridge for the
 componentwise orthogonal quotient lift.
+The 48-probe audit passed at 02:34:58 UTC. These files were captured by
+GEOM lifecycle snapshot `05276d0` before the explicit owned-path commit;
+they were authored entirely by COVOLUME/run0008.
+
+`Quotient.lean` constructs the actual trace maps and orthogonal right
+inverse, proves its pairing and orthogonality, identifies the actual
+kernel, and gives the resulting orthogonal splitting equivalence. Its
+final module check passed 3420 jobs at 02:40:43 UTC (`5e5975d98e63773b`);
+the expanded 58-probe audit passed at 02:40:50 UTC, foundational-only.
+It is committed at `dc8a4f9`.
+
+`Exact.lean` proves `traceCovolume_exact` using an integral splitting,
+integer bases, their actual real trace extensions and the orthogonal
+splitting. The basis-coordinate matrix has identity diagonal blocks;
+the orthogonal Gram matrix has the two actual trace Gram blocks.
+The module check passed 3614 jobs at 02:44:29 UTC (`9bcd316d640812a0`).
 
 Remaining: pass to higher-rank nonfree projectives. The stable APIs include exact
 degree additivity and saturated rank-one reduction. They permit induction
