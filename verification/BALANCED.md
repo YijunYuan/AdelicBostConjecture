@@ -768,3 +768,20 @@ and `Geometry/NonvanishingBaseChange.lean`) or the pre-existing workspace
 root inputs (`.gitignore`, `.mcp.json`, `AGENTS.md`, `CLAUDE.md`, `Bost.pdf`,
 `bost_specht_manuscript.pdf`). They are deliberately excluded from this
 task's commits under I-0074. No unread conversation remained at this check.
+
+## Bounded polynomial Haar averaging
+
+`PolynomialAverage.lean` constructs the intrinsic bounded-degree subspace,
+proves its pullback continuity using the injective evaluation embedding,
+and proves `exists_compactInvariant_polynomial` by actual Haar integration.
+The explicit-root serialized build passed **3,098 jobs, warning-free**;
+the updated axiom file passed **185 probes**, foundational axioms only.
+Independent honesty/source review accepted this producer and independently
+verified the endpoint axioms. The special-unitary Plücker instantiation and
+extension to full special-linear invariance remain open at this checkpoint.
+
+Root integration of the previous `7f56300`/`6da0e3e` producers is confirmed
+at `5f4a2ef`: **9,318 jobs warning-free**, root blob
+`0042d749fe363f603e838610e6805ca895c3771f`. I-0080 is resolved.
+The active-item warning remains intentional (three proof branches and their
+ancestors); read-only health review found no stale scratch candidates.

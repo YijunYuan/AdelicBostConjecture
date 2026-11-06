@@ -1039,9 +1039,37 @@ finite-dimensional integration argument in the cited Reynolds theorem;
 no density or invariant-ring generation result is used here.
 \end{proof}
 
+\begin{lemma}[Continuity and averaging in a bounded polynomial space]
+\label{lem:balanced-bounded-polynomial-average}
+\lean{BostConjecture.InvariantTheory.polynomialsOfDegreeLE,BostConjecture.InvariantTheory.exists_mem_polynomialsOfDegreeLE,BostConjecture.InvariantTheory.polynomialEval_ext,BostConjecture.InvariantTheory.continuous_polynomialSubspace_iff,BostConjecture.InvariantTheory.continuous_degreeLEPolynomialRepresentation,BostConjecture.InvariantTheory.exists_compactInvariant_polynomial}\leanok
+\uses{lem:balanced-intrinsic-polynomials,lem:balanced-homogeneous-extraction,lem:balanced-compact-vector-average}
+\source{maithani-reynolds:thm:reynolds-for-lie-group}
+Let $H$ be a compact topological group with a continuous linear representation
+on a finite-dimensional complex space $X$. Put
+$P_{\leq N}(X)=\sum_{d=0}^N P_d(X)$. This space is finite-dimensional,
+stable under inverse pullback, and its orbit maps are continuous.
+Every polynomial belongs to some $P_{\leq N}(X)$. Integrating its orbit
+against probability Haar measure therefore produces an $H$-fixed polynomial
+$r$ satisfying $r(y)=\int_H q(h^{-1}y)\,dh$ at every $y$.
+\end{lemma}
+\begin{proof}
+Finite dimensionality and stability follow by taking a finite sum of the
+homogeneous spaces. The homogeneous decomposition places every polynomial
+in such a sum. Over the infinite field $\mathbb C$, evaluation at all
+points is an injective linear map from $P_{\leq N}(X)$ into
+$\mathbb C^X$: in coordinates this is the fact that a polynomial vanishing
+everywhere is zero. An injective linear map from a finite-dimensional
+complex space into a Hausdorff topological vector space is a topological
+embedding. Thus continuity can be checked after every evaluation.
+For a fixed $y$, the orbit evaluation is $q(h^{-1}y)$, a continuous
+function, because linear forms are continuous and polynomials are sums
+of products of linear forms. The finite-dimensional averaging lemma now
+makes the integral fixed, and every evaluation commutes with that integral.
+\end{proof}
+
 \begin{lemma}[Finite-degree compact averaging]
 \label{lem:balanced-polynomial-average}
-\uses{lem:balanced-unitary-density,lem:balanced-compact-vector-average}
+\uses{lem:balanced-unitary-density,lem:balanced-bounded-polynomial-average}
 \source{maithani-reynolds:thm:reynolds-for-lie-group}\notready
 Let $G=\SL(U)\times\SL(W)$ act algebraically and linearly on a
 finite-dimensional complex vector space $X$,
@@ -1058,11 +1086,8 @@ A zero-dimensional factor may be replaced by a one-dimensional factor:
 both its special-linear and special-unitary groups are trivial. We may
 therefore use the positive-dimensional matrix density statement after
 choosing orthonormal bases.
-The action preserves the finite-dimensional space of polynomials of
-degree at most $\deg q$. In a monomial basis, its coefficient functions
-on $K$ are continuous. Compactness makes them integrable, so their
-integrals define a polynomial; evaluation, a linear map on this finite
-space, commutes with integration. This proves the displayed formula.
+The bounded polynomial averaging lemma gives a polynomial with the
+displayed evaluation formula.
 The same construction stays in one homogeneous degree when $q$ does.
 For $h\in K$, substitute $k=h\ell$ and use left invariance of Haar
 measure to obtain $Rq(hy)=Rq(y)$. For fixed $y$, the regular function
