@@ -761,3 +761,10 @@ The final graph refresh had no missing references and 940 unattached
 helpers across concurrent project work; this is the same intentional
 coverage warning. All owned source and verification paths match committed
 HEAD. No rejected proof draft or background check is left running.
+
+Finalization retry: ledger status contains no uncommitted BALANCED-owned
+source or evidence. Remaining changes belong to GEOM (`BostConjecture.lean`
+and `Geometry/NonvanishingBaseChange.lean`) or the pre-existing workspace
+root inputs (`.gitignore`, `.mcp.json`, `AGENTS.md`, `CLAUDE.md`, `Bost.pdf`,
+`bost_specht_manuscript.pdf`). They are deliberately excluded from this
+task's commits under I-0074. No unread conversation remained at this check.
