@@ -337,9 +337,10 @@ and commutes with changes of frame, proving the isometric action.
 
 \begin{lemma}[Injectivity of nonzero canonical pairings]
 \label{lem:canonical-pairing-injective}
+\lean{BostConjecture.Slope.Geometric.canonicalPairing_injective}
+\leanok
 \uses{lem:canonical-contraction,lem:determinant-specht-representation}
-\source{bost-specht-manuscript:page-0009}
-\notready
+\source{bost-specht-manuscript:page-0010}
 Let $V,E_j$ be finite projective $\Ocal_K$-modules with the constant
 ranks required by the canonical rectangular determinant constructions.
 Every nonzero canonical pairing
@@ -357,6 +358,36 @@ representation tensored with the one-dimensional determinant line.
 Schur's kernel argument therefore makes the complex map injective.
 Finally, the integral source injects into this complex fiber, so
 injectivity descends to the original map over $\Ocal_K$.
+\end{proof}
+
+\begin{lemma}[Intrinsic contraction metric]
+\label{lem:canonical-pairing-intrinsic-contraction}
+\uses{lem:canonical-contraction,lem:determinant-specht-fiber-metric}
+\source{bost-specht-manuscript:page-0010}
+\notready
+Give $V$ the metric induced by its injection into the Hilbert tensor
+product of the Hermitian $E_j$. Give $B_d$ the canonical
+determinant--Specht metric, and give $D_d^\vee$ the Hermitian dual
+of the finite tensor product of the canonical determinant--Specht
+metrics of the $E_j^\vee$. Then the actual canonical pairing
+$\Psi_d:B_d\longrightarrow D_d^\vee$ has operator norm at most one
+at every archimedean embedding.
+\end{lemma}
+\begin{proof}
+The canonical dual base-change map identifies the complex fiber of
+$E_j^\vee$ isometrically with the operator dual of $(E_j)_\sigma$.
+The scalar-extended projective determinant map, followed by the tensor
+of these dual base-change maps, is its free determinant formula.
+In an orthonormal frame of the operator dual that formula is isometric
+for the prescribed determinant and lattice forms. Consequently these
+forms, pulled back by the canonical dual determinant transport, are
+exactly the intrinsic canonical determinant--Specht forms of
+$E_j^\vee$. Tensoring the isometries gives equality of the intrinsic
+metric on $D_d$ and the prescribed fiber metric in the canonical
+contraction estimate. Its operator dual is therefore exactly the
+intrinsic metric on $D_d^\vee$. The source metric agrees by
+Lemma~\ref{lem:determinant-specht-fiber-metric}. Applying the canonical
+contraction estimate with these identifications proves the claim.
 \end{proof}
 
 \begin{theorem}[Geometric slope inequality]

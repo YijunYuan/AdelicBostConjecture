@@ -71,9 +71,15 @@ Independent honesty/source review accepted the normalization and tableau
 independence. A rewrite elaboration timeout was repaired by explicit theorem
 composition without increasing heartbeat limits.
 
-The geometric slope inequality remains open; the next consumer is injectivity
-of the actual nonzero canonical pairing, followed by intrinsic image-slope
-comparison and the verified asymptotic limit.
+`Slope/Geometric/PairingInjective.lean` proves injectivity of the actual nonzero
+canonical pairing, using its contragredient equivariance and the concrete
+complex irreducibility theorem. Kernel build passed (9181 jobs, 127.7 seconds);
+all twenty-nine transitive probes passed (38.8 seconds), foundational-only.
+Independent honesty/source review accepted the diagonal action and descent.
+
+The geometric slope inequality remains open; the next consumer is intrinsic
+contraction-metric identification, image-slope comparison and the verified
+asymptotic limit.
 Existing ARITH, SPECHT, and GEOM producers are unchanged.
 
 Tooling: the first check invocation used unsupported `-p` and did not run Lean;
