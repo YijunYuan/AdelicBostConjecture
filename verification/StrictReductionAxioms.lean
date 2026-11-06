@@ -1,0 +1,14 @@
+import BostConjecture.Main.StrictReduction.MaximizingCounterexample
+
+/-! Transitive axiom audit of the actual strict-reduction producers. -/
+
+#print axioms BostConjecture.Arithmetic.HermitianMetric.isSemistable_iff_maxDegree_nonpos
+#print axioms BostConjecture.Arithmetic.HermitianMetric.maxDegree_tensor_pos_of_not_isSemistable
+#print axioms BostConjecture.Arithmetic.Compactness.exists_minimal_positive_tensorMaxDegree
+#print axioms BostConjecture.Arithmetic.Compactness.isSemistable_tensor_of_smaller_rank_sum
+#print axioms BostConjecture.Arithmetic.HermitianMetric.isSemistable_iff_of_equiv
+#print axioms BostConjecture.Arithmetic.HermitianMetric.isSemistable_tensor_of_submodule_quotient
+#print axioms BostConjecture.Arithmetic.generic_ranks_of_saturated_proper
+#print axioms BostConjecture.Arithmetic.HermitianMetric.isStable_left_of_minimal_rank_sum
+#print axioms BostConjecture.Arithmetic.HermitianMetric.isStable_factors_of_minimal_rank_sum
+#print axioms BostConjecture.Arithmetic.Compactness.exists_strict_maximizing_counterexample
