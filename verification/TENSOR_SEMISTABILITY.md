@@ -1,7 +1,34 @@
 # Tensor semistability evidence
 
-The source tensor-semistability theorem is **open**. No unconditional tensor
-semistability declaration is exported yet.
+The source tensor-semistability theorem is **kernel checked**. The discoverable
+export is `BostConjecture.Arithmetic.HermitianMetric.IsSemistable.tensor` in
+`Main/TensorSemistability/TensorSemistability.lean`. It takes actual semistability
+of both metrics and positive generic ranks, over any number field and finite
+projective modules; it concludes semistability of their actual Hilbert tensor
+metric. There is no freeness, rational-field, local-maximum, balance or geometric
+slope assumption in this theorem.
+
+Fresh serialized checks after the bounded shared instance repair `f8975ea`:
+
+- `check BostConjecture.Main.TensorSemistability.BalancedSlope`:9386 jobs,
+  no warnings; checked bridge committed `aae85ac`.
+- `check BostConjecture.Main.TensorSemistability.TensorSemistability`:9395 jobs,
+  no warnings, including rebuilt LINE and STRICT producers.
+- `check --lean verification/TensorSemistabilityAxioms.lean`:76 probes passed,
+  including both final declarations, with only `propext`, `Classical.choice`
+  and `Quot.sound`. No `sorryAx` or additional mathematical axiom occurs.
+
+The proof uses the actual strict maximizing counterexample, determinant-preserving
+compatible variations, the degree derivative and scalar partial-trace defects,
+accepted intrinsic Plücker semistability, and the actual geometric slope bound.
+Normalization uses the checked tensor-rescaling identity. The project import
+cone has no `Main.MaxSlope` dependency. Source nodes `lem:extensions-and-twists`,
+`lem:balanced-arithmetic-slope` and `thm:tensor-semistability` have faithful
+Lean attachments and completion markers. Independent source/math/honesty review
+accepted the mathematical route and bounded instance repair; final evidence
+review and MAIN shared-root/consumer integration are being completed.
+
+The records below describe earlier checkpoints and their then-open frontiers.
 
 ## Normalization and normalized extensions
 

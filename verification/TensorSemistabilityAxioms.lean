@@ -10,6 +10,7 @@ import BostConjecture.Main.TensorSemistability.ConjugateBasis
 import BostConjecture.Main.TensorSemistability.ArithmeticTensorFiber
 import BostConjecture.Main.TensorSemistability.ExtremalBalance
 import BostConjecture.Main.TensorSemistability.TensorRescale
+import BostConjecture.Main.TensorSemistability.TensorSemistability
 
 #print axioms BostConjecture.Arithmetic.HermitianMetric.isSemistable_iff_degree_nonpos
 #print axioms BostConjecture.Arithmetic.HermitianMetric.isSemistable_rescale_iff
@@ -86,3 +87,9 @@ import BostConjecture.Main.TensorSemistability.TensorRescale
 #print axioms BostConjecture.Arithmetic.HermitianMetric.fiberProjectionTrace_tensor_eq
 #print axioms BostConjecture.Arithmetic.HermitianMetric.isBalanced_of_maximizing_pair
 #print axioms BostConjecture.Arithmetic.HermitianMetric.tensor_rescale
+#print axioms BostConjecture.Arithmetic.rankAtStalk_eq_genericRank
+#print axioms BostConjecture.Arithmetic.twoFactor_baseChange_binaryTensorEquiv
+#print axioms BostConjecture.Arithmetic.HermitianMetric.slope_submodule_tensor_le_of_invariant
+#print axioms BostConjecture.Arithmetic.HermitianMetric.slope_submodule_tensor_le_of_isBalanced
+#print axioms BostConjecture.Arithmetic.HermitianMetric.isSemistable_tensor_of_degree_zero
+#print axioms BostConjecture.Arithmetic.HermitianMetric.IsSemistable.tensor
