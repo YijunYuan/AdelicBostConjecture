@@ -1,5 +1,5 @@
 import BostConjecture.Main.MaxSlope.FilteredBound
-import BostConjecture.Main.MaxSlope.TensorFlag
+import BostConjecture.Main.MaxSlope.HNGrades
 
 #print axioms BostConjecture.Arithmetic.HermitianMetric.tensor_map_pullback
 #print axioms BostConjecture.Arithmetic.HermitianMetric.slope_pullback_eq_range
@@ -31,3 +31,21 @@ import BostConjecture.Main.MaxSlope.TensorFlag
 #print axioms BostConjecture.Arithmetic.HermitianMetric.hnTensorFlag_zero
 #print axioms BostConjecture.Arithmetic.HermitianMetric.hnTensorFlag_length
 #print axioms BostConjecture.Arithmetic.HermitianMetric.hnTensorFlag_monotone
+#print axioms BostConjecture.Arithmetic.HermitianMetric.pushforward_natural_inner
+#print axioms BostConjecture.Arithmetic.HermitianMetric.pushforward_comp
+#print axioms BostConjecture.Arithmetic.HermitianMetric.tensor_pushforward_left
+#print axioms BostConjecture.Arithmetic.HermitianMetric.tensor_map_pushforward
+#print axioms BostConjecture.Arithmetic.tensorGradeProjection_surjective
+#print axioms BostConjecture.Arithmetic.tensorGradeProjection_ker
+#print axioms BostConjecture.Arithmetic.tensorGradeEquiv
+#print axioms BostConjecture.Arithmetic.tensorGradeEquiv_projection
+#print axioms BostConjecture.Arithmetic.tensorGradeInclusion_injective
+#print axioms BostConjecture.Arithmetic.ker_fiberMap_of_surjective
+#print axioms BostConjecture.Arithmetic.tensorStepLift_kernel
+#print axioms BostConjecture.Arithmetic.HermitianMetric.tensorGradeEquiv_inner
+#print axioms BostConjecture.Arithmetic.HermitianMetric.hnSubmoduleQuotientProjective
+#print axioms BostConjecture.Arithmetic.HermitianMetric.hnTensorFlag_succ
+#print axioms BostConjecture.Arithmetic.HermitianMetric.exists_hnTensorGrade_isometry
+#print axioms BostConjecture.Arithmetic.HermitianMetric.hnGrade_rank_pos
+#print axioms BostConjecture.Arithmetic.HermitianMetric.hnTensorGrade_slope
+#print axioms BostConjecture.Arithmetic.HermitianMetric.hnTensorGrade_slope_le

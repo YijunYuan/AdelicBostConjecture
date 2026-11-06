@@ -23,6 +23,14 @@ variable {M N : Type u} [AddCommGroup M] [Module (𝓞 K) M]
     [Module.Finite (𝓞 K) N] [Module.Projective (𝓞 K) N]
     [Nontrivial (K ⊗[𝓞 K] M)] [Nontrivial (K ⊗[𝓞 K] N)]
 
+omit [Module.Finite (𝓞 K) N] [Module.Projective (𝓞 K) N]
+    [Nontrivial (K ⊗[𝓞 K] N)] in
+/-- The actual saturated HN terms have projective ambient quotients. -/
+instance hnSubmoduleQuotientProjective (h : HermitianMetric (K := K) M) (i : ℕ) :
+    Module.Projective (𝓞 K) (M ⧸ h.hnSubmodule i) := by
+  unfold hnSubmodule
+  infer_instance
+
 /-- Incrementing the flattened index includes the transition at each block end. -/
 lemma hnTensorFlag_succ (h : HermitianMetric (K := K) M)
     (g : HermitianMetric (K := K) N) (k : ℕ) :
@@ -41,6 +49,7 @@ lemma hnTensorFlag_succ (h : HermitianMetric (K := K) M)
     have hz : (k + 1) % g.hnFlag.length ≠ 0 := by omega
     simp only [hnTensorFlag, Nat.succ_div_of_mod_ne_zero hz, hm']
 
+set_option maxHeartbeats 800000 in
 /-- The consecutive actual integral HN tensor grade is isometric to the tensor
 of the actual factor grades, including transitions between blocks. -/
 theorem exists_hnTensorGrade_isometry (h : HermitianMetric (K := K) M)
@@ -65,16 +74,6 @@ theorem exists_hnTensorGrade_isometry (h : HermitianMetric (K := K) M)
           ((h.hnTensorFlag g k).comap (h.hnTensorFlag g (k + 1)).subtype)).fiber σ).inner x y := by
   rw [h.hnTensorFlag_succ g k]
   simp only [hnTensorFlag, hnTensorStep]
-  let : Module.Flat (𝓞 K) (h.hnSubmodule (k / g.hnFlag.length + 1) ⧸
-      (h.hnSubmodule (k / g.hnFlag.length)).comap
-        (h.hnSubmodule (k / g.hnFlag.length + 1)).subtype) := by
-    unfold hnSubmodule
-    infer_instance
-  let : Module.Flat (𝓞 K) (g.hnSubmodule (k % g.hnFlag.length + 1) ⧸
-      (g.hnSubmodule (k % g.hnFlag.length)).comap
-        (g.hnSubmodule (k % g.hnFlag.length + 1)).subtype) := by
-    unfold hnSubmodule
-    infer_instance
   refine ⟨tensorGradeEquiv
     (h.hnSubmodule_monotone (Nat.le_succ (k / g.hnFlag.length)))
     (g.hnSubmodule (k % g.hnFlag.length))
@@ -83,5 +82,45 @@ theorem exists_hnTensorGrade_isometry (h : HermitianMetric (K := K) M)
   exact tensorGradeEquiv_inner h g
     (h.hnSubmodule_monotone (Nat.le_succ (k / g.hnFlag.length)))
     (g.hnSubmodule_monotone (Nat.le_succ (k % g.hnFlag.length))) σ x y
+
+omit [Module.Finite (𝓞 K) N] [Module.Projective (𝓞 K) N]
+    [Nontrivial (K ⊗[𝓞 K] N)] in
+/-- Every actual HN grade has positive generic rank. -/
+lemma hnGrade_rank_pos (h : HermitianMetric (K := K) M) (i : Fin h.hnFlag.length) :
+    0 < Module.finrank K (K ⊗[𝓞 K]
+      (h.hnSubmodule (i + 1) ⧸ (h.hnSubmodule i).comap
+        (h.hnSubmodule (i + 1)).subtype)) := by
+  change 0 < Module.finrank K (K ⊗[𝓞 K] (integralPart (h.hnStep i).right ⧸
+    (integralPart (h.hnStep i).left).comap (integralPart (h.hnStep i).right).subtype))
+  rw [subspaceQuotient_finrank (h.hnStep i).lt.le]
+  exact Nat.sub_pos_of_lt (Submodule.finrank_strictMono (h.hnStep i).lt)
+
+/-- The actual HN tensor grade has the sum of its two factor slopes. -/
+theorem hnTensorGrade_slope (h : HermitianMetric (K := K) M)
+    (g : HermitianMetric (K := K) N) (k : ℕ)
+    (hk : k < h.hnFlag.length * g.hnFlag.length) :
+    (((h.tensor g).submodule (h.hnTensorFlag g (k + 1))).quotient
+      ((h.hnTensorFlag g k).comap (h.hnTensorFlag g (k + 1)).subtype)).slope =
+      h.hnSlope ⟨k / g.hnFlag.length, (Nat.div_lt_iff_lt_mul g.hnFlag_length_pos).mpr hk⟩ +
+      g.hnSlope ⟨k % g.hnFlag.length, Nat.mod_lt k g.hnFlag_length_pos⟩ := by
+  obtain ⟨e, he⟩ := h.exists_hnTensorGrade_isometry g k
+  have hd := degree_eq_of_equiv _ _ e he
+  have hr := (e.baseChange (𝓞 K) K _ _).finrank_eq
+  change _ = _ + _
+  rw [slope, hd, hr]
+  exact slope_tensor _ _ (h.hnGrade_rank_pos
+    ⟨k / g.hnFlag.length, (Nat.div_lt_iff_lt_mul g.hnFlag_length_pos).mpr hk⟩)
+    (g.hnGrade_rank_pos ⟨k % g.hnFlag.length, Nat.mod_lt k g.hnFlag_length_pos⟩)
+
+/-- Every actual grade is bounded by the sum of maximal slopes, independently
+of tensor semistability. -/
+theorem hnTensorGrade_slope_le (h : HermitianMetric (K := K) M)
+    (g : HermitianMetric (K := K) N) (k : ℕ)
+    (hk : k < h.hnFlag.length * g.hnFlag.length) :
+    (((h.tensor g).submodule (h.hnTensorFlag g (k + 1))).quotient
+      ((h.hnTensorFlag g k).comap (h.hnTensorFlag g (k + 1)).subtype)).slope ≤
+      h.maxSlope + g.maxSlope := by
+  rw [h.hnTensorGrade_slope g k hk]
+  exact add_le_add (h.hnSlope_le_maxSlope _) (g.hnSlope_le_maxSlope _)
 
 end BostConjecture.Arithmetic.HermitianMetric

@@ -189,7 +189,7 @@ this image map, so it is an isometry.
 \label{lem:hn-tensor-grades}
 \uses{lem:hn-tensor-filtration,lem:tensor-refinement-grades}
 \source{bost-specht-manuscript:page-0013}
-\notready
+\lean{BostConjecture.Arithmetic.HermitianMetric.hnTensorFlag_succ,BostConjecture.Arithmetic.HermitianMetric.exists_hnTensorGrade_isometry}
 With the preceding notation, for $0\leq i<p$, $0\leq j<q$, the
 canonical quotient identification is an isometry
 \[
@@ -207,6 +207,29 @@ $E_{i+1}\otimes F$, equal to the first term of the next block by the
 endpoint formula. Thus the same identification applies at each block
 transition. The refinement lemma proves the integral map and its metric
 identity simultaneously, at every complex embedding.
+\end{proof}
+
+\begin{lemma}[Slopes of HN tensor grades]
+\label{lem:hn-tensor-grade-slopes}
+\uses{lem:hn-tensor-grades,lem:hn-filtration,lem:degree-calculus}
+\source{bost-specht-manuscript:page-0013}
+\lean{BostConjecture.Arithmetic.HermitianMetric.hnGrade_rank_pos,BostConjecture.Arithmetic.HermitianMetric.hnTensorGrade_slope,BostConjecture.Arithmetic.HermitianMetric.hnTensorGrade_slope_le}
+Every consecutive grade of the HN tensor filtration has positive rank
+and slope
+\[
+ \mu(A_{iq+j+1}/A_{iq+j})
+ =\mu(E_{i+1}/E_i)+\mu(F_{j+1}/F_j)
+ \leq\maxslope(E)+\maxslope(F).
+\]
+\end{lemma}
+\begin{proof}
+Strictness of each factor's HN filtration makes both quotient ranks
+positive. The preceding integral isometry preserves the determinant
+degree and generic rank. The tensor rank is the product of the two
+positive ranks, and the tensor degree formula therefore gives the
+displayed slope sum. Each HN slope is at most the first HN slope,
+which is the corresponding maximal slope. Adding these two
+inequalities gives the bound.
 \end{proof}
 
 \begin{lemma}[Slope bound from a metrized filtration]
@@ -242,7 +265,7 @@ the first HN term proves the maximal-slope bound.
 
 \begin{theorem}[Maximal-slope identity]
 \label{thm:bost-main}
-\uses{lem:hn-filtration,lem:degree-calculus,thm:tensor-semistability,lem:hn-tensor-grades,lem:filtered-slope-bound,lem:max-slope-tensor-lower}
+\uses{lem:hn-filtration,lem:degree-calculus,thm:tensor-semistability,lem:hn-tensor-grades,lem:hn-tensor-grade-slopes,lem:filtered-slope-bound,lem:max-slope-tensor-lower}
 \source{bost-specht-manuscript:page-0001,bost-specht-manuscript:page-0013}
 \notready
 For every number field $K$ and every pair of positive-rank Hermitian
@@ -277,8 +300,25 @@ identity, so the maximal slope of the ambient tensor product is at
 least $c$. The inequalities give equality.
 \end{proof}
 
+\begin{lemma}[Maximal slope and integral isometries]
+\label{lem:max-slope-isometry}
+\uses{lem:hn-filtration,lem:degree-calculus}
+\source{bost-specht-manuscript:page-0013}
+\lean{BostConjecture.Arithmetic.HermitianMetric.maxSlope_le_of_isometric_injection,BostConjecture.Arithmetic.HermitianMetric.maxSlope_eq_of_equiv}
+An integral isometric injection between positive-rank Hermitian bundles
+satisfies $\maxslope(E)\leq\maxslope(F)$. Consequently an integral
+isometry preserves maximal slope.
+\end{lemma}
+\begin{proof}
+Let $P$ be the first HN term of $E$. The injection identifies $P$
+isometrically with its integral image in $F$. Their slopes agree,
+and the image slope is bounded by $\maxslope(F)$. Since
+$\mu(P)=\maxslope(E)$ this proves the inequality. For an isomorphism,
+apply it also to the inverse, whose fiber map is again an isometry.
+\end{proof}
+
 \begin{corollary}[Finite families]
-\label{cor:bost-finite-family}\uses{thm:bost-main,lem:degree-calculus}
+\label{cor:bost-finite-family}\uses{thm:bost-main,lem:degree-calculus,lem:max-slope-isometry}
 \source{bost-specht-manuscript:page-0001,bost-specht-manuscript:page-0013}
 \notready
 For every finite nonempty family of positive-rank Hermitian
