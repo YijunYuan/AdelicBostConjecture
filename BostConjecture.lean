@@ -43,8 +43,12 @@ public import BostConjecture.Main.TensorSemistability.MetricVariation
 public import BostConjecture.Main.TensorSemistability.DegreeDerivative
 public import BostConjecture.Main.TensorSemistability.GramDegree
 public import BostConjecture.Main.TensorSemistability.ExponentialVariation
+public import BostConjecture.Main.TensorSemistability.ExtremalNeighborhood
+public import BostConjecture.Main.TensorSemistability.SubmoduleVariation
+public import BostConjecture.Main.TensorSemistability.TensorVariation
 public import BostConjecture.Main.MaxSlope.FilteredBound
-public import BostConjecture.Main.MaxSlope.TensorFlag
+public import BostConjecture.Main.MaxSlope.HNGrades
+public import BostConjecture.Main.MaxSlope.Isometry
 public import BostConjecture.LinearAlgebra.AlternatingTensorPower
 public import BostConjecture.LinearAlgebra.ExteriorPower.BaseChange
 public import BostConjecture.LinearAlgebra.PiTensorProduct.Projective
