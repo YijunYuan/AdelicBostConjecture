@@ -1,6 +1,6 @@
 # Parallel Horizon scheduling
 
-## Live checkpoint at 2026-11-06 00:06 UTC
+## Live checkpoint at 2026-11-06 00:30 UTC
 
 SPECHT is complete and run `0003` exited normally after session `0030` at
 23:50:16 UTC. The exact canonical-lattice covolume limit, 14 final
@@ -13,7 +13,7 @@ shared-file handoff: `e2e7039`, evidence typography `8d57641`, root blob
 | --- | --- | --- | --- |
 | `0004` | `BOST-ARITH` | `0016` | Intrinsic arithmetic HN theory and degree finiteness |
 | `0005` | `BOST-GEOM` | `0016` | Invariant tensor nonvanishing and shared integration |
-| `0006` | `BOST-BALANCED` | `0006` | Invariant extraction, actual orbit identification and full Lemma 7.2 |
+| `0006` | `BOST-BALANCED` | `0008` | Homogeneous extraction, compact averaging and full Lemma 7.2 |
 | `0007` | `BOST-CLOSURE` | `0002` | Exact complex polynomial-image closure comparison |
 
 CLOSURE started at 00:00:50 UTC in the freed SPECHT slot, PID `584941`.
@@ -34,7 +34,8 @@ Standing permissions allow tasks/runs with a four-session cap and no budget
 limit. Independent read-only health review confirmed exactly four live runs
 and the guarded LSP in the new CLOSURE process. At 00:05 UTC, memory measured
 10.33 GiB available, PSI avg10 0.00%, zero OOM kills, and no swap-out increase
-over the startup sample. Dashboard HTTP returned 200. The old three-writer
+over the startup sample. At 00:28 UTC, 9.80 GiB remained available with PSI
+avg10/avg60/avg300 all zero. Dashboard HTTP returned 200. The old three-writer
 wording in the ARITH/GEOM objectives was corrected without changing their math.
 Lemma 7.2 remains open at algebraic closure comparison and invariant extraction.
 
@@ -45,6 +46,22 @@ over algebraically closed characteristic-zero fields with 254 probes and
 source/honesty reviews; BALANCED's invariant-detection module passed its
 kernel build at 00:05 UTC. Later root integration is still pending. These
 claims do not complete the remaining tasks or the manuscript's main theorem.
+
+BALANCED session `0006` ended normally with its 142-probe checked handoff
+through `7b835bd`; session `0008` started at 00:23:27 UTC. The exact actual
+orbit-image equality is checked and delivered to CLOSURE. The closure lane
+has checked coordinates, complex root persistence, integral lifting and finite
+fibers; the reverse closure inclusion is still open.
+
+A bounded read-only scheduling review distinguished complex Lemma 7.2 from
+the later scalar-extension/field-descent obligation. In `I-0079`, both BALANCED
+and GEOM accepted this priority: BALANCED finishes only the already in-flight
+`PolynomialBaseChange` checkpoint, then advances homogeneous extraction,
+special-unitary density and finite-degree averaging. Remaining coaction
+scalar-extension work stays a later GEOM-consumer obligation under unchanged
+BALANCED ownership. GEOM confirmed no current consumer requires delaying
+this direct complex route. This is a scheduling decision, not a new mathematical
+proof or a fifth writer; the parent made no Lean or blueprint edits.
 
 ## Earlier checkpoints
 
