@@ -1015,3 +1015,14 @@ Hermitian lines. Its 56-module cone, 3580-job endpoint check and ten transitive
 probes were independently inspected. It reuses the authorized arithmetic
 `TensorSubmodule` leaf and existing dual/projective APIs; no vendor code was
 copied. Its strict-reduction consumer retains separate authorship and evidence.
+
+STRICT-REDUCTION `b49b67f` (foundation `81f0fcf`/`8fb4ac2`, strictness
+`d3bf378`) constructs a minimal-rank normalized counterexample internally,
+then actual strictly stable maximizing factors of ranks at least two and a
+saturated positive-degree tensor submodule. Its 104-module cone matches the
+accepted tree, with a 9171-job endpoint check and ten foundational-only
+probes. Both LINE endpoints substantively exclude rank one; normalized
+extensions and existing compactness supply strictness and attainment. The
+cone has no MAIN import or final tensor-semistability dependency. Independent
+source/math/honesty review accepted this reduction; its remaining consumer is
+TENSOR-SEMI actual balance. No external code was copied.

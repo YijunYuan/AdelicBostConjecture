@@ -49,6 +49,7 @@ public import BostConjecture.Main.TensorSemistability.TensorVariation
 public import BostConjecture.Main.TensorSemistability.PartialTraceDefect
 public import BostConjecture.Main.TensorSemistability.ConjugateBasis
 public import BostConjecture.Main.LineTwist.Semistability
+public import BostConjecture.Main.StrictReduction.MaximizingCounterexample
 public import BostConjecture.Main.MaxSlope.FilteredBound
 public import BostConjecture.Main.MaxSlope.HNGrades
 public import BostConjecture.Main.MaxSlope.PiLowerBound
