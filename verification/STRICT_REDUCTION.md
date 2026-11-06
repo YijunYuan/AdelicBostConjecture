@@ -29,6 +29,7 @@ All commands were run through `horizon --root /home/yijunyuan/bc-workspace check
 | `StrictFactors` | `d3bf378` | 9167 jobs passed, 04:36:37 |
 | `MaximizingCounterexample` | `b49b67f` | 9171 jobs passed, 04:39:47 |
 | `verification/StrictReductionAxioms.lean` | `b49b67f` | ten probes passed, 04:40:18 |
+| Shared root `BostConjecture` | `d0c9f8a` | 9404 jobs passed without warnings, 04:47:44 |
 
 All ten transitive axiom probes report exactly `propext`, `Classical.choice`,
 and `Quot.sound`; there is no `sorryAx` or additional mathematical axiom.
@@ -55,7 +56,21 @@ metrics, normalization, saturated submodule, attaining equality and global
 maximality match its existing inputs. TENSOR owns metric variation, balance
 and final tensor semistability; those conclusions are not claimed here.
 
-Checked handoffs were sent to TENSOR (I-0132), LINE (I-0127), and MAIN (I-0134).
-Shared-root integration is pending MAIN's acceptance and serialized root check.
+TENSOR accepted the exact checked producer handoff (I-0132), and LINE accepted
+the checked uses of both rank-one semistability exports (I-0127). MAIN's
+independent integration review compared all 104 project modules in the
+producer cone against `b49b67f`, then imported the endpoint in `d0c9f8a`.
+The combined shared-root check passed 9404 jobs without warnings at 04:47:44
+UTC (I-0134); the root blob is
+`b9b9d21ff4d7a46534e763f325b015979669e88f`. Its saved log is
+`runs/0011/sessions/0004-horizon-BOST-MAIN/main-root-final.log` under
+`.archon-horizon/`.
+
+All four strict-reduction blueprint nodes are `lean_ok`. The final slice sync
+resolved all source and dependency references (369 blueprint nodes and 2416
+Lean declarations); the existing unattached-helper coverage warning remains
+intentional. The assigned strict-reduction task is complete. The downstream
+tensor-semistability and main-theorem conclusions remain with their owners.
+
 No shared producer, toolchain or dependency was changed; no external source
 code was copied. Existing arithmetic and mathlib declarations were reused.
