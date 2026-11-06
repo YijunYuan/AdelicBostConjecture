@@ -1,6 +1,6 @@
 module
 
-public import BostConjecture.Arithmetic.RestrictionCovolume.Covolume
+public import BostConjecture.Arithmetic.RestrictionCovolume.TraceSpace
 public import BostConjecture.Arithmetic.Semistable
 
 /-!

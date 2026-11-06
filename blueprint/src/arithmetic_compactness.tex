@@ -54,8 +54,9 @@ and the preceding lemma puts a basis matrix of each lattice in this set.
 
 \begin{lemma}[Trace systole of normalized semistable bundles]
 \label{lem:trace-semistable-systole}
-\uses{def:hermitian-degree,lem:degree-rank-one,lem:integral-part-generic-subspace}
-\source{bost-specht-manuscript:page-0011}\notready
+\uses{def:hermitian-degree,lem:degree-rank-one,lem:integral-part-generic-subspace,lem:real-trace-lattice,lem:line-degree-quotient-formula}
+\lean{BostConjecture.Arithmetic.HermitianMetric.IsSemistable.sum_log_sectionNorm_nonneg,BostConjecture.Arithmetic.HermitianMetric.IsSemistable.traceLattice_systole}
+\source{bost-specht-manuscript:page-0011}\leanok
 If $A$ is semistable with $\degn(A)=0$, every nonzero $x\in A$
 satisfies $\sum_{\sigma:K\hookrightarrow\mathbb C}\log\|x_\sigma\|\geq0$.
 Its image in the actual trace lattice consequently has norm at least
@@ -78,9 +79,37 @@ Both norms are nonnegative, giving the asserted systole. This is the
 logarithmic form of the arithmetic--geometric mean step in the source.
 \end{proof}
 
+\begin{lemma}[Bounded arithmetic multiplication on trace space]
+\label{lem:trace-multiplication-bound}
+\uses{lem:real-trace-lattice,lem:metric-topology-comparison}
+\source{bost-specht-manuscript:page-0011}\notready
+For $\alpha\in\Ocal$, multiplication on $A$ extends canonically to
+a real-linear endomorphism $T_\alpha$ of its trace space. It preserves
+the actual integral trace lattice. If $C\geq0$ bounds
+$|\sigma(\alpha)|$ at every complex embedding, then
+$\|T_\alpha z\|_{\mathrm{tr}}\leq C\|z\|_{\mathrm{tr}}$ for all $z$.
+In particular the bound can be chosen independently of the metric on $A$.
+\end{lemma}
+\begin{proof}
+Transport $1\otimes(x\mapsto\alpha x)$ along the canonical isomorphism
+$\mathbb R\otimes_{\mathbb Z}A\simeq A_{\mathrm{tr}}$.
+On an integral section it sends $x$ to $\alpha x$, proving lattice
+preservation. On the $\sigma$-component it acts by $\sigma(\alpha)$:
+this holds on the spanning integral sections and extends by real linearity.
+Consequently
+\[
+ \|T_\alpha z\|_{\mathrm{tr}}^2
+ =\sum_\sigma |\sigma(\alpha)|^2\|z_\sigma\|_\sigma^2
+ \leq C^2\sum_\sigma\|z_\sigma\|_\sigma^2
+ =C^2\|z\|_{\mathrm{tr}}^2.
+\]
+Taking nonnegative square roots gives the bound. For example
+$C=\sum_\sigma|\sigma(\alpha)|$ works for every metric.
+\end{proof}
+
 \begin{lemma}[Arithmetic compactness]
 \label{lem:arithmetic-compactness}
-\uses{def:hermitian-degree,lem:restriction-covolume,lem:mahler-frames,lem:trace-semistable-systole,lem:degree-maximum-continuity}
+\uses{def:hermitian-degree,lem:restriction-covolume,lem:mahler-frames,lem:trace-semistable-systole,lem:trace-multiplication-bound,lem:degree-maximum-continuity}
 \source{bost-specht-manuscript:page-0011}\notready
 For fixed $K$ and $a\geq1$, every sequence of normalized semistable
 rank-$a$ Hermitian $\Ocal$-bundles has a subsequence which, after
@@ -88,13 +117,9 @@ $\Ocal$-module isomorphisms, has one fixed underlying module and
 convergent metrics. The limit is normalized and semistable.
 \end{lemma}
 \begin{proof}
-For $0\ne x\in A$, the free line $\Ocal x$ has degree
-$-D^{-1}\sum_v w_v\log\|x_v\|_v$. Semistability and normalization
-therefore give $\prod_v\|x_v\|_v^{w_v}\geq1$. The arithmetic--geometric
-mean inequality, applied to $D$ positive numbers with each complex
-norm repeated twice, gives $\sum_vw_v\|x_v\|_v^2\geq D$.
-The underlying Euclidean lattice has systole at least $\sqrt D$ and
-covolume $\Delta_K^{a/2}$. Compact lattice frames give integral bases
+Lemma~\ref{lem:trace-semistable-systole} gives systole at least $\sqrt D$
+for the actual trace lattice, and Lemma~\ref{lem:restriction-covolume}
+gives covolume $\Delta_K^{a/2}$. Compact lattice frames give integral bases
 whose Gram matrices converge to a positive-definite matrix $G$.
 
 For $\alpha\in\Ocal$, multiplication by $\alpha$ has operator norm at

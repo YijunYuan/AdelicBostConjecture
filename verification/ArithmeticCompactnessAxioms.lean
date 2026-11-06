@@ -1,5 +1,6 @@
 import BostConjecture.Arithmetic.Compactness.DegreeContinuity
 import BostConjecture.Arithmetic.Compactness.StabilityTopology
+import BostConjecture.Arithmetic.Compactness.TraceSystole
 
 /-! Transitive axiom audit of the actual arithmetic compactness producers. -/
 
@@ -17,3 +18,6 @@ import BostConjecture.Arithmetic.Compactness.StabilityTopology
 #print axioms BostConjecture.Arithmetic.HermitianMetric.IsStable.exists_degree_gap
 #print axioms BostConjecture.Arithmetic.HermitianMetric.isStable_of_fiberNorm_compare
 #print axioms BostConjecture.Arithmetic.HermitianMetric.isOpen_isStable_normalized
+#print axioms BostConjecture.Arithmetic.HermitianMetric.IsSemistable.sum_log_sectionNorm_nonneg
+#print axioms BostConjecture.Arithmetic.HermitianMetric.IsSemistable.traceSection_norm_sq_ge
+#print axioms BostConjecture.Arithmetic.HermitianMetric.IsSemistable.traceLattice_systole

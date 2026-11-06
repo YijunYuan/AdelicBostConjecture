@@ -14,6 +14,10 @@ number field and every finite projective module over its ring of integers.
   maximum degree in that topology.
 - `Stability`, `StabilityTopology`: a uniform negative degree gap and openness
   of strict stability in the subtype of degree-zero metrics.
+- `TraceSystole`: the actual integral trace lattice of a normalized semistable
+  module has systole at least the square root of the number-field degree.
+  The saturated generic line and logarithmic degree formula supply the bound;
+  no covolume identity is used.
 
 The source route is `blueprint/src/arithmetic_compactness.tex`. It replaces
 the source's covolume-based finiteness argument with the completed intrinsic
@@ -43,3 +47,10 @@ actual proof consumers, topology, rank-zero behavior, build evidence and all
 14 axiom outputs. Verdict: honest proved producers; full fixed-module
 `lem:degree-maximum-continuity` may be marked checked. Root integration belongs
 to GEOM and is a separate handoff.
+
+The `TraceSystole` module check passed with 3672 jobs. The expanded 17-probe
+axiom check passed at 02:37 UTC, again with only the three foundational axioms.
+The reviewer separately verified its source meaning and all three new outputs;
+only the systole node is closed, not arithmetic compactness. The graph sync had
+no unresolved source attachments; its 1029 unattached-helper coverage warnings
+are retained rather than attaching unrelated declarations to these theorems.
