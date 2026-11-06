@@ -27,6 +27,7 @@ public import BostConjecture.Arithmetic.IrreducibleSemistable
 public import BostConjecture.Arithmetic.IndependentPiSemistable
 public import BostConjecture.Arithmetic.RestrictionOfScalars
 public import BostConjecture.Arithmetic.DegreeFiniteness
+public import BostConjecture.Arithmetic.RestrictionCovolume.Covolume
 public import BostConjecture.LinearAlgebra.AlternatingTensorPower
 public import BostConjecture.LinearAlgebra.ExteriorPower.BaseChange
 public import BostConjecture.LinearAlgebra.PiTensorProduct.Projective

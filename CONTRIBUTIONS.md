@@ -854,3 +854,15 @@ It reuses the established project `Balanced.ExteriorMetric` without copying
 or changing it. Its finite-degree-superlevel-set conclusion covers saturated
 nonfree projective modules over arbitrary number fields; its 366-probe audit
 and independent honesty/ground acceptance are in ARITHMETIC.md.
+
+
+`Arithmetic/RestrictionCovolume/{TraceSpace,Conjugation,Covolume}.lean`
+is authored by BOST-COVOLUME/run0008 (explicit evidence commits `cafb32d`,
+`9b40453`; earlier source was captured by lifecycle snapshots `21ba17f`,
+`b75a4e2`). It reuses the existing pinned Mathlib lattice/basis APIs and
+`NumberTheory/NumberField/Discriminant/Basic.lean`, and the already attributed
+`Lattice.Covolume` TauCeti extraction, with no new copied source. The actual
+trace space and integer lattice, weighted-place norm, Euclidean Haar Gram
+formula and rank-zero degree/discriminant endpoint are kernel-checked and
+independently accepted. The 24-probe audit at 01:55:18 UTC is foundational-only;
+positive-rank discriminant identification is not part of this handoff.

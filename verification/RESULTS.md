@@ -1,3 +1,15 @@
+## Actual trace-space and Haar covolume producers integrated
+
+The explicit-root configured build passed **9,332 jobs warning-free at
+2026-11-06 02:12:49 UTC**, root blob
+`89e534e394ba08ee4bbb48a619bd5ee7fff8bb51`. It adds COVOLUME's accepted
+`TraceSpace`, `Conjugation` and `Covolume` producers (`cafb32d`, `9b40453`),
+with **24 foundational-only owner probes** at 01:55:18 UTC and independent
+honesty acceptance. The actual weighted trace norm and Euclidean Haar Gram
+formula are proved, including the exact rank-zero endpoint. Positive-rank
+discriminant identification remains open. This build does not include the
+in-progress BinaryPlucker consumer or the later FiniteIndex delivery.
+
 ## Exact Lemma 7.2 and arithmetic degree finiteness integrated
 
 The explicit-root configured check passed **9,329 jobs warning-free at
