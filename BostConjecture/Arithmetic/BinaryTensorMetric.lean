@@ -28,13 +28,13 @@ abbrev binaryTensorFamily (M N : Type u) : Unit ⊕ Unit → Type u
   | .inr _ => N
 
 instance {M N : Type u} [AddCommGroup M] [AddCommGroup N] (i : Unit ⊕ Unit) :
-    AddCommGroup (binaryTensorFamily M N i) := by
-  cases i <;> exact inferInstance
+    AddCommGroup (binaryTensorFamily M N i) :=
+  Sum.casesOn i (fun _ => inferInstance) (fun _ => inferInstance)
 
 instance {R : Type*} [CommRing R] {M N : Type u}
     [AddCommGroup M] [AddCommGroup N] [Module R M] [Module R N] (i : Unit ⊕ Unit) :
-    Module R (binaryTensorFamily M N i) := by
-  cases i <;> exact inferInstance
+    Module R (binaryTensorFamily M N i) :=
+  Sum.casesOn i (fun _ => inferInstance) (fun _ => inferInstance)
 
 variable (R : Type*) [CommRing R] (M N : Type u)
     [AddCommGroup M] [AddCommGroup N] [Module R M] [Module R N]
