@@ -981,7 +981,19 @@ repaired before its successful module check. The first dual builds exposed
 unused number-field hypotheses; these were removed before the final warning-free
 joint check. No admitted proof or custom axiom was introduced.
 
-The finite-family representation consumer is being completed separately.
+`387d06a` and `a1aa8cb` complete the finite-family representation consumer.
+The warning-free 3615-job `Arithmetic.IndependentPiSemistable` build passed
+at 00:58:25 UTC; its 338-probe audit passed at 00:58:49 UTC, foundational
+axioms only (`finite-representation-axioms.jsonlog`). Independent honesty
+review approved both finite-family nodes at `a1aa8cb`. The endpoint and
+scalar-restriction import were sent to GEOM in I-0075 for root integration.
+This includes arbitrary independent groups, a common irreducible complex
+fiber, all-embedding metric invariance, and the empty tensor product.
+
+Full configured graph sync repaired the stale nodes caused by a scoped sync;
+only unattached helper declarations remain warned (939 across all slices).
+No missing cross-slice dependency warnings remain in the full sync.
+
 The arithmetic frontier is now the real trace metric and degree-covolume formula,
 then bounded-degree finiteness via primitive exterior integer lattices.
 This record does not assert general tensor semistability or manuscript Theorem 1.1.
