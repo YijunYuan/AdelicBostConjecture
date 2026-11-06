@@ -152,7 +152,8 @@ claim for $\mathcal D$.
 \begin{lemma}[Local comparison of actual metrics]
 \label{lem:metric-topology-comparison}
 \uses{lem:metric-degree-comparison}
-\source{bost-specht-manuscript:page-0012}\notready
+\lean{BostConjecture.Arithmetic.HermitianMetric.continuous_fiberNorm,BostConjecture.Arithmetic.HermitianMetric.eventually_all_fiberNorm_compare}
+\source{bost-specht-manuscript:page-0012}
 Give the Hermitian metrics on a fixed finite projective module the topology
 of pointwise convergence of their fiber forms. For every metric $h$ and
 $t>0$, all sufficiently close metrics $g$ satisfy
@@ -179,9 +180,31 @@ This also shows that the form topology agrees with convergence of Gram
 matrices in any complex bases.
 \end{proof}
 
+\begin{lemma}[Uniform degree gap for strict stability]
+\label{lem:strict-stability-degree-gap}
+\uses{lem:degree-finiteness,lem:metric-degree-comparison}
+\source{bost-specht-manuscript:page-0012}\notready
+If $h$ is normalized and strictly stable, there is $\delta>0$ such
+that $\degn_h(P)\leq-\delta$ for every nonzero proper saturated
+submodule $P$. In particular a normalized metric $g$ with uniform
+norm distortion at most $t\geq0$ remains strictly stable whenever
+$a t<\delta$, where $a=\operatorname{rk}A$.
+\end{lemma}
+\begin{proof}
+Let $S$ be the set of nonzero proper saturated submodules of degree
+at least $-1$. It is finite by degree finiteness. If $S$ is empty,
+take $\delta=1$. Otherwise choose $P_0\in S$ of largest degree and
+put $\delta=\min(1,-\degn_h(P_0))$. Strict stability and normalization
+give $\degn_h(P_0)<0$, so $\delta>0$. For a member of $S$ the
+maximality of $P_0$ gives the claimed bound; outside $S$ the degree
+is less than $-1\leq-\delta$. The metric-comparison estimate then
+gives $\degn_g(P)\leq-\delta+a t<0$. Since $g$ is normalized,
+these are exactly the strict stability inequalities.
+\end{proof}
+
 \begin{lemma}[The maximum degree and openness of strict stability]
 \label{lem:degree-maximum-continuity}
-\uses{lem:degree-finiteness,lem:maximum-saturated-degree,lem:metric-degree-comparison,lem:metric-topology-comparison}
+\uses{lem:degree-finiteness,lem:maximum-saturated-degree,lem:metric-degree-comparison,lem:metric-topology-comparison,lem:strict-stability-degree-gap}
 \source{bost-specht-manuscript:page-0011,bost-specht-manuscript:page-0012}
 \notready
 For every Hermitian bundle $A$, the number
