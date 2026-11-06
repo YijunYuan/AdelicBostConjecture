@@ -1,6 +1,7 @@
 import BostConjecture.Arithmetic.Specht.Representation
 import BostConjecture.Arithmetic.Specht.Bundle
 import BostConjecture.Arithmetic.Specht.DeterminantRepresentation
+import BostConjecture.Arithmetic.Specht.DeterminantBundle
 
 #print axioms BostConjecture.Arithmetic.Specht.complexRepresentation_irreducible
 #print axioms BostConjecture.Arithmetic.Specht.latticeComplexCore_action_inner
@@ -13,3 +14,8 @@ import BostConjecture.Arithmetic.Specht.DeterminantRepresentation
 #print axioms BostConjecture.Arithmetic.Specht.projectiveDeterminantMap_equivariant
 #print axioms BostConjecture.Arithmetic.Specht.determinantRepresentationEquiv
 #print axioms BostConjecture.Arithmetic.Specht.determinantRepresentation_irreducible_of_rankAtStalk
+#print axioms BostConjecture.Arithmetic.Specht.determinantMetric
+#print axioms BostConjecture.Arithmetic.Specht.determinantMetric_action_inner
+#print axioms BostConjecture.Arithmetic.Specht.determinantMetric_isSemistable
+#print axioms BostConjecture.Arithmetic.Specht.determinantMetric_fiber_inner
+#print axioms BostConjecture.Arithmetic.Specht.determinantMetric_piTensor_and_dual_isSemistable

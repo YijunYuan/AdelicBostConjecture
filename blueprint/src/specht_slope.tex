@@ -97,6 +97,78 @@ complex Specht representation. The basis was chosen only after extension
 to $\mathbb C$; no basis of $A$ over $R$ is required.
 \end{proof}
 
+\begin{lemma}[Semistability of the canonical determinant--Specht metric]
+\label{lem:determinant-specht-semistable}
+\uses{lem:determinant-specht-representation,lem:projective-determinant-inclusion,lem:irreducible-semistable}
+\source{bost-specht-manuscript:page-0008,bost-specht-manuscript:page-0009}
+\lean{BostConjecture.Arithmetic.Specht.determinantMetric,BostConjecture.Arithmetic.Specht.determinantMetric_action_inner,BostConjecture.Arithmetic.Specht.determinantMetric_isSemistable}
+\leanok
+For a finite projective Hermitian $\Ocal_K$-module $A$ of rank $a$ and
+$d=ak$ with $k>0$, give $\mathcal S_{a,d}(A)$ the metric induced by
+its canonical inclusion in $A^{\otimes d}$. Its actual permutation
+representation is isometric at every complex embedding, and this
+Hermitian bundle is semistable.
+\end{lemma}
+\begin{proof}
+The canonical inclusion is injective over $\Ocal_K$, since this ring
+is flat over $\mathbb Z$. Its pullback of the Hilbert tensor metric is
+positive definite on each complex fiber and compatible with conjugation.
+The inclusion intertwines the integral position actions, and canonical
+tensor base change preserves this identity in every complex fiber.
+Position permutations preserve the Hilbert tensor inner product: on
+pure tensors the product of the factor inner products is merely
+reindexed, and sesquilinearity extends the identity to all tensors.
+The pullback metric is therefore invariant under the actual integral
+permutation action. At one complex embedding that action is irreducible
+by Lemma~\ref{lem:determinant-specht-representation}; in particular the
+complex fiber, and hence the generic fiber of equal dimension, is
+nonzero. The irreducible isometric action criterion gives semistability.
+\end{proof}
+
+\begin{lemma}[The canonical determinant--Specht fiber metric]
+\label{lem:determinant-specht-fiber-metric}
+\uses{lem:determinant-specht-semistable,lem:projective-determinant-isometry}
+\source{bost-specht-manuscript:page-0008,bost-specht-manuscript:page-0009}
+\lean{BostConjecture.Arithmetic.Specht.determinantMetric_fiber_inner}
+\leanok
+At every complex embedding, canonical exterior and tensor base change
+identify the induced metric on $\mathcal S_{a,d}(A)$ with the tensor
+product of the $k$ determinant metrics and the canonical complex lattice
+Gram form.
+\end{lemma}
+\begin{proof}
+Choose an orthonormal basis of $A_{\sigma}$. The projective determinant
+map base-changes to its free formula in this basis. Its image metric is
+the Hilbert tensor form. By Lemma~\ref{lem:projective-determinant-isometry},
+that formula pulls this form back to the tensor product of the Gram
+determinant forms and the lattice form under the same canonical
+base-change equivalence. This is precisely the defining pullback metric
+of $\mathcal S_{a,d}(A)$. There is no further normalization of the
+determinant tensor: its unnormalized norm is already present in the
+polytabloid lattice form.
+\end{proof}
+
+\begin{lemma}[Independent determinant--Specht factors]
+\label{lem:determinant-specht-family-semistable}
+\uses{lem:determinant-specht-semistable,lem:independent-irreducible-semistable}
+\source{bost-specht-manuscript:page-0009}
+\lean{BostConjecture.Arithmetic.Specht.determinantMetric_piTensor_and_dual_isSemistable}
+\leanok
+For a finite family of finite projective Hermitian modules $A_j$ of
+constant positive ranks $a_j$, and a common $d=a_jk_j$ with $k_j>0$,
+both $\bigotimes_j\mathcal S_{a_j,d}(A_j)$ and its Hermitian dual are
+semistable.
+\end{lemma}
+\begin{proof}
+Each actual determinant--Specht representation is irreducible at the
+same chosen complex embedding and is isometric at every embedding, by
+Lemma~\ref{lem:determinant-specht-semistable} and its proof. Each factor
+has positive generic rank. Apply the finite independent action theorem
+to the product of the permutation groups, using the canonical Hilbert
+tensor metric. It gives semistability of both the tensor bundle and its
+Hermitian dual, with no arithmetic semistability hypothesis on the $A_j$.
+\end{proof}
+
 \begin{lemma}[Determinant-isotypic integral modules]
 \label{lem:determinant-isotypic}
 \uses{def:rectangular-specht,lem:arithmetic-specht-action,lem:arithmetic-specht-semistable,lem:rectangular-invariants,lem:determinant-twisted-free-inclusion,lem:determinant-free-base-change,lem:determinant-free-naturality,lem:tensor-base-change-equivalence,lem:determinant-free-base-change-square,lem:linear-map-localization-descent,lem:determinant-chart-tower,lem:finite-projective-frames,lem:projective-determinant-inclusion,lem:degree-calculus}
