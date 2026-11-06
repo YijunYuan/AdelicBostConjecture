@@ -79,7 +79,8 @@ metric curves through strictly stable factors.
 
 - Serialized builds: 3677 and 9171 jobs, no warnings.
 - Independent mathematical/source/honesty review accepted both producers.
-- The expanded twenty-five-probe serialized audit is pending.
+- Expanded serialized audit: twenty-five probes passed, each using only
+  `propext`, `Classical.choice`, and `Quot.sound`.
 - Strict stability is an explicit premise of the intermediate local-maximum
   theorem; its construction by minimal-rank reduction is not claimed.
 
