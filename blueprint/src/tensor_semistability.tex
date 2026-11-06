@@ -336,9 +336,72 @@ a differentiable real function has derivative zero at a local maximum,
 and $[K:\mathbb Q]$ is positive.
 \end{proof}
 
+\begin{lemma}[Self-adjoint scalar defects of partial traces]
+\label{lem:partial-trace-defect}
+\uses{lem:balanced-partial-traces,lem:balanced-projection-trace}
+\source{bost-specht-manuscript:page-0013}
+\lean{BostConjecture.Balanced.inner_partialTraceRight,BostConjecture.Balanced.inner_partialTraceLeft,BostConjecture.Balanced.isSymmetric_partialTraceRight,BostConjecture.Balanced.isSymmetric_partialTraceLeft,BostConjecture.Balanced.trace_partialTraceRight,BostConjecture.Balanced.trace_partialTraceLeft,BostConjecture.Balanced.trace_starProjection,BostConjecture.Balanced.isSymmetric_sub_real_smul_id,BostConjecture.Balanced.trace_sub_scalar_id,BostConjecture.Balanced.trace_comp_sub_scalar_id,BostConjecture.Balanced.re_trace_comp_self,BostConjecture.Balanced.re_trace_comp_self_nonneg,BostConjecture.Balanced.eq_zero_of_re_trace_comp_self_eq_zero}
+\leanok
+Let $U,W$ be finite-dimensional complex Hilbert spaces. Partial trace
+preserves self-adjointness and full trace. For an orthonormal basis
+$(f_j)$ of $W$,
+\[
+ \langle x,\operatorname{Tr}_W(P)y\rangle
+ =\sum_j\langle x\otimes f_j,P(y\otimes f_j)\rangle,
+\]
+and the analogous left formula holds. The orthogonal projection onto
+$S\subset U\otimes W$ has trace $\dim S$.
+
+If $T$ is self-adjoint, $a$ is real, and
+$\operatorname{Tr}T=a\dim U$, then $A=T-aI$ is self-adjoint and
+traceless, with $\operatorname{Tr}(TA)=\operatorname{Tr}(A^2)$.
+For every self-adjoint $A$ and orthonormal basis $(e_i)$,
+\[
+ \operatorname{Re}\operatorname{Tr}(A^2)
+ =\sum_i\|Ae_i\|^2\geq0.
+\]
+This real trace is zero only if $A=0$.
+\end{lemma}
+\begin{proof}
+Write a tensor endomorphism as a finite sum of operators $C\otimes D$.
+For one such operator the right partial trace is $(\operatorname{Tr}D)C$.
+The orthonormal trace formula and tensor inner-product formula prove the
+contraction identity; linearity proves it for the sum. The left formula
+is identical with the factors exchanged. Conjugate symmetry and
+self-adjointness of $P$ in the contraction identity show self-adjointness
+of each partial trace. Evaluate its trace-pairing identity at the identity
+operator to obtain equality of full traces. For the projection, its
+compressed operator on $S$ is the identity, so its trace is $\dim S$.
+
+Subtracting a real scalar identity preserves self-adjointness, and
+linearity of trace gives $\operatorname{Tr}A=0$. Expand
+$TA=(A+aI)A$ to get equality of the two traces. Finally the orthonormal
+trace formula and self-adjointness give
+$\langle e_i,A^2e_i\rangle=\langle Ae_i,Ae_i\rangle=\|Ae_i\|^2$.
+Each term is nonnegative. If their sum is zero, $Ae_i=0$ for every basis
+vector, and linearity gives $A=0$.
+\end{proof}
+
+\begin{lemma}[Conjugate transport of orthonormal bases]
+\label{lem:conjugate-orthonormal-basis}
+\source{bost-specht-manuscript:page-0013}
+\lean{BostConjecture.Balanced.conjugateOrthonormalBasis,BostConjecture.Balanced.conjugateOrthonormalBasis_apply}
+\leanok
+If $c:U\to V$ is a conjugate-linear bijection with
+$\langle cx,cy\rangle=\overline{\langle x,y\rangle}$, and $(e_i)$ is
+a finite orthonormal basis of $U$, then $(ce_i)$ is an orthonormal basis
+of $V$.
+\end{lemma}
+\begin{proof}
+The pairings of the transported vectors are conjugates of the Kronecker
+deltas and hence equal those same deltas. For $y=cx$, expand
+$x=\sum_i a_i e_i$; conjugate linearity gives
+$y=\sum_i\overline{a_i}ce_i$, proving that the transported vectors span.
+\end{proof}
+
 \begin{lemma}[Extremal metrics give balanced tensor fibers]
 \label{lem:extremal-to-balance}
-\uses{lem:extremal-degree-local-maximum,lem:exponential-stability-neighborhood,lem:tensor-metric-variation,lem:balanced-partial-traces,lem:balanced-projection-trace,def:balanced-subspace}
+\uses{lem:extremal-degree-local-maximum,lem:exponential-stability-neighborhood,lem:tensor-metric-variation,lem:partial-trace-defect,lem:conjugate-orthonormal-basis,lem:balanced-partial-traces,lem:balanced-projection-trace,def:balanced-subspace}
 \source{bost-specht-manuscript:page-0013}
 \notready
 Let $E,F$ have positive ranks $m,n$ and strictly stable degree-zero

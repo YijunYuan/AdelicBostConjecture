@@ -5,6 +5,8 @@ import BostConjecture.Main.TensorSemistability.GramDegree
 import BostConjecture.Main.TensorSemistability.ExponentialVariation
 import BostConjecture.Main.TensorSemistability.ExtremalNeighborhood
 import BostConjecture.Main.TensorSemistability.TensorVariation
+import BostConjecture.Main.TensorSemistability.PartialTraceDefect
+import BostConjecture.Main.TensorSemistability.ConjugateBasis
 
 #print axioms BostConjecture.Arithmetic.HermitianMetric.isSemistable_iff_degree_nonpos
 #print axioms BostConjecture.Arithmetic.HermitianMetric.isSemistable_rescale_iff
@@ -41,3 +43,20 @@ import BostConjecture.Main.TensorSemistability.TensorVariation
 #print axioms BostConjecture.Arithmetic.HermitianMetric.tensor_archimedeanPullback
 #print axioms BostConjecture.Arithmetic.HermitianMetric.hasDerivAt_submodule_degree_tensor_exponentialVariation
 #print axioms BostConjecture.Arithmetic.HermitianMetric.sum_tensorFiberProjectionTrace_eq_zero_of_isLocalMax
+
+#print axioms BostConjecture.Balanced.inner_partialTraceRight
+#print axioms BostConjecture.Balanced.inner_partialTraceLeft
+#print axioms BostConjecture.Balanced.isSymmetric_partialTraceRight
+#print axioms BostConjecture.Balanced.isSymmetric_partialTraceLeft
+#print axioms BostConjecture.Balanced.trace_partialTraceRight
+#print axioms BostConjecture.Balanced.trace_partialTraceLeft
+#print axioms BostConjecture.Balanced.trace_starProjection
+#print axioms BostConjecture.Balanced.isSymmetric_sub_real_smul_id
+#print axioms BostConjecture.Balanced.trace_sub_scalar_id
+#print axioms BostConjecture.Balanced.trace_comp_sub_scalar_id
+#print axioms BostConjecture.Balanced.re_trace_comp_self
+#print axioms BostConjecture.Balanced.re_trace_comp_self_nonneg
+#print axioms BostConjecture.Balanced.eq_zero_of_re_trace_comp_self_eq_zero
+
+#print axioms BostConjecture.Balanced.conjugateOrthonormalBasis
+#print axioms BostConjecture.Balanced.conjugateOrthonormalBasis_apply

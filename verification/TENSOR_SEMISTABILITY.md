@@ -100,7 +100,7 @@ degree derivative, using an actual fiber isometry onto the submodule range.
 - Blueprint `lem:submodule-projection-trace-derivative` feeds the explicit
   still-open `lem:extremal-to-balance` producer.
 
-The line-twist, strict-factor reduction, tensor variation transport,
+The successor-owned line-twist and strict-factor reduction,
 conjugation-compatible partial-trace defects, extremal-to-balance and final
 composition remain open. The checked producers do not prove balance.
 The planned balance proof uses global compatible defect families and positivity
@@ -124,3 +124,32 @@ forces its summed projection trace to vanish.
   one blueprint dependency-label typo was repaired before acceptance.
 - Tensor transport is now proved. Conjugation-compatible partial-trace defects,
   their positivity argument, extremal-to-balance and final composition remain open.
+
+## Scalar partial-trace defects and conjugate bases
+
+`PartialTraceDefect.lean` proves both orthonormal contraction formulas,
+preservation of self-adjointness and trace, the actual projection rank trace,
+traceless scalar-defect identities, and positivity/zero detection from
+`Re trace (A ∘ A) = sum ‖A e_i‖²`. `ConjugateBasis.lean` transports an
+orthonormal basis through a conjugate-linear isometry.
+
+- Each narrow serialized module build passed 2814 jobs without warnings.
+- Independent source/mathematical/honesty review accepted both modules and
+  their exact blueprint statements. Neither claims arithmetic balance.
+- The final expanded serialized axiom audit passed all forty-nine probes,
+  each with only `propext`, `Classical.choice`, and `Quot.sound`.
+
+Next: transport the actual tensor-submodule projections under canonical fiber
+conjugation; apply the transported orthonormal bases to prove naturality of both
+partial traces; identify arithmetic projection traces through the canonical
+binary tensor-fiber isometry. Use these to construct globally compatible,
+traceless self-adjoint defects. Combine their actual metric local maxima with
+tensor derivative stationarity and the proved trace-square positivity to obtain
+both scalar identities. Only then assemble tensor semistability using the
+accepted strict maximizing counterexample and geometric slope theorem.
+
+The LINE owner handed off both-order nonprincipal rank-one semistability at
+032df77; STRICT's both-factor strictness is checked at d3bf378 and its final
+maximizing endpoint remains in owner assembly. Shared root/graph integration
+of this checkpoint is requested from MAIN. I-0131 asks this round to end at
+this checked checkpoint to recycle clients; the task is not done or paused.
