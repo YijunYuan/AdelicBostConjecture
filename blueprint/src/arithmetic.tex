@@ -1696,6 +1696,28 @@ $B_K\not\subseteq X_1$ by the strict inequality just proved, hence
 $B\subseteq A\cap X_1=A_1$.
 \end{proof}
 
+\begin{lemma}[Uniqueness of the intrinsic HN flag]
+\label{lem:hermitian-hn-unique}
+\uses{lem:hermitian-hn-maximal-slope,lem:quotient-interval-semistable,lem:finite-length-slope-game,lem:quotient-submodule-degree}
+\source{chen-jeannin-harder-narasimhan-games-v1}\notready
+Any generic flag from $0$ to $A_K$ whose actual saturated integral
+quotients are semistable with strictly decreasing slopes equals the
+canonical HN flag.
+\end{lemma}
+\begin{proof}
+For $X\subsetneq Z\subseteq Y$, the image of $A\cap Z$ in
+$(A\cap Y)/(A\cap X)$ has inverse image $A\cap Z$. The quotient
+submodule degree and rank formulas identify its slope with $\mu(X,Z)$.
+Thus semistability of the actual quotient implies the inequalities
+$\mu(X,Z)\leq\mu(X,Y)$. The converse is the induced quotient interval
+lemma, so actual quotient semistability is equivalent to game
+semistability on each strict interval. On these intervals the game
+value equals the ordinary slope. The flag therefore satisfies precisely
+the hypotheses of the uniqueness theorem for convex HN games, which
+identifies it with the canonical flag. Integral parts recover all terms
+of a saturated integral filtration, so the same uniqueness holds there.
+\end{proof}
+
 \begin{lemma}[Harder--Narasimhan filtration]
 \label{lem:hn-filtration}
 \uses{def:hermitian-degree,lem:hermitian-hn-interval-flag,lem:nested-quotient-metric,lem:exact-determinant-degree,lem:determinant-contraction,lem:saturation-degree,lem:hermitian-convex-slopes}
