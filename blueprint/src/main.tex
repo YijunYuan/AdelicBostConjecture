@@ -268,9 +268,27 @@ Saturation gives $A\cap X_i=A_i$, so every induced quotient metric
 in the generic formulation is exactly the original integral quotient metric.
 \end{proof}
 
+\begin{lemma}[Semistability of the HN tensor grades]
+\label{lem:hn-tensor-grade-semistable}
+\uses{lem:hn-filtration,lem:hn-tensor-grades,thm:tensor-semistability}
+\source{bost-specht-manuscript:page-0013}
+\notready
+Every consecutive grade of the saturated HN tensor filtration is
+semistable for its actual induced quotient metric.
+\end{lemma}
+\begin{proof}
+For an index $k=iq+j$ before the end of the filtration, its grade is
+integrally isometric to $(E_{i+1}/E_i)\otimes(F_{j+1}/F_j)$.
+Both factor grades have positive rank and are semistable by the HN
+property. Tensor semistability therefore applies to their Hilbert tensor
+metric. An integral isometry preserves every submodule's rank and induced
+metric, and hence its degree and slope. Transporting the semistability
+inequalities through the grade isometry proves the assertion.
+\end{proof}
+
 \begin{theorem}[Maximal-slope identity]
 \label{thm:bost-main}
-\uses{lem:hn-filtration,lem:degree-calculus,thm:tensor-semistability,lem:hn-tensor-grades,lem:hn-tensor-grade-slopes,lem:filtered-slope-bound,lem:max-slope-tensor-lower}
+\uses{lem:hn-filtration,lem:degree-calculus,lem:hn-tensor-grade-semistable,lem:hn-tensor-grade-slopes,lem:filtered-slope-bound,lem:max-slope-tensor-lower}
 \source{bost-specht-manuscript:page-0001,bost-specht-manuscript:page-0013}
 \notready
 For every number field $K$ and every pair of positive-rank Hermitian
