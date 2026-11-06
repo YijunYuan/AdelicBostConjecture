@@ -1,6 +1,7 @@
 import BostConjecture.Geometry.TensorRealization
 import BostConjecture.Geometry.HomInvariants
 import BostConjecture.Geometry.DualInvariants
+import BostConjecture.Geometry.Nonvanishing
 import BostConjecture.Geometry.FreeEmbedding
 import BostConjecture.Geometry.DeterminantFrame
 import BostConjecture.Tensor.Evaluation
@@ -337,3 +338,11 @@ import BostConjecture.Geometry.HomTensor
 #print axioms BostConjecture.Geometry.independentTensorRepresentation
 #print axioms BostConjecture.Geometry.exists_dual_independent_invariants
 #print axioms BostConjecture.Geometry.exists_independent_dual_pairing
+
+#print axioms BostConjecture.Geometry.specialLinear_dualMap_surjective
+#print axioms BostConjecture.Geometry.dual_specialLinear_fixed_iff
+#print axioms BostConjecture.Geometry.mem_range_freeLatticeMap_of_dual_specialLinear_fixed
+#print axioms BostConjecture.Geometry.projectiveDeterminantMap_eq_free
+#print axioms BostConjecture.Geometry.mem_range_projectiveDeterminantMap_iff
+#print axioms BostConjecture.Geometry.specialLinearTensorRepresentation
+#print axioms BostConjecture.Geometry.canonicalPairing_ne_zero_of_invariant

@@ -1,3 +1,21 @@
+## Canonical nonvanishing and exact complex-closure integration
+
+Claim class: **proved prerequisites**. The configured explicit-root build
+passed **9,307 jobs warning-free at 2026-11-06 01:00:22 UTC**; root blob
+`3df1683a4e20af6eb4aa70c9461018efa69928cd`. All **280 geometry axiom probes**
+passed at 01:00:31 UTC with only `propext`, `Classical.choice`, `Quot.sound`.
+Independent honesty review accepted actual canonical-pairing nonvanishing
+from a nonzero invariant polynomial over an algebraically closed
+characteristic-zero field. Exact checks and source blobs are in GEOMETRY.md.
+
+This root also integrates CLOSURE's exact `ComplexClosure.Comparison`
+endpoint (`53f1119`; delivered 3,394-job check and 40 foundational-only probes)
+and BALANCED's `CompactAverage`/`UnitaryDensity` (`3e7976e`/`96d2f1b`;
+delivered 169-probe audit), each independently reviewed. The closure theorem
+is complete at its stated endpoint; homogeneous invariant existence and
+Lemma 7.2 remain open. CONTRIBUTIONS records the pinned Mathlib sources.
+This build does not complete BOST-GEOM or the number-field Theorem 1.1.
+
 ## Integrated dual independent factors and two further lane producers
 
 The explicit-root configured build passed **9,299 jobs warning-free at

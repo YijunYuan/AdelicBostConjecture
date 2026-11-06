@@ -933,3 +933,34 @@ hypotheses depending on the induction variable; both are repaired. The two
 producer nodes alone are checked. The individual dual-factor rectangular
 restriction, full canonical determinant pairing nonvanishing and field descent
 remain subsequent obligations.
+
+
+## Actual canonical determinant contraction is nonzero
+
+`DualSpecialLinear.lean` proves transpose surjectivity using the canonical
+finite-dimensional double-dual evaluation equivalence. `Nonvanishing.lean`
+identifies the glued determinant map in a global frame, proves its range is
+the rectangular lattice image, and consumes independently invariant factors
+to prove `canonicalPairing_ne_zero_of_invariant`. This is the existing
+integral determinant contraction, not a newly assumed pairing. The input is
+an actual homogeneous invariant Hom polynomial nonzero at A, over an
+algebraically closed characteristic-zero field, at a common positive
+rectangular degree.
+
+DualSpecialLinear passed 9,077 jobs at 00:49:51 UTC
+(`4efac1b9e1a1f6e9`); Nonvanishing passed 9,107 jobs at 00:59:11 UTC
+(`669d2de5ef8622e4`). The configured explicit-root build passed **9,307 jobs
+warning-free at 2026-11-06 01:00:22 UTC** (`975bdb23135a0d4a`). Root blob:
+`3df1683a4e20af6eb4aa70c9461018efa69928cd`; DualSpecialLinear blob:
+`6c246b3bee3b46048ae9a48b5e97d4932276048d`; Nonvanishing blob:
+`39ed2b0d847eba913fa3d3d0cffec73174222f80`. All **280 geometry probes** passed
+01:00:31 UTC (`ffefd7bf352d83dc`), foundational-only. Logs: session0016
+`canonical-nonvanishing.log`, `nonvanishing-root.log`, `nonvanishing-axioms.log`.
+Independent honesty review inspected the actual consumer chain and check logs
+and found no defect. The two matching nodes are marked checked.
+
+Initial LSP repairs removed a duplicate local instance name and simplified
+the actual contragredient action. Final source diagnostics are clear; stale
+root-import LSP diagnostics are superseded by the serialized build. No new
+mathematical axiom or sorry is used. Field descent, invariant existence and
+the full nonvanishing sequence remain open; the next descent node is notready.

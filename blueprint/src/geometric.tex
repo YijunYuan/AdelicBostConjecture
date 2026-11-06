@@ -1760,7 +1760,8 @@ pairing. Choose a pure tensor where it does not vanish.
 \begin{lemma}[Dual special-linear fixed tensors are rectangular]
 \label{lem:dual-special-linear-rectangular}
 \uses{lem:rectangular-tensor-span-algclosed}
-\notready
+\lean{BostConjecture.Geometry.specialLinear_dualMap_surjective,BostConjecture.Geometry.dual_specialLinear_fixed_iff,BostConjecture.Geometry.mem_range_freeLatticeMap_of_dual_specialLinear_fixed}
+\leanok
 For a finite-dimensional vector space $E$, transposition maps $\SL(E)$
 surjectively onto $\SL(E^\vee)$. Thus a tensor in $(E^\vee)^{\otimes n}$
 is fixed by all transposes from $\SL(E)$ if and only if it is fixed by
@@ -1775,6 +1776,63 @@ preserved by both operations, and evaluation shows that the transpose
 of the resulting endomorphism is exactly $h$. Surjectivity gives the
 fixed-vector equivalence, which feeds the proved rectangular invariant
 identification on $E^\vee$.
+\end{proof}
+
+\begin{lemma}[Nonzero canonical determinant contraction over an algebraic closure]
+\label{lem:canonical-pairing-nonzero-algclosed}
+\uses{lem:dual-independent-invariant-pairing,lem:dual-special-linear-rectangular,lem:rectangular-tensor-span-algclosed,lem:projective-determinant-inclusion,lem:integral-canonical-pairing}
+\lean{BostConjecture.Geometry.projectiveDeterminantMap_eq_free,BostConjecture.Geometry.mem_range_projectiveDeterminantMap_iff,BostConjecture.Geometry.canonicalPairing_ne_zero_of_invariant}
+\leanok
+Let $F$ be an algebraically closed field of characteristic zero, $V,E_i$ finite-dimensional
+of positive ranks $s,a_i$, and $I$ finite. Let $n=s\ell=a_i k_i$ with
+$\ell,k_i>0$, and choose corresponding rectangular tableaux.
+If a homogeneous degree-$n$ polynomial on $\Hom(V,\bigotimes_i E_i)$,
+invariant for $(\prod_i\SL(E_i))\times\SL(V)$, has nonzero value at $A$,
+then the already constructed canonical determinant contraction for $A$ is
+nonzero. Its source and target are the actual determinant powers tensored
+with the integral rectangular lattices.
+\end{lemma}
+\begin{proof}
+First the projective determinant inclusion equals the free determinant
+inclusion in every global basis: both have the same formula in each
+principal chart, so uniqueness of the glued map identifies them.
+Its range equals the rectangular lattice image, since the determinant
+power coordinate is an isomorphism and its basis wedge has coordinate one.
+Obtain a source invariant tensor and individually invariant dual factors
+with nonzero pairing. Rectangular invariant identification puts the source
+factor in the projective determinant image. Transpose surjectivity and the
+same identification put each dual factor in its projective determinant
+image. Choose their preimages, take their tensor product, and evaluate the
+canonical contraction there. Its proved defining formula is precisely the
+previous nonzero scalar.
+\end{proof}
+
+\begin{lemma}[Nonvanishing descends from a free scalar extension]
+\label{lem:canonical-pairing-nonzero-descent}
+\uses{lem:canonical-pairing-nonzero-algclosed,lem:canonical-pairing-base-change}
+\notready
+Let $R\to F$ be an algebra to an algebraically closed characteristic-zero
+field. Let $V,E_i$ be finite projective $R$-modules of constant positive
+ranks $s,a_i$, and choose bases of $F\otimes_R V$ and
+$(F\otimes_R E_i)^\vee$ of those ranks. Fix rectangular tableaux with
+$n=s\ell=a_i k_i$ and positive $\ell,k_i$.
+If an actual homogeneous degree-$n$ invariant polynomial on
+$\Hom_F(F\otimes_R V,\bigotimes_i(F\otimes_R E_i))$ is nonzero at the
+scalar extension of $A$, then the canonical determinant pairing for $A$
+over $R$ is nonzero.
+\end{lemma}
+\begin{proof}
+The determinant source transport is an isomorphism. Each dual determinant
+transport is also an isomorphism by finite-projective duality, exterior
+base change and the integral lattice scalar-extension identification.
+Taking their tensor product and the canonical tensor regrouping gives a
+surjective transport of the full dual determinant source. If the original
+pairing were zero, its scalar extension would vanish on every pair of
+source vectors. The proved scalar-extension formula and surjectivity of
+both transports would then make the free determinant pairing over $F$
+zero. In global bases this is the projective determinant pairing, which
+the preceding nonvanishing lemma proves nonzero. This contradiction proves
+the assertion; faithfulness of the algebra is unnecessary in this direction.
 \end{proof}
 
 \begin{lemma}[Polynomial identities from evaluation]

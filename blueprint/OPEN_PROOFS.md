@@ -49,7 +49,7 @@ now proves the general sublinear covolume limit for every fixed positive
 height, using actual prefix separation and logarithmic expectations.
 Rectangular SL invariant identification over algebraically closed characteristic-zero
 fields is now checked in `Geometry.RectangularInvariants`. Arbitrary-field descent,
-canonical contraction nonvanishing and the number-field main theorem remain open.
+nonvanishing from geometric semistability and the number-field main theorem remain open.
 
 Current boundaries and remaining producers:
 
@@ -97,9 +97,10 @@ Current boundaries and remaining producers:
   interval partition and the factorial/Vandermonde enumeration.
   No seminormal theorem is assumed: the
   action and norms are now proved in the canonical word realization.
-- `lem:invariant-orbit-criterion`: equality of Euclidean and Zariski orbit
-  closures, and detection by homogeneous invariants for products of special
-  linear groups. The following balanced-projection argument uses both parts.
+- `lem:invariant-orbit-criterion`: detection by homogeneous invariants for
+  products of special linear groups remains open. Equality of Euclidean and
+  Zariski polynomial-image closures is proved in `ComplexClosure.Comparison`
+  and integrated; the balanced-projection argument consumes both parts.
 
 These are unproved producer obligations, not assumptions under which the
 main result is declared finished. The current manuscript proposes the route;
@@ -119,9 +120,11 @@ evaluation and the restricted pairing are bounded, the latter in
 `ContractionNorm.lean`. The normalized Hom polynomial lift now yields independent invariant factors
 with nonzero tensor pairing (`HomInvariants.lean`), and the source factor
 is restricted to the actual rectangular lattice over algebraically closed
-characteristic-zero fields. Dual-target rectangular restriction, nonvanishing
-of the full canonical determinant pairing, and arbitrary-field descent remain
-requirements of the route.
+characteristic-zero fields. `DualInvariants.lean`, `DualSpecialLinear.lean` and
+`Nonvanishing.lean` now also restrict every dual factor and prove the actual
+canonical pairing nonzero from a nonzero invariant Hom polynomial. Descent
+to the original coefficient ring and the full geometric-semistability
+nonvanishing sequence remain requirements of the route.
 
 All cited manuscript page anchors resolve to registered vision transcriptions
 that were read before attachment. The shifted-coordinate tableau count has

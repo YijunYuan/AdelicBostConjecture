@@ -750,3 +750,46 @@ from `RingTheory/Polynomial/UniqueFactorization.lean` and
 an actual integral injective polynomial coordinate map; construction of that
 map and density are subsequent obligations. These imports retain the same
 repository/revision/Apache-2.0 license stated above; no source is copied.
+
+## Canonical nonvanishing and closure/averaging integration
+
+`Geometry/DualSpecialLinear.lean` and `Nonvanishing.lean` are original
+compositions using Mathlib's `SpecialLinearGroup.dualMap`,
+`SpecialLinearGroup.congr_linearEquiv` and `Module.evalEquiv` unchanged.
+They feed actual transpose surjectivity into the checked rectangular
+invariant theorem and then into the existing projective determinant pairing.
+The nonzero invariant polynomial is the mathematical input, not a new
+certificate or a replacement for geometric semistability.
+
+BALANCED deliveries `CompactAverage` (`3e7976e`) and `UnitaryDensity`
+(`96d2f1b`) reuse pinned Apache-2.0 Mathlib probability Haar measure,
+Bochner integral translation and continuous-linear-map commutation,
+`Matrix.toEuclideanCLM`, `Matrix.IsHermitian.spectral_theorem`,
+`MvPolynomial.funext_set`, `Circle.exp_injOn_Icc`, and
+`Matrix.det_mvPolynomialX_ne_zero`. No source copied. Their sources are
+the registered Maithani Theorem 5.6, U–GL density proposition and
+product-of-infinite-sets lemma; actual consumers and remaining special-unitary
+averaging obligations are recorded in `verification/BALANCED.md`.
+
+CLOSURE final delivery `53f1119` imports `ComplexClosure.Comparison`,
+consuming the actual normalization, constructibility and principal-open
+density producers to prove `closure_polynomial_image_zeroLocus`.
+Additional unchanged Mathlib imports at the same pinned revision/license:
+`RingTheory/NoetherNormalization.lean` (`exists_integral_inj_algHom_of_fg`),
+`Algebra/MvPolynomial/Funext.lean` (`funext_set`),
+`RingTheory/Ideal/GoingUp.lean` (`Ideal.under_ne_bot`),
+`Topology/Separation/Basic.lean` (`infinite_of_mem_nhds`),
+`RingTheory/Spectrum/Prime/Chevalley.lean`
+(`PrimeSpectrum.isConstructible_range_comap`, including its
+`ChevalleyComplexity` dependency),
+`RingTheory/Spectrum/Prime/ConstructibleSet.lean`
+(`exists_constructibleSetData_iff`),
+`RingTheory/Ideal/MinimalPrime/Noetherian.lean`
+(`finite_minimalPrimes_of_isNoetherianRing`),
+`RingTheory/Ideal/MinimalPrime/Basic.lean` (`exists_minimalPrimes_le`),
+`RingTheory/FinitePresentation.lean` (`of_finiteType`), and
+`Topology/Homeomorph/Defs.lean` (`Homeomorph.preimage_closure`).
+No source copied or dependencies changed. The intended actual consumer is
+BALANCED's checked special-linear polynomial Plücker orbit image (`84a679f`).
+Exact authorship, source review and 40-probe evidence are preserved in
+`verification/COMPLEX_CLOSURE.md`.
