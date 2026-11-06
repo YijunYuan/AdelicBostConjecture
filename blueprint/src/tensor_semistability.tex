@@ -248,6 +248,37 @@ Substitution in the squared-norm degree derivative cancels this fixed
 factor in each embedding, yielding the formula.
 \end{proof}
 
+\begin{lemma}[Projection-trace derivative of an induced arithmetic degree]
+\label{lem:submodule-projection-trace-derivative}
+\uses{lem:arithmetic-gram-derivative,lem:arithmetic-metric-variation}
+\source{bost-specht-manuscript:page-0013}
+Fix a Hermitian metric $h$ on $E$ and an integral submodule $S$.
+Let $g_\sigma(t)$ be compatible complex fiber automorphisms with
+$g_\sigma(0)=1$ and
+$\frac{d}{dt}g_\sigma(t)x|_{t=0}=A_\sigma x$ for every fiber vector $x$.
+Let $h_t$ be their pullback metric, and $P_\sigma$ the $h_\sigma$-orthogonal
+projection onto the image of $S_\sigma$ in $E_\sigma$. Then
+\[
+ \left.\frac{d}{dt}\degn(S,h_t|_S)\right|_{t=0}
+ =-\frac1{[K:\mathbb Q]}\sum_\sigma
+   \operatorname{Re}\operatorname{Tr}(P_\sigma A_\sigma).
+\]
+\end{lemma}
+\begin{proof}
+For each embedding choose an orthonormal basis $v_1,\ldots,v_s$ of
+$S_\sigma$ for its induced metric. The scalar-extension injection
+is an isometry onto its range, so the images form an orthonormal basis
+of that range. Differentiating their moving Gram entries gives
+$\langle A_\sigma v_i,v_j\rangle+\langle v_i,A_\sigma v_j\rangle$.
+The Gram matrix at zero is the identity; the derivative of its
+determinant is therefore its derivative's trace, namely
+$2\operatorname{Re}\sum_i\langle v_i,A_\sigma v_i\rangle
+=2\operatorname{Re}\operatorname{Tr}(P_\sigma A_\sigma)$.
+The arithmetic Gram derivative lemma cancels the factor two and yields
+the stated formula. All bases are in complex fibers; no integral basis
+of $S$ or $E$ is used.
+\end{proof}
+
 \begin{lemma}[Arithmetic stationarity at a local maximum]
 \label{lem:arithmetic-degree-stationarity}
 \uses{lem:arithmetic-gram-derivative}

@@ -1,6 +1,7 @@
 module
 
 public import BostConjecture.Main.MaxSlope.TensorFiltration
+public import BostConjecture.Main.MaxSlope.LowerBound
 
 /-!
 # The actual lexicographic HN tensor steps
