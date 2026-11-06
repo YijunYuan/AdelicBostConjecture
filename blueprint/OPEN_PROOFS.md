@@ -8,7 +8,7 @@ appendices are outside the target.
 
 ## Remaining producer-to-consumer route
 
-1. **TENSOR-SEMI:** construct the conjugation-compatible traceless partial-trace
+1. **TENSOR-SEMI, checked at `9ba97a4`:** construct the conjugation-compatible traceless partial-trace
    defects of the actual maximizing tensor submodule. Combine actual metric
    stationarity with trace-square positivity to prove both defects vanish.
    This supplies `lem:extremal-to-balance`.
@@ -25,7 +25,8 @@ appendices are outside the target.
    slope zero, providing the induction base. Average-slope additivity gives
    the semistability consequence.
 
-All four headline nodes remain uncompleted. No assumed producer package,
+The balance node is checked in its owner cone and awaits the next shared-root
+batch. The other three headline nodes remain uncompleted. No assumed producer package,
 local-maximum premise in the final theorem, or clean prerequisite build
 substitutes for these steps. The two active owners retain their disjoint
 scopes; completed lanes are not reopened.
@@ -52,7 +53,9 @@ scopes; completed lanes are not reopened.
 - **TENSOR-SEMI:** normalized extensions, actual exponential metric variation,
   local maximality and degree derivatives, scalar partial-trace defects,
   conjugate bases, and actual conjugation/projection-trace transport are
-  checked through the full owner handoff `6cc3fd8`. Balance remains separate.
+  checked through the full owner handoff `6cc3fd8`. The additionally reviewed
+  `9ba97a4` proves actual defect vanishing and balance; it awaits shared-root
+  integration with the unconditional endpoint.
 - **MAIN:** the actual saturated lexicographic HN tensor flag, consecutive
   integral quotient isomorphisms and all-fiber Hilbert metric identities,
   grade slope bounds, filtered slope bound, maximal-slope isometry invariance,

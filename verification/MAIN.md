@@ -112,8 +112,10 @@ Attribution and pinned external sources remain in `CONTRIBUTIONS.md`.
 
 ## Remaining route and hygiene
 
-TENSOR-SEMI must finish compatible arithmetic partial-trace defect vanishing,
-extremal balance and unconditional tensor semistability. MAIN then applies that
+TENSOR-SEMI balance handoff `9ba97a4` is independently accepted (3538/9181
+jobs and69 foundational-only probes), pending the next shared-root batch.
+TENSOR-SEMI must finish the geometric contradiction and unconditional tensor
+semistability. MAIN then applies that
 proved theorem to the actual HN grades, transports semistability through the
 checked integral isometry, and applies the filtered bound for the upper bound.
 Together with the unconditional lower bound this gives the binary equality.
@@ -137,3 +139,10 @@ proofs. The finalization scan found only pre-existing untracked workspace
 configuration/instruction files and the two reference PDFs; these are outside
 MAIN ownership and were not staged. All authored MAIN source and evidence are
 committed.
+
+The latest graph sync has373 blueprint nodes/2446 declarations with no unresolved
+attachments;1144 unattached helper/draft declarations remain intentional coverage
+warnings. A rejected `graph sync --json` invocation was rerun without the
+unsupported flag. The transient roadmap parent/child warning was investigated
+by the read-only ground helper and corrected by TENSOR adding its remaining
+geometric and composition children; the repeated command reports no warnings.
