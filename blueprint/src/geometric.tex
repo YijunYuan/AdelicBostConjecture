@@ -2025,6 +2025,31 @@ identity is precisely evaluation of a pulled-back polynomial at a vector.
 No freeness, metric or arithmetic-degree choice enters this construction.
 \end{proof}
 
+\begin{lemma}[Binary invariant detection of the original contraction]
+\label{lem:binary-plucker-nonzero-sequence}
+\uses{lem:two-factor-plucker-transport,lem:plucker-invariant-nonzero-sequence}
+\source{bost-specht-manuscript:page-0010}\notready
+Let $R\to F$ be a homomorphism to an algebraically closed characteristic-zero
+field $F$, and let $V,E_{\mathrm L},E_{\mathrm R}$ be finite projective
+$R$-modules of constant positive ranks $s,a_{\mathrm L},a_{\mathrm R}$.
+Write $A:V\to\bigotimes_i E_i$ for an $R$-linear map with the two-factor
+indexing. Choose bases of $F\otimes_R V$ and the two dual fibers.
+Suppose an actual homogeneous positive-degree invariant $p$ for the binary
+Pl\"ucker action is nonzero at the exterior vector of $A_F$, after applying
+$\delta$ from the preceding lemma. Then there is a positive common multiple
+$d_0$ of $s,a_{\mathrm L},a_{\mathrm R}$ such that the canonical original-ring
+pairing is nonzero in every degree $d_0r$, $r>0$, with compatible rectangular
+parameters and tableaux.
+\end{lemma}
+\begin{proof}
+Pull $p$ back along $\bigwedge^s\delta$. The preceding lemma gives exactly
+its homogeneous degree, invariance under every independent family element,
+and its unchanged nonzero value at the exterior vector of $A_F$.
+Apply the Pl\"ucker-invariant nonzero-sequence lemma to this polynomial.
+Its output is the existing pairing over $R$, so no faithful-extension or
+integral-freeness hypothesis is needed for this detection step.
+\end{proof}
+
 \begin{lemma}[Nonvanishing in unbounded degrees]
 \label{lem:contraction-nonzero}
 \uses{def:geometric-semistability,lem:invariant-base-change,lem:canonical-contraction,lem:rectangular-invariants,lem:finite-independent-tensor-invariants,lem:plucker-invariant-tensor,lem:invariant-degree-divisibility}

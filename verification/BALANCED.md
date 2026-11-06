@@ -5,14 +5,19 @@ The exact source-shaped endpoint is now kernel-checked as
 subspace of an arbitrary finite-dimensional complex Hermitian tensor product,
 the actual scalar partial-trace equations imply geometric semistability and
 positive-degree homogeneous invariant existence on every nonzero vector of
-the intrinsic top-exterior image. Independent source, mathematical and honesty reviews have accepted this
-endpoint. Final root integration is pending; the task remains open until
-that acceptance condition is satisfied.
+the intrinsic top-exterior image. Independent source, mathematical and honesty
+reviews have accepted this endpoint. Final root integration at `cf39176`
+passed **9,329 jobs warning-free**; all **195 transitive axiom probes** use
+only `propext`, `Classical.choice`, and `Quot.sound`. Lemma 7.2 and its used
+dependency cone are complete. The number-field main theorem remains open.
 
 The proof includes actual Gram differentiation, Hermitian exponential
 convexity, determinant-one polar reduction, Euclidean/algebraic orbit closure
 comparison, compact polynomial Haar averaging, special-unitary coordinate
 detection and homogeneous extraction. No orbit criterion is assumed.
+
+The sections below record successive verification checkpoints; their earlier
+open frontiers are superseded by the final acceptance record at the end.
 
 ## Checked producers
 
@@ -30,7 +35,7 @@ The exponential consumer constructs the actual frame rather than assuming
 its derivative. It needs no Hermitian hypothesis for this first-variation
 statement; Hermitian hypotheses enter the checked spectral convexity argument.
 The real scalar instances use the canonical restriction along ℝ → ℂ.
-Zero-dimensional auxiliary cases are permitted; the open headline retains
+Zero-dimensional auxiliary cases are permitted; the headline retains
 the source requirement that the subspace is nonzero.
 
 All checks used the serialized resource slot and explicit workspace root:
@@ -819,7 +824,7 @@ The COVOLUME launch baseline `b3a4bcd` captured the checked OrbitCriterion,
 final PluckerSemistability and axiom file while this session was active.
 The producer checks above, not that operational snapshot, certify those files.
 PolynomialAverage is root-integrated at `fb60f4a`, 9,321 warning-free jobs;
-root integration of the final endpoint remains pending.
+the final endpoint is integrated at `cf39176`, as recorded below.
 
 Independent final reviews accepted source correspondence, mathematical
 correctness and honesty. They checked non-vacuity, positive-factor derivation,
@@ -829,5 +834,37 @@ verified the criterion and headline axioms as foundational-only. Source review's
 two stale citation findings were corrected and rechecked (I-0089 resolved).
 The reviewers traced inherited analytic/closure interfaces and relied on the
 recorded earlier independent reviews for their full dependency proofs.
-All five new blueprint producer/headline nodes now have faithful attachments
-and checked completion markers; root validation remains the final task gate.
+All six new blueprint producer/headline nodes have faithful attachments
+and checked completion markers (`d91a68c`, with the reverse-criterion dependency
+recorded at `acd31cb`).
+
+## Final acceptance
+
+GEOM's explicit shared-root commit `cf39176` passed the configured serialized
+check at **2026-11-06 01:44:09 UTC**, **9,329 jobs warning-free**,
+fingerprint `975bdb23135a0d4a`. The accepted root blob is
+`56d13ab1ed56f846890255e0c4e9e713d2a272bf`; it imports both the final
+`Balanced.PluckerSemistability` and `InvariantTheory.OrbitCriterion`.
+The checked source blobs are respectively
+`74e9fb060b2cacbc37a15d35bac52921477a659f` and
+`e3f8876a01f53d6e276d4d542a68cfdda8332b37`. The independent parent audit
+confirmed that these sources were unchanged, and accepted the root build,
+195-probe audit and three reviews in I-0086. GEOM's `0bcc5fb` subsequently
+clarified historical shared-status prose without changing this evidence.
+
+The graph sync passed with **303 nodes and no missing references**. Its
+952 unattached helpers are the recorded project-wide coverage warning,
+not a missing dependency of the checked theorem. No kernel build warning,
+`sorryAx`, custom axiom or unresolved proof failure remains in this delivery.
+Guarded LSP and serialized explicit-root kernel checks were used throughout.
+
+Claim class: **proved producer**. Frontier before: actual finite-degree
+polynomial averaging and the invariant orbit criterion. Frontier after:
+**exact Lemma 7.2 complete**, including its used analytic and algebraic
+conclusions. Consumer: GEOM's `exists_tensorSL_plucker_invariant_tensor`
+accepts the canonical homogeneous invariant supplied by this theorem.
+Independent source/mathematical reviews: accepted; **honesty-reviewer: used**.
+The scalar-extension square remains tracked separately under
+`BOST-BALANCED-COACTION`, pending for GEOM's later descent under I-0079;
+it is not a dependency of this complex lemma. The main Theorem 1.1 is not
+claimed complete.

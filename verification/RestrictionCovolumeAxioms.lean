@@ -1,0 +1,16 @@
+import BostConjecture.Arithmetic.RestrictionCovolume.TraceSpace
+
+#print axioms BostConjecture.Arithmetic.archimedeanSection
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceCore
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceSection
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceSection_norm_sq
+#print axioms BostConjecture.Arithmetic.HermitianMetric.sectionNorm_le_traceSection_norm
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceSection_injective
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceLatticeEquiv
+#print axioms BostConjecture.Arithmetic.HermitianMetric.finite_traceLattice_ball
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceLattice_discreteTopology
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceLattice_isZLattice
+#print axioms BostConjecture.Arithmetic.HermitianMetric.realTensorMap_bijective
+#print axioms BostConjecture.Arithmetic.HermitianMetric.realTensorEquiv
+#print axioms BostConjecture.Arithmetic.HermitianMetric.realTensorEquiv_tmul
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceSpace_finrank

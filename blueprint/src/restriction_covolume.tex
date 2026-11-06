@@ -9,8 +9,51 @@ compatible with conjugation, as in Definition~\ref{def:hermitian-metric}.
 The normalized degree is Definition~\ref{def:intrinsic-determinant-degree}.
 Covolume below uses the Euclidean volume of the displayed real trace metric.
 
+\begin{lemma}[The real trace space and integral image]
+\label{lem:real-trace-lattice}
+\uses{def:hermitian-metric,lem:bounded-integral-sections,lem:integral-restriction-rank}
+\source{bost-specht-manuscript:page-0011}
+\lean{BostConjecture.Arithmetic.HermitianMetric.traceCore,BostConjecture.Arithmetic.HermitianMetric.traceSection_injective,BostConjecture.Arithmetic.HermitianMetric.traceLattice_discreteTopology,BostConjecture.Arithmetic.HermitianMetric.traceLattice_isZLattice,BostConjecture.Arithmetic.HermitianMetric.realTensorEquiv,BostConjecture.Arithmetic.HermitianMetric.realTensorEquiv_tmul,BostConjecture.Arithmetic.HermitianMetric.traceSpace_finrank}\leanok
+Let $j:A\longrightarrow\prod_{\sigma:K\hookrightarrow\mathbb C} A_\sigma$
+be the simultaneous section map and let $E=\operatorname{span}_{\mathbb R}j(A)$.
+The pairing
+\[
+ (x,y)_{\mathrm{tr}}=\sum_\sigma\operatorname{Re}\langle x_\sigma,y_\sigma\rangle_\sigma
+\]
+is a positive definite real inner product on $E$. The map $j$ is injective,
+$j(A)$ is a full discrete integer lattice, and the scalar extension
+$\mathbb R\otimes_{\mathbb Z}A\longrightarrow E$, $r\otimes a\mapsto rj(a)$,
+is an isomorphism. In particular $\dim_{\mathbb R}E=D\rk_\Ocal A$.
+\end{lemma}
+\begin{proof}
+Real bilinearity and symmetry follow from the Hermitian pairing in each
+fiber. Each summand of $(x,x)_{\mathrm{tr}}$ is nonnegative; their sum
+vanishes only if every coordinate is zero. Scalar extension to any complex
+embedding is injective on the projective module $A$, so $j$ is injective.
+The square of the norm of $j(a)$ is $\sum_\sigma\|a\|_\sigma^2$.
+Consequently a bounded ball meets $j(A)$ in finitely many points by
+Lemma~\ref{lem:bounded-integral-sections}. Removing the finitely many
+nonzero points from the unit ball gives a neighborhood of zero meeting
+$j(A)$ only at zero; translation proves discreteness. Fullness is the
+definition of $E$.
+
+For completeness, discreteness also proves the required independence over
+$\mathbb R$. Choose an integer basis of $j(A)$ and a maximal real
+independent subset $e_1,\dots,e_s$ of that basis. Every remaining basis
+element $v$ has all integer multiples reducible modulo
+$\sum_i\mathbb Ze_i$ into its bounded fundamental parallelepiped.
+These remainders lie in the discrete subgroup $j(A)$, so only finitely many
+occur. Two distinct multiples have the same remainder, giving
+$nv\in\sum_i\mathbb Ze_i$ for a nonzero integer $n$, contrary to integer
+independence. Thus the whole integer basis is a real basis. Its scalar
+extension is the asserted isomorphism, which is canonical because its
+formula on pure tensors determines it. Its dimension is the integer rank
+of $A$, equal to $D\rk_\Ocal A$ by
+Lemma~\ref{lem:integral-restriction-rank}.
+\end{proof}
+
 \begin{lemma}[Restriction of scalars and covolume]
-\label{lem:restriction-covolume}\uses{def:hermitian-degree,lem:bounded-integral-sections,lem:integral-restriction-rank}
+\label{lem:restriction-covolume}\uses{def:hermitian-degree,lem:bounded-integral-sections,lem:integral-restriction-rank,lem:real-trace-lattice}
 \source{bost-specht-manuscript:page-0011}\notready
 Give $A\otimes_{\mathbb Z}\mathbb R$ the Euclidean norm
 $\|x\|^2=\sum_v w_v\|x_v\|_v^2$. For $a=\rk_\Ocal A$,
