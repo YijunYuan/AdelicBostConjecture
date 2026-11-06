@@ -1576,7 +1576,7 @@ gives the converse. These identities prove the assertions.
 
 \begin{lemma}[Hermitian semistability on the generic subspace lattice]
 \label{lem:hermitian-convex-slopes}
-\uses{lem:hermitian-subspace-supermodular,lem:hermitian-quotient-interval-slope,lem:intrinsic-subspace-degree,lem:saturation-degree}\notready
+\uses{lem:hermitian-subspace-supermodular,lem:hermitian-quotient-interval-slope,lem:intrinsic-subspace-degree,lem:saturation-degree}\lean{BostConjecture.Arithmetic.HermitianMetric.isSemistable_iff_subspaces,BostConjecture.Arithmetic.HermitianMetric.subspaceSlope_top,BostConjecture.Arithmetic.HermitianMetric.isSemistable_iff_game}\leanok
 For a positive-rank Hermitian bundle $A$, the intrinsic subspace slope
 satisfies $\mu(0,A_K)=\slope(A)$. The inequalities
 $\mu(0,X)\leq\mu(0,A_K)$ for $X\ne0$ are equivalent to
@@ -1624,7 +1624,7 @@ preserved. This argument does not use bounded-degree finiteness.
 \begin{lemma}[Degree of a submodule of a quotient]
 \label{lem:quotient-submodule-degree}
 \uses{lem:nested-quotient-metric,lem:exact-determinant-degree}
-\notready
+\lean{BostConjecture.Arithmetic.HermitianMetric.degree_quotient_submodule,BostConjecture.Arithmetic.HermitianMetric.finrank_quotient_submodule}\leanok
 Let $P\subset A$ be saturated, let $N\subset A/P$, and let
 $T$ be its inverse image in $A$. Give $N$ the metric induced from the
 quotient metric of $A/P$. Then
@@ -1645,7 +1645,7 @@ sequence, so dimension additivity gives the rank formula.
 \begin{lemma}[Semistability of induced quotient intervals]
 \label{lem:quotient-interval-semistable}
 \uses{lem:quotient-submodule-degree,lem:hermitian-convex-slopes,lem:saturation-degree,lem:hermitian-quotient-interval-slope}
-\notready
+\lean{BostConjecture.Arithmetic.HermitianMetric.quotient_submodule_slope_le_interval,BostConjecture.Arithmetic.HermitianMetric.quotient_isSemistable_of_interval}\leanok
 Let $X\subsetneq Y\subseteq A_K$. Suppose every $X\subsetneq Z\subseteq Y$
 satisfies $\mu(X,Z)\leq\mu(X,Y)$. Then the actual quotient bundle
 $(A\cap Y)/(A\cap X)$ is semistable against all positive-rank integral
@@ -1665,7 +1665,7 @@ This proves the assertion with the actual induced quotient metric.
 \begin{lemma}[Semistable HN grades and attained maximal slope]
 \label{lem:hermitian-hn-maximal-slope}
 \uses{lem:hermitian-hn-interval-flag,lem:quotient-interval-semistable,lem:hermitian-subspace-supermodular,lem:saturation-degree}
-\notready
+\lean{BostConjecture.Arithmetic.HermitianMetric.hn_quotient_isSemistable,BostConjecture.Arithmetic.HermitianMetric.hnSubmodule_one_rank_pos,BostConjecture.Arithmetic.HermitianMetric.maxSlope,BostConjecture.Arithmetic.HermitianMetric.isGreatest_slopes,BostConjecture.Arithmetic.HermitianMetric.isGreatest_maximalSlope_submodules}\leanok
 Every actual quotient $A_{i+1}/A_i$ of the canonical saturated HN flag
 is semistable. The maximum of the slopes of positive-rank integral
 submodules is attained by $A_1$. Every submodule with this slope is

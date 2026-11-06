@@ -914,3 +914,34 @@ Balanced verification, invariant/representation theory and vendor paths),
 or were pre-existing workspace configuration/reference files. None was
 staged or committed by this task. I-0065 stays open for the root integration
 result; the delivered arithmetic imports were acknowledged by both consumers.
+
+
+## Session 0016: actual HN grades and maximal slope
+
+The all-integral semistability equivalence and actual quotient-preimage degree/rank
+formulas are in `de1c7bb`; the saturation comparison for arbitrary quotient
+submodules is in `fc452fc`; `fb56e97` proves semistability of every actual HN grade,
+attainment of the maximum integral-submodule slope and containment of every
+maximizer in the first saturated term. These are proved producers for arbitrary
+number fields and nonfree finite projective modules.
+
+- Serialized `check Arithmetic.Semistable Arithmetic.QuotientSubmoduleDegree`
+  (full module names) passed 3573 jobs at 2026-11-05 23:49:12 UTC,
+  fingerprint `2da16866e835b77e`.
+- `check BostConjecture.Arithmetic.QuotientSemistable` passed 3574 jobs at
+  23:54:01 UTC, fingerprint `81d3bf8b80cff84a`.
+- `check BostConjecture.Arithmetic.HermitianHN` passed 3576 jobs at 23:58:15 UTC,
+  fingerprint `221119cdbff26404`.
+- `check --lean verification/ArithmeticAxioms.lean` passed 287 probes at
+  23:59:04 UTC, fingerprint `590174f2cda53d26`; only `propext`,
+  `Classical.choice` and `Quot.sound` occur. Log: session0016/arithmetic-axioms.jsonlog.
+- Scoped honesty review was satisfactory: all-submodule quantifiers, actual
+  quotient metrics, positivity and substantive maximum proofs were checked.
+
+The first command attempted with unsupported `check -p` was rejected before Lean;
+the commands above use explicit workspace `--root` and the shared serialized slot.
+The offline MCP search tool likewise lacked workspace-root discovery; the Horizon
+CLI and guarded LSP searches supplied the required searches instead.
+The previous integration thread I-0065 closed after the accepted root e2e7039;
+these new producers were handed to the successor shared integrator GEOM as I-0075.
+Full HN uniqueness/isometry and degree finiteness remain separate open boundaries.
