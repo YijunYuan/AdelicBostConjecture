@@ -2,6 +2,7 @@ import BostConjecture.Arithmetic.TensorDegree
 import BostConjecture.Arithmetic.SubspaceSupermodular
 import BostConjecture.Arithmetic.ArchimedeanFiniteness
 import BostConjecture.Arithmetic.IrreducibleSemistable
+import BostConjecture.Arithmetic.RestrictionOfScalars
 import BostConjecture.Arithmetic.ExactDegree
 import BostConjecture.Arithmetic.QuotientMetric
 import BostConjecture.Arithmetic.IntegralDeterminantProduct
@@ -338,3 +339,9 @@ import BostConjecture.Arithmetic.DeterminantProduct
 #print axioms BostConjecture.Arithmetic.HermitianMetric.hnSubmodule_unique
 #print axioms BostConjecture.Arithmetic.genericRepresentation
 #print axioms BostConjecture.Arithmetic.HermitianMetric.isSemistable_of_irreducible
+#print axioms BostConjecture.Arithmetic.genericMap_int_isLocalizedModule
+#print axioms BostConjecture.Arithmetic.rationalGenericEquiv
+#print axioms BostConjecture.Arithmetic.rationalGenericEquiv_tmul
+#print axioms BostConjecture.Arithmetic.finite_int
+#print axioms BostConjecture.Arithmetic.free_int
+#print axioms BostConjecture.Arithmetic.finrank_int
