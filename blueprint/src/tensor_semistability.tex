@@ -60,12 +60,14 @@ The degree criterion applied to $A$ and $Q$ concludes the proof.
 \end{proof}
 
 \begin{lemma}[Extensions and line twists]
-\label{lem:extensions-and-twists}\uses{lem:normalized-semistable-extension,lem:line-twist}\notready
+\label{lem:extensions-and-twists}\uses{lem:normalized-semistable-extension,lem:line-twist}
+\lean{BostConjecture.Arithmetic.HermitianMetric.isSemistable_of_submodule_quotient,BostConjecture.Arithmetic.HermitianMetric.IsSemistable.tensor_rankOne_right,BostConjecture.Arithmetic.HermitianMetric.IsSemistable.tensor_rankOne_left,BostConjecture.Arithmetic.HermitianMetric.slope_submodule_tensor_of_rank_one}
+\leanok
 \source{bost-specht-manuscript:page-0012,bost-specht-manuscript:page-0013}
 An extension of normalized semistable bundles, with induced and
-quotient metrics, is normalized semistable. Tensoring by a Hermitian
-line bundle preserves semistability and shifts every slope by the
-line's degree.
+quotient metrics, is normalized semistable. For a positive-rank bundle,
+tensoring by a Hermitian line bundle preserves semistability and shifts
+each positive-rank submodule slope and the ambient slope by the line's degree.
 \end{lemma}
 \begin{proof}
 The normalized extension assertion is
@@ -575,9 +577,43 @@ degree. This global compatible-family argument is an adaptation of the
 source's single-place variation argument.
 \end{proof}
 
+\begin{lemma}[Arithmetic slope bound from a balanced tensor fiber]
+\label{lem:balanced-arithmetic-slope}
+\uses{lem:arithmetic-tensor-projection,lem:balanced-plucker,lem:binary-plucker-nonzero-sequence,thm:geometric-slope}
+\source{bost-specht-manuscript:page-0013}
+\lean{BostConjecture.Arithmetic.HermitianMetric.slope_submodule_tensor_le_of_invariant,BostConjecture.Arithmetic.HermitianMetric.slope_submodule_tensor_le_of_isBalanced}
+\notready
+Let $E,F$ be positive-rank Hermitian finite projective modules over
+$\Ocal_K$, and let $S\subset E\otimes F$ have positive rank.
+If its concrete tensor fiber at one complex embedding is balanced,
+then $\slope(S)\leq\slope(E)+\slope(F)$ for the actual induced metric.
+\end{lemma}
+\begin{proof}
+Choose an orthonormal basis of the fiber image of $S$. Its exterior
+vector has squared norm one, hence is nonzero. The balanced Pl\"ucker
+lemma supplies a homogeneous invariant of positive degree not vanishing
+on this vector. Scalar extension of the integral inclusion identifies
+the fiber of $S$ with that image, and pulling back the orthonormal basis
+gives a basis to which the binary invariant detection theorem applies.
+
+For a finite projective module over the domain $\Ocal_K$, the rank at
+every prime equals the generic rank: specialize along the inclusion
+of the generic prime and use local constancy of projective rank.
+The same rank equality holds for the dual. Thus all ranks in the
+geometric slope inequality have their prescribed positive values.
+The binary and two-factor finite-family scalar-extension identifications
+agree on pure integral tensors, hence everywhere by linearity.
+Their induced exterior vectors are therefore equal. Binary invariant
+detection yields the nonzero canonical contractions required by the
+geometric slope inequality. Finally, pulling the two-factor Hilbert
+metric back along the integral inclusion is exactly the induced metric
+on $S$, by composition of scalar-extension maps. The geometric inequality
+is consequently the asserted intrinsic slope inequality.
+\end{proof}
+
 \begin{proposition}[Tensor semistability]
 \label{thm:tensor-semistability}
-\uses{lem:degree-calculus,lem:semistable-normalization,lem:strict-maximizing-counterexample,lem:extremal-to-balance,lem:balanced-plucker,lem:binary-plucker-nonzero-sequence,thm:geometric-slope}
+\uses{lem:degree-calculus,lem:semistable-normalization,lem:strict-maximizing-counterexample,lem:extremal-to-balance,lem:balanced-arithmetic-slope}
 \source{bost-specht-manuscript:page-0012,bost-specht-manuscript:page-0013}
 \notready
 For every number field $K$ and all positive-rank semistable Hermitian

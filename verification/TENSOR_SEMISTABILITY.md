@@ -205,3 +205,19 @@ rescaling of both factors with rescaling the tensor by the sum. The explicit-roo
 serialized target passed 3576 jobs without warnings; the expanded 70-declaration
 axiom audit passed with only `propext`, `Classical.choice`, and `Quot.sound`.
 The final geometric bridge and unconditional tensor theorem remain unverified drafts.
+
+## Bounded geometric-application diagnosis (2026-11-06)
+
+The I-0140 lean-isolator has exited. Its two serialized scratch checks failed at
+200000 heartbeats (83.5s and14.2s), with stage markers proving that `hfiber`
+and the underlying vector-family equality `hfun` elaborate before the failure.
+The partial application of `slope_le_of_binary_complex_invariant`, while supplying
+the polynomial/invariance arguments, is the remaining failing comparison.
+Unfolding diagnostics counted 283711 `Sum.rec` and248835 `Eq.rec` reductions,
+including opaque proof fields of the two `binaryTensorFamily` data instances.
+Exact probes are preserved in this session's attempts0002/0003; current owned
+drafts are preserved in a later attempt. Explicit locally transparent family
+instances fail to match the compiled `hE` type. Simplification before supplying
+`p` still exceeds200000 heartbeats. Coordination requests a minimal shared
+instance implementation repair, with unchanged public names/types. No such
+repair, final bridge, or unconditional theorem is claimed checked here.
