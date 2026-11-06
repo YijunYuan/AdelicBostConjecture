@@ -66,8 +66,16 @@ twist used in Proposition 7.3; it does not assert general tensor semistability.
 ## Integration boundary
 
 The exact checked exports were handed to STRICT in I-0127, to MAIN in I-0135,
-and to TENSOR in I-0136. The required external consumer and checked shared-root
-acceptance are pending; the task remains active until their evidence is recorded.
+and to TENSOR in I-0136. STRICT's actual consumer is committed at `b49b67f`:
+`Arithmetic.Compactness.exists_strict_maximizing_counterexample` in
+`Main/StrictReduction/MaximizingCounterexample.lean`. Its two rank-one
+contradictions call the left and right exports and feed both rank-at-least-two
+conclusions. The module passed 9171 jobs at 04:39:47 UTC, and its ten transitive
+axiom probes passed at 04:40:18 with standard foundations only. Thus this is an
+actual checked consumer, not merely an import or planned attachment.
+
+MAIN's checked shared-root and graph acceptance is still pending; the task
+remains active until that final integration evidence is recorded.
 
 No external code was newly vendored or adapted. The proof uses the pinned
 mathlib and existing attributed project APIs. Shared source and integration files
