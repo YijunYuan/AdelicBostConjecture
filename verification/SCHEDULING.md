@@ -1,6 +1,6 @@
 # Parallel Horizon scheduling
 
-## Live checkpoint at 2026-11-06 04:57 UTC
+## Live checkpoint at 2026-11-06 05:14 UTC
 
 The user requests **four continuing Horizon proof lanes until the entire main
 theorem and its used dependencies are complete**, with no budget cap. The parent
@@ -132,6 +132,25 @@ covolume asymptotic `e2e7039`/`8d57641`; CLOSURE `0007` exited 01:16:41,
 proof `53f1119`, root `d29f2d3`, evidence `f7ffd4f`, 40 probes. Do not resume.
 
 ## Resource and runtime checkpoint
+
+At 05:14, the checked frontier has advanced to **9ba97a4**: actual maximizing
+pairs imply both balance identities, with ArithmeticDefect (3,538 jobs),
+ExtremalBalance (9,181 jobs), and 69 foundation-only probes. An additional
+fresh mathematical audit accepts actual projection/rank, real-place-compatible
+variations and the sum-of-squares argument for arbitrary nonfree modules.
+MAIN's filtration adapter/unit case is **40987f0**; root **0b1826d** passed
+9,406 jobs and its 54 probes are foundational-only. That root predates balance.
+
+The remaining TENSOR bridge is `BalancedSlope.lean`, connecting actual balanced
+fibers to the checked geometric slope inequality, then removing normalization.
+Its binary/finite-family comparison has incurred Lean `whnf` elaboration cost;
+the saved attempt lacks a diagnostic log, so no stronger cause is asserted.
+A bounded read-only interface review found no new type/metric mismatch or
+missing checked adapter and recommended the owner's existing explicit
+application repair. No new proof route, helper producer or interface redesign
+was introduced. There was not yet a completed kernel check for that bridge;
+unconditional tensor semistability and the main equalities remain open.
+The 05:10 memory sample had 9.45 GiB available, PSI zero and no OOM.
 
 At the 04:57 bounded reassessment, all predecessor handoffs and both final
 successor exits are durably recorded. The remaining proof obligation is actual
