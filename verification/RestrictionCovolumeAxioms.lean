@@ -1,5 +1,4 @@
-import BostConjecture.Arithmetic.RestrictionCovolume.Line
-import BostConjecture.Arithmetic.RestrictionCovolume.Quotient
+import BostConjecture.Arithmetic.RestrictionCovolume.Main
 
 #print axioms BostConjecture.Arithmetic.archimedeanSection
 #print axioms BostConjecture.Arithmetic.HermitianMetric.traceCore
@@ -59,3 +58,8 @@ import BostConjecture.Arithmetic.RestrictionCovolume.Quotient
 #print axioms BostConjecture.Arithmetic.HermitianMetric.ker_traceMap_mkQ
 #print axioms BostConjecture.Arithmetic.HermitianMetric.traceSplitEquiv
 #print axioms BostConjecture.Arithmetic.HermitianMetric.traceSplitEquiv_symm_snd
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceBasis
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceCovolume_sq_eq_gram
+#print axioms BostConjecture.Arithmetic.HermitianMetric.det_gram_eq_of_basis_det_eq_one
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceCovolume_exact
+#print axioms BostConjecture.Arithmetic.HermitianMetric.traceCovolume_eq_discr_degree

@@ -4,13 +4,14 @@
 
 The endpoint remains `lem:restriction-covolume`, consumed by
 `lem:arithmetic-compactness`: the Euclidean Haar covolume of the actual
-trace-metric integer lattice must equal
+trace-metric integer lattice equals
 `abs(discriminant K)^(a/2) * exp(-[K:ℚ] * h.degree)` for every finite
 projective module over the ring of integers, including rank zero.
-The identity is proved for every module with a free integral frame,
-every projective line (including nonprincipal ideals), and in rank zero,
-for the actual lattice and intrinsic degree. The general nonfree projective
-endpoint in higher rank is not yet formalized.
+`HermitianMetric.traceCovolume_eq_discr_degree` in `Main.lean` now proves
+this exact identity for all the stated inputs. Its serialized module check
+passed 3652 jobs at 2026-11-06 02:46:57 UTC (`e742aa919b53262c`). Final
+transitive audit, independent reviews and shared-root integration are
+tracked below; the task is not marked complete before those finish.
 
 ## Constructed real space and lattice
 
@@ -35,7 +36,7 @@ fingerprint `95819e0a2a987609`. The dedicated 14-declaration axiom probe
 passed (fingerprint `2bec001e17d69f56`); every listed construction and
 lattice/tensor bridge uses only `propext`, `Classical.choice`, and `Quot.sound`.
 
-## Remaining calculation
+## Exact calculation
 
 `Conjugation.lean` now proves conjugation on every vector of the real
 trace space and both weighted-place pairing and squared-norm formulas.
@@ -106,16 +107,14 @@ splitting. The basis-coordinate matrix has identity diagonal blocks;
 the orthogonal Gram matrix has the two actual trace Gram blocks.
 The module check passed 3614 jobs at 02:44:29 UTC (`9bcd316d640812a0`).
 
-Remaining: pass to higher-rank nonfree projectives. The stable APIs include exact
-degree additivity and saturated rank-one reduction. They permit induction
-after proving actual trace covolume multiplicativity for the induced and
-quotient metrics. This requires the explicit compatibility between the
-trace metric of the actual quotient and the Euclidean quotient of the
-ambient trace space. The blueprint proves that compatibility using the
-conjugation-fixed real form, and multiplies Gram determinants using an
-integral splitting followed by the orthogonal real splitting. Both new
-producer nodes remain `notready`, and the main endpoint remains `notready`.
-No general finite-index determinant-degree identity is assumed.
+`Main.lean` uses the stable exact degree identity and saturated rank-one
+reduction to induct on generic rank. Rank zero uses the actual empty
+lattice and intrinsic degree normalization; rank one permits nonprincipal
+ideals. The exact covolume theorem and exact degree theorem combine the
+line and quotient induction hypotheses. No general finite-index
+determinant-degree identity, freeness of the original module or
+semistability assumption is used. All source-facing nodes in this slice
+now have kernel-checked attachments.
 
 The fixed TraceSpace producer received independent honesty review:
 **honest/proved producer**, no actionable defect; metric and lattice data
