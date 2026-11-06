@@ -52,8 +52,31 @@ of $A$, equal to $D\rk_\Ocal A$ by
 Lemma~\ref{lem:integral-restriction-rank}.
 \end{proof}
 
+\begin{lemma}[Conjugation and the trace metric]
+\label{lem:trace-metric-weights}
+\uses{lem:real-trace-lattice,def:hermitian-metric}
+\source{bost-specht-manuscript:page-0011}\notready
+Every $x\in E$ satisfies $x_{\bar\sigma}=\overline{x_\sigma}$ under
+canonical fiber conjugation. For $x,y\in E$,
+\[
+ (x,y)_{\mathrm{tr}}=\sum_{v\mid\infty} w_v
+   \operatorname{Re}\langle x_v,y_v\rangle_v,
+ \qquad \|x\|_{\mathrm{tr}}^2=\sum_{v\mid\infty}w_v\|x_v\|_v^2.
+\]
+\end{lemma}
+\begin{proof}
+Conjugation takes $z\otimes a$ to $\bar z\otimes a$, so the component
+identity holds for each $j(a)$. Both sides are real linear in $x$, hence
+it holds on their real span $E$. Compatibility of the metrics with fiber
+conjugation implies that the pairings at $\sigma$ and $\bar\sigma$ are
+complex conjugates. Their real parts coincide. Group the finite sum over
+embeddings by infinite place: a real place has one embedding and a complex
+place has exactly two. This gives the first equality; setting $y=x$
+gives the squared norm equality.
+\end{proof}
+
 \begin{lemma}[Restriction of scalars and covolume]
-\label{lem:restriction-covolume}\uses{def:hermitian-degree,lem:bounded-integral-sections,lem:integral-restriction-rank,lem:real-trace-lattice}
+\label{lem:restriction-covolume}\uses{def:hermitian-degree,lem:bounded-integral-sections,lem:integral-restriction-rank,lem:real-trace-lattice,lem:trace-metric-weights}
 \source{bost-specht-manuscript:page-0011}\notready
 Give $A\otimes_{\mathbb Z}\mathbb R$ the Euclidean norm
 $\|x\|^2=\sum_v w_v\|x_v\|_v^2$. For $a=\rk_\Ocal A$,

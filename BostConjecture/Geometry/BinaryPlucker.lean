@@ -14,6 +14,8 @@ namespace BostConjecture.Geometry
 open Module InvariantTheory PiTensorProduct
 open scoped TensorProduct
 
+section Transport
+
 variable {F : Type} [Field F] (E : Unit ⊕ Unit → Type*)
   [∀ i, AddCommGroup (E i)] [∀ i, Module F (E i)]
 
@@ -60,9 +62,12 @@ theorem twoFactor_plucker_eval {s : ℕ}
         polynomialEval (exteriorPower.ιMulti F s (fun j => Tensor.twoFactorEquiv F E (x j))) p := by
   simp [Function.comp_def]
 
+end Transport
+
 section ScalarExtension
 
-variable {R : Type*} [CommRing R] [Algebra R F] [CharZero F] [IsAlgClosed F]
+variable {R : Type*} [CommRing R] {F : Type} [Field F]
+  [Algebra R F] [CharZero F] [IsAlgClosed F]
   {E : Unit ⊕ Unit → Type*} [∀ i, AddCommGroup (E i)] [∀ i, Module R (E i)]
   [∀ i, Module.Finite R (E i)] [∀ i, Module.Projective R (E i)]
   {V : Type*} [AddCommGroup V] [Module R V] [Module.Finite R V] [Module.Projective R V]
@@ -71,7 +76,6 @@ attribute [local instance] scalarExtendedTargetAddCommGroup
 
 /-- The canonical binary Plücker invariant supplies the original-ring sequence
 of actual finite-family determinant pairings. -/
-set_option maxHeartbeats 800000 in
 theorem exists_canonicalPairing_nonzero_sequence_of_binary_invariant
     (A : V →ₗ[R] (⨂[R] i, E i)) {s m : ℕ} {a : Unit ⊕ Unit → ℕ}
     (hspos : 0 < s) (hapos : ∀ i, 0 < a i) (hm : 0 < m)
