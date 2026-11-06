@@ -140,9 +140,57 @@ A submodule of a finite projective module over $\Ocal_K$ is again finite
 projective, so the same argument applies to its fixed determinant line.
 \end{proof}
 
+\begin{lemma}[Degree variation from fiber Gram determinants]
+\label{lem:arithmetic-gram-derivative}
+\uses{lem:arithmetic-degree-derivative,lem:degree-calculus}
+\source{bost-specht-manuscript:page-0013}
+\lean{BostConjecture.Arithmetic.HermitianMetric.hasDerivAt_degree_of_gram}
+\leanok
+Let $h_t$ be metrics on a fixed finite projective module $E$. For every
+complex embedding $\sigma$, fix a basis $b_\sigma$ orthonormal for
+$h_{t_0,\sigma}$. Let $G_\sigma(t)$ be its Gram matrix for $h_{t,\sigma}$.
+If $\operatorname{Re}\det G_\sigma(t)$ has derivative $d_\sigma$ at $t_0$,
+then
+\[
+ \left.\frac{d}{dt}\degn(E,h_t)\right|_{t=t_0}
+ =-\frac1{2[K:\mathbb Q]}\sum_\sigma d_\sigma.
+\]
+\end{lemma}
+\begin{proof}
+Choose a nonzero integral determinant section $\xi$. In each fiber write
+$\xi=c_\sigma\bigwedge b_\sigma$. The coefficient $c_\sigma$ is nonzero,
+since scalar extension is injective and the wedge of a basis is nonzero.
+Sesquilinearity and the determinant Gram formula give
+\[
+ \|\xi\|_{\det h_t,\sigma}^2
+ =|c_\sigma|^2\operatorname{Re}\det G_\sigma(t).
+\]
+Thus its derivative is $|c_\sigma|^2d_\sigma$. At $t_0$ the Gram matrix
+is the identity, so its squared norm is $|c_\sigma|^2>0$.
+Substitution in the squared-norm degree derivative cancels this fixed
+factor in each embedding, yielding the formula.
+\end{proof}
+
+\begin{lemma}[Arithmetic stationarity at a local maximum]
+\label{lem:arithmetic-degree-stationarity}
+\uses{lem:arithmetic-gram-derivative}
+\source{bost-specht-manuscript:page-0013}
+\lean{BostConjecture.Arithmetic.HermitianMetric.sum_gram_deriv_eq_zero_of_isLocalMax}
+\leanok
+In the setting of the Gram derivative lemma, if $t_0$ is a local maximum
+of the actual degree $\degn(E,h_t)$, then $\sum_\sigma d_\sigma=0$.
+\end{lemma}
+\begin{proof}
+A differentiable real function has derivative zero at a local maximum.
+The derivative formula therefore gives
+$-(\sum_\sigma d_\sigma)/(2[K:\mathbb Q])=0$.
+Since $[K:\mathbb Q]>0$, multiplication by its nonzero denominator
+gives the assertion.
+\end{proof}
+
 \begin{proposition}[Tensor semistability]
 \label{thm:tensor-semistability}
-\uses{lem:degree-calculus,lem:extensions-and-twists,lem:arithmetic-compactness,lem:degree-maximum-continuity,lem:arithmetic-metric-variation,lem:arithmetic-degree-derivative,lem:balanced-plucker,lem:binary-plucker-nonzero-sequence,thm:geometric-slope}
+\uses{lem:degree-calculus,lem:extensions-and-twists,lem:arithmetic-compactness,lem:degree-maximum-continuity,lem:arithmetic-metric-variation,lem:arithmetic-degree-stationarity,lem:balanced-plucker,lem:binary-plucker-nonzero-sequence,thm:geometric-slope}
 \source{bost-specht-manuscript:page-0012,bost-specht-manuscript:page-0013}
 \notready
 For every number field $K$ and all positive-rank semistable Hermitian

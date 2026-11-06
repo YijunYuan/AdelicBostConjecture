@@ -36,6 +36,23 @@ form, along a metric curve with differentiable determinant section norms.
 - Blueprint: `lem:arithmetic-metric-variation` and
   `lem:arithmetic-degree-derivative`, both in the final theorem's dependency cone.
 
+## Arithmetic Gram derivative and local stationarity
+
+`GramDegree.lean` proves the exact determinant-section squared-norm formula in
+an arbitrary complex basis, cancels its positive coordinate factor at an
+orthonormal base point, and proves the degree derivative is
+`-(sum d)/(2*[K:Q])`. Actual local maximality forces this embedding sum to zero.
+
+- Final serialized module check: 3243 jobs, no warnings.
+- Expanded serialized axiom audit: fifteen probes, foundational axioms only.
+- Independent mathematical/source/honesty review accepted the factor of two,
+  nonzero coordinate cancellation and arbitrary nonfree domains.
+- Blueprint `lem:arithmetic-gram-derivative` feeds
+  `lem:arithmetic-degree-stationarity`, which feeds tensor semistability.
+
+The stationarity lemma is intermediate: its actual metric curve and local
+maximum are hypotheses, and it does not assert balance.
+
 The line-twist, strict-factor reduction, conjugation-compatible exponential
 curves, actual submodule projection-trace derivative, extremal-to-balance and
 final composition remain open. These two producers do not prove balance.
