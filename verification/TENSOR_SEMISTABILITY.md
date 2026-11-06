@@ -26,8 +26,16 @@ cone has no `Main.MaxSlope` dependency. Source nodes `lem:extensions-and-twists`
 `lem:balanced-arithmetic-slope` and `thm:tensor-semistability` have faithful
 Lean attachments and completion markers. Independent source/math/honesty review
 accepted the exact final source, fresh9386/9395 build records, all76 axiom outputs,
-the318-module acyclic import cone and bounded instance repair. MAIN shared-root
-and direct HN-consumer integration remains the sole task-closure requirement.
+the318-module acyclic producer cone and bounded instance repair.
+
+Shared integration is accepted at `dd5c6b6`: the fresh full root passed9413 jobs
+without warnings, and all60 MAIN transitive axiom probes passed with only the
+same three foundational axioms. These include the tensor-semistability export,
+its actual HN-grade consumer, binary maximal-slope upper bound/equality, and
+finite-family maximal-slope equality/semistability. Independent integration
+review confirmed all352 reachable local source files match the committed tree.
+I-0141 is resolved. The assigned mathematical objective and shared kernel
+integration are complete; MAIN owns final shared graph/documentation closure.
 
 The records below describe earlier checkpoints and their then-open frontiers.
 
