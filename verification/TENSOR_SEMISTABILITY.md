@@ -179,3 +179,20 @@ The remaining frontier is now the compatible traceless arithmetic defect
 families, local-maximum stationarity and their vanishing, followed by the actual
 geometric contradiction and unconditional tensor semistability. LINE032df77 and
 STRICTb49b67f are accepted completed producers; no successor dependency is missing.
+
+## Actual extremal-to-balance theorem
+
+`ArithmeticDefect.lean` constructs both actual compatible self-adjoint traceless
+families. `ExtremalBalance.isBalanced_of_maximizing_pair` derives local maximality
+from the actual strictly stable maximizing pair, applies simultaneous exponential
+variations, and forces both scalar partial-trace identities by nonnegative
+trace-square vanishing. Its conclusion is the existing `Balanced.IsBalanced` on
+the concrete integral tensor-submodule fiber.
+
+- Serialized builds passed 3538 and 9181 jobs without warnings.
+- All 69 serialized transitive axiom probes use only standard foundations.
+- Independent exact-source, mathematical and honesty review accepted both nodes.
+- `lem:arithmetic-partial-trace-defects` and `lem:extremal-to-balance` are checked.
+
+The remaining source frontier is the geometric slope application to this balanced
+fiber and the contradiction/normalization assembly of tensor semistability.
