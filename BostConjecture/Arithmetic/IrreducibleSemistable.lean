@@ -1,7 +1,7 @@
 module
 
 public import BostConjecture.Arithmetic.HNIsometry
-public import Mathlib.RepresentationTheory.Irreducible
+public import BostConjecture.Arithmetic.RepresentationBaseChange
 
 /-!
 # Irreducible isometric actions imply intrinsic semistability
@@ -27,7 +27,7 @@ variable {G : Type*} [Group G]
 /-- The canonical generic scalar extension of an integral representation. -/
 def genericRepresentation (ρ : Representation (𝓞 K) G M) :
     Representation K G (K ⊗[𝓞 K] M) :=
-  (Module.End.baseChangeHom (𝓞 K) K M).toMonoidHom.comp ρ
+  representationBaseChange K ρ
 
 namespace HermitianMetric
 
