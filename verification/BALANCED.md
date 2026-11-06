@@ -577,7 +577,8 @@ Lemma 7.2 remains notready, and all owned changes are committed. The roadmap
 active-count warning includes ancestors and the four authorized lanes and
 was independently reviewed as intentional. Scratch dry-run had no candidates.
 The graph found one GEOM in-flight dependency-label typo, independently
-localized and handed to its owner in I-0076; unattached helper declarations
-remain the existing broad-scope warning described by I-0004. Integration of
+localized and handed to its owner in I-0076. GEOM repaired it; the final sync
+has no missing dependency references. Unattached helper declarations remain
+the existing broad-scope warning described by I-0004. Integration of
 InvariantDetection, OrbitImage and SpecialLinearBaseChange is handed to GEOM
 and is not yet certified by a new root build here.
