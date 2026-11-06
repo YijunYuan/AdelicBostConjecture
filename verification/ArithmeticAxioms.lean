@@ -3,6 +3,8 @@ import BostConjecture.Arithmetic.SubspaceSupermodular
 import BostConjecture.Arithmetic.ArchimedeanFiniteness
 import BostConjecture.Arithmetic.IrreducibleSemistable
 import BostConjecture.Arithmetic.RestrictionOfScalars
+import BostConjecture.Arithmetic.IndependentTensorSemistable
+import BostConjecture.Arithmetic.IrreducibleDualSemistable
 import BostConjecture.Arithmetic.ExactDegree
 import BostConjecture.Arithmetic.QuotientMetric
 import BostConjecture.Arithmetic.IntegralDeterminantProduct
@@ -345,3 +347,24 @@ import BostConjecture.Arithmetic.DeterminantProduct
 #print axioms BostConjecture.Arithmetic.finite_int
 #print axioms BostConjecture.Arithmetic.free_int
 #print axioms BostConjecture.Arithmetic.finrank_int
+#print axioms BostConjecture.Arithmetic.representationAnnihilator
+#print axioms BostConjecture.Arithmetic.representationCoannihilator
+#print axioms BostConjecture.Arithmetic.representationAnnihilatorOrderIso
+#print axioms BostConjecture.Arithmetic.isIrreducible_dual
+#print axioms BostConjecture.Arithmetic.representation_asAlgebraHom_surjective
+#print axioms BostConjecture.Arithmetic.independentTensorRepresentation
+#print axioms BostConjecture.Arithmetic.isIrreducible_independentTensor
+#print axioms BostConjecture.Arithmetic.representationBaseChange
+#print axioms BostConjecture.Arithmetic.subrepresentationBaseChange
+#print axioms BostConjecture.Arithmetic.isIrreducible_of_equiv
+#print axioms BostConjecture.Arithmetic.complexRepresentation
+#print axioms BostConjecture.Arithmetic.HermitianMetric.isSemistable_of_complex_irreducible
+#print axioms BostConjecture.Arithmetic.complexRepresentation_section
+#print axioms BostConjecture.Arithmetic.complexTensorRepresentationEquiv
+#print axioms BostConjecture.Arithmetic.HermitianMetric.tensor_action_inner
+#print axioms BostConjecture.Arithmetic.HermitianMetric.isSemistable_tensor_of_complex_irreducible
+#print axioms BostConjecture.Arithmetic.complexDualRepresentationEquiv
+#print axioms BostConjecture.Arithmetic.dualFiberEquiv_action
+#print axioms BostConjecture.Arithmetic.HermitianMetric.dualRiesz_action
+#print axioms BostConjecture.Arithmetic.HermitianMetric.dual_action_inner
+#print axioms BostConjecture.Arithmetic.HermitianMetric.isSemistable_dual_of_complex_irreducible
