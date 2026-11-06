@@ -1,3 +1,42 @@
+## Binary nonvanishing construction complete; shared arithmetic handoffs integrated
+
+`Geometry.exists_canonicalPairing_nonzero_sequence_of_binary_invariant` is
+kernel-checked at `1557324`, completing the revised BOST-GEOM construction
+scope. Its actual binary action and Plucker transport feed the existing
+original-ring finite-projective canonical pairing. The earlier failed terminal
+attempt below is superseded. No arbitrary contraction certificate or general
+coaction scalar-extension theorem is assumed.
+
+The final explicit-root configured build passed **9,354 jobs without warnings
+at 2026-11-06 03:04:06 UTC**, root blob
+`c234f9e6ab31c82d4de652bca29437e8e6ef514c` (run0005/session0018,
+`final-root.log`, fingerprint `975bdb23135a0d4a`). All **291 geometry probes**
+passed at **02:57:18 UTC**, including the terminal theorem; their axiom union
+is exactly `propext`, `Classical.choice`, `Quot.sound`. Independent honesty/source
+review checked the actual logs, source hash and faithful blueprint attachment.
+The terminal's narrow 9,121-job kernel check passed at 02:53:11 UTC.
+
+This root also integrates the checked owner handoffs:
+
+- COVOLUME `Main` (`5144157`, basis consolidation `739e58a`, final evidence
+  `8871998`): actual discriminant/degree trace-covolume formula for every number
+  field and finite projective module, including nonfree modules and rank zero;
+  **63 foundational-only probes**, repeated at 02:57:55 UTC, with independent
+  mathematical, source and honesty acceptance.
+- SPECHT-SLOPE `DeterminantBundle` (`1eb4f44`) and `LatticeDegree` (`a8b97fe`):
+  actual isometric determinant-Specht representation, tensor/dual semistability,
+  and exact rectangular lattice slope; **20 foundational-only owner probes**.
+- COMPACTNESS `DegreeContinuity`, `StabilityTopology` (`98a5c8f`) and
+  `TraceSystole` (`7b0867c`): fixed-module maximum-degree continuity, strict-
+  stability openness and actual trace systole; **17 foundational-only owner
+  probes**. Arithmetic compactness/maximizing pairs remain open.
+
+Exact source reuse and lane authorship are recorded in CONTRIBUTIONS.md and
+the owner verification files. The parent-authorized blueprint split is
+`439d654`; successor statements remain `notready`. Full geometric slope,
+tensor semistability, maximal-slope additivity and the finite-family theorem
+remain unproved. The deferred general coaction square is not claimed proved.
+
 ## Binary Plucker action transport verified; terminal consumer remains open
 
 The configured explicit-root build passed **9,334 jobs warning-free at

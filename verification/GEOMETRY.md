@@ -1147,3 +1147,41 @@ the original-ring canonical pairing at all positive multiples of one degree.
 The geometric slope inequality, downstream balanced-invariant application and
 number-field main theorem remain separate obligations. General coaction
 scalar-extension equality remains deferred, not proved.
+
+
+The expanded `check --lean verification/GeometryAxioms.lean` passed all
+291 transitive probes at 02:57:18 UTC (`terminal-axioms.log`, fingerprint
+`ffefd7bf352d83dc`). The axiom union is exactly `propext`, `Classical.choice`,
+`Quot.sound`, including the terminal theorem. Independent review read the
+actual logs and matching source blob and returned satisfactory/proved producer.
+The terminal unit is committed at `1557324`.
+
+The parent-authorized successor migration is `439d654`: the two unproved
+extensions/twists and tensor-semistability nodes moved to
+`tensor_semistability.tex`, included immediately before `main.tex`. Their
+statements and labels are preserved; the final argument now uses direct
+original-ring contraction rather than unused general coaction descent.
+Independent read-only review accepted this bounded mathematical reconciliation.
+Graph sync reports no missing references; 1,061 unattached declarations in the
+concurrent workspace snapshot remain the documented helper-coverage warning.
+The read-only janitor confirmed that nine active roadmap items were the four
+proof lanes plus ancestors, not deferred leaves; scratch cleanup had no stale
+candidates. No concurrent writer's draft was staged by these commits.
+
+
+Final shared configured check passed **9,354 jobs without warnings** at
+2026-11-06 03:04:06 UTC (`final-root.log`, `975bdb23135a0d4a`), root blob
+`c234f9e6ab31c82d4de652bca29437e8e6ef514c`. It includes the terminal theorem,
+COVOLUME `Main` through `739e58a`/`8871998`, determinant-Specht `DeterminantBundle`
+and `LatticeDegree`, and compactness degree continuity/stability/systole.
+The owner audits retain their separate exact source scopes (63/20/17 probes).
+The revised GEOM construction is complete; no main-theorem or geometric-slope
+completion follows. The serialized 800,000-heartbeat diagnostic check failed and was preserved;
+its evaluation-transport issue is repaired in the accepted terminal source.
+
+
+Late handoff for the incoming MAIN integrator: COMPACTNESS `870179a` delivers
+`TraceActionFiniteness` and `SemistabilityTopology`, with 26 foundational-only
+owner probes and independent review. It arrived after the accepted final
+9,354-job root and is not included in that root's import claim. I-0100 retains
+the exact handoff; no GEOM construction obligation depends on this later batch.

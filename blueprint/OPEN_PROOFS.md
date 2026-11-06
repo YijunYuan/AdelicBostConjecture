@@ -102,7 +102,8 @@ Current boundaries and remaining producers:
   SU coordinate density and `ComplexClosure.Comparison`; the intrinsic
   `IsBalanced.plucker_semistable` endpoint supplies a positive-degree
   homogeneous invariant for every nonzero Plucker representative.
-  The terminal binary-to-family geometry consumer remains open.
+  The terminal binary-to-family original-ring nonvanishing sequence is checked
+  in `Geometry.BinaryPlucker`; its downstream slope application remains open.
   The unused general coaction scalar-extension square is retired from the
   current route, not proved.
 
@@ -131,9 +132,9 @@ canonical pairing nonzero from a nonzero invariant Hom polynomial.
 `PluckerNonvanishing.lean` produces an actual nonzero sequence in every
 positive multiple of one common degree from a positive-degree Plucker invariant.
 `BinaryPlucker.lean` now proves the actual binary-to-family action,
-homogeneous invariant and evaluation transport. Its terminal application to
-the original-ring sequence remains an unverified preserved elaboration attempt.
-This is the remaining revised GEOM construction obligation. The unused general
+homogeneous invariant and evaluation transport. Its terminal theorem
+`exists_canonicalPairing_nonzero_sequence_of_binary_invariant` proves the
+original-ring sequence and closes the revised GEOM construction obligation. The unused general
 coaction scalar-extension square is retired from this route, not proved.
 
 All cited manuscript page anchors resolve to registered vision transcriptions
@@ -146,3 +147,21 @@ The finite-dimensional convex-interval lemma specializes Chen–Jeannin §4.3
 to strictly increasing ranks. Its geometric application separately proves
 degree supermodularity and the quotient-degree identification. No modularity
 of Hermitian degree or already-proved tensor semistability is assumed.
+
+
+The actual trace-metric covolume identity for every finite projective module,
+including nonfree modules and rank zero, is checked in
+`Arithmetic.RestrictionCovolume.Main` (COVOLUME `5144157`, canonical basis
+relocation `739e58a`, final evidence `8871998`). No assumed covolume formula
+is needed by the arithmetic compactness successor. Fixed-module maximum-degree
+attainment/continuity, strict-stability openness and the actual trace systole
+are checked in `Arithmetic.Compactness`; fixed arithmetic actions, compactness
+and maximizing pairs remain that lane's obligations.
+
+`Arithmetic.Specht.DeterminantBundle` constructs the actual irreducible
+isometric determinant-Specht representation and its tensor/dual semistability;
+`LatticeDegree` proves the exact rectangular lattice slope. The determinant
+tensor metric/degree bridge and geometric slope inequality remain in
+`specht_slope.tex`. The subsequent unproved tensor-semistability route now
+lives in `tensor_semistability.tex`; maximal-slope assembly and finite families
+remain in `main.tex`. These successor statements are not marked complete.

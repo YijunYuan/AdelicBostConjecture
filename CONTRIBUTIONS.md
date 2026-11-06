@@ -879,3 +879,34 @@ representation is duplicated, and no additional axiom is used. The terminal
 original-ring binary sequence application consumes these action/homogeneity
 transports and the canonical polynomial-evaluation and exterior-map identities;
 its actual finite-projective pairing is the previously constructed one.
+
+
+## Final construction and arithmetic successor integration
+
+BOST-COVOLUME/run0008 authored the full
+`Arithmetic/RestrictionCovolume/Main.lean` dependency cone: exact endpoint
+`5144157`, canonical trace-basis consolidation `739e58a`, and final evidence
+`8871998`. `RealForm.lean` was first captured by lifecycle snapshot `05276d0`
+but retains COVOLUME authorship. The intrinsic degree and trace-metric quotient
+comparison prove the formula for nonfree projectives and rank zero as well.
+No external source was copied or modified. Additional canonical imports are
+Mathlib `LinearAlgebra/Matrix/Kronecker.lean` (`det_kronecker`,
+`det_blockDiagonal`), `NumberTheory/NumberField/Discriminant/Basic.lean`
+(`basisMatrix`, `discr_eq_basisMatrix_det_sq`), and
+`Algebra/Exact/Basic.lean` (`Function.Exact.splitSurjectiveEquiv`, consumed by
+`traceSplitEquiv` and `traceCovolume_exact`), all from
+`leanprover-community/mathlib4` revision
+`56a005855ea17e0b0958f73ec801ae140b0a1679`, Apache-2.0. Existing lattice
+extractions retain their attribution above. The final owner audit has 63
+foundational-only probes and independent mathematical/source/honesty acceptance.
+
+BOST-SPECHT-SLOPE/run0009 authored `Arithmetic/Specht/DeterminantBundle`
+(`1eb4f44`) and `LatticeDegree` (`a8b97fe`), composing the already attributed
+Specht representation and GEOM determinant metric with ARITH semistability and
+degree. BOST-COMPACTNESS/run0010 authored the degree-continuity/stability package
+(`98a5c8f`) and actual trace systole (`7b0867c`). These import the unchanged pinned
+Mathlib and project APIs, with no copied external source, new core model or new
+axiom. Their actual consumers and 20/17 foundational-only owner audits are
+recorded in `SPECHT_SLOPE.md` and `ARITHMETIC_COMPACTNESS.md`. Full geometric
+slope and arithmetic compactness are later obligations, not consequences of
+this integration alone.
