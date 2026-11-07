@@ -7,12 +7,15 @@ module
 
 public import BostConjecture.Arithmetic.HN.Subspace
 public import BostConjecture.Arithmetic.HN.QuotientSemistable
+public import BostConjecture.Arithmetic.HN.MaxSlope
 
 /-!
 # Intrinsic Hermitian HN grades and maximal slope
 
-The canonical saturated flag has semistable actual quotient bundles. Its first
-term realizes the maximum over all positive-rank integral submodules.
+Maximal slope and its finiteness are defined independently of the HN flag in
+`HN/MaxSlope.lean`. The canonical flag has semistable actual quotient bundles,
+and its first term attains the maximum over all positive-rank integral
+submodules.
 -/
 
 @[expose] public section
@@ -58,12 +61,29 @@ lemma hnSubmodule_one_rank_pos (h : HermitianMetric (K := K) M) :
   rw [h.hnFlag.head_eq_bot] at ht
   simpa using Submodule.finrank_strictMono ht
 
-/-- Maximal Hermitian slope, realized by the first saturated HN term. -/
-def maxSlope (h : HermitianMetric (K := K) M) : ℝ :=
-  (h.submodule (h.hnSubmodule 1)).slope
+/-- The slope payoff's supremum is the principal cut of the first HN slope. -/
+theorem subspaceSlope_max_eq_principal_hnSubmodule (h : HermitianMetric (K := K) M) :
+    (BostConjecture.Subspace.slope h.subspaceDegree).max ⊤ =
+      DedekindCut.principal (h.submodule (h.hnSubmodule 1)).slope := by
+  let μ := BostConjecture.Subspace.slope h.subspaceDegree
+  have hx := (PayoffFunction.hnFiltration_succ_isGreatest_breakpoints (μ := μ)
+    (n := 0) (h.hnFlag.head_eq_bot.trans_ne bot_ne_top)).1
+  change μ.IsBreakpoint ⟨h.hnFlag 0, ⊤, _⟩ (h.hnFlag 1) at hx
+  have hx : μ.IsBreakpoint ⊤ (h.hnFlag 1) := by
+    simpa only [h.hnFlag_zero, StrictIntvl.mk_bot_top] using hx
+  exact (BostConjecture.Slope.max_top_eq_of_isBreakpoint μ hx).trans
+    (h.subspaceSlope_apply_bot _ hx.left_lt)
+
+/-- The first saturated HN term attains maximal slope. -/
+@[simp]
+lemma slope_hnSubmodule_one (h : HermitianMetric (K := K) M) :
+    (h.submodule (h.hnSubmodule 1)).slope = h.maxSlope :=
+  DedekindCut.principal_inj.mp
+    (h.subspaceSlope_max_eq_principal_hnSubmodule.symm.trans h.subspaceSlope_max_eq)
 
 lemma hnSlope_zero (h : HermitianMetric (K := K) M) :
     h.hnSlope ⟨0, h.hnFlag_length_pos⟩ = h.maxSlope := by
+  rw [← h.slope_hnSubmodule_one]
   have he := h.hnStep_payoff ⟨0, h.hnFlag_length_pos⟩
   have ht : ⊥ < h.hnFlag 1 := by
     have ht := (h.hnStep ⟨0, h.hnFlag_length_pos⟩).lt
@@ -93,52 +113,6 @@ lemma hn_interval_degree_le (h : HermitianMetric (K := K) M)
   have hr := Submodule.finrank_strictMono hiz
   rw [Nat.cast_sub hr.le] at hs
   exact (div_le_iff₀ (sub_pos.mpr (by exact_mod_cast hr))).mp hs
-
-/-- The first HN slope bounds the degree of every generic subspace. -/
-theorem subspaceDegree_le_maxSlope (h : HermitianMetric (K := K) M)
-    (X : Submodule K (K ⊗[𝓞 K] M)) :
-    h.subspaceDegree X ≤ h.maxSlope * Module.finrank K X := by
-  have hb : ∀ i, i ≤ h.hnFlag.length → ∀ X : Submodule K (K ⊗[𝓞 K] M),
-      X ≤ h.hnFlag i → h.subspaceDegree X ≤ h.maxSlope * Module.finrank K X := by
-    intro i
-    induction i with
-    | zero =>
-      intro _ X hX
-      rw [h.hnFlag_zero] at hX
-      rw [le_bot_iff.mp hX, subspaceDegree_bot]
-      simp
-    | succ i ih =>
-      intro hi X hX
-      by_cases hXi : X ≤ h.hnFlag i
-      · exact ih (Nat.le_of_succ_le hi) X hXi
-      have hinf := ih (Nat.le_of_succ_le hi) (X ⊓ h.hnFlag i) inf_le_right
-      have hs := h.hn_interval_degree_le ⟨i, hi⟩ (right_lt_sup.mpr hXi)
-        (sup_le hX (h.hnFlag.monotone (Nat.le_succ i)))
-      have hc := h.subspaceDegree_supermodular X (h.hnFlag i)
-      have hr := Submodule.finrank_sup_add_finrank_inf_eq X (h.hnFlag i)
-      have hr' : (Module.finrank K ↥(X ⊔ h.hnFlag i) : ℝ) +
-          Module.finrank K ↥(X ⊓ h.hnFlag i) = Module.finrank K X +
-          Module.finrank K (h.hnFlag i) := by exact_mod_cast hr
-      have hd : 0 ≤ (Module.finrank K ↥(X ⊔ h.hnFlag i) : ℝ) -
-          Module.finrank K (h.hnFlag i) := sub_nonneg.mpr (by
-        exact_mod_cast Submodule.finrank_mono (show h.hnFlag i ≤ X ⊔ h.hnFlag i from le_sup_right))
-      have hm := mul_le_mul_of_nonneg_right (h.hnSlope_le_maxSlope ⟨i, hi⟩) hd
-      change h.subspaceDegree (X ⊔ h.hnFlag i) - h.subspaceDegree (h.hnFlag i) ≤
-        h.hnSlope ⟨i, hi⟩ * ((Module.finrank K ↥(X ⊔ h.hnFlag i) : ℝ) -
-          Module.finrank K (h.hnFlag i)) at hs
-      have hrm := congrArg (h.maxSlope * ·) hr'
-      nlinarith only [hinf, hc, hs, hm, hrm]
-  exact hb h.hnFlag.length le_rfl X (by rw [h.hnFlag_at_length]; exact le_top)
-
-/-- Every positive-rank integral submodule has slope at most the attained maximum. -/
-theorem slope_submodule_le_maxSlope (h : HermitianMetric (K := K) M)
-    (P : Submodule (𝓞 K) M) (hP : 0 < Module.finrank K (K ⊗[𝓞 K] P)) :
-    (h.submodule P).slope ≤ h.maxSlope := by
-  apply (h.slope_le_saturation P).trans
-  rw [← subspaceDegree_div_finrank]
-  have hr : 0 < Module.finrank K (P.baseChange K) :=
-    (Submodule.toBaseChange.toLinearEquiv K P).finrank_eq ▸ hP
-  exact (div_le_iff₀ (by exact_mod_cast hr)).mpr (h.subspaceDegree_le_maxSlope _)
 
 lemma hnSlope_lt_maxSlope (h : HermitianMetric (K := K) M)
     (i : Fin h.hnFlag.length) (hi : 0 < i.val) : h.hnSlope i < h.maxSlope := by
@@ -205,7 +179,7 @@ theorem le_hnSubmodule_one_of_slope_eq (h : HermitianMetric (K := K) M)
 theorem isGreatest_slopes (h : HermitianMetric (K := K) M) :
     IsGreatest {s : ℝ | ∃ P : Submodule (𝓞 K) M,
       0 < Module.finrank K (K ⊗[𝓞 K] P) ∧ (h.submodule P).slope = s} h.maxSlope := by
-  refine ⟨⟨h.hnSubmodule 1, h.hnSubmodule_one_rank_pos, rfl⟩, ?_⟩
+  refine ⟨⟨h.hnSubmodule 1, h.hnSubmodule_one_rank_pos, h.slope_hnSubmodule_one⟩, ?_⟩
   rintro s ⟨P, hP, rfl⟩
   exact h.slope_submodule_le_maxSlope P hP
 
@@ -213,7 +187,7 @@ theorem isGreatest_slopes (h : HermitianMetric (K := K) M) :
 theorem isGreatest_maximalSlope_submodules (h : HermitianMetric (K := K) M) :
     IsGreatest {P : Submodule (𝓞 K) M | 0 < Module.finrank K (K ⊗[𝓞 K] P) ∧
       (h.submodule P).slope = h.maxSlope} (h.hnSubmodule 1) := by
-  refine ⟨⟨h.hnSubmodule_one_rank_pos, rfl⟩, ?_⟩
+  refine ⟨⟨h.hnSubmodule_one_rank_pos, h.slope_hnSubmodule_one⟩, ?_⟩
   intro P hP
   exact h.le_hnSubmodule_one_of_slope_eq P hP.1 hP.2
 
@@ -231,21 +205,5 @@ theorem eq_hnSubmodule_one_of_slope_eq_of_rank (h : HermitianMetric (K := K) M)
         (Submodule.toBaseChange.toLinearEquiv K (h.hnSubmodule 1)).finrank_eq)
   rw [← integralPart_baseChange P, heq]
   simp only [hnSubmodule, baseChange_integralPart]
-
-/-- The ambient slope is bounded by its attained maximal submodule slope. -/
-lemma slope_le_maxSlope (h : HermitianMetric (K := K) M) : h.slope ≤ h.maxSlope := by
-  have hr : 0 < Module.finrank K (K ⊗[𝓞 K] (⊤ : Submodule (𝓞 K) M)) := by
-    rw [(Submodule.topEquiv.baseChange (𝓞 K) K (⊤ : Submodule (𝓞 K) M) M).finrank_eq]
-    exact Module.finrank_pos
-  simpa using h.slope_submodule_le_maxSlope ⊤ hr
-
-/-- Intrinsic semistability is equality of average and maximal slopes. -/
-theorem isSemistable_iff_maxSlope_eq (h : HermitianMetric (K := K) M) :
-    h.IsSemistable ↔ h.maxSlope = h.slope := by
-  constructor
-  · intro hs
-    exact le_antisymm (hs _ h.hnSubmodule_one_rank_pos) h.slope_le_maxSlope
-  · intro he P hP
-    exact (h.slope_submodule_le_maxSlope P hP).trans_eq he
 
 end BostConjecture.Arithmetic.HermitianMetric

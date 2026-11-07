@@ -46,7 +46,7 @@ lemma maxSlope_le_of_isometric_injection (h : HermitianMetric (K := K) M)
     exact he σ _ _
   have hs := g.slope_pullback_le_maxSlope j hj h.hnSubmodule_one_rank_pos
   rw [hm] at hs
-  exact hs
+  simpa only [P, h.slope_hnSubmodule_one] using hs
 
 /-- Canonical integral isometries preserve the attained maximal slope. -/
 theorem maxSlope_eq_of_equiv (h : HermitianMetric (K := K) M)

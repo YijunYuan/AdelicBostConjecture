@@ -80,6 +80,7 @@ theorem isSemistable_of_complex_irreducible (h : HermitianMetric (K := K) M)
       rw [← hdim, he]
       simpa using complexFiber_finrank (M := M) σ
     apply h.isSemistable_iff_maxSlope_eq.mpr
+    rw [← h.slope_hnSubmodule_one]
     exact (congrArg (fun P : Submodule (𝓞 K) M => (h.submodule P).slope)
       (congrArg integralPart hfirst)).trans h.slope_submodule_top
 

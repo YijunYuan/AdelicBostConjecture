@@ -74,4 +74,17 @@ lemma A_eq_of_isSemistable (I : StrictIntvl L) (h : (μ.restrict I).IsSemistable
   simpa only [PayoffFunction.A_restrict_apply, PayoffFunction.restrict_apply,
     StrictIntvl.ofSub_top] using hmin
 
+/-- A breakpoint attains the supremum of all initial-interval slopes. -/
+theorem max_top_eq_of_isBreakpoint [Nontrivial L] {x : L}
+    (hx : μ.IsBreakpoint ⊤ x) : μ.max ⊤ = μ ⟨⊥, x, hx.left_lt⟩ := by
+  let : μ.StrongDCC := ⟨fun f hf => False.elim (not_strictAnti_of_wellFoundedLT f hf)⟩
+  have hA := A_eq_of_isSemistable μ _ hx.isSemistable_restrict
+  apply le_antisymm
+  · rw [← PayoffFunction.B_top_eq_max_top]
+    apply PayoffFunction.B_le
+    intro y hy
+    rw [(inferInstance : μ.IsSlopeLike).min_eq_A]
+    exact (le_of_not_gt (hx.not_lt y ⟨hy.1.le, hy.2⟩ hy.1.ne)).trans_eq hA
+  · exact PayoffFunction.le_max ⟨hx.left_lt, le_top⟩
+
 end BostConjecture.Slope

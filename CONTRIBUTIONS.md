@@ -47,6 +47,12 @@ claimed by checking the selected dependency cone.
   instead of installing repeated `IsLocalization.flat` proofs locally.
   Specht lattice embeddings and permutation actions use `LinearMap.restrict`
   from `Mathlib/Algebra/Module/Submodule/LinearMap.lean` for their restricted maps.
+- `Slope/DedekindCut.lean` uses `DedekindCut.principal`,
+  `principal_le_iff`, `left_subset_left_iff`, `ext'`, `right_principal` and
+  `upperBounds_left` from `Mathlib/Order/Completion.lean`, together with
+  `csSup_le_iff` from `Mathlib/Order/ConditionallyCompleteLattice/Basic.lean`.
+  Its local real-value conversion and bounds lemma feed
+  `Arithmetic/HN/MaxSlope.lean`; the pinned upstream sources are unmodified.
 
 ## Harder–Narasimhan games
 
@@ -55,10 +61,24 @@ claimed by checking the selected dependency cone.
 - Author: Yijun Yuan; license: Apache-2.0.
 - Integration: unmodified pinned Lake dependency, Lean/mathlib `v4.35.0`.
 - Original modules: `HarderNarasimhan.Filtration.Unique`,
+  `HarderNarasimhan.Filtration.Exists`,
+  `HarderNarasimhan.PayoffFunction.Defs`,
   `HarderNarasimhan.PayoffFunction.Slope`, and
   `HarderNarasimhan.PayoffFunction.NashEquilibrium`.
 - Results: HN existence and uniqueness, additive-interval slopes, and the
   comparison of game semistability with ordinary slope semistability.
+- Maximal-slope consumers: `Slope/FiniteLength.lean` combines
+  `PayoffFunction.B_top_eq_max_top` and `IsSlopeLike.min_eq_A` from
+  `HarderNarasimhan.PayoffFunction.GameValue` with breakpoint semistability to
+  prove that a breakpoint attains `PayoffFunction.max ⊤`.
+  `Arithmetic/HN/Filtration.lean` applies
+  `PayoffFunction.hnFiltration_succ_isGreatest_breakpoints` from
+  `HarderNarasimhan.Filtration.Exists` to identify the slope supremum with the
+  first HN slope. The definition and finiteness of `maxSlope` are independent
+  of this identification: `Arithmetic/HN/MaxSlope.lean` uses `PayoffFunction.max`
+  and its upper/lower bounds from `PayoffFunction.Defs`, together with the
+  project's arithmetic degree-finiteness results. These are local bridge
+  proofs; upstream code is unchanged.
 - Consumers: arithmetic HN filtrations and the finite-length slope adapters.
   The project separately proves the Hermitian degree, quotient and duality
   bridges; order duality alone is not Hermitian duality.

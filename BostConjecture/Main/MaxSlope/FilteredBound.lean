@@ -111,8 +111,9 @@ theorem maxSlope_le_of_filtration [Nontrivial (K ⊗[𝓞 K] M)]
       ((integralPart (A i)).comap (integralPart (A (i + 1))).subtype)).IsSemistable)
     (hc : ∀ i < n, ((h.submodule (integralPart (A (i + 1)))).quotient
       ((integralPart (A i)).comap (integralPart (A (i + 1))).subtype)).slope ≤ c) :
-    h.maxSlope ≤ c :=
-  h.slope_submodule_le_of_filtration A hA h0 n hn c hss hc
+    h.maxSlope ≤ c := by
+  rw [← h.slope_hnSubmodule_one]
+  exact h.slope_submodule_le_of_filtration A hA h0 n hn c hss hc
     (h.hnSubmodule 1) h.hnSubmodule_one_rank_pos
 
 /-- The same filtration bound for actual saturated integral terms. Passing to

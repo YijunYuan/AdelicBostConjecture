@@ -71,6 +71,7 @@ theorem isSemistable_of_irreducible (h : HermitianMetric (K := K) M)
     simp at hr
   · have hz : h.hnFlag 1 = ⊤ := congrArg Subrepresentation.toSubmodule hW
     apply h.isSemistable_iff_maxSlope_eq.mpr
+    rw [← h.slope_hnSubmodule_one]
     exact (congrArg (fun P : Submodule (𝓞 K) M => (h.submodule P).slope)
       (congrArg integralPart hz)).trans h.slope_submodule_top
 

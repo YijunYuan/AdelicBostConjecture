@@ -102,8 +102,10 @@ theorem maxSlope_add_le_tensor
     rw [tensor_generic_finrank]
     exact Nat.mul_pos h.hnSubmodule_one_rank_pos g.hnSubmodule_one_rank_pos
   have hs := (h.tensor g).slope_pullback_le_maxSlope f hf hr
-  rw [tensor_map_pullback, slope_tensor _ _
+  rw [tensor_map_pullback h g P.subtype Q.subtype P.injective_subtype Q.injective_subtype,
+    slope_tensor _ _
     h.hnSubmodule_one_rank_pos g.hnSubmodule_one_rank_pos] at hs
+  rw [← h.slope_hnSubmodule_one, ← g.slope_hnSubmodule_one]
   exact hs
 
 end BostConjecture.Arithmetic.HermitianMetric

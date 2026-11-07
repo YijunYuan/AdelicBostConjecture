@@ -20,6 +20,15 @@ The final proofs are in [Main/MaxSlope](BostConjecture/Main/MaxSlope) and
 Weighted Harder–Narasimhan compatibility, effective rates and the appendices
 of this paper are outside this formalization's target.
 
+`maxSlope` is defined in
+[HN/MaxSlope.lean](BostConjecture/Arithmetic/HN/MaxSlope.lean) as
+`((BostConjecture.Subspace.slope h.subspaceDegree).max ⊤).toReal`.
+Arithmetic degree finiteness bounds this cut above by `principal h.maxDegree`,
+and the ambient slope bounds it below. `subspaceSlope_max_eq` identifies the
+cut with `principal h.maxSlope`, independently of the Hermitian HN flag.
+The later theorem `slope_hnSubmodule_one` proves that the first saturated HN
+term attains it.
+
 ## Organization
 
 Directories follow the mathematical dependencies of this paper. File paths
@@ -85,10 +94,11 @@ The expected dependencies are Lean's standard foundational axioms
 `propext`, `Classical.choice` and `Quot.sound`; no `sorryAx` or additional
 mathematical axiom is permitted. The proof does not assume tensor semistability.
 
-The refactored source passes `lake build` with **4,238 jobs and no warnings**.
-All **60 transitive axiom probes**, covering the main statements and their
-assembly lemmas, report only the three foundational axioms above. The root
-import cone covers all 351 local Lean modules; source checks find no proof
+The refactored source passes `lake build` with **4,240 jobs and no warnings**.
+Transitive axiom probes covering the real-cut conversion, the arithmetic
+finiteness bound and the four principal declarations report only the three
+foundational axioms above. The root import cone covers all 353 local Lean
+modules; source checks find no proof
 placeholders or additional axiom declarations.
 
 ## Conventions and license
