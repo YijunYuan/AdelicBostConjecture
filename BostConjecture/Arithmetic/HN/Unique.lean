@@ -30,7 +30,7 @@ variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 variable [Nontrivial (K ⊗[𝓞 K] M)]
 
 /-- Any flag of actual semistable quotient bundles with decreasing slopes is canonical. -/
-theorem hnFlag_unique (h : HermitianMetric (K := K) M)
+theorem hnFlag_unique (h : HermitianMetric K M)
     (F : ℕ → Submodule K (K ⊗[𝓞 K] M)) (n : ℕ)
     (hmono : Monotone F) (hzero : F 0 = ⊥) (htop : F n = ⊤)
     (hstrict : StrictMonoOn F (Set.Iic n))
@@ -68,7 +68,7 @@ theorem hnFlag_unique (h : HermitianMetric (K := K) M)
   exact congrArg (fun f : μ.HarderNarasimhanFiltration => f.toFun) he
 
 /-- Uniqueness for actual saturated integral flags, with their actual induced quotient metrics. -/
-theorem hnSubmodule_unique (h : HermitianMetric (K := K) M)
+theorem hnSubmodule_unique (h : HermitianMetric K M)
     (F : ℕ → Submodule (𝓞 K) M) [∀ i, Module.IsTorsionFree (𝓞 K) (M ⧸ F i)]
     (n : ℕ) (hmono : Monotone F) (hzero : F 0 = ⊥) (htop : F n = ⊤)
     (hstrict : StrictMonoOn F (Set.Iic n))

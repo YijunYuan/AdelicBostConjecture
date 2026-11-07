@@ -31,14 +31,14 @@ variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 variable {ι : Type*} [Fintype ι] [DecidableEq ι]
 
 /-- Invertible complex coordinates supplied by the real trace frame. -/
-def complexFrameEquiv (h : HermitianMetric (K := K) M) (b : Module.Basis ι ℤ M)
+def complexFrameEquiv (h : HermitianMetric K M) (b : Module.Basis ι ℤ M)
     (B : GeneralLinearGroup ι ℝ) :
     ((σ : K →+* ℂ) → ComplexFiber M σ) ≃ₗ[ℂ] EuclideanSpace ℂ ι :=
   ((h.complexTraceBasis b).equivFun.trans
     (GeneralLinearGroup.toLin (GeneralLinearGroup.map (algebraMap ℝ ℂ) B)).toLinearEquiv).trans
       (EuclideanSpace.basisFun ι ℂ).toBasis.equivFun.symm
 
-lemma complexFrameEquiv_apply (h : HermitianMetric (K := K) M)
+lemma complexFrameEquiv_apply (h : HermitianMetric K M)
     (b : Module.Basis ι ℤ M) (B : GeneralLinearGroup ι ℝ)
     (x : (σ : K →+* ℂ) → ComplexFiber M σ) (i : ι) :
     h.complexFrameEquiv b B x i =
@@ -48,7 +48,7 @@ lemma complexFrameEquiv_apply (h : HermitianMetric (K := K) M)
 
 /-- An invertible real frame induces a positive-definite product form. -/
 @[instance_reducible]
-def frameProductCore (h : HermitianMetric (K := K) M) (b : Module.Basis ι ℤ M)
+def frameProductCore (h : HermitianMetric K M) (b : Module.Basis ι ℤ M)
     (B : GeneralLinearGroup ι ℝ) :
     InnerProductSpace.Core ℂ ((σ : K →+* ℂ) → ComplexFiber M σ) where
   inner x y := inner ℂ (h.complexFrameEquiv b B x) (h.complexFrameEquiv b B y)
@@ -62,7 +62,7 @@ def frameProductCore (h : HermitianMetric (K := K) M) (b : Module.Basis ι ℤ M
     exact inner_self_eq_zero.mp hx
 
 /-- The Gram entries are the usual real column inner products. -/
-lemma frameProductCore_basis (h : HermitianMetric (K := K) M)
+lemma frameProductCore_basis (h : HermitianMetric K M)
     (b : Module.Basis ι ℤ M) (B : GeneralLinearGroup ι ℝ) (i j : ι) :
     (h.frameProductCore b B).inner (h.complexTraceBasis b i) (h.complexTraceBasis b j) =
       (∑ k, B.val k i * B.val k j : ℝ) := by
@@ -74,7 +74,7 @@ lemma frameProductCore_basis (h : HermitianMetric (K := K) M)
 open Classical in
 /-- Restriction of the product form to one actual fiber is positive definite. -/
 @[instance_reducible]
-def frameFiberCore (h : HermitianMetric (K := K) M) (b : Module.Basis ι ℤ M)
+def frameFiberCore (h : HermitianMetric K M) (b : Module.Basis ι ℤ M)
     (B : GeneralLinearGroup ι ℝ) (σ : K →+* ℂ) :
     InnerProductSpace.Core ℂ (ComplexFiber M σ) where
   inner x y := (h.frameProductCore b B).inner (Pi.single σ x) (Pi.single σ y)
@@ -87,7 +87,7 @@ def frameFiberCore (h : HermitianMetric (K := K) M) (b : Module.Basis ι ℤ M)
     simpa using congrFun hz σ
 
 /-- An actual orthonormal coordinate frame gives the asserted trace Gram matrix. -/
-lemma trace_inner_eq_sum_frame (h : HermitianMetric (K := K) M)
+lemma trace_inner_eq_sum_frame (h : HermitianMetric K M)
     (b : Module.Basis ι ℤ M) (b₀ : OrthonormalBasis ι ℝ h.TraceSpace)
     (B : GeneralLinearGroup ι ℝ) (hB : B.val = b₀.toBasis.toMatrix (h.traceBasis b))
     (i j : ι) :

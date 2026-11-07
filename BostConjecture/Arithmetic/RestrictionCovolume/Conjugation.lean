@@ -27,7 +27,7 @@ namespace BostConjecture.Arithmetic.HermitianMetric
 variable {K : Type*} [Field K] [NumberField K]
 variable {M : Type*} [AddCommGroup M] [Module (𝓞 K) M]
 variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
-variable (h : HermitianMetric (K := K) M)
+variable (h : HermitianMetric K M)
 
 /-- All real trace-space vectors have the actual conjugate fiber components. -/
 theorem traceInclusion_conjugate (x : h.TraceSpace) (σ : K →+* ℂ) :

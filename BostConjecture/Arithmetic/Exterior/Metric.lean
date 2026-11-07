@@ -62,7 +62,7 @@ variable [Module.Finite (𝓞 K) M]
 
 /-- The exterior Gram form on the actual arithmetic complex fiber. -/
 @[instance_reducible]
-def exteriorFiber (h : HermitianMetric (K := K) M) (r : ℕ) (σ : K →+* ℂ) :
+def exteriorFiber (h : HermitianMetric K M) (r : ℕ) (σ : K →+* ℂ) :
     InnerProductSpace.Core ℂ (ComplexFiber (⋀[𝓞 K]^r M) σ) := by
   let : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
   let := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber M σ)
@@ -73,7 +73,7 @@ def exteriorFiber (h : HermitianMetric (K := K) M) (r : ℕ) (σ : K →+* ℂ) 
   exact InnerProductSpace.toCore
 
 /-- The cross Gram formula on arbitrary complex wedges. -/
-lemma exteriorFiber_inner_ιMulti (h : HermitianMetric (K := K) M) (r : ℕ)
+lemma exteriorFiber_inner_ιMulti (h : HermitianMetric K M) (r : ℕ)
     (σ : K →+* ℂ) (x y : Fin r → ComplexFiber M σ) :
     (h.exteriorFiber r σ).inner
       ((exteriorFiberEquiv M σ r).symm (ιMulti ℂ r x))
@@ -88,7 +88,7 @@ lemma exteriorFiber_inner_ιMulti (h : HermitianMetric (K := K) M) (r : ℕ)
   exact Balanced.exterior_inner_ιMulti x y
 
 /-- The exterior form on pure integral wedges. -/
-lemma exteriorFiber_inner_wedge (h : HermitianMetric (K := K) M) (r : ℕ)
+lemma exteriorFiber_inner_wedge (h : HermitianMetric K M) (r : ℕ)
     (σ : K →+* ℂ) (x y : Fin r → M) :
     (h.exteriorFiber r σ).inner (fiberSection _ σ (ιMulti (𝓞 K) r x))
       (fiberSection _ σ (ιMulti (𝓞 K) r y)) =
@@ -103,7 +103,7 @@ lemma exteriorFiber_inner_wedge (h : HermitianMetric (K := K) M) (r : ℕ)
 
 /-- The exterior forms inherit conjugation compatibility on every integral
 section, proved from the spanning integral wedges. -/
-lemma exteriorFiber_conjugate (h : HermitianMetric (K := K) M)
+lemma exteriorFiber_conjugate (h : HermitianMetric K M)
     (r : ℕ) (σ : K →+* ℂ) (x y : ⋀[𝓞 K]^r M) :
     (h.exteriorFiber r (ComplexEmbedding.conjugate σ)).inner
         (fiberSection _ (ComplexEmbedding.conjugate σ) x)
@@ -149,13 +149,13 @@ lemma exteriorFiber_conjugate (h : HermitianMetric (K := K) M)
       ComplexEmbedding.conjugate_coe_eq, map_mul, hxy, RCLike.star_def]
 
 /-- The intrinsic Hermitian exterior metric on the integral exterior module. -/
-def exterior (h : HermitianMetric (K := K) M) (r : ℕ) :
-    HermitianMetric (K := K) (⋀[𝓞 K]^r M) where
+def exterior (h : HermitianMetric K M) (r : ℕ) :
+    HermitianMetric K (⋀[𝓞 K]^r M) where
   fiber := h.exteriorFiber r
   conjugate := h.exteriorFiber_conjugate r
 
 /-- In top degree the general exterior metric agrees with the determinant metric. -/
-lemma exteriorFiber_top_eq (h : HermitianMetric (K := K) M) (σ : K →+* ℂ) :
+lemma exteriorFiber_top_eq (h : HermitianMetric K M) (σ : K →+* ℂ) :
     h.exteriorFiber (Module.finrank K (K ⊗[𝓞 K] M)) σ = h.determinantFiber σ := by
   apply h.determinantFiber_unique σ
   intro x
@@ -163,7 +163,7 @@ lemma exteriorFiber_top_eq (h : HermitianMetric (K := K) M) (σ : K →+* ℂ) :
 
 /-- An integral map isometric on a fiber induces an isometry on every exterior fiber. -/
 lemma exteriorFiber_inner_map [Module.Finite (𝓞 K) N]
-    (h : HermitianMetric (K := K) M) (g : HermitianMetric (K := K) N)
+    (h : HermitianMetric K M) (g : HermitianMetric K N)
     (f : M →ₗ[𝓞 K] N) (r : ℕ) (σ : K →+* ℂ)
     (hf : ∀ x y, (g.fiber σ).inner (fiberMap f σ x) (fiberMap f σ y) =
       (h.fiber σ).inner x y)
@@ -190,7 +190,7 @@ lemma exteriorFiber_inner_map [Module.Finite (𝓞 K) N]
 variable [NumberField K]
 
 /-- The actual determinant inclusion of any integral submodule is isometric. -/
-lemma determinant_submodule_sectionNorm (h : HermitianMetric (K := K) M)
+lemma determinant_submodule_sectionNorm (h : HermitianMetric K M)
     (P : Submodule (𝓞 K) M) (σ : K →+* ℂ) (x : DeterminantLine (K := K) P) :
     (h.exterior (Module.finrank K (K ⊗[𝓞 K] P))).sectionNorm σ
         (map _ P.subtype x) = (h.submodule P).determinant.sectionNorm σ x := by

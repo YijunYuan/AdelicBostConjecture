@@ -66,7 +66,7 @@ variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 
 omit [Module.Projective (𝓞 K) M] in
 /-- The canonical quotient/preimage identification preserves the actual fiber forms. -/
-lemma quotientPreimageEquiv_inner (h : HermitianMetric (K := K) M)
+lemma quotientPreimageEquiv_inner (h : HermitianMetric K M)
     (P : Submodule (𝓞 K) M) (N : Submodule (𝓞 K) (M ⧸ P)) (σ : K →+* ℂ)
     (x y : ComplexFiber ((N.comap P.mkQ) ⧸ P.comap (N.comap P.mkQ).subtype) σ) :
     (((h.quotient P).submodule N).fiber σ).inner
@@ -82,7 +82,7 @@ lemma quotientPreimageEquiv_inner (h : HermitianMetric (K := K) M)
   rfl
 
 /-- Induced degree on a quotient submodule is the degree difference of its preimage. -/
-theorem degree_quotient_submodule (h : HermitianMetric (K := K) M)
+theorem degree_quotient_submodule (h : HermitianMetric K M)
     (P : Submodule (𝓞 K) M) [Module.Projective (𝓞 K) (M ⧸ P)]
     (N : Submodule (𝓞 K) (M ⧸ P)) :
     ((h.quotient P).submodule N).degree =

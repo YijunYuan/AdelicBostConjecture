@@ -42,7 +42,7 @@ theorem exists_compact_trace_frames (r : ℕ)
     ∃ S : Set (GeneralLinearGroup (Fin (Module.finrank ℝ E)) ℝ), IsCompact S ∧
       ∀ (M : Type u) [AddCommGroup M] [Module (𝓞 K) M]
         [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
-        (h : HermitianMetric (K := K) M),
+        (h : HermitianMetric K M),
         Module.finrank K (K ⊗[𝓞 K] M) = r → h.degree = 0 → h.IsSemistable →
         ∀ b₀ : OrthonormalBasis (Fin (Module.finrank ℝ E)) ℝ h.TraceSpace,
         ∃ b : Module.Basis (Fin (Module.finrank ℝ E)) ℤ M,

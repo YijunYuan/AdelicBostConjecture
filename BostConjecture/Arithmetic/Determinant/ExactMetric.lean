@@ -73,7 +73,7 @@ namespace HermitianMetric
 
 /-- Exact determinant norms multiply for the actual induced and quotient
 metrics, on every integral pure determinant tensor. -/
-lemma determinantExactEquiv_sectionNorm (H : HermitianMetric (K := K) P)
+lemma determinantExactEquiv_sectionNorm (H : HermitianMetric K P)
     (i : M →ₗ[𝓞 K] P) (q : P →ₗ[𝓞 K] N)
     (h : Function.Exact i q) (hi : Function.Injective i) (hq : Function.Surjective q)
     (σ : K →+* ℂ) (x : DeterminantLine (K := K) M) (y : DeterminantLine (K := K) N) :

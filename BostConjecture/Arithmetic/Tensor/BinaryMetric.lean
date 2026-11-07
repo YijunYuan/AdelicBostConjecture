@@ -63,15 +63,15 @@ variable {K : Type*} [Field K] [NumberField K] [Module (𝓞 K) M] [Module (𝓞
 namespace HermitianMetric
 
 /-- Binary Hilbert tensor metric, using the established finite-family metric. -/
-def tensor (h : HermitianMetric (K := K) M) (g : HermitianMetric (K := K) N) :
-    HermitianMetric (K := K) (M ⊗[𝓞 K] N) :=
+def tensor (h : HermitianMetric K M) (g : HermitianMetric K N) :
+    HermitianMetric K (M ⊗[𝓞 K] N) :=
   (piTensor (fun i : Unit ⊕ Unit => Sum.casesOn i (fun _ => h) (fun _ => g))).pullback
     (binaryTensorEquiv (𝓞 K) M N).toLinearMap (binaryTensorEquiv (𝓞 K) M N).injective
 
 /-- The binary tensor norm has the same pure-tensor formula. -/
 @[simp]
-lemma sectionNorm_tensor_tmul (h : HermitianMetric (K := K) M)
-    (g : HermitianMetric (K := K) N) (σ : K →+* ℂ) (x : M) (y : N) :
+lemma sectionNorm_tensor_tmul (h : HermitianMetric K M)
+    (g : HermitianMetric K N) (σ : K →+* ℂ) (x : M) (y : N) :
     (h.tensor g).sectionNorm σ (x ⊗ₜ[𝓞 K] y) = h.sectionNorm σ x * g.sectionNorm σ y := by
   simp [tensor, sectionNorm_piTensor_tprod, Fintype.prod_sum_type]
 

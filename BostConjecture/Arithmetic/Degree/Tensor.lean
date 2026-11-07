@@ -32,8 +32,8 @@ variable {M N P Q : Type u} [AddCommGroup M] [Module (𝓞 K) M]
     [AddCommGroup Q] [Module (𝓞 K) Q]
 
 /-- Interchanging the two factors preserves the entire intrinsic tensor form. -/
-lemma tensor_comm_inner (h : HermitianMetric (K := K) M)
-    (g : HermitianMetric (K := K) N) (σ : K →+* ℂ)
+lemma tensor_comm_inner (h : HermitianMetric K M)
+    (g : HermitianMetric K N) (σ : K →+* ℂ)
     (x y : ComplexFiber (M ⊗[𝓞 K] N) σ) :
     ((g.tensor h).fiber σ).inner
       (fiberMap (TensorProduct.comm (𝓞 K) M N).toLinearMap σ x)
@@ -49,16 +49,16 @@ lemma tensor_comm_inner (h : HermitianMetric (K := K) M)
 variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
     [Module.Finite (𝓞 K) N] [Module.Projective (𝓞 K) N]
 
-lemma degree_tensor_comm (h : HermitianMetric (K := K) M)
-    (g : HermitianMetric (K := K) N) : (h.tensor g).degree = (g.tensor h).degree :=
+lemma degree_tensor_comm (h : HermitianMetric K M)
+    (g : HermitianMetric K N) : (h.tensor g).degree = (g.tensor h).degree :=
   degree_eq_of_equiv _ _ (TensorProduct.comm (𝓞 K) M N) (tensor_comm_inner h g)
 
 variable [Module.Finite (𝓞 K) P] [Module.Projective (𝓞 K) P]
     [Module.Finite (𝓞 K) Q] [Module.Projective (𝓞 K) Q]
 
 /-- Exact determinant degree applied to the actual tensor exact sequence. -/
-lemma degree_tensor_exact (h : HermitianMetric (K := K) P)
-    (g : HermitianMetric (K := K) Q) (i : M →ₗ[𝓞 K] P) (q : P →ₗ[𝓞 K] N)
+lemma degree_tensor_exact (h : HermitianMetric K P)
+    (g : HermitianMetric K Q) (i : M →ₗ[𝓞 K] P) (q : P →ₗ[𝓞 K] N)
     (he : Function.Exact i q) (hi : Function.Injective i) (hq : Function.Surjective q) :
     (h.tensor g).degree = ((h.pullback i hi).tensor g).degree +
       ((h.pushforward q hq).tensor g).degree := by
@@ -70,8 +70,8 @@ lemma degree_tensor_exact (h : HermitianMetric (K := K) P)
 
 /-- Normalized arithmetic tensor degree, for all finite projective modules
 over every number field, including rank zero. -/
-theorem degree_tensor (h : HermitianMetric (K := K) M)
-    (g : HermitianMetric (K := K) N) :
+theorem degree_tensor (h : HermitianMetric K M)
+    (g : HermitianMetric K N) :
     (h.tensor g).degree = (Module.finrank K (K ⊗[𝓞 K] N) : ℝ) * h.degree +
       (Module.finrank K (K ⊗[𝓞 K] M) : ℝ) * g.degree := by
   generalize hn : Module.finrank K (K ⊗[𝓞 K] M) + Module.finrank K (K ⊗[𝓞 K] N) = n
@@ -135,8 +135,8 @@ theorem degree_tensor (h : HermitianMetric (K := K) M)
       ring
 
 /-- Average slopes add under the actual Hilbert tensor product. -/
-theorem slope_tensor (h : HermitianMetric (K := K) M)
-    (g : HermitianMetric (K := K) N)
+theorem slope_tensor (h : HermitianMetric K M)
+    (g : HermitianMetric K N)
     (hM : 0 < Module.finrank K (K ⊗[𝓞 K] M))
     (hN : 0 < Module.finrank K (K ⊗[𝓞 K] N)) :
     (h.tensor g).slope = h.slope + g.slope := by

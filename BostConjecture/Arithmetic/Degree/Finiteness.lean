@@ -33,7 +33,7 @@ variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 
 /-- A generic subspace has a nonzero bounded integral Plücker section in the
 fixed ambient exterior module, with bound controlled by its intrinsic degree. -/
-theorem exists_small_exterior_section (h : HermitianMetric (K := K) M)
+theorem exists_small_exterior_section (h : HermitianMetric K M)
     (X : Submodule K (K ⊗[𝓞 K] M)) {r : ℕ} (hr : finrank K X = r) :
     ∃ ξ : ⋀[𝓞 K]^r M, ξ ≠ 0 ∧
       (∀ σ : K →+* ℂ, (h.exterior r).sectionNorm σ ξ <
@@ -57,7 +57,7 @@ theorem exists_small_exterior_section (h : HermitianMetric (K := K) M)
 
 /-- The actual intrinsic subspace degree has finite superlevel sets in every
 fixed rank. No degree finiteness assumption enters the statement. -/
-theorem finite_subspaces_degree_ge (h : HermitianMetric (K := K) M) (r : ℕ) (c : ℝ) :
+theorem finite_subspaces_degree_ge (h : HermitianMetric K M) (r : ℕ) (c : ℝ) :
     {X : Submodule K (K ⊗[𝓞 K] M) | finrank K X = r ∧ c ≤ h.subspaceDegree X}.Finite := by
   classical
   let S := {X : Submodule K (K ⊗[𝓞 K] M) | finrank K X = r ∧ c ≤ h.subspaceDegree X}
@@ -91,7 +91,7 @@ theorem finite_subspaces_degree_ge (h : HermitianMetric (K := K) M) (r : ℕ) (c
   exact Set.toFinite S
 
 /-- Finiteness holds across all ranks, since the ambient generic dimension is finite. -/
-theorem finite_subspaces_degree_ge_all (h : HermitianMetric (K := K) M) (c : ℝ) :
+theorem finite_subspaces_degree_ge_all (h : HermitianMetric K M) (c : ℝ) :
     {X : Submodule K (K ⊗[𝓞 K] M) | c ≤ h.subspaceDegree X}.Finite := by
   have hf := Set.finite_iUnion (fun r : Fin (finrank K (K ⊗[𝓞 K] M) + 1) =>
     h.finite_subspaces_degree_ge r.val c)
@@ -101,7 +101,7 @@ theorem finite_subspaces_degree_ge_all (h : HermitianMetric (K := K) M) (c : ℝ
 
 /-- Saturated integral submodules of a fixed Hermitian bundle with degree
 bounded below form a finite set, with no integral freeness assumption. -/
-theorem finite_saturated_submodules_degree_ge (h : HermitianMetric (K := K) M) (c : ℝ) :
+theorem finite_saturated_submodules_degree_ge (h : HermitianMetric K M) (c : ℝ) :
     {P : Submodule (𝓞 K) M | Module.IsTorsionFree (𝓞 K) (M ⧸ P) ∧
       c ≤ (h.submodule P).degree}.Finite := by
   apply Set.Finite.of_injOn (f := fun P : Submodule (𝓞 K) M => P.baseChange K)

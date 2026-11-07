@@ -32,7 +32,7 @@ variable {M : Type*} [AddCommGroup M] [Module (𝓞 K) M]
 variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 
 /-- At degree zero, semistability bounds every induced degree, including rank zero. -/
-theorem isSemistable_iff_degree_nonpos (h : HermitianMetric (K := K) M)
+theorem isSemistable_iff_degree_nonpos (h : HermitianMetric K M)
     (h0 : h.degree = 0) :
     h.IsSemistable ↔ ∀ P : Submodule (𝓞 K) M, (h.submodule P).degree ≤ 0 := by
   constructor
@@ -48,7 +48,7 @@ theorem isSemistable_iff_degree_nonpos (h : HermitianMetric (K := K) M)
     exact div_nonpos_of_nonpos_of_nonneg (hs P) (Nat.cast_nonneg _)
 
 /-- Uniform rescaling preserves actual semistability in positive rank. -/
-theorem isSemistable_rescale_iff (h : HermitianMetric (K := K) M)
+theorem isSemistable_rescale_iff (h : HermitianMetric K M)
     (hr : Module.finrank K (K ⊗[𝓞 K] M) ≠ 0) (t : ℝ) :
     (h.rescale t).IsSemistable ↔ h.IsSemistable := by
   simp only [IsSemistable, slope_rescale h hr]
@@ -56,7 +56,7 @@ theorem isSemistable_rescale_iff (h : HermitianMetric (K := K) M)
   rw [slope_submodule_rescale h P (Nat.ne_of_gt hP), sub_le_sub_iff_right]
 
 /-- Rescaling by the slope gives degree zero, for any generic rank. -/
-theorem degree_rescale_self (h : HermitianMetric (K := K) M) :
+theorem degree_rescale_self (h : HermitianMetric K M) :
     (h.rescale h.slope).degree = 0 := by
   by_cases hr : Module.finrank K (K ⊗[𝓞 K] M) = 0
   · rw [degree_rescale, hr, Nat.cast_zero, zero_mul, sub_zero]
@@ -64,14 +64,14 @@ theorem degree_rescale_self (h : HermitianMetric (K := K) M) :
   · rw [degree_rescale, slope, mul_div_cancel₀ _ (Nat.cast_ne_zero.mpr hr), sub_self]
 
 /-- The degree of the actual quotient is the difference of the two degrees. -/
-theorem degree_quotient (h : HermitianMetric (K := K) M)
+theorem degree_quotient (h : HermitianMetric K M)
     (P : Submodule (𝓞 K) M) [Module.Projective (𝓞 K) (M ⧸ P)] :
     (h.quotient P).degree = h.degree - (h.submodule P).degree := by
   simpa only [degree_submodule_top, Submodule.comap_top] using
     h.degree_quotient_submodule P ⊤
 
 /-- A degree-zero submodule of a normalized semistable bundle is semistable. -/
-theorem IsSemistable.submodule_of_degree_zero {h : HermitianMetric (K := K) M}
+theorem IsSemistable.submodule_of_degree_zero {h : HermitianMetric K M}
     (hs : h.IsSemistable) (h0 : h.degree = 0)
     (P : Submodule (𝓞 K) M) (hP0 : (h.submodule P).degree = 0) :
     (h.submodule P).IsSemistable := by
@@ -81,7 +81,7 @@ theorem IsSemistable.submodule_of_degree_zero {h : HermitianMetric (K := K) M}
   exact (h.isSemistable_iff_degree_nonpos h0).mp hs _
 
 /-- The quotient by a degree-zero saturated submodule is normalized semistable. -/
-theorem IsSemistable.quotient_of_degree_zero {h : HermitianMetric (K := K) M}
+theorem IsSemistable.quotient_of_degree_zero {h : HermitianMetric K M}
     (hs : h.IsSemistable) (h0 : h.degree = 0)
     (P : Submodule (𝓞 K) M) [Module.Projective (𝓞 K) (M ⧸ P)]
     (hP0 : (h.submodule P).degree = 0) :
@@ -94,7 +94,7 @@ theorem IsSemistable.quotient_of_degree_zero {h : HermitianMetric (K := K) M}
 
 /-- Extensions of normalized semistable bundles are normalized semistable,
 with the actual induced and quotient metrics. -/
-theorem isSemistable_of_submodule_quotient (h : HermitianMetric (K := K) M)
+theorem isSemistable_of_submodule_quotient (h : HermitianMetric K M)
     (P : Submodule (𝓞 K) M) [Module.IsTorsionFree (𝓞 K) (M ⧸ P)]
     (hP : (h.submodule P).IsSemistable) (hP0 : (h.submodule P).degree = 0)
     (hQ : (h.quotient P).IsSemistable) (hQ0 : (h.quotient P).degree = 0) :

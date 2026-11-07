@@ -30,7 +30,7 @@ variable {M : Type*} [AddCommGroup M] [Module (𝓞 K) M]
 variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 
 /-- Viewing a submodule of a submodule inside the original module preserves degree. -/
-lemma degree_submodule_map (h : HermitianMetric (K := K) M)
+lemma degree_submodule_map (h : HermitianMetric K M)
     (T : Submodule (𝓞 K) M) (R : Submodule (𝓞 K) T) :
     ((h.submodule T).submodule R).degree = (h.submodule (R.map T.subtype)).degree := by
   let e := Submodule.equivMapOfInjective T.subtype T.injective_subtype R
@@ -52,7 +52,7 @@ lemma finrank_submodule_map (T : Submodule (𝓞 K) M) (R : Submodule (𝓞 K) T
     (𝓞 K) K _ _).finrank_eq
 
 /-- Nested restriction to an included submodule preserves its intrinsic degree. -/
-lemma degree_submodule_comap (h : HermitianMetric (K := K) M)
+lemma degree_submodule_comap (h : HermitianMetric K M)
     {P T : Submodule (𝓞 K) M} (hPT : P ≤ T) :
     ((h.submodule T).submodule (P.comap T.subtype)).degree = (h.submodule P).degree := by
   exact (h.degree_submodule_map T (P.comap T.subtype)).trans
@@ -68,7 +68,7 @@ lemma finrank_submodule_comap {P T : Submodule (𝓞 K) M} (hPT : P ≤ T) :
 
 /-- Every positive-rank submodule of an interval quotient is bounded by the
 saturated interval obtained from its inverse image. -/
-theorem quotient_submodule_slope_le_interval (h : HermitianMetric (K := K) M)
+theorem quotient_submodule_slope_le_interval (h : HermitianMetric K M)
     {X Y : Submodule K (K ⊗[𝓞 K] M)} (hXY : X ≤ Y)
     (N : Submodule (𝓞 K) (integralPart Y ⧸ (integralPart X).comap (integralPart Y).subtype))
     (hN : 0 < Module.finrank K (K ⊗[𝓞 K] N)) :
@@ -121,7 +121,7 @@ theorem quotient_submodule_slope_le_interval (h : HermitianMetric (K := K) M)
 
 /-- Semistability on a generic interval is genuine semistability of its
 induced integral quotient, against every integral submodule. -/
-theorem quotient_isSemistable_of_interval (h : HermitianMetric (K := K) M)
+theorem quotient_isSemistable_of_interval (h : HermitianMetric K M)
     {X Y : Submodule K (K ⊗[𝓞 K] M)} (hXY : X < Y)
     (hs : ∀ Z (_ : X < Z), Z ≤ Y →
       ((h.submodule (integralPart Z)).quotient
@@ -135,7 +135,7 @@ theorem quotient_isSemistable_of_interval (h : HermitianMetric (K := K) M)
   exact hNZ.trans (hs Z hXZ hZY)
 
 /-- Genuine quotient semistability is equivalent to all generic interval inequalities. -/
-theorem quotient_isSemistable_iff_interval (h : HermitianMetric (K := K) M)
+theorem quotient_isSemistable_iff_interval (h : HermitianMetric K M)
     {X Y : Submodule K (K ⊗[𝓞 K] M)} (hXY : X < Y) :
     ((h.submodule (integralPart Y)).quotient
       ((integralPart X).comap (integralPart Y).subtype)).IsSemistable ↔
@@ -176,7 +176,7 @@ theorem quotient_isSemistable_iff_interval (h : HermitianMetric (K := K) M)
   exact hb
 
 /-- The interval game and the actual induced Hermitian quotient have the same semistability. -/
-theorem quotient_isSemistable_iff_game (h : HermitianMetric (K := K) M)
+theorem quotient_isSemistable_iff_game (h : HermitianMetric K M)
     {X Y : Submodule K (K ⊗[𝓞 K] M)} (hXY : X < Y) :
     ((h.submodule (integralPart Y)).quotient
       ((integralPart X).comap (integralPart Y).subtype)).IsSemistable ↔

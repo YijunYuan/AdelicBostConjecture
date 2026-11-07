@@ -40,7 +40,7 @@ variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 variable [Nontrivial (K ⊗[𝓞 K] M)]
 
 /-- An irreducible generic representation acting by actual integral isometries is semistable. -/
-theorem isSemistable_of_irreducible (h : HermitianMetric (K := K) M)
+theorem isSemistable_of_irreducible (h : HermitianMetric K M)
     (ρ : Representation (𝓞 K) G M) [Representation.IsIrreducible (genericRepresentation ρ)]
     (hρ : ∀ (g : G) (σ : K →+* ℂ) (x y : ComplexFiber M σ),
       (h.fiber σ).inner (fiberMap (ρ g) σ x) (fiberMap (ρ g) σ y) =

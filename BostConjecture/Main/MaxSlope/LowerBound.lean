@@ -35,7 +35,7 @@ variable [AddCommGroup M] [Module (𝓞 K) M]
 /-- The induced metric along an actual tensor injection is the tensor of the
 two induced metrics. This equality holds on the entire complex fibers. -/
 lemma tensor_map_pullback [Module.Flat (𝓞 K) M] [Module.Flat (𝓞 K) Q]
-    (h : HermitianMetric (K := K) M) (g : HermitianMetric (K := K) N)
+    (h : HermitianMetric K M) (g : HermitianMetric K N)
     (f : P →ₗ[𝓞 K] M) (j : Q →ₗ[𝓞 K] N)
     (hf : Function.Injective f) (hj : Function.Injective j) :
     (h.tensor g).pullback (TensorProduct.map f j)
@@ -54,7 +54,7 @@ variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
     [Module.Finite (𝓞 K) N] [Module.Projective (𝓞 K) N]
 
 /-- Pullback along an injection has the slope of its actual integral image. -/
-lemma slope_pullback_eq_range (h : HermitianMetric (K := K) M)
+lemma slope_pullback_eq_range (h : HermitianMetric K M)
     (f : N →ₗ[𝓞 K] M) (hf : Function.Injective f) :
     (h.pullback f hf).slope = (h.submodule (LinearMap.range f)).slope := by
   let e := LinearEquiv.ofInjective f hf
@@ -71,7 +71,7 @@ lemma slope_pullback_eq_range (h : HermitianMetric (K := K) M)
 /-- Every positive-rank isometrically induced subbundle has slope at most the
 ambient maximum, without a saturation assumption. -/
 lemma slope_pullback_le_maxSlope [Nontrivial (K ⊗[𝓞 K] M)]
-    (h : HermitianMetric (K := K) M) (f : N →ₗ[𝓞 K] M)
+    (h : HermitianMetric K M) (f : N →ₗ[𝓞 K] M)
     (hf : Function.Injective f) (hN : 0 < Module.finrank K (K ⊗[𝓞 K] N)) :
     (h.pullback f hf).slope ≤ h.maxSlope := by
   rw [slope_pullback_eq_range]
@@ -91,7 +91,7 @@ instance tensorGenericNontrivial
 products, obtained from the actual first HN terms. -/
 theorem maxSlope_add_le_tensor
     [Nontrivial (K ⊗[𝓞 K] M)] [Nontrivial (K ⊗[𝓞 K] N)]
-    (h : HermitianMetric (K := K) M) (g : HermitianMetric (K := K) N) :
+    (h : HermitianMetric K M) (g : HermitianMetric K N) :
     h.maxSlope + g.maxSlope ≤ (h.tensor g).maxSlope := by
   let P := h.hnSubmodule 1
   let Q := g.hnSubmodule 1

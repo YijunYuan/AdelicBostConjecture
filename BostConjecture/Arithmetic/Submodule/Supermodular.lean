@@ -39,7 +39,7 @@ namespace HermitianMetric
 variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 
 /-- Actual arithmetic degree on generic subspaces is supermodular. -/
-theorem subspaceDegree_supermodular (h : HermitianMetric (K := K) M)
+theorem subspaceDegree_supermodular (h : HermitianMetric K M)
     (X Y : Submodule K (K ⊗[𝓞 K] M)) :
     h.subspaceDegree X + h.subspaceDegree Y ≤
       h.subspaceDegree (X ⊓ Y) + h.subspaceDegree (X ⊔ Y) := by
@@ -52,12 +52,12 @@ theorem subspaceDegree_supermodular (h : HermitianMetric (K := K) M)
   exact hd.trans (add_le_add le_rfl hs)
 
 /-- The concrete Hermitian subspace payoff satisfies the HN convexity axiom. -/
-instance subspaceSlope_isConvex (h : HermitianMetric (K := K) M) :
+instance subspaceSlope_isConvex (h : HermitianMetric K M) :
     (BostConjecture.Subspace.slope h.subspaceDegree).IsConvex :=
   BostConjecture.Subspace.slope_isConvex h.subspaceDegree h.subspaceDegree_supermodular
 
 /-- Degree differences on nested subspaces are the degree of the actual quotient. -/
-lemma subspaceDegree_sub_eq_quotient (h : HermitianMetric (K := K) M)
+lemma subspaceDegree_sub_eq_quotient (h : HermitianMetric K M)
     {X Y : Submodule K (K ⊗[𝓞 K] M)} (hXY : X ≤ Y) :
     h.subspaceDegree Y - h.subspaceDegree X =
       ((h.submodule (integralPart Y)).quotient
@@ -89,7 +89,7 @@ lemma subspaceQuotient_finrank {X Y : Submodule K (K ⊗[𝓞 K] M)} (hXY : X �
   omega
 
 /-- The HN interval payoff is the slope of the intrinsic induced quotient metric. -/
-lemma subspaceSlope_eq_quotient (h : HermitianMetric (K := K) M)
+lemma subspaceSlope_eq_quotient (h : HermitianMetric K M)
     {X Y : Submodule K (K ⊗[𝓞 K] M)} (hXY : X < Y) :
     BostConjecture.Subspace.slope h.subspaceDegree ⟨X, Y, hXY⟩ =
       DedekindCut.principal (((h.submodule (integralPart Y)).quotient

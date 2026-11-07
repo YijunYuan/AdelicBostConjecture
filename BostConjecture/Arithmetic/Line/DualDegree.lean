@@ -38,7 +38,7 @@ namespace HermitianMetric
 
 omit [NumberField K] in
 /-- On a Hermitian line every nonzero vector attains the dual evaluation norm. -/
-lemma dual_sectionNorm_mul_of_rank_one (h : HermitianMetric (K := K) M)
+lemma dual_sectionNorm_mul_of_rank_one (h : HermitianMetric K M)
     (hr : finrank K (K ⊗[𝓞 K] M) = 1) (σ : K →+* ℂ)
     (f : Dual (𝓞 K) M) {x : M} (hx : x ≠ 0) :
     h.dual.sectionNorm σ f * h.sectionNorm σ x = ‖σ (f x)‖ := by
@@ -58,7 +58,7 @@ lemma dual_sectionNorm_mul_of_rank_one (h : HermitianMetric (K := K) M)
   ring
 
 /-- The dual coordinate length is the reciprocal of the original coordinate length. -/
-lemma coordinateLength_dual (h : HermitianMetric (K := K) M)
+lemma coordinateLength_dual (h : HermitianMetric K M)
     (hr : finrank K (K ⊗[𝓞 K] M) = 1)
     (q : M →ₗ[𝓞 K] K) (hq : Function.Injective q)
     {x : M} (hx : x ≠ 0) {f : Dual (𝓞 K) M} (hf : f ≠ 0) (v : InfinitePlace K) :
@@ -78,7 +78,7 @@ lemma coordinateLength_dual (h : HermitianMetric (K := K) M)
 variable [Nontrivial M]
 
 /-- Inversion of the coefficient ideal and coordinate norm negates the actual degree formula. -/
-lemma degreeInCoordinate_dual (h : HermitianMetric (K := K) M)
+lemma degreeInCoordinate_dual (h : HermitianMetric K M)
     (hr : finrank K (K ⊗[𝓞 K] M) = 1)
     (q : M →ₗ[𝓞 K] K) (hq : Function.Injective q)
     {x : M} (hx : x ≠ 0) {f : Dual (𝓞 K) M} (hf : f ≠ 0) :
@@ -92,7 +92,7 @@ lemma degreeInCoordinate_dual (h : HermitianMetric (K := K) M)
   ring
 
 /-- Intrinsic normalized degree changes sign on the dual of any projective Hermitian line. -/
-theorem degree_dual_of_rank_one (h : HermitianMetric (K := K) M)
+theorem degree_dual_of_rank_one (h : HermitianMetric K M)
     (hr : finrank K (K ⊗[𝓞 K] M) = 1) : h.dual.degree = -h.degree := by
   have hrd : finrank K (K ⊗[𝓞 K] Dual (𝓞 K) M) = 1 := dual_generic_finrank.trans hr
   let : Nontrivial (Dual (𝓞 K) M) := by

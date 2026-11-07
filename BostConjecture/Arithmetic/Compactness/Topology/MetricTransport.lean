@@ -30,18 +30,18 @@ variable {M N : Type*} [AddCommGroup M] [Module (𝓞 K) M]
     [Module.Finite (𝓞 K) N] [Module.Projective (𝓞 K) N]
 
 /-- Pullback by a genuine integral isomorphism preserves degree. -/
-theorem degree_pullback_equiv (h : HermitianMetric (K := K) N) (e : M ≃ₗ[𝓞 K] N) :
+theorem degree_pullback_equiv (h : HermitianMetric K N) (e : M ≃ₗ[𝓞 K] N) :
     (h.pullback e.toLinearMap e.injective).degree = h.degree :=
   degree_eq_of_equiv _ h e (fun _ _ _ => rfl)
 
 /-- Pullback by an integral isomorphism preserves slope. -/
-theorem slope_pullback_equiv (h : HermitianMetric (K := K) N) (e : M ≃ₗ[𝓞 K] N) :
+theorem slope_pullback_equiv (h : HermitianMetric K N) (e : M ≃ₗ[𝓞 K] N) :
     (h.pullback e.toLinearMap e.injective).slope = h.slope := by
   rw [slope, slope, degree_pullback_equiv,
     (e.baseChange (𝓞 K) K M N).finrank_eq]
 
 /-- Induced degrees agree on corresponding actual integral submodules. -/
-theorem degree_submodule_pullback_equiv (h : HermitianMetric (K := K) N)
+theorem degree_submodule_pullback_equiv (h : HermitianMetric K N)
     (e : M ≃ₗ[𝓞 K] N) (P : Submodule (𝓞 K) M) :
     ((h.pullback e.toLinearMap e.injective).submodule P).degree =
       (h.submodule (P.map e.toLinearMap)).degree := by
@@ -60,7 +60,7 @@ theorem degree_submodule_pullback_equiv (h : HermitianMetric (K := K) N)
   exact congrArg₂ (h.fiber σ).inner (LinearMap.congr_fun he' x) (LinearMap.congr_fun he' y)
 
 /-- Every semistability inequality transports along the actual module equivalence. -/
-theorem IsSemistable.pullback_equiv {h : HermitianMetric (K := K) N}
+theorem IsSemistable.pullback_equiv {h : HermitianMetric K N}
     (hs : h.IsSemistable) (e : M ≃ₗ[𝓞 K] N) :
     (h.pullback e.toLinearMap e.injective).IsSemistable := by
   intro P hP

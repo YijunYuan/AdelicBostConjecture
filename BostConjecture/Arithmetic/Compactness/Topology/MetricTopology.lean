@@ -31,21 +31,21 @@ variable {K : Type*} [Field K]
 variable {M : Type*} [AddCommGroup M] [Module (𝓞 K) M]
 
 /-- Pointwise convergence of the actual Hermitian forms on all complex fibers. -/
-instance : TopologicalSpace (HermitianMetric (K := K) M) :=
-  TopologicalSpace.induced (fun h : HermitianMetric (K := K) M =>
+instance : TopologicalSpace (HermitianMetric K M) :=
+  TopologicalSpace.induced (fun h : HermitianMetric K M =>
     fun σ x y => (h.fiber σ).inner x y) inferInstance
 
 /-- Evaluating a fiber form at fixed vectors is continuous in the metric. -/
 theorem continuous_inner_eval (σ : K →+* ℂ) (x y : ComplexFiber M σ) :
-    Continuous (fun h : HermitianMetric (K := K) M => (h.fiber σ).inner x y) := by
-  have hc : Continuous (fun h : HermitianMetric (K := K) M =>
+    Continuous (fun h : HermitianMetric K M => (h.fiber σ).inner x y) := by
+  have hc : Continuous (fun h : HermitianMetric K M =>
       fun τ x y => (h.fiber τ).inner x y) := continuous_induced_dom
   exact (continuous_apply y).comp ((continuous_apply x).comp
     ((continuous_apply σ).comp hc))
 
 /-- A fiber form is recovered from its finite Gram matrix in any complex basis. -/
 lemma fiber_inner_eq_sum {ι : Type*} [Fintype ι]
-    (h : HermitianMetric (K := K) M) (σ : K →+* ℂ)
+    (h : HermitianMetric K M) (σ : K →+* ℂ)
     (b : Module.Basis ι ℂ (ComplexFiber M σ)) (x y : ComplexFiber M σ) :
     (h.fiber σ).inner x y = ∑ i, ∑ j,
       star (b.repr x i) * (b.repr y j * (h.fiber σ).inner (b i) (b j)) := by
@@ -68,7 +68,7 @@ lemma fiber_inner_eq_sum {ι : Type*} [Fintype ι]
 variable [Module.Finite (𝓞 K) M]
 
 omit [Module.Finite (𝓞 K) M] in
-lemma fiberNorm_smul (h : HermitianMetric (K := K) M) (σ : K →+* ℂ)
+lemma fiberNorm_smul (h : HermitianMetric K M) (σ : K →+* ℂ)
     (c : ℂ) (x : ComplexFiber M σ) :
     h.fiberNorm σ (c • x) = ‖c‖ * h.fiberNorm σ x := by
   let : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
@@ -79,10 +79,10 @@ lemma fiberNorm_smul (h : HermitianMetric (K := K) M) (σ : K →+* ℂ)
 
 /-- Fiber norms vary jointly continuously with the metric and the vector.
 The vector topology can be supplied by any one of the actual metrics. -/
-theorem continuous_fiberNorm (h : HermitianMetric (K := K) M) (σ : K →+* ℂ) :
+theorem continuous_fiberNorm (h : HermitianMetric K M) (σ : K →+* ℂ) :
     letI : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
     letI := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber M σ)
-    Continuous (fun p : HermitianMetric (K := K) M × ComplexFiber M σ =>
+    Continuous (fun p : HermitianMetric K M × ComplexFiber M σ =>
       p.1.fiberNorm σ p.2) := by
   let : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
   let := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber M σ)
@@ -90,7 +90,7 @@ theorem continuous_fiberNorm (h : HermitianMetric (K := K) M) (σ : K →+* ℂ)
     (inferInstance : PreInnerProductSpace.Core ℂ (ComplexFiber M σ))
   let : Module.Finite ℂ (ComplexFiber M σ) := by dsimp [ComplexFiber]; infer_instance
   let b := Module.finBasis ℂ (ComplexFiber M σ)
-  have he : (fun p : HermitianMetric (K := K) M × ComplexFiber M σ =>
+  have he : (fun p : HermitianMetric K M × ComplexFiber M σ =>
       p.1.fiberNorm σ p.2) = (fun p => Real.sqrt ((∑ i, ∑ j,
       star (b.repr p.2 i) * (b.repr p.2 j * (p.1.fiber σ).inner (b i) (b j))).re)) := by
     funext p
@@ -109,7 +109,7 @@ theorem continuous_fiberNorm (h : HermitianMetric (K := K) M) (σ : K →+* ℂ)
 
 /-- In one fiber, sufficiently close metrics have arbitrarily small
 logarithmic distortion, uniformly over all vectors. -/
-theorem eventually_fiberNorm_compare (h : HermitianMetric (K := K) M)
+theorem eventually_fiberNorm_compare (h : HermitianMetric K M)
     (σ : K →+* ℂ) {t : ℝ} (ht : 0 < t) :
     ∀ᶠ g in 𝓝 h, ∀ x : ComplexFiber M σ,
       g.fiberNorm σ x ≤ Real.exp t * h.fiberNorm σ x ∧
@@ -163,7 +163,7 @@ theorem eventually_fiberNorm_compare (h : HermitianMetric (K := K) M)
 variable [NumberField K]
 
 /-- The uniform comparison holds simultaneously at every archimedean embedding. -/
-theorem eventually_all_fiberNorm_compare (h : HermitianMetric (K := K) M)
+theorem eventually_all_fiberNorm_compare (h : HermitianMetric K M)
     {t : ℝ} (ht : 0 < t) :
     ∀ᶠ g in 𝓝 h, ∀ (σ : K →+* ℂ) (x : ComplexFiber M σ),
       g.fiberNorm σ x ≤ Real.exp t * h.fiberNorm σ x ∧

@@ -30,24 +30,24 @@ variable {M : Type*} [AddCommGroup M] [Module (𝓞 K) M]
 variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 
 /-- Every positive-rank integral submodule has slope at most the ambient slope. -/
-def IsSemistable (h : HermitianMetric (K := K) M) : Prop :=
+def IsSemistable (h : HermitianMetric K M) : Prop :=
   ∀ P : Submodule (𝓞 K) M, 0 < Module.finrank K (K ⊗[𝓞 K] P) →
     (h.submodule P).slope ≤ h.slope
 
 @[simp]
-lemma degree_submodule_top (h : HermitianMetric (K := K) M) :
+lemma degree_submodule_top (h : HermitianMetric K M) :
     (h.submodule ⊤).degree = h.degree :=
   degree_eq_of_equiv _ _ (Submodule.topEquiv : (⊤ : Submodule (𝓞 K) M) ≃ₗ[𝓞 K] M)
     (fun _ _ _ => rfl)
 
 @[simp]
-lemma slope_submodule_top (h : HermitianMetric (K := K) M) :
+lemma slope_submodule_top (h : HermitianMetric K M) :
     (h.submodule ⊤).slope = h.slope := by
   rw [slope, slope, degree_submodule_top]
   rw [(Submodule.topEquiv.baseChange (𝓞 K) K (⊤ : Submodule (𝓞 K) M) M).finrank_eq]
 
 /-- Saturation preserves generic rank and increases slope. -/
-lemma slope_le_saturation (h : HermitianMetric (K := K) M)
+lemma slope_le_saturation (h : HermitianMetric K M)
     (P : Submodule (𝓞 K) M) :
     (h.submodule P).slope ≤ (h.submodule (integralPart (P.baseChange K))).slope := by
   have hr := (Submodule.toBaseChange.toLinearEquiv K P).finrank_eq.trans
@@ -56,7 +56,7 @@ lemma slope_le_saturation (h : HermitianMetric (K := K) M)
   exact div_le_div_of_nonneg_right (h.degree_le_saturation P) (Nat.cast_nonneg _)
 
 /-- Testing saturated integral parts suffices for genuine integral semistability. -/
-theorem isSemistable_iff_subspaces (h : HermitianMetric (K := K) M) :
+theorem isSemistable_iff_subspaces (h : HermitianMetric K M) :
     h.IsSemistable ↔ ∀ X : Submodule K (K ⊗[𝓞 K] M), ⊥ < X →
       (h.submodule (integralPart X)).slope ≤ h.slope := by
   constructor
@@ -76,13 +76,13 @@ theorem isSemistable_iff_subspaces (h : HermitianMetric (K := K) M) :
 variable [Nontrivial (K ⊗[𝓞 K] M)]
 
 /-- The total generic payoff is the actual ambient Hermitian slope. -/
-lemma subspaceSlope_top (h : HermitianMetric (K := K) M) :
+lemma subspaceSlope_top (h : HermitianMetric K M) :
     BostConjecture.Subspace.slope h.subspaceDegree ⊤ = DedekindCut.principal h.slope := by
   rw [show (⊤ : StrictIntvl (Submodule K (K ⊗[𝓞 K] M))) = ⟨⊥, ⊤, bot_lt_top⟩ from rfl,
     subspaceSlope_apply_bot, integralPart_top, slope_submodule_top]
 
 /-- The finite-length game specializes to semistability against all integral submodules. -/
-theorem isSemistable_iff_game (h : HermitianMetric (K := K) M) :
+theorem isSemistable_iff_game (h : HermitianMetric K M) :
     h.IsSemistable ↔ (BostConjecture.Subspace.slope h.subspaceDegree).IsSemistable := by
   rw [BostConjecture.Slope.isSemistable_iff, h.isSemistable_iff_subspaces]
   simp only [h.subspaceSlope_apply_bot, h.subspaceSlope_top,

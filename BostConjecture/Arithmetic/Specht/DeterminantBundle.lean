@@ -39,10 +39,10 @@ local instance (t : OAI.Saxl.Tableau n (rectangle a k)) :
       (𝓞 K ⊗[ℤ] orbitLattice t)) := Module.addCommMonoidToAddCommGroup (𝓞 K)
 
 /-- The canonical metric is induced by the actual projective determinant inclusion. -/
-def determinantMetric (h : HermitianMetric (K := K) M) (hk : 0 < k)
+def determinantMetric (h : HermitianMetric K M) (hk : 0 < k)
     (t : OAI.Saxl.Tableau n (rectangle a k))
     (ha : ∀ p : PrimeSpectrum (𝓞 K), Module.rankAtStalk M p = a) :
-    HermitianMetric (K := K) ((⨂[𝓞 K] (_ : Fin k), ⋀[𝓞 K]^a M) ⊗[𝓞 K]
+    HermitianMetric K ((⨂[𝓞 K] (_ : Fin k), ⋀[𝓞 K]^a M) ⊗[𝓞 K]
       (𝓞 K ⊗[ℤ] orbitLattice t)) :=
   (HermitianMetric.piTensor (fun _ : Fin n => h)).pullback
     (Geometry.projectiveDeterminantMap hk t ha)
@@ -73,7 +73,7 @@ theorem determinant_generic_nontrivial (t : OAI.Saxl.Tableau n (rectangle a k))
   exact Module.finrank_pos
 
 /-- Position permutations are isometries for the actual induced determinant metric. -/
-theorem determinantMetric_action_inner (h : HermitianMetric (K := K) M) (hk : 0 < k)
+theorem determinantMetric_action_inner (h : HermitianMetric K M) (hk : 0 < k)
     (t : OAI.Saxl.Tableau n (rectangle a k))
     (ha : ∀ p : PrimeSpectrum (𝓞 K), Module.rankAtStalk M p = a)
     (g : Equiv.Perm (Fin n)) (σ : K →+* ℂ)
@@ -118,7 +118,7 @@ theorem determinantMetric_action_inner (h : HermitianMetric (K := K) M) (hk : 0 
   exact Tensor.hilbertCore_reindex_inner (fun _ : Fin n => ComplexFiber M σ) g _ _
 
 /-- Intrinsic semistability of the actual determinant–Specht Hermitian bundle. -/
-theorem determinantMetric_isSemistable (h : HermitianMetric (K := K) M) (hk : 0 < k)
+theorem determinantMetric_isSemistable (h : HermitianMetric K M) (hk : 0 < k)
     (t : OAI.Saxl.Tableau n (rectangle a k))
     (ha : ∀ p : PrimeSpectrum (𝓞 K), Module.rankAtStalk M p = a) :
     (determinantMetric h hk t ha).IsSemistable := by
@@ -130,7 +130,7 @@ theorem determinantMetric_isSemistable (h : HermitianMetric (K := K) M) (hk : 0 
 
 /-- The actual induced metric equals the prescribed determinant and lattice
 Gram metric in every archimedean fiber. -/
-theorem determinantMetric_fiber_inner (h : HermitianMetric (K := K) M) (hk : 0 < k)
+theorem determinantMetric_fiber_inner (h : HermitianMetric K M) (hk : 0 < k)
     (t : OAI.Saxl.Tableau n (rectangle a k))
     (ha : ∀ p : PrimeSpectrum (𝓞 K), Module.rankAtStalk M p = a) (σ : K →+* ℂ) :
     letI : Algebra (𝓞 K) ℂ := (σ.comp (algebraMap (𝓞 K) K)).toAlgebra
@@ -170,7 +170,7 @@ local instance (t : ∀ j, OAI.Saxl.Tableau n (rectangle (r j) (q j))) :
 /-- Independent actions prove semistability of the actual finite family of
 determinant–Specht bundles and of its actual Hermitian dual. -/
 theorem determinantMetric_piTensor_and_dual_isSemistable
-    (h : ∀ j, HermitianMetric (K := K) (E j)) (hq : ∀ j, 0 < q j)
+    (h : ∀ j, HermitianMetric K (E j)) (hq : ∀ j, 0 < q j)
     (t : ∀ j, OAI.Saxl.Tableau n (rectangle (r j) (q j)))
     (hr : ∀ j (p : PrimeSpectrum (𝓞 K)), Module.rankAtStalk (E j) p = r j) :
     (HermitianMetric.piTensor (fun j => determinantMetric (h j) (hq j) (t j) (hr j))).IsSemistable ∧

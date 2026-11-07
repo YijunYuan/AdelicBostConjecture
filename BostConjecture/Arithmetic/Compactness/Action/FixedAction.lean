@@ -125,7 +125,7 @@ variable [∀ n, Module.Finite (𝓞 K) (A n)] [∀ n, Module.Projective (𝓞 K
 after passage to an increasing subsequence. -/
 theorem exists_module_identifications_of_compact_frames
     (a : Module.Basis κ ℤ (𝓞 K))
-    (h : ∀ n, HermitianMetric (K := K) (A n)) (b : ∀ n, Module.Basis ι ℤ (A n))
+    (h : ∀ n, HermitianMetric K (A n)) (b : ∀ n, Module.Basis ι ℤ (A n))
     (b₀ : ∀ n, OrthonormalBasis ι ℝ (h n).TraceSpace)
     {S : Set (GeneralLinearGroup ι ℝ)} (hS : IsCompact S)
     (B : ℕ → GeneralLinearGroup ι ℝ) (hBS : ∀ n, B n ∈ S)

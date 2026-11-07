@@ -96,7 +96,7 @@ namespace HermitianMetric
 variable {M}
 
 /-- Evaluation at an orthonormal determinant generator computes the actual dual form. -/
-lemma determinant_dualFiber_inner_eval (h : HermitianMetric (K := K) M) (σ : K →+* ℂ)
+lemma determinant_dualFiber_inner_eval (h : HermitianMetric K M) (σ : K →+* ℂ)
     (f g : ComplexFiber (Dual (𝓞 K) (DeterminantLine (K := K) M)) σ) :
     let : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
     let := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber M σ)
@@ -130,7 +130,7 @@ lemma determinant_dualFiber_inner_eval (h : HermitianMetric (K := K) M) (σ : K 
   exact mul_comm _ _
 
 /-- Canonical integral determinant duality preserves every archimedean fiber norm. -/
-theorem determinantDual_fiber_norm (h : HermitianMetric (K := K) M) (σ : K →+* ℂ)
+theorem determinantDual_fiber_norm (h : HermitianMetric K M) (σ : K →+* ℂ)
     (x : ComplexFiber (DeterminantLine (K := K) (Dual (𝓞 K) M)) σ) :
     Real.sqrt (((h.determinant.dual.fiber σ).inner
       (fiberMap (determinantDualEquiv M).toLinearMap σ x)
@@ -185,7 +185,7 @@ theorem determinantDual_fiber_norm (h : HermitianMetric (K := K) M) (σ : K →+
   exact (h.dual.determinantFiber_norm_eq σ c x).symm
 
 /-- Canonical integral determinant duality is an isometry on integral sections. -/
-lemma determinantDual_sectionNorm (h : HermitianMetric (K := K) M) (σ : K →+* ℂ)
+lemma determinantDual_sectionNorm (h : HermitianMetric K M) (σ : K →+* ℂ)
     (x : DeterminantLine (K := K) (Dual (𝓞 K) M)) :
     h.determinant.dual.sectionNorm σ (determinantDualEquiv M x) =
       h.dual.determinant.sectionNorm σ x := by
@@ -196,7 +196,7 @@ lemma determinantDual_sectionNorm (h : HermitianMetric (K := K) M) (σ : K →+*
 variable [NumberField K]
 
 /-- The intrinsic normalized degree of the actual Hermitian dual is the negative degree. -/
-theorem degree_dual (h : HermitianMetric (K := K) M) : h.dual.degree = -h.degree := by
+theorem degree_dual (h : HermitianMetric K M) : h.dual.degree = -h.degree := by
   have hr := determinant_generic_finrank (K := K) M
   have hrd : finrank K (K ⊗[𝓞 K] Dual (𝓞 K) (DeterminantLine (K := K) M)) = 1 :=
     dual_generic_finrank.trans hr
@@ -216,7 +216,7 @@ theorem degree_dual (h : HermitianMetric (K := K) M) : h.dual.degree = -h.degree
     _ = -h.degree := congrArg Neg.neg (h.determinant.degree_eq_lineDegree hr)
 
 /-- Duality reverses normalized slope, with no freeness or positive-rank assumption. -/
-theorem slope_dual (h : HermitianMetric (K := K) M) : h.dual.slope = -h.slope := by
+theorem slope_dual (h : HermitianMetric K M) : h.dual.slope = -h.slope := by
   simp only [slope, degree_dual, dual_generic_finrank, neg_div]
 
 end HermitianMetric

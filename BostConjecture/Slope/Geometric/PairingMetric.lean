@@ -32,7 +32,7 @@ section Factor
 variable {K M : Type*} [Field K] [NumberField K]
   [AddCommGroup M] [Module (𝓞 K) M]
   [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
-  (h : HermitianMetric (K := K) M) (σ : K →+* ℂ) {n a k : ℕ}
+  (h : HermitianMetric K M) (σ : K →+* ℂ) {n a k : ℕ}
 
 local instance factorDualDeterminantAddGroup (t : OAI.Saxl.Tableau n (rectangle a k)) :
     AddCommGroup ((⨂[𝓞 K] (_ : Fin k), ⋀[𝓞 K]^a (Dual (𝓞 K) M)) ⊗[𝓞 K]
@@ -87,7 +87,7 @@ section Family
 variable {K ι : Type*} [Field K] [NumberField K] [Fintype ι]
   (E : ι → Type*) [∀ j, AddCommGroup (E j)] [∀ j, Module (𝓞 K) (E j)]
   [∀ j, Module.Finite (𝓞 K) (E j)] [∀ j, Module.Projective (𝓞 K) (E j)]
-  (hE : ∀ j, HermitianMetric (K := K) (E j)) (σ : K →+* ℂ)
+  (hE : ∀ j, HermitianMetric K (E j)) (σ : K →+* ℂ)
   {n : ℕ} {a k : ι → ℕ}
 
 local instance familyDualDeterminantAddGroup (t : ∀ j, OAI.Saxl.Tableau n (rectangle (a j) (k j))) :
@@ -155,7 +155,7 @@ section Pairing
 variable {K ι : Type*} [Field K] [NumberField K] [Fintype ι]
   (E : ι → Type*) [∀ j, AddCommGroup (E j)] [∀ j, Module (𝓞 K) (E j)]
   [∀ j, Module.Finite (𝓞 K) (E j)] [∀ j, Module.Projective (𝓞 K) (E j)]
-  (hE : ∀ j, HermitianMetric (K := K) (E j))
+  (hE : ∀ j, HermitianMetric K (E j))
   {V : Type*} [AddCommGroup V] [Module (𝓞 K) V]
   [Module.Finite (𝓞 K) V] [Module.Projective (𝓞 K) V]
   (i : V →ₗ[𝓞 K] (⨂[𝓞 K] j, E j)) (hi : Function.Injective i)

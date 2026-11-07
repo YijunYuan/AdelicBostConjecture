@@ -43,7 +43,7 @@ lemma piTensor_generic_finrank {ι : Type} [Fintype ι] (M : ι → Type u)
 /-- Separating the final factor preserves the entire arithmetic fiber form. -/
 lemma piTensor_option_inner {ι : Type} [Fintype ι] (M : Option ι → Type u)
     [∀ i, AddCommGroup (M i)] [∀ i, Module (𝓞 K) (M i)]
-    (h : ∀ i, HermitianMetric (K := K) (M i)) (σ : K →+* ℂ)
+    (h : ∀ i, HermitianMetric K (M i)) (σ : K →+* ℂ)
     (x y : ComplexFiber (⨂[𝓞 K] i, M i) σ) :
     (((HermitianMetric.piTensor (fun i => h (some i))).tensor (h none)).fiber σ).inner
       (fiberMap (Tensor.optionEquiv (𝓞 K) M).toLinearMap σ x)
@@ -63,7 +63,7 @@ omit [NumberField K] in
 /-- Reindexing preserves the entire arithmetic tensor form. -/
 lemma piTensor_reindex_inner {ι κ : Type} [Fintype ι] [Fintype κ]
     (M : κ → Type u) [∀ i, AddCommGroup (M i)] [∀ i, Module (𝓞 K) (M i)]
-    (h : ∀ i, HermitianMetric (K := K) (M i)) (e : ι ≃ κ) (σ : K →+* ℂ)
+    (h : ∀ i, HermitianMetric K (M i)) (e : ι ≃ κ) (σ : K →+* ℂ)
     (x y : ComplexFiber (⨂[𝓞 K] i, M i) σ) :
     ((HermitianMetric.piTensor (fun i => h (e i))).fiber σ).inner
       (fiberMap (reindex (𝓞 K) M e.symm).toLinearMap σ x)
@@ -84,7 +84,7 @@ lemma piTensor_reindex_inner {ι κ : Type} [Fintype ι] [Fintype κ]
 lemma degree_piTensor_empty {ι : Type} [Fintype ι] [IsEmpty ι]
     (M : ι → Type u) [∀ i, AddCommGroup (M i)] [∀ i, Module (𝓞 K) (M i)]
     [∀ i, Module.Finite (𝓞 K) (M i)] [∀ i, Module.Projective (𝓞 K) (M i)]
-    (h : ∀ i, HermitianMetric (K := K) (M i)) :
+    (h : ∀ i, HermitianMetric K (M i)) :
     (HermitianMetric.piTensor h).degree = 0 := by
   classical
   let e := isEmptyEquiv ι (R := 𝓞 K) (s := M)
@@ -110,7 +110,7 @@ lemma degree_piTensor_empty {ι : Type} [Fintype ι] [IsEmpty ι]
 theorem slope_piTensor {ι : Type} [Fintype ι] (M : ι → Type u)
     [∀ i, AddCommGroup (M i)] [∀ i, Module (𝓞 K) (M i)]
     [∀ i, Module.Finite (𝓞 K) (M i)] [∀ i, Module.Projective (𝓞 K) (M i)]
-    (h : ∀ i, HermitianMetric (K := K) (M i))
+    (h : ∀ i, HermitianMetric K (M i))
     (hr : ∀ i, 0 < Module.finrank K (K ⊗[𝓞 K] M i)) :
     (HermitianMetric.piTensor h).slope = ∑ i, (h i).slope := by
   classical
@@ -118,7 +118,7 @@ theorem slope_piTensor {ι : Type} [Fintype ι] (M : ι → Type u)
   refine Fintype.induction_empty_option (P := fun ι _ =>
     ∀ (M : ι → Type u) [∀ i, AddCommGroup (M i)] [∀ i, Module (𝓞 K) (M i)]
       [∀ i, Module.Finite (𝓞 K) (M i)] [∀ i, Module.Projective (𝓞 K) (M i)]
-      (h : ∀ i, HermitianMetric (K := K) (M i)),
+      (h : ∀ i, HermitianMetric K (M i)),
       (∀ i, 0 < Module.finrank K (K ⊗[𝓞 K] M i)) →
       (HermitianMetric.piTensor h).slope = ∑ i, (h i).slope) ?_ ?_ ?_ ι
   · intro α β _ e ih M _ _ _ _ h hr
@@ -159,19 +159,19 @@ variable {M : Type u} [AddCommGroup M] [Module (𝓞 K) M]
   [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 
 /-- Taking the intrinsic determinant line preserves the defining determinant degree. -/
-lemma determinant_degree (h : HermitianMetric (K := K) M) :
+lemma determinant_degree (h : HermitianMetric K M) :
     h.determinant.degree = h.degree :=
   h.determinant.degree_eq_lineDegree (determinant_generic_finrank M)
 
 /-- The actual finite tensor power of the determinant line has the expected slope. -/
-lemma determinant_piTensor_slope (h : HermitianMetric (K := K) M) (k : ℕ) :
+lemma determinant_piTensor_slope (h : HermitianMetric K M) (k : ℕ) :
     (HermitianMetric.piTensor (fun _ : Fin k => h.determinant)).slope =
       (k : ℝ) * h.degree := by
   rw [slope_piTensor _ _ (fun _ => by rw [determinant_generic_finrank]; exact Nat.zero_lt_one)]
   simp [HermitianMetric.slope, determinant_generic_finrank, determinant_degree]
 
 /-- The same formula gives the degree since a determinant tensor power has rank one. -/
-lemma determinant_piTensor_degree (h : HermitianMetric (K := K) M) (k : ℕ) :
+lemma determinant_piTensor_degree (h : HermitianMetric K M) (k : ℕ) :
     (HermitianMetric.piTensor (fun _ : Fin k => h.determinant)).degree =
       (k : ℝ) * h.degree := by
   have hr : Module.finrank K

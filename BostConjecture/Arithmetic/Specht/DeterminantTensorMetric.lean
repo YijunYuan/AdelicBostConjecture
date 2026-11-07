@@ -57,7 +57,7 @@ local instance (t : OAI.Saxl.Tableau n
 
 /-- The metric defined through the projective determinant inclusion is exactly
 ARITH's Hilbert tensor of the intrinsic determinant powers and the actual lattice. -/
-theorem determinantMetric_eq_tensor (h : HermitianMetric (K := K) M) (hk : 0 < k)
+theorem determinantMetric_eq_tensor (h : HermitianMetric K M) (hk : 0 < k)
     (t : OAI.Saxl.Tableau n (rectangle (Module.finrank K (K ⊗[𝓞 K] M)) k))
     (ha : ∀ p : PrimeSpectrum (𝓞 K),
       Module.rankAtStalk M p = Module.finrank K (K ⊗[𝓞 K] M)) :

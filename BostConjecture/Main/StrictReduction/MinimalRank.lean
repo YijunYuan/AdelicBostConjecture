@@ -38,7 +38,7 @@ variable {M N : Type u} [AddCommGroup M] [Module (𝓞 K) M]
 
 /-- A normalized metric is semistable exactly when its saturated maximum degree
 is nonpositive. Saturation handles all integral test submodules. -/
-theorem isSemistable_iff_maxDegree_nonpos (h : HermitianMetric (K := K) M)
+theorem isSemistable_iff_maxDegree_nonpos (h : HermitianMetric K M)
     (h0 : h.degree = 0) : h.IsSemistable ↔ h.maxDegree ≤ 0 := by
   rw [h.isSemistable_iff_degree_nonpos h0]
   constructor
@@ -51,7 +51,7 @@ theorem isSemistable_iff_maxDegree_nonpos (h : HermitianMetric (K := K) M)
 
 /-- An actual normalized tensor counterexample has positive maximum degree. -/
 theorem maxDegree_tensor_pos_of_not_isSemistable
-    (h : HermitianMetric (K := K) M) (g : HermitianMetric (K := K) N)
+    (h : HermitianMetric K M) (g : HermitianMetric K N)
     (h0 : h.degree = 0) (g0 : g.degree = 0)
     (hbad : ¬ (h.tensor g).IsSemistable) : 0 < (h.tensor g).maxDegree := by
   have ht0 : (h.tensor g).degree = 0 := by simp [degree_tensor, h0, g0]
@@ -93,7 +93,7 @@ theorem isSemistable_tensor_of_smaller_rank_sum
     [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
     [AddCommGroup N] [Module (𝓞 K) N]
     [Module.Finite (𝓞 K) N] [Module.Projective (𝓞 K) N]
-    (h : HermitianMetric (K := K) M) (g : HermitianMetric (K := K) N)
+    (h : HermitianMetric K M) (g : HermitianMetric K N)
     (hrM : 0 < Module.finrank K (K ⊗[𝓞 K] M))
     (hrN : 0 < Module.finrank K (K ⊗[𝓞 K] N))
     (hlt : Module.finrank K (K ⊗[𝓞 K] M) +

@@ -33,7 +33,7 @@ variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 
 /-- A nonzero integral section of a normalized semistable module has
 nonnegative logarithmic archimedean norm product. -/
-theorem IsSemistable.sum_log_sectionNorm_nonneg {h : HermitianMetric (K := K) M}
+theorem IsSemistable.sum_log_sectionNorm_nonneg {h : HermitianMetric K M}
     (hs : h.IsSemistable) (h0 : h.degree = 0) {x : M} (hx : x ≠ 0) :
     0 ≤ ∑ σ : K →+* ℂ, Real.log (h.sectionNorm σ x) := by
   have hgen : (1 : K) ⊗ₜ[𝓞 K] x ≠ 0 := by
@@ -68,7 +68,7 @@ theorem IsSemistable.sum_log_sectionNorm_nonneg {h : HermitianMetric (K := K) M}
   linarith
 
 /-- The squared actual trace norm is at least the field degree. -/
-theorem IsSemistable.traceSection_norm_sq_ge {h : HermitianMetric (K := K) M}
+theorem IsSemistable.traceSection_norm_sq_ge {h : HermitianMetric K M}
     (hs : h.IsSemistable) (h0 : h.degree = 0) {x : M} (hx : x ≠ 0) :
     (Module.finrank ℚ K : ℝ) ≤ ‖h.traceSection x‖ ^ 2 := by
   have hlog := hs.sum_log_sectionNorm_nonneg h0 hx
@@ -83,7 +83,7 @@ theorem IsSemistable.traceSection_norm_sq_ge {h : HermitianMetric (K := K) M}
   linarith
 
 /-- Every nonzero point of the actual integral trace lattice has the uniform systole. -/
-theorem IsSemistable.traceLattice_systole {h : HermitianMetric (K := K) M}
+theorem IsSemistable.traceLattice_systole {h : HermitianMetric K M}
     (hs : h.IsSemistable) (h0 : h.degree = 0) (z : h.TraceSpace)
     (hz : z ∈ h.traceLattice) (hz0 : z ≠ 0) :
     Real.sqrt (Module.finrank ℚ K : ℝ) ≤ ‖z‖ := by

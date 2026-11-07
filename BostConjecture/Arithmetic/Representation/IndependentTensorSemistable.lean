@@ -52,7 +52,7 @@ def complexTensorRepresentationEquiv (ρ : Representation (𝓞 K) G M)
 namespace HermitianMetric
 
 /-- Independent integral isometries act isometrically for the actual Hilbert tensor metric. -/
-lemma tensor_action_inner (h : HermitianMetric (K := K) M) (k : HermitianMetric (K := K) N)
+lemma tensor_action_inner (h : HermitianMetric K M) (k : HermitianMetric K N)
     (ρ : Representation (𝓞 K) G M) (τ : Representation (𝓞 K) H N)
     (hρ : ∀ (a : G) (σ : K →+* ℂ) (x y : ComplexFiber M σ),
       (h.fiber σ).inner (fiberMap (ρ a) σ x) (fiberMap (ρ a) σ y) = (h.fiber σ).inner x y)
@@ -83,7 +83,7 @@ variable [Nontrivial (K ⊗[𝓞 K] M)] [Nontrivial (K ⊗[𝓞 K] N)]
 
 /-- Independent actions irreducible at one embedding give a semistable tensor bundle. -/
 theorem isSemistable_tensor_of_complex_irreducible
-    (h : HermitianMetric (K := K) M) (k : HermitianMetric (K := K) N)
+    (h : HermitianMetric K M) (k : HermitianMetric K N)
     (ρ : Representation (𝓞 K) G M) (τ : Representation (𝓞 K) H N) (σ : K →+* ℂ)
     [Representation.IsIrreducible (complexRepresentation ρ σ)]
     [Representation.IsIrreducible (complexRepresentation τ σ)]

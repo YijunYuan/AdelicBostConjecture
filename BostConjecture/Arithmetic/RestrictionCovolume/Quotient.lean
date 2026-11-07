@@ -31,7 +31,7 @@ variable {M N : Type*} [AddCommGroup M] [Module (𝓞 K) M]
     [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
     [AddCommGroup N] [Module (𝓞 K) N]
     [Module.Finite (𝓞 K) N] [Module.Projective (𝓞 K) N]
-variable (h : HermitianMetric (K := K) M) (g : HermitianMetric (K := K) N)
+variable (h : HermitianMetric K M) (g : HermitianMetric K N)
 
 /-- The real trace map induced by an actual integral linear map. -/
 def traceMap (f : M →ₗ[𝓞 K] N) : h.TraceSpace →ₗ[ℝ] g.TraceSpace where

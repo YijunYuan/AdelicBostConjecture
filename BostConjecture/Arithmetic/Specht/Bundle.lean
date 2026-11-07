@@ -76,7 +76,7 @@ lemma latticeFiberEquiv_conjugate_coeff (t : OAI.Saxl.Tableau n μ) (σ : K →+
 
 /-- The canonical arithmetic Specht metric, with no auxiliary metric choices. -/
 def latticeMetric (t : OAI.Saxl.Tableau n μ) :
-    HermitianMetric (K := K) (𝓞 K ⊗[ℤ] orbitLattice t) where
+    HermitianMetric K (𝓞 K ⊗[ℤ] orbitLattice t) where
   fiber := latticeFiber t
   conjugate := by
     intro σ x y

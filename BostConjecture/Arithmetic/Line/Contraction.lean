@@ -52,8 +52,8 @@ variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M] [Nontrivial M
 variable [Module.Finite (𝓞 K) N] [Module.Projective (𝓞 K) N] [Nontrivial N]
 
 /-- An injective contraction between intrinsic projective lines increases degree. -/
-theorem lineDegree_le_of_injective (h : HermitianMetric (K := K) M)
-    (g : HermitianMetric (K := K) N) (f : M →ₗ[𝓞 K] N) (hf : Function.Injective f)
+theorem lineDegree_le_of_injective (h : HermitianMetric K M)
+    (g : HermitianMetric K N) (f : M →ₗ[𝓞 K] N) (hf : Function.Injective f)
     (hM : Module.finrank K (K ⊗[𝓞 K] M) = 1)
     (hN : Module.finrank K (K ⊗[𝓞 K] N) = 1)
     (hcontract : ∀ (σ : K →+* ℂ) (x : M), g.sectionNorm σ (f x) ≤ h.sectionNorm σ x) :

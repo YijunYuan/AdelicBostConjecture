@@ -90,7 +90,7 @@ variable {K : Type*} [Field K]
 variable {M : Type*} [AddCommGroup M] [Module (𝓞 K) M] [Module.Finite (𝓞 K) M]
 
 /-- The intrinsic determinant fiber has the exterior norm in every orthonormal frame. -/
-lemma determinantFiber_norm_eq (h : HermitianMetric (K := K) M) (σ : K →+* ℂ) :
+lemma determinantFiber_norm_eq (h : HermitianMetric K M) (σ : K →+* ℂ) :
     letI : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
     letI := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber M σ)
     letI := InnerProductSpace.ofCore
@@ -114,8 +114,8 @@ lemma determinantFiber_norm_eq (h : HermitianMetric (K := K) M) (σ : K →+* �
 variable {N : Type*} [AddCommGroup N] [Module (𝓞 K) N] [Module.Finite (𝓞 K) N]
 
 /-- Fiberwise contraction descends to every vector of the complex determinant fiber. -/
-theorem determinantFiber_norm_map_le (h : HermitianMetric (K := K) M)
-    (g : HermitianMetric (K := K) N) (f : M →ₗ[𝓞 K] N)
+theorem determinantFiber_norm_map_le (h : HermitianMetric K M)
+    (g : HermitianMetric K N) (f : M →ₗ[𝓞 K] N)
     (hr : Module.finrank K (K ⊗[𝓞 K] M) = Module.finrank K (K ⊗[𝓞 K] N))
     (hc : ∀ (σ : K →+* ℂ) (x : ComplexFiber M σ),
       Real.sqrt (((g.fiber σ).inner (fiberMap f σ x) (fiberMap f σ x)).re) ≤
@@ -142,8 +142,8 @@ theorem determinantFiber_norm_map_le (h : HermitianMetric (K := K) M)
   exact ComplexDeterminant.norm_map_le b d (fiberMap f σ) (hc σ) _
 
 /-- Fiberwise contraction descends to contraction of every integral determinant section. -/
-theorem determinant_sectionNorm_map_le (h : HermitianMetric (K := K) M)
-    (g : HermitianMetric (K := K) N) (f : M →ₗ[𝓞 K] N)
+theorem determinant_sectionNorm_map_le (h : HermitianMetric K M)
+    (g : HermitianMetric K N) (f : M →ₗ[𝓞 K] N)
     (hr : Module.finrank K (K ⊗[𝓞 K] M) = Module.finrank K (K ⊗[𝓞 K] N))
     (hc : ∀ (σ : K →+* ℂ) (x : ComplexFiber M σ),
       Real.sqrt (((g.fiber σ).inner (fiberMap f σ x) (fiberMap f σ x)).re) ≤
@@ -157,8 +157,8 @@ theorem determinant_sectionNorm_map_le (h : HermitianMetric (K := K) M)
 variable [NumberField K] [Module.Projective (𝓞 K) M] [Module.Projective (𝓞 K) N]
 
 /-- An injective contraction of equal generic rank increases intrinsic arithmetic degree. -/
-theorem degree_le_of_injective (h : HermitianMetric (K := K) M)
-    (g : HermitianMetric (K := K) N) (f : M →ₗ[𝓞 K] N) (hf : Function.Injective f)
+theorem degree_le_of_injective (h : HermitianMetric K M)
+    (g : HermitianMetric K N) (f : M →ₗ[𝓞 K] N) (hf : Function.Injective f)
     (hr : Module.finrank K (K ⊗[𝓞 K] M) = Module.finrank K (K ⊗[𝓞 K] N))
     (hc : ∀ (σ : K →+* ℂ) (x : ComplexFiber M σ),
       Real.sqrt (((g.fiber σ).inner (fiberMap f σ x) (fiberMap f σ x)).re) ≤

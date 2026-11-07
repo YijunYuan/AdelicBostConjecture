@@ -51,13 +51,13 @@ lemma lineCoordinate_injective [Module.Finite (𝓞 K) M] [Module.Projective (�
 namespace HermitianMetric
 
 /-- The norm of the vector with coordinate one, recovered from an integral section. -/
-def coordinateLength (h : HermitianMetric (K := K) M) (f : M →ₗ[𝓞 K] K)
+def coordinateLength (h : HermitianMetric K M) (f : M →ₗ[𝓞 K] K)
     (x : M) (v : InfinitePlace K) : ℝ :=
   h.sectionNorm v.embedding x / v (f x)
 
 omit [NumberField K] in
 lemma coordinateLength_pos [Module.Projective (𝓞 K) M]
-    (h : HermitianMetric (K := K) M) (f : M →ₗ[𝓞 K] K)
+    (h : HermitianMetric K M) (f : M →ₗ[𝓞 K] K)
     (hf : Function.Injective f) {x : M} (hx : x ≠ 0) (v : InfinitePlace K) :
     0 < h.coordinateLength f x v := by
   apply div_pos (h.sectionNorm_pos v.embedding hx)
@@ -65,7 +65,7 @@ lemma coordinateLength_pos [Module.Projective (𝓞 K) M]
 
 /-- The intrinsic fiber metric determines the same length from any nonzero
 integral section, including for a nonfree rank-one module. -/
-lemma coordinateLength_eq (h : HermitianMetric (K := K) M)
+lemma coordinateLength_eq (h : HermitianMetric K M)
     (f : M →ₗ[𝓞 K] K) (hf : Function.Injective f)
     {x y : M} (hx : x ≠ 0) (hy : y ≠ 0) :
     h.coordinateLength f x = h.coordinateLength f y := by
@@ -89,7 +89,7 @@ lemma coordinateLength_eq (h : HermitianMetric (K := K) M)
 
 omit [NumberField K] in
 /-- The fiber length under a change of coordinate. -/
-lemma coordinateLength_smul (h : HermitianMetric (K := K) M)
+lemma coordinateLength_smul (h : HermitianMetric K M)
     (f : M →ₗ[𝓞 K] K) (x : M) (a : K) (v : InfinitePlace K) :
     h.coordinateLength (a • f) x v = v a⁻¹ * h.coordinateLength f x v := by
   simp only [coordinateLength, LinearMap.smul_apply, smul_eq_mul, map_mul, map_inv₀]
@@ -99,10 +99,10 @@ variable [Module.Finite (𝓞 K) M]
 
 /-- The degree computed from the integral module, its coordinate ideal, and its
 actual Hermitian metric. -/
-def degreeInCoordinate (h : HermitianMetric (K := K) M) (f : M →ₗ[𝓞 K] K) (x : M) : ℝ :=
+def degreeInCoordinate (h : HermitianMetric K M) (f : M →ₗ[𝓞 K] K) (x : M) : ℝ :=
   lineDegree (coordinateIdeal f) (h.coordinateLength f x)
 
-lemma degreeInCoordinate_eq_section (h : HermitianMetric (K := K) M)
+lemma degreeInCoordinate_eq_section (h : HermitianMetric K M)
     (f : M →ₗ[𝓞 K] K) (hf : Function.Injective f)
     {x y : M} (hx : x ≠ 0) (hy : y ≠ 0) :
     h.degreeInCoordinate f x = h.degreeInCoordinate f y := by
@@ -110,7 +110,7 @@ lemma degreeInCoordinate_eq_section (h : HermitianMetric (K := K) M)
 
 /-- Independence of the generic coordinate, proved using the product formula. -/
 theorem degreeInCoordinate_eq [Module.Projective (𝓞 K) M] [Nontrivial M]
-    (h : HermitianMetric (K := K) M) (f g : M →ₗ[𝓞 K] K)
+    (h : HermitianMetric K M) (f g : M →ₗ[𝓞 K] K)
     (hf : Function.Injective f) (hg : Function.Injective g)
     {x y : M} (hx : x ≠ 0) (hy : y ≠ 0) :
     h.degreeInCoordinate f x = h.degreeInCoordinate g y := by
@@ -133,7 +133,7 @@ theorem degreeInCoordinate_eq [Module.Projective (𝓞 K) M] [Nontrivial M]
 
 omit [Module.Finite (𝓞 K) M] in
 /-- Counting the two conjugate complex embeddings recovers the place weights. -/
-lemma sum_log_sectionNorm (h : HermitianMetric (K := K) M) (x : M) :
+lemma sum_log_sectionNorm (h : HermitianMetric K M) (x : M) :
     (∑ σ : K →+* ℂ, Real.log (h.sectionNorm σ x)) =
       archLog (fun v => h.sectionNorm v.embedding x) := by
   classical
@@ -152,13 +152,13 @@ variable [Module.Projective (𝓞 K) M] [Nontrivial M]
 /-- Normalized degree of an intrinsic Hermitian line. Its generic rank is computed
 on the canonical generic fiber. The defining choices are eliminated by
 `lineDegree_eq_degreeInCoordinate`. -/
-def lineDegree (h : HermitianMetric (K := K) M)
+def lineDegree (h : HermitianMetric K M)
     (hrank : Module.finrank K (K ⊗[𝓞 K] M) = 1) : ℝ :=
   h.degreeInCoordinate (lineCoordinate hrank) (Classical.choose (exists_ne (0 : M)))
 
 /-- Compute the intrinsic degree using any injective coordinate and any nonzero
 integral section. No coordinate or integral trivialization is part of the bundle. -/
-theorem lineDegree_eq_degreeInCoordinate (h : HermitianMetric (K := K) M)
+theorem lineDegree_eq_degreeInCoordinate (h : HermitianMetric K M)
     (hrank : Module.finrank K (K ⊗[𝓞 K] M) = 1)
     (f : M →ₗ[𝓞 K] K) (hf : Function.Injective f) {x : M} (hx : x ≠ 0) :
     h.lineDegree hrank = h.degreeInCoordinate f x :=
@@ -168,7 +168,7 @@ theorem lineDegree_eq_degreeInCoordinate (h : HermitianMetric (K := K) M)
 /-- The intrinsic degree has the section formula with the finite norm ratio and
 the actual section norms. The equality of that ratio to the finite quotient
 cardinality is not assumed here. -/
-theorem lineDegree_eq_normRatio (h : HermitianMetric (K := K) M)
+theorem lineDegree_eq_normRatio (h : HermitianMetric K M)
     (hrank : Module.finrank K (K ⊗[𝓞 K] M) = 1)
     (f : M →ₗ[𝓞 K] K) (hf : Function.Injective f) {x : M} (hx : x ≠ 0) :
     h.lineDegree hrank =
@@ -188,7 +188,7 @@ theorem lineDegree_eq_normRatio (h : HermitianMetric (K := K) M)
 
 /-- The manuscript's normalized degree formula on the actual finite quotient and
 actual archimedean section norms. It holds for every nonzero integral section. -/
-theorem lineDegree_eq (h : HermitianMetric (K := K) M)
+theorem lineDegree_eq (h : HermitianMetric K M)
     (hrank : Module.finrank K (K ⊗[𝓞 K] M) = 1) {x : M} (hx : x ≠ 0) :
     h.lineDegree hrank =
       (Real.log (Nat.card (M ⧸ (𝓞 K ∙ x))) -
@@ -203,7 +203,7 @@ theorem lineDegree_eq (h : HermitianMetric (K := K) M)
 
 /-- The same intrinsic formula indexed by all complex embeddings, exactly as
 in the manuscript; complex conjugate embeddings are both counted. -/
-theorem lineDegree_eq_sum_embeddings (h : HermitianMetric (K := K) M)
+theorem lineDegree_eq_sum_embeddings (h : HermitianMetric K M)
     (hrank : Module.finrank K (K ⊗[𝓞 K] M) = 1) {x : M} (hx : x ≠ 0) :
     h.lineDegree hrank =
       (Real.log (Nat.card (M ⧸ (𝓞 K ∙ x))) -
@@ -215,7 +215,7 @@ The underlying modules need not admit integral bases. -/
 theorem lineDegree_eq_of_equiv
     {N : Type*} [AddCommGroup N] [Module (𝓞 K) N]
     [Module.Finite (𝓞 K) N] [Module.Projective (𝓞 K) N] [Nontrivial N]
-    (h : HermitianMetric (K := K) M) (g : HermitianMetric (K := K) N)
+    (h : HermitianMetric K M) (g : HermitianMetric K N)
     (e : M ≃ₗ[𝓞 K] N)
     (hM : Module.finrank K (K ⊗[𝓞 K] M) = 1)
     (hN : Module.finrank K (K ⊗[𝓞 K] N) = 1)

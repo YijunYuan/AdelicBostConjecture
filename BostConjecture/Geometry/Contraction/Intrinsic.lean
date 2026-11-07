@@ -40,7 +40,7 @@ theorem scalarExtension_finrank_of_rankAtStalk
 
 variable {K : Type*} [Field K] [NumberField K] {ι : Type*} [Fintype ι]
   (E : ι → Type*) [∀ j, AddCommGroup (E j)] [∀ j, Module (𝓞 K) (E j)]
-  (hE : ∀ j, HermitianMetric (K := K) (E j)) (σ : K →+* ℂ)
+  (hE : ∀ j, HermitianMetric K (E j)) (σ : K →+* ℂ)
 
 variable {V : Type*} [AddCommGroup V] [Module (𝓞 K) V]
   (i : V →ₗ[𝓞 K] (⨂[𝓞 K] j, E j)) (hi : Function.Injective i)

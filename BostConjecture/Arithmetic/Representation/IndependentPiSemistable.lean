@@ -57,7 +57,7 @@ namespace HermitianMetric
 
 omit [NumberField K] in
 /-- Componentwise isometries preserve the actual finite Hilbert tensor metric. -/
-lemma piTensor_action_inner (h : ∀ i, HermitianMetric (K := K) (M i))
+lemma piTensor_action_inner (h : ∀ i, HermitianMetric K (M i))
     (ρ : ∀ i, Representation (𝓞 K) (G i) (M i))
     (hρ : ∀ i (a : G i) (σ : K →+* ℂ) (x y : ComplexFiber (M i) σ),
       ((h i).fiber σ).inner (fiberMap (ρ i a) σ x) (fiberMap (ρ i a) σ y) =
@@ -86,7 +86,7 @@ variable [∀ i, Nontrivial (K ⊗[𝓞 K] M i)]
 
 /-- The finite tensor bundle and its dual are semistable under independent irreducible actions. -/
 theorem isSemistable_piTensor_and_dual_of_complex_irreducible
-    (h : ∀ i, HermitianMetric (K := K) (M i))
+    (h : ∀ i, HermitianMetric K (M i))
     (ρ : ∀ i, Representation (𝓞 K) (G i) (M i)) (σ : K →+* ℂ)
     [∀ i, Representation.IsIrreducible (complexRepresentation (ρ i) σ)]
     (hρ : ∀ i (a : G i) (s : K →+* ℂ) (x y : ComplexFiber (M i) s),

@@ -29,8 +29,8 @@ variable {M N : Type*} [AddCommGroup M] [Module (𝓞 K) M]
     [Module.Projective (𝓞 K) N]
 
 /-- An integral isomorphism preserving the fiber forms preserves intrinsic degree. -/
-lemma degree_eq_of_equiv (h : HermitianMetric (K := K) M)
-    (g : HermitianMetric (K := K) N) (e : M ≃ₗ[𝓞 K] N)
+lemma degree_eq_of_equiv (h : HermitianMetric K M)
+    (g : HermitianMetric K N) (e : M ≃ₗ[𝓞 K] N)
     (he : ∀ (σ : K →+* ℂ) (x y : ComplexFiber M σ),
       (g.fiber σ).inner (fiberMap e.toLinearMap σ x) (fiberMap e.toLinearMap σ y) =
         (h.fiber σ).inner x y) : h.degree = g.degree := by

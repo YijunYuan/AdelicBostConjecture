@@ -34,29 +34,29 @@ variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 
 /-- Slope is continuous on a fixed underlying integral module. -/
 theorem continuous_slope :
-    Continuous (fun h : HermitianMetric (K := K) M => h.slope) :=
+    Continuous (fun h : HermitianMetric K M => h.slope) :=
   continuous_degree.div_const _
 
 /-- Each fixed induced slope is continuous. -/
 theorem continuous_slope_submodule (P : Submodule (𝓞 K) M) :
-    Continuous (fun h : HermitianMetric (K := K) M => (h.submodule P).slope) :=
+    Continuous (fun h : HermitianMetric K M => (h.submodule P).slope) :=
   continuous_slope.comp (continuous_submodule P)
 
 /-- Semistability is a closed condition on actual Hermitian metrics. -/
 theorem isClosed_isSemistable :
-    IsClosed {h : HermitianMetric (K := K) M | h.IsSemistable} := by
+    IsClosed {h : HermitianMetric K M | h.IsSemistable} := by
   simp only [IsSemistable, Set.ofPred_forall]
   exact isClosed_iInter fun P => isClosed_iInter fun _ =>
     isClosed_le (continuous_slope_submodule P) continuous_slope
 
 /-- Degree-zero semistability is closed; every submodule inequality is retained. -/
 theorem isClosed_normalized_semistable :
-    IsClosed {h : HermitianMetric (K := K) M | h.degree = 0 ∧ h.IsSemistable} :=
+    IsClosed {h : HermitianMetric K M | h.degree = 0 ∧ h.IsSemistable} :=
   (isClosed_eq continuous_degree continuous_const).inter isClosed_isSemistable
 
 /-- A limit of normalized semistable actual metrics is normalized and semistable. -/
 theorem normalized_semistable_of_tendsto {α : Type*} {l : Filter α} [l.NeBot]
-    {h : α → HermitianMetric (K := K) M} {g : HermitianMetric (K := K) M}
+    {h : α → HermitianMetric K M} {g : HermitianMetric K M}
     (ht : Tendsto h l (𝓝 g))
     (hs : ∀ᶠ i in l, (h i).degree = 0 ∧ (h i).IsSemistable) :
     g.degree = 0 ∧ g.IsSemistable :=

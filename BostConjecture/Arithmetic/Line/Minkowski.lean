@@ -110,7 +110,7 @@ variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M] [Nontrivial M
 
 /-- Every intrinsic Hermitian line admits a nonzero section bounded at all
 embeddings by its normalized degree and a field-only constant. -/
-theorem exists_small_section (h : HermitianMetric (K := K) M)
+theorem exists_small_section (h : HermitianMetric K M)
     (hr : Module.finrank K (K ⊗[𝓞 K] M) = 1) :
     ∃ y : M, y ≠ 0 ∧ ∀ σ : K →+* ℂ,
       h.sectionNorm σ y < lineMinkowskiConstant K * Real.exp (-h.lineDegree hr) := by

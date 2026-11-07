@@ -110,6 +110,9 @@ guidelines. Use existing library results and typeclass inference before adding
 local infrastructure. Enumeration needed only inside a proof uses `Finite`
 with a local `Fintype.ofFinite`. Canonical tensor and dual Hermitian cores have
 scoped instances; metrics chosen as explicit data remain explicit arguments.
+Write their type as `HermitianMetric K M`: the base field is an explicit
+parameter because it cannot be recovered from the module type alone.
+Operations on an existing metric infer the field from that metric.
 
 Original code is released under [Apache-2.0](LICENSE). External code retains
 its upstream licenses and attribution as recorded in

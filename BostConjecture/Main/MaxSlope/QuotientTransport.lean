@@ -51,7 +51,7 @@ variable {M N P Q : Type u}
 /-- An isometric commuting square identifies its actual quotient metrics when
 the larger kernel is contained in the isometric image. -/
 lemma pushforward_natural_inner
-    (h : HermitianMetric (K := K) M) (g : HermitianMetric (K := K) N)
+    (h : HermitianMetric K M) (g : HermitianMetric K N)
     (i : M →ₗ[𝓞 K] N)
     (hi : ∀ σ x y, (g.fiber σ).inner (fiberMap i σ x) (fiberMap i σ y) =
       (h.fiber σ).inner x y)
@@ -87,7 +87,7 @@ lemma pushforward_natural_inner
 
 omit [NumberField K] in
 /-- Successive quotient metrics agree with the quotient by the composite. -/
-lemma pushforward_comp (h : HermitianMetric (K := K) M)
+lemma pushforward_comp (h : HermitianMetric K M)
     (f : M →ₗ[𝓞 K] N) (hf : Function.Surjective f)
     (q : N →ₗ[𝓞 K] P) (hq : Function.Surjective q) :
     (h.pushforward f hf).pushforward q hq =
@@ -127,8 +127,8 @@ lemma pushforward_comp (h : HermitianMetric (K := K) M)
   rfl
 
 /-- The actual quotient metric commutes with left tensoring. -/
-lemma tensor_pushforward_left (h : HermitianMetric (K := K) M)
-    (g : HermitianMetric (K := K) N) (f : N →ₗ[𝓞 K] P) (hf : Function.Surjective f) :
+lemma tensor_pushforward_left (h : HermitianMetric K M)
+    (g : HermitianMetric K N) (f : N →ₗ[𝓞 K] P) (hf : Function.Surjective f) :
     (h.tensor g).pushforward (f.lTensor M) (LinearMap.lTensor_surjective M hf) =
       h.tensor (g.pushforward f hf) := by
   apply ext_inner
@@ -144,8 +144,8 @@ lemma tensor_pushforward_left (h : HermitianMetric (K := K) M)
   exact he.symm
 
 /-- Simultaneous actual quotients carry the Hilbert tensor quotient metric. -/
-lemma tensor_map_pushforward (h : HermitianMetric (K := K) M)
-    (g : HermitianMetric (K := K) N)
+lemma tensor_map_pushforward (h : HermitianMetric K M)
+    (g : HermitianMetric K N)
     (f : M →ₗ[𝓞 K] P) (hf : Function.Surjective f)
     (j : N →ₗ[𝓞 K] Q) (hj : Function.Surjective j) :
     (h.tensor g).pushforward (TensorProduct.map f j)

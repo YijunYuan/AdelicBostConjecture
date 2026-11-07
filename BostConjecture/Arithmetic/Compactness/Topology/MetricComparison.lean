@@ -30,18 +30,18 @@ variable {K : Type*} [Field K]
 variable {M : Type*} [AddCommGroup M] [Module (𝓞 K) M]
 
 /-- The norm supplied by a metric on its actual complex fiber. -/
-def fiberNorm (h : HermitianMetric (K := K) M) (σ : K →+* ℂ)
+def fiberNorm (h : HermitianMetric K M) (σ : K →+* ℂ)
     (x : ComplexFiber M σ) : ℝ := Real.sqrt (((h.fiber σ).inner x x).re)
 
-lemma fiberNorm_nonneg (h : HermitianMetric (K := K) M) (σ : K →+* ℂ)
+lemma fiberNorm_nonneg (h : HermitianMetric K M) (σ : K →+* ℂ)
     (x : ComplexFiber M σ) : 0 ≤ h.fiberNorm σ x := Real.sqrt_nonneg _
 
 @[simp]
-lemma fiberNorm_section (h : HermitianMetric (K := K) M) (σ : K →+* ℂ) (x : M) :
+lemma fiberNorm_section (h : HermitianMetric K M) (σ : K →+* ℂ) (x : M) :
     h.fiberNorm σ (fiberSection M σ x) = h.sectionNorm σ x := rfl
 
 @[simp]
-lemma fiberNorm_rescale (h : HermitianMetric (K := K) M) (t : ℝ)
+lemma fiberNorm_rescale (h : HermitianMetric K M) (t : ℝ)
     (σ : K →+* ℂ) (x : ComplexFiber M σ) :
     (h.rescale t).fiberNorm σ x = Real.exp t * h.fiberNorm σ x := by
   simp only [fiberNorm, rescale_inner, Complex.mul_re, Complex.ofReal_re,
@@ -52,7 +52,7 @@ lemma fiberNorm_rescale (h : HermitianMetric (K := K) M) (t : ℝ)
 variable [NumberField K]
 
 @[simp]
-lemma fiberNorm_submodule (h : HermitianMetric (K := K) M) (P : Submodule (𝓞 K) M)
+lemma fiberNorm_submodule (h : HermitianMetric K M) (P : Submodule (𝓞 K) M)
     (σ : K →+* ℂ) (x : ComplexFiber P σ) :
     (h.submodule P).fiberNorm σ x = h.fiberNorm σ (fiberMap P.subtype σ x) := rfl
 
@@ -60,7 +60,7 @@ variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 
 /-- An exponential norm bound gives the corresponding one-sided degree bound. -/
 theorem degree_sub_rank_mul_le_of_fiberNorm_le
-    (h g : HermitianMetric (K := K) M) (t : ℝ)
+    (h g : HermitianMetric K M) (t : ℝ)
     (hc : ∀ (σ : K →+* ℂ) (x : ComplexFiber M σ),
       g.fiberNorm σ x ≤ Real.exp t * h.fiberNorm σ x) :
     h.degree - (Module.finrank K (K ⊗[𝓞 K] M) : ℝ) * t ≤ g.degree := by
@@ -76,7 +76,7 @@ theorem degree_sub_rank_mul_le_of_fiberNorm_le
 
 /-- Uniformly equivalent actual fiber norms give a rank-sharp degree estimate. -/
 theorem abs_degree_sub_le_of_fiberNorm_le
-    (h g : HermitianMetric (K := K) M) (t : ℝ)
+    (h g : HermitianMetric K M) (t : ℝ)
     (hgh : ∀ (σ : K →+* ℂ) (x : ComplexFiber M σ),
       g.fiberNorm σ x ≤ Real.exp t * h.fiberNorm σ x)
     (hhg : ∀ (σ : K →+* ℂ) (x : ComplexFiber M σ),
@@ -88,7 +88,7 @@ theorem abs_degree_sub_le_of_fiberNorm_le
 
 /-- The same bound holds simultaneously for every actual induced submodule metric. -/
 theorem abs_degree_submodule_sub_le_of_fiberNorm_le
-    (h g : HermitianMetric (K := K) M) (t : ℝ)
+    (h g : HermitianMetric K M) (t : ℝ)
     (hgh : ∀ (σ : K →+* ℂ) (x : ComplexFiber M σ),
       g.fiberNorm σ x ≤ Real.exp t * h.fiberNorm σ x)
     (hhg : ∀ (σ : K →+* ℂ) (x : ComplexFiber M σ),

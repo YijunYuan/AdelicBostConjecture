@@ -98,7 +98,7 @@ namespace HermitianMetric
 
 /-- Pulling back both factors tensors to the pullback of the actual tensor metric. -/
 theorem tensor_archimedeanPullback
-    (h : HermitianMetric (K := K) M) (k : HermitianMetric (K := K) N)
+    (h : HermitianMetric K M) (k : HermitianMetric K N)
     (g : ∀ σ : K →+* ℂ, ComplexFiber M σ ≃ₗ[ℂ] ComplexFiber M σ)
     (j : ∀ σ : K →+* ℂ, ComplexFiber N σ ≃ₗ[ℂ] ComplexFiber N σ)
     (hg : ∀ σ x, g (ComplexEmbedding.conjugate σ) (fiberConjugate M σ x) =
@@ -130,7 +130,7 @@ variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 /-- Differentiate an actual tensor submodule degree along independent compatible
 exponential variations of the two factor metrics. -/
 theorem hasDerivAt_submodule_degree_tensor_exponentialVariation
-    (h : HermitianMetric (K := K) M) (k : HermitianMetric (K := K) N)
+    (h : HermitianMetric K M) (k : HermitianMetric K N)
     (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
     (A : ∀ σ : K →+* ℂ, Module.End ℂ (ComplexFiber M σ))
     (B : ∀ σ : K →+* ℂ, Module.End ℂ (ComplexFiber N σ))
@@ -200,7 +200,7 @@ theorem hasDerivAt_submodule_degree_tensor_exponentialVariation
 /-- A local maximum of the actual tensor submodule degree forces stationarity
 against both tensor-factor generators. -/
 theorem sum_tensorFiberProjectionTrace_eq_zero_of_isLocalMax
-    (h : HermitianMetric (K := K) M) (k : HermitianMetric (K := K) N)
+    (h : HermitianMetric K M) (k : HermitianMetric K N)
     (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
     (A : ∀ σ : K →+* ℂ, Module.End ℂ (ComplexFiber M σ))
     (B : ∀ σ : K →+* ℂ, Module.End ℂ (ComplexFiber N σ))

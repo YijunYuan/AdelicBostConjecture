@@ -64,8 +64,8 @@ instance submoduleProjective [Module.Finite (𝓞 K) M] [Module.Projective (𝓞
 namespace HermitianMetric
 
 /-- Pull back a Hermitian metric along an injective integral linear map. -/
-def pullback (h : HermitianMetric (K := K) M) (f : N →ₗ[𝓞 K] M)
-    (hf : Function.Injective f) : HermitianMetric (K := K) N where
+def pullback (h : HermitianMetric K M) (f : N →ₗ[𝓞 K] M)
+    (hf : Function.Injective f) : HermitianMetric K N where
   fiber σ :=
     { inner := fun x y => (h.fiber σ).inner (fiberMap f σ x) (fiberMap f σ y)
       conj_inner_symm := fun x y => (h.fiber σ).conj_inner_symm _ _
@@ -89,23 +89,23 @@ def pullback (h : HermitianMetric (K := K) M) (f : N →ₗ[𝓞 K] M)
         (fiberMap f σ (fiberSection N σ y)))
     simp only [fiberMap_section, h.conjugate]
 
-lemma pullback_inner (h : HermitianMetric (K := K) M) (f : N →ₗ[𝓞 K] M)
+lemma pullback_inner (h : HermitianMetric K M) (f : N →ₗ[𝓞 K] M)
     (hf : Function.Injective f) (σ : K →+* ℂ) (x y : ComplexFiber N σ) :
     ((h.pullback f hf).fiber σ).inner x y =
       (h.fiber σ).inner (fiberMap f σ x) (fiberMap f σ y) := rfl
 
 @[simp]
-lemma sectionNorm_pullback (h : HermitianMetric (K := K) M) (f : N →ₗ[𝓞 K] M)
+lemma sectionNorm_pullback (h : HermitianMetric K M) (f : N →ₗ[𝓞 K] M)
     (hf : Function.Injective f) (σ : K →+* ℂ) (x : N) :
     (h.pullback f hf).sectionNorm σ x = h.sectionNorm σ (f x) := by
   simp only [sectionNorm, pullback_inner, fiberMap_section]
 
 /-- The induced Hermitian metric on an actual integral submodule. -/
-def submodule (h : HermitianMetric (K := K) M) (P : Submodule (𝓞 K) M) :
-    HermitianMetric (K := K) P := h.pullback P.subtype P.injective_subtype
+def submodule (h : HermitianMetric K M) (P : Submodule (𝓞 K) M) :
+    HermitianMetric K P := h.pullback P.subtype P.injective_subtype
 
 @[simp]
-lemma sectionNorm_submodule (h : HermitianMetric (K := K) M)
+lemma sectionNorm_submodule (h : HermitianMetric K M)
     (P : Submodule (𝓞 K) M) (σ : K →+* ℂ) (x : P) :
     (h.submodule P).sectionNorm σ x = h.sectionNorm σ x :=
   h.sectionNorm_pullback P.subtype P.injective_subtype σ x

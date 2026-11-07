@@ -38,7 +38,7 @@ theorem exists_strict_maximizing_counterexample
     [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
     [AddCommGroup N] [Module (𝓞 K) N]
     [Module.Finite (𝓞 K) N] [Module.Projective (𝓞 K) N]
-    (h : HermitianMetric (K := K) M) (g : HermitianMetric (K := K) N)
+    (h : HermitianMetric K M) (g : HermitianMetric K N)
     (hrM : 0 < Module.finrank K (K ⊗[𝓞 K] M))
     (hrN : 0 < Module.finrank K (K ⊗[𝓞 K] N))
     (h0 : h.degree = 0) (g0 : g.degree = 0)
@@ -51,7 +51,7 @@ theorem exists_strict_maximizing_counterexample
     ∃ fe : Module.Finite (𝓞 K) E, ∃ pe : Module.Projective (𝓞 K) E,
     ∃ ff : Module.Finite (𝓞 K) F, ∃ pf : Module.Projective (𝓞 K) F,
     letI := fe; letI := pe; letI := ff; letI := pf;
-    ∃ H : HermitianMetric (K := K) E, ∃ G : HermitianMetric (K := K) F,
+    ∃ H : HermitianMetric K E, ∃ G : HermitianMetric K F,
       2 ≤ Module.finrank K (K ⊗[𝓞 K] E) ∧
       2 ≤ Module.finrank K (K ⊗[𝓞 K] F) ∧
       H.degree = 0 ∧ G.degree = 0 ∧ H.IsStable ∧ G.IsStable ∧

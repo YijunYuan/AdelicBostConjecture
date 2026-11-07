@@ -31,7 +31,7 @@ variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 
 /-- Every induced degree satisfies the estimate with the ambient rank. -/
 theorem abs_degree_submodule_sub_le_rank_mul
-    (h g : HermitianMetric (K := K) M) {t : ℝ} (ht : 0 ≤ t)
+    (h g : HermitianMetric K M) {t : ℝ} (ht : 0 ≤ t)
     (hgh : ∀ (σ : K →+* ℂ) (x : ComplexFiber M σ),
       g.fiberNorm σ x ≤ Real.exp t * h.fiberNorm σ x)
     (hhg : ∀ (σ : K →+* ℂ) (x : ComplexFiber M σ),
@@ -47,7 +47,7 @@ theorem abs_degree_submodule_sub_le_rank_mul
 /-- The maximum degree changes by at most ambient rank times the logarithmic
 distortion of the actual fiber norms. -/
 theorem abs_maxDegree_sub_le_of_fiberNorm_le
-    (h g : HermitianMetric (K := K) M) {t : ℝ} (ht : 0 ≤ t)
+    (h g : HermitianMetric K M) {t : ℝ} (ht : 0 ≤ t)
     (hgh : ∀ (σ : K →+* ℂ) (x : ComplexFiber M σ),
       g.fiberNorm σ x ≤ Real.exp t * h.fiberNorm σ x)
     (hhg : ∀ (σ : K →+* ℂ) (x : ComplexFiber M σ),

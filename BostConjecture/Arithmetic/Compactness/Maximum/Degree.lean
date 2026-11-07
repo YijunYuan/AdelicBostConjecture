@@ -30,13 +30,13 @@ variable {M : Type*} [AddCommGroup M] [Module (𝓞 K) M]
 variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 
 @[simp]
-lemma degree_submodule_bot (h : HermitianMetric (K := K) M) :
+lemma degree_submodule_bot (h : HermitianMetric K M) :
     (h.submodule ⊥).degree = 0 := by
   apply degree_eq_zero_of_rank_zero
   simp
 
 /-- The largest saturated degree is attained by an actual integral submodule. -/
-theorem exists_max_degree_submodule (h : HermitianMetric (K := K) M) :
+theorem exists_max_degree_submodule (h : HermitianMetric K M) :
     ∃ P : Submodule (𝓞 K) M, Module.IsTorsionFree (𝓞 K) (M ⧸ P) ∧
       ∀ Q : Submodule (𝓞 K) M, Module.IsTorsionFree (𝓞 K) (M ⧸ Q) →
         (h.submodule Q).degree ≤ (h.submodule P).degree := by
@@ -56,13 +56,13 @@ theorem exists_max_degree_submodule (h : HermitianMetric (K := K) M) :
 
 /-- The supremum of the intrinsic degrees of saturated integral submodules.
 `exists_max_degree_submodule` proves that this is an attained maximum. -/
-def maxDegree (h : HermitianMetric (K := K) M) : ℝ :=
+def maxDegree (h : HermitianMetric K M) : ℝ :=
   sSup {d : ℝ | ∃ P : Submodule (𝓞 K) M,
     Module.IsTorsionFree (𝓞 K) (M ⧸ P) ∧ (h.submodule P).degree = d}
 
 omit [Module.Projective (𝓞 K) M] in
 /-- A maximizing submodule computes the maximum degree. -/
-theorem maxDegree_eq_of_max (h : HermitianMetric (K := K) M)
+theorem maxDegree_eq_of_max (h : HermitianMetric K M)
     (P : Submodule (𝓞 K) M) (hP : Module.IsTorsionFree (𝓞 K) (M ⧸ P))
     (hmax : ∀ Q : Submodule (𝓞 K) M, Module.IsTorsionFree (𝓞 K) (M ⧸ Q) →
       (h.submodule Q).degree ≤ (h.submodule P).degree) :
@@ -75,21 +75,21 @@ theorem maxDegree_eq_of_max (h : HermitianMetric (K := K) M)
     · exact ⟨P, hP, rfl⟩
 
 /-- An actual saturated submodule realizes `maxDegree`. -/
-theorem exists_degree_eq_maxDegree (h : HermitianMetric (K := K) M) :
+theorem exists_degree_eq_maxDegree (h : HermitianMetric K M) :
     ∃ P : Submodule (𝓞 K) M, Module.IsTorsionFree (𝓞 K) (M ⧸ P) ∧
       (h.submodule P).degree = h.maxDegree := by
   obtain ⟨P, hP, hmax⟩ := h.exists_max_degree_submodule
   exact ⟨P, hP, (h.maxDegree_eq_of_max P hP hmax).symm⟩
 
 /-- Every saturated induced degree lies below the attained maximum. -/
-theorem degree_le_maxDegree (h : HermitianMetric (K := K) M)
+theorem degree_le_maxDegree (h : HermitianMetric K M)
     (P : Submodule (𝓞 K) M) [Module.IsTorsionFree (𝓞 K) (M ⧸ P)] :
     (h.submodule P).degree ≤ h.maxDegree := by
   obtain ⟨Q, hQ, hmax⟩ := h.exists_max_degree_submodule
   rw [h.maxDegree_eq_of_max Q hQ hmax]
   exact hmax P inferInstance
 
-theorem maxDegree_nonneg (h : HermitianMetric (K := K) M) : 0 ≤ h.maxDegree := by
+theorem maxDegree_nonneg (h : HermitianMetric K M) : 0 ≤ h.maxDegree := by
   exact (h.subspaceDegree_bot).ge.trans (h.degree_le_maxDegree (integralPart ⊥))
 
 end BostConjecture.Arithmetic.HermitianMetric

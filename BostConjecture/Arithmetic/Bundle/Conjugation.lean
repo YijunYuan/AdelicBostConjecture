@@ -126,7 +126,7 @@ lemma fiberConjugate_map {N : Type*} [AddCommGroup N] [Module (𝓞 K) N]
 namespace HermitianMetric
 
 /-- Compatibility on integral sections implies antiunitarity on the whole fiber. -/
-lemma inner_conjugate (h : HermitianMetric (K := K) M) (σ : K →+* ℂ)
+lemma inner_conjugate (h : HermitianMetric K M) (σ : K →+* ℂ)
     (x y : ComplexFiber M σ) :
     (h.fiber (ComplexEmbedding.conjugate σ)).inner
       (fiberConjugate M σ x) (fiberConjugate M σ y) = star ((h.fiber σ).inner x y) := by

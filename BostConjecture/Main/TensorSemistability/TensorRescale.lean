@@ -29,8 +29,8 @@ variable {K M N : Type u} [Field K] [NumberField K]
     [AddCommGroup N] [Module (𝓞 K) N]
 
 /-- Rescaling the two factor norms multiplies the tensor norm by their product. -/
-theorem tensor_rescale (h : HermitianMetric (K := K) M)
-    (k : HermitianMetric (K := K) N) (a b : ℝ) :
+theorem tensor_rescale (h : HermitianMetric K M)
+    (k : HermitianMetric K N) (a b : ℝ) :
     (h.rescale a).tensor (k.rescale b) = (h.tensor k).rescale (a + b) := by
   apply ext_inner
   intro σ x y

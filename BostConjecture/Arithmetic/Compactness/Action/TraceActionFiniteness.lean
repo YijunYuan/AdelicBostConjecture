@@ -44,7 +44,7 @@ variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 
 /-- Every actual integral multiplication matrix lies in the universal finite
 set when its lattice frame lies in the prescribed compact family. -/
-theorem integral_action_mem (h : HermitianMetric (K := K) M) (a : 𝓞 K)
+theorem integral_action_mem (h : HermitianMetric K M) (a : 𝓞 K)
     (b : Module.Basis ι ℤ M) (b₀ : OrthonormalBasis ι ℝ h.TraceSpace)
     {S : Set (GeneralLinearGroup ι ℝ)} (B : GeneralLinearGroup ι ℝ)
     (hBS : B ∈ S) (hB : B.val = b₀.toBasis.toMatrix (h.traceBasis b)) :

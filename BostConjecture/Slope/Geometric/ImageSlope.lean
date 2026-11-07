@@ -31,7 +31,7 @@ theorem slope_le_image_of_injective
     {K M N : Type*} [Field K] [NumberField K]
     [AddCommGroup M] [Module (𝓞 K) M] [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
     [AddCommGroup N] [Module (𝓞 K) N] [Module.Finite (𝓞 K) N] [Module.Projective (𝓞 K) N]
-    (h : HermitianMetric (K := K) M) (g : HermitianMetric (K := K) N)
+    (h : HermitianMetric K M) (g : HermitianMetric K N)
     (f : M →ₗ[𝓞 K] N) (hf : Function.Injective f)
     (hc : ∀ (σ : K →+* ℂ) (x : ComplexFiber M σ),
       Real.sqrt (((g.fiber σ).inner (fiberMap f σ x) (fiberMap f σ x)).re) ≤
@@ -61,7 +61,7 @@ universe u
 variable {K V : Type u} [Field K] [NumberField K] {ι : Type} [Fintype ι]
   (E : ι → Type u) [∀ j, AddCommGroup (E j)] [∀ j, Module (𝓞 K) (E j)]
   [∀ j, Module.Finite (𝓞 K) (E j)] [∀ j, Module.Projective (𝓞 K) (E j)]
-  (hE : ∀ j, HermitianMetric (K := K) (E j))
+  (hE : ∀ j, HermitianMetric K (E j))
   [AddCommGroup V] [Module (𝓞 K) V]
   [Module.Finite (𝓞 K) V] [Module.Projective (𝓞 K) V]
   (i : V →ₗ[𝓞 K] (⨂[𝓞 K] j, E j)) (hi : Function.Injective i)

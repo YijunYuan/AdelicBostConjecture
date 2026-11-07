@@ -46,7 +46,7 @@ namespace HermitianMetric
 
 /-- The positive tensor form on the actual arithmetic complex fiber. -/
 @[instance_reducible]
-def tensorFiber (h : ∀ i, HermitianMetric (K := K) (M i)) (σ : K →+* ℂ) :
+def tensorFiber (h : ∀ i, HermitianMetric K (M i)) (σ : K →+* ℂ) :
     InnerProductSpace.Core ℂ (ComplexFiber (⨂[𝓞 K] i, M i) σ) := by
   letI : ∀ i, InnerProductSpace.Core ℂ (ComplexFiber (M i) σ) := fun i => (h i).fiber σ
   letI : ∀ i, NormedAddCommGroup (ComplexFiber (M i) σ) := fun i =>
@@ -62,7 +62,7 @@ def tensorFiber (h : ∀ i, HermitianMetric (K := K) (M i)) (σ : K →+* ℂ) :
   exact InnerProductSpace.toCore
 
 /-- Pairing integral pure tensors multiplies the factor pairings. -/
-lemma tensorFiber_inner_tprod (h : ∀ i, HermitianMetric (K := K) (M i))
+lemma tensorFiber_inner_tprod (h : ∀ i, HermitianMetric K (M i))
     (σ : K →+* ℂ) (x y : ∀ i, M i) :
     (tensorFiber h σ).inner (fiberSection _ σ (tprod (𝓞 K) x))
       (fiberSection _ σ (tprod (𝓞 K) y)) =
@@ -79,7 +79,7 @@ lemma tensorFiber_inner_tprod (h : ∀ i, HermitianMetric (K := K) (M i))
     Tensor.hilbertCore_inner_tprod, finprod_eq_prod_of_fintype]
 
 /-- Tensor forms inherit conjugation on arbitrary integral tensor sections. -/
-lemma tensorFiber_conjugate (h : ∀ i, HermitianMetric (K := K) (M i))
+lemma tensorFiber_conjugate (h : ∀ i, HermitianMetric K (M i))
     (σ : K →+* ℂ) (x y : ⨂[𝓞 K] i, M i) :
     (tensorFiber h (ComplexEmbedding.conjugate σ)).inner
       (fiberSection _ (ComplexEmbedding.conjugate σ) x)
@@ -111,13 +111,13 @@ lemma tensorFiber_conjugate (h : ∀ i, HermitianMetric (K := K) (M i))
       InnerProductSpace.Core.inner_add_left, star_add] using congrArg₂ (· + ·) hx hz
 
 /-- The intrinsic Hermitian metric on a finite integral tensor product. -/
-def piTensor (h : ∀ i, HermitianMetric (K := K) (M i)) :
-    HermitianMetric (K := K) (⨂[𝓞 K] i, M i) where
+def piTensor (h : ∀ i, HermitianMetric K (M i)) :
+    HermitianMetric K (⨂[𝓞 K] i, M i) where
   fiber := tensorFiber h
   conjugate := tensorFiber_conjugate h
 
 /-- The norm of an integral pure tensor is the product of its factor norms. -/
-lemma sectionNorm_piTensor_tprod (h : ∀ i, HermitianMetric (K := K) (M i))
+lemma sectionNorm_piTensor_tprod (h : ∀ i, HermitianMetric K (M i))
     (σ : K →+* ℂ) (x : ∀ i, M i) :
     (piTensor h).sectionNorm σ (tprod (𝓞 K) x) = ∏ i, (h i).sectionNorm σ (x i) := by
   let : ∀ i, InnerProductSpace.Core ℂ (ComplexFiber (M i) σ) := fun i => (h i).fiber σ

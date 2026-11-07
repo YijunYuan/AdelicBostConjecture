@@ -57,7 +57,7 @@ variable {N : Type u} [AddCommGroup N] [Module (𝓞 K) N]
 /-- The first factor of a least-rank normalized counterexample is strictly
 stable: a degree-zero cut contradicts normalized tensor extension closure. -/
 theorem isStable_left_of_minimal_rank_sum
-    (h : HermitianMetric (K := K) M) (g : HermitianMetric (K := K) N)
+    (h : HermitianMetric K M) (g : HermitianMetric K N)
     (h0 : h.degree = 0) (g0 : g.degree = 0)
     (hs : h.IsSemistable) (gs : g.IsSemistable)
     (hrN : 0 < Module.finrank K (K ⊗[𝓞 K] N))
@@ -91,7 +91,7 @@ theorem isStable_left_of_minimal_rank_sum
 /-- Both factors are strictly stable at a least counterexample rank sum. The
 second assertion uses the actual integral Hilbert tensor flip. -/
 theorem isStable_factors_of_minimal_rank_sum
-    (h : HermitianMetric (K := K) M) (g : HermitianMetric (K := K) N)
+    (h : HermitianMetric K M) (g : HermitianMetric K N)
     (h0 : h.degree = 0) (g0 : g.degree = 0)
     (hs : h.IsSemistable) (gs : g.IsSemistable)
     (hrM : 0 < Module.finrank K (K ⊗[𝓞 K] M))

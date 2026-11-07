@@ -29,7 +29,7 @@ variable {K : Type*} [Field K] [NumberField K]
 variable {M : Type*} [AddCommGroup M] [Module (𝓞 K) M]
 
 /-- The induced metric is unchanged along nested integral inclusions. -/
-lemma submodule_inner_inclusion (h : HermitianMetric (K := K) M)
+lemma submodule_inner_inclusion (h : HermitianMetric K M)
     {P T : Submodule (𝓞 K) M} (hPT : P ≤ T) (σ : K →+* ℂ)
     (x y : ComplexFiber P σ) :
     ((h.submodule T).fiber σ).inner (fiberMap (Submodule.inclusion hPT) σ x)
@@ -48,7 +48,7 @@ lemma submodule_inner_inclusion (h : HermitianMetric (K := K) M)
 variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 
 /-- Equal-rank integral inclusions increase the degree for induced metrics. -/
-theorem degree_submodule_le_of_le (h : HermitianMetric (K := K) M)
+theorem degree_submodule_le_of_le (h : HermitianMetric K M)
     {P T : Submodule (𝓞 K) M} (hPT : P ≤ T)
     (hr : Module.finrank K (K ⊗[𝓞 K] P) = Module.finrank K (K ⊗[𝓞 K] T)) :
     (h.submodule P).degree ≤ (h.submodule T).degree := by
@@ -58,7 +58,7 @@ theorem degree_submodule_le_of_le (h : HermitianMetric (K := K) M)
   exact le_of_eq (congrArg Real.sqrt (congrArg Complex.re (h.submodule_inner_inclusion hPT σ x x)))
 
 /-- The actual saturation of an integral submodule has at least its degree. -/
-theorem degree_le_saturation (h : HermitianMetric (K := K) M)
+theorem degree_le_saturation (h : HermitianMetric K M)
     (P : Submodule (𝓞 K) M) :
     (h.submodule P).degree ≤ (h.submodule (integralPart (P.baseChange K))).degree := by
   apply h.degree_submodule_le_of_le

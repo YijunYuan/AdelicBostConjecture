@@ -32,13 +32,13 @@ variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 
 /-- Actual integral multiplication extended to the trace space through the
 canonical real scalar-extension equivalence. -/
-def traceMul (h : HermitianMetric (K := K) M) (a : 𝓞 K) :
+def traceMul (h : HermitianMetric K M) (a : 𝓞 K) :
     h.TraceSpace →ₗ[ℝ] h.TraceSpace :=
   h.realTensorEquiv.toLinearMap.comp
     (((Algebra.lsmul ℤ ℤ M a).baseChange ℝ).comp h.realTensorEquiv.symm.toLinearMap)
 
 @[simp]
-lemma traceMul_realTensorEquiv (h : HermitianMetric (K := K) M) (a : 𝓞 K)
+lemma traceMul_realTensorEquiv (h : HermitianMetric K M) (a : 𝓞 K)
     (r : ℝ) (x : M) :
     h.traceMul a (h.realTensorEquiv (r ⊗ₜ[ℤ] x)) =
       h.realTensorEquiv (r ⊗ₜ[ℤ] (a • x)) := by
@@ -48,18 +48,18 @@ lemma traceMul_realTensorEquiv (h : HermitianMetric (K := K) M) (a : 𝓞 K)
   rfl
 
 @[simp]
-lemma traceMul_section (h : HermitianMetric (K := K) M) (a : 𝓞 K) (x : M) :
+lemma traceMul_section (h : HermitianMetric K M) (a : 𝓞 K) (x : M) :
     h.traceMul a (h.traceSection x) = h.traceSection (a • x) := by
   simpa only [realTensorEquiv_tmul, one_smul] using h.traceMul_realTensorEquiv a 1 x
 
 /-- The real extension preserves the actual integral lattice. -/
-lemma traceMul_mem_traceLattice (h : HermitianMetric (K := K) M) (a : 𝓞 K)
+lemma traceMul_mem_traceLattice (h : HermitianMetric K M) (a : 𝓞 K)
     {z : h.TraceSpace} (hz : z ∈ h.traceLattice) : h.traceMul a z ∈ h.traceLattice := by
   obtain ⟨x, rfl⟩ := hz
   exact ⟨a • x, (h.traceMul_section a x).symm⟩
 
 /-- The transported action has the prescribed scalar action in each actual fiber. -/
-lemma traceInclusion_traceMul (h : HermitianMetric (K := K) M) (a : 𝓞 K)
+lemma traceInclusion_traceMul (h : HermitianMetric K M) (a : 𝓞 K)
     (z : h.TraceSpace) (σ : K →+* ℂ) :
     h.traceInclusion (h.traceMul a z) σ = σ a • h.traceInclusion z σ := by
   obtain ⟨w, rfl⟩ := h.realTensorEquiv.surjective z
@@ -72,7 +72,7 @@ lemma traceInclusion_traceMul (h : HermitianMetric (K := K) M) (a : 𝓞 K)
 
 omit [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M] in
 /-- The actual trace norm is the sum of the actual squared fiber norms. -/
-lemma trace_norm_sq (h : HermitianMetric (K := K) M) (z : h.TraceSpace) :
+lemma trace_norm_sq (h : HermitianMetric K M) (z : h.TraceSpace) :
     ‖z‖ ^ 2 = ∑ σ : K →+* ℂ, h.fiberNorm σ (h.traceInclusion z σ) ^ 2 := by
   rw [norm_sq_eq_re_inner (𝕜 := ℝ)]
   change (∑ σ : K →+* ℂ, ((h.fiber σ).inner
@@ -83,7 +83,7 @@ lemma trace_norm_sq (h : HermitianMetric (K := K) M) (z : h.TraceSpace) :
 
 /-- The action bound is independent of the metric: any simultaneous bound on
 the archimedean absolute values bounds multiplication on trace space. -/
-theorem traceMul_norm_le (h : HermitianMetric (K := K) M) (a : 𝓞 K)
+theorem traceMul_norm_le (h : HermitianMetric K M) (a : 𝓞 K)
     {C : ℝ} (hC : 0 ≤ C) (ha : ∀ σ : K →+* ℂ, ‖σ a‖ ≤ C) (z : h.TraceSpace) :
     ‖h.traceMul a z‖ ≤ C * ‖z‖ := by
   have hb : ‖h.traceMul a z‖ ^ 2 ≤ C ^ 2 * ‖z‖ ^ 2 := by
@@ -99,7 +99,7 @@ theorem traceMul_norm_le (h : HermitianMetric (K := K) M) (a : 𝓞 K)
 variable {ι : Type*}
 
 @[simp]
-lemma traceBasis_repr_section (h : HermitianMetric (K := K) M)
+lemma traceBasis_repr_section (h : HermitianMetric K M)
     (b : Module.Basis ι ℤ M) (x : M) (i : ι) :
     (h.traceBasis b).repr (h.traceSection x) i = (b.repr x i : ℝ) := by
   change ((b.map h.traceLatticeEquiv).ofZLatticeBasis ℝ h.traceLattice).repr
@@ -111,7 +111,7 @@ variable [Fintype ι] [DecidableEq ι]
 
 /-- The integral multiplication matrix really is the matrix of trace
 multiplication after extension to the reals. -/
-theorem traceMul_toMatrix (h : HermitianMetric (K := K) M) (a : 𝓞 K)
+theorem traceMul_toMatrix (h : HermitianMetric K M) (a : 𝓞 K)
     (b : Module.Basis ι ℤ M) :
     LinearMap.toMatrix (h.traceBasis b) (h.traceBasis b) (h.traceMul a) =
       (LinearMap.toMatrix b b (Algebra.lsmul ℤ ℤ M a)).map (Int.castRingHom ℝ) := by
@@ -122,7 +122,7 @@ theorem traceMul_toMatrix (h : HermitianMetric (K := K) M) (a : 𝓞 K)
 
 /-- Changing from an actual integral frame to an ambient real frame conjugates
 the multiplication matrix in the expected direction. -/
-theorem traceMul_matrix_conjugate (h : HermitianMetric (K := K) M) (a : 𝓞 K)
+theorem traceMul_matrix_conjugate (h : HermitianMetric K M) (a : 𝓞 K)
     (b : Module.Basis ι ℤ M) (b₀ : Module.Basis ι ℝ h.TraceSpace)
     (B : Matrix.GeneralLinearGroup ι ℝ) (hB : B.val = b₀.toMatrix (h.traceBasis b)) :
     B.val * (LinearMap.toMatrix b b (Algebra.lsmul ℤ ℤ M a)).map (Int.castRingHom ℝ) *
@@ -135,7 +135,7 @@ theorem traceMul_matrix_conjugate (h : HermitianMetric (K := K) M) (a : 𝓞 K)
 
 /-- In an orthonormal real frame the entries of multiplication are bounded
 by the same metric-independent archimedean bound. -/
-theorem traceMul_toMatrix_abs_le (h : HermitianMetric (K := K) M) (a : 𝓞 K)
+theorem traceMul_toMatrix_abs_le (h : HermitianMetric K M) (a : 𝓞 K)
     (b₀ : OrthonormalBasis ι ℝ h.TraceSpace) {C : ℝ}
     (hC : 0 ≤ C) (ha : ∀ σ : K →+* ℂ, ‖σ a‖ ≤ C) (i j : ι) :
     |LinearMap.toMatrix b₀.toBasis b₀.toBasis (h.traceMul a) i j| ≤ C := by

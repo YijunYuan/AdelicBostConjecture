@@ -74,7 +74,7 @@ variable [NumberField K] [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) 
 
 omit [NumberField K] [Module.Projective (𝓞 K) M] in
 /-- The first-exterior-power isomorphism preserves every section norm. -/
-lemma determinant_sectionNorm_rank_one (h : HermitianMetric (K := K) M)
+lemma determinant_sectionNorm_rank_one (h : HermitianMetric K M)
     (hr : Module.finrank K (K ⊗[𝓞 K] M) = 1) (σ : K →+* ℂ) (x : M) :
     h.determinant.sectionNorm σ ((determinantOneEquiv hr).symm x) = h.sectionNorm σ x := by
   rw [determinantOneEquiv_symm]
@@ -88,7 +88,7 @@ lemma determinant_sectionNorm_rank_one (h : HermitianMetric (K := K) M)
   rfl
 
 /-- Intrinsic determinant degree agrees with intrinsic line degree in rank one. -/
-theorem degree_eq_lineDegree [Nontrivial M] (h : HermitianMetric (K := K) M)
+theorem degree_eq_lineDegree [Nontrivial M] (h : HermitianMetric K M)
     (hr : Module.finrank K (K ⊗[𝓞 K] M) = 1) : h.degree = h.lineDegree hr := by
   symm
   exact h.lineDegree_eq_of_equiv h.determinant (determinantOneEquiv hr).symm
@@ -97,7 +97,7 @@ theorem degree_eq_lineDegree [Nontrivial M] (h : HermitianMetric (K := K) M)
 
 omit [NumberField K] [Module.Projective (𝓞 K) M] in
 /-- The empty integral determinant wedge has norm one at every embedding. -/
-lemma determinant_sectionNorm_rank_zero (h : HermitianMetric (K := K) M)
+lemma determinant_sectionNorm_rank_zero (h : HermitianMetric K M)
     (hr : Module.finrank K (K ⊗[𝓞 K] M) = 0) (σ : K →+* ℂ) :
     h.determinant.sectionNorm σ ((determinantZeroEquiv hr).symm 1) = 1 := by
   rw [determinantZeroEquiv_symm_one]
@@ -111,7 +111,7 @@ lemma determinant_sectionNorm_rank_zero (h : HermitianMetric (K := K) M)
   simp
 
 /-- The intrinsic determinant degree of a generic rank-zero module vanishes. -/
-theorem degree_eq_zero_of_rank_zero (h : HermitianMetric (K := K) M)
+theorem degree_eq_zero_of_rank_zero (h : HermitianMetric K M)
     (hr : Module.finrank K (K ⊗[𝓞 K] M) = 0) : h.degree = 0 := by
   let e := determinantZeroEquiv (M := M) hr
   let ξ := e.symm 1

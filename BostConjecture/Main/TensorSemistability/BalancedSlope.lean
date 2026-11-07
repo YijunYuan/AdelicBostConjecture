@@ -71,7 +71,7 @@ namespace HermitianMetric
 
 /-- The finite-family geometric inequality specialized to the actual binary tensor metric. -/
 theorem slope_submodule_tensor_le_of_invariant
-    (h : HermitianMetric (K := K) M) (k : HermitianMetric (K := K) N)
+    (h : HermitianMetric K M) (k : HermitianMetric K N)
     (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
     (hrM : 0 < Module.finrank K (K ⊗[𝓞 K] M))
     (hrN : 0 < Module.finrank K (K ⊗[𝓞 K] N))
@@ -86,7 +86,7 @@ theorem slope_submodule_tensor_le_of_invariant
     ((h.tensor k).submodule P).slope ≤ h.slope + k.slope := by
   let f := (binaryTensorFiberEquiv σ).toLinearMap.comp (fiberMap P.subtype σ)
   let E := binaryTensorFamily M N
-  let hE : ∀ j, HermitianMetric (K := K) (E j) :=
+  let hE : ∀ j, HermitianMetric K (E j) :=
     fun j => Sum.casesOn j (fun _ => h) (fun _ => k)
   let : ∀ j, Module.Finite (𝓞 K) (E j) := fun j =>
     Sum.casesOn j (fun _ => inferInstance) (fun _ => inferInstance)
@@ -137,7 +137,7 @@ theorem slope_submodule_tensor_le_of_invariant
 /-- A positive-rank actual tensor submodule with a balanced complex fiber
 satisfies the geometric slope bound. -/
 theorem slope_submodule_tensor_le_of_isBalanced
-    (h : HermitianMetric (K := K) M) (k : HermitianMetric (K := K) N)
+    (h : HermitianMetric K M) (k : HermitianMetric K N)
     (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
     (hrM : 0 < Module.finrank K (K ⊗[𝓞 K] M))
     (hrN : 0 < Module.finrank K (K ⊗[𝓞 K] N))

@@ -33,7 +33,7 @@ variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 
 omit [NumberField K] in
 /-- Every integral coordinate is bounded on each actual archimedean fiber. -/
-lemma exists_coordinate_bound (h : HermitianMetric (K := K) M)
+lemma exists_coordinate_bound (h : HermitianMetric K M)
     (f : M →ₗ[𝓞 K] 𝓞 K) (σ : K →+* ℂ) :
     ∃ C : ℝ, 0 ≤ C ∧ ∀ x : M, ‖σ (f x)‖ ≤ C * h.sectionNorm σ x := by
   let : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
@@ -47,7 +47,7 @@ lemma exists_coordinate_bound (h : HermitianMetric (K := K) M)
   rwa [dualFiberEquiv_section] at hF
 
 /-- Integral sections bounded at every embedding form a finite set. -/
-theorem finite_bounded_sections (h : HermitianMetric (K := K) M)
+theorem finite_bounded_sections (h : HermitianMetric K M)
     (b : (K →+* ℂ) → ℝ) : {x : M | ∀ σ, h.sectionNorm σ x ≤ b σ}.Finite := by
   classical
   obtain ⟨n, p, i, hp, hi, hpi⟩ := Module.Finite.exists_comp_eq_id_of_projective (𝓞 K) M

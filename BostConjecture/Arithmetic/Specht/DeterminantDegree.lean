@@ -37,7 +37,7 @@ local instance (t : OAI.Saxl.Tableau n (rectangle a k)) :
       (𝓞 K ⊗[ℤ] orbitLattice t)) := Module.addCommMonoidToAddCommGroup (𝓞 K)
 
 /-- The actual determinant twist contributes `k` times the intrinsic degree. -/
-theorem determinantMetric_line_twist_slope (h : HermitianMetric (K := K) M) (hk : 0 < k)
+theorem determinantMetric_line_twist_slope (h : HermitianMetric K M) (hk : 0 < k)
     (t : OAI.Saxl.Tableau n (rectangle a k))
     (ha : ∀ p : PrimeSpectrum (𝓞 K), Module.rankAtStalk M p = a) :
     (determinantMetric h hk t ha).slope =
@@ -59,7 +59,7 @@ theorem determinantMetric_line_twist_slope (h : HermitianMetric (K := K) M) (hk 
         (determinant_piTensor_slope h k))
 
 /-- Exact intrinsic slope with the actual orbit-lattice covolume correction. -/
-theorem determinantMetric_slope (h : HermitianMetric (K := K) M) (hk : 0 < k)
+theorem determinantMetric_slope (h : HermitianMetric K M) (hk : 0 < k)
     (t : OAI.Saxl.Tableau n (rectangle a k))
     (ha : ∀ p : PrimeSpectrum (𝓞 K), Module.rankAtStalk M p = a) :
     (determinantMetric h hk t ha).slope = (k : ℝ) * h.degree -
@@ -68,7 +68,7 @@ theorem determinantMetric_slope (h : HermitianMetric (K := K) M) (hk : 0 < k)
 
 /-- The manuscript's exact normalization for the canonical rectangular bundle,
 over an arbitrary number field and without an integral frame. -/
-theorem rectangle_determinantMetric_slope (h : HermitianMetric (K := K) M)
+theorem rectangle_determinantMetric_slope (h : HermitianMetric K M)
     (ha0 : 0 < a) (hk : 0 < k)
     (ha : ∀ p : PrimeSpectrum (𝓞 K), Module.rankAtStalk M p = a) :
     (determinantMetric h hk (rectangleTableau a k) ha).slope =
@@ -94,7 +94,7 @@ lemma normalized_covolume_eq_rectangle (t : OAI.Saxl.Tableau n (rectangle a k)) 
 
 /-- Exact slope in any rectangular tableau, in the degree used by the actual
 canonical pairings. -/
-theorem determinantMetric_slope_of_pos (h : HermitianMetric (K := K) M)
+theorem determinantMetric_slope_of_pos (h : HermitianMetric K M)
     (ha0 : 0 < a) (hk : 0 < k) (t : OAI.Saxl.Tableau n (rectangle a k))
     (ha : ∀ p : PrimeSpectrum (𝓞 K), Module.rankAtStalk M p = a) :
     (determinantMetric h hk t ha).slope =

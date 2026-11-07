@@ -30,7 +30,7 @@ namespace BostConjecture.Arithmetic.HermitianMetric
 variable {K : Type*} [Field K] [NumberField K]
 variable {M : Type*} [AddCommGroup M] [Module (𝓞 K) M]
 variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
-variable (h : HermitianMetric (K := K) M)
+variable (h : HermitianMetric K M)
 
 omit [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M] in
 /-- The complex sum of section pairings is the real trace pairing. -/

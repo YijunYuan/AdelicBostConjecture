@@ -99,8 +99,8 @@ lemma binaryTensorFiberEquiv_rTensor (f : M →ₗ[𝓞 K] P) (σ : K →+* ℂ)
 namespace HermitianMetric
 
 /-- The existing tensor form has the binary product formula on integral sections. -/
-lemma tensor_inner_section (h : HermitianMetric (K := K) M)
-    (g : HermitianMetric (K := K) N) (σ : K →+* ℂ) (x x' : M) (y y' : N) :
+lemma tensor_inner_section (h : HermitianMetric K M)
+    (g : HermitianMetric K N) (σ : K →+* ℂ) (x x' : M) (y y' : N) :
     ((h.tensor g).fiber σ).inner (fiberSection _ σ (x ⊗ₜ[𝓞 K] y))
       (fiberSection _ σ (x' ⊗ₜ[𝓞 K] y')) =
       (h.fiber σ).inner (fiberSection M σ x) (fiberSection M σ x') *
@@ -112,8 +112,8 @@ lemma tensor_inner_section (h : HermitianMetric (K := K) M)
   exact (tensorFiber_inner_tprod _ σ _ _).trans (by simp [Fintype.prod_sum_type])
 
 /-- The full complex scalar-extension equivalence preserves the Hilbert form. -/
-lemma tensor_inner (h : HermitianMetric (K := K) M)
-    (g : HermitianMetric (K := K) N) (σ : K →+* ℂ)
+lemma tensor_inner (h : HermitianMetric K M)
+    (g : HermitianMetric K N) (σ : K →+* ℂ)
     (x y : ComplexFiber (M ⊗[𝓞 K] N) σ) :
     ((h.tensor g).fiber σ).inner x y =
       (Tensor.binaryCore (h.fiber σ) (g.fiber σ)).inner
@@ -129,7 +129,7 @@ lemma tensor_inner (h : HermitianMetric (K := K) M)
 omit [NumberField K] in
 /-- Equality of all fiber pairings determines the Hermitian metric. -/
 @[ext]
-lemma ext_inner {h g : HermitianMetric (K := K) M}
+lemma ext_inner {h g : HermitianMetric K M}
     (he : ∀ σ x y, (h.fiber σ).inner x y = (g.fiber σ).inner x y) : h = g := by
   have hf : h.fiber = g.fiber := by
     funext σ
@@ -147,7 +147,7 @@ lemma ext_inner {h g : HermitianMetric (K := K) M}
 
 omit [NumberField K] in
 /-- It suffices to compare pairings on the spanning integral sections. -/
-lemma ext_section_inner {h g : HermitianMetric (K := K) M}
+lemma ext_section_inner {h g : HermitianMetric K M}
     (he : ∀ σ x y, (h.fiber σ).inner (fiberSection M σ x) (fiberSection M σ y) =
       (g.fiber σ).inner (fiberSection M σ x) (fiberSection M σ y)) : h = g := by
   apply ext_inner
@@ -157,7 +157,7 @@ lemma ext_section_inner {h g : HermitianMetric (K := K) M}
 
 /-- Tensoring an integral injection commutes with the actual induced metric. -/
 lemma tensor_pullback [Module.Flat (𝓞 K) N]
-    (h : HermitianMetric (K := K) P) (g : HermitianMetric (K := K) N)
+    (h : HermitianMetric K P) (g : HermitianMetric K N)
     (f : M →ₗ[𝓞 K] P) (hf : Function.Injective f) :
     (h.tensor g).pullback (f.rTensor N) (Module.Flat.rTensor_preserves_injective_linearMap f hf) =
       (h.pullback f hf).tensor g := by

@@ -36,7 +36,7 @@ variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 
 /-- Exact Euclidean Haar covolume of the actual trace lattice over every number
 field, for arbitrary finite projective integral modules including rank zero. -/
-theorem traceCovolume_eq_discr_degree (h : HermitianMetric (K := K) M) :
+theorem traceCovolume_eq_discr_degree (h : HermitianMetric K M) :
     h.traceCovolume = |(NumberField.discr K : ℝ)| ^
         ((Module.finrank K (K ⊗[𝓞 K] M) : ℝ) / 2) *
       Real.exp (-(Module.finrank ℚ K : ℝ) * h.degree) := by

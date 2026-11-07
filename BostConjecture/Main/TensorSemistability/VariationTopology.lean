@@ -29,7 +29,7 @@ variable {K : Type*} [Field K]
 variable {M : Type*} [AddCommGroup M] [Module (𝓞 K) M] [Module.Finite (𝓞 K) M]
 
 /-- Compatible exponential curves are continuous in the actual metric topology. -/
-theorem continuous_exponentialVariation (h : HermitianMetric (K := K) M)
+theorem continuous_exponentialVariation (h : HermitianMetric K M)
     (A : ∀ σ : K →+* ℂ, Module.End ℂ (ComplexFiber M σ))
     (hs : ∀ σ x y, (h.fiber σ).inner (A σ x) y = (h.fiber σ).inner x (A σ y))
     (hc : ∀ σ x, A (ComplexEmbedding.conjugate σ) (fiberConjugate M σ x) =
@@ -63,7 +63,7 @@ theorem continuous_exponentialVariation (h : HermitianMetric (K := K) M)
 /-- Small determinant-one variations of a normalized strictly stable metric
 remain strictly stable and normalized. -/
 theorem IsStable.eventually_exponentialVariation [NumberField K]
-    [Module.Projective (𝓞 K) M] {h : HermitianMetric (K := K) M}
+    [Module.Projective (𝓞 K) M] {h : HermitianMetric K M}
     (hst : h.IsStable) (h0 : h.degree = 0)
     (A : ∀ σ : K →+* ℂ, Module.End ℂ (ComplexFiber M σ))
     (hs : ∀ σ x y, (h.fiber σ).inner (A σ x) y = (h.fiber σ).inner x (A σ y))

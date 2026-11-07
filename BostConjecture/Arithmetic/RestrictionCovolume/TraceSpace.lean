@@ -46,10 +46,10 @@ def archimedeanSpan : Submodule ℝ ((σ : K →+* ℂ) → ComplexFiber M σ) :
 
 namespace HermitianMetric
 
-variable {M} (h : HermitianMetric (K := K) M)
+variable {M} (h : HermitianMetric K M)
 
 /-- The real trace space, with its metric supplied by `h`. -/
-def TraceSpace (_h : HermitianMetric (K := K) M) : Type _ :=
+def TraceSpace (_h : HermitianMetric K M) : Type _ :=
   archimedeanSpan (K := K) M
 
 instance : AddCommGroup h.TraceSpace :=

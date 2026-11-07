@@ -35,7 +35,7 @@ variable {M N : Type u} [AddCommGroup M] [Module (𝓞 K) M]
 
 /-- Semistability is invariant under an actual integral fiberwise isometry. -/
 theorem isSemistable_iff_of_equiv
-    (h : HermitianMetric (K := K) M) (g : HermitianMetric (K := K) N)
+    (h : HermitianMetric K M) (g : HermitianMetric K N)
     (e : M ≃ₗ[𝓞 K] N)
     (he : ∀ (σ : K →+* ℂ) (x y : ComplexFiber M σ),
       (g.fiber σ).inner (fiberMap e.toLinearMap σ x) (fiberMap e.toLinearMap σ y) =
@@ -61,7 +61,7 @@ theorem isSemistable_iff_of_equiv
 /-- If the two Hilbert tensor pieces are normalized semistable, the whole
 tensor product is normalized semistable, for any saturated first-factor cut. -/
 theorem isSemistable_tensor_of_submodule_quotient
-    (h : HermitianMetric (K := K) M) (g : HermitianMetric (K := K) N)
+    (h : HermitianMetric K M) (g : HermitianMetric K N)
     (P : Submodule (𝓞 K) M) [Module.Projective (𝓞 K) (M ⧸ P)]
     (hP : ((h.submodule P).tensor g).IsSemistable)
     (hP0 : ((h.submodule P).tensor g).degree = 0)

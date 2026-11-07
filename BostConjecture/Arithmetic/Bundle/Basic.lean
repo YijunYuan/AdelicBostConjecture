@@ -44,7 +44,9 @@ def fiberSection (σ : K →+* ℂ) (x : M) : ComplexFiber M σ :=
   let : Algebra (𝓞 K) ℂ := (σ.comp (algebraMap (𝓞 K) K)).toAlgebra
   1 ⊗ₜ[𝓞 K] x
 
-/-- Positive-definite fiber metrics compatible with complex conjugation. -/
+variable (K) in
+/-- Positive-definite fiber metrics compatible with complex conjugation.
+The base field is explicit: the module type alone does not determine it. -/
 structure HermitianMetric where
   /-- The Hermitian inner product on each canonical complex fiber. -/
   fiber : ∀ σ : K →+* ℂ, InnerProductSpace.Core ℂ (ComplexFiber M σ)
@@ -78,18 +80,18 @@ namespace HermitianMetric
 variable {M}
 
 /-- Norm of an integral section in an archimedean fiber. -/
-def sectionNorm (h : HermitianMetric (K := K) M) (σ : K →+* ℂ) (x : M) : ℝ :=
+def sectionNorm (h : HermitianMetric K M) (σ : K →+* ℂ) (x : M) : ℝ :=
   Real.sqrt (((h.fiber σ).inner (fiberSection M σ x) (fiberSection M σ x)).re)
 
 @[simp]
-lemma sectionNorm_conjugate (h : HermitianMetric (K := K) M)
+lemma sectionNorm_conjugate (h : HermitianMetric K M)
     (σ : K →+* ℂ) (x : M) :
     h.sectionNorm (ComplexEmbedding.conjugate σ) x = h.sectionNorm σ x := by
   simp only [sectionNorm, h.conjugate, Complex.star_def, Complex.conj_re]
 
 /-- The section norm depends only on the infinite place, not on its representing
 complex embedding. -/
-lemma sectionNorm_eq_of_place_eq (h : HermitianMetric (K := K) M)
+lemma sectionNorm_eq_of_place_eq (h : HermitianMetric K M)
     {σ τ : K →+* ℂ} (heq : InfinitePlace.mk σ = InfinitePlace.mk τ) (x : M) :
     h.sectionNorm σ x = h.sectionNorm τ x := by
   rcases InfinitePlace.mk_eq_iff.mp heq with heq | heq
@@ -97,7 +99,7 @@ lemma sectionNorm_eq_of_place_eq (h : HermitianMetric (K := K) M)
   · rw [← heq, h.sectionNorm_conjugate]
 
 /-- Fiber norms scale by the archimedean absolute value. -/
-lemma sectionNorm_smul (h : HermitianMetric (K := K) M)
+lemma sectionNorm_smul (h : HermitianMetric K M)
     (σ : K →+* ℂ) (a : 𝓞 K) (x : M) :
     h.sectionNorm σ (a • x) = ‖σ a‖ * h.sectionNorm σ x := by
   let : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
@@ -107,7 +109,7 @@ lemma sectionNorm_smul (h : HermitianMetric (K := K) M)
   rw [fiberSection_smul, norm_smul]
 
 lemma sectionNorm_pos [Module.Projective (𝓞 K) M]
-    (h : HermitianMetric (K := K) M) (σ : K →+* ℂ) {x : M} (hx : x ≠ 0) :
+    (h : HermitianMetric K M) (σ : K →+* ℂ) {x : M} (hx : x ≠ 0) :
     0 < h.sectionNorm σ x := by
   let : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
   let := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber M σ)

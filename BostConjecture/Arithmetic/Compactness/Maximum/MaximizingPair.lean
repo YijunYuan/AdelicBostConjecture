@@ -40,7 +40,7 @@ def tensorMaxDegreeValues (K : Type*) [Field K] [NumberField K] (a b : ℕ) : Se
     ∃ fm : Module.Finite (𝓞 K) M, ∃ pm : Module.Projective (𝓞 K) M,
     ∃ fn : Module.Finite (𝓞 K) N, ∃ pn : Module.Projective (𝓞 K) N,
     letI := fm; letI := pm; letI := fn; letI := pn;
-    ∃ h : HermitianMetric (K := K) M, ∃ g : HermitianMetric (K := K) N,
+    ∃ h : HermitianMetric K M, ∃ g : HermitianMetric K N,
       Module.finrank K (K ⊗[𝓞 K] M) = a ∧ Module.finrank K (K ⊗[𝓞 K] N) = b ∧
       h.degree = 0 ∧ g.degree = 0 ∧ h.IsSemistable ∧ g.IsSemistable ∧
       (h.tensor g).maxDegree = d}
@@ -50,7 +50,7 @@ theorem tensor_maxDegree_mem {M N : Type u}
     [AddCommGroup M] [Module (𝓞 K) M] [Module.Finite (𝓞 K) M]
     [Module.Projective (𝓞 K) M] [AddCommGroup N] [Module (𝓞 K) N]
     [Module.Finite (𝓞 K) N] [Module.Projective (𝓞 K) N]
-    (h : HermitianMetric (K := K) M) (g : HermitianMetric (K := K) N) {a b : ℕ}
+    (h : HermitianMetric K M) (g : HermitianMetric K N) {a b : ℕ}
     (hrM : Module.finrank K (K ⊗[𝓞 K] M) = a)
     (hrN : Module.finrank K (K ⊗[𝓞 K] N) = b)
     (h0 : h.degree = 0) (g0 : g.degree = 0) (hs : h.IsSemistable) (gs : g.IsSemistable) :
@@ -105,7 +105,7 @@ theorem exists_maximizing_pair (a b : ℕ)
     ∃ fm : Module.Finite (𝓞 K) M, ∃ pm : Module.Projective (𝓞 K) M,
     ∃ fn : Module.Finite (𝓞 K) N, ∃ pn : Module.Projective (𝓞 K) N,
     letI := fm; letI := pm; letI := fn; letI := pn;
-    ∃ h : HermitianMetric (K := K) M, ∃ g : HermitianMetric (K := K) N,
+    ∃ h : HermitianMetric K M, ∃ g : HermitianMetric K N,
       Module.finrank K (K ⊗[𝓞 K] M) = a ∧ Module.finrank K (K ⊗[𝓞 K] N) = b ∧
       h.degree = 0 ∧ g.degree = 0 ∧ h.IsSemistable ∧ g.IsSemistable ∧
       ∃ P : Submodule (𝓞 K) (M ⊗[𝓞 K] N),

@@ -32,7 +32,7 @@ variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 
 /-- A normalized strictly stable metric has a neighborhood whose normalized
 members remain strictly stable. -/
-theorem IsStable.eventually_isStable_normalized {h : HermitianMetric (K := K) M}
+theorem IsStable.eventually_isStable_normalized {h : HermitianMetric K M}
     (hs : h.IsStable) (h0 : h.degree = 0) :
     ∀ᶠ g in 𝓝 h, g.degree = 0 → g.IsStable := by
   obtain ⟨δ, hδ, hgap⟩ := hs.exists_degree_gap h0
@@ -44,7 +44,7 @@ theorem IsStable.eventually_isStable_normalized {h : HermitianMetric (K := K) M}
 
 /-- The strictly stable locus is open in the subspace of normalized actual metrics. -/
 theorem isOpen_isStable_normalized :
-    IsOpen {h : {h : HermitianMetric (K := K) M // h.degree = 0} | h.val.IsStable} := by
+    IsOpen {h : {h : HermitianMetric K M // h.degree = 0} | h.val.IsStable} := by
   apply isOpen_iff_mem_nhds.mpr
   intro h hh
   have he := hh.eventually_isStable_normalized h.property

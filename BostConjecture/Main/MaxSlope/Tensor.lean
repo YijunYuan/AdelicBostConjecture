@@ -32,8 +32,8 @@ variable {K M N : Type u} [Field K] [NumberField K]
     [Nontrivial (K ⊗[𝓞 K] M)] [Nontrivial (K ⊗[𝓞 K] N)]
 
 /-- Every actual Hermitian grade in the flattened HN tensor flag is semistable. -/
-theorem hnTensorGrade_isSemistable (h : HermitianMetric (K := K) M)
-    (g : HermitianMetric (K := K) N) (k : ℕ)
+theorem hnTensorGrade_isSemistable (h : HermitianMetric K M)
+    (g : HermitianMetric K N) (k : ℕ)
     (hk : k < h.hnFlag.length * g.hnFlag.length) :
     (((h.tensor g).submodule (h.hnTensorFlag g (k + 1))).quotient
       ((h.hnTensorFlag g k).comap (h.hnTensorFlag g (k + 1)).subtype)).IsSemistable := by
@@ -46,8 +46,8 @@ theorem hnTensorGrade_isSemistable (h : HermitianMetric (K := K) M)
   exact (isSemistable_iff_of_equiv _ _ e he).mpr hs
 
 /-- The actual HN tensor filtration gives the maximal-slope upper bound. -/
-theorem maxSlope_tensor_le (h : HermitianMetric (K := K) M)
-    (g : HermitianMetric (K := K) N) :
+theorem maxSlope_tensor_le (h : HermitianMetric K M)
+    (g : HermitianMetric K N) :
     (h.tensor g).maxSlope ≤ h.maxSlope + g.maxSlope := by
   exact (h.tensor g).maxSlope_le_of_integral_filtration (h.hnTensorFlag g)
     (h.hnTensorFlag_monotone g) (h.hnTensorFlag_zero g)
@@ -57,8 +57,8 @@ theorem maxSlope_tensor_le (h : HermitianMetric (K := K) M)
 
 /-- Manuscript Theorem 1.1: maximal slope is additive for actual Hilbert tensor
 products over every number field, including nonfree finite projective modules. -/
-theorem maxSlope_tensor (h : HermitianMetric (K := K) M)
-    (g : HermitianMetric (K := K) N) :
+theorem maxSlope_tensor (h : HermitianMetric K M)
+    (g : HermitianMetric K N) :
     (h.tensor g).maxSlope = h.maxSlope + g.maxSlope :=
   le_antisymm (h.maxSlope_tensor_le g) (h.maxSlope_add_le_tensor g)
 

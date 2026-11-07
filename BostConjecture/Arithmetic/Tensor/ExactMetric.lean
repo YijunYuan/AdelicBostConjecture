@@ -31,8 +31,8 @@ variable {M N P : Type u} [AddCommGroup M] [Module (𝓞 K) M]
     [Module.Finite (𝓞 K) M] [Module.Finite (𝓞 K) N]
 
 /-- The actual quotient metric commutes with right tensoring. -/
-lemma tensor_pushforward (h : HermitianMetric (K := K) M)
-    (g : HermitianMetric (K := K) N) (f : M →ₗ[𝓞 K] P) (hf : Function.Surjective f) :
+lemma tensor_pushforward (h : HermitianMetric K M)
+    (g : HermitianMetric K N) (f : M →ₗ[𝓞 K] P) (hf : Function.Surjective f) :
     (h.tensor g).pushforward (f.rTensor N) (LinearMap.rTensor_surjective N hf) =
       (h.pushforward f hf).tensor g := by
   apply ext_inner

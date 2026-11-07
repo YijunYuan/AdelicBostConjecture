@@ -34,7 +34,7 @@ variable {K M N : Type u} [Field K] [NumberField K]
 
 /-- There are no actual normalized tensor counterexamples. -/
 theorem isSemistable_tensor_of_degree_zero
-    (h : HermitianMetric (K := K) M) (k : HermitianMetric (K := K) N)
+    (h : HermitianMetric K M) (k : HermitianMetric K N)
     (hrM : 0 < Module.finrank K (K ⊗[𝓞 K] M))
     (hrN : 0 < Module.finrank K (K ⊗[𝓞 K] N))
     (h0 : h.degree = 0) (k0 : k.degree = 0)
@@ -69,7 +69,7 @@ theorem isSemistable_tensor_of_degree_zero
 /-- The actual Hilbert tensor product of positive-rank semistable Hermitian
 finite projective modules over any number field is semistable. -/
 theorem IsSemistable.tensor
-    {h : HermitianMetric (K := K) M} {k : HermitianMetric (K := K) N}
+    {h : HermitianMetric K M} {k : HermitianMetric K N}
     (hs : h.IsSemistable) (ks : k.IsSemistable)
     (hrM : 0 < Module.finrank K (K ⊗[𝓞 K] M))
     (hrN : 0 < Module.finrank K (K ⊗[𝓞 K] N)) : (h.tensor k).IsSemistable := by

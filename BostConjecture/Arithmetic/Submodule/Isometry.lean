@@ -39,7 +39,7 @@ namespace HermitianMetric
 variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 
 /-- Restrictions of an integral fiberwise isometry preserve submodule degree. -/
-lemma degree_submodule_map_equiv (h : HermitianMetric (K := K) M)
+lemma degree_submodule_map_equiv (h : HermitianMetric K M)
     (e : M ≃ₗ[𝓞 K] M)
     (he : ∀ (σ : K →+* ℂ) (x y : ComplexFiber M σ),
       (h.fiber σ).inner (fiberMap e.toLinearMap σ x) (fiberMap e.toLinearMap σ y) =
@@ -58,7 +58,7 @@ lemma degree_submodule_map_equiv (h : HermitianMetric (K := K) M)
   exact he σ _ _
 
 /-- An actual integral isometry preserves the intrinsic generic subspace degree. -/
-lemma subspaceDegree_map_equiv (h : HermitianMetric (K := K) M)
+lemma subspaceDegree_map_equiv (h : HermitianMetric K M)
     (e : M ≃ₗ[𝓞 K] M)
     (he : ∀ (σ : K →+* ℂ) (x y : ComplexFiber M σ),
       (h.fiber σ).inner (fiberMap e.toLinearMap σ x) (fiberMap e.toLinearMap σ y) =

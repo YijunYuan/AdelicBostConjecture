@@ -90,14 +90,14 @@ variable {N}
 
 /-- The integral image of a tensor injection carries the tensor induced metric. -/
 lemma tensorRightEquiv_inner [Module.Flat (𝓞 K) N]
-    (h : HermitianMetric (K := K) M) (g : HermitianMetric (K := K) N)
+    (h : HermitianMetric K M) (g : HermitianMetric K N)
     (P : Submodule (𝓞 K) M) (σ : K →+* ℂ)
     (x y : ComplexFiber (P ⊗[𝓞 K] N) σ) :
     (((h.tensor g).submodule (tensorRight N P)).fiber σ).inner
       (fiberMap (tensorRightEquiv N P).toLinearMap σ x)
       (fiberMap (tensorRightEquiv N P).toLinearMap σ y) =
       (((h.submodule P).tensor g).fiber σ).inner x y := by
-  have he := congrArg (fun m : HermitianMetric (K := K) (P ⊗[𝓞 K] N) =>
+  have he := congrArg (fun m : HermitianMetric K (P ⊗[𝓞 K] N) =>
     (m.fiber σ).inner x y) (tensor_pullback h g P.subtype P.injective_subtype)
   change ((h.tensor g).fiber σ).inner
     (fiberMap (tensorRight N P).subtype σ (fiberMap (tensorRightEquiv N P).toLinearMap σ x))
@@ -111,7 +111,7 @@ variable [Module.Finite (𝓞 K) M]
 quotient metric on the whole complex fibers. -/
 lemma pushforward_equiv_inner
     {P : Type u} [AddCommGroup P] [Module (𝓞 K) P]
-    (h : HermitianMetric (K := K) M)
+    (h : HermitianMetric K M)
     (f : M →ₗ[𝓞 K] N) (hf : Function.Surjective f)
     (q : M →ₗ[𝓞 K] P) (hq : Function.Surjective q)
     (e : N ≃ₗ[𝓞 K] P) (he : e.toLinearMap.comp f = q)
@@ -142,7 +142,7 @@ variable [Module.Finite (𝓞 K) N]
 
 /-- The canonical tensor quotient identification preserves the Hilbert metric. -/
 lemma tensorRightQuotientEquiv_inner
-    (h : HermitianMetric (K := K) M) (g : HermitianMetric (K := K) N)
+    (h : HermitianMetric K M) (g : HermitianMetric K N)
     (P : Submodule (𝓞 K) M) (σ : K →+* ℂ)
     (x y : ComplexFiber ((M ⊗[𝓞 K] N) ⧸ tensorRight N P) σ) :
     (((h.quotient P).tensor g).fiber σ).inner

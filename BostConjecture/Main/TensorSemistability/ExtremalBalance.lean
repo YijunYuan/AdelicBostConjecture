@@ -33,7 +33,7 @@ variable {M N : Type u} [AddCommGroup M] [Module (𝓞 K) M]
 
 /-- Actual strict maximizing pairs have balanced concrete tensor-submodule fibers. -/
 theorem isBalanced_of_maximizing_pair
-    (h : HermitianMetric (K := K) M) (k : HermitianMetric (K := K) N)
+    (h : HermitianMetric K M) (k : HermitianMetric K N)
     (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
     [Module.IsTorsionFree (𝓞 K) ((M ⊗[𝓞 K] N) ⧸ P)]
     (hrM : 0 < Module.finrank K (K ⊗[𝓞 K] M))

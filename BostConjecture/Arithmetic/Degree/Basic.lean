@@ -29,16 +29,16 @@ variable {M : Type*} [AddCommGroup M] [Module (𝓞 K) M]
 variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 
 /-- Normalized arithmetic degree of the intrinsic metrized determinant line. -/
-def degree (h : HermitianMetric (K := K) M) : ℝ :=
+def degree (h : HermitianMetric K M) : ℝ :=
   h.determinant.lineDegree (determinant_generic_finrank M)
 
 /-- Normalized slope; its geometric applications use positive generic rank. -/
-def slope (h : HermitianMetric (K := K) M) : ℝ :=
+def slope (h : HermitianMetric K M) : ℝ :=
   h.degree / (Module.finrank K (K ⊗[𝓞 K] M) : ℝ)
 
 /-- Degree computed from any nonzero integral determinant section, with every
 complex embedding counted. -/
-theorem degree_eq (h : HermitianMetric (K := K) M)
+theorem degree_eq (h : HermitianMetric K M)
     {ξ : DeterminantLine (K := K) M} (hξ : ξ ≠ 0) :
     h.degree = (Real.log (Nat.card (DeterminantLine (K := K) M ⧸ (𝓞 K ∙ ξ))) -
       ∑ σ : K →+* ℂ, Real.log (h.determinant.sectionNorm σ ξ)) / (Module.finrank ℚ K : ℝ) :=

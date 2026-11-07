@@ -34,7 +34,7 @@ variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 omit [NumberField K] [Module.Projective (𝓞 K) M] in
 /-- The norm of a fixed integral determinant section is the Gram determinant
 times the squared norm of its coordinate in the top exterior basis. -/
-theorem determinant_sectionNorm_sq_eq_gram (h : HermitianMetric (K := K) M)
+theorem determinant_sectionNorm_sq_eq_gram (h : HermitianMetric K M)
     (σ : K →+* ℂ)
     (b : Module.Basis (Fin (Module.finrank K (K ⊗[𝓞 K] M))) ℂ (ComplexFiber M σ))
     (ξ : DeterminantLine (K := K) M) :
@@ -71,7 +71,7 @@ theorem determinant_sectionNorm_sq_eq_gram (h : HermitianMetric (K := K) M)
 
 /-- In an orthonormal frame at the base point, all determinant-coordinate
 factors cancel from the arithmetic derivative. -/
-theorem hasDerivAt_degree_of_gram (h : ℝ → HermitianMetric (K := K) M) {t₀ : ℝ}
+theorem hasDerivAt_degree_of_gram (h : ℝ → HermitianMetric K M) {t₀ : ℝ}
     (b : ∀ σ : K →+* ℂ,
       Module.Basis (Fin (Module.finrank K (K ⊗[𝓞 K] M))) ℂ (ComplexFiber M σ))
     (hb : ∀ σ, (Matrix.of fun i j => ((h t₀).fiber σ).inner (b σ i) (b σ j)) = 1)
@@ -110,7 +110,7 @@ theorem hasDerivAt_degree_of_gram (h : ℝ → HermitianMetric (K := K) M) {t₀
 embedding sum of Gram derivatives. This is an intermediate stationarity
 statement; admissible metric curves must still be constructed. -/
 theorem sum_gram_deriv_eq_zero_of_isLocalMax
-    (h : ℝ → HermitianMetric (K := K) M) {t₀ : ℝ}
+    (h : ℝ → HermitianMetric K M) {t₀ : ℝ}
     (b : ∀ σ : K →+* ℂ,
       Module.Basis (Fin (Module.finrank K (K ⊗[𝓞 K] M))) ℂ (ComplexFiber M σ))
     (hb : ∀ σ, (Matrix.of fun i j => ((h t₀).fiber σ).inner (b σ i) (b σ j)) = 1)

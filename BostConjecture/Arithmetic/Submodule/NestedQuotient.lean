@@ -77,7 +77,7 @@ namespace HermitianMetric
 variable [NumberField K] [Module.Finite (𝓞 K) M]
 
 /-- Nested quotient constructions have the same orthogonal representative. -/
-lemma fiberLift_submodule (h : HermitianMetric (K := K) M)
+lemma fiberLift_submodule (h : HermitianMetric K M)
     {P T : Submodule (𝓞 K) M} (hPT : P ≤ T) (σ : K →+* ℂ)
     (x : ComplexFiber (T ⧸ P.comap T.subtype) σ) :
     fiberMap T.subtype σ
@@ -99,7 +99,7 @@ lemma fiberLift_submodule (h : HermitianMetric (K := K) M)
     (fiberMap_submoduleQuotientMap_mkQ P T σ) (ker_fiberMap_le_range_subtype hPT σ) x
 
 /-- Quotient metrics commute with restriction to an intermediate submodule. -/
-theorem quotient_submodule (h : HermitianMetric (K := K) M)
+theorem quotient_submodule (h : HermitianMetric K M)
     {P T : Submodule (𝓞 K) M} (hPT : P ≤ T) :
     (h.submodule T).quotient (P.comap T.subtype) =
       (h.quotient P).pullback (submoduleQuotientMap P T)
@@ -135,7 +135,7 @@ theorem quotient_submodule (h : HermitianMetric (K := K) M)
   rfl
 
 /-- The same norm on an integral intermediate quotient, computed in either ambient module. -/
-lemma sectionNorm_quotient_submodule (h : HermitianMetric (K := K) M)
+lemma sectionNorm_quotient_submodule (h : HermitianMetric K M)
     {P T : Submodule (𝓞 K) M} (hPT : P ≤ T) (σ : K →+* ℂ)
     (x : T ⧸ P.comap T.subtype) :
     ((h.submodule T).quotient (P.comap T.subtype)).sectionNorm σ x =

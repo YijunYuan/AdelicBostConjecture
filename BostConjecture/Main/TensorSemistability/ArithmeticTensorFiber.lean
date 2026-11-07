@@ -67,8 +67,8 @@ variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 
 
 /-- The orthogonal projection onto the concrete arithmetic tensor subspace. -/
-def tensorSubmoduleProjection (h : HermitianMetric (K := K) M)
-    (k : HermitianMetric (K := K) N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
+def tensorSubmoduleProjection (h : HermitianMetric K M)
+    (k : HermitianMetric K N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
     (σ : K →+* ℂ) : Module.End ℂ (ComplexFiber M σ ⊗[ℂ] ComplexFiber N σ) := by
   let (σ : K →+* ℂ) : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
   let (σ : K →+* ℂ) := InnerProductSpace.Core.toNormedAddCommGroup
@@ -83,23 +83,23 @@ def tensorSubmoduleProjection (h : HermitianMetric (K := K) M)
   exact (tensorSubmoduleFiber P σ).starProjection.toLinearMap
 
 /-- Right partial trace of the actual tensor-submodule projection. -/
-def tensorPartialTraceRight (h : HermitianMetric (K := K) M)
-    (k : HermitianMetric (K := K) N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
+def tensorPartialTraceRight (h : HermitianMetric K M)
+    (k : HermitianMetric K N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
     (σ : K →+* ℂ) : Module.End ℂ (ComplexFiber M σ) :=
   Balanced.partialTraceRight ℂ (ComplexFiber M σ) (ComplexFiber N σ)
     (h.tensorSubmoduleProjection k P σ)
 
 /-- Left partial trace of the actual tensor-submodule projection. -/
-def tensorPartialTraceLeft (h : HermitianMetric (K := K) M)
-    (k : HermitianMetric (K := K) N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
+def tensorPartialTraceLeft (h : HermitianMetric K M)
+    (k : HermitianMetric K N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
     (σ : K →+* ℂ) : Module.End ℂ (ComplexFiber N σ) :=
   Balanced.partialTraceLeft ℂ (ComplexFiber M σ) (ComplexFiber N σ)
     (h.tensorSubmoduleProjection k P σ)
 
 omit [NumberField K] [Module.Projective (𝓞 K) M] [Module.Projective (𝓞 K) N] in
 /-- Canonical conjugation intertwines the actual orthogonal tensor projections. -/
-theorem tensorSubmoduleProjection_conjugate (h : HermitianMetric (K := K) M)
-    (k : HermitianMetric (K := K) N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
+theorem tensorSubmoduleProjection_conjugate (h : HermitianMetric K M)
+    (k : HermitianMetric K N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
     (σ : K →+* ℂ) (z : ComplexFiber M σ ⊗[ℂ] ComplexFiber N σ) :
     h.tensorSubmoduleProjection k P (ComplexEmbedding.conjugate σ)
       (TensorProduct.congr (fiberConjugate M σ) (fiberConjugate N σ) z) =
@@ -121,8 +121,8 @@ theorem tensorSubmoduleProjection_conjugate (h : HermitianMetric (K := K) M)
     _ _ (mem_tensorSubmoduleFiber_conjugate P σ) z
 
 /-- Right partial traces form a conjugation-compatible arithmetic family. -/
-theorem tensorPartialTraceRight_conjugate (h : HermitianMetric (K := K) M)
-    (k : HermitianMetric (K := K) N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
+theorem tensorPartialTraceRight_conjugate (h : HermitianMetric K M)
+    (k : HermitianMetric K N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
     (σ : K →+* ℂ) (x : ComplexFiber M σ) :
     h.tensorPartialTraceRight k P (ComplexEmbedding.conjugate σ) (fiberConjugate M σ x) =
       fiberConjugate M σ (h.tensorPartialTraceRight k P σ x) := by
@@ -140,8 +140,8 @@ theorem tensorPartialTraceRight_conjugate (h : HermitianMetric (K := K) M)
     _ _ (h.tensorSubmoduleProjection_conjugate k P σ) x
 
 /-- Left partial traces form a conjugation-compatible arithmetic family. -/
-theorem tensorPartialTraceLeft_conjugate (h : HermitianMetric (K := K) M)
-    (k : HermitianMetric (K := K) N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
+theorem tensorPartialTraceLeft_conjugate (h : HermitianMetric K M)
+    (k : HermitianMetric K N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
     (σ : K →+* ℂ) (x : ComplexFiber N σ) :
     h.tensorPartialTraceLeft k P (ComplexEmbedding.conjugate σ) (fiberConjugate N σ x) =
       fiberConjugate N σ (h.tensorPartialTraceLeft k P σ x) := by
@@ -160,8 +160,8 @@ theorem tensorPartialTraceLeft_conjugate (h : HermitianMetric (K := K) M)
 
 omit [Module.Projective (𝓞 K) M] [Module.Projective (𝓞 K) N] in
 /-- The arithmetic projection trace is the trace on the canonical binary fiber. -/
-theorem fiberProjectionTrace_tensor_transport (h : HermitianMetric (K := K) M)
-    (k : HermitianMetric (K := K) N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
+theorem fiberProjectionTrace_tensor_transport (h : HermitianMetric K M)
+    (k : HermitianMetric K N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
     (σ : K →+* ℂ) (C : Module.End ℂ (ComplexFiber M σ ⊗[ℂ] ComplexFiber N σ)) :
     (h.tensor k).fiberProjectionTrace P σ
       ((binaryTensorFiberEquiv σ).symm.toLinearMap.comp

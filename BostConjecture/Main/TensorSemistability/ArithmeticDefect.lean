@@ -31,24 +31,24 @@ variable {M N : Type u} [AddCommGroup M] [Module (𝓞 K) M]
     [Module.Finite (𝓞 K) N] [Module.Projective (𝓞 K) N]
 
 /-- The traceless scalar defect in the first factor. -/
-def tensorRightDefect (h : HermitianMetric (K := K) M)
-    (k : HermitianMetric (K := K) N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
+def tensorRightDefect (h : HermitianMetric K M)
+    (k : HermitianMetric K N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
     (σ : K →+* ℂ) : Module.End ℂ (ComplexFiber M σ) :=
   h.tensorPartialTraceRight k P σ -
     (((Module.finrank K (K ⊗[𝓞 K] P) : ℝ) / Module.finrank K (K ⊗[𝓞 K] M) : ℝ) : ℂ) •
       LinearMap.id
 
 /-- The traceless scalar defect in the second factor. -/
-def tensorLeftDefect (h : HermitianMetric (K := K) M)
-    (k : HermitianMetric (K := K) N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
+def tensorLeftDefect (h : HermitianMetric K M)
+    (k : HermitianMetric K N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
     (σ : K →+* ℂ) : Module.End ℂ (ComplexFiber N σ) :=
   h.tensorPartialTraceLeft k P σ -
     (((Module.finrank K (K ⊗[𝓞 K] P) : ℝ) / Module.finrank K (K ⊗[𝓞 K] N) : ℝ) : ℂ) •
       LinearMap.id
 
 /-- The actual right defect is self-adjoint for its factor metric. -/
-theorem tensorRightDefect_symmetric (h : HermitianMetric (K := K) M)
-    (k : HermitianMetric (K := K) N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
+theorem tensorRightDefect_symmetric (h : HermitianMetric K M)
+    (k : HermitianMetric K N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
     (σ : K →+* ℂ) (x y : ComplexFiber M σ) :
     (h.fiber σ).inner (h.tensorRightDefect k P σ x) y =
       (h.fiber σ).inner x (h.tensorRightDefect k P σ y) := by
@@ -65,8 +65,8 @@ theorem tensorRightDefect_symmetric (h : HermitianMetric (K := K) M)
     _ x y
 
 /-- The full trace of the actual right partial trace is the generic submodule rank. -/
-theorem trace_tensorPartialTraceRight (h : HermitianMetric (K := K) M)
-    (k : HermitianMetric (K := K) N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
+theorem trace_tensorPartialTraceRight (h : HermitianMetric K M)
+    (k : HermitianMetric K N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
     (σ : K →+* ℂ) : LinearMap.trace ℂ (ComplexFiber M σ)
       (h.tensorPartialTraceRight k P σ) = (Module.finrank K (K ⊗[𝓞 K] P) : ℂ) := by
   let : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
@@ -82,8 +82,8 @@ theorem trace_tensorPartialTraceRight (h : HermitianMetric (K := K) M)
   rw [Balanced.trace_partialTraceRight, Balanced.trace_starProjection, finrank_tensorSubmoduleFiber]
 
 /-- The actual right defect is traceless for a positive-rank factor. -/
-theorem trace_tensorRightDefect (h : HermitianMetric (K := K) M)
-    (k : HermitianMetric (K := K) N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
+theorem trace_tensorRightDefect (h : HermitianMetric K M)
+    (k : HermitianMetric K N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
     (hr : 0 < Module.finrank K (K ⊗[𝓞 K] M)) (σ : K →+* ℂ) :
     LinearMap.trace ℂ (ComplexFiber M σ) (h.tensorRightDefect k P σ) = 0 := by
   simp only [tensorRightDefect, map_sub, map_smul, LinearMap.trace_id]
@@ -93,8 +93,8 @@ theorem trace_tensorRightDefect (h : HermitianMetric (K := K) M)
   exact (div_mul_cancel₀ _ (by exact_mod_cast hr.ne')).symm
 
 /-- The actual right scalar-defect family respects canonical conjugation. -/
-theorem tensorRightDefect_conjugate (h : HermitianMetric (K := K) M)
-    (k : HermitianMetric (K := K) N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
+theorem tensorRightDefect_conjugate (h : HermitianMetric K M)
+    (k : HermitianMetric K N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
     (σ : K →+* ℂ) (x : ComplexFiber M σ) :
     h.tensorRightDefect k P (ComplexEmbedding.conjugate σ) (fiberConjugate M σ x) =
       fiberConjugate M σ (h.tensorRightDefect k P σ x) := by
@@ -102,8 +102,8 @@ theorem tensorRightDefect_conjugate (h : HermitianMetric (K := K) M)
     map_sub, map_smulₛₗ, tensorPartialTraceRight_conjugate, Complex.conj_ofReal]
 
 /-- The actual left defect is self-adjoint for its factor metric. -/
-theorem tensorLeftDefect_symmetric (h : HermitianMetric (K := K) M)
-    (k : HermitianMetric (K := K) N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
+theorem tensorLeftDefect_symmetric (h : HermitianMetric K M)
+    (k : HermitianMetric K N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
     (σ : K →+* ℂ) (x y : ComplexFiber N σ) :
     (k.fiber σ).inner (h.tensorLeftDefect k P σ x) y =
       (k.fiber σ).inner x (h.tensorLeftDefect k P σ y) := by
@@ -120,8 +120,8 @@ theorem tensorLeftDefect_symmetric (h : HermitianMetric (K := K) M)
     _ x y
 
 /-- The full trace of the actual left partial trace is the generic submodule rank. -/
-theorem trace_tensorPartialTraceLeft (h : HermitianMetric (K := K) M)
-    (k : HermitianMetric (K := K) N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
+theorem trace_tensorPartialTraceLeft (h : HermitianMetric K M)
+    (k : HermitianMetric K N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
     (σ : K →+* ℂ) : LinearMap.trace ℂ (ComplexFiber N σ)
       (h.tensorPartialTraceLeft k P σ) = (Module.finrank K (K ⊗[𝓞 K] P) : ℂ) := by
   let : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
@@ -137,8 +137,8 @@ theorem trace_tensorPartialTraceLeft (h : HermitianMetric (K := K) M)
   rw [Balanced.trace_partialTraceLeft, Balanced.trace_starProjection, finrank_tensorSubmoduleFiber]
 
 /-- The actual left defect is traceless for a positive-rank factor. -/
-theorem trace_tensorLeftDefect (h : HermitianMetric (K := K) M)
-    (k : HermitianMetric (K := K) N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
+theorem trace_tensorLeftDefect (h : HermitianMetric K M)
+    (k : HermitianMetric K N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
     (hr : 0 < Module.finrank K (K ⊗[𝓞 K] N)) (σ : K →+* ℂ) :
     LinearMap.trace ℂ (ComplexFiber N σ) (h.tensorLeftDefect k P σ) = 0 := by
   simp only [tensorLeftDefect, map_sub, map_smul, LinearMap.trace_id]
@@ -148,8 +148,8 @@ theorem trace_tensorLeftDefect (h : HermitianMetric (K := K) M)
   exact (div_mul_cancel₀ _ (by exact_mod_cast hr.ne')).symm
 
 /-- The actual left scalar-defect family respects canonical conjugation. -/
-theorem tensorLeftDefect_conjugate (h : HermitianMetric (K := K) M)
-    (k : HermitianMetric (K := K) N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
+theorem tensorLeftDefect_conjugate (h : HermitianMetric K M)
+    (k : HermitianMetric K N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
     (σ : K →+* ℂ) (x : ComplexFiber N σ) :
     h.tensorLeftDefect k P (ComplexEmbedding.conjugate σ) (fiberConjugate N σ x) =
       fiberConjugate N σ (h.tensorLeftDefect k P σ x) := by
@@ -157,8 +157,8 @@ theorem tensorLeftDefect_conjugate (h : HermitianMetric (K := K) M)
     map_sub, map_smulₛₗ, tensorPartialTraceLeft_conjugate, Complex.conj_ofReal]
 
 /-- Actual arithmetic tensor projection traces split into the two partial-trace pairings. -/
-theorem fiberProjectionTrace_tensor_eq (h : HermitianMetric (K := K) M)
-    (k : HermitianMetric (K := K) N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
+theorem fiberProjectionTrace_tensor_eq (h : HermitianMetric K M)
+    (k : HermitianMetric K N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
     (A : ∀ σ : K →+* ℂ, Module.End ℂ (ComplexFiber M σ))
     (B : ∀ σ : K →+* ℂ, Module.End ℂ (ComplexFiber N σ)) (σ : K →+* ℂ) :
     (h.tensor k).fiberProjectionTrace P σ (tensorFiberGenerator A B σ) =

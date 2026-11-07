@@ -40,7 +40,7 @@ variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 variable [Nontrivial (K ⊗[𝓞 K] M)]
 
 /-- Irreducibility at a single complex embedding suffices for intrinsic semistability. -/
-theorem isSemistable_of_complex_irreducible (h : HermitianMetric (K := K) M)
+theorem isSemistable_of_complex_irreducible (h : HermitianMetric K M)
     (ρ : Representation (𝓞 K) G M) (σ : K →+* ℂ)
     [Representation.IsIrreducible (complexRepresentation ρ σ)]
     (hρ : ∀ (g : G) (τ : K →+* ℂ) (x y : ComplexFiber M τ),

@@ -41,7 +41,7 @@ lemma maxSlope_piTensor_empty {ι : Type} [Fintype ι] [IsEmpty ι]
     (M : ι → Type u) [∀ i, AddCommGroup (M i)] [∀ i, Module (𝓞 K) (M i)]
     [∀ i, Module.Finite (𝓞 K) (M i)] [∀ i, Module.Projective (𝓞 K) (M i)]
     [∀ i, Nontrivial (K ⊗[𝓞 K] M i)]
-    (h : ∀ i, HermitianMetric (K := K) (M i)) :
+    (h : ∀ i, HermitianMetric K (M i)) :
     (piTensor h).maxSlope = 0 := by
   have hr : Module.finrank K (K ⊗[𝓞 K] (⨂[𝓞 K] i, M i)) = 1 := by
     simp [Specht.piTensor_generic_finrank]
@@ -62,7 +62,7 @@ theorem sum_maxSlope_le_piTensor {ι : Type} [Fintype ι] (M : ι → Type u)
     [∀ i, AddCommGroup (M i)] [∀ i, Module (𝓞 K) (M i)]
     [∀ i, Module.Finite (𝓞 K) (M i)] [∀ i, Module.Projective (𝓞 K) (M i)]
     [∀ i, Nontrivial (K ⊗[𝓞 K] M i)]
-    (h : ∀ i, HermitianMetric (K := K) (M i)) :
+    (h : ∀ i, HermitianMetric K (M i)) :
     ∑ i, (h i).maxSlope ≤ (piTensor h).maxSlope := by
   classical
   revert M
@@ -70,7 +70,7 @@ theorem sum_maxSlope_le_piTensor {ι : Type} [Fintype ι] (M : ι → Type u)
     ∀ (M : ι → Type u) [∀ i, AddCommGroup (M i)] [∀ i, Module (𝓞 K) (M i)]
       [∀ i, Module.Finite (𝓞 K) (M i)] [∀ i, Module.Projective (𝓞 K) (M i)]
       [∀ i, Nontrivial (K ⊗[𝓞 K] M i)]
-      (h : ∀ i, HermitianMetric (K := K) (M i)),
+      (h : ∀ i, HermitianMetric K (M i)),
       ∑ i, (h i).maxSlope ≤ (piTensor h).maxSlope) ?_ ?_ ?_ ι
   · intro α β _ e ih M _ _ _ _ _ h
     let : Fintype α := Fintype.ofEquiv β e.symm

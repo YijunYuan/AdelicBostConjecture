@@ -28,7 +28,7 @@ variable {K : Type*} [Field K]
 variable {M : Type*} [AddCommGroup M] [Module (𝓞 K) M]
 
 /-- Uniformly multiply all archimedean norms by `exp t`. -/
-def rescale (h : HermitianMetric (K := K) M) (t : ℝ) : HermitianMetric (K := K) M where
+def rescale (h : HermitianMetric K M) (t : ℝ) : HermitianMetric K M where
   fiber σ :=
     { inner := fun x y => (Real.exp (2 * t) : ℂ) * (h.fiber σ).inner x y
       conj_inner_symm := by
@@ -63,13 +63,13 @@ def rescale (h : HermitianMetric (K := K) M) (t : ℝ) : HermitianMetric (K := K
     rw [h.conjugate, star_mul, Complex.star_def, Complex.conj_ofReal]
     exact mul_comm _ _
 
-lemma rescale_inner (h : HermitianMetric (K := K) M) (t : ℝ) (σ : K →+* ℂ)
+lemma rescale_inner (h : HermitianMetric K M) (t : ℝ) (σ : K →+* ℂ)
     (x y : ComplexFiber M σ) :
     ((h.rescale t).fiber σ).inner x y =
       (Real.exp (2 * t) : ℂ) * (h.fiber σ).inner x y := rfl
 
 /-- The constructed rescaling has the prescribed effect on actual section norms. -/
-lemma sectionNorm_rescale (h : HermitianMetric (K := K) M) (t : ℝ)
+lemma sectionNorm_rescale (h : HermitianMetric K M) (t : ℝ)
     (σ : K →+* ℂ) (x : M) :
     (h.rescale t).sectionNorm σ x = Real.exp t * h.sectionNorm σ x := by
   simp only [sectionNorm, rescale_inner, Complex.mul_re, Complex.ofReal_re,
@@ -79,7 +79,7 @@ lemma sectionNorm_rescale (h : HermitianMetric (K := K) M) (t : ℝ)
 
 /-- Metrics with equal fiber forms are equal. -/
 @[ext]
-lemma ext {h g : HermitianMetric (K := K) M}
+lemma ext {h g : HermitianMetric K M}
     (hf : ∀ σ, h.fiber σ = g.fiber σ) : h = g := by
   cases h with
   | mk f hc =>
@@ -92,7 +92,7 @@ lemma ext {h g : HermitianMetric (K := K) M}
 /-- Rescaling commutes with an actual induced metric. -/
 lemma pullback_rescale [NumberField K]
     {N : Type*} [AddCommGroup N] [Module (𝓞 K) N]
-    (h : HermitianMetric (K := K) M) (f : N →ₗ[𝓞 K] M)
+    (h : HermitianMetric K M) (f : N →ₗ[𝓞 K] M)
     (hf : Function.Injective f) (t : ℝ) :
     (h.rescale t).pullback f hf = (h.pullback f hf).rescale t := by
   apply ext
@@ -100,7 +100,7 @@ lemma pullback_rescale [NumberField K]
   rfl
 
 /-- Every integral submodule inherits the same uniform norm scaling. -/
-lemma submodule_rescale [NumberField K] (h : HermitianMetric (K := K) M)
+lemma submodule_rescale [NumberField K] (h : HermitianMetric K M)
     (P : Submodule (𝓞 K) M) (t : ℝ) :
     (h.rescale t).submodule P = (h.submodule P).rescale t :=
   h.pullback_rescale P.subtype P.injective_subtype t
@@ -109,7 +109,7 @@ variable [Module.Finite (𝓞 K) M]
 
 /-- Uniform rescaling commutes with the intrinsic determinant metric, with
 parameter multiplied by the generic rank. -/
-theorem determinant_rescale (h : HermitianMetric (K := K) M) (t : ℝ) :
+theorem determinant_rescale (h : HermitianMetric K M) (t : ℝ) :
     (h.rescale t).determinant =
       h.determinant.rescale ((Module.finrank K (K ⊗[𝓞 K] M) : ℝ) * t) := by
   apply ext
@@ -136,7 +136,7 @@ theorem determinant_rescale (h : HermitianMetric (K := K) M) (t : ℝ) :
 variable [NumberField K] [Module.Projective (𝓞 K) M]
 
 /-- Scaling line norms by `exp t` subtracts `t` from normalized degree. -/
-theorem lineDegree_rescale [Nontrivial M] (h : HermitianMetric (K := K) M)
+theorem lineDegree_rescale [Nontrivial M] (h : HermitianMetric K M)
     (hr : Module.finrank K (K ⊗[𝓞 K] M) = 1) (t : ℝ) :
     (h.rescale t).lineDegree hr = h.lineDegree hr - t := by
   obtain ⟨x, hx⟩ := exists_ne (0 : M)
@@ -152,31 +152,31 @@ theorem lineDegree_rescale [Nontrivial M] (h : HermitianMetric (K := K) M)
   ring
 
 /-- Uniform rescaling of norms subtracts rank times the parameter from degree. -/
-theorem degree_rescale (h : HermitianMetric (K := K) M) (t : ℝ) :
+theorem degree_rescale (h : HermitianMetric K M) (t : ℝ) :
     (h.rescale t).degree = h.degree - (Module.finrank K (K ⊗[𝓞 K] M) : ℝ) * t := by
   rw [degree, determinant_rescale, lineDegree_rescale]
   rfl
 
 /-- Every positive-rank slope decreases by the norm-scaling parameter. -/
-theorem slope_rescale (h : HermitianMetric (K := K) M)
+theorem slope_rescale (h : HermitianMetric K M)
     (hr : Module.finrank K (K ⊗[𝓞 K] M) ≠ 0) (t : ℝ) :
     (h.rescale t).slope = h.slope - t := by
   rw [slope, slope, degree_rescale, sub_div, mul_div_cancel_left₀ t (Nat.cast_ne_zero.mpr hr)]
 
 /-- Rescaling by the original slope produces a bundle of slope zero. -/
-theorem slope_rescale_self (h : HermitianMetric (K := K) M)
+theorem slope_rescale_self (h : HermitianMetric K M)
     (hr : Module.finrank K (K ⊗[𝓞 K] M) ≠ 0) : (h.rescale h.slope).slope = 0 := by
   rw [slope_rescale h hr, sub_self]
 
 /-- Degree scaling for every actual integral submodule of a Hermitian bundle. -/
-theorem degree_submodule_rescale (h : HermitianMetric (K := K) M)
+theorem degree_submodule_rescale (h : HermitianMetric K M)
     (P : Submodule (𝓞 K) M) (t : ℝ) :
     ((h.rescale t).submodule P).degree = (h.submodule P).degree -
       (Module.finrank K (K ⊗[𝓞 K] P) : ℝ) * t := by
   rw [submodule_rescale, degree_rescale]
 
 /-- Every positive-rank submodule's slope decreases by the same parameter. -/
-theorem slope_submodule_rescale (h : HermitianMetric (K := K) M)
+theorem slope_submodule_rescale (h : HermitianMetric K M)
     (P : Submodule (𝓞 K) M) (hr : Module.finrank K (K ⊗[𝓞 K] P) ≠ 0) (t : ℝ) :
     ((h.rescale t).submodule P).slope = (h.submodule P).slope - t := by
   rw [submodule_rescale, slope_rescale _ hr]

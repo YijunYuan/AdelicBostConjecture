@@ -33,7 +33,7 @@ variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 
 /-- Strict slope inequality for every nonzero proper saturated submodule,
 written without division by its positive rank. -/
-def IsStable (h : HermitianMetric (K := K) M) : Prop :=
+def IsStable (h : HermitianMetric K M) : Prop :=
   ∀ P : Submodule (𝓞 K) M, Module.IsTorsionFree (𝓞 K) (M ⧸ P) →
     P ≠ ⊥ → P ≠ ⊤ → (h.submodule P).degree <
       (Module.finrank K (K ⊗[𝓞 K] P) : ℝ) * h.slope
@@ -41,14 +41,14 @@ def IsStable (h : HermitianMetric (K := K) M) : Prop :=
 omit [Module.Projective (𝓞 K) M] in
 /-- At degree zero strict stability is precisely negativity of all proper
 nonzero saturated induced degrees. -/
-theorem isStable_iff_degree_neg (h : HermitianMetric (K := K) M) (h0 : h.degree = 0) :
+theorem isStable_iff_degree_neg (h : HermitianMetric K M) (h0 : h.degree = 0) :
     h.IsStable ↔ ∀ P : Submodule (𝓞 K) M,
       Module.IsTorsionFree (𝓞 K) (M ⧸ P) → P ≠ ⊥ → P ≠ ⊤ →
         (h.submodule P).degree < 0 := by
   simp only [IsStable, slope, h0, zero_div, mul_zero]
 
 /-- Arithmetic finiteness turns the strict inequalities into a uniform gap. -/
-theorem IsStable.exists_degree_gap {h : HermitianMetric (K := K) M}
+theorem IsStable.exists_degree_gap {h : HermitianMetric K M}
     (hs : h.IsStable) (h0 : h.degree = 0) :
     ∃ δ : ℝ, 0 < δ ∧ ∀ P : Submodule (𝓞 K) M,
       Module.IsTorsionFree (𝓞 K) (M ⧸ P) → P ≠ ⊥ → P ≠ ⊤ →
@@ -78,7 +78,7 @@ theorem IsStable.exists_degree_gap {h : HermitianMetric (K := K) M}
 
 /-- The uniform degree gap persists under sufficiently small changes of
 the actual fiber norms, after restricting to normalized metrics. -/
-theorem isStable_of_fiberNorm_compare {h g : HermitianMetric (K := K) M}
+theorem isStable_of_fiberNorm_compare {h g : HermitianMetric K M}
     {δ t : ℝ} (hgap : ∀ P : Submodule (𝓞 K) M,
       Module.IsTorsionFree (𝓞 K) (M ⧸ P) → P ≠ ⊥ → P ≠ ⊤ →
         (h.submodule P).degree ≤ -δ)

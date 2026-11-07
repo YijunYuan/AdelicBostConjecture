@@ -31,7 +31,7 @@ variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 /-- Semistability of an actual quotient bounds every intermediate degree
 increment by the corresponding rank increment. -/
 lemma interval_degree_le_of_quotient_semistable
-    (h : HermitianMetric (K := K) M)
+    (h : HermitianMetric K M)
     {X Y : Submodule K (K ⊗[𝓞 K] M)} (hXY : X < Y) {c : ℝ}
     (hss : ((h.submodule (integralPart Y)).quotient
       ((integralPart X).comap (integralPart Y).subtype)).IsSemistable)
@@ -49,7 +49,7 @@ lemma interval_degree_le_of_quotient_semistable
 
 /-- A finite saturated filtration with semistable bounded-slope grades bounds
 the degree of every generic subspace. Repeated filtration steps are allowed. -/
-theorem subspaceDegree_le_of_filtration (h : HermitianMetric (K := K) M)
+theorem subspaceDegree_le_of_filtration (h : HermitianMetric K M)
     (A : ℕ → Submodule K (K ⊗[𝓞 K] M)) (hA : Monotone A)
     (h0 : A 0 = ⊥) (n : ℕ) (hn : A n = ⊤) (c : ℝ)
     (hss : ∀ i < n, ((h.submodule (integralPart (A (i + 1)))).quotient
@@ -86,7 +86,7 @@ theorem subspaceDegree_le_of_filtration (h : HermitianMetric (K := K) M)
 
 /-- The filtration slope bound applies to all actual integral submodules,
 including nonsaturated ones. -/
-theorem slope_submodule_le_of_filtration (h : HermitianMetric (K := K) M)
+theorem slope_submodule_le_of_filtration (h : HermitianMetric K M)
     (A : ℕ → Submodule K (K ⊗[𝓞 K] M)) (hA : Monotone A)
     (h0 : A 0 = ⊥) (n : ℕ) (hn : A n = ⊤) (c : ℝ)
     (hss : ∀ i < n, ((h.submodule (integralPart (A (i + 1)))).quotient
@@ -104,7 +104,7 @@ theorem slope_submodule_le_of_filtration (h : HermitianMetric (K := K) M)
 
 /-- A bound on actual semistable filtration grades bounds the attained maximum. -/
 theorem maxSlope_le_of_filtration [Nontrivial (K ⊗[𝓞 K] M)]
-    (h : HermitianMetric (K := K) M)
+    (h : HermitianMetric K M)
     (A : ℕ → Submodule K (K ⊗[𝓞 K] M)) (hA : Monotone A)
     (h0 : A 0 = ⊥) (n : ℕ) (hn : A n = ⊤) (c : ℝ)
     (hss : ∀ i < n, ((h.submodule (integralPart (A (i + 1)))).quotient
@@ -119,7 +119,7 @@ theorem maxSlope_le_of_filtration [Nontrivial (K ⊗[𝓞 K] M)]
 /-- The same filtration bound for actual saturated integral terms. Passing to
 the generic fiber recovers each term exactly, including its quotient metric. -/
 theorem maxSlope_le_of_integral_filtration [Nontrivial (K ⊗[𝓞 K] M)]
-    (h : HermitianMetric (K := K) M)
+    (h : HermitianMetric K M)
     (A : ℕ → Submodule (𝓞 K) M)
     [∀ i, Module.IsTorsionFree (𝓞 K) (M ⧸ A i)] (hA : Monotone A)
     (h0 : A 0 = ⊥) (n : ℕ) (hn : A n = ⊤) (c : ℝ)

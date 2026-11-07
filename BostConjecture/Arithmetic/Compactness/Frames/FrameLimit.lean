@@ -55,7 +55,7 @@ variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 variable {ι : Type*} [Fintype ι] [DecidableEq ι]
 
 /-- Actual fiber pairings are reconstructed from the trace Gram entries. -/
-lemma fiber_inner_eq_frame (h g : HermitianMetric (K := K) M)
+lemma fiber_inner_eq_frame (h g : HermitianMetric K M)
     (b : Module.Basis ι ℤ M) (B : GeneralLinearGroup ι ℝ)
     (hGram : ∀ i j, inner ℝ (g.traceSection (b i)) (g.traceSection (b j)) =
       ∑ k, B.val k i * B.val k j)
@@ -79,7 +79,7 @@ lemma fiber_inner_eq_frame (h g : HermitianMetric (K := K) M)
   · simp
 
 /-- Each reconstructed pairing depends continuously on the real frame. -/
-theorem continuous_frameProduct_inner (h : HermitianMetric (K := K) M)
+theorem continuous_frameProduct_inner (h : HermitianMetric K M)
     (b : Module.Basis ι ℤ M) (x y : (σ : K →+* ℂ) → ComplexFiber M σ) :
     Continuous (fun B : GeneralLinearGroup ι ℝ => (h.frameProductCore b B).inner x y) := by
   have he : (fun B : GeneralLinearGroup ι ℝ => (h.frameProductCore b B).inner x y) =
@@ -107,12 +107,12 @@ theorem continuous_frameProduct_inner (h : HermitianMetric (K := K) M)
 /-- A convergent sequence of nondegenerate actual trace frames reconstructs
 an actual conjugation-compatible Hermitian metric limit. -/
 theorem exists_metric_limit_of_trace_frames
-    (h : ℕ → HermitianMetric (K := K) M) (b : Module.Basis ι ℤ M)
+    (h : ℕ → HermitianMetric K M) (b : Module.Basis ι ℤ M)
     (B : ℕ → GeneralLinearGroup ι ℝ) (Blim : GeneralLinearGroup ι ℝ)
     (hB : Tendsto B atTop (𝓝 Blim))
     (hGram : ∀ n i j, inner ℝ ((h n).traceSection (b i)) ((h n).traceSection (b j)) =
       ∑ k, (B n).val k i * (B n).val k j) :
-    ∃ g : HermitianMetric (K := K) M, Tendsto h atTop (𝓝 g) := by
+    ∃ g : HermitianMetric K M, Tendsto h atTop (𝓝 g) := by
   classical
   have ht (σ : K →+* ℂ) (x y : ComplexFiber M σ) :
       Tendsto (fun n => ((h n).fiber σ).inner x y) atTop
@@ -121,7 +121,7 @@ theorem exists_metric_limit_of_trace_frames
     convert hc.continuousAt.tendsto.comp hB using 1
     funext n
     exact (h 0).fiber_inner_eq_frame (h n) b (B n) (hGram n) σ x y
-  let g : HermitianMetric (K := K) M :=
+  let g : HermitianMetric K M :=
     { fiber := fun σ => (h 0).frameFiberCore b Blim σ
       conjugate := by
         intro σ x y
@@ -131,7 +131,7 @@ theorem exists_metric_limit_of_trace_frames
         simp only [HermitianMetric.conjugate] at hl
         exact tendsto_nhds_unique hl hr }
   refine ⟨g, ?_⟩
-  have hi : Topology.IsInducing (fun g : HermitianMetric (K := K) M =>
+  have hi : Topology.IsInducing (fun g : HermitianMetric K M =>
       fun σ x y => (g.fiber σ).inner x y) := ⟨rfl⟩
   apply hi.tendsto_nhds_iff.mpr
   apply tendsto_pi_nhds.mpr

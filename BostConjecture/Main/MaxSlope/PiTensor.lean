@@ -31,7 +31,7 @@ theorem maxSlope_piTensor {ι : Type} [Fintype ι] (M : ι → Type u)
     [∀ i, AddCommGroup (M i)] [∀ i, Module (𝓞 K) (M i)]
     [∀ i, Module.Finite (𝓞 K) (M i)] [∀ i, Module.Projective (𝓞 K) (M i)]
     [∀ i, Nontrivial (K ⊗[𝓞 K] M i)]
-    (h : ∀ i, HermitianMetric (K := K) (M i)) :
+    (h : ∀ i, HermitianMetric K (M i)) :
     (piTensor h).maxSlope = ∑ i, (h i).maxSlope := by
   classical
   apply le_antisymm ?_ (sum_maxSlope_le_piTensor M h)
@@ -40,7 +40,7 @@ theorem maxSlope_piTensor {ι : Type} [Fintype ι] (M : ι → Type u)
     ∀ (M : ι → Type u) [∀ i, AddCommGroup (M i)] [∀ i, Module (𝓞 K) (M i)]
       [∀ i, Module.Finite (𝓞 K) (M i)] [∀ i, Module.Projective (𝓞 K) (M i)]
       [∀ i, Nontrivial (K ⊗[𝓞 K] M i)]
-      (h : ∀ i, HermitianMetric (K := K) (M i)),
+      (h : ∀ i, HermitianMetric K (M i)),
       (piTensor h).maxSlope ≤ ∑ i, (h i).maxSlope) ?_ ?_ ?_ ι
   · intro α β _ e ih M _ _ _ _ _ h
     let : Fintype α := Fintype.ofEquiv β e.symm
@@ -64,7 +64,7 @@ theorem isSemistable_piTensor {ι : Type} [Fintype ι] (M : ι → Type u)
     [∀ i, AddCommGroup (M i)] [∀ i, Module (𝓞 K) (M i)]
     [∀ i, Module.Finite (𝓞 K) (M i)] [∀ i, Module.Projective (𝓞 K) (M i)]
     [∀ i, Nontrivial (K ⊗[𝓞 K] M i)]
-    (h : ∀ i, HermitianMetric (K := K) (M i))
+    (h : ∀ i, HermitianMetric K (M i))
     (hs : ∀ i, (h i).IsSemistable) : (piTensor h).IsSemistable := by
   apply (piTensor h).isSemistable_iff_maxSlope_eq.mpr
   rw [maxSlope_piTensor, Specht.slope_piTensor M h (fun _ => Module.finrank_pos)]

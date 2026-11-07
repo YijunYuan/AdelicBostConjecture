@@ -259,7 +259,7 @@ variable [Module.Finite (𝓞 K) M] [Module.Finite (𝓞 K) N]
 omit [Module.Finite (𝓞 K) M] [Module.Finite (𝓞 K) N] in
 /-- The lift of an actual sum step into `T ⊗ N` preserves induced metrics. -/
 lemma tensorStepLift_inner [Module.Flat (𝓞 K) N]
-    (h : HermitianMetric (K := K) M) (g : HermitianMetric (K := K) N)
+    (h : HermitianMetric K M) (g : HermitianMetric K N)
     {P T : Submodule (𝓞 K) M} (hPT : P ≤ T) (U : Submodule (𝓞 K) N)
     (σ : K →+* ℂ) (x y : ComplexFiber (tensorStep P T U) σ) :
     (((h.submodule T).tensor g).fiber σ).inner
@@ -277,7 +277,7 @@ lemma tensorStepLift_inner [Module.Flat (𝓞 K) N]
 /-- The canonical integral consecutive-grade isomorphism is a Hilbert isometry
 on every complex fiber. -/
 lemma tensorGradeEquiv_inner [Module.Flat (𝓞 K) N]
-    (h : HermitianMetric (K := K) M) (g : HermitianMetric (K := K) N)
+    (h : HermitianMetric K M) (g : HermitianMetric K N)
     {P T : Submodule (𝓞 K) M} (hPT : P ≤ T)
     {Q U : Submodule (𝓞 K) N} (hQU : Q ≤ U)
     [Module.Flat (𝓞 K) (T ⧸ P.comap T.subtype)]
@@ -311,7 +311,7 @@ lemma tensorGradeEquiv_inner [Module.Flat (𝓞 K) N]
   have ht := tensor_map_pullback a (g.quotient Q) LinearMap.id (submoduleQuotientMap Q U)
     Function.injective_id (submoduleQuotientMap_injective Q U)
   rw [hid, ← g.quotient_submodule hQU] at ht
-  have hi := congrArg (fun b : HermitianMetric (K := K)
+  have hi := congrArg (fun b : HermitianMetric K
       ((T ⧸ P.comap T.subtype) ⊗[𝓞 K] (U ⧸ Q.comap U.subtype)) =>
     (b.fiber σ).inner (fiberMap (tensorGradeEquiv hPT Q U).toLinearMap σ x)
       (fiberMap (tensorGradeEquiv hPT Q U).toLinearMap σ y)) ht

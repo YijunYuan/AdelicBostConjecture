@@ -33,12 +33,12 @@ variable {M N : Type*} [AddCommGroup M] [Module (𝓞 K) M]
     [Module.Finite (𝓞 K) N] [Module.Projective (𝓞 K) N]
 
 /-- Saturation bounds every integral induced degree by the saturated maximum. -/
-theorem degree_submodule_le_maxDegree (h : HermitianMetric (K := K) M)
+theorem degree_submodule_le_maxDegree (h : HermitianMetric K M)
     (P : Submodule (𝓞 K) M) : (h.submodule P).degree ≤ h.maxDegree :=
   (h.degree_le_saturation P).trans (h.degree_le_maxDegree (integralPart (P.baseChange K)))
 
 /-- Actual integral isomorphisms preserve maximum saturated degree. -/
-theorem maxDegree_pullback_equiv (h : HermitianMetric (K := K) N)
+theorem maxDegree_pullback_equiv (h : HermitianMetric K N)
     (e : M ≃ₗ[𝓞 K] N) : (h.pullback e.toLinearMap e.injective).maxDegree = h.maxDegree := by
   apply le_antisymm
   · obtain ⟨P, _, hP⟩ := (h.pullback e.toLinearMap e.injective).exists_degree_eq_maxDegree
@@ -61,8 +61,8 @@ variable {A B C D : Type u}
     [AddCommGroup D] [Module (𝓞 K) D] [Module.Finite (𝓞 K) D] [Module.Projective (𝓞 K) D]
 
 /-- The tensor objective is unchanged by actual integral identifications of both factors. -/
-theorem maxDegree_tensor_pullback_equiv (h : HermitianMetric (K := K) C)
-    (g : HermitianMetric (K := K) D) (e : A ≃ₗ[𝓞 K] C) (f : B ≃ₗ[𝓞 K] D) :
+theorem maxDegree_tensor_pullback_equiv (h : HermitianMetric K C)
+    (g : HermitianMetric K D) (e : A ≃ₗ[𝓞 K] C) (f : B ≃ₗ[𝓞 K] D) :
     ((h.pullback e.toLinearMap e.injective).tensor
       (g.pullback f.toLinearMap f.injective)).maxDegree = (h.tensor g).maxDegree := by
   let t := TensorProduct.congr e f

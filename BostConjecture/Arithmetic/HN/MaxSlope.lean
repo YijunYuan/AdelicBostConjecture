@@ -32,11 +32,11 @@ variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 variable [Nontrivial (K ⊗[𝓞 K] M)]
 
 /-- Maximal Hermitian slope, as the real value of the subspace payoff's supremum. -/
-def maxSlope (h : HermitianMetric (K := K) M) : ℝ :=
+def maxSlope (h : HermitianMetric K M) : ℝ :=
   ((BostConjecture.Subspace.slope h.subspaceDegree).max ⊤).toReal
 
 /-- Arithmetic degree finiteness bounds the slope supremum, without an HN filtration. -/
-theorem subspaceSlope_max_le_maxDegree (h : HermitianMetric (K := K) M) :
+theorem subspaceSlope_max_le_maxDegree (h : HermitianMetric K M) :
     (BostConjecture.Subspace.slope h.subspaceDegree).max ⊤ ≤
       DedekindCut.principal h.maxDegree := by
   apply PayoffFunction.max_le
@@ -51,7 +51,7 @@ theorem subspaceSlope_max_le_maxDegree (h : HermitianMetric (K := K) M) :
     (le_mul_of_one_le_right h.maxDegree_nonneg (by exact_mod_cast hr))
 
 /-- The real maximal slope represents exactly the cut supplied by the payoff API. -/
-theorem subspaceSlope_max_eq (h : HermitianMetric (K := K) M) :
+theorem subspaceSlope_max_eq (h : HermitianMetric K M) :
     (BostConjecture.Subspace.slope h.subspaceDegree).max ⊤ =
       DedekindCut.principal h.maxSlope := by
   apply (DedekindCut.principal_toReal_of_bounds (a := h.slope)
@@ -60,7 +60,7 @@ theorem subspaceSlope_max_eq (h : HermitianMetric (K := K) M) :
   exact PayoffFunction.apply_le_max
 
 /-- The supremum of initial slopes bounds the degree of every generic subspace. -/
-theorem subspaceDegree_le_maxSlope (h : HermitianMetric (K := K) M)
+theorem subspaceDegree_le_maxSlope (h : HermitianMetric K M)
     (X : Submodule K (K ⊗[𝓞 K] M)) :
     h.subspaceDegree X ≤ h.maxSlope * Module.finrank K X := by
   by_cases hX : X = ⊥
@@ -77,7 +77,7 @@ theorem subspaceDegree_le_maxSlope (h : HermitianMetric (K := K) M)
   exact (div_le_iff₀ (by exact_mod_cast hr)).mp hs
 
 /-- Every positive-rank integral submodule has slope at most the supremum. -/
-theorem slope_submodule_le_maxSlope (h : HermitianMetric (K := K) M)
+theorem slope_submodule_le_maxSlope (h : HermitianMetric K M)
     (P : Submodule (𝓞 K) M) (hP : 0 < Module.finrank K (K ⊗[𝓞 K] P)) :
     (h.submodule P).slope ≤ h.maxSlope := by
   apply (h.slope_le_saturation P).trans
@@ -87,13 +87,13 @@ theorem slope_submodule_le_maxSlope (h : HermitianMetric (K := K) M)
   exact (div_le_iff₀ (by exact_mod_cast hr)).mpr (h.subspaceDegree_le_maxSlope _)
 
 /-- The ambient slope is bounded by the supremum of submodule slopes. -/
-lemma slope_le_maxSlope (h : HermitianMetric (K := K) M) : h.slope ≤ h.maxSlope := by
+lemma slope_le_maxSlope (h : HermitianMetric K M) : h.slope ≤ h.maxSlope := by
   apply DedekindCut.principal_le_principal.mp
   rw [← h.subspaceSlope_top, ← h.subspaceSlope_max_eq]
   exact PayoffFunction.apply_le_max
 
 /-- Intrinsic semistability is equality of average and maximal slopes. -/
-theorem isSemistable_iff_maxSlope_eq (h : HermitianMetric (K := K) M) :
+theorem isSemistable_iff_maxSlope_eq (h : HermitianMetric K M) :
     h.IsSemistable ↔ h.maxSlope = h.slope := by
   constructor
   · intro hs

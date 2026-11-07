@@ -32,7 +32,7 @@ variable {M : Type*} [AddCommGroup M] [Module (𝓞 K) M]
     [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 
 /-- Riesz representation of the actual fiber of the integral dual. -/
-def dualRiesz (h : HermitianMetric (K := K) M) (σ : K →+* ℂ) :
+def dualRiesz (h : HermitianMetric K M) (σ : K →+* ℂ) :
     ComplexFiber (Dual (𝓞 K) M) σ ≃ₗ⋆[ℂ] ComplexFiber M σ := by
   letI : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
   letI := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber M σ)
@@ -40,7 +40,7 @@ def dualRiesz (h : HermitianMetric (K := K) M) (σ : K →+* ℂ) :
   exact (dualFiberEquiv M σ).trans (Tensor.dualRieszEquiv (ComplexFiber M σ))
 
 @[simp]
-lemma dualRiesz_inner (h : HermitianMetric (K := K) M) (σ : K →+* ℂ)
+lemma dualRiesz_inner (h : HermitianMetric K M) (σ : K →+* ℂ)
     (f : ComplexFiber (Dual (𝓞 K) M) σ) (x : ComplexFiber M σ) :
     (h.fiber σ).inner (h.dualRiesz σ f) x = dualFiberEquiv M σ f x := by
   let : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
@@ -49,7 +49,7 @@ lemma dualRiesz_inner (h : HermitianMetric (K := K) M) (σ : K →+* ℂ)
   exact Tensor.dualRieszEquiv_inner _ _ _
 
 /-- Canonical fiber conjugation commutes with Riesz representation. -/
-lemma dualRiesz_conjugate (h : HermitianMetric (K := K) M) (σ : K →+* ℂ)
+lemma dualRiesz_conjugate (h : HermitianMetric K M) (σ : K →+* ℂ)
     (f : ComplexFiber (Dual (𝓞 K) M) σ) :
     fiberConjugate M σ (h.dualRiesz σ f) =
       h.dualRiesz (ComplexEmbedding.conjugate σ) (fiberConjugate (Dual (𝓞 K) M) σ f) := by
@@ -69,7 +69,7 @@ lemma dualRiesz_conjugate (h : HermitianMetric (K := K) M) (σ : K →+* ℂ)
 
 /-- The canonical dual form transported through the finite-projective base change. -/
 @[instance_reducible]
-def dualFiber (h : HermitianMetric (K := K) M) (σ : K →+* ℂ) :
+def dualFiber (h : HermitianMetric K M) (σ : K →+* ℂ) :
     InnerProductSpace.Core ℂ (ComplexFiber (Dual (𝓞 K) M) σ) := by
   letI : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
   letI := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber M σ)
@@ -86,12 +86,12 @@ def dualFiber (h : HermitianMetric (K := K) M) (σ : K →+* ℂ) :
         apply (dualFiberEquiv M σ).injective
         simpa only [map_zero] using (Tensor.dualCore _).definite _ hf }
 
-lemma dualFiber_inner (h : HermitianMetric (K := K) M) (σ : K →+* ℂ)
+lemma dualFiber_inner (h : HermitianMetric K M) (σ : K →+* ℂ)
     (f g : ComplexFiber (Dual (𝓞 K) M) σ) :
     (h.dualFiber σ).inner f g = (h.fiber σ).inner (h.dualRiesz σ g) (h.dualRiesz σ f) := rfl
 
 /-- The operator dual metric on the actual integral dual module. -/
-def dual (h : HermitianMetric (K := K) M) : HermitianMetric (K := K) (Dual (𝓞 K) M) where
+def dual (h : HermitianMetric K M) : HermitianMetric K (Dual (𝓞 K) M) where
   fiber := h.dualFiber
   conjugate := by
     intro σ f g
@@ -99,7 +99,7 @@ def dual (h : HermitianMetric (K := K) M) : HermitianMetric (K := K) (Dual (𝓞
       ← h.dualRiesz_conjugate, h.inner_conjugate]
 
 /-- The transported fiber norm equals the complex operator norm. -/
-lemma dualFiber_norm (h : HermitianMetric (K := K) M) (σ : K →+* ℂ)
+lemma dualFiber_norm (h : HermitianMetric K M) (σ : K →+* ℂ)
     (f : ComplexFiber (Dual (𝓞 K) M) σ) :
     letI : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
     letI := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber M σ)
@@ -113,7 +113,7 @@ lemma dualFiber_norm (h : HermitianMetric (K := K) M) (σ : K →+* ℂ)
   exact Tensor.dualCore_norm _ _
 
 /-- Evaluation is bounded on every complex fiber vector. -/
-lemma dual_evaluation_le (h : HermitianMetric (K := K) M) (σ : K →+* ℂ)
+lemma dual_evaluation_le (h : HermitianMetric K M) (σ : K →+* ℂ)
     (f : ComplexFiber (Dual (𝓞 K) M) σ) (x : ComplexFiber M σ) :
     ‖dualFiberEquiv M σ f x‖ ≤
       Real.sqrt (((h.dual.fiber σ).inner f f).re) *
@@ -124,7 +124,7 @@ lemma dual_evaluation_le (h : HermitianMetric (K := K) M) (σ : K →+* ℂ)
   exact Tensor.dualCore_evaluation_le _ _ _
 
 /-- The intrinsic dual metric bounds every integral evaluation at every embedding. -/
-lemma dual_section_evaluation_le (h : HermitianMetric (K := K) M) (σ : K →+* ℂ)
+lemma dual_section_evaluation_le (h : HermitianMetric K M) (σ : K →+* ℂ)
     (f : Dual (𝓞 K) M) (x : M) :
     ‖σ (f x)‖ ≤ h.dual.sectionNorm σ f * h.sectionNorm σ x := by
   simpa only [dualFiberEquiv_section, sectionNorm] using

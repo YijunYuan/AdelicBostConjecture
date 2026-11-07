@@ -40,12 +40,12 @@ modules. The fixed module is one of the original sequence's modules. -/
 theorem exists_normalized_semistable_subsequence
     (A : ℕ → Type u) [∀ n, AddCommGroup (A n)] [∀ n, Module (𝓞 K) (A n)]
     [∀ n, Module.Finite (𝓞 K) (A n)] [∀ n, Module.Projective (𝓞 K) (A n)]
-    (h : ∀ n, HermitianMetric (K := K) (A n)) (r : ℕ)
+    (h : ∀ n, HermitianMetric K (A n)) (r : ℕ)
     (hr : ∀ n, Module.finrank K (K ⊗[𝓞 K] A n) = r)
     (h0 : ∀ n, (h n).degree = 0) (hs : ∀ n, (h n).IsSemistable) :
     ∃ φ : ℕ → ℕ, StrictMono φ ∧ ∃ m : ℕ,
       ∃ e : ∀ n, A m ≃ₗ[𝓞 K] A (φ n),
-      ∃ g : HermitianMetric (K := K) (A m),
+      ∃ g : HermitianMetric K (A m),
         g.degree = 0 ∧ g.IsSemistable ∧
         Tendsto (fun n => (h (φ n)).pullback (e n).toLinearMap (e n).injective)
           atTop (𝓝 g) := by

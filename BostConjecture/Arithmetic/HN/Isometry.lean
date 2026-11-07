@@ -30,7 +30,7 @@ variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 variable [Nontrivial (K ⊗[𝓞 K] M)]
 
 /-- Every actual integral isometric automorphism preserves the entire generic HN flag. -/
-theorem hnFlag_map_equiv (h : HermitianMetric (K := K) M) (e : M ≃ₗ[𝓞 K] M)
+theorem hnFlag_map_equiv (h : HermitianMetric K M) (e : M ≃ₗ[𝓞 K] M)
     (he : ∀ (σ : K →+* ℂ) (x y : ComplexFiber M σ),
       (h.fiber σ).inner (fiberMap e.toLinearMap σ x) (fiberMap e.toLinearMap σ y) =
         (h.fiber σ).inner x y) (n : ℕ) :
@@ -48,7 +48,7 @@ theorem hnFlag_map_equiv (h : HermitianMetric (K := K) M) (e : M ≃ₗ[𝓞 K] 
   simp only [hd, BostConjecture.Subspace.intervalRank, hr]
 
 /-- Every actual integral isometric automorphism preserves the saturated integral HN terms. -/
-theorem hnSubmodule_map_equiv (h : HermitianMetric (K := K) M) (e : M ≃ₗ[𝓞 K] M)
+theorem hnSubmodule_map_equiv (h : HermitianMetric K M) (e : M ≃ₗ[𝓞 K] M)
     (he : ∀ (σ : K →+* ℂ) (x y : ComplexFiber M σ),
       (h.fiber σ).inner (fiberMap e.toLinearMap σ x) (fiberMap e.toLinearMap σ y) =
         (h.fiber σ).inner x y) (n : ℕ) :

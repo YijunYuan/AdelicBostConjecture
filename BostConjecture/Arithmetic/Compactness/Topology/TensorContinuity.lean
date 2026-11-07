@@ -31,7 +31,7 @@ variable {M N : Type u} [AddCommGroup M] [Module (𝓞 K) M]
 
 /-- Hilbert tensor product varies continuously with its two actual metrics. -/
 theorem continuous_tensor : Continuous
-    (fun p : HermitianMetric (K := K) M × HermitianMetric (K := K) N =>
+    (fun p : HermitianMetric K M × HermitianMetric K N =>
       p.1.tensor p.2) := by
   apply continuous_induced_rng.mpr
   apply continuous_pi
@@ -40,14 +40,14 @@ theorem continuous_tensor : Continuous
   intro x
   apply continuous_pi
   intro y
-  change Continuous (fun p : HermitianMetric (K := K) M × HermitianMetric (K := K) N =>
+  change Continuous (fun p : HermitianMetric K M × HermitianMetric K N =>
     ((p.1.tensor p.2).fiber σ).inner x y)
   let : Module.Finite ℂ (ComplexFiber M σ) := by dsimp [ComplexFiber]; infer_instance
   let : Module.Finite ℂ (ComplexFiber N σ) := by dsimp [ComplexFiber]; infer_instance
   let b := Module.finBasis ℂ (ComplexFiber M σ)
   let c := Module.finBasis ℂ (ComplexFiber N σ)
   let d := (b.tensorProduct c).map (binaryTensorFiberEquiv σ).symm
-  have he (h : HermitianMetric (K := K) M) (g : HermitianMetric (K := K) N)
+  have he (h : HermitianMetric K M) (g : HermitianMetric K N)
       (i j) : ((h.tensor g).fiber σ).inner (d i) (d j) =
         (h.fiber σ).inner (b i.1) (b j.1) *
           (g.fiber σ).inner (c i.2) (c j.2) := by
@@ -56,7 +56,7 @@ theorem continuous_tensor : Continuous
     rw [tensor_inner]
     simp only [d, Module.Basis.map_apply, LinearEquiv.apply_symm_apply,
       Module.Basis.tensorProduct_apply, Tensor.binaryCore_inner_tmul]
-  have hform : (fun p : HermitianMetric (K := K) M × HermitianMetric (K := K) N =>
+  have hform : (fun p : HermitianMetric K M × HermitianMetric K N =>
       ((p.1.tensor p.2).fiber σ).inner x y) = (fun p => ∑ i, ∑ j,
       star (d.repr x i) * (d.repr y j *
         ((p.1.fiber σ).inner (b i.1) (b j.1) *
@@ -76,7 +76,7 @@ theorem continuous_tensor : Continuous
 /-- The maximum saturated tensor degree is continuous in both factors. -/
 theorem continuous_tensor_maxDegree [Module.Projective (𝓞 K) M]
     [Module.Projective (𝓞 K) N] : Continuous
-    (fun p : HermitianMetric (K := K) M × HermitianMetric (K := K) N =>
+    (fun p : HermitianMetric K M × HermitianMetric K N =>
       (p.1.tensor p.2).maxDegree) :=
   continuous_maxDegree.comp continuous_tensor
 

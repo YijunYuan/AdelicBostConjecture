@@ -30,7 +30,7 @@ namespace BostConjecture.Arithmetic.HermitianMetric
 variable {K : Type*} [Field K] [NumberField K]
 variable {M : Type*} [AddCommGroup M] [Module (𝓞 K) M]
 variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
-variable (h : HermitianMetric (K := K) M)
+variable (h : HermitianMetric K M)
 
 lemma traceCovolume_sq_eq_gram {ι : Type*} [Fintype ι] [DecidableEq ι]
     (b : Basis ι ℤ M) : h.traceCovolume ^ 2 = (Matrix.gram ℝ (h.traceBasis b)).det := by

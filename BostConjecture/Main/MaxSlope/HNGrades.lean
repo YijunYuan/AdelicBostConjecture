@@ -31,14 +31,14 @@ variable {M N : Type u} [AddCommGroup M] [Module (𝓞 K) M]
 omit [Module.Finite (𝓞 K) N] [Module.Projective (𝓞 K) N]
     [Nontrivial (K ⊗[𝓞 K] N)] in
 /-- The actual saturated HN terms have projective ambient quotients. -/
-instance hnSubmoduleQuotientProjective (h : HermitianMetric (K := K) M) (i : ℕ) :
+instance hnSubmoduleQuotientProjective (h : HermitianMetric K M) (i : ℕ) :
     Module.Projective (𝓞 K) (M ⧸ h.hnSubmodule i) := by
   unfold hnSubmodule
   infer_instance
 
 /-- Incrementing the flattened index includes the transition at each block end. -/
-lemma hnTensorFlag_succ (h : HermitianMetric (K := K) M)
-    (g : HermitianMetric (K := K) N) (k : ℕ) :
+lemma hnTensorFlag_succ (h : HermitianMetric K M)
+    (g : HermitianMetric K N) (k : ℕ) :
     h.hnTensorFlag g (k + 1) =
       h.hnTensorStep g (k / g.hnFlag.length) (k % g.hnFlag.length + 1) := by
   have hr := Nat.mod_lt k g.hnFlag_length_pos
@@ -56,8 +56,8 @@ lemma hnTensorFlag_succ (h : HermitianMetric (K := K) M)
 
 /-- The consecutive actual integral HN tensor grade is isometric to the tensor
 of the actual factor grades, including transitions between blocks. -/
-theorem exists_hnTensorGrade_isometry (h : HermitianMetric (K := K) M)
-    (g : HermitianMetric (K := K) N) (k : ℕ) :
+theorem exists_hnTensorGrade_isometry (h : HermitianMetric K M)
+    (g : HermitianMetric K N) (k : ℕ) :
     ∃ e : (h.hnTensorFlag g (k + 1) ⧸
           (h.hnTensorFlag g k).comap (h.hnTensorFlag g (k + 1)).subtype) ≃ₗ[𝓞 K]
       ((h.hnSubmodule (k / g.hnFlag.length + 1) ⧸
@@ -94,7 +94,7 @@ theorem exists_hnTensorGrade_isometry (h : HermitianMetric (K := K) M)
 omit [Module.Finite (𝓞 K) N] [Module.Projective (𝓞 K) N]
     [Nontrivial (K ⊗[𝓞 K] N)] in
 /-- Every actual HN grade has positive generic rank. -/
-lemma hnGrade_rank_pos (h : HermitianMetric (K := K) M) (i : Fin h.hnFlag.length) :
+lemma hnGrade_rank_pos (h : HermitianMetric K M) (i : Fin h.hnFlag.length) :
     0 < Module.finrank K (K ⊗[𝓞 K]
       (h.hnSubmodule (i + 1) ⧸ (h.hnSubmodule i).comap
         (h.hnSubmodule (i + 1)).subtype)) := by
@@ -104,8 +104,8 @@ lemma hnGrade_rank_pos (h : HermitianMetric (K := K) M) (i : Fin h.hnFlag.length
   exact Nat.sub_pos_of_lt (Submodule.finrank_strictMono (h.hnStep i).lt)
 
 /-- The actual HN tensor grade has the sum of its two factor slopes. -/
-theorem hnTensorGrade_slope (h : HermitianMetric (K := K) M)
-    (g : HermitianMetric (K := K) N) (k : ℕ)
+theorem hnTensorGrade_slope (h : HermitianMetric K M)
+    (g : HermitianMetric K N) (k : ℕ)
     (hk : k < h.hnFlag.length * g.hnFlag.length) :
     (((h.tensor g).submodule (h.hnTensorFlag g (k + 1))).quotient
       ((h.hnTensorFlag g k).comap (h.hnTensorFlag g (k + 1)).subtype)).slope =
@@ -122,8 +122,8 @@ theorem hnTensorGrade_slope (h : HermitianMetric (K := K) M)
 
 /-- Every actual grade is bounded by the sum of maximal slopes, independently
 of tensor semistability. -/
-theorem hnTensorGrade_slope_le (h : HermitianMetric (K := K) M)
-    (g : HermitianMetric (K := K) N) (k : ℕ)
+theorem hnTensorGrade_slope_le (h : HermitianMetric K M)
+    (g : HermitianMetric K N) (k : ℕ)
     (hk : k < h.hnFlag.length * g.hnFlag.length) :
     (((h.tensor g).submodule (h.hnTensorFlag g (k + 1))).quotient
       ((h.hnTensorFlag g k).comap (h.hnTensorFlag g (k + 1)).subtype)).slope ≤

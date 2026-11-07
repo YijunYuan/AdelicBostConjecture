@@ -35,7 +35,7 @@ variable {M N P : Type u} [AddCommGroup M] [Module (𝓞 K) M]
 
 omit [Module.Projective (𝓞 K) P] in
 /-- The canonical exact determinant preserves every integral section norm. -/
-lemma determinantExactEquiv_isometry (H : HermitianMetric (K := K) P)
+lemma determinantExactEquiv_isometry (H : HermitianMetric K P)
     (i : M →ₗ[𝓞 K] P) (q : P →ₗ[𝓞 K] N)
     (h : Function.Exact i q) (hi : Function.Injective i) (hq : Function.Surjective q)
     (σ : K →+* ℂ) (z : DeterminantLine (K := K) M ⊗[𝓞 K] DeterminantLine (K := K) N) :
@@ -74,7 +74,7 @@ lemma determinantExactEquiv_isometry (H : HermitianMetric (K := K) P)
 omit [Module.Projective (𝓞 K) P] in
 /-- The canonical exact determinant is an isometry on the entire complex
 fiber, not only on integral generators. -/
-lemma determinantExactEquiv_fiber_isometry (H : HermitianMetric (K := K) P)
+lemma determinantExactEquiv_fiber_isometry (H : HermitianMetric K P)
     (i : M →ₗ[𝓞 K] P) (q : P →ₗ[𝓞 K] N)
     (h : Function.Exact i q) (hi : Function.Injective i) (hq : Function.Surjective q)
     (σ : K →+* ℂ)
@@ -111,7 +111,7 @@ lemma determinantExactEquiv_fiber_isometry (H : HermitianMetric (K := K) P)
 
 /-- Normalized arithmetic degree is additive for every finite projective
 exact sequence with its induced and quotient Hermitian metrics. -/
-theorem degree_exact (H : HermitianMetric (K := K) P)
+theorem degree_exact (H : HermitianMetric K P)
     (i : M →ₗ[𝓞 K] P) (q : P →ₗ[𝓞 K] N)
     (h : Function.Exact i q) (hi : Function.Injective i) (hq : Function.Surjective q) :
     H.degree = (H.pullback i hi).degree + (H.pushforward q hq).degree := by

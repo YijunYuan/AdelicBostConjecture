@@ -42,8 +42,8 @@ lemma tensor_generic_finrank :
 namespace HermitianMetric
 
 /-- Tensor coordinates multiply the actual archimedean coordinate lengths. -/
-lemma coordinateLength_tensor_tmul (h : HermitianMetric (K := K) M)
-    (g : HermitianMetric (K := K) N) (f : M →ₗ[𝓞 K] K) (q : N →ₗ[𝓞 K] K)
+lemma coordinateLength_tensor_tmul (h : HermitianMetric K M)
+    (g : HermitianMetric K N) (f : M →ₗ[𝓞 K] K) (q : N →ₗ[𝓞 K] K)
     (x : M) (y : N) (v : InfinitePlace K) :
     (h.tensor g).coordinateLength (tensorCoordinate f q) (x ⊗ₜ[𝓞 K] y) v =
       h.coordinateLength f x v * g.coordinateLength q y v := by
@@ -56,8 +56,8 @@ variable [Module.Finite (𝓞 K) M] [Module.Finite (𝓞 K) N]
 
 /-- Additivity of the coordinate formula uses both finite and archimedean
 tensor producers. -/
-theorem degreeInCoordinate_tensor (h : HermitianMetric (K := K) M)
-    (g : HermitianMetric (K := K) N) (f : M →ₗ[𝓞 K] K) (q : N →ₗ[𝓞 K] K)
+theorem degreeInCoordinate_tensor (h : HermitianMetric K M)
+    (g : HermitianMetric K N) (f : M →ₗ[𝓞 K] K) (q : N →ₗ[𝓞 K] K)
     (hf : Function.Injective f) (hq : Function.Injective q)
     {x : M} {y : N} (hx : x ≠ 0) (hy : y ≠ 0) :
     (h.tensor g).degreeInCoordinate (tensorCoordinate f q) (x ⊗ₜ[𝓞 K] y) =
@@ -74,8 +74,8 @@ theorem degreeInCoordinate_tensor (h : HermitianMetric (K := K) M)
 
 /-- Actual normalized determinant degree is additive on intrinsic Hermitian
 lines with the Hilbert tensor metric, over any number field. -/
-theorem degree_tensor_of_rank_one (h : HermitianMetric (K := K) M)
-    (g : HermitianMetric (K := K) N)
+theorem degree_tensor_of_rank_one (h : HermitianMetric K M)
+    (g : HermitianMetric K N)
     (hM : Module.finrank K (K ⊗[𝓞 K] M) = 1)
     (hN : Module.finrank K (K ⊗[𝓞 K] N) = 1) :
     (h.tensor g).degree = h.degree + g.degree := by

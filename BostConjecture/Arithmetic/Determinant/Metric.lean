@@ -114,7 +114,7 @@ namespace HermitianMetric
 
 /-- The positive complex metric on the actual determinant fiber. -/
 @[instance_reducible]
-def determinantFiber (h : HermitianMetric (K := K) M) (σ : K →+* ℂ) :
+def determinantFiber (h : HermitianMetric K M) (σ : K →+* ℂ) :
     InnerProductSpace.Core ℂ (ComplexFiber (DeterminantLine (K := K) M) σ) := by
   letI : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
   letI := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber M σ)
@@ -128,7 +128,7 @@ def determinantFiber (h : HermitianMetric (K := K) M) (σ : K →+* ℂ) :
 
 /-- The determinant pairing on arbitrary complex fiber wedges is the cross
 Gram determinant, transported through the canonical base-change equivalence. -/
-lemma determinantFiber_inner_ιMulti (h : HermitianMetric (K := K) M) (σ : K →+* ℂ)
+lemma determinantFiber_inner_ιMulti (h : HermitianMetric K M) (σ : K →+* ℂ)
     (x y : Fin (Module.finrank K (K ⊗[𝓞 K] M)) → ComplexFiber M σ) :
     (h.determinantFiber σ).inner
         ((determinantComplexEquiv M σ).symm (ιMulti ℂ _ x))
@@ -147,7 +147,7 @@ lemma determinantFiber_inner_ιMulti (h : HermitianMetric (K := K) M) (σ : K �
 
 /-- The Gram norm identity uniquely characterizes the actual complex determinant
 fiber metric, including in rank zero. -/
-lemma determinantFiber_unique (h : HermitianMetric (K := K) M) (σ : K →+* ℂ)
+lemma determinantFiber_unique (h : HermitianMetric K M) (σ : K →+* ℂ)
     (c : InnerProductSpace.Core ℂ (ComplexFiber (DeterminantLine (K := K) M) σ))
     (hc : ∀ x : Fin (Module.finrank K (K ⊗[𝓞 K] M)) → ComplexFiber M σ,
       (c.inner ((determinantComplexEquiv M σ).symm (ιMulti ℂ _ x))
@@ -166,7 +166,7 @@ lemma determinantFiber_unique (h : HermitianMetric (K := K) M) (σ : K →+* ℂ
   rw [hc, h.determinantFiber_inner_ιMulti]
 
 /-- Pairing integral wedges is the determinant of the original fiber pairings. -/
-lemma determinantFiber_inner_wedge (h : HermitianMetric (K := K) M) (σ : K →+* ℂ)
+lemma determinantFiber_inner_wedge (h : HermitianMetric K M) (σ : K →+* ℂ)
     (x y : Fin (Module.finrank K (K ⊗[𝓞 K] M)) → M) :
     (h.determinantFiber σ).inner
         (fiberSection (DeterminantLine (K := K) M) σ (ιMulti (𝓞 K) _ x))
@@ -183,7 +183,7 @@ lemma determinantFiber_inner_wedge (h : HermitianMetric (K := K) M) (σ : K →+
 
 /-- The determinant forms inherit conjugation compatibility on every integral
 section, proved from the spanning integral wedges. -/
-lemma determinantFiber_conjugate (h : HermitianMetric (K := K) M)
+lemma determinantFiber_conjugate (h : HermitianMetric K M)
     (σ : K →+* ℂ) (x y : DeterminantLine (K := K) M) :
     (h.determinantFiber (ComplexEmbedding.conjugate σ)).inner
         (fiberSection _ (ComplexEmbedding.conjugate σ) x)
@@ -229,13 +229,13 @@ lemma determinantFiber_conjugate (h : HermitianMetric (K := K) M)
       ComplexEmbedding.conjugate_coe_eq, map_mul, hxy, RCLike.star_def]
 
 /-- The intrinsic Hermitian metric on the integral determinant line. -/
-def determinant (h : HermitianMetric (K := K) M) :
-    HermitianMetric (K := K) (DeterminantLine (K := K) M) where
+def determinant (h : HermitianMetric K M) :
+    HermitianMetric K (DeterminantLine (K := K) M) where
   fiber := h.determinantFiber
   conjugate := h.determinantFiber_conjugate
 
 /-- The induced determinant norm is the square root of the Gram determinant. -/
-theorem determinant_sectionNorm_wedge_sq (h : HermitianMetric (K := K) M)
+theorem determinant_sectionNorm_wedge_sq (h : HermitianMetric K M)
     (σ : K →+* ℂ) (x : Fin (Module.finrank K (K ⊗[𝓞 K] M)) → M) :
     (h.determinant.sectionNorm σ (ιMulti (𝓞 K) _ x)) ^ 2 =
       ((Matrix.of fun i j => (h.fiber σ).inner

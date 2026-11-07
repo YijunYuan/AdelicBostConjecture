@@ -34,11 +34,11 @@ variable {M : Type*} [AddCommGroup M] [Module (𝓞 K) M]
 variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 
 /-- Intrinsic determinant degree of the actual integral part of a generic subspace. -/
-def subspaceDegree (h : HermitianMetric (K := K) M)
+def subspaceDegree (h : HermitianMetric K M)
     (X : Submodule K (K ⊗[𝓞 K] M)) : ℝ := (h.submodule (integralPart X)).degree
 
 @[simp]
-lemma subspaceDegree_bot (h : HermitianMetric (K := K) M) :
+lemma subspaceDegree_bot (h : HermitianMetric K M) :
     h.subspaceDegree ⊥ = 0 := by
   apply degree_eq_zero_of_rank_zero
   rw [integralPart_generic_finrank]
@@ -46,13 +46,13 @@ lemma subspaceDegree_bot (h : HermitianMetric (K := K) M) :
 
 omit [Module.Projective (𝓞 K) M] in
 /-- The generic rank in this degree's denominator is the actual subspace dimension. -/
-lemma subspaceDegree_div_finrank (h : HermitianMetric (K := K) M)
+lemma subspaceDegree_div_finrank (h : HermitianMetric K M)
     (X : Submodule K (K ⊗[𝓞 K] M)) :
     h.subspaceDegree X / Module.finrank K X = (h.submodule (integralPart X)).slope := by
   rw [slope, integralPart_generic_finrank]
   rfl
 
-lemma subspaceDegree_rescale (h : HermitianMetric (K := K) M)
+lemma subspaceDegree_rescale (h : HermitianMetric K M)
     (X : Submodule K (K ⊗[𝓞 K] M)) (t : ℝ) :
     (h.rescale t).subspaceDegree X = h.subspaceDegree X -
       (Module.finrank K X : ℝ) * t := by
@@ -61,7 +61,7 @@ lemma subspaceDegree_rescale (h : HermitianMetric (K := K) M)
 
 /-- The actual arithmetic degree specializes the slope payoff to the Hermitian
 slope of the saturated integral submodule on every interval from zero. -/
-lemma subspaceSlope_apply_bot (h : HermitianMetric (K := K) M)
+lemma subspaceSlope_apply_bot (h : HermitianMetric K M)
     (X : Submodule K (K ⊗[𝓞 K] M)) (hX : ⊥ < X) :
     BostConjecture.Subspace.slope h.subspaceDegree ⟨⊥, X, hX⟩ =
       DedekindCut.principal (h.submodule (integralPart X)).slope := by

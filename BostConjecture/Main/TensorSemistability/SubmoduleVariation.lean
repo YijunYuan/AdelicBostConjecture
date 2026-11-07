@@ -54,7 +54,7 @@ variable {M : Type*} [AddCommGroup M] [Module (𝓞 K) M]
     [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 
 /-- Real trace of an endomorphism compressed to the actual submodule fiber. -/
-def fiberProjectionTrace (h : HermitianMetric (K := K) M)
+def fiberProjectionTrace (h : HermitianMetric K M)
     (P : Submodule (𝓞 K) M) (σ : K →+* ℂ)
     (A : Module.End ℂ (ComplexFiber M σ)) : ℝ := by
   letI : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
@@ -67,7 +67,7 @@ def fiberProjectionTrace (h : HermitianMetric (K := K) M)
 /-- Differentiation of actual induced arithmetic degree under a compatible
 archimedean automorphism curve. -/
 theorem hasDerivAt_submodule_degree_archimedeanPullback
-    (h : HermitianMetric (K := K) M) (P : Submodule (𝓞 K) M)
+    (h : HermitianMetric K M) (P : Submodule (𝓞 K) M)
     (g : ℝ → ∀ σ : K →+* ℂ, ComplexFiber M σ ≃ₗ[ℂ] ComplexFiber M σ)
     (hc : ∀ t σ x, g t (ComplexEmbedding.conjugate σ) (fiberConjugate M σ x) =
       fiberConjugate M σ (g t σ x))
@@ -122,7 +122,7 @@ theorem hasDerivAt_submodule_degree_archimedeanPullback
 
 /-- The actual induced-degree derivative along the constructed exponential metrics. -/
 theorem hasDerivAt_submodule_degree_exponentialVariation
-    (h : HermitianMetric (K := K) M) (P : Submodule (𝓞 K) M)
+    (h : HermitianMetric K M) (P : Submodule (𝓞 K) M)
     (A : ∀ σ : K →+* ℂ, Module.End ℂ (ComplexFiber M σ))
     (hs : ∀ σ x y, (h.fiber σ).inner (A σ x) y = (h.fiber σ).inner x (A σ y))
     (hc : ∀ σ x, A (ComplexEmbedding.conjugate σ) (fiberConjugate M σ x) =
@@ -147,7 +147,7 @@ theorem hasDerivAt_submodule_degree_exponentialVariation
 /-- Actual local maximality along an exponential metric curve forces the
 sum of concrete fiber projection traces to vanish. -/
 theorem sum_fiberProjectionTrace_eq_zero_of_isLocalMax
-    (h : HermitianMetric (K := K) M) (P : Submodule (𝓞 K) M)
+    (h : HermitianMetric K M) (P : Submodule (𝓞 K) M)
     (A : ∀ σ : K →+* ℂ, Module.End ℂ (ComplexFiber M σ))
     (hs : ∀ σ x y, (h.fiber σ).inner (A σ x) y = (h.fiber σ).inner x (A σ y))
     (hc : ∀ σ x, A (ComplexEmbedding.conjugate σ) (fiberConjugate M σ x) =

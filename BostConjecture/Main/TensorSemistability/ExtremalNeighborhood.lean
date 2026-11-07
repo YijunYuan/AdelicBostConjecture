@@ -36,7 +36,7 @@ variable {M N : Type u} [AddCommGroup M] [Module (𝓞 K) M]
 
 /-- Normalized strict stability implies genuine integral semistability,
 including nonsaturated test modules by saturation. -/
-theorem IsStable.isSemistable_of_degree_zero {h : HermitianMetric (K := K) M}
+theorem IsStable.isSemistable_of_degree_zero {h : HermitianMetric K M}
     (hst : h.IsStable) (h0 : h.degree = 0) : h.IsSemistable := by
   apply (h.isSemistable_iff_degree_nonpos h0).mpr
   intro P
@@ -53,7 +53,7 @@ theorem IsStable.isSemistable_of_degree_zero {h : HermitianMetric (K := K) M}
 maximum along every continuous normalized curve through a strictly stable pair.
 This consumes the global maximizing-pair output; local maximality is a conclusion. -/
 theorem isLocalMax_degree_of_maximizing_pair
-    (h : HermitianMetric (K := K) M) (g : HermitianMetric (K := K) N)
+    (h : HermitianMetric K M) (g : HermitianMetric K N)
     (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
     [Module.IsTorsionFree (𝓞 K) ((M ⊗[𝓞 K] N) ⧸ P)]
     (hst : h.IsStable) (gst : g.IsStable) (h0 : h.degree = 0) (g0 : g.degree = 0)
@@ -61,7 +61,7 @@ theorem isLocalMax_degree_of_maximizing_pair
     (hmax : IsGreatest (Compactness.tensorMaxDegreeValues.{u} K
       (Module.finrank K (K ⊗[𝓞 K] M)) (Module.finrank K (K ⊗[𝓞 K] N)))
       (h.tensor g).maxDegree)
-    (H : ℝ → HermitianMetric (K := K) M) (G : ℝ → HermitianMetric (K := K) N)
+    (H : ℝ → HermitianMetric K M) (G : ℝ → HermitianMetric K N)
     (hH : ContinuousAt H 0) (hG : ContinuousAt G 0) (H0 : H 0 = h) (G0 : G 0 = g)
     (Hd : ∀ t, (H t).degree = 0) (Gd : ∀ t, (G t).degree = 0) :
     IsLocalMax (fun t => (((H t).tensor (G t)).submodule P).degree) 0 := by

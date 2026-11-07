@@ -27,7 +27,7 @@ namespace BostConjecture.Arithmetic.HermitianMetric
 variable {K : Type*} [Field K] [NumberField K]
 variable {M : Type*} [AddCommGroup M] [Module (𝓞 K) M]
 variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
-variable (h : HermitianMetric (K := K) M) (P : Submodule (𝓞 K) M)
+variable (h : HermitianMetric K M) (P : Submodule (𝓞 K) M)
 
 /-- The actual image of an integral submodule in the ambient trace space. -/
 def submoduleTraceLattice : Submodule ℤ h.TraceSpace :=

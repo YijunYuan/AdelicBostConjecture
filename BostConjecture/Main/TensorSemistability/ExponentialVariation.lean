@@ -120,7 +120,7 @@ variable {K : Type*} [Field K]
 variable {M : Type*} [AddCommGroup M] [Module (𝓞 K) M] [Module.Finite (𝓞 K) M]
 
 /-- Exponentiation in the norm supplied by the actual fiber metric. -/
-def fiberExp (h : HermitianMetric (K := K) M) (σ : K →+* ℂ)
+def fiberExp (h : HermitianMetric K M) (σ : K →+* ℂ)
     (A : Module.End ℂ (ComplexFiber M σ)) (t : ℝ) :
     ComplexFiber M σ ≃ₗ[ℂ] ComplexFiber M σ := by
   letI : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
@@ -130,7 +130,7 @@ def fiberExp (h : HermitianMetric (K := K) M) (σ : K →+* ℂ)
   exact expLinearEquiv (LinearMap.toContinuousLinearMap A) t
 
 /-- Fiber conjugation intertwines the exponential automorphisms. -/
-theorem fiberExp_conjugate (h : HermitianMetric (K := K) M)
+theorem fiberExp_conjugate (h : HermitianMetric K M)
     (A : ∀ σ : K →+* ℂ, Module.End ℂ (ComplexFiber M σ))
     (hs : ∀ σ x y, (h.fiber σ).inner (A σ x) y = (h.fiber σ).inner x (A σ y))
     (hc : ∀ σ x, A (ComplexEmbedding.conjugate σ) (fiberConjugate M σ x) =
@@ -145,16 +145,16 @@ theorem fiberExp_conjugate (h : HermitianMetric (K := K) M)
   exact expLinearEquiv_conjugate (A σ) (A _) (hs σ) (fiberConjugate M σ) (hc σ) t x
 
 /-- The actual arithmetic metric along a compatible self-adjoint flow. -/
-def exponentialVariation (h : HermitianMetric (K := K) M)
+def exponentialVariation (h : HermitianMetric K M)
     (A : ∀ σ : K →+* ℂ, Module.End ℂ (ComplexFiber M σ))
     (hs : ∀ σ x y, (h.fiber σ).inner (A σ x) y = (h.fiber σ).inner x (A σ y))
     (hc : ∀ σ x, A (ComplexEmbedding.conjugate σ) (fiberConjugate M σ x) =
-      fiberConjugate M σ (A σ x)) (t : ℝ) : HermitianMetric (K := K) M :=
+      fiberConjugate M σ (A σ x)) (t : ℝ) : HermitianMetric K M :=
   h.archimedeanPullback (fun σ => h.fiberExp σ (A σ) t)
     (h.fiberExp_conjugate A hs hc t)
 
 /-- A traceless generator preserves the actual determinant metric. -/
-theorem determinant_exponentialVariation (h : HermitianMetric (K := K) M)
+theorem determinant_exponentialVariation (h : HermitianMetric K M)
     (A : ∀ σ : K →+* ℂ, Module.End ℂ (ComplexFiber M σ))
     (hs : ∀ σ x y, (h.fiber σ).inner (A σ x) y = (h.fiber σ).inner x (A σ y))
     (hc : ∀ σ x, A (ComplexEmbedding.conjugate σ) (fiberConjugate M σ x) =
@@ -171,7 +171,7 @@ theorem determinant_exponentialVariation (h : HermitianMetric (K := K) M)
 
 /-- The variation starts at the prescribed actual metric. -/
 @[simp]
-theorem exponentialVariation_zero (h : HermitianMetric (K := K) M)
+theorem exponentialVariation_zero (h : HermitianMetric K M)
     (A : ∀ σ : K →+* ℂ, Module.End ℂ (ComplexFiber M σ))
     (hs : ∀ σ x y, (h.fiber σ).inner (A σ x) y = (h.fiber σ).inner x (A σ y))
     (hc : ∀ σ x, A (ComplexEmbedding.conjugate σ) (fiberConjugate M σ x) =
@@ -198,7 +198,7 @@ theorem exponentialVariation_zero (h : HermitianMetric (K := K) M)
   rfl
 
 /-- Arithmetic normalization is constant along the determinant-one flow. -/
-theorem degree_exponentialVariation [NumberField K] (h : HermitianMetric (K := K) M)
+theorem degree_exponentialVariation [NumberField K] (h : HermitianMetric K M)
     (A : ∀ σ : K →+* ℂ, Module.End ℂ (ComplexFiber M σ))
     (hs : ∀ σ x y, (h.fiber σ).inner (A σ x) y = (h.fiber σ).inner x (A σ y))
     (hc : ∀ σ x, A (ComplexEmbedding.conjugate σ) (fiberConjugate M σ x) =

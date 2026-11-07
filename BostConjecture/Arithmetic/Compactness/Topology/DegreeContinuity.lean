@@ -33,7 +33,7 @@ variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 
 /-- Intrinsic arithmetic degree is continuous in the actual fiber forms. -/
 theorem continuous_degree :
-    Continuous (fun h : HermitianMetric (K := K) M => h.degree) := by
+    Continuous (fun h : HermitianMetric K M => h.degree) := by
   apply continuous_iff_continuousAt.mpr
   intro h
   apply Metric.continuousAt_iff'.mpr
@@ -47,7 +47,7 @@ theorem continuous_degree :
 
 /-- The attained maximum saturated degree is continuous in the actual metrics. -/
 theorem continuous_maxDegree :
-    Continuous (fun h : HermitianMetric (K := K) M => h.maxDegree) := by
+    Continuous (fun h : HermitianMetric K M => h.maxDegree) := by
   apply continuous_iff_continuousAt.mpr
   intro h
   apply Metric.continuousAt_iff'.mpr
@@ -62,7 +62,7 @@ theorem continuous_maxDegree :
 omit [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M] in
 /-- Taking the induced metric on a fixed integral submodule is continuous. -/
 theorem continuous_submodule (P : Submodule (𝓞 K) M) :
-    Continuous (fun h : HermitianMetric (K := K) M => h.submodule P) := by
+    Continuous (fun h : HermitianMetric K M => h.submodule P) := by
   apply continuous_induced_rng.mpr
   apply continuous_pi
   intro σ
@@ -74,7 +74,7 @@ theorem continuous_submodule (P : Submodule (𝓞 K) M) :
 
 /-- Each fixed induced degree is continuous, without requiring saturation. -/
 theorem continuous_degree_submodule (P : Submodule (𝓞 K) M) :
-    Continuous (fun h : HermitianMetric (K := K) M => (h.submodule P).degree) :=
+    Continuous (fun h : HermitianMetric K M => (h.submodule P).degree) :=
   continuous_degree.comp (continuous_submodule P)
 
 end BostConjecture.Arithmetic.HermitianMetric

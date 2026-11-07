@@ -147,62 +147,62 @@ namespace HermitianMetric
 variable [Nontrivial (K ⊗[𝓞 K] M)] [Nontrivial (K ⊗[𝓞 K] N)]
 
 /-- The actual lexicographic HN tensor step before flattening the two indices. -/
-def hnTensorStep (h : HermitianMetric (K := K) M) (g : HermitianMetric (K := K) N)
+def hnTensorStep (h : HermitianMetric K M) (g : HermitianMetric K N)
     (i j : ℕ) : Submodule (𝓞 K) (M ⊗[𝓞 K] N) :=
   tensorStep (h.hnSubmodule i) (h.hnSubmodule (i + 1)) (g.hnSubmodule j)
 
-lemma hnTensorStep_mono (h : HermitianMetric (K := K) M) (g : HermitianMetric (K := K) N)
+lemma hnTensorStep_mono (h : HermitianMetric K M) (g : HermitianMetric K N)
     {i i' j j' : ℕ} (hi : i ≤ i') (hj : j ≤ j') :
     h.hnTensorStep g i j ≤ h.hnTensorStep g i' j' :=
   tensorStep_mono (h.hnSubmodule_monotone hi)
     (h.hnSubmodule_monotone (Nat.add_le_add_right hi 1)) (g.hnSubmodule_monotone hj)
 
 @[simp]
-lemma hnTensorStep_zero (h : HermitianMetric (K := K) M) (g : HermitianMetric (K := K) N)
+lemma hnTensorStep_zero (h : HermitianMetric K M) (g : HermitianMetric K N)
     (i : ℕ) : h.hnTensorStep g i 0 = tensorRight N (h.hnSubmodule i) := by
   simp [hnTensorStep]
 
 @[simp]
-lemma hnTensorStep_length (h : HermitianMetric (K := K) M) (g : HermitianMetric (K := K) N)
+lemma hnTensorStep_length (h : HermitianMetric K M) (g : HermitianMetric K N)
     (i : ℕ) : h.hnTensorStep g i g.hnFlag.length = tensorRight N (h.hnSubmodule (i + 1)) := by
   simp only [hnTensorStep, g.hnSubmodule_length]
   exact tensorStep_top (h.hnSubmodule_monotone (Nat.le_succ i))
 
-instance hnTensorStepQuotientTorsionFree (h : HermitianMetric (K := K) M)
-    (g : HermitianMetric (K := K) N) (i j : ℕ) :
+instance hnTensorStepQuotientTorsionFree (h : HermitianMetric K M)
+    (g : HermitianMetric K N) (i j : ℕ) :
     Module.IsTorsionFree (𝓞 K) ((M ⊗[𝓞 K] N) ⧸ h.hnTensorStep g i j) := by
   unfold hnTensorStep hnSubmodule
   exact tensorStep_quotient_torsionFree
     (integralPart_mono (h.hnFlag.monotone (Nat.le_succ i))) _
 
-instance hnTensorStepQuotientProjective (h : HermitianMetric (K := K) M)
-    (g : HermitianMetric (K := K) N) (i j : ℕ) :
+instance hnTensorStepQuotientProjective (h : HermitianMetric K M)
+    (g : HermitianMetric K N) (i j : ℕ) :
     Module.Projective (𝓞 K) ((M ⊗[𝓞 K] N) ⧸ h.hnTensorStep g i j) := by
   let : Module.FinitePresentation (𝓞 K) ((M ⊗[𝓞 K] N) ⧸ h.hnTensorStep g i j) :=
     Module.finitePresentation_of_finite (𝓞 K) _
   exact Module.Flat.projective_of_finitePresentation
 
 /-- The lexicographic tensor flag, with repeated block endpoints identified. -/
-def hnTensorFlag (h : HermitianMetric (K := K) M) (g : HermitianMetric (K := K) N)
+def hnTensorFlag (h : HermitianMetric K M) (g : HermitianMetric K N)
     (k : ℕ) : Submodule (𝓞 K) (M ⊗[𝓞 K] N) :=
   h.hnTensorStep g (k / g.hnFlag.length) (k % g.hnFlag.length)
 
-instance hnTensorFlagQuotientProjective (h : HermitianMetric (K := K) M)
-    (g : HermitianMetric (K := K) N) (k : ℕ) :
+instance hnTensorFlagQuotientProjective (h : HermitianMetric K M)
+    (g : HermitianMetric K N) (k : ℕ) :
     Module.Projective (𝓞 K) ((M ⊗[𝓞 K] N) ⧸ h.hnTensorFlag g k) :=
   hnTensorStepQuotientProjective h g _ _
 
 @[simp]
-lemma hnTensorFlag_zero (h : HermitianMetric (K := K) M) (g : HermitianMetric (K := K) N) :
+lemma hnTensorFlag_zero (h : HermitianMetric K M) (g : HermitianMetric K N) :
     h.hnTensorFlag g 0 = ⊥ := by simp [hnTensorFlag]
 
 @[simp]
-lemma hnTensorFlag_length (h : HermitianMetric (K := K) M) (g : HermitianMetric (K := K) N) :
+lemma hnTensorFlag_length (h : HermitianMetric K M) (g : HermitianMetric K N) :
     h.hnTensorFlag g (h.hnFlag.length * g.hnFlag.length) = ⊤ := by
   simp [hnTensorFlag, Nat.ne_of_gt g.hnFlag_length_pos]
 
-lemma hnTensorFlag_monotone (h : HermitianMetric (K := K) M)
-    (g : HermitianMetric (K := K) N) : Monotone (h.hnTensorFlag g) := by
+lemma hnTensorFlag_monotone (h : HermitianMetric K M)
+    (g : HermitianMetric K N) : Monotone (h.hnTensorFlag g) := by
   intro k l hkl
   have hd := Nat.div_le_div_right hkl (c := g.hnFlag.length)
   by_cases he : k / g.hnFlag.length = l / g.hnFlag.length

@@ -50,7 +50,7 @@ namespace HermitianMetric
 variable [Module.Finite (𝓞 K) M]
 
 /-- The orthogonal representative of a vector in the target complex fiber. -/
-def fiberLift (h : HermitianMetric (K := K) M) (f : M →ₗ[𝓞 K] N)
+def fiberLift (h : HermitianMetric K M) (f : M →ₗ[𝓞 K] N)
     (hf : Function.Surjective f) (σ : K →+* ℂ) :
     ComplexFiber N σ →ₗ[ℂ] ComplexFiber M σ := by
   letI : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
@@ -59,7 +59,7 @@ def fiberLift (h : HermitianMetric (K := K) M) (f : M →ₗ[𝓞 K] N)
   exact ComplexQuotient.lift (fiberMap f σ) (fiberMap_surjective f hf σ)
 
 @[simp]
-lemma fiberMap_fiberLift (h : HermitianMetric (K := K) M) (f : M →ₗ[𝓞 K] N)
+lemma fiberMap_fiberLift (h : HermitianMetric K M) (f : M →ₗ[𝓞 K] N)
     (hf : Function.Surjective f) (σ : K →+* ℂ) (x : ComplexFiber N σ) :
     fiberMap f σ (h.fiberLift f hf σ x) = x := by
   let : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
@@ -68,7 +68,7 @@ lemma fiberMap_fiberLift (h : HermitianMetric (K := K) M) (f : M →ₗ[𝓞 K] 
   exact ComplexQuotient.map_lift _ _ x
 
 /-- Fiber conjugation carries the orthogonal lift to the orthogonal lift. -/
-lemma fiberLift_conjugate (h : HermitianMetric (K := K) M) (f : M →ₗ[𝓞 K] N)
+lemma fiberLift_conjugate (h : HermitianMetric K M) (f : M →ₗ[𝓞 K] N)
     (hf : Function.Surjective f) (σ : K →+* ℂ) (x : ComplexFiber N σ) :
     fiberConjugate M σ (h.fiberLift f hf σ x) =
       h.fiberLift f hf (ComplexEmbedding.conjugate σ) (fiberConjugate N σ x) := by
@@ -100,7 +100,7 @@ lemma fiberLift_conjugate (h : HermitianMetric (K := K) M) (f : M →ₗ[𝓞 K]
 
 /-- The canonical positive Hermitian form on a target complex fiber. -/
 @[instance_reducible]
-def pushforwardFiber (h : HermitianMetric (K := K) M) (f : M →ₗ[𝓞 K] N)
+def pushforwardFiber (h : HermitianMetric K M) (f : M →ₗ[𝓞 K] N)
     (hf : Function.Surjective f) (σ : K →+* ℂ) :
     InnerProductSpace.Core ℂ (ComplexFiber N σ) := by
   letI : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
@@ -108,14 +108,14 @@ def pushforwardFiber (h : HermitianMetric (K := K) M) (f : M →ₗ[𝓞 K] N)
   letI := InnerProductSpace.ofCore (inferInstance : PreInnerProductSpace.Core ℂ (ComplexFiber M σ))
   exact ComplexQuotient.core (fiberMap f σ) (fiberMap_surjective f hf σ)
 
-lemma pushforwardFiber_inner (h : HermitianMetric (K := K) M) (f : M →ₗ[𝓞 K] N)
+lemma pushforwardFiber_inner (h : HermitianMetric K M) (f : M →ₗ[𝓞 K] N)
     (hf : Function.Surjective f) (σ : K →+* ℂ) (x y : ComplexFiber N σ) :
     (h.pushforwardFiber f hf σ).inner x y =
       (h.fiber σ).inner (h.fiberLift f hf σ x) (h.fiberLift f hf σ y) := rfl
 
 /-- The quotient metric along an actual surjective integral map. -/
-def pushforward (h : HermitianMetric (K := K) M) (f : M →ₗ[𝓞 K] N)
-    (hf : Function.Surjective f) : HermitianMetric (K := K) N where
+def pushforward (h : HermitianMetric K M) (f : M →ₗ[𝓞 K] N)
+    (hf : Function.Surjective f) : HermitianMetric K N where
   fiber := h.pushforwardFiber f hf
   conjugate := by
     intro σ x y
@@ -123,11 +123,11 @@ def pushforward (h : HermitianMetric (K := K) M) (f : M →ₗ[𝓞 K] N)
       ← h.fiberLift_conjugate, h.inner_conjugate]
 
 /-- The canonical quotient Hermitian metric on the actual module quotient. -/
-def quotient (h : HermitianMetric (K := K) M) (P : Submodule (𝓞 K) M) :
-    HermitianMetric (K := K) (M ⧸ P) := h.pushforward P.mkQ P.mkQ_surjective
+def quotient (h : HermitianMetric K M) (P : Submodule (𝓞 K) M) :
+    HermitianMetric K (M ⧸ P) := h.pushforward P.mkQ P.mkQ_surjective
 
 /-- An integral quotient map decreases section norms for the quotient metric. -/
-lemma sectionNorm_pushforward_le (h : HermitianMetric (K := K) M)
+lemma sectionNorm_pushforward_le (h : HermitianMetric K M)
     (f : M →ₗ[𝓞 K] N) (hf : Function.Surjective f) (σ : K →+* ℂ) (x : M) :
     (h.pushforward f hf).sectionNorm σ (f x) ≤ h.sectionNorm σ x := by
   let : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
@@ -137,13 +137,13 @@ lemma sectionNorm_pushforward_le (h : HermitianMetric (K := K) M)
   rw [← fiberMap_section f σ x]
   exact ComplexQuotient.norm_lift_map_le _ _ _
 
-lemma sectionNorm_quotient_le (h : HermitianMetric (K := K) M)
+lemma sectionNorm_quotient_le (h : HermitianMetric K M)
     (P : Submodule (𝓞 K) M) (σ : K →+* ℂ) (x : M) :
     (h.quotient P).sectionNorm σ (P.mkQ x) ≤ h.sectionNorm σ x :=
   h.sectionNorm_pushforward_le P.mkQ P.mkQ_surjective σ x
 
 /-- The fiber norm is the attained minimum among norms of all lifts. -/
-lemma pushforwardFiber_min (h : HermitianMetric (K := K) M)
+lemma pushforwardFiber_min (h : HermitianMetric K M)
     (f : M →ₗ[𝓞 K] N) (hf : Function.Surjective f) (σ : K →+* ℂ)
     (y : ComplexFiber N σ) :
     ∃ x : ComplexFiber M σ, fiberMap f σ x = y ∧
@@ -162,7 +162,7 @@ lemma pushforwardFiber_min (h : HermitianMetric (K := K) M)
   exact ComplexQuotient.norm_lift_map_le _ _ _
 
 /-- The quotient norm is the attained distance to the actual submodule fiber. -/
-lemma quotientFiber_min (h : HermitianMetric (K := K) M)
+lemma quotientFiber_min (h : HermitianMetric K M)
     (P : Submodule (𝓞 K) M) (σ : K →+* ℂ) (v : ComplexFiber M σ) :
     ∃ u ∈ LinearMap.range (fiberMap P.subtype σ),
       Real.sqrt ((((h.quotient P).fiber σ).inner (fiberMap P.mkQ σ v)
@@ -184,7 +184,7 @@ lemma quotientFiber_min (h : HermitianMetric (K := K) M)
       rw [map_sub, (LinearMap.mem_ker.mp hw), sub_zero])
 
 /-- Agreement on all orthogonal representatives determines the quotient form. -/
-lemma pushforwardFiber_unique (h : HermitianMetric (K := K) M)
+lemma pushforwardFiber_unique (h : HermitianMetric K M)
     (f : M →ₗ[𝓞 K] N) (hf : Function.Surjective f) (σ : K →+* ℂ)
     (c : InnerProductSpace.Core ℂ (ComplexFiber N σ))
     (hc : ∀ x y : ComplexFiber N σ, c.inner x y =

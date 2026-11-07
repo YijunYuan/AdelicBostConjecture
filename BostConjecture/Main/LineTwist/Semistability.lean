@@ -43,8 +43,8 @@ lemma tensorRight_generic_finrank_of_rank_one
 namespace HermitianMetric
 
 /-- The ambient slope shifts by the degree of an arbitrary projective line. -/
-theorem slope_tensor_rankOne_right (h : HermitianMetric (K := K) M)
-    (g : HermitianMetric (K := K) L)
+theorem slope_tensor_rankOne_right (h : HermitianMetric K M)
+    (g : HermitianMetric K L)
     (hM : 0 < Module.finrank K (K ⊗[𝓞 K] M))
     (hL : Module.finrank K (K ⊗[𝓞 K] L) = 1) :
     (h.tensor g).slope = h.slope + g.degree := by
@@ -52,8 +52,8 @@ theorem slope_tensor_rankOne_right (h : HermitianMetric (K := K) M)
   simp only [slope, hL, Nat.cast_one, div_one]
 
 /-- The same exact ambient slope shift in the other tensor order. -/
-theorem slope_tensor_rankOne_left (h : HermitianMetric (K := K) M)
-    (g : HermitianMetric (K := K) L)
+theorem slope_tensor_rankOne_left (h : HermitianMetric K M)
+    (g : HermitianMetric K L)
     (hM : 0 < Module.finrank K (K ⊗[𝓞 K] M))
     (hL : Module.finrank K (K ⊗[𝓞 K] L) = 1) :
     (g.tensor h).slope = g.degree + h.slope := by
@@ -61,8 +61,8 @@ theorem slope_tensor_rankOne_left (h : HermitianMetric (K := K) M)
   simp only [slope, hL, Nat.cast_one, div_one]
 
 /-- The induced slope on the actual integral tensor image has the exact line shift. -/
-theorem slope_tensorRight_of_rank_one (h : HermitianMetric (K := K) M)
-    (g : HermitianMetric (K := K) L)
+theorem slope_tensorRight_of_rank_one (h : HermitianMetric K M)
+    (g : HermitianMetric K L)
     (hL : Module.finrank K (K ⊗[𝓞 K] L) = 1)
     (P : Submodule (𝓞 K) M) (hP : 0 < Module.finrank K (K ⊗[𝓞 K] P)) :
     ((h.tensor g).submodule (tensorRight L P)).slope =
@@ -78,8 +78,8 @@ theorem slope_tensorRight_of_rank_one (h : HermitianMetric (K := K) M)
 
 /-- Every positive-rank integral submodule, without saturation assumptions,
 has precisely the slope of its recovered submodule plus the line degree. -/
-theorem slope_submodule_tensor_of_rank_one (h : HermitianMetric (K := K) M)
-    (g : HermitianMetric (K := K) L)
+theorem slope_submodule_tensor_of_rank_one (h : HermitianMetric K M)
+    (g : HermitianMetric K L)
     (hL : Module.finrank K (K ⊗[𝓞 K] L) = 1)
     (C : Submodule (𝓞 K) (M ⊗[𝓞 K] L))
     (hC : 0 < Module.finrank K (K ⊗[𝓞 K] C)) :
@@ -93,8 +93,8 @@ theorem slope_submodule_tensor_of_rank_one (h : HermitianMetric (K := K) M)
 
 /-- Tensoring a semistable bundle on the right with any projective Hermitian line
 preserves actual integral semistability. -/
-theorem IsSemistable.tensor_rankOne_right {h : HermitianMetric (K := K) M}
-    (hs : h.IsSemistable) (g : HermitianMetric (K := K) L)
+theorem IsSemistable.tensor_rankOne_right {h : HermitianMetric K M}
+    (hs : h.IsSemistable) (g : HermitianMetric K L)
     (hM : 0 < Module.finrank K (K ⊗[𝓞 K] M))
     (hL : Module.finrank K (K ⊗[𝓞 K] L) = 1) : (h.tensor g).IsSemistable := by
   intro C hC
@@ -107,8 +107,8 @@ theorem IsSemistable.tensor_rankOne_right {h : HermitianMetric (K := K) M}
 
 /-- Tensoring a semistable bundle on the left with any projective Hermitian line
 preserves actual integral semistability. -/
-theorem IsSemistable.tensor_rankOne_left {h : HermitianMetric (K := K) M}
-    (hs : h.IsSemistable) (g : HermitianMetric (K := K) L)
+theorem IsSemistable.tensor_rankOne_left {h : HermitianMetric K M}
+    (hs : h.IsSemistable) (g : HermitianMetric K L)
     (hM : 0 < Module.finrank K (K ⊗[𝓞 K] M))
     (hL : Module.finrank K (K ⊗[𝓞 K] L) = 1) : (g.tensor h).IsSemistable := by
   intro C hC

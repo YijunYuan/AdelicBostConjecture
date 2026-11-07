@@ -57,7 +57,7 @@ lemma dualFiberEquiv_action (ρ : Representation (𝓞 K) G M) (σ : K →+* ℂ
 namespace HermitianMetric
 
 /-- Riesz duality commutes with an isometric group action. -/
-lemma dualRiesz_action (h : HermitianMetric (K := K) M)
+lemma dualRiesz_action (h : HermitianMetric K M)
     (ρ : Representation (𝓞 K) G M)
     (hρ : ∀ (a : G) (σ : K →+* ℂ) (x y : ComplexFiber M σ),
       (h.fiber σ).inner (fiberMap (ρ a) σ x) (fiberMap (ρ a) σ y) = (h.fiber σ).inner x y)
@@ -75,7 +75,7 @@ lemma dualRiesz_action (h : HermitianMetric (K := K) M)
   exact congrArg (dualFiberEquiv M σ f) ((complexRepresentation ρ σ).inv_self_apply a y)
 
 /-- The actual dual metric makes the contragredient integral action isometric. -/
-lemma dual_action_inner (h : HermitianMetric (K := K) M)
+lemma dual_action_inner (h : HermitianMetric K M)
     (ρ : Representation (𝓞 K) G M)
     (hρ : ∀ (a : G) (σ : K →+* ℂ) (x y : ComplexFiber M σ),
       (h.fiber σ).inner (fiberMap (ρ a) σ x) (fiberMap (ρ a) σ y) = (h.fiber σ).inner x y)
@@ -89,7 +89,7 @@ lemma dual_action_inner (h : HermitianMetric (K := K) M)
 
 /-- An action irreducible at one embedding gives a semistable dual bundle. -/
 theorem isSemistable_dual_of_complex_irreducible [NumberField K] [Nontrivial (K ⊗[𝓞 K] M)]
-    (h : HermitianMetric (K := K) M) (ρ : Representation (𝓞 K) G M) (σ : K →+* ℂ)
+    (h : HermitianMetric K M) (ρ : Representation (𝓞 K) G M) (σ : K →+* ℂ)
     [Representation.IsIrreducible (complexRepresentation ρ σ)]
     (hρ : ∀ (a : G) (s : K →+* ℂ) (x y : ComplexFiber M s),
       (h.fiber s).inner (fiberMap (ρ a) s x) (fiberMap (ρ a) s y) = (h.fiber s).inner x y) :

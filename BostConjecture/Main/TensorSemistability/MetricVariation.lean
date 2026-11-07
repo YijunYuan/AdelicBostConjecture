@@ -31,11 +31,11 @@ variable {M : Type*} [AddCommGroup M] [Module (𝓞 K) M]
 
 /-- Pull back the archimedean forms by a conjugation-compatible family of
 fiber automorphisms, keeping the integral module fixed. -/
-def archimedeanPullback (h : HermitianMetric (K := K) M)
+def archimedeanPullback (h : HermitianMetric K M)
     (g : ∀ σ : K →+* ℂ, ComplexFiber M σ ≃ₗ[ℂ] ComplexFiber M σ)
     (hc : ∀ (σ : K →+* ℂ) (x : ComplexFiber M σ),
       g (ComplexEmbedding.conjugate σ) (fiberConjugate M σ x) =
-        fiberConjugate M σ (g σ x)) : HermitianMetric (K := K) M where
+        fiberConjugate M σ (g σ x)) : HermitianMetric K M where
   fiber σ :=
     { inner := fun x y => (h.fiber σ).inner (g σ x) (g σ y)
       conj_inner_symm := fun x y => (h.fiber σ).conj_inner_symm _ _
@@ -54,7 +54,7 @@ def archimedeanPullback (h : HermitianMetric (K := K) M)
     exact h.inner_conjugate σ _ _
 
 @[simp]
-lemma archimedeanPullback_inner (h : HermitianMetric (K := K) M)
+lemma archimedeanPullback_inner (h : HermitianMetric K M)
     (g : ∀ σ : K →+* ℂ, ComplexFiber M σ ≃ₗ[ℂ] ComplexFiber M σ)
     (hc : ∀ (σ : K →+* ℂ) (x : ComplexFiber M σ),
       g (ComplexEmbedding.conjugate σ) (fiberConjugate M σ x) =
@@ -66,7 +66,7 @@ lemma archimedeanPullback_inner (h : HermitianMetric (K := K) M)
 variable [Module.Finite (𝓞 K) M]
 
 /-- Determinant-one changes preserve the actual determinant metric at every fiber. -/
-theorem determinant_archimedeanPullback (h : HermitianMetric (K := K) M)
+theorem determinant_archimedeanPullback (h : HermitianMetric K M)
     (g : ∀ σ : K →+* ℂ, ComplexFiber M σ ≃ₗ[ℂ] ComplexFiber M σ)
     (hc : ∀ (σ : K →+* ℂ) (x : ComplexFiber M σ),
       g (ComplexEmbedding.conjugate σ) (fiberConjugate M σ x) =
@@ -92,7 +92,7 @@ theorem determinant_archimedeanPullback (h : HermitianMetric (K := K) M)
 variable [NumberField K]
 
 /-- These archimedean changes preserve arithmetic normalization exactly. -/
-theorem degree_archimedeanPullback (h : HermitianMetric (K := K) M)
+theorem degree_archimedeanPullback (h : HermitianMetric K M)
     (g : ∀ σ : K →+* ℂ, ComplexFiber M σ ≃ₗ[ℂ] ComplexFiber M σ)
     (hc : ∀ (σ : K →+* ℂ) (x : ComplexFiber M σ),
       g (ComplexEmbedding.conjugate σ) (fiberConjugate M σ x) =

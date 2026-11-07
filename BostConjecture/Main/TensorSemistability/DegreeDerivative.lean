@@ -34,7 +34,7 @@ variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 
 /-- Differentiating the actual section formula for degree; the finite
 determinant quotient contributes no derivative. -/
-theorem hasDerivAt_degree (h : ℝ → HermitianMetric (K := K) M)
+theorem hasDerivAt_degree (h : ℝ → HermitianMetric K M)
     {ξ : DeterminantLine (K := K) M} (hξ : ξ ≠ 0) {t₀ : ℝ}
     (a : (K →+* ℂ) → ℝ)
     (ha : ∀ σ, HasDerivAt (fun t => (h t).determinant.sectionNorm σ ξ) (a σ) t₀) :
@@ -50,7 +50,7 @@ theorem hasDerivAt_degree (h : ℝ → HermitianMetric (K := K) M)
     simpa only [Finset.sum_apply] using (h t).degree_eq hξ
 
 /-- The squared-norm form of the arithmetic degree derivative. -/
-theorem hasDerivAt_degree_of_norm_sq (h : ℝ → HermitianMetric (K := K) M)
+theorem hasDerivAt_degree_of_norm_sq (h : ℝ → HermitianMetric K M)
     {ξ : DeterminantLine (K := K) M} (hξ : ξ ≠ 0) {t₀ : ℝ}
     (a : (K →+* ℂ) → ℝ)
     (ha : ∀ σ, HasDerivAt (fun t => ((h t).determinant.sectionNorm σ ξ) ^ 2)

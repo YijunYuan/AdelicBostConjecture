@@ -31,7 +31,7 @@ universe u
 variable {K V : Type u} [Field K] [NumberField K]
   (E : Unit ⊕ Unit → Type u) [∀ j, AddCommGroup (E j)] [∀ j, Module (𝓞 K) (E j)]
   [∀ j, Module.Finite (𝓞 K) (E j)] [∀ j, Module.Projective (𝓞 K) (E j)]
-  (hE : ∀ j, HermitianMetric (K := K) (E j))
+  (hE : ∀ j, HermitianMetric K (E j))
   [AddCommGroup V] [Module (𝓞 K) V]
   [Module.Finite (𝓞 K) V] [Module.Projective (𝓞 K) V]
   (i : V →ₗ[𝓞 K] (⨂[𝓞 K] j, E j)) (hi : Function.Injective i)

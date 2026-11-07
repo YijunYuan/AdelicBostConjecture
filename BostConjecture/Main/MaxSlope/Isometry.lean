@@ -29,8 +29,8 @@ variable {M N : Type u} [AddCommGroup M] [Module (𝓞 K) M]
     [Nontrivial (K ⊗[𝓞 K] M)] [Nontrivial (K ⊗[𝓞 K] N)]
 
 /-- An actual integral fiberwise isometric injection cannot decrease maximal slope. -/
-lemma maxSlope_le_of_isometric_injection (h : HermitianMetric (K := K) M)
-    (g : HermitianMetric (K := K) N) (f : M →ₗ[𝓞 K] N)
+lemma maxSlope_le_of_isometric_injection (h : HermitianMetric K M)
+    (g : HermitianMetric K N) (f : M →ₗ[𝓞 K] N)
     (hf : Function.Injective f)
     (he : ∀ (σ : K →+* ℂ) (x y : ComplexFiber M σ),
       (g.fiber σ).inner (fiberMap f σ x) (fiberMap f σ y) = (h.fiber σ).inner x y) :
@@ -49,8 +49,8 @@ lemma maxSlope_le_of_isometric_injection (h : HermitianMetric (K := K) M)
   simpa only [P, h.slope_hnSubmodule_one] using hs
 
 /-- Canonical integral isometries preserve the attained maximal slope. -/
-theorem maxSlope_eq_of_equiv (h : HermitianMetric (K := K) M)
-    (g : HermitianMetric (K := K) N) (e : M ≃ₗ[𝓞 K] N)
+theorem maxSlope_eq_of_equiv (h : HermitianMetric K M)
+    (g : HermitianMetric K N) (e : M ≃ₗ[𝓞 K] N)
     (he : ∀ (σ : K →+* ℂ) (x y : ComplexFiber M σ),
       (g.fiber σ).inner (fiberMap e.toLinearMap σ x) (fiberMap e.toLinearMap σ y) =
         (h.fiber σ).inner x y) : h.maxSlope = g.maxSlope := by

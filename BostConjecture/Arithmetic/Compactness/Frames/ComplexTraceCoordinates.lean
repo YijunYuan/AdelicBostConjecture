@@ -35,17 +35,17 @@ variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 variable {ι : Type*}
 
 /-- The actual complexification equivalence, with no coordinate-model fibers. -/
-def traceComplexEquiv (h : HermitianMetric (K := K) M) :
+def traceComplexEquiv (h : HermitianMetric K M) :
     ℂ ⊗[ℝ] h.TraceSpace ≃ₗ[ℂ] ((σ : K →+* ℂ) → ComplexFiber M σ) :=
   LinearEquiv.ofBijective h.traceComplexification h.traceComplexification_bijective
 
 /-- Simultaneous integral sections form a complex basis of all actual fibers. -/
-def complexTraceBasis (h : HermitianMetric (K := K) M) (b : Module.Basis ι ℤ M) :
+def complexTraceBasis (h : HermitianMetric K M) (b : Module.Basis ι ℤ M) :
     Module.Basis ι ℂ ((σ : K →+* ℂ) → ComplexFiber M σ) :=
   ((h.traceBasis b).baseChange ℂ).map h.traceComplexEquiv
 
 @[simp]
-lemma complexTraceBasis_apply (h : HermitianMetric (K := K) M)
+lemma complexTraceBasis_apply (h : HermitianMetric K M)
     (b : Module.Basis ι ℤ M) (i : ι) (σ : K →+* ℂ) :
     h.complexTraceBasis b i σ = fiberSection M σ (b i) := by
   simp only [complexTraceBasis, Module.Basis.map_apply, Module.Basis.baseChange_apply,
@@ -55,7 +55,7 @@ lemma complexTraceBasis_apply (h : HermitianMetric (K := K) M)
 omit [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M] in
 /-- The genuine direct sum of the actual fiber forms. -/
 @[instance_reducible]
-def fiberProductCore (h : HermitianMetric (K := K) M) :
+def fiberProductCore (h : HermitianMetric K M) :
     InnerProductSpace.Core ℂ ((σ : K →+* ℂ) → ComplexFiber M σ) where
   inner x y := ∑ σ, (h.fiber σ).inner (x σ) (y σ)
   conj_inner_symm x y := by simp only [map_sum, (h.fiber _).conj_inner_symm]
@@ -79,7 +79,7 @@ def fiberProductCore (h : HermitianMetric (K := K) M) :
 
 /-- The product Hermitian Gram matrix in simultaneous integral coordinates
 is precisely the real trace Gram matrix, viewed over the complex numbers. -/
-lemma fiberProductCore_basis (h g : HermitianMetric (K := K) M)
+lemma fiberProductCore_basis (h g : HermitianMetric K M)
     (b : Module.Basis ι ℤ M) (i j : ι) :
     g.fiberProductCore.inner (h.complexTraceBasis b i) (h.complexTraceBasis b j) =
       (inner ℝ (g.traceSection (b i)) (g.traceSection (b j)) : ℂ) := by

@@ -30,7 +30,7 @@ variable {K : Type*} [Field K] [NumberField K]
 variable {M : Type*} [AddCommGroup M] [Module (𝓞 K) M]
 
 /-- Restricting an induced form along a nested inclusion gives the same induced form. -/
-lemma pullback_submodule_inclusion (h : HermitianMetric (K := K) M)
+lemma pullback_submodule_inclusion (h : HermitianMetric K M)
     {P T : Submodule (𝓞 K) M} (hPT : P ≤ T) :
     (h.submodule T).pullback (Submodule.inclusion hPT) (Submodule.inclusion_injective hPT) =
       h.submodule P := by
@@ -41,7 +41,7 @@ lemma pullback_submodule_inclusion (h : HermitianMetric (K := K) M)
 variable [Module.Finite (𝓞 K) M]
 
 /-- Enlarging the space of lifts can only decrease the actual orthogonal quotient norm. -/
-lemma pushforward_norm_le_of_inclusion (h : HermitianMetric (K := K) M)
+lemma pushforward_norm_le_of_inclusion (h : HermitianMetric K M)
     {P T : Submodule (𝓞 K) M} (hPT : P ≤ T)
     {Q : Type*} [AddCommGroup Q] [Module (𝓞 K) Q]
     (q : T →ₗ[𝓞 K] Q) (hq : Function.Surjective q)
@@ -74,7 +74,7 @@ lemma pushforward_norm_le_of_inclusion (h : HermitianMetric (K := K) M)
 variable [Module.Projective (𝓞 K) M]
 
 /-- The arithmetic degree inequality for two submodules when the second is saturated. -/
-theorem degree_submodule_sup (h : HermitianMetric (K := K) M)
+theorem degree_submodule_sup (h : HermitianMetric K M)
     (U V : Submodule (𝓞 K) M) [Module.IsTorsionFree (𝓞 K) (M ⧸ V)] :
     (h.submodule U).degree + (h.submodule V).degree ≤
       (h.submodule (U ⊓ V)).degree + (h.submodule (U ⊔ V)).degree := by
