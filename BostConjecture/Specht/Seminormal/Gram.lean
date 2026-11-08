@@ -55,14 +55,12 @@ theorem row_lt_of_standard_adjacent_lt
     (T.val j).val.1 < (T.val i).val.1 := by
   rcases lt_trichotomy (T.val i).val.1 (T.val j).val.1 with hr | hr | hr
   · have hUT : U < T := (standardColex_lt_iff U T).mpr (by
-      rw [hU]
-      exact tableauColexLT_relabel_adjacent T.val i j hij hr)
+      simpa only [hU] using tableauColexLT_relabel_adjacent T.val i j hij hr)
     exact (lt_asymm hTU hUT).elim
   · have hw : rowWord U.val = rowWord T.val := by
       rw [hU, rowWord_relabel]
       funext l
-      simp only [Function.comp_apply, Equiv.swap_inv]
-      exact Equiv.apply_swap_eq_self (Fin.ext hr) l
+      simpa only [Function.comp_apply, Equiv.swap_inv] using Equiv.apply_swap_eq_self (Fin.ext hr) l
     exact (hTU.ne (Subtype.ext (U.property.1.eq_of_rowWord_eq T.property.1 hw)).symm).elim
   · exact hr
 
@@ -87,8 +85,7 @@ theorem det_standard_gram_eq_prod_prefixNormProduct (a k : ℕ)
     (t : Tableau (a * k) (rectangle a k)) :
     (Matrix.gram ℝ (standardRealBasis t)).det =
       ∏ T : {u : Tableau (a * k) (rectangle a k) // IsStandard u}, prefixNormProduct T.val := by
-  rw [det_standard_gram_eq_prod_orthogonal_norm_sq]
-  exact Finset.prod_congr rfl fun T _ =>
+  simpa only [det_standard_gram_eq_prod_orthogonal_norm_sq] using Finset.prod_congr rfl fun T _ =>
     norm_orthogonalStandardBasis_sq_eq_prefixNormProduct a k t T
 
 /-- The explicit seminormal sum bounds the logarithmic covolume of the unchanged orbit lattice. -/
@@ -109,8 +106,7 @@ theorem two_mul_rectangleLogCovolume_le_average_log_prefixNormProduct (a k : ℕ
   have hr : rectangleRank a k =
       Fintype.card {u : Tableau (a * k) (rectangle a k) // IsStandard u} :=
     finrank_orbitLattice_eq_card_standard (rectangleTableau a k)
-  rw [rectangleLogCovolume, ← mul_div_assoc, ← hr]
-  exact div_le_div_of_nonneg_right
+  simpa only [rectangleLogCovolume, ← mul_div_assoc, ← hr] using div_le_div_of_nonneg_right
     (two_mul_log_covolume_le_sum_log_prefixNormProduct a k (rectangleTableau a k))
     (Nat.cast_nonneg _)
 

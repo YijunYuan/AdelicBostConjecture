@@ -53,13 +53,12 @@ theorem rowIndex_colIndex_mem (t : Tableau n μ) (k : Fin n) :
     (rowIndex t k, colIndex t k) ∈ μ := (t k).property
 
 theorem rowIndex_colIndex_injective (t : Tableau n μ) :
-    Function.Injective (fun k => (rowIndex t k, colIndex t k)) := by
-  intro x y h
-  exact t.injective (Subtype.ext h)
+    Function.Injective (fun k => (rowIndex t k, colIndex t k)) :=
+  fun _ _ h => t.injective (Subtype.ext h)
 
 theorem exists_rowIndex_colIndex (t : Tableau n μ) {i j : ℕ} (h : (i, j) ∈ μ) :
-    ∃ k, rowIndex t k = i ∧ colIndex t k = j := by
-  exact ⟨t.symm ⟨(i, j), h⟩, by simp [rowIndex], by simp [colIndex]⟩
+    ∃ k, rowIndex t k = i ∧ colIndex t k = j :=
+  ⟨t.symm ⟨(i, j), h⟩, by simp [rowIndex], by simp [colIndex]⟩
 
 @[simp] theorem rowIndex_relabel (σ : Equiv.Perm (Fin n)) (t : Tableau n μ) (k : Fin n) :
     rowIndex (relabel σ t) k = rowIndex t (σ⁻¹ k) := rfl
@@ -227,8 +226,7 @@ theorem mem_columnGroup_iff_image_garnirSetLeft_eq {t : Tableau n μ} {i j : ℕ
     obtain ⟨l, hl, rfl⟩ := Finset.mem_image.mp hk
     have hmem : σ l ∈ garnirSet t i j :=
       apply_mem_of_forall_notMem hσ (garnirSetLeft_subset_garnirSet t i j hl)
-    have hcolσ : colIndex t (σ l) = j := by
-      exact (hcol l).trans (mem_garnirSetLeft.mp hl).1
+    have hcolσ : colIndex t (σ l) = j := (hcol l).trans (mem_garnirSetLeft.mp hl).1
     rcases mem_garnirSet.mp hmem with ⟨-, hrow⟩ | ⟨hc, -⟩
     · exact mem_garnirSetLeft.mpr ⟨hcolσ, hrow⟩
     · exact absurd hc (by omega)

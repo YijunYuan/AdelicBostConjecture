@@ -84,8 +84,7 @@ theorem orthogonalStandardBasis_sub_mem_colexSubspace (t : Tableau n μ)
   rw [orthogonalStandardBasis_eq_sub_sum, sub_sub_cancel_left]
   apply Submodule.neg_mem
   apply Submodule.sum_mem
-  intro U hU
-  exact Submodule.smul_mem _ _
+  exact fun U hU => Submodule.smul_mem _ _
     (orthogonalStandardBasis_mem_colexSubspace t (Finset.mem_Iio.mp hU))
 
 /-- Each monic orthogonal vector is perpendicular to the earlier standard span. -/
@@ -120,8 +119,7 @@ theorem murphyOperator_orthogonalStandardBasis (t : Tableau n μ)
         (murphyOperator t j (standardRealBasis t T) - c • standardRealBasis t T) := by
       simp only [z, map_sub, smul_sub]
       abel
-    rw [he]
-    exact Submodule.add_mem _ (Submodule.sub_mem _ h₁ h₂) h₃
+    simpa only [he] using Submodule.add_mem _ (Submodule.sub_mem _ h₁ h₂) h₃
   have hzero : inner ℝ z z = 0 := by
     change inner ℝ (murphyOperator t j f - c • f) z = 0
     rw [inner_sub_left, murphyOperator_symmetric t j f z,

@@ -53,8 +53,7 @@ theorem determinant_covariant_of_specialLinear_fixed [IsAlgClosed F]
   let e := LinearMap.GeneralLinearGroup.toLinearEquiv g
   have he : (e : M →ₗ[F] M) = (g : Module.End F M) := rfl
   have hd : LinearMap.det (g : Module.End F M) ≠ 0 := by
-    rw [← he, ← LinearEquiv.coe_det]
-    exact Units.ne_zero e.det
+    simpa only [← he, ← LinearEquiv.coe_det] using Units.ne_zero e.det
   obtain ⟨c, hc⟩ := IsAlgClosed.exists_pow_nat_eq (LinearMap.det (g : Module.End F M)) ha
   have hc0 : c ≠ 0 := by
     intro h

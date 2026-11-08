@@ -69,8 +69,7 @@ theorem lineDegree_le_of_injective (h : HermitianMetric K M)
     · exact Nat.cast_pos.mpr Nat.card_pos
     · exact_mod_cast quotient_span_card_le f hf x
   · apply Finset.sum_le_sum
-    intro σ _
-    exact Real.log_le_log (g.sectionNorm_pos σ hfx) (hcontract σ x)
+    exact fun σ _ => Real.log_le_log (g.sectionNorm_pos σ hfx) (hcontract σ x)
 
 end HermitianMetric
 end BostConjecture.Arithmetic

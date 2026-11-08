@@ -59,8 +59,7 @@ theorem dualDeterminantMap_reindex (σ : Equiv.Perm (Fin n))
   congr 2
   funext i
   apply LinearMap.ext
-  intro x
-  exact projectiveDeterminantMap_reindex (hk i) (t i) (ha i) σ x
+  exact fun x => projectiveDeterminantMap_reindex (hk i) (t i) (ha i) σ x
 
 variable {V : Type*} [AddCommGroup V] [Module R V]
   [Module.Finite R V] [Module.Projective R V] {s l : ℕ}

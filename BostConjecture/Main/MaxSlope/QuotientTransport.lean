@@ -114,8 +114,7 @@ lemma pushforward_comp (h : HermitianMetric K M)
       rw [← hip]
       have hu' : fiberMap f σ u ∈ LinearMap.ker (fiberMap q σ) := by
         change fiberMap q σ (fiberMap f σ u) = 0
-        rw [← LinearMap.comp_apply, ← fiberMap_comp]
-        exact hu
+        rwa [← LinearMap.comp_apply, ← fiberMap_comp]
       exact (Submodule.mem_orthogonal _ _).mp
         (ComplexQuotient.lift_mem (fiberMap q σ) (fiberMap_surjective q hq σ) z) _ hu'
     · rw [fiberMap_comp, LinearMap.comp_apply, h.fiberMap_fiberLift,

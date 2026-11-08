@@ -87,8 +87,8 @@ theorem hnSubmodule_unique (h : HermitianMetric K M)
   have hxstrict : StrictMonoOn X (Set.Iic n) := by
     intro i hi j hj hij
     apply lt_of_le_of_ne (hxmono hij.le)
-    intro he
-    exact (hstrict hi hj hij).ne ((hsat i).symm.trans ((congrArg integralPart he).trans (hsat j)))
+    exact fun he =>
+      (hstrict hi hj hij).ne ((hsat i).symm.trans ((congrArg integralPart he).trans (hsat j)))
   have hxss : ∀ i < n, ((h.submodule (integralPart (X (i + 1)))).quotient
       ((integralPart (X i)).comap (integralPart (X (i + 1))).subtype)).IsSemistable := by
     intro i hi

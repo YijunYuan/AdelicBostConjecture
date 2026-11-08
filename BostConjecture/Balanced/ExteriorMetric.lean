@@ -90,8 +90,7 @@ theorem exteriorCore_unique (b : OrthonormalBasis ι ℂ E) (s : ℕ)
     funext x y
     apply Tensor.inner_ext_of_span (ιMulti ℂ s) (ιMulti_span ℂ s E)
       c (exteriorCore b s) LinearMap.id LinearMap.id _ x y
-    intro v w
-    exact (hc v w).trans (exteriorCore_inner_ιMulti b s v w).symm
+    exact fun v w => (hc v w).trans (exteriorCore_inner_ιMulti b s v w).symm
   have hinj : Function.Injective
       (fun d : InnerProductSpace.Core ℂ (⋀[ℂ]^s E) => d.inner) := by
     rintro ⟨⟨⟨ci⟩, cs, cp, ca, cm⟩, cd⟩ ⟨⟨⟨di⟩, ds, dp, da, dm⟩, dd⟩ h

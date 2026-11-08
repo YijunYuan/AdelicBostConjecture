@@ -97,8 +97,7 @@ theorem exists_hilbertCore [Finite ι] :
     intro x y
     rw [coreOfEquiv_inner, reindex_tprod, reindex_tprod]
     change c.inner (tprod ℂ (fun i => x (e i))) (tprod ℂ (fun i => y (e i))) = _
-    rw [hc]
-    exact finprod_comp_equiv e (f := fun i => inner ℂ (x i) (y i))
+    simpa only [hc] using finprod_comp_equiv e (f := fun i => inner ℂ (x i) (y i))
   | h_empty =>
     refine ⟨coreOfEquiv (isEmptyEquiv PEmpty (R := ℂ) (s := E)), ?_⟩
     intro x y

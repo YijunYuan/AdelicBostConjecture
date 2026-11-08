@@ -67,9 +67,7 @@ theorem mem_iff_mul_plucker_eq_zero (W : Submodule k V) (b : Basis (Fin r) k W)
     rw [Set.range_comp, ← Submodule.map_span, b.span_eq, Submodule.map_top,
       Submodule.range_subtype]
   obtain ⟨a, rfl⟩ := (Geometry.determinantCoordinates b).symm.surjective η
-  have ha : a ≠ 0 := by
-    intro he
-    exact hη (by simp [he])
+  have ha : a ≠ 0 := fun he => hη (by simp [he])
   have he : (map r W.subtype ((Geometry.determinantCoordinates b).symm a) :
       ExteriorAlgebra k V) = a • ExteriorAlgebra.ιMulti k r v := by
     simp only [Geometry.determinantCoordinates_symm_apply, map_smul, map_apply_ιMulti]

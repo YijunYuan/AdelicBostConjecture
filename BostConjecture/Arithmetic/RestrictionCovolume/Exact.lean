@@ -96,8 +96,7 @@ theorem traceCovolume_exact (P : Submodule (𝓞 K) M)
     rw [h.traceSplitEquiv_symm_snd, hb₂, h.traceMap_section]
     have hh := LinearMap.congr_fun hs (qZ j)
     change P.mkQ (s (qZ j)) = qZ j at hh
-    rw [hh]
-    exact ((h.quotient P).traceBasis_apply qZ j).symm
+    simpa only [hh] using ((h.quotient P).traceBasis_apply qZ j).symm
   let C := Matrix.of fun i j => p.repr (e.symm (b (Sum.inr j))).1 i
   have hmat : c.toMatrix b = Matrix.fromBlocks 1 C 0 1 := by
     ext i j

@@ -80,8 +80,7 @@ lemma columnAlt_mem {n d : ℕ} {μ : YoungDiagram} (t : Tableau n μ)
 lemma spechtSub_le_tabloidSub {n : ℕ} {μ : YoungDiagram} (t : Tableau n μ) :
     spechtSub t ≤ tabloidSub t := by
   apply (cyclic_le _ _ _).mpr
-  rw [← columnAlt_row]
-  exact columnAlt_mem t (tabloidSub t) (mem_cyclic _ _)
+  simpa only [← columnAlt_row] using columnAlt_mem t (tabloidSub t) (mem_cyclic _ _)
 
 /- The Ferrers shape forces the column antisymmetrizer to have rank one
 on the row-tabloid module. -/
@@ -93,8 +92,7 @@ lemma columnAlt_tabloid {n : ℕ} {μ : YoungDiagram} (t : Tableau n μ)
   | mem x hx =>
     obtain ⟨g, rfl⟩ := hx
     dsimp only
-    rw [wordRep_single]
-    exact columnAlt_single t g⁻¹
+    simpa only [wordRep_single] using columnAlt_single t g⁻¹
   | zero => simpa only [map_zero] using (Submodule.zero_mem (Submodule.span ℂ {polytabloid t}))
   | add x y hx hy ihx ihy =>
     simpa only [map_add] using Submodule.add_mem _ ihx ihy
@@ -244,13 +242,9 @@ theorem specht_irreducible {n : ℕ} {μ : YoungDiagram} (t : Tableau n μ) :
   let : Nontrivial (Subrepresentation (spechtRep t)) := ⟨⟨⊥, ⊤, hb⟩⟩
   apply IsSimpleOrder.of_forall_eq_top
   intro S hS
-  have hn : S.toSubmodule ≠ ⊥ := by
-    intro h
-    exact hS (Subrepresentation.toSubmodule_injective h)
+  have hn : S.toSubmodule ≠ ⊥ := fun h => hS (Subrepresentation.toSubmodule_injective h)
   obtain ⟨x, hx, hx0⟩ := (Submodule.ne_bot_iff S.toSubmodule).mp hn
-  have hv : (x : WordSpace n (μ.colLen 0)) ≠ 0 := by
-    intro h
-    exact hx0 (Subtype.ext h)
+  have hv : (x : WordSpace n (μ.colLen 0)) ≠ 0 := fun h => hx0 (Subtype.ext h)
   have hl : cyclic (wordRep n (μ.colLen 0)) x.val ≤ subrepAmbient (spechtSub t) S :=
     (cyclic_le _ _ _).mpr ⟨x, hx, rfl⟩
   rw [specht_cyclic_of_ne_zero t x.property hv] at hl

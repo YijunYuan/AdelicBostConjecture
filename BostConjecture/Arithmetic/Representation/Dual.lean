@@ -30,8 +30,7 @@ def representationAnnihilator {ρ : Representation k G V} (P : Subrepresentation
   apply_mem_toSubmodule := by
     intro g f hf
     rw [Submodule.mem_dualAnnihilator] at hf ⊢
-    intro x hx
-    exact hf _ (P.apply_mem_toSubmodule g⁻¹ hx)
+    exact fun x hx => hf _ (P.apply_mem_toSubmodule g⁻¹ hx)
 
 /-- The common kernel of a dual subrepresentation is invariant. -/
 def representationCoannihilator {ρ : Representation k G V} (P : Subrepresentation ρ.dual) :

@@ -67,8 +67,7 @@ lemma prodMap_bijective_of_basis (p : Basis (Fin a) R M) (q : Basis (Fin b) R N)
     change d (prodMap R M N a b (x ⊗ₜ[R] y)) =
       d (d.symm (BostConjecture.Geometry.determinantCoordinates p x *
         BostConjecture.Geometry.determinantCoordinates q y))
-    rw [LinearEquiv.apply_symm_apply]
-    exact prodMap_coordinates p q x y
+    simpa only [LinearEquiv.apply_symm_apply] using prodMap_coordinates p q x y
   rw [he]
   exact e.bijective
 
@@ -87,8 +86,7 @@ lemma prodMap_baseChange_bijective
     (show Function.Bijective (map (a + b) p.toLinearMap) from
       ⟨map_injective p.symm.toLinearMap (by
         apply LinearMap.ext
-        intro x
-        exact p.symm_apply_apply x), map_surjective p.surjective⟩).comp
+        exact fun x => p.symm_apply_apply x), map_surjective p.surjective⟩).comp
         (baseChangeEquiv R (M × N) S (a + b)).bijective
   have he : t.comp ((prodMap R M N a b).baseChange S) =
       (prodMap S (S ⊗[R] M) (S ⊗[R] N) a b).comp e.toLinearMap := by
@@ -135,8 +133,7 @@ lemma bijective_of_baseChange_maximal (f : M →ₗ[R] N)
       (TensorProduct.mk R (Localization.AtPrime p) M 1)
       (TensorProduct.mk R (Localization.AtPrime p) N 1)
     apply LinearMap.ext
-    intro x
-    exact IsLocalizedModule.map_apply p.primeCompl
+    exact fun x => IsLocalizedModule.map_apply p.primeCompl
       (TensorProduct.mk R (Localization.AtPrime p) M 1)
       (TensorProduct.mk R (Localization.AtPrime p) N 1) f x
   rw [he]

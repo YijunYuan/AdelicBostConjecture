@@ -37,8 +37,7 @@ theorem isClosed_preimage_pointToPoint {τ : Type*}
     {S : Set (PrimeSpectrum (MvPolynomial τ ℂ))} (hS : IsClosed S) :
     IsClosed ((MvPolynomial.pointToPoint (k := ℂ) : (τ → ℂ) → _) ⁻¹' S) := by
   obtain ⟨I, rfl⟩ := (PrimeSpectrum.isClosed_iff_zeroLocus_ideal S).mp hS
-  rw [pointToPoint_preimage_zeroLocus]
-  exact isClosed_zeroLocus I
+  simpa only [pointToPoint_preimage_zeroLocus] using isClosed_zeroLocus I
 
 /-- Principal opens of a prime zero locus have that entire zero locus as Euclidean closure. -/
 theorem closure_principalOpen_prime {τ : Type*} [Finite τ]
@@ -71,9 +70,8 @@ theorem exists_closed_closure_principalOpen {τ : Type*} [Finite τ]
   refine ⟨S, hS, Set.Subset.antisymm ?_ ?_⟩
   · apply closure_minimal _ (isClosed_preimage_pointToPoint hS)
     intro x hx
-    have hI : I ≤ MvPolynomial.vanishingIdeal ℂ {x} := by
-      intro p hp
-      exact (MvPolynomial.mem_vanishingIdeal_singleton_iff x p).mpr (hx.1 p hp)
+    have hI : I ≤ MvPolynomial.vanishingIdeal ℂ {x} :=
+      fun p hp => (MvPolynomial.mem_vanishingIdeal_singleton_iff x p).mpr (hx.1 p hp)
     obtain ⟨J, hJ, hJx⟩ := Ideal.exists_minimalPrimes_le hI
     have huJ : u ∉ J := fun h =>
       hx.2 ((MvPolynomial.mem_vanishingIdeal_singleton_iff x u).mp (hJx h))
@@ -81,13 +79,11 @@ theorem exists_closed_closure_principalOpen {τ : Type*} [Finite τ]
   · intro x hx
     obtain ⟨J, hJ, hxJ⟩ := Set.mem_iUnion₂.mp hx
     have : J.IsPrime := hJ.1.isPrime
-    have hxV : x ∈ MvPolynomial.zeroLocus ℂ J := by
-      exact (pointToPoint_preimage_zeroLocus J ▸ hxJ)
+    have hxV : x ∈ MvPolynomial.zeroLocus ℂ J := (pointToPoint_preimage_zeroLocus J ▸ hxJ)
     rw [← closure_principalOpen_prime J hJ.2] at hxV
     apply closure_mono
       (s := {y | y ∈ MvPolynomial.zeroLocus ℂ J ∧ MvPolynomial.eval y u ≠ 0}) ?_ hxV
-    intro y hy
-    exact ⟨MvPolynomial.zeroLocus_anti_mono hJ.1.le hy.1, hy.2⟩
+    exact fun y hy => ⟨MvPolynomial.zeroLocus_anti_mono hJ.1.le hy.1, hy.2⟩
 
 /-- Basic spectral constructible sets have the expected coordinate-point traces. -/
 theorem pointToPoint_preimage_basicConstructible {K τ : Type*} [Field K]

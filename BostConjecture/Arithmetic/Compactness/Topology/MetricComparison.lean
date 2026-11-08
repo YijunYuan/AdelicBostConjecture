@@ -71,8 +71,7 @@ theorem degree_sub_rank_mul_le_of_fiberNorm_le
     let : Algebra (𝓞 K) ℂ := (σ.comp (algebraMap (𝓞 K) K)).toAlgebra
     exact LinearMap.congr_fun LinearMap.baseChange_id x
   change g.fiberNorm σ (fiberMap LinearMap.id σ x) ≤ (h.rescale t).fiberNorm σ x
-  rw [he, fiberNorm_rescale]
-  exact hc σ x
+  simpa only [he, fiberNorm_rescale] using hc σ x
 
 /-- Uniformly equivalent actual fiber norms give a rank-sharp degree estimate. -/
 theorem abs_degree_sub_le_of_fiberNorm_le
@@ -95,8 +94,8 @@ theorem abs_degree_submodule_sub_le_of_fiberNorm_le
       h.fiberNorm σ x ≤ Real.exp t * g.fiberNorm σ x)
     (P : Submodule (𝓞 K) M) :
     |(g.submodule P).degree - (h.submodule P).degree| ≤
-      (Module.finrank K (K ⊗[𝓞 K] P) : ℝ) * t := by
-  exact (h.submodule P).abs_degree_sub_le_of_fiberNorm_le (g.submodule P) t
+      (Module.finrank K (K ⊗[𝓞 K] P) : ℝ) * t :=
+  (h.submodule P).abs_degree_sub_le_of_fiberNorm_le (g.submodule P) t
     (fun σ x => hgh σ (fiberMap P.subtype σ x))
     (fun σ x => hhg σ (fiberMap P.subtype σ x))
 

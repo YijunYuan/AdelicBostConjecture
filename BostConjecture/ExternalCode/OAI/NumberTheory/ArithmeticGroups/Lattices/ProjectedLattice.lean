@@ -113,8 +113,7 @@ theorem projected_lattice_discrete (Λ : Submodule ℤ E) {v : E} (hv : v ∈ Λ
         (show w.val ≠ 0 from fun he => hw0 (Subtype.ext he))
       change ‖v‖ ≤ 2 * ‖w‖ at h
       linarith
-  rw [he]
-  exact Metric.isOpen_ball
+  simpa only [he] using Metric.isOpen_ball
 
 theorem projected_lattice_full (Λ : Submodule ℤ E)
     (hΛ : Submodule.span ℝ (Λ : Set E) = ⊤) (v : E) :

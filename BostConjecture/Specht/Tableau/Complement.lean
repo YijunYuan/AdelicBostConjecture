@@ -116,8 +116,7 @@ theorem rowLen_rectangleComplement {μ : YoungDiagram} {a k r : ℕ}
     (rectangleComplement μ a k).rowLen r = k - μ.rowLen (a - 1 - r) := by
   apply eq_of_forall_lt_iff
   intro q
-  rw [← YoungDiagram.mem_iff_lt_rowLen, mem_rectangleComplement]
-  rw [mem_rectangle]
+  rw [← YoungDiagram.mem_iff_lt_rowLen, mem_rectangleComplement, mem_rectangle]
   simp only [hr, true_and, rotateCell, YoungDiagram.mem_iff_lt_rowLen]
   have hb := rowLen_le_of_le_rectangle (r := a - 1 - r) hμ
   omega

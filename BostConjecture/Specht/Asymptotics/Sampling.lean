@@ -44,8 +44,8 @@ theorem card_samples_containing (u : Finset α) {A : ℕ} (hu : u.card ≤ A) :
   · intro s hs t ht h
     have hus := (mem_filter.mp hs).2
     have hut := (mem_filter.mp ht).2
-    have he := congrArg (fun v : Finset α => v ∪ u) h
-    simpa only [sdiff_union_of_subset hus, sdiff_union_of_subset hut] using he
+    simpa only [sdiff_union_of_subset hus, sdiff_union_of_subset hut] using
+      congrArg (fun v : Finset α => v ∪ u) h
   · intro v hv
     obtain ⟨hv, hcard⟩ := mem_powersetCard.mp hv
     have hd : Disjoint v u := disjoint_of_subset_left hv sdiff_disjoint
@@ -134,8 +134,7 @@ theorem sampling_binomialMoment_le (t : Finset α) {A r : ℕ}
     (∑ s ∈ univ.powersetCard A, ((s ∩ t).card.choose r : ℝ)) /
         ((Fintype.card α).choose A : ℝ) ≤
       (A.choose r : ℝ) * (t.card / Fintype.card α : ℝ) ^ r := by
-  rw [sampling_binomialMoment_eq t hA hr, mul_div_assoc]
-  exact mul_le_mul_of_nonneg_left
+  simpa only [sampling_binomialMoment_eq t hA hr, mul_div_assoc] using mul_le_mul_of_nonneg_left
     (descFactorial_ratio_le_pow hN (card_le_univ t) (hr.trans hA)) (by positivity)
 
 private theorem one_add_pow_eq_sum_choose (z : ℝ) {b A : ℕ} (hb : b ≤ A) :

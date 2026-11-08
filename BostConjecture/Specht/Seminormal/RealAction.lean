@@ -173,11 +173,9 @@ theorem murphyOperator_succ (t : Tableau n μ) (i j : Fin n) (hij : i.val + 1 = 
     simpa only [Equiv.swap_apply_of_ne_of_ne hki.ne hkj, Equiv.swap_apply_left,
       Equiv.swap_inv, map_mul] using congrArg (realSpechtRep t) h
   change (∑ k ∈ Finset.Iio j, realSpechtRep t (Equiv.swap k j)) = _
-  rw [hset, Finset.sum_insert (by simp)]
-  rw [add_comm]
+  rw [hset, Finset.sum_insert (by simp), add_comm]
   congr 1
-  simp only [murphyOperator, Finset.mul_sum, Finset.sum_mul]
-  exact Finset.sum_congr rfl hconj
+  simpa only [murphyOperator, Finset.mul_sum, Finset.sum_mul] using Finset.sum_congr rfl hconj
 
 /-- In affine-Hecke form the adjacent recurrence has scalar correction exactly one. -/
 theorem murphyOperator_mul_swap (t : Tableau n μ) (i j : Fin n) (hij : i.val + 1 = j.val) :

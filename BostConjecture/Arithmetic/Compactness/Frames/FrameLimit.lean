@@ -139,7 +139,6 @@ theorem exists_metric_limit_of_trace_frames
   apply tendsto_pi_nhds.mpr
   intro x
   apply tendsto_pi_nhds.mpr
-  intro y
-  exact ht σ x y
+  exact fun y => ht σ x y
 
 end BostConjecture.Arithmetic.HermitianMetric

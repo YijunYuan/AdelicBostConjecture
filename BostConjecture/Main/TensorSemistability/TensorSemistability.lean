@@ -79,8 +79,7 @@ theorem IsSemistable.tensor
     hrM hrN h.degree_rescale_self k.degree_rescale_self hh hk
   rw [tensor_rescale] at ht
   have hr : Module.finrank K (K ⊗[𝓞 K] (M ⊗[𝓞 K] N)) ≠ 0 := by
-    rw [tensor_generic_finrank]
-    exact mul_ne_zero hrM.ne' hrN.ne'
+    simpa only [tensor_generic_finrank] using mul_ne_zero hrM.ne' hrN.ne'
   exact ((h ⊗[𝓞 K] k).isSemistable_rescale_iff hr _).mp ht
 
 end BostConjecture.Arithmetic.HermitianMetric

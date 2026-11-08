@@ -72,8 +72,7 @@ theorem polynomialZariskiClosure_eq_preimage_zeroLocus (b : Basis τ K E) (S : S
     rintro _ ⟨y, hy, rfl⟩
     change MvPolynomial.eval (b.equivFun y)
       (SymmetricAlgebra.equivMvPolynomial b.dualBasis p) = 0
-    rw [← polynomialEval_eq_eval_equivMvPolynomial]
-    exact hp y hy
+    simpa only [← polynomialEval_eq_eval_equivMvPolynomial] using hp y hy
 
 end Algebra
 

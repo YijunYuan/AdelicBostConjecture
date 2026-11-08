@@ -95,8 +95,7 @@ theorem coordinate_quotient_card {M : Type*} [AddCommGroup M] [Module (𝓞 K) M
     (FractionalIdeal.spanSingleton_le_iff_mem.mpr ⟨x, rfl⟩)
   change ((FractionalIdeal.spanSingleton (𝓞 K)⁰ (f x) : Submodule (𝓞 K) K).toAddSubgroup.relIndex
     f.range.toAddSubgroup : ℚ) = _ at hn
-  rw [hi] at hn
-  exact hn
+  rwa [hi] at hn
 
 /-- The quotient in the section formula is genuinely finite. -/
 theorem coordinate_quotient_finite {M : Type*} [AddCommGroup M] [Module (𝓞 K) M]

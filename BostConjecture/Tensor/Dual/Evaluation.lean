@@ -73,8 +73,7 @@ theorem tensorPowerPairing_reindex (i : V →ₗ[R] W) (σ : Equiv.Perm ι)
     tensorPowerPairing i (reindex R (fun _ : ι => V) σ z)
       (reindex R (fun _ : ι => Dual R W) σ u) = tensorPowerPairing i z u := by
   simp only [tensorPowerPairing_apply]
-  rw [map_reindex (fun _ : ι => i) σ z]
-  exact evaluation_reindex σ u _
+  simpa only [map_reindex (fun _ : ι => i) σ z] using evaluation_reindex σ u _
 
 /-- Equivariance into the contragredient representation, with the inverse
 permutation on the dual tensor argument. -/
@@ -84,8 +83,7 @@ theorem tensorPowerPairing_reindex_left (i : V →ₗ[R] W) (σ : Equiv.Perm ι)
       tensorPowerPairing i z (reindex R (fun _ : ι => Dual R W) σ.symm u) := by
   have h := tensorPowerPairing_reindex i σ z
     ((reindex R (fun _ : ι => Dual R W) σ).symm u)
-  rw [LinearEquiv.apply_symm_apply, reindex_symm] at h
-  exact h
+  rwa [LinearEquiv.apply_symm_apply, reindex_symm] at h
 
 /-- Evaluation detects precisely whether the image tensor is zero. This uses
 finite projectivity, not a chosen basis. -/

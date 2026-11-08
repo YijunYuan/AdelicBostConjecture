@@ -38,8 +38,7 @@ theorem choose_ratio_eq_ascFactorial (m l c : ℕ) :
       ((m + 1).ascFactorial c : ℝ) * ((l + 1).ascFactorial c : ℝ) /
         ((m + l + 1).ascFactorial (2 * c) : ℝ) := by
   have hs : m + l + 2 * c = (m + c) + (l + c) := by omega
-  rw [cast_choose_add, hs, cast_choose_add]
-  rw [← hs]
+  rw [cast_choose_add, hs, cast_choose_add, ← hs]
   have hf (n r : ℕ) : ((n + r).factorial : ℝ) =
       (n.factorial : ℝ) * ((n + 1).ascFactorial r : ℝ) := by
     exact_mod_cast (Nat.factorial_mul_ascFactorial n r).symm
@@ -65,16 +64,14 @@ theorem pow_le_choose_ratio (m l c : ℕ) {x y : ℝ} (hx : 0 ≤ x)
   rw [choose_ratio_eq_ascFactorial]
   have hnum : x ^ (2 * c) ≤
       ((m + 1).ascFactorial c : ℝ) * ((l + 1).ascFactorial c : ℝ) := by
-    rw [two_mul, pow_add]
-    exact mul_le_mul (pow_le_cast_ascFactorial hx hm c)
+    simpa only [two_mul, pow_add] using mul_le_mul (pow_le_cast_ascFactorial hx hm c)
       (pow_le_cast_ascFactorial hx hl c) (pow_nonneg hx c) (by positivity)
   have hden : ((m + l + 1).ascFactorial (2 * c) : ℝ) ≤ y ^ (2 * c) := by
     calc
       _ ≤ ((m + l + 2 * c : ℕ) : ℝ) ^ (2 * c) := by
         exact_mod_cast Nat.ascFactorial_le_pow_add (m + l) (2 * c)
       _ ≤ _ := pow_le_pow_left₀ (by positivity) hn _
-  rw [div_pow]
-  exact div_le_div₀ (by positivity) hnum (by positivity) hden
+  simpa only [div_pow] using div_le_div₀ (by positivity) hnum (by positivity) hden
 
 /-- The expanded occupancy population is at most `a` times the rectangle size. -/
 theorem rectangle_occupancy_population_le {a k : ℕ} (ha : 0 < a) (hk : 0 < k) :
@@ -90,8 +87,7 @@ theorem pow_staircaseSum_le_prod (a k : ℕ) :
     (k : ℝ) ^ staircaseSum a ≤ ∏ j ∈ range a, (k + j : ℝ) ^ j := by
   have hs : staircaseSum a = ∑ j ∈ range a, j := by
     rw [staircaseSum_eq, sum_range_id]
-  rw [hs, ← prod_pow_eq_pow_sum]
-  exact prod_le_prod₀ (fun _ _ => by positivity)
+  simpa only [hs, ← prod_pow_eq_pow_sum] using prod_le_prod₀ (fun _ _ => by positivity)
     (fun j _ => pow_le_pow_left₀ (by positivity)
       (le_add_of_nonneg_right (Nat.cast_nonneg j)) j)
 
@@ -123,8 +119,8 @@ theorem sum_occupancyWeight_bulk_lower {a k : ℕ} (ha : 0 < a) (hk : 0 < k)
     _ ≤ ((a.factorial : ℝ) * (∏ j ∈ range a, (j.factorial : ℝ))) *
         ((∏ j ∈ range a, (k + j : ℝ) ^ j) *
           (((a * k).choose m : ℝ) /
-            ((a * (k + a - 1)).choose (m + staircaseSum a) : ℝ))) := by
-      exact mul_le_mul_of_nonneg_left
+            ((a * (k + a - 1)).choose (m + staircaseSum a) : ℝ))) :=
+      mul_le_mul_of_nonneg_left
         (mul_le_mul hp hratio (by positivity) (by positivity)) hc
     _ = _ := by ring
 

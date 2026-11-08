@@ -86,8 +86,7 @@ lemma hnSlope_zero (h : HermitianMetric K M) :
   rw [← h.slope_hnSubmodule_one]
   have he := h.hnStep_payoff ⟨0, h.hnFlag_length_pos⟩
   have ht : ⊥ < h.hnFlag 1 := by
-    have ht := (h.hnStep ⟨0, h.hnFlag_length_pos⟩).lt
-    simpa [hnStep, h.hnFlag_zero] using ht
+    simpa [hnStep, h.hnFlag_zero] using (h.hnStep ⟨0, h.hnFlag_length_pos⟩).lt
   have hs : h.hnStep ⟨0, h.hnFlag_length_pos⟩ = ⟨⊥, h.hnFlag 1, ht⟩ := by
     ext <;> simp [hnStep, h.hnFlag_zero]
   rw [hs, h.subspaceSlope_apply_bot] at he
@@ -129,8 +128,7 @@ theorem subspaceDegree_lt_maxSlope (h : HermitianMetric K M)
     intro i
     induction i with
     | zero =>
-      intro _ hi
-      exact False.elim (hX1 (hi.trans (h.hnFlag.monotone (Nat.zero_le 1))))
+      exact fun _ hi => False.elim (hX1 (hi.trans (h.hnFlag.monotone (Nat.zero_le 1))))
     | succ i ih =>
       intro hi hXi
       by_cases hx : X ≤ h.hnFlag i
@@ -172,8 +170,7 @@ theorem le_hnSubmodule_one_of_slope_eq (h : HermitianMetric K M)
       exact_mod_cast hr)).mpr hd
     rw [subspaceDegree_div_finrank] at hs
     exact (he ▸ h.slope_le_saturation P).not_gt hs
-  intro x hx
-  exact hX (Submodule.tmul_mem_baseChange_of_mem 1 hx)
+  exact fun x hx => hX (Submodule.tmul_mem_baseChange_of_mem 1 hx)
 
 /-- The set of slopes of positive-rank integral submodules has this actual maximum. -/
 theorem isGreatest_slopes (h : HermitianMetric K M) :
@@ -188,8 +185,7 @@ theorem isGreatest_maximalSlope_submodules (h : HermitianMetric K M) :
     IsGreatest {P : Submodule (𝓞 K) M | 0 < Module.finrank K (K ⊗[𝓞 K] P) ∧
       (h.submodule P).slope = h.maxSlope} (h.hnSubmodule 1) := by
   refine ⟨⟨h.hnSubmodule_one_rank_pos, h.slope_hnSubmodule_one⟩, ?_⟩
-  intro P hP
-  exact h.le_hnSubmodule_one_of_slope_eq P hP.1 hP.2
+  exact fun P hP => h.le_hnSubmodule_one_of_slope_eq P hP.1 hP.2
 
 /-- Among saturated maximal-slope submodules, maximal rank characterizes the first term. -/
 theorem eq_hnSubmodule_one_of_slope_eq_of_rank (h : HermitianMetric K M)

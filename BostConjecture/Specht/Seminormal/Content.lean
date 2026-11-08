@@ -76,9 +76,8 @@ theorem polytabloidInt_rowWord_swap (t : Tableau n μ) (i j : Fin n) (hij : i �
       exact Equiv.apply_swap_eq_self (Fin.ext hr) k
     simp [hr, hc, hw, polytabloidInt_rowWord]
   by_cases hc : (t i).val.2 = (t j).val.2
-  · have hcol : Equiv.swap i j ∈ columnGroup t := by
-      intro k
-      exact Equiv.apply_swap_eq_self (v := fun x => (t x).val.2) hc k
+  · have hcol : Equiv.swap i j ∈ columnGroup t :=
+      fun k => Equiv.apply_swap_eq_self (v := fun x => (t x).val.2) hc k
     have h := congrFun (polytabloidInt_relabel_of_mem_columnGroup t hcol) (rowWord t)
     rw [polytabloidInt_relabel] at h
     change polytabloidInt t (rowWord t ∘ Equiv.swap i j) = _ at h

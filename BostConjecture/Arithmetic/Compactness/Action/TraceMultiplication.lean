@@ -78,8 +78,7 @@ lemma trace_norm_sq (h : HermitianMetric K M) (z : h.TraceSpace) :
   change (∑ σ : K →+* ℂ, ((h.fiber σ).inner
     (h.traceInclusion z σ) (h.traceInclusion z σ)).re) = _
   apply Finset.sum_congr rfl
-  intro σ _
-  exact (Real.sq_sqrt ((h.fiber σ).re_inner_nonneg _)).symm
+  exact fun σ _ => (Real.sq_sqrt ((h.fiber σ).re_inner_nonneg _)).symm
 
 /-- The action bound is independent of the metric: any simultaneous bound on
 the archimedean absolute values bounds multiplication on trace space. -/

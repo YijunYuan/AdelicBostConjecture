@@ -138,8 +138,7 @@ theorem dualDeterminantFiberCore_eq (hk : ∀ j, 0 < k j)
       (inferInstance : PreInnerProductSpace.Core ℂ (Dual ℂ (ComplexFiber (E j) σ)))
   intro b
   apply core_ext
-  intro x y
-  exact Tensor.tensorCore_map_inner
+  exact fun x y => Tensor.tensorCore_map_inner
     (fun j => (determinantMetric (hE j).dual (hk j) (t j) (ha j)).fiber σ)
     (fun j => Tensor.binaryCore
       (Tensor.tensorCore (fun _ : Fin (k j) => ComplexDeterminant.core (b j)))

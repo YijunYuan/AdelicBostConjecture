@@ -78,8 +78,7 @@ def polytabloidInt (t : Tableau n μ) : (Fin n → Fin (μ.colLen 0)) → ℤ :=
 
 theorem polytabloidInt_rowWord (t : Tableau n μ) : polytabloidInt t (rowWord t) = 1 := by
   apply Int.cast_injective (α := ℂ)
-  have h := congrFun (complexCast_polytabloid t) (rowWord t)
-  simpa [complexCast, polytabloid_rowWord] using h
+  simpa [complexCast, polytabloid_rowWord] using congrFun (complexCast_polytabloid t) (rowWord t)
 
 theorem polytabloidInt_ne_zero (t : Tableau n μ) : polytabloidInt t ≠ 0 := by
   intro h

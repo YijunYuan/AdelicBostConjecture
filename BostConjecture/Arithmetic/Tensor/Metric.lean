@@ -134,8 +134,7 @@ lemma sectionNorm_piTensor_tprod (h : ∀ i, HermitianMetric K (M i))
       (fiberSection (M i) σ (x i))) =
       ((∏ i, (((h i).fiber σ).inner (fiberSection (M i) σ (x i))
         (fiberSection (M i) σ (x i))).re : ℝ) : ℂ) := by
-    rw [Complex.ofReal_prod]
-    exact Finset.prod_congr rfl (fun i _ => (hi i).symm)
+    simpa only [Complex.ofReal_prod] using Finset.prod_congr rfl (fun i _ => (hi i).symm)
   rw [he, Complex.ofReal_re]
   exact Real.sqrt_prod _ (fun i _ => ((h i).fiber σ).re_inner_nonneg _)
 

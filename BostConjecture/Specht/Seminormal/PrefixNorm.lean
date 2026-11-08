@@ -85,8 +85,8 @@ theorem col_add_one_le_prefixRowCount {t : Tableau n μ} (ht : IsStandard t)
     intro c d he
     have hh := congrArg (fun z : s => (t z.val).val.2) he
     exact Fin.ext (by simpa [f] using hh)
-  have hh := Fintype.card_le_of_injective f hf
-  simpa only [Fintype.card_fin, Fintype.card_coe, s, prefixRowCount] using hh
+  simpa only [Fintype.card_fin, Fintype.card_coe, s, prefixRowCount] using
+    Fintype.card_le_of_injective f hf
 
 /-- All factors that occur in the prefix product have distance at least two. -/
 theorem two_le_prefixAxialDistance {t : Tableau n μ} (ht : IsStandard t)

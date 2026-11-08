@@ -88,8 +88,7 @@ lemma fiberLift_conjugate (h : HermitianMetric K M) (f : M →ₗ[𝓞 K] N)
     have hv : v ∈ LinearMap.ker (fiberMap f σ) := by
       change fiberMap f σ v = 0
       apply (fiberConjugate N σ).injective
-      rw [fiberConjugate_map, map_zero]
-      exact hu
+      rwa [fiberConjugate_map, map_zero]
     change (h.fiber (ComplexEmbedding.conjugate σ)).inner
       (fiberConjugate M σ v) (fiberConjugate M σ (h.fiberLift f hf σ x)) = 0
     rw [h.inner_conjugate]

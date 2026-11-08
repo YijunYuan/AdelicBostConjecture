@@ -253,8 +253,7 @@ private theorem straightWeight_lt_of_swap {t : Tableau n μ} {x y : Fin n}
       Nat.add_lt_add_left (mul_add_mul_lt_mul_add_mul hrow (Fin.lt_def.mp hyx)) _
     rw [rowMoment, ← hr] at hstep
     exact lt_of_add_lt_add_right hstep
-  rw [straightWeight, straightWeight, hcol']
-  exact Nat.add_lt_add_left hrow' _
+  simpa only [straightWeight, straightWeight, hcol'] using Nat.add_lt_add_left hrow' _
 
 /-!
 ## The Garnir step increases the measure -/
@@ -346,8 +345,7 @@ private theorem colMoment_lt_of_garnir {t : Tableau n μ} {i j : ℕ}
     have h : ∑ z ∈ (garnirSet t i j).image σ, (z : ℕ) =
         ∑ k ∈ garnirSet t i j, ((σ k : Fin n) : ℕ) :=
       Finset.sum_image fun x _ y _ hxy => σ.injective hxy
-    rw [hXimg] at h
-    exact h.symm
+    simpa only [hXimg] using h.symm
   -- so the two moments differ only in the sum over the right half of the Garnir set
   have hkey := sum_lt_sum_image_sdiff Fin.val hAX hXimg himg hlt
   rw [colMoment_relabel, colMoment, hsum fun k => ((σ k : Fin n) : ℕ),
@@ -377,8 +375,7 @@ private theorem exists_adjacent_row_inversion (t : Tableau n μ) :
     · exact ⟨x, y, hrow, hadj, hyx⟩
     · have hmem : (rowIndex t x, colIndex t x + 1) ∈ μ := by
         have hcell : (rowIndex t x, colIndex t y) ∈ μ := by
-          rw [hrow]
-          exact rowIndex_colIndex_mem t y
+          simpa only [hrow] using rowIndex_colIndex_mem t y
         exact μ.up_left_mem le_rfl (by omega) hcell
       obtain ⟨z, hzr, hzc⟩ := exists_rowIndex_colIndex t hmem
       rcases lt_trichotomy z x with hzx | hzx | hzx
@@ -401,8 +398,7 @@ theorem polytabloid_mem_span_polytabloid_relabel_garnirSet (t : Tableau n μ) {i
         (garnirSetLeft t i j).image σ ≠ garnirSetLeft t i j} := by
     ext σ
     exact and_congr_right fun hσ => not_congr (mem_columnGroup_iff_image_garnirSetLeft_eq hσ)
-  rw [← hindex]
-  exact polytabloidRat_mem_span_relabel t
+  simpa only [← hindex] using polytabloidRat_mem_span_relabel t
     (fun _ hk => colLen_colIndex_le_colLen_of_mem_garnirSet hk)
     (by rw [card_garnirSet t h]; exact Nat.lt_succ_self _)
 

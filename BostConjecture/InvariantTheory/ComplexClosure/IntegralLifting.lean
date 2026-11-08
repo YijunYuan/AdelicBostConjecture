@@ -70,8 +70,7 @@ theorem exists_algHom_of_minpoly_eq_zero {K R B : Type*}
       ext p
       change e p = 0 ↔ Polynomial.aeval u p = 0
       exact Subtype.ext_iff
-    rw [hker, minpoly.ker_eval hu]
-    exact Ideal.span_le.mpr (Set.singleton_subset_iff.mpr hz)
+    simpa only [hker, minpoly.ker_eval hu] using Ideal.span_le.mpr (Set.singleton_subset_iff.mpr hz)
   let φ : A →ₐ[K] K := AlgHom.liftOfSurjective e
     (Polynomial.aeval u).rangeRestrict_surjective f hk
   have hφ (p : Polynomial R) : φ (e p) = f p :=
@@ -80,8 +79,8 @@ theorem exists_algHom_of_minpoly_eq_zero {K R B : Type*}
   have : Algebra.IsIntegral (A.restrictScalars K) B :=
     inferInstanceAs (Algebra.IsIntegral A B)
   obtain ⟨ψ, hψ⟩ := exists_algHom_extends_of_isIntegral (A.restrictScalars K) φ
-  have hψe (p : Polynomial R) : ψ (Polynomial.aeval u p) = f p := by
-    exact (DFunLike.congr_fun hψ (e p)).trans (hφ p)
+  have hψe (p : Polynomial R) : ψ (Polynomial.aeval u p) = f p :=
+    (DFunLike.congr_fun hψ (e p)).trans (hφ p)
   refine ⟨ψ, fun r => ?_, ?_⟩
   · simpa [f] using hψe (Polynomial.C r)
   · simpa [f] using hψe Polynomial.X

@@ -127,8 +127,7 @@ theorem independent_invariants_eq_range :
       LinearMap.range (TensorProduct.map ρ.invariants.subtype τ.invariants.subtype) := by
   ext z
   change (∀ gh : G × H, TensorProduct.map (ρ gh.1) (τ gh.2) z = z) ↔ _
-  rw [LinearMap.mem_range, exists_independent_invariants_iff]
-  exact Prod.forall
+  simpa only [LinearMap.mem_range, exists_independent_invariants_iff] using Prod.forall
 
 /-- The canonical invariant tensor map is injective over a field. -/
 theorem independent_invariants_map_injective :

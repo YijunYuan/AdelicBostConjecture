@@ -170,8 +170,7 @@ theorem dualDeterminantMap_baseChange
   congr 1
   simp only [LinearEquiv.coe_coe]
   apply tensorMap_comp_apply_eq
-  intro j x
-  exact projectiveDualDeterminantMap_baseChange (hk j) (t j) (ha j) (b j) x
+  exact fun j x => projectiveDualDeterminantMap_baseChange (hk j) (t j) (ha j) (b j) x
 
 variable {V : Type*} [AddCommGroup V] [Module R V]
   [Module.Finite R V] [Module.Projective R V] {s l : ℕ}

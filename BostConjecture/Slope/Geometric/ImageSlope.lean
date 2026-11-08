@@ -49,11 +49,9 @@ theorem slope_le_image_of_injective
     change Real.sqrt (((g.fiber σ).inner
       (fiberMap (LinearMap.range f).subtype σ (fiberMap e.toLinearMap σ x))
       (fiberMap (LinearMap.range f).subtype σ (fiberMap e.toLinearMap σ x))).re) ≤ _
-    rw [← hx]
-    exact hc σ x
+    simpa only [← hx] using hc σ x
   unfold HermitianMetric.slope
-  rw [hr]
-  exact div_le_div_of_nonneg_right hd (Nat.cast_nonneg _)
+  simpa only [hr] using div_le_div_of_nonneg_right hd (Nat.cast_nonneg _)
 
 section Pairing
 

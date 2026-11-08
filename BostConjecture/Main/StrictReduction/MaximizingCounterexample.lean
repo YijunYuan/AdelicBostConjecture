@@ -84,16 +84,12 @@ theorem exists_strict_maximizing_counterexample
   have hmaxpos : 0 < (H ⊗[𝓞 K] G).maxDegree := hdpos.trans_le (hmax.2 hd)
   have hT0 : (H ⊗[𝓞 K] G).degree = 0 := by
     simp [HermitianMetric.degree_tensor, H0, G0]
-  have hTbad : ¬ (H ⊗[𝓞 K] G).IsSemistable := by
-    intro hT
-    exact (not_le_of_gt hmaxpos)
+  have hTbad : ¬ (H ⊗[𝓞 K] G).IsSemistable := fun hT => (not_le_of_gt hmaxpos)
       (((H ⊗[𝓞 K] G).isSemistable_iff_maxDegree_nonpos hT0).mp hT)
-  have hE1 : Module.finrank K (K ⊗[𝓞 K] E) ≠ 1 := by
-    intro hr
-    exact hTbad (Gs.tensor_rankOne_left H hFpos hr)
-  have hF1 : Module.finrank K (K ⊗[𝓞 K] F) ≠ 1 := by
-    intro hr
-    exact hTbad (Hs.tensor_rankOne_right G hEpos hr)
+  have hE1 : Module.finrank K (K ⊗[𝓞 K] E) ≠ 1 :=
+    fun hr => hTbad (Gs.tensor_rankOne_left H hFpos hr)
+  have hF1 : Module.finrank K (K ⊗[𝓞 K] F) ≠ 1 :=
+    fun hr => hTbad (Hs.tensor_rankOne_right G hEpos hr)
   obtain ⟨Hst, Gst⟩ := H.isStable_factors_of_minimal_rank_sum G H0 G0 Hs Gs
     hEpos hFpos hTbad (by simpa only [hrE, hrF] using hmin)
   refine ⟨E, F, ae, af, me, mf, fe, pe, ff, pf, H, G, by omega, by omega,

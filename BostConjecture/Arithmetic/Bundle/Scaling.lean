@@ -49,9 +49,7 @@ def rescale (h : HermitianMetric K M) (t : ℝ) : HermitianMetric K M where
         intro x y a
         rw [(h.fiber σ).smul_left]
         ring
-      definite := by
-        intro x hx
-        exact (h.fiber σ).definite x ((mul_eq_zero.mp hx).resolve_left
+      definite := fun x hx => (h.fiber σ).definite x ((mul_eq_zero.mp hx).resolve_left
           (Complex.ofReal_ne_zero.mpr (Real.exp_ne_zero _))) }
   conjugate := by
     intro σ x y
@@ -60,8 +58,7 @@ def rescale (h : HermitianMetric K M) (t : ℝ) : HermitianMetric K M where
       (fiberSection M (ComplexEmbedding.conjugate σ) y) =
       star ((Real.exp (2 * t) : ℂ) * (h.fiber σ).inner
         (fiberSection M σ x) (fiberSection M σ y))
-    rw [h.conjugate, star_mul, Complex.star_def, Complex.conj_ofReal]
-    exact mul_comm _ _
+    simpa only [h.conjugate, star_mul, Complex.star_def, Complex.conj_ofReal] using mul_comm _ _
 
 lemma rescale_inner (h : HermitianMetric K M) (t : ℝ) (σ : K →+* ℂ)
     (x y : ComplexFiber M σ) :

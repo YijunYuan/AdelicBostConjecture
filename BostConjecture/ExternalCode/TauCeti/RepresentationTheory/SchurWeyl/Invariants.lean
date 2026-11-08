@@ -117,8 +117,8 @@ theorem invariants_reindexRepresentation (h : IsUnit ((Fintype.card ι).factoria
       simp only [hy, Finset.sum_const, Finset.card_univ, Fintype.card_perm,
         Nat.cast_smul_eq_nsmul]
     rw [he] at hs
-    have hi := Submodule.smul_mem _ (⅟((Fintype.card ι).factorial : R)) hs
-    simpa only [smul_smul, invOf_mul_self, one_smul] using hi
+    simpa only [smul_smul, invOf_mul_self, one_smul] using
+      Submodule.smul_mem _ (⅟((Fintype.card ι).factorial : R)) hs
   · rintro _ ⟨x, rfl⟩
     exact tprod_const_mem_invariants x
 

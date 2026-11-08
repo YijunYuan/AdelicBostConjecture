@@ -112,7 +112,7 @@ theorem polynomialPullback_mem_homogeneous (f : X →ₗ[K] Y) {d : ℕ}
     exact Submodule.mul_mem_mul ⟨ℓ.comp f, rfl⟩ ih
 
 instance finiteDimensional_homogeneousPolynomials [FiniteDimensional K X] (d : ℕ) :
-    FiniteDimensional K (homogeneousPolynomials K X d) := by
-  exact Module.Finite.of_fg (((Submodule.fg_iff_finiteDimensional _).mpr inferInstance).pow d)
+    FiniteDimensional K (homogeneousPolynomials K X d) :=
+  Module.Finite.of_fg (((Submodule.fg_iff_finiteDimensional _).mpr inferInstance).pow d)
 
 end BostConjecture.InvariantTheory

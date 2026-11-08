@@ -111,8 +111,7 @@ lemma ferrers_rearrangement {n : ℕ} {μ : YoungDiagram} (t : Tableau n μ)
         le_of_not_gt (fun h => hc (YoungDiagram.mem_iff_lt_rowLen.mpr h))
       dsimp [w]
       omega) he
-  intro i
-  exact (le_of_eq heq) (Finset.mem_image.mpr ⟨i, Finset.mem_univ _, rfl⟩)
+  exact fun i => (le_of_eq heq) (Finset.mem_image.mpr ⟨i, Finset.mem_univ _, rfl⟩)
 
 /- The complex-valued sign character. -/
 def signC {n : ℕ} : Equiv.Perm (Fin n) →* ℂ :=
@@ -139,12 +138,10 @@ lemma wordRep_single {n d : ℕ} (g : Equiv.Perm (Fin n)) (a : Fin n → Fin d) 
   constructor
   · intro h
     funext i
-    have hh := congrFun h (g⁻¹ i)
-    simpa using hh
+    simpa using congrFun h (g⁻¹ i)
   · intro h
     funext i
-    have hh := congrFun h (g i)
-    simpa using hh
+    simpa using congrFun h (g i)
 
 /- Actual column antisymmetrizer on the word-coordinate module. -/
 def columnAlt {n d : ℕ} {μ : YoungDiagram} (t : Tableau n μ) :
@@ -192,8 +189,7 @@ lemma column_rearrangement {n : ℕ} {μ : YoungDiagram} (t : Tableau n μ)
   have hf : Function.Injective f := by
     intro i j hij
     apply hinj
-    have hh := congrArg (fun k => (t k).val) hij
-    simpa [f] using hh
+    simpa [f] using congrArg (fun k => (t k).val) hij
   let h : Equiv.Perm (Fin n) := Equiv.ofBijective f ⟨hf, Finite.surjective_of_injective hf⟩
   have hcol : h ∈ columnGroup t := by
     intro i
@@ -255,8 +251,7 @@ lemma columnAlt_single {n : ℕ} {μ : YoungDiagram} (t : Tableau n μ)
       have hh := congrArg Prod.fst hc
       exact hh
     have hcol := congrArg Prod.snd hc
-    rw [columnAlt_collision t _ i j hij hcol ha]
-    exact Submodule.zero_mem _
+    simpa only [columnAlt_collision t _ i j hij hcol ha] using Submodule.zero_mem _
 
 end Saxl
 

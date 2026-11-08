@@ -88,12 +88,10 @@ theorem map_normalizeDetMatrix_eq {A B : Type*} [CommRing A] [CommRing B]
     (normalizeDetMatrix i₀ M hM : Matrix ι ι A).map f =
       (normalizeDetMatrix i₀ (M.map f)
         (by change IsUnit (f.mapMatrix M).det
-            rw [← RingHom.map_det]
-            exact hM.map f) : Matrix ι ι B) := by
+            simpa only [← RingHom.map_det] using hM.map f) : Matrix ι ι B) := by
   let hN : IsUnit (M.map f).det := by
     change IsUnit (f.mapMatrix M).det
-    rw [← RingHom.map_det]
-    exact hM.map f
+    simpa only [← RingHom.map_det] using hM.map f
   have hu : Units.map f hM.unit = hN.unit := Units.ext (by
     change f (↑hM.unit : A) = (↑hN.unit : B)
     rw [hM.unit_spec, hN.unit_spec]
@@ -218,7 +216,6 @@ theorem specialLinearPairEval_detects_of_unitary (i₀ : ι) (j₀ : κ)
     have hn' := congrArg (fun M : Matrix κ κ ℂ => M ∈ Matrix.unitaryGroup κ ℂ) hn
     apply Eq.mpr hn'
     simpa only [hr] using normalizeDetMatrix_mem_unitary j₀ v)
-  rw [specialLinearPairEval_point] at h
-  exact h
+  rwa [specialLinearPairEval_point] at h
 
 end BostConjecture.InvariantTheory

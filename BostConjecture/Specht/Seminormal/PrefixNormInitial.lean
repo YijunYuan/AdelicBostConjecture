@@ -57,8 +57,7 @@ theorem prefixRowCount_rectangleColumnTableau {a k : ℕ} (m : Fin (a * k))
       have hl : (t.symm b).val = r + a * c := rectangleColumnTableau_symm_val a k b
       have hm : m.val = (t m).val.1 + a * (t m).val.2 := hlabel m
       have hmul := Nat.mul_le_mul_left a hc'
-      rw [hl, hm]
-      exact add_lt_add_of_lt_of_le hr hmul
+      simpa only [hl, hm] using add_lt_add_of_lt_of_le hr hmul
     · change (t (t.symm b)).val.1 = r
       simp [b]
     · simp [b]

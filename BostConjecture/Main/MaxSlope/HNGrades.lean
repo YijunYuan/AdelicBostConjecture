@@ -88,8 +88,7 @@ theorem exists_hnTensorGrade_isometry (h : HermitianMetric K M)
       g.hnSubmodule (k % g.hnFlag.length + 1) :=
     g.hnSubmodule_monotone (Nat.le_succ (k % g.hnFlag.length))
   refine ⟨tensorGradeEquiv hP _ _, ?_⟩
-  intro σ x y
-  exact tensorGradeEquiv_inner h g hP hQ σ x y
+  exact fun σ x y => tensorGradeEquiv_inner h g hP hQ σ x y
 
 omit [Module.Finite (𝓞 K) N] [Module.Projective (𝓞 K) N]
     [Nontrivial (K ⊗[𝓞 K] N)] in

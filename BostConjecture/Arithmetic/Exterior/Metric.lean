@@ -52,8 +52,7 @@ lemma exteriorMap_fiber (f : M →ₗ[𝓞 K] N) (σ : K →+* ℂ) (r : ℕ)
   have he : (exteriorFiberEquiv N σ r).toLinearMap.comp (fiberMap (map r f) σ) =
       (map r (fiberMap f σ)).comp (exteriorFiberEquiv M σ r).toLinearMap := by
     apply LinearMap.ext_on_range (span_fiberSection σ)
-    intro y
-    exact exteriorMap_section f σ r y
+    exact fun y => exteriorMap_section f σ r y
   exact LinearMap.congr_fun he x
 
 namespace HermitianMetric
@@ -158,8 +157,7 @@ def exterior (h : HermitianMetric K M) (r : ℕ) :
 lemma exteriorFiber_top_eq (h : HermitianMetric K M) (σ : K →+* ℂ) :
     h.exteriorFiber (Module.finrank K (K ⊗[𝓞 K] M)) σ = h.determinantFiber σ := by
   apply h.determinantFiber_unique σ
-  intro x
-  exact congrArg Complex.re (h.exteriorFiber_inner_ιMulti _ σ x x)
+  exact fun x => congrArg Complex.re (h.exteriorFiber_inner_ιMulti _ σ x x)
 
 /-- An integral map isometric on a fiber induces an isometry on every exterior fiber. -/
 lemma exteriorFiber_inner_map [Module.Finite (𝓞 K) N]

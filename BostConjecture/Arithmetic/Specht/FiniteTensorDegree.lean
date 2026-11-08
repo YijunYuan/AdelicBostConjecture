@@ -144,8 +144,7 @@ theorem slope_piTensor {ι : Type} [Fintype ι] (M : ι → Type u)
       ((HermitianMetric.piTensor (fun i => h (some i))) ⊗[𝓞 K] (h none)) f
       (piTensor_option_inner M h)
     have hp : 0 < Module.finrank K (K ⊗[𝓞 K] (⨂[𝓞 K] i : α, M (some i))) := by
-      rw [piTensor_generic_finrank]
-      exact Finset.prod_pos (fun i _ => hr (some i))
+      simpa only [piTensor_generic_finrank] using Finset.prod_pos (fun i _ => hr (some i))
     calc
       (HermitianMetric.piTensor h).slope =
           ((HermitianMetric.piTensor (fun i => h (some i))) ⊗[𝓞 K] (h none)).slope := by

@@ -53,10 +53,8 @@ theorem polynomial_ext [Infinite F] [FiniteDimensional F X]
       polynomialEval_ι]
     simp [Finsupp.single_apply]
   have he' (r : SymmetricAlgebra F (Dual F X)) :
-      MvPolynomial.eval a (e r) = polynomialEval (∑ i, a i • b i) r := by
-    exact DFunLike.congr_fun he r
-  rw [he', he']
-  exact h _
+      MvPolynomial.eval a (e r) = polynomialEval (∑ i, a i • b i) r := DFunLike.congr_fun he r
+  simpa only [he', he'] using h _
 
 variable [FiniteDimensional F X] {s : ℕ}
 
@@ -196,8 +194,7 @@ theorem pluckerPolynomialPullback_mem_invariants {G : Type*} [Group G]
     rw [← LinearEquiv.coe_det, SpecialLinearGroup.det_coe, Units.val_one]
   have he := pluckerPolynomialPullback_naturality b (ρ g.1)
     ((g.2⁻¹ : SpecialLinearGroup F V) : V →ₗ[F] V) hh p
-  rw [hi] at he
-  exact he
+  rwa [hi] at he
 
 omit [FiniteDimensional F V] [Infinite F] in
 /-- The pullback preserves nonzero evaluation at the specified linear map. -/

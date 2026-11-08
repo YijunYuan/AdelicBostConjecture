@@ -111,8 +111,7 @@ lemma norm_determinant_lift (i : E →ₗ[ℂ] G) (q : G →ₗ[ℂ] F)
   let := InnerProductSpace.ofCore (inferInstance : PreInnerProductSpace.Core ℂ F)
   intro p r c x y
   apply ComplexDeterminant.norm_prodMap p r c i (lift q hq) hi (fun _ _ => rfl)
-  intro u v
-  exact (Submodule.mem_orthogonal _ _).mp (lift_mem q hq v) (i u)
+  exact fun u v => (Submodule.mem_orthogonal _ _).mp (lift_mem q hq v) (i u)
     (show q (i u) = 0 from LinearMap.congr_fun hqi u)
 
 end BostConjecture.Arithmetic.ComplexQuotient

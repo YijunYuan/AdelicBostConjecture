@@ -70,8 +70,7 @@ theorem range_polynomialTensorMap (d : ℕ) :
       rw [map_smul, polynomialTensorMap_tprod]
       exact (homogeneousPolynomials F X d).smul_mem r (hprod ℓ)
     | add u v hu hv =>
-      rw [map_add]
-      exact (homogeneousPolynomials F X d).add_mem hu hv
+      simpa only [map_add] using (homogeneousPolynomials F X d).add_mem hu hv
   · intro p hp
     induction hp using Submodule.pow_induction_on_left' with
     | algebraMap r =>

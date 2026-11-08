@@ -41,8 +41,7 @@ theorem continuous_degree :
   obtain ⟨t, ht, hsmall⟩ := exists_pos_mul_lt hε
     (Module.finrank K (K ⊗[𝓞 K] M) : ℝ)
   filter_upwards [h.eventually_all_fiberNorm_compare ht] with g hg
-  rw [Real.dist_eq]
-  exact (h.abs_degree_sub_le_of_fiberNorm_le g t
+  simpa only [Real.dist_eq] using (h.abs_degree_sub_le_of_fiberNorm_le g t
     (fun σ x => (hg σ x).1) (fun σ x => (hg σ x).2)).trans_lt hsmall
 
 /-- The attained maximum saturated degree is continuous in the actual metrics. -/
@@ -55,8 +54,7 @@ theorem continuous_maxDegree :
   obtain ⟨t, ht, hsmall⟩ := exists_pos_mul_lt hε
     (Module.finrank K (K ⊗[𝓞 K] M) : ℝ)
   filter_upwards [h.eventually_all_fiberNorm_compare ht] with g hg
-  rw [Real.dist_eq]
-  exact (h.abs_maxDegree_sub_le_of_fiberNorm_le g ht.le
+  simpa only [Real.dist_eq] using (h.abs_maxDegree_sub_le_of_fiberNorm_le g ht.le
     (fun σ x => (hg σ x).1) (fun σ x => (hg σ x).2)).trans_lt hsmall
 
 omit [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M] in
@@ -69,8 +67,7 @@ theorem continuous_submodule (P : Submodule (𝓞 K) M) :
   apply continuous_pi
   intro x
   apply continuous_pi
-  intro y
-  exact continuous_inner_eval σ (fiberMap P.subtype σ x) (fiberMap P.subtype σ y)
+  exact fun y => continuous_inner_eval σ (fiberMap P.subtype σ x) (fiberMap P.subtype σ y)
 
 /-- Each fixed induced degree is continuous, without requiring saturation. -/
 theorem continuous_degree_submodule (P : Submodule (𝓞 K) M) :

@@ -86,10 +86,9 @@ theorem degree_le_maxDegree (h : HermitianMetric K M)
     (P : Submodule (𝓞 K) M) [Module.IsTorsionFree (𝓞 K) (M ⧸ P)] :
     (h.submodule P).degree ≤ h.maxDegree := by
   obtain ⟨Q, hQ, hmax⟩ := h.exists_max_degree_submodule
-  rw [h.maxDegree_eq_of_max Q hQ hmax]
-  exact hmax P inferInstance
+  simpa only [h.maxDegree_eq_of_max Q hQ hmax] using hmax P inferInstance
 
-theorem maxDegree_nonneg (h : HermitianMetric K M) : 0 ≤ h.maxDegree := by
-  exact (h.subspaceDegree_bot).ge.trans (h.degree_le_maxDegree (integralPart ⊥))
+theorem maxDegree_nonneg (h : HermitianMetric K M) : 0 ≤ h.maxDegree :=
+  (h.subspaceDegree_bot).ge.trans (h.degree_le_maxDegree (integralPart ⊥))
 
 end BostConjecture.Arithmetic.HermitianMetric

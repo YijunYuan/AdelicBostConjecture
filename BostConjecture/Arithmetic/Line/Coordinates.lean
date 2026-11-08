@@ -90,8 +90,7 @@ lemma exists_smul_eq_of_injective (f : M →ₗ[𝓞 K] K) (hf : Function.Inject
   have hbK : (algebraMap (𝓞 K) K b) ≠ 0 := RingOfIntegers.coe_ne_zero_iff.mpr hb'
   refine ⟨a, b, hb', hf ?_⟩
   simp only [map_smul, Algebra.smul_def]
-  have hcross := (div_eq_div_iff hbK hfx).mp heq
-  simpa only [mul_comm] using hcross
+  simpa only [mul_comm] using (div_eq_div_iff hbK hfx).mp heq
 
 omit [Module.Finite (𝓞 K) M] in
 /-- Two coordinates of an integral line differ by the ratio on any nonzero

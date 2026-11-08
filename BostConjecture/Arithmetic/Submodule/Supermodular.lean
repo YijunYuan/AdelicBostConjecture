@@ -30,8 +30,7 @@ variable {M : Type*} [AddCommGroup M] [Module (𝓞 K) M]
 /-- Generic scalar extension preserves sums of integral submodules. -/
 lemma baseChange_sup (U V : Submodule (𝓞 K) M) :
     (U ⊔ V).baseChange K = U.baseChange K ⊔ V.baseChange K := by
-  simp only [baseChange_eq_localized]
-  exact (Submodule.localized'gi K (nonZeroDivisors (𝓞 K))
+  simpa only [baseChange_eq_localized] using (Submodule.localized'gi K (nonZeroDivisors (𝓞 K))
     (TensorProduct.mk (𝓞 K) K M 1)).gc.l_sup
 
 namespace HermitianMetric
@@ -48,8 +47,7 @@ theorem subspaceDegree_supermodular (h : HermitianMetric K M)
   rw [baseChange_sup, baseChange_integralPart, baseChange_integralPart] at hs
   change (h.submodule (integralPart X)).degree + (h.submodule (integralPart Y)).degree ≤
     (h.submodule (integralPart (X ⊓ Y))).degree + (h.submodule (integralPart (X ⊔ Y))).degree
-  rw [integralPart_inf]
-  exact hd.trans (add_le_add le_rfl hs)
+  simpa only [integralPart_inf] using hd.trans (add_le_add le_rfl hs)
 
 /-- The concrete Hermitian subspace payoff satisfies the HN convexity axiom. -/
 instance subspaceSlope_isConvex (h : HermitianMetric K M) :

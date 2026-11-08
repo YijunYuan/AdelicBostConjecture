@@ -60,8 +60,7 @@ lemma determinantExactEquiv_isometry (H : HermitianMetric K P)
       (fun hz => hy (hg (by simpa using hz)))) hz'
   have hn : H.determinant.sectionNorm σ (e (x ⊗ₜ[𝓞 K] y)) =
       (A ⊗[𝓞 K] C).sectionNorm σ (x ⊗ₜ[𝓞 K] y) := by
-    rw [sectionNorm_tensor_tmul]
-    exact H.determinantExactEquiv_sectionNorm i q h hi hq σ x y
+    simpa only [sectionNorm_tensor_tmul] using H.determinantExactEquiv_sectionNorm i q h hi hq σ x y
   obtain ⟨a, b, hb, hab⟩ := exists_smul_eq_of_injective (tensorCoordinate f g)
     (tensorCoordinate_injective f g hf hg) hxy z
   have h₁ := congrArg (fun w => H.determinant.sectionNorm σ (e w)) hab

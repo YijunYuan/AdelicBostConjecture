@@ -190,8 +190,7 @@ lemma determinantDual_sectionNorm (h : HermitianMetric K M) (σ : K →+* ℂ)
     h.determinant.dual.sectionNorm σ (determinantDualEquiv M x) =
       h.dual.determinant.sectionNorm σ x := by
   have he := h.determinantDual_fiber_norm σ (fiberSection _ σ x)
-  rw [fiberMap_section] at he
-  exact he
+  rwa [fiberMap_section] at he
 
 variable [NumberField K]
 

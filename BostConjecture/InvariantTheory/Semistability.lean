@@ -102,7 +102,6 @@ theorem IsGeometricallySemistable.of_mem_span_singleton
     IsGeometricallySemistable ρ y := by
   obtain ⟨c, rfl⟩ := Submodule.mem_span_singleton.mp hy
   apply hx.smul
-  intro hc
-  exact hy0 (hc ▸ zero_smul ℂ x)
+  exact fun hc => hy0 (hc ▸ zero_smul ℂ x)
 
 end BostConjecture.InvariantTheory

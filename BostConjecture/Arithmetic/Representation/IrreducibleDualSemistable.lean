@@ -95,8 +95,7 @@ theorem isSemistable_dual_of_complex_irreducible [NumberField K] [Nontrivial (K 
       (h.fiber s).inner (fiberMap (ρ a) s x) (fiberMap (ρ a) s y) = (h.fiber s).inner x y) :
     h.dual.IsSemistable := by
   let : Nontrivial (K ⊗[𝓞 K] Dual (𝓞 K) M) := Module.nontrivial_of_finrank_pos (R := K) (by
-    rw [dual_generic_finrank]
-    exact Module.finrank_pos)
+    simpa only [dual_generic_finrank] using Module.finrank_pos)
   let : Representation.IsIrreducible (complexRepresentation ρ σ).dual := isIrreducible_dual _
   let : Representation.IsIrreducible (complexRepresentation ρ.dual σ) :=
     isIrreducible_of_equiv (complexDualRepresentationEquiv ρ σ)

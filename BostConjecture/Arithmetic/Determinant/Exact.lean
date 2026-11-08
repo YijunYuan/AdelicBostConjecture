@@ -38,8 +38,7 @@ def exactEquivOfSection (s : N →ₗ[R] P) (hs : q.comp s = LinearMap.id) :
   exact prodEquiv.trans (LinearEquiv.ofBijective (map _ e.toLinearMap)
     ⟨map_injective e.symm.toLinearMap (by
       apply LinearMap.ext
-      intro x
-      exact e.symm_apply_apply x), map_surjective e.surjective⟩)
+      exact fun x => e.symm_apply_apply x), map_surjective e.surjective⟩)
 
 @[simp]
 lemma exactEquivOfSection_apply (s : N →ₗ[R] P) (hs : q.comp s = LinearMap.id)
@@ -60,8 +59,7 @@ lemma exactEquivOfSection_eq (s s' : N →ₗ[R] P)
   have ht (y : N) : i (t y) + s y = s' y := by
     have hy := e.apply_symm_apply (s' y)
     have hqs : q (s' y) = y := LinearMap.congr_fun hs' y
-    rw [he, hq, hqs] at hy
-    exact hy
+    rwa [he, hq, hqs] at hy
   have hc : i.coprod s' = (i.coprod s).comp (upperShear t) := by
     apply LinearMap.ext
     intro x

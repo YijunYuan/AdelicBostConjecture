@@ -60,8 +60,7 @@ theorem finite_bounded_sections (h : HermitianMetric K M)
     have hf := (NumberField.Embeddings.finite_of_norm_le K ℂ (B j)).preimage
       (f := fun a : 𝓞 K => (a : K)) (RingOfIntegers.coe_injective.injOn)
     apply hf.subset
-    intro a ha
-    exact ⟨a.property, ha⟩
+    exact fun a ha => ⟨a.property, ha⟩
   apply ((Set.Finite.pi hS).preimage hi.injOn).subset
   intro x hx
   simp only [Set.mem_preimage, Set.mem_pi, Set.mem_univ, forall_true_left]

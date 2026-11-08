@@ -116,8 +116,7 @@ theorem projection_short_vectors_span (Λ : Submodule ℤ E) (R : ℝ)
   let p := (perpendicularProjection v).toLinearMap
   have hp : p.range = ⊤ := by
     apply LinearMap.range_eq_top.mpr
-    intro y
-    exact ⟨y.val, Submodule.orthogonalProjectionOnto_mem_subspace_eq_self y⟩
+    exact fun y => ⟨y.val, Submodule.orthogonalProjectionOnto_mem_subspace_eq_self y⟩
   apply top_unique
   calc
     ⊤ = Submodule.span ℝ (p '' {x : E | x ∈ Λ ∧ ‖x‖ ≤ R}) := by

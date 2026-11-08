@@ -41,11 +41,9 @@ theorem isSemistable_iff_degree_nonpos (h : HermitianMetric K M)
     · exact ((h.submodule P).degree_eq_zero_of_rank_zero hr).le
     · have hp : (0 : ℝ) < Module.finrank K (K ⊗[𝓞 K] P) := by
         exact_mod_cast Nat.pos_of_ne_zero hr
-      have hb := hs P (Nat.pos_of_ne_zero hr)
-      simpa only [slope, h0, zero_div, div_le_iff₀ hp, zero_mul] using hb
+      simpa only [slope, h0, zero_div, div_le_iff₀ hp, zero_mul] using hs P (Nat.pos_of_ne_zero hr)
   · intro hs P hP
-    simp only [slope, h0, zero_div]
-    exact div_nonpos_of_nonpos_of_nonneg (hs P) (Nat.cast_nonneg _)
+    simpa only [slope, h0, zero_div] using div_nonpos_of_nonpos_of_nonneg (hs P) (Nat.cast_nonneg _)
 
 /-- Uniform rescaling preserves actual semistability in positive rank. -/
 theorem isSemistable_rescale_iff (h : HermitianMetric K M)
@@ -77,8 +75,7 @@ theorem IsSemistable.submodule_of_degree_zero {h : HermitianMetric K M}
     (h.submodule P).IsSemistable := by
   apply ((h.submodule P).isSemistable_iff_degree_nonpos hP0).mpr
   intro S
-  rw [degree_submodule_map]
-  exact (h.isSemistable_iff_degree_nonpos h0).mp hs _
+  simpa only [degree_submodule_map] using (h.isSemistable_iff_degree_nonpos h0).mp hs _
 
 /-- The quotient by a degree-zero saturated submodule is normalized semistable. -/
 theorem IsSemistable.quotient_of_degree_zero {h : HermitianMetric K M}
@@ -104,8 +101,7 @@ theorem isSemistable_of_submodule_quotient (h : HermitianMetric K M)
   let : Module.Projective (𝓞 K) (M ⧸ P) :=
     Module.Flat.projective_of_finitePresentation
   have h0 : h.degree = 0 := by
-    rw [degree_quotient, hP0, sub_zero] at hQ0
-    exact hQ0
+    rwa [degree_quotient, hP0, sub_zero] at hQ0
   refine ⟨h0, (h.isSemistable_iff_degree_nonpos h0).mpr ?_⟩
   intro S
   have hB := ((h.submodule P).isSemistable_iff_degree_nonpos hP0).mp hP

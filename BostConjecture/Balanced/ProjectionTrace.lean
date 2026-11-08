@@ -44,8 +44,7 @@ theorem trace_starProjection_comp_eq_sum {ι : Type*} [Fintype ι]
       ∑ i, inner ℂ (v i : E) (A (v i : E)) := by
   rw [trace_starProjection_comp, LinearMap.trace_eq_sum_inner _ v]
   apply Finset.sum_congr rfl
-  intro i _
-  exact S.inner_orthogonalProjectionOnto_eq_of_mem_left (v i) (A (v i : E))
+  exact fun i _ => S.inner_orthogonalProjectionOnto_eq_of_mem_left (v i) (A (v i : E))
 
 variable {U W : Type*} [NormedAddCommGroup U] [InnerProductSpace ℂ U]
   [FiniteDimensional ℂ U] [NormedAddCommGroup W] [InnerProductSpace ℂ W]

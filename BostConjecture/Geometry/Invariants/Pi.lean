@@ -118,8 +118,7 @@ theorem exists_piTensor_invariants_iff [Finite ι] (z : ⨂[F] i, M i) :
         have hg (j : J) : Function.subtypeNeLift i₀ g h (j : ι) = g j :=
           Function.subtypeNeLift_of_neq i₀ g h j j.property
         simp only [hg] at hh
-        rw [Function.subtypeNeLift_self i₀ g h] at hh
-        exact hh
+        rwa [Function.subtypeNeLift_self i₀ g h] at hh
       obtain ⟨x, hx⟩ := (exists_independent_invariants_iff τ (ρ i₀)
         (equivPiTensorComplSingletonTensor F M i₀ z)).mpr hz'
       obtain ⟨y, hy⟩ := TensorProduct.map_surjective ht

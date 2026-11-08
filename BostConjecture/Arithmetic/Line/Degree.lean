@@ -79,8 +79,8 @@ theorem lineDegree_changeSection (I : FractionalIdeal (𝓞 K)⁰ K) (hI : I ≠
     (ρ : InfinitePlace K → ℝ) (hρ : ∀ v, 0 < ρ v) {a : K} (ha : a ≠ 0) :
     lineDegree (FractionalIdeal.spanSingleton (𝓞 K)⁰ a⁻¹ * I)
       (fun v => v a * ρ v) = lineDegree I ρ := by
-  have hp : FractionalIdeal.spanSingleton (𝓞 K)⁰ a⁻¹ ≠ 0 := by
-    exact FractionalIdeal.spanSingleton_ne_zero_iff.mpr (inv_ne_zero ha)
+  have hp : FractionalIdeal.spanSingleton (𝓞 K)⁰ a⁻¹ ≠ 0 :=
+    FractionalIdeal.spanSingleton_ne_zero_iff.mpr (inv_ne_zero ha)
   rw [lineDegree, lineDegree, logIdealNorm_mul hp hI,
     logIdealNorm_spanSingleton (inv_ne_zero ha),
     archLog_mul (fun v => ne_of_gt (InfinitePlace.pos_iff.mpr ha))

@@ -192,8 +192,8 @@ theorem fiberProjectionTrace_tensor_transport (h : HermitianMetric K M)
           ((h ⊗[𝓞 K] k).fiber σ).inner x y
       exact (h.tensor_inner k σ x y).symm)
   let S := (fiberMap P.subtype σ).range
-  have hS : S.map e.toLinearEquiv.toLinearMap = tensorSubmoduleFiber P σ := by
-    exact LinearMap.range_comp _ _ |>.symm
+  have hS : S.map e.toLinearEquiv.toLinearMap = tensorSubmoduleFiber P σ :=
+    LinearMap.range_comp _ _ |>.symm
   have hp (x) : h.tensorSubmoduleProjection k P σ (e x) = e (S.starProjection x) := by
     change (tensorSubmoduleFiber P σ).starProjection (e x) = _
     rw [← hS]

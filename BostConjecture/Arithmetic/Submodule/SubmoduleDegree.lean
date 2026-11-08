@@ -35,8 +35,7 @@ lemma pullback_submodule_inclusion (h : HermitianMetric K M)
     (h.submodule T).pullback (Submodule.inclusion hPT) (Submodule.inclusion_injective hPT) =
       h.submodule P := by
   apply ext_inner
-  intro σ x y
-  exact h.submodule_inner_inclusion hPT σ x y
+  exact fun σ x y => h.submodule_inner_inclusion hPT σ x y
 
 variable [Module.Finite (𝓞 K) M]
 
@@ -60,8 +59,7 @@ lemma pushforward_norm_le_of_inclusion (h : HermitianMetric K M)
   let x := (h.submodule P).fiberLift (q.comp (Submodule.inclusion hPT)) hp σ z
   have he : fiberMap q σ (fiberMap (Submodule.inclusion hPT) σ x) = z := by
     change ((fiberMap q σ).comp (fiberMap (Submodule.inclusion hPT) σ)) x = z
-    rw [← fiberMap_comp]
-    exact (h.submodule P).fiberMap_fiberLift _ hp σ z
+    simpa only [← fiberMap_comp] using (h.submodule P).fiberMap_fiberLift _ hp σ z
   change ‖(h.submodule T).fiberLift q hq σ z‖ ≤ ‖x‖
   calc
     _ ≤ ‖fiberMap (Submodule.inclusion hPT) σ x‖ := by
@@ -100,8 +98,7 @@ theorem degree_submodule_sup (h : HermitianMetric K M)
     have he : fiberMap (LinearMap.id : Q →ₗ[𝓞 K] Q) σ z = z := by
       let : Algebra (𝓞 K) ℂ := (σ.comp (algebraMap (𝓞 K) K)).toAlgebra
       exact LinearMap.congr_fun LinearMap.baseChange_id z
-    rw [he]
-    exact h.pushforward_norm_le_of_inclusion le_sup_left q hq hf σ z
+    simpa only [he] using h.pushforward_norm_le_of_inclusion le_sup_left q hq hf σ z
   change (h.submodule U).degree = (h.submodule (U ⊓ V)).degree + HU.degree at hdU
   change (h.submodule T).degree = (h.submodule V).degree + HT.degree at hdT
   change _ ≤ (h.submodule (U ⊓ V)).degree + (h.submodule T).degree

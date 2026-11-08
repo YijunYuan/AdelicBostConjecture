@@ -104,8 +104,7 @@ theorem exists_monic_lifting_polynomial {K σ τ : Type*} [Field K] [IsAlgClosed
       simp only [f, AlgHom.comp_apply] at h
       rw [MvPolynomial.aeval_X, MvPolynomial.aeval_X] at h
       change ψ (Ideal.Quotient.mk I (q i)) = a i at h
-      rw [he] at h
-      exact h
+      rwa [he] at h
     · exact (he u).symm.trans hψu
 
 /-- Base sequences approaching a point admit a subsequence of lifts approaching that point. -/

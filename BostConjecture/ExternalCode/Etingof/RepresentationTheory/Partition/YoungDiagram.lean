@@ -41,8 +41,7 @@ private lemma getD_le_sum (l : List ℕ) (i : ℕ) : l.getD i 0 ≤ l.sum := by
       rw [List.getD_cons_zero, List.sum_cons]
       omega
     | succ i =>
-      simp only [List.getD_cons_succ, List.sum_cons]
-      exact le_trans (ih i) (Nat.le_add_left _ _)
+      simpa only [List.getD_cons_succ, List.sum_cons] using le_trans (ih i) (Nat.le_add_left _ _)
 
 /-- The sorted parts of a partition sum to its size. -/
 lemma sum_sortedParts (n : ℕ) (la : Nat.Partition n) :

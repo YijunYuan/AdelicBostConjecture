@@ -52,8 +52,7 @@ theorem murphyOperator_castSucc_mem_lastRowSubspace (t : Tableau (n + 1) μ)
   rw [murphyOperator_castSucc]
   simp only [LinearMap.sum_apply]
   apply Submodule.sum_mem
-  intro i _
-  exact prefixPerm_mem_lastRowSubspace t r (Equiv.swap i j) hx
+  exact fun i _ => prefixPerm_mem_lastRowSubspace t r (Equiv.swap i j) hx
 
 /-- The restriction map intertwines each prefix Murphy operator. -/
 theorem prefixSliceReal_murphyOperator {t : Tableau (n + 1) μ} (ht : IsStandard t)
@@ -143,7 +142,6 @@ theorem murphyOperator_sub_content_mem_colex (t : Tableau n μ)
   rw [hspan T.val, ← hspan t] at h
   obtain ⟨z, hz, hzx⟩ := h
   have he : z = x := Subtype.ext hzx
-  rw [he] at hz
-  exact hz
+  rwa [he] at hz
 
 end BostConjecture.Specht

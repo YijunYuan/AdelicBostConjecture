@@ -61,8 +61,7 @@ theorem prefixCentralOperator_mem_lastRowSubspace (t : Tableau (n + 1) μ)
   apply Submodule.sum_mem
   intro j _
   apply Submodule.sum_mem
-  intro i _
-  exact prefixPerm_mem_lastRowSubspace t r (Equiv.swap i j) hx
+  exact fun i _ => prefixPerm_mem_lastRowSubspace t r (Equiv.swap i j) hx
 
 /-- Through the actual restriction map, the prefix central sum acts by prefix content. -/
 theorem prefixSliceReal_prefixCentralOperator {t : Tableau (n + 1) μ}
@@ -155,7 +154,6 @@ theorem murphyOperator_last_sub_content_mem {t : Tableau (n + 1) μ}
         (diagramContent (prefixShape ht n (Nat.le_succ n)) : ℝ) • x) := by
     rw [eq_sub_of_add_eq' h, hc, sub_smul]
     abel
-  rw [he]
-  exact Submodule.neg_mem _ (prefixCentralOperator_sub_content_mem ht hx)
+  simpa only [he] using Submodule.neg_mem _ (prefixCentralOperator_sub_content_mem ht hx)
 
 end BostConjecture.Specht

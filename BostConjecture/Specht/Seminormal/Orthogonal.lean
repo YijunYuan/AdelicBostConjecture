@@ -35,8 +35,8 @@ def orthogonalStandardBasis (t : Tableau n μ) :
 
 @[simp] theorem orthogonalStandardBasis_apply (t : Tableau n μ)
     (u : {u : Tableau n μ // IsStandard u}) :
-    orthogonalStandardBasis t u = gramSchmidt ℝ (standardRealBasis t) u := by
-  exact congrFun (coe_gramSchmidtBasis (standardRealBasis t)) u
+    orthogonalStandardBasis t u = gramSchmidt ℝ (standardRealBasis t) u :=
+  congrFun (coe_gramSchmidtBasis (standardRealBasis t)) u
 
 /-- Distinct orthogonalized standard polytabloids are perpendicular. -/
 theorem orthogonalStandardBasis_orthogonal (t : Tableau n μ)
@@ -54,8 +54,7 @@ theorem orthogonalStandardBasis_ne_zero (t : Tableau n μ)
 theorem orthogonalStandardBasis_triangular (t : Tableau n μ)
     {u v : {u : Tableau n μ // IsStandard u}} (h : u < v) :
     (standardRealBasis t).repr (orthogonalStandardBasis t u) v = 0 := by
-  rw [orthogonalStandardBasis_apply]
-  exact gramSchmidt_triangular h (standardRealBasis t)
+  simpa only [orthogonalStandardBasis_apply] using gramSchmidt_triangular h (standardRealBasis t)
 
 /-- The coefficient of the original standard polytabloid stays one. -/
 theorem orthogonalStandardBasis_monic (t : Tableau n μ)

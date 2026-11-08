@@ -72,8 +72,7 @@ theorem eq_smul_orthogonalStandardBasis_of_eigenvalues (t : Tableau n μ)
       real_inner_smul_left (F := realSpan t), real_inner_smul_right (F := realSpan t)] at hs
     have hj' : (tableauContent U.val j : ℝ) ≠ (tableauContent T.val j : ℝ) :=
       fun h => hj (Int.cast_injective h)
-    have hz : inner ℝ (orthogonalStandardBasis t U) x = 0 := by
-      exact (mul_eq_zero.mp (by nlinarith [hs] :
+    have hz : inner ℝ (orthogonalStandardBasis t U) x = 0 := (mul_eq_zero.mp (by nlinarith [hs] :
         ((tableauContent U.val j : ℝ) - tableauContent T.val j) *
           inner ℝ (orthogonalStandardBasis t U) x = 0)).resolve_left (sub_ne_zero.mpr hj')
     rw [hz, real_inner_smul_right (F := realSpan t), orthogonalStandardBasis_orthogonal t hUT,
@@ -92,8 +91,7 @@ theorem realSpechtRep_adjacent_commute_murphyOperator (t : Tableau n μ)
     · intro x
       by_cases hxi : x = i
       · subst x
-        rw [Equiv.swap_apply_left]
-        exact iff_of_false (not_lt_of_ge hki'.le)
+        simpa only [Equiv.swap_apply_left] using iff_of_false (not_lt_of_ge hki'.le)
           (by simp only [Fin.lt_def] at *; omega)
       by_cases hxj : x = j
       · subst x
@@ -124,8 +122,7 @@ theorem tableauContent_ne_of_swap_standard {T U : Tableau n μ}
   intro hc
   have he : U = T := hU.eq_of_tableauContent_eq hT (by
     intro k
-    rw [hUeq, tableauContent_relabel_swap]
-    exact Equiv.apply_swap_eq_self hc k)
+    simpa only [hUeq, tableauContent_relabel_swap] using Equiv.apply_swap_eq_self hc k)
   have hi := congrArg (fun v : Tableau n μ => v i) (he.symm.trans hUeq)
   have : i = j := T.injective (by simpa [relabel] using hi)
   exact hij this

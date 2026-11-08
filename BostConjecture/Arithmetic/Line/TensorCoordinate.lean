@@ -45,8 +45,8 @@ lemma tensorCoordinate_tmul (f : M →ₗ[𝓞 K] K) (g : N →ₗ[𝓞 K] K) (x
 lemma tensorCoordinate_injective [Module.Flat (𝓞 K) N]
     (f : M →ₗ[𝓞 K] K) (g : N →ₗ[𝓞 K] K)
     (hf : Function.Injective f) (hg : Function.Injective g) :
-    Function.Injective (tensorCoordinate f g) := by
-  exact (IsLocalization.bijective_linearMap_mul' (nonZeroDivisors (𝓞 K)) K).injective.comp
+    Function.Injective (tensorCoordinate f g) :=
+  (IsLocalization.bijective_linearMap_mul' (nonZeroDivisors (𝓞 K)) K).injective.comp
     (TensorProduct.map_injective_of_flat_flat f g hf hg)
 
 variable [Module.Finite (𝓞 K) M] [Module.Finite (𝓞 K) N]

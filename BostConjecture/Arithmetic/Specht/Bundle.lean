@@ -116,8 +116,7 @@ theorem latticeMetric_action_inner (t : OAI.Saxl.Tableau n μ)
     (latticeFiberEquiv t σ (fiberMap (latticeRepresentation t g) σ x))
     (latticeFiberEquiv t σ (fiberMap (latticeRepresentation t g) σ y)) =
       (Geometry.latticeComplexCore t).inner (latticeFiberEquiv t σ x) (latticeFiberEquiv t σ y)
-  rw [he, he]
-  exact latticeComplexCore_action_inner t g _ _
+  simpa only [he, he] using latticeComplexCore_action_inner t g _ _
 
 /-- The generic rank is the rank of the original integral orbit lattice. -/
 theorem lattice_generic_finrank (t : OAI.Saxl.Tableau n μ) :
@@ -130,8 +129,7 @@ instance lattice_generic_nontrivial (t : OAI.Saxl.Tableau n μ) :
     Nontrivial (K ⊗[𝓞 K] (𝓞 K ⊗[ℤ] orbitLattice t)) := by
   let : Nontrivial (orbitLattice t) := Submodule.nontrivial_iff_ne_bot.mpr (orbitLattice_ne_bot t)
   apply Module.nontrivial_of_finrank_pos (R := K)
-  rw [lattice_generic_finrank]
-  exact Module.finrank_pos
+  simpa only [lattice_generic_finrank] using Module.finrank_pos
 
 /-- The actual canonical arithmetic Specht lattice is semistable. -/
 theorem latticeMetric_isSemistable [NumberField K] (t : OAI.Saxl.Tableau n μ) :

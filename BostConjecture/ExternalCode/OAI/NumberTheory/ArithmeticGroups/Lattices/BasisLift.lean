@@ -56,8 +56,7 @@ theorem basis_lift_cyclic_kernel
     simpa [s] using hu i
   have hfv : f v = 0 := by
     apply LinearMap.mem_ker.mp
-    rw [hker]
-    exact Submodule.mem_span_singleton_self v
+    simpa only [hker] using Submodule.mem_span_singleton_self v
   let d : (R × N) →ₗ[R] M := (LinearMap.toSpanSingleton R M v).coprod s
   have hd : ∀ a : R × N, d a = a.1 • v + s a.2 := fun _ => rfl
   have hfd (a : R × N) : f (d a) = a.2 := by
@@ -82,8 +81,7 @@ theorem basis_lift_cyclic_kernel
     rw [hker] at hx
     obtain ⟨a, ha⟩ := Submodule.mem_span_singleton.mp hx
     refine ⟨(a, f x), ?_⟩
-    rw [hd, ha]
-    exact sub_add_cancel _ _
+    simpa only [hd, ha] using sub_add_cancel _ _
   let e := LinearEquiv.ofBijective d ⟨hinj, hsurj⟩
   refine ⟨((Basis.singleton Unit R).prod b).map e, ?_, ?_⟩
   · change d ((Basis.singleton Unit R).prod b (Sum.inl ())) = v

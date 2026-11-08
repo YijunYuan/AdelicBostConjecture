@@ -46,8 +46,7 @@ theorem isSemistable_iff_maxDegree_nonpos (h : HermitianMetric K M)
   constructor
   · intro hs
     obtain ⟨P, _, hP⟩ := h.exists_degree_eq_maxDegree
-    rw [← hP]
-    exact hs P
+    simpa only [← hP] using hs P
   · intro hm P
     exact (h.degree_submodule_le_maxDegree P).trans hm
 

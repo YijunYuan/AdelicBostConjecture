@@ -78,7 +78,6 @@ theorem tensorDual_evaluation_le (u : ⨂[ℂ] i, Dual ℂ (E i)) (x : ⨂[ℂ] 
         Real.sqrt (((hilbertCore E).inner x x).re) := by
   have h := dualCore_evaluation_le (⨂[ℂ] i, E i)
     (dualDistribEquivOfProjective ℂ E u) x
-  rw [dualDistribEquivOfProjective_inner] at h
-  exact h
+  rwa [dualDistribEquivOfProjective_inner] at h
 
 end BostConjecture.Tensor

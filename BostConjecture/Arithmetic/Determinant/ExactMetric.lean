@@ -108,8 +108,7 @@ lemma determinantExactEquiv_sectionNorm (H : HermitianMetric K P)
   let c' := c.reindex (finCongr hP.symm)
   have ht : (fiberMap q σ).comp (H.fiberLift q hq σ) = LinearMap.id := by
     apply LinearMap.ext
-    intro z
-    exact H.fiberMap_fiberLift q hq σ z
+    exact fun z => H.fiberMap_fiberLift q hq σ z
   change Real.sqrt (((H.determinantFiber σ).inner _ _).re) =
     Real.sqrt ((((H.pullback i hi).determinantFiber σ).inner _ _).re) *
       Real.sqrt ((((H.pushforward q hq).determinantFiber σ).inner _ _).re)

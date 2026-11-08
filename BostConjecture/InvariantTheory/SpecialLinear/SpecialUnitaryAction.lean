@@ -139,7 +139,6 @@ theorem continuous_specialUnitaryPlucker_dual
     simp only [map_sum, map_smul, smul_eq_mul, Basis.coord_apply]
   simp_rw [he]
   apply continuous_finsetSum
-  intro i _
-  exact (continuous_specialUnitaryPlucker_coord bU bW s z i).mul_const _
+  exact fun i _ => (continuous_specialUnitaryPlucker_coord bU bW s z i).mul_const _
 
 end BostConjecture.InvariantTheory

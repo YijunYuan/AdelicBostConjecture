@@ -69,8 +69,7 @@ theorem determinant_generic_nontrivial (t : OAI.Saxl.Tableau n (rectangle a k))
       (𝓞 K ⊗[ℤ] orbitLattice t)) σ) :=
     IsSimpleModule.nontrivial ℂ[Equiv.Perm (Fin n)] ρ.asModule
   apply Module.nontrivial_of_finrank_pos (R := K)
-  rw [← complexFiber_finrank _ σ]
-  exact Module.finrank_pos
+  simpa only [← complexFiber_finrank _ σ] using Module.finrank_pos
 
 /-- Position permutations are isometries for the actual induced determinant metric. -/
 theorem determinantMetric_action_inner (h : HermitianMetric K M) (hk : 0 < k)
@@ -152,8 +151,7 @@ theorem determinantMetric_fiber_inner (h : HermitianMetric K M) (hk : 0 < k)
   let := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber M σ)
   let := InnerProductSpace.ofCore
     (inferInstance : PreInnerProductSpace.Core ℂ (ComplexFiber M σ))
-  intro b x y
-  exact Geometry.projectiveDeterminantMap_inner hk t ha b x y
+  exact fun b x y => Geometry.projectiveDeterminantMap_inner hk t ha b x y
 
 section Family
 

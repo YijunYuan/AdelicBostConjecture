@@ -125,8 +125,7 @@ theorem traceSection_norm_sq (x : M) :
   change (∑ σ : K →+* ℂ, ((h.fiber σ).inner (fiberSection M σ x)
     (fiberSection M σ x)).re) = _
   apply Finset.sum_congr rfl
-  intro σ _
-  exact (Real.sq_sqrt ((h.fiber σ).re_inner_nonneg _)).symm
+  exact fun σ _ => (Real.sq_sqrt ((h.fiber σ).re_inner_nonneg _)).symm
 
 /-- Each fiber section norm is bounded by the trace norm. -/
 lemma sectionNorm_le_traceSection_norm (σ : K →+* ℂ) (x : M) :
@@ -170,8 +169,7 @@ lemma finite_traceLattice_ball (r : ℝ) :
   intro x hx
   obtain ⟨m, rfl⟩ := h.traceLatticeEquiv.surjective x
   refine ⟨m, ?_, rfl⟩
-  intro σ
-  exact (h.sectionNorm_le_traceSection_norm σ m).trans (le_of_lt hx)
+  exact fun σ => (h.sectionNorm_le_traceSection_norm σ m).trans (le_of_lt hx)
 
 instance traceLattice_discreteTopology : DiscreteTopology h.traceLattice := by
   apply discreteTopology_iff_isOpen_singleton_zero.mpr

@@ -125,8 +125,8 @@ theorem determinantRepresentation_irreducible_of_rankAtStalk
     (t : OAI.Saxl.Tableau n (rectangle a k))
     (ha : ∀ p : PrimeSpectrum R, Module.rankAtStalk M p = a) :
     Representation.IsIrreducible
-      (representationBaseChange ℂ (determinantRepresentation (R := R) (M := M) t)) := by
-  exact determinantRepresentation_irreducible t
+      (representationBaseChange ℂ (determinantRepresentation (R := R) (M := M) t)) :=
+  determinantRepresentation_irreducible t
     ((Module.finBasis ℂ (ℂ ⊗[R] M)).reindex
       (finCongr (Geometry.scalarExtension_finrank_of_rankAtStalk ha)))
 

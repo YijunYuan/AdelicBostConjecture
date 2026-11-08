@@ -144,8 +144,7 @@ theorem existsUnique_projectiveDeterminantMap (hk : 0 < k)
   let b (i : (s : Set R)) := (hb i i.property).some
   obtain ⟨U, hU, hUnique⟩ := existsUnique_determinantMap_of_frames hk t (s : Set R) hs b
   refine ⟨U, fun f c => determinantMap_baseChange_of_frames hk t (s : Set R) hs b U hU c, ?_⟩
-  intro V hV
-  exact hUnique V (fun i => hV i (b i))
+  exact fun V hV => hUnique V (fun i => hV i (b i))
 
 /-- The canonical determinant-twisted map of a finite projective constant-rank module. -/
 def projectiveDeterminantMap (hk : 0 < k)

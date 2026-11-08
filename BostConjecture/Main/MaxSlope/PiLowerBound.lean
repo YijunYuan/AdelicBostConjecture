@@ -32,8 +32,7 @@ instance piTensorGenericNontrivial {ι : Type} [Finite ι] (M : ι → Type u)
     Nontrivial (K ⊗[𝓞 K] (⨂[𝓞 K] i, M i)) := by
   let := Fintype.ofFinite ι
   apply Module.nontrivial_of_finrank_pos (R := K)
-  rw [Specht.piTensor_generic_finrank]
-  exact Finset.prod_pos (fun i _ => Module.finrank_pos)
+  simpa only [Specht.piTensor_generic_finrank] using Finset.prod_pos (fun i _ => Module.finrank_pos)
 
 /-- The empty Hilbert tensor product has maximal slope zero, so it supplies
 the exact base case for finite tensor induction. -/

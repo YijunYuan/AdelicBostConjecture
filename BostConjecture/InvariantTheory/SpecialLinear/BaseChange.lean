@@ -73,8 +73,7 @@ theorem map_tensor_specialLinearPairIdeal :
     intro p
     change MvPolynomial.algebraTensorAlgEquiv K L (1 ⊗ₜ[K] p) = _
     simp
-  rw [h]
-  exact map_specialLinearPairIdeal K L ι κ
+  simpa only [h] using map_specialLinearPairIdeal K L ι κ
 
 /-- Scalar extension commutes with the actual determinant-one quotient algebra. -/
 def specialLinearPairBaseChangeEquiv :

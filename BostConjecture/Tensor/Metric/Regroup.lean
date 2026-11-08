@@ -41,7 +41,6 @@ theorem regroupEquiv_inner (c : ∀ i j, InnerProductSpace.Core ℂ (P i j))
     tensorCore_inner_tprod]
   let : Fintype ι := Fintype.ofFinite ι
   let : Fintype κ := Fintype.ofFinite κ
-  simp only [finprod_eq_prod_of_fintype]
-  exact Finset.prod_comm
+  simpa only [finprod_eq_prod_of_fintype] using Finset.prod_comm
 
 end BostConjecture.Tensor

@@ -49,8 +49,7 @@ theorem polynomialPullback_mem_degreeLE (f : X →ₗ[K] X) {N : ℕ}
   have h : polynomialsOfDegreeLE K X N ≤
       (polynomialsOfDegreeLE K X N).comap (polynomialPullback f).toLinearMap := by
     apply iSup_le
-    intro d p hp
-    exact homogeneousPolynomials_le_degreeLE (Nat.le_of_lt_succ d.isLt)
+    exact fun d p hp => homogeneousPolynomials_le_degreeLE (Nat.le_of_lt_succ d.isLt)
       (polynomialPullback_mem_homogeneous f hp)
   exact h hp
 
@@ -62,8 +61,7 @@ theorem exists_mem_polynomialsOfDegreeLE [FiniteDimensional K X]
   refine ⟨N, ?_⟩
   rw [← sum_polynomialHomogeneousComponent b p]
   apply Submodule.sum_mem
-  intro d hd
-  exact homogeneousPolynomials_le_degreeLE (Nat.le_of_lt_succ (Finset.mem_range.mp hd))
+  exact fun d hd => homogeneousPolynomials_le_degreeLE (Nat.le_of_lt_succ (Finset.mem_range.mp hd))
     (polynomialHomogeneousComponent_mem b d p)
 
 /-- The actual inverse-pullback representation on bounded-degree polynomials. -/
@@ -129,8 +127,7 @@ theorem continuous_polynomialSubspace_iff [FiniteDimensional ℂ E]
     intro p q h
     apply Subtype.ext
     apply polynomialEval_ext
-    intro x
-    exact congrFun h x
+    exact fun x => congrFun h x
   have he := ev.isClosedEmbedding_of_injective (LinearMap.ker_eq_bot.mpr hi)
   rw [he.isEmbedding.continuous_iff]
   exact continuous_pi_iff

@@ -42,9 +42,8 @@ def archimedeanPullback (h : HermitianMetric K M)
       re_inner_nonneg := fun x => (h.fiber σ).re_inner_nonneg _
       add_left := by intros; simp only [map_add, (h.fiber σ).add_left]
       smul_left := by intros; simp only [map_smul, (h.fiber σ).smul_left]
-      definite := by
-        intro x hx
-        exact (g σ).injective (by simpa only [map_zero] using (h.fiber σ).definite _ hx) }
+      definite :=
+        fun x hx => (g σ).injective (by simpa only [map_zero] using (h.fiber σ).definite _ hx) }
   conjugate := by
     intro σ x y
     change (h.fiber (ComplexEmbedding.conjugate σ)).inner

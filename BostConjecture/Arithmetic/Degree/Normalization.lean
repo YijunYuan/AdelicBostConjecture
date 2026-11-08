@@ -123,8 +123,7 @@ theorem degree_eq_zero_of_rank_zero (h : HermitianMetric K M)
     apply Submodule.mem_span_singleton.mpr
     exact ⟨a, by simp [ξ, ← map_smul]⟩
   have hq : Nat.card (DeterminantLine (K := K) M ⧸ (𝓞 K ∙ ξ)) = 1 := by
-    rw [hs]
-    exact Nat.card_unique
+    simpa only [hs] using Nat.card_unique
   rw [h.degree_eq hξ, hq]
   have hn (σ : K →+* ℂ) : h.determinant.sectionNorm σ ξ = 1 :=
     h.determinant_sectionNorm_rank_zero hr σ

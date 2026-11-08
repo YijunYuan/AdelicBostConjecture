@@ -68,8 +68,7 @@ theorem continuous_tensor : Continuous
   apply continuous_finsetSum
   intro i _
   apply continuous_finsetSum
-  intro j _
-  exact continuous_const.mul (continuous_const.mul
+  exact fun j _ => continuous_const.mul (continuous_const.mul
     (((continuous_inner_eval σ (b i.1) (b j.1)).comp continuous_fst).mul
       ((continuous_inner_eval σ (c i.2) (c j.2)).comp continuous_snd)))
 

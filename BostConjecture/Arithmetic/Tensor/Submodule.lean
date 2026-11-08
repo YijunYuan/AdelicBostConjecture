@@ -54,8 +54,7 @@ lemma tensorRight_bot : tensorRight N (⊥ : Submodule (𝓞 K) M) = ⊥ := by
 lemma tensorRight_top : tensorRight N (⊤ : Submodule (𝓞 K) M) = ⊤ := by
   apply LinearMap.range_eq_top.mpr
   apply LinearMap.rTensor_surjective
-  intro x
-  exact ⟨⟨x, trivial⟩, rfl⟩
+  exact fun x => ⟨⟨x, trivial⟩, rfl⟩
 
 /-- Right exactness computes the actual tensor image as the quotient-map kernel. -/
 lemma tensorRight_eq_ker (P : Submodule (𝓞 K) M) :

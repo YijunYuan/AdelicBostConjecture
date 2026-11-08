@@ -132,7 +132,7 @@ theorem slope_le_of_complex_invariant (hspos : 0 < s) (hapos : ∀ j, 0 < a j)
       ((Tensor.baseChangeEquiv (𝓞 K) ℂ E).toLinearMap ∘ₗ i.baseChange ℂ) (bV j))) p ≠ 0 →
     ((HermitianMetric.piTensor hE).pullback i hi).slope ≤ ∑ j, (hE j).slope := by
   let : Algebra (𝓞 K) ℂ := (σ.comp (algebraMap (𝓞 K) K)).toAlgebra
-  intro bV m p hm hp hInv hEval
-  exact slope_le_of_invariant E hE i hi ℂ hspos hapos ha hs bV hm hp hInv hEval
+  exact fun bV m p hm hp hInv hEval =>
+    slope_le_of_invariant E hE i hi ℂ hspos hapos ha hs bV hm hp hInv hEval
 
 end BostConjecture.Slope.Geometric

@@ -193,7 +193,6 @@ theorem canonicalPairing_fiber_norm_le
       ((𝓞 K) ⊗[ℤ] Specht.orbitLattice (t j)))))
   intro z
   apply Tensor.dualCore_norm_le _ _ (Real.sqrt_nonneg _)
-  intro u
-  exact canonicalPairing_fiber_le E hE σ i hi hk t ha hl v hs bV b z u
+  exact fun u => canonicalPairing_fiber_le E hE σ i hi hk t ha hl v hs bV b z u
 
 end BostConjecture.Geometry

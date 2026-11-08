@@ -46,8 +46,7 @@ lemma lift_mem (f : E →ₗ[ℂ] F) (hf : Function.Surjective f) (y : F) :
 lemma map_lift (f : E →ₗ[ℂ] F) (hf : Function.Surjective f) (y : F) :
     f (lift f hf y) = y := by
   change f ((orthogonalEquiv f hf y : (LinearMap.ker f)ᗮ) : E) = y
-  have he := (orthogonalEquiv f hf).symm_apply_apply y
-  exact he
+  exact (orthogonalEquiv f hf).symm_apply_apply y
 
 lemma lift_injective (f : E →ₗ[ℂ] F) (hf : Function.Surjective f) :
     Function.Injective (lift f hf) := Function.LeftInverse.injective (map_lift f hf)
@@ -107,10 +106,8 @@ lemma lift_natural {E' F' : Type*} [NormedAddCommGroup E'] [InnerProductSpace �
     obtain ⟨v, rfl⟩ := hker hu
     have hv : v ∈ LinearMap.ker f := by
       apply hj
-      rw [map_zero, ← hcomm]
-      exact hu
-    rw [hi]
-    exact (Submodule.mem_orthogonal _ _).mp (lift_mem f hf x) v hv
+      rwa [map_zero, ← hcomm]
+    simpa only [hi] using (Submodule.mem_orthogonal _ _).mp (lift_mem f hf x) v hv
   · rw [hcomm, map_lift]
 
 end ComplexQuotient

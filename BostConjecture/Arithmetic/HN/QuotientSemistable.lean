@@ -54,8 +54,8 @@ lemma finrank_submodule_map (T : Submodule (𝓞 K) M) (R : Submodule (𝓞 K) T
 /-- Nested restriction to an included submodule preserves its intrinsic degree. -/
 lemma degree_submodule_comap (h : HermitianMetric K M)
     {P T : Submodule (𝓞 K) M} (hPT : P ≤ T) :
-    ((h.submodule T).submodule (P.comap T.subtype)).degree = (h.submodule P).degree := by
-  exact (h.degree_submodule_map T (P.comap T.subtype)).trans
+    ((h.submodule T).submodule (P.comap T.subtype)).degree = (h.submodule P).degree :=
+  (h.degree_submodule_map T (P.comap T.subtype)).trans
     (congrArg (fun S : Submodule (𝓞 K) M => (h.submodule S).degree)
       ((Submodule.map_comap_subtype T P).trans (inf_eq_right.mpr hPT)))
 
@@ -96,8 +96,7 @@ theorem quotient_submodule_slope_le_interval (h : HermitianMetric K M)
   have hZY : Z ≤ Y := by
     rw [← baseChange_integralPart Y]
     exact Submodule.baseChange_mono K hST
-  have hrR : Module.finrank K (K ⊗[𝓞 K] R) = Module.finrank K Z := by
-    exact (finrank_submodule_map T R).trans
+  have hrR : Module.finrank K (K ⊗[𝓞 K] R) = Module.finrank K Z := (finrank_submodule_map T R).trans
       (Submodule.toBaseChange.toLinearEquiv K S).finrank_eq
   have hrP : Module.finrank K (K ⊗[𝓞 K] P) = Module.finrank K X :=
     (finrank_submodule_comap (integralPart_mono hXY)).trans (integralPart_generic_finrank X)
@@ -151,8 +150,7 @@ theorem quotient_isSemistable_iff_interval (h : HermitianMetric K M)
   let R := (integralPart Z).comap T.subtype
   let N := R.map P.mkQ
   have hPR : P ≤ R := Submodule.comap_mono (integralPart_mono hXZ.le)
-  have he : N.comap P.mkQ = R := by
-    exact Submodule.comap_map_eq_self (by simpa using hPR)
+  have he : N.comap P.mkQ = R := Submodule.comap_map_eq_self (by simpa using hPR)
   have hrR : Module.finrank K (K ⊗[𝓞 K] R) = Module.finrank K Z :=
     (finrank_submodule_comap (integralPart_mono hZY)).trans (integralPart_generic_finrank Z)
   have hrP : Module.finrank K (K ⊗[𝓞 K] P) = Module.finrank K X :=
@@ -168,12 +166,10 @@ theorem quotient_isSemistable_iff_interval (h : HermitianMetric K M)
       degree_submodule_comap h (integralPart_mono hXY.le)] at hd
     exact hd
   have hN : 0 < Module.finrank K (K ⊗[𝓞 K] N) := by
-    rw [hrN]
-    exact Nat.sub_pos_of_lt (Submodule.finrank_strictMono hXZ)
+    simpa only [hrN] using Nat.sub_pos_of_lt (Submodule.finrank_strictMono hXZ)
   have hb := hs N hN
   rw [slope, hdN, hrN] at hb
-  rw [slope, ← subspaceDegree_sub_eq_quotient h hXZ.le, subspaceQuotient_finrank hXZ.le]
-  exact hb
+  rwa [slope, ← subspaceDegree_sub_eq_quotient h hXZ.le, subspaceQuotient_finrank hXZ.le]
 
 /-- The interval game and the actual induced Hermitian quotient have the same semistability. -/
 theorem quotient_isSemistable_iff_game (h : HermitianMetric K M)

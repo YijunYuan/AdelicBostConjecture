@@ -63,8 +63,8 @@ theorem hasDerivAt_degree_of_norm_sq (h : ℝ → HermitianMetric K M)
   have hd (σ : K →+* ℂ) : HasDerivAt
       (fun t => (h t).determinant.sectionNorm σ ξ)
       (a σ / (2 * (h t₀).determinant.sectionNorm σ ξ)) t₀ := by
-    have hh := (ha σ).sqrt (pow_ne_zero 2 (hn σ).ne')
-    simpa only [Real.sqrt_sq (le_of_lt ((h _).determinant.sectionNorm_pos σ hξ))] using hh
+    simpa only [Real.sqrt_sq (le_of_lt ((h _).determinant.sectionNorm_pos σ hξ))] using
+      (ha σ).sqrt (pow_ne_zero 2 (hn σ).ne')
   convert hasDerivAt_degree h hξ _ hd using 1
   congr 2
   apply Finset.sum_congr rfl

@@ -47,8 +47,7 @@ theorem tendsto_gap_majorant {a c : ℕ} (ha : 0 < a)
   have hq : 0 < 2 * r - 1 := by linarith
   have hcentral : Tendsto (fun x : ℝ => x ^ (r * (2 * (c - 1 : ℕ)) - c))
       atTop (𝓝 0) := by
-    have h := tendsto_rpow_neg_atTop (sub_pos.mpr hrc)
-    simpa only [neg_sub] using h
+    simpa only [neg_sub] using tendsto_rpow_neg_atTop (sub_pos.mpr hrc)
   have htail := tendsto_rpow_mul_exp_neg_rpow (c : ℝ) hq
     (show (0 : ℝ) < 1 / (4 * (a : ℝ) ^ 2) by positivity)
   have h := (hcentral.const_mul (L ^ 2 * 2 ^ (2 * (c - 1)) / C)).add

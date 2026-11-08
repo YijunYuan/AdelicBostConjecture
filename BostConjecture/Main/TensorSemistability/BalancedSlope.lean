@@ -130,8 +130,7 @@ theorem slope_submodule_tensor_le_of_invariant
         (fiberMap (binaryTensorEquiv (𝓞 K) M N).toLinearMap τ (fiberMap P.subtype τ y))
     simp only [fiberMap, i, LinearMap.baseChange_comp,
       LinearMap.comp_apply]
-  rw [hm] at hb
-  exact hb
+  rwa [hm] at hb
 
 
 /-- A positive-rank actual tensor submodule with a balanced complex fiber

@@ -125,8 +125,7 @@ theorem sum_occupancyWeight_gap_le {a M A : ℕ} (ha : 0 < a) (hM : 0 < M)
   calc
     _ ≤ ∑ b : Occupancy a M A,
         (C * occupancyMass b + D * (if E b then occupancyMass b else 0)) := by
-      rw [sum_filter]
-      exact sum_le_sum (fun b _ => hpoint b)
+      simpa only [sum_filter] using sum_le_sum (fun b _ => hpoint b)
     _ = C + D * ∑ b ∈ (univ : Finset (Occupancy a M A)).filter E,
         occupancyMass b := by
       rw [sum_add_distrib, ← mul_sum, ← mul_sum, sum_occupancyMass hA, mul_one, sum_filter]

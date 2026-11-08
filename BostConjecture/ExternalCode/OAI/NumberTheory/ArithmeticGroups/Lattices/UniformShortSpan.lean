@@ -113,8 +113,7 @@ theorem exists_uniform_lattice_basis_bound
   classical
   obtain ⟨R, hR, hspan⟩ := exists_uniform_short_spanning_bound μ ε C hε
   refine ⟨finrank ℝ E * R, mul_nonneg (Nat.cast_nonneg _) hR.le, ?_⟩
-  intro Λ _ _ hcov hgap
-  exact BoundedBasis.Construction.bounded_spanning_lattice_basis
+  exact fun Λ _ _ hcov hgap => BoundedBasis.Construction.bounded_spanning_lattice_basis
     (finrank ℝ E) Λ rfl R hR.le (hspan Λ hcov hgap)
 
 end

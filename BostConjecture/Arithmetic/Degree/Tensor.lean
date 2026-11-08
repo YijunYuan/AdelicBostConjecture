@@ -65,8 +65,7 @@ lemma degree_tensor_exact (h : HermitianMetric K P)
   have hd := (h ⊗[𝓞 K] g).degree_exact (i.rTensor Q) (q.rTensor Q)
     (rTensor_exact Q he hq) (Module.Flat.rTensor_preserves_injective_linearMap i hi)
     (LinearMap.rTensor_surjective Q hq)
-  rw [tensor_pullback, tensor_pushforward] at hd
-  exact hd
+  rwa [tensor_pullback, tensor_pushforward] at hd
 
 /-- Normalized arithmetic tensor degree, for all finite projective modules
 over every number field, including rank zero. -/

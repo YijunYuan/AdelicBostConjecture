@@ -149,9 +149,8 @@ theorem polytabloidInt_eq_zero_of_not_rectangleContent {n a k : ℕ} (hk : 0 < k
   apply Finset.sum_eq_zero
   intro g _
   rw [wordRepInt_single]
-  have hn : rowWord t ∘ ((g : Equiv.Perm (Fin n))⁻¹ : Equiv.Perm (Fin n)) ≠ w := by
-    intro he
-    exact hw ((mem_rectangle_rowWord_orbit_iff hk t w).mp ⟨g, he⟩)
+  have hn : rowWord t ∘ ((g : Equiv.Perm (Fin n))⁻¹ : Equiv.Perm (Fin n)) ≠ w :=
+    fun he => hw ((mem_rectangle_rowWord_orbit_iff hk t w).mp ⟨g, he⟩)
   have hn' : w ≠ rowWord t ∘ (g : Equiv.Perm (Fin n)).symm := fun h => hn h.symm
   simp [hn']
 

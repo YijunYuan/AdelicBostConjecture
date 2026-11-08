@@ -92,8 +92,7 @@ lemma mem_integralPart_of_smul_mem (X : Submodule K (K ⊗[𝓞 K] M))
     x ∈ integralPart X := by
   change (1 : K) ⊗ₜ[𝓞 K] x ∈ X
   have hx' : (a : K) • ((1 : K) ⊗ₜ[𝓞 K] x) ∈ X := by
-    rw [mem_integralPart, TensorProduct.tmul_smul, ← algebraMap_smul K] at hx
-    exact hx
+    rwa [mem_integralPart, TensorProduct.tmul_smul, ← algebraMap_smul K] at hx
   have ha' : (a : K) ≠ 0 := RingOfIntegers.coe_ne_zero_iff.mpr ha
   simpa only [smul_smul, inv_mul_cancel₀ ha', one_smul] using X.smul_mem (a : K)⁻¹ hx'
 

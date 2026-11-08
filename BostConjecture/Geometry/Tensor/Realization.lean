@@ -55,8 +55,7 @@ theorem tensorCoordinates_map (b : Basis (Fin a) R M) (c : Basis (Fin a) R N)
     rw [Specht.wordTensorAction_prod]
     funext w
     apply Finset.prod_congr rfl
-    intro q hq
-    exact congrFun (LinearMap.toMatrix_mulVec_repr b c f (v q)).symm (w q)
+    exact fun q hq => congrFun (LinearMap.toMatrix_mulVec_repr b c f (v q)).symm (w q)
   | add x y hx hy => simp only [map_add, hx, hy]
 
 /-- Rectangular orbit-lattice vectors have determinant covariance in actual tensor powers. -/

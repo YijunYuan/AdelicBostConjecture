@@ -52,8 +52,7 @@ private theorem exists_nonzero_invariant_pair {H : Type*} [Group H]
       apply LinearMap.ext
       intro v
       apply LinearMap.ext
-      intro w
-      exact hall v w
+      exact fun w => hall v w
     apply hz
     rw [← hy]
     exact LinearMap.congr_fun hzero y
@@ -94,8 +93,7 @@ theorem exists_independent_invariant_pairing
         homSpecialLinearRepresentation ρ (g, h)⁻¹ := by
       ext A x
       simp [homSpecialLinearRepresentation_apply]
-    rw [he]
-    exact hufix (g, h)
+    simpa only [he] using hufix (g, h)
   have hpure : ∃ (v : ⨂[F] (_ : Fin d), V) (ℓ : ⨂[F] (_ : Fin d), Dual F W),
       (∀ h, σd h v = v) ∧ (∀ g, τd g ℓ = ℓ) ∧
       Tensor.tensorPowerPairing A v ℓ ≠ 0 := by

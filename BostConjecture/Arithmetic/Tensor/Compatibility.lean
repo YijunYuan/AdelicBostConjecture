@@ -151,8 +151,7 @@ lemma ext_section_inner {h g : HermitianMetric K M}
     (he : ∀ σ x y, (h.fiber σ).inner (fiberSection M σ x) (fiberSection M σ y) =
       (g.fiber σ).inner (fiberSection M σ x) (fiberSection M σ y)) : h = g := by
   apply ext_inner
-  intro σ x y
-  exact Tensor.inner_ext_of_span (fiberSection M σ) (span_fiberSection σ)
+  exact fun σ x y => Tensor.inner_ext_of_span (fiberSection M σ) (span_fiberSection σ)
     (h.fiber σ) (g.fiber σ) LinearMap.id LinearMap.id (he σ) x y
 
 /-- Tensoring an integral injection commutes with the actual induced metric. -/

@@ -44,8 +44,7 @@ def complexRepresentationEquiv (t : OAI.Saxl.Tableau n μ) :
   Representation.Equiv.mk (complexSpechtEquiv t) (by
     intro g
     apply LinearMap.ext
-    intro x
-    exact complexSpechtEquiv_equivariant t g x)
+    exact fun x => complexSpechtEquiv_equivariant t g x)
 
 /-- The complexified integral orbit action is irreducible. -/
 instance complexRepresentation_irreducible (t : OAI.Saxl.Tableau n μ) :
@@ -57,8 +56,8 @@ instance complexRepresentation_irreducible (t : OAI.Saxl.Tableau n μ) :
 theorem complexification_action (t : OAI.Saxl.Tableau n μ) (g : Equiv.Perm (Fin n))
     (x : ℂ ⊗[ℤ] orbitLattice t) :
     complexification t ((orbitAction t g).baseChange ℂ x) =
-      OAI.Saxl.wordRep n (μ.colLen 0) g (complexification t x) := by
-  exact congrArg Subtype.val (complexSpechtEquiv_equivariant t g x)
+      OAI.Saxl.wordRep n (μ.colLen 0) g (complexification t x) :=
+  congrArg Subtype.val (complexSpechtEquiv_equivariant t g x)
 
 /-- Position permutations preserve the canonical complex lattice Gram form. -/
 theorem latticeComplexCore_action_inner (t : OAI.Saxl.Tableau n μ)

@@ -64,8 +64,8 @@ lemma subspaceDegree_map_equiv (h : HermitianMetric K M)
       (h.fiber σ).inner (fiberMap e.toLinearMap σ x) (fiberMap e.toLinearMap σ y) =
         (h.fiber σ).inner x y)
     (X : Submodule K (K ⊗[𝓞 K] M)) :
-    h.subspaceDegree (X.map (e.baseChange (𝓞 K) K M M).toLinearMap) = h.subspaceDegree X := by
-  exact (congrArg (fun P : Submodule (𝓞 K) M => (h.submodule P).degree)
+    h.subspaceDegree (X.map (e.baseChange (𝓞 K) K M M).toLinearMap) = h.subspaceDegree X :=
+  (congrArg (fun P : Submodule (𝓞 K) M => (h.submodule P).degree)
     (integralPart_map_equiv e X)).trans (h.degree_submodule_map_equiv e he _)
 
 end HermitianMetric

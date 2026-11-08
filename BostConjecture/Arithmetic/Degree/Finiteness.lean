@@ -65,9 +65,7 @@ theorem finite_subspaces_degree_ge (h : HermitianMetric K M) (r : ℕ) (c : ℝ)
     (h.exterior r).sectionNorm σ ξ ≤ lineMinkowskiConstant K * Real.exp (-c)}
   have hT : T.Finite := (h.exterior r).finite_bounded_sections _
   choose ξ hξ0 hξb hξrange using fun X : S => h.exists_small_exterior_section X.val X.property.1
-  have hb (X : S) : ξ X ∈ T := by
-    intro σ
-    exact (hξb X σ).le.trans (mul_le_mul_of_nonneg_left
+  have hb (X : S) : ξ X ∈ T := fun σ => (hξb X σ).le.trans (mul_le_mul_of_nonneg_left
       (Real.exp_le_exp.mpr (neg_le_neg X.property.2)) lineMinkowskiConstant_pos.le)
   let F : S → T := fun X => ⟨ξ X, hb X⟩
   have hF : Function.Injective F := by
@@ -84,8 +82,7 @@ theorem finite_subspaces_degree_ge (h : HermitianMetric K M) (r : ℕ) (c : ℝ)
       simpa only [TensorProduct.tmul_zero] using hz
     apply eq_of_mem_exterior_ranges X.val Y.val X.property.1 Y.property.1
       hnonzero (hξrange X)
-    rw [hxy]
-    exact hξrange Y
+    simpa only [hxy] using hξrange Y
   let : Fintype T := hT.fintype
   let : Finite S := Finite.of_injective F hF
   exact Set.toFinite S
@@ -96,8 +93,7 @@ theorem finite_subspaces_degree_ge_all (h : HermitianMetric K M) (c : ℝ) :
   have hf := Set.finite_iUnion (fun r : Fin (finrank K (K ⊗[𝓞 K] M) + 1) =>
     h.finite_subspaces_degree_ge r.val c)
   apply hf.subset
-  intro X hX
-  exact Set.mem_iUnion.mpr ⟨⟨finrank K X, Nat.lt_succ_of_le X.finrank_le⟩, rfl, hX⟩
+  exact fun X hX => Set.mem_iUnion.mpr ⟨⟨finrank K X, Nat.lt_succ_of_le X.finrank_le⟩, rfl, hX⟩
 
 /-- Saturated integral submodules of a fixed Hermitian bundle with degree
 bounded below form a finite set, with no integral freeness assumption. -/

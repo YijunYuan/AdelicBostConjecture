@@ -48,8 +48,8 @@ theorem hnTensorGrade_isSemistable (h : HermitianMetric K M)
 /-- The actual HN tensor filtration gives the maximal-slope upper bound. -/
 theorem maxSlope_tensor_le (h : HermitianMetric K M)
     (g : HermitianMetric K N) :
-    (h ⊗[𝓞 K] g).maxSlope ≤ h.maxSlope + g.maxSlope := by
-  exact (h ⊗[𝓞 K] g).maxSlope_le_of_integral_filtration (h.hnTensorFlag g)
+    (h ⊗[𝓞 K] g).maxSlope ≤ h.maxSlope + g.maxSlope :=
+  (h ⊗[𝓞 K] g).maxSlope_le_of_integral_filtration (h.hnTensorFlag g)
     (h.hnTensorFlag_monotone g) (h.hnTensorFlag_zero g)
     (h.hnFlag.length * g.hnFlag.length) (h.hnTensorFlag_length g)
     (h.maxSlope + g.maxSlope) (h.hnTensorGrade_isSemistable g)

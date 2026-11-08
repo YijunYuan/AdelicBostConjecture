@@ -125,9 +125,8 @@ def latticeEmbedding (t : Tableau n μ) : orbitLattice t →ₗ[ℤ] realSpan t 
     fun x hx => Submodule.subset_span ⟨x, hx, rfl⟩
 
 theorem latticeEmbedding_injective (t : Tableau n μ) :
-    Function.Injective (latticeEmbedding t) := by
-  intro x y h
-  exact Subtype.ext (realCast_injective (congrArg Subtype.val h))
+    Function.Injective (latticeEmbedding t) :=
+  fun _ _ h => Subtype.ext (realCast_injective (congrArg Subtype.val h))
 
 theorem range_latticeEmbedding (t : Tableau n μ) :
     LinearMap.range (latticeEmbedding t) = spanLattice t := by

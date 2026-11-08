@@ -71,8 +71,7 @@ theorem isSymmetric_partialTraceRight (P : Module.End ℂ (U ⊗[ℂ] W))
   let b := stdOrthonormalBasis ℂ W
   rw [← inner_conj_symm, inner_partialTraceRight b, map_sum, inner_partialTraceRight b]
   apply Finset.sum_congr rfl
-  intro i _
-  exact (inner_conj_symm (𝕜 := ℂ) (P (x ⊗ₜ[ℂ] b i)) (y ⊗ₜ[ℂ] b i)).trans
+  exact fun i _ => (inner_conj_symm (𝕜 := ℂ) (P (x ⊗ₜ[ℂ] b i)) (y ⊗ₜ[ℂ] b i)).trans
     (hP _ _)
 
 /-- A partial trace preserves self-adjointness. -/
@@ -82,8 +81,7 @@ theorem isSymmetric_partialTraceLeft (P : Module.End ℂ (U ⊗[ℂ] W))
   let b := stdOrthonormalBasis ℂ U
   rw [← inner_conj_symm, inner_partialTraceLeft b, map_sum, inner_partialTraceLeft b]
   apply Finset.sum_congr rfl
-  intro i _
-  exact (inner_conj_symm (𝕜 := ℂ) (P (b i ⊗ₜ[ℂ] x)) (b i ⊗ₜ[ℂ] y)).trans
+  exact fun i _ => (inner_conj_symm (𝕜 := ℂ) (P (b i ⊗ₜ[ℂ] x)) (b i ⊗ₜ[ℂ] y)).trans
     (hP _ _)
 
 /-- Taking a partial trace does not change the full trace. -/

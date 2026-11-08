@@ -117,8 +117,7 @@ lemma tensorGradeEquiv_projection [Module.Flat (𝓞 K) N]
 /-- Every refinement step lies in the tensor of its larger first submodule. -/
 lemma tensorStep_le_tensorRight {P T : Submodule (𝓞 K) M} (hPT : P ≤ T)
     (U : Submodule (𝓞 K) N) : tensorStep P T U ≤ tensorRight N T := by
-  rw [← tensorStep_top hPT]
-  exact tensorStep_mono le_rfl le_rfl le_top
+  simpa only [← tensorStep_top hPT] using tensorStep_mono le_rfl le_rfl le_top
 
 /-- The actual refinement step regarded inside `T ⊗ N`. -/
 def tensorStepLift [Module.Flat (𝓞 K) N]

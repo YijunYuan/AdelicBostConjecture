@@ -63,8 +63,7 @@ lemma map_upperShear_top (t : N →ₗ[R] M)
   apply (baseChangeEquiv R (M × N) F n).injective
   apply map_injective p.symm.toLinearMap (by
     apply LinearMap.ext
-    intro z
-    exact p.symm_apply_apply z)
+    exact fun z => p.symm_apply_apply z)
   simp only [TensorProduct.mk_apply]
   rw [map_baseChange_section F (upperShear t) n x]
   have hp : p.toLinearMap.comp ((upperShear t).baseChange F) =

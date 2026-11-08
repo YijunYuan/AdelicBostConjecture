@@ -54,8 +54,7 @@ theorem continuous_basis_determinant
   apply continuous_pi
   intro i
   apply continuous_pi
-  intro j
-  exact (b.coord i).continuous_of_finiteDimensional.comp (continuous_apply j)
+  exact fun j => (b.coord i).continuous_of_finiteDimensional.comp (continuous_apply j)
 
 theorem compact_nondegenerate_frames
     {E ι : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E]
@@ -119,8 +118,7 @@ theorem continuous_basis_matrix
   apply continuous_pi
   intro i
   apply continuous_pi
-  intro j
-  exact (b.coord i).continuous_of_finiteDimensional.comp (continuous_apply j)
+  exact fun j => (b.coord i).continuous_of_finiteDimensional.comp (continuous_apply j)
 
 theorem continuous_invertible_matrix_mk
     {X ι : Type*} [TopologicalSpace X] [Fintype ι] [DecidableEq ι]

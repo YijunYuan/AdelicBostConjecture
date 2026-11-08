@@ -148,7 +148,7 @@ def complementTableauOfShape {T : Tableau (m + l) (rectangle a k)}
       simp only [rotateCell_rotateCell (T (Fin.natAdd m i.rev)).property,
         rotateCell_rotateCell (T (Fin.natAdd m j.rev)).property] at he
       have hi : Fin.natAdd m i.rev = Fin.natAdd m j.rev := T.injective (Subtype.ext he)
-      have hr : i.rev = j.rev := Fin.ext (by exact Nat.add_left_cancel (congrArg Fin.val hi))
+      have hr : i.rev = j.rev := Fin.ext (Nat.add_left_cancel (congrArg Fin.val hi))
       simpa only [Fin.rev_rev] using congrArg Fin.rev hr
     , by
       intro c

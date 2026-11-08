@@ -52,11 +52,9 @@ theorem isSemistable_iff_of_equiv
       have hy : fiberMap e.toLinearMap σ (fiberMap e.symm.toLinearMap σ y) = y :=
         (e.baseChange (𝓞 K) ℂ M N).apply_symm_apply y
       exact (he σ _ _).symm.trans (by rw [hx, hy])
-    rw [← hi]
-    exact hs.pullback_equiv e.symm
+    simpa only [← hi] using hs.pullback_equiv e.symm
   · intro hs
-    rw [← hp]
-    exact hs.pullback_equiv e
+    simpa only [← hp] using hs.pullback_equiv e
 
 /-- If the two Hilbert tensor pieces are normalized semistable, the whole
 tensor product is normalized semistable, for any saturated first-factor cut. -/

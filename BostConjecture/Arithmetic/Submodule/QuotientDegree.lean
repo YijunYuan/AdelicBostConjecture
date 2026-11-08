@@ -42,8 +42,7 @@ def quotientPreimageEquiv (P : Submodule (𝓞 K) M) (N : Submodule (𝓞 K) (M 
     obtain ⟨x, hx⟩ := P.mkQ_surjective y
     refine ⟨(P.comap (N.comap P.mkQ).subtype).mkQ ⟨x, ?_⟩, ?_⟩
     · change P.mkQ x ∈ N
-      rw [hx]
-      exact y.property
+      simpa only [hx] using y.property
     · exact Subtype.ext hx
 
 omit [NumberField K] in
@@ -57,8 +56,7 @@ lemma le_quotient_preimage (P : Submodule (𝓞 K) M)
     (N : Submodule (𝓞 K) (M ⧸ P)) : P ≤ N.comap P.mkQ := by
   intro x hx
   change P.mkQ x ∈ N
-  rw [show P.mkQ x = 0 from (Submodule.Quotient.mk_eq_zero P).mpr hx]
-  exact N.zero_mem
+  simpa only [show P.mkQ x = 0 from (Submodule.Quotient.mk_eq_zero P).mpr hx] using N.zero_mem
 
 namespace HermitianMetric
 

@@ -191,8 +191,7 @@ theorem sum_abs_tail_le_of_exp_bound {ι : Type*} [Fintype ι] (w f : ι → ℝ
     linarith
   · have hempty : (univ.filter (fun i => u ≤ |f i|) : Finset ι) = ∅ := by
       apply filter_eq_empty_iff.mpr
-      intro i _ hi
-      exact huA (hi.trans (hf i))
+      exact fun i _ hi => huA (hi.trans (hf i))
     rw [hempty, sum_empty]
     positivity
 

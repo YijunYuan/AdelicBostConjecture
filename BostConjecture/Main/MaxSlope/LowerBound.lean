@@ -84,8 +84,7 @@ instance tensorGenericNontrivial
     [Nontrivial (K ⊗[𝓞 K] M)] [Nontrivial (K ⊗[𝓞 K] N)] :
     Nontrivial (K ⊗[𝓞 K] (M ⊗[𝓞 K] N)) := by
   apply Module.nontrivial_of_finrank_pos (R := K)
-  rw [tensor_generic_finrank]
-  exact Nat.mul_pos Module.finrank_pos Module.finrank_pos
+  simpa only [tensor_generic_finrank] using Nat.mul_pos Module.finrank_pos Module.finrank_pos
 
 /-- The unconditional lower bound for maximal slopes under Hilbert tensor
 products, obtained from the actual first HN terms. -/
@@ -105,7 +104,6 @@ theorem maxSlope_add_le_tensor
   rw [tensor_map_pullback h g P.subtype Q.subtype P.injective_subtype Q.injective_subtype,
     slope_tensor _ _
     h.hnSubmodule_one_rank_pos g.hnSubmodule_one_rank_pos] at hs
-  rw [← h.slope_hnSubmodule_one, ← g.slope_hnSubmodule_one]
-  exact hs
+  rwa [← h.slope_hnSubmodule_one, ← g.slope_hnSubmodule_one]
 
 end BostConjecture.Arithmetic.HermitianMetric

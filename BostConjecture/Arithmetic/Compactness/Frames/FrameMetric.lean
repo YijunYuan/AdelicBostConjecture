@@ -58,8 +58,7 @@ def frameProductCore (h : HermitianMetric K M) (b : Module.Basis ι ℤ M)
   smul_left x y c := by rw [map_smul, inner_smul_left]
   definite x hx := by
     apply (h.complexFrameEquiv b B).injective
-    rw [map_zero]
-    exact inner_self_eq_zero.mp hx
+    simpa only [map_zero] using inner_self_eq_zero.mp hx
 
 /-- The Gram entries are the usual real column inner products. -/
 lemma frameProductCore_basis (h : HermitianMetric K M)
@@ -98,7 +97,6 @@ lemma trace_inner_eq_sum_frame (h : HermitianMetric K M)
   rw [← b₀.repr.inner_map_map, EuclideanSpace.inner_eq_star_dotProduct]
   simp only [dotProduct, star_trivial, hb]
   apply Finset.sum_congr rfl
-  intro k _
-  exact mul_comm _ _
+  exact fun k _ => mul_comm _ _
 
 end BostConjecture.Arithmetic.HermitianMetric

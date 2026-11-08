@@ -151,8 +151,7 @@ theorem determinant_sectionNorm_map_le (h : HermitianMetric K M)
     (σ : K →+* ℂ) (x : DeterminantLine (K := K) M) :
     g.determinant.sectionNorm σ (determinantMap f hr x) ≤ h.determinant.sectionNorm σ x := by
   have he := h.determinantFiber_norm_map_le g f hr hc σ (fiberSection _ σ x)
-  rw [fiberMap_section] at he
-  exact he
+  rwa [fiberMap_section] at he
 
 variable [NumberField K] [Module.Projective (𝓞 K) M] [Module.Projective (𝓞 K) N]
 

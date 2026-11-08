@@ -417,16 +417,14 @@ private noncomputable def sytBranchingToFun (n : ℕ) (la : Nat.Partition (n + 1
   have g_row : ∀ c₁ c₂ : { x : ℕ × ℕ // x.1 <
     (auxiliaryPartitionNatList la').length ∧
       x.2 < (auxiliaryPartitionNatList la').getD x.1 0 },
-      c₁.val.1 = c₂.val.1 → c₁.val.2 < c₂.val.2 → g c₁ < g c₂ := by
-    intro c₁ c₂ hr hc
-    exact hrow ⟨c₁.val, reducedCell_mem_original (hcorner := hcorner_oc) c₁.property⟩
+      c₁.val.1 = c₂.val.1 → c₁.val.2 < c₂.val.2 → g c₁ < g c₂ :=
+    fun c₁ c₂ hr hc => hrow ⟨c₁.val, reducedCell_mem_original (hcorner := hcorner_oc) c₁.property⟩
            ⟨c₂.val, reducedCell_mem_original (hcorner := hcorner_oc) c₂.property⟩ hr hc
   have g_col : ∀ c₁ c₂ : { x : ℕ × ℕ // x.1 <
     (auxiliaryPartitionNatList la').length ∧
       x.2 < (auxiliaryPartitionNatList la').getD x.1 0 },
-      c₁.val.2 = c₂.val.2 → c₁.val.1 < c₂.val.1 → g c₁ < g c₂ := by
-    intro c₁ c₂ hr hc
-    exact hcol ⟨c₁.val, reducedCell_mem_original (hcorner := hcorner_oc) c₁.property⟩
+      c₁.val.2 = c₂.val.2 → c₁.val.1 < c₂.val.1 → g c₁ < g c₂ :=
+    fun c₁ c₂ hr hc => hcol ⟨c₁.val, reducedCell_mem_original (hcorner := hcorner_oc) c₁.property⟩
            ⟨c₂.val, reducedCell_mem_original (hcorner := hcorner_oc) c₂.property⟩ hr hc
   exact ⟨corner, g, g_bij, g_row, g_col⟩
 
@@ -562,8 +560,7 @@ private theorem sytBranching_invFun_injective (n : ℕ) (la : Nat.Partition (n +
       simp only [sytBranchingInvFun]; simp
     have hval₂ : (sytBranchingInvFun n la ⟨c₂, t₂⟩).val ⟨c₁.val, hc₁_cell⟩ ≠ Fin.last n := by
       simp only [sytBranchingInvFun]
-      simp only [dite_eq_right hne]
-      exact Fin.castSucc_ne_last _
+      simpa only [dite_eq_right hne] using Fin.castSucc_ne_last _
     exact hval₂ (by rw [← hval₁]; exact (congrFun hfun ⟨c₁.val, hc₁_cell⟩).symm)
   have hc_eq : c₁ = c₂ := Subtype.ext hcorner_eq
   subst hc_eq
@@ -626,9 +623,7 @@ lemma YoungDiagram.rowLen_eq_succ_of_isOuterCorner
     (hc : (YoungDiagram.auxiliaryCellPredicate μ) i j) : μ.rowLen i = j + 1 := by
   have h1 : j < μ.rowLen i :=
     YoungDiagram.mem_iff_lt_rowLen.mp hc.1
-  have h2 : ¬(j + 1 < μ.rowLen i) := by
-    intro h
-    exact hc.2.2 (YoungDiagram.mem_iff_lt_rowLen.mpr h)
+  have h2 : ¬(j + 1 < μ.rowLen i) := fun h => hc.2.2 (YoungDiagram.mem_iff_lt_rowLen.mpr h)
   omega
 
 /-- At an outer corner, the column length is one more than the row index. -/
@@ -637,9 +632,7 @@ lemma YoungDiagram.colLen_eq_succ_of_isOuterCorner
     (hc : (YoungDiagram.auxiliaryCellPredicate μ) i j) : μ.colLen j = i + 1 := by
   have h1 : i < μ.colLen j :=
     YoungDiagram.mem_iff_lt_colLen.mp hc.1
-  have h2 : ¬(i + 1 < μ.colLen j) := by
-    intro h
-    exact hc.2.1 (YoungDiagram.mem_iff_lt_colLen.mpr h)
+  have h2 : ¬(i + 1 < μ.colLen j) := fun h => hc.2.1 (YoungDiagram.mem_iff_lt_colLen.mpr h)
   omega
 
 /-- The hook length at an outer corner is one. -/
@@ -658,9 +651,7 @@ private lemma YoungDiagram.removeCorner_mem_row
     (b : ℕ) :
     (a, b) ∈ ((YoungDiagram.auxiliaryCornerTransform μ) i j hc) ↔ (a, b) ∈ μ := by
   rw [mem_removeCorner_iff hc]
-  constructor
-  · exact And.left
-  · exact fun h => ⟨h, by simp [Prod.ext_iff, ha]⟩
+  exact ⟨And.left, fun h => ⟨h, by simp [Prod.ext_iff, ha]⟩⟩
 
 /-- Removing an outer corner leaves every other row length unchanged. -/
 lemma YoungDiagram.removeCorner_rowLen_eq_of_ne
@@ -708,9 +699,7 @@ private lemma YoungDiagram.removeCorner_mem_col
     (a : ℕ) :
     (a, b) ∈ ((YoungDiagram.auxiliaryCornerTransform μ) i j hc) ↔ (a, b) ∈ μ := by
   rw [mem_removeCorner_iff hc]
-  constructor
-  · exact And.left
-  · exact fun h => ⟨h, fun heq => by cases heq; exact hb rfl⟩
+  exact ⟨And.left, fun h => ⟨h, fun heq => by cases heq; exact hb rfl⟩⟩
 
 /-- Removing an outer corner leaves every other column length unchanged. -/
 lemma YoungDiagram.removeCorner_colLen_eq_of_ne
@@ -1039,8 +1028,7 @@ theorem YoungDiagram.sum_outerCorners_auxiliaryCellWeight_eq_one
             ((YoungDiagram.auxiliaryCellStatistic μ) i j - 1 : ℚ) := by
       intro c _
       rw [YoungDiagram.auxiliaryCellWeight, dite_eq_left hmem, ite_eq_right hone]
-    rw [Finset.sum_congr rfl hsummand]
-    rw [← Finset.sum_div]
+    rw [Finset.sum_congr rfl hsummand, ← Finset.sum_div]
     rw [Finset.sum_comm]
     have hinner : ∀ (w : { v // v ∈ (YoungDiagram.auxiliaryCellFinset μ) i j }),
         w ∈ ((YoungDiagram.auxiliaryCellFinset μ) i j).attach →
@@ -1438,8 +1426,7 @@ private lemma YoungDiagram.hookWalkWeight_row_telescope
     intro b hb hn
     by_cases hbj : b = j
     · rw [show Finset.Ico b (j + 1) = {b} from by ext; simp [Finset.mem_Ico]; omega]
-      rw [Finset.sum_singleton]
-      rw [show Finset.Ico b j = ∅ from by ext; simp [Finset.mem_Ico]; omega]
+      rw [Finset.sum_singleton, show Finset.Ico b j = ∅ from by ext; simp [Finset.mem_Ico]; omega]
       rw [Finset.prod_empty, hbj, YoungDiagram.auxiliaryCellWeight_self_eq_one hc]
     · have hblt : b < j := lt_of_le_of_ne hb hbj
       rw [show Finset.Ico b (j + 1) = {b} ∪ Finset.Ico (b + 1) (j + 1) from by
@@ -1510,8 +1497,7 @@ private lemma YoungDiagram.hookWalkWeight_col_telescope
     intro a ha hn
     by_cases haj : a = i
     · rw [show Finset.Ico a (i + 1) = {a} from by ext; simp [Finset.mem_Ico]; omega]
-      rw [Finset.sum_singleton]
-      rw [show Finset.Ico a i = ∅ from by ext; simp [Finset.mem_Ico]; omega]
+      rw [Finset.sum_singleton, show Finset.Ico a i = ∅ from by ext; simp [Finset.mem_Ico]; omega]
       rw [Finset.prod_empty, haj, YoungDiagram.auxiliaryCellWeight_self_eq_one hc]
     · have halt : a < i := lt_of_le_of_ne ha haj
       rw [show Finset.Ico a (i + 1) = {a} ∪ Finset.Ico (a + 1) (i + 1) from by
@@ -1663,8 +1649,7 @@ private lemma YoungDiagram.hookWalkWeight_col_sum_singleton
     have : (i, j) ∈ μ.cells := hc.1
     rw [ha] at this
     exact congrArg _ (Finset.mem_singleton.mp this).symm
-  rw [honly, Finset.sum_singleton]
-  rw [YoungDiagram.auxiliaryCellWeight_self_eq_one hc]
+  rw [honly, Finset.sum_singleton, YoungDiagram.auxiliaryCellWeight_self_eq_one hc]
   have hHP : (YoungDiagram.auxiliaryDiagramStatistic μ) = 1 := by
     unfold YoungDiagram.auxiliaryDiagramStatistic
     rw [honly, Finset.prod_singleton]
@@ -1738,11 +1723,9 @@ theorem YoungDiagram.sum_auxiliaryCellWeight_eq_statistic_div
           have ha' : a ≤ i := Nat.lt_succ_iff.mp ha
           have hb' : b ≤ j := Nat.lt_succ_iff.mp hb
           exact ⟨μ.up_left_mem ha' hb' hc.1, ha', hb'⟩
-      rw [hfilter_eq]
-      rw [Finset.sum_product]
+      rw [hfilter_eq, Finset.sum_product]
       simp_rw [← Finset.mul_sum]
-      rw [← Finset.sum_mul]
-      rw [show Finset.Ico 0 (i + 1) = Finset.Ico 0 (i + 1) from rfl]
+      rw [← Finset.sum_mul, show Finset.Ico 0 (i + 1) = Finset.Ico 0 (i + 1) from rfl]
       rw [show Finset.Ico 0 (j + 1) = Finset.Ico 0 (j + 1) from rfl]
       rw [YoungDiagram.hookWalkWeight_col_telescope hc (Nat.zero_le _)]
       rw [YoungDiagram.hookWalkWeight_row_telescope hc (Nat.zero_le _)]
@@ -1769,11 +1752,9 @@ private lemma YoungDiagram.hook_quotient_identity_yd
       (YoungDiagram.auxiliaryCellPairFinset μ).attach.sum (fun c =>
         μ.cells.sum (fun u => (YoungDiagram.auxiliaryCellWeight μ) u.1 u.2 c.val)) := by
     apply Finset.sum_congr rfl
-    intro c _
-    exact (YoungDiagram.sum_auxiliaryCellWeight_eq_statistic_div μ
+    exact fun c _ => (YoungDiagram.sum_auxiliaryCellWeight_eq_statistic_div μ
       (YoungDiagram.mem_auxiliaryCellPairFinset_iff.mp c.property)).symm
-  rw [hstep1]
-  rw [Finset.sum_comm]
+  rw [hstep1, Finset.sum_comm]
   have hstep3 : μ.cells.sum (fun u =>
       (YoungDiagram.auxiliaryCellPairFinset μ).attach.sum (fun c =>
         (YoungDiagram.auxiliaryCellWeight μ) u.1 u.2 c.val)) =
@@ -1858,8 +1839,7 @@ theorem Partition.auxiliaryCornerSum_mul_hookLengthProduct_eq_factorial (n : ℕ
     rw [hsyt]
     ring
   simp_rw [hsummand]
-  rw [← Finset.mul_sum]
-  rw [hook_quotient_identity]
+  rw [← Finset.mul_sum, hook_quotient_identity]
   push_cast [Nat.factorial_succ]
   ring
 

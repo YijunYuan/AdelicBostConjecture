@@ -44,8 +44,7 @@ lemma ofReal_traceSection_inner (x y : M) :
     calc
       ∑ σ, star (f σ) = ∑ σ, f (ComplexEmbedding.conjugate σ) := by
         apply Finset.sum_congr rfl
-        intro σ _
-        exact (h.conjugate σ x y).symm
+        exact fun σ _ => (h.conjugate σ x y).symm
       _ = ∑ σ, f σ := Equiv.sum_comp (ComplexEmbedding.involutive_conjugate K).toPerm f
   have hi : (∑ σ, f σ).im = 0 := by
     have hh := congrArg Complex.im hc
@@ -191,8 +190,7 @@ theorem degree_eq_neg_sum_log_of_basis
     obtain ⟨a, rfl⟩ := e.symm.surjective y
     exact Submodule.mem_span_singleton.mpr ⟨a, by simp [ξ, ← map_smul]⟩
   have hq : Nat.card (DeterminantLine (K := K) M ⧸ (𝓞 K ∙ ξ)) = 1 := by
-    rw [hs]
-    exact Nat.card_unique
+    simpa only [hs] using Nat.card_unique
   rw [h.degree_eq hξ, hq, he]
   simp
 

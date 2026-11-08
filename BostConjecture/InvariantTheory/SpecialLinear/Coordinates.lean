@@ -111,8 +111,7 @@ theorem specialLinearPair_left_det
   rw [specialLinearLeftRelation, map_sub, map_one] at h
   have hd := sub_eq_zero.mp h
   change (f.comp q).toRingHom _ = 1 at hd
-  rw [RingHom.map_det] at hd
-  exact hd
+  rwa [RingHom.map_det] at hd
 
 theorem specialLinearPair_right_det
     (f : SpecialLinearPairCoordinateRing K ι κ →ₐ[K] A) :
@@ -127,8 +126,7 @@ theorem specialLinearPair_right_det
   rw [specialLinearRightRelation, map_sub, map_one] at h
   have hd := sub_eq_zero.mp h
   change (f.comp q).toRingHom _ = 1 at hd
-  rw [RingHom.map_det] at hd
-  exact hd
+  rwa [RingHom.map_det] at hd
 
 /-- A point of the coordinate algebra yields actual determinant-one matrices. -/
 def specialLinearPairPoint

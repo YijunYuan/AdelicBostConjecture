@@ -51,8 +51,8 @@ private theorem sum_symmetric_pairs {M : Type*} [AddCommGroup M]
   calc
     ∑ i, ∑ j, f i j = ∑ i, ∑ j,
         ((if j < i then f i j else 0) + (if i = j then f i j else 0) +
-          (if i < j then f i j else 0)) := by
-      exact Finset.sum_congr rfl fun i _ => Finset.sum_congr rfl fun j _ => he i j
+          (if i < j then f i j else 0)) :=
+      Finset.sum_congr rfl fun i _ => Finset.sum_congr rfl fun j _ => he i j
     _ = _ := by
       simp only [Finset.sum_add_distrib, hl, hu, Finset.sum_ite_eq,
         Finset.mem_univ, ite_true]
@@ -67,8 +67,8 @@ private theorem wordRep_commute_all_swaps (d : ℕ) (g : Equiv.Perm (Fin n)) :
   change _ * _ = _ * _
   simp only [Finset.mul_sum, Finset.sum_mul, ← map_mul, Equiv.mul_swap_eq_swap_mul]
   calc
-    _ = ∑ i : Fin n, ∑ j : Fin n, wordRep n d (Equiv.swap (g i) j * g) := by
-      exact Finset.sum_congr rfl fun i _ =>
+    _ = ∑ i : Fin n, ∑ j : Fin n, wordRep n d (Equiv.swap (g i) j * g) :=
+      Finset.sum_congr rfl fun i _ =>
         Equiv.sum_comp g (fun j => wordRep n d (Equiv.swap (g i) j * g))
     _ = _ := Equiv.sum_comp g (fun i => ∑ j : Fin n, wordRep n d (Equiv.swap i j * g))
 
@@ -88,8 +88,7 @@ theorem wordRep_commute_centralWordOperator (d : ℕ) (g : Equiv.Perm (Fin n)) :
       centralWordOperator n d * wordRep n d g at h
   have hh : (2 : ℂ) • (wordRep n d g * centralWordOperator n d) =
       (2 : ℂ) • (centralWordOperator n d * wordRep n d g) := by
-    simp only [two_smul]
-    exact add_left_cancel (by simpa only [add_assoc] using h)
+    simpa only [two_smul] using add_left_cancel (by simpa only [add_assoc] using h)
   exact smul_right_injective _ (by norm_num : (2 : ℂ) ≠ 0) hh
 
 /-- The existing rank-one column antisymmetrizer identifies the central action's line. -/
@@ -109,8 +108,7 @@ theorem centralWordOperator_polytabloid_mem (t : Tableau n μ) :
     simp only [Finset.sum_mul, Finset.mul_sum, smul_mul_assoc, mul_smul_comm]
     exact Finset.sum_congr rfl fun g _ =>
       congrArg (fun x => _ • x) (wordRep_commute_centralWordOperator (μ.colLen 0) g.val).eq
-  rw [← Module.End.mul_apply, he, Module.End.mul_apply, columnAlt_row] at hc
-  exact hc
+  rwa [← Module.End.mul_apply, he, Module.End.mul_apply, columnAlt_row] at hc
 
 /-- Sum of the signed contents of all boxes of a Young diagram. -/
 def diagramContent (μ : YoungDiagram) : ℤ := by

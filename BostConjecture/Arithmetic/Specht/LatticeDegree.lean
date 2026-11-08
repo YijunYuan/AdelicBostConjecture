@@ -68,8 +68,7 @@ theorem latticeMetric_determinant_norm (t : OAI.Saxl.Tableau n μ)
       ((Int.castRingHom ℂ).map_det G).symm]
     have hc := covolume_sq_eq_integer_gram t b
     change ‖(G.det : ℂ)‖ = _
-    rw [Complex.norm_intCast]
-    rw [← hc, abs_of_nonneg (sq_nonneg _)]
+    rw [Complex.norm_intCast, ← hc, abs_of_nonneg (sq_nonneg _)]
   have hx : 0 ≤ h.determinant.sectionNorm σ (ιMulti (𝓞 K) _ (b.baseChange (𝓞 K))) :=
     Real.sqrt_nonneg _
   have hy := ZLattice.covolume_pos (spanLattice t) volume

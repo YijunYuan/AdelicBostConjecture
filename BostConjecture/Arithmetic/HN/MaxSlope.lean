@@ -56,8 +56,7 @@ theorem subspaceSlope_max_eq (h : HermitianMetric K M) :
       DedekindCut.principal h.maxSlope := by
   apply (DedekindCut.principal_toReal_of_bounds (a := h.slope)
     ?_ h.subspaceSlope_max_le_maxDegree).symm
-  rw [← h.subspaceSlope_top]
-  exact PayoffFunction.apply_le_max
+  simpa only [← h.subspaceSlope_top] using PayoffFunction.apply_le_max
 
 /-- The supremum of initial slopes bounds the degree of every generic subspace. -/
 theorem subspaceDegree_le_maxSlope (h : HermitianMetric K M)
@@ -89,8 +88,7 @@ theorem slope_submodule_le_maxSlope (h : HermitianMetric K M)
 /-- The ambient slope is bounded by the supremum of submodule slopes. -/
 lemma slope_le_maxSlope (h : HermitianMetric K M) : h.slope ≤ h.maxSlope := by
   apply DedekindCut.principal_le_principal.mp
-  rw [← h.subspaceSlope_top, ← h.subspaceSlope_max_eq]
-  exact PayoffFunction.apply_le_max
+  simpa only [← h.subspaceSlope_top, ← h.subspaceSlope_max_eq] using PayoffFunction.apply_le_max
 
 /-- Intrinsic semistability is equality of average and maximal slopes. -/
 theorem isSemistable_iff_maxSlope_eq (h : HermitianMetric K M) :

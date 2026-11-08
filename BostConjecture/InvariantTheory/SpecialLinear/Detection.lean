@@ -88,8 +88,8 @@ def specialLinearOpenQuotient :
 theorem specialLinearOpenQuotient_algebraMap
     (p : MvPolynomial ((ι × ι) ⊕ (κ × κ)) K) :
     specialLinearOpenQuotient K ι κ (algebraMap _ (SpecialLinearPairOpen K ι κ) p) =
-      Ideal.Quotient.mkₐ K (specialLinearPairIdeal K ι κ) p := by
-  exact IsLocalization.Away.lift_eq _
+      Ideal.Quotient.mkₐ K (specialLinearPairIdeal K ι κ) p :=
+  IsLocalization.Away.lift_eq _
     (show IsUnit (Ideal.Quotient.mkₐ K (specialLinearPairIdeal K ι κ)
       (matrixPairDeterminant K ι κ)) from by
         rw [quotient_matrixPairDeterminant]; exact isUnit_one) p
@@ -183,8 +183,7 @@ theorem specialLinearNormalization_injective (i₀ : ι) (j₀ : κ) :
     Function.Injective (specialLinearNormalization K ι κ i₀ j₀) := by
   apply Function.LeftInverse.injective (f := specialLinearNormalization K ι κ i₀ j₀)
     (g := specialLinearOpenQuotient K ι κ)
-  intro a
-  exact DFunLike.congr_fun (specialLinearOpenQuotient_comp_normalization K ι κ i₀ j₀) a
+  exact fun a => DFunLike.congr_fun (specialLinearOpenQuotient_comp_normalization K ι κ i₀ j₀) a
 
 theorem matrixPairDeterminant_ne_zero : matrixPairDeterminant K ι κ ≠ 0 := by
   intro h
@@ -207,8 +206,7 @@ theorem specialLinearPairEval_detects [Infinite K] (i₀ : ι) (j₀ : κ)
   let e := (localizationPolynomialEval (matrixPairDeterminant K ι κ) x hx).comp
     (specialLinearNormalization K ι κ i₀ j₀)
   have h := ha (specialLinearPairPoint e)
-  rw [specialLinearPairEval_point] at h
-  exact h
+  rwa [specialLinearPairEval_point] at h
 
 end Retraction
 

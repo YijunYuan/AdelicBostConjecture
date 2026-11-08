@@ -136,8 +136,7 @@ theorem occupancyWeight_eq_zero_of_not_injective {a M A : ℕ} (b : Occupancy a 
   have hz : (Matrix.vandermonde (fun i => ((b.val i).val : ℝ))).det = 0 := by
     by_contra hz
     apply hb
-    intro i j hij
-    exact Matrix.det_vandermonde_ne_zero_iff.mp hz (by rw [hij])
+    exact fun i j hij => Matrix.det_vandermonde_ne_zero_iff.mp hz (by rw [hij])
   simp [occupancyWeight, hz]
 
 /-- The labelled squared-Vandermonde mass is `a!` times the decreasing mass. -/

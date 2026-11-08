@@ -155,15 +155,14 @@ theorem apply_eq_zero_tfae (T : E →L[ℂ] F) (x : E) :
     simp [← ContinuousLinearMap.adjoint_inner_right, h]
   tfae_finish
 
-theorem polar_eq_zero_iff (T : E →L[ℂ] F) (x : E) : T.polar x = 0 ↔ T x = 0 := by
-  exact ((T.apply_eq_zero_tfae x).out 2 1)
+theorem polar_eq_zero_iff (T : E →L[ℂ] F) (x : E) : T.polar x = 0 ↔ T x = 0 :=
+  ((T.apply_eq_zero_tfae x).out 2 1)
 
-theorem abs_eq_zero_iff (T : E →L[ℂ] F) (x : E) : |T| x = 0 ↔ T x = 0 := by
-  exact ((T.apply_eq_zero_tfae x).out 3 1)
+theorem abs_eq_zero_iff (T : E →L[ℂ] F) (x : E) : |T| x = 0 ↔ T x = 0 :=
+  ((T.apply_eq_zero_tfae x).out 3 1)
 
 theorem polar_eq_zero_iff_abs_eq_zero (T : E →L[ℂ] F) (x : E) :
-    T.polar x = 0 ↔ |T| x = 0 := by
-  exact ((T.apply_eq_zero_tfae x).out 2 3)
+    T.polar x = 0 ↔ |T| x = 0 := ((T.apply_eq_zero_tfae x).out 2 3)
 
 theorem ker_polar_eq (T : E →L[ℂ] F) : T.polar.ker = T.ker := by
   ext x

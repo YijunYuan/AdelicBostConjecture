@@ -217,8 +217,7 @@ theorem prefixSlice_polytabloidInt (ht : IsStandard t) (hm : m ≤ n) :
       rw [extendPrefixWord_castLE] at hi
       change (t (g.val (Fin.castLE hm i))).val.1 = (w i).val at hi
       change (t (Fin.castLE hm (restrictPrefixPerm hm g.val hfix i))).val.1 = _
-      rw [castLE_restrictPrefixPerm]
-      exact hi
+      rwa [castLE_restrictPrefixPerm]
     have he := polytabloidInt_rowWord_column (prefixTableau ht m hm) q
     rw [hq, hz] at he
     exact (Units.ne_zero (Equiv.Perm.sign q.val)) he.symm

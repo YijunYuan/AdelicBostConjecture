@@ -82,8 +82,8 @@ theorem determinantMetric_eq_tensor (h : HermitianMetric K M) (hk : 0 < k)
       (Tensor.tensorCore (fun _ : Fin k => ComplexDeterminant.core b)).inner
         (Geometry.determinantPowerBaseChangeEquiv k _ u)
         (Geometry.determinantPowerBaseChangeEquiv k _ v) =
-      ((HermitianMetric.piTensor (fun _ : Fin k => h.determinant)).fiber σ).inner u v := by
-    exact Tensor.tensorCore_map_inner (fun _ : Fin k => h.determinant.fiber σ)
+      ((HermitianMetric.piTensor (fun _ : Fin k => h.determinant)).fiber σ).inner u v :=
+    Tensor.tensorCore_map_inner (fun _ : Fin k => h.determinant.fiber σ)
       (fun _ : Fin k => ComplexDeterminant.core b)
       (fun _ => (determinantComplexEquiv M σ).toLinearMap) (fun _ => hd) _ _
   rw [determinantMetric_fiber_inner h hk t ha σ b]

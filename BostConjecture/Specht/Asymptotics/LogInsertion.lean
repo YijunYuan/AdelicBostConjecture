@@ -52,8 +52,8 @@ theorem log_prefixInsertionFactor_nonneg {n : ℕ} {μ : YoungDiagram} {t : Tabl
     (ht : IsStandard t) (m : Fin n) : 0 ≤ Real.log (prefixInsertionFactor t m) := by
   rw [log_prefixInsertionFactor ht]
   apply sum_nonneg
-  intro r hr
-  exact (log_ratio_bounds (by exact_mod_cast two_le_prefixAxialDistance ht m r (mem_range.mp hr))).1
+  exact fun r hr =>
+    (log_ratio_bounds (by exact_mod_cast two_le_prefixAxialDistance ht m r (mem_range.mp hr))).1
 
 /-- The uniform logarithmic insertion bound in a rectangle with `a` rows. -/
 theorem log_prefixInsertionFactor_le {n a k : ℕ} {t : Tableau n (rectangle a k)}
@@ -111,8 +111,7 @@ theorem log_prefixInsertionFactor_le_of_not_gap {n a k : ℕ} {t : Tableau n (re
         intro hle
         apply hgap
         refine ⟨⟨r, hr'.trans hrow⟩, ⟨(t m).val.1, hrow⟩, hr', ?_⟩
-        rw [abs_sub_comm, ← prefixAxialDistance_eq_shifted ht m hr', abs_of_nonneg (by linarith)]
-        exact hle
+        rwa [abs_sub_comm, ← prefixAxialDistance_eq_shifted ht m hr', abs_of_nonneg (by linarith)]
       exact (log_ratio_bounds hd).2.2.trans
         (one_div_le_one_div_of_le (by linarith) (by linarith))
     _ = ((t m).val.1 : ℝ) / (L - 1) := by simp [div_eq_mul_inv]

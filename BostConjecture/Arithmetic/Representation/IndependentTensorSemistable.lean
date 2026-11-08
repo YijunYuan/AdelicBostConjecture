@@ -93,8 +93,7 @@ theorem isSemistable_tensor_of_complex_irreducible
       (k.fiber s).inner (fiberMap (τ b) s x) (fiberMap (τ b) s y) = (k.fiber s).inner x y) :
     (h ⊗[𝓞 K] k).IsSemistable := by
   let : Nontrivial (K ⊗[𝓞 K] (M ⊗[𝓞 K] N)) := Module.nontrivial_of_finrank_pos (R := K) (by
-    rw [tensor_generic_finrank]
-    exact Nat.mul_pos Module.finrank_pos Module.finrank_pos)
+    simpa only [tensor_generic_finrank] using Nat.mul_pos Module.finrank_pos Module.finrank_pos)
   let : Representation.IsIrreducible
       (independentTensorRepresentation (complexRepresentation ρ σ) (complexRepresentation τ σ)) :=
     isIrreducible_independentTensor _ _

@@ -80,8 +80,7 @@ lemma lineContract_mem_untwist (hL : Module.finrank K (K ⊗[𝓞 K] L) = 1)
     (C : Submodule (𝓞 K) (M ⊗[𝓞 K] L)) (f : L →ₗ[𝓞 K] 𝓞 K)
     {t : M ⊗[𝓞 K] L} (ht : t ∈ C) : lineContract f t ∈ lineUntwist C := by
   intro l
-  rw [lineContract_tmul_eq_smul hL]
-  exact C.smul_mem _ ht
+  simpa only [lineContract_tmul_eq_smul hL] using C.smul_mem _ ht
 
 /-- Removing and restoring the line factor recovers every actual integral submodule. -/
 theorem tensorRight_lineUntwist (hL : Module.finrank K (K ⊗[𝓞 K] L) = 1)
@@ -112,8 +111,7 @@ theorem tensorRight_lineUntwist (hL : Module.finrank K (K ⊗[𝓞 K] L) = 1)
     intro t htc
     rw [← ht t]
     apply Submodule.sum_mem
-    intro j _
-    exact ⟨(⟨lineContract (f j) t, lineContract_mem_untwist hL C (f j) htc⟩ :
+    exact fun j _ => ⟨(⟨lineContract (f j) t, lineContract_mem_untwist hL C (f j) htc⟩ :
       lineUntwist C) ⊗ₜ[𝓞 K] e j, rfl⟩
 
 end BostConjecture.Arithmetic

@@ -31,8 +31,7 @@ variable {M : Type*} [AddCommGroup M] [Module (𝓞 K) M]
 @[simp]
 lemma integralPartGenericEquiv_tmul (X : Submodule K (K ⊗[𝓞 K] M))
     (a : K) (x : integralPart X) :
-    (integralPartGenericEquiv X (a ⊗ₜ[𝓞 K] x) : K ⊗[𝓞 K] M) = a ⊗ₜ[𝓞 K] (x : M) := by
-  rfl
+    (integralPartGenericEquiv X (a ⊗ₜ[𝓞 K] x) : K ⊗[𝓞 K] M) = a ⊗ₜ[𝓞 K] (x : M) := rfl
 
 /-- Generic scalar extension of an integral exterior inclusion lies in the
 exterior image of the original generic subspace. -/

@@ -75,8 +75,7 @@ theorem polynomialHomogeneousComponent_mem (b : Basis ι K X) (d : ℕ)
   change (SymmetricAlgebra.equivMvPolynomial b.dualBasis).symm
     (MvPolynomial.homogeneousComponent d (SymmetricAlgebra.equivMvPolynomial b.dualBasis p)) ∈ _
   change SymmetricAlgebra.equivMvPolynomial b.dualBasis q = _ at he
-  rw [← he, AlgEquiv.symm_apply_apply]
-  exact hq
+  rwa [← he, AlgEquiv.symm_apply_apply]
 
 theorem polynomialHomogeneousComponent_of_mem (b : Basis ι K X) {d n : ℕ}
     {p : SymmetricAlgebra K (Dual K X)} (hp : p ∈ homogeneousPolynomials K X n) :
@@ -109,8 +108,7 @@ theorem polynomialHomogeneousComponent_of_sum_eq (b : Basis ι K X)
   calc
     _ = ∑ j ∈ D, if d = j then q j else 0 := by
       apply Finset.sum_congr rfl
-      intro j hj
-      exact polynomialHomogeneousComponent_of_mem b (hq j hj)
+      exact fun j hj => polynomialHomogeneousComponent_of_mem b (hq j hj)
     _ = _ := by simp
 
 /-- A degree-preserving linear map commutes with the component projections. -/

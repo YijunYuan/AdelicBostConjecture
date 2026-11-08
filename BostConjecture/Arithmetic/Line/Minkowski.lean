@@ -132,8 +132,7 @@ theorem exists_small_section (h : HermitianMetric K M)
   have hlength := congrFun (h.coordinateLength_eq f hf hy0 hx) v
   change h.sectionNorm v.embedding y / v (f y) = h.coordinateLength f x v at hlength
   have hv : v (f y) ≠ 0 := (InfinitePlace.pos_iff.mpr (hy ▸ ha0)).ne'
-  rw [(div_eq_iff hv).mp hlength, mul_comm, hy]
-  exact hab v
+  simpa only [(div_eq_iff hv).mp hlength, mul_comm, hy] using hab v
 
 end HermitianMetric
 end BostConjecture.Arithmetic

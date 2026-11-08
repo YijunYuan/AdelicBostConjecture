@@ -119,8 +119,7 @@ theorem exists_rowWord_relabel_eq (t : Tableau n μ) {X : Finset (Fin n)} {r : �
     have hcol := (q⁻¹).property k
     change (t (q.val⁻¹ k)).val.2 = (t k).val.2 at hcol
     have hlt := YoungDiagram.mem_iff_lt_colLen.mp (t (q.val⁻¹ k)).property
-    rw [Finset.mem_range]
-    exact hlt.trans_le (by rw [hcol]; exact hX k hk)
+    simpa only [Finset.mem_range] using hlt.trans_le (by rw [hcol]; exact hX k hk)
   obtain ⟨x, hx, y, hy, hxy, he⟩ :=
     Finset.exists_ne_map_eq_of_card_lt_of_maps_to (by simpa using hcard) hmaps
   exact ⟨x, hx, y, hy, hxy, Fin.ext he⟩
@@ -164,8 +163,7 @@ theorem sum_sign_smul_polytabloidRat_relabel_eq_zero (t : Tableau n μ)
       ((Equiv.Perm.sign σ : ℤ) : ℚ) • polytabloidRat (relabel σ t) = 0 := by
   ext w
   have h := congrFun (sum_sign_smul_polytabloidInt_relabel_eq_zero t hX hcard) w
-  have hc := congrArg (fun z : ℤ => (z : ℚ)) h
-  simpa [polytabloidRat] using hc
+  simpa [polytabloidRat] using congrArg (fun z : ℤ => (z : ℚ)) h
 
 open Classical in
 /-- Collecting internal column permutations in the Garnir relation. -/
@@ -192,8 +190,7 @@ theorem card_nsmul_polytabloidRat_add_sum_eq_zero (t : Tableau n μ)
     have hsq : ((Equiv.Perm.sign σ : ℤ) : ℚ) * ((Equiv.Perm.sign σ : ℤ) : ℚ) = 1 := by
       rcases Int.units_eq_one_or (Equiv.Perm.sign σ) with h | h <;> simp [h]
     rw [hsq, one_smul]
-  rw [Finset.sum_congr rfl hconst, Finset.sum_const] at hsplit
-  exact hsplit
+  rwa [Finset.sum_congr rfl hconst, Finset.sum_const] at hsplit
 
 /-- Rational Garnir straightening: only permutations that leave the column
 group are required. The positive multiplicity of internal permutations is

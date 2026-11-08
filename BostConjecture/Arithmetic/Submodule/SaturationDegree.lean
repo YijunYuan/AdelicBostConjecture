@@ -37,8 +37,8 @@ lemma submodule_inner_inclusion (h : HermitianMetric K M)
       ((h.submodule P).fiber σ).inner x y := by
   let : Algebra (𝓞 K) ℂ := (σ.comp (algebraMap (𝓞 K) K)).toAlgebra
   have he : (fiberMap T.subtype σ).comp (fiberMap (Submodule.inclusion hPT) σ) =
-      fiberMap P.subtype σ := by
-    exact (LinearMap.baseChange_comp (A := ℂ) (Submodule.inclusion hPT) T.subtype).symm
+      fiberMap P.subtype σ :=
+    (LinearMap.baseChange_comp (A := ℂ) (Submodule.inclusion hPT) T.subtype).symm
   change (h.fiber σ).inner
     ((fiberMap T.subtype σ).comp (fiberMap (Submodule.inclusion hPT) σ) x)
     ((fiberMap T.subtype σ).comp (fiberMap (Submodule.inclusion hPT) σ) y) = _
@@ -54,8 +54,8 @@ theorem degree_submodule_le_of_le (h : HermitianMetric K M)
     (h.submodule P).degree ≤ (h.submodule T).degree := by
   apply (h.submodule P).degree_le_of_injective (h.submodule T)
     (Submodule.inclusion hPT) (Submodule.inclusion_injective hPT) hr
-  intro σ x
-  exact le_of_eq (congrArg Real.sqrt (congrArg Complex.re (h.submodule_inner_inclusion hPT σ x x)))
+  exact fun σ x =>
+    le_of_eq (congrArg Real.sqrt (congrArg Complex.re (h.submodule_inner_inclusion hPT σ x x)))
 
 /-- The actual saturation of an integral submodule has at least its degree. -/
 theorem degree_le_saturation (h : HermitianMetric K M)

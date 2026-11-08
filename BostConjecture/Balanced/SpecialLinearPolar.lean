@@ -58,8 +58,7 @@ theorem trace_log_abs_eq_zero (T : E →L[ℂ] E) (hT : Function.Injective T)
     LinearMap.trace ℂ E (CFC.log T.abs).toLinearMap = 0 := by
   apply trace_eq_zero_of_det_exp_eq_one _ (log_abs_isSymmetric T)
   change LinearMap.det (NormedSpace.exp (CFC.log T.abs)).toLinearMap = 1
-  rw [exp_log_abs T hT]
-  exact det_abs_eq_one T hT hdet
+  simpa only [exp_log_abs T hT] using det_abs_eq_one T hT hdet
 
 /-- Every special-linear map factors as a determinant-one unitary and the exponential
 of a constructed traceless Hermitian operator. -/
@@ -77,8 +76,7 @@ theorem specialLinear_polar (g : SpecialLinearGroup ℂ E) :
   refine ⟨u, (CFC.log T.abs).toLinearMap, ?_, log_abs_isSymmetric T,
     trace_log_abs_eq_zero T hT hdet, ?_⟩
   · have h := congrArg LinearMap.det (polarIsometry_comp_exp_log_abs T hT)
-    rw [LinearMap.det_comp, exp_log_abs T hT, det_abs_eq_one T hT hdet, mul_one, hdet] at h
-    exact h
+    rwa [LinearMap.det_comp, exp_log_abs T hT, det_abs_eq_one T hT hdet, mul_one, hdet] at h
   · exact (polarIsometry_comp_exp_log_abs T hT).symm
 
 end BostConjecture.Balanced

@@ -142,8 +142,7 @@ theorem row_hookProduct_mul_shiftedDifferences (μ : YoungDiagram) {a r : ℕ}
   have hd := row_hooks_disjoint_shiftedDifferences μ a r
   have hp := congrArg (fun s : Finset ℕ => ∏ x ∈ s, x)
     (row_hooks_union_shiftedDifferences μ ha hr)
-  rw [prod_union hd, prod_image hH, prod_image hG, prod_Ico_id_eq_factorial] at hp
-  exact hp
+  rwa [prod_union hd, prod_image hH, prod_image hG, prod_Ico_id_eq_factorial] at hp
 
 /-- Row grouping of the hook product, allowing zero-padded rows. -/
 theorem hookProduct_eq_prod_rows (μ : YoungDiagram) {a : ℕ} (ha : μ.colLen 0 ≤ a) :

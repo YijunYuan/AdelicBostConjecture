@@ -119,8 +119,7 @@ theorem mem_span_range_map_const_iff_forall_commute (h : IsUnit ((Fintype.card �
   · refine (piTensorHomEquiv R (fun _ : ι => M) (fun _ : ι => M)).injective ?_
     rw [LinearEquiv.apply_symm_apply]
     have hcancel := congrArg (· * reindexRepresentation R M ι σ⁻¹) (hkey.trans hcomm.symm)
-    simp only [mul_assoc, reindexRepresentation_mul_inv, mul_one] at hcancel
-    exact hcancel
+    simpa only [mul_assoc, reindexRepresentation_mul_inv, mul_one] using hcancel
 
 end Ring
 

@@ -102,8 +102,7 @@ theorem continuous_fiberNorm (h : HermitianMetric K M) (σ : K →+* ℂ) :
   apply continuous_finsetSum
   intro i _
   apply continuous_finsetSum
-  intro j _
-  exact (((b.coord i).continuous_of_finiteDimensional.comp continuous_snd).star).mul
+  exact fun j _ => (((b.coord i).continuous_of_finiteDimensional.comp continuous_snd).star).mul
     (((b.coord j).continuous_of_finiteDimensional.comp continuous_snd).mul
       ((continuous_inner_eval σ (b i) (b j)).comp continuous_fst))
 
@@ -128,11 +127,9 @@ theorem eventually_fiberNorm_compare (h : HermitianMetric K M)
       change ‖x‖ = 1
       simpa only [Metric.mem_sphere, dist_zero_right] using hx
     have hupper : h.fiberNorm σ x < Real.exp t := by
-      rw [hn]
-      exact Real.one_lt_exp_iff.mpr ht
+      simpa only [hn] using Real.one_lt_exp_iff.mpr ht
     have hlower : Real.exp (-t) < h.fiberNorm σ x := by
-      rw [hn]
-      exact Real.exp_lt_one_iff.mpr (neg_neg_of_pos ht)
+      simpa only [hn] using Real.exp_lt_one_iff.mpr (neg_neg_of_pos ht)
     exact ((hc.continuousAt (x := (h, x))).eventually_lt_const hupper).and
       ((hc.continuousAt (x := (h, x))).eventually_const_lt hlower)
   filter_upwards [hs] with g hg x
@@ -167,7 +164,7 @@ theorem eventually_all_fiberNorm_compare (h : HermitianMetric K M)
     {t : ℝ} (ht : 0 < t) :
     ∀ᶠ g in 𝓝 h, ∀ (σ : K →+* ℂ) (x : ComplexFiber M σ),
       g.fiberNorm σ x ≤ Real.exp t * h.fiberNorm σ x ∧
-      h.fiberNorm σ x ≤ Real.exp t * g.fiberNorm σ x := by
-  exact Filter.eventually_all.mpr (fun σ => h.eventually_fiberNorm_compare σ ht)
+      h.fiberNorm σ x ≤ Real.exp t * g.fiberNorm σ x :=
+  Filter.eventually_all.mpr (fun σ => h.eventually_fiberNorm_compare σ ht)
 
 end BostConjecture.Arithmetic.HermitianMetric

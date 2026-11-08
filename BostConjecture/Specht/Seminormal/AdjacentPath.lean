@@ -58,8 +58,7 @@ private theorem exists_adjacent_descent (p : Equiv.Perm (Fin n)) (hp : p ≠ 1) 
     | zero => exact fun i => Fin.elim0 i
     | succ n =>
       apply Fin.strictMono_iff_lt_succ.mpr
-      intro i
-      exact lt_of_le_of_ne (h i.castSucc i.succ rfl)
+      exact fun i => lt_of_le_of_ne (h i.castSucc i.succ rfl)
         (fun he => (Fin.castSucc_lt_succ (i := i)).ne (p.injective he))
   have he : p = 1 := by
     apply Equiv.ext

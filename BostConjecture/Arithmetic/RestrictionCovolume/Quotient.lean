@@ -131,8 +131,7 @@ lemma traceLift_orthogonal (P : Submodule (𝓞 K) M)
   let := InnerProductSpace.ofCore (inferInstance : PreInnerProductSpace.Core ℂ (ComplexFiber M σ))
   have hu : fiberMap P.subtype σ ((h.submodule P).traceInclusion x σ) ∈
       LinearMap.ker (fiberMap P.mkQ σ) := by
-    rw [ker_fiberMap_mkQ]
-    exact LinearMap.mem_range_self _ _
+    simpa only [ker_fiberMap_mkQ] using LinearMap.mem_range_self _ _
   have ho := (Submodule.mem_orthogonal _ _).mp
     (ComplexQuotient.lift_mem (fiberMap P.mkQ σ) (fiberMap_surjective P.mkQ P.mkQ_surjective σ)
       ((h.quotient P).traceInclusion y σ)) _ hu
@@ -148,8 +147,8 @@ lemma ker_traceMap_mkQ (P : Submodule (𝓞 K) M)
   · intro hx
     have hxσ (σ : K →+* ℂ) :
         fiberMap P.mkQ σ (h.traceInclusion x σ) = 0 := by
-      have hh := congrArg (fun z => (h.quotient P).traceInclusion z σ) hx
-      simpa only [traceMap_apply, map_zero, Pi.zero_apply] using hh
+      simpa only [traceMap_apply, map_zero, Pi.zero_apply] using
+        congrArg (fun z => (h.quotient P).traceInclusion z σ) hx
     have hx' (σ : K →+* ℂ) : ∃ v : ComplexFiber P σ,
         fiberMap P.subtype σ v = h.traceInclusion x σ := by
       apply LinearMap.mem_range.mp
@@ -171,8 +170,7 @@ lemma ker_traceMap_mkQ (P : Submodule (𝓞 K) M)
     funext σ
     have hx : fiberMap P.subtype σ ((h.submodule P).traceInclusion y σ) ∈
         LinearMap.ker (fiberMap P.mkQ σ) := by
-      rw [ker_fiberMap_mkQ]
-      exact LinearMap.mem_range_self _ _
+      simpa only [ker_fiberMap_mkQ] using LinearMap.mem_range_self _ _
     exact hx
 
 /-- The actual saturated sequence remains exact on real trace spaces. -/

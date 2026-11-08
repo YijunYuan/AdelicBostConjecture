@@ -71,7 +71,6 @@ theorem tensorPowerPairing_tensorBaseChange (f : V →ₗ[R] (⨂[R] i, E i))
   have he : (tensorDualBaseChangeEquiv R S E).toLinearMap =
       (baseChangeEquiv R S E).symm.dualMap.toLinearMap ∘ₗ
         (Arithmetic.dualBaseChangeEquiv R S (⨂[R] i, E i)).toLinearMap := rfl
-  rw [he, PiTensorProduct.map_comp, LinearMap.comp_apply]
-  exact h
+  rwa [he, PiTensorProduct.map_comp, LinearMap.comp_apply]
 
 end BostConjecture.Tensor

@@ -64,8 +64,7 @@ theorem canonicalPairing_injective
     f.intertwiningMap_of_isIntertwiningMap _ _ (by
       intro g z
       apply LinearMap.ext
-      intro u
-      exact Geometry.canonicalPairing_reindex_left E hk t ha hl v hs i g z u)
+      exact fun u => Geometry.canonicalPairing_reindex_left E hk t ha hl v hs i g z u)
   let σ : K →+* ℂ := Classical.choice inferInstance
   let : Algebra (𝓞 K) ℂ := (σ.comp (algebraMap (𝓞 K) K)).toAlgebra
   let : Representation.IsIrreducible
@@ -96,7 +95,6 @@ theorem canonicalPairing_injective
   apply fiberSection_injective _ σ
   apply hinj
   change fiberMap f σ (fiberSection _ σ x) = fiberMap f σ (fiberSection _ σ y)
-  rw [fiberMap_section, fiberMap_section]
-  exact congrArg (fiberSection _ σ) hxy
+  simpa only [fiberMap_section, fiberMap_section] using congrArg (fiberSection _ σ) hxy
 
 end BostConjecture.Slope.Geometric

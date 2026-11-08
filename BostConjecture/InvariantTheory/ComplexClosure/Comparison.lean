@@ -29,8 +29,7 @@ theorem closure_coordinate_polynomial_image_zeroLocus {σ τ : Type*} [Finite σ
       ((fun a : σ → ℂ => fun i => MvPolynomial.eval a (q i)) ''
         MvPolynomial.zeroLocus ℂ I)) := by
   obtain ⟨S, hS, he⟩ := exists_constructible_polynomial_image I q
-  rw [he]
-  exact closure_constructible_eq_zeroLocus_vanishingIdeal hS
+  simpa only [he] using closure_constructible_eq_zeroLocus_vanishingIdeal hS
 
 /-- The complex polynomial-image closure comparison used in Lemma 7.2. -/
 theorem closure_polynomial_image_zeroLocus

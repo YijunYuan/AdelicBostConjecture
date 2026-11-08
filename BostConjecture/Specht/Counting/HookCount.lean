@@ -111,8 +111,7 @@ def standardTableauEquivPartition (p : Nat.Partition n) :
 theorem card_standard_eq_partition (p : Nat.Partition n) :
     Fintype.card {t : Tableau n (auxiliaryYoungDiagramOfPartition p) // IsStandard t} =
       Nat.card (AuxiliaryPartitionSource n p) := by
-  rw [← Nat.card_eq_fintype_card]
-  exact Nat.card_congr (standardTableauEquivPartition p)
+  simpa only [← Nat.card_eq_fintype_card] using Nat.card_congr (standardTableauEquivPartition p)
 
 /-- Hook enumeration for any diagram, expressed in the existing tableau model. -/
 theorem card_standard_mul_hookProduct (μ : YoungDiagram) (h : μ.card = n) :

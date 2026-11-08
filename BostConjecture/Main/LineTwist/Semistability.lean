@@ -85,11 +85,9 @@ theorem slope_submodule_tensor_of_rank_one (h : HermitianMetric K M)
     (hC : 0 < Module.finrank K (K ⊗[𝓞 K] C)) :
     ((h ⊗[𝓞 K] g).submodule C).slope = (h.submodule (lineUntwist C)).slope + g.degree := by
   have hB : 0 < Module.finrank K (K ⊗[𝓞 K] lineUntwist C) := by
-    rw [← tensorRight_generic_finrank_of_rank_one hL, tensorRight_lineUntwist hL]
-    exact hC
+    rwa [← tensorRight_generic_finrank_of_rank_one hL, tensorRight_lineUntwist hL]
   have he := slope_tensorRight_of_rank_one h g hL (lineUntwist C) hB
-  rw [tensorRight_lineUntwist hL] at he
-  exact he
+  rwa [tensorRight_lineUntwist hL] at he
 
 /-- Tensoring a semistable bundle on the right with any projective Hermitian line
 preserves actual integral semistability. -/
@@ -99,8 +97,7 @@ theorem IsSemistable.tensor_rankOne_right {h : HermitianMetric K M}
     (hL : Module.finrank K (K ⊗[𝓞 K] L) = 1) : (h ⊗[𝓞 K] g).IsSemistable := by
   intro C hC
   have hB : 0 < Module.finrank K (K ⊗[𝓞 K] lineUntwist C) := by
-    rw [← tensorRight_generic_finrank_of_rank_one hL, tensorRight_lineUntwist hL]
-    exact hC
+    rwa [← tensorRight_generic_finrank_of_rank_one hL, tensorRight_lineUntwist hL]
   rw [slope_submodule_tensor_of_rank_one h g hL C hC,
     slope_tensor_rankOne_right h g hM hL]
   linarith [hs (lineUntwist C) hB]

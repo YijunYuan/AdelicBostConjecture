@@ -42,8 +42,7 @@ theorem maxDegree_pullback_equiv (h : HermitianMetric K N)
     (e : M ≃ₗ[𝓞 K] N) : (h.pullback e.toLinearMap e.injective).maxDegree = h.maxDegree := by
   apply le_antisymm
   · obtain ⟨P, _, hP⟩ := (h.pullback e.toLinearMap e.injective).exists_degree_eq_maxDegree
-    rw [← hP, degree_submodule_pullback_equiv]
-    exact h.degree_submodule_le_maxDegree _
+    simpa only [← hP, degree_submodule_pullback_equiv] using h.degree_submodule_le_maxDegree _
   · obtain ⟨Q, _, hQ⟩ := h.exists_degree_eq_maxDegree
     have hp := (h.pullback e.toLinearMap e.injective).degree_submodule_le_maxDegree
       (Q.comap e.toLinearMap)

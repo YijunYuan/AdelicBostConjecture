@@ -52,8 +52,7 @@ lemma dualCore_inner_eval (b : OrthonormalBasis (Fin r) ℂ E)
     rw [Basis.det_self, mul_one]
   rw [Tensor.dualCore_inner]
   change (core b).inner _ _ = _
-  rw [core_inner, he, he, star_star]
-  exact mul_comm _ _
+  simpa only [core_inner, he, he, star_star] using mul_comm _ _
 
 /-- Pull back the dual determinant metric through canonical exterior evaluation. -/
 @[instance_reducible]
@@ -102,8 +101,7 @@ local instance : InnerProductSpace ℂ (Dual ℂ E) :=
 lemma dualPullbackCore_eq (b : OrthonormalBasis (Fin r) ℂ E)
     (d : OrthonormalBasis (Fin r) ℂ (Dual ℂ E)) : dualPullbackCore b = core d := by
   apply core_unique d
-  intro f
-  exact congrArg Complex.re (dualPullbackCore_inner_ιMulti b f f)
+  exact fun f => congrArg Complex.re (dualPullbackCore_inner_ιMulti b f f)
 
 end DualInner
 

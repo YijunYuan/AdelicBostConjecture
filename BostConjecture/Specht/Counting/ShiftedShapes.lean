@@ -110,14 +110,12 @@ theorem shiftedRowLength_occupancyShape {a k A : ℕ}
 /-- Counting cells by rows, with padding up to the enclosing height. -/
 theorem sum_rowLen_rectangle {μ : YoungDiagram} {a k : ℕ} (hμ : μ ≤ rectangle a k) :
     ∑ i : Fin a, μ.rowLen i.val = μ.card := by
-  have hm : Set.MapsTo Prod.fst (μ.cells : Set (ℕ × ℕ)) (range a) := by
-    intro c hc
-    exact mem_range.mpr (mem_rectangle.mp (hμ hc)).1
+  have hm : Set.MapsTo Prod.fst (μ.cells : Set (ℕ × ℕ)) (range a) :=
+    fun c hc => mem_range.mpr (mem_rectangle.mp (hμ hc)).1
   change (∑ i : Fin a, μ.rowLen i.val) = μ.cells.card
   rw [Fin.sum_univ_eq_sum_range, card_eq_sum_card_fiberwise hm]
   apply sum_congr rfl
-  intro r _
-  exact μ.rowLen_eq_card
+  exact fun r _ => μ.rowLen_eq_card
 
 theorem card_occupancyShape_add_staircase {a k A : ℕ}
     (b : SortedOccupancy a (k + a - 1) A) :
@@ -174,12 +172,9 @@ theorem occupancyShape_rectangleShapeOccupancy {a k m : ℕ}
       dsimp only
       omega
     rw [YoungDiagram.mem_iff_lt_rowLen, YoungDiagram.mem_iff_lt_rowLen, hrow]
-  · have hn₁ : c ∉ occupancyShape (rectangleShapeOccupancy μ) := by
-      intro hc
-      exact hr (mem_rectangle.mp (occupancyShape_le _ hc)).1
-    have hn₂ : c ∉ μ.val := by
-      intro hc
-      exact hr (mem_rectangle.mp (μ.property.1 hc)).1
+  · have hn₁ : c ∉ occupancyShape (rectangleShapeOccupancy μ) :=
+      fun hc => hr (mem_rectangle.mp (occupancyShape_le _ hc)).1
+    have hn₂ : c ∉ μ.val := fun hc => hr (mem_rectangle.mp (μ.property.1 hc)).1
     simp [hn₁, hn₂]
 
 /-- Removing and adding the staircase identify shapes with decreasing occupancies. -/

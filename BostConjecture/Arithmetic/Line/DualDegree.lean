@@ -45,9 +45,8 @@ lemma dual_sectionNorm_mul_of_rank_one (h : HermitianMetric K M)
   let : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
   let := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber M σ)
   let := InnerProductSpace.ofCore (inferInstance : PreInnerProductSpace.Core ℂ (ComplexFiber M σ))
-  have hx' : fiberSection M σ x ≠ 0 := by
-    intro he
-    exact hx (fiberSection_injective M σ (by simpa [fiberSection] using he))
+  have hx' : fiberSection M σ x ≠ 0 :=
+    fun he => hx (fiberSection_injective M σ (by simpa [fiberSection] using he))
   obtain ⟨c, hc⟩ := exists_smul_eq_of_finrank_eq_one
     ((complexFiber_finrank M σ).trans hr) hx' (h.dualRiesz σ (fiberSection _ σ f))
   rw [← dualFiberEquiv_section M σ f x, ← h.dualRiesz_inner]
@@ -72,8 +71,7 @@ lemma coordinateLength_dual (h : HermitianMetric K M)
   rw [coordinateLength, coordinateLength, inv_div,
     div_eq_div_iff hd (ne_of_gt (h.sectionNorm_pos v.embedding hx)),
     h.dual_sectionNorm_mul_of_rank_one hr v.embedding f hx]
-  rw [← map_mul, mul_comm (q x), dualCoordinate_mul q hq hx]
-  exact v.norm_embedding_eq _
+  simpa only [← map_mul, mul_comm (q x), dualCoordinate_mul q hq hx] using v.norm_embedding_eq _
 
 variable [Nontrivial M]
 
