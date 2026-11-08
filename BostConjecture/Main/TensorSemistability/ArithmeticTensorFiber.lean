@@ -163,7 +163,7 @@ omit [Module.Projective (𝓞 K) M] [Module.Projective (𝓞 K) N] in
 theorem fiberProjectionTrace_tensor_transport (h : HermitianMetric K M)
     (k : HermitianMetric K N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
     (σ : K →+* ℂ) (C : Module.End ℂ (ComplexFiber M σ ⊗[ℂ] ComplexFiber N σ)) :
-    (h.tensor k).fiberProjectionTrace P σ
+    (h ⊗[𝓞 K] k).fiberProjectionTrace P σ
       ((binaryTensorFiberEquiv σ).symm.toLinearMap.comp
         (C.comp (binaryTensorFiberEquiv σ).toLinearMap)) =
       (LinearMap.trace ℂ (ComplexFiber M σ ⊗[ℂ] ComplexFiber N σ)
@@ -178,7 +178,7 @@ theorem fiberProjectionTrace_tensor_transport (h : HermitianMetric K M)
     (𝕜 := ℂ) (F := ComplexFiber N σ)
   let (σ : K →+* ℂ) := InnerProductSpace.ofCore
     (inferInstance : PreInnerProductSpace.Core ℂ (ComplexFiber N σ))
-  let (σ : K →+* ℂ) : InnerProductSpace.Core ℂ (ComplexFiber (M ⊗[𝓞 K] N) σ) := (h.tensor k).fiber σ
+  let (σ : K →+* ℂ) : InnerProductSpace.Core ℂ (ComplexFiber (M ⊗[𝓞 K] N) σ) := (h ⊗[𝓞 K] k).fiber σ
   let (σ : K →+* ℂ) := InnerProductSpace.Core.toNormedAddCommGroup
     (𝕜 := ℂ) (F := ComplexFiber (M ⊗[𝓞 K] N) σ)
   let (σ : K →+* ℂ) := InnerProductSpace.ofCore
@@ -189,7 +189,7 @@ theorem fiberProjectionTrace_tensor_transport (h : HermitianMetric K M)
       intro x y
       change (Tensor.binaryCore (h.fiber σ) (k.fiber σ)).inner
         (binaryTensorFiberEquiv σ x) (binaryTensorFiberEquiv σ y) =
-          ((h.tensor k).fiber σ).inner x y
+          ((h ⊗[𝓞 K] k).fiber σ).inner x y
       exact (h.tensor_inner k σ x y).symm)
   let S := (fiberMap P.subtype σ).range
   have hS : S.map e.toLinearEquiv.toLinearMap = tensorSubmoduleFiber P σ := by

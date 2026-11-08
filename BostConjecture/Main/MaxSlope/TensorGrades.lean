@@ -262,13 +262,13 @@ lemma tensorStepLift_inner [Module.Flat (𝓞 K) N]
     (h : HermitianMetric K M) (g : HermitianMetric K N)
     {P T : Submodule (𝓞 K) M} (hPT : P ≤ T) (U : Submodule (𝓞 K) N)
     (σ : K →+* ℂ) (x y : ComplexFiber (tensorStep P T U) σ) :
-    (((h.submodule T).tensor g).fiber σ).inner
+    (((h.submodule T) ⊗[𝓞 K] g).fiber σ).inner
       (fiberMap (tensorStepLift hPT U) σ x) (fiberMap (tensorStepLift hPT U) σ y) =
-      (((h.tensor g).submodule (tensorStep P T U)).fiber σ).inner x y := by
-  rw [show (h.submodule T).tensor g = (h.tensor g).pullback (T.subtype.rTensor N)
+      (((h ⊗[𝓞 K] g).submodule (tensorStep P T U)).fiber σ).inner x y := by
+  rw [show (h.submodule T) ⊗[𝓞 K] g = (h ⊗[𝓞 K] g).pullback (T.subtype.rTensor N)
       (Module.Flat.rTensor_preserves_injective_linearMap T.subtype T.injective_subtype) from
     (tensor_pullback h g T.subtype T.injective_subtype).symm]
-  change ((h.tensor g).fiber σ).inner
+  change ((h ⊗[𝓞 K] g).fiber σ).inner
     (fiberMap (T.subtype.rTensor N) σ (fiberMap (tensorStepLift hPT U) σ x))
     (fiberMap (T.subtype.rTensor N) σ (fiberMap (tensorStepLift hPT U) σ y)) = _
   simp only [← LinearMap.comp_apply, ← fiberMap_comp, tensorStepLift_comp]
@@ -285,14 +285,14 @@ lemma tensorGradeEquiv_inner [Module.Flat (𝓞 K) N]
     (σ : K →+* ℂ)
     (x y : ComplexFiber
       (tensorStep P T U ⧸ (tensorStep P T Q).comap (tensorStep P T U).subtype) σ) :
-    ((((h.submodule T).quotient (P.comap T.subtype)).tensor
+    ((((h.submodule T).quotient (P.comap T.subtype)) ⊗[𝓞 K]
         ((g.submodule U).quotient (Q.comap U.subtype))).fiber σ).inner
       (fiberMap (tensorGradeEquiv hPT Q U).toLinearMap σ x)
       (fiberMap (tensorGradeEquiv hPT Q U).toLinearMap σ y) =
-      ((((h.tensor g).submodule (tensorStep P T U)).quotient
+      ((((h ⊗[𝓞 K] g).submodule (tensorStep P T U)).quotient
         ((tensorStep P T Q).comap (tensorStep P T U).subtype)).fiber σ).inner x y := by
   have hn := pushforward_natural_inner
-    ((h.tensor g).submodule (tensorStep P T U)) ((h.submodule T).tensor g)
+    ((h ⊗[𝓞 K] g).submodule (tensorStep P T U)) ((h.submodule T) ⊗[𝓞 K] g)
     (tensorStepLift hPT U) (tensorStepLift_inner h g hPT U)
     ((tensorStep P T Q).comap (tensorStep P T U).subtype).mkQ
     ((tensorStep P T Q).comap (tensorStep P T U).subtype).mkQ_surjective

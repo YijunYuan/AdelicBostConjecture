@@ -161,7 +161,7 @@ theorem fiberProjectionTrace_tensor_eq (h : HermitianMetric K M)
     (k : HermitianMetric K N) (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
     (A : ∀ σ : K →+* ℂ, Module.End ℂ (ComplexFiber M σ))
     (B : ∀ σ : K →+* ℂ, Module.End ℂ (ComplexFiber N σ)) (σ : K →+* ℂ) :
-    (h.tensor k).fiberProjectionTrace P σ (tensorFiberGenerator A B σ) =
+    (h ⊗[𝓞 K] k).fiberProjectionTrace P σ (tensorFiberGenerator A B σ) =
       (LinearMap.trace ℂ (ComplexFiber M σ) ((h.tensorPartialTraceRight k P σ).comp (A σ))).re +
       (LinearMap.trace ℂ (ComplexFiber N σ) ((h.tensorPartialTraceLeft k P σ).comp (B σ))).re := by
   rw [tensorFiberGenerator, fiberProjectionTrace_tensor_transport]

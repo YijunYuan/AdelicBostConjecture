@@ -57,14 +57,14 @@ theorem isLocalMax_degree_of_maximizing_pair
     (P : Submodule (𝓞 K) (M ⊗[𝓞 K] N))
     [Module.IsTorsionFree (𝓞 K) ((M ⊗[𝓞 K] N) ⧸ P)]
     (hst : h.IsStable) (gst : g.IsStable) (h0 : h.degree = 0) (g0 : g.degree = 0)
-    (hP : ((h.tensor g).submodule P).degree = (h.tensor g).maxDegree)
+    (hP : ((h ⊗[𝓞 K] g).submodule P).degree = (h ⊗[𝓞 K] g).maxDegree)
     (hmax : IsGreatest (Compactness.tensorMaxDegreeValues.{u} K
       (Module.finrank K (K ⊗[𝓞 K] M)) (Module.finrank K (K ⊗[𝓞 K] N)))
-      (h.tensor g).maxDegree)
+      (h ⊗[𝓞 K] g).maxDegree)
     (H : ℝ → HermitianMetric K M) (G : ℝ → HermitianMetric K N)
     (hH : ContinuousAt H 0) (hG : ContinuousAt G 0) (H0 : H 0 = h) (G0 : G 0 = g)
     (Hd : ∀ t, (H t).degree = 0) (Gd : ∀ t, (G t).degree = 0) :
-    IsLocalMax (fun t => (((H t).tensor (G t)).submodule P).degree) 0 := by
+    IsLocalMax (fun t => (((H t) ⊗[𝓞 K] (G t)).submodule P).degree) 0 := by
   have he := hH.eventually (by simpa only [H0] using hst.eventually_isStable_normalized h0)
   have ge := hG.eventually (by simpa only [G0] using gst.eventually_isStable_normalized g0)
   filter_upwards [he, ge] with t ht gt
@@ -72,6 +72,6 @@ theorem isLocalMax_degree_of_maximizing_pair
     (Hd t) (Gd t) ((ht (Hd t)).isSemistable_of_degree_zero (Hd t))
     ((gt (Gd t)).isSemistable_of_degree_zero (Gd t))
   simpa only [H0, G0, hP] using
-    (((H t).tensor (G t)).degree_le_maxDegree P).trans (hmax.2 hmem)
+    (((H t) ⊗[𝓞 K] (G t)).degree_le_maxDegree P).trans (hmax.2 hmem)
 
 end BostConjecture.Arithmetic.HermitianMetric

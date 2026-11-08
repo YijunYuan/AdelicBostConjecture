@@ -63,11 +63,11 @@ variable {A B C D : Type u}
 /-- The tensor objective is unchanged by actual integral identifications of both factors. -/
 theorem maxDegree_tensor_pullback_equiv (h : HermitianMetric K C)
     (g : HermitianMetric K D) (e : A ≃ₗ[𝓞 K] C) (f : B ≃ₗ[𝓞 K] D) :
-    ((h.pullback e.toLinearMap e.injective).tensor
-      (g.pullback f.toLinearMap f.injective)).maxDegree = (h.tensor g).maxDegree := by
+    ((h.pullback e.toLinearMap e.injective) ⊗[𝓞 K]
+      (g.pullback f.toLinearMap f.injective)).maxDegree = (h ⊗[𝓞 K] g).maxDegree := by
   let t := TensorProduct.congr e f
-  have ht : (h.tensor g).pullback t.toLinearMap t.injective =
-      (h.pullback e.toLinearMap e.injective).tensor
+  have ht : (h ⊗[𝓞 K] g).pullback t.toLinearMap t.injective =
+      (h.pullback e.toLinearMap e.injective) ⊗[𝓞 K]
         (g.pullback f.toLinearMap f.injective) := by
     apply ext_inner
     intro σ x y

@@ -25,6 +25,8 @@ open Module NumberField TensorProduct
 
 namespace BostConjecture.Arithmetic.Specht
 
+open scoped HermitianMetric
+
 open BostConjecture.Specht
 
 private lemma binaryCore_map_inner {A B C D : Type*}
@@ -62,7 +64,7 @@ theorem determinantMetric_eq_tensor (h : HermitianMetric K M) (hk : 0 < k)
     (ha : ∀ p : PrimeSpectrum (𝓞 K),
       Module.rankAtStalk M p = Module.finrank K (K ⊗[𝓞 K] M)) :
     determinantMetric h hk t ha =
-      (HermitianMetric.piTensor (fun _ : Fin k => h.determinant)).tensor
+      (HermitianMetric.piTensor (fun _ : Fin k => h.determinant)) ⊗[𝓞 K]
         (latticeMetric (K := K) t) := by
   apply HermitianMetric.ext_inner
   intro σ x y

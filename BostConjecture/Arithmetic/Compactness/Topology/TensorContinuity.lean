@@ -32,7 +32,7 @@ variable {M N : Type u} [AddCommGroup M] [Module (𝓞 K) M]
 /-- Hilbert tensor product varies continuously with its two actual metrics. -/
 theorem continuous_tensor : Continuous
     (fun p : HermitianMetric K M × HermitianMetric K N =>
-      p.1.tensor p.2) := by
+      p.1 ⊗[𝓞 K] p.2) := by
   apply continuous_induced_rng.mpr
   apply continuous_pi
   intro σ
@@ -41,14 +41,14 @@ theorem continuous_tensor : Continuous
   apply continuous_pi
   intro y
   change Continuous (fun p : HermitianMetric K M × HermitianMetric K N =>
-    ((p.1.tensor p.2).fiber σ).inner x y)
+    ((p.1 ⊗[𝓞 K] p.2).fiber σ).inner x y)
   let : Module.Finite ℂ (ComplexFiber M σ) := by dsimp [ComplexFiber]; infer_instance
   let : Module.Finite ℂ (ComplexFiber N σ) := by dsimp [ComplexFiber]; infer_instance
   let b := Module.finBasis ℂ (ComplexFiber M σ)
   let c := Module.finBasis ℂ (ComplexFiber N σ)
   let d := (b.tensorProduct c).map (binaryTensorFiberEquiv σ).symm
   have he (h : HermitianMetric K M) (g : HermitianMetric K N)
-      (i j) : ((h.tensor g).fiber σ).inner (d i) (d j) =
+      (i j) : ((h ⊗[𝓞 K] g).fiber σ).inner (d i) (d j) =
         (h.fiber σ).inner (b i.1) (b j.1) *
           (g.fiber σ).inner (c i.2) (c j.2) := by
     rcases i with ⟨i₁, i₂⟩
@@ -57,7 +57,7 @@ theorem continuous_tensor : Continuous
     simp only [d, Module.Basis.map_apply, LinearEquiv.apply_symm_apply,
       Module.Basis.tensorProduct_apply, Tensor.binaryCore_inner_tmul]
   have hform : (fun p : HermitianMetric K M × HermitianMetric K N =>
-      ((p.1.tensor p.2).fiber σ).inner x y) = (fun p => ∑ i, ∑ j,
+      ((p.1 ⊗[𝓞 K] p.2).fiber σ).inner x y) = (fun p => ∑ i, ∑ j,
       star (d.repr x i) * (d.repr y j *
         ((p.1.fiber σ).inner (b i.1) (b j.1) *
           (p.2.fiber σ).inner (c i.2) (c j.2)))) := by
@@ -77,7 +77,7 @@ theorem continuous_tensor : Continuous
 theorem continuous_tensor_maxDegree [Module.Projective (𝓞 K) M]
     [Module.Projective (𝓞 K) N] : Continuous
     (fun p : HermitianMetric K M × HermitianMetric K N =>
-      (p.1.tensor p.2).maxDegree) :=
+      (p.1 ⊗[𝓞 K] p.2).maxDegree) :=
   continuous_maxDegree.comp continuous_tensor
 
 end BostConjecture.Arithmetic.HermitianMetric

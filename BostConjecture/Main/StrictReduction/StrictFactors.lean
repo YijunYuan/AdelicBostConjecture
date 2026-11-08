@@ -61,7 +61,7 @@ theorem isStable_left_of_minimal_rank_sum
     (h0 : h.degree = 0) (g0 : g.degree = 0)
     (hs : h.IsSemistable) (gs : g.IsSemistable)
     (hrN : 0 < Module.finrank K (K ⊗[𝓞 K] N))
-    (hbad : ¬ (h.tensor g).IsSemistable)
+    (hbad : ¬ (h ⊗[𝓞 K] g).IsSemistable)
     (hmin : ∀ a' b' : ℕ, 0 < a' → 0 < b' →
       a' + b' < Module.finrank K (K ⊗[𝓞 K] M) + Module.finrank K (K ⊗[𝓞 K] N) →
       ∀ d ∈ Compactness.tensorMaxDegreeValues.{u} K a' b', d ≤ 0) :
@@ -96,7 +96,7 @@ theorem isStable_factors_of_minimal_rank_sum
     (hs : h.IsSemistable) (gs : g.IsSemistable)
     (hrM : 0 < Module.finrank K (K ⊗[𝓞 K] M))
     (hrN : 0 < Module.finrank K (K ⊗[𝓞 K] N))
-    (hbad : ¬ (h.tensor g).IsSemistable)
+    (hbad : ¬ (h ⊗[𝓞 K] g).IsSemistable)
     (hmin : ∀ a' b' : ℕ, 0 < a' → 0 < b' →
       a' + b' < Module.finrank K (K ⊗[𝓞 K] M) + Module.finrank K (K ⊗[𝓞 K] N) →
       ∀ d ∈ Compactness.tensorMaxDegreeValues.{u} K a' b', d ≤ 0) :

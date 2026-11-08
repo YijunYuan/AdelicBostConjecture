@@ -27,6 +27,8 @@ open NumberField TensorProduct
 
 namespace BostConjecture.Arithmetic.Compactness
 
+open scoped HermitianMetric
+
 universe u
 variable {K : Type*} [Field K] [NumberField K]
 
@@ -43,7 +45,7 @@ theorem exists_strict_maximizing_counterexample
     (hrN : 0 < Module.finrank K (K ⊗[𝓞 K] N))
     (h0 : h.degree = 0) (g0 : g.degree = 0)
     (hs : h.IsSemistable) (gs : g.IsSemistable)
-    (hbad : ¬ (h.tensor g).IsSemistable) :
+    (hbad : ¬ (h ⊗[𝓞 K] g).IsSemistable) :
     ∃ E F : Type u, ∃ ae : AddCommGroup E, ∃ af : AddCommGroup F,
     letI := ae; letI := af;
     ∃ me : Module (𝓞 K) E, ∃ mf : Module (𝓞 K) F,
@@ -57,11 +59,11 @@ theorem exists_strict_maximizing_counterexample
       H.degree = 0 ∧ G.degree = 0 ∧ H.IsStable ∧ G.IsStable ∧
       ∃ P : Submodule (𝓞 K) (E ⊗[𝓞 K] F),
         Module.IsTorsionFree (𝓞 K) ((E ⊗[𝓞 K] F) ⧸ P) ∧
-        0 < ((H.tensor G).submodule P).degree ∧
-        ((H.tensor G).submodule P).degree = (H.tensor G).maxDegree ∧
+        0 < ((H ⊗[𝓞 K] G).submodule P).degree ∧
+        ((H ⊗[𝓞 K] G).submodule P).degree = (H ⊗[𝓞 K] G).maxDegree ∧
         IsGreatest (tensorMaxDegreeValues.{u} K
           (Module.finrank K (K ⊗[𝓞 K] E)) (Module.finrank K (K ⊗[𝓞 K] F)))
-          (H.tensor G).maxDegree := by
+          (H ⊗[𝓞 K] G).maxDegree := by
   have hpos := h.maxDegree_tensor_pos_of_not_isSemistable g h0 g0 hbad
   obtain ⟨a, b, ha, hb, ⟨d, hd, hdpos⟩, hmin⟩ :=
     exists_minimal_positive_tensorMaxDegree (K := K)
@@ -79,13 +81,13 @@ theorem exists_strict_maximizing_counterexample
   let : Module.Projective (𝓞 K) F := pf
   have hEpos : 0 < Module.finrank K (K ⊗[𝓞 K] E) := hrE ▸ ha
   have hFpos : 0 < Module.finrank K (K ⊗[𝓞 K] F) := hrF ▸ hb
-  have hmaxpos : 0 < (H.tensor G).maxDegree := hdpos.trans_le (hmax.2 hd)
-  have hT0 : (H.tensor G).degree = 0 := by
+  have hmaxpos : 0 < (H ⊗[𝓞 K] G).maxDegree := hdpos.trans_le (hmax.2 hd)
+  have hT0 : (H ⊗[𝓞 K] G).degree = 0 := by
     simp [HermitianMetric.degree_tensor, H0, G0]
-  have hTbad : ¬ (H.tensor G).IsSemistable := by
+  have hTbad : ¬ (H ⊗[𝓞 K] G).IsSemistable := by
     intro hT
     exact (not_le_of_gt hmaxpos)
-      (((H.tensor G).isSemistable_iff_maxDegree_nonpos hT0).mp hT)
+      (((H ⊗[𝓞 K] G).isSemistable_iff_maxDegree_nonpos hT0).mp hT)
   have hE1 : Module.finrank K (K ⊗[𝓞 K] E) ≠ 1 := by
     intro hr
     exact hTbad (Gs.tensor_rankOne_left H hFpos hr)

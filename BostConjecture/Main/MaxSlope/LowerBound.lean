@@ -38,9 +38,9 @@ lemma tensor_map_pullback [Module.Flat (𝓞 K) M] [Module.Flat (𝓞 K) Q]
     (h : HermitianMetric K M) (g : HermitianMetric K N)
     (f : P →ₗ[𝓞 K] M) (j : Q →ₗ[𝓞 K] N)
     (hf : Function.Injective f) (hj : Function.Injective j) :
-    (h.tensor g).pullback (TensorProduct.map f j)
+    (h ⊗[𝓞 K] g).pullback (TensorProduct.map f j)
       (TensorProduct.map_injective_of_flat_flat f j hf hj) =
-        (h.pullback f hf).tensor (g.pullback j hj) := by
+        (h.pullback f hf) ⊗[𝓞 K] (g.pullback j hj) := by
   apply ext_inner
   intro σ x y
   apply Tensor.inner_ext_of_span
@@ -92,7 +92,7 @@ products, obtained from the actual first HN terms. -/
 theorem maxSlope_add_le_tensor
     [Nontrivial (K ⊗[𝓞 K] M)] [Nontrivial (K ⊗[𝓞 K] N)]
     (h : HermitianMetric K M) (g : HermitianMetric K N) :
-    h.maxSlope + g.maxSlope ≤ (h.tensor g).maxSlope := by
+    h.maxSlope + g.maxSlope ≤ (h ⊗[𝓞 K] g).maxSlope := by
   let P := h.hnSubmodule 1
   let Q := g.hnSubmodule 1
   let f := TensorProduct.map P.subtype Q.subtype
@@ -101,7 +101,7 @@ theorem maxSlope_add_le_tensor
   have hr : 0 < Module.finrank K (K ⊗[𝓞 K] (P ⊗[𝓞 K] Q)) := by
     rw [tensor_generic_finrank]
     exact Nat.mul_pos h.hnSubmodule_one_rank_pos g.hnSubmodule_one_rank_pos
-  have hs := (h.tensor g).slope_pullback_le_maxSlope f hf hr
+  have hs := (h ⊗[𝓞 K] g).slope_pullback_le_maxSlope f hf hr
   rw [tensor_map_pullback h g P.subtype Q.subtype P.injective_subtype Q.injective_subtype,
     slope_tensor _ _
     h.hnSubmodule_one_rank_pos g.hnSubmodule_one_rank_pos] at hs

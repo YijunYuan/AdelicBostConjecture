@@ -129,11 +129,11 @@ lemma pushforward_comp (h : HermitianMetric K M)
 /-- The actual quotient metric commutes with left tensoring. -/
 lemma tensor_pushforward_left (h : HermitianMetric K M)
     (g : HermitianMetric K N) (f : N →ₗ[𝓞 K] P) (hf : Function.Surjective f) :
-    (h.tensor g).pushforward (f.lTensor M) (LinearMap.lTensor_surjective M hf) =
-      h.tensor (g.pushforward f hf) := by
+    (h ⊗[𝓞 K] g).pushforward (f.lTensor M) (LinearMap.lTensor_surjective M hf) =
+      h ⊗[𝓞 K] (g.pushforward f hf) := by
   apply ext_inner
   intro σ x y
-  have he := pushforward_natural_inner (h.tensor g) (g.tensor h)
+  have he := pushforward_natural_inner (h ⊗[𝓞 K] g) (g ⊗[𝓞 K] h)
     (TensorProduct.comm (𝓞 K) M N).toLinearMap (tensor_comm_inner h g)
     (f.lTensor M) (LinearMap.lTensor_surjective M hf)
     (f.rTensor M) (LinearMap.rTensor_surjective M hf)
@@ -148,14 +148,14 @@ lemma tensor_map_pushforward (h : HermitianMetric K M)
     (g : HermitianMetric K N)
     (f : M →ₗ[𝓞 K] P) (hf : Function.Surjective f)
     (j : N →ₗ[𝓞 K] Q) (hj : Function.Surjective j) :
-    (h.tensor g).pushforward (TensorProduct.map f j)
+    (h ⊗[𝓞 K] g).pushforward (TensorProduct.map f j)
         (TensorProduct.map_surjective hf hj) =
-      (h.pushforward f hf).tensor (g.pushforward j hj) := by
+      (h.pushforward f hf) ⊗[𝓞 K] (g.pushforward j hj) := by
   let : Module.Finite (𝓞 K) P := Module.Finite.of_surjective f hf
   have hc : (j.lTensor P).comp (f.rTensor N) = TensorProduct.map f j := by
     ext m n
     rfl
-  have he := (h.tensor g).pushforward_comp (f.rTensor N)
+  have he := (h ⊗[𝓞 K] g).pushforward_comp (f.rTensor N)
     (LinearMap.rTensor_surjective N hf) (j.lTensor P) (LinearMap.lTensor_surjective P hj)
   rw [tensor_pushforward, tensor_pushforward_left] at he
   simpa only [hc] using he.symm

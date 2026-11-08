@@ -53,7 +53,7 @@ theorem maxSlope_piTensor {ι : Type} [Fintype ι] (M : ι → Type u)
     simp [maxSlope_piTensor_empty]
   · intro α _ ih M _ _ _ _ _ h
     have hm := maxSlope_eq_of_equiv (piTensor h)
-      ((piTensor (fun i => h (some i))).tensor (h none)) (Tensor.optionEquiv (𝓞 K) M)
+      ((piTensor (fun i => h (some i))) ⊗[𝓞 K] (h none)) (Tensor.optionEquiv (𝓞 K) M)
       (Specht.piTensor_option_inner M h)
     rw [hm, maxSlope_tensor, Fintype.sum_option]
     linarith only [ih (fun i => M (some i)) (fun i => h (some i))]

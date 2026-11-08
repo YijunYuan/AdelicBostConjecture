@@ -26,6 +26,8 @@ open NumberField TensorProduct
 
 namespace BostConjecture.Arithmetic
 
+open scoped HermitianMetric
+
 universe u
 variable {K : Type*} [Field K] [NumberField K]
 
@@ -53,9 +55,9 @@ theorem isSemistable_iff_maxDegree_nonpos (h : HermitianMetric K M)
 theorem maxDegree_tensor_pos_of_not_isSemistable
     (h : HermitianMetric K M) (g : HermitianMetric K N)
     (h0 : h.degree = 0) (g0 : g.degree = 0)
-    (hbad : ¬ (h.tensor g).IsSemistable) : 0 < (h.tensor g).maxDegree := by
-  have ht0 : (h.tensor g).degree = 0 := by simp [degree_tensor, h0, g0]
-  exact lt_of_not_ge (fun hd => hbad ((h.tensor g).isSemistable_iff_maxDegree_nonpos ht0 |>.mpr hd))
+    (hbad : ¬ (h ⊗[𝓞 K] g).IsSemistable) : 0 < (h ⊗[𝓞 K] g).maxDegree := by
+  have ht0 : (h ⊗[𝓞 K] g).degree = 0 := by simp [degree_tensor, h0, g0]
+  exact lt_of_not_ge (fun hd => hbad ((h ⊗[𝓞 K] g).isSemistable_iff_maxDegree_nonpos ht0 |>.mpr hd))
 
 end HermitianMetric
 
@@ -100,8 +102,8 @@ theorem isSemistable_tensor_of_smaller_rank_sum
       Module.finrank K (K ⊗[𝓞 K] N) < a + b)
     (h0 : h.degree = 0) (g0 : g.degree = 0)
     (hs : h.IsSemistable) (gs : g.IsSemistable) :
-    (h.tensor g).IsSemistable := by
-  apply ((h.tensor g).isSemistable_iff_maxDegree_nonpos
+    (h ⊗[𝓞 K] g).IsSemistable := by
+  apply ((h ⊗[𝓞 K] g).isSemistable_iff_maxDegree_nonpos
     (by simp [HermitianMetric.degree_tensor, h0, g0])).mpr
   exact hmin _ _ hrM hrN hlt _ (tensor_maxDegree_mem h g rfl rfl h0 g0 hs gs)
 

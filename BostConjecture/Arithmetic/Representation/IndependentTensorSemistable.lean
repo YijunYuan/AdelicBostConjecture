@@ -59,16 +59,16 @@ lemma tensor_action_inner (h : HermitianMetric K M) (k : HermitianMetric K N)
     (hτ : ∀ (b : H) (σ : K →+* ℂ) (x y : ComplexFiber N σ),
       (k.fiber σ).inner (fiberMap (τ b) σ x) (fiberMap (τ b) σ y) = (k.fiber σ).inner x y)
     (a : G × H) (σ : K →+* ℂ) (x y : ComplexFiber (M ⊗[𝓞 K] N) σ) :
-    ((h.tensor k).fiber σ).inner
+    ((h ⊗[𝓞 K] k).fiber σ).inner
       (fiberMap (independentTensorRepresentation ρ τ a) σ x)
       (fiberMap (independentTensorRepresentation ρ τ a) σ y) =
-      ((h.tensor k).fiber σ).inner x y := by
+      ((h ⊗[𝓞 K] k).fiber σ).inner x y := by
   apply Tensor.inner_ext_of_span
     (fun xy : M × N => fiberSection _ σ (xy.1 ⊗ₜ[𝓞 K] xy.2))
-    (span_fiberSection_tmul σ) ((h.tensor k).fiber σ) ((h.tensor k).fiber σ)
+    (span_fiberSection_tmul σ) ((h ⊗[𝓞 K] k).fiber σ) ((h ⊗[𝓞 K] k).fiber σ)
     (fiberMap (independentTensorRepresentation ρ τ a) σ) LinearMap.id _ x y
   intro b c
-  change ((h.tensor k).fiber σ).inner
+  change ((h ⊗[𝓞 K] k).fiber σ).inner
     (fiberSection _ σ (ρ a.1 b.1 ⊗ₜ[𝓞 K] τ a.2 b.2))
     (fiberSection _ σ (ρ a.1 c.1 ⊗ₜ[𝓞 K] τ a.2 c.2)) = _
   simp only [LinearMap.id_apply]
@@ -91,7 +91,7 @@ theorem isSemistable_tensor_of_complex_irreducible
       (h.fiber s).inner (fiberMap (ρ a) s x) (fiberMap (ρ a) s y) = (h.fiber s).inner x y)
     (hτ : ∀ (b : H) (s : K →+* ℂ) (x y : ComplexFiber N s),
       (k.fiber s).inner (fiberMap (τ b) s x) (fiberMap (τ b) s y) = (k.fiber s).inner x y) :
-    (h.tensor k).IsSemistable := by
+    (h ⊗[𝓞 K] k).IsSemistable := by
   let : Nontrivial (K ⊗[𝓞 K] (M ⊗[𝓞 K] N)) := Module.nontrivial_of_finrank_pos (R := K) (by
     rw [tensor_generic_finrank]
     exact Nat.mul_pos Module.finrank_pos Module.finrank_pos)
@@ -101,7 +101,7 @@ theorem isSemistable_tensor_of_complex_irreducible
   let : Representation.IsIrreducible
       (complexRepresentation (independentTensorRepresentation ρ τ) σ) :=
     isIrreducible_of_equiv (complexTensorRepresentationEquiv ρ τ σ)
-  exact (h.tensor k).isSemistable_of_complex_irreducible
+  exact (h ⊗[𝓞 K] k).isSemistable_of_complex_irreducible
     (independentTensorRepresentation ρ τ) σ (h.tensor_action_inner k ρ τ hρ hτ)
 
 end HermitianMetric

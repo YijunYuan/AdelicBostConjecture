@@ -23,6 +23,8 @@ open NumberField TensorProduct PiTensorProduct
 
 namespace BostConjecture.Arithmetic.Specht
 
+open scoped HermitianMetric
+
 universe u
 
 variable {K : Type u} [Field K] [NumberField K]
@@ -45,7 +47,7 @@ lemma piTensor_option_inner {ι : Type} [Fintype ι] (M : Option ι → Type u)
     [∀ i, AddCommGroup (M i)] [∀ i, Module (𝓞 K) (M i)]
     (h : ∀ i, HermitianMetric K (M i)) (σ : K →+* ℂ)
     (x y : ComplexFiber (⨂[𝓞 K] i, M i) σ) :
-    (((HermitianMetric.piTensor (fun i => h (some i))).tensor (h none)).fiber σ).inner
+    (((HermitianMetric.piTensor (fun i => h (some i))) ⊗[𝓞 K] (h none)).fiber σ).inner
       (fiberMap (Tensor.optionEquiv (𝓞 K) M).toLinearMap σ x)
       (fiberMap (Tensor.optionEquiv (𝓞 K) M).toLinearMap σ y) =
         ((HermitianMetric.piTensor h).fiber σ).inner x y := by
@@ -139,14 +141,14 @@ theorem slope_piTensor {ι : Type} [Fintype ι] (M : ι → Type u)
   · intro α _ ih M _ _ _ _ h hr
     let f := Tensor.optionEquiv (𝓞 K) M
     have hd := HermitianMetric.degree_eq_of_equiv (HermitianMetric.piTensor h)
-      ((HermitianMetric.piTensor (fun i => h (some i))).tensor (h none)) f
+      ((HermitianMetric.piTensor (fun i => h (some i))) ⊗[𝓞 K] (h none)) f
       (piTensor_option_inner M h)
     have hp : 0 < Module.finrank K (K ⊗[𝓞 K] (⨂[𝓞 K] i : α, M (some i))) := by
       rw [piTensor_generic_finrank]
       exact Finset.prod_pos (fun i _ => hr (some i))
     calc
       (HermitianMetric.piTensor h).slope =
-          ((HermitianMetric.piTensor (fun i => h (some i))).tensor (h none)).slope := by
+          ((HermitianMetric.piTensor (fun i => h (some i))) ⊗[𝓞 K] (h none)).slope := by
         unfold HermitianMetric.slope
         rw [hd, (f.baseChange (𝓞 K) K).finrank_eq]
       _ = (HermitianMetric.piTensor (fun i => h (some i))).slope + (h none).slope :=

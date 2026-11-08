@@ -105,8 +105,8 @@ theorem tensor_archimedeanPullback
       fiberConjugate M σ (g σ x))
     (hj : ∀ σ x, j (ComplexEmbedding.conjugate σ) (fiberConjugate N σ x) =
       fiberConjugate N σ (j σ x)) :
-    (h.archimedeanPullback g hg).tensor (k.archimedeanPullback j hj) =
-      (h.tensor k).archimedeanPullback (tensorFiberAutomorphism g j)
+    (h.archimedeanPullback g hg) ⊗[𝓞 K] (k.archimedeanPullback j hj) =
+      (h ⊗[𝓞 K] k).archimedeanPullback (tensorFiberAutomorphism g j)
         (tensorFiberAutomorphism_conjugate g j hg hj) := by
   apply ext_inner
   intro σ x y
@@ -140,9 +140,9 @@ theorem hasDerivAt_submodule_degree_tensor_exponentialVariation
       fiberConjugate M σ (A σ x))
     (kc : ∀ σ x, B (ComplexEmbedding.conjugate σ) (fiberConjugate N σ x) =
       fiberConjugate N σ (B σ x)) :
-    HasDerivAt (fun t => (((h.exponentialVariation A hs hc t).tensor
+    HasDerivAt (fun t => (((h.exponentialVariation A hs hc t) ⊗[𝓞 K]
       (k.exponentialVariation B ks kc t)).submodule P).degree)
-      (-(∑ σ, (h.tensor k).fiberProjectionTrace P σ (tensorFiberGenerator A B σ)) /
+      (-(∑ σ, (h ⊗[𝓞 K] k).fiberProjectionTrace P σ (tensorFiberGenerator A B σ)) /
         (Module.finrank ℚ K : ℝ)) 0 := by
   simp only [exponentialVariation, tensor_archimedeanPullback]
   apply hasDerivAt_submodule_degree_archimedeanPullback
@@ -171,7 +171,7 @@ theorem hasDerivAt_submodule_degree_tensor_exponentialVariation
     let := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber N σ)
     let := InnerProductSpace.ofCore
       (inferInstance : PreInnerProductSpace.Core ℂ (ComplexFiber N σ))
-    let : InnerProductSpace.Core ℂ (ComplexFiber (M ⊗[𝓞 K] N) σ) := (h.tensor k).fiber σ
+    let : InnerProductSpace.Core ℂ (ComplexFiber (M ⊗[𝓞 K] N) σ) := (h ⊗[𝓞 K] k).fiber σ
     let := InnerProductSpace.Core.toNormedAddCommGroup
       (𝕜 := ℂ) (F := ComplexFiber (M ⊗[𝓞 K] N) σ)
     let := InnerProductSpace.ofCore
@@ -210,9 +210,9 @@ theorem sum_tensorFiberProjectionTrace_eq_zero_of_isLocalMax
       fiberConjugate M σ (A σ x))
     (kc : ∀ σ x, B (ComplexEmbedding.conjugate σ) (fiberConjugate N σ x) =
       fiberConjugate N σ (B σ x))
-    (hmax : IsLocalMax (fun t => (((h.exponentialVariation A hs hc t).tensor
+    (hmax : IsLocalMax (fun t => (((h.exponentialVariation A hs hc t) ⊗[𝓞 K]
       (k.exponentialVariation B ks kc t)).submodule P).degree) 0) :
-    ∑ σ, (h.tensor k).fiberProjectionTrace P σ (tensorFiberGenerator A B σ) = 0 := by
+    ∑ σ, (h ⊗[𝓞 K] k).fiberProjectionTrace P σ (tensorFiberGenerator A B σ) = 0 := by
   have he := hmax.hasDerivAt_eq_zero
     (hasDerivAt_submodule_degree_tensor_exponentialVariation h k P A B hs ks hc kc)
   have hD : (Module.finrank ℚ K : ℝ) ≠ 0 := by

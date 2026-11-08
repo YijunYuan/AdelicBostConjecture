@@ -83,7 +83,7 @@ theorem slope_submodule_tensor_le_of_invariant
       (InvariantTheory.pluckerRepresentation ℂ (ComplexFiber M σ) (ComplexFiber N σ) s) d) :
     InvariantTheory.polynomialEval (exteriorPower.ιMulti ℂ s (fun j =>
       binaryTensorFiberEquiv σ (fiberMap P.subtype σ (bV j)))) p ≠ 0 →
-    ((h.tensor k).submodule P).slope ≤ h.slope + k.slope := by
+    ((h ⊗[𝓞 K] k).submodule P).slope ≤ h.slope + k.slope := by
   let f := (binaryTensorFiberEquiv σ).toLinearMap.comp (fiberMap P.subtype σ)
   let E := binaryTensorFamily M N
   let hE : ∀ j, HermitianMetric K (E j) :=
@@ -121,7 +121,7 @@ theorem slope_submodule_tensor_le_of_invariant
   have hb := hb bV hd hpinv
   rw [hfun] at hb
   have hb := hb hp
-  have hm : (piTensor hE).pullback i hi = (h.tensor k).submodule P := by
+  have hm : (piTensor hE).pullback i hi = (h ⊗[𝓞 K] k).submodule P := by
     apply ext_inner
     intro τ x y
     change ((piTensor hE).fiber τ).inner (fiberMap i τ x) (fiberMap i τ y) =
@@ -151,7 +151,7 @@ theorem slope_submodule_tensor_le_of_isBalanced
   letI := InnerProductSpace.ofCore
     (inferInstance : PreInnerProductSpace.Core ℂ (ComplexFiber N σ))
   Balanced.IsBalanced (tensorSubmoduleFiber P σ) →
-    ((h.tensor k).submodule P).slope ≤ h.slope + k.slope := by
+    ((h ⊗[𝓞 K] k).submodule P).slope ≤ h.slope + k.slope := by
   let : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
   let := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber M σ)
   let := InnerProductSpace.ofCore

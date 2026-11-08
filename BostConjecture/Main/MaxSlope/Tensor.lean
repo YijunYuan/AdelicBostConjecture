@@ -35,7 +35,7 @@ variable {K M N : Type u} [Field K] [NumberField K]
 theorem hnTensorGrade_isSemistable (h : HermitianMetric K M)
     (g : HermitianMetric K N) (k : ℕ)
     (hk : k < h.hnFlag.length * g.hnFlag.length) :
-    (((h.tensor g).submodule (h.hnTensorFlag g (k + 1))).quotient
+    (((h ⊗[𝓞 K] g).submodule (h.hnTensorFlag g (k + 1))).quotient
       ((h.hnTensorFlag g k).comap (h.hnTensorFlag g (k + 1)).subtype)).IsSemistable := by
   let i : Fin h.hnFlag.length :=
     ⟨k / g.hnFlag.length, (Nat.div_lt_iff_lt_mul g.hnFlag_length_pos).mpr hk⟩
@@ -48,8 +48,8 @@ theorem hnTensorGrade_isSemistable (h : HermitianMetric K M)
 /-- The actual HN tensor filtration gives the maximal-slope upper bound. -/
 theorem maxSlope_tensor_le (h : HermitianMetric K M)
     (g : HermitianMetric K N) :
-    (h.tensor g).maxSlope ≤ h.maxSlope + g.maxSlope := by
-  exact (h.tensor g).maxSlope_le_of_integral_filtration (h.hnTensorFlag g)
+    (h ⊗[𝓞 K] g).maxSlope ≤ h.maxSlope + g.maxSlope := by
+  exact (h ⊗[𝓞 K] g).maxSlope_le_of_integral_filtration (h.hnTensorFlag g)
     (h.hnTensorFlag_monotone g) (h.hnTensorFlag_zero g)
     (h.hnFlag.length * g.hnFlag.length) (h.hnTensorFlag_length g)
     (h.maxSlope + g.maxSlope) (h.hnTensorGrade_isSemistable g)
@@ -59,7 +59,7 @@ theorem maxSlope_tensor_le (h : HermitianMetric K M)
 products over every number field, including nonfree finite projective modules. -/
 theorem maxSlope_tensor (h : HermitianMetric K M)
     (g : HermitianMetric K N) :
-    (h.tensor g).maxSlope = h.maxSlope + g.maxSlope :=
+    (h ⊗[𝓞 K] g).maxSlope = h.maxSlope + g.maxSlope :=
   le_antisymm (h.maxSlope_tensor_le g) (h.maxSlope_add_le_tensor g)
 
 end BostConjecture.Arithmetic.HermitianMetric

@@ -68,11 +68,15 @@ def tensor (h : HermitianMetric K M) (g : HermitianMetric K N) :
   (piTensor (fun i : Unit ⊕ Unit => Sum.casesOn i (fun _ => h) (fun _ => g))).pullback
     (binaryTensorEquiv (𝓞 K) M N).toLinearMap (binaryTensorEquiv (𝓞 K) M N).injective
 
+/-- Tensor product of Hermitian metrics on modules over `𝓞 K`.
+Available with `open scoped HermitianMetric`, using the explicit ring notation `𝓞 K`. -/
+scoped notation:100 h:100 " ⊗[" "𝓞 " K "] " g:101 => tensor (K := K) h g
+
 /-- The binary tensor norm has the same pure-tensor formula. -/
 @[simp]
 lemma sectionNorm_tensor_tmul (h : HermitianMetric K M)
     (g : HermitianMetric K N) (σ : K →+* ℂ) (x : M) (y : N) :
-    (h.tensor g).sectionNorm σ (x ⊗ₜ[𝓞 K] y) = h.sectionNorm σ x * g.sectionNorm σ y := by
+    (h ⊗[𝓞 K] g).sectionNorm σ (x ⊗ₜ[𝓞 K] y) = h.sectionNorm σ x * g.sectionNorm σ y := by
   simp [tensor, sectionNorm_piTensor_tprod, Fintype.prod_sum_type]
 
 end HermitianMetric

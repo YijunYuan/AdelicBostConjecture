@@ -71,12 +71,12 @@ theorem exists_hnTensorGrade_isometry (h : HermitianMetric K M)
           (h.hnTensorFlag g k).comap (h.hnTensorFlag g (k + 1)).subtype) σ),
         ((((h.submodule (h.hnSubmodule (k / g.hnFlag.length + 1))).quotient
             ((h.hnSubmodule (k / g.hnFlag.length)).comap
-              (h.hnSubmodule (k / g.hnFlag.length + 1)).subtype)).tensor
+              (h.hnSubmodule (k / g.hnFlag.length + 1)).subtype)) ⊗[𝓞 K]
           ((g.submodule (g.hnSubmodule (k % g.hnFlag.length + 1))).quotient
             ((g.hnSubmodule (k % g.hnFlag.length)).comap
               (g.hnSubmodule (k % g.hnFlag.length + 1)).subtype))).fiber σ).inner
           (fiberMap e.toLinearMap σ x) (fiberMap e.toLinearMap σ y) =
-        ((((h.tensor g).submodule (h.hnTensorFlag g (k + 1))).quotient
+        ((((h ⊗[𝓞 K] g).submodule (h.hnTensorFlag g (k + 1))).quotient
           ((h.hnTensorFlag g k).comap (h.hnTensorFlag g (k + 1)).subtype)).fiber σ).inner x y := by
   rw [h.hnTensorFlag_succ g k]
   dsimp only [hnTensorFlag, hnTensorStep]
@@ -107,7 +107,7 @@ lemma hnGrade_rank_pos (h : HermitianMetric K M) (i : Fin h.hnFlag.length) :
 theorem hnTensorGrade_slope (h : HermitianMetric K M)
     (g : HermitianMetric K N) (k : ℕ)
     (hk : k < h.hnFlag.length * g.hnFlag.length) :
-    (((h.tensor g).submodule (h.hnTensorFlag g (k + 1))).quotient
+    (((h ⊗[𝓞 K] g).submodule (h.hnTensorFlag g (k + 1))).quotient
       ((h.hnTensorFlag g k).comap (h.hnTensorFlag g (k + 1)).subtype)).slope =
       h.hnSlope ⟨k / g.hnFlag.length, (Nat.div_lt_iff_lt_mul g.hnFlag_length_pos).mpr hk⟩ +
       g.hnSlope ⟨k % g.hnFlag.length, Nat.mod_lt k g.hnFlag_length_pos⟩ := by
@@ -125,7 +125,7 @@ of tensor semistability. -/
 theorem hnTensorGrade_slope_le (h : HermitianMetric K M)
     (g : HermitianMetric K N) (k : ℕ)
     (hk : k < h.hnFlag.length * g.hnFlag.length) :
-    (((h.tensor g).submodule (h.hnTensorFlag g (k + 1))).quotient
+    (((h ⊗[𝓞 K] g).submodule (h.hnTensorFlag g (k + 1))).quotient
       ((h.hnTensorFlag g k).comap (h.hnTensorFlag g (k + 1)).subtype)).slope ≤
       h.maxSlope + g.maxSlope := by
   rw [h.hnTensorGrade_slope g k hk]

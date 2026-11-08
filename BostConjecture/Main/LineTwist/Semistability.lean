@@ -47,7 +47,7 @@ theorem slope_tensor_rankOne_right (h : HermitianMetric K M)
     (g : HermitianMetric K L)
     (hM : 0 < Module.finrank K (K ⊗[𝓞 K] M))
     (hL : Module.finrank K (K ⊗[𝓞 K] L) = 1) :
-    (h.tensor g).slope = h.slope + g.degree := by
+    (h ⊗[𝓞 K] g).slope = h.slope + g.degree := by
   rw [slope_tensor h g hM (by omega)]
   simp only [slope, hL, Nat.cast_one, div_one]
 
@@ -56,7 +56,7 @@ theorem slope_tensor_rankOne_left (h : HermitianMetric K M)
     (g : HermitianMetric K L)
     (hM : 0 < Module.finrank K (K ⊗[𝓞 K] M))
     (hL : Module.finrank K (K ⊗[𝓞 K] L) = 1) :
-    (g.tensor h).slope = g.degree + h.slope := by
+    (g ⊗[𝓞 K] h).slope = g.degree + h.slope := by
   rw [slope_tensor g h (by omega) hM]
   simp only [slope, hL, Nat.cast_one, div_one]
 
@@ -65,13 +65,13 @@ theorem slope_tensorRight_of_rank_one (h : HermitianMetric K M)
     (g : HermitianMetric K L)
     (hL : Module.finrank K (K ⊗[𝓞 K] L) = 1)
     (P : Submodule (𝓞 K) M) (hP : 0 < Module.finrank K (K ⊗[𝓞 K] P)) :
-    ((h.tensor g).submodule (tensorRight L P)).slope =
+    ((h ⊗[𝓞 K] g).submodule (tensorRight L P)).slope =
       (h.submodule P).slope + g.degree := by
-  have hd := degree_eq_of_equiv ((h.submodule P).tensor g)
-    ((h.tensor g).submodule (tensorRight L P)) (tensorRightEquiv L P)
+  have hd := degree_eq_of_equiv ((h.submodule P) ⊗[𝓞 K] g)
+    ((h ⊗[𝓞 K] g).submodule (tensorRight L P)) (tensorRightEquiv L P)
     (tensorRightEquiv_inner h g P)
-  have hs : ((h.tensor g).submodule (tensorRight L P)).slope =
-      ((h.submodule P).tensor g).slope := by
+  have hs : ((h ⊗[𝓞 K] g).submodule (tensorRight L P)).slope =
+      ((h.submodule P) ⊗[𝓞 K] g).slope := by
     rw [slope, slope, ← hd,
       ((tensorRightEquiv L P).baseChange (𝓞 K) K _ _).finrank_eq]
   rw [hs, slope_tensor_rankOne_right _ _ hP hL]
@@ -83,7 +83,7 @@ theorem slope_submodule_tensor_of_rank_one (h : HermitianMetric K M)
     (hL : Module.finrank K (K ⊗[𝓞 K] L) = 1)
     (C : Submodule (𝓞 K) (M ⊗[𝓞 K] L))
     (hC : 0 < Module.finrank K (K ⊗[𝓞 K] C)) :
-    ((h.tensor g).submodule C).slope = (h.submodule (lineUntwist C)).slope + g.degree := by
+    ((h ⊗[𝓞 K] g).submodule C).slope = (h.submodule (lineUntwist C)).slope + g.degree := by
   have hB : 0 < Module.finrank K (K ⊗[𝓞 K] lineUntwist C) := by
     rw [← tensorRight_generic_finrank_of_rank_one hL, tensorRight_lineUntwist hL]
     exact hC
@@ -96,7 +96,7 @@ preserves actual integral semistability. -/
 theorem IsSemistable.tensor_rankOne_right {h : HermitianMetric K M}
     (hs : h.IsSemistable) (g : HermitianMetric K L)
     (hM : 0 < Module.finrank K (K ⊗[𝓞 K] M))
-    (hL : Module.finrank K (K ⊗[𝓞 K] L) = 1) : (h.tensor g).IsSemistable := by
+    (hL : Module.finrank K (K ⊗[𝓞 K] L) = 1) : (h ⊗[𝓞 K] g).IsSemistable := by
   intro C hC
   have hB : 0 < Module.finrank K (K ⊗[𝓞 K] lineUntwist C) := by
     rw [← tensorRight_generic_finrank_of_rank_one hL, tensorRight_lineUntwist hL]
@@ -110,27 +110,27 @@ preserves actual integral semistability. -/
 theorem IsSemistable.tensor_rankOne_left {h : HermitianMetric K M}
     (hs : h.IsSemistable) (g : HermitianMetric K L)
     (hM : 0 < Module.finrank K (K ⊗[𝓞 K] M))
-    (hL : Module.finrank K (K ⊗[𝓞 K] L) = 1) : (g.tensor h).IsSemistable := by
+    (hL : Module.finrank K (K ⊗[𝓞 K] L) = 1) : (g ⊗[𝓞 K] h).IsSemistable := by
   intro C hC
   let e := TensorProduct.comm (𝓞 K) L M
   let eC := Submodule.equivMapOfInjective e.toLinearMap e.injective C
   have hr := (eC.baseChange (𝓞 K) K C (C.map e.toLinearMap)).finrank_eq
-  have hd : ((g.tensor h).submodule C).degree =
-      ((h.tensor g).submodule (C.map e.toLinearMap)).degree := by
+  have hd : ((g ⊗[𝓞 K] h).submodule C).degree =
+      ((h ⊗[𝓞 K] g).submodule (C.map e.toLinearMap)).degree := by
     apply degree_eq_of_equiv _ _ eC
     intro σ x y
     have he : (C.map e.toLinearMap).subtype.comp eC.toLinearMap =
         e.toLinearMap.comp C.subtype := by ext; rfl
-    change ((h.tensor g).fiber σ).inner
+    change ((h ⊗[𝓞 K] g).fiber σ).inner
         (fiberMap (C.map e.toLinearMap).subtype σ (fiberMap eC.toLinearMap σ x))
         (fiberMap (C.map e.toLinearMap).subtype σ (fiberMap eC.toLinearMap σ y)) = _
     have he' := congrArg (fun f => fiberMap f σ) he
     simp only [fiberMap_comp] at he'
-    exact (congrArg₂ ((h.tensor g).fiber σ).inner
+    exact (congrArg₂ ((h ⊗[𝓞 K] g).fiber σ).inner
       (LinearMap.congr_fun he' x) (LinearMap.congr_fun he' y)).trans
         (tensor_comm_inner g h σ _ _)
-  have hsc : ((g.tensor h).submodule C).slope =
-      ((h.tensor g).submodule (C.map e.toLinearMap)).slope := by
+  have hsc : ((g ⊗[𝓞 K] h).submodule C).slope =
+      ((h ⊗[𝓞 K] g).submodule (C.map e.toLinearMap)).slope := by
     rw [slope, slope, hd, hr]
   rw [hsc, slope_tensor_rankOne_left h g hM hL]
   have hb := hs.tensor_rankOne_right g hM hL (C.map e.toLinearMap) (hr ▸ hC)

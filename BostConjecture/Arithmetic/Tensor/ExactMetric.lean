@@ -33,8 +33,8 @@ variable {M N P : Type u} [AddCommGroup M] [Module (𝓞 K) M]
 /-- The actual quotient metric commutes with right tensoring. -/
 lemma tensor_pushforward (h : HermitianMetric K M)
     (g : HermitianMetric K N) (f : M →ₗ[𝓞 K] P) (hf : Function.Surjective f) :
-    (h.tensor g).pushforward (f.rTensor N) (LinearMap.rTensor_surjective N hf) =
-      (h.pushforward f hf).tensor g := by
+    (h ⊗[𝓞 K] g).pushforward (f.rTensor N) (LinearMap.rTensor_surjective N hf) =
+      (h.pushforward f hf) ⊗[𝓞 K] g := by
   apply ext_inner
   intro σ x y
   let : Algebra (𝓞 K) ℂ := (σ.comp (algebraMap (𝓞 K) K)).toAlgebra
@@ -44,7 +44,7 @@ lemma tensor_pushforward (h : HermitianMetric K M)
   let : InnerProductSpace.Core ℂ (ComplexFiber N σ) := g.fiber σ
   let := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber N σ)
   let := InnerProductSpace.ofCore (inferInstance : PreInnerProductSpace.Core ℂ (ComplexFiber N σ))
-  let : InnerProductSpace.Core ℂ (ComplexFiber (M ⊗[𝓞 K] N) σ) := (h.tensor g).fiber σ
+  let : InnerProductSpace.Core ℂ (ComplexFiber (M ⊗[𝓞 K] N) σ) := (h ⊗[𝓞 K] g).fiber σ
   let := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber (M ⊗[𝓞 K] N) σ)
   let := InnerProductSpace.ofCore
     (inferInstance : PreInnerProductSpace.Core ℂ (ComplexFiber (M ⊗[𝓞 K] N) σ))
@@ -52,7 +52,7 @@ lemma tensor_pushforward (h : HermitianMetric K M)
   let j := binaryTensorFiberEquiv (M := P) (N := N) σ
   let q := fiberMap f σ
   have hn (z : ComplexFiber (P ⊗[𝓞 K] N) σ) :
-      e ((h.tensor g).fiberLift (f.rTensor N) (LinearMap.rTensor_surjective N hf) σ z) =
+      e ((h ⊗[𝓞 K] g).fiberLift (f.rTensor N) (LinearMap.rTensor_surjective N hf) σ z) =
         ComplexQuotient.lift (q.rTensor (ComplexFiber N σ))
           (LinearMap.rTensor_surjective _ (fiberMap_surjective f hf σ)) (j z) := by
     apply ComplexQuotient.lift_natural e.toLinearMap
@@ -64,9 +64,9 @@ lemma tensor_pushforward (h : HermitianMetric K M)
       exact (binaryTensorFiberEquiv_rTensor f σ z).symm
     · intro z _
       exact ⟨e.symm z, e.apply_symm_apply z⟩
-  change ((h.tensor g).fiber σ).inner
-    ((h.tensor g).fiberLift (f.rTensor N) (LinearMap.rTensor_surjective N hf) σ x)
-    ((h.tensor g).fiberLift (f.rTensor N) (LinearMap.rTensor_surjective N hf) σ y) = _
+  change ((h ⊗[𝓞 K] g).fiber σ).inner
+    ((h ⊗[𝓞 K] g).fiberLift (f.rTensor N) (LinearMap.rTensor_surjective N hf) σ x)
+    ((h ⊗[𝓞 K] g).fiberLift (f.rTensor N) (LinearMap.rTensor_surjective N hf) σ y) = _
   rw [tensor_inner, tensor_inner]
   change inner ℂ (e _) (e _) = _
   rw [hn, hn]

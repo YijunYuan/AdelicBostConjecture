@@ -83,7 +83,7 @@ theorem sum_maxSlope_le_piTensor {ι : Type} [Fintype ι] (M : ι → Type u)
     simpa [slope, Specht.degree_piTensor_empty] using (piTensor h).slope_le_maxSlope
   · intro α _ ih M _ _ _ _ _ h
     have hm := maxSlope_eq_of_equiv (piTensor h)
-      ((piTensor (fun i => h (some i))).tensor (h none)) (Tensor.optionEquiv (𝓞 K) M)
+      ((piTensor (fun i => h (some i))) ⊗[𝓞 K] (h none)) (Tensor.optionEquiv (𝓞 K) M)
       (Specht.piTensor_option_inner M h)
     rw [hm, Fintype.sum_option]
     calc

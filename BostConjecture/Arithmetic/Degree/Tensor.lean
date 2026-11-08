@@ -35,12 +35,12 @@ variable {M N P Q : Type u} [AddCommGroup M] [Module (𝓞 K) M]
 lemma tensor_comm_inner (h : HermitianMetric K M)
     (g : HermitianMetric K N) (σ : K →+* ℂ)
     (x y : ComplexFiber (M ⊗[𝓞 K] N) σ) :
-    ((g.tensor h).fiber σ).inner
+    ((g ⊗[𝓞 K] h).fiber σ).inner
       (fiberMap (TensorProduct.comm (𝓞 K) M N).toLinearMap σ x)
       (fiberMap (TensorProduct.comm (𝓞 K) M N).toLinearMap σ y) =
-        ((h.tensor g).fiber σ).inner x y := by
+        ((h ⊗[𝓞 K] g).fiber σ).inner x y := by
   apply Tensor.inner_ext_of_span (fun xy : M × N => fiberSection _ σ (xy.1 ⊗ₜ[𝓞 K] xy.2))
-    (span_fiberSection_tmul σ) ((g.tensor h).fiber σ) ((h.tensor g).fiber σ)
+    (span_fiberSection_tmul σ) ((g ⊗[𝓞 K] h).fiber σ) ((h ⊗[𝓞 K] g).fiber σ)
     (fiberMap (TensorProduct.comm (𝓞 K) M N).toLinearMap σ) LinearMap.id _ x y
   intro a b
   simp only [LinearMap.id_apply, fiberMap_section, LinearEquiv.coe_coe,
@@ -50,7 +50,7 @@ variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
     [Module.Finite (𝓞 K) N] [Module.Projective (𝓞 K) N]
 
 lemma degree_tensor_comm (h : HermitianMetric K M)
-    (g : HermitianMetric K N) : (h.tensor g).degree = (g.tensor h).degree :=
+    (g : HermitianMetric K N) : (h ⊗[𝓞 K] g).degree = (g ⊗[𝓞 K] h).degree :=
   degree_eq_of_equiv _ _ (TensorProduct.comm (𝓞 K) M N) (tensor_comm_inner h g)
 
 variable [Module.Finite (𝓞 K) P] [Module.Projective (𝓞 K) P]
@@ -60,9 +60,9 @@ variable [Module.Finite (𝓞 K) P] [Module.Projective (𝓞 K) P]
 lemma degree_tensor_exact (h : HermitianMetric K P)
     (g : HermitianMetric K Q) (i : M →ₗ[𝓞 K] P) (q : P →ₗ[𝓞 K] N)
     (he : Function.Exact i q) (hi : Function.Injective i) (hq : Function.Surjective q) :
-    (h.tensor g).degree = ((h.pullback i hi).tensor g).degree +
-      ((h.pushforward q hq).tensor g).degree := by
-  have hd := (h.tensor g).degree_exact (i.rTensor Q) (q.rTensor Q)
+    (h ⊗[𝓞 K] g).degree = ((h.pullback i hi) ⊗[𝓞 K] g).degree +
+      ((h.pushforward q hq) ⊗[𝓞 K] g).degree := by
+  have hd := (h ⊗[𝓞 K] g).degree_exact (i.rTensor Q) (q.rTensor Q)
     (rTensor_exact Q he hq) (Module.Flat.rTensor_preserves_injective_linearMap i hi)
     (LinearMap.rTensor_surjective Q hq)
   rw [tensor_pullback, tensor_pushforward] at hd
@@ -72,7 +72,7 @@ lemma degree_tensor_exact (h : HermitianMetric K P)
 over every number field, including rank zero. -/
 theorem degree_tensor (h : HermitianMetric K M)
     (g : HermitianMetric K N) :
-    (h.tensor g).degree = (Module.finrank K (K ⊗[𝓞 K] N) : ℝ) * h.degree +
+    (h ⊗[𝓞 K] g).degree = (Module.finrank K (K ⊗[𝓞 K] N) : ℝ) * h.degree +
       (Module.finrank K (K ⊗[𝓞 K] M) : ℝ) * g.degree := by
   generalize hn : Module.finrank K (K ⊗[𝓞 K] M) + Module.finrank K (K ⊗[𝓞 K] N) = n
   induction n using Nat.strong_induction_on generalizing M N with
@@ -80,12 +80,12 @@ theorem degree_tensor (h : HermitianMetric K M)
     by_cases hM0 : Module.finrank K (K ⊗[𝓞 K] M) = 0
     · have ht : Module.finrank K (K ⊗[𝓞 K] (M ⊗[𝓞 K] N)) = 0 := by
         rw [tensor_generic_finrank, hM0, zero_mul]
-      rw [(h.tensor g).degree_eq_zero_of_rank_zero ht, h.degree_eq_zero_of_rank_zero hM0, hM0]
+      rw [(h ⊗[𝓞 K] g).degree_eq_zero_of_rank_zero ht, h.degree_eq_zero_of_rank_zero hM0, hM0]
       simp
     by_cases hN0 : Module.finrank K (K ⊗[𝓞 K] N) = 0
     · have ht : Module.finrank K (K ⊗[𝓞 K] (M ⊗[𝓞 K] N)) = 0 := by
         rw [tensor_generic_finrank, hN0, mul_zero]
-      rw [(h.tensor g).degree_eq_zero_of_rank_zero ht, g.degree_eq_zero_of_rank_zero hN0, hN0]
+      rw [(h ⊗[𝓞 K] g).degree_eq_zero_of_rank_zero ht, g.degree_eq_zero_of_rank_zero hN0, hN0]
       simp
     have hMpos : 0 < Module.finrank K (K ⊗[𝓞 K] M) := Nat.pos_of_ne_zero hM0
     have hNpos : 0 < Module.finrank K (K ⊗[𝓞 K] N) := Nat.pos_of_ne_zero hN0
@@ -139,7 +139,7 @@ theorem slope_tensor (h : HermitianMetric K M)
     (g : HermitianMetric K N)
     (hM : 0 < Module.finrank K (K ⊗[𝓞 K] M))
     (hN : 0 < Module.finrank K (K ⊗[𝓞 K] N)) :
-    (h.tensor g).slope = h.slope + g.slope := by
+    (h ⊗[𝓞 K] g).slope = h.slope + g.slope := by
   have hm : (Module.finrank K (K ⊗[𝓞 K] M) : ℝ) ≠ 0 := by exact_mod_cast Nat.ne_of_gt hM
   have hn : (Module.finrank K (K ⊗[𝓞 K] N) : ℝ) ≠ 0 := by exact_mod_cast Nat.ne_of_gt hN
   simp only [slope, degree_tensor, tensor_generic_finrank, Nat.cast_mul]

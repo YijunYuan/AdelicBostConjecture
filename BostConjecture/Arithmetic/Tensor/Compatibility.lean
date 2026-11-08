@@ -101,7 +101,7 @@ namespace HermitianMetric
 /-- The existing tensor form has the binary product formula on integral sections. -/
 lemma tensor_inner_section (h : HermitianMetric K M)
     (g : HermitianMetric K N) (σ : K →+* ℂ) (x x' : M) (y y' : N) :
-    ((h.tensor g).fiber σ).inner (fiberSection _ σ (x ⊗ₜ[𝓞 K] y))
+    ((h ⊗[𝓞 K] g).fiber σ).inner (fiberSection _ σ (x ⊗ₜ[𝓞 K] y))
       (fiberSection _ σ (x' ⊗ₜ[𝓞 K] y')) =
       (h.fiber σ).inner (fiberSection M σ x) (fiberSection M σ x') *
         (g.fiber σ).inner (fiberSection N σ y) (fiberSection N σ y') := by
@@ -115,11 +115,11 @@ lemma tensor_inner_section (h : HermitianMetric K M)
 lemma tensor_inner (h : HermitianMetric K M)
     (g : HermitianMetric K N) (σ : K →+* ℂ)
     (x y : ComplexFiber (M ⊗[𝓞 K] N) σ) :
-    ((h.tensor g).fiber σ).inner x y =
+    ((h ⊗[𝓞 K] g).fiber σ).inner x y =
       (Tensor.binaryCore (h.fiber σ) (g.fiber σ)).inner
         (binaryTensorFiberEquiv σ x) (binaryTensorFiberEquiv σ y) := by
   apply Tensor.inner_ext_of_span (fun xy : M × N => fiberSection _ σ (xy.1 ⊗ₜ[𝓞 K] xy.2))
-    (span_fiberSection_tmul σ) ((h.tensor g).fiber σ)
+    (span_fiberSection_tmul σ) ((h ⊗[𝓞 K] g).fiber σ)
     (Tensor.binaryCore (h.fiber σ) (g.fiber σ)) LinearMap.id
     (binaryTensorFiberEquiv σ).toLinearMap _ x y
   intro a b
@@ -159,14 +159,14 @@ lemma ext_section_inner {h g : HermitianMetric K M}
 lemma tensor_pullback [Module.Flat (𝓞 K) N]
     (h : HermitianMetric K P) (g : HermitianMetric K N)
     (f : M →ₗ[𝓞 K] P) (hf : Function.Injective f) :
-    (h.tensor g).pullback (f.rTensor N) (Module.Flat.rTensor_preserves_injective_linearMap f hf) =
-      (h.pullback f hf).tensor g := by
+    (h ⊗[𝓞 K] g).pullback (f.rTensor N) (Module.Flat.rTensor_preserves_injective_linearMap f hf) =
+      (h.pullback f hf) ⊗[𝓞 K] g := by
   apply ext_inner
   intro σ x y
   apply Tensor.inner_ext_of_span (fun xy : M × N => fiberSection _ σ (xy.1 ⊗ₜ[𝓞 K] xy.2))
-    (span_fiberSection_tmul σ) (((h.tensor g).pullback (f.rTensor N)
+    (span_fiberSection_tmul σ) (((h ⊗[𝓞 K] g).pullback (f.rTensor N)
       (Module.Flat.rTensor_preserves_injective_linearMap f hf)).fiber σ)
-    (((h.pullback f hf).tensor g).fiber σ) LinearMap.id LinearMap.id _ x y
+    (((h.pullback f hf) ⊗[𝓞 K] g).fiber σ) LinearMap.id LinearMap.id _ x y
   intro a b
   simp only [LinearMap.id_apply, pullback_inner, fiberMap_section,
     LinearMap.rTensor_tmul, tensor_inner_section]

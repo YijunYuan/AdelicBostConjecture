@@ -39,10 +39,10 @@ theorem isBalanced_of_maximizing_pair
     (hrM : 0 < Module.finrank K (K ⊗[𝓞 K] M))
     (hrN : 0 < Module.finrank K (K ⊗[𝓞 K] N))
     (hst : h.IsStable) (kst : k.IsStable) (h0 : h.degree = 0) (k0 : k.degree = 0)
-    (hP : ((h.tensor k).submodule P).degree = (h.tensor k).maxDegree)
+    (hP : ((h ⊗[𝓞 K] k).submodule P).degree = (h ⊗[𝓞 K] k).maxDegree)
     (hmax : IsGreatest (Compactness.tensorMaxDegreeValues.{u} K
       (Module.finrank K (K ⊗[𝓞 K] M)) (Module.finrank K (K ⊗[𝓞 K] N)))
-      (h.tensor k).maxDegree) (σ : K →+* ℂ) :
+      (h ⊗[𝓞 K] k).maxDegree) (σ : K →+* ℂ) :
     letI : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
     letI := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber M σ)
     letI := InnerProductSpace.ofCore
@@ -79,7 +79,7 @@ theorem isBalanced_of_maximizing_pair
     (fun t => (k.degree_exponentialVariation B ks kc kt t).trans k0)
   have hz := h.sum_tensorFiberProjectionTrace_eq_zero_of_isLocalMax k P A B hs ks hc kc hm
   have hpair (τ : K →+* ℂ) :
-      (h.tensor k).fiberProjectionTrace P τ (tensorFiberGenerator A B τ) =
+      (h ⊗[𝓞 K] k).fiberProjectionTrace P τ (tensorFiberGenerator A B τ) =
         (LinearMap.trace ℂ (ComplexFiber M τ) ((A τ).comp (A τ))).re +
         (LinearMap.trace ℂ (ComplexFiber N τ) ((B τ).comp (B τ))).re := by
     rw [fiberProjectionTrace_tensor_eq]

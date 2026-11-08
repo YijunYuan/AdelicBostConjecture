@@ -27,6 +27,8 @@ open scoped Topology
 
 namespace BostConjecture.Arithmetic.Compactness
 
+open scoped HermitianMetric
+
 universe u
 variable {K : Type*} [Field K] [NumberField K]
 
@@ -43,7 +45,7 @@ def tensorMaxDegreeValues (K : Type*) [Field K] [NumberField K] (a b : ℕ) : Se
     ∃ h : HermitianMetric K M, ∃ g : HermitianMetric K N,
       Module.finrank K (K ⊗[𝓞 K] M) = a ∧ Module.finrank K (K ⊗[𝓞 K] N) = b ∧
       h.degree = 0 ∧ g.degree = 0 ∧ h.IsSemistable ∧ g.IsSemistable ∧
-      (h.tensor g).maxDegree = d}
+      (h ⊗[𝓞 K] g).maxDegree = d}
 
 /-- An actual pair supplies a point of the realized-value set. -/
 theorem tensor_maxDegree_mem {M N : Type u}
@@ -54,7 +56,7 @@ theorem tensor_maxDegree_mem {M N : Type u}
     (hrM : Module.finrank K (K ⊗[𝓞 K] M) = a)
     (hrN : Module.finrank K (K ⊗[𝓞 K] N) = b)
     (h0 : h.degree = 0) (g0 : g.degree = 0) (hs : h.IsSemistable) (gs : g.IsSemistable) :
-    (h.tensor g).maxDegree ∈ tensorMaxDegreeValues.{u} K a b :=
+    (h ⊗[𝓞 K] g).maxDegree ∈ tensorMaxDegreeValues.{u} K a b :=
   ⟨M, N, inferInstance, inferInstance, inferInstance, inferInstance,
     inferInstance, inferInstance, inferInstance, inferInstance, h, g,
     hrM, hrN, h0, g0, hs, gs, rfl⟩
@@ -80,12 +82,12 @@ theorem isCompact_tensorMaxDegreeValues (a b : ℕ) :
       (fun n => hrB (φ n)) (fun n => g0 (φ n)) (fun n => gs (φ n))
   have hpair := (hH.comp hψ.tendsto_atTop).prodMk_nhds hG
   have hobj := HermitianMetric.continuous_tensor_maxDegree.tendsto (H, G) |>.comp hpair
-  refine ⟨(H.tensor G).maxDegree, ?_, φ ∘ ψ, hφ.comp hψ, ?_⟩
+  refine ⟨(H ⊗[𝓞 K] G).maxDegree, ?_, φ ∘ ψ, hφ.comp hψ, ?_⟩
   · exact ⟨A m, B (φ n), inferInstance, inferInstance, inferInstance, inferInstance,
       inferInstance, inferInstance, inferInstance, inferInstance, H, G,
       hrA m, hrB (φ n), H0, G0, Hs, Gs, rfl⟩
   · have heq : (fun k => ((h (φ (ψ k))).pullback (e (ψ k)).toLinearMap
-          (e (ψ k)).injective |>.tensor
+          (e (ψ k)).injective ⊗[𝓞 K]
           ((g (φ (ψ k))).pullback (f k).toLinearMap (f k).injective)).maxDegree) =
         v ∘ (φ ∘ ψ) := by
       funext k
@@ -110,8 +112,8 @@ theorem exists_maximizing_pair (a b : ℕ)
       h.degree = 0 ∧ g.degree = 0 ∧ h.IsSemistable ∧ g.IsSemistable ∧
       ∃ P : Submodule (𝓞 K) (M ⊗[𝓞 K] N),
         Module.IsTorsionFree (𝓞 K) ((M ⊗[𝓞 K] N) ⧸ P) ∧
-        ((h.tensor g).submodule P).degree = (h.tensor g).maxDegree ∧
-        IsGreatest (tensorMaxDegreeValues.{u} K a b) (h.tensor g).maxDegree := by
+        ((h ⊗[𝓞 K] g).submodule P).degree = (h ⊗[𝓞 K] g).maxDegree ∧
+        IsGreatest (tensorMaxDegreeValues.{u} K a b) (h ⊗[𝓞 K] g).maxDegree := by
   obtain ⟨d, hd, hmax⟩ := (isCompact_tensorMaxDegreeValues (K := K) a b).exists_isGreatest hne
   rcases hd with ⟨M, N, am, an, mm, mn, fm, pm, fn, pn, h, g, hrM, hrN, h0, g0, hs, gs, hval⟩
   let : AddCommGroup M := am
@@ -122,7 +124,7 @@ theorem exists_maximizing_pair (a b : ℕ)
   let : Module.Projective (𝓞 K) M := pm
   let : Module.Finite (𝓞 K) N := fn
   let : Module.Projective (𝓞 K) N := pn
-  obtain ⟨P, hP, hdeg⟩ := (h.tensor g).exists_degree_eq_maxDegree
+  obtain ⟨P, hP, hdeg⟩ := (h ⊗[𝓞 K] g).exists_degree_eq_maxDegree
   refine ⟨M, N, am, an, mm, mn, fm, pm, fn, pn, h, g, hrM, hrN, h0, g0, hs, gs,
     P, hP, hdeg, tensor_maxDegree_mem h g hrM hrN h0 g0 hs gs, ?_⟩
   rwa [hval]

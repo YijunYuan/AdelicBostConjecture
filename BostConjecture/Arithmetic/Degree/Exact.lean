@@ -40,7 +40,7 @@ lemma determinantExactEquiv_isometry (H : HermitianMetric K P)
     (h : Function.Exact i q) (hi : Function.Injective i) (hq : Function.Surjective q)
     (σ : K →+* ℂ) (z : DeterminantLine (K := K) M ⊗[𝓞 K] DeterminantLine (K := K) N) :
     H.determinant.sectionNorm σ (determinantExactEquiv i q h hi hq z) =
-      ((H.pullback i hi).determinant.tensor (H.pushforward q hq).determinant).sectionNorm σ z := by
+      ((H.pullback i hi).determinant ⊗[𝓞 K] (H.pushforward q hq).determinant).sectionNorm σ z := by
   let A := (H.pullback i hi).determinant
   let C := (H.pushforward q hq).determinant
   let e := determinantExactEquiv i q h hi hq
@@ -59,13 +59,13 @@ lemma determinantExactEquiv_isometry (H : HermitianMetric K P)
     exact (mul_ne_zero (fun hz => hx (hf (by simpa using hz)))
       (fun hz => hy (hg (by simpa using hz)))) hz'
   have hn : H.determinant.sectionNorm σ (e (x ⊗ₜ[𝓞 K] y)) =
-      (A.tensor C).sectionNorm σ (x ⊗ₜ[𝓞 K] y) := by
+      (A ⊗[𝓞 K] C).sectionNorm σ (x ⊗ₜ[𝓞 K] y) := by
     rw [sectionNorm_tensor_tmul]
     exact H.determinantExactEquiv_sectionNorm i q h hi hq σ x y
   obtain ⟨a, b, hb, hab⟩ := exists_smul_eq_of_injective (tensorCoordinate f g)
     (tensorCoordinate_injective f g hf hg) hxy z
   have h₁ := congrArg (fun w => H.determinant.sectionNorm σ (e w)) hab
-  have h₂ := congrArg ((A.tensor C).sectionNorm σ) hab
+  have h₂ := congrArg ((A ⊗[𝓞 K] C).sectionNorm σ) hab
   simp only [map_smul, sectionNorm_smul] at h₁ h₂
   have hbσ : ‖σ (b : K)‖ ≠ 0 := norm_ne_zero_iff.mpr
     (fun hz => (RingOfIntegers.coe_ne_zero_iff.mpr hb) (σ.injective (by simpa using hz)))
@@ -82,10 +82,10 @@ lemma determinantExactEquiv_fiber_isometry (H : HermitianMetric K P)
     Real.sqrt (((H.determinant.fiber σ).inner
       (fiberMap (determinantExactEquiv i q h hi hq).toLinearMap σ z)
       (fiberMap (determinantExactEquiv i q h hi hq).toLinearMap σ z)).re) =
-    Real.sqrt (((((H.pullback i hi).determinant.tensor
+    Real.sqrt (((((H.pullback i hi).determinant ⊗[𝓞 K]
       (H.pushforward q hq).determinant).fiber σ).inner z z).re) := by
   let T := DeterminantLine (K := K) M ⊗[𝓞 K] DeterminantLine (K := K) N
-  let A := (H.pullback i hi).determinant.tensor (H.pushforward q hq).determinant
+  let A := (H.pullback i hi).determinant ⊗[𝓞 K] (H.pushforward q hq).determinant
   let e := determinantExactEquiv i q h hi hq
   let : Nontrivial T := e.symm.injective.nontrivial
   let : InnerProductSpace.Core ℂ (ComplexFiber T σ) := A.fiber σ
@@ -123,11 +123,11 @@ theorem degree_exact (H : HermitianMetric K P)
   have hr : Module.finrank K
       (K ⊗[𝓞 K] (DeterminantLine (K := K) M ⊗[𝓞 K] DeterminantLine (K := K) N)) = 1 := by
     rw [tensor_generic_finrank, determinant_generic_finrank, determinant_generic_finrank, mul_one]
-  have he := (A.tensor C).lineDegree_eq_of_equiv H.determinant e hr
+  have he := (A ⊗[𝓞 K] C).lineDegree_eq_of_equiv H.determinant e hr
     (determinant_generic_finrank P)
     (fun σ z => (H.determinantExactEquiv_isometry i q h hi hq σ z).symm)
   change H.determinant.lineDegree _ = A.lineDegree _ + C.lineDegree _
-  rw [← he, ← (A.tensor C).degree_eq_lineDegree hr,
+  rw [← he, ← (A ⊗[𝓞 K] C).degree_eq_lineDegree hr,
     A.degree_tensor_of_rank_one C (determinant_generic_finrank M) (determinant_generic_finrank N),
     A.degree_eq_lineDegree (determinant_generic_finrank M),
     C.degree_eq_lineDegree (determinant_generic_finrank N)]

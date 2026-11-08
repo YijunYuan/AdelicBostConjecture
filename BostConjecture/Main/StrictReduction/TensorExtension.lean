@@ -63,15 +63,15 @@ tensor product is normalized semistable, for any saturated first-factor cut. -/
 theorem isSemistable_tensor_of_submodule_quotient
     (h : HermitianMetric K M) (g : HermitianMetric K N)
     (P : Submodule (𝓞 K) M) [Module.Projective (𝓞 K) (M ⧸ P)]
-    (hP : ((h.submodule P).tensor g).IsSemistable)
-    (hP0 : ((h.submodule P).tensor g).degree = 0)
-    (hQ : ((h.quotient P).tensor g).IsSemistable)
-    (hQ0 : ((h.quotient P).tensor g).degree = 0) :
-    (h.tensor g).degree = 0 ∧ (h.tensor g).IsSemistable := by
+    (hP : ((h.submodule P) ⊗[𝓞 K] g).IsSemistable)
+    (hP0 : ((h.submodule P) ⊗[𝓞 K] g).degree = 0)
+    (hQ : ((h.quotient P) ⊗[𝓞 K] g).IsSemistable)
+    (hQ0 : ((h.quotient P) ⊗[𝓞 K] g).degree = 0) :
+    (h ⊗[𝓞 K] g).degree = 0 ∧ (h ⊗[𝓞 K] g).IsSemistable := by
   let T := tensorRight N P
   have hPi := tensorRightEquiv_inner h g P
   have hQi := tensorRightQuotientEquiv_inner h g P
-  apply (h.tensor g).isSemistable_of_submodule_quotient T
+  apply (h ⊗[𝓞 K] g).isSemistable_of_submodule_quotient T
   · exact (isSemistable_iff_of_equiv _ _ (tensorRightEquiv N P) hPi).mp hP
   · exact (degree_eq_of_equiv _ _ (tensorRightEquiv N P) hPi).symm.trans hP0
   · exact (isSemistable_iff_of_equiv _ _ (tensorRightQuotientEquiv N P) hQi).mpr hQ

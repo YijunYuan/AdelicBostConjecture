@@ -93,13 +93,13 @@ lemma tensorRightEquiv_inner [Module.Flat (𝓞 K) N]
     (h : HermitianMetric K M) (g : HermitianMetric K N)
     (P : Submodule (𝓞 K) M) (σ : K →+* ℂ)
     (x y : ComplexFiber (P ⊗[𝓞 K] N) σ) :
-    (((h.tensor g).submodule (tensorRight N P)).fiber σ).inner
+    (((h ⊗[𝓞 K] g).submodule (tensorRight N P)).fiber σ).inner
       (fiberMap (tensorRightEquiv N P).toLinearMap σ x)
       (fiberMap (tensorRightEquiv N P).toLinearMap σ y) =
-      (((h.submodule P).tensor g).fiber σ).inner x y := by
+      (((h.submodule P) ⊗[𝓞 K] g).fiber σ).inner x y := by
   have he := congrArg (fun m : HermitianMetric K (P ⊗[𝓞 K] N) =>
     (m.fiber σ).inner x y) (tensor_pullback h g P.subtype P.injective_subtype)
-  change ((h.tensor g).fiber σ).inner
+  change ((h ⊗[𝓞 K] g).fiber σ).inner
     (fiberMap (tensorRight N P).subtype σ (fiberMap (tensorRightEquiv N P).toLinearMap σ x))
     (fiberMap (tensorRight N P).subtype σ (fiberMap (tensorRightEquiv N P).toLinearMap σ y)) = _
   simp only [← LinearMap.comp_apply, ← fiberMap_comp]
@@ -145,11 +145,11 @@ lemma tensorRightQuotientEquiv_inner
     (h : HermitianMetric K M) (g : HermitianMetric K N)
     (P : Submodule (𝓞 K) M) (σ : K →+* ℂ)
     (x y : ComplexFiber ((M ⊗[𝓞 K] N) ⧸ tensorRight N P) σ) :
-    (((h.quotient P).tensor g).fiber σ).inner
+    (((h.quotient P) ⊗[𝓞 K] g).fiber σ).inner
       (fiberMap (tensorRightQuotientEquiv N P).toLinearMap σ x)
       (fiberMap (tensorRightQuotientEquiv N P).toLinearMap σ y) =
-      (((h.tensor g).quotient (tensorRight N P)).fiber σ).inner x y := by
-  rw [show (h.quotient P).tensor g = (h.tensor g).pushforward
+      (((h ⊗[𝓞 K] g).quotient (tensorRight N P)).fiber σ).inner x y := by
+  rw [show (h.quotient P) ⊗[𝓞 K] g = (h ⊗[𝓞 K] g).pushforward
       (P.mkQ.rTensor N) (LinearMap.rTensor_surjective N P.mkQ_surjective) from
     (tensor_pushforward h g P.mkQ P.mkQ_surjective).symm]
   exact pushforward_equiv_inner _ _ (tensorRight N P).mkQ_surjective _

@@ -38,7 +38,7 @@ theorem isSemistable_tensor_of_degree_zero
     (hrM : 0 < Module.finrank K (K ⊗[𝓞 K] M))
     (hrN : 0 < Module.finrank K (K ⊗[𝓞 K] N))
     (h0 : h.degree = 0) (k0 : k.degree = 0)
-    (hs : h.IsSemistable) (ks : k.IsSemistable) : (h.tensor k).IsSemistable := by
+    (hs : h.IsSemistable) (ks : k.IsSemistable) : (h ⊗[𝓞 K] k).IsSemistable := by
   by_contra hbad
   obtain ⟨E, F, ae, af, me, mf, fe, pe, ff, pf, H, G,
       hrE, hrF, H0, G0, Hst, Gst, P, hsat, hpos, hP, hmax⟩ :=
@@ -56,12 +56,12 @@ theorem isSemistable_tensor_of_degree_zero
   have hf : 0 < Module.finrank K (K ⊗[𝓞 K] F) := by omega
   have hp : 0 < Module.finrank K (K ⊗[𝓞 K] P) := by
     by_contra hn
-    have hz := ((H.tensor G).submodule P).degree_eq_zero_of_rank_zero (by omega)
+    have hz := ((H ⊗[𝓞 K] G).submodule P).degree_eq_zero_of_rank_zero (by omega)
     linarith
   let σ : K →+* ℂ := Classical.choice inferInstance
   have hbal := H.isBalanced_of_maximizing_pair G P he hf Hst Gst H0 G0 hP hmax σ
   have hb := H.slope_submodule_tensor_le_of_isBalanced G P he hf hp σ hbal
-  have hsp : 0 < ((H.tensor G).submodule P).slope :=
+  have hsp : 0 < ((H ⊗[𝓞 K] G).submodule P).slope :=
     div_pos hpos (by exact_mod_cast hp)
   simp only [slope, H0, G0, zero_div, zero_add] at hb
   exact (not_le_of_gt hsp) hb
@@ -72,7 +72,7 @@ theorem IsSemistable.tensor
     {h : HermitianMetric K M} {k : HermitianMetric K N}
     (hs : h.IsSemistable) (ks : k.IsSemistable)
     (hrM : 0 < Module.finrank K (K ⊗[𝓞 K] M))
-    (hrN : 0 < Module.finrank K (K ⊗[𝓞 K] N)) : (h.tensor k).IsSemistable := by
+    (hrN : 0 < Module.finrank K (K ⊗[𝓞 K] N)) : (h ⊗[𝓞 K] k).IsSemistable := by
   have hh := (h.isSemistable_rescale_iff hrM.ne' h.slope).mpr hs
   have hk := (k.isSemistable_rescale_iff hrN.ne' k.slope).mpr ks
   have ht := isSemistable_tensor_of_degree_zero (h.rescale h.slope) (k.rescale k.slope)
@@ -81,6 +81,6 @@ theorem IsSemistable.tensor
   have hr : Module.finrank K (K ⊗[𝓞 K] (M ⊗[𝓞 K] N)) ≠ 0 := by
     rw [tensor_generic_finrank]
     exact mul_ne_zero hrM.ne' hrN.ne'
-  exact ((h.tensor k).isSemistable_rescale_iff hr _).mp ht
+  exact ((h ⊗[𝓞 K] k).isSemistable_rescale_iff hr _).mp ht
 
 end BostConjecture.Arithmetic.HermitianMetric

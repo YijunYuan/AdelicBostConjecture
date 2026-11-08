@@ -31,13 +31,13 @@ variable {K M N : Type u} [Field K] [NumberField K]
 /-- Rescaling the two factor norms multiplies the tensor norm by their product. -/
 theorem tensor_rescale (h : HermitianMetric K M)
     (k : HermitianMetric K N) (a b : ℝ) :
-    (h.rescale a).tensor (k.rescale b) = (h.tensor k).rescale (a + b) := by
+    (h.rescale a) ⊗[𝓞 K] (k.rescale b) = (h ⊗[𝓞 K] k).rescale (a + b) := by
   apply ext_inner
   intro σ x y
   apply Tensor.inner_ext_of_span
     (fun xy : M × N => fiberSection _ σ (xy.1 ⊗ₜ[𝓞 K] xy.2))
-    (span_fiberSection_tmul σ) (((h.rescale a).tensor (k.rescale b)).fiber σ)
-    (((h.tensor k).rescale (a + b)).fiber σ) LinearMap.id LinearMap.id _ x y
+    (span_fiberSection_tmul σ) (((h.rescale a) ⊗[𝓞 K] (k.rescale b)).fiber σ)
+    (((h ⊗[𝓞 K] k).rescale (a + b)).fiber σ) LinearMap.id LinearMap.id _ x y
   intro v w
   simp only [LinearMap.id_apply, tensor_inner_section, rescale_inner]
   rw [mul_add, Real.exp_add, Complex.ofReal_mul]

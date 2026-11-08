@@ -45,7 +45,7 @@ namespace HermitianMetric
 lemma coordinateLength_tensor_tmul (h : HermitianMetric K M)
     (g : HermitianMetric K N) (f : M →ₗ[𝓞 K] K) (q : N →ₗ[𝓞 K] K)
     (x : M) (y : N) (v : InfinitePlace K) :
-    (h.tensor g).coordinateLength (tensorCoordinate f q) (x ⊗ₜ[𝓞 K] y) v =
+    (h ⊗[𝓞 K] g).coordinateLength (tensorCoordinate f q) (x ⊗ₜ[𝓞 K] y) v =
       h.coordinateLength f x v * g.coordinateLength q y v := by
   simp only [coordinateLength, sectionNorm_tensor_tmul, tensorCoordinate_tmul,
     map_mul, div_mul_div_comm]
@@ -60,9 +60,9 @@ theorem degreeInCoordinate_tensor (h : HermitianMetric K M)
     (g : HermitianMetric K N) (f : M →ₗ[𝓞 K] K) (q : N →ₗ[𝓞 K] K)
     (hf : Function.Injective f) (hq : Function.Injective q)
     {x : M} {y : N} (hx : x ≠ 0) (hy : y ≠ 0) :
-    (h.tensor g).degreeInCoordinate (tensorCoordinate f q) (x ⊗ₜ[𝓞 K] y) =
+    (h ⊗[𝓞 K] g).degreeInCoordinate (tensorCoordinate f q) (x ⊗ₜ[𝓞 K] y) =
       h.degreeInCoordinate f x + g.degreeInCoordinate q y := by
-  have hl : (h.tensor g).coordinateLength (tensorCoordinate f q) (x ⊗ₜ[𝓞 K] y) =
+  have hl : (h ⊗[𝓞 K] g).coordinateLength (tensorCoordinate f q) (x ⊗ₜ[𝓞 K] y) =
       fun v => h.coordinateLength f x v * g.coordinateLength q y v := by
     funext v
     exact coordinateLength_tensor_tmul h g f q x y v
@@ -78,7 +78,7 @@ theorem degree_tensor_of_rank_one (h : HermitianMetric K M)
     (g : HermitianMetric K N)
     (hM : Module.finrank K (K ⊗[𝓞 K] M) = 1)
     (hN : Module.finrank K (K ⊗[𝓞 K] N) = 1) :
-    (h.tensor g).degree = h.degree + g.degree := by
+    (h ⊗[𝓞 K] g).degree = h.degree + g.degree := by
   obtain ⟨x, hx⟩ := exists_ne (0 : M)
   obtain ⟨y, hy⟩ := exists_ne (0 : N)
   let f := lineCoordinate (M := M) hM
@@ -94,9 +94,9 @@ theorem degree_tensor_of_rank_one (h : HermitianMetric K M)
   let : Nontrivial (M ⊗[𝓞 K] N) := ⟨⟨_, _, ht⟩⟩
   have hr : Module.finrank K (K ⊗[𝓞 K] (M ⊗[𝓞 K] N)) = 1 := by
     rw [tensor_generic_finrank, hM, hN, mul_one]
-  rw [(h.tensor g).degree_eq_lineDegree hr, h.degree_eq_lineDegree hM,
+  rw [(h ⊗[𝓞 K] g).degree_eq_lineDegree hr, h.degree_eq_lineDegree hM,
     g.degree_eq_lineDegree hN,
-    (h.tensor g).lineDegree_eq_degreeInCoordinate hr (tensorCoordinate f q)
+    (h ⊗[𝓞 K] g).lineDegree_eq_degreeInCoordinate hr (tensorCoordinate f q)
       (tensorCoordinate_injective f q hf hq) ht,
     h.lineDegree_eq_degreeInCoordinate hM f hf hx,
     g.lineDegree_eq_degreeInCoordinate hN q hq hy]
