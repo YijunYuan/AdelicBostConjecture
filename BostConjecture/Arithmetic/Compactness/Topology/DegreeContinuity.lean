@@ -69,9 +69,4 @@ theorem continuous_submodule (P : Submodule (𝓞 K) M) :
   apply continuous_pi
   exact fun y => continuous_inner_eval σ (fiberMap P.subtype σ x) (fiberMap P.subtype σ y)
 
-/-- Each fixed induced degree is continuous, without requiring saturation. -/
-theorem continuous_degree_submodule (P : Submodule (𝓞 K) M) :
-    Continuous (fun h : HermitianMetric K M => (h.submodule P).degree) :=
-  continuous_degree.comp (continuous_submodule P)
-
 end BostConjecture.Arithmetic.HermitianMetric

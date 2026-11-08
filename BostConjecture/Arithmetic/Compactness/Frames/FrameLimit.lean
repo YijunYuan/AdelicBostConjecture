@@ -6,6 +6,8 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Arithmetic.Compactness.Frames.FrameMetric
+public import BostConjecture.Arithmetic.Compactness.Topology.MetricTopology
+public import Mathlib.Algebra.Order.Ring.Star
 
 /-!
 # Reconstruction of actual Hermitian limits from nondegenerate real frames

@@ -7,8 +7,6 @@ module
 
 public import BostConjecture.ExternalCode.TauCeti.LinearAlgebra.SymmetricPower.Lift
 public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
-public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
-public import Mathlib.Algebra.Algebra.Operations
 public import Mathlib.Algebra.BigOperators.Fin
 
 /-!
@@ -82,12 +80,6 @@ theorem toSymmetricAlgebra_mem_homogeneousSubmodule (n : ℕ) (x : Sym[R]^n M) :
 noncomputable def toHomogeneous (n : ℕ) :
     Sym[R]^n M →ₗ[R] ↥((LinearMap.range (SymmetricAlgebra.ι R M)) ^ n) :=
   (toSymmetricAlgebra R M n).codRestrict _ (toSymmetricAlgebra_mem_homogeneousSubmodule R M n)
-
-/-- The homogeneous multiplication map has ordinary multiplication as its underlying map. -/
-@[simp]
-theorem coe_toHomogeneous_apply (n : ℕ) (x : Sym[R]^n M) :
-    (toHomogeneous R M n x : SymmetricAlgebra R M) = toSymmetricAlgebra R M n x :=
-  (rfl)
 
 /-- The image of multiplication is exactly the homogeneous component of the same degree. -/
 theorem range_toSymmetricAlgebra (n : ℕ) :
@@ -233,31 +225,5 @@ theorem coe_equivHomogeneous_apply (n : ℕ) (x : Sym[R]^n M) :
     (equivHomogeneous (R := R) (M := M) n x : SymmetricAlgebra R M) =
       toSymmetricAlgebra R M n x :=
   (rfl)
-
-/-- The linear map underlying the homogeneous equivalence is homogeneous multiplication. -/
-@[simp]
-theorem toLinearMap_equivHomogeneous (n : ℕ) :
-    (equivHomogeneous (R := R) (M := M) n).toLinearMap = toHomogeneous R M n := by
-  rfl
-
-/-- The homogeneous equivalence sends a pure symmetric tensor to its product of generators. -/
-@[simp]
-theorem equivHomogeneous_tprod (n : ℕ) (m : Fin n → M) :
-    equivHomogeneous (R := R) (M := M) n (⨂ₛ[R] i, m i) =
-      ⟨∏ i, SymmetricAlgebra.ι R M (m i), by
-        simpa only [toSymmetricAlgebra_tprod] using
-          toSymmetricAlgebra_mem_homogeneousSubmodule R M n (⨂ₛ[R] i, m i)⟩ := by
-  apply Subtype.ext
-  exact toSymmetricAlgebra_tprod R M n m
-
-/-- The inverse homogeneous equivalence sends a product of generators to its pure tensor. -/
-@[simp]
-theorem equivHomogeneous_symm_prod_ι (n : ℕ) (m : Fin n → M)
-    (h : ∏ i, SymmetricAlgebra.ι R M (m i) ∈
-      (LinearMap.range (SymmetricAlgebra.ι R M)) ^ n) :
-    (equivHomogeneous (R := R) (M := M) n).symm ⟨∏ i, SymmetricAlgebra.ι R M (m i), h⟩ =
-      ⨂ₛ[R] i, m i := by
-  apply (equivHomogeneous (R := R) (M := M) n).injective
-  simp only [LinearEquiv.apply_symm_apply, equivHomogeneous_tprod]
 
 end TauCeti.SymmetricPower

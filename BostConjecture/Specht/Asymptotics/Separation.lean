@@ -5,7 +5,6 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Specht.Asymptotics.BulkGap
 public import BostConjecture.Specht.Asymptotics.GapAsymptotics
 public import BostConjecture.Specht.Asymptotics.PrefixEvent
 

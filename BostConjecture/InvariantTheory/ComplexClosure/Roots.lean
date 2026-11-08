@@ -7,8 +7,6 @@ module
 
 public import Mathlib.Analysis.Complex.Polynomial.Basic
 public import Mathlib.Analysis.Polynomial.CauchyBound
-public import Mathlib.Algebra.Order.BigOperators.Group.Multiset
-public import Mathlib.Data.Finset.Max
 public import Mathlib.Topology.Algebra.MvPolynomial
 
 /-!

@@ -7,7 +7,6 @@ module
 
 public import BostConjecture.Arithmetic.RestrictionCovolume.Quotient
 public import BostConjecture.Arithmetic.RestrictionCovolume.Covolume
-public import Mathlib.LinearAlgebra.Basis.Prod
 
 /-!
 # Trace covolume in a saturated exact sequence
@@ -23,7 +22,6 @@ Gram matrices, so their Euclidean Haar covolumes multiply.
 noncomputable section
 
 open NumberField TensorProduct Module
-
 
 namespace BostConjecture.Arithmetic.HermitianMetric
 

@@ -7,7 +7,6 @@ module
 
 public import BostConjecture.Arithmetic.Specht.DeterminantBundle
 public import BostConjecture.Geometry.Contraction.Norm
-public import BostConjecture.Tensor.Metric.Map
 
 /-!
 # The intrinsic Hermitian metrics of the canonical pairing
@@ -159,11 +158,6 @@ variable {K ι : Type*} [Field K] [NumberField K] [Fintype ι]
   [Module.Finite (𝓞 K) V] [Module.Projective (𝓞 K) V]
   (i : V →ₗ[𝓞 K] (⨂[𝓞 K] j, E j)) (hi : Function.Injective i)
   {n s l : ℕ} {a k : ι → ℕ}
-
-local instance pairingDualDeterminantAddGroup
-    (t : ∀ j, OAI.Saxl.Tableau n (rectangle (a j) (k j))) :
-    ∀ j, AddCommGroup ((⨂[𝓞 K] (_ : Fin (k j)), ⋀[𝓞 K]^(a j) (Dual (𝓞 K) (E j))) ⊗[𝓞 K]
-      (𝓞 K ⊗[ℤ] orbitLattice (t j))) := fun _ => Module.addCommMonoidToAddCommGroup (𝓞 K)
 
 local instance pairingSourceDeterminantAddGroup (v : OAI.Saxl.Tableau n (rectangle s l)) :
     AddCommGroup ((⨂[𝓞 K] (_ : Fin l), ⋀[𝓞 K]^s V) ⊗[𝓞 K]

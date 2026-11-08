@@ -52,34 +52,6 @@ lemma prodMap_ιMulti (a b : ℕ) (x : Fin a → M) (y : Fin b → N) :
 variable {M N}
 variable {P Q : Type*} [AddCommGroup P] [Module R P] [AddCommGroup Q] [Module R Q]
 
-/-- The product of exterior powers is natural in both summands. -/
-lemma prodMap_natural (a b : ℕ) (f : M →ₗ[R] P) (g : N →ₗ[R] Q) :
-    (map (a + b) (f.prodMap g)).comp (prodMap R M N a b) =
-      (prodMap R P Q a b).comp (TensorProduct.map (map a f) (map b g)) := by
-  apply TensorProduct.ext'
-  intro x y
-  have hx : x ∈ Submodule.span R (Set.range (ιMulti R a (M := M))) := by
-    rw [ιMulti_span]; trivial
-  have hy : y ∈ Submodule.span R (Set.range (ιMulti R b (M := N))) := by
-    rw [ιMulti_span]; trivial
-  induction hx using Submodule.span_induction with
-  | mem x hx =>
-    obtain ⟨v, rfl⟩ := hx
-    induction hy using Submodule.span_induction with
-    | mem y hy =>
-      obtain ⟨w, rfl⟩ := hy
-      simp only [LinearMap.comp_apply, prodMap_ιMulti, TensorProduct.map_tmul,
-        map_apply_ιMulti]
-      congr 1
-      funext i
-      refine Fin.addCases ?_ ?_ i <;> intro j <;> simp
-    | zero => simp
-    | add x y hx hy ihx ihy => simp only [tmul_add, map_add, ihx, ihy]
-    | smul c x hx ih => simp [tmul_smul, ih]
-  | zero => simp
-  | add x y hx hy ihx ihy => simp only [add_tmul, map_add, ihx, ihy]
-  | smul c x hx ih => simp [smul_tmul, ih]
-
 variable (M N) (S : Type*) [CommRing S] [Algebra R S]
 
 /-- Exterior product commutes with scalar extension on arbitrary integral wedges. -/

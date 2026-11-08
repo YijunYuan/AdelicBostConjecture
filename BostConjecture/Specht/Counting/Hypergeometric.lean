@@ -5,10 +5,8 @@ Authors: Yijun Yuan
 -/
 module
 
-public import Mathlib.Data.Fintype.Powerset
 public import Mathlib.Data.Fintype.BigOperators
 public import Mathlib.Data.Fintype.Prod
-public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 public import Mathlib.Algebra.BigOperators.Field
 public import Mathlib.Basic.Real.Basic
 

@@ -7,8 +7,6 @@ module
 
 public import BostConjecture.Arithmetic.Bundle.Conjugation
 public import BostConjecture.Arithmetic.Exterior.OrthogonalLift
-public import Mathlib.LinearAlgebra.TensorProduct.Finiteness
-public import Mathlib.LinearAlgebra.TensorProduct.RightExactness
 
 /-!
 # Canonical quotient Hermitian metrics
@@ -124,77 +122,6 @@ def pushforward (h : HermitianMetric K M) (f : M →ₗ[𝓞 K] N)
 /-- The canonical quotient Hermitian metric on the actual module quotient. -/
 def quotient (h : HermitianMetric K M) (P : Submodule (𝓞 K) M) :
     HermitianMetric K (M ⧸ P) := h.pushforward P.mkQ P.mkQ_surjective
-
-/-- An integral quotient map decreases section norms for the quotient metric. -/
-lemma sectionNorm_pushforward_le (h : HermitianMetric K M)
-    (f : M →ₗ[𝓞 K] N) (hf : Function.Surjective f) (σ : K →+* ℂ) (x : M) :
-    (h.pushforward f hf).sectionNorm σ (f x) ≤ h.sectionNorm σ x := by
-  let : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
-  let := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber M σ)
-  let := InnerProductSpace.ofCore (inferInstance : PreInnerProductSpace.Core ℂ (ComplexFiber M σ))
-  change ‖h.fiberLift f hf σ (fiberSection N σ (f x))‖ ≤ ‖fiberSection M σ x‖
-  rw [← fiberMap_section f σ x]
-  exact ComplexQuotient.norm_lift_map_le _ _ _
-
-lemma sectionNorm_quotient_le (h : HermitianMetric K M)
-    (P : Submodule (𝓞 K) M) (σ : K →+* ℂ) (x : M) :
-    (h.quotient P).sectionNorm σ (P.mkQ x) ≤ h.sectionNorm σ x :=
-  h.sectionNorm_pushforward_le P.mkQ P.mkQ_surjective σ x
-
-/-- The fiber norm is the attained minimum among norms of all lifts. -/
-lemma pushforwardFiber_min (h : HermitianMetric K M)
-    (f : M →ₗ[𝓞 K] N) (hf : Function.Surjective f) (σ : K →+* ℂ)
-    (y : ComplexFiber N σ) :
-    ∃ x : ComplexFiber M σ, fiberMap f σ x = y ∧
-      Real.sqrt (((h.pushforwardFiber f hf σ).inner y y).re) =
-        Real.sqrt (((h.fiber σ).inner x x).re) ∧
-      ∀ z : ComplexFiber M σ, fiberMap f σ z = y →
-        Real.sqrt (((h.fiber σ).inner x x).re) ≤
-          Real.sqrt (((h.fiber σ).inner z z).re) := by
-  let : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
-  let := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber M σ)
-  let := InnerProductSpace.ofCore (inferInstance : PreInnerProductSpace.Core ℂ (ComplexFiber M σ))
-  refine ⟨h.fiberLift f hf σ y, h.fiberMap_fiberLift f hf σ y, rfl, ?_⟩
-  intro z hz
-  change ‖h.fiberLift f hf σ y‖ ≤ ‖z‖
-  rw [← hz]
-  exact ComplexQuotient.norm_lift_map_le _ _ _
-
-/-- The quotient norm is the attained distance to the actual submodule fiber. -/
-lemma quotientFiber_min (h : HermitianMetric K M)
-    (P : Submodule (𝓞 K) M) (σ : K →+* ℂ) (v : ComplexFiber M σ) :
-    ∃ u ∈ LinearMap.range (fiberMap P.subtype σ),
-      Real.sqrt ((((h.quotient P).fiber σ).inner (fiberMap P.mkQ σ v)
-        (fiberMap P.mkQ σ v)).re) = Real.sqrt (((h.fiber σ).inner (v - u) (v - u)).re) ∧
-      ∀ w ∈ LinearMap.range (fiberMap P.subtype σ),
-        Real.sqrt (((h.fiber σ).inner (v - u) (v - u)).re) ≤
-          Real.sqrt (((h.fiber σ).inner (v - w) (v - w)).re) := by
-  obtain ⟨x, hx, he, hmin⟩ := h.pushforwardFiber_min P.mkQ P.mkQ_surjective σ
-    (fiberMap P.mkQ σ v)
-  refine ⟨v - x, ?_, ?_, ?_⟩
-  · rw [← ker_fiberMap_mkQ]
-    change fiberMap P.mkQ σ (v - x) = 0
-    rw [map_sub, hx, sub_self]
-  · rw [sub_sub_cancel]
-    exact he
-  · intro w hw
-    rw [← ker_fiberMap_mkQ] at hw
-    simpa only [sub_sub_cancel] using hmin (v - w) (by
-      rw [map_sub, (LinearMap.mem_ker.mp hw), sub_zero])
-
-/-- Agreement on all orthogonal representatives determines the quotient form. -/
-lemma pushforwardFiber_unique (h : HermitianMetric K M)
-    (f : M →ₗ[𝓞 K] N) (hf : Function.Surjective f) (σ : K →+* ℂ)
-    (c : InnerProductSpace.Core ℂ (ComplexFiber N σ))
-    (hc : ∀ x y : ComplexFiber N σ, c.inner x y =
-      (h.fiber σ).inner (h.fiberLift f hf σ x) (h.fiberLift f hf σ y)) :
-    c = h.pushforwardFiber f hf σ := by
-  have he : c.inner = (h.pushforwardFiber f hf σ).inner := funext fun x => funext fun y => hc x y
-  generalize hd : h.pushforwardFiber f hf σ = d at he ⊢
-  rcases c with ⟨⟨⟨ci⟩, cs, cp, ca, cm⟩, cd⟩
-  rcases d with ⟨⟨⟨di⟩, ds, dp, da, dm⟩, dd⟩
-  cases he
-  rfl
 
 end HermitianMetric
 end BostConjecture.Arithmetic

@@ -5,9 +5,16 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.InvariantTheory.Polynomial.Action
-public import BostConjecture.Tensor.Dual.Evaluation
-public import Mathlib.LinearAlgebra.Multilinear.Curry
+public import BostConjecture.ExternalCode.MathlibPRs.PR44845.LinearAlgebra.PiTensorProduct.Projective
+public import BostConjecture.InvariantTheory.Polynomial.Basic
+public import Mathlib.Algebra.Algebra.IsSimpleRing
+public import Mathlib.Algebra.Order.Field.Basic
+public import Mathlib.CategoryTheory.Category.Init
+public import Mathlib.Data.Nat.Totient
+public import Mathlib.Data.Sym.Sym2.Init
+public import Mathlib.GroupTheory.GroupAction.Ring
+public import Mathlib.Tactic.NormNum.GCD
+public import Mathlib.Tactic.Positivity.Finset
 
 /-!
 # The tensor quotient onto intrinsic homogeneous polynomials
@@ -83,24 +90,6 @@ theorem range_polynomialTensorMap (d : ℕ) :
       obtain ⟨u, rfl⟩ := ih
       exact ⟨_, polynomialTensorMap_cons ℓ u⟩
 
-/-- Naturality of the tensor quotient for every linear map. -/
-theorem polynomialTensorMap_map_dual {d : ℕ} (f : X →ₗ[F] Y)
-    (u : ⨂[F] (_ : Fin d), Dual F Y) :
-    polynomialTensorMap F X d (PiTensorProduct.map (fun _ => f.dualMap) u) =
-      polynomialPullback f (polynomialTensorMap F Y d u) := by
-  induction u using PiTensorProduct.induction_on with
-  | smul_tprod r ℓ => simp; rfl
-  | add u v hu hv => simp only [map_add, hu, hv]
-
-/-- The quotient intertwines the actual tensor dual action and the intrinsic
-polynomial representation, whose action is inverse pullback. -/
-theorem polynomialTensorMap_representation {G : Type*} [Group G]
-    (ρ : Representation F G X) (g : G) {d : ℕ}
-    (u : ⨂[F] (_ : Fin d), Dual F X) :
-    polynomialTensorMap F X d (PiTensorProduct.map (fun _ => (ρ g⁻¹).dualMap) u) =
-      polynomialRepresentation ρ g (polynomialTensorMap F X d u) :=
-  polynomialTensorMap_map_dual (ρ g⁻¹) u
-
 /-- Polynomial evaluation is the existing finite-projective tensor evaluation. -/
 theorem polynomialEval_tensorMap [FiniteDimensional F X] {d : ℕ}
     (x : X) (u : ⨂[F] (_ : Fin d), Dual F X) :
@@ -110,19 +99,5 @@ theorem polynomialEval_tensorMap [FiniteDimensional F X] {d : ℕ}
   induction u using PiTensorProduct.induction_on with
   | smul_tprod r ℓ => simp [finprod_eq_prod_of_fintype]
   | add u v hu hv => simp only [map_add, LinearMap.add_apply, hu, hv]
-
-/-- A nonvanishing homogeneous polynomial has a tensor preimage with nonzero
-canonical evaluation. No invariance of that preimage is asserted here. -/
-theorem exists_tensor_evaluation_ne_zero [FiniteDimensional F X] {d : ℕ}
-    {p : SymmetricAlgebra F (Dual F X)} (hp : p ∈ homogeneousPolynomials F X d)
-    {x : X} (hx : polynomialEval x p ≠ 0) :
-    ∃ u : ⨂[F] (_ : Fin d), Dual F X,
-      polynomialTensorMap F X d u = p ∧
-        dualDistribEquivOfProjective F (fun _ : Fin d => X) u
-          (tprod F fun _ : Fin d => x) ≠ 0 := by
-  obtain ⟨u, hu⟩ := (show p ∈ LinearMap.range (polynomialTensorMap F X d) by
-    rwa [range_polynomialTensorMap])
-  refine ⟨u, hu, ?_⟩
-  rwa [← polynomialEval_tensorMap, hu]
 
 end BostConjecture.Geometry

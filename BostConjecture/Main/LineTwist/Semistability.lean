@@ -7,6 +7,7 @@ module
 
 public import BostConjecture.Main.LineTwist.Submodule
 public import BostConjecture.Arithmetic.HN.Semistable
+public import BostConjecture.Arithmetic.Degree.Tensor
 
 /-!
 # Semistability of actual Hermitian line twists

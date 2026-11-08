@@ -8,8 +8,12 @@ module
 public import BostConjecture.InvariantTheory.Semistability
 public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basis
 public import Mathlib.RingTheory.Nullstellensatz
-public import Mathlib.Analysis.Normed.Module.FiniteDimension
 public import Mathlib.Topology.Algebra.MvPolynomial
+public import Mathlib.Algebra.Order.Algebra
+public import Mathlib.Algebra.Order.Field.Power
+public import Mathlib.Analysis.Complex.Basic
+public import Mathlib.Data.EReal.Inv
+public import Mathlib.Logic.Equiv.PartialEquiv
 
 /-!
 # Coordinates for intrinsic polynomial zero loci
@@ -89,22 +93,6 @@ theorem isClosed_zeroLocus (I : Ideal (MvPolynomial σ ℂ)) :
     simp [MvPolynomial.mem_zeroLocus_iff, MvPolynomial.aeval_def]
   rw [h]
   exact isClosed_biInter fun p _ => isClosed_eq p.continuous_eval continuous_const
-
-theorem continuous_polynomialEval (b : Basis τ ℂ E)
-    (p : SymmetricAlgebra ℂ (Module.Dual ℂ E)) :
-    Continuous (fun x : E => polynomialEval x p) := by
-  classical
-  simp_rw [polynomialEval_eq_eval_equivMvPolynomial b]
-  exact (MvPolynomial.continuous_eval _).comp (continuous_equivFun_basis b)
-
-theorem isClosed_polynomialZariskiClosure (b : Basis τ ℂ E) (S : Set E) :
-    IsClosed (polynomialZariskiClosure (K := ℂ) S) := by
-  rw [polynomialZariskiClosure_eq_preimage_zeroLocus b]
-  exact (isClosed_zeroLocus _).preimage (continuous_equivFun_basis b)
-
-theorem closure_subset_polynomialZariskiClosure (b : Basis τ ℂ E) (S : Set E) :
-    closure S ⊆ polynomialZariskiClosure (K := ℂ) S :=
-  closure_minimal (subset_polynomialZariskiClosure S) (isClosed_polynomialZariskiClosure b S)
 
 end Complex
 

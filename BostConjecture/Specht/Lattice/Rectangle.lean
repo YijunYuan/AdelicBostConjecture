@@ -67,108 +67,6 @@ def rectangleTableau (a k : ℕ) : Tableau (a * k) (rectangle a k) :=
 def rectangleCoordinates {n a k : ℕ} (t : Tableau n (rectangle a k)) :
     Fin n ≃ Fin a × Fin k := t.trans (rectangleCellsEquiv a k)
 
-/-- A row of a rectangular tableau contains exactly one entry in each column. -/
-def rectangleRowEquiv {n a k : ℕ} (t : Tableau n (rectangle a k)) (i : Fin a) :
-    {x : Fin n // (rectangleCoordinates t x).1 = i} ≃ Fin k where
-  toFun x := (rectangleCoordinates t x.val).2
-  invFun j := ⟨(rectangleCoordinates t).symm (i, j), by simp⟩
-  left_inv x := by
-    apply Subtype.ext
-    apply (rectangleCoordinates t).injective
-    simp only [Equiv.apply_symm_apply]
-    exact Prod.ext x.property.symm rfl
-  right_inv j := by simp
-
-/-- Every letter occurs `k` times. This is the row-tabloid content condition. -/
-def HasRectangleContent {n d : ℕ} (k : ℕ) (w : Fin n → Fin d) : Prop :=
-  ∀ r, Nat.card {x : Fin n // w x = r} = k
-
-theorem rowWord_hasRectangleContent {n a k : ℕ} (hk : 0 < k)
-    (t : Tableau n (rectangle a k)) : HasRectangleContent k (rowWord t) := by
-  intro r
-  have hr : r.val < a := by simpa [colLen_rectangle hk] using r.isLt
-  let e : {x : Fin n // rowWord t x = r} ≃
-      {x : Fin n // (rectangleCoordinates t x).1 = (⟨r.val, hr⟩ : Fin a)} :=
-    Equiv.subtypeEquivRight (fun x => by
-      simp only [Fin.ext_iff]
-      rfl)
-  simpa using Nat.card_congr (e.trans (rectangleRowEquiv t ⟨r.val, hr⟩))
-
-/-- Fill each row with the positions carrying its letter, in any fixed order. -/
-def tableauOfRectangleContent {n a k : ℕ} (hk : 0 < k)
-    (w : Fin n → Fin (rectangle a k |>.colLen 0)) (hw : HasRectangleContent k w) :
-    Tableau n (rectangle a k) := by
-  classical
-  let e r : {x : Fin n // w x = r} ≃ Fin k :=
-    Fintype.equivFinOfCardEq (by simpa using hw r)
-  exact (Equiv.sigmaFiberEquiv w).symm |>.trans
-    (Equiv.sigmaCongrRight e) |>.trans
-    (Equiv.sigmaEquivProd _ _) |>.trans
-    (Equiv.prodCongr (finCongr (colLen_rectangle hk)) (Equiv.refl (Fin k))) |>.trans
-    (rectangleCellsEquiv a k).symm
-
-@[simp] theorem rowWord_tableauOfRectangleContent {n a k : ℕ} (hk : 0 < k)
-    (w : Fin n → Fin (rectangle a k |>.colLen 0)) (hw : HasRectangleContent k w) :
-    rowWord (tableauOfRectangleContent hk w hw) = w := by
-  ext x
-  rfl
-
-/-- The row words of rectangular tableaux are exactly the words of rectangular content. -/
-theorem exists_tableau_rowWord_iff {n a k : ℕ} (hk : 0 < k)
-    (w : Fin n → Fin (rectangle a k |>.colLen 0)) :
-    (∃ t : Tableau n (rectangle a k), rowWord t = w) ↔ HasRectangleContent k w := by
-  constructor
-  · rintro ⟨t, rfl⟩
-    exact rowWord_hasRectangleContent hk t
-  · intro hw
-    exact ⟨tableauOfRectangleContent hk w hw, rowWord_tableauOfRectangleContent hk w hw⟩
-
-/-- The row-word orbit contains precisely the row tabloids of the rectangle. -/
-theorem mem_rectangle_rowWord_orbit_iff {n a k : ℕ} (hk : 0 < k)
-    (t : Tableau n (rectangle a k)) (w : Fin n → Fin (rectangle a k |>.colLen 0)) :
-    (∃ g : Equiv.Perm (Fin n), rowWord t ∘ (g⁻¹ : Equiv.Perm (Fin n)) = w) ↔
-      HasRectangleContent k w := by
-  constructor
-  · rintro ⟨g, rfl⟩
-    exact rowWord_hasRectangleContent hk (relabel g t)
-  · intro hw
-    obtain ⟨u, hu⟩ := (exists_tableau_rowWord_iff hk w).mpr hw
-    refine ⟨t.trans u.symm, ?_⟩
-    change rowWord (relabel (t.trans u.symm) t) = w
-    have ht : relabel (t.trans u.symm) t = u := by
-      ext i <;> simp [relabel]
-    rw [ht, hu]
-
-theorem polytabloidInt_eq_zero_of_not_rectangleContent {n a k : ℕ} (hk : 0 < k)
-    (t : Tableau n (rectangle a k)) (w : Fin n → Fin (rectangle a k |>.colLen 0))
-    (hw : ¬ HasRectangleContent k w) : polytabloidInt t w = 0 := by
-  classical
-  let := Fintype.ofFinite (columnGroup t)
-  unfold polytabloidInt
-  simp only [Finset.sum_apply, Pi.smul_apply]
-  apply Finset.sum_eq_zero
-  intro g _
-  rw [wordRepInt_single]
-  have hn : rowWord t ∘ ((g : Equiv.Perm (Fin n))⁻¹ : Equiv.Perm (Fin n)) ≠ w :=
-    fun he => hw ((mem_rectangle_rowWord_orbit_iff hk t w).mp ⟨g, he⟩)
-  have hn' : w ≠ rowWord t ∘ (g : Equiv.Perm (Fin n)).symm := fun h => hn h.symm
-  simp [hn']
-
-/-- The integral rectangle lattice lies in the free module on its row tabloids. -/
-theorem rectangle_orbitLattice_supported {n a k : ℕ} (hk : 0 < k)
-    (t : Tableau n (rectangle a k))
-    {x : (Fin n → Fin (rectangle a k |>.colLen 0)) → ℤ} (hx : x ∈ orbitLattice t)
-    (w : Fin n → Fin (rectangle a k |>.colLen 0)) (hw : ¬ HasRectangleContent k w) :
-    x w = 0 := by
-  rw [orbitLattice_eq_span_polytabloids] at hx
-  induction hx using Submodule.span_induction with
-  | mem x hx =>
-    obtain ⟨u, rfl⟩ := hx
-    exact polytabloidInt_eq_zero_of_not_rectangleContent hk u w hw
-  | zero => rfl
-  | add x y hx hy ihx ihy => simp [ihx, ihy]
-  | smul a x hx ih => simp [ih]
-
 theorem rectangleCoordinates_column {n a k : ℕ} (t : Tableau n (rectangle a k))
     (g : columnGroup t) (x : Fin n) :
     (rectangleCoordinates t ((g : Equiv.Perm (Fin n)) x)).2 = (rectangleCoordinates t x).2 :=
@@ -264,10 +162,6 @@ abbrev rectangleLattice (a k : ℕ) := orbitLattice (rectangleTableau a k)
 
 /-- Rank of the canonical integral rectangular lattice. -/
 def rectangleRank (a k : ℕ) : ℕ := Module.finrank ℤ (rectangleLattice a k)
-
-theorem rectangleRank_pos (a k : ℕ) : 0 < rectangleRank a k := by
-  apply Module.finrank_pos_iff.mpr
-  exact Submodule.nontrivial_iff_ne_bot.mpr (orbitLattice_ne_bot _)
 
 /-- Logarithmic covolume per rank in the inherited orthonormal word metric. -/
 def rectangleLogCovolume (a k : ℕ) : ℝ :=

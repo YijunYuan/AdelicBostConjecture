@@ -5,8 +5,14 @@ Authors: The Tau Ceti contributors
 -/
 module
 
-public import Mathlib.RepresentationTheory.Invariants
 public import Mathlib.LinearAlgebra.PiTensorProduct.Basic
+public import Mathlib.Algebra.Order.Field.Basic
+public import Mathlib.CategoryTheory.Category.Init
+public import Mathlib.Data.Nat.Totient
+public import Mathlib.Data.Sym.Sym2.Init
+public import Mathlib.RepresentationTheory.Basic
+public import Mathlib.Tactic.NormNum.GCD
+public import Mathlib.Tactic.Positivity.Finset
 
 /-!
 # Selected permutation action and group-algebra range API
@@ -59,15 +65,6 @@ noncomputable def reindexRepresentation :
 theorem reindexRepresentation_apply (σ : Equiv.Perm ι) :
     reindexRepresentation R M ι σ = (reindex R (fun _ : ι => M) σ).toLinearMap :=
   (rfl)
-
-/-- Permuting factors commutes with applying the same linear map in every tensor factor. -/
-theorem commute_reindexRepresentation_map (σ : Equiv.Perm ι) (f : M →ₗ[R] M) :
-    Commute (reindexRepresentation R M ι σ) (map fun _ : ι => f) := by
-  apply LinearMap.ext
-  intro x
-  simpa only [Module.End.mul_apply, reindexRepresentation_apply,
-    LinearEquiv.coe_toLinearMap] using
-    (map_reindex (f := fun _ : ι => f) σ x).symm
 
 end PiTensorProduct
 section Range

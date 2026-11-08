@@ -5,8 +5,8 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Arithmetic.Exterior.Dual
 public import BostConjecture.Arithmetic.Dual.Fiber
+public import BostConjecture.Arithmetic.Determinant.Line
 
 /-!
 # Scalar extension of canonical exterior duality

@@ -5,8 +5,8 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Arithmetic.Degree.Tensor
 public import BostConjecture.Arithmetic.Submodule.NestedQuotient
+public import BostConjecture.Arithmetic.Tensor.ExactMetric
 
 /-!
 # Actual tensor submodules and their saturated quotients
@@ -66,10 +66,6 @@ def tensorRightQuotientEquiv (P : Submodule (𝓞 K) M) :
     ((M ⊗[𝓞 K] N) ⧸ tensorRight N P) ≃ₗ[𝓞 K] ((M ⧸ P) ⊗[𝓞 K] N) :=
   (Submodule.quotEquivOfEq _ _ (tensorRight_eq_ker N P)).trans
     ((P.mkQ.rTensor N).quotKerEquivOfSurjective (LinearMap.rTensor_surjective N P.mkQ_surjective))
-
-@[simp]
-lemma tensorRightQuotientEquiv_mkQ (P : Submodule (𝓞 K) M) (x : M ⊗[𝓞 K] N) :
-    tensorRightQuotientEquiv N P ((tensorRight N P).mkQ x) = P.mkQ.rTensor N x := rfl
 
 instance tensorRightQuotientProjective (P : Submodule (𝓞 K) M)
     [Module.Projective (𝓞 K) (M ⧸ P)] [Module.Projective (𝓞 K) N] :

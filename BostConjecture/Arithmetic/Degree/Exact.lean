@@ -70,44 +70,6 @@ lemma determinantExactEquiv_isometry (H : HermitianMetric K P)
     (fun hz => (RingOfIntegers.coe_ne_zero_iff.mpr hb) (σ.injective (by simpa using hz)))
   exact mul_left_cancel₀ hbσ (h₁.symm.trans ((congrArg (_ * ·) hn).trans h₂))
 
-omit [Module.Projective (𝓞 K) P] in
-/-- The canonical exact determinant is an isometry on the entire complex
-fiber, not only on integral generators. -/
-lemma determinantExactEquiv_fiber_isometry (H : HermitianMetric K P)
-    (i : M →ₗ[𝓞 K] P) (q : P →ₗ[𝓞 K] N)
-    (h : Function.Exact i q) (hi : Function.Injective i) (hq : Function.Surjective q)
-    (σ : K →+* ℂ)
-    (z : ComplexFiber (DeterminantLine (K := K) M ⊗[𝓞 K] DeterminantLine (K := K) N) σ) :
-    Real.sqrt (((H.determinant.fiber σ).inner
-      (fiberMap (determinantExactEquiv i q h hi hq).toLinearMap σ z)
-      (fiberMap (determinantExactEquiv i q h hi hq).toLinearMap σ z)).re) =
-    Real.sqrt (((((H.pullback i hi).determinant ⊗[𝓞 K]
-      (H.pushforward q hq).determinant).fiber σ).inner z z).re) := by
-  let T := DeterminantLine (K := K) M ⊗[𝓞 K] DeterminantLine (K := K) N
-  let A := (H.pullback i hi).determinant ⊗[𝓞 K] (H.pushforward q hq).determinant
-  let e := determinantExactEquiv i q h hi hq
-  let : Nontrivial T := e.symm.injective.nontrivial
-  let : InnerProductSpace.Core ℂ (ComplexFiber T σ) := A.fiber σ
-  let := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber T σ)
-  let := InnerProductSpace.ofCore
-    (inferInstance : PreInnerProductSpace.Core ℂ (ComplexFiber T σ))
-  let : InnerProductSpace.Core ℂ (ComplexFiber (DeterminantLine (K := K) P) σ) :=
-    H.determinant.fiber σ
-  let := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ)
-    (F := ComplexFiber (DeterminantLine (K := K) P) σ)
-  let := InnerProductSpace.ofCore (inferInstance : PreInnerProductSpace.Core ℂ
-    (ComplexFiber (DeterminantLine (K := K) P) σ))
-  obtain ⟨w, hw⟩ := exists_ne (0 : T)
-  have hws : fiberSection T σ w ≠ 0 := fun hz =>
-    hw (fiberSection_injective T σ (by simpa only [fiberSection, tmul_zero] using hz))
-  have hr : Module.finrank ℂ (ComplexFiber T σ) = 1 := by
-    rw [complexFiber_finrank, tensor_generic_finrank, determinant_generic_finrank,
-      determinant_generic_finrank, mul_one]
-  obtain ⟨a, rfl⟩ := (finrank_eq_one_iff_of_nonzero' (fiberSection T σ w) hws).mp hr z
-  change ‖fiberMap e.toLinearMap σ (a • fiberSection T σ w)‖ = ‖a • fiberSection T σ w‖
-  rw [map_smul, norm_smul, norm_smul, fiberMap_section]
-  exact congrArg (‖a‖ * ·) (H.determinantExactEquiv_isometry i q h hi hq σ w)
-
 /-- Normalized arithmetic degree is additive for every finite projective
 exact sequence with its induced and quotient Hermitian metrics. -/
 theorem degree_exact (H : HermitianMetric K P)

@@ -6,6 +6,7 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Specht.Asymptotics.Sampling
+public import BostConjecture.Specht.Counting.Hypergeometric
 
 /-!
 # Exponential moments of the labelled occupancy law

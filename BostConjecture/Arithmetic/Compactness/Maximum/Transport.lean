@@ -7,8 +7,6 @@ module
 
 public import BostConjecture.Arithmetic.Compactness.Topology.MetricTransport
 public import BostConjecture.Arithmetic.Compactness.Maximum.Degree
-public import BostConjecture.Arithmetic.Submodule.SaturationDegree
-public import BostConjecture.Arithmetic.Tensor.Compatibility
 
 /-!
 # Integral isometry invariance of maximum degree

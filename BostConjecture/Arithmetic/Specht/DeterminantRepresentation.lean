@@ -6,8 +6,8 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Arithmetic.Specht.Representation
-public import BostConjecture.Geometry.Descent.Permutation
 public import BostConjecture.Geometry.Contraction.Intrinsic
+public import BostConjecture.Arithmetic.Representation.BaseChange
 
 /-!
 # The determinant-twisted integral Specht action
@@ -44,12 +44,6 @@ def determinantRepresentation (t : OAI.Saxl.Tableau n (rectangle a k)) :
   Representation.tprod
     (Representation.trivial R (Equiv.Perm (Fin n)) (⨂[R] (_ : Fin k), ⋀[R]^a M))
     (representationBaseChange R (integralRepresentation t))
-
-@[simp]
-theorem determinantRepresentation_apply (t : OAI.Saxl.Tableau n (rectangle a k))
-    (g : Equiv.Perm (Fin n)) :
-    determinantRepresentation (R := R) (M := M) t g =
-      TensorProduct.map LinearMap.id ((orbitAction t g).baseChange R) := rfl
 
 /-- The actual projective determinant inclusion intertwines position permutations. -/
 theorem projectiveDeterminantMap_equivariant [Module.Finite R M] [Module.Projective R M]

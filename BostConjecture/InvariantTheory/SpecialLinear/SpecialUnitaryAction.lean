@@ -5,11 +5,11 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.InvariantTheory.SpecialLinear.SpecialUnitaryDensity
 public import BostConjecture.InvariantTheory.Plucker.Coordinates
 public import Mathlib.Topology.Algebra.Star.Unitary
-public import Mathlib.Topology.Algebra.Group.Matrix
 public import Mathlib.Topology.Algebra.MvPolynomial
+public import Mathlib.Analysis.CStarAlgebra.Matrix
+public import Mathlib.Analysis.SpecialFunctions.Bernstein
 
 /-!
 # The compact special-unitary subgroup of the actual Plücker action

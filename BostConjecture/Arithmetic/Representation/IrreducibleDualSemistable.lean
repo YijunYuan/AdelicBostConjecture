@@ -7,7 +7,6 @@ module
 
 public import BostConjecture.Arithmetic.Representation.ComplexIrreducibleSemistable
 public import BostConjecture.Arithmetic.Representation.Dual
-public import BostConjecture.Arithmetic.Tensor.Compatibility
 public import BostConjecture.Arithmetic.Line.DualDegree
 
 /-!

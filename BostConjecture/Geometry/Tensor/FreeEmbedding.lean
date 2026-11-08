@@ -6,8 +6,6 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Geometry.Tensor.Realization
-public import Mathlib.LinearAlgebra.TensorProduct.Pi
-public import Mathlib.RingTheory.Flat.Basic
 
 /-!
 # The scalar-extended integral lattice in a finite free tensor power

@@ -5,7 +5,6 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Arithmetic.Specht.Bundle
 public import BostConjecture.Arithmetic.Specht.DeterminantRepresentation
 public import BostConjecture.Geometry.Descent.Metric
 public import BostConjecture.Arithmetic.Representation.IndependentPiSemistable
@@ -115,17 +114,6 @@ theorem determinantMetric_action_inner (h : HermitianMetric K M) (hk : 0 < k)
       (tensorFiberEquiv (fun _ : Fin n => M) σ (fiberMap f σ y))
   rw [he'', he'']
   exact Tensor.hilbertCore_reindex_inner (fun _ : Fin n => ComplexFiber M σ) g _ _
-
-/-- Intrinsic semistability of the actual determinant–Specht Hermitian bundle. -/
-theorem determinantMetric_isSemistable (h : HermitianMetric K M) (hk : 0 < k)
-    (t : OAI.Saxl.Tableau n (rectangle a k))
-    (ha : ∀ p : PrimeSpectrum (𝓞 K), Module.rankAtStalk M p = a) :
-    (determinantMetric h hk t ha).IsSemistable := by
-  let σ : K →+* ℂ := Classical.choice inferInstance
-  let := determinant_generic_nontrivial t ha
-  let := determinant_complex_irreducible t ha σ
-  exact (determinantMetric h hk t ha).isSemistable_of_complex_irreducible
-    (determinantRepresentation t) σ (determinantMetric_action_inner h hk t ha)
 
 /-- The actual induced metric equals the prescribed determinant and lattice
 Gram metric in every archimedean fiber. -/

@@ -5,7 +5,9 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Specht.Seminormal.RealAction
+public import BostConjecture.ExternalCode.TauCeti.RepresentationTheory.Specht.Garnir
+public import BostConjecture.Specht.Tableau.Standard
+public import Mathlib.MeasureTheory.Integral.Bochner.Basic
 
 /-!
 # Content coefficients of the concrete Murphy action
@@ -177,19 +179,5 @@ theorem sum_polytabloidInt_rowWord_swap {t : Tableau n μ} (ht : IsStandard t) (
   rw [Finset.sum_sub_distrib]
   simp only [← Finset.sum_filter, Finset.sum_const, nsmul_eq_mul, mul_one,
     ht.1.card_earlier_row, ht.2.card_earlier_column, tableauContent]
-
-/-- The same content coefficient on the actual real standard basis.
-This statement does not assert that the standard basis is a Murphy eigenbasis. -/
-theorem murphyOperator_standardRealBasis_rowWord (t : Tableau n μ)
-    (T : {u : Tableau n μ // IsStandard u}) (j : Fin n) :
-    (murphyOperator t j (standardRealBasis t T)).val (rowWord T.val) =
-      (tableauContent T.val j : ℝ) := by
-  classical
-  simp only [murphyOperator, LinearMap.sum_apply, Submodule.coe_sum, WithLp.ofLp_sum,
-    Finset.sum_apply,
-    realSpechtRep_coe, standardRealBasis_coe, wordRepReal_apply]
-  change (∑ i ∈ Finset.Iio j, (polytabloidInt T.val
-    (rowWord T.val ∘ Equiv.swap i j) : ℝ)) = _
-  rw [← Int.cast_sum, sum_polytabloidInt_rowWord_swap T.property]
 
 end BostConjecture.Specht

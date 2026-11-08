@@ -6,10 +6,7 @@ Authors: The Tau Ceti contributors
 module
 
 public import Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.MvPolynomial
-public import Mathlib.Data.Matrix.Basis
-public import Mathlib.LinearAlgebra.Multilinear.Basic
 public import Mathlib.LinearAlgebra.Dual.Lemmas
-public import Mathlib.LinearAlgebra.Matrix.ToLin
 public import Mathlib.LinearAlgebra.PiTensorProduct.Basic
 
 /-!
@@ -129,14 +126,5 @@ theorem map_const_mem_span_range_map_const_units (f : V →ₗ[K] V) :
     exact hφ _ (Submodule.subset_span ⟨u, congrArg _ (funext fun _ => hu)⟩)
   have hf := Θ.apply_const_eq_zero_of_eq_zero_on_gl hgl (LinearMap.toMatrixAlgEquiv e f)
   rwa [hΘ, Matrix.toLinAlgEquiv_toMatrixAlgEquiv] at hf
-
-/-- **The diagonal operators of the invertible endomorphisms span the same subspace as all the
-diagonal operators**, over an infinite field and for a finite-dimensional `V`. -/
-theorem span_range_map_const_units_eq_span_range_map_const :
-    Submodule.span K (Set.range fun u : (V →ₗ[K] V)ˣ => map fun _ : ι => (u : V →ₗ[K] V)) =
-      Submodule.span K (Set.range fun f : V →ₗ[K] V => map fun _ : ι => f) :=
-  le_antisymm (Submodule.span_le.2 (by rintro _ ⟨u, rfl⟩; exact Submodule.subset_span ⟨_, rfl⟩))
-    (Submodule.span_le.2 (by
-      rintro _ ⟨f, rfl⟩; exact map_const_mem_span_range_map_const_units f))
 
 end PiTensorProduct

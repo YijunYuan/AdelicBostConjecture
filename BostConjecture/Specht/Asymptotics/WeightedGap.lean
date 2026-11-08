@@ -5,8 +5,8 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Specht.Asymptotics.BulkNormalizer
 public import BostConjecture.Specht.Asymptotics.OccupancyMGF
+public import BostConjecture.Specht.Counting.ShiftedShapes
 
 /-!
 # Small gaps under squared Vandermonde weighting

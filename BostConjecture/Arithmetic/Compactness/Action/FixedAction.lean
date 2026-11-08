@@ -6,8 +6,6 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Arithmetic.Compactness.Action.TraceActionFiniteness
-public import Mathlib.Order.OrderIsoNat
-public import Mathlib.Data.Fintype.Pigeonhole
 
 /-!
 # Constant integral actions and genuine module identifications

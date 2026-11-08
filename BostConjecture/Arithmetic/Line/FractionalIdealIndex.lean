@@ -6,7 +6,7 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Arithmetic.Line.Coordinates
-public import Mathlib.LinearAlgebra.FreeModule.Finite.CardQuotient
+public import Mathlib.NumberTheory.NumberField.FractionalIdeal
 
 /-!
 # The index of fractional ideals

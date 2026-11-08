@@ -6,6 +6,7 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.InvariantTheory.ComplexClosure.ConstructibleClosure
+public import BostConjecture.InvariantTheory.ComplexClosure.ConstructibleImage
 
 /-!
 # Polynomial-image closure comparison over the complex numbers

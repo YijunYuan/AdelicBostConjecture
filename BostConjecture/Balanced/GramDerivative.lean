@@ -6,8 +6,6 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Balanced.ProjectionTrace
-public import Mathlib.Analysis.Calculus.FDeriv.Analytic
-public import Mathlib.Analysis.Calculus.FDeriv.RestrictScalars
 public import Mathlib.Analysis.Calculus.Deriv.Prod
 public import Mathlib.Analysis.InnerProductSpace.Calculus
 

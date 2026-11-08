@@ -8,7 +8,6 @@ module
 public import HarderNarasimhan.PayoffFunction.Slope
 public import HarderNarasimhan.PayoffFunction.Convex
 public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
-public import Mathlib.Tactic.Linarith
 
 /-!
 # Slopes on finite-dimensional subspace lattices

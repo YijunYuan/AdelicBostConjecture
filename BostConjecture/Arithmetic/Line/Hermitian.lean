@@ -7,8 +7,8 @@ module
 
 public import BostConjecture.Arithmetic.Bundle.Basic
 public import BostConjecture.Arithmetic.Line.FractionalIdealIndex
-public import Mathlib.LinearAlgebra.Dimension.Free
-public import Mathlib.LinearAlgebra.TensorProduct.Finiteness
+public import BostConjecture.Arithmetic.Line.Degree
+public import Mathlib.RingTheory.Flat.TorsionFree
 
 /-!
 # Intrinsic Hermitian line degree

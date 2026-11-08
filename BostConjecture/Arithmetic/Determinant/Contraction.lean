@@ -5,11 +5,8 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Arithmetic.Degree.Normalization
 public import BostConjecture.Arithmetic.Line.Contraction
-public import BostConjecture.Arithmetic.Submodule.Metric
 public import BostConjecture.Arithmetic.Exterior.Map
-public import Mathlib.Analysis.InnerProductSpace.GramSchmidtOrtho
 
 /-!
 # Contraction on determinant lines

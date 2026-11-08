@@ -7,6 +7,7 @@ module
 
 public import BostConjecture.ExternalCode.TauCeti.RepresentationTheory.SchurWeyl.Action
 public import BostConjecture.ExternalCode.TauCeti.RepresentationTheory.SchurWeyl.Polarization
+public import Mathlib.RepresentationTheory.Invariants
 
 /-!
 # Symmetric tensors are spanned by pure powers. Selected TauCeti proof;
@@ -74,24 +75,6 @@ theorem sum_reindexRepresentation_mem_span (y : ⨂[R] _ : ι, M) :
   | zero => simp
   | add z z' hz hz' ihz ihz' => simpa [Finset.sum_add_distrib] using Submodule.add_mem _ ihz ihz'
   | smul r z hz ihz => simpa [← Finset.smul_sum] using Submodule.smul_mem _ r ihz
-
-/-- **The symmetrization operator has the symmetric tensors as its range.** The range of `∑_σ σ` is
-the span of the pure powers; the operator scales an invariant tensor by `(#ι)!`, so it is the
-projection onto that span only up to that factor. -/
-theorem range_sum_reindexRepresentation (h : IsUnit ((Fintype.card ι).factorial : R)) :
-    LinearMap.range (∑ σ : Equiv.Perm ι, reindexRepresentation R M ι σ) =
-      Submodule.span R (Set.range fun x : M => ⨂ₜ[R] (_ : ι), x) := by
-  let := h.invertible
-  refine le_antisymm ?_ (Submodule.span_le.mpr ?_)
-  · rintro _ ⟨y, rfl⟩
-    simpa [LinearMap.sum_apply] using sum_reindexRepresentation_mem_span y
-  · rintro _ ⟨x, rfl⟩
-    have hfix : ∀ σ : Equiv.Perm ι,
-        reindexRepresentation R M ι σ (⨂ₜ[R] (_ : ι), x) = ⨂ₜ[R] (_ : ι), x := fun σ => by simp
-    refine ⟨⅟((Fintype.card ι).factorial : R) • (⨂ₜ[R] (_ : ι), x), ?_⟩
-    rw [map_smul, LinearMap.sum_apply, Finset.sum_congr rfl fun σ _ => hfix σ,
-      Finset.sum_const, Finset.card_univ, Fintype.card_perm, ← Nat.cast_smul_eq_nsmul R, smul_smul,
-      invOf_mul_self, one_smul]
 
 end
 

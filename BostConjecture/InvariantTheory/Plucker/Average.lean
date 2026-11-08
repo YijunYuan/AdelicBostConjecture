@@ -8,6 +8,7 @@ module
 public import BostConjecture.InvariantTheory.Polynomial.Average
 public import BostConjecture.InvariantTheory.SpecialLinear.SpecialUnitaryAction
 public import BostConjecture.InvariantTheory.Polynomial.InvariantDetection
+public import BostConjecture.InvariantTheory.SpecialLinear.SpecialUnitaryDensity
 
 /-!
 # Invariant polynomial averaging for the Plücker representation

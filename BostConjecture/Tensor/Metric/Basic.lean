@@ -134,21 +134,6 @@ private theorem inner_ext_tprod {V W : Type*} [AddCommGroup V] [Module ℂ V]
     c.inner (f x) (f y) = d.inner (g x) (g y) :=
   inner_ext_of_span (PiTensorProduct.tprod ℂ) (span_tprod_eq_top (R := ℂ) (s := E)) c d f g h x y
 
-/-- The pure-tensor formula determines the Hermitian core uniquely. -/
-theorem hilbertCore_unique [Finite ι] (c : InnerProductSpace.Core ℂ (⨂[ℂ] i, E i))
-    (hc : ∀ x y : ∀ i, E i,
-      c.inner (tprod ℂ x) (tprod ℂ y) = ∏ᶠ i, inner ℂ (x i) (y i)) :
-    c = hilbertCore E := by
-  have hinner : c.inner = (hilbertCore E).inner := by
-    funext x y
-    exact inner_ext_tprod E c (hilbertCore E) (LinearMap.id) (LinearMap.id)
-      (fun x y => (hc x y).trans (hilbertCore_inner_tprod E x y).symm) x y
-  generalize hd : hilbertCore E = d at hinner ⊢
-  rcases c with ⟨⟨⟨ci⟩, cs, cp, ca, cm⟩, cd⟩
-  rcases d with ⟨⟨⟨di⟩, ds, dp, da, dm⟩, dd⟩
-  cases hinner
-  rfl
-
 /-- Tensoring linear isometries preserves the canonical Hilbert tensor form. -/
 theorem hilbertCore_map_inner [Finite ι] {F : ι → Type*}
     [∀ i, NormedAddCommGroup (F i)] [∀ i, InnerProductSpace ℂ (F i)]
@@ -200,12 +185,6 @@ theorem tensorCore_inner_tprod [Finite ι] (c : ∀ i, InnerProductSpace.Core �
   let : ∀ i, InnerProductSpace ℂ (M i) := fun i =>
     InnerProductSpace.ofCore (inferInstance : PreInnerProductSpace.Core ℂ (M i))
   exact hilbertCore_inner_tprod _ x y
-
-/-- Starting with inner product spaces recovers the original canonical tensor core. -/
-theorem tensorCore_toCore [Finite ι] :
-    tensorCore (fun i => InnerProductSpace.toCore (𝕜 := ℂ) (E := E i)) = hilbertCore E := by
-  apply hilbertCore_unique
-  exact tensorCore_inner_tprod _
 
 variable {V W : Type*} [AddCommGroup V] [Module ℂ V] [AddCommGroup W] [Module ℂ W]
 

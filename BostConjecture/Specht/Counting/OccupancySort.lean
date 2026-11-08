@@ -7,7 +7,6 @@ module
 
 public import BostConjecture.Specht.Counting.Hypergeometric
 public import Mathlib.Data.Fin.Tuple.Sort
-public import Mathlib.Data.Fintype.Perm
 public import Mathlib.LinearAlgebra.Vandermonde
 
 /-!
@@ -32,9 +31,6 @@ abbrev SortedOccupancy (a M A : ℕ) := {b : Occupancy a M A // StrictAnti b.val
 def occupancyPerm {a M A : ℕ} (b : Occupancy a M A) (σ : Equiv.Perm (Fin a)) :
     Occupancy a M A :=
   ⟨b.val ∘ σ, (Equiv.sum_comp σ (fun i => (b.val i).val)).trans b.property⟩
-
-@[simp] theorem occupancyPerm_apply {a M A : ℕ} (b : Occupancy a M A)
-    (σ : Equiv.Perm (Fin a)) (i : Fin a) : (occupancyPerm b σ).val i = b.val (σ i) := rfl
 
 /-- Forget the ordering while retaining the block labels. -/
 def unsortOccupancy {a M A : ℕ} (x : SortedOccupancy a M A × Equiv.Perm (Fin a)) :

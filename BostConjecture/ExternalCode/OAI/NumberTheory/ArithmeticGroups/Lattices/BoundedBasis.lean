@@ -13,6 +13,9 @@ This file has been modified for Lean 4.35 module visibility.
 module
 
 public import BostConjecture.ExternalCode.OAI.NumberTheory.ArithmeticGroups.Lattices.BasisLift
+public import BostConjecture.ExternalCode.OAI.NumberTheory.ArithmeticGroups.Lattices.ProjectedLattice
+public import BostConjecture.ExternalCode.OAI.NumberTheory.ArithmeticGroups.Lattices.ShortestVector
+public import Mathlib.Analysis.InnerProductSpace.Projection.FiniteDimensional
 
 /-!
 # Bounded Basis
@@ -50,9 +53,6 @@ def latticeProjection (Λ : Submodule ℤ E) (v : E) : Λ →ₗ[ℤ] projectedL
   map_add' x y := Subtype.ext ((perpendicularProjection v).map_add x.val y.val)
   map_smul' m x := Subtype.ext
     (((perpendicularProjection v).toLinearMap.restrictScalars ℤ).map_smul m x.val)
-
-@[simp] theorem latticeProjection_coe (Λ : Submodule ℤ E) (v : E) (x : Λ) :
-    (latticeProjection Λ v x).val = perpendicularProjection v x.val := rfl
 
 theorem shortest_projection_kernel (Λ : Submodule ℤ E) (v : Λ) (hv0 : v.val ≠ 0)
     (hmin : ∀ x ∈ Λ, x ≠ 0 → ‖v.val‖ ≤ ‖x‖) :

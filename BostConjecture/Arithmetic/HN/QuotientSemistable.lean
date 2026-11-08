@@ -7,6 +7,7 @@ module
 
 public import BostConjecture.Arithmetic.Submodule.QuotientDegree
 public import BostConjecture.Arithmetic.HN.Semistable
+public import BostConjecture.Arithmetic.Submodule.Supermodular
 
 /-!
 # Semistability of intrinsic quotient intervals
@@ -170,14 +171,5 @@ theorem quotient_isSemistable_iff_interval (h : HermitianMetric K M)
   have hb := hs N hN
   rw [slope, hdN, hrN] at hb
   rwa [slope, ← subspaceDegree_sub_eq_quotient h hXZ.le, subspaceQuotient_finrank hXZ.le]
-
-/-- The interval game and the actual induced Hermitian quotient have the same semistability. -/
-theorem quotient_isSemistable_iff_game (h : HermitianMetric K M)
-    {X Y : Submodule K (K ⊗[𝓞 K] M)} (hXY : X < Y) :
-    ((h.submodule (integralPart Y)).quotient
-      ((integralPart X).comap (integralPart Y).subtype)).IsSemistable ↔
-    ((BostConjecture.Subspace.slope h.subspaceDegree).restrict ⟨X, Y, hXY⟩).IsSemistable := by
-  rw [h.quotient_isSemistable_iff_interval hXY, BostConjecture.Slope.isSemistable_restrict_iff]
-  simp only [h.subspaceSlope_eq_quotient, DedekindCut.principal_le_principal]
 
 end BostConjecture.Arithmetic.HermitianMetric

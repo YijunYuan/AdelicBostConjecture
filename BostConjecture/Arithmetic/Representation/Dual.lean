@@ -6,7 +6,6 @@ Authors: Yijun Yuan
 module
 
 public import Mathlib.RepresentationTheory.Irreducible
-public import Mathlib.LinearAlgebra.Dual.Lemmas
 
 /-!
 # Annihilators and irreducible dual representations

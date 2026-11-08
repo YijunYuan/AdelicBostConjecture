@@ -7,6 +7,7 @@ module
 
 public import BostConjecture.Tensor.Algebra.TwoFactors
 public import BostConjecture.Geometry.Plucker.Nonvanishing
+public import BostConjecture.InvariantTheory.Plucker.Action
 
 /-!
 # The binary Plücker action in the canonical finite-family tensor model
@@ -63,15 +64,6 @@ theorem twoFactor_plucker_invariant {s m : ℕ}
   simp only [exteriorPower.map_comp] at he
   rw [← AlgHom.comp_apply, ← polynomialPullback_comp, he,
     polynomialPullback_comp, AlgHom.comp_apply, hi]
-
-/-- The polynomial transported above has exactly the corresponding evaluation. -/
-theorem twoFactor_plucker_eval {s : ℕ}
-    (p : SymmetricAlgebra F (Dual F (⋀[F]^s (E (.inl ()) ⊗[F] E (.inr ())))))
-    (x : Fin s → ⨂[F] i, E i) :
-    polynomialEval (exteriorPower.ιMulti F s x)
-      (polynomialPullback (exteriorPower.map s (Tensor.twoFactorEquiv F E).toLinearMap) p) =
-        polynomialEval (exteriorPower.ιMulti F s (fun j => Tensor.twoFactorEquiv F E (x j))) p := by
-  simp [Function.comp_def]
 
 end Transport
 

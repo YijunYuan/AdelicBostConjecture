@@ -5,8 +5,8 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Specht.Seminormal.Adjacent
 public import BostConjecture.Specht.Lattice.Rectangle
+public import BostConjecture.Specht.Seminormal.Spectral
 
 /-!
 # The column-reading initial vector

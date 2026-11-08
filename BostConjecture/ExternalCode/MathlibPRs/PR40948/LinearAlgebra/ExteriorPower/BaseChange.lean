@@ -108,11 +108,6 @@ obtained from `exteriorPower.baseChangeInverseAlternating`. -/
 def baseChangeEquivInverse (i : ℕ) : ⋀[S]^i (S ⊗[R] M) →ₗ[S] S ⊗[R] (⋀[R]^i M) :=
   alternatingMapLinearEquiv (baseChangeInverseAlternating R M S i)
 
-lemma baseChangeEquivInverse_apply_tmul (i : ℕ) (s : Fin i → S) (m : Fin i → M) :
-    baseChangeEquivInverse R M S i (ιMulti S i (fun j ↦ s j ⊗ₜ[R] m j)) =
-      (Finset.univ.prod fun j ↦ s j) ⊗ₜ[R] ιMulti R i m := by
-  simp [baseChangeEquivInverse, baseChangeInverseAlternating_apply_tmul]
-
 lemma baseChange_left_inverse (i : ℕ) :
     (baseChangeEquivInverse R M S i).comp (baseChangeEquivForward R M S i) = LinearMap.id := by
   ext m
@@ -154,10 +149,5 @@ public lemma baseChangeEquiv_apply_tmul (i : ℕ) (m : Fin i → M) :
     baseChangeEquiv R M S i (1 ⊗ₜ[R] (ιMulti R i m)) =
       ιMulti S i ((TensorProduct.mk R S M 1) ∘ m) := by
   simp [exteriorPower.baseChangeEquiv, baseChangeEquivForward_apply_one_tmul_ιMulti]
-
-public lemma baseChangeEquiv_symm_apply_tmul (i : ℕ) (s : Fin i → S) (m : Fin i → M) :
-    (baseChangeEquiv R M S i).symm (ιMulti S i (fun j ↦ s j ⊗ₜ[R] m j)) =
-      (Finset.univ.prod fun j ↦ s j) ⊗ₜ[R] ιMulti R i m := by
-  simp [exteriorPower.baseChangeEquiv, exteriorPower.baseChangeEquivInverse_apply_tmul]
 
 end exteriorPower

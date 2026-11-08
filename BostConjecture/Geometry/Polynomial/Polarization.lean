@@ -7,6 +7,7 @@ module
 
 public import BostConjecture.Geometry.Polynomial.Tensor
 public import BostConjecture.ExternalCode.TauCeti.LinearAlgebra.SymmetricPower.Algebra
+public import BostConjecture.InvariantTheory.Polynomial.Action
 
 /-!
 # Natural symmetric tensor lifts of homogeneous invariant polynomials
@@ -120,48 +121,6 @@ theorem polynomialSymmetricLift_pullback {d : ℕ} (f : X →ₗ[F] Y)
   rw [h]
   congr 1
   exact (LinearMap.congr_fun (_root_.SymmetricPower.toTensorPower_comp_map f.dualMap) _).symm
-
-omit [CharZero F] in
-private theorem reindex_toTensorPower {d : ℕ} (σ : Equiv.Perm (Fin d))
-    (u : _root_.SymmetricPower F (Fin d) (Dual F X)) :
-    reindex F (fun _ : Fin d => Dual F X) σ
-      (_root_.SymmetricPower.toTensorPower F (Fin d) (Dual F X) u) =
-      _root_.SymmetricPower.toTensorPower F (Fin d) (Dual F X) u := by
-  have h : (reindex F (fun _ : Fin d => Dual F X) σ).toLinearMap.comp
-      (_root_.SymmetricPower.toTensorPower F (Fin d) (Dual F X)) =
-        _root_.SymmetricPower.toTensorPower F (Fin d) (Dual F X) := by
-    apply _root_.SymmetricPower.ext
-    intro ℓ
-    simp only [LinearMap.comp_apply, LinearEquiv.coe_coe,
-      _root_.SymmetricPower.toTensorPower_tprod, map_sum, reindex_tprod]
-    exact Fintype.sum_bijective (· * σ⁻¹) (Group.mulRight_bijective _) _ _ (fun τ => rfl)
-  exact LinearMap.congr_fun h u
-
-/-- The section takes values in the actual position-permutation fixed tensors. -/
-theorem polynomialSymmetricLift_reindex {d : ℕ} (σ : Equiv.Perm (Fin d))
-    (p : homogeneousPolynomials F X d) :
-    reindex F (fun _ : Fin d => Dual F X) σ (polynomialSymmetricLift F X d p) =
-      polynomialSymmetricLift F X d p := by
-  change reindex F (fun _ : Fin d => Dual F X) σ ((d.factorial : F)⁻¹ • _) =
-    (d.factorial : F)⁻¹ • _
-  rw [map_smul, reindex_toTensorPower]
-
-/-- A symmetric tensor is recovered by lifting its polynomial quotient. -/
-theorem polynomialSymmetricLift_eq_of_symmetric {d : ℕ}
-    (p : homogeneousPolynomials F X d) (u : ⨂[F] (_ : Fin d), Dual F X)
-    (hu : polynomialTensorMap F X d u = p)
-    (hfix : ∀ σ : Equiv.Perm (Fin d), reindex F (fun _ : Fin d => Dual F X) σ u = u) :
-    polynomialSymmetricLift F X d p = u := by
-  have h : (symmetricPowerPolynomialEquiv F X d).symm p =
-      _root_.SymmetricPower.mk F (Fin d) (Dual F X) u := by
-    apply TauCeti.SymmetricPower.toSymmetricAlgebra_injective d
-    rw [toSymmetricAlgebra_symm, toSymmetricAlgebra_mk, hu]
-  change (d.factorial : F)⁻¹ • _ = u
-  simp only [LinearEquiv.coe_coe]
-  rw [h, _root_.SymmetricPower.toTensorPower_mk]
-  simp only [hfix, Finset.sum_const, Finset.card_univ, Fintype.card_perm, Fintype.card_fin]
-  rw [← Nat.cast_smul_eq_nsmul F, smul_smul,
-    inv_mul_cancel₀ (Nat.cast_ne_zero.mpr (Nat.factorial_ne_zero d)), one_smul]
 
 /-- Invariant homogeneous polynomials have invariant tensor lifts with the same
 nonzero canonical evaluation. -/

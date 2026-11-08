@@ -5,11 +5,8 @@ Authors: The Tau Ceti contributors
 -/
 module
 
-public import Mathlib.LinearAlgebra.Basis.VectorSpace
-public import Mathlib.RingTheory.SimpleRing.Basic
 public import Mathlib.RingTheory.SimpleModule.Basic
-public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
-public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Algebra.Algebra.Subalgebra.Basic
 
 /-!
 # The semisimple image double centralizer, with only its restriction-of-scalars helper

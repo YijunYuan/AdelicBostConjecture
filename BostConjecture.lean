@@ -5,12 +5,7 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Arithmetic.Determinant.IntegralProduct
-public import BostConjecture.Main.MaxSlope.PiTensor
-public import BostConjecture.InvariantTheory.SpecialLinear.BaseChange
-public import BostConjecture.InvariantTheory.Polynomial.BaseChange
-public import BostConjecture.Geometry.Invariants.BaseChange
-public import BostConjecture.Geometry.Polynomial.DegreeDivisibility
+public import BostConjecture.Main.MaxSlope.PiTensor -- shake: keep
 
 /-!
 # Bost's tensor semistability conjecture

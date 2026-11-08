@@ -5,9 +5,10 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Arithmetic.Submodule.Supermodular
 public import BostConjecture.Arithmetic.Degree.Isometry
-public import BostConjecture.Slope.FiniteLength
+public import BostConjecture.Arithmetic.Submodule.SaturationDegree
+public import BostConjecture.Arithmetic.Submodule.SubspaceDegree
+public import BostConjecture.Arithmetic.Tensor.BinaryMetric
 
 /-!
 # Intrinsic Hermitian semistability
@@ -80,12 +81,5 @@ lemma subspaceSlope_top (h : HermitianMetric K M) :
     BostConjecture.Subspace.slope h.subspaceDegree ⊤ = DedekindCut.principal h.slope := by
   rw [show (⊤ : StrictIntvl (Submodule K (K ⊗[𝓞 K] M))) = ⟨⊥, ⊤, bot_lt_top⟩ from rfl,
     subspaceSlope_apply_bot, integralPart_top, slope_submodule_top]
-
-/-- The finite-length game specializes to semistability against all integral submodules. -/
-theorem isSemistable_iff_game (h : HermitianMetric K M) :
-    h.IsSemistable ↔ (BostConjecture.Subspace.slope h.subspaceDegree).IsSemistable := by
-  rw [BostConjecture.Slope.isSemistable_iff, h.isSemistable_iff_subspaces]
-  simp only [h.subspaceSlope_apply_bot, h.subspaceSlope_top,
-    DedekindCut.principal_le_principal]
 
 end BostConjecture.Arithmetic.HermitianMetric

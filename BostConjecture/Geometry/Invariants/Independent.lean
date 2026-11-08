@@ -6,7 +6,6 @@ Authors: Yijun Yuan
 module
 
 public import Mathlib.RepresentationTheory.Invariants
-public import Mathlib.LinearAlgebra.TensorProduct.Basis
 public import Mathlib.RingTheory.Flat.Basic
 
 /-!
@@ -119,34 +118,6 @@ theorem exists_independent_invariants_iff (z : A ⊗[F] B) :
     refine ⟨y, ?_⟩
     rw [← hx, ← hy]
     simp only [TensorProduct.map_map, LinearMap.id_comp, LinearMap.comp_id]
-
-/-- Equality with the invariants of the standard product-group representation. -/
-theorem independent_invariants_eq_range :
-    (Representation.tprod (ρ.comp (MonoidHom.fst G H))
-      (τ.comp (MonoidHom.snd G H))).invariants =
-      LinearMap.range (TensorProduct.map ρ.invariants.subtype τ.invariants.subtype) := by
-  ext z
-  change (∀ gh : G × H, TensorProduct.map (ρ gh.1) (τ gh.2) z = z) ↔ _
-  simpa only [LinearMap.mem_range, exists_independent_invariants_iff] using Prod.forall
-
-/-- The canonical invariant tensor map is injective over a field. -/
-theorem independent_invariants_map_injective :
-    Function.Injective (TensorProduct.map ρ.invariants.subtype τ.invariants.subtype) :=
-  TensorProduct.map_injective_of_flat_flat _ _
-    ρ.invariants.injective_subtype τ.invariants.injective_subtype
-
-/-- The actual tensor of invariant subspaces equals the product-group invariants. -/
-def independentInvariantsEquiv :
-    ρ.invariants ⊗[F] τ.invariants ≃ₗ[F]
-      (Representation.tprod (ρ.comp (MonoidHom.fst G H))
-        (τ.comp (MonoidHom.snd G H))).invariants :=
-  (LinearEquiv.ofInjective _ (independent_invariants_map_injective ρ τ)).trans
-    (LinearEquiv.ofEq _ _ (independent_invariants_eq_range ρ τ).symm)
-
-@[simp]
-theorem independentInvariantsEquiv_apply (x : ρ.invariants ⊗[F] τ.invariants) :
-    (independentInvariantsEquiv ρ τ x : A ⊗[F] B) =
-      TensorProduct.map ρ.invariants.subtype τ.invariants.subtype x := rfl
 
 end Field
 

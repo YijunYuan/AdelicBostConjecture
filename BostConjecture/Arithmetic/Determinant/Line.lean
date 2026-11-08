@@ -5,11 +5,10 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Arithmetic.Line.Hermitian
 public import BostConjecture.ExternalCode.MathlibPRs.PR40948.LinearAlgebra.ExteriorPower.BaseChange
 public import Mathlib.LinearAlgebra.ExteriorPower.Basis
-public import Mathlib.LinearAlgebra.Dimension.Constructions
-public import Mathlib.LinearAlgebra.TensorProduct.Tower
+public import BostConjecture.Arithmetic.Bundle.Basic
+public import Mathlib.RingTheory.Flat.TorsionFree
 
 /-!
 # The intrinsic integral determinant line
@@ -89,9 +88,5 @@ lemma determinantComplexEquiv_section (σ : K →+* ℂ)
       exteriorPower.ιMulti ℂ _ (fiberSection M σ ∘ x) := by
   let : Algebra (𝓞 K) ℂ := (σ.comp (algebraMap (𝓞 K) K)).toAlgebra
   exact exteriorPower.baseChangeEquiv_apply_tmul (𝓞 K) M ℂ _ x
-
-lemma determinant_complex_finrank [Module.Finite (𝓞 K) M] (σ : K →+* ℂ) :
-    Module.finrank ℂ (ComplexFiber (DeterminantLine (K := K) M) σ) = 1 := by
-  rw [complexFiber_finrank, determinant_generic_finrank]
 
 end BostConjecture.Arithmetic

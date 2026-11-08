@@ -8,7 +8,6 @@ module
 public import BostConjecture.Geometry.Contraction.Metric
 public import BostConjecture.Geometry.Contraction.BaseChange
 public import BostConjecture.Arithmetic.Tensor.Metric
-public import BostConjecture.Arithmetic.Submodule.Metric
 
 /-!
 # The canonical pairing on intrinsic Hermitian fibers

@@ -7,7 +7,6 @@ module
 
 public import BostConjecture.Arithmetic.RestrictionCovolume.RealForm
 public import BostConjecture.Arithmetic.Submodule.QuotientMetric
-public import Mathlib.Algebra.Exact.Basic
 
 /-!
 # Maps and orthogonal lifts on the actual trace spaces
@@ -88,12 +87,6 @@ def traceLift (q : M →ₗ[𝓞 K] N) (hq : Function.Surjective q) :
     change h.fiberLift q hq σ ((r : ℂ) • (h.pushforward q hq).traceInclusion x σ) =
       (r : ℂ) • h.fiberLift q hq σ ((h.pushforward q hq).traceInclusion x σ)
     exact map_smul _ _ _
-
-@[simp]
-lemma traceLift_apply (q : M →ₗ[𝓞 K] N) (hq : Function.Surjective q)
-    (x : (h.pushforward q hq).TraceSpace) (σ : K →+* ℂ) :
-    h.traceInclusion (h.traceLift q hq x) σ =
-      h.fiberLift q hq σ ((h.pushforward q hq).traceInclusion x σ) := rfl
 
 /-- The real orthogonal lift is a right inverse to the actual trace quotient map. -/
 @[simp]

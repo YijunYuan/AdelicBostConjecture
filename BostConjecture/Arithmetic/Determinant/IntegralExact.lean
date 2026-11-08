@@ -55,20 +55,4 @@ def determinantExactEquiv :
         (degreeCongr ((exteriorPower.finrank_exact i q h hi hq).symm.trans
           (TensorProduct.isBaseChange (𝓞 K) P K).finrank_eq.symm)))
 
-/-- Its value can be computed with every section, without making that section
-part of the intrinsic determinant-line representation. -/
-lemma determinantExactEquiv_apply_of_section
-    (s : N →ₗ[𝓞 K] P) (hs : q.comp s = LinearMap.id)
-    (z : DeterminantLine (K := K) M ⊗[𝓞 K] DeterminantLine (K := K) N) :
-    determinantExactEquiv i q h hi hq z =
-      degreeCongr ((exteriorPower.finrank_exact i q h hi hq).symm.trans
-        (TensorProduct.isBaseChange (𝓞 K) P K).finrank_eq.symm)
-        (map (Module.finrank (𝓞 K) M + Module.finrank (𝓞 K) N) (i.coprod s)
-          (prodMap (𝓞 K) M N _ _
-            ((TensorProduct.congr
-              (degreeCongr (TensorProduct.isBaseChange (𝓞 K) M K).finrank_eq)
-              (degreeCongr (TensorProduct.isBaseChange (𝓞 K) N K).finrank_eq)) z))) := by
-  simp only [determinantExactEquiv, LinearEquiv.trans_apply,
-    exactEquiv_eq_of_section i q h hi hq s hs, exactEquivOfSection_apply]
-
 end BostConjecture.Arithmetic

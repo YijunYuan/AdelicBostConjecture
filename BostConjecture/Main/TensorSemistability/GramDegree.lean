@@ -6,7 +6,6 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Main.TensorSemistability.DegreeDerivative
-public import Mathlib.Analysis.Calculus.LocalExtr.Basic
 
 /-!
 # Gram determinants and intrinsic arithmetic degree variation
@@ -105,23 +104,5 @@ theorem hasDerivAt_degree_of_gram (h : ℝ → HermitianMetric K M) {t₀ : ℝ}
   simp_rw [he]
   rw [← Finset.sum_div]
   ring
-
-/-- Local maximality of actual arithmetic degree forces vanishing of the
-embedding sum of Gram derivatives. This is an intermediate stationarity
-statement; admissible metric curves must still be constructed. -/
-theorem sum_gram_deriv_eq_zero_of_isLocalMax
-    (h : ℝ → HermitianMetric K M) {t₀ : ℝ}
-    (b : ∀ σ : K →+* ℂ,
-      Module.Basis (Fin (Module.finrank K (K ⊗[𝓞 K] M))) ℂ (ComplexFiber M σ))
-    (hb : ∀ σ, (Matrix.of fun i j => ((h t₀).fiber σ).inner (b σ i) (b σ j)) = 1)
-    (d : (K →+* ℂ) → ℝ)
-    (hd : ∀ σ, HasDerivAt
-      (fun t => (Matrix.of fun i j => ((h t).fiber σ).inner (b σ i) (b σ j)).det.re)
-      (d σ) t₀)
-    (hmax : IsLocalMax (fun t => (h t).degree) t₀) : ∑ σ, d σ = 0 := by
-  have he := hmax.hasDerivAt_eq_zero (hasDerivAt_degree_of_gram h b hb d hd)
-  have hD : (2 * (Module.finrank ℚ K : ℝ)) ≠ 0 :=
-    mul_ne_zero two_ne_zero (by exact_mod_cast (Module.finrank_pos (R := ℚ) (M := K)).ne')
-  exact neg_eq_zero.mp ((div_eq_zero_iff.mp he).resolve_right hD)
 
 end BostConjecture.Arithmetic.HermitianMetric

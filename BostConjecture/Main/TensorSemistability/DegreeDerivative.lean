@@ -6,7 +6,6 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Arithmetic.Degree.Basic
-public import Mathlib.Analysis.SpecialFunctions.Log.Deriv
 public import Mathlib.Analysis.SpecialFunctions.Sqrt
 
 /-!

@@ -7,7 +7,6 @@ module
 
 public import BostConjecture.Geometry.Invariants.Independent
 public import Mathlib.LinearAlgebra.PiTensorProduct.Generators
-public import Mathlib.LinearAlgebra.TensorProduct.RightExactness
 
 /-!
 # Invariants of a finite family of independent tensor factors
@@ -28,16 +27,6 @@ open Module TensorProduct PiTensorProduct
 variable {F ι : Type*} [Field F] {M N : ι → Type*}
   [∀ i, AddCommGroup (M i)] [∀ i, Module F (M i)]
   [∀ i, AddCommGroup (N i)] [∀ i, Module F (N i)]
-
-/-- Tensoring injective linear maps over a field remains injective. -/
-theorem piTensor_map_injective (f : ∀ i, M i →ₗ[F] N i)
-    (hf : ∀ i, Function.Injective (f i)) : Function.Injective (PiTensorProduct.map f) := by
-  choose g hg using fun i => (f i).exists_leftInverse_of_injective
-    (LinearMap.ker_eq_bot.mpr (hf i))
-  have hcomp : (PiTensorProduct.map g).comp (PiTensorProduct.map f) = LinearMap.id := by
-    rw [← PiTensorProduct.map_comp]
-    simp only [hg, PiTensorProduct.map_id]
-  exact Function.LeftInverse.injective (fun x => LinearMap.congr_fun hcomp x)
 
 /-- Singleton-complement regrouping commutes with every tensor of factor maps. -/
 theorem piTensor_split_map [DecidableEq ι] (i₀ : ι)
@@ -130,20 +119,5 @@ theorem exists_piTensor_invariants_iff [Finite ι] (z : ⨂[F] i, M i) :
       rw [piTensor_split_map, LinearEquiv.apply_symm_apply]
       rw [← hx, ← hy, TensorProduct.map_map]
       rfl
-
-/-- The invariant preimage is unique: the canonical finite tensor map is an
-isomorphism onto precisely the product-action fixed tensors. -/
-theorem existsUnique_piTensor_invariants_iff [Finite ι] (z : ⨂[F] i, M i) :
-    (∃! y : ⨂[F] i, (ρ i).invariants,
-      PiTensorProduct.map (fun i => (ρ i).invariants.subtype) y = z) ↔
-      ∀ g : ∀ i, G i, PiTensorProduct.map (fun i => ρ i (g i)) z = z := by
-  constructor
-  · intro h
-    exact (exists_piTensor_invariants_iff ρ z).mp h.exists
-  · intro h
-    obtain ⟨y, hy⟩ := (exists_piTensor_invariants_iff ρ z).mpr h
-    refine ⟨y, hy, fun y' hy' => ?_⟩
-    exact piTensor_map_injective _ (fun i => (ρ i).invariants.injective_subtype)
-      (hy'.trans hy.symm)
 
 end BostConjecture.Geometry

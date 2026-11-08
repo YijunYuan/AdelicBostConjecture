@@ -6,6 +6,7 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Specht.Seminormal.Content
+public import BostConjecture.Specht.Seminormal.RealAction
 
 /-!
 # The central transposition sum and total content
@@ -169,18 +170,5 @@ theorem sum_murphyOperator_eq (t : Tableau n μ) :
   apply (standardRealBasis t).ext
   intro T
   simpa using sum_murphyOperator_standardRealBasis t T
-
-/-- The central content identity on every vector of the canonical integral orbit lattice. -/
-theorem sum_wordRepInt_eq_content_of_mem_orbitLattice (t : Tableau n μ)
-    {z : (Fin n → Fin (μ.colLen 0)) → ℤ} (hz : z ∈ orbitLattice t) :
-    ∑ j, ∑ i ∈ Finset.Iio j, wordRepInt n (μ.colLen 0) (Equiv.swap i j) z =
-      diagramContent μ • z := by
-  let x : realSpan t := ⟨realCast n (μ.colLen 0) z, Submodule.subset_span ⟨z, hz, rfl⟩⟩
-  have h := congrArg (fun f : Module.End ℝ (realSpan t) => (f x).val)
-    (sum_murphyOperator_eq t)
-  simp only [murphyOperator, LinearMap.sum_apply, Submodule.coe_sum, LinearMap.smul_apply,
-    Module.End.one_apply, Submodule.coe_smul, realSpechtRep_coe] at h
-  apply realCast_injective
-  simpa only [map_sum, map_smul, ← wordRepReal_realCast, Int.cast_smul_eq_zsmul] using h
 
 end BostConjecture.Specht

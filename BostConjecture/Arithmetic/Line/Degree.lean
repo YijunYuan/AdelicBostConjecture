@@ -5,10 +5,8 @@ Authors: Yijun Yuan
 -/
 module
 
-public import Mathlib.NumberTheory.NumberField.FractionalIdeal
 public import Mathlib.NumberTheory.NumberField.InfinitePlace.Basic
-public import Mathlib.Analysis.SpecialFunctions.Log.Basic
-public import Mathlib.Tactic.Ring
+public import Mathlib.RingTheory.FractionalIdeal.Norm
 
 /-!
 # Section independence of arithmetic line degree

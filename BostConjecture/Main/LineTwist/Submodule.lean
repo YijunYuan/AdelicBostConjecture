@@ -7,7 +7,7 @@ module
 
 public import BostConjecture.Arithmetic.Tensor.Submodule
 public import BostConjecture.Arithmetic.Line.DualCoordinate
-public import Mathlib.RingTheory.Finiteness.Projective
+public import BostConjecture.Arithmetic.Line.Hermitian
 
 /-!
 # Integral submodules under a projective line twist

@@ -27,7 +27,6 @@ open RepresentationTheory.Combinatorics.YoungDiagram.CornerStatistics
 /-- A row length shifted by its distance from the last of `a` rows. -/
 def shiftedRowLength (μ : YoungDiagram) (a r : ℕ) : ℕ := μ.rowLen r + a - r - 1
 
-
 /-- Shifted row lengths are strictly decreasing, including zero-padded rows. -/
 theorem shiftedRowLength_strictAnti (μ : YoungDiagram) {a i j : ℕ}
     (hij : i < j) (hj : j < a) : shiftedRowLength μ a j < shiftedRowLength μ a i := by
@@ -130,7 +129,6 @@ theorem row_hooks_union_shiftedDifferences (μ : YoungDiagram) {a r : ℕ}
     simp only [card_range, Nat.card_Ioo, Nat.card_Ico, shiftedRowLength]
     omega
 
-
 /-- Multiplication of the row interval partition gives the factorial identity. -/
 theorem row_hookProduct_mul_shiftedDifferences (μ : YoungDiagram) {a r : ℕ}
     (ha : μ.colLen 0 ≤ a) (hr : r < a) :
@@ -181,19 +179,5 @@ theorem card_standard_mul_shiftedFactorials (μ : YoungDiagram) {n a : ℕ}
   simp only [YoungDiagram.auxiliaryCellStatistic]
   rw [card_standard_mul_hookProduct μ hn]
 
-/-- The number of existing standard tableaux in factorial/Vandermonde form. -/
-theorem card_standard_eq_shifted_formula (μ : YoungDiagram) {n a : ℕ}
-    (hn : μ.card = n) (ha : μ.colLen 0 ≤ a) :
-    (Fintype.card {t : Tableau n μ // IsStandard t} : ℝ) =
-      (n.factorial : ℝ) * (∏ r ∈ range a, ∏ j ∈ Ioo r a,
-        ((shiftedRowLength μ a r - shiftedRowLength μ a j : ℕ) : ℝ)) /
-        (∏ r ∈ range a, ((shiftedRowLength μ a r).factorial : ℝ)) := by
-  have h := card_standard_mul_shiftedFactorials μ hn ha
-  have hp : (∏ r ∈ range a, ((shiftedRowLength μ a r).factorial : ℝ)) ≠ 0 := by
-    positivity
-  apply (eq_div_iff hp).mpr
-  exact_mod_cast h
-
 end BostConjecture.Specht
-
 

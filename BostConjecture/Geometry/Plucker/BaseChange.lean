@@ -32,25 +32,6 @@ variable {R S : Type*} [CommRing R] [CommRing S] [Algebra R S]
   {n : ℕ} {a k : ι → ℕ}
   (t : ∀ i, OAI.Saxl.Tableau n (Specht.rectangle (a i) (k i)))
 
-local instance nonvanishingSourceFactorAddCommGroup : ∀ i, AddCommGroup
-    ((⨂[R] (_ : Fin (k i)), ⋀[R]^(a i) (Dual R (E i))) ⊗[R]
-      (R ⊗[ℤ] Specht.orbitLattice (t i))) := fun _ =>
-        Module.addCommMonoidToAddCommGroup R
-
-local instance nonvanishingSourceFactorModule : ∀ i, Module R
-    ((⨂[R] (_ : Fin (k i)), ⋀[R]^(a i) (Dual R (E i))) ⊗[R]
-      (R ⊗[ℤ] Specht.orbitLattice (t i))) := fun _ => inferInstance
-
-local instance nonvanishingExtendedFactorAddCommGroup : ∀ i, AddCommGroup
-    ((⨂[S] (_ : Fin (k i)), ⋀[S]^(a i) (Dual S (S ⊗[R] E i))) ⊗[S]
-      (S ⊗[ℤ] Specht.orbitLattice (t i))) := fun _ =>
-        Module.addCommMonoidToAddCommGroup S
-
-local instance nonvanishingExtendedFactorModule : ∀ i, Module S
-    ((⨂[S] (_ : Fin (k i)), ⋀[S]^(a i) (Dual S (S ⊗[R] E i))) ⊗[S]
-      (S ⊗[ℤ] Specht.orbitLattice (t i))) := fun _ => inferInstance
-
-
 variable (hk : ∀ i, 0 < k i)
   (ha : ∀ i (q : PrimeSpectrum R), Module.rankAtStalk (Dual R (E i)) q = a i)
   (haS : ∀ i (q : PrimeSpectrum S),

@@ -6,7 +6,8 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Main.TensorSemistability.GramDegree
-public import BostConjecture.Main.TensorSemistability.ExponentialVariation
+public import BostConjecture.Balanced.GramDerivative
+public import BostConjecture.Main.TensorSemistability.MetricVariation
 
 /-!
 # Projection-trace derivative of an actual induced arithmetic degree
@@ -119,46 +120,6 @@ theorem hasDerivAt_submodule_degree_archimedeanPullback
   convert hh using 1
   rw [← Finset.mul_sum]
   ring
-
-/-- The actual induced-degree derivative along the constructed exponential metrics. -/
-theorem hasDerivAt_submodule_degree_exponentialVariation
-    (h : HermitianMetric K M) (P : Submodule (𝓞 K) M)
-    (A : ∀ σ : K →+* ℂ, Module.End ℂ (ComplexFiber M σ))
-    (hs : ∀ σ x y, (h.fiber σ).inner (A σ x) y = (h.fiber σ).inner x (A σ y))
-    (hc : ∀ σ x, A (ComplexEmbedding.conjugate σ) (fiberConjugate M σ x) =
-      fiberConjugate M σ (A σ x)) :
-    HasDerivAt (fun t => ((h.exponentialVariation A hs hc t).submodule P).degree)
-      (-(∑ σ, h.fiberProjectionTrace P σ (A σ)) / (Module.finrank ℚ K : ℝ)) 0 := by
-  apply h.hasDerivAt_submodule_degree_archimedeanPullback P
-    (fun t σ => h.fiberExp σ (A σ) t) (fun t => h.fiberExp_conjugate A hs hc t) A
-  · intro σ x
-    let : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
-    let := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber M σ)
-    let := InnerProductSpace.ofCore
-      (inferInstance : PreInnerProductSpace.Core ℂ (ComplexFiber M σ))
-    exact expLinearEquiv_zero_apply (LinearMap.toContinuousLinearMap (A σ)) x
-  · intro σ x
-    let : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
-    let := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber M σ)
-    let := InnerProductSpace.ofCore
-      (inferInstance : PreInnerProductSpace.Core ℂ (ComplexFiber M σ))
-    exact Balanced.hasDerivAt_exp_apply_zero (LinearMap.toContinuousLinearMap (A σ)) x
-
-/-- Actual local maximality along an exponential metric curve forces the
-sum of concrete fiber projection traces to vanish. -/
-theorem sum_fiberProjectionTrace_eq_zero_of_isLocalMax
-    (h : HermitianMetric K M) (P : Submodule (𝓞 K) M)
-    (A : ∀ σ : K →+* ℂ, Module.End ℂ (ComplexFiber M σ))
-    (hs : ∀ σ x y, (h.fiber σ).inner (A σ x) y = (h.fiber σ).inner x (A σ y))
-    (hc : ∀ σ x, A (ComplexEmbedding.conjugate σ) (fiberConjugate M σ x) =
-      fiberConjugate M σ (A σ x))
-    (hmax : IsLocalMax (fun t => ((h.exponentialVariation A hs hc t).submodule P).degree) 0) :
-    ∑ σ, h.fiberProjectionTrace P σ (A σ) = 0 := by
-  have he := hmax.hasDerivAt_eq_zero
-    (h.hasDerivAt_submodule_degree_exponentialVariation P A hs hc)
-  have hD : (Module.finrank ℚ K : ℝ) ≠ 0 := by
-    exact_mod_cast (Module.finrank_pos (R := ℚ) (M := K)).ne'
-  exact neg_eq_zero.mp ((div_eq_zero_iff.mp he).resolve_right hD)
 
 end HermitianMetric
 

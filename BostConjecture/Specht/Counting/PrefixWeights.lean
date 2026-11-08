@@ -88,17 +88,4 @@ theorem card_rectanglePrefix_mul_factorial_pow (hμ : μ ≤ rectangle a k)
       (∏ r ∈ range a, (k + a - 1).choose (shiftedRowLength μ a r)) := by ring
     _ = _ := by rw [card_rectanglePrefix_mul_factorials hμ hm hl]
 
-/-- Exact prefix-fiber weight in real scalars, with a positive constant denominator. -/
-theorem card_rectanglePrefix_eq_binomial_weight (hμ : μ ≤ rectangle a k)
-    (hm : μ.card = m) (hl : (rectangleComplement μ a k).card = l) :
-    (Nat.card {T : {T : Tableau (m + l) (rectangle a k) // IsStandard T} //
-      prefixShape T.property m (Nat.le_add_right m l) = μ} : ℝ) =
-    ((m.factorial : ℝ) * (l.factorial : ℝ) *
-      (∏ r ∈ range a, ∏ j ∈ Ioo r a,
-        ((shiftedRowLength μ a r - shiftedRowLength μ a j : ℕ) : ℝ)) ^ 2 *
-      (∏ r ∈ range a, ((k + a - 1).choose (shiftedRowLength μ a r) : ℝ))) /
-      ((k + a - 1).factorial : ℝ) ^ a := by
-  apply (eq_div_iff (by positivity)).mpr
-  exact_mod_cast card_rectanglePrefix_mul_factorial_pow hμ hm hl
-
 end BostConjecture.Specht

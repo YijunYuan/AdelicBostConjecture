@@ -7,7 +7,6 @@ module
 
 public import BostConjecture.Arithmetic.Bundle.Basic
 public import Mathlib.RingTheory.Flat.Stability
-public import Mathlib.RingTheory.Flat.Localization
 public import Mathlib.RingTheory.Flat.TorsionFree
 public import Mathlib.RingTheory.Flat.EquationalCriterion
 

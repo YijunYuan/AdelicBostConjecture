@@ -6,8 +6,6 @@ Authors: The AxiomMath/Stacks contributors
 module
 
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
-public import Mathlib.Algebra.BigOperators.Ring.Finset
-public import Mathlib.Data.Fintype.Perm
 
 /-!
 # Determinant covariance of the alternating tensor vector

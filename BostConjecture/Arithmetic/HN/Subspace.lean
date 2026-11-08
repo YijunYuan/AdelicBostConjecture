@@ -7,6 +7,7 @@ module
 
 public import BostConjecture.Arithmetic.Submodule.Supermodular
 public import BostConjecture.Slope.FiniteLength
+public import HarderNarasimhan.Filtration.Exists
 
 /-!
 # The HN interval flag of intrinsic Hermitian subspace degree
@@ -52,15 +53,6 @@ lemma hnSubmodule_length (h : HermitianMetric K M) :
 
 lemma hnSubmodule_monotone (h : HermitianMetric K M) : Monotone h.hnSubmodule :=
   fun _ _ hij => integralPart_mono (h.hnFlag.monotone hij)
-
-/-- Consecutive generic steps remain strict after taking actual integral parts. -/
-lemma hnSubmodule_lt_succ (h : HermitianMetric K M) (i : ℕ) (hi : i < h.hnFlag.length) :
-    h.hnSubmodule i < h.hnSubmodule (i + 1) := by
-  refine lt_of_le_of_ne (h.hnSubmodule_monotone (Nat.le_succ i)) ?_
-  intro he
-  have hg := congrArg (fun P : Submodule (𝓞 K) M => P.baseChange K) he
-  simp only [hnSubmodule, baseChange_integralPart] at hg
-  exact (h.hnFlag.strictMonoOn hi.le hi (Nat.lt_succ_self i)).ne hg
 
 /-- The strict interval at a step of the actual degree's HN flag. -/
 def hnStep (h : HermitianMetric K M) (i : Fin h.hnFlag.length) :

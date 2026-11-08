@@ -6,7 +6,6 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Arithmetic.Compactness.Topology.DegreeContinuity
-public import BostConjecture.Arithmetic.Tensor.Compatibility
 
 /-!
 # Continuity of actual Hilbert tensor metrics

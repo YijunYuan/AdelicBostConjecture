@@ -5,9 +5,9 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Main.TensorSemistability.ExtremalBalance
 public import BostConjecture.Balanced.PluckerSemistability
 public import BostConjecture.Slope.Geometric.BinaryInvariantSlope
+public import BostConjecture.Main.TensorSemistability.ArithmeticTensorFiber
 
 /-!
 # The geometric slope inequality for an actual balanced tensor submodule
@@ -131,7 +131,6 @@ theorem slope_submodule_tensor_le_of_invariant
     simp only [fiberMap, i, LinearMap.baseChange_comp,
       LinearMap.comp_apply]
   rwa [hm] at hb
-
 
 /-- A positive-rank actual tensor submodule with a balanced complex fiber
 satisfies the geometric slope bound. -/

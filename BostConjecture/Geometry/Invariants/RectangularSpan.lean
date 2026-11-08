@@ -8,6 +8,7 @@ module
 public import BostConjecture.Geometry.Invariants.RectangularCovector
 public import BostConjecture.ExternalCode.TauCeti.RepresentationTheory.SchurWeyl.SchurWeyl
 public import Mathlib.Algebra.CharZero.Infinite
+public import BostConjecture.Geometry.Tensor.Permutation
 
 /-!
 # Determinant-covariant tensors are in the rectangular lattice span

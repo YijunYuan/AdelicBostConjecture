@@ -94,10 +94,11 @@ The expected dependencies are Lean's standard foundational axioms
 `propext`, `Classical.choice` and `Quot.sound`; no `sorryAx` or additional
 mathematical axiom is permitted. The proof does not assume tensor semistability.
 
-The refactored source passes `lake build` with **4,240 jobs and no warnings**.
+The source passes `lake build` without warnings. Local declarations are restricted
+to the four principal theorems and their definition, proof and elaboration dependencies.
 Transitive axiom probes covering the real-cut conversion, the arithmetic
 finiteness bound and the four principal declarations report only the three
-foundational axioms above. The root import cone covers all 353 local Lean
+foundational axioms above. The root import cone covers all 343 local Lean
 modules; source checks find no proof
 placeholders or additional axiom declarations.
 

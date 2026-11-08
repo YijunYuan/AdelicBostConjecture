@@ -147,13 +147,6 @@ private theorem toTensorPower_mk' (x : ⨂[R] (_ : ι), M) :
     toTensorPower R ι M (mk R ι M x) = (symmetrizer R ι M).toAddMonoidHom x :=
   (rfl)
 
-@[simp]
-theorem toTensorPower_mk (x : ⨂[R] (_ : ι), M) :
-    toTensorPower R ι M (mk R ι M x) =
-      ∑ σ : Equiv.Perm ι, PiTensorProduct.reindex R (fun _ : ι => M) σ x := by
-  rw [toTensorPower_mk', LinearMap.toAddMonoidHom_coe, symmetrizer, LinearMap.sum_apply]
-  rfl
-
 /-- The symmetrization of a pure symmetric tensor is the sum of the pure tensors over all
 orderings of its factors. -/
 @[simp]

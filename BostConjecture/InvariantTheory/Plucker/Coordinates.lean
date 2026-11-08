@@ -7,8 +7,6 @@ module
 
 public import BostConjecture.InvariantTheory.Plucker.Action
 public import Mathlib.LinearAlgebra.ExteriorPower.Basis
-public import Mathlib.LinearAlgebra.TensorProduct.Basis
-public import Mathlib.Algebra.MvPolynomial.Eval
 
 /-!
 # Polynomial matrix coefficients of the Plücker action

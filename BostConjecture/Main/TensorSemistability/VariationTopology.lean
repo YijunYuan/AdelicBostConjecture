@@ -6,7 +6,9 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Main.TensorSemistability.ExponentialVariation
-public import BostConjecture.Arithmetic.Compactness.Topology.StabilityTopology
+public import BostConjecture.Arithmetic.Compactness.Topology.MetricTopology
+public import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
+public import Mathlib.Data.Nat.Factorial.DoubleFactorial
 
 /-!
 # Admissible neighborhoods along actual exponential metric variations
@@ -59,25 +61,5 @@ theorem continuous_exponentialVariation (h : HermitianMetric K M)
       NormedSpace.exp (t • LinearMap.toContinuousLinearMap (A σ)) z) :=
     (he.comp (continuous_id.smul continuous_const)).clm_apply continuous_const
   exact (hf x).inner (hf y)
-
-/-- Small determinant-one variations of a normalized strictly stable metric
-remain strictly stable and normalized. -/
-theorem IsStable.eventually_exponentialVariation [NumberField K]
-    [Module.Projective (𝓞 K) M] {h : HermitianMetric K M}
-    (hst : h.IsStable) (h0 : h.degree = 0)
-    (A : ∀ σ : K →+* ℂ, Module.End ℂ (ComplexFiber M σ))
-    (hs : ∀ σ x y, (h.fiber σ).inner (A σ x) y = (h.fiber σ).inner x (A σ y))
-    (hc : ∀ σ x, A (ComplexEmbedding.conjugate σ) (fiberConjugate M σ x) =
-      fiberConjugate M σ (A σ x))
-    (ht : ∀ σ, LinearMap.trace ℂ (ComplexFiber M σ) (A σ) = 0) :
-    ∀ᶠ t in 𝓝 (0 : ℝ), (h.exponentialVariation A hs hc t).degree = 0 ∧
-      (h.exponentialVariation A hs hc t).IsStable := by
-  have hlim : Tendsto (h.exponentialVariation A hs hc) (𝓝 0) (𝓝 h) := by
-    simpa only [ContinuousAt, exponentialVariation_zero] using
-      (h.continuous_exponentialVariation A hs hc).continuousAt (x := 0)
-  filter_upwards [hlim.eventually (hst.eventually_isStable_normalized h0)] with t htst
-  have hd : (h.exponentialVariation A hs hc t).degree = 0 := by
-    rw [h.degree_exponentialVariation A hs hc ht, h0]
-  exact ⟨hd, htst hd⟩
 
 end BostConjecture.Arithmetic.HermitianMetric

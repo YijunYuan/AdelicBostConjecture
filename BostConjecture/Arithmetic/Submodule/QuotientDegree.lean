@@ -5,8 +5,8 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Arithmetic.Submodule.Supermodular
 public import BostConjecture.Arithmetic.Degree.Isometry
+public import BostConjecture.Arithmetic.Submodule.SubmoduleDegree
 
 /-!
 # Degree of an integral submodule of a quotient

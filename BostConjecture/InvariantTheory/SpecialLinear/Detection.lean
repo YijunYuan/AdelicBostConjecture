@@ -6,7 +6,7 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.InvariantTheory.SpecialLinear.Coordinates
-public import BostConjecture.InvariantTheory.SpecialLinear.LocalizationDetection
+public import Mathlib.RingTheory.Localization.Away.Basic
 
 /-!
 # Rational-point detection for pairs of special linear groups
@@ -184,29 +184,6 @@ theorem specialLinearNormalization_injective (i₀ : ι) (j₀ : κ) :
   apply Function.LeftInverse.injective (f := specialLinearNormalization K ι κ i₀ j₀)
     (g := specialLinearOpenQuotient K ι κ)
   exact fun a => DFunLike.congr_fun (specialLinearOpenQuotient_comp_normalization K ι κ i₀ j₀) a
-
-theorem matrixPairDeterminant_ne_zero : matrixPairDeterminant K ι κ ≠ 0 := by
-  intro h
-  have he := congrArg
-    (specialLinearPairEval (K := K)
-      ((1 : Matrix.SpecialLinearGroup ι K), (1 : Matrix.SpecialLinearGroup κ K)))
-    (quotient_matrixPairDeterminant K ι κ)
-  rw [h, map_zero, map_zero, map_one] at he
-  exact zero_ne_one he
-
-/-- Actual rational special-linear points detect their coordinate algebra over an infinite field. -/
-theorem specialLinearPairEval_detects [Infinite K] (i₀ : ι) (j₀ : κ)
-    {a : SpecialLinearPairCoordinateRing K ι κ}
-    (ha : ∀ g : Matrix.SpecialLinearGroup ι K × Matrix.SpecialLinearGroup κ K,
-      specialLinearPairEval g a = 0) : a = 0 := by
-  apply specialLinearNormalization_injective K ι κ i₀ j₀
-  rw [map_zero]
-  apply localizationPolynomialEval_detects (matrixPairDeterminant_ne_zero K ι κ)
-  intro x hx
-  let e := (localizationPolynomialEval (matrixPairDeterminant K ι κ) x hx).comp
-    (specialLinearNormalization K ι κ i₀ j₀)
-  have h := ha (specialLinearPairPoint e)
-  rwa [specialLinearPairEval_point] at h
 
 end Retraction
 

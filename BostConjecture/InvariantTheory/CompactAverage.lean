@@ -9,8 +9,6 @@ public import Mathlib.RepresentationTheory.Invariants
 public import Mathlib.MeasureTheory.Group.Integral
 public import Mathlib.MeasureTheory.Measure.Haar.Basic
 public import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
-public import Mathlib.MeasureTheory.Function.LocallyIntegrable
-public import Mathlib.Analysis.Normed.Module.FiniteDimension
 
 /-!
 # Compact averaging in a finite-dimensional complex representation
@@ -69,26 +67,6 @@ theorem linearMap_compactRepresentationAverage (ρ : Representation ℂ H V) (v 
   let := FiniteDimensional.complete ℂ V
   exact (ℓ.toContinuousLinearMap.integral_comp_comm
     (integrable_representation_orbit μ ρ v hc)).symm
-
-omit [IsTopologicalGroup H] [μ.IsMulLeftInvariant] in
-/-- A constant orbit observation retains its value after averaging. -/
-theorem linearMap_compactRepresentationAverage_of_constant
-    (ρ : Representation ℂ H V) (v : V) (hc : Continuous fun h => ρ h v)
-    (ℓ : Module.Dual ℂ V) (c : ℂ) (hℓ : ∀ h, ℓ (ρ h v) = c) :
-    ℓ (compactRepresentationAverage μ ρ v) = c := by
-  rw [linearMap_compactRepresentationAverage μ ρ v hc ℓ]
-  simp_rw [hℓ]
-  simp
-
-omit [IsTopologicalGroup H] [CompactSpace H] [BorelSpace H]
-  [TopologicalSpace H] [μ.IsMulLeftInvariant] in
-/-- Averaging fixes every already invariant vector. -/
-theorem compactRepresentationAverage_of_mem_invariants (ρ : Representation ℂ H V)
-    {v : V} (hv : v ∈ ρ.invariants) : compactRepresentationAverage μ ρ v = v := by
-  let := NormedSpace.restrictScalars ℝ ℂ V
-  let := FiniteDimensional.complete ℂ V
-  have hv' (h : H) : ρ h v = v := hv h
-  simp [compactRepresentationAverage, hv']
 
 /-- A compact group has a probability left Haar measure, normalized on the whole group. -/
 theorem exists_probability_leftInvariant_measure (H : Type*) [Group H]

@@ -19,7 +19,9 @@ preserved. Historical extraction manifests retain the original source hashes,
 modification records and checks; their relocation sections identify current
 paths. Original sources are retrievable from the pinned repositories and revisions;
 redundant upstream source snapshots are omitted. No complete upstream build is
-claimed by checking the selected dependency cone.
+claimed by checking the selected dependency cone. The retained source is further
+restricted to dependencies of the four principal theorems; historical manifests
+may therefore describe declarations or modules that have since been removed.
 
 ## Mathlib
 
@@ -121,7 +123,7 @@ claimed by checking the selected dependency cone.
   [source manifest](BostConjecture/ExternalCode/Etingof/PROVENANCE.json).
 - Original source root: `clean-code/release/RepresentationTheory/`; local root:
   `BostConjecture/ExternalCode/Etingof/RepresentationTheory/`.
-- Selected five-module closure: `Alignment/Attribute`,
+- Selected four-module closure:
   `YoungDiagram/PartitionConstructions`, `Partition/YoungDiagram`,
   `SymmetricGroup/PartitionAuxiliaryConstructions`, and
   `Combinatorics/YoungDiagram/CornerStatistics`.
@@ -135,6 +137,8 @@ claimed by checking the selected dependency cone.
   `AuxiliaryPartitionSource`, and `auxiliaryYoungDiagramOfPartition`; unused
   canonical-filling, group-algebra and semistandard-tableau APIs are omitted.
   Umbrella Mathlib imports are replaced by the precise prerequisites.
+  Unused source-reference metadata tooling and compatibility aliases are
+  omitted; bibliographic references remain in source comments.
 - Consumers: `Specht` hook and shifted counts, followed by prefix weights and
   the covolume asymptotic. The hook-count bridge also adapts the upstream
   private `sytCell_iff_mem_toYoungDiagram` and `sytCellEquiv` as
@@ -230,8 +234,8 @@ replacement Mathlib dependency. All target Lean/mathlib `v4.35.0`.
 | PR | Repository and exact revision | Original sources and principal declarations | Local source root and consumers |
 | --- | --- | --- | --- |
 | [#40948](https://github.com/leanprover-community/mathlib4/pull/40948) | `Thmoas-Guan/mathlib4_fork` at `b642b6723caf97b7b462dd5ddeabb0226c3b5433` | Nailin Guan's `Mathlib/LinearAlgebra/ExteriorPower/BaseChange.lean` and two projections from `ExteriorAlgebra/Grading.lean`; `exteriorPower.baseChangeEquiv` and `ExteriorAlgebra.toExteriorPower` | `ExternalCode/MathlibPRs/PR40948/`; arithmetic determinants and geometric Plucker base change |
-| [#44845](https://github.com/leanprover-community/mathlib4/pull/44845) | `DanielJHorton/mathlib4` at `47365e3b9fd4329f058c31ac7aa9565a6036b17d` | Daniel Horton's `Mathlib/LinearAlgebra/PiTensorProduct/Projective.lean` and three declarations from `Dual/Defs.lean`; `PiTensorProduct.Projective`, `piTensorHomEquiv`, `dualDistribEquivOfProjective`, `Module.Dual.dualBaseRingEquiv` | `ExternalCode/MathlibPRs/PR44845/`; integral projective tensor duality, contraction and Schur–Weyl duality |
-| [#45002](https://github.com/leanprover-community/mathlib4/pull/45002) | `TJHeeringa/mathlib4` at `41260205df493c627e1ac0e54812cfdeb6517fbc` | Tjeerd Jan Heeringa's `Mathlib/Analysis/InnerProductSpace/{Abs,Polar}.lean`; `ContinuousLinearMap.abs`, `polarₚₗᵢ`, `polar` and their characterizations | `ExternalCode/MathlibPRs/PR45002/`; balanced special-linear polar decomposition and orbit-norm bounds |
+| [#44845](https://github.com/leanprover-community/mathlib4/pull/44845) | `DanielJHorton/mathlib4` at `47365e3b9fd4329f058c31ac7aa9565a6036b17d` | Daniel Horton's `Mathlib/LinearAlgebra/PiTensorProduct/Projective.lean` and two declarations from `Dual/Defs.lean`; `PiTensorProduct.Projective`, `piTensorHomEquiv`, `dualDistribEquivOfProjective`, `Module.Dual.dualBaseRingEquiv` | `ExternalCode/MathlibPRs/PR44845/`; integral projective tensor duality, contraction and Schur–Weyl duality |
+| [#45002](https://github.com/leanprover-community/mathlib4/pull/45002) | `TJHeeringa/mathlib4` at `41260205df493c627e1ac0e54812cfdeb6517fbc` | Tjeerd Jan Heeringa's `Mathlib/Analysis/InnerProductSpace/{Abs,Polar}.lean`; `ContinuousLinearMap.abs`, `polarₚₗᵢ`, `polar` and the polar decomposition identities | `ExternalCode/MathlibPRs/PR45002/`; balanced special-linear polar decomposition and orbit-norm bounds |
 
 Local roots in the table are relative to `BostConjecture/`. Each contains
 `LICENSE` and `PROVENANCE.json`. PR #40948 extracts a small projection

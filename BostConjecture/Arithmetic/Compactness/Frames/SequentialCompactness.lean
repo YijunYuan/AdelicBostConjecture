@@ -9,7 +9,7 @@ public import BostConjecture.Arithmetic.Compactness.Frames.TraceFrames
 public import BostConjecture.Arithmetic.Compactness.Action.FixedAction
 public import BostConjecture.Arithmetic.Compactness.Frames.FrameLimit
 public import BostConjecture.Arithmetic.Compactness.Topology.MetricTransport
-public import Mathlib.Topology.Sequences
+public import BostConjecture.Arithmetic.Compactness.Topology.SemistabilityTopology
 
 /-!
 # Arithmetic sequential compactness for actual Hermitian modules

@@ -9,20 +9,19 @@ module
 
 public import BostConjecture.ExternalCode.Etingof.RepresentationTheory.YoungDiagram.PartitionConstructions
 public import BostConjecture.ExternalCode.Etingof.RepresentationTheory.Partition.YoungDiagram
-public import BostConjecture.ExternalCode.Etingof.RepresentationTheory.Alignment.Attribute
 public import Mathlib.Algebra.BigOperators.Field
-public import Mathlib.Algebra.BigOperators.Group.Finset.Sigma
 public import Mathlib.Algebra.Order.BigOperators.GroupWithZero.Finset
 public import Mathlib.Data.List.GetD
-public import Mathlib.Data.Nat.Factorial.Basic
-public import Mathlib.Data.Fintype.Card
-public import Mathlib.Order.Interval.Finset.Nat
 public import Mathlib.SetTheory.Cardinal.Finite
 public import Mathlib.Tactic.FieldSimp
-public import Mathlib.Tactic.Linarith
-public import Mathlib.Tactic.Positivity
-public import Mathlib.Tactic.Ring
-public import Mathlib.Tactic.Zify
+public import Mathlib.Algebra.Order.Field.Basic
+public import Mathlib.Data.Rat.Cast.Order
+public import Mathlib.Tactic.Linarith.Frontend
+public import Mathlib.Tactic.NormNum.Abs
+public import Mathlib.Tactic.NormNum.DivMod
+public import Mathlib.Tactic.NormNum.OfScientific
+public import Mathlib.Tactic.Positivity.Finset
+public import Mathlib.Tactic.Ring.RingNF
 
 /-!
 # The hook-length formula for standard Young tableaux
@@ -56,12 +55,16 @@ open RepresentationTheory.SymmetricGroup.PartitionAuxiliaryConstructions
 open RepresentationTheory.YoungDiagram.PartitionConstructions
 
 /-- An auxiliary natural-number statistic of a Young diagram at two indices. -/
-@[expose, source_ref "Chapter5/Discussion_hook_length_derivation" (role := supporting)]
+-- Etingof et al., Introduction to Representation Theory:
+-- Chapter5/Discussion_hook_length_derivation (supporting).
+@[expose]
 def YoungDiagram.auxiliaryCellStatistic (μ : YoungDiagram) (i j : ℕ) : ℕ :=
   μ.rowLen i + μ.colLen j - i - j - 1
 
 /-- An auxiliary natural-number statistic of a Young diagram. -/
-@[expose, source_ref "Chapter5/Discussion_hook_length_derivation" (role := supporting)]
+-- Etingof et al., Introduction to Representation Theory:
+-- Chapter5/Discussion_hook_length_derivation (supporting).
+@[expose]
 noncomputable def YoungDiagram.auxiliaryDiagramStatistic (μ : YoungDiagram) : ℕ :=
   μ.cells.prod (fun c => (YoungDiagram.auxiliaryCellStatistic μ) c.1 c.2)
 
@@ -96,19 +99,6 @@ theorem YoungDiagram.mem_auxiliaryCellPairFinset_iff {μ : YoungDiagram} {c : �
     c ∈ (YoungDiagram.auxiliaryCellPairFinset μ) ↔ (YoungDiagram.auxiliaryCellPredicate μ) c.1 c.2
       := by
   simp [auxiliaryCellPairFinset, auxiliaryCellPredicate, Finset.mem_filter]
-
-/-- A Young diagram with at least one cell has a nonempty auxiliary finite set of pairs. -/
-theorem YoungDiagram.auxiliaryCellPairFinset_nonempty (μ : YoungDiagram) (h : μ.cells.Nonempty) :
-    (YoungDiagram.auxiliaryCellPairFinset μ).Nonempty := by
-  obtain ⟨c, hc_mem, hc_max⟩ := Finset.exists_max_image μ.cells
-    (fun c : ℕ × ℕ => c.1 + c.2) h
-  refine ⟨c, mem_auxiliaryCellPairFinset_iff.mpr ⟨hc_mem, ?_, ?_⟩⟩
-  · intro h1
-    have := hc_max _ h1
-    simp at this
-  · intro h1
-    have := hc_max _ h1
-    simp at this
 
 /-- An auxiliary Young-diagram transformation determined by two indices satisfying the auxiliary
 corner predicate. -/
@@ -261,17 +251,6 @@ private lemma sytCell_iff_mem_toYoungDiagram {n : ℕ} (la : Nat.Partition n)
     refine ⟨h1, ?_⟩
     have heq := List.getD_eq_getElem _ 0 h1
     omega
-
-/-- Identify row-length coordinates with the cells of the associated Young diagram. -/
-private noncomputable def sytCellEquiv {n : ℕ} (la : Nat.Partition n) :
-    { c : ℕ × ℕ // c.1 <
-      (auxiliaryPartitionNatList la).length ∧ c.2 < (auxiliaryPartitionNatList la).getD c.1 0 } ≃
-    { c : ℕ × ℕ // c ∈
-      (auxiliaryYoungDiagramOfPartition la).cells } where
-  toFun := fun ⟨c, h⟩ => ⟨c, (sytCell_iff_mem_toYoungDiagram la c).mp h⟩
-  invFun := fun ⟨c, h⟩ => ⟨c, (sytCell_iff_mem_toYoungDiagram la c).mpr h⟩
-  left_inv := fun ⟨_, _⟩ => by simp
-  right_inv := fun ⟨_, _⟩ => by simp
 
 private lemma syt_maxCell_isOuterCorner {n : ℕ} {la : Nat.Partition (n + 1)}
     (f : { c : ℕ × ℕ // c.1 <
@@ -815,40 +794,6 @@ lemma YoungDiagram.hookLengthProduct_div_removeCorner_eq_prod
   push_cast
   rw [Finset.prod_div_distrib]
 
-private lemma YoungDiagram.outerCorners_eq_empty_of_cells_eq_empty
-    {μ : YoungDiagram} (h : μ.cells = ∅) : (YoungDiagram.auxiliaryCellPairFinset μ) = ∅ := by
-  simp only [YoungDiagram.auxiliaryCellPairFinset, h]
-  simp
-
-private lemma YoungDiagram.auxiliaryCellPredicate.persist_removeCorner
-    {μ : YoungDiagram} {i₀ j₀ i j : ℕ}
-    (hc₀ : (YoungDiagram.auxiliaryCellPredicate μ) i₀ j₀) (hc :
-      (YoungDiagram.auxiliaryCellPredicate μ) i j)
-    (hne : (i, j) ≠ (i₀, j₀)) :
-    (YoungDiagram.auxiliaryCellPredicate ((YoungDiagram.auxiliaryCornerTransform μ) i₀ j₀ hc₀)) i
-      j := by
-  refine ⟨(mem_removeCorner_iff hc₀).mpr ⟨hc.1, hne⟩, ?_, ?_⟩
-  · intro hmem
-    have : (i + 1, j) ∈ μ.cells := by
-      rw [YoungDiagram.auxiliaryCornerTransform] at hmem
-      exact (Finset.mem_erase.mp hmem).2
-    exact hc.2.1 this
-  · intro hmem
-    have : (i, j + 1) ∈ μ.cells := by
-      rw [YoungDiagram.auxiliaryCornerTransform] at hmem
-      exact (Finset.mem_erase.mp hmem).2
-    exact hc.2.2 this
-
-private lemma YoungDiagram.outerCorner_of_removeCorner
-    {μ : YoungDiagram} {i₀ j₀ : ℕ}
-    (hc₀ : (YoungDiagram.auxiliaryCellPredicate μ) i₀ j₀)
-    {c : ℕ × ℕ} (hc_oc : c ∈ (YoungDiagram.auxiliaryCellPairFinset μ)) (hne : c ≠ (i₀, j₀)) :
-    c ∈ (YoungDiagram.auxiliaryCellPairFinset ((YoungDiagram.auxiliaryCornerTransform μ) i₀ j₀
-      hc₀)) := by
-  have hc := YoungDiagram.mem_auxiliaryCellPairFinset_iff.mp hc_oc
-  exact YoungDiagram.mem_auxiliaryCellPairFinset_iff.mpr
-    (YoungDiagram.auxiliaryCellPredicate.persist_removeCorner hc₀ hc hne)
-
 private lemma YoungDiagram.hookLength_lt_of_right
     {μ : YoungDiagram} {a b b' : ℕ}
     (hb : (a, b) ∈ μ.cells) (hb' : (a, b') ∈ μ.cells)
@@ -891,7 +836,8 @@ private lemma YoungDiagram.hookLength_eq_one_iff_outerCorner
 end
 
 /-- An auxiliary finite set of pairs associated with a Young diagram and two indices. -/
-@[source_ref "Chapter5/Discussion_hook_length_derivation" (role := supporting)]
+-- Etingof et al., Introduction to Representation Theory:
+-- Chapter5/Discussion_hook_length_derivation (supporting).
 def YoungDiagram.auxiliaryCellFinset (μ : YoungDiagram) (i j : ℕ) :
     Finset (ℕ × ℕ) :=
   ((Finset.Ico (j + 1) (μ.rowLen i)).image (fun b' => (i, b'))) ∪
@@ -936,22 +882,6 @@ lemma YoungDiagram.auxiliaryCellWeight_self_eq_one
   rw [dite_eq_left hc.1, ite_eq_left (YoungDiagram.hookLength_eq_one_of_isOuterCorner hc),
     ite_eq_left rfl]
 
-/-- The auxiliary weight from an outer corner to a distinct pair of indices is zero. -/
-lemma YoungDiagram.auxiliaryCellWeight_eq_zero_of_ne
-    {μ : YoungDiagram} {i j i' j' : ℕ}
-    (hc : (YoungDiagram.auxiliaryCellPredicate μ) i j) (hne : (i, j) ≠ (i', j')) :
-    (YoungDiagram.auxiliaryCellWeight μ) i j (i', j') = 0 := by
-  unfold YoungDiagram.auxiliaryCellWeight
-  rw [dite_eq_left hc.1, ite_eq_left (YoungDiagram.hookLength_eq_one_of_isOuterCorner hc),
-    ite_eq_right hne]
-
-/-- If a pair of indices is not a cell, every auxiliary weight originating at those indices is zero.
--/
-lemma YoungDiagram.auxiliaryCellWeight_eq_zero_of_not_mem
-    {μ : YoungDiagram} {i j : ℕ} (h : (i, j) ∉ μ.cells)
-    (c : ℕ × ℕ) : (YoungDiagram.auxiliaryCellWeight μ) i j c = 0 := by
-  rw [YoungDiagram.auxiliaryCellWeight, dite_eq_right h]
-
 /-- For indices specifying a cell, every pair in the associated auxiliary finite set is a cell of
 the diagram. -/
 lemma YoungDiagram.auxiliaryCellFinset_subset_cells
@@ -979,7 +909,8 @@ private lemma YoungDiagram.hookCellsExcl_disjoint
 
 /-- For a cell of a Young diagram, the associated hook cells excluding that cell have cardinality
 one less than its hook length. -/
-@[source_ref "Chapter5/Discussion_hook_length_derivation" (role := supporting)]
+-- Etingof et al., Introduction to Representation Theory:
+-- Chapter5/Discussion_hook_length_derivation (supporting).
 lemma YoungDiagram.card_hookCellsExcl_eq_hookLength_sub_one
     {μ : YoungDiagram} {i j : ℕ} (hmem : (i, j) ∈ μ.cells) :
     ((YoungDiagram.auxiliaryCellFinset μ) i j).card = (YoungDiagram.auxiliaryCellStatistic μ) i j
@@ -1057,74 +988,6 @@ private lemma YoungDiagram.hookWalkWeight_unfold_noncorner
         (YoungDiagram.auxiliaryCellWeight μ) v.1 v.2 c) /
         ((YoungDiagram.auxiliaryCellStatistic μ) a b - 1 : ℚ) := by
   rw [YoungDiagram.auxiliaryCellWeight, dite_eq_left hmem, ite_eq_right hne]
-
-private lemma YoungDiagram.hookWalkWeight_other_corner
-    {μ : YoungDiagram} {a b i j : ℕ}
-    (hoc : (YoungDiagram.auxiliaryCellPredicate μ) a b) (hne : (a, b) ≠ (i, j)) :
-    (YoungDiagram.auxiliaryCellWeight μ) a b (i, j) = 0 := by
-  rw [YoungDiagram.auxiliaryCellWeight, dite_eq_left hoc.1,
-      ite_eq_left (YoungDiagram.hookLength_eq_one_of_isOuterCorner hoc), ite_eq_right hne]
-
-private lemma YoungDiagram.hookWalkWeight_zero_of_not_mem
-    {μ : YoungDiagram} {u : ℕ × ℕ} (h : u ∉ μ.cells) (c : ℕ × ℕ) :
-    (YoungDiagram.auxiliaryCellWeight μ) u.1 u.2 c = 0 :=
-  YoungDiagram.auxiliaryCellWeight_eq_zero_of_not_mem h c
-
-private lemma YoungDiagram.hookRatio_arm_leg_decomp
-    {μ : YoungDiagram} {i j : ℕ} (hc : (YoungDiagram.auxiliaryCellPredicate μ) i j) :
-    (μ.cells.erase (i, j)).prod (fun c =>
-      ((YoungDiagram.auxiliaryCellStatistic μ) c.1 c.2 : ℚ) /
-        ((YoungDiagram.auxiliaryCellStatistic ((YoungDiagram.auxiliaryCornerTransform μ) i j hc))
-          c.1 c.2 : ℚ)) =
-    (μ.cells.erase (i, j)).prod (fun c =>
-      if c.1 = i ∧ c.2 < j then
-        ((YoungDiagram.auxiliaryCellStatistic μ) c.1 c.2 : ℚ) /
-          ((YoungDiagram.auxiliaryCellStatistic μ) c.1 c.2 - 1 : ℚ)
-      else if c.2 = j ∧ c.1 < i then
-        ((YoungDiagram.auxiliaryCellStatistic μ) c.1 c.2 : ℚ) /
-          ((YoungDiagram.auxiliaryCellStatistic μ) c.1 c.2 - 1 : ℚ)
-      else 1) := by
-  apply Finset.prod_congr rfl
-  intro ⟨a, b⟩ hmem
-  simp only
-  have hmem' : (a, b) ∈ μ.cells := Finset.mem_of_mem_erase hmem
-  have hne : (a, b) ≠ (i, j) := Finset.ne_of_mem_erase hmem
-  by_cases hai : a = i
-  · have hbj : b ≠ j := fun h => hne (by rw [hai, h])
-    have hblt : b < j := by
-      rcases Nat.lt_or_gt_of_ne hbj with h | h
-      · exact h
-      · exfalso
-        have := YoungDiagram.rowLen_eq_succ_of_isOuterCorner hc
-        have := YoungDiagram.mem_iff_lt_rowLen.mp (hai ▸ hmem')
-        omega
-    rw [ite_eq_left ⟨hai, hblt⟩]
-    congr 1
-    rw [hai, YoungDiagram.removeCorner_hookLength_eq_sub_one_of_lt_col hc hblt]
-    have hpos := YoungDiagram.auxiliaryCellStatistic_pos μ i b (hai ▸ hmem')
-    simp [Nat.cast_sub (by omega : 1 ≤ (YoungDiagram.auxiliaryCellStatistic μ) i b)]
-  · by_cases hbj : b = j
-    · have halt : a < i := by
-        rcases Nat.lt_or_gt_of_ne hai with h | h
-        · exact h
-        · exfalso
-          have := YoungDiagram.colLen_eq_succ_of_isOuterCorner hc
-          have := YoungDiagram.mem_iff_lt_colLen.mp (hbj ▸ hmem')
-          omega
-      rw [ite_eq_right (fun h => hai h.1), ite_eq_left ⟨hbj, halt⟩]
-      congr 1
-      rw [hbj, YoungDiagram.removeCorner_hookLength_eq_sub_one_of_lt_row hc halt]
-      have hpos := YoungDiagram.auxiliaryCellStatistic_pos μ a j (hbj ▸ hmem')
-      simp [Nat.cast_sub (by omega : 1 ≤ (YoungDiagram.auxiliaryCellStatistic μ) a j)]
-    · rw [ite_eq_right (fun h => hai h.1), ite_eq_right (fun h => hbj h.1)]
-      rw [YoungDiagram.removeCorner_hookLength_eq_of_row_ne_of_col_ne hc hai hbj]
-      have hpos := YoungDiagram.auxiliaryCellStatistic_pos μ a b hmem'
-      exact div_self (by positivity)
-
-private lemma YoungDiagram.hookCellsExcl_mem_cells
-    {μ : YoungDiagram} {a b : ℕ} (hmem : (a, b) ∈ μ.cells)
-    {v : ℕ × ℕ} (hv : v ∈ (YoungDiagram.auxiliaryCellFinset μ) a b) : v ∈ μ.cells :=
-  YoungDiagram.auxiliaryCellFinset_subset_cells hmem hv
 
 private lemma YoungDiagram.hookWalkWeight_zero_of_row_gt
     {μ : YoungDiagram} {a b i j : ℕ} (ha : i < a)
@@ -1867,31 +1730,6 @@ theorem Partition.auxiliaryCard_mul_hookLengthProduct_eq_factorial (n : ℕ) (la
   | zero => exact Partition.auxiliaryFactorialIdentity_zero la
   | succ n ih => exact Partition.auxiliaryFactorialIdentity_succ n ih la
 
-/-- The hook-length product of a partition divides the factorial of its size. -/
-theorem Partition.hookLengthProduct_dvd_factorial (n : ℕ) (la : Nat.Partition n) :
-    (YoungDiagram.auxiliaryDiagramStatistic
-      (auxiliaryYoungDiagramOfPartition la)) ∣ n.factorial :=
-  ⟨Nat.card (AuxiliaryPartitionSource n la), by linarith
-    [Partition.auxiliaryCard_mul_hookLengthProduct_eq_factorial n la]⟩
-
-/-- An auxiliary cardinality associated with a partition equals its size factorial divided by the
-hook-length product. -/
-theorem Partition.auxiliaryCard_eq_factorial_div_hookLengthProduct (n : ℕ) (la : Nat.Partition n) :
-    Nat.card (AuxiliaryPartitionSource n la) =
-      n.factorial / (YoungDiagram.auxiliaryDiagramStatistic
-        (auxiliaryYoungDiagramOfPartition la)) := by
-  have h := Partition.auxiliaryCard_mul_hookLengthProduct_eq_factorial n la
-  have hpos := YoungDiagram.auxiliaryDiagramStatistic_pos
-    (auxiliaryYoungDiagramOfPartition la)
-  rw [← h, Nat.mul_div_cancel _ hpos]
-
 end
-
-/-- Source-compatible alias for the outer-corner factorial recurrence. -/
-alias auxiliaryElidedStatement020303 :=
-  Partition.auxiliaryCornerSum_mul_hookLengthProduct_eq_factorial
-
-/-- Source-compatible alias for the standard-tableau branching recurrence. -/
-alias auxiliaryElidedStatement023751 := Partition.auxiliaryCard_eq_sum_removeOuterCorner
 
 end RepresentationTheory.Combinatorics.YoungDiagram.CornerStatistics

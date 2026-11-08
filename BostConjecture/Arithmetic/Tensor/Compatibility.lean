@@ -6,7 +6,6 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Arithmetic.Tensor.BinaryMetric
-public import BostConjecture.Arithmetic.Submodule.QuotientMetric
 
 /-!
 # Tensor metrics and induced metrics

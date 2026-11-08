@@ -6,6 +6,7 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Specht.Seminormal.PrefixNorm
+public import BostConjecture.Specht.Tableau.ColumnReading
 
 /-!
 # Initial value of the prefix insertion product

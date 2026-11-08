@@ -12,8 +12,7 @@ This file has been modified for Lean 4.35 module visibility.
 -/
 module
 
-public import BostConjecture.ExternalCode.OAI.RepresentationTheory.Saxl.Basic
-public import Mathlib.Tactic.Ring
+public import BostConjecture.ExternalCode.OAI.RepresentationTheory.Saxl.Model
 
 /-!
 # Column antisymmetrization of row tabloids

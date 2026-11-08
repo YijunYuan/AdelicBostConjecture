@@ -15,8 +15,6 @@ module
 public import BostConjecture.ExternalCode.OAI.NumberTheory.ArithmeticGroups.Lattices.OrthogonalStretch
 public import Mathlib.Algebra.Module.ZLattice.Covolume
 public import Mathlib.MeasureTheory.Group.GeometryOfNumbers
-public import Mathlib.MeasureTheory.Measure.Lebesgue.EqHaar
-public import Mathlib.Tactic.Linarith
 
 /-!
 # Ellipsoid

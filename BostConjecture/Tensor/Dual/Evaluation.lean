@@ -6,7 +6,11 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.ExternalCode.MathlibPRs.PR44845.LinearAlgebra.PiTensorProduct.Projective
-public import Mathlib.LinearAlgebra.Dual.Lemmas
+public import Mathlib.Data.Rat.Cast.Order
+public import Mathlib.Tactic.ContinuousFunctionalCalculus
+public import Mathlib.Tactic.NormNum.Abs
+public import Mathlib.Tactic.NormNum.DivMod
+public import Mathlib.Tactic.NormNum.OfScientific
 
 /-!
 # Canonical evaluation on tensor powers
@@ -84,20 +88,5 @@ theorem tensorPowerPairing_reindex_left (i : V →ₗ[R] W) (σ : Equiv.Perm ι)
   have h := tensorPowerPairing_reindex i σ z
     ((reindex R (fun _ : ι => Dual R W) σ).symm u)
   rwa [LinearEquiv.apply_symm_apply, reindex_symm] at h
-
-/-- Evaluation detects precisely whether the image tensor is zero. This uses
-finite projectivity, not a chosen basis. -/
-theorem tensorPowerPairing_eq_zero_iff (i : V →ₗ[R] W) (z : ⨂[R] (_ : ι), V) :
-    tensorPowerPairing i z = 0 ↔ PiTensorProduct.map (fun _ : ι => i) z = 0 := by
-  constructor
-  · intro h
-    by_contra hz
-    obtain ⟨f, hf⟩ := Module.Projective.exists_dual_ne_zero R hz
-    let u := (dualDistribEquivOfProjective R (fun _ : ι => W)).symm f
-    have hu := LinearMap.congr_fun h u
-    exact hf (by simpa [u] using hu)
-  · intro h
-    ext u
-    simp [h]
 
 end BostConjecture.Tensor

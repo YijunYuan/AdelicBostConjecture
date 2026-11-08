@@ -8,7 +8,6 @@ module
 public import BostConjecture.Arithmetic.Compactness.Frames.SequentialCompactness
 public import BostConjecture.Arithmetic.Compactness.Topology.TensorContinuity
 public import BostConjecture.Arithmetic.Compactness.Maximum.Transport
-public import Mathlib.Topology.Order.Compact
 
 /-!
 # Maximizing normalized semistable pairs

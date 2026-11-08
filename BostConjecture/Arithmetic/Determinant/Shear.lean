@@ -6,7 +6,6 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Geometry.Determinant.Coordinates
-public import Mathlib.LinearAlgebra.Basis.Prod
 
 /-!
 # Shears on the determinant of a product

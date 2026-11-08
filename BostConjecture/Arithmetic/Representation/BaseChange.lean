@@ -6,7 +6,6 @@ Authors: Yijun Yuan
 module
 
 public import Mathlib.RepresentationTheory.Irreducible
-public import Mathlib.LinearAlgebra.TensorProduct.Tower
 
 /-!
 # Scalar extension of representations and invariant submodules

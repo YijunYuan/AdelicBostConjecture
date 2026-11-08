@@ -5,7 +5,8 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Arithmetic.Tensor.Submodule
+public import BostConjecture.Arithmetic.Degree.Tensor
+public import BostConjecture.Arithmetic.Submodule.NestedQuotient
 
 /-!
 # Transport of actual quotient metrics

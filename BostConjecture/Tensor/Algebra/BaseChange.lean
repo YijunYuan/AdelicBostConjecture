@@ -7,7 +7,6 @@ module
 
 public import Mathlib.LinearAlgebra.PiTensorProduct.Basic
 public import Mathlib.LinearAlgebra.TensorProduct.Tower
-public import Mathlib.Data.Fintype.Option
 
 /-!
 # Scalar extension on finite tensor products
@@ -124,18 +123,6 @@ theorem baseChangeEquiv_tmul [Finite ι] (s : S) (v : ∀ i, M i) :
     baseChangeEquiv R S M (s ⊗ₜ[R] tprod R v) =
       s • tprod S (fun i => 1 ⊗ₜ[R] v i) := by
   simp [baseChangeEquiv]
-
-/-- The inverse multiplies the coefficient factors of a pure tensor. -/
-@[simp]
-theorem baseChangeEquiv_symm_tprod [Fintype ι] (s : ι → S) (v : ∀ i, M i) :
-    (baseChangeEquiv R S M).symm (tprod S (fun i => s i ⊗ₜ[R] v i)) =
-      (∏ i, s i) ⊗ₜ[R] tprod R v := by
-  apply (baseChangeEquiv R S M).injective
-  rw [LinearEquiv.apply_symm_apply, baseChangeEquiv_tmul,
-    ← (tprod S).map_smul_univ]
-  congr 1
-  ext i
-  simp [TensorProduct.smul_tmul']
 
 variable {M} {N : ι → Type*} [∀ i, AddCommGroup (N i)] [∀ i, Module R (N i)]
 

@@ -6,7 +6,6 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Specht.Lattice.Rectangle
-public import BostConjecture.Specht.Tableau.Prefix
 
 /-!
 # Rotation and complements inside a rectangle
@@ -62,18 +61,6 @@ theorem rotateCell_mem_rectangleComplement {μ : YoungDiagram} {a k : ℕ} {c : 
     (hc : c ∈ rectangle a k) :
     rotateCell a k c ∈ rectangleComplement μ a k ↔ c ∉ μ := by
   simp only [mem_rectangleComplement, rotateCell_mem hc, rotateCell_rotateCell hc, true_and]
-
-@[simp] theorem rectangleComplement_involutive {μ : YoungDiagram} {a k : ℕ}
-    (hμ : μ ≤ rectangle a k) : rectangleComplement (rectangleComplement μ a k) a k = μ := by
-  ext c
-  simp only [YoungDiagram.mem_cells]
-  constructor
-  · intro hc
-    obtain ⟨hr, hc⟩ := mem_rectangleComplement.mp hc
-    simpa only [rotateCell_mem_rectangleComplement hr, not_not] using hc
-  · intro hc
-    exact mem_rectangleComplement.mpr ⟨hμ hc, by
-      simpa only [rotateCell_mem_rectangleComplement (hμ hc), not_not] using hc⟩
 
 /-- Splitting the rectangle into the prefix diagram and its rotated complement. -/
 def rectangleSplitEquiv {μ : YoungDiagram} {a k : ℕ} (hμ : μ ≤ rectangle a k) :

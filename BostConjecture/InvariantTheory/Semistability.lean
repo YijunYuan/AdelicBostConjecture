@@ -6,7 +6,8 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.InvariantTheory.Polynomial.Action
-public import Mathlib.Analysis.Complex.Basic
+public import Mathlib.Algebra.Order.BigOperators.Expect
+public import Mathlib.Analysis.Complex.Order
 
 /-!
 # Polynomial orbit closure and geometric semistability
@@ -30,23 +31,6 @@ def polynomialZariskiClosure (A : Set X) : Set X :=
   {x | ∀ p : SymmetricAlgebra K (Module.Dual K X),
     (∀ y ∈ A, polynomialEval y p = 0) → polynomialEval x p = 0}
 
-theorem subset_polynomialZariskiClosure (A : Set X) :
-    A ⊆ polynomialZariskiClosure (K := K) A :=
-  fun _ hx _ hp => hp _ hx
-
-theorem polynomialZariskiClosure_mono {A B : Set X} (hAB : A ⊆ B) :
-    polynomialZariskiClosure (K := K) A ⊆ polynomialZariskiClosure (K := K) B :=
-  fun _ hx _ hp => hx _ (fun y hy => hp y (hAB hy))
-
-@[simp]
-theorem polynomialZariskiClosure_idem (A : Set X) :
-    polynomialZariskiClosure (K := K) (polynomialZariskiClosure (K := K) A) =
-      polynomialZariskiClosure (K := K) A := by
-  apply Set.Subset.antisymm
-  · intro x hx p hp
-    exact hx p (fun y hy => hy p hp)
-  · exact subset_polynomialZariskiClosure _
-
 theorem polynomialEval_eq_on_closure {A : Set X}
     (p : SymmetricAlgebra K (Module.Dual K X)) (c : K)
     (hp : ∀ y ∈ A, polynomialEval y p = c) {x : X}
@@ -60,13 +44,6 @@ variable {G E : Type*} [Group G] [AddCommGroup E] [Module ℂ E]
 /-- Geometric semistability of a vector under a complex linear group action. -/
 def IsGeometricallySemistable (ρ : Representation ℂ G E) (x : E) : Prop :=
   (0 : E) ∉ polynomialZariskiClosure (K := ℂ) (Set.range (fun g => ρ g x))
-
-theorem IsGeometricallySemistable.ne_zero {ρ : Representation ℂ G E} {x : E}
-    (hx : IsGeometricallySemistable ρ x) : x ≠ 0 := by
-  intro h
-  apply hx
-  apply subset_polynomialZariskiClosure
-  exact ⟨1, by simp [h]⟩
 
 /-- A positive-degree invariant nonzero at a vector excludes zero from its orbit closure. -/
 theorem isGeometricallySemistable_of_homogeneousInvariant (ρ : Representation ℂ G E)

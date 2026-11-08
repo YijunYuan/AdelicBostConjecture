@@ -7,7 +7,6 @@ module
 
 public import BostConjecture.ExternalCode.MathlibPRs.PR45002.Analysis.InnerProductSpace.Polar
 public import Mathlib.Analysis.SpecialFunctions.ContinuousFunctionalCalculus.ExpLog.Basic
-public import Mathlib.Analysis.InnerProductSpace.Spectrum
 
 /-!
 # Invertible polar factors and their Hermitian logarithms
@@ -51,10 +50,6 @@ theorem norm_polar_apply (T : E →L[ℂ] E) (hT : Function.Injective T) (x : E)
 def polarIsometry (T : E →L[ℂ] E) (hT : Function.Injective T) : E →ₗᵢ[ℂ] E where
   toLinearMap := T.polar.toLinearMap
   norm_map' := norm_polar_apply T hT
-
-@[simp]
-theorem polarIsometry_apply (T : E →L[ℂ] E) (hT : Function.Injective T) (x : E) :
-    polarIsometry T hT x = T.polar x := rfl
 
 theorem log_abs_isSymmetric (T : E →L[ℂ] E) :
     (CFC.log T.abs).toLinearMap.IsSymmetric :=

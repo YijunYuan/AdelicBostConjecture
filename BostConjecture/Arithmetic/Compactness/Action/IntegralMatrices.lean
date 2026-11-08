@@ -8,7 +8,6 @@ module
 public import Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Defs
 public import Mathlib.Topology.Instances.Matrix
 public import Mathlib.Topology.Algebra.Group.Units
-public import Mathlib.Topology.Instances.Int
 public import Mathlib.Topology.Algebra.Ring.Real
 
 /-!

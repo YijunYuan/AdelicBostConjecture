@@ -5,8 +5,10 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Arithmetic.Compactness.Topology.SemistabilityTopology
 public import BostConjecture.Arithmetic.Submodule.NestedQuotient
+public import BostConjecture.Arithmetic.HN.Semistable
+public import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
+public import Mathlib.Data.Nat.Factorial.DoubleFactorial
 
 /-!
 # Transport of normalization and semistability along actual module isomorphisms

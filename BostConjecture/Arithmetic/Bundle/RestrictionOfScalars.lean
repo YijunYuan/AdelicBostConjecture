@@ -5,10 +5,9 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Arithmetic.Submodule.IntegralSubspace
-public import Mathlib.LinearAlgebra.Dimension.Localization
-public import Mathlib.LinearAlgebra.FreeModule.PID
-public import Mathlib.Algebra.Module.Rat
+public import Mathlib.MeasureTheory.Integral.Bochner.Basic
+public import Mathlib.NumberTheory.NumberField.Basic
+public import Mathlib.RingTheory.Flat.TorsionFree
 
 /-!
 # Restriction of an integral module to the integers
@@ -35,19 +34,6 @@ instance genericMap_int_isLocalizedModule :
     IsLocalizedModule (nonZeroDivisors ℤ)
       ((TensorProduct.mk (𝓞 K) K M 1).restrictScalars ℤ) :=
   IsLocalizedModule.restrictScalars (nonZeroDivisors ℤ) _
-
-/-- Rational scalar extension of the underlying abelian group is the actual
-generic fiber, including for nonfree integral modules. -/
-def rationalGenericEquiv : ℚ ⊗[ℤ] M ≃ₗ[ℚ] K ⊗[𝓞 K] M := by
-  let e := IsLocalizedModule.linearEquiv (nonZeroDivisors ℤ)
-    (TensorProduct.mk ℤ ℚ M 1)
-    ((TensorProduct.mk (𝓞 K) K M 1).restrictScalars ℤ)
-  exact e.toAddEquiv.toLinearEquiv (fun q x => map_rat_smul e q x)
-
-@[simp]
-lemma rationalGenericEquiv_tmul (x : M) :
-    rationalGenericEquiv ((1 : ℚ) ⊗ₜ[ℤ] x) = (1 : K) ⊗ₜ[𝓞 K] x :=
-  IsLocalizedModule.linearEquiv_apply (nonZeroDivisors ℤ) _ _ x
 
 /-- The integral module is finite after restriction to `ℤ`. -/
 lemma finite_int [Module.Finite (𝓞 K) M] : Module.Finite ℤ M :=

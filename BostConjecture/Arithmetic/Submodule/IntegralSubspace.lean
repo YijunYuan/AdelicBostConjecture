@@ -5,11 +5,10 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Arithmetic.Submodule.Metric
-public import Mathlib.Algebra.Module.LocalizedModule.Submodule
-public import Mathlib.RingTheory.Localization.BaseChange
-public import Mathlib.LinearAlgebra.TensorProduct.Finiteness
-public import Mathlib.LinearAlgebra.Dimension.Constructions
+public import Mathlib.MeasureTheory.Integral.Bochner.Basic
+public import Mathlib.NumberTheory.NumberField.Basic
+public import Mathlib.RingTheory.Flat.EquationalCriterion
+public import Mathlib.RingTheory.Flat.TorsionFree
 
 /-!
 # Integral parts of generic subspaces

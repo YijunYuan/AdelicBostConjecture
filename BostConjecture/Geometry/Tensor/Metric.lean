@@ -7,7 +7,6 @@ module
 
 public import BostConjecture.Geometry.Tensor.Realization
 public import BostConjecture.Tensor.Metric.Basic
-public import Mathlib.Analysis.InnerProductSpace.PiL2
 
 /-!
 # Orthonormal tensor coordinates

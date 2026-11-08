@@ -171,14 +171,4 @@ lemma determinant_piTensor_slope (h : HermitianMetric K M) (k : ℕ) :
   rw [slope_piTensor _ _ (fun _ => by rw [determinant_generic_finrank]; exact Nat.zero_lt_one)]
   simp [HermitianMetric.slope, determinant_generic_finrank, determinant_degree]
 
-/-- The same formula gives the degree since a determinant tensor power has rank one. -/
-lemma determinant_piTensor_degree (h : HermitianMetric K M) (k : ℕ) :
-    (HermitianMetric.piTensor (fun _ : Fin k => h.determinant)).degree =
-      (k : ℝ) * h.degree := by
-  have hr : Module.finrank K
-      (K ⊗[𝓞 K] (⨂[𝓞 K] (_ : Fin k), DeterminantLine (K := K) M)) = 1 := by
-    simp [piTensor_generic_finrank, determinant_generic_finrank]
-  simpa only [HermitianMetric.slope, hr, Nat.cast_one, div_one] using
-    determinant_piTensor_slope h k
-
 end BostConjecture.Arithmetic.Specht

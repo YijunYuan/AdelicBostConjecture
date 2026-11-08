@@ -8,7 +8,6 @@ module
 public import BostConjecture.Balanced.ExteriorMetric
 public import Mathlib.Analysis.SpecialFunctions.Exponential
 public import Mathlib.Analysis.InnerProductSpace.Spectrum
-public import Mathlib.Analysis.Convex.SpecificFunctions.Basic
 public import Mathlib.Analysis.Convex.Deriv
 
 /-!

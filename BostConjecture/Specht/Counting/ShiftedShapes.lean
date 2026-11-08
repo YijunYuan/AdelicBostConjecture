@@ -5,8 +5,9 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Specht.Counting.ComplementCount
 public import BostConjecture.Specht.Counting.OccupancySort
+public import BostConjecture.Specht.Counting.ShiftedCount
+public import BostConjecture.Specht.Tableau.Complement
 
 /-!
 # Rectangular subdiagrams as decreasing occupancies

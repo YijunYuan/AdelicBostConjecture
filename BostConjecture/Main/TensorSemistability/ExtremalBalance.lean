@@ -7,6 +7,7 @@ module
 
 public import BostConjecture.Main.TensorSemistability.ArithmeticDefect
 public import BostConjecture.Main.TensorSemistability.ExtremalNeighborhood
+public import BostConjecture.Main.TensorSemistability.VariationTopology
 
 /-!
 # Actual maximizing Hermitian metrics give balanced tensor fibers

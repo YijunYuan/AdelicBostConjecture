@@ -6,7 +6,7 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Specht.Tableau.Complement
-public import BostConjecture.Specht.Counting.ShiftedCount
+public import BostConjecture.Specht.Tableau.Prefix
 
 /-!
 # Prefix counting for rectangular standard tableaux
@@ -40,7 +40,6 @@ def glueRectangleTableau (hμ : μ ≤ rectangle a k) (t : Tableau m μ)
     (u : Tableau l (rectangleComplement μ a k)) (i : Fin l) :
     (glueRectangleTableau hμ t u (Fin.natAdd m i)).val = rotateCell a k (u i.rev).val := by
   simp [glueRectangleTableau, rectangleSplitEquiv]
-
 
 private theorem glueRectangleTableau_label_mono (hμ : μ ≤ rectangle a k)
     {t : Tableau m μ} {u : Tableau l (rectangleComplement μ a k)}
@@ -105,7 +104,6 @@ theorem prefixShape_glueRectangleTableau (hμ : μ ≤ rectangle a k)
     refine Finset.mem_image.mpr ⟨t.symm ⟨c, hc⟩, Finset.mem_univ _, ?_⟩
     change (glueRectangleTableau hμ t u (Fin.castAdd l (t.symm ⟨c, hc⟩))).val = c
     simp
-
 
 /-- Transport the actual prefix tableau to its specified shape. -/
 def prefixTableauOfShape {T : Tableau (m + l) (rectangle a k)} (hT : IsStandard T)
@@ -214,7 +212,6 @@ theorem complementTableauOfShape_isStandard {T : Tableau (m + l) (rectangle a k)
       exact Nat.lt_of_add_lt_add_left hh
     simpa only [Fin.rev_rev] using Fin.rev_strictAnti hrev
 
-
 /-- The actual rectangular prefix fiber is the product of the two standard-tableau types. -/
 def rectanglePrefixEquiv (hμ : μ ≤ rectangle a k) :
     {T : {T : Tableau (m + l) (rectangle a k) // IsStandard T} //
@@ -261,6 +258,4 @@ theorem card_rectanglePrefix (hμ : μ ≤ rectangle a k) :
   simp only [Nat.card_eq_fintype_card, Fintype.card_prod]
 
 end BostConjecture.Specht
-
-
 

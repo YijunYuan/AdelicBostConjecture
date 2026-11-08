@@ -15,7 +15,6 @@ module
 
 public import Mathlib.Combinatorics.Young.YoungDiagram
 public import Mathlib.RepresentationTheory.Subrepresentation
-public import Mathlib.GroupTheory.Perm.Sign
 public import Mathlib.Basic.Complex.Basic
 
 /-!
@@ -79,8 +78,6 @@ def cyclic {G : Type uG} {V : Type uV} [Group G] [AddCommGroup V] [Module ℂ V]
 abbrev Tableau (n : ℕ) (μ : YoungDiagram) := Fin n ≃ μ.cells
 
 /- One fixed tableau; changing its enumeration gives an isomorphic Specht module. -/
-def canonicalTableau {n : ℕ} (μ : YoungDiagram) (hn : μ.card = n) : Tableau n μ :=
-  (Fintype.equivFinOfCardEq (by simpa using hn)).symm
 
 /- The row word corresponding to the tabloid of a tableau. -/
 def rowWord {n : ℕ} {μ : YoungDiagram} (t : Tableau n μ) : Fin n → Fin (μ.colLen 0) :=

@@ -12,8 +12,7 @@ This file has been modified for Lean 4.35 module visibility.
 -/
 module
 
-public import Mathlib.Analysis.InnerProductSpace.Projection.FiniteDimensional
-public import Mathlib.LinearAlgebra.Determinant
+public import Mathlib.Analysis.InnerProductSpace.Projection.Submodule
 
 /-!
 # Orthogonal Stretch

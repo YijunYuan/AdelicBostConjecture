@@ -6,8 +6,7 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Arithmetic.Specht.DeterminantBundle
-public import BostConjecture.Arithmetic.Tensor.Compatibility
-public import BostConjecture.Tensor.Metric.Map
+public import BostConjecture.Arithmetic.Specht.Bundle
 
 /-!
 # The canonical determinant–Specht metric as an arithmetic tensor metric
@@ -51,11 +50,6 @@ universe u
 
 variable {K M : Type u} [Field K] [NumberField K] [AddCommGroup M] [Module (𝓞 K) M]
   [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M] {n k : ℕ}
-
-local instance (t : OAI.Saxl.Tableau n
-    (rectangle (Module.finrank K (K ⊗[𝓞 K] M)) k)) :
-    AddCommGroup ((⨂[𝓞 K] (_ : Fin k), DeterminantLine (K := K) M) ⊗[𝓞 K]
-      (𝓞 K ⊗[ℤ] orbitLattice t)) := Module.addCommMonoidToAddCommGroup (𝓞 K)
 
 /-- The metric defined through the projective determinant inclusion is exactly
 ARITH's Hilbert tensor of the intrinsic determinant powers and the actual lattice. -/

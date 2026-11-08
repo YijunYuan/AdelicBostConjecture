@@ -9,7 +9,9 @@ public import BostConjecture.Geometry.Polynomial.HomTensor
 public import BostConjecture.Geometry.Plucker.Polynomial
 public import BostConjecture.Geometry.Polynomial.Polarization
 public import BostConjecture.Geometry.Invariants.Independent
-public import BostConjecture.Geometry.Invariants.Rectangular
+public import Mathlib.LinearAlgebra.FreeModule.PID
+public import Mathlib.MeasureTheory.Integral.Bochner.Basic
+public import Mathlib.RingTheory.Flat.TorsionFree
 
 /-!
 # Nonzero Hom pairing on independent invariant factors
@@ -102,22 +104,5 @@ theorem exists_independent_invariant_pairing
     · exact hfix
   obtain ⟨v, ℓ, hv, hℓ, hvℓ⟩ := hpure
   exact ⟨v, ℓ, hv, hℓ, hvℓ⟩
-
-/-- Over an algebraic closure, the nonzero invariant pairing restricts to the
-actual scalar-extended rectangular lattice on the source side. -/
-theorem exists_rectangular_invariant_pairing [IsAlgClosed F]
-    (ρ : Representation F G W) (A : V →ₗ[F] W) {n a k : ℕ}
-    (ha : 0 < a) (hk : 0 < k)
-    (t : OAI.Saxl.Tableau n (Specht.rectangle a k)) (b : Basis (Fin a) F V)
-    {p : SymmetricAlgebra F (Dual F (V →ₗ[F] W))}
-    (hp : p ∈ homogeneousInvariants (homSpecialLinearRepresentation ρ) n)
-    (hpA : polynomialEval A p ≠ 0) :
-    ∃ (x : F ⊗[ℤ] Specht.orbitLattice t) (ℓ : ⨂[F] (_ : Fin n), Dual F W),
-      (∀ g : G, PiTensorProduct.map (fun _ => (ρ g⁻¹).dualMap) ℓ = ℓ) ∧
-      Tensor.tensorPowerPairing A (freeLatticeMap hk t b x) ℓ ≠ 0 := by
-  obtain ⟨v, ℓ, hv, hℓ, hvℓ⟩ := exists_independent_invariant_pairing ρ A hp hpA
-  obtain ⟨x, hx⟩ :=
-    (mem_range_freeLatticeMap_iff_specialLinear_fixed ha hk t b v).mpr hv
-  exact ⟨x, ℓ, hℓ, by rwa [hx]⟩
 
 end BostConjecture.Geometry

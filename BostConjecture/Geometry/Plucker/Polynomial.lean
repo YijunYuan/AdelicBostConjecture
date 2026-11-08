@@ -10,6 +10,7 @@ public import BostConjecture.Geometry.Determinant.Coordinates
 public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basis
 public import Mathlib.Algebra.MvPolynomial.Funext
 public import Mathlib.LinearAlgebra.SpecialLinearGroup
+public import BostConjecture.InvariantTheory.Polynomial.Action
 
 /-!
 # Actual polynomial pullback along the Plücker map

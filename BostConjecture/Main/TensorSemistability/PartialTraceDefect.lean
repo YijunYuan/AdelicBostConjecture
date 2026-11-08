@@ -116,12 +116,6 @@ theorem isSymmetric_sub_real_smul_id (T : Module.End ℂ U) (hT : T.IsSymmetric)
     inner_sub_left, inner_sub_right, inner_smul_left, inner_smul_right, hT x y,
     Complex.conj_ofReal]
 
-/-- The scalar defect is traceless when the scalar is its normalized trace. -/
-theorem trace_sub_scalar_id (T : Module.End ℂ U) (a : ℂ)
-    (hT : LinearMap.trace ℂ U T = a * (Module.finrank ℂ U : ℂ)) :
-    LinearMap.trace ℂ U (T - a • LinearMap.id) = 0 := by
-  simp [hT]
-
 omit [FiniteDimensional ℂ U] in
 /-- A traceless scalar defect has the same pairing with its operator as with itself. -/
 theorem trace_comp_sub_scalar_id (T : Module.End ℂ U) (a : ℂ)

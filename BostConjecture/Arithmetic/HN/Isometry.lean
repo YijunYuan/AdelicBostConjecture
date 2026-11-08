@@ -5,9 +5,11 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Arithmetic.HN.Unique
 public import BostConjecture.Arithmetic.Submodule.Isometry
 public import BostConjecture.Slope.Equivariance
+public import BostConjecture.Arithmetic.HN.Subspace
+public import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
+public import Mathlib.Data.Nat.Factorial.DoubleFactorial
 
 /-!
 # Isometric invariance of the intrinsic HN filtration

@@ -7,7 +7,6 @@ module
 
 public import BostConjecture.Arithmetic.Determinant.Line
 public import BostConjecture.Geometry.Determinant.Coordinates
-public import Mathlib.Analysis.InnerProductSpace.GramMatrix
 
 /-!
 # The complex determinant metric

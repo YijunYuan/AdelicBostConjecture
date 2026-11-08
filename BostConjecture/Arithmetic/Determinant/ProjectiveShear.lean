@@ -7,7 +7,6 @@ module
 
 public import BostConjecture.Arithmetic.Determinant.Shear
 public import BostConjecture.Arithmetic.Determinant.Line
-public import Mathlib.LinearAlgebra.Dimension.Localization
 public import Mathlib.LinearAlgebra.TensorProduct.Prod
 
 /-!

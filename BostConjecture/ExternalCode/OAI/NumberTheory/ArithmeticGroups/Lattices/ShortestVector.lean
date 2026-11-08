@@ -14,10 +14,6 @@ module
 
 public import Mathlib.Analysis.Normed.Module.Basic
 public import Mathlib.Topology.Algebra.OpenSubgroup
-public import Mathlib.Topology.MetricSpace.ProperSpace
-public import Mathlib.Algebra.Order.Round
-public import Mathlib.LinearAlgebra.Span.Defs
-public import Mathlib.Tactic.Linarith
 
 /-!
 # Shortest Vector
@@ -83,23 +79,6 @@ theorem shortest_vector_scalar_is_integer
     exact (not_lt_of_ge (hmin _ hzmem hne)) hnorm
   have he : t - (m : ℝ) = 0 := (smul_eq_zero.mp hz).resolve_right hv0
   exact ⟨m, sub_eq_zero.mp he⟩
-
-theorem shortest_vector_line_intersection
-    {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
-    (Λ : Submodule ℤ E) {v : E} (hv : v ∈ Λ) (hv0 : v ≠ 0)
-    (hmin : ∀ x ∈ Λ, x ≠ 0 → ‖v‖ ≤ ‖x‖) :
-    (Submodule.span ℝ ({v} : Set E)).restrictScalars ℤ ⊓ Λ = Submodule.span ℤ {v} := by
-  classical
-  apply le_antisymm
-  · intro x hx
-    obtain ⟨t, rfl⟩ := Submodule.mem_span_singleton.mp hx.1
-    obtain ⟨m, rfl⟩ := shortest_vector_scalar_is_integer Λ hv hv0 hmin t hx.2
-    exact Submodule.mem_span_singleton.mpr ⟨m, by simp only [Int.cast_smul_eq_zsmul]⟩
-  · apply Submodule.span_le.mpr
-    intro x hx
-    have he : x = v := Set.mem_singleton_iff.mp hx
-    rw [he]
-    exact ⟨Submodule.mem_span_singleton_self v, hv⟩
 
 end
 

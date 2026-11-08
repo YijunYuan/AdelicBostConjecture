@@ -8,9 +8,7 @@ module
 public import BostConjecture.InvariantTheory.ComplexClosure.IntegralLifting
 public import BostConjecture.InvariantTheory.ComplexClosure.FiniteFiber
 public import BostConjecture.InvariantTheory.ComplexClosure.Coordinates
-public import Mathlib.RingTheory.Polynomial.UniqueFactorization
 public import Mathlib.RingTheory.Polynomial.RationalRoot
-public import Mathlib.Topology.Sequences
 
 /-!
 # Polynomial normalization maps on complex points

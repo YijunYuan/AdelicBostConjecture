@@ -160,18 +160,6 @@ theorem slope_rescale (h : HermitianMetric K M)
     (h.rescale t).slope = h.slope - t := by
   rw [slope, slope, degree_rescale, sub_div, mul_div_cancel_left₀ t (Nat.cast_ne_zero.mpr hr)]
 
-/-- Rescaling by the original slope produces a bundle of slope zero. -/
-theorem slope_rescale_self (h : HermitianMetric K M)
-    (hr : Module.finrank K (K ⊗[𝓞 K] M) ≠ 0) : (h.rescale h.slope).slope = 0 := by
-  rw [slope_rescale h hr, sub_self]
-
-/-- Degree scaling for every actual integral submodule of a Hermitian bundle. -/
-theorem degree_submodule_rescale (h : HermitianMetric K M)
-    (P : Submodule (𝓞 K) M) (t : ℝ) :
-    ((h.rescale t).submodule P).degree = (h.submodule P).degree -
-      (Module.finrank K (K ⊗[𝓞 K] P) : ℝ) * t := by
-  rw [submodule_rescale, degree_rescale]
-
 /-- Every positive-rank submodule's slope decreases by the same parameter. -/
 theorem slope_submodule_rescale (h : HermitianMetric K M)
     (P : Submodule (𝓞 K) M) (hr : Module.finrank K (K ⊗[𝓞 K] P) ≠ 0) (t : ℝ) :

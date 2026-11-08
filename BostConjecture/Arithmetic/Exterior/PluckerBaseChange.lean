@@ -6,8 +6,8 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Arithmetic.Submodule.IntegralSubspace
-public import BostConjecture.Arithmetic.Exterior.Metric
 public import BostConjecture.Arithmetic.Exterior.PluckerRecovery
+public import BostConjecture.ExternalCode.MathlibPRs.PR40948.LinearAlgebra.ExteriorPower.BaseChange
 
 /-!
 # Generic images of integral determinant sections
@@ -27,11 +27,6 @@ namespace BostConjecture.Arithmetic
 
 variable {K : Type*} [Field K] [NumberField K]
 variable {M : Type*} [AddCommGroup M] [Module (𝓞 K) M]
-
-@[simp]
-lemma integralPartGenericEquiv_tmul (X : Submodule K (K ⊗[𝓞 K] M))
-    (a : K) (x : integralPart X) :
-    (integralPartGenericEquiv X (a ⊗ₜ[𝓞 K] x) : K ⊗[𝓞 K] M) = a ⊗ₜ[𝓞 K] (x : M) := rfl
 
 /-- Generic scalar extension of an integral exterior inclusion lies in the
 exterior image of the original generic subspace. -/

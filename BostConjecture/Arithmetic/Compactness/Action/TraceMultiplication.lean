@@ -52,12 +52,6 @@ lemma traceMul_section (h : HermitianMetric K M) (a : 𝓞 K) (x : M) :
     h.traceMul a (h.traceSection x) = h.traceSection (a • x) := by
   simpa only [realTensorEquiv_tmul, one_smul] using h.traceMul_realTensorEquiv a 1 x
 
-/-- The real extension preserves the actual integral lattice. -/
-lemma traceMul_mem_traceLattice (h : HermitianMetric K M) (a : 𝓞 K)
-    {z : h.TraceSpace} (hz : z ∈ h.traceLattice) : h.traceMul a z ∈ h.traceLattice := by
-  obtain ⟨x, rfl⟩ := hz
-  exact ⟨a • x, (h.traceMul_section a x).symm⟩
-
 /-- The transported action has the prescribed scalar action in each actual fiber. -/
 lemma traceInclusion_traceMul (h : HermitianMetric K M) (a : 𝓞 K)
     (z : h.TraceSpace) (σ : K →+* ℂ) :

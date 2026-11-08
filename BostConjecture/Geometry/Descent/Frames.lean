@@ -6,7 +6,6 @@ Authors: Yijun Yuan
 module
 
 public import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
-public import Mathlib.LinearAlgebra.Dimension.Free
 
 /-!
 # Principal frames for finite projective modules

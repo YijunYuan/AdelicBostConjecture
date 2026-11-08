@@ -6,12 +6,10 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.InvariantTheory.SpecialLinear.LocalizationDetection
-public import Mathlib.LinearAlgebra.Matrix.MvPolynomial
 public import Mathlib.Analysis.SpecialFunctions.Complex.Circle
 public import BostConjecture.Balanced.PolarLog
 public import Mathlib.Analysis.CStarAlgebra.Matrix
 public import Mathlib.Analysis.Matrix.Spectrum
-public import Mathlib.Order.Interval.Set.Infinite
 
 /-!
 # Polynomial detection on compact unitary groups

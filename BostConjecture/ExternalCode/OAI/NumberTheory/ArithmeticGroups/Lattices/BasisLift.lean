@@ -12,8 +12,18 @@ This file has been modified for Lean 4.35 module visibility.
 -/
 module
 
-public import BostConjecture.ExternalCode.OAI.NumberTheory.ArithmeticGroups.Lattices.ProjectedLattice
 public import Mathlib.LinearAlgebra.Basis.Prod
+public import Mathlib.Algebra.Order.Algebra
+public import Mathlib.Algebra.Order.BigOperators.Expect
+public import Mathlib.Algebra.Order.Field.Power
+public import Mathlib.Analysis.Complex.Order
+public import Mathlib.Data.EReal.Inv
+public import Mathlib.Data.Nat.Totient
+public import Mathlib.Data.Sym.Sym2.Init
+public import Mathlib.LinearAlgebra.DFinsupp
+public import Mathlib.Logic.Equiv.PartialEquiv
+public import Mathlib.Tactic.ContinuousFunctionalCalculus
+public import Mathlib.Tactic.NormNum.GCD
 
 /-!
 # Basis Lift

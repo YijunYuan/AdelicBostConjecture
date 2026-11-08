@@ -42,13 +42,4 @@ theorem IsStable.eventually_isStable_normalized {h : HermitianMetric K M}
   exact isStable_of_fiberNorm_compare hgap ht.le hsmall hg0
     (fun σ x => (hg σ x).1) (fun σ x => (hg σ x).2)
 
-/-- The strictly stable locus is open in the subspace of normalized actual metrics. -/
-theorem isOpen_isStable_normalized :
-    IsOpen {h : {h : HermitianMetric K M // h.degree = 0} | h.val.IsStable} := by
-  apply isOpen_iff_mem_nhds.mpr
-  intro h hh
-  have he := hh.eventually_isStable_normalized h.property
-  have ht := (continuous_subtype_val.continuousAt (x := h)).eventually he
-  exact ht.mono fun g hg => hg g.property
-
 end BostConjecture.Arithmetic.HermitianMetric

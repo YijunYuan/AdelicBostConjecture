@@ -12,7 +12,7 @@ See CONTRIBUTIONS.md for the local changes and consumers.
 -/
 module
 
-public import BostConjecture.Specht.Tableau.Standard
+public import BostConjecture.Specht.Tableau.Basic
 
 /-!
 # Garnir sets in the enumerating-tableau model

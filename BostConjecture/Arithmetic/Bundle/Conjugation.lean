@@ -98,13 +98,6 @@ lemma fiberConjugate_section (σ : K →+* ℂ) (x : M) :
   change star (1 : ℂ) • fiberSection M (ComplexEmbedding.conjugate σ) x = _
   simp
 
-@[simp]
-lemma fiberConjugate_symm_section (σ : K →+* ℂ) (x : M) :
-    (fiberConjugate M σ).symm (fiberSection M (ComplexEmbedding.conjugate σ) x) =
-      fiberSection M σ x := by
-  apply (fiberConjugate M σ).injective
-  simp
-
 variable {M}
 
 /-- Fiber conjugation commutes with every integral linear map. -/

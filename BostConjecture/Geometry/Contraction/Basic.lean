@@ -7,6 +7,7 @@ module
 
 public import BostConjecture.Geometry.Descent.Permutation
 public import BostConjecture.Tensor.Dual.Regroup
+public import BostConjecture.Tensor.Dual.Evaluation
 
 /-!
 # The canonical integral restricted tensor pairing

@@ -7,7 +7,6 @@ module
 
 public import BostConjecture.Specht.Lattice.Covariance
 public import Mathlib.LinearAlgebra.PiTensorProduct.Basis
-public import Mathlib.LinearAlgebra.Matrix.ToLin
 
 /-!
 # Rectangular Specht vectors in tensor powers
@@ -71,17 +70,5 @@ theorem map_tensorCoordinates_symm_of_mem_span (hk : 0 < k)
   rw [tensorCoordinates_map, LinearEquiv.apply_symm_apply, map_smul,
     LinearEquiv.apply_symm_apply]
   exact Specht.wordTensorAction_of_mem_span hk t _ hx
-
-/-- Transition between two frames acts on the rectangular realization by the
-corresponding determinant power. This is the overlap identity for gluing. -/
-theorem tensorCoordinates_symm_change_basis (hk : 0 < k)
-    (t : OAI.Saxl.Tableau n (Specht.rectangle a k))
-    (b c : Basis (Fin a) R M) {x : (Fin n → Fin a) → R}
-    (hx : x ∈ Submodule.span R (Set.range fun y : Specht.orbitLattice t =>
-      fun w => (y.val ((Specht.rectangleAlphabetEquiv hk).symm w) : R))) :
-    (tensorCoordinates n b).symm x =
-      (LinearMap.toMatrix b c (LinearMap.id : M →ₗ[R] M)).det ^ k •
-        (tensorCoordinates n c).symm x := by
-  simpa using map_tensorCoordinates_symm_of_mem_span hk t b c LinearMap.id hx
 
 end BostConjecture.Geometry

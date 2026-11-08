@@ -7,9 +7,7 @@ module
 
 public import BostConjecture.Arithmetic.Bundle.RestrictionOfScalars
 public import BostConjecture.Arithmetic.Degree.ArchimedeanFiniteness
-public import BostConjecture.Arithmetic.Bundle.Conjugation
 public import Mathlib.Algebra.Module.ZLattice.Basic
-public import Mathlib.LinearAlgebra.TensorProduct.Basis
 
 /-!
 # The real trace space of a Hermitian module

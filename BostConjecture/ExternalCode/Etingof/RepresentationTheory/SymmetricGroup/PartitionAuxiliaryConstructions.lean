@@ -8,7 +8,6 @@ module
 /- Ported to Lean 4.35.0 for BostConjecture; see the project's CONTRIBUTIONS.md. -/
 
 public import Mathlib.Combinatorics.Enumerative.Partition.Basic
-public import BostConjecture.ExternalCode.Etingof.RepresentationTheory.Alignment.Attribute
 
 /-!
 # Standard tableaux indexed by partitions

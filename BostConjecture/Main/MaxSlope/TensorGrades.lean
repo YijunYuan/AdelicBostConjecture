@@ -7,6 +7,7 @@ module
 
 public import BostConjecture.Main.MaxSlope.TensorFlag
 public import BostConjecture.Main.MaxSlope.QuotientTransport
+public import BostConjecture.Main.MaxSlope.LowerBound
 
 /-!
 # The actual integral grades of the HN tensor refinement

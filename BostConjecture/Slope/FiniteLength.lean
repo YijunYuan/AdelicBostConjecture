@@ -5,8 +5,8 @@ Authors: Yijun Yuan
 -/
 module
 
-public import HarderNarasimhan.Filtration.Exists
 public import HarderNarasimhan.PayoffFunction.NashEquilibrium
+public import HarderNarasimhan.PayoffFunction.Semistable.Breakpoints
 
 /-!
 # Ordinary slope inequalities in finite-length HN games

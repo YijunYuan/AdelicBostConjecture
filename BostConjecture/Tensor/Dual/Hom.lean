@@ -8,6 +8,7 @@ module
 public import BostConjecture.Tensor.Algebra.Regroup
 public import BostConjecture.Tensor.Dual.Evaluation
 public import Mathlib.LinearAlgebra.Contraction
+public import Mathlib.LinearAlgebra.PiTensorProduct.Dual
 
 /-!
 # Canonical Hom duality and tensor-power evaluation
@@ -41,15 +42,6 @@ theorem homDualEquiv_tmul (v : V) (ℓ : Dual R W) (A : V →ₗ[R] W) :
   obtain ⟨z, rfl⟩ := (dualTensorHomEquiv R V W).surjective A
   induction z using TensorProduct.inductionOn with
   | tmul f w => simp [homDualEquiv, mul_comm]
-  | add x y hx hy => simp only [map_add, LinearMap.add_apply, hx, hy]
-
-/-- Pullback on Hom acts by the source map and target dual map on this tensor. -/
-theorem homDualEquiv_pullback (h : V →ₗ[R] V) (g : W →ₗ[R] W)
-    (z : V ⊗[R] Dual R W) (A : V →ₗ[R] W) :
-    homDualEquiv R V W (TensorProduct.map h g.dualMap z) A =
-      homDualEquiv R V W z (g ∘ₗ A ∘ₗ h) := by
-  induction z using TensorProduct.inductionOn with
-  | tmul v ℓ => simp
   | add x y hx hy => simp only [map_add, LinearMap.add_apply, hx, hy]
 
 variable {ι : Type*} [Fintype ι]

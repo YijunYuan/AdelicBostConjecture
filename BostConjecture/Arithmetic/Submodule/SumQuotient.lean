@@ -6,7 +6,6 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Arithmetic.Submodule.NestedQuotient
-public import Mathlib.LinearAlgebra.Isomorphisms
 
 /-!
 # The actual sum quotient of two integral submodules

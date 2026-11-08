@@ -131,14 +131,6 @@ theorem extendPrefixWord_comp (ht : IsStandard t) (hm : m ≤ n)
   · simp [Function.comp_apply, prefixPerm_of_le hm g i (le_of_not_gt hi),
       extendPrefixWord_of_le ht hm _ i (le_of_not_gt hi)]
 
-/-- The coefficient restriction intertwines the actual integral position actions. -/
-theorem prefixSlice_wordRepInt (ht : IsStandard t) (hm : m ≤ n)
-    (g : Equiv.Perm (Fin m)) (x : (Fin n → Fin (μ.colLen 0)) → ℤ) :
-    prefixSlice ht hm (wordRepInt n (μ.colLen 0) (prefixPerm hm g) x) =
-      wordRepInt m ((prefixShape ht m hm).colLen 0) g (prefixSlice ht hm x) := by
-  ext w
-  exact congrArg x (extendPrefixWord_comp ht hm w g).symm
-
 /-- Column permutations of the smaller tableau extend to column permutations of the original. -/
 def prefixColumnGroup (ht : IsStandard t) (hm : m ≤ n)
     (g : columnGroup (prefixTableau ht m hm)) : columnGroup t :=
@@ -221,24 +213,6 @@ theorem prefixSlice_polytabloidInt (ht : IsStandard t) (hm : m ≤ n) :
     have he := polytabloidInt_rowWord_column (prefixTableau ht m hm) q
     rw [hq, hz] at he
     exact (Units.ne_zero (Equiv.Perm.sign q.val)) he.symm
-
-/-- Every vector of the smaller integral orbit lattice has an integral lift. -/
-theorem orbitLattice_le_map_prefixSlice (ht : IsStandard t) (hm : m ≤ n) :
-    orbitLattice (prefixTableau ht m hm) ≤ (orbitLattice t).map (prefixSlice ht hm) := by
-  rw [orbitLattice, Submodule.span_le]
-  rintro _ ⟨g, rfl⟩
-  exact ⟨wordRepInt n (μ.colLen 0) (prefixPerm hm g) (polytabloidInt t),
-    orbit_mem_orbitLattice t _, by rw [prefixSlice_wordRepInt, prefixSlice_polytabloidInt]⟩
-
-/-- The prefix central action has the expected scalar after coefficient restriction.
-This is an identity of slices, not an eigenvector assertion in the full Specht module. -/
-theorem prefixSlice_central_polytabloidInt (ht : IsStandard t) (hm : m ≤ n) :
-    prefixSlice ht hm
-      (∑ j : Fin m, ∑ i ∈ Finset.Iio j,
-        wordRepInt n (μ.colLen 0) (prefixPerm hm (Equiv.swap i j)) (polytabloidInt t)) =
-      diagramContent (prefixShape ht m hm) • polytabloidInt (prefixTableau ht m hm) := by
-  simp only [map_sum, prefixSlice_wordRepInt, prefixSlice_polytabloidInt]
-  exact sum_wordRepInt_polytabloid_eq_content (prefixTableau_isStandard ht m hm)
 
 /-- Column standardness bounds the row assigned to the largest label in every nonzero term. -/
 theorem ColumnStandard.last_row_le_of_polytabloidInt_ne_zero

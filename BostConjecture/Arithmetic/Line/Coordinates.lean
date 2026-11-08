@@ -5,10 +5,9 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Arithmetic.Line.Degree
-public import Mathlib.LinearAlgebra.TensorProduct.Basic
-public import Mathlib.Tactic.FieldSimp
-public import Mathlib.Tactic.LinearCombination
+public import Mathlib.MeasureTheory.Integral.Bochner.Basic
+public import Mathlib.NumberTheory.NumberField.Basic
+public import Mathlib.RingTheory.FractionalIdeal.Operations
 
 /-!
 # Integral coefficient ideals of lines
@@ -55,11 +54,6 @@ lemma coordinateIdeal_smul (f : M →ₗ[𝓞 K] K) (a : K) :
   · rintro ⟨y, ⟨m, rfl⟩, rfl⟩
     exact ⟨m, rfl⟩
 
-/-- An injective coordinate presents the integral module as its coefficient ideal. -/
-def coordinateEquiv (f : M →ₗ[𝓞 K] K) (hf : Function.Injective f) :
-    M ≃ₗ[𝓞 K] coordinateIdeal f :=
-  LinearEquiv.ofInjective f hf
-
 lemma coordinateIdeal_ne_zero [Nontrivial M]
     (f : M →ₗ[𝓞 K] K) (hf : Function.Injective f) : coordinateIdeal f ≠ 0 := by
   intro heq
@@ -68,16 +62,6 @@ lemma coordinateIdeal_ne_zero [Nontrivial M]
   rw [heq] at hx'
   have hzero : f x = 0 := by simpa only [FractionalIdeal.mem_zero_iff] using hx'
   exact hx (hf (by simpa using hzero))
-
-/-- Product-formula cancellation for the coefficient ideal of an actual integral
-module under a change of generic coordinate. -/
-theorem coordinateIdeal_degree_smul [Nontrivial M]
-    (f : M →ₗ[𝓞 K] K) (hf : Function.Injective f)
-    (ρ : InfinitePlace K → ℝ) (hρ : ∀ v, 0 < ρ v) {a : K} (ha : a ≠ 0) :
-    lineDegree (coordinateIdeal (a⁻¹ • f)) (fun v => v a * ρ v) =
-      lineDegree (coordinateIdeal f) ρ := by
-  rw [coordinateIdeal_smul]
-  exact lineDegree_changeSection _ (coordinateIdeal_ne_zero f hf) ρ hρ ha
 
 omit [Module.Finite (𝓞 K) M] in
 /-- Clear denominators in a line coordinate to compare two integral sections. -/

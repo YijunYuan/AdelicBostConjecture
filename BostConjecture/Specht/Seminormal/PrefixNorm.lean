@@ -5,7 +5,7 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Specht.Seminormal.AdjacentPath
+public import BostConjecture.Specht.Tableau.Prefix
 
 /-!
 # The explicit prefix insertion product
@@ -22,7 +22,6 @@ noncomputable section
 namespace BostConjecture.Specht
 
 open OAI.Saxl
-open scoped StandardColex
 
 variable {n : ℕ} {μ : YoungDiagram}
 
@@ -102,9 +101,6 @@ theorem prefixInsertionFactor_pos {t : Tableau n μ} (ht : IsStandard t) (m : Fi
   have hd : (2 : ℝ) ≤ prefixAxialDistance t m r := by
     exact_mod_cast two_le_prefixAxialDistance ht m r (Finset.mem_range.mp hr)
   exact div_pos (by linarith) (by linarith)
-
-theorem prefixNormProduct_pos {t : Tableau n μ} (ht : IsStandard t) :
-    0 < prefixNormProduct t := Finset.prod_pos (fun m _ => prefixInsertionFactor_pos ht m)
 
 /-- Consecutive prefixes differ by the row of the intervening label. -/
 theorem prefixRowCount_succ (t : Tableau n μ) (i j : Fin n)

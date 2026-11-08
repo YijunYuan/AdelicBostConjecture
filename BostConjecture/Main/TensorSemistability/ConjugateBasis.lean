@@ -5,7 +5,8 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Balanced.ProjectionTrace
+public import Mathlib.Analysis.InnerProductSpace.PiL2
+public import Mathlib.Tactic.Positivity.Finset
 
 /-!
 # Orthonormal bases transported by conjugate-linear isometries

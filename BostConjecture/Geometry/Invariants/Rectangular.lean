@@ -7,7 +7,6 @@ module
 
 public import BostConjecture.Geometry.Invariants.RectangularSpan
 public import Mathlib.LinearAlgebra.SpecialLinearGroup
-public import Mathlib.FieldTheory.IsAlgClosed.Basic
 
 /-!
 # Rectangular special-linear invariant tensors over algebraically closed fields

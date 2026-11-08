@@ -5,8 +5,7 @@ Authors: Yijun Yuan
 -/
 module
 
-public import Mathlib.Analysis.InnerProductSpace.Projection.FiniteDimensional
-public import Mathlib.LinearAlgebra.Isomorphisms
+public import Mathlib.Analysis.InnerProductSpace.Projection.Submodule
 
 /-!
 # Orthogonal representatives of a linear surjection
@@ -85,9 +84,6 @@ def core (f : E →ₗ[ℂ] F) (hf : Function.Surjective f) :
   letI := NormedAddCommGroup.induced F E (lift f hf) (lift_injective f hf)
   letI := InnerProductSpace.induced (lift f hf)
   exact InnerProductSpace.toCore
-
-lemma core_inner (f : E →ₗ[ℂ] F) (hf : Function.Surjective f) (x y : F) :
-    (core f hf).inner x y = inner ℂ (lift f hf x) (lift f hf y) := rfl
 
 /-- Orthogonal lifts commute with an isometric inclusion whose image contains
 the kernel of the ambient quotient. -/

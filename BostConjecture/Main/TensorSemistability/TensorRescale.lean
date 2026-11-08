@@ -5,8 +5,8 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Main.TensorSemistability.Extensions
 public import BostConjecture.Arithmetic.Tensor.Compatibility
+public import BostConjecture.Arithmetic.Bundle.Scaling
 
 /-!
 # Uniform rescaling of the actual Hilbert tensor metric

@@ -76,15 +76,6 @@ theorem exp_tensorSum (H : Module.End ℂ U) (J : Module.End ℂ W)
   simp [mul_add, Real.exp_add, TensorProduct.smul_tmul', TensorProduct.tmul_smul,
     smul_smul, mul_comm]
 
-theorem convexOn_exterior_tensor_exp_norm_sq
-    (H : Module.End ℂ U) (J : Module.End ℂ W) (hH : H.IsSymmetric) (hJ : J.IsSymmetric)
-    (s : ℕ) (z : ⋀[ℂ]^s (U ⊗[ℂ] W)) :
-    ConvexOn ℝ Set.univ (fun t : ℝ => ‖exteriorPower.map s
-      (TensorProduct.map (NormedSpace.exp (t • LinearMap.toContinuousLinearMap H)).toLinearMap
-        (NormedSpace.exp (t • LinearMap.toContinuousLinearMap J)).toLinearMap) z‖ ^ 2) := by
-  simpa only [exp_tensorSum H J hH hJ] using
-    convexOn_exterior_exp_norm_sq _ (isSymmetric_tensorSum H J hH hJ) s z
-
 /-- Balanced Plücker vectors have norm at least one along every traceless Hermitian tensor flow. -/
 theorem IsBalanced.one_le_plucker_norm_sq_tensor_exp {s : ℕ}
     {S : Submodule ℂ (U ⊗[ℂ] W)} (hS : IsBalanced S)

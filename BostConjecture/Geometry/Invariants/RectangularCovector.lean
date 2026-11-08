@@ -5,8 +5,7 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Geometry.Tensor.Permutation
-public import BostConjecture.Specht.Lattice.Norm
+public import BostConjecture.Geometry.Tensor.FreeEmbedding
 
 /-!
 # The bilinear covector of the rectangular polytabloid

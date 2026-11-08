@@ -5,10 +5,8 @@ Authors: Yijun Yuan
 -/
 module
 
-public import Mathlib.Algebra.MvPolynomial.Eval
 public import Mathlib.LinearAlgebra.Matrix.SpecialLinearGroup
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
-public import Mathlib.RingTheory.FiniteType
 
 /-!
 # Coordinates of a pair of special linear groups
@@ -42,9 +40,6 @@ def specialLinearPairIdeal : Ideal (MvPolynomial ((ι × ι) ⊕ (κ × κ)) K) 
 /-- The affine coordinate algebra of a pair of special linear groups. -/
 abbrev SpecialLinearPairCoordinateRing :=
   MvPolynomial ((ι × ι) ⊕ (κ × κ)) K ⧸ specialLinearPairIdeal K ι κ
-
-instance : Algebra.FiniteType K (SpecialLinearPairCoordinateRing K ι κ) :=
-  Algebra.FiniteType.quotient K _
 
 variable {K ι κ} {A : Type*} [CommRing A] [Algebra K A]
 
@@ -138,22 +133,6 @@ def specialLinearPairPoint
       (MvPolynomial.X (Sum.inr (i, j))))), specialLinearPair_right_det f⟩)
 
 @[simp]
-theorem specialLinearPairPoint_eval
-    (g : Matrix.SpecialLinearGroup ι A × Matrix.SpecialLinearGroup κ A) :
-    specialLinearPairPoint (specialLinearPairEval (K := K) g) = g := by
-  apply Prod.ext
-  · apply Subtype.ext
-    ext i j
-    exact MvPolynomial.aeval_X (R := K)
-      (Sum.elim (fun ij : ι × ι => g.1 ij.1 ij.2)
-        (fun ij : κ × κ => g.2 ij.1 ij.2)) (Sum.inl (i, j))
-  · apply Subtype.ext
-    ext i j
-    exact MvPolynomial.aeval_X (R := K)
-      (Sum.elim (fun ij : ι × ι => g.1 ij.1 ij.2)
-        (fun ij : κ × κ => g.2 ij.1 ij.2)) (Sum.inr (i, j))
-
-@[simp]
 theorem specialLinearPairEval_point
     (f : SpecialLinearPairCoordinateRing K ι κ →ₐ[K] A) :
     specialLinearPairEval (specialLinearPairPoint f) = f := by
@@ -168,14 +147,5 @@ theorem specialLinearPairEval_point
   obtain ⟨p, rfl⟩ := Ideal.Quotient.mkₐ_surjective K (specialLinearPairIdeal K ι κ) p
   rw [specialLinearPairEval_mk]
   exact DFunLike.congr_fun h p
-
-/-- The coordinate algebra represents pairs of special linear matrices over every algebra. -/
-def specialLinearPairPointEquiv :
-    (SpecialLinearPairCoordinateRing K ι κ →ₐ[K] A) ≃
-      Matrix.SpecialLinearGroup ι A × Matrix.SpecialLinearGroup κ A where
-  toFun := specialLinearPairPoint
-  invFun := specialLinearPairEval
-  left_inv := specialLinearPairEval_point
-  right_inv := specialLinearPairPoint_eval
 
 end BostConjecture.InvariantTheory

@@ -6,7 +6,6 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Arithmetic.Compactness.Topology.MetricComparison
-public import Mathlib.Topology.Compactness.Compact
 
 /-!
 # The topology of intrinsic Hermitian metrics

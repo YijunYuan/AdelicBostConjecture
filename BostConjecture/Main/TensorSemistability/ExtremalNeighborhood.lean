@@ -5,10 +5,9 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Main.TensorSemistability.VariationTopology
 public import BostConjecture.Main.TensorSemistability.Extensions
 public import BostConjecture.Arithmetic.Compactness.Maximum.MaximizingPair
-public import Mathlib.Analysis.Calculus.LocalExtr.Basic
+public import BostConjecture.Arithmetic.Compactness.Topology.StabilityTopology
 
 /-!
 # Actual local degree maxima at strictly stable maximizing pairs

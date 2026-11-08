@@ -12,8 +12,7 @@ This file has been modified for Lean 4.35 module visibility.
 -/
 module
 
-public import BostConjecture.ExternalCode.OAI.NumberTheory.ArithmeticGroups.Lattices.ShortestVector
-public import Mathlib.Analysis.InnerProductSpace.Projection.FiniteDimensional
+public import Mathlib.Analysis.InnerProductSpace.Projection.Basic
 
 /-!
 # Projected Lattice
@@ -114,17 +113,6 @@ theorem projected_lattice_discrete (Λ : Submodule ℤ E) {v : E} (hv : v ∈ Λ
       change ‖v‖ ≤ 2 * ‖w‖ at h
       linarith
   simpa only [he] using Metric.isOpen_ball
-
-theorem projected_lattice_full (Λ : Submodule ℤ E)
-    (hΛ : Submodule.span ℝ (Λ : Set E) = ⊤) (v : E) :
-    Submodule.span ℝ (projectedLattice Λ v : Set (Submodule.span ℝ ({v} : Set E))ᗮ) = ⊤ := by
-  classical
-  rw [projectedLattice, Submodule.map_coe, LinearMap.coe_restrictScalars,
-    ← Submodule.map_span, hΛ, Submodule.map_top]
-  apply LinearMap.range_eq_top.mpr
-  intro y
-  refine ⟨y.val, ?_⟩
-  exact Submodule.orthogonalProjectionOnto_mem_subspace_eq_self y
 
 end
 

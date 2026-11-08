@@ -6,9 +6,6 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Arithmetic.Dual.Fiber
-public import Mathlib.NumberTheory.NumberField.InfinitePlace.Embeddings
-public import Mathlib.Topology.Algebra.Module.FiniteDimension
-public import Mathlib.Analysis.Normed.Operator.Basic
 
 /-!
 # Finiteness of bounded intrinsic integral sections

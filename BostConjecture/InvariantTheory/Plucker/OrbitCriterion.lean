@@ -60,16 +60,4 @@ theorem exists_homogeneousInvariant_of_plucker_semistable
   exact exists_homogeneousInvariant_of_invariant (pluckerRepresentation ℂ U W s)
     hr hr0 (hrx.trans_ne one_ne_zero)
 
-/-- The exact equivalence between orbit-closure and invariant-polynomial semistability. -/
-theorem plucker_semistable_iff_exists_homogeneousInvariant
-    (bU : Basis ι ℂ U) (bW : Basis κ ℂ W) (i₀ : ι) (j₀ : κ) (s : ℕ)
-    (x : ⋀[ℂ]^s (U ⊗[ℂ] W)) :
-    IsGeometricallySemistable (pluckerRepresentation ℂ U W s) x ↔
-      ∃ d : ℕ, 0 < d ∧ ∃ p : homogeneousInvariants (pluckerRepresentation ℂ U W s) d,
-        polynomialEval x (p : SymmetricAlgebra ℂ (Dual ℂ (⋀[ℂ]^s (U ⊗[ℂ] W)))) ≠ 0 := by
-  constructor
-  · exact exists_homogeneousInvariant_of_plucker_semistable bU bW i₀ j₀ s
-  · rintro ⟨d, hd, p, hp⟩
-    exact isGeometricallySemistable_of_homogeneousInvariant _ x (Nat.ne_of_gt hd) p.property hp
-
 end BostConjecture.InvariantTheory

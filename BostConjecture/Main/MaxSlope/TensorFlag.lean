@@ -6,7 +6,7 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Arithmetic.Tensor.Submodule
-public import BostConjecture.Main.MaxSlope.LowerBound
+public import BostConjecture.Arithmetic.HN.Filtration
 
 /-!
 # The actual lexicographic HN tensor steps

@@ -6,6 +6,7 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Specht.Tableau.Colex
+public import BostConjecture.Specht.Branching.LastMurphy
 
 /-!
 # Triangular Murphy action

@@ -7,9 +7,8 @@ module
 
 public import BostConjecture.Arithmetic.Line.Coordinates
 public import Mathlib.RingTheory.Flat.TorsionFree
-public import Mathlib.RingTheory.Localization.BaseChange
 public import Mathlib.LinearAlgebra.TensorProduct.Submodule
-public import Mathlib.LinearAlgebra.TensorProduct.Finiteness
+public import BostConjecture.Arithmetic.Line.Degree
 
 /-!
 # Coefficient ideals of tensor products of integral lines

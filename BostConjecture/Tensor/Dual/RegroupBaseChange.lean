@@ -28,27 +28,6 @@ open scoped TensorProduct
 variable (R S : Type*) [CommRing R] [CommRing S] [Algebra R S]
   {ι κ : Type*} [Finite ι] [Finite κ]
 
-/-- Canonical interchange of finite tensor index sets commutes with extension. -/
-theorem regroup_scalarExtension (P : ι → κ → Type*)
-    [∀ i j, AddCommGroup (P i j)] [∀ i j, Module R (P i j)]
-    (z : ⨂[R] i, ⨂[R] j, P i j) :
-    regroupEquiv S (fun i j => S ⊗[R] P i j)
-      (map (fun i => (baseChangeEquiv R S (P i)).toLinearMap)
-        (scalarExtension R S (fun i => ⨂[R] j, P i j) z)) =
-    map (fun j => (baseChangeEquiv R S (fun i => P i j)).toLinearMap)
-      (scalarExtension R S (fun j => ⨂[R] i, P i j) (regroupEquiv R P z)) := by
-  have h :
-      ((regroupEquiv S (fun i j => S ⊗[R] P i j)).toLinearMap.restrictScalars R) ∘ₗ
-          ((map (fun i => (baseChangeEquiv R S (P i)).toLinearMap)).restrictScalars R) ∘ₗ
-          scalarExtension R S (fun i => ⨂[R] j, P i j) =
-      ((map (fun j => (baseChangeEquiv R S (fun i => P i j)).toLinearMap)).restrictScalars R) ∘ₗ
-          scalarExtension R S (fun j => ⨂[R] i, P i j) ∘ₗ
-          (regroupEquiv R P).toLinearMap := by
-    apply tensorTensor_ext R P
-    intro x
-    simp
-  exact LinearMap.congr_fun h z
-
 variable (E : ι → Type*)
   [∀ i, AddCommGroup (E i)] [∀ i, Module R (E i)]
   [∀ i, Module.Finite R (E i)] [∀ i, Module.Projective R (E i)]

@@ -5,7 +5,12 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Arithmetic.Determinant.Line
+public import Mathlib.CategoryTheory.Category.Init
+public import Mathlib.Combinatorics.Matroid.Init
+public import Mathlib.LinearAlgebra.ExteriorPower.Basis
+public import Mathlib.MeasureTheory.Integral.Bochner.Basic
+public import Mathlib.RingTheory.Finiteness.Projective
+public import Mathlib.Tactic.Positivity.Finset
 
 /-!
 # Perfect exterior duality for finite projective modules
@@ -92,9 +97,5 @@ lemma pairingDual_bijective (n : ℕ) : Function.Bijective (pairingDual R M n) :
 /-- The canonical finite-projective exterior-duality equivalence. -/
 def pairingDualEquiv (n : ℕ) : ⋀[R]^n (Dual R M) ≃ₗ[R] Dual R (⋀[R]^n M) :=
   LinearEquiv.ofBijective (pairingDual R M n) (pairingDual_bijective R M n)
-
-@[simp]
-lemma pairingDualEquiv_apply (n : ℕ) (z : ⋀[R]^n (Dual R M)) :
-    pairingDualEquiv R M n z = pairingDual R M n z := rfl
 
 end exteriorPower

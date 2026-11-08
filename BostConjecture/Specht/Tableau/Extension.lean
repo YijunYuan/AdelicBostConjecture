@@ -5,7 +5,7 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Specht.Branching.LastMurphy
+public import BostConjecture.Specht.Branching.Quotient
 
 /-!
 # Extending a standard tableau at a fixed corner

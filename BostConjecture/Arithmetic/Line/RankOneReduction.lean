@@ -6,7 +6,8 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Arithmetic.Submodule.IntegralSubspace
-public import BostConjecture.Arithmetic.Determinant.IntegralExact
+public import BostConjecture.Arithmetic.Determinant.Exact
+public import Mathlib.RingTheory.Flat.Stability
 
 /-!
 # Saturated rank-one reduction of a projective arithmetic module

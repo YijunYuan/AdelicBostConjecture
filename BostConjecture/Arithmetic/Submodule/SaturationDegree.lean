@@ -7,7 +7,6 @@ module
 
 public import BostConjecture.Arithmetic.Determinant.Contraction
 public import BostConjecture.Arithmetic.Submodule.IntegralSubspace
-public import Mathlib.LinearAlgebra.TensorProduct.Tower
 
 /-!
 # Saturation increases intrinsic degree

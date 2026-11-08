@@ -7,7 +7,6 @@ module
 
 public import BostConjecture.Main.TensorSemistability.MetricVariation
 public import BostConjecture.Balanced.ExponentialDeterminant
-public import BostConjecture.Balanced.ExponentialFlow
 
 /-!
 # Conjugation-compatible exponential changes of metric

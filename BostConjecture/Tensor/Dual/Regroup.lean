@@ -6,7 +6,12 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Tensor.Algebra.Regroup
-public import BostConjecture.Tensor.Dual.Evaluation
+public import BostConjecture.ExternalCode.MathlibPRs.PR44845.LinearAlgebra.PiTensorProduct.Projective
+public import Mathlib.Data.Rat.Cast.Order
+public import Mathlib.Tactic.ContinuousFunctionalCalculus
+public import Mathlib.Tactic.NormNum.Abs
+public import Mathlib.Tactic.NormNum.DivMod
+public import Mathlib.Tactic.NormNum.OfScientific
 
 /-!
 # Regrouping tensor powers of projective dual modules

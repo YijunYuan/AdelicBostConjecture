@@ -7,6 +7,7 @@ module
 
 public import BostConjecture.Arithmetic.Tensor.Compatibility
 public import BostConjecture.Arithmetic.Tensor.ComplexQuotient
+public import BostConjecture.Arithmetic.Submodule.QuotientMetric
 
 /-!
 # Intrinsic quotient tensor metrics

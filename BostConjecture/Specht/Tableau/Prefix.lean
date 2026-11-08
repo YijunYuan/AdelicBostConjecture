@@ -82,9 +82,6 @@ def prefixTableau (ht : IsStandard t) (m : ℕ) (hm : m ≤ n) :
       obtain ⟨i, _, hi⟩ := Finset.mem_image.mp hb
       exact ⟨i, Subtype.ext hi⟩⟩
 
-@[simp] theorem prefixTableau_apply (ht : IsStandard t) (m : ℕ) (hm : m ≤ n)
-    (i : Fin m) : (prefixTableau ht m hm i).val = (t (Fin.castLE hm i)).val := rfl
-
 theorem prefixTableau_isStandard (ht : IsStandard t) (m : ℕ) (hm : m ≤ n) :
     IsStandard (prefixTableau ht m hm) := by
   constructor
@@ -103,35 +100,10 @@ theorem prefixShape_le (ht : IsStandard t) (m : ℕ) (hm : m ≤ n) :
   obtain ⟨i, _, rfl⟩ := Finset.mem_image.mp hb
   exact (t (Fin.castLE hm i)).property
 
-theorem prefixShape_mono (ht : IsStandard t) {m l : ℕ} (hm : m ≤ n) (hl : l ≤ n)
-    (h : m ≤ l) : prefixShape ht m hm ≤ prefixShape ht l hl := by
-  intro b hb
-  have hbμ := prefixShape_le ht m hm hb
-  exact (mem_prefixShape ht l hl ⟨b, hbμ⟩).mpr
-    (((mem_prefixShape ht m hm ⟨b, hbμ⟩).mp hb).trans_le h)
-
-@[simp] theorem tableauContent_prefixTableau (ht : IsStandard t) (m : ℕ) (hm : m ≤ n)
-    (j : Fin m) : tableauContent (prefixTableau ht m hm) j =
-      tableauContent t (Fin.castLE hm j) := rfl
-
 /-- The prefix content sum is computed in the original tableau. -/
 theorem diagramContent_prefixShape (ht : IsStandard t) (m : ℕ) (hm : m ≤ n) :
     diagramContent (prefixShape ht m hm) =
       ∑ j : Fin m, tableauContent t (Fin.castLE hm j) :=
   (sum_tableauContent (prefixTableau ht m hm)).symm
-
-/-- Successive prefix central scalars differ by the new box content. -/
-theorem diagramContent_prefixShape_succ (ht : IsStandard t) (m : ℕ) (hm : m + 1 ≤ n) :
-    diagramContent (prefixShape ht (m + 1) hm) =
-      diagramContent (prefixShape ht m (by omega)) + tableauContent t ⟨m, by omega⟩ := by
-  simp only [diagramContent_prefixShape, Fin.sum_univ_castSucc]
-  rfl
-
-/-- The already checked central action applies to the actual restricted tableau. -/
-theorem sum_murphyOperator_prefixTableau (ht : IsStandard t) (m : ℕ) (hm : m ≤ n) :
-    (∑ j, murphyOperator (prefixTableau ht m hm) j) =
-      ((∑ j : Fin m, tableauContent t (Fin.castLE hm j) : ℤ) : ℝ) •
-        (1 : Module.End ℝ (realSpan (prefixTableau ht m hm))) := by
-  rw [sum_murphyOperator_eq, diagramContent_prefixShape]
 
 end BostConjecture.Specht

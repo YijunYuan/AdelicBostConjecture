@@ -9,6 +9,7 @@ public import BostConjecture.Arithmetic.Exterior.PluckerBaseChange
 public import BostConjecture.Arithmetic.Line.Minkowski
 public import BostConjecture.Arithmetic.Degree.ArchimedeanFiniteness
 public import BostConjecture.Arithmetic.Submodule.SubspaceDegree
+public import BostConjecture.Arithmetic.Exterior.Metric
 
 /-!
 # Finiteness of saturated submodules of bounded degree below

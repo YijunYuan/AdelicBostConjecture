@@ -7,7 +7,6 @@ module
 
 public import BostConjecture.Arithmetic.Bundle.Conjugation
 public import Mathlib.LinearAlgebra.Dual.BaseChange
-public import Mathlib.LinearAlgebra.Contraction
 
 /-!
 # Scalar extension of the intrinsic integral dual

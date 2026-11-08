@@ -91,8 +91,8 @@ operators.** For a finite projective module `M` and `(#ι)!` invertible in `R`, 
 `⨂[R] (_ : ι), M` commutes with every permutation of the tensor factors exactly when it is an
 `R`-linear combination of the operators `f^{⊗ι}` applying one endomorphism `f` in every factor.
 
-One direction is `PiTensorProduct.commute_reindexRepresentation_map`; the substance is the other,
-which says that the diagonal operators already exhaust the commutant. -/
+Diagonal tensor operators commute with factor permutations; conversely, their span
+exhausts the commutant. -/
 theorem mem_span_range_map_const_iff_forall_commute (h : IsUnit ((Fintype.card ι)! : R))
     (T : (⨂[R] _ : ι, M) →ₗ[R] ⨂[R] _ : ι, M) :
     T ∈ Submodule.span R (Set.range fun f : M →ₗ[R] M => map fun _ : ι => f) ↔

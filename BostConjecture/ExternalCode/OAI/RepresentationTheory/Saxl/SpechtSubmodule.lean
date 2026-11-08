@@ -14,9 +14,9 @@ module
 
 public import BostConjecture.ExternalCode.OAI.RepresentationTheory.Saxl.Polytabloid
 public import Mathlib.RepresentationTheory.Irreducible
-public import Mathlib.Algebra.Star.Pi
 public import Mathlib.Analysis.Complex.Basic
 public import Mathlib.LinearAlgebra.Matrix.DotProduct
+public import BostConjecture.ExternalCode.OAI.RepresentationTheory.Saxl.Basic
 
 /-!
 # Irreducibility of the complex Specht submodule

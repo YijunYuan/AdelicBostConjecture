@@ -133,13 +133,4 @@ theorem tensorTensor_ext [Finite ι] {Q : Type*} [AddCommGroup Q] [Module R Q]
     f = g :=
   PiTensorProduct.ext_of_span_eq_top (fun i => span_tprod_eq_top (R := R) (s := P i)) h
 
-/-- Interchanging the two index sets in the opposite order gives the inverse. -/
-theorem regroupEquiv_symm [Finite ι] [Finite κ] :
-    (regroupEquiv R P).symm = regroupEquiv R (fun j i => P i j) := by
-  apply LinearEquiv.toLinearMap_injective
-  apply tensorTensor_ext R (fun j i => P i j)
-  intro x
-  apply (regroupEquiv R P).injective
-  simp
-
 end BostConjecture.Tensor

@@ -6,7 +6,6 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Specht.Lattice.Basis
-public import Mathlib.Analysis.InnerProductSpace.GramSchmidtOrtho
 
 /-!
 # Monic orthogonalization of standard polytabloids
@@ -50,26 +49,6 @@ theorem orthogonalStandardBasis_ne_zero (t : Tableau n μ)
     (u : {u : Tableau n μ // IsStandard u}) : orthogonalStandardBasis t u ≠ 0 :=
   (orthogonalStandardBasis t).ne_zero u
 
-/-- Orthogonalization only uses earlier standard polytabloids. -/
-theorem orthogonalStandardBasis_triangular (t : Tableau n μ)
-    {u v : {u : Tableau n μ // IsStandard u}} (h : u < v) :
-    (standardRealBasis t).repr (orthogonalStandardBasis t u) v = 0 := by
-  simpa only [orthogonalStandardBasis_apply] using gramSchmidt_triangular h (standardRealBasis t)
-
-/-- The coefficient of the original standard polytabloid stays one. -/
-theorem orthogonalStandardBasis_monic (t : Tableau n μ)
-    (u : {u : Tableau n μ // IsStandard u}) :
-    (standardRealBasis t).repr (orthogonalStandardBasis t u) u = 1 := by
-  have h := congrArg (fun x => (standardRealBasis t).repr x u)
-    (gramSchmidt_def'' ℝ (standardRealBasis t) u)
-  simp only [map_add, map_sum, map_smul, Finsupp.add_apply,
-    Finsupp.finsetSum_apply, Finsupp.smul_apply, smul_eq_mul] at h
-  have hz : ∀ v ∈ Finset.Iio u,
-      (standardRealBasis t).repr (gramSchmidt ℝ (standardRealBasis t) v) u = 0 :=
-    fun v hv => gramSchmidt_triangular (Finset.mem_Iio.mp hv) (standardRealBasis t)
-  rw [Finset.sum_eq_zero (fun v hv => by rw [hz v hv, mul_zero]), add_zero] at h
-  simpa only [Basis.repr_self, Finsupp.single_eq_same, orthogonalStandardBasis_apply] using h.symm
-
 /-- The monic recurrence, without normalizing the output vectors to unit length. -/
 theorem orthogonalStandardBasis_eq_sub_sum (t : Tableau n μ)
     (u : {u : Tableau n μ // IsStandard u}) :
@@ -89,15 +68,6 @@ theorem orthogonalStandardBasis_eq_of_isLeast (t : Tableau n μ)
   have he : Finset.Iio u = ∅ := Finset.eq_empty_iff_forall_notMem.mpr
     (fun v hv => hu v (Finset.mem_Iio.mp hv))
   rw [he, Finset.sum_empty, sub_zero]
-
-/-- The basis change is monic triangular and hence has determinant one. -/
-theorem det_orthogonalStandardBasis (t : Tableau n μ) :
-    (standardRealBasis t).det (orthogonalStandardBasis t) = 1 := by
-  classical
-  have ht : ((standardRealBasis t).toMatrix (orthogonalStandardBasis t)).IsUpperTriangular :=
-    fun _ _ h => orthogonalStandardBasis_triangular t h
-  rw [Basis.det_apply, Matrix.det_of_isUpperTriangular ht]
-  simp only [Basis.toMatrix_apply, orthogonalStandardBasis_monic, Finset.prod_const_one]
 
 /-- The original vector and its monic orthogonalization have the same projection
 onto the latter. -/
@@ -136,13 +106,6 @@ theorem det_standard_gram_eq_prod_orthogonal_norm_sq (t : Tableau n μ) :
   rw [o.det_gram_eq_norm_det_sq, gramSchmidtOrthonormalBasis_det, Finset.prod_congr rfl
     (fun u _ => hi u), norm_prod, ← Finset.prod_pow]
   simp only [norm_norm]
-
-/-- The canonical orbit covolume is bounded by the actual orthogonal norm product. -/
-theorem covolume_sq_le_prod_orthogonal_norm_sq (t : Tableau n μ) :
-    ZLattice.covolume (spanLattice t) ^ 2 ≤
-      ∏ u, ‖orthogonalStandardBasis t u‖ ^ 2 := by
-  rw [← det_standard_gram_eq_prod_orthogonal_norm_sq]
-  exact covolume_sq_le_det_standard_gram t
 
 /-- Taking logarithms gives the sum of actual monic orthogonal squared norms. -/
 theorem two_mul_log_covolume_le_sum_log_orthogonal_norm_sq (t : Tableau n μ) :

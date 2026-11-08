@@ -6,7 +6,7 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Specht.Asymptotics.WeightedGap
-public import Mathlib.Analysis.SpecialFunctions.Pow.Asymptotics
+public import BostConjecture.Specht.Asymptotics.BulkNormalizer
 
 /-!
 # Uniform bounds for small gaps in the rectangular bulk
@@ -30,11 +30,6 @@ def occupancyGapProbability (a M A : ℕ) (L : ℝ) : ℝ :=
   (∑ b ∈ (univ : Finset (Occupancy a M A)).filter
     (fun b => ∃ i j : Fin a, i < j ∧ |((b.val j).val : ℝ) - (b.val i).val| ≤ L),
       occupancyWeight b) / (∑ b : Occupancy a M A, occupancyWeight b)
-
-theorem occupancyGapProbability_nonneg (a M A : ℕ) (L : ℝ) :
-    0 ≤ occupancyGapProbability a M A L := by
-  apply div_nonneg <;> apply sum_nonneg <;> intro b _ <;>
-    exact mul_nonneg (sq_nonneg _) (occupancyMass_nonneg b)
 
 theorem staircaseSum_pos {a : ℕ} (ha : 2 ≤ a) : 0 < staircaseSum a := by
   rw [staircaseSum_eq]

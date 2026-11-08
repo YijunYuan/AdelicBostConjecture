@@ -6,8 +6,7 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Arithmetic.RestrictionCovolume.Covolume
-public import Mathlib.LinearAlgebra.Matrix.Kronecker
-public import Mathlib.RingTheory.AlgebraTower
+public import Mathlib.NumberTheory.NumberField.Discriminant.Basic
 
 /-!
 # Discriminant calculation in an integral frame
@@ -151,28 +150,6 @@ lemma norm_det_gram_eq_sectionNorm_sq (σ : K →+* ℂ)
   rw [Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg hn, h.determinantFiber_inner_wedge]
   exact (h.determinant_sectionNorm_wedge_sq σ x).symm
 
-/-- Exact covolume expressed using the determinant norms of an integral frame. -/
-theorem traceCovolume_eq_discr_mul_prod
-    (b : Module.Basis (Fin (Module.finrank K (K ⊗[𝓞 K] M))) (𝓞 K) M) :
-    h.traceCovolume = |(NumberField.discr K : ℝ)| ^
-        ((Module.finrank K (K ⊗[𝓞 K] M) : ℝ) / 2) *
-      ∏ σ : K →+* ℂ, h.determinant.sectionNorm σ (ιMulti (𝓞 K) _ b) := by
-  have hs := h.traceCovolume_sq_eq_discr_mul_prod b
-  simp_rw [h.norm_det_gram_eq_sectionNorm_sq, Finset.prod_pow] at hs
-  have hp : (|(NumberField.discr K : ℝ)| ^
-      ((Module.finrank K (K ⊗[𝓞 K] M) : ℝ) / 2)) ^ 2 =
-      |(NumberField.discr K : ℝ)| ^ Module.finrank K (K ⊗[𝓞 K] M) := by
-    rw [← Real.rpow_mul_natCast (abs_nonneg _)]
-    norm_num [Real.rpow_natCast]
-  have hn : 0 ≤ |(NumberField.discr K : ℝ)| ^
-      ((Module.finrank K (K ⊗[𝓞 K] M) : ℝ) / 2) *
-      ∏ σ : K →+* ℂ, h.determinant.sectionNorm σ (ιMulti (𝓞 K) _ b) :=
-    mul_nonneg (Real.rpow_nonneg (abs_nonneg _) _) (Finset.prod_nonneg fun _ _ =>
-      Real.sqrt_nonneg _)
-  nlinarith [h.traceCovolume_pos, mul_pow
-    (|(NumberField.discr K : ℝ)| ^ ((Module.finrank K (K ⊗[𝓞 K] M) : ℝ) / 2))
-    (∏ σ : K →+* ℂ, h.determinant.sectionNorm σ (ιMulti (𝓞 K) _ b)) 2]
-
 /-- A free integral frame computes the existing intrinsic degree without an index term. -/
 theorem degree_eq_neg_sum_log_of_basis
     (b : Module.Basis (Fin (Module.finrank K (K ⊗[𝓞 K] M))) (𝓞 K) M) :
@@ -193,26 +170,5 @@ theorem degree_eq_neg_sum_log_of_basis
     simpa only [hs] using Nat.card_unique
   rw [h.degree_eq hξ, hq, he]
   simp
-
-/-- The exact restriction-covolume formula for a module with an integral frame. -/
-theorem traceCovolume_eq_discr_degree_of_basis
-    (b : Module.Basis (Fin (Module.finrank K (K ⊗[𝓞 K] M))) (𝓞 K) M) :
-    h.traceCovolume = |(NumberField.discr K : ℝ)| ^
-        ((Module.finrank K (K ⊗[𝓞 K] M) : ℝ) / 2) *
-      Real.exp (-(Module.finrank ℚ K : ℝ) * h.degree) := by
-  rw [h.traceCovolume_eq_discr_mul_prod b, h.degree_eq_neg_sum_log_of_basis b]
-  congr 1
-  have hD : (Module.finrank ℚ K : ℝ) ≠ 0 := by
-    exact_mod_cast (ne_of_gt (Module.finrank_pos (R := ℚ) (M := K)))
-  have ha (s : ℝ) : -(Module.finrank ℚ K : ℝ) * (-s / (Module.finrank ℚ K : ℝ)) = s := by
-    field_simp
-  rw [ha, Real.exp_sum]
-  apply Finset.prod_congr rfl
-  intro σ _
-  apply (Real.exp_log _).symm
-  apply h.determinant.sectionNorm_pos
-  have he := (Geometry.determinantCoordinates b).symm.map_ne_zero_iff.mpr
-    (one_ne_zero : (1 : 𝓞 K) ≠ 0)
-  simpa using he
 
 end BostConjecture.Arithmetic.HermitianMetric

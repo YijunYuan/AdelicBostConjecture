@@ -7,7 +7,6 @@ module
 
 public import BostConjecture.Arithmetic.Dual.Fiber
 public import BostConjecture.Tensor.Dual.Metric
-public import Mathlib.LinearAlgebra.TensorProduct.Finiteness
 
 /-!
 # The intrinsic dual Hermitian metric
@@ -97,37 +96,5 @@ def dual (h : HermitianMetric K M) : HermitianMetric K (Dual (𝓞 K) M) where
     intro σ f g
     simp only [dualFiber_inner, ← fiberConjugate_section (Dual (𝓞 K) M) σ,
       ← h.dualRiesz_conjugate, h.inner_conjugate]
-
-/-- The transported fiber norm equals the complex operator norm. -/
-lemma dualFiber_norm (h : HermitianMetric K M) (σ : K →+* ℂ)
-    (f : ComplexFiber (Dual (𝓞 K) M) σ) :
-    letI : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
-    letI := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber M σ)
-    letI := InnerProductSpace.ofCore
-      (inferInstance : PreInnerProductSpace.Core ℂ (ComplexFiber M σ))
-    Real.sqrt (((h.dual.fiber σ).inner f f).re) =
-      ‖(dualFiberEquiv M σ f).toContinuousLinearMap‖ := by
-  let : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
-  let := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber M σ)
-  let := InnerProductSpace.ofCore (inferInstance : PreInnerProductSpace.Core ℂ (ComplexFiber M σ))
-  exact Tensor.dualCore_norm _ _
-
-/-- Evaluation is bounded on every complex fiber vector. -/
-lemma dual_evaluation_le (h : HermitianMetric K M) (σ : K →+* ℂ)
-    (f : ComplexFiber (Dual (𝓞 K) M) σ) (x : ComplexFiber M σ) :
-    ‖dualFiberEquiv M σ f x‖ ≤
-      Real.sqrt (((h.dual.fiber σ).inner f f).re) *
-        Real.sqrt (((h.fiber σ).inner x x).re) := by
-  let : InnerProductSpace.Core ℂ (ComplexFiber M σ) := h.fiber σ
-  let := InnerProductSpace.Core.toNormedAddCommGroup (𝕜 := ℂ) (F := ComplexFiber M σ)
-  let := InnerProductSpace.ofCore (inferInstance : PreInnerProductSpace.Core ℂ (ComplexFiber M σ))
-  exact Tensor.dualCore_evaluation_le _ _ _
-
-/-- The intrinsic dual metric bounds every integral evaluation at every embedding. -/
-lemma dual_section_evaluation_le (h : HermitianMetric K M) (σ : K →+* ℂ)
-    (f : Dual (𝓞 K) M) (x : M) :
-    ‖σ (f x)‖ ≤ h.dual.sectionNorm σ f * h.sectionNorm σ x := by
-  simpa only [dualFiberEquiv_section, sectionNorm] using
-    h.dual_evaluation_le σ (fiberSection _ σ f) (fiberSection _ σ x)
 
 end BostConjecture.Arithmetic.HermitianMetric

@@ -6,10 +6,8 @@ Authors: Yijun Yuan
 module
 
 public import Mathlib.NumberTheory.NumberField.InfinitePlace.Basic
-public import Mathlib.Analysis.InnerProductSpace.Defs
-public import Mathlib.LinearAlgebra.TensorProduct.Basic
-public import Mathlib.RingTheory.Finiteness.Projective
-public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.CategoryTheory.Category.Init
+public import Mathlib.RingTheory.Flat.Basic
 
 /-!
 # Hermitian metrics on intrinsic arithmetic fibers

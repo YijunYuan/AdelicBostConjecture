@@ -13,6 +13,7 @@ module
 
 public import BostConjecture.ExternalCode.TauCeti.RepresentationTheory.Specht.GarnirSets
 public import BostConjecture.ExternalCode.TauCeti.RepresentationTheory.Specht.Garnir
+public import BostConjecture.Specht.Tableau.Standard
 
 /-!
 # Rational straightening of word polytabloids

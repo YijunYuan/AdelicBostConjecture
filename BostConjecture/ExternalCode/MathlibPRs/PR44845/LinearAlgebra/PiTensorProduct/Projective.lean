@@ -7,12 +7,11 @@ module
 
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.LinearAlgebra.PiTensorProduct.Finite
-public import Mathlib.LinearAlgebra.PiTensorProduct.Dual
 public import BostConjecture.ExternalCode.MathlibPRs.PR44845.LinearAlgebra.PiTensorProduct.DualBaseRing
 
 import Mathlib.LinearAlgebra.Contraction
 import Mathlib.LinearAlgebra.PiTensorProduct.Generators
-import Mathlib.RingTheory.PiTensorProduct
+public import Mathlib.RingTheory.PiTensorProduct
 
 /-!
 # Tensor Products of Families of Projective Modules
@@ -176,9 +175,6 @@ noncomputable def piTensorHomEquiv :
       simp
     simpa [piTensorHomEquiv_of_Fin_tprod]
 
-@[simp]
-lemma piTensorHomEquiv_toLinearMap : (piTensorHomEquiv R P M).toLinearMap = piTensorHomMap := rfl
-
 variable {R P M} in
 @[simp]
 lemma piTensorHomEquiv_apply (f : ⨂[R] i, P i →ₗ[R] M i) :
@@ -198,10 +194,6 @@ noncomputable def dualDistribEquivOfProjective :
     (⨂[R] i, Dual R (P i)) ≃ₗ[R] Dual R (⨂[R] i, P i) :=
   have := Fintype.ofFinite ι
   piTensorHomEquiv R P _ ≪≫ₗ (LinearEquiv.congrRight (constantBaseRingEquiv ι R).toLinearEquiv)
-
-@[simp]
-lemma dualDistribEquivOfProjective_toLinearMap :
-    (dualDistribEquivOfProjective R P).toLinearMap = dualDistrib := rfl
 
 variable {R P} in
 @[simp]

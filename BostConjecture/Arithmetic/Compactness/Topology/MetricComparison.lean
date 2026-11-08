@@ -33,13 +33,6 @@ variable {M : Type*} [AddCommGroup M] [Module (𝓞 K) M]
 def fiberNorm (h : HermitianMetric K M) (σ : K →+* ℂ)
     (x : ComplexFiber M σ) : ℝ := Real.sqrt (((h.fiber σ).inner x x).re)
 
-lemma fiberNorm_nonneg (h : HermitianMetric K M) (σ : K →+* ℂ)
-    (x : ComplexFiber M σ) : 0 ≤ h.fiberNorm σ x := Real.sqrt_nonneg _
-
-@[simp]
-lemma fiberNorm_section (h : HermitianMetric K M) (σ : K →+* ℂ) (x : M) :
-    h.fiberNorm σ (fiberSection M σ x) = h.sectionNorm σ x := rfl
-
 @[simp]
 lemma fiberNorm_rescale (h : HermitianMetric K M) (t : ℝ)
     (σ : K →+* ℂ) (x : ComplexFiber M σ) :
@@ -50,11 +43,6 @@ lemma fiberNorm_rescale (h : HermitianMetric K M) (t : ℝ)
     rw [two_mul, Real.exp_add, pow_two], Real.sqrt_sq (Real.exp_pos _).le]
 
 variable [NumberField K]
-
-@[simp]
-lemma fiberNorm_submodule (h : HermitianMetric K M) (P : Submodule (𝓞 K) M)
-    (σ : K →+* ℂ) (x : ComplexFiber P σ) :
-    (h.submodule P).fiberNorm σ x = h.fiberNorm σ (fiberMap P.subtype σ x) := rfl
 
 variable [Module.Finite (𝓞 K) M] [Module.Projective (𝓞 K) M]
 

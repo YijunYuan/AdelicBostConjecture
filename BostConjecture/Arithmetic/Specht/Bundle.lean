@@ -5,15 +5,16 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Arithmetic.Specht.Representation
-public import BostConjecture.Arithmetic.Representation.ComplexIrreducibleSemistable
+public import BostConjecture.Arithmetic.Bundle.Basic
+public import BostConjecture.Geometry.Tensor.LatticeMetric
+public import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
+public import Mathlib.Data.Nat.Factorial.DoubleFactorial
 
 /-!
 # The canonical arithmetic Specht bundle
 
 The existing integral orbit lattice is extended to the ring of integers.
-The canonical word Gram form defines all of its archimedean metrics, and the
-actual permutation action proves intrinsic semistability.
+The canonical word Gram form defines all of its archimedean metrics.
 
 Reference: this paper, Lemma 6.1, pages 8–9.
 -/
@@ -89,35 +90,6 @@ def latticeMetric (t : OAI.Saxl.Tableau n μ) :
     simp only [Geometry.latticeComplexCore_inner,
       latticeFiberEquiv_conjugate_coeff, star_sum, star_mul, mul_comm]
 
-/-- The actual representation on the ring-of-integers extension of the orbit lattice. -/
-def latticeRepresentation (t : OAI.Saxl.Tableau n μ) :
-    Representation (𝓞 K) (Equiv.Perm (Fin n)) (𝓞 K ⊗[ℤ] orbitLattice t) :=
-  representationBaseChange (𝓞 K) (integralRepresentation t)
-
-/-- The complex arithmetic fiber is the irreducible complex Specht representation. -/
-instance latticeRepresentation_irreducible (t : OAI.Saxl.Tableau n μ) (σ : K →+* ℂ) :
-    Representation.IsIrreducible (complexRepresentation (latticeRepresentation t) σ) := by
-  let : Algebra (𝓞 K) ℂ := (σ.comp (algebraMap (𝓞 K) K)).toAlgebra
-  exact isIrreducible_of_equiv (scalarExtensionRepresentationEquiv (𝓞 K) t)
-
-/-- The action is an isometry in every actual archimedean fiber. -/
-theorem latticeMetric_action_inner (t : OAI.Saxl.Tableau n μ)
-    (g : Equiv.Perm (Fin n)) (σ : K →+* ℂ)
-    (x y : ComplexFiber (𝓞 K ⊗[ℤ] orbitLattice t) σ) :
-    ((latticeMetric t).fiber σ).inner
-      (fiberMap (latticeRepresentation t g) σ x) (fiberMap (latticeRepresentation t g) σ y) =
-        ((latticeMetric t).fiber σ).inner x y := by
-  let : Algebra (𝓞 K) ℂ := (σ.comp (algebraMap (𝓞 K) K)).toAlgebra
-  have he (z : ComplexFiber (𝓞 K ⊗[ℤ] orbitLattice t) σ) :
-      latticeFiberEquiv t σ (fiberMap (latticeRepresentation t g) σ z) =
-        (orbitAction t g).baseChange ℂ (latticeFiberEquiv t σ z) :=
-    LinearMap.congr_fun ((scalarExtensionRepresentationEquiv (𝓞 K) t).isIntertwining' g) z
-  change (Geometry.latticeComplexCore t).inner
-    (latticeFiberEquiv t σ (fiberMap (latticeRepresentation t g) σ x))
-    (latticeFiberEquiv t σ (fiberMap (latticeRepresentation t g) σ y)) =
-      (Geometry.latticeComplexCore t).inner (latticeFiberEquiv t σ x) (latticeFiberEquiv t σ y)
-  simpa only [he, he] using latticeComplexCore_action_inner t g _ _
-
 /-- The generic rank is the rank of the original integral orbit lattice. -/
 theorem lattice_generic_finrank (t : OAI.Saxl.Tableau n μ) :
     Module.finrank K (K ⊗[𝓞 K] (𝓞 K ⊗[ℤ] orbitLattice t)) =
@@ -130,12 +102,5 @@ instance lattice_generic_nontrivial (t : OAI.Saxl.Tableau n μ) :
   let : Nontrivial (orbitLattice t) := Submodule.nontrivial_iff_ne_bot.mpr (orbitLattice_ne_bot t)
   apply Module.nontrivial_of_finrank_pos (R := K)
   simpa only [lattice_generic_finrank] using Module.finrank_pos
-
-/-- The actual canonical arithmetic Specht lattice is semistable. -/
-theorem latticeMetric_isSemistable [NumberField K] (t : OAI.Saxl.Tableau n μ) :
-    (latticeMetric (K := K) t).IsSemistable := by
-  let σ : K →+* ℂ := Classical.choice inferInstance
-  exact (latticeMetric t).isSemistable_of_complex_irreducible
-    (latticeRepresentation t) σ (latticeMetric_action_inner t)
 
 end BostConjecture.Arithmetic.Specht

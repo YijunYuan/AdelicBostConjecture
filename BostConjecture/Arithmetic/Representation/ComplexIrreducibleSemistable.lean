@@ -5,8 +5,9 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Arithmetic.Representation.IrreducibleSemistable
-public import Mathlib.LinearAlgebra.GeneralLinearGroup.Basic
+public import BostConjecture.Arithmetic.HN.Isometry
+public import BostConjecture.Arithmetic.Representation.BaseChange
+public import BostConjecture.Arithmetic.HN.Filtration
 
 /-!
 # Irreducibility at one complex embedding implies semistability
@@ -33,6 +34,12 @@ def complexRepresentation (ρ : Representation (𝓞 K) G M) (σ : K →+* ℂ) 
     Representation ℂ G (ComplexFiber M σ) :=
   let : Algebra (𝓞 K) ℂ := (σ.comp (algebraMap (𝓞 K) K)).toAlgebra
   representationBaseChange ℂ ρ
+
+omit [NumberField K] in
+@[simp]
+lemma complexRepresentation_section (ρ : Representation (𝓞 K) G M)
+    (σ : K →+* ℂ) (g : G) (x : M) :
+    complexRepresentation ρ σ g (fiberSection M σ x) = fiberSection M σ (ρ g x) := rfl
 
 namespace HermitianMetric
 

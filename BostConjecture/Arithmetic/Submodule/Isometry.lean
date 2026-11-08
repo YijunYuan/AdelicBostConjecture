@@ -5,7 +5,10 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Arithmetic.HN.QuotientSemistable
+public import BostConjecture.Arithmetic.Degree.Isometry
+public import BostConjecture.Arithmetic.Submodule.NestedQuotient
+public import BostConjecture.Arithmetic.Submodule.SubspaceDegree
+public import BostConjecture.Arithmetic.Tensor.BinaryMetric
 
 /-!
 # Intrinsic subspace degree under integral isometries

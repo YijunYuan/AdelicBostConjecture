@@ -6,7 +6,6 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Specht.Asymptotics.PrefixNormalizer
-public import Mathlib.Data.Nat.Factorial.BigOperators
 
 /-!
 # Uniform bulk lower bound for the rectangular prefix normalizer

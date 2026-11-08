@@ -123,12 +123,6 @@ theorem finrank_orbitLattice_eq_card_standard (t : Tableau n μ) :
   rw [(latticeEquiv t).finrank_eq, ZLattice.rank ℝ (spanLattice t)]
   exact finrank_eq_card_basis (standardRealBasis t)
 
-/-- The standard Gram determinant bounds the canonical orbit lattice covolume. -/
-theorem covolume_sq_le_det_standard_gram (t : Tableau n μ) :
-    ZLattice.covolume (spanLattice t) ^ 2 ≤ (Matrix.gram ℝ (standardRealBasis t)).det := by
-  classical
-  exact covolume_sq_le_det_gram t (standardRealBasis t) (standardRealBasis_mem_spanLattice t)
-
 /-- The logarithmic standard Gram bound, with its basis and integrality hypotheses discharged. -/
 theorem two_mul_log_covolume_le_log_det_standard_gram (t : Tableau n μ) :
     2 * Real.log (ZLattice.covolume (spanLattice t)) ≤

@@ -6,8 +6,8 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.InvariantTheory.ComplexClosure.Density
-public import BostConjecture.InvariantTheory.ComplexClosure.ConstructibleImage
 public import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
+public import Mathlib.RingTheory.Spectrum.Prime.ConstructibleSet
 
 /-!
 # Euclidean closures of constructible sets of complex points

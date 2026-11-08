@@ -6,7 +6,6 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Specht.Counting.PrefixDistribution
-public import Mathlib.Algebra.BigOperators.Intervals
 
 /-!
 # Closed rectangular prefix normalizer
@@ -157,19 +156,6 @@ theorem rectangle_occupancy_population (a k : ℕ) :
 theorem card_standard_rectangle_pos (a : ℕ) {k : ℕ} (hk : 0 < k) :
     0 < (Fintype.card {T : Tableau (a * k) (rectangle a k) // IsStandard T} : ℝ) := by
   rw [card_standard_rectangle_eq_factorials a hk]
-  positivity
-
-/-- The weighted normalizer is strictly positive throughout the valid prefix range. -/
-theorem sum_occupancyWeight_pos (a : ℕ) {k : ℕ} (hk : 0 < k)
-    (m l : ℕ) (hml : m + l = a * k) :
-    0 < ∑ b : Occupancy a (k + a - 1) (m + staircaseSum a), occupancyWeight b := by
-  rw [sum_occupancyWeight_eq_tableau_count a k m l hml, hml]
-  have hF := card_standard_rectangle_pos a hk
-  have hA : m + staircaseSum a ≤ a * (k + a - 1) := by
-    rw [rectangle_occupancy_population]
-    omega
-  have hC : (0 : ℝ) < ((a * (k + a - 1)).choose (m + staircaseSum a) : ℝ) := by
-    exact_mod_cast Nat.choose_pos hA
   positivity
 
 /-- The actual uniform tableau prefix law is obtained by weighting and sorting

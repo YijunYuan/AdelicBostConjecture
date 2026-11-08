@@ -5,9 +5,7 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Arithmetic.Compactness.Topology.MetricTopology
 public import BostConjecture.Arithmetic.RestrictionCovolume.RealForm
-public import Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Defs
 
 /-!
 # Complex coordinates of actual arithmetic trace frames
@@ -25,7 +23,6 @@ Reference: this paper, page 11, Lemma 7.1.
 noncomputable section
 
 open NumberField TensorProduct Matrix
-
 
 namespace BostConjecture.Arithmetic.HermitianMetric
 

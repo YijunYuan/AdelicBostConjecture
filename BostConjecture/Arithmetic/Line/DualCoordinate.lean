@@ -6,7 +6,7 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Arithmetic.Line.Coordinates
-public import Mathlib.LinearAlgebra.Dual.Lemmas
+public import BostConjecture.Arithmetic.Line.Degree
 
 /-!
 # Inverse coefficient ideals of integral dual lines

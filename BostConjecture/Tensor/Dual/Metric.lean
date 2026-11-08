@@ -6,7 +6,6 @@ Authors: Yijun Yuan
 module
 
 public import Mathlib.Analysis.InnerProductSpace.Dual
-public import Mathlib.Analysis.InnerProductSpace.PiL2
 
 /-!
 # The canonical Hilbert form on the algebraic dual

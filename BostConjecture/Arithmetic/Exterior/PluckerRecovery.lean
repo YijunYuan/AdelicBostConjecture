@@ -6,8 +6,6 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Geometry.Determinant.Coordinates
-public import Mathlib.LinearAlgebra.ExteriorPower.Basis
-public import Mathlib.LinearAlgebra.LinearIndependent.Lemmas
 
 /-!
 # Recovering a subspace from a nonzero determinant vector

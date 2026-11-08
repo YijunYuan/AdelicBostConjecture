@@ -13,8 +13,8 @@ public import Mathlib.LinearAlgebra.Dual.Defs
 
 Selective extraction from Mathlib PR #44845 at commit
 47365e3b9fd4329f058c31ac7aa9565a6036b17d.
-Changed file: extracted the three new declarations into this project-local module;
-proofs and canonical declaration names are unchanged.
+Changed file: extracted the equivalence and its inverse application lemma into this
+project-local module; proofs and canonical declaration names are unchanged.
 
 ## Source
 
@@ -42,9 +42,6 @@ def dualBaseRingEquiv : Dual R R ≃ₗ[R] R := { LinearMap.applyₗ 1 with
 }
 
 variable {R}
-
-@[simp]
-theorem dualBaseRingEquiv_apply (f : Dual R R) : (dualBaseRingEquiv R) f = f 1 := rfl
 
 @[simp]
 theorem dualBaseRingEquiv_symm_apply (x : R) :

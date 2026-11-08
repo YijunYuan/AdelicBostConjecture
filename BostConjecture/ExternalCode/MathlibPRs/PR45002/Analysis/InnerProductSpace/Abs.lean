@@ -12,7 +12,6 @@ module
 
 public import Mathlib.Analysis.InnerProductSpace.StarOrder
 public import Mathlib.Analysis.SpecialFunctions.ContinuousFunctionalCalculus.Rpow.Basic
-public import Mathlib.Analysis.SpecialFunctions.ContinuousFunctionalCalculus.Abs
 public import Mathlib.Analysis.CStarAlgebra.ContinuousLinearMap
 
 /-!
@@ -23,8 +22,8 @@ between (potentially distinct) Hilbert spaces `E` and `F`.
 
 ## Implementation details
 The absolute value `ContinuousLinearMap.abs T` is similar to `CFC.abs T` for a continuous linear
-map `T : E →L[ℂ] E` acting on a Hilbert space `E`. They agree when `E = F`, see the theorem
-`abs_eq_cfcAbs`. However, when `E ≠ F`, the adjoint is no longer a star operation and thus
+map `T : E →L[ℂ] E` acting on a Hilbert space `E`. They agree when `E = F`.
+However, when `E ≠ F`, the adjoint is no longer a star operation and thus
 `CFC.abs T` is no longer defined.
 
 The absolute value `ContinuousLinearMap.abs T` is also known in the literature under the name
@@ -61,23 +60,7 @@ def abs (T : E →L[ℂ] F) : E →L[ℂ] E := CFC.sqrt (T.adjoint ∘L T)
 @[inherit_doc]
 local notation "|" T "|" => abs T
 
-theorem abs_apply (T : E →L[ℂ] F) : |T| = CFC.sqrt (T.adjoint ∘L T) := rfl
-
-@[simp] theorem abs_zero : |(0 : E →L[ℂ] F)| = 0 := by simp [abs]
-@[simp] theorem abs_neg (T : E →L[ℂ] F) : |-T| = |T| := by simp [abs]
 @[simp] theorem abs_nonneg (T : E →L[ℂ] F) : 0 ≤ |T| := by simp [abs]
-@[simp] theorem abs_abs (T : E →L[ℂ] F) : |(|T|)| = |T| := by
-  rw [abs, T.abs_nonneg.isSelfAdjoint.adjoint_eq]
-  exact CFC.sqrt_mul_self |T|
-
-theorem abs_eq_cfcAbs (T : E →L[ℂ] E) : |T| = CFC.abs T := rfl
-
-theorem abs_eq_zero (T : E →L[ℂ] F) : |T| = 0 ↔ T = 0 := by
-  refine ⟨fun h ↦ ?_, fun h ↦ by simp [h]⟩
-  simp only [abs] at h
-  rw [CFC.sqrt_eq_zero_iff (adjoint T ∘SL T)
-    (nonneg_iff_isPositive.mpr (ContinuousLinearMap.isPositive_adjoint_comp_self T))] at h
-  exact adjoint_comp_self_eq_zero_iff.mp h
 
 theorem abs_comp_abs (T : E →L[ℂ] F) :
     |T| ∘L |T| = T.adjoint ∘L T := by

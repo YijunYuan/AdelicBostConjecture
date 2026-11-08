@@ -7,7 +7,6 @@ module
 
 public import BostConjecture.Balanced.SpectralExpansion
 public import Mathlib.Analysis.InnerProductSpace.Trace
-public import Mathlib.LinearAlgebra.Determinant
 
 /-!
 # Determinants of Hermitian exponentials

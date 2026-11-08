@@ -7,7 +7,7 @@ module
 
 public import BostConjecture.Tensor.Dual.Metric
 public import BostConjecture.Tensor.Metric.Basic
-public import BostConjecture.Tensor.Dual.Evaluation
+public import BostConjecture.ExternalCode.MathlibPRs.PR44845.LinearAlgebra.PiTensorProduct.Projective
 
 /-!
 # Canonical projective tensor duality preserves the Hilbert form

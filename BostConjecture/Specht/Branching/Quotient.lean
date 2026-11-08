@@ -6,13 +6,12 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Specht.Branching.Filtration
-public import Mathlib.LinearAlgebra.Isomorphisms
 
 /-!
 # Branching by restriction at a removable corner
 
-The frozen-tail coefficient map on the largest-label filtration has image the
-smaller Specht space and kernel the preceding filtration step. All spaces use
+The frozen-tail coefficient map on the largest-label filtration takes values in
+the smaller Specht space and vanishes on the preceding filtration step. All spaces use
 the existing orthonormal word realization.
 -/
 
@@ -165,54 +164,10 @@ def branchingMap {t : Tableau (n + 1) μ} (ht : IsStandard t) :
   map_add' _ _ := by ext w; rfl
   map_smul' _ _ := by ext w; rfl
 
-/-- Each smaller orbit vector lifts inside the chosen filtration step. -/
-theorem branchingMap_lift_orbit {t : Tableau (n + 1) μ} (ht : IsStandard t)
-    (g : Equiv.Perm (Fin n)) :
-    ∃ x, branchingMap ht x =
-      realSpechtRep (prefixTableau ht n (Nat.le_succ n)) g
-        (standardRealBasis (prefixTableau ht n (Nat.le_succ n))
-          ⟨_, prefixTableau_isStandard ht n (Nat.le_succ n)⟩) := by
-  let y := realSpechtRep t (prefixPerm (Nat.le_succ n) g) (standardRealBasis t ⟨t, ht⟩)
-  have hy : y ∈ lastRowSubspace t (rowWord t (Fin.last n)).val := by
-    apply prefixPerm_mem_lastRowSubspace
-    exact Submodule.subset_span ⟨⟨t, ht⟩, le_rfl, rfl⟩
-  refine ⟨⟨y, hy⟩, ?_⟩
-  apply Subtype.ext
-  change prefixSliceReal ht (Nat.le_succ n)
-      (wordRepReal _ _ (prefixPerm (Nat.le_succ n) g) (standardRealBasis t ⟨t, ht⟩).val) = _
-  rw [prefixSliceReal_wordRepReal, standardRealBasis_coe, prefixSliceReal_polytabloid]
-  rw [realSpechtRep_coe, standardRealBasis_coe]
-
-/-- The branching restriction is onto the actual smaller Specht space. -/
-theorem branchingMap_surjective {t : Tableau (n + 1) μ} (ht : IsStandard t) :
-    Function.Surjective (branchingMap ht) := by
-  rw [← LinearMap.range_eq_top]
-  apply top_unique
-  intro y _
-  rw [← (standardRealBasis (prefixTableau ht n (Nat.le_succ n))).sum_repr y]
-  apply Submodule.sum_mem
-  intro T _
-  apply Submodule.smul_mem
-  let u := prefixTableau ht n (Nat.le_succ n)
-  obtain ⟨x, hx⟩ := branchingMap_lift_orbit ht (u.trans T.val.symm)
-  refine ⟨x, hx.trans ?_⟩
-  apply Subtype.ext
-  rw [realSpechtRep_standardRealBasis_coe, standardRealBasis_coe]
-  congr 2
-  apply Equiv.ext
-  intro i
-  simp [relabel, u]
-
 /-- The strict preceding step, including the zero step when the row is zero. -/
 def lastRowSubspaceLT (t : Tableau (n + 1) μ) (r : ℕ) : Submodule ℝ (realSpan t) :=
   Submodule.span ℝ {x | ∃ T : {u : Tableau (n + 1) μ // IsStandard u},
     (rowWord T.val (Fin.last n)).val < r ∧ standardRealBasis t T = x}
-
-theorem lastRowSubspaceLT_le (t : Tableau (n + 1) μ) (r : ℕ) :
-    lastRowSubspaceLT t r ≤ lastRowSubspace t r := by
-  apply Submodule.span_le.mpr
-  rintro _ ⟨T, hT, rfl⟩
-  exact Submodule.subset_span ⟨T, hT.le, rfl⟩
 
 /-- Restriction annihilates the preceding filtration step. -/
 theorem prefixSliceReal_eq_zero_of_mem_lastRowSubspaceLT {t : Tableau (n + 1) μ}
@@ -253,53 +208,5 @@ theorem branchingMap_eq_zero_iff {t : Tableau (n + 1) μ} (ht : IsStandard t)
   · intro hx
     apply Subtype.ext
     exact prefixSliceReal_eq_zero_of_mem_lastRowSubspaceLT ht hx
-
-/-- Kernel identification inside the filtration step. -/
-theorem ker_branchingMap {t : Tableau (n + 1) μ} (ht : IsStandard t) :
-    LinearMap.ker (branchingMap ht) =
-      (lastRowSubspaceLT t (rowWord t (Fin.last n)).val).comap
-        (lastRowSubspace t (rowWord t (Fin.last n)).val).subtype := by
-  ext x
-  exact branchingMap_eq_zero_iff ht x
-
-/-- The branching quotient is the smaller Specht space, not an assumed model. -/
-def branchingQuotientEquiv {t : Tableau (n + 1) μ} (ht : IsStandard t) :
-    ((lastRowSubspace t (rowWord t (Fin.last n)).val) ⧸
-      (lastRowSubspaceLT t (rowWord t (Fin.last n)).val).comap
-        (lastRowSubspace t (rowWord t (Fin.last n)).val).subtype) ≃ₗ[ℝ]
-      realSpan (prefixTableau ht n (Nat.le_succ n)) :=
-  (Submodule.quotEquivOfEq _ _ (ker_branchingMap ht).symm).trans
-    ((branchingMap ht).quotKerEquivOfSurjective (branchingMap_surjective ht))
-
-@[simp] theorem branchingQuotientEquiv_mk {t : Tableau (n + 1) μ} (ht : IsStandard t)
-    (x : lastRowSubspace t (rowWord t (Fin.last n)).val) :
-    branchingQuotientEquiv ht (Submodule.Quotient.mk x) = branchingMap ht x := rfl
-
-/-- The induced quotient map still restricts the actual word coefficients. -/
-theorem branchingQuotientEquiv_mk_apply {t : Tableau (n + 1) μ} (ht : IsStandard t)
-    (x : lastRowSubspace t (rowWord t (Fin.last n)).val)
-    (w : Fin n → Fin ((prefixShape ht n (Nat.le_succ n)).colLen 0)) :
-    (branchingQuotientEquiv ht (Submodule.Quotient.mk x)).val w =
-      x.val.val (extendPrefixWord ht (Nat.le_succ n) w) := rfl
-
-/-- Equivariance of restriction, on all representatives of the quotient. -/
-theorem branchingMap_equivariant {t : Tableau (n + 1) μ} (ht : IsStandard t)
-    (g : Equiv.Perm (Fin n)) (x : lastRowSubspace t (rowWord t (Fin.last n)).val) :
-    branchingMap ht
-      ⟨realSpechtRep t (prefixPerm (Nat.le_succ n) g) x.val,
-        prefixPerm_mem_lastRowSubspace t _ g x.property⟩ =
-      realSpechtRep (prefixTableau ht n (Nat.le_succ n)) g (branchingMap ht x) := by
-  apply Subtype.ext
-  exact prefixSliceReal_wordRepReal ht (Nat.le_succ n) g x.val.val
-
-/-- Equivariance of the quotient equivalence, expressed on its surjective set of representatives. -/
-theorem branchingQuotientEquiv_mk_action {t : Tableau (n + 1) μ} (ht : IsStandard t)
-    (g : Equiv.Perm (Fin n)) (x : lastRowSubspace t (rowWord t (Fin.last n)).val) :
-    branchingQuotientEquiv ht (Submodule.Quotient.mk
-      ⟨realSpechtRep t (prefixPerm (Nat.le_succ n) g) x.val,
-        prefixPerm_mem_lastRowSubspace t _ g x.property⟩) =
-      realSpechtRep (prefixTableau ht n (Nat.le_succ n)) g
-        (branchingQuotientEquiv ht (Submodule.Quotient.mk x)) :=
-  branchingMap_equivariant ht g x
 
 end BostConjecture.Specht

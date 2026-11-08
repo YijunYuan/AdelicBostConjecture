@@ -5,9 +5,9 @@ Authors: Yijun Yuan
 -/
 module
 
-public import Mathlib.RingTheory.Nullstellensatz
 public import Mathlib.FieldTheory.Minpoly.IsIntegrallyClosed
-public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.RingTheory.Jacobson.Ring
 
 /-!
 # Lifting roots along integral finite-type extensions

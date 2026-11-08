@@ -9,7 +9,6 @@ module
 
 public import Mathlib.Combinatorics.Enumerative.Partition.Basic
 public import Mathlib.Combinatorics.Young.YoungDiagram
-public import BostConjecture.ExternalCode.Etingof.RepresentationTheory.Alignment.Attribute
 
 /-!
 # Auxiliary partition constructions

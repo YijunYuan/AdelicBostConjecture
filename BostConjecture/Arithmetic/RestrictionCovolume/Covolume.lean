@@ -5,10 +5,12 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Arithmetic.RestrictionCovolume.Conjugation
 public import BostConjecture.Arithmetic.Degree.Normalization
 public import BostConjecture.ExternalCode.TauCeti.Lattice.Covolume
-public import Mathlib.NumberTheory.NumberField.Discriminant.Basic
+public import BostConjecture.Arithmetic.RestrictionCovolume.TraceSpace
+public import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
+public import Mathlib.Data.Nat.Factorial.DoubleFactorial
+public import Mathlib.NumberTheory.NumberField.Discriminant.Defs
 
 /-!
 # Euclidean Haar covolume of the actual trace lattice

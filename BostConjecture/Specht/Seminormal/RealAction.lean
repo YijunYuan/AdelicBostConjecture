@@ -6,7 +6,6 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Specht.Lattice.Basis
-public import Mathlib.Analysis.InnerProductSpace.Symmetric
 
 /-!
 # The real isometric action and Murphy operators on the Specht span
@@ -33,10 +32,6 @@ def wordRepReal (n d : ℕ) :
     (LinearIsometryEquiv.piLpCongrLeft 2 ℝ ℝ (wordPerm n d g).symm).toLinearEquiv.toLinearMap
   map_one' := by ext x w; rfl
   map_mul' g h := by ext x w; rfl
-
-@[simp] theorem wordRepReal_apply (g : Equiv.Perm (Fin n))
-    (x : EuclideanSpace ℝ (Fin n → Fin d)) (w : Fin n → Fin d) :
-    wordRepReal n d g x w = x (w ∘ g) := rfl
 
 @[simp] theorem wordRepReal_realCast (g : Equiv.Perm (Fin n))
     (x : (Fin n → Fin d) → ℤ) :
@@ -131,24 +126,6 @@ theorem realSpechtRep_swap_commute_murphyOperator (t : Tableau n μ)
       simpa only [Equiv.swap_apply_right] using iff_of_true hhj hij
     rw [Equiv.swap_apply_of_ne_of_ne hxi hxh]
 
-/-- Pairwise commutation is proved for the concrete position-action sums. -/
-theorem murphyOperator_commute (t : Tableau n μ) (i j : Fin n) :
-    Commute (murphyOperator t i) (murphyOperator t j) := by
-  have hlt (a b : Fin n) (hab : a < b) :
-      Commute (murphyOperator t a) (murphyOperator t b) := by
-    change (∑ k ∈ Finset.Iio a, realSpechtRep t (Equiv.swap k a)) * murphyOperator t b =
-      murphyOperator t b * (∑ k ∈ Finset.Iio a, realSpechtRep t (Equiv.swap k a))
-    simp only [Finset.sum_mul, Finset.mul_sum]
-    apply Finset.sum_congr rfl
-    intro k hk
-    have h := realSpechtRep_swap_commute_murphyOperator t k a b
-      ((Finset.mem_Iio.mp hk).trans hab) hab
-    exact h.eq
-  rcases lt_trichotomy i j with h | rfl | h
-  · exact hlt i j h
-  · exact Commute.refl _
-  · exact (hlt j i h).symm
-
 /-- The adjacent-transposition recurrence for the concrete Murphy sums. -/
 theorem murphyOperator_succ (t : Tableau n μ) (i j : Fin n) (hij : i.val + 1 = j.val) :
     murphyOperator t j =
@@ -202,17 +179,6 @@ theorem inner_swap_of_murphy_eigenvector (t : Tableau n μ) (i j : Fin n)
     inner_add_right, real_inner_self_eq_norm_sq] at hs
   apply (eq_div_iff hab).mpr
   nlinarith
-
-/-- Removing the forced diagonal component leaves an orthogonal vector.
-This lemma does not assert that a standard orthogonal vector has content eigenvalues. -/
-theorem inner_swap_residual_of_murphy_eigenvector (t : Tableau n μ) (i j : Fin n)
-    (hij : i.val + 1 = j.val) (x : realSpan t) (a b : ℝ)
-    (hi : murphyOperator t i x = a • x) (hj : murphyOperator t j x = b • x)
-    (hab : b - a ≠ 0) :
-    inner ℝ x (realSpechtRep t (Equiv.swap i j) x - (b - a)⁻¹ • x) = 0 := by
-  rw [inner_sub_right, real_inner_smul_right (F := realSpan t), real_inner_self_eq_norm_sq,
-    inner_swap_of_murphy_eigenvector t i j hij x a b hi hj hab]
-  simp [div_eq_mul_inv, mul_comm]
 
 /-- The squared-norm ratio forced by two distinct adjacent Murphy eigenvalues.
 Identification of the residual with the next monic standard vector remains separate. -/

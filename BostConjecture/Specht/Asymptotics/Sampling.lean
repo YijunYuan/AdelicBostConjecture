@@ -5,12 +5,10 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Specht.Counting.Hypergeometric
 public import Mathlib.Data.Nat.Choose.Sum
 public import Mathlib.Data.Nat.Factorial.BigOperators
-public import Mathlib.Tactic.FieldSimp
-public import Mathlib.Tactic.Linarith
 public import Mathlib.Analysis.Complex.Exponential
+public import Mathlib.Algebra.BigOperators.Field
 
 /-!
 # Binomial moments for sampling without replacement

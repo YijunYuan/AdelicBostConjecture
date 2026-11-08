@@ -7,6 +7,8 @@ module
 
 public import BostConjecture.Main.TensorSemistability.SubmoduleVariation
 public import BostConjecture.Arithmetic.Tensor.Compatibility
+public import BostConjecture.Balanced.ExponentialFlow
+public import BostConjecture.Main.TensorSemistability.ExponentialVariation
 
 /-!
 # Tensor products of actual archimedean metric variations

@@ -6,6 +6,7 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Arithmetic.Determinant.Metric
+public import BostConjecture.Arithmetic.Line.Hermitian
 
 /-!
 # Intrinsic normalized Hermitian degree
@@ -43,10 +44,5 @@ theorem degree_eq (h : HermitianMetric K M)
     h.degree = (Real.log (Nat.card (DeterminantLine (K := K) M ⧸ (𝓞 K ∙ ξ))) -
       ∑ σ : K →+* ℂ, Real.log (h.determinant.sectionNorm σ ξ)) / (Module.finrank ℚ K : ℝ) :=
   h.determinant.lineDegree_eq_sum_embeddings (determinant_generic_finrank M) hξ
-
-/-- The finite quotient appearing in the determinant degree formula is finite. -/
-theorem determinant_quotient_finite {ξ : DeterminantLine (K := K) M} (hξ : ξ ≠ 0) :
-    Finite (DeterminantLine (K := K) M ⧸ (𝓞 K ∙ ξ)) :=
-  line_quotient_finite (determinant_generic_finrank M) hξ
 
 end BostConjecture.Arithmetic.HermitianMetric

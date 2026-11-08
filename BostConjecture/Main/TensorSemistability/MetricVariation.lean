@@ -88,17 +88,4 @@ theorem determinant_archimedeanPullback (h : HermitianMetric K M)
   rw [hw] at he
   exact congrArg Complex.re he
 
-variable [NumberField K]
-
-/-- These archimedean changes preserve arithmetic normalization exactly. -/
-theorem degree_archimedeanPullback (h : HermitianMetric K M)
-    (g : ∀ σ : K →+* ℂ, ComplexFiber M σ ≃ₗ[ℂ] ComplexFiber M σ)
-    (hc : ∀ (σ : K →+* ℂ) (x : ComplexFiber M σ),
-      g (ComplexEmbedding.conjugate σ) (fiberConjugate M σ x) =
-        fiberConjugate M σ (g σ x))
-    (hd : ∀ σ, LinearMap.det (g σ).toLinearMap = 1) :
-    (h.archimedeanPullback g hc).degree = h.degree := by
-  unfold degree
-  rw [determinant_archimedeanPullback h g hc hd]
-
 end BostConjecture.Arithmetic.HermitianMetric

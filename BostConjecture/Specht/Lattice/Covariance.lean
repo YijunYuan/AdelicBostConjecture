@@ -128,29 +128,4 @@ theorem wordTensorAction_of_mem_span (hk : 0 < k)
   | add x y hx hy ihx ihy => simp only [map_add, ihx, ihy, smul_add]
   | smul c x hx ih => rw [map_smul, ih, smul_comm]
 
-/-- The checked complex Specht representation has determinant covariance in
-its existing word realization. -/
-theorem wordTensorAction_complexSpecht (hk : 0 < k)
-    (t : Tableau n (rectangle a k)) (u : Matrix (Fin a) (Fin a) ℂ)
-    (x : OAI.Saxl.Specht t) :
-    wordTensorAction n u (fun w => x.val ((rectangleAlphabetEquiv hk).symm w)) =
-      u.det ^ k • (fun w => x.val ((rectangleAlphabetEquiv hk).symm w)) := by
-  let C : WordSpace n (rectangle a k |>.colLen 0) →ₗ[ℂ] ((Fin n → Fin a) → ℂ) :=
-    { toFun := fun y w => y ((rectangleAlphabetEquiv hk).symm w)
-      map_add' := by intros; rfl
-      map_smul' := by intros; rfl }
-  change wordTensorAction n u (C x.val) = u.det ^ k • C x.val
-  have hx := x.property
-  change x.val ∈ (spechtSub t).toSubmodule at hx
-  rw [← complex_span_orbitLattice] at hx
-  generalize he : x.val = y at hx ⊢
-  clear he
-  induction hx using Submodule.span_induction with
-  | mem y hy =>
-    obtain ⟨z, hz, rfl⟩ := hy
-    exact wordTensorAction_of_mem_orbitLattice hk t u hz
-  | zero => simp
-  | add y z hy hz ihy ihz => simp only [map_add, ihy, ihz, smul_add]
-  | smul c y hy ih => rw [C.map_smul, map_smul, ih, smul_comm]
-
 end BostConjecture.Specht

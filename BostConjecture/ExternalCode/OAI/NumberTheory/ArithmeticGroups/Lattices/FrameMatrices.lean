@@ -13,8 +13,6 @@ This file has been modified for Lean 4.35 module visibility.
 module
 
 public import BostConjecture.ExternalCode.OAI.NumberTheory.ArithmeticGroups.Lattices.UniformShortSpan
-public import Mathlib.Topology.Instances.Matrix
-public import Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Defs
 
 /-!
 # Frame Matrices
@@ -143,12 +141,6 @@ def matrixOfFrame
     Matrix.GeneralLinearGroup ι ℝ :=
   Matrix.GeneralLinearGroup.mkOfDetNeZero (b.toMatrix v)
     (isUnit_iff_ne_zero.mp (b.is_basis_iff_det.mp hv))
-
-@[simp] theorem matrixOfFrame_val
-    {E ι : Type*} [AddCommGroup E] [Module ℝ E] [Fintype ι] [DecidableEq ι]
-    (b : Basis ι ℝ E) (v : ι → E)
-    (hv : LinearIndependent ℝ v ∧ Submodule.span ℝ (Set.range v) = ⊤) :
-    (matrixOfFrame b v hv).val = b.toMatrix v := rfl
 
 theorem compact_frame_matrices
     {E ι : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E]

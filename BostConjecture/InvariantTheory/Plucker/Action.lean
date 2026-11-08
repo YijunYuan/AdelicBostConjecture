@@ -6,7 +6,6 @@ Authors: Yijun Yuan
 module
 
 public import Mathlib.LinearAlgebra.ExteriorPower.Basic
-public import Mathlib.LinearAlgebra.TensorProduct.Map
 public import Mathlib.LinearAlgebra.SpecialLinearGroup
 public import Mathlib.RepresentationTheory.Basic
 
@@ -48,12 +47,5 @@ theorem pluckerRepresentation_apply (s : ℕ)
     (g : SpecialLinearGroup K U × SpecialLinearGroup K W) (z : ⋀[K]^s (U ⊗[K] W)) :
     pluckerRepresentation K U W s g z =
       exteriorPower.map s (TensorProduct.map (g.1 : U →ₗ[K] U) (g.2 : W →ₗ[K] W)) z := rfl
-
-theorem pluckerRepresentation_apply_ιMulti (s : ℕ)
-    (g : SpecialLinearGroup K U × SpecialLinearGroup K W) (v : Fin s → U ⊗[K] W) :
-    pluckerRepresentation K U W s g (ιMulti K s v) =
-      ιMulti K s (fun i => TensorProduct.map (g.1 : U →ₗ[K] U) (g.2 : W →ₗ[K] W) (v i)) := by
-  simp
-  rfl
 
 end BostConjecture.InvariantTheory

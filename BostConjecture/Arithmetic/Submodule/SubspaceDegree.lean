@@ -7,8 +7,8 @@ module
 
 public import BostConjecture.Arithmetic.Submodule.IntegralSubspace
 public import BostConjecture.Arithmetic.Degree.Normalization
-public import BostConjecture.Arithmetic.Bundle.Scaling
 public import BostConjecture.Slope.Subspace
+public import BostConjecture.Arithmetic.Submodule.Metric
 
 /-!
 # Intrinsic degree on the generic subspace lattice
@@ -50,13 +50,6 @@ lemma subspaceDegree_div_finrank (h : HermitianMetric K M)
     (X : Submodule K (K ⊗[𝓞 K] M)) :
     h.subspaceDegree X / Module.finrank K X = (h.submodule (integralPart X)).slope := by
   rw [slope, integralPart_generic_finrank]
-  rfl
-
-lemma subspaceDegree_rescale (h : HermitianMetric K M)
-    (X : Submodule K (K ⊗[𝓞 K] M)) (t : ℝ) :
-    (h.rescale t).subspaceDegree X = h.subspaceDegree X -
-      (Module.finrank K X : ℝ) * t := by
-  rw [subspaceDegree, degree_submodule_rescale, integralPart_generic_finrank]
   rfl
 
 /-- The actual arithmetic degree specializes the slope payoff to the Hermitian

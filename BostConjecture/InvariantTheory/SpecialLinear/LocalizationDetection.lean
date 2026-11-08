@@ -49,21 +49,4 @@ theorem polynomial_eq_zero_of_eval_on_principalOpen [Infinite K]
     · rw [map_mul, hp x hx, zero_mul, map_zero]
   exact (mul_eq_zero.mp hmul).resolve_right hD
 
-/-- Rational-point evaluation detects every element of a localized polynomial algebra. -/
-theorem localizationPolynomialEval_detects [Infinite K]
-    {D : MvPolynomial σ K} (hD : D ≠ 0) {z : Localization.Away D}
-    (hz : ∀ (x : σ → K) (hx : MvPolynomial.aeval x D ≠ 0),
-      localizationPolynomialEval D x hx z = 0) : z = 0 := by
-  obtain ⟨n, p, hzp⟩ := IsLocalization.Away.surj D z
-  have hp : p = 0 := polynomial_eq_zero_of_eval_on_principalOpen hD (by
-    intro x hx
-    have he := congrArg (localizationPolynomialEval D x hx) hzp
-    simpa only [map_mul, hz x hx, zero_mul, localizationPolynomialEval_algebraMap] using he.symm)
-  rw [hp, map_zero] at hzp
-  obtain ⟨u, hu⟩ := IsLocalization.Away.algebraMap_pow_isUnit D n (S := Localization.Away D)
-  rw [← hu] at hzp
-  calc
-    z = (z * (u : Localization.Away D)) * ↑u⁻¹ := by simp [mul_assoc]
-    _ = 0 := by rw [hzp, zero_mul]
-
 end BostConjecture.InvariantTheory

@@ -7,9 +7,7 @@ module
 
 public import BostConjecture.Arithmetic.Exterior.Product
 public import BostConjecture.Geometry.Determinant.Coordinates
-public import Mathlib.LinearAlgebra.Basis.Prod
 public import Mathlib.LinearAlgebra.Dimension.Localization
-public import Mathlib.RingTheory.LocalProperties.Exactness
 public import Mathlib.RingTheory.LocalRing.Module
 
 /-!
@@ -170,18 +168,5 @@ def prodEquiv :
     (⋀[R]^(Module.finrank R M) M) ⊗[R] (⋀[R]^(Module.finrank R N) N) ≃ₗ[R]
       ⋀[R]^(Module.finrank R M + Module.finrank R N) (M × N) :=
   LinearEquiv.ofBijective _ prodMap_bijective
-
-@[simp]
-lemma prodEquiv_apply (z : (⋀[R]^(Module.finrank R M) M) ⊗[R]
-    (⋀[R]^(Module.finrank R N) N)) :
-    prodEquiv z = prodMap R M N (Module.finrank R M) (Module.finrank R N) z := rfl
-
-/-- The determinant product with ranks measured in an extension field. -/
-lemma prodMap_bijective_generic (F : Type*) [Field F] [Algebra R F] [FaithfulSMul R F] :
-    Function.Bijective (prodMap R M N (Module.finrank F (F ⊗[R] M))
-      (Module.finrank F (F ⊗[R] N))) := by
-  rw [(TensorProduct.isBaseChange R M F).finrank_eq,
-    (TensorProduct.isBaseChange R N F).finrank_eq]
-  exact prodMap_bijective
 
 end exteriorPower

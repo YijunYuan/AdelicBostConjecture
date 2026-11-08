@@ -7,7 +7,6 @@ module
 
 public import BostConjecture.InvariantTheory.ComplexClosure.Roots
 public import Mathlib.RingTheory.Nullstellensatz
-public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
 
 /-!
 # Finite fibers and polynomial separation

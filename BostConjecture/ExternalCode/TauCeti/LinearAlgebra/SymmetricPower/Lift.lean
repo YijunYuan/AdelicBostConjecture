@@ -6,7 +6,6 @@ Authors: The Tau Ceti contributors
 module
 
 public import BostConjecture.ExternalCode.TauCeti.LinearAlgebra.SymmetricPower.Basic
-public import Mathlib.LinearAlgebra.Multilinear.Curry
 import Mathlib.GroupTheory.Perm.Fin
 
 /-!

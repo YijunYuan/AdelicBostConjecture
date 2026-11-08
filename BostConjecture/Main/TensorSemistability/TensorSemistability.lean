@@ -8,6 +8,7 @@ module
 public import BostConjecture.Main.TensorSemistability.BalancedSlope
 public import BostConjecture.Main.TensorSemistability.TensorRescale
 public import BostConjecture.Main.StrictReduction.MaximizingCounterexample
+public import BostConjecture.Main.TensorSemistability.ExtremalBalance
 
 /-!
 # Tensor semistability over arbitrary number fields

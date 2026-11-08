@@ -6,7 +6,6 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Arithmetic.Submodule.QuotientMetric
-public import Mathlib.LinearAlgebra.TensorProduct.Tower
 
 /-!
 # Compatibility of induced and quotient Hermitian metrics
@@ -37,10 +36,6 @@ lemma submoduleQuotientMap_injective (P T : Submodule (𝓞 K) M) :
     Function.Injective (submoduleQuotientMap P T) := by
   rw [← LinearMap.ker_eq_bot]
   simp [submoduleQuotientMap, Submodule.ker_mapQ]
-
-@[simp]
-lemma submoduleQuotientMap_mkQ (P T : Submodule (𝓞 K) M) (x : T) :
-    submoduleQuotientMap P T ((P.comap T.subtype).mkQ x) = P.mkQ x := rfl
 
 lemma fiberMap_comp {N L : Type*} [AddCommGroup N] [Module (𝓞 K) N]
     [AddCommGroup L] [Module (𝓞 K) L]
@@ -133,14 +128,6 @@ theorem quotient_submodule (h : HermitianMetric K M)
   cases d
   cases hf
   rfl
-
-/-- The same norm on an integral intermediate quotient, computed in either ambient module. -/
-lemma sectionNorm_quotient_submodule (h : HermitianMetric K M)
-    {P T : Submodule (𝓞 K) M} (hPT : P ≤ T) (σ : K →+* ℂ)
-    (x : T ⧸ P.comap T.subtype) :
-    ((h.submodule T).quotient (P.comap T.subtype)).sectionNorm σ x =
-      (h.quotient P).sectionNorm σ (submoduleQuotientMap P T x) := by
-  rw [h.quotient_submodule hPT, sectionNorm_pullback]
 
 end HermitianMetric
 end BostConjecture.Arithmetic

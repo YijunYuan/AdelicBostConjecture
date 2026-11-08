@@ -7,8 +7,6 @@ module
 
 public import BostConjecture.Specht.Asymptotics.LogInsertion
 public import BostConjecture.Specht.Asymptotics.Separation
-public import Mathlib.Algebra.Order.BigOperators.Expect
-public import Mathlib.Algebra.Order.Floor.Semiring
 
 /-!
 # Averaging logarithmic insertions over actual standard tableaux

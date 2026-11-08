@@ -7,13 +7,12 @@ module
 
 public import Mathlib.Algebra.Module.LocalizedModule.Away
 public import Mathlib.RingTheory.LocalProperties.Submodule
-public import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 public import Mathlib.RingTheory.Localization.BaseChange
 
 /-!
 # Descent on a finite principal cover
 
-Compatible localized elements and linear maps descend to the original module.
+Compatible localized elements descend uniquely to the original module.
 The constructions use denominator clearing and a unit-ideal partition, without
 introducing a new representation of the global module.
 -/
@@ -79,24 +78,6 @@ theorem existsUnique_of_isLocalizedModule_compatible (s : Set R) [Finite s]
     simp only [map_sum, map_smul, hq, ← mul_smul, ← Finset.sum_smul]
     simpa only [smul_eq_mul, one_smul] using (congrArg (fun r : R => r • x j) hc).symm
 
-
-/-- Compatible sections on a finite principal cover come from a unique global element. -/
-theorem existsUnique_of_localization_compatible (s : Set R) [Finite s]
-    (hs : Ideal.span s = ⊤)
-    (x : ∀ r : s, LocalizedModule (Submonoid.powers (r : R)) Q)
-    (h : ∀ i j : s,
-      IsLocalizedModule.map (Submonoid.powers (i : R))
-        (LocalizedModule.mkLinearMap (Submonoid.powers (i : R)) Q)
-        (LocalizedModule.mkLinearMap (Submonoid.powers (i : R))
-          (LocalizedModule (Submonoid.powers (j : R)) Q))
-        (LocalizedModule.mkLinearMap (Submonoid.powers (j : R)) Q) (x i) =
-      LocalizedModule.mkLinearMap (Submonoid.powers (i : R))
-        (LocalizedModule (Submonoid.powers (j : R)) Q) (x j)) :
-    ∃! q : Q, ∀ r : s, LocalizedModule.mkLinearMap (Submonoid.powers (r : R)) Q q = x r :=
-  existsUnique_of_isLocalizedModule_compatible s hs
-    (fun i => LocalizedModule (Submonoid.powers (i : R)) Q)
-    (fun i => LocalizedModule.mkLinearMap (Submonoid.powers (i : R)) Q) x h
-
 open scoped TensorProduct
 
 /-- Descent in the scalar-extension models, with overlaps expressed by tensoring
@@ -161,75 +142,5 @@ theorem existsUnique_of_tensorLocalization_compatible (s : Set R) [Finite s]
   change e (IsLocalizedModule.map _ _ _ _ (x i)) = _ at hei
   rw [hei]
   simpa only [e, IsLocalizedModule.linearEquiv_apply] using h i j
-
-variable {P : Type*} [AddCommGroup P] [Module R P]
-
-/-- Local linear maps whose values agree on overlaps descend uniquely. It suffices
-to check compatibility on the images of the original module. -/
-theorem existsUnique_linearMap_of_localization_compatible (s : Set R) [Finite s]
-    (hs : Ideal.span s = ⊤)
-    (u : ∀ r : s, LocalizedModule (Submonoid.powers (r : R)) P →ₗ[R]
-      LocalizedModule (Submonoid.powers (r : R)) Q)
-    (h : ∀ (p : P) (i j : s),
-      IsLocalizedModule.map (Submonoid.powers (i : R))
-        (LocalizedModule.mkLinearMap (Submonoid.powers (i : R)) Q)
-        (LocalizedModule.mkLinearMap (Submonoid.powers (i : R))
-          (LocalizedModule (Submonoid.powers (j : R)) Q))
-        (LocalizedModule.mkLinearMap (Submonoid.powers (j : R)) Q)
-        (u i (LocalizedModule.mkLinearMap (Submonoid.powers (i : R)) P p)) =
-      LocalizedModule.mkLinearMap (Submonoid.powers (i : R))
-        (LocalizedModule (Submonoid.powers (j : R)) Q)
-        (u j (LocalizedModule.mkLinearMap (Submonoid.powers (j : R)) P p))) :
-    ∃! U : P →ₗ[R] Q, ∀ i : s,
-      IsLocalizedModule.map (Submonoid.powers (i : R))
-        (LocalizedModule.mkLinearMap (Submonoid.powers (i : R)) P)
-        (LocalizedModule.mkLinearMap (Submonoid.powers (i : R)) Q) U = u i := by
-  classical
-  let locP (r : s) := LocalizedModule.mkLinearMap (Submonoid.powers (r : R)) P
-  let locQ (r : s) := LocalizedModule.mkLinearMap (Submonoid.powers (r : R)) Q
-  have hex (p : P) : ∃ q : Q, ∀ i : s, locQ i q = u i (locP i p) :=
-    (existsUnique_of_localization_compatible s hs (fun i => u i (locP i p)) (h p)).exists
-  choose g hg using hex
-  let U : P →ₗ[R] Q :=
-    { toFun := g
-      map_add' := by
-        intro p q
-        apply Module.eq_of_isLocalized_span s hs _ locQ
-        intro i
-        simp only [hg, map_add]
-      map_smul' := by
-        intro r p
-        apply Module.eq_of_isLocalized_span s hs _ locQ
-        intro i
-        simp only [hg, map_smul, RingHom.id_apply] }
-  have hU (i : s) : IsLocalizedModule.map (Submonoid.powers (i : R)) (locP i) (locQ i) U = u i := by
-    apply IsLocalizedModule.linearMap_ext (Submonoid.powers (i : R)) (locP i) (locQ i)
-    ext p
-    simpa only [LinearMap.comp_apply, IsLocalizedModule.map_apply, U, LinearMap.coe_mk,
-      AddHom.coe_mk] using hg p i
-  refine ⟨U, hU, ?_⟩
-  intro V hV
-  ext p
-  apply Module.eq_of_isLocalized_span s hs _ locQ
-  intro i
-  have hv := LinearMap.congr_fun (hV i) (locP i p)
-  change locQ i (V p) = locQ i (g p)
-  rw [hg]
-  simpa only [locP, IsLocalizedModule.map_apply] using hv
-
-/-- Injectivity can be checked on the localizations of a principal cover. -/
-theorem injective_of_localizedMap_injective (s : Set R) (hs : Ideal.span s = ⊤)
-    (U : P →ₗ[R] Q)
-    (h : ∀ i : s, Function.Injective
-      (IsLocalizedModule.map (Submonoid.powers (i : R))
-        (LocalizedModule.mkLinearMap (Submonoid.powers (i : R)) P)
-        (LocalizedModule.mkLinearMap (Submonoid.powers (i : R)) Q) U)) :
-    Function.Injective U := by
-  intro p q hpq
-  apply Module.eq_of_isLocalized_span s hs _
-    (fun i => LocalizedModule.mkLinearMap (Submonoid.powers (i : R)) P)
-  intro i
-  apply h i
-  simp only [IsLocalizedModule.map_apply, hpq]
 
 end BostConjecture.Geometry

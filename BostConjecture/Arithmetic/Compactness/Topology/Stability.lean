@@ -6,7 +6,6 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Arithmetic.Compactness.Maximum.Comparison
-public import BostConjecture.Arithmetic.HN.Semistable
 
 /-!
 # The degree gap at a normalized strictly stable metric

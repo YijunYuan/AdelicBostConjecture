@@ -7,6 +7,7 @@ module
 
 public import BostConjecture.Tensor.Dual.Hom
 public import BostConjecture.Geometry.Polynomial.Tensor
+public import Mathlib.LinearAlgebra.FreeModule.Finite.Matrix
 
 /-!
 # The Hom polynomial tensor in the canonical pairing grouping

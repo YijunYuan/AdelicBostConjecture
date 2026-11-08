@@ -7,6 +7,7 @@ module
 
 public import BostConjecture.Geometry.Determinant.Metric
 public import BostConjecture.Tensor.Dual.RegroupMetric
+public import BostConjecture.Tensor.Dual.Evaluation
 
 /-!
 # The actual local determinant pairing is contracting

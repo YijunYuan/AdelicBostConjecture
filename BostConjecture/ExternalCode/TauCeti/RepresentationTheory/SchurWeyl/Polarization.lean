@@ -8,7 +8,6 @@ module
 public import Mathlib.Algebra.Module.BigOperators
 public import Mathlib.Data.Fintype.Perm
 public import Mathlib.LinearAlgebra.PiTensorProduct.Basic
-public import Mathlib.Data.Finset.Powerset
 public import Mathlib.Data.Nat.Choose.Sum
 
 /-!

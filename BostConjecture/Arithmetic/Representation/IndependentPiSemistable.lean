@@ -5,7 +5,7 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Arithmetic.Representation.IndependentTensorSemistable
+public import BostConjecture.Arithmetic.Representation.ComplexIrreducibleSemistable
 public import BostConjecture.Arithmetic.Representation.IndependentPiIrreducible
 public import BostConjecture.Arithmetic.Representation.IrreducibleDualSemistable
 

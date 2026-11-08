@@ -7,7 +7,6 @@ module
 
 public import BostConjecture.Arithmetic.Specht.Bundle
 public import BostConjecture.Arithmetic.RestrictionCovolume.Free
-public import BostConjecture.Specht.Lattice.Metric
 
 /-!
 # Intrinsic degree of the arithmetic Specht lattice
@@ -91,12 +90,5 @@ theorem latticeMetric_slope (t : OAI.Saxl.Tableau n μ) :
     (latticeMetric (K := K) t).slope =
       -Real.log (ZLattice.covolume (spanLattice t)) / Module.finrank ℤ (orbitLattice t) := by
   rw [HermitianMetric.slope, latticeMetric_degree, lattice_generic_finrank]
-
-/-- For the canonical rectangle, the intrinsic lattice slope is exactly minus
-the existing normalized covolume correction used by the Specht asymptotics. -/
-theorem rectangle_latticeMetric_slope (a k : ℕ) :
-    (latticeMetric (K := K) (rectangleTableau a k)).slope = -rectangleLogCovolume a k := by
-  rw [latticeMetric_slope]
-  simp only [rectangleLogCovolume, rectangleRank, rectangleLattice, neg_div]
 
 end BostConjecture.Arithmetic.Specht

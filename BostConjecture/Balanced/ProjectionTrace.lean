@@ -58,17 +58,4 @@ def IsBalanced (S : Submodule ℂ (U ⊗[ℂ] W)) : Prop :=
     partialTraceLeft ℂ U W S.starProjection.toLinearMap =
       ((Module.finrank ℂ S : ℂ) / Module.finrank ℂ W) • LinearMap.id
 
-/-- Balance annihilates the frame sum for the tensor infinitesimal action. -/
-theorem IsBalanced.sum_inner_tensorSum_eq_zero
-    {S : Submodule ℂ (U ⊗[ℂ] W)} (hS : IsBalanced S)
-    {ι : Type*} [Fintype ι] (v : OrthonormalBasis ι ℂ S)
-    (H : Module.End ℂ U) (J : Module.End ℂ W)
-    (hH : LinearMap.trace ℂ U H = 0) (hJ : LinearMap.trace ℂ W J = 0) :
-    ∑ i, inner ℂ (v i : U ⊗[ℂ] W)
-      ((TensorProduct.map H LinearMap.id + TensorProduct.map LinearMap.id J :
-          Module.End ℂ (U ⊗[ℂ] W))
-        (v i : U ⊗[ℂ] W)) = 0 := by
-  rw [← trace_starProjection_comp_eq_sum S v]
-  exact trace_comp_tensorSum_eq_zero S.starProjection.toLinearMap H J _ _ hS.1 hS.2 hH hJ
-
 end BostConjecture.Balanced
