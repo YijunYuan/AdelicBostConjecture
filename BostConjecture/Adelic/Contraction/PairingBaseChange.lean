@@ -25,7 +25,7 @@ namespace BostConjecture.Adelic.Contraction
 open Module ArakelovGeometry
 open scoped TensorProduct
 
-universe u v w wι
+universe u v w w' wι
 
 section Algebra
 
@@ -53,7 +53,7 @@ end Algebra
 section Maps
 
 variable {K : Type u} [Field K] {S : AdelicStructure.{u, v} K}
-  {ι : Type wι} [Fintype ι] {X Y : ι → Type w}
+  {ι : Type wι} [Fintype ι] {X : ι → Type w} {Y : ι → Type w'}
   [∀ i, AddCommGroup (X i)] [∀ i, Module K (X i)] [∀ i, FiniteDimensional K (X i)]
   [∀ i, AddCommGroup (Y i)] [∀ i, Module K (Y i)] [∀ i, FiniteDimensional K (Y i)]
 
@@ -71,18 +71,44 @@ theorem orthogonalTensor_map_norm_le_of_finite_le_infinite_eq
     (NormFamily.orthogonalTensor η hN hη).norm ω
       ((PiTensorProduct.map f).baseChange (S.ϕ ω).Completion z) ≤
         (NormFamily.orthogonalTensor ξ hN hξ).norm ω z := by
+  let L := (S.ϕ ω).Completion
+  let : ∀ j, NormedAddCommGroup (L ⊗[K] X j) := fun j ↦ (ξ j).fibreNormedAddCommGroup ω
+  let : ∀ j, NormedSpace L (L ⊗[K] X j) := fun j ↦ (ξ j).fibreNormedSpace ω
+  let : ∀ j, NormedAddCommGroup (L ⊗[K] Y j) := fun j ↦ (η j).fibreNormedAddCommGroup ω
+  let : ∀ j, NormedSpace L (L ⊗[K] Y j) := fun j ↦ (η j).fibreNormedSpace ω
   by_cases hω : ω ∈ S.Ωinf
-  · exact NormFamily.orthogonalTensor_map_norm_le_of_norm_eq ξ η hN hξ hη f ω (hfi hω) z
+  · let := hN ω hω
+    let := IsRCLikeNormedField.rclike L
+    let : ∀ j, InnerProductSpace L (L ⊗[K] X j) :=
+      fun j ↦ (hξ j).fibreInnerProductSpace ω hω
+    let : ∀ j, InnerProductSpace L (L ⊗[K] Y j) :=
+      fun j ↦ (hη j).fibreInnerProductSpace ω hω
+    let g : ∀ j, (L ⊗[K] X j) →ₗᵢ[L] (L ⊗[K] Y j) :=
+      fun j ↦ ⟨(f j).baseChange L, hfi hω j⟩
+    rw [NormFamily.orthogonalTensor_norm_of_infinite _ _ _ ω hω,
+      NormFamily.orthogonalTensor_norm_of_infinite _ _ _ ω hω]
+    change orthogonalTensorSeminorm (fun j ↦ stdOrthonormalBasis L (L ⊗[K] Y j))
+        (tensorBaseChangeEquiv K L Y ((PiTensorProduct.map f).baseChange L z)) ≤
+      orthogonalTensorSeminorm (fun j ↦ stdOrthonormalBasis L (L ⊗[K] X j))
+        (tensorBaseChangeEquiv K L X z)
+    rw [tensorBaseChangeEquiv_map]
+    exact (orthogonalTensorSeminorm_map_eq
+      (fun j ↦ stdOrthonormalBasis L (L ⊗[K] X j))
+      (fun j ↦ stdOrthonormalBasis L (L ⊗[K] Y j)) g _).le
   · rw [NormFamily.orthogonalTensor_norm_of_finite _ _ _ ω (not_not.mp hω),
       NormFamily.orthogonalTensor_norm_of_finite _ _ _ ω (not_not.mp hω)]
-    exact NormFamily.injectiveTensor_map_norm_le ξ η f ω hf z
+    change injectiveTensorSeminorm (tensorBaseChangeEquiv K L Y
+      ((PiTensorProduct.map f).baseChange L z)) ≤
+        injectiveTensorSeminorm (tensorBaseChangeEquiv K L X z)
+    rw [tensorBaseChangeEquiv_map]
+    exact injectiveSeminorm_map_le_of_norm_le (fun j ↦ (f j).baseChange L) hf _
 
 end Maps
 
 section Dual
 
 variable {K : Type u} [Field K] {S : AdelicStructure.{u, v} K}
-  {E F : Type w} [AddCommGroup E] [Module K E] [FiniteDimensional K E]
+  {E : Type w} {F : Type w'} [AddCommGroup E] [Module K E] [FiniteDimensional K E]
   [AddCommGroup F] [Module K F] [FiniteDimensional K F]
 
 /-- The transpose of a completed contraction contracts for the actual dual norms. -/
@@ -103,7 +129,7 @@ section Evaluation
 
 variable {K : Type u} [Field K] {S : AdelicStructure.{u, v} K}
   {ι : Type wι} [Fintype ι]
-  {E F : Type w} [AddCommGroup E] [Module K E] [FiniteDimensional K E]
+  {E : Type w} {F : Type w'} [AddCommGroup E] [Module K E] [FiniteDimensional K E]
   [AddCommGroup F] [Module K F] [FiniteDimensional K F]
 
 omit [FiniteDimensional K E] in
@@ -138,9 +164,9 @@ theorem tensorPowerPairing_norm_le
       (fun _ ↦ hη) ω x).le) _).trans ?_
   refine ((NormFamily.orthogonalTensor (fun _ : ι ↦ η) hN (fun _ ↦ hη)).dual_dual_norm_eval_le
     ω _).trans ?_
-  exact NormFamily.orthogonalTensor_map_norm_le_of_norm_eq
+  exact orthogonalTensor_map_norm_le_of_finite_le_infinite_eq
     (fun _ : ι ↦ ξ) (fun _ : ι ↦ η) hN (fun _ ↦ hξ) (fun _ ↦ hη)
-    (fun _ ↦ f) ω (fun _ ↦ hf) z
+    (fun _ ↦ f) ω (fun _ x ↦ (hf x).le) (fun _ _ ↦ hf) z
 
 end Evaluation
 
