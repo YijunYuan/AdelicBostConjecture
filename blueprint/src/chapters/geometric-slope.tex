@@ -283,6 +283,53 @@ and the common degree $n_i=n$ in the preceding lemma. Distributivity of
 the finite sums gives the asserted formula.
 \end{proof}
 
+\begin{lemma}[Finite-degree comparison under the canonical norm inequality]
+\label{lem:canonical-pairing-finite-reduction}
+\source{bost-adelic-2026:page-0027}
+\uses{lem:semistable-contraction-slope,lem:determinant-specht-semistability,lem:determinant-specht-product-semistability,lem:determinant-specht-slope,cor:canonical-pairing-target-slope}
+\notready
+Suppose that the actual map $\Psi_n:B_n\to D_n^{\vee}$ is nonzero and that
+$\|\Psi_{n,\omega}(z)\|\leq\|z\|$ for every place $\omega$ and every completed
+source vector $z$. Then
+\[
+ n\widehat\mu(\overline U)-m_\infty C_s(n/s)
+ \leq n\sum_i\widehat\mu(\overline E_i)
+       +m_\infty\sum_i C_{a_i}(n/a_i).
+\]
+The norm inequality is an explicit hypothesis of this lemma.
+\end{lemma}
+\begin{proof}
+The source is Hermitian and semistable by the determinant--Specht lemma.
+The target is semistable by the independent-product lemma and duality.
+The nonzero contraction comparison therefore gives
+$\widehat\mu(B_n)\leq\widehat\mu(D_n^{\vee})$.
+Substitution of the two exact auxiliary slope formulas gives the assertion.
+\end{proof}
+
+\begin{lemma}[Limit comparison under the canonical norm inequalities]
+\label{lem:canonical-pairing-limit-reduction}
+\source{bost-adelic-2026:page-0027,bost-adelic-2026:page-0028}
+\uses{lem:canonical-pairing-finite-reduction,lem:nonzero-pairings,lem:specht-error-limit}
+\notready
+Assume that the Pl\"ucker point of $\iota:U\hookrightarrow W$ is geometrically
+semistable. Suppose that for every positive common degree $n$, the actual
+canonical pairing $\Psi_n$ satisfies the completed norm inequality of the
+preceding lemma. Then
+\[
+ \widehat\mu(\overline U)\leq\sum_i\widehat\mu(\overline E_i).
+\]
+\end{lemma}
+\begin{proof}
+The nonzero-pairing theorem supplies a positive degree $d$ and a nonzero
+canonical pairing at each degree $d(r+1)$, $r\geq0$. Its rectangular tableaux
+have widths $l_r$ and $k_{r,i}$. Counting their boxes gives
+$d(r+1)=s l_r=a_i k_{r,i}$, so these widths are precisely the required
+integer quotients. The preceding lemma applies to each of these actual
+pairings with its specified integral bases. The covolume error-elimination
+lemma, with $c=m_\infty$, $x=\widehat\mu(\overline U)$ and
+$y=\sum_i\widehat\mu(\overline E_i)$, now gives the conclusion.
+\end{proof}
+
 \begin{lemma}[The finite-degree geometric slope bound]
 \label{lem:finite-degree-geometric-slope}
 \source{bost-adelic-2026:page-0026,bost-adelic-2026:page-0027}
