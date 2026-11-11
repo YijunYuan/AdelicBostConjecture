@@ -32,16 +32,28 @@ may therefore describe declarations or modules that have since been removed.
 - License: Apache-2.0; retained in the pinned Lake dependency.
 - Integration: unchanged dependency, fetched by SSH; Lean/mathlib 4.35.0 and
   HarderNarasimhan `14b3090e1e169b77fe381102a1289f24c2b08a11` match this project.
-- Intended consumers: the adelic implementation of this paper's Sections 6–7,
-  using actual completed norms, degrees, HN filtrations, Plucker invariants and
+- Consumers: `Adelic/Geometry/{Polynomial,Plucker,ScalarExtension,Nonvanishing,Quotient,Binary}`
+  reuse `InvariantTheory/{Semistability,Plucker,Linearization}` and
+  `InvariantTheory/Binary/TensorTransport`, retaining the original-field
+  pairing and quotient dual inclusion. `tensorBaseChangeEquiv`,
+  `dualBaseChangeEquiv`, and `dualBaseChangeEquiv_dualMap` provide the actual
+  tensor/dual transport. `Adelic/Semistability/Group` consumes
+  `map_destabilizingSubspace_eq_of_completed_isometry` from
+  `HarderNarasimhan/Galois/HNScalarExtension`.
+- `Adelic/Induction/{GradeEquality,TensorHN,RankInduction,MaxSlope}` reuse
+  actual completed norms, degree identities, HN uniqueness and the componentwise
+  finite-image variation from `Tensor/Graded/HNVariation`, including
   `slope_sum_le_tensor_quotient_of_not_geometricallySemistable`.
 - Boundary: the last result retains the smaller-rank tensor-HN induction
   hypothesis; this project must discharge it by simultaneous rank induction.
   Its existence does not prove the geometric semistable branch or Theorem 1.1.
-- Verification: source interfaces and pins inspected during setup. Local
-  consumer builds and transitive axiom checks are pending and will be recorded
-  with the implemented consumers. Prefer this dependency's external exports
-  over duplicate local ports once their exact statements have been compared.
+- Verification: the geometry, group and induction consumers above passed
+  serialized Horizon kernel checks on 11 November 2026. Their recorded
+  transitive axiom audits use only `propext`, `Classical.choice`, and `Quot.sound`;
+  the induction assembly still explicitly assumes the geometric quotient bound.
+  These checks certify the imported dependency cone, not the whole upstream
+  library. Prefer this dependency's exports over duplicate local ports after
+  comparing exact statements. No new external code was copied for these bridges.
 
 ## Mathlib
 
