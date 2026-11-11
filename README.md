@@ -1,10 +1,23 @@
 # BostConjecture
 
-Lean formalization of Theorem 1.1 of this paper: for positive-rank Hermitian
-vector bundles over the ring of integers of any number field, maximal slopes
-are additive under the Hilbert tensor product. The project also proves the
-finite-family equality and the corresponding semistability statements.
-The underlying modules are finite projective; they need not be free.
+The current target is Theorem 1.1 of [this paper](bost.pdf), revised 10 November
+2026: maximal slopes are additive under orthogonal tensor products of
+positive-rank Hermitian adelic vector bundles on proper adelic curves over
+countable fields of characteristic zero. Archimedean norms are the usual
+real/complex ones; tensor norms are Hilbert at Archimedean places and epsilon
+at the other places. The target includes finite families and semistability.
+
+**Status:** migration from [the previous number-field manuscript](old.pdf) is
+in progress. The declarations and verification account below describe the
+existing number-field implementation, not completion of the adelic theorem.
+The new development reuses ArakelovGeometry at
+`0a608c4f219c4de669be8b6b1a1bc47f996d8d72`, HarderNarasimhan at
+`14b3090e1e169b77fe381102a1289f24c2b08a11`, and applicable existing modules.
+Weighted tensor HN compatibility is now required by the simultaneous induction.
+New source reuse is recorded in [CONTRIBUTIONS.md](CONTRIBUTIONS.md).
+
+In the previous number-field implementation, underlying modules are finite
+projective and need not be free.
 
 The principal declarations, in namespace
 `BostConjecture.Arithmetic.HermitianMetric`, are:
@@ -17,8 +30,8 @@ The principal declarations, in namespace
 The entry point is [BostConjecture.lean](BostConjecture.lean).
 The final proofs are in [Main/MaxSlope](BostConjecture/Main/MaxSlope) and
 [Main/TensorSemistability](BostConjecture/Main/TensorSemistability).
-Weighted Harder–Narasimhan compatibility, effective rates and the appendices
-of this paper are outside this formalization's target.
+Effective rates and the appendices remain outside the new target unless needed
+by its proof.
 
 `maxSlope` is defined in
 [HN/MaxSlope.lean](BostConjecture/Arithmetic/HN/MaxSlope.lean) as

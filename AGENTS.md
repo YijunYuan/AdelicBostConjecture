@@ -1,16 +1,21 @@
 # BostConjecture
 
-The target is Theorem 1.1 of this paper: maximal slopes are additive under
-Hilbert tensor products of positive-rank Hermitian vector bundles over the
-ring of integers of every number field, with the finite-family consequence.
-Refer to the manuscript as "this paper" in documentation. The Euclidean case
-is not a substitute for the number-field statement.
+The target is Theorem 1.1 of `bost.pdf` (revised 10 November 2026): maximal
+slopes are additive under orthogonal tensor products of positive-rank Hermitian
+adelic vector bundles on a proper adelic curve over any countable field of
+characteristic zero, with the finite-family and semistability consequences.
+Archimedean absolute values are the usual real/complex ones; tensor norms are
+Hilbert at Archimedean places and epsilon norms at other places. `old.pdf` is
+the previous number-field target; its implementation is reusable infrastructure,
+not a proof of the new target. Refer to the current manuscript as "this paper".
 
 - Formalize only the definitions and results actually needed by the target.
-  Reuse checked mathlib results; do not reproduce an entire cited theory when
-  a smaller proved special case suffices. The effective rate, weighted
-  Harder–Narasimhan compatibility and appendices are outside the initial target
-  unless a verified dependency requires them.
+  Reuse mathlib, the pinned HarderNarasimhan and ArakelovGeometry libraries, and
+  existing project code before writing replacements. Search other suitable
+  formalizations for genuine missing producers. Do not reproduce an entire
+  cited theory when a proved special case suffices. Weighted tensor HN
+  compatibility is in scope as the simultaneous rank-induction invariant.
+  The effective rate and appendices remain outside scope unless needed.
 - The manuscript is a proposed proof. Check its load-bearing steps before
   encoding them; record genuine gaps and repair them mathematically. Never
   weaken the target, assume tensor semistability, or introduce a target-shaped
@@ -29,8 +34,12 @@ is not a substitute for the number-field statement.
   path/declarations, license, modifications and project consumers in
   `CONTRIBUTIONS.md`; preserve license and attribution notices. Check the reused
   dependency cone for unproved assumptions and toolchain compatibility.
-- Place selectively copied source under `BostConjecture/ExternalCode/`, grouped
-  by origin, with source documentation and upstream namespaces preserved.
+- Prefer ArakelovGeometry's exports when external declarations are duplicated.
+  Check actual statements and adaptation differences before removing a local copy.
+  Place new selectively copied source under `BostConjecture/ExternalResults/`,
+  grouped by origin, with source documentation and upstream namespaces preserved.
+  Existing `ExternalCode/` ports remain available until their consumers have
+  been migrated or shown unnecessary for the new target.
   Compile it within the single `BostConjecture` library. Original code uses
   Apache-2.0; retain external licenses and attribution.
 - Keep source Lean and imports small; avoid unused abstractions and duplicate
@@ -39,3 +48,14 @@ is not a substitute for the number-field statement.
 The user has authorized the setup batches, necessary edits and checks, and
 continued work toward the target without repeated approval questions. This is
 not authorization to publish, push to a remote, or run unrelated work.
+
+## Parallel execution
+
+The interactive coordinator schedules at most six Horizon runs and monitors
+memory. Worker runs must not launch further runs. Work only in the task's
+assigned paths; others are editing the same tree, so never revert their work.
+Coordinate shared interfaces through the inbox before changing another scope.
+Use `horizon check` for kernel checks, with `LEAN_NUM_THREADS=2`; do not start
+independent broad builds. Release unused LSP sessions. The coordinator owns
+the root import, dependency pins, project instructions and final integration.
+Use explicit pathspec ledger commits. Do not edit `.lake/packages/` dependencies.

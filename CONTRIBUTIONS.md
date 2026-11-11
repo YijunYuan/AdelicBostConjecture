@@ -1,11 +1,13 @@
 # Reused formalizations
 
-This project formalizes Theorem 1.1 of this paper for arbitrary number fields
-and positive-rank Hermitian bundles. This file records external source reuse;
+This project targets Theorem 1.1 of `bost.pdf` over proper adelic curves with
+countable characteristic-zero fields. Existing number-field proofs from
+`old.pdf` are reused where applicable. This file records external source reuse;
 it does not attribute the upstream proofs to the project author.
 
-Mathlib and HarderNarasimhan are pinned Lake dependencies. All selectively
-copied or adapted source is under `BostConjecture/ExternalCode/`, grouped by
+Mathlib, HarderNarasimhan and ArakelovGeometry are pinned Lake dependencies.
+New selectively copied source belongs under `BostConjecture/ExternalResults/`;
+existing copied or adapted source is under `BostConjecture/ExternalCode/`, grouped by
 origin and compiled as part of the single `BostConjecture` library. Module
 paths describe file organization; public declaration namespaces retain their
 upstream names. The substantially adapted Garnir proofs keep the existing
@@ -22,6 +24,24 @@ redundant upstream source snapshots are omitted. No complete upstream build is
 claimed by checking the selected dependency cone. The retained source is further
 restricted to dependencies of the four principal theorems; historical manifests
 may therefore describe declarations or modules that have since been removed.
+
+## ArakelovGeometry: adelic foundations and instability filtrations
+
+- Repository: <https://github.com/YijunYuan/ArakelovGeometry> (private).
+- Revision: `0a608c4f219c4de669be8b6b1a1bc47f996d8d72`.
+- License: Apache-2.0; retained in the pinned Lake dependency.
+- Integration: unchanged dependency, fetched by SSH; Lean/mathlib 4.35.0 and
+  HarderNarasimhan `14b3090e1e169b77fe381102a1289f24c2b08a11` match this project.
+- Intended consumers: the adelic implementation of this paper's Sections 6–7,
+  using actual completed norms, degrees, HN filtrations, Plucker invariants and
+  `slope_sum_le_tensor_quotient_of_not_geometricallySemistable`.
+- Boundary: the last result retains the smaller-rank tensor-HN induction
+  hypothesis; this project must discharge it by simultaneous rank induction.
+  Its existence does not prove the geometric semistable branch or Theorem 1.1.
+- Verification: source interfaces and pins inspected during setup. Local
+  consumer builds and transitive axiom checks are pending and will be recorded
+  with the implemented consumers. Prefer this dependency's external exports
+  over duplicate local ports once their exact statements have been compared.
 
 ## Mathlib
 
