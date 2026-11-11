@@ -51,6 +51,20 @@ may therefore describe declarations or modules that have since been removed.
   mean-slope formula feeds the determinant-Specht product degree calculation;
   finite maximal-slope additivity remains an explicit consequence of binary
   additivity until the main theorem is assembled. No upstream source is copied.
+- `Adelic/Contraction/PairingBaseChange` generalizes the completed-map arguments
+  of `AdelicVectorBundle/Tensor/PairMap.lean` to independent carrier universes,
+  using its imported seminorm-map producers. In `PairingNorm`, the private
+  `multilinear_bound_of_generator_bounds` adapts the proof of
+  `AdelicVectorBundle/ScalarExtension/Degree.lean`'s private
+  `seminorm_multilinearMap_le_of_linear_bound` to dependent generator sets and
+  weights. This bound feeds finite-place regrouping, `dualRegroupEquiv_norm_le`,
+  and finally the actual `canonicalPairing_norm_le`. These are local adaptations
+  of proof arguments; the pinned dependency itself is unchanged.
+- `Adelic/Slope/{GeometricSubspace,GeometricQuotient}` consume the actual
+  pairing contraction, the Specht covolume limit, and unchanged exports from
+  `Construction/Tensor/Countable`, `Slope/{Quotient,DualUpper}`, norm-family
+  pushforward composition, and duality. The resulting geometric quotient bound
+  is unconditional and uses the actual induced and quotient norms.
 - Boundary: the last result retains the smaller-rank tensor-HN induction
   hypothesis; this project must discharge it by simultaneous rank induction.
   Its existence does not prove the geometric semistable branch or Theorem 1.1.
@@ -60,7 +74,8 @@ may therefore describe declarations or modules that have since been removed.
   the induction assembly still explicitly assumes the geometric quotient bound.
   These checks certify the imported dependency cone, not the whole upstream
   library. Prefer this dependency's exports over duplicate local ports after
-  comparing exact statements. No ArakelovGeometry source was copied or modified. The additional TauCeti
+  comparing exact statements. The ArakelovGeometry dependency is unmodified;
+  local proof adaptations are identified above. The additional TauCeti
   symmetric-power adaptation is recorded below.
 
 ## Mathlib
