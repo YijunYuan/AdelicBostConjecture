@@ -28,7 +28,10 @@ lean:
 - .lake/packages/ArakelovGeometry/ArakelovGeometry/AdelicVectorBundle/Tensor/Hermitian/InnerProduct.lean
 - .lake/packages/ArakelovGeometry/ArakelovGeometry/InvariantTheory/Plucker.lean
 - BostConjecture/Adelic/Basic.lean
+- BostConjecture/Adelic/Contraction/Archimedean.lean
 - BostConjecture/Adelic/Contraction/Determinant.lean
+- BostConjecture/Adelic/Contraction/FiniteDeterminant.lean
+- BostConjecture/Adelic/Contraction/FiniteSpecht.lean
 - BostConjecture/Adelic/Contraction/Lattice.lean
 - BostConjecture/Adelic/Geometry/Binary.lean
 - BostConjecture/Adelic/Geometry/Nonvanishing.lean
@@ -51,6 +54,7 @@ lean:
 - BostConjecture/Adelic/Slope/CovolumeLimit.lean
 - BostConjecture/Adelic/Slope/DeterminantPower.lean
 - BostConjecture/Adelic/Slope/DeterminantSpecht.lean
+- BostConjecture/Adelic/Slope/DeterminantSpechtDegree.lean
 - BostConjecture/Adelic/Slope/DeterminantSpechtTensor.lean
 - BostConjecture/Adelic/Slope/DualQuotient.lean
 - BostConjecture/Adelic/Specht/Bundle.lean

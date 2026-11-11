@@ -8,6 +8,7 @@ module
 public import BostConjecture.Main.MaxSlope.PiTensor -- shake: keep
 public import BostConjecture.Adelic.Basic -- shake: keep
 public import BostConjecture.Adelic.Contraction.Determinant -- shake: keep
+public import BostConjecture.Adelic.Contraction.FiniteSpecht -- shake: keep
 public import BostConjecture.Adelic.Contraction.Lattice -- shake: keep
 public import BostConjecture.Adelic.Geometry.Binary -- shake: keep
 public import BostConjecture.Adelic.Geometry.Quotient -- shake: keep
@@ -20,6 +21,7 @@ public import BostConjecture.Adelic.Slope.BoolTensor -- shake: keep
 public import BostConjecture.Adelic.Slope.Contraction -- shake: keep
 public import BostConjecture.Adelic.Slope.CovolumeLimit -- shake: keep
 public import BostConjecture.Adelic.Slope.DeterminantSpecht -- shake: keep
+public import BostConjecture.Adelic.Slope.DeterminantSpechtDegree -- shake: keep
 public import BostConjecture.Adelic.Slope.DeterminantSpechtTensor -- shake: keep
 public import BostConjecture.Adelic.Slope.DualQuotient -- shake: keep
 public import BostConjecture.Adelic.Specht.Semistability -- shake: keep
