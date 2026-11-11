@@ -6,6 +6,7 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Adelic.Contraction.FiniteDeterminant
+public import BostConjecture.Adelic.Contraction.Archimedean
 public import BostConjecture.Adelic.Specht.Bundle
 public import ArakelovGeometry.AdelicVectorBundle.Tensor.Hermitian.InnerProduct
 
@@ -22,8 +23,11 @@ noncomputable section
 
 namespace BostConjecture.Adelic.Contraction
 
-open Module ArakelovGeometry Geometry Specht OAI.Saxl
+open Module ArakelovGeometry Specht OAI.Saxl
+open BostConjecture.Geometry
 open scoped TensorProduct
+
+section Lattice
 
 variable {K E : Type*} [Field K] [CharZero K] {S : AdelicStructure K}
   [AddCommGroup E] [Module K E] [FiniteDimensional K E]
@@ -53,5 +57,57 @@ theorem orthogonal_freeLatticeMap_completed_le
   rw [NormFamily.orthogonalTensor_norm_of_finite _ hN _ ω hω,
     latticeNormFamily_norm_finite S t c ω hω, fibreBasisCoordinates_cancel]
   exact injective_freeLatticeMap_completed_le ξ ω hω hk t b c _
+
+end Lattice
+
+section Bundle
+
+universe u v
+variable {K : Type u} [Field K] [CharZero K] {S : AdelicStructure.{u, v} K}
+  {E : Type u} [AddCommGroup E] [Module K E] [FiniteDimensional K E]
+  (V : AdelicVectorBundle S E)
+  (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
+  (hcount : S.HasCommonCountableDenseSubfield) (hV : V.IsHermitian hN)
+
+set_option maxHeartbeats 800000 in
+set_option backward.isDefEq.respectTransparency false in
+/-- The existing determinant embedding contracts for the prescribed completed
+norms at every non-Archimedean place, including trivial valuations. -/
+theorem projectiveDeterminantMap_norm_finite {n k : ℕ} (hk : 0 < k)
+    (t : Tableau n (rectangle (finrank K E) k))
+    (c : Basis (Fin (finrank K (K ⊗[ℤ] orbitLattice t))) ℤ (orbitLattice t))
+    (ω : S.Ω) (hω : ω ∈ S.Ωfin)
+    (x : (S.ϕ ω).Completion ⊗[K]
+      ((⨂[K] (_ : Fin k), ⋀[K]^(finrank K E) E) ⊗[K] (K ⊗[ℤ] orbitLattice t))) :
+    (NormFamily.orthogonalTensor (fun _ : Fin n => V.toNormFamily) hN (fun _ => hV)).norm ω
+      ((projectiveDeterminantMap hk t
+        (fun p => congrFun (Module.rankAtStalk_eq_finrank_of_free (R := K) (M := E)) p)).baseChange
+          (S.ϕ ω).Completion x) ≤ (determinantSpechtBundle V hN hcount k t c).norm ω x := by
+  let b := (Module.finBasis (S.ϕ ω).Completion ((S.ϕ ω).Completion ⊗[K] E)).reindex
+    (finCongr Module.finrank_baseChange)
+  let e := determinantTwistBaseChangeEquiv (R := K) (S := (S.ϕ ω).Completion)
+    (M := E) (orbitLattice t) k (finrank K E)
+  obtain ⟨z, hz⟩ := exists_determinantPower_tmul b (e x)
+  have hx : x = e.symm ((⨂ₜ[(S.ϕ ω).Completion] (_ : Fin k),
+      exteriorPower.ιMulti (S.ϕ ω).Completion (finrank K E) b)
+        ⊗ₜ[(S.ϕ ω).Completion] z) := by
+    rw [← hz, LinearEquiv.symm_apply_apply]
+  rw [hx]
+  change (NormFamily.orthogonalTensor _ hN _).norm ω
+    ((projectiveDeterminantMap hk t _).baseChange (S.ϕ ω).Completion
+      ((determinantTwistBaseChangeEquiv (R := K) (S := (S.ϕ ω).Completion) (M := E)
+        (orbitLattice t) k (finrank K E)).symm _)) ≤ _
+  rw [projectiveDeterminantMap_baseChange_generator]
+  have hn := orthogonal_freeLatticeMap_completed_le V.toNormFamily hN hV hk t c ω hω b
+    ((TensorProduct.AlgebraTensorModule.cancelBaseChange ℤ K (S.ϕ ω).Completion
+      (S.ϕ ω).Completion (orbitLattice t)).symm z)
+  rw [LinearEquiv.apply_symm_apply] at hn
+  refine hn.trans_eq ?_
+  change _ = (determinantSpechtBundle V hN hcount k t c).norm ω
+    ((determinantTwistBaseChangeEquiv (R := K) (S := (S.ϕ ω).Completion) (M := E)
+      (orbitLattice t) k (finrank K E)).symm _)
+  rw [determinantSpechtBundle_norm_tprod]
+  simp only [Finset.prod_const, Finset.card_univ, Fintype.card_fin]
+end Bundle
 
 end BostConjecture.Adelic.Contraction

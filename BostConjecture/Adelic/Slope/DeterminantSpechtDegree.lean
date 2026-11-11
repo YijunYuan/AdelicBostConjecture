@@ -5,7 +5,7 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Adelic.Slope.DeterminantSpechtTensor
+public import BostConjecture.Adelic.Slope.DeterminantSpecht
 public import BostConjecture.Adelic.Induction.FiniteSlopes
 public import ArakelovGeometry.AdelicVectorBundle.Slope.DualUpper
 
@@ -26,10 +26,10 @@ namespace BostConjecture.Adelic
 
 open ArakelovGeometry ArakelovGeometry.AdelicVectorBundle Specht Module
 
-universe u v
+universe u v w
 
 variable {K : Type u} [Field K] [CharZero K] {S : AdelicStructure.{u, v} K}
-  [S.IsProper] {ι : Type u} [Fintype ι] [Nonempty ι]
+  [S.IsProper] {ι : Type w} [Fintype ι] [Nonempty ι]
   {E : ι → Type u} [∀ i, AddCommGroup (E i)] [∀ i, Module K (E i)]
   [∀ i, FiniteDimensional K (E i)] (V : ∀ i, AdelicVectorBundle S (E i))
   (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
@@ -47,9 +47,15 @@ theorem determinantSpechtBundle_tensor_slope_rectangle :
         (V i) hN hcount (k i) (t i) (b i))).slope (Or.inr hcount) hN =
       ∑ i, ((n i : ℝ) * (V i).slope (Or.inr hcount) hN -
         (S.v S.Ωinf).toReal * rectangleLogCovolume (finrank K (E i)) (k i)) := by
-  rw [slope_orthogonalTensorOfMeasurableBase _ _ _ _
-    (fun i => (determinantSpechtBundle_isMeanSlopeSemistable_and_dual
-      (V i) hN hcount (k i) (t i) (b i)).1.1)]
+  have hr (i : ι) : 0 < finrank K
+      ((⨂[K] (_ : Fin (k i)), ⋀[K]^(finrank K (E i)) (E i)) ⊗[K]
+        (K ⊗[ℤ] orbitLattice (t i))) := by
+    let := Arithmetic.Specht.orbitLattice_baseChange_nontrivial K (t i)
+    have hp : finrank K (⨂[K] (_ : Fin (k i)), ⋀[K]^(finrank K (E i)) (E i)) = 1 :=
+      determinantPower_isLine (V i) (Or.inr hcount) hN (k i)
+    simpa only [Module.finrank_tensorProduct, hp, one_mul] using
+      (finrank_pos : 0 < finrank K (K ⊗[ℤ] orbitLattice (t i)))
+  rw [slope_orthogonalTensorOfMeasurableBase _ _ _ _ hr]
   exact Finset.sum_congr rfl fun i _ =>
     determinantSpechtBundle_slope_rectangle (V i) hN hcount (k i) (t i) (b i)
 
