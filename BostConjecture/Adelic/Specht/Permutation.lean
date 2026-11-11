@@ -8,6 +8,7 @@ module
 public import BostConjecture.Adelic.Specht.Bundle
 public import BostConjecture.Adelic.Specht.IntegralNorm
 public import BostConjecture.Arithmetic.Specht.Representation
+import Mathlib.Analysis.Normed.Group.Ultra
 
 /-!
 # Isometries of the constant Specht norm family
@@ -39,8 +40,8 @@ theorem latticeNormFamily_basis_independent (b : Basis ι ℤ (orbitLattice t))
   · rw [latticeNormFamily_norm_infinite S t b ω hω,
       latticeNormFamily_norm_infinite S t c ω hω]
   · have hf : ω ∈ S.Ωfin := not_not.mp hω
-    letI : IsUltrametricDist (S.ϕ ω).Completion :=
-      IsUltrametricDist.isUltrametricDist_of_forall_norm_add_le_max_norm
+    let : IsUltrametricDist (S.ϕ ω).Completion :=
+      IsUltrametricDist.isUltrametricDist_iff_isNonarchimedean_norm.mpr
         (S.norm_add_le_max_of_finite ω hf)
     rw [latticeNormFamily_norm_finite S t b ω hf,
       latticeNormFamily_norm_finite S t c ω hf,
@@ -59,13 +60,13 @@ theorem latticeNormFamily_orbitAction (b : Basis ι ℤ (orbitLattice t))
   · simp_rw [latticeNormFamily_norm_infinite S t b ω hω,
       fibreWordCoordinates_cancel, fibreOrbitAction_cancel, wordCoordinates_orbitAction]
     congr 1
-    exact (Equiv.arrowCongr g.symm (Equiv.refl (Fin (μ.colLen 0)))).sum_comp
-      (fun w => ‖wordCoordinates (S.ϕ ω).Completion t
-        (TensorProduct.AlgebraTensorModule.cancelBaseChange ℤ K
-          (S.ϕ ω).Completion (S.ϕ ω).Completion (orbitLattice t) x) w‖ ^ 2)
+    simpa only [fibreWordCoordinates_cancel, Equiv.arrowCongr, Equiv.coe_fn_mk,
+      Equiv.symm_symm, Equiv.coe_refl, Function.id_comp] using
+      (Equiv.arrowCongr g.symm (Equiv.refl (Fin (μ.colLen 0)))).sum_comp
+        (fun w ↦ ‖fibreWordCoordinates t x w‖ ^ 2)
   · have hf : ω ∈ S.Ωfin := not_not.mp hω
-    letI : IsUltrametricDist (S.ϕ ω).Completion :=
-      IsUltrametricDist.isUltrametricDist_of_forall_norm_add_le_max_norm
+    let : IsUltrametricDist (S.ϕ ω).Completion :=
+      IsUltrametricDist.isUltrametricDist_iff_isNonarchimedean_norm.mpr
         (S.norm_add_le_max_of_finite ω hf)
     rw [latticeNormFamily_norm_finite S t b ω hf,
       latticeNormFamily_norm_finite S t b ω hf,

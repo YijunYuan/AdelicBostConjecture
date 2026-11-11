@@ -6,8 +6,9 @@ carry restricted norms, and quotients always carry quotient norms.
 
 \begin{definition}[The adelic context]
 \label{def:adelic-context}
-\source{bost-adelic-2026:page-0001,bost-adelic-2026:page-0004}
+\source{bost-adelic-2026:page-0001,bost-adelic-2026:page-0003,bost-adelic-2026:page-0004}
 \lean{ArakelovGeometry.AdelicStructure, ArakelovGeometry.AdelicStructure.IsProper}
+\leanok
 An adelic curve consists of a field $K$, a measure space
 $(\Omega,\mathcal A,\nu)$, and an absolute value $|\cdot|_\omega$ on $K$
 for each $\omega\in\Omega$, such that
@@ -30,6 +31,7 @@ $m_\infty=\nu(\Omega_\infty)$.
 \uses{def:adelic-context}
 \source{bost-adelic-2026:page-0004}
 \lean{ArakelovGeometry.AdelicStructure.hasCommonCountableDenseSubfield_of_countable}
+\leanok
 There is a single countable subfield of $K$ whose image is dense in every
 $K_\omega$.
 \end{lemma}
@@ -44,6 +46,7 @@ trivially valued place, and countability is one of our hypotheses on $K$.
 \uses{def:adelic-context}
 \source{bost-adelic-2026:page-0004}
 \lean{ArakelovGeometry.AdelicVectorBundle, ArakelovGeometry.AdelicVectorBundle.IsHermitian}
+\leanok
 For a $K$-vector space $E$, put $E_\omega=K_\omega\otimes_K E$ and
 $E^\vee=\operatorname{Hom}_K(E,K)$. A norm family $\xi$ assigns a norm
 $\|\cdot\|_\omega$ to $E_\omega$. Its dual family is the operator norm
@@ -119,6 +122,7 @@ places or number-field assumption is imposed.
 \uses{def:adelic-context,def:hermitian-adelic-bundle,def:adelic-induced-norms,lem:countable-common-density}
 \source{bost-adelic-2026:page-0005,bost-adelic-2026:page-0006}
 \lean{ArakelovGeometry.AdelicVectorBundle.degree, ArakelovGeometry.AdelicVectorBundle.slope, ArakelovGeometry.AdelicVectorBundle.maximalSlope, ArakelovGeometry.AdelicVectorBundle.IsMeanSlopeSemistable}
+\leanok
 For a Hermitian adelic line $\overline L$ and $s\in L\setminus\{0\}$,
 define
 \[
@@ -149,6 +153,7 @@ changes the integral by $-\int\log|a|_\omega\,d\nu=0$.
 \uses{def:adelic-slope,def:adelic-induced-norms}
 \source{bost-adelic-2026:page-0006}
 \lean{ArakelovGeometry.AdelicVectorBundle.degree_restrict_add_degree_quotient_eq_of_isHermitian}
+\leanok
 For every subspace $A$ of a Hermitian adelic bundle $\overline E$,
 \[
  \widehat{\deg}(\overline E)
@@ -182,6 +187,7 @@ These concern mean slopes and do not assert tensor semistability.
 \uses{def:adelic-slope,def:adelic-induced-norms}
 \source{bost-adelic-2026:page-0006}
 \lean{ArakelovGeometry.AdelicVectorBundle.slope_add_slope_dual_eq_zero_of_isHermitian, ArakelovGeometry.AdelicVectorBundle.minimalSlope_dual_add_maximalSlope_eq_zero_of_isHermitian, ArakelovGeometry.AdelicVectorBundle.minimalSlope_eq_iInf_slope_quotient}
+\leanok
 For a positive-rank Hermitian adelic bundle define
 \[
  \widehat\mu_{\min}(\overline E)
@@ -213,6 +219,7 @@ this paper; in particular every quotient carries its actual quotient norm.
 \uses{def:adelic-slope,def:adelic-induced-norms,lem:degree-exact-sequence,lem:slope-duality}
 \source{bost-adelic-2026:page-0006}
 \lean{ArakelovGeometry.AdelicVectorBundle.isMeanSlopeSemistable_dual_iff_of_isHermitian}
+\leanok
 A positive-rank Hermitian adelic bundle is semistable if and only if its
 dual is semistable.
 \end{lemma}
@@ -242,6 +249,7 @@ the converse.
 \uses{def:adelic-slope,lem:degree-exact-sequence,lem:slope-duality}
 \source{bost-adelic-2026:page-0007}
 \lean{ArakelovGeometry.AdelicVectorBundle.hermitianHNFlag, ArakelovGeometry.AdelicVectorBundle.hermitianHNFlag_strictMono, ArakelovGeometry.AdelicVectorBundle.isMeanSlopeSemistable_hermitianHNFactor, ArakelovGeometry.AdelicVectorBundle.hermitianHNFactor_slope_strictAnti, ArakelovGeometry.AdelicVectorBundle.hermitianHNOrderedSlope_zero_eq_maximalSlope, ArakelovGeometry.AdelicVectorBundle.slope_hermitianHNFactor_last_eq_minimalSlope, ArakelovGeometry.AdelicVectorBundle.sum_hermitianHNFactor_rank_mul_slope_eq_degree, ArakelovGeometry.AdelicVectorBundle.hermitianHNFiltration}
+\leanok
 Every positive-rank Hermitian adelic bundle $\overline E$ has a flag
 \[
  0=E_0\subsetneq E_1\subsetneq\cdots\subsetneq E_\ell=E
@@ -285,6 +293,7 @@ values and left-continuity directly.
 \uses{thm:hermitian-hn-filtration}
 \source{bost-adelic-2026:page-0007}
 \lean{ArakelovGeometry.AdelicVectorBundle.semistableFlag_eq_hermitianHNTerm, ArakelovGeometry.AdelicVectorBundle.hermitianHNFiltration_unique}
+\leanok
 Any strict flag from $0$ to $E$ with semistable induced graded bundles
 and strictly decreasing graded slopes defines the same real filtration
 $\mathcal H_E$. Consequently its length, its subspaces, and its graded
@@ -322,6 +331,7 @@ real filtration.
 \uses{thm:hermitian-hn-filtration}
 \source{bost-adelic-2026:page-0006,bost-adelic-2026:page-0007}
 \lean{ArakelovGeometry.AdelicVectorBundle.exists_unique_largest_maximalSlope_subspace}
+\leanok
 For every positive-rank Hermitian adelic bundle $\overline E$, there is a
 unique nonzero subspace $D_E\subset E$ such that
 \[
@@ -351,6 +361,7 @@ The subsequent group argument does not require a tensor-product HN theorem.
 \uses{thm:largest-destabilizing-subspace,def:adelic-induced-norms}
 \source{bost-adelic-2026:page-0007}
 \lean{ArakelovGeometry.AdelicVectorBundle.map_destabilizingSubspace_eq_of_completed_isometry}
+\leanok
 Let $u:E\xrightarrow{\sim}F$ be a $K$-linear isomorphism between
 positive-rank Hermitian adelic bundles such that every
 $u_\omega:E_\omega\to F_\omega$ is an isometry. Then $u(D_E)=D_F$.
@@ -373,6 +384,7 @@ $u^{-1}(D_F)\subset D_E$, proving equality.
 \uses{lem:isometry-preserves-destabilizer,def:adelic-slope}
 \source{bost-adelic-2026:page-0008}
 \lean{ArakelovGeometry.AdelicVectorBundle.isMeanSlopeSemistable_of_isIrreducible}
+\leanok
 Let a group $G$ act $K$-linearly on a positive-rank Hermitian adelic
 bundle $\overline E$. Suppose its representation is irreducible over $K$
 and every completed action is isometric:
@@ -395,8 +407,10 @@ finiteness of $G$; the statement above records this harmless generalization.
 \begin{lemma}[The action spans all endomorphisms]
 \label{lem:irreducible-action-span}
 \lean{BostConjecture.Arithmetic.span_representation_eq_top}
-Let $L$ be an algebraically closed field, $G$ a group, and $V$ a nonzero
-finite-dimensional irreducible $L$-representation. Then
+\leanok
+Let $L$ be an algebraically closed field and $G$ a group. Let $V$ be a nonzero
+finite dimensional vector space over $L$, with an irreducible action $\rho$
+of $G$. Then
 \[
  \operatorname{span}_L\{\rho(g):g\in G\}
        =\operatorname{End}_L(V).
@@ -419,6 +433,7 @@ $\operatorname{End}_L(V)$, as required.
 \uses{lem:irreducible-action-span}
 \source{bost-adelic-2026:page-0008}
 \lean{BostConjecture.Arithmetic.isIrreducible_independentPi_of_representationBaseChange}
+\leanok
 Let $I$ be a finite nonempty set, let $G_i$ be groups, and let $E_i$ be
 nonzero finite-dimensional $K$-representations. Suppose there is an
 algebraically closed extension $L/K$ such that each $L\otimes_K E_i$ is
@@ -461,6 +476,7 @@ $0<\dim_K A<\dim_K T$. This contradicts the irreducibility just proved.
 \uses{def:adelic-induced-norms}
 \source{bost-adelic-2026:page-0008}
 \lean{ArakelovGeometry.NormFamily.orthogonalTensor_norm_independentPiRepresentation}
+\leanok
 Let $I$ be a finite nonempty set and, for each $i\in I$, let $G_i$ act
 $K$-linearly on a positive-rank Hermitian adelic bundle $\overline E_i$.
 Suppose each $G_i$ acts by isometries on every completed fibre of
@@ -486,6 +502,7 @@ Apply this with $u_i=g_i$ on each completed fibre.
 \uses{lem:group-semistability,lem:independent-product-irreducible,lem:independent-product-isometry,lem:adelic-dual-semistability}
 \source{bost-adelic-2026:page-0008}
 \lean{ArakelovGeometry.AdelicVectorBundle.isMeanSlopeSemistable_orthogonalTensor_and_dual_of_isIrreducible_baseChange}
+\leanok
 Let $(G_i,\overline E_i)_{i\in I}$ be a finite nonempty family of
 positive-rank Hermitian adelic bundles with group actions preserving
 every completed norm. Suppose that, over one common algebraically
@@ -500,31 +517,40 @@ The tensor bundle has positive rank $\prod_i\dim_K E_i$.
 Lemma~\ref{lem:independent-product-irreducible} proves irreducibility
 of its independent product representation, and
 Lemma~\ref{lem:independent-product-isometry} proves preservation of
-its completed norms. Lemma~\ref{lem:group-semistability} gives its
-semistability. Lemma~\ref{lem:adelic-dual-semistability} gives
-semistability of its dual.
+its completed norms. Apply Lemma~\ref{lem:group-semistability} to obtain
+semistability. The dual is semistable by
+Lemma~\ref{lem:adelic-dual-semistability}.
 \end{proof}
 
 \begin{corollary}[Line factors in an irreducible isometric action]
 \label{cor:group-line-twist-semistability}
-\uses{lem:independent-group-semistability}
-\notready
-Under the hypotheses of Lemma~\ref{lem:independent-group-semistability},
-let $\overline L$ be any Hermitian adelic line bundle. Then
-$\overline L\otimes\bigotimes_i\overline E_i$ and its dual are
-semistable.
+\uses{lem:group-semistability,lem:independent-product-irreducible,lem:independent-product-isometry,lem:adelic-dual-semistability}
+\lean{ArakelovGeometry.AdelicVectorBundle.isMeanSlopeSemistable_lineTensor_and_dual_of_isIrreducible, BostConjecture.Arithmetic.isIrreducible_baseChange_trivialLineTensor}
+Let $G$ act irreducibly on a positive-rank Hermitian adelic bundle
+$\overline V$ by isometries of every completed fibre, and let
+$\overline L$ be any Hermitian adelic line bundle. Then
+$\overline L\otimes\overline V$ and its dual are semistable.
+The action on $L\otimes_K V$ is trivial on $L$ and the given action on $V$;
+it stays irreducible after every field extension over which the action on
+$V$ is irreducible.
+In particular this applies with
+$\overline V=\bigotimes_i\overline E_i$ under the hypotheses of
+Lemma~\ref{lem:independent-group-semistability}.
 \end{corollary}
 \begin{proof}
-Let the trivial group act trivially on $L$. This action preserves all
-completed norms and remains irreducible after every field extension,
-because a one-dimensional vector space has only the zero and whole
-subspaces. Add it to the family in
-Lemma~\ref{lem:independent-group-semistability} and apply that lemma.
-The canonical grouping of this finite tensor product as
-$L\otimes\bigotimes_i E_i$ is isometric. At Archimedean places this
-follows from the product formula for inner products. At other places,
-choosing $0\ne l\in L_\omega$ gives
-$\|l\otimes z\|=\|l\|\|z\|$ directly from the supremum formula,
-both before and after grouping. Since every tensor with a line factor
-has this form, the grouping preserves all norms.
+Give $L$ the trivial $G$-action. Choose $0\ne l\in L$. The isomorphism
+$V\to L\otimes_K V$, $v\mapsto l\otimes v$, intertwines the original
+action with the action $g(l'\otimes v)=l'\otimes gv$.
+This action is therefore irreducible. It preserves the completed tensor
+norms: the inner product argument and the change of dual functionals
+in Lemma~\ref{lem:independent-product-isometry} apply to
+$\operatorname{id}_{L_\omega}\otimes g_\omega$.
+Lemma~\ref{lem:group-semistability} proves semistability, and
+Lemma~\ref{lem:adelic-dual-semistability} proves it for the dual.
+Scalar-extending the displayed intertwining isomorphism proves the assertion
+about any field extension.
+For the indicated finite tensor bundle, irreducibility and completed
+isometry follow respectively from
+Lemmas~\ref{lem:independent-product-irreducible}
+and~\ref{lem:independent-product-isometry}.
 \end{proof}

@@ -21,10 +21,128 @@ noncomputable section
 
 open scoped TensorProduct
 
+universe u
+
 namespace BostConjecture.Arithmetic
 
-variable {K G D E : Type*} [Field K] [Group G]
+variable {K G : Type*} {D E : Type u} [Field K] [Group G]
+  [AddCommGroup D] [Module K D] [FiniteDimensional K D]
+  [AddCommGroup E] [Module K E]
+
+/-- A trivial one-dimensional factor does not change the representation. -/
+def trivialLineTensorEquiv (hD : Module.finrank K D = 1) (ρ : Representation K G E) :
+    ((Representation.trivial K G D).tprod ρ).Equiv ρ := by
+  let e : D ≃ₗ[K] K := LinearEquiv.ofFinrankEq D K
+    (hD.trans (Module.finrank_self K).symm)
+  refine Representation.Equiv.mk
+    ((TensorProduct.congr e (LinearEquiv.refl K E)).trans (TensorProduct.lid K E)) ?_
+  intro g
+  ext d x
+  simp
+
+/-- Tensoring an irreducible action with a trivial line preserves irreducibility. -/
+theorem isIrreducible_trivialLineTensor (hD : Module.finrank K D = 1)
+    (ρ : Representation K G E) [ρ.IsIrreducible] :
+    ((Representation.trivial K G D).tprod ρ).IsIrreducible :=
+  isIrreducible_of_equiv (trivialLineTensorEquiv hD ρ)
+
+/-- The line-factor representation equivalence survives any scalar extension. -/
+def trivialLineTensorBaseChangeEquiv (hD : Module.finrank K D = 1)
+    (ρ : Representation K G E) (L : Type*) [Field L] [Algebra K L] :
+    (representationBaseChange L ((Representation.trivial K G D).tprod ρ)).Equiv
+      (representationBaseChange L ρ) := by
+  let e := trivialLineTensorEquiv hD ρ
+  refine Representation.Equiv.mk (e.toLinearEquiv.baseChange K L _ _) ?_
+  intro g
+  change (e.toLinearMap.baseChange L).comp
+      ((((Representation.trivial K G D).tprod ρ) g).baseChange L) =
+    ((ρ g).baseChange L).comp (e.toLinearMap.baseChange L)
+  rw [← LinearMap.baseChange_comp, ← LinearMap.baseChange_comp, e.isIntertwining' g]
+
+/-- Absolute irreducibility is preserved by a trivial one-dimensional factor. -/
+theorem isIrreducible_baseChange_trivialLineTensor (hD : Module.finrank K D = 1)
+    (ρ : Representation K G E) (L : Type*) [Field L] [Algebra K L]
+    [(representationBaseChange L ρ).IsIrreducible] :
+    (representationBaseChange L ((Representation.trivial K G D).tprod ρ)).IsIrreducible :=
+  isIrreducible_of_equiv (trivialLineTensorBaseChangeEquiv hD ρ L)
+
+end BostConjecture.Arithmetic
+
+namespace ArakelovGeometry
+
+open BostConjecture.Arithmetic
+
+variable {K G : Type*} {D E : Type u} [Field K] [Group G] {S : AdelicStructure K}
   [AddCommGroup D] [Module K D] [FiniteDimensional K D]
   [AddCommGroup E] [Module K E] [FiniteDimensional K E]
 
-end BostConjecture.Arithmetic
+/-- A trivial line factor and an isometric action preserve the actual binary
+orthogonal tensor norms on every completed fibre. -/
+theorem NormFamily.orthogonalTensorPair_norm_trivialLineTensor
+    (ξ : NormFamily S D) (η : NormFamily S E)
+    (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
+    (hξ : ξ.IsHermitian hN) (hη : η.IsHermitian hN) (ρ : Representation K G E)
+    (hρ : ∀ g ω z, η.norm ω ((ρ g).baseChange (S.ϕ ω).Completion z) = η.norm ω z)
+    (g : G) (ω : S.Ω) (z : (S.ϕ ω).Completion ⊗[K] (D ⊗[K] E)) :
+    (ξ.orthogonalTensorPair η hN hξ hη).norm ω
+        ((((Representation.trivial K G D).tprod ρ) g).baseChange (S.ϕ ω).Completion z) =
+      (ξ.orthogonalTensorPair η hN hξ hη).norm ω z := by
+  let τ := (Representation.trivial K G D).tprod ρ
+  have hle (a : G) (x : (S.ϕ ω).Completion ⊗[K] (D ⊗[K] E)) :
+      (ξ.orthogonalTensorPair η hN hξ hη).norm ω
+          ((τ a).baseChange (S.ϕ ω).Completion x) ≤
+        (ξ.orthogonalTensorPair η hN hξ hη).norm ω x := by
+    apply NormFamily.orthogonalTensorPair_map_norm_le_of_norm_eq ξ η ξ η hN
+      hξ hη hξ hη (LinearMap.id) (ρ a) ω
+    · intro y
+      simp
+    · exact hρ a ω
+  apply le_antisymm (hle g z)
+  have hinv : (τ g⁻¹).baseChange (S.ϕ ω).Completion
+      ((τ g).baseChange (S.ϕ ω).Completion z) = z :=
+    (representationBaseChange (S.ϕ ω).Completion τ).inv_self_apply g z
+  simpa only [hinv] using hle g⁻¹ ((τ g).baseChange (S.ϕ ω).Completion z)
+
+namespace AdelicVectorBundle
+
+/-- A Hermitian line times an irreducible isometric bundle is semistable,
+on the actual binary tensor type used by the determinant--Specht pairing. -/
+theorem isMeanSlopeSemistable_lineTensor_of_isIrreducible [S.IsProper]
+    (L : AdelicVectorBundle S D) (V : AdelicVectorBundle S E)
+    (hS : DiscreteMeasurableSpace S.Ω ∨ S.HasCommonCountableDenseSubfield)
+    (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
+    (hL : L.IsHermitian hN) (hV : V.IsHermitian hN)
+    (hD : Module.finrank K D = 1) (hE : 0 < Module.finrank K E)
+    (ρ : Representation K G E) [ρ.IsIrreducible]
+    (hρ : ∀ g ω z, V.norm ω ((ρ g).baseChange (S.ϕ ω).Completion z) = V.norm ω z) :
+    (L.orthogonalTensorPair V hS hN hL hV).IsMeanSlopeSemistable hS hN := by
+  let : ((Representation.trivial K G D).tprod ρ).IsIrreducible :=
+    isIrreducible_trivialLineTensor hD ρ
+  apply isMeanSlopeSemistable_of_isIrreducible _ hS hN
+    (orthogonalTensorPair_isHermitian L V hS hN hL hV)
+    (by simpa only [Module.finrank_tensorProduct, hD, one_mul] using hE)
+    ((Representation.trivial K G D).tprod ρ)
+  exact NormFamily.orthogonalTensorPair_norm_trivialLineTensor
+    L.toNormFamily V.toNormFamily hN hL hV ρ hρ
+
+/-- The actual line tensor and its actual dual are both semistable. -/
+theorem isMeanSlopeSemistable_lineTensor_and_dual_of_isIrreducible [S.IsProper]
+    (L : AdelicVectorBundle S D) (V : AdelicVectorBundle S E)
+    (hS : DiscreteMeasurableSpace S.Ω ∨ S.HasCommonCountableDenseSubfield)
+    (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
+    (hL : L.IsHermitian hN) (hV : V.IsHermitian hN)
+    (hD : Module.finrank K D = 1) (hE : 0 < Module.finrank K E)
+    (ρ : Representation K G E) [ρ.IsIrreducible]
+    (hρ : ∀ g ω z, V.norm ω ((ρ g).baseChange (S.ϕ ω).Completion z) = V.norm ω z) :
+    (L.orthogonalTensorPair V hS hN hL hV).IsMeanSlopeSemistable hS hN ∧
+      ((L.orthogonalTensorPair V hS hN hL hV).dualOfMeasurableBase hS).IsMeanSlopeSemistable
+        hS hN := by
+  have hs := isMeanSlopeSemistable_lineTensor_of_isIrreducible
+    L V hS hN hL hV hD hE ρ hρ
+  exact ⟨hs, (isMeanSlopeSemistable_dual_iff_of_isHermitian
+      (L.orthogonalTensorPair V hS hN hL hV) hS hN
+      (orthogonalTensorPair_isHermitian L V hS hN hL hV) hs.1).mpr hs⟩
+
+end AdelicVectorBundle
+
+end ArakelovGeometry

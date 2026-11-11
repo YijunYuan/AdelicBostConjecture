@@ -6,6 +6,7 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Adelic.Contraction.Lattice
+public import BostConjecture.Adelic.Contraction.Determinant
 public import BostConjecture.Geometry.Determinant.Frame
 
 /-!
@@ -75,7 +76,7 @@ theorem injective_freeDeterminantMap_tprod_le
             ((∏ i, ‖b i‖) ^ k * ‖(c.baseChange L).equivFun z‖) :=
           mul_le_mul_of_nonneg_left (injective_freeLatticeMap_le hk t b c z)
             (Finset.prod_nonneg fun _ _ ↦ norm_nonneg _)
-        _ = _ := by ring
+        _ = _ := by simp only [Basis.equivFun_apply]; ring
     calc
       α ^ (a * k) * A ≤ α ^ (a * k) *
           ((∏ q, ‖determinantCoordinates b (η q)‖) * (∏ i, ‖b i‖) ^ k *
@@ -93,5 +94,43 @@ theorem injective_freeDeterminantMap_tprod_le
   apply le_of_tendsto hlim
   filter_upwards [Ioo_mem_nhdsLT (show (0 : ℝ) < 1 by norm_num)] with α hα'
   exact hα α hα'.1 hα'.2
+
+section Completed
+
+variable {K V : Type*} [Field K] {S : AdelicStructure K}
+  [AddCommGroup V] [Module K V] [FiniteDimensional K V]
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The determinant-twisted lattice estimate with the actual completed
+determinant norm. The nearly orthogonal basis premise is discharged by the
+completed determinant lower bound, including at trivially valued places. -/
+theorem injective_freeDeterminantMap_completed_tprod_le
+    (ξ : NormFamily S V) (ω : S.Ω) (hω : ω ∈ S.Ωfin)
+    (hk : 0 < k) (t : Tableau n (rectangle (Module.finrank K V) k))
+    (b₀ : Basis (Fin (Module.finrank K V)) (S.ϕ ω).Completion
+      ((S.ϕ ω).Completion ⊗[K] V))
+    (c : Basis κ ℤ (orbitLattice t))
+    (η : Fin k → ⋀[(S.ϕ ω).Completion]^(Module.finrank K V)
+      ((S.ϕ ω).Completion ⊗[K] V))
+    (z : (S.ϕ ω).Completion ⊗[ℤ] orbitLattice t) :
+    letI := ξ.fibreNormedAddCommGroup ω
+    letI := ξ.fibreNormedSpace ω
+    injectiveTensorSeminorm
+      (freeDeterminantMap hk t b₀ ((⨂ₜ[(S.ϕ ω).Completion] q, η q) ⊗ₜ[(S.ϕ ω).Completion] z)) ≤
+      (∏ q, ξ.determinant.norm ω
+        ((exteriorBaseChangeEquiv K (S.ϕ ω).Completion V (Module.finrank K V)).symm
+          (η q))) * ‖(c.baseChange (S.ϕ ω).Completion).equivFun z‖ := by
+  let := ξ.fibreNormedAddCommGroup ω
+  let := ξ.fibreNormedSpace ω
+  let : IsUltrametricDist (S.ϕ ω).Completion :=
+    (S.ϕ ω).isUltrametricDist_completion hω
+  let p := (ξ.determinant.norm ω).comp
+    (exteriorBaseChangeEquiv K (S.ϕ ω).Completion V (Module.finrank K V)).symm.toLinearMap
+  apply injective_freeDeterminantMap_tprod_le hk t b₀ c p
+  intro α hα hα1
+  obtain ⟨b, _, hb⟩ := exists_completed_basis_det_bound ξ ω hω hα hα1
+  exact ⟨b, hb⟩
+
+end Completed
 
 end BostConjecture.Adelic.Contraction
