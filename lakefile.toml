@@ -1,6 +1,7 @@
 name = "bostConjecture"
 version = "0.1.0"
 defaultTargets = ["BostConjecture"]
+weakLeanArgs = ["-j2"]
 
 [leanOptions]
 pp.unicode.fun = true # pretty-prints `fun a ↦ b`
@@ -20,3 +21,8 @@ rev = "14b3090e1e169b77fe381102a1289f24c2b08a11"
 
 [[lean_lib]]
 name = "BostConjecture"
+
+[[require]]
+name = "ArakelovGeometry"
+git = "git@github.com:YijunYuan/ArakelovGeometry.git"
+rev = "0a608c4f219c4de669be8b6b1a1bc47f996d8d72"
