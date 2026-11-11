@@ -554,21 +554,6 @@ this also proves the initial induction steps. No smaller-rank hypothesis
 is retained in the conclusion.
 \end{proof}
 
-\begin{theorem}[Tensor HN compatibility]
-\label{thm:tensor-hn-compatibility}
-\uses{prop:conditional-tensor-hn-assembly,thm:geometric-quotient-bound}
-\source{bost-adelic-2026:page-0032}
-\notready
-Suppose in addition that $K$ is countable. For Hermitian adelic bundles on $S$,
-$\mathcal H_{E\otimes F}=\mathcal H_E\otimes\mathcal H_F$.
-The tensor product of positive-rank semistable bundles is semistable.
-\end{theorem}
-\begin{proof}
-The geometric quotient inequality supplies exactly the assumption of
-the preceding proposition, for the original quotient norms. Apply that
-proposition to the given bundles.
-\end{proof}
-
 \begin{lemma}[Maximal slope from the actual tensor filtration]
 \label{lem:maximal-slope-from-tensor-hn}
 \uses{def:induction-filtrations,thm:hermitian-hn-filtration,lem:induction-tensor-degree,lem:tensor-filtration-weights}
@@ -594,6 +579,93 @@ Its image, with induced norms, has degree at least that of
 $\overline E_1\otimes\overline F_1$. Hence the maximal slope of the
 ambient tensor product is at least $a+b$. The ranks of $E_1,F_1$ are
 positive, so this supplies a nonzero subspace as required.
+\end{proof}
+
+\begin{lemma}[Isometries of binary orthogonal tensors]
+\label{lem:binary-tensor-isometry}
+\uses{lem:contraction-tensor-maps}
+\lean{ArakelovGeometry.NormFamily.orthogonalTensorPair_norm_congr}
+\leanok
+Let $e:E\simeq G$ and $f:F\simeq H$ be $K$-linear equivalences
+between Hermitian normed families. Suppose that their scalar extensions
+preserve the norms of all vectors at every completed place. Then
+$e\otimes f:E\otimes F\simeq G\otimes H$ preserves the full completed
+Hilbert/$\varepsilon$ tensor norms.
+\end{lemma}
+\begin{proof}
+The maps $e$ and $f$ satisfy the finite-place contraction and
+Archimedean isometry hypotheses of Lemma~\ref{lem:contraction-tensor-maps}.
+Apply it to the two-element family. The canonical identification of
+that finite tensor with the binary tensor commutes with these maps:
+both composites send a pure tensor $x\otimes y$ to $e(x)\otimes f(y)$,
+and pure tensors span. The same equality holds after scalar extension.
+Thus $e\otimes f$ is contracting on every completed fibre.
+The completed inverses $e^{-1},f^{-1}$ also preserve norms, since
+$\|e^{-1}z\|=\|e(e^{-1}z)\|=\|z\|$, and likewise for $f$.
+Applying the same contraction bound to their tensor product at
+$(e\otimes f)z$ gives the reverse inequality. Hence the norms are equal
+for every completed tensor $z$, including in rank zero.
+\end{proof}
+
+\begin{lemma}[The binary maximal-slope identity]
+\label{lem:binary-bost-identity}
+\uses{prop:conditional-tensor-hn-assembly,thm:geometric-quotient-bound,lem:binary-tensor-isometry,lem:maximal-slope-from-tensor-hn}
+\source{bost-adelic-2026:page-0001,bost-adelic-2026:page-0032}
+\lean{ArakelovGeometry.AdelicVectorBundle.maximalSlope_orthogonalTensorPair}
+\leanok
+Suppose $K$ is countable. For every pair of positive-rank Hermitian
+adelic bundles,
+\[
+ \widehat\mu_{\max}(\overline E\otimes\overline F)
+ =\widehat\mu_{\max}(\overline E)+\widehat\mu_{\max}(\overline F).
+\]
+\end{lemma}
+\begin{proof}
+Choose bases, giving $K$-linear equivalences $K^{r(E)}\simeq E$ and
+$K^{r(F)}\simeq F$, and pull back the given completed norms along them.
+These are actual adelic bundles: an equivalence preserves the norm
+families and transports measurability of their dual norms along its
+transpose. They remain Hermitian. The field is unchanged.
+The geometric quotient theorem supplies the hypothesis of
+Proposition~\ref{prop:conditional-tensor-hn-assembly} on these bundles.
+Their tensor HN identity and
+Lemma~\ref{lem:maximal-slope-from-tensor-hn} prove the displayed
+maximal-slope identity for the pulled-back bundles.
+
+The factor equivalences, and their tensor product by
+Lemma~\ref{lem:binary-tensor-isometry}, are completed isometries.
+Such an equivalence bijects nonzero subspaces and preserves their
+restricted norms, ranks, and determinant norms. It therefore preserves
+their degrees and slopes, and hence the supremum defining maximal slope.
+Transporting the identity along these three equivalences proves it for
+the original bundles.
+\end{proof}
+
+\begin{theorem}[Tensor HN compatibility]
+\label{thm:tensor-hn-compatibility}
+\uses{lem:binary-bost-identity,lem:induction-tensor-degree,lem:tensor-hn-identification,thm:hermitian-hn-filtration}
+\source{bost-adelic-2026:page-0032}
+\lean{ArakelovGeometry.AdelicVectorBundle.hermitianHNFiltration_orthogonalTensorPair,
+ArakelovGeometry.AdelicVectorBundle.isMeanSlopeSemistable_orthogonalTensorPair}
+\leanok
+Suppose in addition that $K$ is countable. For Hermitian adelic bundles on $S$,
+$\mathcal H_{E\otimes F}=\mathcal H_E\otimes\mathcal H_F$.
+The tensor product of positive-rank semistable bundles is semistable.
+\end{theorem}
+\begin{proof}
+For a positive-rank bundle semistability is equivalent to equality
+of maximal and mean slopes: semistability bounds every nonzero subspace
+slope by the mean, and the whole space attains that mean. For semistable
+factors the preceding binary identity and the tensor mean-slope formula
+therefore give equality of maximal and mean slopes of their tensor.
+Its rank is the product of the positive ranks, proving semistability.
+
+Now take arbitrary factors. Every nonzero HN grade is semistable, so
+the assertion just proved applies to each pair of their nonzero grades.
+Lemma~\ref{lem:tensor-hn-identification} identifies the weighted tensor
+filtration with the actual HN filtration. That lemma includes zero
+factors and zero grades, so no positivity assumption is needed for this
+identity.
 \end{proof}
 
 \begin{lemma}[The one-factor tensor isometry]
@@ -778,9 +850,13 @@ at most its mean slope. Since $T$ has positive rank, this is semistability.
 
 \begin{theorem}[Adelic Bost theorem]
 \label{thm:bost-adelic}
-\uses{thm:tensor-hn-compatibility,lem:maximal-slope-from-tensor-hn,lem:finite-tensor-slopes-of-binary,cor:finite-tensor-semistability-of-binary}
+\uses{lem:binary-bost-identity,thm:tensor-hn-compatibility,lem:finite-tensor-slopes-of-binary,cor:finite-tensor-semistability-of-binary}
 \source{bost-adelic-2026:page-0001,bost-adelic-2026:page-0032}
-\notready
+\lean{ArakelovGeometry.AdelicVectorBundle.maximalSlope_orthogonalTensorPair,
+ArakelovGeometry.AdelicVectorBundle.maximalSlope_orthogonalTensorOfMeasurableBase,
+ArakelovGeometry.AdelicVectorBundle.isMeanSlopeSemistable_orthogonalTensorPair,
+ArakelovGeometry.AdelicVectorBundle.isMeanSlopeSemistable_orthogonalTensorOfMeasurableBase}
+\leanok
 Let $K$ be countable of characteristic zero and $S$ proper, with the
 usual Archimedean absolute values. For every pair of positive-rank
 Hermitian adelic vector bundles, with Hilbert/\(\varepsilon\) tensor norms,
@@ -794,8 +870,8 @@ particular a tensor product of semistable factors is semistable.
 \end{theorem}
 \begin{proof}
 Countability supplies the common countable dense subfield hypothesis
-by taking $K$ itself. Apply tensor HN compatibility, then the preceding
-maximal-slope lemma. This supplies the binary hypothesis of
+by taking $K$ itself. The binary identity is
+Lemma~\ref{lem:binary-bost-identity}. It supplies the binary hypothesis of
 Lemma~\ref{lem:finite-tensor-slopes-of-binary}, which proves the finite-family
 identity on the actual tensor norms. Apply
 Corollary~\ref{cor:finite-tensor-semistability-of-binary} for semistable factors.
