@@ -13,7 +13,7 @@ public import BostConjecture.Specht.Lattice.OneRow
 
 The bulk separation estimate controls the actual finite average of the
 seminormal logarithms. The integral Gram comparison then gives the limit.
-Reference: this paper equation (6) and Proposition 5.2, pages 7–8.
+Reference: this paper equation (29) and Proposition 5.3, pages 23–24.
 -/
 
 @[expose] public section
