@@ -3,10 +3,12 @@ Copyright (c) 2026 Yijun Yuan. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Yijun Yuan
 -/
-import BostConjecture.Adelic.Induction.GradeEquality
-import ArakelovGeometry.AdelicVectorBundle.Tensor.Graded.Degree
-import ArakelovGeometry.AdelicVectorBundle.Slope.Tensor
-import ArakelovGeometry.AdelicVectorBundle.Degree.TensorHermitian
+module
+
+public import BostConjecture.Adelic.Induction.GradeEquality
+public import ArakelovGeometry.AdelicVectorBundle.Tensor.Graded.Degree
+public import ArakelovGeometry.AdelicVectorBundle.Slope.Tensor
+public import ArakelovGeometry.AdelicVectorBundle.Degree.TensorHermitian
 
 /-!
 # Identification of the tensor Harder--Narasimhan filtration
@@ -17,6 +19,8 @@ quotient-slope bounds. Equality of total degrees makes each bound sharp, so
 HN uniqueness identifies the weighted tensor filtration. No norm on a direct
 sum of the components is needed. Zero factors and zero grades are included.
 -/
+
+@[expose] public section
 
 open Module Submodule
 open scoped TensorProduct BigOperators
@@ -40,15 +44,26 @@ theorem iSup_range_tensorFiltrationGradedPair
       (tensorFiltrationGradedPair hP hR p.property).range) = ⊤ := by
   have h := iSup_range_tensorFiltrationGradedQuotientPair b c w z
     (LinearMap.id : E ⊗[K] F →ₗ[K] E ⊗[K] F) hP hR hPw hRz γ
-  simpa only [tensorFiltrationGradedQuotientPair, map_id,
-    filtrationGradedMap_id, LinearMap.id_comp] using h
+  have transport (G : ℝ → Submodule K (E ⊗[K] F))
+      (hG : G = tensorFiltration P R)
+      (hg : ∀ s, tensorFiltration P R s ≤ (G s).comap LinearMap.id)
+      (hs : (⨆ p : {ij : ι × κ // w ij.1 + z ij.2 = γ},
+        ((filtrationGradedMap LinearMap.id hg γ).comp
+          (tensorFiltrationGradedPair hP hR p.property)).range) = ⊤) :
+      (⨆ p : {ij : ι × κ // w ij.1 + z ij.2 = γ},
+        (tensorFiltrationGradedPair hP hR p.property).range) = ⊤ := by
+    subst G
+    simpa only [filtrationGradedMap_id, LinearMap.id_comp] using hs
+  exact transport _ (funext fun s ↦ map_id _) _ h
 
 end Submodule
 
 namespace ArakelovGeometry.AdelicVectorBundle
 
-variable {K E : Type*} [Field K] [AddCommGroup E] [Module K E]
-  [FiniteDimensional K E] {S : AdelicStructure K} [S.IsProper]
+universe u v w
+
+variable {K : Type u} {E : Type w} [Field K] [AddCommGroup E] [Module K E]
+  [FiniteDimensional K E] {S : AdelicStructure.{u, v} K} [S.IsProper]
 
 /-- An actual Hermitian HN filtration admits a weighted basis, also in rank zero. -/
 theorem exists_weighted_basis_hermitianHNFiltration
@@ -73,7 +88,7 @@ theorem exists_weighted_basis_hermitianHNFiltration
     ha hbot htop hleft ha hbot htop hleft
   exact ⟨b, w, hw⟩
 
-variable {F : Type*} [AddCommGroup F] [Module K F] [FiniteDimensional K F]
+variable {F : Type w} [AddCommGroup F] [Module K F] [FiniteDimensional K F]
   (V : AdelicVectorBundle S E) (W : AdelicVectorBundle S F)
   (hS : DiscreteMeasurableSpace S.Ω ∨ S.HasCommonCountableDenseSubfield)
   (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
@@ -98,9 +113,8 @@ theorem finsum_tensor_hermitianHNFiltration_eq_degree :
     (fun p ↦ w p.1 + z p.2) (tensorFiltration_eq_span_tensorProduct b c w z hb hc),
     V.degree_orthogonalTensorPair W hS hN hV hW]
   simp only [Fintype.sum_prod_type, Finset.sum_add_distrib, Finset.sum_const,
-    Finset.card_univ, Fintype.card_fin, nsmul_eq_mul, ← Finset.sum_mul,
+    Finset.card_univ, Fintype.card_fin, nsmul_eq_mul, ← Finset.mul_sum,
     hVdeg, hWdeg]
-  ring
 
 /-- This paper, Lemma 7.1: semistability of nonzero products of HN grades
 identifies the tensor filtration with the actual HN filtration. -/
@@ -133,10 +147,10 @@ theorem hermitianHNFiltration_orthogonalTensorPair_of_semistable_grades
     have htp := Nat.pos_of_ne_zero ht
     have hup := Nat.pos_of_ne_zero hu
     refine Or.inr ⟨hsemi t u htp hup, ?_⟩
-    have hts := (filtrationGraded_hermitianHN_zero_or_semistable V hS hN hV t).
-      resolve_left ht
-    have hus := (filtrationGraded_hermitianHN_zero_or_semistable W hS hN hW u).
-      resolve_left hu
+    have hts :=
+      (filtrationGraded_hermitianHN_zero_or_semistable V hS hN hV t).resolve_left ht
+    have hus :=
+      (filtrationGraded_hermitianHN_zero_or_semistable W hS hN hW u).resolve_left hu
     exact ((V.filtrationGraded P t hS).slope_orthogonalTensorPair
       (W.filtrationGraded R u hS) hS hN (hV.filtrationGraded P t)
       (hW.filtrationGraded R u) htp hup).trans (congrArg₂ (· + ·) hts.2 hus.2)
@@ -147,7 +161,8 @@ theorem hermitianHNFiltration_orthogonalTensorPair_of_semistable_grades
       w ij.1 + z ij.2 = γ}) := tensorFiltrationGradedPair hP hR p.property
   have hC (γ : ℝ) (p) : (C γ p).toNormFamily.IsHermitian hN :=
     tensorFiltrationGradedSource_isHermitian V W hS hN hV hW P R _ _
-  have hCs (γ : ℝ) (p) : finrank K
+  have hCs (γ : ℝ) (p : {ij : Fin (finrank K E) × Fin (finrank K F) //
+      w ij.1 + z ij.2 = γ}) : finrank K
       (FiltrationGraded P (w p.val.1) ⊗[K] FiltrationGraded R (z p.val.2)) = 0 ∨
       (C γ p).IsMeanSlopeSemistable hS hN ∧ (C γ p).slope hS hN = γ := by
     simpa only [C, p.property] using hs (w p.val.1) (z p.val.2)
