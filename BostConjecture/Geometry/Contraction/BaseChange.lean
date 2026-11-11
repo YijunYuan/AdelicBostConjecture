@@ -119,7 +119,6 @@ local instance : ∀ j, Module R
     ((⨂[R] (_ : Fin (k j)), ⋀[R]^(a j) (Dual R (E j))) ⊗[R]
       (R ⊗[ℤ] Specht.orbitLattice (t j))) := fun _ => inferInstance
 
-set_option backward.isDefEq.respectTransparency false in
 /-- The tensor product of the canonical dual determinant scalar extensions. -/
 def dualDeterminantTensorBaseChange :
     S ⊗[R] (⨂[R] j, (⨂[R] (_ : Fin (k j)), ⋀[R]^(a j) (Dual R (E j))) ⊗[R]
@@ -132,7 +131,6 @@ def dualDeterminantTensorBaseChange :
         (⨂[R] (_ : Fin (k j)), ⋀[R]^(a j) (Dual R (E j))) ⊗[R]
           (R ⊗[ℤ] Specht.orbitLattice (t j)))).toLinearMap
 
-set_option backward.isDefEq.respectTransparency false in
 /-- Canonical scalar extension of the whole dual determinant source is bijective. -/
 theorem dualDeterminantTensorBaseChange_bijective :
     Function.Bijective (dualDeterminantTensorBaseChange (R := R) (S := S) E t) := by
@@ -147,7 +145,6 @@ theorem dualDeterminantTensorBaseChange_bijective :
   exact f.bijective
 
 
-set_option backward.isDefEq.respectTransparency false in
 /-- The actual tensor of projective determinant factors, including dual regrouping,
 has the expected free formula after scalar extension. -/
 theorem dualDeterminantMap_baseChange
@@ -178,7 +175,6 @@ variable {V : Type*} [AddCommGroup V] [Module R V]
   (hs : ∀ p : PrimeSpectrum R, Module.rankAtStalk V p = s)
   (bV : Basis (Fin s) S (S ⊗[R] V))
 
-set_option backward.isDefEq.respectTransparency false in
 /-- The scalar extension of the actual integral pairing is the free determinant
 pairing, on arbitrary vectors in both scalar-extended sources. -/
 theorem canonicalPairing_baseChange (i : V →ₗ[R] (⨂[R] j, E j))

@@ -27,6 +27,10 @@ open Module ArakelovGeometry Specht OAI.Saxl
 open BostConjecture.Geometry
 open scoped TensorProduct
 
+-- Use the canonical integer action when cancelling scalar extensions.
+local instance {K : Type*} [Field K] {S : AdelicStructure K} (ω : S.Ω) :
+    Algebra ℤ (S.ϕ ω).Completion := Ring.toIntAlgebra _
+
 section Lattice
 
 variable {K E : Type*} [Field K] [CharZero K] {S : AdelicStructure K}
@@ -35,7 +39,6 @@ variable {K E : Type*} [Field K] [CharZero K] {S : AdelicStructure K}
   (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
   (hξ : ξ.IsHermitian hN) {n k : ℕ}
 
-set_option backward.isDefEq.respectTransparency false in
 /-- The finite-place lattice estimate in the actual completed tensor and
 Specht norms, in any frame of the completed vector space. -/
 theorem orthogonal_freeLatticeMap_completed_le
@@ -69,9 +72,6 @@ variable {K : Type u} [Field K] [CharZero K] {S : AdelicStructure.{u, v} K}
   (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
   (hcount : S.HasCommonCountableDenseSubfield) (hV : V.IsHermitian hN)
 
-set_option maxHeartbeats 800000 in
--- Comparing completion ring projections in the determinant source is costly.
-set_option backward.isDefEq.respectTransparency false in
 /-- The existing determinant embedding contracts for the prescribed completed
 norms at every non-Archimedean place, including trivial valuations. -/
 theorem projectiveDeterminantMap_norm_finite {n k : ℕ} (hk : 0 < k)
@@ -89,16 +89,15 @@ theorem projectiveDeterminantMap_norm_finite {n k : ℕ} (hk : 0 < k)
   let e := determinantTwistBaseChangeEquiv (R := K) (S := (S.ϕ ω).Completion)
     (M := E) (orbitLattice t) k (finrank K E)
   obtain ⟨z, hz⟩ := exists_determinantPower_tmul b (e x)
-  have hx : x = e.symm ((⨂ₜ[(S.ϕ ω).Completion] (_ : Fin k),
-      exteriorPower.ιMulti (S.ϕ ω).Completion (finrank K E) b)
-        ⊗ₜ[(S.ϕ ω).Completion] z) := by
-    rw [← hz, LinearEquiv.symm_apply_apply]
+  have hx := e.eq_symm_apply.mpr hz
   rw [hx]
   change (NormFamily.orthogonalTensor _ hN _).norm ω
     ((projectiveDeterminantMap hk t _).baseChange (S.ϕ ω).Completion
       ((determinantTwistBaseChangeEquiv (R := K) (S := (S.ϕ ω).Completion) (M := E)
         (orbitLattice t) k (finrank K E)).symm _)) ≤ _
-  rw [projectiveDeterminantMap_baseChange_generator]
+  refine (congrArg
+    ((NormFamily.orthogonalTensor (fun _ : Fin n ↦ V.toNormFamily) hN (fun _ ↦ hV)).norm ω)
+    (projectiveDeterminantMap_baseChange_generator hk t _ b z)).trans_le ?_
   have hn := orthogonal_freeLatticeMap_completed_le V.toNormFamily hN hV hk t c ω hω b
     ((TensorProduct.AlgebraTensorModule.cancelBaseChange ℤ K (S.ϕ ω).Completion
       (S.ϕ ω).Completion (orbitLattice t)).symm z)
@@ -107,7 +106,7 @@ theorem projectiveDeterminantMap_norm_finite {n k : ℕ} (hk : 0 < k)
   change _ = (determinantSpechtBundle V hN hcount k t c).norm ω
     ((determinantTwistBaseChangeEquiv (R := K) (S := (S.ϕ ω).Completion) (M := E)
       (orbitLattice t) k (finrank K E)).symm _)
-  rw [determinantSpechtBundle_norm_tprod]
+  rw [determinantSpechtBundle_norm_tprod V hN hcount t c ω]
   simp only [Finset.prod_const, Finset.card_univ, Fintype.card_fin]
 
 /-- The actual determinant–Specht embedding contracts at every place. -/

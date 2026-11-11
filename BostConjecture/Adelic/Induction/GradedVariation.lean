@@ -138,7 +138,7 @@ theorem HNVariationLift.filtrationOnGraded_eq
     {hS : DiscreteMeasurableSpace S.Ω ∨ S.HasCommonCountableDenseSubfield}
     {hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion}
     {hV : V.toNormFamily.IsHermitian hN} {P : ℝ → Submodule K E}
-    (L : BostConjecture.Adelic.HNVariationLift V hS hN hV P) (t : ℝ) :
+    (L : HNVariationLift V hS hN hV P) (t : ℝ) :
     Submodule.filtrationOnGraded P L.direction t =
       (V.filtrationGraded P t hS).hermitianHNFiltration hS hN (hV.filtrationGraded P t) := by
   classical
@@ -176,8 +176,8 @@ theorem tensorFiltrationQuotient_eventual_hn_upper
     (b : Basis ι K E) (c : Basis κ K F) (w : ι → ℝ) (z : κ → ℝ)
     (hPw : ∀ t, P t = Submodule.span K (b '' {i | t ≤ w i}))
     (hRz : ∀ u, R u = Submodule.span K (c '' {j | u ≤ z j}))
-    (L : BostConjecture.Adelic.HNVariationLift V hS hN hV P)
-    (M : BostConjecture.Adelic.HNVariationLift W hS hN hW R)
+    (L : HNVariationLift V hS hN hV P)
+    (M : HNVariationLift W hS hN hW R)
     (s : ι → ℝ) (v : κ → ℝ)
     (hLs : ∀ t, L.direction t = Submodule.span K (b '' {i | t ≤ s i}))
     (hMv : ∀ t, M.direction t = Submodule.span K (c '' {j | t ≤ v j}))
@@ -215,7 +215,7 @@ theorem tensorFiltrationQuotient_eventual_hn_upper
   obtain ⟨hPQb, hPQt⟩ := Submodule.span_weights_attains_bot_top d₀ a₀
   have hPQl := Submodule.span_weights_locallyConstant_left d₀ a₀
   simp_rw [← hPQ] at hPQb hPQt hPQl
-  obtain ⟨N⟩ := BostConjecture.Adelic.exists_hnVariationLift B hS hN hB PQ hPQa hPQb hPQt hPQl
+  obtain ⟨N⟩ := exists_hnVariationLift B hS hN hB PQ hPQa hPQb hPQt hPQl
   obtain ⟨d, a, r, hd, hNr, _, _⟩ := Submodule.exists_common_weighted_basis
     hPQa hPQb hPQt hPQl N.antitone_direction N.direction_bot N.direction_top N.direction_left
   have hb (i : ι) : b i ∈ P (w i) := by
@@ -266,7 +266,7 @@ theorem tensorFiltrationQuotient_eventual_hn_upper
     congr 1
     apply Subtype.ext
     exact congrArg q (Basis.tensorProduct_apply b c p.1 p.2)
-  obtain ⟨η, hη, hu⟩ := BostConjecture.Adelic.eventual_image_expectation_le_of_graded_mem
+  obtain ⟨η, hη, hu⟩ := eventual_image_expectation_le_of_graded_mem
     (b.tensorProduct c) (fun p ↦ w p.1 + z p.2) (fun p ↦ s p.1 + v p.2)
     q hq d a r hd hNr hm hclass
   refine ⟨η, hη, fun ε hε he ↦ ?_⟩

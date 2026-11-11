@@ -50,7 +50,6 @@ theorem determinantSpechtBundle_tensor_slope_rectangle :
   have hr (i : ι) : 0 < finrank K
       ((⨂[K] (_ : Fin (k i)), ⋀[K]^(finrank K (E i)) (E i)) ⊗[K]
         (K ⊗[ℤ] orbitLattice (t i))) := by
-    let := Arithmetic.Specht.orbitLattice_baseChange_nontrivial K (t i)
     have hp : finrank K (⨂[K] (_ : Fin (k i)), ⋀[K]^(finrank K (E i)) (E i)) = 1 :=
       determinantPower_isLine (V i) (Or.inr hcount) hN (k i)
     simpa only [Module.finrank_tensorProduct, hp, one_mul] using

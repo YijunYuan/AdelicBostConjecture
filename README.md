@@ -87,7 +87,8 @@ The remote dependency revisions are recorded in
 [lake-manifest.json](lake-manifest.json). The package enables the mathlib
 standard linter set, `relaxedAutoImplicit = false` and
 `maxSynthPendingDepth = 3`. Local proofs use Lean's default limits of
-200,000 heartbeats and recursion depth 512 unless a declaration sets a scoped limit.
+200,000 heartbeats and recursion depth 512. No local source raises the heartbeat
+limit; simplify costly elaboration and rewriting instead of increasing that budget.
 
 To audit the final statements after building, check a temporary Lean file containing:
 
@@ -117,11 +118,9 @@ Code follows the mathlib [style](https://leanprover-community.github.io/contribu
 [documentation](https://leanprover-community.github.io/contribute/doc.html)
 guidelines. Use existing library results and typeclass inference before adding
 local infrastructure. Enumeration needed only inside a proof uses `Finite`
-with a local `Fintype.ofFinite`. Canonical tensor and dual Hermitian cores have
-scoped instances; metrics chosen as explicit data remain explicit arguments.
-Write their type as `HermitianMetric K M`: the base field is an explicit
-parameter because it cannot be recovered from the module type alone.
-Operations on an existing metric infer the field from that metric.
+with a local `Fintype.ofFinite`. Use instances for canonical algebraic properties,
+such as nontriviality of the integral Specht lattice and its scalar extensions.
+Norm families chosen as data remain explicit arguments.
 
 Original code is released under [Apache-2.0](LICENSE). External code retains
 its upstream licenses and attribution as recorded in

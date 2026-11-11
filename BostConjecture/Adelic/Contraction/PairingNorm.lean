@@ -201,7 +201,6 @@ variable {K : Type*} [Field K] {S : AdelicStructure K}
   [∀ i j, AddCommGroup (P i j)] [∀ i j, Module K (P i j)]
   [∀ i j, FiniteDimensional K (P i j)]
 
-set_option backward.isDefEq.respectTransparency false in
 /-- A bound on completed double pure tensors extends with the same constant
 for iterated epsilon norms. -/
 theorem norm_linearMap_le_nested_orthogonalTensor_of_finite
@@ -243,7 +242,6 @@ theorem norm_linearMap_le_nested_orthogonalTensor_of_finite
       change ‖f _‖ ≤ _
       exact hf y) x
 
-set_option backward.isDefEq.respectTransparency false in
 /-- Rectangular regrouping contracts the actual iterated epsilon norms at every
 finite place, including a trivial valuation. -/
 theorem regroup_norm_le_finite
@@ -305,7 +303,6 @@ variable {K : Type*} [Field K] {S : AdelicStructure K}
   {I : Type*} [Fintype I] {P : I → Type*}
   [∀ i, AddCommGroup (P i)] [∀ i, Module K (P i)] [∀ i, FiniteDimensional K (P i)]
 
-set_option backward.isDefEq.respectTransparency false in
 /-- The actual completed Hilbert tensor inner product has the product formula. -/
 theorem orthogonalTensor_fibre_inner_tprod
     (ξ : ∀ i, NormFamily S (P i))
@@ -363,7 +360,6 @@ variable {K : Type*} [Field K] {S : AdelicStructure K}
   [∀ i j, AddCommGroup (P i j)] [∀ i j, Module K (P i j)]
   [∀ i j, FiniteDimensional K (P i j)]
 
-set_option backward.isDefEq.respectTransparency false in
 /-- Rectangular regrouping preserves the actual completed Hilbert norms over
 both real and complex completions. -/
 theorem regroup_norm_infinite

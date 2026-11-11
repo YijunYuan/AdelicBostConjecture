@@ -38,7 +38,6 @@ variable {K : Type u} [Field K] {S : AdelicStructure.{u, v} K}
   [AddCommGroup G] [Module K G] [FiniteDimensional K G]
   [AddCommGroup H] [Module K H] [FiniteDimensional K H]
 
-set_option backward.isDefEq.respectTransparency false in
 private theorem tensorPair_map_bound
     (ξ : NormFamily S E) (η : NormFamily S F) (ζ : NormFamily S G) (θ : NormFamily S H)
     (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
@@ -85,7 +84,6 @@ private theorem tensorPair_map_bound
     · exact hf x
     · exact hg x
 
-set_option backward.isDefEq.respectTransparency false in
 /-- Tensoring completed isometric linear equivalences preserves the full actual
 orthogonal tensor norms, with independent source and target carrier universes. -/
 theorem orthogonalTensorPair_norm_congr

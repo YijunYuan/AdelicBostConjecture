@@ -59,7 +59,6 @@ variable {K : Type u} [Field K] {S : AdelicStructure.{u, v} K}
   [AddCommGroup F] [Module K F] [FiniteDimensional K F]
   [AddCommGroup Q] [Module K Q] [FiniteDimensional K Q]
 
-set_option backward.isDefEq.respectTransparency false in
 private theorem orthogonalTensor_bool_pushforward
     (ξ : NormFamily S E) (η : NormFamily S F)
     (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
@@ -78,7 +77,6 @@ private theorem orthogonalTensor_bool_pushforward
       (NormFamily.orthogonalTensor_norm_boolTensorEquiv ξ η hN hξ hη ω x).symm
 
 omit [FiniteDimensional K Q] in
-set_option backward.isDefEq.respectTransparency false in
 private theorem orthogonalTensor_bool_quotient
     (ξ : NormFamily S E) (η : NormFamily S F)
     (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
@@ -90,10 +88,11 @@ private theorem orthogonalTensor_bool_quotient
         (q.comp (boolTensorEquiv K (BoolTensorFactors E F)).toLinearMap)
         (hq.comp (boolTensorEquiv K (BoolTensorFactors E F)).surjective) =
       (ξ.orthogonalTensorPair η hN hξ hη).pushforward q hq := by
-  rw [← NormFamily.pushforward_comp _
+  exact (NormFamily.pushforward_comp _
     (boolTensorEquiv K (BoolTensorFactors E F)).toLinearMap
-    (boolTensorEquiv K (BoolTensorFactors E F)).surjective q hq,
-    orthogonalTensor_bool_pushforward]
+    (boolTensorEquiv K (BoolTensorFactors E F)).surjective q hq).symm.trans
+      (congrArg (fun ζ ↦ ζ.pushforward q hq)
+        (orthogonalTensor_bool_pushforward ξ η hN hξ hη))
 
 end BinaryNorm
 
@@ -105,7 +104,6 @@ variable {K : Type u} [Field K] [CharZero K] {S : AdelicStructure.{u, v} K}
   [∀ i, FiniteDimensional K (E i)] [∀ i, Nontrivial (E i)]
   {Q : Type u} [AddCommGroup Q] [Module K Q] [FiniteDimensional K Q] [Nontrivial Q]
 
-set_option backward.isDefEq.respectTransparency false in
 /-- Geometric semistability of a finite tensor quotient gives the slope bound
 for its actual pushforward bundle, without arithmetic semistability of factors. -/
 theorem slope_sum_le_orthogonalTensor_quotient_of_geometricallySemistable
@@ -168,7 +166,6 @@ variable {K : Type u} [Field K] [CharZero K] [Countable K]
   [AddCommGroup F] [Module K F] [FiniteDimensional K F] [Nontrivial F]
   [AddCommGroup Q] [Module K Q] [FiniteDimensional K Q] [Nontrivial Q]
 
-set_option backward.isDefEq.respectTransparency false in
 /-- The geometric branch of the tensor-quotient slope inequality, with the
 original binary orthogonal tensor and its actual pushforward quotient norms.
 No arithmetic semistability hypothesis on either original factor is required. -/
@@ -218,6 +215,7 @@ theorem slope_sum_le_tensor_quotient_of_geometricallySemistable
     VF hN hcount hVF qB hqB hg
   change ∑ i, (VF i).slope (Or.inr hcount) hN ≤ BF.slope (Or.inr hcount) hN at h
   rw [hB] at h
-  simpa only [Fintype.sum_bool, VF, add_comm] using h
+  simp only [Fintype.sum_bool, VF, add_comm] at h
+  exact h
 
 end ArakelovGeometry.AdelicVectorBundle

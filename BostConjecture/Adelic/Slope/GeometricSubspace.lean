@@ -45,8 +45,6 @@ variable {K : Type u} [Field K] [CharZero K] {S : AdelicStructure.{u, v} K}
 
 include hV
 
-set_option maxHeartbeats 800000 in
--- Elaborating the nested determinant tensors and their dual needs this budget.
 /-- The exact finite-degree inequality, conditional only on the completed norm
 bound for the displayed nonzero canonical pairing. -/
 theorem canonicalPairing_finite_degree_bound_of_norm_le
@@ -119,8 +117,6 @@ section Limit
 
 variable [∀ i, Nontrivial (E i)] [Nontrivial F]
 
-set_option maxHeartbeats 1200000 in
--- The dependent sequence contains integral tableaux and their original-field maps.
 /-- Geometric semistability and the exact universal canonical-pairing norm
 inequality imply the subspace slope bound. All nonvanishing, rank choices,
 semistability, slope computation, and limiting steps are discharged here. -/

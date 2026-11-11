@@ -27,7 +27,7 @@ the proof of Theorem 1.1 in the other modules of this project.
 
 open ArakelovGeometry ArakelovGeometry.AdelicVectorBundle Submodule
 
-open Module Submodule
+open Module
 open scoped TensorProduct
 
 namespace BostConjecture.Adelic

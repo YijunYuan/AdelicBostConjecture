@@ -63,7 +63,6 @@ theorem determinantSpechtBundle_isMeanSlopeSemistable_and_dual :
         (Or.inr hcount) hN ∧
       ((determinantSpechtBundle V hN hcount k t b).dualOfMeasurableBase
         (Or.inr hcount)).IsMeanSlopeSemistable (Or.inr hcount) hN := by
-  let := Arithmetic.Specht.orbitLattice_baseChange_nontrivial K t
   let ρ := Arithmetic.representationBaseChange K (Arithmetic.Specht.integralRepresentation t)
   let : ρ.IsIrreducible := Arithmetic.Specht.integralRepresentation_baseChange_isIrreducible K t
   exact isMeanSlopeSemistable_lineTensor_and_dual_of_isIrreducible
@@ -79,7 +78,6 @@ theorem determinantSpechtBundle_slope_rectangle :
     (determinantSpechtBundle V hN hcount k t b).slope (Or.inr hcount) hN =
       n * V.slope (Or.inr hcount) hN -
         (S.v S.Ωinf).toReal * rectangleLogCovolume (finrank K E) k := by
-  let := Arithmetic.Specht.orbitLattice_baseChange_nontrivial K t
   have hn : n = finrank K E * k := by
     simpa using Fintype.card_congr (rectangleCoordinates t)
   have hp : finrank K (⨂[K] (_ : Fin k), ⋀[K]^(finrank K E) E) = 1 :=
@@ -96,7 +94,6 @@ theorem determinantSpechtBundle_slope :
       n * V.slope (Or.inr hcount) hN - (S.v S.Ωinf).toReal *
         (Real.log (ZLattice.covolume (spanLattice t)) /
           finrank K (K ⊗[ℤ] orbitLattice t)) := by
-  let := Arithmetic.Specht.orbitLattice_baseChange_nontrivial K t
   have hr : 0 < finrank K (K ⊗[ℤ] orbitLattice t) := Module.finrank_pos
   have hn : n = finrank K E * k := by
     simpa using Fintype.card_congr (rectangleCoordinates t)

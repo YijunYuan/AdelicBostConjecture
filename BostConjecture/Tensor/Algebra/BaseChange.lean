@@ -57,17 +57,20 @@ def optionEquiv (N : Option ι → Type*) [∀ i, AddCommGroup (N i)]
     ((tmulEquivDep R (fun i => N ((Equiv.optionEquivSumPUnit.{0, _} ι).symm i))).symm.trans
       (TensorProduct.congr (LinearEquiv.refl R _) (subsingletonEquiv PUnit.unit)))
 
-set_option backward.isDefEq.respectTransparency false in
 @[simp]
 theorem optionEquiv_tprod (N : Option ι → Type*) [∀ i, AddCommGroup (N i)]
     [∀ i, Module R (N i)] (v : ∀ i, N i) :
     optionEquiv R N (tprod R v) = tprod R (fun i => v (some i)) ⊗ₜ[R] v none := by
-  dsimp [optionEquiv]
+  let e := Equiv.optionEquivSumPUnit.{0, _} ι
+  let f := TensorProduct.congr (LinearEquiv.refl R (⨂[R] i, N (some i)))
+    (subsingletonEquiv (R := R) (s := fun _ : PUnit ↦ N none) PUnit.unit)
+  change f ((tmulEquivDep R (fun i ↦ N (e.symm i))).symm
+    (reindex R N e (tprod R v))) = _
   rw [reindex_tprod]
-  rw [dsimp% tmulEquivDep_symm_apply R
-    (fun i => N ((Equiv.optionEquivSumPUnit.{0, _} ι).symm i))
-    (fun i => v ((Equiv.optionEquivSumPUnit.{0, _} ι).symm i))]
-  simp
+  refine (congrArg f (tmulEquivDep_symm_apply R (fun i ↦ N (e.symm i))
+    (fun i ↦ v (e.symm i)))).trans ?_
+  change f (tprod R (fun i ↦ v (some i)) ⊗ₜ[R] tprod R (fun _ : PUnit ↦ v none)) = _
+  simp [f]
 
 private theorem exists_baseChangeEquiv [Finite ι] :
     ∃ e : S ⊗[R] (⨂[R] i, M i) ≃ₗ[S] (⨂[S] i, S ⊗[R] M i),

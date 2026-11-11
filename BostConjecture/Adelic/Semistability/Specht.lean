@@ -56,14 +56,13 @@ open BostConjecture.Specht
 variable {n : ℕ} {μ : YoungDiagram}
 
 /-- The integral lattice is nonzero, witnessed by its polytabloid. -/
-theorem orbitLattice_nontrivial (t : OAI.Saxl.Tableau n μ) : Nontrivial (orbitLattice t) :=
+instance orbitLattice_nontrivial (t : OAI.Saxl.Tableau n μ) : Nontrivial (orbitLattice t) :=
   ⟨⟨⟨polytabloidInt t, polytabloidInt_mem_orbitLattice t⟩, 0,
     fun h => polytabloidInt_ne_zero t (congrArg Subtype.val h)⟩⟩
 
 /-- Extension of the free integral orbit lattice remains nonzero. -/
-theorem orbitLattice_baseChange_nontrivial (K : Type*) [Field K]
+instance orbitLattice_baseChange_nontrivial (K : Type*) [Field K]
     (t : OAI.Saxl.Tableau n μ) : Nontrivial (K ⊗[ℤ] orbitLattice t) := by
-  let := orbitLattice_nontrivial t
   let b := (Module.Free.chooseBasis ℤ (orbitLattice t)).baseChange K
   exact b.repr.symm.injective.nontrivial
 
@@ -92,7 +91,6 @@ every characteristic-zero field, hence an absolutely irreducible representation.
 theorem integralRepresentation_baseChange_isIrreducible (K : Type*) [Field K] [CharZero K]
     (t : OAI.Saxl.Tableau n μ) :
     Representation.IsIrreducible (representationBaseChange K (integralRepresentation t)) := by
-  let := orbitLattice_baseChange_nontrivial ℚ t
   let : Representation.IsIrreducible
       (representationBaseChange K (representationBaseChange ℚ (integralRepresentation t))) :=
     isIrreducible_of_span_eq_top _

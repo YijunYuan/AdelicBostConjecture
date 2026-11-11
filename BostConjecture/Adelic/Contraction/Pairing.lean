@@ -68,9 +68,6 @@ theorem tensor_projectiveDeterminantMap_norm_le {n : ℕ} {k : ι → ℕ}
   · exact fun hω j x ↦ projectiveDeterminantMap_norm_infinite
       (V j) hN hcount (hV j) (hk j) (t j) (b j) ω hω x
 
-set_option maxHeartbeats 800000 in
--- Comparing the completed structures of the nested determinant tensor is costly.
-set_option backward.isDefEq.respectTransparency false in
 /-- The original-field canonical pairing contracts on every completed fibre
 for the actual determinant–Specht source and the dual of the actual auxiliary
 orthogonal tensor bundle. The sole metric premise is the induced norm on the inclusion. -/
@@ -111,7 +108,7 @@ theorem canonicalPairing_norm_le {n : ℕ} {k : ι → ℕ}
   have hj (x) : T.norm ω
       ((Geometry.dualDeterminantMap E hk t ha).baseChange (S.ϕ ω).Completion x) ≤
         D.norm ω x := by
-    rw [Geometry.dualDeterminantMap, LinearMap.baseChange_comp, LinearMap.comp_apply]
+    simp only [Geometry.dualDeterminantMap, LinearMap.baseChange_comp, LinearMap.comp_apply]
     exact (dualRegroupEquiv_norm_le (fun j ↦ (V j).toNormFamily) hN hV ω _).trans
       (tensor_projectiveDeterminantMap_norm_le VD hN hcount hVD hk t b ω x)
   change D.toNormFamily.dual.norm ω

@@ -101,9 +101,6 @@ section Completed
 variable {K V : Type*} [Field K] {S : AdelicStructure K}
   [AddCommGroup V] [Module K V] [FiniteDimensional K V]
 
-set_option maxHeartbeats 800000 in
--- Comparing the algebraic completion's ring projections in exterior powers is costly.
-set_option backward.isDefEq.respectTransparency false in
 /-- In any completed frame, the lattice realization is bounded by the actual
 norm of its determinant wedge, with no alpha loss. This is the finite-place
 normalization of the determinant embedding on the full Specht factor. -/
@@ -127,14 +124,9 @@ theorem injective_freeLatticeMap_completed_le
     (S.ϕ ω).isUltrametricDist_completion hω
   let p := (ξ.determinant.norm ω).comp
     (exteriorBaseChangeEquiv K (S.ϕ ω).Completion V (Module.finrank K V)).symm.toLinearMap
-  have hp (α : ℝ) (hα : 0 < α) (hα1 : α < 1) :
-      ∃ b : Basis (Fin (Module.finrank K V)) (S.ϕ ω).Completion
-        ((S.ϕ ω).Completion ⊗[K] V),
-        α ^ Module.finrank K V * (∏ i, ‖b i‖) ≤
-          p (exteriorPower.ιMulti (S.ϕ ω).Completion (Module.finrank K V) b) := by
-    obtain ⟨b, _, hb⟩ := exists_completed_basis_det_bound ξ ω hω hα hα1
-    exact ⟨b, hb⟩
-  have h := injective_freeDeterminantMap_tprod_le hk t b₀ c p hp
+  have h := injective_freeDeterminantMap_tprod_le hk t b₀ c p
+    (fun α hα hα1 ↦ (exists_completed_basis_det_bound ξ ω hω hα hα1).imp
+      fun _ hb ↦ hb.2)
     (fun _ : Fin k ↦ exteriorPower.ιMulti (S.ϕ ω).Completion (Module.finrank K V) b₀) z
   rw [freeDeterminantMap_basis] at h
   change injectiveTensorSeminorm
