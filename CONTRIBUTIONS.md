@@ -44,6 +44,13 @@ may therefore describe declarations or modules that have since been removed.
   actual completed norms, degree identities, HN uniqueness and the componentwise
   finite-image variation from `Tensor/Graded/HNVariation`, including
   `slope_sum_le_tensor_quotient_of_not_geometricallySemistable`.
+- `Adelic/Induction/{FiniteNorms,FiniteSlopes,FiniteMaxSlope}` reuse the
+  completed tensor grouping and coherence exports in
+  `Tensor/Hermitian/{Dual/Basic,Grouping,Coherence}`, tensor construction on
+  countable bases, and `Slope/{Basic,Tensor}`. The unconditional finite
+  mean-slope formula feeds the determinant-Specht product degree calculation;
+  finite maximal-slope additivity remains an explicit consequence of binary
+  additivity until the main theorem is assembled. No upstream source is copied.
 - Boundary: the last result retains the smaller-rank tensor-HN induction
   hypothesis; this project must discharge it by simultaneous rank induction.
   Its existence does not prove the geometric semistable branch or Theorem 1.1.
