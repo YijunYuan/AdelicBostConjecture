@@ -167,6 +167,34 @@ variable {K : Type u} [Field K] [CharZero K] {S : AdelicStructure.{u, v} K}
   (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
   (hcount : S.HasCommonCountableDenseSubfield) (hV : V.IsHermitian hN)
 
+set_option backward.isDefEq.respectTransparency false in
+/-- On determinant pure tensors the actual auxiliary norm is the product of
+the actual determinant norms and the completed Specht norm, at every place. -/
+theorem determinantSpechtBundle_norm_tprod {n k : ℕ}
+    (t : Tableau n (rectangle (finrank K E) k))
+    (c : Basis (Fin (finrank K (K ⊗[ℤ] orbitLattice t))) ℤ (orbitLattice t))
+    (ω : S.Ω)
+    (η : Fin k → ⋀[(S.ϕ ω).Completion]^(finrank K E) ((S.ϕ ω).Completion ⊗[K] E))
+    (z : (S.ϕ ω).Completion ⊗[ℤ] orbitLattice t) :
+    (determinantSpechtBundle V hN hcount k t c).norm ω
+      ((determinantTwistBaseChangeEquiv (R := K) (S := (S.ϕ ω).Completion) (M := E)
+        (orbitLattice t) k (finrank K E)).symm ((⨂ₜ[(S.ϕ ω).Completion] q, η q)
+          ⊗ₜ[(S.ϕ ω).Completion] z)) =
+      (∏ q, V.toNormFamily.determinant.norm ω
+        ((exteriorBaseChangeEquiv K (S.ϕ ω).Completion E _).symm (η q))) *
+      (latticeNormFamily S t c).norm ω
+        ((TensorProduct.AlgebraTensorModule.cancelBaseChange ℤ K (S.ϕ ω).Completion
+          (S.ϕ ω).Completion (orbitLattice t)).symm z) := by
+  rw [determinantTwistBaseChangeEquiv_symm_tprod]
+  change (NormFamily.orthogonalTensorPair _ _ hN
+    (determinantPower_isHermitian V (Or.inr hcount) hN k)
+    (latticeBundle_isHermitian S t c hN hcount)).norm ω _ = _
+  rw [NormFamily.orthogonalTensorPair_norm_tmul_completed]
+  congr 1
+  change (NormFamily.orthogonalTensor _ hN _).norm ω _ = _
+  rw [NormFamily.orthogonalTensor_norm_tprod]
+  rfl
+
 omit [CharZero K] in
 set_option backward.isDefEq.respectTransparency false in
 /-- The power of an orthonormal determinant generator has norm one for the
