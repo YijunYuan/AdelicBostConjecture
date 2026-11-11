@@ -1,0 +1,329 @@
+\chapter{The geometric slope inequality}
+
+Let $S$ be a proper adelic curve over $K$, with place space $\Omega$,
+sigma-algebra $\mathcal A$, measure $\nu$, and absolute values $\phi$.
+We assume that the Archimedean completions carry their usual real or complex
+absolute values, and that either $\mathcal A$ is discrete or $S$ has a common
+countable subfield dense in every completion. In the application below, $K$ is
+countable of characteristic zero, so the latter condition holds with the whole
+field $K$. Write $K_\omega$ for the completion at $\omega$ and
+$m_\infty=\nu(\Omega_\infty)<\infty$.
+
+All bundles are finite-dimensional, with their actual completed norms.
+Subspaces carry induced norms, quotients carry quotient norms, and duals carry
+operator norms. Tensor products of Hermitian bundles carry Hilbert norms at
+Archimedean places and epsilon norms at all other places.
+
+For a positive-rank bundle $\overline A$, put
+$\widehat\mu(\overline A)=\widehat{\deg}(\overline A)/\dim_K A$.
+Mean-slope semistability means that every nonzero subspace with its induced
+norms has slope at most $\widehat\mu(\overline A)$.
+The extreme slopes $\widehat\mu_{\max}$ and $\widehat\mu_{\min}$ are,
+respectively, the supremum of slopes of nonzero subspaces and the infimum of
+slopes of nonzero quotients. These definitions use the extended real line when
+necessary. For a semistable bundle the maximal slope is its mean slope; for a
+Hermitian semistable bundle the minimal slope is also its mean slope.
+We use the degree, tensor, and duality formulas recalled in
+\cite[Section 2.4]{bost2026}.
+
+\section{Contractions and sublinear errors}
+
+\begin{lemma}[Semistable slopes under a nonzero contraction]
+\label{lem:semistable-contraction-slope}
+\uses{def:adelic-slope,lem:slope-duality}
+\source{bost-adelic-2026:page-0006,bost-adelic-2026:page-0007,bost-adelic-2026:page-0027}
+\lean{ArakelovGeometry.AdelicVectorBundle.slope_le_of_nonzero_completed_contraction}
+\leanok
+Let $\overline A$ and $\overline B$ be mean-slope semistable adelic bundles,
+and suppose that $\overline A$ is Hermitian. If a nonzero $K$-linear map
+$f:A\to B$ satisfies
+\[
+ \|f_\omega(x)\|_{B,\omega}\leq\|x\|_{A,\omega}
+ \qquad(\omega\in\Omega,\ x\in A_\omega),
+\]
+then $\widehat\mu(\overline A)\leq\widehat\mu(\overline B)$.
+\end{lemma}
+\begin{proof}
+The nonzero-map slope inequality gives
+\[
+ \widehat\mu_{\min}(\overline A)
+ \leq\widehat\mu_{\max}(\overline B)+h(f),
+\]
+where $h(f)$ is the extended map height obtained from the logarithms of the
+completed operator norms. The local contractions give $\|f_\omega\|\leq1$,
+so monotonicity of the lower integral gives $h(f)\leq0$.
+Semistability and Hermitianity of the source give
+$\widehat\mu_{\min}(\overline A)=\widehat\mu(\overline A)$;
+semistability of the target gives
+$\widehat\mu_{\max}(\overline B)=\widehat\mu(\overline B)$.
+Substitution proves the assertion. The two mean slopes are finite real
+numbers, so their comparison in the extended real line is the same comparison
+in $\mathbb R$.
+\end{proof}
+
+This is the nonzero-map form of the comparison in
+\cite[Proposition 2.4 and the proof of Theorem 6.2]{bost2026}.
+Only the source's minimal-slope characterization requires Hermitianity.
+In particular, the comparison does not require the map to be injective.
+
+For integers $a,k\geq1$, let $L_{a,ak}$ denote the integral rectangular
+Specht lattice with its word Gram metric, and put
+\[
+ C_a(k)=\frac{\log\operatorname{covol}(L_{a,ak})}
+                  {\operatorname{rank}_{\mathbb Z}L_{a,ak}}.
+\]
+Thus $C_a(k)=c_a(ak)$ in the notation of this paper.
+
+\begin{lemma}[Eliminating rectangular Specht errors]
+\label{lem:specht-error-limit}
+\source{bost-adelic-2026:page-0028}
+\uses{lem:specht-limit}
+\lean{BostConjecture.Adelic.le_of_rectangleLogCovolume_bounds}
+\leanok
+Let $I$ be a finite set, let $s,d\geq1$ and $a_i\geq1$ for $i\in I$,
+and let $l_r,k_{r,i}$ be nonnegative integers for $r\geq0$ such that
+\[
+ n_r:=d(r+1)=s l_r=a_i k_{r,i}\qquad(i\in I).
+\]
+If $c,x,y\in\mathbb R$ and, for every $r\geq0$,
+\[
+ n_r x-cC_s(l_r)\leq n_r y+c\sum_{i\in I}C_{a_i}(k_{r,i}),
+\]
+then $x\leq y$. There is no sign restriction on $c$.
+\end{lemma}
+\begin{proof}
+The common degree $n_r$ is positive, so every width appearing in the formula
+is positive. Since $n_r\to\infty$ and the heights are fixed and positive,
+$l_r=n_r/s\to\infty$ and $k_{r,i}=n_r/a_i\to\infty$.
+The normalized covolume limit therefore gives
+\[
+ \frac{C_s(l_r)}{s l_r}\longrightarrow0,
+ \qquad
+ \frac{C_{a_i}(k_{r,i})}{a_i k_{r,i}}\longrightarrow0
+ \quad(i\in I).
+\]
+Divide the assumed inequality by $n_r>0$, and use the equalities of degrees:
+\[
+ x-c\frac{C_s(l_r)}{s l_r}
+ \leq y+c\sum_{i\in I}\frac{C_{a_i}(k_{r,i})}{a_i k_{r,i}}.
+\]
+A finite sum preserves convergence, as does multiplication by the fixed real
+number $c$. The two sides tend to $x$ and $y$, respectively. The order relation
+on $\mathbb R$ is closed, hence $x\leq y$.
+\end{proof}
+
+\section{The auxiliary bundles and the finite-degree comparison}
+
+From now on $K$ is countable of characteristic zero.
+For a positive-rank Hermitian bundle $\overline A$ of rank $a$ and a positive
+multiple $n=ak$, write
+\[
+ S_{a,n}(\overline A)
+   =(\det\overline A)^{\otimes k}\otimes\overline L^S_{a,n}.
+\]
+Here $\overline L^S_{a,n}$ is the constant adelic bundle of the integral Specht
+lattice: it has the word Gram norm at infinity and the integral-basis maximum
+norm at finite places. The determinant line carries the actual determinant
+norm. These choices fix both the module and every completed norm in the
+auxiliary bundle.
+
+\begin{lemma}[Slope of the determinant power]
+\label{lem:determinant-power-slope}
+\uses{def:adelic-slope,def:adelic-induced-norms}
+\source{bost-adelic-2026:page-0025,bost-adelic-2026:page-0026}
+\lean{BostConjecture.Adelic.determinantPower_slope}
+\leanok
+For an adelic bundle $\overline A$ and $k\geq0$, the orthogonal tensor power
+of its determinant line has slope
+\[
+ \widehat\mu((\det\overline A)^{\otimes k})
+      =k\widehat{\deg}(\overline A).
+\]
+The empty power is the scalar line of degree zero.
+\end{lemma}
+\begin{proof}
+The determinant bundle is a line, and every tensor power of lines has rank
+one, including the empty power. Its slope is therefore its line degree.
+Additivity of line degree under tensor products gives $k$ times the line
+degree of $\det\overline A$. By definition this last line degree is
+$\widehat{\deg}(\overline A)$. For $k=0$, the sum of line degrees is empty
+and equals zero.
+\end{proof}
+
+Let $I$ be a finite nonempty index set and let $(\overline E_i)_{i\in I}$ be
+positive-rank Hermitian bundles. Give
+$W=\bigotimes_{i\in I}E_i$ its orthogonal tensor norms, and let
+$\iota:U\hookrightarrow W$ be a nonzero subspace with induced norms.
+Set $s=\dim_K U$ and $a_i=\dim_K E_i$. For a positive common multiple $n$ of
+$s$ and all $a_i$, put
+\[
+ B_n=S_{s,n}(\overline U),\qquad
+ D_n=\bigotimes_{i\in I}S_{a_i,n}(\overline E_i^{\vee}).
+\]
+The canonical determinant maps give
+$\iota_U:B_n\to U^{\otimes n}$ and
+$j_n:D_n\to(W^{\vee})^{\otimes n}$. Define the original-field pairing
+\[
+ \Psi_n:B_n\longrightarrow D_n^{\vee},\qquad
+ \Psi_n(b)(d)=\langle j_n(d),\iota^{\otimes n}(\iota_U(b))\rangle.
+\]
+The brackets are algebraic tensor evaluation; no averaging operator is part
+of this definition.
+
+\begin{lemma}[The finite-degree geometric slope bound]
+\label{lem:finite-degree-geometric-slope}
+\source{bost-adelic-2026:page-0026,bost-adelic-2026:page-0027}
+\uses{lem:semistable-contraction-slope,lem:determinant-power-slope,lem:specht-degree,lem:specht-semistability,cor:group-line-twist-semistability,lem:independent-group-semistability,lem:slope-duality,lem:local-pairing-contraction}
+\notready
+In the preceding setting, if $\Psi_n\neq0$, then
+\[
+ n\widehat\mu(\overline U)-m_\infty C_s(n/s)
+ \leq n\sum_{i\in I}\widehat\mu(\overline E_i)
+       +m_\infty\sum_{i\in I}C_{a_i}(n/a_i).
+\]
+\end{lemma}
+\begin{proof}
+The permutation action on each rectangular Specht lattice is absolutely
+irreducible and preserves every completed lattice norm. Give each determinant
+line power the trivial action. Tensoring the lattice representation with this
+one-dimensional trivial representation preserves absolute irreducibility:
+after any field extension, choosing a nonzero vector of the line identifies
+the resulting representation with the lattice representation. The action
+preserves the tensor norm because it preserves both factor norms. All these
+bundles are Hermitian.
+
+Consequently $B_n$ is semistable. Each factor of $D_n$ has its own
+permutation group action, so the independent-group semistability theorem
+makes $D_n$ and $D_n^{\vee}$ semistable. This assertion uses the product of
+the groups, not their diagonal subgroup.
+The local pairing contraction gives $\|\Psi_{n,\omega}\|\leq1$ at every
+place. Since $\Psi_n\neq0$, the semistable contraction comparison yields
+\[
+ \widehat\mu(B_n)\leq\widehat\mu(D_n^{\vee}).
+\]
+
+The lattice degree formula and the determinant-power formula give
+\[
+ \widehat\mu(B_n)=n\widehat\mu(\overline U)-m_\infty C_s(n/s).
+\]
+For each $i$, the same formulas and Hermitian duality give
+\[
+ \widehat\mu(S_{a_i,n}(\overline E_i^{\vee}))
+   =-n\widehat\mu(\overline E_i)-m_\infty C_{a_i}(n/a_i).
+\]
+Repeated use of the binary tensor-slope formula computes the slope of $D_n$
+as the sum of these expressions. Duality negates that sum. Substituting both
+computed slopes in the comparison proves the displayed inequality.
+\end{proof}
+
+\section{Geometric semistability and quotient norms}
+
+The Pl\"ucker point of $U\subset W$ is the line
+$\bigwedge^s U\subset\bigwedge^s W$.
+It is geometrically semistable if, over an algebraic closure of $K$, a
+positive-degree homogeneous polynomial invariant under
+$\prod_{i\in I}\operatorname{SL}(E_i)$ is nonzero on a nonzero vector of
+that line.
+
+\begin{theorem}[Geometric subspace slope inequality]
+\label{thm:geometric-subspace-bound}
+\source{bost-adelic-2026:page-0026,bost-adelic-2026:page-0027,bost-adelic-2026:page-0028}
+\uses{lem:nonzero-pairings,lem:finite-degree-geometric-slope,lem:specht-error-limit}
+\notready
+If the Pl\"ucker point of the nonzero subspace $\iota:U\hookrightarrow W$
+is geometrically semistable, then
+\[
+ \widehat\mu(\overline U)\leq\sum_{i\in I}\widehat\mu(\overline E_i).
+\]
+No arithmetic semistability hypothesis is imposed on the $\overline E_i$.
+\end{theorem}
+\begin{proof}
+The nonzero-pairing theorem supplies $d\geq1$ divisible by $s$ and all $a_i$
+such that $\Psi_{d(r+1)}\neq0$ for every integer $r\geq0$.
+Put $l_r=d(r+1)/s$ and $k_{r,i}=d(r+1)/a_i$; divisibility makes these positive
+integers. The finite-degree bound applies at every one of these degrees.
+Apply the error-elimination lemma with
+\[
+ c=m_\infty,\qquad x=\widehat\mu(\overline U),\qquad
+ y=\sum_{i\in I}\widehat\mu(\overline E_i).
+\]
+Its conclusion is the required inequality.
+\end{proof}
+
+\begin{lemma}[Dual norm of an orthogonal tensor quotient]
+\label{lem:tensor-quotient-dual-norm}
+\uses{def:adelic-induced-norms}
+\source{bost-adelic-2026:page-0028}
+\lean{ArakelovGeometry.NormFamily.orthogonalTensor_pushforward_dual_norm,ArakelovGeometry.NormFamily.orthogonalTensorPair_pushforward_dual_norm}
+\leanok
+Let $q:W\twoheadrightarrow Q$ be a surjective linear map from the orthogonal
+tensor product of a finite family of Hermitian normed spaces over $S$.
+Give $Q$ the pushforward norms. Under the canonical tensor-duality isomorphism,
+let
+\[
+ j:Q^{\vee}\xrightarrow{q^{\vee}}W^{\vee}
+       \xrightarrow{\ \sim\ }\bigotimes_{i\in I}E_i^{\vee}.
+\]
+At every place and on every completed vector $\lambda\in Q_\omega^{\vee}$,
+\[
+ \|\lambda\|_{Q^{\vee},\omega}
+   =\|j_\omega(\lambda)\|_{\bigotimes_i E_i^{\vee},\omega}.
+\]
+The same statement holds for the ordinary binary tensor product.
+\end{lemma}
+\begin{proof}
+Fix a place. Write $C=\|q^{\vee}(\lambda)\|_{W^{\vee}}$.
+For every lift $x\in W_\omega$ of $y\in Q_\omega$,
+$|\lambda(y)|\leq C\|x\|$. Taking the infimum over all lifts gives
+$|\lambda(y)|\leq C\|y\|_Q$, hence $\|\lambda\|_{Q^{\vee}}\leq C$.
+Conversely $\|q(x)\|_Q\leq\|x\|$, so
+$|\lambda(q(x))|\leq\|\lambda\|_{Q^{\vee}}\|x\|$ for every $x$.
+Thus $C\leq\|\lambda\|_{Q^{\vee}}$. This proves equality for the transpose.
+The canonical tensor-duality isomorphism is isometric for the prescribed
+Hermitian tensor norms, so composing with it gives the asserted identity.
+Scalar extension commutes with these canonical maps, hence the computation
+applies to all completed vectors. The binary statement uses the binary
+tensor-duality isomorphism and the identical argument.
+\end{proof}
+
+\begin{theorem}[Geometric quotient slope inequality]
+\label{thm:geometric-quotient-bound}
+\source{bost-adelic-2026:page-0028}
+\uses{thm:geometric-subspace-bound,lem:geometric-dual-quotient,lem:tensor-quotient-dual-norm,lem:slope-duality}
+\notready
+Let $\overline E$ and $\overline F$ be positive-rank Hermitian adelic bundles
+over the countable characteristic-zero field $K$, and put
+$\overline T=\overline E\otimes\overline F$ with its orthogonal tensor norms.
+Let $q:E\otimes_K F\twoheadrightarrow Q$ be a positive-rank quotient and
+let $\overline B=q_*\overline T$ be its actual pushforward bundle.
+If $q$ is geometrically semistable, meaning that its dual Pl\"ucker point
+is geometrically semistable for the contragredient tensor action, then
+\[
+ \widehat\mu(\overline E)+\widehat\mu(\overline F)
+     \leq\widehat\mu(\overline B).
+\]
+Neither factor is required to be arithmetically semistable.
+\end{theorem}
+\begin{proof}
+The dual-quotient bridge identifies the geometric hypothesis with geometric
+semistability of
+\[
+ j:Q^{\vee}\hookrightarrow E^{\vee}\otimes_K F^{\vee}
+\]
+for the full special-linear groups of the dual factors. Surjectivity of $q$
+implies injectivity of its transpose, and tensor duality is an isomorphism,
+so $j$ is injective. Its source is nonzero because $\dim_K Q>0$.
+The dual-quotient norm identity says that the induced norms along $j$ are
+precisely those of $\overline B^{\vee}$. Apply the geometric subspace
+inequality to the Hermitian bundles $\overline E^{\vee}$ and
+$\overline F^{\vee}$. It yields
+\[
+ \widehat\mu(\overline B^{\vee})
+ \leq\widehat\mu(\overline E^{\vee})+
+       \widehat\mu(\overline F^{\vee}).
+\]
+The tensor bundle and its quotient $\overline B$ are Hermitian. Hermitian
+slope duality therefore negates all three slopes in this inequality.
+Multiplication by $-1$ gives the assertion, with the original pushforward
+norms on $\overline B$.
+\end{proof}
