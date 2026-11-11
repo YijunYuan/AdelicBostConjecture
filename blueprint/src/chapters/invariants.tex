@@ -137,14 +137,16 @@ For an $a$-dimensional space $M$ set
 The determinant map $\iota_{M,t}:S_t(M)\to M^{\otimes d}$ sends
 $(b_1\wedge\cdots\wedge b_a)^{\otimes k}\otimes x$ to the tensor obtained
 by substituting $b_i$ for every letter $e_i$ of $x$.
-Lemma~\ref{lem:rectangular-specht-invariants} identifies its image and ensures
-that the construction is independent of the chosen basis.
+Lemma~\ref{lem:rectangular-determinant-map} shows that the construction is
+independent of the chosen basis over the original field.
+After extension to an algebraic closure,
+Lemma~\ref{lem:rectangular-specht-invariants} identifies its invariant image.
 There is no division by $a!$ in this definition.
 
 \begin{definition}[Canonical determinant pairing]
 \label{def:canonical-pairing}
 \source{bost-adelic-2026:page-0025,bost-adelic-2026:page-0026}
-\uses{lem:rectangular-specht-invariants}
+\uses{lem:rectangular-determinant-map}
 \lean{BostConjecture.Geometry.canonicalPairing}
 \leanok
 Let $d>0$ be divisible by $s$ and every $a_j$, put $l=d/s$ and $k_j=d/a_j$,
