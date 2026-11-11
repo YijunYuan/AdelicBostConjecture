@@ -13,7 +13,8 @@ places and $\varepsilon$-tensor norms elsewhere.
 
 Write $r(E)=\dim_K E$, $\widehat{\deg}(\overline E)$ for degree, and
 $\widehat\mu(\overline E)=\widehat{\deg}(\overline E)/r(E)$ for positive
-rank. Semistability means that every nonzero subspace has slope at most
+rank. Semistability is defined only for positive rank and means that every
+nonzero subspace has slope at most
 the ambient slope; equivalently, every nonzero quotient has slope at least
 the ambient slope. Write $\mathcal H_E$ for the weighted
 Harder--Narasimhan filtration and $\widehat\mu_{\max}(\overline E)$ for its
@@ -49,7 +50,8 @@ The tensor filtration is
 \]
 On adapted bases with weights $(x_i)$ and $(y_j)$ its weights are
 $(x_i+y_j)_{i,j}$. Two finite filtrations on one space have a common
-adapted basis. If their weights on that basis are $x_i,y_i$, set
+adapted basis. On a positive-rank space, if their weights on that basis
+are $x_i,y_i$, set
 $\langle P,R\rangle=r(E)^{-1}\sum_i x_i y_i$ and
 $\|P\|^2=\langle P,P\rangle$. A filtration is normalized if $e(P)=0$.
 A lift of the grade HN filtrations of $P$ is obtained by lifting an
@@ -57,9 +59,38 @@ HN-adapted basis of each $E_t$ to $P^tE$, retaining its HN weights as
 secondary weights. The lifted basis is adapted to both filtrations.
 \end{definition}
 
+\begin{lemma}[Hermitian tensor degree]
+\label{lem:induction-tensor-degree}
+\uses{def:adelic-slope}
+\source{bost-adelic-2026:page-0006}
+\lean{ArakelovGeometry.AdelicVectorBundle.degree_orthogonalTensorPair, ArakelovGeometry.AdelicVectorBundle.slope_orthogonalTensorPair}
+\leanok
+For Hermitian bundles, including those of rank zero,
+\[
+ \widehat{\deg}(\overline E\otimes\overline F)
+ =r(F)\widehat{\deg}(\overline E)+r(E)\widehat{\deg}(\overline F).
+\]
+For positive ranks this gives
+$\widehat\mu(\overline E\otimes\overline F)
+=\widehat\mu(\overline E)+\widehat\mu(\overline F)$.
+\end{lemma}
+\begin{proof}
+For positive ranks this is the Hermitian tensor degree formula
+\cite[Proposition 4.3.19, equation (4.35)]{chenmoriwaki2020}, recalled as
+(8) in this paper. Its determinant norm identity identifies the norm of
+the tensor determinant generator with the product of the factor
+determinant norms to powers $r(F)$ and $r(E)$, respectively. Taking
+negative logarithms and integrating gives the displayed equality.
+Divide by $r(E\otimes F)=r(E)r(F)$ to obtain its slope form.
+If one factor has rank zero, its degree and the tensor product degree
+are zero, and both terms on the right vanish.
+\end{proof}
+
 \begin{lemma}[Finite contracting images of one slope]
 \label{lem:finite-contracting-images}
+\uses{def:adelic-slope,lem:degree-exact-sequence}
 \lean{ArakelovGeometry.AdelicVectorBundle.degree_ge_of_finite_same_slope_spanning_contractions, ArakelovGeometry.AdelicVectorBundle.slope_quotient_ge_of_finite_same_slope_spanning_contractions}
+\leanok
 Let finitely many Hermitian bundles $\overline C_i$ be either zero or
 semistable of slope $a$. Let $f_i:C_i\to B$ be contractions at every
 completed place whose images span $B$. Then
@@ -88,6 +119,7 @@ and spanning, so the same argument proves the quotient assertion.
 \uses{def:induction-filtrations}
 \source{bost-adelic-2026:page-0029}
 \lean{ArakelovGeometry.NormFamily.tensorFiltrationGradedPair_pushforward_norm_le, Submodule.iSup_range_tensorFiltrationGradedQuotientPair}
+\leanok
 Let $P,R$ be finite filtrations on $E,F$, and let
 $q:E\otimes F\twoheadrightarrow Q$ have the original tensor quotient norms.
 For $t+u=\gamma$ the canonical map
@@ -122,9 +154,10 @@ the quotient grade.
 
 \begin{lemma}[Tensor HN identification]
 \label{lem:tensor-hn-identification}
-\uses{lem:finite-contracting-images,lem:tensor-grade-components}
+\uses{lem:finite-contracting-images,lem:tensor-grade-components,thm:hermitian-hn-filtration,lem:hn-uniqueness,lem:degree-exact-sequence,lem:induction-tensor-degree}
 \source{bost-adelic-2026:page-0029}
 \lean{ArakelovGeometry.AdelicVectorBundle.hermitianHNFiltration_orthogonalTensorPair_of_semistable_grades}
+\leanok
 Suppose that the tensor product of every pair of nonzero HN grades of
 $\overline E,\overline F$ is semistable. Then
 \[
@@ -160,9 +193,10 @@ the contraction of the whole orthogonal sum asserted in (44) of this paper.
 
 \begin{lemma}[HN images and degree]
 \label{lem:finite-hn-image-degree}
-\uses{lem:finite-contracting-images,def:induction-filtrations}
+\uses{lem:finite-contracting-images,def:induction-filtrations,thm:hermitian-hn-filtration,lem:degree-exact-sequence}
 \source{bost-adelic-2026:page-0029,bost-adelic-2026:page-0030}
-\lean{ArakelovGeometry.AdelicVectorBundle.finsum_hermitianHN_imageFiltration_le_degree}
+\lean{ArakelovGeometry.AdelicVectorBundle.hermitianHN_imageFiltration_finite, ArakelovGeometry.AdelicVectorBundle.finsum_hermitianHN_imageFiltration_le_degree}
+\leanok
 Let $f_i:C_i\to B$ be a finite family of contractions with spanning
 images. Define $H^sB=\sum_i f_i(\mathcal H_{C_i}^s C_i)$. Then
 $H$ is a finite filtration and $d(H)\le\widehat{\deg}(\overline B)$.
@@ -184,6 +218,7 @@ grades and use degree additivity.
 \uses{lem:finite-hn-image-degree,lem:tensor-grade-components,def:induction-filtrations}
 \source{bost-adelic-2026:page-0030,bost-adelic-2026:page-0031}
 \lean{ArakelovGeometry.AdelicVectorBundle.tensorFiltrationQuotient_eventual_hn_upper}
+\leanok
 Let $q:E\otimes F\twoheadrightarrow Q\ne0$, let $P,R$ be finite
 filtrations, and choose lifts of their grade HN filtrations with common
 adapted bases. Suppose all pairs of grades have rank sum strictly less
@@ -232,9 +267,11 @@ Its vectors of each primary weight $\gamma$ therefore give a basis of
 $Q_\gamma$. The class of a tensor vector of secondary weight $s_z$
 belongs to $H_\gamma^{s_z}$, by the definition of the lifts and the
 component images. In any filtered space, the sum of assigned weights
-of independent vectors lying in their assigned cuts is at most the
+of a basis whose vectors lie in their assigned cuts is at most the
 filtration degree: at each threshold their number is at most the
-dimension of the cut, and the same telescoping formula proves the bound.
+dimension of the cut. Below all assigned and filtration weights these
+counts both equal the full dimension, so the same telescoping formula
+proves the bound, including negative weights.
 Applying it in every primary grade gives
 $\beta_I\le\sum_\gamma d(H_\gamma)=r\delta$.
 The maximum formula now gives the desired inequality after division by $r$.
@@ -242,11 +279,47 @@ This is the one-sided form of Lemma 7.2 needed below; it does not assert
 the stronger affine identity or a contraction from an orthogonal direct sum.
 \end{proof}
 
+\begin{lemma}[Original-field geometric optimizer]
+\label{lem:induction-geometric-optimizer}
+\uses{def:induction-filtrations}
+\source{bost-adelic-2026:page-0031}
+\lean{Submodule.exists_normalized_tensor_quotient_optimizer_of_not_geometricallySemistable}
+\leanok
+Let $E,F,Q$ have positive ranks and let
+$q:E\otimes F\twoheadrightarrow Q$ be geometrically unstable. Here
+geometric semistability means semistability of the dual Pl\"ucker point
+of $Q^\vee\subset(E\otimes F)^\vee$ for the product of the special
+linear groups after passage to an algebraic closure. There exist
+normalized finite filtrations $P,R$ over $K$ such that
+\[
+ \|P\|^2+\|R\|^2=1,\qquad e((P\otimes R)_Q)<0,
+\]
+and, for every normalized finite pair $A,B$ not both trivial,
+\[
+ e((P\otimes R)_Q)\le
+ \frac{e((A\otimes B)_Q)}{\sqrt{\|A\|^2+\|B\|^2}}.
+\]
+\end{lemma}
+\begin{proof}
+Apply the original-field geometric instability theorem in its binary
+case \cite[Theorem 5.4.3]{chenmoriwaki2020}, as used in Section 7.3 of
+this paper. It gives a normalized nontrivial pair minimizing the
+displayed ratio, with negative minimum. Its norm $L$ is positive.
+Divide both sets of weights by $L$. Expectations scale by $1/L$ and
+the sum of squared norms scales by $1/L^2$. The new pair is normalized,
+has squared norm one, and has quotient expectation equal to the same
+negative minimum. The minimizing property gives exactly the stated
+comparison with every $A,B$. The original-field conclusion of the
+instability theorem is used here; no extension of the adelic norms to
+an algebraic closure is made.
+\end{proof}
+
 \begin{lemma}[Unstable quotient bound]
 \label{lem:unstable-quotient-bound}
-\uses{lem:component-hn-variation,def:induction-filtrations}
+\uses{lem:component-hn-variation,def:induction-filtrations,lem:degree-exact-sequence,lem:induction-geometric-optimizer}
 \source{bost-adelic-2026:page-0031,bost-adelic-2026:page-0032}
 \lean{ArakelovGeometry.AdelicVectorBundle.slope_sum_le_tensor_quotient_of_not_geometricallySemistable}
+\leanok
 Let $\overline E,\overline F$ be positive-rank semistable Hermitian
 bundles and $q:E\otimes F\twoheadrightarrow Q\ne0$ a quotient with
 its original tensor quotient norms. Assume that for every pair of
@@ -315,7 +388,7 @@ $\delta-a\ge c\beta/L\ge0$, which proves the assertion.
 
 \begin{proposition}[Assembly from the geometric quotient inequality]
 \label{prop:conditional-tensor-hn-assembly}
-\uses{lem:unstable-quotient-bound,lem:tensor-hn-identification}
+\uses{lem:unstable-quotient-bound,lem:tensor-hn-identification,thm:hermitian-hn-filtration,lem:induction-tensor-degree}
 \source{bost-adelic-2026:page-0031,bost-adelic-2026:page-0032}
 \lean{ArakelovGeometry.AdelicVectorBundle.tensorHN_and_semistable_of_geometric_quotient_bound}
 Assume the following inequality: for every pair of positive-rank
@@ -357,7 +430,7 @@ is retained in the conclusion.
 \uses{prop:conditional-tensor-hn-assembly,thm:geometric-quotient-bound}
 \source{bost-adelic-2026:page-0032}
 \notready
-For Hermitian adelic bundles on $S$,
+Suppose in addition that $K$ is countable. For Hermitian adelic bundles on $S$,
 $\mathcal H_{E\otimes F}=\mathcal H_E\otimes\mathcal H_F$.
 The tensor product of positive-rank semistable bundles is semistable.
 \end{theorem}
@@ -369,9 +442,10 @@ proposition to the given bundles.
 
 \begin{lemma}[Maximal slope from the actual tensor filtration]
 \label{lem:maximal-slope-from-tensor-hn}
-\uses{def:induction-filtrations}
+\uses{def:induction-filtrations,thm:hermitian-hn-filtration,lem:induction-tensor-degree}
 \source{bost-adelic-2026:page-0032}
 \lean{ArakelovGeometry.AdelicVectorBundle.maximalSlope_orthogonalTensorPair_of_hnFiltration_eq}
+\leanok
 If $E,F\ne0$ and $\mathcal H_{E\otimes F}=\mathcal H_E\otimes\mathcal H_F$,
 then
 \[
@@ -395,7 +469,7 @@ positive, so this supplies a nonzero subspace as required.
 
 \begin{theorem}[Adelic Bost theorem]
 \label{thm:bost-adelic}
-\uses{thm:tensor-hn-compatibility,lem:maximal-slope-from-tensor-hn}
+\uses{thm:tensor-hn-compatibility,lem:maximal-slope-from-tensor-hn,lem:induction-tensor-degree}
 \source{bost-adelic-2026:page-0001,bost-adelic-2026:page-0032}
 \notready
 Let $K$ be countable of characteristic zero and $S$ proper, with the
