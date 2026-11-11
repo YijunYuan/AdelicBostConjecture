@@ -3,8 +3,10 @@ Copyright (c) 2026 Yijun Yuan. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Yijun Yuan
 -/
-import BostConjecture.Adelic.Induction.TensorHN
-import ArakelovGeometry.AdelicVectorBundle.Tensor.Graded.HNVariation
+module
+
+public import BostConjecture.Adelic.Induction.TensorHN
+public import ArakelovGeometry.AdelicVectorBundle.Tensor.Graded.HNVariation
 
 /-!
 # Strong rank induction, conditional on the geometric quotient inequality
@@ -17,6 +19,8 @@ produced by strong induction, including zero grades.
 The Section 6 geometric quotient inequality is an explicit hypothesis below.
 This module does not supply it and does not assert an unconditional Bost theorem.
 -/
+
+@[expose] public section
 
 open Module Submodule ArakelovGeometry.InvariantTheory
 open scoped TensorProduct
@@ -114,10 +118,10 @@ theorem tensorHN_and_semistable_of_geometric_quotient_bound
       apply hermitianHNFiltration_orthogonalTensorPair_of_semistable_grades
         V W hS hN hV hW
       intro t u ht hu
-      have hsV := (filtrationGraded_hermitianHN_zero_or_semistable V hS hN hV t).
-        resolve_left (Nat.ne_of_gt ht)
-      have hsW := (filtrationGraded_hermitianHN_zero_or_semistable W hS hN hW u).
-        resolve_left (Nat.ne_of_gt hu)
+      have hsV := (filtrationGraded_hermitianHN_zero_or_semistable V hS hN hV t).resolve_left
+        (Nat.ne_of_gt ht)
+      have hsW := (filtrationGraded_hermitianHN_zero_or_semistable W hS hN hW u).resolve_left
+        (Nat.ne_of_gt hu)
       obtain ⟨b, w, hb⟩ := V.exists_weighted_basis_hermitianHNFiltration hS hN hV
       obtain ⟨c, z, hc⟩ := W.exists_weighted_basis_hermitianHNFiltration hS hN hW
       exact semistable _ _ (V.filtrationGraded _ t hS) (W.filtrationGraded _ u hS)
