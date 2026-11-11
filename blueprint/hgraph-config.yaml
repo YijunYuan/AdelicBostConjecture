@@ -51,6 +51,7 @@ lean:
 - BostConjecture/Adelic/Specht/Bundle.lean
 - BostConjecture/Adelic/Specht/Degree.lean
 - BostConjecture/Adelic/Specht/Permutation.lean
+- BostConjecture/Adelic/Specht/Semistability.lean
 - BostConjecture/Arithmetic/Representation/Density.lean
 - BostConjecture/Geometry/Contraction/BaseChange.lean
 - BostConjecture/Geometry/Contraction/Basic.lean
