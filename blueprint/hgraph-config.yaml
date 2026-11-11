@@ -7,6 +7,7 @@ lean:
 - .lake/packages/ArakelovGeometry/ArakelovGeometry/AdelicVectorBundle/Degree/ExactSequence/Dual.lean
 - .lake/packages/ArakelovGeometry/ArakelovGeometry/AdelicVectorBundle/Degree/Flag/ImageHN.lean
 - .lake/packages/ArakelovGeometry/ArakelovGeometry/AdelicVectorBundle/Degree/TensorHermitian.lean
+- .lake/packages/ArakelovGeometry/ArakelovGeometry/AdelicVectorBundle/Determinant/Basic.lean
 - .lake/packages/ArakelovGeometry/ArakelovGeometry/AdelicVectorBundle/Examples/Trivial/Filtration/Optimal/Geometric.lean
 - .lake/packages/ArakelovGeometry/ArakelovGeometry/AdelicVectorBundle/HarderNarasimhan/Destabilizing.lean
 - .lake/packages/ArakelovGeometry/ArakelovGeometry/AdelicVectorBundle/HarderNarasimhan/Galois/HNScalarExtension.lean
@@ -19,9 +20,12 @@ lean:
 - .lake/packages/ArakelovGeometry/ArakelovGeometry/AdelicVectorBundle/Slope/DualUpper.lean
 - .lake/packages/ArakelovGeometry/ArakelovGeometry/AdelicVectorBundle/Slope/Quotient.lean
 - .lake/packages/ArakelovGeometry/ArakelovGeometry/AdelicVectorBundle/Slope/Tensor.lean
+- .lake/packages/ArakelovGeometry/ArakelovGeometry/AdelicVectorBundle/Subquotient/Quotient/Basic.lean
+- .lake/packages/ArakelovGeometry/ArakelovGeometry/AdelicVectorBundle/Subquotient/Restriction/Basic.lean
 - .lake/packages/ArakelovGeometry/ArakelovGeometry/AdelicVectorBundle/Tensor/Graded/Basic.lean
 - .lake/packages/ArakelovGeometry/ArakelovGeometry/AdelicVectorBundle/Tensor/Graded/Degree.lean
 - .lake/packages/ArakelovGeometry/ArakelovGeometry/AdelicVectorBundle/Tensor/Graded/HNVariation.lean
+- .lake/packages/ArakelovGeometry/ArakelovGeometry/AdelicVectorBundle/Tensor/Hermitian/InnerProduct.lean
 - .lake/packages/ArakelovGeometry/ArakelovGeometry/InvariantTheory/Plucker.lean
 - BostConjecture/Adelic/Basic.lean
 - BostConjecture/Adelic/Contraction/Determinant.lean
@@ -37,6 +41,8 @@ lean:
 - BostConjecture/Adelic/Induction/TensorHN.lean
 - BostConjecture/Adelic/Semistability/Group.lean
 - BostConjecture/Adelic/Semistability/Independent.lean
+- BostConjecture/Adelic/Semistability/LineTensor.lean
+- BostConjecture/Adelic/Semistability/Specht.lean
 - BostConjecture/Adelic/Slope/BoolTensor.lean
 - BostConjecture/Adelic/Slope/Contraction.lean
 - BostConjecture/Adelic/Slope/CovolumeLimit.lean
@@ -53,4 +59,5 @@ lean:
 - BostConjecture/Geometry/Plucker/Polynomial.lean
 - BostConjecture/Specht/Asymptotics/Limit.lean
 - BostConjecture/Specht/Asymptotics/Separation.lean
+- BostConjecture/Specht/Lattice/Rectangle.lean
 - BostConjecture/Specht/Seminormal/Gram.lean
