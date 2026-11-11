@@ -70,6 +70,7 @@ variable {K : Type u} [Field K] [CharZero K] {S : AdelicStructure.{u, v} K}
   (hcount : S.HasCommonCountableDenseSubfield) (hV : V.IsHermitian hN)
 
 set_option maxHeartbeats 800000 in
+-- Comparing completion ring projections in the determinant source is costly.
 set_option backward.isDefEq.respectTransparency false in
 /-- The existing determinant embedding contracts for the prescribed completed
 norms at every non-Archimedean place, including trivial valuations. -/
@@ -108,6 +109,22 @@ theorem projectiveDeterminantMap_norm_finite {n k : ℕ} (hk : 0 < k)
       (orbitLattice t) k (finrank K E)).symm _)
   rw [determinantSpechtBundle_norm_tprod]
   simp only [Finset.prod_const, Finset.card_univ, Fintype.card_fin]
+
+/-- The actual determinant–Specht embedding contracts at every place. -/
+theorem projectiveDeterminantMap_norm_le {n k : ℕ} (hk : 0 < k)
+    (t : Tableau n (rectangle (finrank K E) k))
+    (c : Basis (Fin (finrank K (K ⊗[ℤ] orbitLattice t))) ℤ (orbitLattice t))
+    (ω : S.Ω)
+    (x : (S.ϕ ω).Completion ⊗[K]
+      ((⨂[K] (_ : Fin k), ⋀[K]^(finrank K E) E) ⊗[K] (K ⊗[ℤ] orbitLattice t))) :
+    (NormFamily.orthogonalTensor (fun _ : Fin n => V.toNormFamily) hN (fun _ => hV)).norm ω
+      ((projectiveDeterminantMap hk t
+        (fun p => congrFun (Module.rankAtStalk_eq_finrank_of_free (R := K) (M := E)) p)).baseChange
+          (S.ϕ ω).Completion x) ≤ (determinantSpechtBundle V hN hcount k t c).norm ω x := by
+  by_cases hω : ω ∈ S.Ωfin
+  · exact projectiveDeterminantMap_norm_finite V hN hcount hV hk t c ω hω x
+  · exact (projectiveDeterminantMap_norm_infinite V hN hcount hV hk t c ω hω x).le
+
 end Bundle
 
 end BostConjecture.Adelic.Contraction
