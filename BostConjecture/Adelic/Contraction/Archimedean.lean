@@ -102,6 +102,24 @@ theorem determinantTwistBaseChangeEquiv_symm_tprod
   simp [determinantTwistBaseChangeEquiv, determinantPowerBaseChangeEquiv,
     exteriorBaseChangeEquiv_eq, ← BostConjecture.Adelic.Geometry.tensorBaseChangeEquiv_eq]
 
+variable [FiniteDimensional K E]
+
+/-- The global determinant map sends a completed frame generator to word
+substitution, using AG's actual tensor scalar-extension map. -/
+theorem projectiveDeterminantMap_baseChange_generator {n : ℕ} (hk : 0 < k)
+    (t : Tableau n (rectangle a k))
+    (ha : ∀ p : PrimeSpectrum K, Module.rankAtStalk E p = a)
+    (b : Basis (Fin a) L (L ⊗[K] E)) (z : L ⊗[ℤ] orbitLattice t) :
+    (projectiveDeterminantMap hk t ha).baseChange L
+      ((determinantTwistBaseChangeEquiv (R := K) (S := L) (M := E)
+        (orbitLattice t) k a).symm
+          ((⨂ₜ[L] (_ : Fin k), exteriorPower.ιMulti L a b) ⊗ₜ[L] z)) =
+      (tensorBaseChangeEquiv K L (fun _ : Fin n => E)).symm (freeLatticeMap hk t b z) := by
+  rw [projectiveDeterminantMap_baseChange_of_basis hk t ha b]
+  simp only [determinantChart, LinearMap.comp_apply, LinearEquiv.coe_coe,
+    LinearEquiv.apply_symm_apply, freeDeterminantMap_basis,
+    BostConjecture.Adelic.Geometry.tensorBaseChangeEquiv_eq]
+
 end ScalarTransport
 
 section Completed
@@ -261,6 +279,8 @@ theorem determinantSpechtBundle_norm_generator {n k : ℕ}
     determinantPower_norm_orthonormalBasis V hN hcount hV k ω hω b, one_mul]
   rfl
 
+set_option maxHeartbeats 800000 in
+-- Comparing the completed tensor module instances exceeds the default elaboration budget.
 set_option backward.isDefEq.respectTransparency false in
 /-- At every real or complex Archimedean completion, the actual canonical
 determinant–Specht map is isometric for the prescribed adelic norms. -/
@@ -288,12 +308,12 @@ theorem projectiveDeterminantMap_norm_infinite {n k : ℕ} (hk : 0 < k)
       exteriorPower.ιMulti (S.ϕ ω).Completion (finrank K E) b.toBasis)
         ⊗ₜ[(S.ϕ ω).Completion] z) := by
     rw [← hz, LinearEquiv.symm_apply_apply]
-  rw [hx, projectiveDeterminantMap_baseChange_of_basis hk t _ b.toBasis]
-  simp only [determinantChart, LinearMap.comp_apply, LinearEquiv.coe_coe,
-    show determinantTwistBaseChangeEquiv (R := K) (S := (S.ϕ ω).Completion)
-      (M := E) (orbitLattice t) k (finrank K E) = e from rfl,
-    LinearEquiv.apply_symm_apply, freeDeterminantMap_basis]
-  rw [← BostConjecture.Adelic.Geometry.tensorBaseChangeEquiv_eq]
+  rw [hx]
+  change (NormFamily.orthogonalTensor _ hN _).norm ω
+    ((projectiveDeterminantMap hk t _).baseChange (S.ϕ ω).Completion
+      ((determinantTwistBaseChangeEquiv (R := K) (S := (S.ϕ ω).Completion) (M := E)
+        (orbitLattice t) k (finrank K E)).symm _)) = _
+  rw [projectiveDeterminantMap_baseChange_generator]
   have hn := orthogonal_freeLatticeMap_completed_norm V.toNormFamily hN hV hk t c ω hω b
     ((TensorProduct.AlgebraTensorModule.cancelBaseChange ℤ K (S.ϕ ω).Completion
       (S.ϕ ω).Completion (orbitLattice t)).symm z)
