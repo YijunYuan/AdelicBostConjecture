@@ -26,9 +26,12 @@ not a proof of the new target. Refer to the current manuscript as "this paper".
   foundational axioms from additional assumptions. No main-theorem completion
   claim is justified by a clean build of prerequisites alone.
 - Keep source documentation and README statements, dependencies and completion
-  claims faithful to checked code. The user has removed `blueprint/` and
-  `verification/`; do not recreate or depend on those directories. Run proof
-  and axiom checks using temporary files when needed.
+  claims faithful to checked code. Maintain the mathematical blueprint in
+  `blueprint/src/` and synchronize its actual Lean attachments and dependencies
+  to the dashboard DAG. The user explicitly restored blueprint and DAG support;
+  the previous prohibition on recreating blueprint is obsolete. Keep proofs
+  complete and mathematical, and distinguish pending from kernel-checked nodes.
+  Run proof and axiom checks using temporary files; do not recreate `verification/`.
 - Reuse suitable external formalizations by pinned dependency, selective copy,
   or adaptation. For each reuse record the repository, exact revision, original
   path/declarations, license, modifications and project consumers in
