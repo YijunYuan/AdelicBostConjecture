@@ -287,7 +287,8 @@ the finite sums gives the asserted formula.
 \label{lem:canonical-pairing-finite-reduction}
 \source{bost-adelic-2026:page-0027}
 \uses{lem:semistable-contraction-slope,lem:determinant-specht-semistability,lem:determinant-specht-product-semistability,lem:determinant-specht-slope,cor:canonical-pairing-target-slope}
-\notready
+\lean{BostConjecture.Adelic.canonicalPairing_finite_degree_bound_of_norm_le}
+\leanok
 Suppose that the actual map $\Psi_n:B_n\to D_n^{\vee}$ is nonzero and that
 $\|\Psi_{n,\omega}(z)\|\leq\|z\|$ for every place $\omega$ and every completed
 source vector $z$. Then
@@ -310,7 +311,8 @@ Substitution of the two exact auxiliary slope formulas gives the assertion.
 \label{lem:canonical-pairing-limit-reduction}
 \source{bost-adelic-2026:page-0027,bost-adelic-2026:page-0028}
 \uses{lem:canonical-pairing-finite-reduction,lem:nonzero-pairings,lem:specht-error-limit}
-\notready
+\lean{BostConjecture.Adelic.slope_le_sum_of_geometricallySemistable_of_pairing_norm_le}
+\leanok
 Assume that the Pl\"ucker point of $\iota:U\hookrightarrow W$ is geometrically
 semistable. Suppose that for every positive common degree $n$, the actual
 canonical pairing $\Psi_n$ satisfies the completed norm inequality of the
@@ -333,8 +335,9 @@ $y=\sum_i\widehat\mu(\overline E_i)$, now gives the conclusion.
 \begin{lemma}[The finite-degree geometric slope bound]
 \label{lem:finite-degree-geometric-slope}
 \source{bost-adelic-2026:page-0026,bost-adelic-2026:page-0027}
-\uses{lem:semistable-contraction-slope,lem:determinant-specht-semistability,lem:determinant-specht-product-semistability,lem:determinant-specht-slope,cor:canonical-pairing-target-slope,lem:local-pairing-contraction}
-\notready
+\uses{lem:canonical-pairing-finite-reduction,lem:local-pairing-contraction}
+\lean{BostConjecture.Adelic.canonicalPairing_finite_degree_bound}
+\leanok
 In the preceding setting, if $\Psi_n\neq0$, then
 \[
  n\widehat\mu(\overline U)-m_\infty C_s(n/s)
@@ -377,8 +380,9 @@ that line.
 \begin{theorem}[Geometric subspace slope inequality]
 \label{thm:geometric-subspace-bound}
 \source{bost-adelic-2026:page-0026,bost-adelic-2026:page-0027,bost-adelic-2026:page-0028}
-\uses{lem:nonzero-pairings,lem:finite-degree-geometric-slope,lem:specht-error-limit}
-\notready
+\uses{lem:canonical-pairing-limit-reduction,lem:local-pairing-contraction}
+\lean{BostConjecture.Adelic.slope_le_sum_of_geometricallySemistable}
+\leanok
 If the Pl\"ucker point of the nonzero subspace $\iota:U\hookrightarrow W$
 is geometrically semistable, then
 \[
@@ -387,16 +391,11 @@ is geometrically semistable, then
 No arithmetic semistability hypothesis is imposed on the $\overline E_i$.
 \end{theorem}
 \begin{proof}
-The nonzero-pairing theorem supplies $d\geq1$ divisible by $s$ and all $a_i$
-such that $\Psi_{d(r+1)}\neq0$ for every integer $r\geq0$.
-Put $l_r=d(r+1)/s$ and $k_{r,i}=d(r+1)/a_i$; divisibility makes these positive
-integers. The finite-degree bound applies at every one of these degrees.
-Apply the error-elimination lemma with
-\[
- c=m_\infty,\qquad x=\widehat\mu(\overline U),\qquad
- y=\sum_{i\in I}\widehat\mu(\overline E_i).
-\]
-Its conclusion is the required inequality.
+For every admissible degree and every choice of the integral tableaux and
+bases, the local pairing contraction proves the completed norm inequality
+for the actual canonical map $\Psi_n$. All hypotheses of the limit comparison
+under the canonical norm inequalities are therefore satisfied. That lemma
+gives the asserted slope inequality, without a remaining norm hypothesis.
 \end{proof}
 
 \begin{lemma}[Dual norm of an orthogonal tensor quotient]
@@ -461,11 +460,46 @@ These maps commute with scalar extension, so the same argument applies in
 each completion and proves the claimed norm identity.
 \end{proof}
 
+\begin{theorem}[Geometric quotient bound for a finite tensor product]
+\label{thm:finite-geometric-quotient-bound}
+\source{bost-adelic-2026:page-0028}
+\uses{thm:geometric-subspace-bound,lem:geometric-dual-quotient,lem:tensor-quotient-dual-norm,lem:slope-duality}
+\lean{BostConjecture.Adelic.slope_sum_le_orthogonalTensor_quotient_of_geometricallySemistable}
+\leanok
+Let $I$ be finite and nonempty, let $(\overline E_i)_{i\in I}$ be positive-rank
+Hermitian bundles, and let $q:\bigotimes_i E_i\twoheadrightarrow Q$ be a
+positive-rank quotient. Give $Q$ its actual quotient norms and write
+$\overline B=q_*(\bigotimes_i\overline E_i)$. If the quotient is geometrically
+semistable for the tensor action, then
+\[
+ \sum_i\widehat\mu(\overline E_i)\leq\widehat\mu(\overline B).
+\]
+\end{theorem}
+\begin{proof}
+The geometric dual-quotient theorem makes
+$j:Q^{\vee}\hookrightarrow\bigotimes_i E_i^{\vee}$ geometrically semistable
+for the full special-linear groups of the dual factors. The map is injective
+because $q$ is surjective and the tensor-duality map is an isomorphism.
+The induced norm on its source is the actual norm of $\overline B^{\vee}$
+by the tensor-quotient dual-norm identity. Each dual factor is Hermitian
+of positive rank, and $Q^{\vee}$ has positive rank. The geometric subspace
+inequality applies and gives
+\[
+ \widehat\mu(\overline B^{\vee})
+     \leq\sum_i\widehat\mu(\overline E_i^{\vee}).
+\]
+The tensor bundle, its quotient, and all factors are Hermitian. Slope duality
+identifies the left side with $-\widehat\mu(\overline B)$ and the right side
+with $-\sum_i\widehat\mu(\overline E_i)$. Negating the inequality proves the
+assertion with the original quotient norms.
+\end{proof}
+
 \begin{theorem}[Geometric quotient slope inequality]
 \label{thm:geometric-quotient-bound}
 \source{bost-adelic-2026:page-0028}
-\uses{thm:geometric-subspace-bound,lem:geometric-dual-quotient,lem:tensor-quotient-dual-norm,lem:binary-tensor-norm,lem:slope-duality}
-\notready
+\uses{thm:finite-geometric-quotient-bound,lem:binary-tensor-norm}
+\lean{ArakelovGeometry.AdelicVectorBundle.slope_sum_le_tensor_quotient_of_geometricallySemistable}
+\leanok
 Let $\overline E$ and $\overline F$ be positive-rank Hermitian adelic bundles
 over the countable characteristic-zero field $K$, and put
 $\overline T=\overline E\otimes\overline F$ with its orthogonal tensor norms.
@@ -480,27 +514,15 @@ is geometrically semistable for the contragredient tensor action, then
 Neither factor is required to be arithmetically semistable.
 \end{theorem}
 \begin{proof}
-The dual-quotient bridge identifies the geometric hypothesis with geometric
-semistability of
-\[
- j:Q^{\vee}\hookrightarrow E^{\vee}\otimes_K F^{\vee}
-\]
-for the full special-linear groups of the dual factors. Surjectivity of $q$
-implies injectivity of its transpose, and tensor duality is an isomorphism,
-so $j$ is injective. Its source is nonzero because $\dim_K Q>0$.
-The binary norm identity identifies this target with the two-factor instance
-of the finite-family tensor bundle used in the subspace theorem.
-The dual-quotient norm identity says that the induced norms along $j$ are
-precisely those of $\overline B^{\vee}$. Apply the geometric subspace
-inequality to the Hermitian bundles $\overline E^{\vee}$ and
-$\overline F^{\vee}$. It yields
-\[
- \widehat\mu(\overline B^{\vee})
- \leq\widehat\mu(\overline E^{\vee})+
-       \widehat\mu(\overline F^{\vee}).
-\]
-The tensor bundle and its quotient $\overline B$ are Hermitian. Hermitian
-slope duality therefore negates all three slopes in this inequality.
-Multiplication by $-1$ gives the assertion, with the original pushforward
-norms on $\overline B$.
+Apply the finite-family quotient theorem to the two-element family
+$A_0=E$, $A_1=F$ and the surjection $q\circ\beta$, where $\beta$ is the
+canonical finite-to-binary tensor isomorphism. The geometric hypothesis is
+exactly the hypothesis for this quotient. At every completion, $\beta$ is
+an isometric isomorphism by the binary tensor norm identity. For each
+$y\in Q_\omega$, it bijects the vectors in the fibre of $q\circ\beta$ over
+$y$ with the vectors in the fibre of $q$ over $y$, preserving their norms.
+Taking the infimum of these norms identifies the two quotient norms.
+Thus the finite-family theorem has right side $\widehat\mu(\overline B)$,
+and its left side is the two-term sum
+$\widehat\mu(\overline E)+\widehat\mu(\overline F)$. This is the assertion.
 \end{proof}
