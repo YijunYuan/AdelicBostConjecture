@@ -61,6 +61,7 @@ $G_b=(\sum_w b_i(w)b_j(w))_{ij}$.
 \uses{def:constant-specht}
 \source{bost-adelic-2026:page-0025}
 \lean{BostConjecture.Specht.latticeNormFamily_basis_independent}
+\leanok
 The completed norms in Definition~\ref{def:constant-specht} are independent
 of the integral basis.
 \end{lemma}
@@ -154,7 +155,9 @@ chosen nonzero rational determinant section.
 \label{lem:specht-degree}
 \uses{lem:constant-lattice-degree}
 \source{bost-adelic-2026:page-0026}
-\notready
+\lean{BostConjecture.Specht.latticeBundle_degree,
+BostConjecture.Specht.latticeBundle_slope_rectangle}
+\leanok
 For $a,k\ge1$ and $d=ak$,
 \[
  \widehat{\deg}(\overline L^S_{a,d})
@@ -175,6 +178,7 @@ definition of $c_a(d)$ into Lemma~\ref{lem:constant-lattice-degree}.
 \source{bost-adelic-2026:page-0025,bost-adelic-2026:page-0026}
 \lean{BostConjecture.Arithmetic.Specht.integralRepresentation_baseChange_isIrreducible,
 BostConjecture.Arithmetic.Specht.integralRepresentation_baseChange_isAbsolutelyIrreducible}
+\leanok
 Over every characteristic-zero field $F$, the position action on
 $F\otimes_\Z L_{a,d}$ is irreducible. In particular, the action over $K$
 is absolutely irreducible.
@@ -211,7 +215,10 @@ This proof also applies to an algebraic closure of $K$.
 \uses{def:constant-specht,lem:specht-regularity,lem:specht-basis-independence,
 lem:rectangular-specht-irreducible,lem:group-semistability}
 \source{bost-adelic-2026:page-0008,bost-adelic-2026:page-0026}
-\notready
+\lean{BostConjecture.Specht.latticeBundle_isMeanSlopeSemistable,
+BostConjecture.Specht.latticeNormFamily_orbitAction,
+BostConjecture.Arithmetic.Specht.integralRepresentation_baseChange_isAbsolutelyIrreducible}
+\leanok
 The position action of $\mathfrak S_d$ on $\overline L^S_{a,d}$ is
 absolutely irreducible and preserves every completed fibre norm.
 Consequently $\overline L^S_{a,d}$ is semistable.
