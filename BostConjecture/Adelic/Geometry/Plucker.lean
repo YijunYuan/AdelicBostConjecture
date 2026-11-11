@@ -41,8 +41,8 @@ theorem exists_homogeneousInvariant_of_isPluckerSemistable
       p ∈ homogeneousInvariants (ArakelovGeometry.InvariantTheory.exteriorRepresentation s ρ) m ∧
       polynomialEval (exteriorPower.ιMulti K s (fun j ↦ A (b j))) p ≠ 0 := by
   have hr : Module.finrank K V = s := by simpa using Module.finrank_eq_card_basis b
+  subst s
   unfold ArakelovGeometry.InvariantTheory.IsPluckerSemistable at h
-  rw [hr] at h
   obtain ⟨η, hη, hp⟩ := h
   obtain ⟨c, rfl⟩ := (determinantCoordinates b).symm.surjective η
   have hc : c ≠ 0 := by
@@ -56,7 +56,7 @@ theorem exists_homogeneousInvariant_of_isPluckerSemistable
 
 section Tensor
 
-variable {K : Type} [Field K] {ι : Type*} [Fintype ι]
+variable {K : Type} [Field K] {ι : Type*}
   (E : ι → Type*) [∀ i, AddCommGroup (E i)] [∀ i, Module K (E i)]
 
 /-- Both libraries use the same action of the full product of special linear groups. -/
@@ -68,15 +68,15 @@ theorem tensorSLRepresentation_eq :
 
 /-- The two scalar-extension equivalences agree on every tensor, not just on a
 chosen frame. This identifies the original linear maps in the two APIs. -/
-theorem tensorBaseChangeEquiv_eq (L : Type*) [Field L] [Algebra K L] :
+theorem tensorBaseChangeEquiv_eq [Finite ι] (L : Type*) [Field L] [Algebra K L] :
     ArakelovGeometry.tensorBaseChangeEquiv K L E = Tensor.baseChangeEquiv K L E := by
   apply LinearEquiv.toLinearMap_injective
   apply TensorProduct.AlgebraTensorModule.ext
   intro c z
   induction z using PiTensorProduct.induction_on with
   | smul_tprod a x =>
-    simp only [TensorProduct.tmul_smul, TensorProduct.tmul_eq_smul_one_tmul,
-      LinearEquiv.coe_coe, map_smul, LinearMap.map_smul_of_tower,
+    simp only [TensorProduct.tmul_smul,
+      LinearEquiv.coe_coe, LinearMap.map_smul_of_tower,
       ArakelovGeometry.tensorBaseChangeEquiv_tmul_tprod, Tensor.baseChangeEquiv_tmul]
   | add x y hx hy => simp only [TensorProduct.tmul_add, map_add, hx, hy]
 
