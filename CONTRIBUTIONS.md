@@ -49,8 +49,8 @@ may therefore describe declarations or modules that have since been removed.
   `Tensor/Hermitian/{Dual/Basic,Grouping,Coherence}`, tensor construction on
   countable bases, and `Slope/{Basic,Tensor}`. The unconditional finite
   mean-slope formula feeds the determinant-Specht product degree calculation;
-  finite maximal-slope additivity remains an explicit consequence of binary
-  additivity until the main theorem is assembled. No upstream source is copied.
+  `Induction/Bost` instantiates the finite maximal-slope assembly with the proved
+  binary theorem. No upstream source is copied in these modules.
 - `Adelic/Contraction/PairingBaseChange` generalizes the completed-map arguments
   of `AdelicVectorBundle/Tensor/PairMap.lean` to independent carrier universes,
   using its imported seminorm-map producers. In `PairingNorm`, the private
@@ -65,13 +65,15 @@ may therefore describe declarations or modules that have since been removed.
   `Construction/Tensor/Countable`, `Slope/{Quotient,DualUpper}`, norm-family
   pushforward composition, and duality. The resulting geometric quotient bound
   is unconditional and uses the actual induced and quotient norms.
-- Boundary: the last result retains the smaller-rank tensor-HN induction
-  hypothesis; this project must discharge it by simultaneous rank induction.
-  Its existence does not prove the geometric semistable branch or Theorem 1.1.
+- Boundary: the upstream instability-variation result retains a smaller-rank
+  tensor-HN hypothesis. This project discharges it by simultaneous rank induction
+  and separately proves the geometric semistable branch. `Induction/Bost`
+  combines these producers into Theorem 1.1; no main theorem is assumed upstream.
 - Verification: the geometry, group and induction consumers above passed
   serialized Horizon kernel checks on 11 November 2026. Their recorded
   transitive axiom audits use only `propext`, `Classical.choice`, and `Quot.sound`;
-  the induction assembly still explicitly assumes the geometric quotient bound.
+  the public main declarations discharge the conditional induction helpers'
+  geometric quotient bound with `Slope/GeometricQuotient`.
   These checks certify the imported dependency cone, not the whole upstream
   library. Prefer this dependency's exports over duplicate local ports after
   comparing exact statements. The ArakelovGeometry dependency is unmodified;

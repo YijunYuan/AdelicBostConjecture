@@ -7,22 +7,41 @@ countable fields of characteristic zero. Archimedean norms are the usual
 real/complex ones; tensor norms are Hilbert at Archimedean places and epsilon
 at the other places. The target includes finite families and semistability.
 
-**Status:** migration from [the previous number-field manuscript](old.pdf) is
-in progress. The declarations and verification account below describe the
-existing number-field implementation, not completion of the adelic theorem.
-The new development reuses ArakelovGeometry at
+**Status:** the unconditional binary and finite-family theorems are formalized
+in [Adelic/Induction/Bost.lean](BostConjecture/Adelic/Induction/Bost.lean), together
+with tensor semistability and tensor-product HN compatibility. The proofs use
+the actual completed Hilbert/epsilon norms and discharge the geometric slope
+and smaller-rank induction hypotheses.
+
+The development reuses ArakelovGeometry at
 `0a608c4f219c4de669be8b6b1a1bc47f996d8d72`, HarderNarasimhan at
 `14b3090e1e169b77fe381102a1289f24c2b08a11`, and applicable existing modules.
-Weighted tensor HN compatibility is now required by the simultaneous induction.
 New source reuse is recorded in [CONTRIBUTIONS.md](CONTRIBUTIONS.md).
+
+The public adelic declarations are in namespace
+`ArakelovGeometry.AdelicVectorBundle`:
+
+| Declaration | Conclusion |
+| --- | --- |
+| `maximalSlope_orthogonalTensorPair` | Binary maximal-slope additivity |
+| `maximalSlope_orthogonalTensorOfMeasurableBase` | Additivity for a finite nonempty family |
+| `isMeanSlopeSemistable_orthogonalTensorPair` | Binary tensor semistability |
+| `isMeanSlopeSemistable_orthogonalTensorOfMeasurableBase` | Finite-family tensor semistability |
+| `hermitianHNFiltration_orthogonalTensorPair` | Weighted tensor HN compatibility |
+
+The explicit measurability argument `hS` follows from countability of the field
+by `ArakelovGeometry.AdelicStructure.hasCommonCountableDenseSubfield_of_countable`
+in [Adelic/Basic.lean](BostConjecture/Adelic/Basic.lean). It adds no assumption to
+the paper's theorem. The finite-family conclusion includes singleton families.
 
 The current mathematical blueprint starts at
 [blueprint/src/content.tex](blueprint/src/content.tex). Its chapters follow
 the six adelic proof branches and link to actual Lean declarations and
 visually transcribed source pages in the workspace `references/` library.
-An attached declaration is not certified complete until its mathematical
-statement, kernel check and transitive axioms have been checked; the main
-adelic theorem remains pending.
+Each checked attachment is supported by a matching mathematical statement,
+kernel check and transitive axiom audit. The source-facing dependency graph
+distinguishes explicitly conditional helper statements from the unconditional
+main theorem.
 
 Before synchronizing the dashboard DAG, run from the workspace root:
 
@@ -36,10 +55,11 @@ action. The generated [graph configuration](blueprint/hgraph-config.yaml)
 lists only modules containing blueprint attachments, including the pinned
 ArakelovGeometry exports. It avoids scanning the entire dependency tree.
 
-In the previous number-field implementation, underlying modules are finite
+The implementation of [the previous number-field manuscript](old.pdf) remains
+available. Its underlying modules are finite
 projective and need not be free.
 
-The principal declarations, in namespace
+Its principal declarations, in namespace
 `BostConjecture.Arithmetic.HermitianMetric`, are:
 
 - `maxSlope_tensor`: the binary maximal-slope identity.
@@ -64,7 +84,10 @@ term attains it.
 
 ## Organization
 
-`Adelic/` contains the current adelic development. The legacy directory map
+`Adelic/` contains the adelic development: constant Specht bundles,
+group semistability, geometric nonvanishing, completed contractions,
+geometric slope bounds, and tensor HN induction. `ExternalResults/` contains
+new selectively adapted external producers. The legacy directory map
 below describes the number-field implementation of `old.pdf`. File paths
 organize modules; they do not add layers to the mathematical namespaces.
 
@@ -108,33 +131,31 @@ The exact dependency commits are recorded in
 [lake-manifest.json](lake-manifest.json). The package enables the mathlib
 standard linter set, `relaxedAutoImplicit = false` and
 `maxSynthPendingDepth = 3`. Local proofs use Lean's default limits of
-200,000 heartbeats and recursion depth 512.
+200,000 heartbeats and recursion depth 512 unless a declaration sets a scoped limit.
 
-To audit the final statements after building, create a temporary Lean file:
+To audit the final statements after building, check a temporary Lean file containing:
 
-```sh
-cat > /tmp/bost-axioms.lean <<'LEAN'
+```lean
 import BostConjecture
 
-#print axioms BostConjecture.Arithmetic.HermitianMetric.maxSlope_tensor
-#print axioms BostConjecture.Arithmetic.HermitianMetric.maxSlope_piTensor
-#print axioms BostConjecture.Arithmetic.HermitianMetric.IsSemistable.tensor
-#print axioms BostConjecture.Arithmetic.HermitianMetric.isSemistable_piTensor
-LEAN
-lake env lean /tmp/bost-axioms.lean
+#print axioms ArakelovGeometry.AdelicVectorBundle.maximalSlope_orthogonalTensorPair
+#print axioms ArakelovGeometry.AdelicVectorBundle.maximalSlope_orthogonalTensorOfMeasurableBase
+#print axioms ArakelovGeometry.AdelicVectorBundle.isMeanSlopeSemistable_orthogonalTensorPair
+#print axioms ArakelovGeometry.AdelicVectorBundle.isMeanSlopeSemistable_orthogonalTensorOfMeasurableBase
+#print axioms ArakelovGeometry.AdelicVectorBundle.hermitianHNFiltration_orthogonalTensorPair
 ```
 
 The expected dependencies are Lean's standard foundational axioms
 `propext`, `Classical.choice` and `Quot.sound`; no `sorryAx` or additional
 mathematical axiom is permitted. The proof does not assume tensor semistability.
 
-The source passes `lake build` without warnings. Local declarations are restricted
-to the four principal theorems and their definition, proof and elaboration dependencies.
-Transitive axiom probes covering the real-cut conversion, the arithmetic
-finiteness bound and the four principal declarations report only the three
-foundational axioms above. The root import cone covers all 343 local Lean
-modules; source checks find no proof
-placeholders or additional axiom declarations.
+On 11 November 2026, `lake build BostConjecture` passed without warnings
+(5232 jobs), including the public adelic and legacy entry points. The five
+adelic declarations above, the simultaneous rank-induction theorem and the
+completed tensor isometry all passed transitive axiom audits with exactly the
+three foundational axioms above. Independent source reviews checked the
+geometric slope route and the final assembly against the revised manuscript.
+Effective asymptotic rates and the appendices are outside this theorem's scope.
 
 ## Conventions and license
 
