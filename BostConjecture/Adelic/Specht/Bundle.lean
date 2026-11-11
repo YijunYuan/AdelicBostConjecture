@@ -10,6 +10,7 @@ public import ArakelovGeometry.AdelicVectorBundle.Basic
 public import ArakelovGeometry.AdelicVectorBundle.NormFamily.Hermitian.Basis
 public import ArakelovGeometry.AdelicVectorBundle.NormFamily.Completion.Density
 public import ArakelovGeometry.AdelicVectorBundle.Measurability.Countable
+public import ArakelovGeometry.AdelicVectorBundle.Tensor.Hermitian.InnerProduct
 import ArakelovGeometry.AdelicVectorBundle.NormFamily.Domination.Subquotient
 import ArakelovGeometry.AdelicCurve.Basic
 
@@ -140,5 +141,58 @@ theorem latticeBundle_toNormFamily (hcount : S.HasCommonCountableDenseSubfield) 
 theorem latticeBundle_isHermitian (hcount : S.HasCommonCountableDenseSubfield) :
     (latticeBundle S t b hS hcount).IsHermitian hS :=
   latticeNormFamily_isHermitian S t b hS
+
+/-- The inner product selected from the Hermitian norm is the actual word
+Gram inner product. This fixes the metric used by determinant constructions. -/
+theorem latticeNormFamily_inner (ω : S.Ω) (hω : ω ∈ S.Ωinf) :
+    letI := hS ω hω
+    letI := IsRCLikeNormedField.rclike (S.ϕ ω).Completion
+    letI := (latticeNormFamily S t b).fibreNormedAddCommGroup ω
+    letI := (latticeNormFamily S t b).fibreNormedSpace ω
+    letI := (latticeNormFamily_isHermitian S t b hS).fibreInnerProductSpace ω hω
+    ∀ x y : (S.ϕ ω).Completion ⊗[K] (K ⊗[ℤ] orbitLattice t),
+      inner (S.ϕ ω).Completion x y =
+        ∑ w, star (fibreWordCoordinates t x w) * fibreWordCoordinates t y w := by
+  let := hS ω hω
+  let := IsRCLikeNormedField.rclike (S.ϕ ω).Completion
+  let := (latticeNormFamily S t b).fibreNormedAddCommGroup ω
+  let := (latticeNormFamily S t b).fibreNormedSpace ω
+  let := (latticeNormFamily_isHermitian S t b hS).fibreInnerProductSpace ω hω
+  let f : ((S.ϕ ω).Completion ⊗[K] (K ⊗[ℤ] orbitLattice t)) →ₗᵢ[(S.ϕ ω).Completion]
+      EuclideanSpace (S.ϕ ω).Completion (Fin n → Fin (μ.colLen 0)) :=
+    { toLinearMap := (WithLp.linearEquiv 2 (S.ϕ ω).Completion _).symm.toLinearMap.comp
+        (fibreWordCoordinates t)
+      norm_map' := fun x => by
+        change ‖(WithLp.linearEquiv 2 (S.ϕ ω).Completion _).symm
+          (fibreWordCoordinates t x)‖ = (latticeNormFamily S t b).norm ω x
+        rw [latticeNormFamily_norm_infinite S t b ω hω]
+        exact PiLp.norm_eq_of_L2 _ }
+  intro x y
+  rw [← f.inner_map_map]
+  change inner (S.ϕ ω).Completion
+    ((WithLp.linearEquiv 2 (S.ϕ ω).Completion _).symm (fibreWordCoordinates t x))
+    ((WithLp.linearEquiv 2 (S.ϕ ω).Completion _).symm (fibreWordCoordinates t y)) = _
+  simp [PiLp.inner_apply, RCLike.inner_apply, mul_comm]
+
+/-- Integral vectors have exactly their integer word Gram pairing at every
+Archimedean completion, with no normalization factor. -/
+theorem latticeNormFamily_inner_integral (ω : S.Ω) (hω : ω ∈ S.Ωinf) :
+    letI := hS ω hω
+    letI := IsRCLikeNormedField.rclike (S.ϕ ω).Completion
+    letI := (latticeNormFamily S t b).fibreNormedAddCommGroup ω
+    letI := (latticeNormFamily S t b).fibreNormedSpace ω
+    letI := (latticeNormFamily_isHermitian S t b hS).fibreInnerProductSpace ω hω
+    ∀ x y : orbitLattice t,
+      inner (S.ϕ ω).Completion
+        ((1 : (S.ϕ ω).Completion) ⊗ₜ[K] ((1 : K) ⊗ₜ[ℤ] x))
+        ((1 : (S.ϕ ω).Completion) ⊗ₜ[K] ((1 : K) ⊗ₜ[ℤ] y)) =
+        (∑ w, x.val w * y.val w : ℤ) := by
+  let := hS ω hω
+  let := IsRCLikeNormedField.rclike (S.ϕ ω).Completion
+  let := (latticeNormFamily S t b).fibreNormedAddCommGroup ω
+  let := (latticeNormFamily S t b).fibreNormedSpace ω
+  let := (latticeNormFamily_isHermitian S t b hS).fibreInnerProductSpace ω hω
+  intro x y
+  simp [latticeNormFamily_inner S t b hS ω hω]
 
 end BostConjecture.Specht
