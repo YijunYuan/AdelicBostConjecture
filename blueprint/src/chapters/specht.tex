@@ -235,40 +235,25 @@ The rank is positive, so the finite-group criterion
 Lemma~\ref{lem:group-semistability} gives semistability.
 \end{proof}
 
-\begin{corollary}[Independent Specht factors]
-\label{cor:independent-specht-semistability}
-\uses{lem:specht-semistability,lem:independent-group-semistability}
-\source{bost-adelic-2026:page-0008}
-\notready
-A finite nonempty tensor product of constant rectangular Specht bundles,
-with the independent symmetric groups acting on its factors, and its dual
-are semistable. The same conclusion holds after tensoring each factor
-with any Hermitian adelic line on which its symmetric group acts trivially.
-\end{corollary}
-\begin{proof}
-A line twist preserves absolute irreducibility: choosing a nonzero vector
-of the line identifies invariant subspaces with those of the original
-factor, also after scalar extension. Locally it multiplies all norms by
-a scalar, so the group still acts isometrically. Apply
-Lemma~\ref{lem:independent-group-semistability} to these factor actions;
-its product group and dual assertions give both conclusions.
-\end{proof}
-
-\begin{lemma}[Rectangular determinant realization of invariants]
-\label{lem:rectangular-specht-invariants}
-\uses{lem:rectangular-specht-irreducible}
-\source{bost-adelic-2026:page-0025,bost-adelic-2026:page-0026}
-\notready
-Let $A$ be an $a$-dimensional characteristic-zero vector space, and let
-$d=ak$. There is a canonical injective map
+\begin{lemma}[The determinant map over the original field]
+\label{lem:rectangular-determinant-map}
+\source{bost-adelic-2026:page-0025}
+\lean{BostConjecture.Geometry.freeDeterminantMap,
+BostConjecture.Geometry.freeDeterminantMap_basis,
+BostConjecture.Geometry.freeDeterminantMap_eq,
+BostConjecture.Geometry.freeDeterminantMap_injective,
+BostConjecture.Geometry.projectiveDeterminantMap_eq_free}
+\leanok
+Let $A$ be an $a$-dimensional vector space over a characteristic-zero
+field $K$, with $a,k>0$ and $d=ak$. There is a basis-independent injection
 \[
- (\det A)^{\otimes k}\otimes_K(K\otimes_\Z L_{a,d})
-     \longrightarrow A^{\otimes d}
+ \iota_A:(\det A)^{\otimes k}\otimes_K(K\otimes_\Z L_{a,d})
+     \longrightarrow A^{\otimes d}.
 \]
-whose image is $(A^{\otimes d})^{\SL(A)}$.
 For a basis $b$ and $\eta_b=b_1\wedge\cdots\wedge b_a$, the map sends
 $\eta_b^{\otimes k}\otimes x$ to the tensor obtained by replacing each
-letter $i$ in $x$ by $b_i$.
+letter $i$ in $x$ by $b_i$. The determinant map obtained by gluing the
+same construction on free frames agrees with $\iota_A$.
 \end{lemma}
 \begin{proof}
 For a tableau with consecutive columns, $v_t$ is the product of $k$
@@ -276,29 +261,66 @@ alternating determinant tensors. Hence $g^{\otimes d}v_t=(\det g)^kv_t$;
 position permutations commute with $g^{\otimes d}$, so the same identity
 holds on its entire orbit span. Under $b\mapsto bg$, both the determinant
 line generator and this substitution map change by $(\det g)^k$. The
-rule is thus independent of $b$. Substitution by a basis is injective on
-the full word space, so its restriction is injective. The image is
-$\SL(A)$-invariant pointwise.
+rule is thus independent of $b$. The inclusion of $L_{a,d}$ into the
+integral word space remains injective after tensoring with $K$: tensor
+first with $\Q$ and then extend scalars to $K$, both of which are exact.
+Substitution by the basis is an isomorphism from the resulting word
+space to $A^{\otimes d}$. After identifying the determinant line power
+with $K$ by $\eta_b^{\otimes k}$, our map is the composite of this
+isomorphism with the lattice inclusion. It is therefore injective.
+Finally a global basis is itself a free frame. The glued map and
+$\iota_A$ have the same expression in that frame, so they agree.
+No algebraic closure is used in this construction.
+\end{proof}
 
-For surjectivity we use the classical characteristic-zero Schur--Weyl
-decomposition, the algebraic input used in this paper, Lemma 6.1:
+\begin{lemma}[Rectangular determinant realization of invariants]
+\label{lem:rectangular-specht-invariants}
+\uses{lem:rectangular-determinant-map}
+\source{bost-adelic-2026:page-0025,bost-adelic-2026:page-0026}
+\lean{BostConjecture.Geometry.mem_range_freeLatticeMap_iff_specialLinear_fixed,
+BostConjecture.Geometry.mem_range_projectiveDeterminantMap_iff}
+\leanok
+Let $F$ be an algebraically closed field of characteristic zero,
+$A$ an $a$-dimensional $F$-vector space, and $a,k>0$, $d=ak$.
+For every basis $b$ and every $v\in A^{\otimes d}$,
 \[
- A^{\otimes d}\simeq
- \bigoplus_{\substack{\mu\vdash d\\\ell(\mu)\le a}}
-       \mathbb S_\mu(A)\otimes V_\mu.
+ v\in\operatorname{im}(b^{\otimes d}|_{F\otimes_\Z L_{a,d}})
+ \quad\Longleftrightarrow\quad
+ g^{\otimes d}v=v\quad\hbox{for every }g\in\SL(A).
 \]
-Here $V_\mu$ is the Specht representation and $\mathbb S_\mu(A)$ is the
-irreducible polynomial $\GL(A)$-representation of highest weight $\mu$,
-padded with zeroes to length $a$. On $\SL(A)$ its highest weight has
-coordinates $\mu_i-\mu_{i+1}$. Such a representation contains a fixed
-vector exactly when all these coordinates vanish, in which case it is
-$(\det A)^{\otimes k}$ and $\mu=(k^a)$. Thus the full fixed space is
-$(\det A)^{\otimes k}\otimes V_{(k^a)}$. The injective map above is a
-nonzero $\mathfrak S_d$-map into this single irreducible multiplicity
-space. The column-antisymmetrizer model of $V_{(k^a)}$ is precisely
-$K\otimes L_{a,d}$, so the map is onto. One may check this after extension
-to an algebraic closure: injectivity and equality of the two finite
-dimensions descend to $K$.
+The image of the canonical determinant map equals this lattice image;
+this last image equality holds over the original field as well.
+Thus the invariant calculation needed for geometric semistability may
+be made over $\overline K$, while the determinant map remains defined over $K$.
+\end{lemma}
+\begin{proof}
+Determinant covariance shows that the lattice image is fixed by $\SL(A)$.
+Conversely let $v$ be fixed. Given $g\in\GL(A)$, choose $c\in F^\times$
+with $c^a=\det g$. Then $c^{-1}g\in\SL(A)$, so
+$g^{\otimes d}v=c^dv=(\det g)^kv$.
+
+Let $z$ be the rectangular column-alternating tensor in the basis $b$,
+and let $\ell$ be its coefficient covector in the word basis, using
+the bilinear coefficient pairing. Each of its $k$ columns has $a!$
+distinct signed words, hence $\ell(z)=(a!)^k\ne0$.
+Transposing the matrix of $g^{\otimes d}$ and applying determinant
+covariance to $z$ gives
+$\ell(g^{\otimes d}x)=(\det g)^k\ell(x)$.
+The rank-one operator $T(x)=\ell(x)v$ therefore commutes with every
+$g^{\otimes d}$. The characteristic-zero Schur--Weyl commutant theorem
+expresses $T$ as an $F$-linear combination of position permutations.
+Consequently $T(z)=(a!)^kv$ lies in the span of the permutation orbit
+of $z$, which is exactly the image of $F\otimes_\Z L_{a,d}$.
+Dividing by $(a!)^k$ proves the converse. This is the commutant form of
+the Schur--Weyl calculation invoked in Lemma 6.1 of \cite{bost2026}.
+
+In any characteristic-zero field, every determinant-power element is
+a scalar multiple of $\eta_b^{\otimes k}$. The formula of
+Lemma~\ref{lem:rectangular-determinant-map} therefore shows that its
+image is contained in the lattice image. Conversely each substituted
+lattice vector is the image of $\eta_b^{\otimes k}\otimes x$.
+This proves equality of the two images over the original field,
+without making an original-field invariant-space descent assertion.
 \end{proof}
 
 \section{The sublinear covolume correction}

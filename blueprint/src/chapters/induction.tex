@@ -30,9 +30,14 @@ and uniqueness of the filtration with semistable grades whose slopes are
 their strictly decreasing weights. These are the Hermitian slope and HN
 facts recalled in Section 2 of this paper \cite{bost2026}.
 
-\begin{definition}[Filtrations and secondary weights]
+\begin{definition}[Intrinsic filtration operations]
 \label{def:induction-filtrations}
-\source{bost-adelic-2026:page-0028,bost-adelic-2026:page-0029}
+\source{bost-adelic-2026:page-0028}
+\lean{Submodule.filtrationRightLimit, Submodule.FiltrationGraded,
+Submodule.tensorFiltration, Submodule.filtrationExpectation,
+Submodule.filtrationJointMultiplicity, Submodule.filtrationPairing,
+Submodule.filtrationNorm}
+\leanok
 A finite real filtration $P$ is decreasing, exhaustive, separated,
 left-continuous, and has finitely many jumps. Set
 \[
@@ -48,16 +53,139 @@ The tensor filtration is
 \[
  (P\otimes R)^v(E\otimes F)=\sum_{t+u\ge v}P^tE\otimes R^uF.
 \]
-On adapted bases with weights $(x_i)$ and $(y_j)$ its weights are
-$(x_i+y_j)_{i,j}$. Two finite filtrations on one space have a common
-adapted basis. On a positive-rank space, if their weights on that basis
-are $x_i,y_i$, set
-$\langle P,R\rangle=r(E)^{-1}\sum_i x_i y_i$ and
-$\|P\|^2=\langle P,P\rangle$. A filtration is normalized if $e(P)=0$.
-A lift of the grade HN filtrations of $P$ is obtained by lifting an
-HN-adapted basis of each $E_t$ to $P^tE$, retaining its HN weights as
-secondary weights. The lifted basis is adapted to both filtrations.
+For two finite filtrations on $E$, define their joint multiplicity by
+\[
+ m_{P,R}(t,u)=r(P^tE\cap R^uE)
+ -r\bigl((P^{>t}E\cap R^uE)+(P^tE\cap R^{>u}E)\bigr).
+\]
+For positive rank set
+\[
+ \langle P,R\rangle=\frac1{r(E)}\sum_{t,u}tu\,m_{P,R}(t,u),
+ \qquad \|P\|=\sqrt{\langle P,P\rangle}.
+\]
+All these sums have finite support; on the zero space their normalized
+values are defined to be zero. A filtration is normalized if $e(P)=0$.
+An adapted weighted basis $(b_i,x_i)$ means
+$P^tE=\operatorname{span}_K\{b_i:x_i\ge t\}$ at every threshold.
 \end{definition}
+
+\begin{lemma}[A common weighted basis]
+\label{lem:common-weighted-filtration-basis}
+\uses{def:induction-filtrations}
+\source{bost-adelic-2026:page-0028}
+\lean{Submodule.exists_common_weighted_basis}
+\leanok
+Two finite real filtrations $P,R$ on $E$ admit a basis $(b_i)$ and
+weights $(x_i,y_i)$ adapted to both. Equivalently, a vector
+$\sum_i c_i b_i$ belongs to $P^tE$ precisely when $c_i\ne0$ implies
+$x_i\ge t$, and belongs to $R^uE$ precisely when $c_i\ne0$ implies
+$y_i\ge u$. In rank zero the basis and weight families are empty.
+\end{lemma}
+\begin{proof}
+Write the distinct steps as increasing flags
+$0=U_0\subset\cdots\subset U_h=E$ and
+$0=V_0\subset\cdots\subset V_m=E$.
+Suppose a basis of $U_{i-1}$ already spans every $U_{i-1}\cap V_j$
+by a subset. In $U_i/U_{i-1}$, consider the increasing flag of images
+of $U_i\cap V_j$. Extend a basis successively along this flag and
+lift each newly added vector to $U_i\cap V_j$ at its first step.
+Together with the old basis these lifts form a basis of $U_i$.
+For $x\in U_i\cap V_j$, its quotient class is a combination of the
+lifts chosen at steps at most $j$; subtracting that combination leaves
+a vector of $U_{i-1}\cap V_j$. Thus the extended basis spans every
+$U_i\cap V_j$ by the stated subsets. Induction on $i$ gives a basis
+adapted to both flags. Assign to each vector its largest threshold
+in each filtration; these thresholds exist by finiteness, exhaustivity,
+separation and left continuity. The asserted span descriptions follow.
+Uniqueness of coordinates in a basis gives the coordinate criteria.
+For $E=0$ use the empty basis.
+\end{proof}
+
+\begin{lemma}[Weight formulas for expectation and pairing]
+\label{lem:filtration-weight-formulas}
+\uses{def:induction-filtrations,lem:common-weighted-filtration-basis}
+\source{bost-adelic-2026:page-0028}
+\lean{Submodule.filtrationExpectation_eq_sum_weights,
+Submodule.filtrationPairing_eq_sum_weights}
+\leanok
+On a common weighted basis $(b_i,x_i,y_i)$ in positive rank,
+\[
+ e(P)=\frac{\sum_i x_i}{r(E)},\qquad
+ \langle P,R\rangle=\frac{\sum_i x_i y_i}{r(E)}.
+\]
+These formulas compute the intrinsic quantities and are independent
+of the common basis. With empty sums and normalized value zero,
+the same formulas apply in rank zero.
+\end{lemma}
+\begin{proof}
+The grade $P^tE/P^{>t}E$ has basis the classes with $x_i=t$.
+Thus its dimension is the number of such indices, and summing their
+weights gives the expectation formula. The intersection $P^tE\cap R^uE$
+has basis the vectors with $x_i\ge t$ and $y_i\ge u$. The sum of its
+two strict intersections has basis the subset for which at least one
+inequality is strict. Their dimension difference counts exactly
+$x_i=t,y_i=u$. Summing $tu$ times these counts gives the pairing
+formula. The left sides use only the filtration subspaces, proving
+independence of the basis. All dimensions and sums vanish in rank zero.
+\end{proof}
+
+\begin{lemma}[Tensor filtration weights]
+\label{lem:tensor-filtration-weights}
+\uses{def:induction-filtrations,lem:common-weighted-filtration-basis}
+\source{bost-adelic-2026:page-0028}
+\lean{Submodule.tensorFiltration_eq_span_tensorProduct}
+\leanok
+If $(b_i,x_i)$ and $(c_j,y_j)$ are adapted weighted bases for $P,R$,
+then $(b_i\otimes c_j,x_i+y_j)$ is adapted to $P\otimes R$.
+\end{lemma}
+\begin{proof}
+For $t+u\ge v$, expand a tensor from $P^tE\otimes R^uF$ in the
+tensor basis. Every occurring pair has $x_i\ge t$, $y_j\ge u$,
+hence $x_i+y_j\ge v$. This proves one span inclusion.
+Conversely, if $x_i+y_j\ge v$, then
+$b_i\otimes c_j\in P^{x_i}E\otimes R^{y_j}F$, one of the summands
+defining $(P\otimes R)^v$. This proves the other inclusion.
+\end{proof}
+
+\begin{lemma}[Lifting the HN filtrations of the grades]
+\label{lem:grade-hn-lift}
+\uses{def:induction-filtrations,lem:common-weighted-filtration-basis,
+lem:filtration-weight-formulas,thm:hermitian-hn-filtration,lem:degree-exact-sequence}
+\source{bost-adelic-2026:page-0029,bost-adelic-2026:page-0032}
+\lean{ArakelovGeometry.AdelicVectorBundle.exists_hnVariationLift}
+\leanok
+For every finite real filtration $P$ of a Hermitian bundle $\overline E$
+there is a finite real filtration $L$ whose induced filtration on
+each actual grade $E_t$ is the HN filtration of that grade with its
+subquotient norms. It satisfies
+\[
+ e(L)=\widehat\mu(\overline E),\qquad
+ r(E)\langle P,L\rangle=\sum_t t\widehat{\deg}(\overline E_t).
+\]
+The first formula uses the value zero in rank zero. The filtrations
+$P,L$ admit a common adapted basis.
+\end{lemma}
+\begin{proof}
+Choose an HN-adapted basis in each nonzero $E_t$, lift it to $P^tE$,
+and assign its HN weights as secondary weights. Successively along the
+finite flag, these lifts form a basis of $E$: a relation projects to
+a relation in its last nonzero quotient, and spanning follows by
+successively subtracting representatives of quotient classes.
+Let $L^uE$ be the span of lifted vectors of secondary weight at least
+$u$. These are finite, decreasing, exhaustive and separated cuts,
+constant immediately to the left of every threshold. In the common
+basis, intersection with $P^tE$ retains precisely primary weights at
+least $t$; reduction modulo $P^{>t}E$ retains precisely primary weight
+$t$. Thus the induced cuts on $E_t$ are its chosen HN cuts.
+
+The sum of secondary weights over the basis of $E_t$ is
+$\widehat{\deg}(\overline E_t)$ by the HN degree identity.
+Summing over $t$ and using degree additivity along $P$ gives the
+expectation formula by Lemma~\ref{lem:filtration-weight-formulas}.
+Multiplying each grade's weight sum by its primary weight gives the
+pairing formula by the same lemma. The empty construction proves
+the rank-zero case.
+\end{proof}
 
 \begin{lemma}[Hermitian tensor degree]
 \label{lem:induction-tensor-degree}
@@ -116,7 +244,7 @@ and spanning, so the same argument proves the quotient assertion.
 
 \begin{lemma}[Canonical tensor components]
 \label{lem:tensor-grade-components}
-\uses{def:induction-filtrations}
+\uses{def:induction-filtrations,lem:tensor-filtration-weights}
 \source{bost-adelic-2026:page-0029}
 \lean{ArakelovGeometry.NormFamily.tensorFiltrationGradedPair_pushforward_norm_le, Submodule.iSup_range_tensorFiltrationGradedQuotientPair}
 \leanok
@@ -154,7 +282,7 @@ the quotient grade.
 
 \begin{lemma}[Tensor HN identification]
 \label{lem:tensor-hn-identification}
-\uses{lem:finite-contracting-images,lem:tensor-grade-components,thm:hermitian-hn-filtration,lem:hn-uniqueness,lem:degree-exact-sequence,lem:induction-tensor-degree}
+\uses{lem:finite-contracting-images,lem:tensor-grade-components,thm:hermitian-hn-filtration,lem:hn-uniqueness,lem:degree-exact-sequence,lem:induction-tensor-degree,lem:tensor-filtration-weights,lem:filtration-weight-formulas}
 \source{bost-adelic-2026:page-0029}
 \lean{ArakelovGeometry.AdelicVectorBundle.hermitianHNFiltration_orthogonalTensorPair_of_semistable_grades}
 \leanok
@@ -215,7 +343,7 @@ grades and use degree additivity.
 
 \begin{lemma}[One-sided HN variation]
 \label{lem:component-hn-variation}
-\uses{lem:finite-hn-image-degree,lem:tensor-grade-components,def:induction-filtrations}
+\uses{lem:finite-hn-image-degree,lem:tensor-grade-components,def:induction-filtrations,lem:grade-hn-lift,lem:tensor-filtration-weights,lem:filtration-weight-formulas}
 \source{bost-adelic-2026:page-0030,bost-adelic-2026:page-0031}
 \lean{ArakelovGeometry.AdelicVectorBundle.tensorFiltrationQuotient_eventual_hn_upper}
 \leanok
@@ -281,7 +409,7 @@ the stronger affine identity or a contraction from an orthogonal direct sum.
 
 \begin{lemma}[Original-field geometric optimizer]
 \label{lem:induction-geometric-optimizer}
-\uses{def:induction-filtrations}
+\uses{def:induction-filtrations,lem:filtration-weight-formulas}
 \source{bost-adelic-2026:page-0031}
 \lean{Submodule.exists_normalized_tensor_quotient_optimizer_of_not_geometricallySemistable}
 \leanok
@@ -316,7 +444,7 @@ an algebraic closure is made.
 
 \begin{lemma}[Unstable quotient bound]
 \label{lem:unstable-quotient-bound}
-\uses{lem:component-hn-variation,def:induction-filtrations,lem:degree-exact-sequence,lem:induction-geometric-optimizer}
+\uses{lem:component-hn-variation,def:induction-filtrations,lem:degree-exact-sequence,lem:induction-geometric-optimizer,lem:grade-hn-lift,lem:filtration-weight-formulas}
 \source{bost-adelic-2026:page-0031,bost-adelic-2026:page-0032}
 \lean{ArakelovGeometry.AdelicVectorBundle.slope_sum_le_tensor_quotient_of_not_geometricallySemistable}
 \leanok
@@ -391,6 +519,7 @@ $\delta-a\ge c\beta/L\ge0$, which proves the assertion.
 \uses{lem:unstable-quotient-bound,lem:tensor-hn-identification,thm:hermitian-hn-filtration,lem:induction-tensor-degree}
 \source{bost-adelic-2026:page-0031,bost-adelic-2026:page-0032}
 \lean{ArakelovGeometry.AdelicVectorBundle.tensorHN_and_semistable_of_geometric_quotient_bound}
+\leanok
 Assume the following inequality: for every pair of positive-rank
 semistable Hermitian bundles and every nonzero geometrically semistable
 quotient of their tensor product, with the original quotient norms,
@@ -442,7 +571,7 @@ proposition to the given bundles.
 
 \begin{lemma}[Maximal slope from the actual tensor filtration]
 \label{lem:maximal-slope-from-tensor-hn}
-\uses{def:induction-filtrations,thm:hermitian-hn-filtration,lem:induction-tensor-degree}
+\uses{def:induction-filtrations,thm:hermitian-hn-filtration,lem:induction-tensor-degree,lem:tensor-filtration-weights}
 \source{bost-adelic-2026:page-0032}
 \lean{ArakelovGeometry.AdelicVectorBundle.maximalSlope_orthogonalTensorPair_of_hnFiltration_eq}
 \leanok
@@ -467,9 +596,104 @@ ambient tensor product is at least $a+b$. The ranks of $E_1,F_1$ are
 positive, so this supplies a nonzero subspace as required.
 \end{proof}
 
+\begin{lemma}[The one-factor tensor isometry]
+\label{lem:finite-tensor-singleton-isometry}
+\uses{def:adelic-slope}
+\lean{ArakelovGeometry.NormFamily.orthogonalTensor_norm_subsingletonEquiv,
+ArakelovGeometry.AdelicVectorBundle.slopes_orthogonalTensor_subsingleton}
+\leanok
+For a family with one index $i_0$, the canonical identification
+$\bigotimes_i E_i\simeq E_{i_0}$ preserves every completed norm.
+It preserves the mean slope and the maximal slope.
+\end{lemma}
+\begin{proof}
+Every one-factor completed tensor is a pure tensor, and its tensor norm
+equals the norm of its sole factor. Thus the canonical linear equivalence
+is an isometry. Its determinant map preserves determinant norms, hence
+degrees and ranks. It also gives a bijection of subspaces preserving
+their restricted norms, hence the supremum of their slopes. This proves
+both slope identities.
+\end{proof}
+
+\begin{lemma}[Finite tensor reindexing]
+\label{lem:finite-tensor-reindex-isometry}
+\uses{def:adelic-slope}
+\lean{ArakelovGeometry.NormFamily.orthogonalTensor_norm_reindex,
+ArakelovGeometry.AdelicVectorBundle.slopes_orthogonalTensor_reindex}
+\leanok
+For a bijection $\sigma:I\simeq J$ of finite index sets, the canonical map
+\[
+ \bigotimes_{i\in I} E_i\longrightarrow
+ \bigotimes_{j\in J}E_{\sigma^{-1}(j)}
+\]
+is an isometry at every completed place. It preserves mean and maximal
+slopes.
+\end{lemma}
+\begin{proof}
+At an Archimedean place choose orthonormal bases in the factors.
+The tensor norm is the square root of the sum of squared absolute values
+of the tensor-basis coefficients. Reindexing permutes those coefficients,
+so it preserves this sum. At a non-Archimedean place the injective norm
+is the supremum of the absolute values of product-dual evaluations divided
+by the products of the dual norms, with zero denominators contributing
+zero. Reindexing bijects these families of functionals and preserves both
+the evaluation and the denominator, so it preserves the supremum. In both cases
+the equalities hold for every completed vector. Determinants and
+restricted subspaces are preserved isometrically, giving the two slope
+identities as in the one-factor case.
+\end{proof}
+
+\begin{lemma}[Finite tensor grouping]
+\label{lem:finite-tensor-grouping-isometry}
+\uses{def:adelic-slope}
+\lean{ArakelovGeometry.NormFamily.orthogonalTensor_norm_tmulEquivDep,
+ArakelovGeometry.AdelicVectorBundle.slopes_orthogonalTensor_sum}
+\leanok
+For finite disjoint index sets $I,J$ and a family on $I\sqcup J$,
+the canonical grouping map
+\[
+ \left(\bigotimes_{i\in I}E_i\right)\otimes
+ \left(\bigotimes_{j\in J}E_j\right)
+ \longrightarrow\bigotimes_{k\in I\sqcup J}E_k
+\]
+is an isometry at every completed place. It preserves mean and maximal
+slopes.
+\end{lemma}
+\begin{proof}
+At an Archimedean place the tensor products of factor orthonormal bases
+are orthonormal in both presentations. Grouping matches their vectors
+and their coefficients, so preserves every squared-norm sum.
+
+At a non-Archimedean place fix $0<\alpha<1$ and choose an
+$\alpha$-orthogonal basis in each nonzero factor. Write $N=|I|+|J|$ and,
+for a tensor with coefficients $z_{\mathbf i}$, put
+\[
+ M(z)=\max_{\mathbf i}|z_{\mathbf i}|
+                    \prod_k\|b_{k,i_k}\|.
+\]
+For the ungrouped injective norm, the ultrametric inequality and the
+crossnorm formula give the upper bound $M(z)$. The coordinate functional
+dual to $b_{k,i_k}$ has norm at most
+$\alpha^{-1}\|b_{k,i_k}\|^{-1}$; evaluating their product gives the
+lower bound $\alpha^N M(z)$. The same argument on each block shows that
+its tensor basis is $\alpha^{|I|}$- or $\alpha^{|J|}$-orthogonal,
+with basis-vector norms the corresponding products. Applying the two-factor
+argument to those block bases bounds the grouped norm between
+$\alpha^N M(z)$ and $M(z)$ as well. Consequently the two norms differ
+by a ratio between $\alpha^N$ and $\alpha^{-N}$. This comparison holds
+for every $\alpha<1$, although its bases may vary, so passage to
+$\alpha\uparrow1$ proves equality. If a factor is zero both tensor
+spaces vanish. Empty blocks use the scalar field with its absolute value,
+for which the same calculation has an empty product equal to one.
+
+The determinant and subspace argument again proves preservation of
+both slopes. Successive grouping and reindexing therefore account for
+any enumeration or parenthesization of a finite tensor family.
+\end{proof}
+
 \begin{lemma}[Mean slope of a finite orthogonal tensor]
 \label{lem:finite-tensor-mean-slope}
-\uses{lem:contraction-tensor-calculus,lem:induction-tensor-degree,def:adelic-slope}
+\uses{lem:finite-tensor-singleton-isometry,lem:finite-tensor-reindex-isometry,lem:finite-tensor-grouping-isometry,lem:induction-tensor-degree,def:adelic-slope}
 \source{bost-adelic-2026:page-0006}
 \lean{ArakelovGeometry.AdelicVectorBundle.finrank_piTensorProduct_eq_prod, ArakelovGeometry.AdelicVectorBundle.finrank_piTensorProduct_pos, ArakelovGeometry.AdelicVectorBundle.slope_orthogonalTensorOfMeasurableBase}
 \leanok
@@ -481,8 +705,6 @@ satisfies
  r(T)=\prod_{i\in I}r(E_i)>0,\qquad
  \widehat\mu(\overline T)=\sum_{i\in I}\widehat\mu(\overline E_i).
 \]
-These identities hold independently of the enumeration and
-parenthesization of the family, with the actual Hilbert and epsilon norms.
 \end{lemma}
 \begin{proof}
 We iterate the binary degree formula (8) and its slope form (9) in this
@@ -497,30 +719,27 @@ For a larger family, choose $i_0\in I$ and put $J=I\setminus\{i_0\}$,
 which is nonempty. The canonical reindexing and grouping map identifies
 the finite tensor with
 $\overline E_{i_0}\otimes(\bigotimes_{j\in J}\overline E_j)$ isometrically
-at every completed place by Lemma~\ref{lem:contraction-tensor-calculus}.
+at every completed place by
+Lemmas~\ref{lem:finite-tensor-reindex-isometry} and
+\ref{lem:finite-tensor-grouping-isometry}.
 This is an identification of the full completed norms on all vectors.
 An isometry preserves ranks and determinant norms, hence degrees and mean
 slopes. The two factors in this grouping have positive rank. The binary
 mean-slope formula, followed by induction on $|I|$, gives the displayed sum.
-Finally, each change of enumeration is a permutation and each change of
-parenthesization is a composition of associators. The completed isometries
-of Lemma~\ref{lem:contraction-tensor-calculus} show that these changes
-preserve the actual tensor bundle up to isometry and preserve its slope.
 \end{proof}
 
 \begin{lemma}[Finite maximal slopes from binary additivity]
 \label{lem:finite-tensor-slopes-of-binary}
-\uses{lem:contraction-tensor-calculus,lem:finite-tensor-mean-slope,def:adelic-slope}
+\uses{lem:finite-tensor-singleton-isometry,lem:finite-tensor-reindex-isometry,lem:finite-tensor-grouping-isometry,lem:finite-tensor-mean-slope,def:adelic-slope}
 \source{bost-adelic-2026:page-0001,bost-adelic-2026:page-0032}
 \lean{ArakelovGeometry.AdelicVectorBundle.maximalSlope_orthogonalTensorOfMeasurableBase_of_binary_additivity}
+\leanok
 Assume that maximal slopes are additive for every pair of positive-rank
 Hermitian bundles on $S$. Then every finite nonempty family as above satisfies
 \[
  \widehat\mu_{\max}(\overline T)=
  \sum_{i\in I}\widehat\mu_{\max}(\overline E_i).
 \]
-This holds independently of enumeration and parenthesization on the actual
-Hilbert and epsilon tensor norms.
 \end{lemma}
 \begin{proof}
 Induct on the size of $I$. For a singleton the canonical identification
@@ -531,9 +750,7 @@ The preceding lemma ensures that the latter factor has positive rank.
 An isometry bijects nonzero subspaces with isometric restricted bundles,
 so it preserves their slope supremum. Apply the binary hypothesis to the
 two factors and then the induction hypothesis to $J$. This gives the sum
-over $I$. Permutations and associators are isometries by
-Lemma~\ref{lem:contraction-tensor-calculus}, so the identity is independent
-of the chosen enumeration and parenthesization.
+over $I$.
 \end{proof}
 
 \begin{corollary}[Finite tensor semistability from binary additivity]
@@ -541,6 +758,7 @@ of the chosen enumeration and parenthesization.
 \uses{lem:finite-tensor-slopes-of-binary,lem:finite-tensor-mean-slope,def:adelic-slope}
 \source{bost-adelic-2026:page-0001,bost-adelic-2026:page-0032}
 \lean{ArakelovGeometry.AdelicVectorBundle.isMeanSlopeSemistable_orthogonalTensorOfMeasurableBase_of_binary_additivity}
+\leanok
 Under the binary maximal-slope hypothesis of the preceding lemma, the
 orthogonal tensor product of a finite nonempty family of positive-rank
 semistable Hermitian bundles is semistable.
