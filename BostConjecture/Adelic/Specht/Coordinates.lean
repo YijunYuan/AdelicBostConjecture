@@ -95,4 +95,43 @@ theorem fibreWordCoordinates_cancel (t : OAI.Saxl.Tableau n μ)
     | add x y hx hy => simp_all only [TensorProduct.tmul_add, map_add]
   | add x y hx hy => simp only [map_add, hx, hy]
 
+/-- The completed lattice coordinates commute with cancellation of the
+intermediate ground field. -/
+theorem fibreBasisCoordinates_cancel {ι : Type*} [Finite ι]
+    (t : OAI.Saxl.Tableau n μ) (b : Basis ι ℤ (orbitLattice t))
+    (x : L ⊗[K] (K ⊗[ℤ] orbitLattice t)) :
+    ((b.baseChange K).baseChange L).equivFun x = (b.baseChange L).equivFun
+      (TensorProduct.AlgebraTensorModule.cancelBaseChange ℤ K L L (orbitLattice t) x) := by
+  induction x using TensorProduct.inductionOn with
+  | tmul z x =>
+    induction x using TensorProduct.inductionOn with
+    | tmul r y =>
+      ext i
+      simp [Basis.equivFun_apply, Basis.baseChange_repr_tmul, Algebra.smul_def, mul_assoc]
+    | add x y hx hy => simp_all only [TensorProduct.tmul_add, map_add]
+  | add x y hx hy => simp only [map_add, hx, hy]
+
+/-- The lattice permutation action commutes with the completed fibre identification. -/
+theorem fibreOrbitAction_cancel (t : OAI.Saxl.Tableau n μ) (g : Equiv.Perm (Fin n))
+    (x : L ⊗[K] (K ⊗[ℤ] orbitLattice t)) :
+    TensorProduct.AlgebraTensorModule.cancelBaseChange ℤ K L L (orbitLattice t)
+        (((orbitAction t g).baseChange K).baseChange L x) =
+      (orbitAction t g).baseChange L
+        (TensorProduct.AlgebraTensorModule.cancelBaseChange ℤ K L L (orbitLattice t) x) := by
+  induction x using TensorProduct.inductionOn with
+  | tmul z x =>
+    induction x using TensorProduct.inductionOn with
+    | tmul r y => simp
+    | add x y hx hy => simp_all only [TensorProduct.tmul_add, map_add]
+  | add x y hx hy => simp only [map_add, hx, hy]
+
+/-- Permuting tensor positions permutes the actual word coefficients. -/
+theorem wordCoordinates_orbitAction (t : OAI.Saxl.Tableau n μ) (g : Equiv.Perm (Fin n))
+    (x : R ⊗[ℤ] orbitLattice t) (w : Fin n → Fin (μ.colLen 0)) :
+    wordCoordinates R t ((orbitAction t g).baseChange R x) w =
+      wordCoordinates R t x (w ∘ g) := by
+  induction x using TensorProduct.inductionOn with
+  | tmul r x => simp [orbitAction, wordRepInt]
+  | add x y hx hy => simp only [map_add, Pi.add_apply, hx, hy]
+
 end BostConjecture.Specht
