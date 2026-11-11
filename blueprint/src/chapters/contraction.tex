@@ -131,107 +131,145 @@ For a finite nonempty family of normed $F$-spaces $A_j$, define
  \frac{|(\bigotimes_j\ell_j)(z)|}{\prod_j\|\ell_j\|_*}.
 \]
 We use the convention that the tensor of an empty family is $F$ with its
-absolute value. The next two lemmas justify the tensor operations used below
+absolute value. The following lemmas justify the tensor operations used below
 without requiring an orthogonal basis to exist exactly.
 
-\begin{lemma}[Coordinate estimates for epsilon tensors]
-\label{lem:contraction-epsilon-coordinates}
-\uses{lem:contraction-nearly-orthogonal-basis}
-\source{bost-adelic-2026:page-0005,bost-adelic-2026:page-0026}
-\notready
-Let $F$ be complete and non-Archimedean and let $b_{j,i}$ be an
-$\alpha_j$-orthogonal basis of $A_j$, with $0<\alpha_j\leq1$.
-For $z=\sum_{\mathbf i}c_{\mathbf i}\bigotimes_j b_{j,i_j}$, put
-$M(z)=\max_{\mathbf i}|c_{\mathbf i}|\prod_j\|b_{j,i_j}\|$.
-Then
+\begin{lemma}[Tensor maps on completed fibres]
+\label{lem:contraction-tensor-maps}
+\source{bost-adelic-2026:page-0027}
+\lean{BostConjecture.Adelic.Contraction.orthogonalTensor_map_norm_le_of_finite_le_infinite_eq}
+\leanok
+Let $(\overline A_j)$ and $(\overline C_j)$ be finite families of Hermitian
+bundles and $f_j:A_j\to C_j$ linear maps. Fix a place $\omega$.
+Suppose $\|f_{j,\omega}(x)\|\leq\|x\|$ for every $j,x$, with equality
+when $\omega$ is infinite. Then, for every completed tensor $z$,
 \[
- \left(\prod_j\alpha_j\right)M(z)\leq\|z\|_\varepsilon\leq M(z).
+ \|(\bigotimes_j f_{j,\omega})(z)\|\leq\|z\|.
 \]
-In particular, tensoring with a normed line multiplies the norm:
-$\|e\otimes x\|_\varepsilon=\|e\|\|x\|$.
 \end{lemma}
 \begin{proof}
-For any tuple of functionals, evaluate the displayed expansion and apply the
-ultrametric inequality and
-$|\ell_j(b_{j,i_j})|\leq\|\ell_j\|_*\|b_{j,i_j}\|$.
-Taking the supremum proves the upper bound. For a fixed multi-index use the
-coordinate functionals $b_{j,i_j}^*$, whose norms are at most
-$(\alpha_j\|b_{j,i_j}\|)^{-1}$. Their tensor evaluates $z$ to
-$c_{\mathbf i}$. This gives the lower bound for every multi-index.
-For the last assertion fix $e\neq0$. The coordinate functional on its line
-has norm $\|e\|^{-1}$. In any finite-dimensional ultrametric space,
-$\sup_{\ell\neq0}|\ell(x)|/\|\ell\|_*=\|x\|$: the upper bound is the
-definition of the dual norm, and an $\alpha$-orthogonal basis supplies a
-coordinate functional giving at least $\alpha\|x\|$; let $\alpha$ tend to
-one. Applying this observation in the defining supremum for $e\otimes x$
-proves equality. If $e=0$ or $x=0$, both sides vanish.
+At an infinite place, each factor map preserves the inner product by
+polarization. The tensor map therefore preserves the product inner product
+on pairs of pure tensors. These span, so sesquilinearity proves preservation
+on all vectors, and hence the norm assertion over both $\mathbb R$ and $\mathbb C$.
+At a finite place, a testing tuple of functionals $(\lambda_j)$ pulls back to
+$(\lambda_j f_j)$, with $\|\lambda_j f_j\|_*\leq\|\lambda_j\|_*$.
+The defining epsilon bound on $z$ therefore bounds the evaluation by
+$\|z\|_\varepsilon\prod_j\|\lambda_j\|_*$.
+A zero functional contributes zero. Taking the supremum proves the assertion.
 \end{proof}
 
-\begin{lemma}[Tensor contractions, regrouping, and evaluation]
-\label{lem:contraction-tensor-calculus}
-\uses{lem:contraction-epsilon-coordinates}
-\source{bost-adelic-2026:page-0005,bost-adelic-2026:page-0027}
-\notready
-For finite-dimensional real or complex Hilbert spaces with Hilbert tensor
-norms, and for finite-dimensional ultrametric spaces over a complete valued
-field with epsilon tensor norms, tensor products of contractions are
-contractions. Canonical permutations and regroupings are isometries, and
-the canonical tensor-duality map
-\[
- \bigotimes_j A_j^\vee\longrightarrow(\bigotimes_j A_j)^\vee
-\]
-is an isometry. In particular its evaluation satisfies
-$|\langle u,z\rangle|\leq\|u\|\|z\|$.
-The transpose of a contraction is a contraction for the operator dual norms.
+\begin{lemma}[Transposes of completed contractions]
+\label{lem:contraction-dual-map}
+\source{bost-adelic-2026:page-0027}
+\lean{BostConjecture.Adelic.Contraction.dualMap_norm_le}
+\leanok
+Let $f:A\to C$ be a linear map between bundles with their prescribed norms.
+At any place where $\|f_\omega(x)\|\leq\|x\|$ for all completed $x$,
+its transpose satisfies $\|f_\omega^\vee(\lambda)\|_*\leq\|\lambda\|_*$.
 \end{lemma}
 \begin{proof}
-In the Hilbert case, products of orthonormal basis vectors form an
-orthonormal tensor basis. Permuting or regrouping them preserves their Gram
-matrix. Their coordinate functionals form an orthonormal basis of the dual,
-which proves the duality assertion and, by Cauchy--Schwarz, the evaluation
-bound. To tensor a contraction $T$ with an identity, expand
-$z=\sum_i x_i\otimes e_i$ in an orthonormal basis of the second factor.
-Then $\|(T\otimes1)z\|^2=\sum_i\|Tx_i\|^2\leq\sum_i\|x_i\|^2$.
-Applying this one factor at a time proves tensor functoriality over both
-$\mathbb R$ and $\mathbb C$.
+For every $x$, one has
+$|\lambda(f_\omega(x))|\leq\|\lambda\|_*\|f_\omega(x)\|
+\leq\|\lambda\|_*\|x\|$. Taking the supremum over nonzero $x$ proves
+the claim. Dual scalar extension identifies the completed transpose with
+this precomposition: on scalar tensors both evaluate as
+$(r\otimes\lambda)(s\otimes f(x))=rs\lambda(f(x))$, and bilinearity
+extends the equality to arbitrary completed vectors.
+\end{proof}
 
-In the ultrametric case, precomposing each testing functional with a
-contraction decreases its dual norm. Substitution in the supremum defining
-$\|\cdot\|_\varepsilon$ proves tensor functoriality; a zero composite
-functional contributes zero. For regrouping, choose an $\alpha$-orthogonal
-basis in each original factor. Repeated application of the coordinate
-estimate bounds every parenthesized tensor norm between $\alpha^N M$ and
-$M$, for some finite $N$ depending only on the number of factors and the
-parenthesization. This follows inductively because a product basis is
-$(\prod_j\alpha_j)$-orthogonal and the norm of each product basis vector
-is the product of its factor norms. The latter equality follows directly
-from the supremum and the norming-functional argument in the preceding
-proof. Thus any two regrouped norms differ by factors at most
-$\alpha^{-N_1-N_2}$. Letting $\alpha\uparrow1$ proves equality.
-
-Here is also a direct verification of tensor duality. With these bases put
-$w_{\mathbf i}=\prod_j\|b_{j,i_j}\|$, and write
-$u=\sum_{\mathbf i}d_{\mathbf i}\bigotimes_j b_{j,i_j}^*$.
-If there are $m$ factors, the coordinate estimate gives
-$\|z\|_\varepsilon\geq\alpha^m\max|c_{\mathbf i}|w_{\mathbf i}$.
-Testing $u$ on the evaluation functionals at the vectors $b_{j,i_j}$,
-whose norms are at most $\|b_{j,i_j}\|$, gives
+\begin{lemma}[Completed tensor duality]
+\label{lem:contraction-tensor-duality}
+\uses{lem:contraction-nearly-orthogonal-basis}
+\source{bost-adelic-2026:page-0005,bost-adelic-2026:page-0027}
+\lean{ArakelovGeometry.NormFamily.orthogonalTensor_dual_norm}
+\leanok
+For a finite family of Hermitian bundles, the canonical map
+$\bigotimes_j A_{j,\omega}^\vee\to(\bigotimes_j A_{j,\omega})^\vee$
+is an isometry for the prescribed completed tensor and dual norms.
+\end{lemma}
+\begin{proof}
+At an infinite place, product orthonormal bases and their coordinate
+functionals are orthonormal bases on both sides, so the map is isometric.
+For a finite place, choose an $\alpha$-orthogonal basis $b_{j,i}$ of each
+factor, where $0<\alpha<1$. Put $w_{\mathbf i}=\prod_j\|b_{j,i_j}\|$
+and let $m$ be the number of factors.
+For $z=\sum c_{\mathbf i}\bigotimes_j b_{j,i_j}$, testing with coordinate
+functionals gives
+$\|z\|_\varepsilon\geq\alpha^m\max_{\mathbf i}|c_{\mathbf i}|w_{\mathbf i}$.
+The reverse bound without $\alpha^m$ follows by evaluating the expansion
+against arbitrary testing functionals and applying the ultrametric inequality.
+Write $u=\sum d_{\mathbf i}\bigotimes_j b_{j,i_j}^*$.
+Evaluation on the $b_{j,i_j}$ gives
 $\|u\|_\varepsilon\geq\max|d_{\mathbf i}|/w_{\mathbf i}$.
-Consequently
-$|\sum_{\mathbf i}c_{\mathbf i}d_{\mathbf i}|
-\leq\alpha^{-m}\|z\|_\varepsilon\|u\|_\varepsilon$.
-Let $\alpha\uparrow1$ to obtain that the duality map is contracting.
-Conversely, if $C$ is the operator norm of the functional represented by
-$u$, testing it on product basis vectors gives
-$|d_{\mathbf i}|\leq Cw_{\mathbf i}$.
+Consequently $|u(z)|\leq\alpha^{-m}\|u\|_\varepsilon\|z\|_\varepsilon$.
+Letting $\alpha\uparrow1$ proves that the duality map contracts.
+Conversely, if its image has operator norm $C$, evaluation on product basis
+vectors gives $|d_{\mathbf i}|\leq Cw_{\mathbf i}$.
 Since $\|b_{j,i_j}^*\|\leq(\alpha\|b_{j,i_j}\|)^{-1}$, the upper
 coordinate estimate on $u$ gives $\|u\|_\varepsilon\leq\alpha^{-m}C$.
-Letting $\alpha\uparrow1$ proves the reverse inequality. Algebraic tensor
-duality is bijective in finite dimension, so this proves the isometry.
+Let $\alpha\uparrow1$ again. The coordinate basis also proves that algebraic
+tensor duality is bijective. The empty family gives scalar multiplication,
+for which the assertion follows directly from the absolute value.
+\end{proof}
 
-Finally, in either case, if $T$ is contracting, then
-$|\lambda(Tx)|\leq\|\lambda\|_*\|Tx\|\leq\|\lambda\|_*\|x\|$;
-taking the supremum over $x$ proves the assertion about transposes.
+\begin{lemma}[Tensor evaluation along an isometric inclusion]
+\label{lem:contraction-tensor-evaluation}
+\uses{lem:contraction-tensor-maps,lem:contraction-dual-map,lem:contraction-tensor-duality}
+\source{bost-adelic-2026:page-0027}
+\lean{BostConjecture.Adelic.Contraction.tensorPowerPairing_norm_le}
+\leanok
+Let $i:A\to W$ be linear between Hermitian bundles and fix a place at which
+$i_\omega$ is isometric. For a finite index set $J$, the map
+\[
+ A_\omega^{\otimes J}\longrightarrow((W_\omega^\vee)^{\otimes J})^\vee,
+ \qquad x\longmapsto[u\mapsto u(i_\omega^{\otimes J}x)]
+\]
+is contracting on every completed vector.
+\end{lemma}
+\begin{proof}
+The tensor of $i_\omega$ contracts by the tensor-map lemma. Evaluation into
+the bidual contracts because $|\lambda(x)|\leq\|\lambda\|_*\|x\|$.
+The transpose of the tensor-duality isometry contracts by the transpose
+lemma. Composing these three maps gives precisely the displayed evaluation
+map, as is verified on pure tensors and extended linearly.
+\end{proof}
+
+\begin{lemma}[Completed canonical dual regrouping]
+\label{lem:contraction-dual-regroup}
+\uses{lem:contraction-nearly-orthogonal-basis,lem:contraction-tensor-maps,lem:contraction-tensor-duality}
+\source{bost-adelic-2026:page-0027}
+\lean{BostConjecture.Adelic.Contraction.dualRegroupEquiv_norm_le}
+\leanok
+For a finite family of Hermitian bundles $\overline A_j$ and a finite index
+set $J$, the canonical map
+\[
+ \bigotimes_j(A_{j,\omega}^\vee)^{\otimes J}
+ \longrightarrow ((\bigotimes_j A_{j,\omega})^\vee)^{\otimes J}
+\]
+is contracting for the actual nested tensor norms at every place.
+\end{lemma}
+\begin{proof}
+First exchange the two tensor indices. At infinity this preserves the product
+inner product on pairs of double pure tensors. Such tensors span, so the
+map is isometric on arbitrary vectors by sesquilinearity.
+At a finite place, the following epsilon universal bound proves contraction.
+If $f:\bigotimes_{j=1}^m X_j\to Z$ is linear, $Z$ is ultrametric and
+$\|f(\bigotimes_jx_j)\|\leq C\prod_j\|x_j\|$, expand in product
+vectors from $\alpha$-orthogonal bases. The ultrametric triangle inequality
+and coordinate-functional lower bound give
+$\|f(z)\|\leq C\alpha^{-m}\|z\|_\varepsilon$.
+Let $\alpha\uparrow1$ to obtain $\|f(z)\|\leq C\|z\|_\varepsilon$.
+For nested tensors, apply this assertion to each row while holding all other
+rows fixed, replacing the product of entry norms in that row by the row's
+epsilon norm. Then apply it to the outer tensor. Thus a bound on double pure
+tensors extends with the same constant to every vector of the nested tensor.
+Regrouping sends a double pure tensor to its transpose; its target norm is
+at most the product of all entry norms. Taking $C=1$ proves contraction.
+Finally apply tensor duality to each column. These maps are isometries at all
+places, so their tensor contracts by the tensor-map lemma. The composite is
+the stated canonical dual regrouping. All these formulas commute with scalar
+extension because they agree on scalar multiples of double pure tensors.
 \end{proof}
 
 \begin{lemma}[The balanced-word estimate]
@@ -331,9 +369,42 @@ claim by letting $\alpha\uparrow1$. The existence and determinant estimates
 used here also hold for trivial valuations.
 \end{proof}
 
+\begin{lemma}[Norm of a determinant--Specht generator]
+\label{lem:contraction-determinant-specht-generator-norm}
+\uses{def:constant-specht,lem:contraction-nearly-orthogonal-basis}
+\source{bost-adelic-2026:page-0025,bost-adelic-2026:page-0026}
+\lean{BostConjecture.Adelic.Contraction.determinantSpechtBundle_norm_tprod}
+\leanok
+At every place, for completed determinant vectors
+$\eta_1,\ldots,\eta_k\in\det(A_\omega)$ and a completed Specht vector
+$x\in K_\omega\otimes_{\mathbb Z}L_{a,ak}$, one has
+\[
+ \| (\eta_1\otimes\cdots\otimes\eta_k)\otimes x\|_{S_{a,ak}(A),\omega}
+ =\left(\prod_{q=1}^k\|\eta_q\|_{\det A,\omega}\right)\|x\|_{L,\omega}.
+\]
+The left side uses the canonical exterior, tensor, and lattice scalar-extension
+identifications with the original determinant--Specht bundle.
+\end{lemma}
+\begin{proof}
+Hilbert tensor norms multiply on pure tensors by the product formula for
+their inner products. Epsilon tensor norms also multiply on pure tensors:
+the upper bound follows by testing with arbitrary dual functionals.
+For the reverse bound, given a nonzero vector $y$ and $0<\alpha<1$, an
+$\alpha$-orthogonal basis supplies a coordinate functional $\lambda$ with
+$|\lambda(y)|\geq\alpha\|y\|\|\lambda\|_*$. Indeed choose a coordinate
+maximizing $|c_i|\|b_i\|$, use
+$\|y\|\leq\max_i|c_i|\|b_i\|$ and
+$\|b_i^*\|\leq(\alpha\|b_i\|)^{-1}$.
+Apply such functionals to each factor and let $\alpha\uparrow1$.
+If a factor is zero both sides vanish; an empty determinant tensor has norm
+one. Apply pure-tensor multiplicativity first to the determinant factors,
+then to their tensor and $x$. The canonical scalar-extension maps send these
+vectors to the same pure tensors, giving precisely the asserted norms.
+\end{proof}
+
 \begin{lemma}[Finite-place determinant embedding]
 \label{lem:contraction-finite-specht}
-\uses{lem:contraction-normalized-lattice,lem:contraction-epsilon-coordinates,lem:contraction-determinant-base-change}
+\uses{lem:contraction-normalized-lattice,lem:contraction-determinant-specht-generator-norm,lem:contraction-determinant-base-change}
 \source{bost-adelic-2026:page-0025,bost-adelic-2026:page-0026}
 \lean{BostConjecture.Adelic.Contraction.projectiveDeterminantMap_norm_finite}
 \leanok
@@ -349,7 +420,7 @@ Choose any basis $b$ of $A_\omega$.
 Since $(\det A_\omega)^{\otimes k}$ is a line generated by
 $\eta_b^{\otimes k}$, every $z$ is uniquely
 $\eta_b^{\otimes k}\otimes x$. Its actual tensor norm is
-$\|\eta_b\|^k\|x\|_L$, by the line case of the epsilon estimate.
+$\|\eta_b\|^k\|x\|_L$, by the determinant--Specht generator norm formula.
 Scalar-extension compatibility and the normalized lattice bound give
 \[
  \|\iota_{A,\omega}(z)\|_\varepsilon
@@ -441,9 +512,10 @@ vectors. Finite-dimensional dual base change is an isomorphism.
 
 \begin{lemma}[Local canonical pairing contraction]
 \label{lem:local-pairing-contraction}
-\uses{def:canonical-pairing,def:constant-specht,lem:contraction-finite-specht,lem:contraction-infinite-specht,lem:contraction-tensor-calculus,lem:contraction-pairing-base-change}
+\uses{def:canonical-pairing,def:constant-specht,lem:contraction-finite-specht,lem:contraction-infinite-specht,lem:contraction-tensor-maps,lem:contraction-dual-map,lem:contraction-tensor-evaluation,lem:contraction-dual-regroup,lem:contraction-pairing-base-change}
 \source{bost-adelic-2026:page-0026,bost-adelic-2026:page-0027}
-\notready
+\lean{BostConjecture.Adelic.Contraction.canonicalPairing_norm_le}
+\leanok
 For every place $\omega$ and every $b\in(B_d)_\omega$,
 \[
  \|\Psi_{d,\omega}(b)\|_{D_d^\vee,\omega}\leq\|b\|_{B_d,\omega}.
@@ -456,7 +528,8 @@ No nonvanishing or geometric semistability assumption is needed.
 The completed inclusion $i_\omega$ is isometric by the definition of the
 induced norms. The two determinant-embedding lemmas prove that
 $\iota_{V,\omega}$ and each determinant embedding defining $j_{d,\omega}$
-are contracting. Tensor functoriality and the isometry of dual regrouping
+are contracting and are isometric at infinite places. Tensor functoriality
+and the contraction of dual regrouping
 therefore make $j_{d,\omega}$ and $i_\omega^{\otimes d}$ contracting.
 For arbitrary completed vectors $b,u$, the completed pairing formula and
 the tensor evaluation estimate yield
@@ -476,14 +549,19 @@ taking the operator norm in $b$ proves its equivalent form.
 \label{cor:canonical-pairing-height}
 \uses{lem:local-pairing-contraction}
 \source{bost-adelic-2026:page-0006,bost-adelic-2026:page-0027}
-\notready
-If $\Psi_d\neq0$, its map height is nonpositive:
+\lean{BostConjecture.Adelic.Contraction.canonicalPairing_mapHeight_le_zero}
+\leanok
+The canonical pairing has nonpositive lower-integral map height, with the
+height of the zero map defined to be $-\infty$. In particular, if
+$\Psi_d\neq0$, its ordinary map height is nonpositive:
 \[
  h(\Psi_d)=\int_\Omega\log\|\Psi_{d,\omega}\|\,d\nu(\omega)\leq0.
 \]
 \end{corollary}
 \begin{proof}
-A nonzero map remains nonzero after extension of fields, so each completed
+For the zero map the assertion follows from its height being $-\infty$.
+Assume now that the pairing is nonzero. A nonzero map remains nonzero after
+extension of fields, so each completed
 operator norm is positive. The local contraction gives
 $\log\|\Psi_{d,\omega}\|\leq0$ at every place. The logarithmic operator
 norm of a nonzero map between adelic bundles is integrable; integrating the
