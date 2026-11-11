@@ -40,8 +40,8 @@ Lemma 6.1 \cite{bost2026}.
 \label{def:constant-specht}
 \source{bost-adelic-2026:page-0008,bost-adelic-2026:page-0025}
 \lean{BostConjecture.Specht.latticeBundle}
-Choose an integral basis $b=(b_1,\ldots,b_f)$ of $L_{a,d}$, and put
-$L^S_{a,d}=K\otimes_\Z L_{a,d}$. On its completed fibre define
+Choose an integral basis $b$ of $L_{a,d}$, with vectors $b_1,\ldots,b_f$.
+Put $L^S_{a,d}=K\otimes_\Z L_{a,d}$. On its completed fibre define
 \[
  \left\|\sum_i z_i b_i\right\|_\omega=
  \begin{cases}
@@ -77,7 +77,9 @@ same maximum norm.
 \uses{def:constant-specht}
 \source{bost-adelic-2026:page-0025}
 \lean{BostConjecture.Specht.latticeBundle_isHermitian,
-BostConjecture.Specht.latticeNormFamily_isStronglyDominated}
+BostConjecture.Specht.latticeNormFamily_isStronglyDominated,
+BostConjecture.Specht.latticeNormFamily_isMeasurable,
+BostConjecture.Specht.latticeBundle}
 The constant norm family and its dual are measurable and dominated.
 Its Archimedean fibres are Hermitian, and its other fibres are ultrametric.
 \end{lemma}
@@ -202,7 +204,7 @@ This proof also applies to an algebraic closure of $K$.
 
 \begin{lemma}[Specht semistability and its isometric action]
 \label{lem:specht-semistability}
-\uses{def:constant-specht,lem:specht-regularity,
+\uses{def:constant-specht,lem:specht-regularity,lem:specht-basis-independence,
 lem:rectangular-specht-irreducible,lem:group-semistability}
 \source{bost-adelic-2026:page-0008,bost-adelic-2026:page-0026}
 \notready
@@ -296,16 +298,19 @@ $b_i^{(t)}=\lambda_i^{(t)}+a-i$ for $1\le i\le a$. These shifted row
 lengths are strictly decreasing. If entry $j$ is added to row $r_j$,
 define
 \[
- \delta_{i,r_j}(j)=b_i^{(j-1)}-b_{r_j}^{(j-1)},\qquad
- H_j(T)=\sum_{i<r_j}\log\frac{\delta_{i,r_j}(j)}{\delta_{i,r_j}(j)-1},
- \qquad \gamma_T=\exp\!\left(\sum_{j=1}^d H_j(T)\right).
+ \delta_{i,r_j}(j)=b_i^{(j-1)}-b_{r_j}^{(j-1)},
+ \qquad \gamma_T=\exp\!\left(\sum_{j=1}^d H_j(T)\right),
+\]
+\[
+ H_j(T)=\sum_{i<r_j}\log\frac{\delta_{i,r_j}(j)}{\delta_{i,r_j}(j)-1}.
 \]
 Legality of insertion implies $\delta_{i,r_j}(j)\ge2$.
 
 \begin{lemma}[The seminormal covolume bound]
 \label{lem:specht-gram-bound}
 \source{bost-adelic-2026:page-0023,bost-adelic-2026:page-0024}
-\lean{BostConjecture.Specht.two_mul_rectangleLogCovolume_le_average_log_prefixNormProduct}
+\lean{BostConjecture.Specht.two_mul_rectangleLogCovolume_le_average_log_prefixNormProduct,
+BostConjecture.Specht.rectangleLogCovolume_nonneg}
 For the uniform average over standard tableaux of shape $(k^a)$,
 \[
  0\le 2c_a(ak)\le\mathbb E\log\gamma_T.
