@@ -6,10 +6,12 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Adelic.Specht.Coordinates
-public import ArakelovGeometry.AdelicVectorBundle.Construction.Basis
+public import ArakelovGeometry.AdelicVectorBundle.Basic
+public import ArakelovGeometry.AdelicVectorBundle.NormFamily.Hermitian.Basis
 public import ArakelovGeometry.AdelicVectorBundle.NormFamily.Completion.Density
 public import ArakelovGeometry.AdelicVectorBundle.Measurability.Countable
 import ArakelovGeometry.AdelicVectorBundle.NormFamily.Domination.Subquotient
+import ArakelovGeometry.AdelicCurve.Basic
 
 /-!
 # The constant adelic Specht bundle
@@ -55,7 +57,7 @@ theorem latticeNormFamily_norm_finite (ω : S.Ω) (hω : ω ∈ S.Ωfin)
     (latticeNormFamily S t b).norm ω x =
       ‖((b.baseChange K).baseChange (S.ϕ ω).Completion).equivFun x‖ := by
   have hn : ω ∉ S.Ωinf := fun h => h hω
-  simp only [latticeNormFamily, NormFamily.piecewise_norm, if_neg hn,
+  simp only [latticeNormFamily, NormFamily.piecewise_norm, ite_eq_right hn,
     NormFamily.ofBasisHermitian_norm_of_finite _ ω hω, NormFamily.ofBasis_norm]
 
 /-- At infinity the norm is the square root of the sum of squared word
@@ -64,7 +66,7 @@ theorem latticeNormFamily_norm_infinite (ω : S.Ω) (hω : ω ∈ S.Ωinf)
     (x : (S.ϕ ω).Completion ⊗[K] (K ⊗[ℤ] orbitLattice t)) :
     (latticeNormFamily S t b).norm ω x =
       Real.sqrt (∑ w, ‖fibreWordCoordinates t x w‖ ^ 2) := by
-  simp only [latticeNormFamily, NormFamily.piecewise_norm, if_pos hω,
+  simp only [latticeNormFamily, NormFamily.piecewise_norm, ite_eq_left hω,
     wordNormFamily, NormFamily.pullback_norm,
     NormFamily.ofBasisHermitian_norm_of_infinite _ ω hω,
     fibreWordCoordinates_eq_basis]
@@ -77,8 +79,15 @@ theorem latticeNormFamily_isMeasurable : (latticeNormFamily S t b).IsMeasurable 
     (S := S) (Pi.basisFun K (Fin n → Fin (μ.colLen 0)))).pullback
       (wordCoordinates K t) (wordCoordinates_injective K t)
   have hb := NormFamily.ofBasisHermitian_isMeasurable (S := S) (b.baseChange K)
-  simpa only [latticeNormFamily, NormFamily.piecewise_norm, ite_apply] using
-    Measurable.ite S.measurableSet_Ωinf (hword x) (hb x)
+  have hm : Measurable (fun ω => if ω ∈ S.Ωinf then
+      (wordNormFamily S t).norm ω ((1 : (S.ϕ ω).Completion) ⊗ₜ[K] x) else
+      (NormFamily.ofBasisHermitian S _ (b.baseChange K)).norm ω
+        ((1 : (S.ϕ ω).Completion) ⊗ₜ[K] x)) :=
+    Measurable.ite (p := fun ω => ω ∈ S.Ωinf) S.measurableSet_Ωinf (hword x) (hb x)
+  convert hm using 1
+  ext ω
+  by_cases hω : ω ∈ S.Ωinf <;>
+    simp [latticeNormFamily, NormFamily.piecewise_norm, hω, wordNormFamily]
 
 variable (hS : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
 
@@ -92,10 +101,12 @@ theorem latticeNormFamily_isHermitian : (latticeNormFamily S t b).IsHermitian hS
   constructor
   · intro ω hω x y
     have hn : ω ∉ S.Ωinf := fun h => h hω
-    simpa only [latticeNormFamily, NormFamily.piecewise_norm, if_neg hn] using hb.1 ω hω x y
+    simpa only [latticeNormFamily, NormFamily.piecewise_norm, ite_eq_right hn] using hb.1 ω hω x y
   · intro ω hω
-    simpa only [latticeNormFamily, NormFamily.piecewise_norm, if_pos hω] using hw.2 ω hω
+    simpa only [latticeNormFamily, NormFamily.piecewise_norm, ite_eq_left hω, wordNormFamily]
+      using hw.2 ω hω
 
+include hS
 /-- Strong domination follows from the checked pullback and splicing theorems
 for actual norm families. Finiteness of the Archimedean mass is proved by AG. -/
 theorem latticeNormFamily_isStronglyDominated :
@@ -117,8 +128,8 @@ def latticeBundle (hcount : S.HasCommonCountableDenseSubfield) :
     AdelicVectorBundle S (K ⊗[ℤ] orbitLattice t) where
   toNormFamily := latticeNormFamily S t b
   isMeasurable := latticeNormFamily_isMeasurable S t b
-  dual_isMeasurable := (latticeNormFamily_isMeasurable S t b).dual_of_common_countable_dense_subfield
-    hcount
+  dual_isMeasurable :=
+    (latticeNormFamily_isMeasurable S t b).dual_of_common_countable_dense_subfield hcount
   isDominated := latticeNormFamily_isDominated S t b hS
 
 @[simp]
