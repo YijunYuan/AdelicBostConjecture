@@ -36,6 +36,7 @@ trivially valued case and the identifications on completed fibres.
 \label{lem:contraction-nearly-orthogonal-basis}
 \source{bost-adelic-2026:page-0025}
 \lean{BostConjecture.Adelic.Contraction.exists_basis_coord_bound}
+\leanok
 Let $F$ be a complete non-Archimedean valued field, possibly trivially valued,
 and let $A$ be an ultrametric normed $F$-space of dimension $a$. For every
 $0<\alpha<1$ there is a basis $b_1,\ldots,b_a$ whose coordinate functionals
@@ -75,6 +76,7 @@ with $w_i=\alpha\|b_i\|$.
 \label{lem:contraction-weighted-determinant}
 \source{bost-adelic-2026:page-0025}
 \lean{BostConjecture.Adelic.Contraction.prod_mul_norm_basis_det_le}
+\leanok
 Let $b$ be a basis of a normed space over a non-Archimedean valued field.
 Write $b_i^*$ for its coordinate functionals. If $w_i>0$ and
 $w_i|b_i^*(x)|\leq\|x\|$ for every $i,x$, then
@@ -98,6 +100,7 @@ The signs have absolute value one. There is no factorial factor.
 \uses{lem:contraction-weighted-determinant}
 \source{bost-adelic-2026:page-0025}
 \lean{BostConjecture.Adelic.Contraction.determinant_norm_basis_ge}
+\leanok
 Fix a non-Archimedean place $\omega$ and a basis $b$ of $A_\omega$.
 Suppose $\alpha>0$ and $\alpha\|b_i\||b_i^*(x)|\leq\|x\|$ for all
 $i,x$. Set $\eta_b=b_1\wedge\cdots\wedge b_a$. Then
@@ -236,6 +239,7 @@ taking the supremum over $x$ proves the assertion about transposes.
 \uses{def:constant-specht}
 \source{bost-adelic-2026:page-0026}
 \lean{BostConjecture.Adelic.Contraction.injective_freeLatticeMap_le}
+\leanok
 Let $F$ be a complete field with an ultrametric absolute value.
 Let $b_1,\ldots,b_a$ be a basis of a finite-dimensional normed $F$-space $A$,
 and let $c_1,\ldots,c_f$
@@ -268,6 +272,7 @@ expansion of $c_h$, and then to $\sum_hz_hc_h$, proves the bound.
 \uses{def:canonical-pairing,def:constant-specht}
 \source{bost-adelic-2026:page-0025}
 \lean{BostConjecture.Geometry.projectiveDeterminantMap_baseChange_of_basis,BostConjecture.Geometry.freeDeterminantMap_baseChange}
+\leanok
 The canonical determinant embedding
 $\iota_A:(\det A)^{\otimes k}\otimes(K\otimes_{\mathbb Z}L_{a,ak})
 \to A^{\otimes ak}$ commutes with field extension. In particular, under
@@ -378,6 +383,7 @@ regrouping. The canonical pairing of Definition~\ref{def:canonical-pairing} is
 \uses{def:canonical-pairing,lem:contraction-determinant-base-change}
 \source{bost-adelic-2026:page-0026}
 \lean{BostConjecture.Geometry.canonicalPairing_baseChange}
+\leanok
 For every place, the scalar extension $\Psi_{d,\omega}$ is the same
 composite on completed fibres:
 \[
