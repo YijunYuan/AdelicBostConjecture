@@ -26,7 +26,7 @@ namespace BostConjecture.Geometry
 open Module PiTensorProduct InvariantTheory
 open scoped TensorProduct
 
-variable {F : Type} [Field F] {ι : Type*} [Finite ι]
+variable {F : Type*} [Field F] {ι : Type*} [Finite ι]
   {E G : ι → Type*} [∀ i, AddCommGroup (E i)] [∀ i, Module F (E i)]
   [∀ i, Group (G i)] (ρ : ∀ i, Representation F (G i) (E i))
 

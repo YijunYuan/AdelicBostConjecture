@@ -64,7 +64,7 @@ theorem mem_range_projectiveDeterminantMap_iff (hk : 0 < k)
 
 end Frame
 
-variable (F : Type) [Field F] {ι : Type*} [Fintype ι]
+variable (F : Type*) [Field F] {ι : Type*} [Fintype ι]
   (E : ι → Type*) [∀ i, AddCommGroup (E i)] [∀ i, Module F (E i)]
 
 /-- The actual independent special-linear action on the ambient tensor product. -/

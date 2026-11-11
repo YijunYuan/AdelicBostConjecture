@@ -24,7 +24,7 @@ namespace BostConjecture.Geometry
 open Module InvariantTheory
 open scoped TensorProduct
 
-variable {F : Type} [Field F] {X : Type*} [AddCommGroup X] [Module F X]
+variable {F : Type*} [Field F] {X : Type*} [AddCommGroup X] [Module F X]
 
 /-- Powers multiply the intrinsic homogeneous degree. -/
 theorem homogeneousPolynomials_pow {d : ℕ}

@@ -76,7 +76,7 @@ theorem canonicalPairing_ne_zero_of_scalarExtension
 
 section AlgebraicallyClosed
 
-variable {F : Type} [Field F] [CharZero F] [IsAlgClosed F] [Algebra R F]
+variable {F : Type*} [Field F] [CharZero F] [IsAlgClosed F] [Algebra R F]
 
 local instance scalarExtendedTargetAddCommGroup : AddCommGroup (⨂[F] i, F ⊗[R] E i) :=
   Module.addCommMonoidToAddCommGroup F

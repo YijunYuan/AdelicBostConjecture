@@ -29,7 +29,7 @@ namespace BostConjecture.Geometry
 open Module PiTensorProduct InvariantTheory
 open scoped TensorProduct
 
-variable {F : Type} {G V W : Type*} [Field F] [Group G]
+variable {F : Type*} {G V W : Type*} [Field F] [Group G]
   [AddCommGroup V] [Module F V] [AddCommGroup W] [Module F W]
 
 /-- The tensor-power action induced by an existing representation. -/

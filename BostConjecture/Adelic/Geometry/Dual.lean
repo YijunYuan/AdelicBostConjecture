@@ -27,7 +27,7 @@ open Module PiTensorProduct
 open ArakelovGeometry.InvariantTheory
 open scoped TensorProduct
 
-variable {K : Type} [Field K] {ι : Type*} [Finite ι]
+variable {K : Type*} [Field K] {ι : Type*} [Finite ι]
   (E : ι → Type*) [∀ i, AddCommGroup (E i)] [∀ i, Module K (E i)]
   [∀ i, FiniteDimensional K (E i)]
 

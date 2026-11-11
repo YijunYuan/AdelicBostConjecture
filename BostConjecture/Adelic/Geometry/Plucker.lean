@@ -101,7 +101,7 @@ theorem isPluckerSemistable_of_intertwining
 
 section Tensor
 
-variable {K : Type} [Field K] {ι : Type*}
+variable {K : Type*} [Field K] {ι : Type*}
   (E : ι → Type*) [∀ i, AddCommGroup (E i)] [∀ i, Module K (E i)]
 
 /-- Both libraries use the same action of the full product of special linear groups. -/

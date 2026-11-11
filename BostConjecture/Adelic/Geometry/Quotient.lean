@@ -29,7 +29,7 @@ open Module PiTensorProduct BostConjecture.Geometry
 open ArakelovGeometry.InvariantTheory
 open scoped TensorProduct
 
-variable {K : Type} [Field K] {ι : Type*}
+variable {K : Type*} [Field K] {ι : Type*}
   (E : ι → Type*) [∀ i, AddCommGroup (E i)] [∀ i, Module K (E i)]
   [∀ i, FiniteDimensional K (E i)] [∀ i, Nontrivial (E i)]
   {V : Type*} [AddCommGroup V] [Module K V] [FiniteDimensional K V] [Nontrivial V]

@@ -25,7 +25,7 @@ namespace BostConjecture.Geometry
 open Module InvariantTheory PiTensorProduct
 open scoped TensorProduct
 
-variable {R : Type*} [CommRing R] {F : Type} [Field F] [CharZero F] [IsAlgClosed F]
+variable {R : Type*} [CommRing R] {F : Type*} [Field F] [CharZero F] [IsAlgClosed F]
   [Algebra R F] {ι : Type*} [Fintype ι] (E : ι → Type*)
   [∀ i, AddCommGroup (E i)] [∀ i, Module R (E i)]
   [∀ i, Module.Finite R (E i)] [∀ i, Module.Projective R (E i)]

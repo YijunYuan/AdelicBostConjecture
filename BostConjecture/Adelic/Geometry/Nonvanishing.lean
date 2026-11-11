@@ -25,7 +25,7 @@ namespace BostConjecture.Adelic.Geometry
 open Module BostConjecture.InvariantTheory BostConjecture.Geometry
 open scoped TensorProduct
 
-variable {K : Type} [Field K] [CharZero K] {ι : Type*} [Fintype ι]
+variable {K : Type*} [Field K] [CharZero K] {ι : Type*} [Fintype ι]
   (E : ι → Type*) [∀ i, AddCommGroup (E i)] [∀ i, Module K (E i)]
   [∀ i, FiniteDimensional K (E i)] [∀ i, Nontrivial (E i)]
   {V : Type*} [AddCommGroup V] [Module K V] [FiniteDimensional K V] [Nontrivial V]
