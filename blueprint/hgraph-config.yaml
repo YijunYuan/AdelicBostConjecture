@@ -50,12 +50,14 @@ lean:
 - BostConjecture/Adelic/Geometry/Polynomial.lean
 - BostConjecture/Adelic/Geometry/Quotient.lean
 - BostConjecture/Adelic/Geometry/ScalarExtension.lean
+- BostConjecture/Adelic/Induction/Bost.lean
 - BostConjecture/Adelic/Induction/FiniteMaxSlope.lean
 - BostConjecture/Adelic/Induction/FiniteNorms.lean
 - BostConjecture/Adelic/Induction/FiniteSlopes.lean
 - BostConjecture/Adelic/Induction/MaxSlope.lean
 - BostConjecture/Adelic/Induction/RankInduction.lean
 - BostConjecture/Adelic/Induction/TensorHN.lean
+- BostConjecture/Adelic/Induction/TensorTransport.lean
 - BostConjecture/Adelic/Semistability/Group.lean
 - BostConjecture/Adelic/Semistability/Independent.lean
 - BostConjecture/Adelic/Semistability/LineTensor.lean
