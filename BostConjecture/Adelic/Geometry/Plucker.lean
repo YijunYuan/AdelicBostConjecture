@@ -54,6 +54,51 @@ theorem exists_homogeneousInvariant_of_isPluckerSemistable
   rw [exteriorPower.map_apply_ιMulti] at hp'
   exact (isPolynomialSemistable_iff_exists_homogeneousInvariant _ _ _).mp hp'
 
+/-- Plücker semistability pulls back through an intertwining target map and a
+source isomorphism, allowing different acting groups. The commuting square
+identifies the actual linear maps whose determinant points are tested. -/
+theorem isPluckerSemistable_of_intertwining
+    {H U Z : Type*} [Group H] [AddCommGroup U] [Module K U] [FiniteDimensional K U]
+    [AddCommGroup Z] [Module K Z] [FiniteDimensional K Z]
+    (ρ : Representation K G W) (τ : Representation K H Z)
+    (A : U →ₗ[K] Z) (B : V →ₗ[K] W) (e : U ≃ₗ[K] V) (f : Z →ₗ[K] W)
+    (hf : ∀ g, ∃ h, f ∘ₗ τ g = ρ h ∘ₗ f)
+    (hAB : f ∘ₗ A = B ∘ₗ e.toLinearMap)
+    (hB : ArakelovGeometry.InvariantTheory.IsPluckerSemistable ρ B) :
+    ArakelovGeometry.InvariantTheory.IsPluckerSemistable τ A := by
+  let b := Module.finBasis K U
+  obtain ⟨m, p, hm, hp, hpB⟩ :=
+    exists_homogeneousInvariant_of_isPluckerSemistable ρ B (b.map e) hB
+  obtain ⟨hp, hi⟩ := (mem_homogeneousInvariants_iff _ _ _).mp hp
+  let q := polynomialPullback (exteriorPower.map (Module.finrank K U) f) p
+  have hq : q ∈ homogeneousInvariants
+      (ArakelovGeometry.InvariantTheory.exteriorRepresentation (Module.finrank K U) τ) m := by
+    apply (mem_homogeneousInvariants_iff _ _ _).mpr
+    refine ⟨polynomialPullback_mem_homogeneous _ hp, ?_⟩
+    intro g
+    obtain ⟨h, hh⟩ := hf g
+    have he := congrArg (exteriorPower.map (Module.finrank K U)) hh
+    simp only [exteriorPower.map_comp] at he
+    change polynomialPullback (exteriorPower.map (Module.finrank K U) (τ g))
+      (polynomialPullback (exteriorPower.map (Module.finrank K U) f) p) = q
+    rw [← AlgHom.comp_apply, ← polynomialPullback_comp, he,
+      polynomialPullback_comp, AlgHom.comp_apply]
+    exact congrArg (polynomialPullback (exteriorPower.map (Module.finrank K U) f)) (hi h)
+  have hqA : polynomialEval (exteriorPower.ιMulti K (Module.finrank K U)
+      (fun j ↦ A (b j))) q ≠ 0 := by
+    rw [polynomialEval_pullback, exteriorPower.map_apply_ιMulti]
+    convert hpB using 1
+    congr 3
+    funext j
+    exact LinearMap.congr_fun hAB (b j)
+  refine ⟨exteriorPower.ιMulti K (Module.finrank K U) b, ?_, ?_⟩
+  · intro hz
+    have hz' := congrArg (determinantCoordinates b) hz
+    simp [Basis.det_self] at hz'
+  · rw [exteriorPower.map_apply_ιMulti]
+    exact (isPolynomialSemistable_iff_exists_homogeneousInvariant _ _ _).mpr
+      ⟨m, q, hm, hq, hqA⟩
+
 section Tensor
 
 variable {K : Type} [Field K] {ι : Type*}
