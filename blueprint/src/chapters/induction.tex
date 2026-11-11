@@ -470,8 +470,9 @@ positive, so this supplies a nonzero subspace as required.
 \begin{lemma}[Mean slope of a finite orthogonal tensor]
 \label{lem:finite-tensor-mean-slope}
 \uses{lem:contraction-tensor-calculus,lem:induction-tensor-degree,def:adelic-slope}
-\source{bost-adelic-2026:page-0001,bost-adelic-2026:page-0032}
+\source{bost-adelic-2026:page-0006}
 \lean{ArakelovGeometry.AdelicVectorBundle.finrank_piTensorProduct_eq_prod, ArakelovGeometry.AdelicVectorBundle.finrank_piTensorProduct_pos, ArakelovGeometry.AdelicVectorBundle.slope_orthogonalTensorOfMeasurableBase}
+\leanok
 For every finite nonempty set $I$ and family
 $(\overline E_i)_{i\in I}$ of positive-rank Hermitian bundles, the actual
 finite orthogonal tensor bundle $\overline T=\bigotimes_{i\in I}\overline E_i$
@@ -484,6 +485,8 @@ These identities hold independently of the enumeration and
 parenthesization of the family, with the actual Hilbert and epsilon norms.
 \end{lemma}
 \begin{proof}
+We iterate the binary degree formula (8) and its slope form (9) in this
+paper \cite{bost2026}, identifying the completed tensor norms at each step.
 The tensor products of basis vectors form a basis indexed by the product
 of the factor basis sets, proving the rank formula and positivity.
 For a singleton, the canonical tensor map to its unique factor is an
@@ -545,7 +548,7 @@ semistable Hermitian bundles is semistable.
 \begin{proof}
 For each semistable factor, the slope of every nonzero subspace is at most
 its mean slope, and the whole space is an allowed subspace. Thus its maximal
-slope equals its mean slope. The two formulas in the preceding lemma give
+slope equals its mean slope. The preceding two lemmas give
 $\widehat\mu_{\max}(\overline T)=\widehat\mu(\overline T)$.
 Every nonzero subspace of $T$ has slope at most its maximal slope and hence
 at most its mean slope. Since $T$ has positive rank, this is semistability.

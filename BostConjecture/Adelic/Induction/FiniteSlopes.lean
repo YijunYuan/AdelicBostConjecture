@@ -25,7 +25,7 @@ open scoped TensorProduct
 
 namespace ArakelovGeometry.AdelicVectorBundle
 
-universe u v
+universe u v w wι
 
 variable {K : Type u} [Field K] {S : AdelicStructure.{u, v} K} [S.IsProper]
   (hS : DiscreteMeasurableSpace S.Ω ∨ S.HasCommonCountableDenseSubfield)
@@ -34,14 +34,14 @@ variable {K : Type u} [Field K] {S : AdelicStructure.{u, v} K} [S.IsProper]
 /-- The actual finite orthogonal tensor has mean slope equal to the sum of
 the positive-rank factor slopes. No maximal-slope hypothesis is used. -/
 theorem slope_orthogonalTensorOfMeasurableBase
-    {ι : Type u} [Fintype ι] [Nonempty ι] {E : ι → Type u}
+    {ι : Type wι} [Fintype ι] [Nonempty ι] {E : ι → Type w}
     [∀ i, AddCommGroup (E i)] [∀ i, Module K (E i)]
     [∀ i, FiniteDimensional K (E i)] (V : ∀ i, AdelicVectorBundle S (E i))
     (hV : ∀ i, (V i).IsHermitian hN) (hr : ∀ i, 0 < finrank K (E i)) :
     (orthogonalTensorOfMeasurableBase V hS hN hV).slope hS hN =
       ∑ i, (V i).slope hS hN := by
   classical
-  have main : ∀ (ι : Type u) [Fintype ι], ∀ [Nonempty ι] (E : ι → Type u)
+  have main : ∀ (ι : Type wι) [Fintype ι], ∀ [Nonempty ι] (E : ι → Type w)
       [∀ i, AddCommGroup (E i)] [∀ i, Module K (E i)]
       [∀ i, FiniteDimensional K (E i)] (V : ∀ i, AdelicVectorBundle S (E i))
       (hV : ∀ i, (V i).IsHermitian hN), (∀ i, 0 < finrank K (E i)) →

@@ -27,12 +27,12 @@ open scoped TensorProduct
 
 namespace ArakelovGeometry.AdelicVectorBundle
 
-universe u v
+universe u v w wι
 
 variable {K : Type u} [Field K] {S : AdelicStructure.{u, v} K} [S.IsProper]
   (hS : DiscreteMeasurableSpace S.Ω ∨ S.HasCommonCountableDenseSubfield)
   (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
-  (hBinaryAdditivity : ∀ (A B : Type u)
+  (hBinaryAdditivity : ∀ (A B : Type (max u w wι))
     [AddCommGroup A] [Module K A] [FiniteDimensional K A]
     [AddCommGroup B] [Module K B] [FiniteDimensional K B]
     (V : AdelicVectorBundle S A) (W : AdelicVectorBundle S B)
@@ -46,14 +46,14 @@ include hBinaryAdditivity
 /-- Binary maximal-slope additivity implies its finite-family form on the
 actual orthogonal tensor bundle, for arbitrary nonempty finite index types. -/
 theorem maximalSlope_orthogonalTensorOfMeasurableBase_of_binary_additivity
-    {ι : Type u} [Fintype ι] [Nonempty ι] {E : ι → Type u}
+    {ι : Type wι} [Fintype ι] [Nonempty ι] {E : ι → Type w}
     [∀ i, AddCommGroup (E i)] [∀ i, Module K (E i)]
     [∀ i, FiniteDimensional K (E i)] (V : ∀ i, AdelicVectorBundle S (E i))
     (hV : ∀ i, (V i).IsHermitian hN) (hr : ∀ i, 0 < finrank K (E i)) :
     (orthogonalTensorOfMeasurableBase V hS hN hV).maximalSlope hS hN =
       ∑ i, (V i).maximalSlope hS hN := by
   classical
-  have main : ∀ (ι : Type u) [Fintype ι], ∀ [Nonempty ι] (E : ι → Type u)
+  have main : ∀ (ι : Type wι) [Fintype ι], ∀ [Nonempty ι] (E : ι → Type w)
       [∀ i, AddCommGroup (E i)] [∀ i, Module K (E i)]
       [∀ i, FiniteDimensional K (E i)] (V : ∀ i, AdelicVectorBundle S (E i))
       (hV : ∀ i, (V i).IsHermitian hN), (∀ i, 0 < finrank K (E i)) →
@@ -100,7 +100,7 @@ theorem maximalSlope_orthogonalTensorOfMeasurableBase_of_binary_additivity
 /-- Binary maximal-slope additivity implies semistability of every nonempty
 finite orthogonal tensor of semistable Hermitian bundles. -/
 theorem isMeanSlopeSemistable_orthogonalTensorOfMeasurableBase_of_binary_additivity
-    {ι : Type u} [Fintype ι] [Nonempty ι] {E : ι → Type u}
+    {ι : Type wι} [Fintype ι] [Nonempty ι] {E : ι → Type w}
     [∀ i, AddCommGroup (E i)] [∀ i, Module K (E i)]
     [∀ i, FiniteDimensional K (E i)] (V : ∀ i, AdelicVectorBundle S (E i))
     (hV : ∀ i, (V i).IsHermitian hN)

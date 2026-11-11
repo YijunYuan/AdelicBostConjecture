@@ -26,10 +26,10 @@ open scoped TensorProduct
 
 namespace ArakelovGeometry
 
-universe u v
+universe u v w wι
 
 variable {K : Type u} [Field K] {S : AdelicStructure.{u, v} K}
-  {ι : Type u} [Fintype ι] {E : ι → Type u}
+  {ι : Type wι} [Fintype ι] {E : ι → Type w}
   [∀ i, AddCommGroup (E i)] [∀ i, Module K (E i)]
   [∀ i, FiniteDimensional K (E i)]
 
@@ -91,7 +91,7 @@ theorem finrank_piTensorProduct_pos [Finite ι] (hr : ∀ i, 0 < finrank K (E i)
   exact Finset.prod_pos fun i _ => hr i
 
 /-- Reindexing preserves both slopes of the actual finite orthogonal bundle. -/
-theorem slopes_orthogonalTensor_reindex {κ : Type u} [Fintype κ]
+theorem slopes_orthogonalTensor_reindex {κ : Type wι} [Fintype κ]
     (V : ∀ i, AdelicVectorBundle S (E i))
     (hV : ∀ i, (V i).IsHermitian hN) (e : ι ≃ κ) :
     (orthogonalTensorOfMeasurableBase V hS hN hV).slope hS hN =
@@ -121,8 +121,8 @@ theorem slopes_orthogonalTensor_subsingleton [Subsingleton ι]
       (PiTensorProduct.subsingletonEquiv (R := K) (s := E) i₀) hS hN he⟩
 
 /-- Canonical grouping preserves the mean and maximal slopes on the actual norms. -/
-theorem slopes_orthogonalTensor_sum {κ : Type u} [Fintype κ]
-    {D : ι ⊕ κ → Type u} [∀ i, AddCommGroup (D i)] [∀ i, Module K (D i)]
+theorem slopes_orthogonalTensor_sum {κ : Type wι} [Fintype κ]
+    {D : ι ⊕ κ → Type w} [∀ i, AddCommGroup (D i)] [∀ i, Module K (D i)]
     [∀ i, FiniteDimensional K (D i)] (V : ∀ i, AdelicVectorBundle S (D i))
     (hV : ∀ i, (V i).IsHermitian hN) :
     let A := orthogonalTensorOfMeasurableBase (fun i => V (.inl i)) hS hN
