@@ -21,8 +21,8 @@ preserved. Historical extraction manifests retain the original source hashes,
 modification records and checks; their relocation sections identify current
 paths. Original sources are retrievable from the pinned repositories and revisions;
 redundant upstream source snapshots are omitted. No complete upstream build is
-claimed by checking the selected dependency cone. The retained source is further
-restricted to dependencies of the four principal theorems; historical manifests
+claimed by checking the selected dependency cone. The retained source supports
+the public adelic and number-field theorems; historical manifests
 may therefore describe declarations or modules that have since been removed.
 
 ## ArakelovGeometry: adelic foundations and instability filtrations
