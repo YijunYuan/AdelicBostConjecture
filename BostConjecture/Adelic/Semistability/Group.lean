@@ -1,5 +1,12 @@
-import ArakelovGeometry.AdelicVectorBundle.HarderNarasimhan.Galois.HNScalarExtension
-import Mathlib.RepresentationTheory.Irreducible
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
+module
+
+public import ArakelovGeometry.AdelicVectorBundle.HarderNarasimhan.Galois.HNScalarExtension
+public import Mathlib.RepresentationTheory.Irreducible
 
 /-!
 # Irreducible isometric group actions and adelic semistability
@@ -16,6 +23,8 @@ zero is needed for this implication. In particular it applies to the product
 group acting on the constant Specht factors, once that representation and its
 completed isometries have been constructed.
 -/
+
+@[expose] public section
 
 noncomputable section
 
