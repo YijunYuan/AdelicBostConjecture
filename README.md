@@ -16,6 +16,26 @@ The new development reuses ArakelovGeometry at
 Weighted tensor HN compatibility is now required by the simultaneous induction.
 New source reuse is recorded in [CONTRIBUTIONS.md](CONTRIBUTIONS.md).
 
+The current mathematical blueprint starts at
+[blueprint/src/content.tex](blueprint/src/content.tex). Its chapters follow
+the six adelic proof branches and link to actual Lean declarations and
+visually transcribed source pages in the workspace `references/` library.
+An attached declaration is not certified complete until its mathematical
+statement, kernel check and transitive axioms have been checked; the main
+adelic theorem remains pending.
+
+Before synchronizing the dashboard DAG, run from the workspace root:
+
+```sh
+python3 tools/blueprint_sources.py
+horizon graph -p BostConjecture sync
+```
+
+Then publish the refreshed DAG with the live dashboard's blueprint sync
+action. The generated [graph configuration](blueprint/hgraph-config.yaml)
+lists only modules containing blueprint attachments, including the pinned
+ArakelovGeometry exports. It avoids scanning the entire dependency tree.
+
 In the previous number-field implementation, underlying modules are finite
 projective and need not be free.
 
@@ -44,7 +64,8 @@ term attains it.
 
 ## Organization
 
-Directories follow the mathematical dependencies of this paper. File paths
+`Adelic/` contains the current adelic development. The legacy directory map
+below describes the number-field implementation of `old.pdf`. File paths
 organize modules; they do not add layers to the mathematical namespaces.
 
 | Directory | Content | Connection to this paper |
