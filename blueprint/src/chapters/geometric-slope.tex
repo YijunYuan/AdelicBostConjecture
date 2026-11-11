@@ -286,10 +286,36 @@ applies to all completed vectors. The binary statement uses the binary
 tensor-duality isomorphism and the identical argument.
 \end{proof}
 
+\begin{lemma}[Binary tensor norms under finite indexing]
+\label{lem:binary-tensor-norm}
+\uses{def:adelic-induced-norms}
+\lean{ArakelovGeometry.NormFamily.orthogonalTensor_norm_boolTensorEquiv}
+\leanok
+Let $\overline E,\overline F$ be Hermitian normed spaces over $S$. Set
+$A_0=E$ and $A_1=F$. The canonical map
+\[
+ \beta:\bigotimes_{i\in\{0,1\}}A_i\longrightarrow E\otimes_K F,
+ \qquad \bigotimes_i x_i\longmapsto x_0\otimes x_1,
+\]
+preserves the orthogonal tensor norm at every place, on every completed vector.
+\end{lemma}
+\begin{proof}
+Identify the two-element index set with the disjoint union of two singletons,
+in the indicated order. Reindexing preserves the Hilbert tensor norm because
+it permutes the orthonormal tensor basis, and preserves the epsilon tensor
+norm because it bijects the families of norm-bounded dual test vectors.
+The binary tensor norm is the finite tensor norm transported through the
+canonical grouping of those two singletons. On pure tensors the composite
+of reindexing and grouping sends $\bigotimes_i x_i$ to $x_0\otimes x_1$;
+multilinearity identifies it with $\beta$ on the whole tensor product.
+These maps commute with scalar extension, so the same argument applies in
+each completion and proves the claimed norm identity.
+\end{proof}
+
 \begin{theorem}[Geometric quotient slope inequality]
 \label{thm:geometric-quotient-bound}
 \source{bost-adelic-2026:page-0028}
-\uses{thm:geometric-subspace-bound,lem:geometric-dual-quotient,lem:tensor-quotient-dual-norm,lem:slope-duality}
+\uses{thm:geometric-subspace-bound,lem:geometric-dual-quotient,lem:tensor-quotient-dual-norm,lem:binary-tensor-norm,lem:slope-duality}
 \notready
 Let $\overline E$ and $\overline F$ be positive-rank Hermitian adelic bundles
 over the countable characteristic-zero field $K$, and put
@@ -313,6 +339,8 @@ semistability of
 for the full special-linear groups of the dual factors. Surjectivity of $q$
 implies injectivity of its transpose, and tensor duality is an isomorphism,
 so $j$ is injective. Its source is nonzero because $\dim_K Q>0$.
+The binary norm identity identifies this target with the two-factor instance
+of the finite-family tensor bundle used in the subspace theorem.
 The dual-quotient norm identity says that the induced norms along $j$ are
 precisely those of $\overline B^{\vee}$. Apply the geometric subspace
 inequality to the Hermitian bundles $\overline E^{\vee}$ and

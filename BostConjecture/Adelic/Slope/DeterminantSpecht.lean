@@ -61,7 +61,7 @@ theorem determinantSpechtBundle_slope :
       n * V.slope (Or.inr hcount) hN - (S.v S.Ωinf).toReal *
         (Real.log (ZLattice.covolume (spanLattice t)) /
           finrank K (K ⊗[ℤ] orbitLattice t)) := by
-  letI := Arithmetic.Specht.orbitLattice_baseChange_nontrivial K t
+  let := Arithmetic.Specht.orbitLattice_baseChange_nontrivial K t
   have hr : 0 < finrank K (K ⊗[ℤ] orbitLattice t) := Module.finrank_pos
   have hn : n = finrank K E * k := by
     simpa using Fintype.card_congr (rectangleCoordinates t)
