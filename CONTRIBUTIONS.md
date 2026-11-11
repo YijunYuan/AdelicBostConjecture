@@ -53,7 +53,8 @@ may therefore describe declarations or modules that have since been removed.
   the induction assembly still explicitly assumes the geometric quotient bound.
   These checks certify the imported dependency cone, not the whole upstream
   library. Prefer this dependency's exports over duplicate local ports after
-  comparing exact statements. No new external code was copied for these bridges.
+  comparing exact statements. No ArakelovGeometry source was copied or modified. The additional TauCeti
+  symmetric-power adaptation is recorded below.
 
 ## Mathlib
 
@@ -229,17 +230,34 @@ may therefore describe declarations or modules that have since been removed.
 - Revision: `3c3a32baea963db05c302adeb307b22baae4de78`; upstream Lean 4.36.0-rc2.
 - Authors: The Tau Ceti contributors; license: Apache-2.0.
   [Detailed provenance and license](BostConjecture/ExternalCode/TauCeti/Provenance/SymmetricPower/PROVENANCE.md).
-- Original files: `TauCeti/LinearAlgebra/SymmetricPower/{Basic,Lift,Algebra}.lean`;
-  local root: `BostConjecture/ExternalCode/TauCeti/LinearAlgebra/SymmetricPower/`.
-- Selected declarations: quotient extensionality and maps, `SymmetricPower.lift`,
-  `consMul`, the natural tensor section and factorial composite, homogeneous
-  multiplication and the symmetric-algebra comparison.
-- Adaptations: Lean 4.35 imports and elaboration; unused basis, monomial and
-  WordFiltration APIs omitted. The homogeneous component remains the existing
-  power of the generator range. The algebra port restores the original
-  `TauCeti.SymmetricPower` namespace.
-- Consumers: geometric polynomial polarization, Plucker polarization and
-  degree divisibility for invariant polynomials.
+- Original files: `TauCeti/LinearAlgebra/SymmetricPower/{Basic,Lift,Algebra}.lean`.
+  The generic quotient, tensor and lift APIs remain in
+  `BostConjecture/ExternalCode/TauCeti/LinearAlgebra/SymmetricPower/{Basic,Lift}.lean`.
+  The universe-polymorphic finite-index adaptation is in
+  `BostConjecture/ExternalResults/TauCeti/LinearAlgebra/SymmetricPower/Finite.lean`.
+- The new file adapts the existing selective port at the same pinned revision,
+  retaining the Tau Ceti contributors' copyright and Apache-2.0 license and
+  crediting Yijun Yuan for the adaptation. Its public namespace remains
+  `TauCeti.SymmetricPower`.
+- `FinitePower R M n` abbreviates Mathlib's existing symmetric quotient indexed
+  by `ULift (Fin n)`. Canonical reindexing connects it to ordinary finite tensor
+  powers. The homogeneous target remains `range(SymmetricAlgebra.ι)^n`.
+  The adapted commuting creation operators give the homogeneous equivalence;
+  existing quotient lift, symmetrization, factorial composite and naturality
+  provide the natural section. No second quotient or homogeneous-polynomial
+  representation is introduced.
+- Consumer: `Geometry/Polynomial/Polarization.lean` uses
+  `finiteEquivHomogeneous`, `finiteMk_comp_toTensorPower`, and
+  `finiteToTensorPower_comp_map` to lift invariant polynomials to invariant
+  tensors. Normalization by the factorial occurs in characteristic-zero field
+  consumers. The existing invariant and canonical-pairing route supplies the
+  original-field nonzero-pairing sequences in
+  `Adelic/Geometry/{Nonvanishing,Quotient}.lean`.
+- The previous local `Algebra.lean` had no remaining consumer after this
+  generalization and was removed. Its upstream hash and adaptation history
+  remain in the provenance document. The pinned ArakelovGeometry coordinate
+  multiplication API does not provide the natural symmetric section required
+  by this route.
 
 ## Stacks: alternating-tensor determinant covariance
 

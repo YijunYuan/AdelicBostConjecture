@@ -18,27 +18,37 @@ Immutable URLs are
 `https://raw.githubusercontent.com/TauCetiProject/TauCeti/3c3a32baea963db05c302adeb307b22baae4de78/`
 followed by the original path in the table.
 
-The port lives in `BostConjecture/ExternalCode/TauCeti/LinearAlgebra/SymmetricPower/`.
-`Basic.lean` retains the extensionality/membership, functorial map,
-quotient descent, `toTensorPower`, factorial composite and naturality cone;
-unused finiteness, functor laws, range and injectivity corollaries are omitted.
-`Lift.lean` retains quotient lift and commuting `consMul` and explicitly imports
-Mathlib multilinear currying. `Algebra.lean` retains homogeneous multiplication,
-the commuting creation-operator left inverse, injectivity and homogeneous
-comparison. It retains the original algebra namespace `TauCeti.SymmetricPower`.
-It omits `toSymmetricAlgebra_symmetricPower_apply` and all Basis,
-BasisComparison, monomial and WordFiltration imports. The homogeneous component
-is the existing submodule expression `range(ι)^d`, with its range proof supplied
-by direct submodule-power induction. Lean 4.35 adaptations explicitly import
-finite-product identities, parenthesize submodule coercions in equivalence
-codomains, and use `Module.End.mul_apply`
-for endomorphism multiplication. No second symmetric algebra, symmetric
-power, polynomial or homogeneous-space representation is introduced.
+The retained generic port lives in
+`BostConjecture/ExternalCode/TauCeti/LinearAlgebra/SymmetricPower/{Basic,Lift}.lean`.
+`Basic.lean` retains quotient extensionality, functorial maps, tensor
+symmetrization, the factorial composite and naturality. `Lift.lean` retains
+the generic quotient lift. These modules remain consumers' shared API.
+
+The finite-index homogeneous comparison is adapted in
+`BostConjecture/ExternalResults/TauCeti/LinearAlgebra/SymmetricPower/Finite.lean`.
+Its `FinitePower R M n` is an abbreviation for Mathlib's existing
+`SymmetricPower R (ULift (Fin n)) M`; the lifted index removes the inherited
+restriction that the coefficient ring lie in the smallest universe.
+Canonical tensor reindexing connects this quotient to ordinary `Fin n` tensor
+powers. The homogeneous target remains the existing submodule `range(ι)^n`.
+Commuting creation operators, adapted through the earlier selective port from
+upstream `Algebra.lean`, prove the homogeneous comparison. The original
+`TauCeti.SymmetricPower` namespace, revision and license are retained, with
+Yijun Yuan credited for the universe adaptation. No new quotient, module
+instance or homogeneous-polynomial representation is introduced.
+
+The old local `Algebra.lean` became unreferenced and was removed after its
+consumer moved to this generalized comparison. The table above records
+**original upstream** source hashes, including `Algebra.lean`; it is not an
+inventory of current local files. `Basic.lean` and `Lift.lean` are retained.
+The selected source omits upstream basis, monomial and WordFiltration APIs.
 
 Upstream uses Lean 4.36.0-rc2 and mathlib
 `1b1ccf4b088b32fa3f23f2de1127433254a81e1e`; the target toolchain and pinned
 mathlib remain unchanged. Original upstream build was not verified here.
-Port and consumer verification is recorded in the historical geometry audit.
+Local consumer builds and transitive axiom checks are recorded in the Horizon
+sessions; checking this selected dependency cone does not certify the entire
+upstream repository.
 Current consumers include the normalized symmetric section of
 `BostConjecture.Geometry.polynomialTensorMap`, its equivariance and its
 nonzero-evaluation lift in
