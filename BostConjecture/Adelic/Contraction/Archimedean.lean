@@ -7,6 +7,8 @@ module
 
 public import BostConjecture.Adelic.Specht.Bundle
 public import BostConjecture.Adelic.Slope.DeterminantSpecht
+public import BostConjecture.Adelic.Geometry.Plucker
+public import BostConjecture.Adelic.Contraction.Tensor
 public import BostConjecture.Geometry.Descent.Embedding
 public import ArakelovGeometry.AdelicVectorBundle.Determinant.HermitianBasis
 
@@ -24,7 +26,8 @@ noncomputable section
 
 namespace BostConjecture.Adelic.Contraction
 
-open Module ArakelovGeometry Geometry Specht OAI.Saxl
+open Module ArakelovGeometry Specht OAI.Saxl
+open BostConjecture.Geometry
 open scoped TensorProduct
 
 section WordNorm
@@ -79,6 +82,27 @@ theorem exists_determinantPower_tmul (b : Basis (Fin a) R M)
     determinantPowerCoordinates_basis, TensorProduct.lid_tmul, one_smul]
 
 end DeterminantGenerator
+
+section ScalarTransport
+
+variable {K L E A : Type*} [Field K] [Field L] [Algebra K L]
+  [AddCommGroup E] [Module K E] [AddCommGroup A] {a k : ℕ}
+
+/-- The algebraic determinant-twist identification transports its normalized
+generators to the actual exterior, tensor, and lattice completed fibres. -/
+theorem determinantTwistBaseChangeEquiv_symm_tprod
+    (η : Fin k → ⋀[L]^a (L ⊗[K] E)) (z : L ⊗[ℤ] A) :
+    (determinantTwistBaseChangeEquiv (R := K) (S := L) (M := E) A k a).symm
+      ((⨂ₜ[L] q, η q) ⊗ₜ[L] z) =
+    (TensorProduct.AlgebraTensorModule.distribBaseChange K L
+      (⨂[K] (_ : Fin k), ⋀[K]^a E) (K ⊗[ℤ] A)).symm
+      (((tensorBaseChangeEquiv K L (fun _ : Fin k => ⋀[K]^a E)).symm
+        (⨂ₜ[L] q, (exteriorBaseChangeEquiv K L E a).symm (η q))) ⊗ₜ[L]
+          (TensorProduct.AlgebraTensorModule.cancelBaseChange ℤ K L L A).symm z) := by
+  simp [determinantTwistBaseChangeEquiv, determinantPowerBaseChangeEquiv,
+    exteriorBaseChangeEquiv_eq, ← BostConjecture.Adelic.Geometry.tensorBaseChangeEquiv_eq]
+
+end ScalarTransport
 
 section Completed
 
@@ -171,6 +195,43 @@ theorem determinantPower_norm_orthonormalBasis (k : ℕ) (ω : S.Ω) (hω : ω �
   rw [NormFamily.orthogonalTensor_norm_tprod]
   simp only [AdelicVectorBundle.determinantOfMeasurableBase_toNormFamily,
     hV.determinant_norm_orthonormalBasis V.toNormFamily ω hω b, Finset.prod_const_one]
+
+set_option backward.isDefEq.respectTransparency false in
+/-- Tensoring with the completed orthonormal determinant generator leaves the
+actual Specht norm unchanged. -/
+theorem determinantSpechtBundle_norm_generator {n k : ℕ}
+    (t : Tableau n (rectangle (finrank K E) k))
+    (c : Basis (Fin (finrank K (K ⊗[ℤ] orbitLattice t))) ℤ (orbitLattice t))
+    (ω : S.Ω) (hω : ω ∈ S.Ωinf) :
+    letI := hN ω hω
+    letI := IsRCLikeNormedField.rclike (S.ϕ ω).Completion
+    letI := V.toNormFamily.fibreNormedAddCommGroup ω
+    letI := V.toNormFamily.fibreNormedSpace ω
+    letI := hV.fibreInnerProductSpace ω hω
+    ∀ (b : OrthonormalBasis (Fin (finrank K E)) (S.ϕ ω).Completion
+        ((S.ϕ ω).Completion ⊗[K] E))
+      (x : (S.ϕ ω).Completion ⊗[K] (K ⊗[ℤ] orbitLattice t)),
+      (determinantSpechtBundle V hN hcount k t c).norm ω
+        ((TensorProduct.AlgebraTensorModule.distribBaseChange K (S.ϕ ω).Completion
+          (⨂[K] (_ : Fin k), ⋀[K]^(finrank K E) E) (K ⊗[ℤ] orbitLattice t)).symm
+          (((tensorBaseChangeEquiv K (S.ϕ ω).Completion
+            (fun _ : Fin k => ⋀[K]^(finrank K E) E)).symm
+              (⨂ₜ[(S.ϕ ω).Completion] (_ : Fin k),
+                (exteriorBaseChangeEquiv K (S.ϕ ω).Completion E _).symm
+                  (exteriorPower.ιMulti (S.ϕ ω).Completion _ b)))
+            ⊗ₜ[(S.ϕ ω).Completion] x)) = (latticeNormFamily S t c).norm ω x := by
+  let := hN ω hω
+  let := IsRCLikeNormedField.rclike (S.ϕ ω).Completion
+  let := V.toNormFamily.fibreNormedAddCommGroup ω
+  let := V.toNormFamily.fibreNormedSpace ω
+  let := hV.fibreInnerProductSpace ω hω
+  intro b x
+  change (NormFamily.orthogonalTensorPair _ _ hN
+    (determinantPower_isHermitian V (Or.inr hcount) hN k)
+    (latticeBundle_isHermitian S t c hN hcount)).norm ω _ = _
+  rw [NormFamily.orthogonalTensorPair_norm_tmul_completed,
+    determinantPower_norm_orthonormalBasis V hN hcount hV k ω hω b, one_mul]
+  rfl
 
 end Bundle
 

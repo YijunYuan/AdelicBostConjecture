@@ -174,7 +174,8 @@ of this definition.
 \label{lem:determinant-specht-semistability}
 \source{bost-adelic-2026:page-0026}
 \uses{lem:specht-semistability,cor:group-line-twist-semistability}
-\notready
+\lean{BostConjecture.Adelic.determinantSpechtBundle_isMeanSlopeSemistable_and_dual}
+\leanok
 For every positive-rank Hermitian adelic bundle $\overline A$ of rank $a$
 and every positive multiple $n=ak$, the actual bundle
 $S_{a,n}(\overline A)$ and its dual are mean-slope semistable.
@@ -195,7 +196,8 @@ No semistability of $\overline A$ enters this argument.
 \label{lem:determinant-specht-product-semistability}
 \source{bost-adelic-2026:page-0027}
 \uses{lem:determinant-specht-semistability,lem:independent-group-semistability}
-\notready
+\lean{BostConjecture.Adelic.determinantSpechtBundle_tensor_isMeanSlopeSemistable_and_dual}
+\leanok
 For a finite family of positive-rank Hermitian bundles $\overline A_i$,
 choose positive multiples $n_i=a_i k_i$ of their ranks. Then
 $\bigotimes_i S_{a_i,n_i}(\overline A_i)$ and its dual are mean-slope
@@ -215,7 +217,8 @@ no assertion about irreducibility of the diagonal subgroup is needed.
 \label{lem:determinant-specht-slope}
 \source{bost-adelic-2026:page-0026}
 \uses{lem:determinant-power-slope,lem:specht-degree,lem:induction-tensor-degree}
-\notready
+\lean{BostConjecture.Adelic.determinantSpechtBundle_slope_rectangle}
+\leanok
 For a positive-rank Hermitian adelic bundle $\overline A$ of rank $a$ and
 $n=ak>0$, the auxiliary bundle has slope
 \[
@@ -231,10 +234,57 @@ and the actual rectangular lattice contributes $-m_\infty C_a(k)$.
 Since $ka=n$, their sum is the displayed expression.
 \end{proof}
 
+\begin{lemma}[Slope of the dual auxiliary product]
+\label{lem:determinant-specht-product-dual-slope}
+\source{bost-adelic-2026:page-0027}
+\uses{lem:determinant-specht-slope,lem:finite-tensor-mean-slope,lem:slope-duality}
+\notready
+For a finite nonempty family of positive-rank Hermitian bundles $\overline A_i$
+of ranks $a_i$, and positive multiples $n_i=a_i k_i$, put
+$P=\bigotimes_i S_{a_i,n_i}(\overline A_i)$. Then
+\[
+ \widehat\mu(P^{\vee})
+   =\sum_i\bigl(-n_i\widehat\mu(\overline A_i)
+                       +m_\infty C_{a_i}(k_i)\bigr).
+\]
+\end{lemma}
+\begin{proof}
+Every auxiliary factor is Hermitian of positive rank. The finite tensor
+mean-slope formula, obtained by induction from the binary degree identity,
+and the rectangular auxiliary slope formula give
+\[
+ \widehat\mu(P)=\sum_i\bigl(n_i\widehat\mu(\overline A_i)
+                                  -m_\infty C_{a_i}(k_i)\bigr).
+\]
+The tensor bundle is again Hermitian of positive rank. Duality negates its
+slope. Distributing that negative sign through the finite sum gives the
+assertion.
+\end{proof}
+
+\begin{corollary}[Slope of the canonical pairing target]
+\label{cor:canonical-pairing-target-slope}
+\source{bost-adelic-2026:page-0027}
+\uses{lem:determinant-specht-product-dual-slope,lem:slope-duality}
+\notready
+For the bundle $D_n=\bigotimes_i S_{a_i,n}(\overline E_i^{\vee})$
+defined above,
+\[
+ \widehat\mu(D_n^{\vee})
+   =n\sum_i\widehat\mu(\overline E_i)
+       +m_\infty\sum_i C_{a_i}(n/a_i).
+\]
+\end{corollary}
+\begin{proof}
+The dual bundle $\overline E_i^{\vee}$ is Hermitian of the same rank $a_i$,
+and its slope is $-\widehat\mu(\overline E_i)$. Substitute these equalities
+and the common degree $n_i=n$ in the preceding lemma. Distributivity of
+the finite sums gives the asserted formula.
+\end{proof}
+
 \begin{lemma}[The finite-degree geometric slope bound]
 \label{lem:finite-degree-geometric-slope}
 \source{bost-adelic-2026:page-0026,bost-adelic-2026:page-0027}
-\uses{lem:semistable-contraction-slope,lem:determinant-specht-semistability,lem:determinant-specht-product-semistability,lem:determinant-specht-slope,lem:induction-tensor-degree,lem:slope-duality,lem:local-pairing-contraction}
+\uses{lem:semistable-contraction-slope,lem:determinant-specht-semistability,lem:determinant-specht-product-semistability,lem:determinant-specht-slope,cor:canonical-pairing-target-slope,lem:local-pairing-contraction}
 \notready
 In the preceding setting, if $\Psi_n\neq0$, then
 \[
@@ -257,14 +307,13 @@ The rectangular auxiliary slope formula gives
 \[
  \widehat\mu(B_n)=n\widehat\mu(\overline U)-m_\infty C_s(n/s).
 \]
-For each $i$, the same formulas and Hermitian duality give
+The canonical pairing target slope is
 \[
- \widehat\mu(S_{a_i,n}(\overline E_i^{\vee}))
-   =-n\widehat\mu(\overline E_i)-m_\infty C_{a_i}(n/a_i).
+ \widehat\mu(D_n^{\vee})
+   =n\sum_i\widehat\mu(\overline E_i)+m_\infty\sum_i C_{a_i}(n/a_i).
 \]
-Repeated use of the binary tensor-slope formula computes the slope of $D_n$
-as the sum of these expressions. Duality negates that sum. Substituting both
-computed slopes in the comparison proves the displayed inequality.
+Substituting both computed slopes in the comparison proves the displayed
+inequality.
 \end{proof}
 
 \section{Geometric semistability and quotient norms}
