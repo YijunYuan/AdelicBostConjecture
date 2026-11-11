@@ -3,8 +3,11 @@ Copyright (c) 2026 Yijun Yuan. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Yijun Yuan
 -/
-import ArakelovGeometry.AdelicVectorBundle.Degree.Flag.ImageHN
-import ArakelovGeometry.AdelicVectorBundle.HarderNarasimhan.Hermitian.Uniqueness
+module
+
+public import ArakelovGeometry.AdelicVectorBundle.Degree.Flag.ImageHN
+public import ArakelovGeometry.AdelicVectorBundle.HarderNarasimhan.Hermitian.Uniqueness
+public import ArakelovGeometry.AdelicVectorBundle.HarderNarasimhan.Hermitian.Semistability
 
 /-!
 # Equality in the graded degree bound
@@ -14,6 +17,8 @@ of the grades sum to the ambient degree, every bound is an equality. Together
 with lower bounds for all actual quotient slopes this identifies the HN filtration.
 All grades carry the restriction and quotient norms of the original bundle.
 -/
+
+@[expose] public section
 
 open Module Submodule
 open scoped BigOperators
@@ -26,6 +31,8 @@ variable {K E : Type*} [Field K] [AddCommGroup E] [Module K E]
   (hS : DiscreteMeasurableSpace S.Ω ∨ S.HasCommonCountableDenseSubfield)
   (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
   (hV : V.toNormFamily.IsHermitian hN)
+
+include hV
 
 /-- Equality of the total degree forces equality in every graded lower bound,
 including the grades of rank zero. -/
@@ -45,11 +52,15 @@ theorem filtrationGraded_degree_eq_of_lower_bounds
   have hdegree (i : Fin n) :
       (V.filtrationGraded P (a i) hS).degree hS hN =
         (V.flagQuotientOfMeasurableBase U hS i).degree hS hN := by
-    unfold filtrationGraded flagQuotientOfMeasurableBase
-    rw [hlevel i, hright i]
+    have hp : (P (a i), filtrationRightLimit P (a i)) =
+        (U i.succ, U i.castSucc) := Prod.ext (hlevel i) (hright i)
+    have he := congrArg (fun p : Submodule K E × Submodule K E ↦
+      ((V.restrictOfMeasurableBase p.1 hS).quotientOfMeasurableBase
+        (p.2.comap p.1.subtype) hS).degree hS hN) hp
+    exact he
   have hrank (i : Fin n) : finrank K (FiltrationGraded P (a i)) =
       finrank K ((U i.succ) ⧸ (U i.castSucc).comap (U i.succ).subtype) := by
-    unfold FiltrationGraded
+    unfold FiltrationGraded filtrationRightLimit
     rw [hlevel i, hright i]
   have hle (i : Fin n) : a i * (finrank K
       ((U i.succ) ⧸ (U i.castSucc).comap (U i.succ).subtype) : ℝ) ≤
@@ -98,8 +109,7 @@ theorem hermitianHNFiltration_eq_of_graded_quotient_bounds
         P hP hbot htop hleft hlower htotal t]
       exact mul_div_cancel_right₀ t (Nat.cast_ne_zero.mpr hr)
     refine Or.inr ⟨?_, hs⟩
-    apply ((V.filtrationGraded P t hS).
-      isMeanSlopeSemistable_iff_slope_le_quotient_of_isHermitian
+    apply ((V.filtrationGraded P t hS).isMeanSlopeSemistable_iff_slope_le_quotient_of_isHermitian
         hS hN (hV.filtrationGraded P t) hp).mpr
     simpa only [hs] using hquot t
 
