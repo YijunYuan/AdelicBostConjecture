@@ -1,0 +1,422 @@
+\chapter{Tensor filtrations and the adelic Bost theorem}
+
+Throughout this chapter, $S=(K,(\Omega,\mathcal A,\nu),\phi)$ is a proper
+adelic curve. The field $K$ has characteristic zero. We assume either that
+$\mathcal A$ is discrete or that $K$ has a common countable dense subfield
+for its completed absolute values. In particular these hypotheses hold when
+$K$ is countable. At Archimedean places the absolute values are the usual
+real or complex ones. All bundles are finite-dimensional Hermitian adelic
+vector bundles; their norms are on the completed fibres. Restrictions and
+quotients always carry their actual induced norms. The notation
+$\overline E\otimes\overline F$ means Hilbert tensor norms at Archimedean
+places and $\varepsilon$-tensor norms elsewhere.
+
+Write $r(E)=\dim_K E$, $\widehat{\deg}(\overline E)$ for degree, and
+$\widehat\mu(\overline E)=\widehat{\deg}(\overline E)/r(E)$ for positive
+rank. Semistability means that every nonzero subspace has slope at most
+the ambient slope; equivalently, every nonzero quotient has slope at least
+the ambient slope. Write $\mathcal H_E$ for the weighted
+Harder--Narasimhan filtration and $\widehat\mu_{\max}(\overline E)$ for its
+largest weight when $E\ne0$. We use the Hermitian degree identities
+\[
+ \widehat{\deg}(\overline E)=
+ \widehat{\deg}(\overline U)+\widehat{\deg}(\overline E/\overline U),
+ \qquad
+ \widehat{\deg}(\overline E\otimes\overline F)=
+ r(F)\widehat{\deg}(\overline E)+r(E)\widehat{\deg}(\overline F),
+\]
+and uniqueness of the filtration with semistable grades whose slopes are
+their strictly decreasing weights. These are the Hermitian slope and HN
+facts recalled in Section 2 of this paper \cite{bost2026}.
+
+\begin{definition}[Filtrations and secondary weights]
+\label{def:induction-filtrations}
+\source{bost-adelic-2026:page-0028,bost-adelic-2026:page-0029}
+A finite real filtration $P$ is decreasing, exhaustive, separated,
+left-continuous, and has finitely many jumps. Set
+\[
+ P^{>t}E=\sum_{s>t}P^sE,\qquad
+ E_t=\operatorname{gr}_P^t E=P^tE/P^{>t}E,
+ \qquad d(P)=\sum_t t\,r(E_t).
+\]
+For $E\ne0$ put $e(P)=d(P)/r(E)$. For an arbitrary family of subspaces
+the same grade notation means $P^tE/(P^tE\cap P^{>t}E)$.
+The filtration on the zero space is identically zero and has weighted
+degree zero. The image filtration under a surjection $q$ is $P_Q^t=q(P^t)$.
+The tensor filtration is
+\[
+ (P\otimes R)^v(E\otimes F)=\sum_{t+u\ge v}P^tE\otimes R^uF.
+\]
+On adapted bases with weights $(x_i)$ and $(y_j)$ its weights are
+$(x_i+y_j)_{i,j}$. Two finite filtrations on one space have a common
+adapted basis. If their weights on that basis are $x_i,y_i$, set
+$\langle P,R\rangle=r(E)^{-1}\sum_i x_i y_i$ and
+$\|P\|^2=\langle P,P\rangle$. A filtration is normalized if $e(P)=0$.
+A lift of the grade HN filtrations of $P$ is obtained by lifting an
+HN-adapted basis of each $E_t$ to $P^tE$, retaining its HN weights as
+secondary weights. The lifted basis is adapted to both filtrations.
+\end{definition}
+
+\begin{lemma}[Finite contracting images of one slope]
+\label{lem:finite-contracting-images}
+\lean{ArakelovGeometry.AdelicVectorBundle.degree_ge_of_finite_same_slope_spanning_contractions, ArakelovGeometry.AdelicVectorBundle.slope_quotient_ge_of_finite_same_slope_spanning_contractions}
+Let finitely many Hermitian bundles $\overline C_i$ be either zero or
+semistable of slope $a$. Let $f_i:C_i\to B$ be contractions at every
+completed place whose images span $B$. Then
+\[
+ \widehat{\deg}(\overline B)\ge a r(B).
+\]
+Every nonzero quotient of $\overline B$, with its quotient norms, has
+slope at least $a$.
+\end{lemma}
+\begin{proof}
+Order the family and set $B_j=\sum_{i\le j}f_i(C_i)$, with $B_0=0$.
+The map $C_j\to B_j/B_{j-1}$ is surjective and contracting for the actual
+subquotient norms. Its quotient norm is at least the target norm.
+If its target is nonzero, semistability gives slope at least $a$ for
+the quotient-norm bundle, and the contracting identity to the target
+cannot decrease degree. Thus
+$\widehat{\deg}(\overline B_j/\overline B_{j-1})\ge
+a(r(B_j)-r(B_{j-1}))$. For a zero target both sides are zero.
+Summing the degree identities along the flag gives the assertion.
+Composing all the maps with a quotient map of $B$ preserves contraction
+and spanning, so the same argument proves the quotient assertion.
+\end{proof}
+
+\begin{lemma}[Canonical tensor components]
+\label{lem:tensor-grade-components}
+\uses{def:induction-filtrations}
+\source{bost-adelic-2026:page-0029}
+\lean{ArakelovGeometry.NormFamily.tensorFiltrationGradedPair_pushforward_norm_le, Submodule.iSup_range_tensorFiltrationGradedQuotientPair}
+Let $P,R$ be finite filtrations on $E,F$, and let
+$q:E\otimes F\twoheadrightarrow Q$ have the original tensor quotient norms.
+For $t+u=\gamma$ the canonical map
+\[
+ E_t\otimes F_u\longrightarrow Q_\gamma,
+ \qquad Q_\gamma=\operatorname{gr}_{(P\otimes R)_Q}^{\gamma}Q,
+\]
+is contracting at every completed place. The images of these maps span
+$Q_\gamma$. This includes $q=\operatorname{id}$.
+\end{lemma}
+\begin{proof}
+The map sends the tensor of classes of $x\in P^tE$ and $y\in R^uF$
+to the class of $q(x\otimes y)$. Changing $x$ or $y$ by a vector of
+strictly higher weight changes its image by a vector of weight strictly
+greater than $\gamma$, so the map is well defined.
+At an Archimedean place, the quotient maps defining $E_t,F_u$ have
+orthogonal isometric sections. Their Hilbert tensor product is isometric;
+the subsequent restriction and quotient maps are contracting.
+At a non-Archimedean place, for every $c>1$ the finite-dimensional quotient
+maps admit linear sections of operator norm at most $c$, by choosing
+arbitrarily nearly orthogonal quotient bases and their nearly minimal lifts.
+The $\varepsilon$-tensor map of these sections has norm at most $c^2$.
+The same subsequent maps are contracting. Since this holds for every
+$c>1$, the canonical component has norm at most one. Zero grades give
+the zero map and require no section.
+Finally choose adapted bases for $P,R$. Tensor basis vectors of weight
+at least $\gamma$ span $(P\otimes R)^\gamma$; those of weight greater
+than $\gamma$ vanish in the grade. The remaining classes, of weight
+exactly $\gamma$, are images of the displayed component maps and span
+the quotient grade.
+\end{proof}
+
+\begin{lemma}[Tensor HN identification]
+\label{lem:tensor-hn-identification}
+\uses{lem:finite-contracting-images,lem:tensor-grade-components}
+\source{bost-adelic-2026:page-0029}
+\lean{ArakelovGeometry.AdelicVectorBundle.hermitianHNFiltration_orthogonalTensorPair_of_semistable_grades}
+Suppose that the tensor product of every pair of nonzero HN grades of
+$\overline E,\overline F$ is semistable. Then
+\[
+ \mathcal H_{E\otimes F}=\mathcal H_E\otimes\mathcal H_F.
+\]
+Zero-rank factors are allowed, with the zero-filtration convention.
+\end{lemma}
+\begin{proof}
+Put $P=\mathcal H_E\otimes\mathcal H_F$. Every nonzero source
+$E_t\otimes F_u$ of a component of weight $\gamma=t+u$ is semistable
+of slope $\gamma$, by the hypothesis and the tensor degree formula.
+The two preceding lemmas give
+\[
+ \widehat{\deg}(\operatorname{gr}_P^\gamma(\overline E\otimes\overline F))
+ \ge \gamma\,r(\operatorname{gr}_P^\gamma(E\otimes F)),
+\]
+and the corresponding lower bound $\gamma$ for every nonzero quotient
+of that actual grade. Choose HN-adapted bases with weights $x_i,y_j$.
+The sum of the right sides is
+\[
+ \sum_{i,j}(x_i+y_j)=r(F)\widehat{\deg}(\overline E)
+  +r(E)\widehat{\deg}(\overline F)
+  =\widehat{\deg}(\overline E\otimes\overline F).
+\]
+The sum of the left sides is the same by degree additivity. These are
+finite sums of inequalities, so each is an equality. Every nonzero grade
+therefore has slope $\gamma$, and its quotient bounds prove semistability.
+The weights strictly decrease along its nonzero grades; HN uniqueness
+gives the identity. If a factor is zero, both filtrations are identically zero.
+This proof uses only the individual component contractions, rather than
+the contraction of the whole orthogonal sum asserted in (44) of this paper.
+\end{proof}
+
+\begin{lemma}[HN images and degree]
+\label{lem:finite-hn-image-degree}
+\uses{lem:finite-contracting-images,def:induction-filtrations}
+\source{bost-adelic-2026:page-0029,bost-adelic-2026:page-0030}
+\lean{ArakelovGeometry.AdelicVectorBundle.finsum_hermitianHN_imageFiltration_le_degree}
+Let $f_i:C_i\to B$ be a finite family of contractions with spanning
+images. Define $H^sB=\sum_i f_i(\mathcal H_{C_i}^s C_i)$. Then
+$H$ is a finite filtration and $d(H)\le\widehat{\deg}(\overline B)$.
+\end{lemma}
+\begin{proof}
+Exhaustivity, separation and left continuity follow by taking common
+bounds for the finitely many source filtrations. Moreover
+$H^{>s}=\sum_i f_i(\mathcal H_{C_i}^{>s})$, by interchanging the sums.
+Consequently the canonical maps from the HN grades at $s$ jointly span
+$\operatorname{gr}_H^s B$ and remain contracting for the actual
+subquotient norms. Each nonzero source grade is semistable of slope $s$.
+The finite-image lemma bounds the degree of this grade below by its
+rank times $s$. Sum these inequalities over the finitely many nonzero
+grades and use degree additivity.
+\end{proof}
+
+\begin{lemma}[One-sided HN variation]
+\label{lem:component-hn-variation}
+\uses{lem:finite-hn-image-degree,lem:tensor-grade-components,def:induction-filtrations}
+\source{bost-adelic-2026:page-0030,bost-adelic-2026:page-0031}
+\lean{ArakelovGeometry.AdelicVectorBundle.tensorFiltrationQuotient_eventual_hn_upper}
+Let $q:E\otimes F\twoheadrightarrow Q\ne0$, let $P,R$ be finite
+filtrations, and choose lifts of their grade HN filtrations with common
+adapted bases. Suppose all pairs of grades have rank sum strictly less
+than $r(E)+r(F)$ and the tensor HN identity holds for every such pair.
+Let $P(\varepsilon),R(\varepsilon)$ replace primary weights $x$ by
+$x+\varepsilon y$, where $y$ is the chosen secondary weight. In each
+primary quotient grade $Q_\gamma$, let $H_\gamma$ be the sum of the
+images of the tensor HN filtrations of $E_t\otimes F_u$, $t+u=\gamma$.
+Put $r=r(Q)$ and $\delta=r^{-1}\sum_\gamma d(H_\gamma)$. Then
+\[
+ \delta\le\widehat\mu(\overline Q),\qquad
+ e((P(\varepsilon)\otimes R(\varepsilon))_Q)
+ \le e((P\otimes R)_Q)+\varepsilon\delta
+\]
+for all sufficiently small $\varepsilon>0$.
+\end{lemma}
+\begin{proof}
+The tensor HN hypothesis identifies each source secondary filtration
+with its actual HN filtration. Apply the preceding lemma to the canonical
+components in each $Q_\gamma$. It gives
+$d(H_\gamma)\le\widehat{\deg}(\overline Q_\gamma)$.
+Summing along the primary quotient flag and dividing by $r$ proves
+the first inequality.
+
+For the second inequality, write $z$ for the tensor basis vectors and
+$p_z,s_z$ for their primary and secondary weights. Let $\mathcal B$ be
+the finite nonempty family of $r$-element subsets whose images form a
+basis of $Q$. For arbitrary weights $w_z$, the weighted degree of the
+image filtration is $\max_{I\in\mathcal B}\sum_{z\in I}w_z$.
+Indeed, list the distinct weights $c_1>\cdots>c_h$, and let $d_i$ be
+the dimension of the span of images of weights at least $c_i$.
+For any image basis, its number $n_i$ of such vectors satisfies $n_i\le d_i$,
+so its total weight is at most
+$c_h r+\sum_{i<h}(c_i-c_{i+1})d_i$.
+Successively extending a basis along these spans attains this bound,
+which is exactly the filtration degree.
+
+Put $\alpha_I=\sum_{z\in I}p_z$, $\beta_I=\sum_{z\in I}s_z$,
+$M=\max_I\alpha_I$, and $\mathcal B_0=\{I:\alpha_I=M\}$.
+Finiteness implies that, for sufficiently small $\varepsilon>0$,
+only $I\in\mathcal B_0$ maximize $\alpha_I+\varepsilon\beta_I$:
+if there are other sets, take the minimum positive primary gap $\Delta$
+and choose $\varepsilon<\Delta/(2\max_I|\beta_I|+1)$.
+Every $I\in\mathcal B_0$ attains all the preceding primary rank bounds.
+Its vectors of each primary weight $\gamma$ therefore give a basis of
+$Q_\gamma$. The class of a tensor vector of secondary weight $s_z$
+belongs to $H_\gamma^{s_z}$, by the definition of the lifts and the
+component images. In any filtered space, the sum of assigned weights
+of independent vectors lying in their assigned cuts is at most the
+filtration degree: at each threshold their number is at most the
+dimension of the cut, and the same telescoping formula proves the bound.
+Applying it in every primary grade gives
+$\beta_I\le\sum_\gamma d(H_\gamma)=r\delta$.
+The maximum formula now gives the desired inequality after division by $r$.
+This is the one-sided form of Lemma 7.2 needed below; it does not assert
+the stronger affine identity or a contraction from an orthogonal direct sum.
+\end{proof}
+
+\begin{lemma}[Unstable quotient bound]
+\label{lem:unstable-quotient-bound}
+\uses{lem:component-hn-variation,def:induction-filtrations}
+\source{bost-adelic-2026:page-0031,bost-adelic-2026:page-0032}
+\lean{ArakelovGeometry.AdelicVectorBundle.slope_sum_le_tensor_quotient_of_not_geometricallySemistable}
+Let $\overline E,\overline F$ be positive-rank semistable Hermitian
+bundles and $q:E\otimes F\twoheadrightarrow Q\ne0$ a quotient with
+its original tensor quotient norms. Assume that for every pair of
+real-indexed families $P,R$ of subspaces and every $t,u$ with
+$r(E_t)+r(F_u)<r(E)+r(F)$, the actual tensor HN identity holds on
+$E_t\otimes F_u$. If the quotient is not geometrically semistable,
+then
+\[
+ \widehat\mu(\overline Q)\ge
+ \widehat\mu(\overline E)+\widehat\mu(\overline F).
+\]
+Here geometric semistability means semistability of the dual Pl\"ucker
+point of $Q^\vee\subset(E\otimes F)^\vee$ for the product of the
+special linear groups, after passage to an algebraic closure.
+\end{lemma}
+\begin{proof}
+The geometric instability theorem supplies an original-field pair of
+normalized finite filtrations $P,R$, not both trivial, minimizing
+\[
+ \Theta(P,R)=\frac{e((P\otimes R)_Q)}
+ {\sqrt{\|P\|^2+\|R\|^2}}.
+\]
+Write $L=\sqrt{\|P\|^2+\|R\|^2}>0$ and $c=\Theta(P,R)<0$.
+At least one normalized filtration has more than one nonzero grade;
+otherwise both have their sole weight zero. Each of its grades has
+rank strictly less than the whole factor. The other factor's grades
+have rank at most that factor's rank. Thus every grade pair has
+strictly smaller rank sum, including pairs with a zero grade.
+
+Choose grade HN lifts $L_E,L_F$. Degree additivity gives
+$e(L_E)=\widehat\mu(\overline E)$ and
+$e(L_F)=\widehat\mu(\overline F)$. Set
+$\beta=\langle P,L_E\rangle+\langle R,L_F\rangle$.
+For decreasing primary weights $t_1>\cdots>t_h$, put
+$U_i=P^{t_i}E$, $U_0=0$, and $m=r(E)$. Then
+\[
+\begin{split}
+ m\langle P,L_E\rangle
+ &=\sum_i t_i\widehat{\deg}(\overline U_i/\overline U_{i-1})\\
+ &=t_h\widehat{\deg}(\overline E)
+   +\sum_{i<h}(t_i-t_{i+1})\widehat{\deg}(\overline U_i)\\
+ &\le\widehat\mu(\overline E)
+   \left(t_hm+\sum_{i<h}(t_i-t_{i+1})r(U_i)\right)=0.
+\end{split}
+\]
+The inequality is semistability; the last equality is normalization.
+The identical calculation for $F$ gives $\beta\le0$.
+
+Subtract the two mean slopes from the corresponding lift weights and
+perturb in these centered directions. The pair remains normalized.
+The preceding variation lemma gives a number
+$\delta\le\widehat\mu(\overline Q)$ and, writing
+$a=\widehat\mu(\overline E)+\widehat\mu(\overline F)$, an upper bound
+$e((P\otimes R)_Q)+\varepsilon(\delta-a)$ for the perturbed numerator.
+The perturbed denominator is
+$L+\varepsilon\beta/L+o(\varepsilon)$, since centering the lifts does
+not change their inner products with normalized $P,R$.
+It stays positive for small $\varepsilon$. Minimality yields
+\[
+ c\bigl(L+\varepsilon\beta/L+o(\varepsilon)\bigr)
+ \le cL+\varepsilon(\delta-a).
+\]
+Subtract $cL$, divide by $\varepsilon>0$, and take the limit. Thus
+$\delta-a\ge c\beta/L\ge0$, which proves the assertion.
+\end{proof}
+
+\begin{proposition}[Assembly from the geometric quotient inequality]
+\label{prop:conditional-tensor-hn-assembly}
+\uses{lem:unstable-quotient-bound,lem:tensor-hn-identification}
+\source{bost-adelic-2026:page-0031,bost-adelic-2026:page-0032}
+\lean{ArakelovGeometry.AdelicVectorBundle.tensorHN_and_semistable_of_geometric_quotient_bound}
+Assume the following inequality: for every pair of positive-rank
+semistable Hermitian bundles and every nonzero geometrically semistable
+quotient of their tensor product, with the original quotient norms,
+\[
+ \widehat\mu(\overline Q)\ge
+ \widehat\mu(\overline E)+\widehat\mu(\overline F).
+\]
+Then tensor HN compatibility holds for all pairs of Hermitian bundles,
+including zero-rank bundles, and the tensor product of two semistable
+bundles is semistable.
+\end{proposition}
+\begin{proof}
+Use strong induction on a bound $n$ for the sum of the two ranks,
+proving both assertions simultaneously for all pairs of rank sum at most $n$.
+First fix a semistable pair of such rank sum. For each nonzero quotient,
+the geometrically semistable case follows from the displayed assumption.
+In the other case use the unstable quotient lemma. Its hypothesis holds
+for every pair of arbitrary subspace families: whenever the grade ranks
+have sum smaller than the fixed pair's rank sum, they have sum smaller
+than $n$, so the HN identity is the first conclusion of the induction
+hypothesis for those actual subquotient bundles. The quotient inequality
+and the tensor slope formula therefore prove semistability.
+
+Next take any pair with rank sum at most $n$. Each nonzero HN grade is
+semistable, and a pair of grades has rank sum at most $n$. The semistable
+assertion just proved, which was uniform over all pairs of this bound,
+applies even when both grades have full rank. Tensor HN identification
+now proves the other assertion. If a factor has rank zero, every tensor
+grade is zero and the identity holds by the zero-filtration convention.
+For $n=0,1$ there are no pairs of positive-rank semistable factors, so
+this also proves the initial induction steps. No smaller-rank hypothesis
+is retained in the conclusion.
+\end{proof}
+
+\begin{theorem}[Tensor HN compatibility]
+\label{thm:tensor-hn-compatibility}
+\uses{prop:conditional-tensor-hn-assembly,thm:geometric-quotient-bound}
+\source{bost-adelic-2026:page-0032}
+\notready
+For Hermitian adelic bundles on $S$,
+$\mathcal H_{E\otimes F}=\mathcal H_E\otimes\mathcal H_F$.
+The tensor product of positive-rank semistable bundles is semistable.
+\end{theorem}
+\begin{proof}
+The geometric quotient inequality supplies exactly the assumption of
+the preceding proposition, for the original quotient norms. Apply that
+proposition to the given bundles.
+\end{proof}
+
+\begin{lemma}[Maximal slope from the actual tensor filtration]
+\label{lem:maximal-slope-from-tensor-hn}
+\uses{def:induction-filtrations}
+\source{bost-adelic-2026:page-0032}
+\lean{ArakelovGeometry.AdelicVectorBundle.maximalSlope_orthogonalTensorPair_of_hnFiltration_eq}
+If $E,F\ne0$ and $\mathcal H_{E\otimes F}=\mathcal H_E\otimes\mathcal H_F$,
+then
+\[
+ \widehat\mu_{\max}(\overline E\otimes\overline F)=
+ \widehat\mu_{\max}(\overline E)+\widehat\mu_{\max}(\overline F).
+\]
+\end{lemma}
+\begin{proof}
+Let $a,b$ be the largest HN weights of the two factors. Every weight of
+an adapted basis is at most the corresponding largest weight. Thus the
+tensor filtration has zero cut at every $v>a+b$. By the asserted HN
+identity, its largest HN slope is at most $a+b$.
+For the reverse inequality, the first HN subspaces $E_1,F_1$ have
+slopes $a,b$. Their tensor product has slope $a+b$, and its natural
+inclusion into $E\otimes F$ is contracting for the stated tensor norms.
+Its image, with induced norms, has degree at least that of
+$\overline E_1\otimes\overline F_1$. Hence the maximal slope of the
+ambient tensor product is at least $a+b$. The ranks of $E_1,F_1$ are
+positive, so this supplies a nonzero subspace as required.
+\end{proof}
+
+\begin{theorem}[Adelic Bost theorem]
+\label{thm:bost-adelic}
+\uses{thm:tensor-hn-compatibility,lem:maximal-slope-from-tensor-hn}
+\source{bost-adelic-2026:page-0001,bost-adelic-2026:page-0032}
+\notready
+Let $K$ be countable of characteristic zero and $S$ proper, with the
+usual Archimedean absolute values. For every pair of positive-rank
+Hermitian adelic vector bundles, with Hilbert/\(\varepsilon\) tensor norms,
+\[
+ \widehat\mu_{\max}(\overline E\otimes\overline F)=
+ \widehat\mu_{\max}(\overline E)+\widehat\mu_{\max}(\overline F).
+\]
+For every finite nonempty family of positive-rank factors the maximal
+slope of its tensor product is the sum of their maximal slopes. In
+particular a tensor product of semistable factors is semistable.
+\end{theorem}
+\begin{proof}
+Countability supplies the common countable dense subfield hypothesis
+by taking $K$ itself. Apply tensor HN compatibility, then the preceding
+maximal-slope lemma. Iterate the binary equality along any parenthesized
+finite tensor product; its intermediate ranks are positive products of
+positive ranks. For semistable factors their maximal slopes equal their
+mean slopes. The tensor mean-slope formula identifies the sum with the
+mean slope of the product. Equality of maximal and mean slopes is
+semistability. For the empty family, if included, the tensor unit has
+degree and slope zero and is a line, giving the same convention.
+\end{proof}
