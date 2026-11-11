@@ -1,0 +1,444 @@
+\chapter{Local determinant and Specht contractions}
+
+Let $S=(K,\Omega,\mathcal A,\nu,\phi)$ be a proper adelic curve over a
+countable field of characteristic zero. Write $K_\omega$ for the completion
+of $K$ at $\omega$. At an Archimedean place its absolute value is the usual
+real or complex absolute value. All vector spaces below have finite dimension.
+The fibre of a bundle $\overline A$ is $A_\omega=K_\omega\otimes_K A$,
+with its prescribed norm. Duals carry operator norms, subspaces induced norms,
+and tensor products Hilbert norms at infinity and epsilon norms elsewhere.
+
+For $a,k\geq1$ and $d=ak$, let $L_{a,d}$ be the rectangular integral Specht
+lattice of Definition~\ref{def:constant-specht}. It sits in the free word
+module on the words of length $d$ in $a$ letters. Each word occurring in it
+contains each letter $k$ times. Its Archimedean metric is the restriction of
+the metric making all words orthonormal; at other places its norm is the
+maximum of its coordinates in an integral lattice basis. Put
+\[
+ S_{a,d}(\overline A)=(\det\overline A)^{\otimes k}
+                   \otimes\overline L^S_{a,d},\qquad a=\dim_K A.
+\]
+The determinant norm at infinity is the Gram determinant norm. At a finite
+place, for $\eta\neq0$ it is
+\[
+ \|\eta\|_{\det A}=\inf_{x_1\wedge\cdots\wedge x_a=\eta}
+                         \prod_{i=1}^a\|x_i\|,
+\]
+and the norm of zero is zero. These are the determinant norms of
+\cite[Section 2.3]{bost2026}. This chapter expands the local estimates in
+\cite[Lemma 6.1 and the proof of Theorem 6.2]{bost2026}, including the
+trivially valued case and the identifications on completed fibres.
+
+\section{Ultrametric bases and determinant norms}
+
+\begin{lemma}[Nearly orthogonal bases]
+\label{lem:contraction-nearly-orthogonal-basis}
+\source{bost-adelic-2026:page-0025}
+\lean{BostConjecture.Adelic.Contraction.exists_basis_coord_bound}
+Let $F$ be a complete non-Archimedean valued field, possibly trivially valued,
+and let $A$ be an ultrametric normed $F$-space of dimension $a$. For every
+$0<\alpha<1$ there is a basis $b_1,\ldots,b_a$ such that
+\[
+ \alpha\max_i |z_i|\|b_i\|
+ \leq\Big\|\sum_i z_i b_i\Big\|
+ \leq\max_i |z_i|\|b_i\|.
+\]
+\end{lemma}
+\begin{proof}
+Induct on $a$. The zero-dimensional assertion has empty maximum zero, and
+the one-dimensional assertion follows from homogeneity. For $a>1$, choose
+$\alpha<\beta<1$ and a hyperplane $U$. A finite-dimensional subspace of a
+normed space over a complete valued field is closed, so for any $v\notin U$
+the distance $\delta=\inf_{u\in U}\|v-u\|$ is positive. Replace $v$ by
+$v-u_0$ with $\|v-u_0\|<\delta/\beta$. This does not change its coset or
+$\delta$, and gives $\delta\geq\beta\|v\|$.
+By induction choose an $(\alpha/\beta)$-orthogonal basis of $U$.
+For $x=u+tv$, the quotient norm gives
+$\|x\|\geq |t|\delta\geq\beta|t|\|v\|$. The ultrametric inequality
+then gives $\|u\|\leq\max(\|x\|,|t|\|v\|)\leq\beta^{-1}\|x\|$.
+Every weighted coordinate of $u$ is at most
+$(\beta/\alpha)\|u\|\leq\alpha^{-1}\|x\|$, and the last weighted
+coordinate $|t|\|v\|$ is also at most $\alpha^{-1}\|x\|$.
+This proves the lower bound. The upper bound is the ultrametric triangle
+inequality. The construction uses an infimum over vectors, not a scalar
+of a prescribed absolute value, so it applies to a trivial valuation.
+\end{proof}
+
+\begin{lemma}[Weighted determinant estimate]
+\label{lem:contraction-weighted-determinant}
+\source{bost-adelic-2026:page-0025}
+\lean{BostConjecture.Adelic.Contraction.prod_mul_norm_basis_det_le}
+Let $b$ be a basis of a normed space over a non-Archimedean valued field.
+Write $b_i^*$ for its coordinate functionals. If $w_i>0$ and
+$w_i|b_i^*(x)|\leq\|x\|$ for every $i,x$, then
+\[
+ \left(\prod_i w_i\right)
+ \left|\det\bigl(b_i^*(x_j)\bigr)_{i,j}\right|
+ \leq\prod_j\|x_j\|.
+\]
+\end{lemma}
+\begin{proof}
+Expand the determinant as a signed sum over permutations. The ultrametric
+inequality bounds its absolute value by the largest absolute value of a
+summand. For a permutation $\sigma$, multiplying the coordinate bounds for
+$b_i^*(x_{\sigma(i)})$ gives the asserted bound on that summand, since
+$\prod_i\|x_{\sigma(i)}\|=\prod_j\|x_j\|$.
+The signs have absolute value one. There is no factorial factor.
+\end{proof}
+
+\begin{lemma}[The completed determinant lower bound]
+\label{lem:contraction-completed-determinant}
+\uses{lem:contraction-weighted-determinant}
+\source{bost-adelic-2026:page-0025}
+\lean{BostConjecture.Adelic.Contraction.determinant_norm_basis_ge}
+Fix a non-Archimedean place $\omega$ and a basis $b$ of $A_\omega$.
+If $\alpha>0$ and
+$\alpha\|b_i\||b_i^*(x)|\leq\|x\|$ for all $i,x$, then, with
+$\eta_b=b_1\wedge\cdots\wedge b_a$,
+\[
+ \|\eta_b\|_{\det A,\omega}\geq
+                  \alpha^a\prod_i\|b_i\|_\omega.
+\]
+Here $\eta_b$ is viewed in $K_\omega\otimes_K\det A$ through the canonical
+exterior-power base-change isomorphism.
+\end{lemma}
+\begin{proof}
+For any $x_1\wedge\cdots\wedge x_a=\eta_b$, its determinant of
+coordinates in $b$ is one. Apply the weighted estimate with
+$w_i=\alpha\|b_i\|>0$. It gives
+$\alpha^a\prod_i\|b_i\|\leq\prod_i\|x_i\|$.
+Taking the infimum over these decompositions proves the result for the
+specified determinant norm. The exterior base-change map sends a wedge of
+completed vectors to that same wedge, so this computation is on the actual
+completed determinant line.
+\end{proof}
+
+\section{Epsilon tensors and balanced words}
+
+For a finite nonempty family of normed $F$-spaces $A_j$, define
+\[
+ \|z\|_\varepsilon=
+ \sup_{\ell_j\neq0}
+ \frac{|(\bigotimes_j\ell_j)(z)|}{\prod_j\|\ell_j\|_*}.
+\]
+We use the convention that the tensor of an empty family is $F$ with its
+absolute value. The next two lemmas justify the tensor operations used below
+without requiring an orthogonal basis to exist exactly.
+
+\begin{lemma}[Coordinate estimates for epsilon tensors]
+\label{lem:contraction-epsilon-coordinates}
+\uses{lem:contraction-nearly-orthogonal-basis}
+\source{bost-adelic-2026:page-0005,bost-adelic-2026:page-0026}
+\notready
+Let $F$ be complete and non-Archimedean and let $b_{j,i}$ be an
+$\alpha_j$-orthogonal basis of $A_j$, with $0<\alpha_j\leq1$.
+For $z=\sum_{\mathbf i}c_{\mathbf i}\bigotimes_j b_{j,i_j}$, put
+$M(z)=\max_{\mathbf i}|c_{\mathbf i}|\prod_j\|b_{j,i_j}\|$.
+Then
+\[
+ \left(\prod_j\alpha_j\right)M(z)\leq\|z\|_\varepsilon\leq M(z).
+\]
+In particular, tensoring with a normed line multiplies the norm:
+$\|e\otimes x\|_\varepsilon=\|e\|\|x\|$.
+\end{lemma}
+\begin{proof}
+For any tuple of functionals, evaluate the displayed expansion and apply the
+ultrametric inequality and
+$|\ell_j(b_{j,i_j})|\leq\|\ell_j\|_*\|b_{j,i_j}\|$.
+Taking the supremum proves the upper bound. For a fixed multi-index use the
+coordinate functionals $b_{j,i_j}^*$, whose norms are at most
+$(\alpha_j\|b_{j,i_j}\|)^{-1}$. Their tensor evaluates $z$ to
+$c_{\mathbf i}$. This gives the lower bound for every multi-index.
+For the last assertion fix $e\neq0$. The coordinate functional on its line
+has norm $\|e\|^{-1}$. In any finite-dimensional ultrametric space,
+$\sup_{\ell\neq0}|\ell(x)|/\|\ell\|_*=\|x\|$: the upper bound is the
+definition of the dual norm, and an $\alpha$-orthogonal basis supplies a
+coordinate functional giving at least $\alpha\|x\|$; let $\alpha$ tend to
+one. Applying this observation in the defining supremum for $e\otimes x$
+proves equality. If $e=0$ or $x=0$, both sides vanish.
+\end{proof}
+
+\begin{lemma}[Tensor contractions, regrouping, and evaluation]
+\label{lem:contraction-tensor-calculus}
+\uses{lem:contraction-epsilon-coordinates}
+\source{bost-adelic-2026:page-0005,bost-adelic-2026:page-0027}
+\notready
+For finite-dimensional real or complex Hilbert spaces with Hilbert tensor
+norms, and for finite-dimensional ultrametric spaces over a complete valued
+field with epsilon tensor norms, tensor products of contractions are
+contractions. Canonical permutations and regroupings are isometries, and
+the canonical tensor-duality map
+\[
+ \bigotimes_j A_j^\vee\longrightarrow(\bigotimes_j A_j)^\vee
+\]
+is an isometry. In particular its evaluation satisfies
+$|\langle u,z\rangle|\leq\|u\|\|z\|$.
+The transpose of a contraction is a contraction for the operator dual norms.
+\end{lemma}
+\begin{proof}
+In the Hilbert case, products of orthonormal basis vectors form an
+orthonormal tensor basis. Permuting or regrouping them preserves their Gram
+matrix. Their coordinate functionals form an orthonormal basis of the dual,
+which proves the duality assertion and, by Cauchy--Schwarz, the evaluation
+bound. To tensor a contraction $T$ with an identity, expand
+$z=\sum_i x_i\otimes e_i$ in an orthonormal basis of the second factor.
+Then $\|(T\otimes1)z\|^2=\sum_i\|Tx_i\|^2\leq\sum_i\|x_i\|^2$.
+Applying this one factor at a time proves tensor functoriality over both
+$\mathbb R$ and $\mathbb C$.
+
+In the ultrametric case, precomposing each testing functional with a
+contraction decreases its dual norm. Substitution in the supremum defining
+$\|\cdot\|_\varepsilon$ proves tensor functoriality; a zero composite
+functional contributes zero. For regrouping, choose an $\alpha$-orthogonal
+basis in each original factor. Repeated application of the coordinate
+estimate bounds every parenthesized tensor norm between $\alpha^N M$ and
+$M$, for some finite $N$ depending only on the number of factors and the
+parenthesization. This follows inductively because a product basis is
+$(\prod_j\alpha_j)$-orthogonal and the norm of each product basis vector
+is the product of its factor norms. The latter equality follows directly
+from the supremum and the norming-functional argument in the preceding
+proof. Thus any two regrouped norms differ by factors at most
+$\alpha^{-N_1-N_2}$. Letting $\alpha\uparrow1$ proves equality.
+
+Here is also a direct verification of tensor duality. With these bases put
+$w_{\mathbf i}=\prod_j\|b_{j,i_j}\|$, and write
+$u=\sum_{\mathbf i}d_{\mathbf i}\bigotimes_j b_{j,i_j}^*$.
+If there are $m$ factors, the coordinate estimate gives
+$\|z\|_\varepsilon\geq\alpha^m\max|c_{\mathbf i}|w_{\mathbf i}$.
+Testing $u$ on the evaluation functionals at the vectors $b_{j,i_j}$,
+whose norms are at most $\|b_{j,i_j}\|$, gives
+$\|u\|_\varepsilon\geq\max|d_{\mathbf i}|/w_{\mathbf i}$.
+Consequently
+$|\sum_{\mathbf i}c_{\mathbf i}d_{\mathbf i}|
+\leq\alpha^{-m}\|z\|_\varepsilon\|u\|_\varepsilon$.
+Let $\alpha\uparrow1$ to obtain that the duality map is contracting.
+Conversely, if $C$ is the operator norm of the functional represented by
+$u$, testing it on product basis vectors gives
+$|d_{\mathbf i}|\leq Cw_{\mathbf i}$.
+Since $\|b_{j,i_j}^*\|\leq(\alpha\|b_{j,i_j}\|)^{-1}$, the upper
+coordinate estimate on $u$ gives $\|u\|_\varepsilon\leq\alpha^{-m}C$.
+Letting $\alpha\uparrow1$ proves the reverse inequality. Algebraic tensor
+duality is bijective in finite dimension, so this proves the isometry.
+
+Finally, in either case, if $T$ is contracting, then
+$|\lambda(Tx)|\leq\|\lambda\|_*\|Tx\|\leq\|\lambda\|_*\|x\|$;
+taking the supremum over $x$ proves the assertion about transposes.
+\end{proof}
+
+\begin{lemma}[The balanced-word estimate]
+\label{lem:contraction-balanced-words}
+\uses{def:constant-specht}
+\source{bost-adelic-2026:page-0026}
+\lean{BostConjecture.Adelic.Contraction.injective_freeLatticeMap_le}
+Let $F$ be complete and non-Archimedean, let $b_1,\ldots,b_a$ be a basis
+of a finite-dimensional normed $F$-space $A$, and let $c_1,\ldots,c_f$
+be any integral basis of $L_{a,ak}$. For
+$x=\sum_h z_hc_h\in F\otimes_{\mathbb Z}L_{a,ak}$ let $b^{\otimes ak}x$
+denote substitution of $b_i$ for the $i$-th letter. Then
+\[
+ \|b^{\otimes ak}x\|_\varepsilon
+ \leq\left(\prod_{i=1}^a\|b_i\|\right)^k\max_h|z_h|.
+\]
+\end{lemma}
+\begin{proof}
+Every $c_h$ has integral coefficients in the word basis, and every word in
+its support uses each letter $k$ times. An integer has absolute value at most
+one in a non-Archimedean field, including a trivially valued field.
+Each substituted word has epsilon norm at most
+$\prod_{q=1}^{ak}\|b_{i_q}\|=(\prod_i\|b_i\|)^k$, by testing with
+tuples of dual functionals. The supremum of these ultrametric seminorms
+satisfies the ultrametric triangle inequality. Applying it first to the word
+expansion of $c_h$, and then to $\sum_hz_hc_h$, proves the bound.
+\end{proof}
+
+\section{The determinant embedding on completed fibres}
+
+\begin{lemma}[Scalar extension of the determinant embedding]
+\label{lem:contraction-determinant-base-change}
+\uses{def:canonical-pairing,def:constant-specht}
+\source{bost-adelic-2026:page-0025}
+\notready
+The canonical determinant embedding
+$\iota_A:(\det A)^{\otimes k}\otimes(K\otimes_{\mathbb Z}L_{a,ak})
+\to A^{\otimes ak}$ commutes with field extension. In particular, under
+the canonical exterior, lattice, and tensor base-change identifications,
+its extension to $K_\omega$ is the map
+\[
+ \eta_b^{\otimes k}\otimes x\longmapsto b^{\otimes ak}x
+\]
+for every basis $b$ of $A_\omega$.
+\end{lemma}
+\begin{proof}
+Start with a basis $e$ over $K$. The formula for $\iota_A$ on
+$\eta_e^{\otimes k}\otimes c_h$ has integral word coefficients.
+Extending scalars therefore gives the same substitution formula in the
+extended basis $e$. These vectors form a basis of its source, proving
+compatibility on the whole scalar extension.
+For another basis $b=eg$, the determinant tensor transforms by
+$\eta_b=\det(g)\eta_e$. On a rectangular Specht vector, substitution by
+$g$ acts by $\det(g)^k$: a generating polytabloid is a permutation of a
+product of $k$ alternating determinant tensors, each transforming by
+$\det(g)$. Linear combinations give the same identity on the entire
+lattice after scalar extension. Thus both sides of the defining rule
+transform by $\det(g)^k$, proving the formula for every $b$.
+\end{proof}
+
+\begin{lemma}[Non-Archimedean determinant embedding]
+\label{lem:contraction-finite-specht}
+\uses{lem:contraction-nearly-orthogonal-basis,lem:contraction-completed-determinant,lem:contraction-epsilon-coordinates,lem:contraction-balanced-words,lem:contraction-determinant-base-change}
+\source{bost-adelic-2026:page-0025,bost-adelic-2026:page-0026}
+\notready
+For every non-Archimedean place $\omega$ and every
+$z\in S_{a,ak}(A)_\omega$, the actual completed determinant embedding satisfies
+\[
+ \|\iota_{A,\omega}(z)\|_\varepsilon\leq\|z\|_{S_{a,ak}(A),\omega}.
+\]
+\end{lemma}
+\begin{proof}
+Fix $0<\alpha<1$ and choose an $\alpha$-orthogonal basis $b$ of $A_\omega$.
+Since $(\det A_\omega)^{\otimes k}$ is a line generated by
+$\eta_b^{\otimes k}$, every $z$ is uniquely
+$\eta_b^{\otimes k}\otimes x$. Its actual tensor norm is
+$\|\eta_b\|^k\|x\|_L$, by the line case of the epsilon estimate.
+Scalar-extension compatibility and the balanced-word bound give
+\[
+ \|\iota_{A,\omega}(z)\|_\varepsilon
+ \leq\left(\prod_i\|b_i\|\right)^k\|x\|_L
+ \leq\alpha^{-ak}\|\eta_b\|^k\|x\|_L
+ =\alpha^{-ak}\|z\|.
+\]
+Although $b$ and $x$ depend on $\alpha$, the two norms of $z$ in this
+inequality do not. Let $\alpha\uparrow1$. This proves the assertion without
+discreteness or nontriviality of the valuation.
+\end{proof}
+
+\begin{lemma}[Real and complex determinant embedding]
+\label{lem:contraction-infinite-specht}
+\uses{def:constant-specht,lem:contraction-determinant-base-change}
+\source{bost-adelic-2026:page-0025}
+\notready
+At every Archimedean place $\omega$, the completed determinant embedding
+$\iota_{A,\omega}$ is an isometry for the prescribed determinant, Specht,
+and Hilbert tensor norms.
+\end{lemma}
+\begin{proof}
+Identify $K_\omega$ isometrically with $\mathbb R$ or $\mathbb C$, and
+choose an orthonormal basis $b$ of the completed space with its given Hilbert
+norm. Its Gram determinant is one, hence $\|\eta_b\|_{\det A}=1$.
+The product vectors $b_{i_1}\otimes\cdots\otimes b_{i_{ak}}$ are an
+orthonormal tensor basis. Consequently substitution by $b$ identifies the
+word inner product with this Hilbert tensor inner product, and restricts to
+the specified Specht Gram inner product. For every $x$ it follows that
+\[
+ \|\iota_{A,\omega}(\eta_b^{\otimes k}\otimes x)\|
+ =\|b^{\otimes ak}x\|=\|x\|_L
+ =\|\eta_b^{\otimes k}\otimes x\|.
+\]
+Every source vector has this form. Exterior and tensor base change send the
+displayed generators to the same wedges and tensors, so these inner products
+are precisely the prescribed completed norms. The computation uses real
+symmetric Gram matrices over $\mathbb R$ and Hermitian Gram matrices over
+$\mathbb C$ and therefore proves both cases. In particular, the
+unnormalized alternating determinant tensor has norm $\sqrt{a!}$; that
+factor remains in the word Gram norm and is not removed from the lattice.
+\end{proof}
+
+\section{The canonical pairing and its height}
+
+Let $(\overline E_j)_{j\in I}$ be a finite nonempty family of positive-rank
+Hermitian bundles, put $W=\bigotimes_j E_j$, and give a positive-dimensional
+subspace $i:V\hookrightarrow W$ its induced norms. Write $a_j=\dim E_j$
+and $s=\dim V$. Let $d=sl=a_jk_j>0$ for positive integers $l,k_j$, and set
+\[
+ B_d=S_{s,d}(\overline V),\qquad
+ D_d=\bigotimes_j S_{a_j,d}(\overline E_j^\vee).
+\]
+These use exactly the determinant lines and constant Specht bundles already
+specified. Let $j_d:D_d\to(W^\vee)^{\otimes d}$ be the tensor of the
+determinant embeddings for the $E_j^\vee$, followed by canonical dual
+regrouping. The canonical pairing of Definition~\ref{def:canonical-pairing} is
+\[
+ \Psi_d:B_d\longrightarrow D_d^\vee,\qquad
+ \Psi_d(b)(u)=\langle j_d(u),i^{\otimes d}\iota_V(b)\rangle.
+\]
+
+\begin{lemma}[The completed pairing formula]
+\label{lem:contraction-pairing-base-change}
+\uses{def:canonical-pairing,lem:contraction-determinant-base-change}
+\source{bost-adelic-2026:page-0026}
+\notready
+For every place, the scalar extension $\Psi_{d,\omega}$ is the same
+composite on completed fibres:
+\[
+ \Psi_{d,\omega}=j_{d,\omega}^{\vee}\circ
+     \operatorname{ev}\circ i_\omega^{\otimes d}\circ\iota_{V,\omega}.
+\]
+Here $\operatorname{ev}:W_\omega^{\otimes d}\to
+((W_\omega^\vee)^{\otimes d})^\vee$ is tensor evaluation, and the target
+is identified with $(D_d^\vee)_\omega$ by dual base change.
+\end{lemma}
+\begin{proof}
+The determinant embeddings commute with scalar extension by the preceding
+lemma. On decomposable tensors, regrouping merely exchanges the two finite
+indices, so regrouping also commutes with scalar extension.
+Evaluation commutes with extension because
+$(r\otimes\lambda)(t\otimes x)=rt\lambda(x)$ for $r,t\in K_\omega$.
+These identities prove the formula on determinant generators and lattice
+basis vectors on both sides of the pairing. Such generators span $B_d$ and
+$D_d$ after extension; bilinearity therefore proves it for all completed
+vectors. Finite-dimensional dual base change is an isomorphism, and the
+completed dual norm is the operator norm under that identification.
+\end{proof}
+
+\begin{lemma}[Local canonical pairing contraction]
+\label{lem:local-pairing-contraction}
+\uses{def:canonical-pairing,def:constant-specht,lem:contraction-finite-specht,lem:contraction-infinite-specht,lem:contraction-tensor-calculus,lem:contraction-pairing-base-change}
+\source{bost-adelic-2026:page-0026,bost-adelic-2026:page-0027}
+\notready
+For every place $\omega$ and every $b\in(B_d)_\omega$,
+\[
+ \|\Psi_{d,\omega}(b)\|_{D_d^\vee,\omega}\leq\|b\|_{B_d,\omega}.
+\]
+Equivalently, $\|\Psi_{d,\omega}\|\leq1$. This includes both real and
+complex places and every non-Archimedean place, even a trivially valued one.
+No nonvanishing or geometric semistability assumption is needed.
+\end{lemma}
+\begin{proof}
+The completed inclusion $i_\omega$ is isometric by the definition of the
+induced norms. The two determinant-embedding lemmas prove that
+$\iota_{V,\omega}$ and each determinant embedding defining $j_{d,\omega}$
+are contracting. Tensor functoriality and the isometry of dual regrouping
+therefore make $j_{d,\omega}$ and $i_\omega^{\otimes d}$ contracting.
+For arbitrary completed vectors $b,u$, the completed pairing formula and
+the tensor evaluation estimate yield
+\[
+ \begin{aligned}
+ |\Psi_{d,\omega}(b)(u)|
+ &\leq\|j_{d,\omega}(u)\|\,
+       \|i_\omega^{\otimes d}(\iota_{V,\omega}(b))\|\\
+ &\leq\|u\|\|b\|.
+ \end{aligned}
+\]
+Taking the operator dual norm in $u$ proves the asserted pointwise bound;
+taking the operator norm in $b$ proves its equivalent form.
+\end{proof}
+
+\begin{corollary}[Nonpositive height of the canonical pairing]
+\label{cor:canonical-pairing-height}
+\uses{lem:local-pairing-contraction}
+\source{bost-adelic-2026:page-0006,bost-adelic-2026:page-0027}
+\notready
+If $\Psi_d\neq0$, its map height is nonpositive:
+\[
+ h(\Psi_d)=\int_\Omega\log\|\Psi_{d,\omega}\|\,d\nu(\omega)\leq0.
+\]
+\end{corollary}
+\begin{proof}
+A nonzero map remains nonzero after extension of fields, so each completed
+operator norm is positive. The local contraction gives
+$\log\|\Psi_{d,\omega}\|\leq0$ at every place. The logarithmic operator
+norm of a nonzero map between adelic bundles is integrable; integrating the
+pointwise inequality proves the claim. If map height is defined instead by
+the extended lower integral, the same conclusion follows directly from
+monotonicity, without an integrability hypothesis.
+\end{proof}

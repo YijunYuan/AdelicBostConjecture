@@ -62,6 +62,8 @@ integrable real function. It is \emph{dominated} if it and its dual are
 upper dominated. A Hermitian adelic vector bundle
 $\overline E=(E,\xi)$ is a Hermitian dominated norm family for which both
 $\xi$ and $\xi^\vee$ are measurable. Its rank is $\dim_K E$.
+For the zero vector space the dual norm is zero; equivalently the displayed
+supremum is taken in the nonnegative reals with $\sup\varnothing=0$.
 \end{definition}
 
 \begin{definition}[Subquotient, tensor, and determinant norms]
@@ -459,6 +461,8 @@ $0<\dim_K A<\dim_K T$. This contradicts the irreducibility just proved.
 \uses{def:adelic-induced-norms}
 \source{bost-adelic-2026:page-0008}
 \lean{ArakelovGeometry.NormFamily.orthogonalTensor_norm_independentPiRepresentation}
+Let $I$ be a finite nonempty set and, for each $i\in I$, let $G_i$ act
+$K$-linearly on a positive-rank Hermitian adelic bundle $\overline E_i$.
 Suppose each $G_i$ acts by isometries on every completed fibre of
 $\overline E_i$. Then the independent product action preserves every
 completed orthogonal tensor norm of $\bigotimes_i\overline E_i$.

@@ -7,6 +7,7 @@ module
 
 public import BostConjecture.Adelic.Slope.DeterminantPower
 public import BostConjecture.Adelic.Specht.Degree
+public import BostConjecture.Adelic.Semistability.Specht
 public import ArakelovGeometry.AdelicVectorBundle.Slope.Tensor
 
 /-!
@@ -55,12 +56,13 @@ variable [S.IsProper]
 
 /-- The actual auxiliary slope, before identifying the lattice covolume with
 the canonical rectangular covolume. -/
-theorem determinantSpechtBundle_slope
-    (hr : 0 < finrank K (K ⊗[ℤ] orbitLattice t)) :
+theorem determinantSpechtBundle_slope :
     (determinantSpechtBundle V hN hcount k t b).slope (Or.inr hcount) hN =
       n * V.slope (Or.inr hcount) hN - (S.v S.Ωinf).toReal *
         (Real.log (ZLattice.covolume (spanLattice t)) /
           finrank K (K ⊗[ℤ] orbitLattice t)) := by
+  letI := Arithmetic.Specht.orbitLattice_baseChange_nontrivial K t
+  have hr : 0 < finrank K (K ⊗[ℤ] orbitLattice t) := Module.finrank_pos
   have hn : n = finrank K E * k := by
     simpa using Fintype.card_congr (rectangleCoordinates t)
   have hp : finrank K (⨂[K] (_ : Fin k), ⋀[K]^(finrank K E) E) = 1 :=
