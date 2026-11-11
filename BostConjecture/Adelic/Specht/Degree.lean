@@ -154,4 +154,22 @@ theorem latticeBundle_slope :
   rw [AdelicVectorBundle.slope, latticeBundle_degree]
   exact mul_div_assoc _ _ _
 
+/-- The actual constant bundle has the rectangular covolume correction of this paper,
+independently of the tableau chosen to generate its integral orbit lattice. -/
+theorem latticeBundle_slope_rectangle {a k : ℕ}
+    (t : OAI.Saxl.Tableau n (rectangle a k))
+    (b : Basis (Fin (Module.finrank K (K ⊗[ℤ] orbitLattice t))) ℤ (orbitLattice t)) :
+    (latticeBundle S t b hN hcount).slope (Or.inr hcount) hN =
+      -(S.v S.Ωinf).toReal * rectangleLogCovolume a k := by
+  have hr : Module.finrank K (K ⊗[ℤ] orbitLattice t) =
+      Module.finrank ℤ (orbitLattice t) := by
+    rw [Module.finrank_eq_card_basis (b.baseChange K), Module.finrank_eq_card_basis b]
+  rw [latticeBundle_slope, hr]
+  congr 1
+  have hn : n = a * k := by
+    simpa using Fintype.card_congr (rectangleCoordinates t)
+  subst n
+  unfold rectangleLogCovolume rectangleRank rectangleLattice spanLattice realSpan realLattice
+  rw [orbitLattice_eq t (rectangleTableau a k)]
+
 end BostConjecture.Specht
