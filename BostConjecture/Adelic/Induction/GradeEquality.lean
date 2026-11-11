@@ -1,0 +1,106 @@
+/-
+Copyright (c) 2026 Yijun Yuan. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Yijun Yuan
+-/
+import ArakelovGeometry.AdelicVectorBundle.Degree.Flag.ImageHN
+import ArakelovGeometry.AdelicVectorBundle.HarderNarasimhan.Hermitian.Uniqueness
+
+/-!
+# Equality in the graded degree bound
+
+The equality step of this paper, Lemma 7.1: if the lower bounds on the degrees
+of the grades sum to the ambient degree, every bound is an equality. Together
+with lower bounds for all actual quotient slopes this identifies the HN filtration.
+All grades carry the restriction and quotient norms of the original bundle.
+-/
+
+open Module Submodule
+open scoped BigOperators
+
+namespace ArakelovGeometry.AdelicVectorBundle
+
+variable {K E : Type*} [Field K] [AddCommGroup E] [Module K E]
+  [FiniteDimensional K E] {S : AdelicStructure K} [S.IsProper]
+  (V : AdelicVectorBundle S E)
+  (hS : DiscreteMeasurableSpace S.Ω ∨ S.HasCommonCountableDenseSubfield)
+  (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
+  (hV : V.toNormFamily.IsHermitian hN)
+
+/-- Equality of the total degree forces equality in every graded lower bound,
+including the grades of rank zero. -/
+theorem filtrationGraded_degree_eq_of_lower_bounds
+    (P : ℝ → Submodule K E) (hP : Antitone P)
+    (hbot : ∃ t, P t = ⊥) (htop : ∃ t, P t = ⊤)
+    (hleft : ∀ t, ∃ ε > 0, ∀ s, t - ε < s → s ≤ t → P s = P t)
+    (hlower : ∀ t, t * (finrank K (FiltrationGraded P t) : ℝ) ≤
+      (V.filtrationGraded P t hS).degree hS hN)
+    (htotal : (∑ᶠ t : ℝ, t * (finrank K (FiltrationGraded P t) : ℝ)) =
+      V.degree hS hN) (t : ℝ) :
+    (V.filtrationGraded P t hS).degree hS hN =
+      t * (finrank K (FiltrationGraded P t) : ℝ) := by
+  classical
+  obtain ⟨n, U, a, hU, hz, ht, _, ha, _, hlevel, hright, hrec⟩ :=
+    exists_strictMono_flag_and_jumps_of_antitone hP hbot htop hleft
+  have hdegree (i : Fin n) :
+      (V.filtrationGraded P (a i) hS).degree hS hN =
+        (V.flagQuotientOfMeasurableBase U hS i).degree hS hN := by
+    unfold filtrationGraded flagQuotientOfMeasurableBase
+    rw [hlevel i, hright i]
+  have hrank (i : Fin n) : finrank K (FiltrationGraded P (a i)) =
+      finrank K ((U i.succ) ⧸ (U i.castSucc).comap (U i.succ).subtype) := by
+    unfold FiltrationGraded
+    rw [hlevel i, hright i]
+  have hle (i : Fin n) : a i * (finrank K
+      ((U i.succ) ⧸ (U i.castSucc).comap (U i.succ).subtype) : ℝ) ≤
+        (V.flagQuotientOfMeasurableBase U hS i).degree hS hN := by
+    simpa only [hdegree i, hrank i] using hlower (a i)
+  have heq : (∑ i : Fin n, a i * (finrank K
+      ((U i.succ) ⧸ (U i.castSucc).comap (U i.succ).subtype) : ℝ)) =
+        ∑ i : Fin n, (V.flagQuotientOfMeasurableBase U hS i).degree hS hN := by
+    rw [← finsum_weight_mul_finrank_filtrationGraded_eq_flag U a ha.injective
+      hlevel hright hrec, htotal,
+      V.sum_flagQuotient_degree_eq_of_isHermitian U hU.monotone hz ht hS hN hV]
+  by_cases ht : t ∈ Set.range a
+  · obtain ⟨i, rfl⟩ := ht
+    rw [hdegree i, hrank i]
+    exact ((Finset.sum_eq_sum_iff_of_le (fun i _ ↦ hle i)).mp heq i
+      (Finset.mem_univ i)).symm
+  · have hr := finrank_filtrationGraded_eq_zero_of_flag U a hlevel hrec ht
+    rw [hr, Nat.cast_zero, mul_zero,
+      (V.filtrationGraded P t hS).degree_eq_zero_of_finrank_eq_zero hS hN hr]
+
+/-- A finite filtration with sharp total graded degree and quotient slope lower
+bounds on each grade is the actual HN filtration. No semistability is assumed. -/
+theorem hermitianHNFiltration_eq_of_graded_quotient_bounds
+    (P : ℝ → Submodule K E) (hP : Antitone P)
+    (hbot : ∃ t, P t = ⊥) (htop : ∃ t, P t = ⊤)
+    (hleft : ∀ t, ∃ ε > 0, ∀ s, t - ε < s → s ≤ t → P s = P t)
+    (hlower : ∀ t, t * (finrank K (FiltrationGraded P t) : ℝ) ≤
+      (V.filtrationGraded P t hS).degree hS hN)
+    (htotal : (∑ᶠ t : ℝ, t * (finrank K (FiltrationGraded P t) : ℝ)) =
+      V.degree hS hN)
+    (hquot : ∀ t (U : Submodule K (FiltrationGraded P t)),
+      0 < finrank K (FiltrationGraded P t ⧸ U) →
+      t ≤ ((V.filtrationGraded P t hS).quotientOfMeasurableBase U hS).slope hS hN) :
+    V.hermitianHNFiltration hS hN hV = P := by
+  symm
+  apply V.hermitianHNFiltration_unique hS hN hV P hP hbot htop hleft
+  intro t
+  change finrank K (FiltrationGraded P t) = 0 ∨
+    (V.filtrationGraded P t hS).IsMeanSlopeSemistable hS hN ∧
+      (V.filtrationGraded P t hS).slope hS hN = t
+  by_cases hr : finrank K (FiltrationGraded P t) = 0
+  · exact Or.inl hr
+  · have hp : 0 < finrank K (FiltrationGraded P t) := Nat.pos_of_ne_zero hr
+    have hs : (V.filtrationGraded P t hS).slope hS hN = t := by
+      rw [slope, V.filtrationGraded_degree_eq_of_lower_bounds hS hN hV
+        P hP hbot htop hleft hlower htotal t]
+      exact mul_div_cancel_right₀ t (Nat.cast_ne_zero.mpr hr)
+    refine Or.inr ⟨?_, hs⟩
+    apply ((V.filtrationGraded P t hS).
+      isMeanSlopeSemistable_iff_slope_le_quotient_of_isHermitian
+        hS hN (hV.filtrationGraded P t) hp).mpr
+    simpa only [hs] using hquot t
+
+end ArakelovGeometry.AdelicVectorBundle

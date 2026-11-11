@@ -1,0 +1,56 @@
+import ArakelovGeometry.AdelicVectorBundle.HarderNarasimhan.Galois.HNScalarExtension
+import Mathlib.RepresentationTheory.Irreducible
+
+/-!
+# Irreducible isometric group actions and adelic semistability
+
+The first assertion of Lemma 2.6 of this paper follows from invariance of the
+actual largest destabilizing subspace. ArakelovGeometry proves that invariance
+using its actual restricted degrees and the uniqueness of the largest
+maximal-slope subspace. Irreducibility then makes this nonzero subspace the
+whole representation.
+
+The action preserves the norms on every completed fibre, rather than just a
+chosen rational lattice. Neither finiteness of the group nor characteristic
+zero is needed for this implication. In particular it applies to the product
+group acting on the constant Specht factors, once that representation and its
+completed isometries have been constructed.
+-/
+
+noncomputable section
+
+namespace ArakelovGeometry.AdelicVectorBundle
+
+variable {K : Type*} [Field K] {S : AdelicStructure K} [S.IsProper]
+  {E : Type*} [AddCommGroup E] [Module K E] [FiniteDimensional K E]
+  {G : Type*} [Group G]
+
+/-- Lemma 2.6 of this paper: an irreducible group action preserving the actual
+completed norms forces arithmetic mean-slope semistability. -/
+theorem isMeanSlopeSemistable_of_isIrreducible (V : AdelicVectorBundle S E)
+    (hS : DiscreteMeasurableSpace S.Ω ∨ S.HasCommonCountableDenseSubfield)
+    (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
+    (hV : V.toNormFamily.IsHermitian hN) (hr : 0 < Module.finrank K E)
+    (ρ : Representation K G E) [ρ.IsIrreducible]
+    (hρ : ∀ g ω z, V.toNormFamily.norm ω
+      ((ρ g).baseChange (S.ϕ ω).Completion z) = V.toNormFamily.norm ω z) :
+    V.IsMeanSlopeSemistable hS hN := by
+  let D := V.destabilizingSubspace hS hN hV hr
+  have hD : 0 < Module.finrank K D :=
+    V.destabilizingSubspace_finrank_pos hS hN hV hr
+  let σ : Subrepresentation ρ :=
+    { toSubmodule := D
+      apply_mem_toSubmodule := by
+        intro g x hx
+        let e := LinearEquiv.ofBijective (ρ g) (ρ.apply_bijective g)
+        have hm := V.map_destabilizingSubspace_eq_of_completed_isometry V e
+          hS hN hV hV hr hr (hρ g)
+        exact hm.le (Submodule.mem_map_of_mem hx) }
+  apply (V.destabilizingSubspace_eq_top_iff_isMeanSlopeSemistable hS hN hV hr).mp
+  rcases eq_bot_or_eq_top σ with hbot | htop
+  · have hz : D = ⊥ := congrArg Subrepresentation.toSubmodule hbot
+    have : Module.finrank K D = 0 := Submodule.finrank_eq_zero.mpr hz
+    omega
+  · exact congrArg Subrepresentation.toSubmodule htop
+
+end ArakelovGeometry.AdelicVectorBundle
