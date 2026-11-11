@@ -604,7 +604,7 @@ ArakelovGeometry.AdelicVectorBundle.slopes_orthogonalTensor_subsingleton}
 \leanok
 For a family with one index $i_0$, the canonical identification
 $\bigotimes_i E_i\simeq E_{i_0}$ preserves every completed norm.
-It preserves the mean slope and the maximal slope.
+In positive rank it preserves the mean slope and the maximal slope.
 \end{lemma}
 \begin{proof}
 Every one-factor completed tensor is a pure tensor, and its tensor norm
@@ -626,8 +626,8 @@ For a bijection $\sigma:I\simeq J$ of finite index sets, the canonical map
  \bigotimes_{i\in I} E_i\longrightarrow
  \bigotimes_{j\in J}E_{\sigma^{-1}(j)}
 \]
-is an isometry at every completed place. It preserves mean and maximal
-slopes.
+is an isometry at every completed place. In positive tensor rank it
+preserves mean and maximal slopes.
 \end{lemma}
 \begin{proof}
 At an Archimedean place choose orthonormal bases in the factors.
@@ -656,8 +656,8 @@ the canonical grouping map
  \left(\bigotimes_{j\in J}E_j\right)
  \longrightarrow\bigotimes_{k\in I\sqcup J}E_k
 \]
-is an isometry at every completed place. It preserves mean and maximal
-slopes.
+is an isometry at every completed place. In positive tensor rank it
+preserves mean and maximal slopes.
 \end{lemma}
 \begin{proof}
 At an Archimedean place the tensor products of factor orthonormal bases
@@ -687,9 +687,13 @@ spaces vanish. Empty blocks use the scalar field with its absolute value,
 for which the same calculation has an empty product equal to one.
 
 The determinant and subspace argument again proves preservation of
-both slopes. Successive grouping and reindexing therefore account for
-any enumeration or parenthesization of a finite tensor family.
+both slopes in positive rank.
 \end{proof}
+
+Composing these reindexing and grouping isometries, with the one-factor
+identifications at the leaves, identifies every enumeration and every
+binary parenthesization with the canonical finite tensor. Thus these
+choices preserve the actual tensor norms and, in positive rank, its slopes.
 
 \begin{lemma}[Mean slope of a finite orthogonal tensor]
 \label{lem:finite-tensor-mean-slope}
