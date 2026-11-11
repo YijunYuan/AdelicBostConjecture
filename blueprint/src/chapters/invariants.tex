@@ -2,10 +2,14 @@
 
 Let $K$ be a field of characteristic zero, let $J$ be a finite set, and let
 $(E_j)_{j\in J}$ and $V$ be nonzero finite-dimensional $K$-vector spaces.
+The symbol $Q$ will denote a finite-dimensional $K$-vector space as well.
 Write
 \[
- W=\bigotimes_{j\in J}E_j,\qquad a_j=\dim_K E_j,\qquad s=\dim_K V,
- \qquad M^\vee=\Hom_K(M,K),\qquad \det M=\bigwedge^{\dim_K M}M.
+ W=\bigotimes_{j\in J}E_j,\qquad a_j=\dim_K E_j,\qquad s=\dim_K V.
+\]
+We use $M^\vee$ for the linear dual and $\det M$ for the determinant line:
+\[
+ M^\vee=\Hom_K(M,K),\qquad \det M=\bigwedge^{\dim_K M}M.
 \]
 All tensor products in this chapter are algebraic. If $L/K$ is an extension,
 put $M_L=L\otimes_K M$ and use the canonical maps
@@ -27,6 +31,7 @@ this paper \cite{bost2026}, keeping these maps fixed throughout.
 \begin{lemma}[Coordinate and intrinsic invariant polynomials]
 \label{lem:invariant-polynomial-models}
 \lean{BostConjecture.Adelic.Geometry.isPolynomialSemistable_iff_exists_homogeneousInvariant}
+\leanok
 Let $F$ be an infinite field, $X$ a finite-dimensional $F$-vector space,
 $b=(b_\alpha)_{\alpha\in I}$ a basis, and $\rho:G\to\GL(X)$ a group action.
 A vector $x\in X$ admits a positive-degree homogeneous coordinate polynomial
@@ -57,6 +62,7 @@ implications.
 \source{bost-adelic-2026:page-0026,bost-adelic-2026:page-0028}
 \uses{lem:invariant-polynomial-models}
 \lean{ArakelovGeometry.InvariantTheory.IsGeometricallySemistableTensorSubspace,ArakelovGeometry.InvariantTheory.IsGeometricallySemistableTensorQuotient}
+\leanok
 Fix an algebraic closure $\overline K$ and put
 $G=\prod_j\SL((E_j)_{\overline K})$, acting on
 $W_{\overline K}=\bigotimes_j(E_j)_{\overline K}$ by tensoring its factors.
@@ -84,8 +90,9 @@ zero. Applied to the dual, this also forces $q$ to be surjective.
 \source{bost-adelic-2026:page-0027}
 \uses{def:geometric-semistability,lem:invariant-polynomial-models}
 \lean{BostConjecture.Adelic.Geometry.exists_homogeneousInvariant_of_isPluckerSemistable,BostConjecture.Geometry.pluckerPolynomialPullback_mem_invariants,BostConjecture.Geometry.polynomialEval_pluckerPolynomialPullback_ne_zero}
+\leanok
 Let $F$ be an infinite field, $X$ a finite-dimensional $F$-vector space with
-an action of $G$, and $V$ an $s$-dimensional $F$-vector space.
+an action $\rho:G\to\GL(X)$, and $V$ an $s$-dimensional $F$-vector space.
 For a basis $(v_1,\ldots,v_s)$ of $V$ put $\eta=v_1\wedge\cdots\wedge v_s$.
 If $p$ is a homogeneous degree-$m$ invariant on $\bigwedge^sX$, then
 \[
@@ -139,6 +146,7 @@ There is no division by $a!$ in this definition.
 \source{bost-adelic-2026:page-0025,bost-adelic-2026:page-0026}
 \uses{lem:rectangular-specht-invariants}
 \lean{BostConjecture.Geometry.canonicalPairing}
+\leanok
 Let $d>0$ be divisible by $s$ and every $a_j$, put $l=d/s$ and $k_j=d/a_j$,
 and choose rectangular tableaux $v$ of shape $(l^s)$ and $t_j$ of shape
 $(k_j^{a_j})$. Define
@@ -172,6 +180,7 @@ canonical tensor-duality identification.
 \source{bost-adelic-2026:page-0027}
 \uses{def:geometric-semistability,lem:plucker-invariant-substitution,def:canonical-pairing,lem:rectangular-specht-invariants}
 \lean{BostConjecture.Adelic.Geometry.exists_canonicalPairing_nonzero_sequence_of_geometricSemistability}
+\leanok
 If $A:V\to W$ is geometrically semistable, there exists an integer $d_0>0$
 divisible by $s$ and by every $a_j$, such that for every integer $r>0$ there
 are tableaux as in Definition~\ref{def:canonical-pairing} at degree $d=d_0r$
@@ -179,9 +188,9 @@ for which the original $K$-linear map $\Psi_{A,d}$ is nonzero.
 \end{lemma}
 \begin{proof}
 Work temporarily over $F=\overline K$. Choose a basis of $V_F$ and use
-Lemma~\ref{lem:plucker-invariant-substitution} to obtain $m>0$ and a
-homogeneous invariant $Q$ of degree $sm$ on $\Hom_F(V_F,W_F)$, with
-$Q(A_F)\ne0$. Put $P=\prod_j a_j$ and $d_0=smP$. Then $d_0>0$, $s\mid d_0$,
+Lemma~\ref{lem:plucker-invariant-substitution}. It gives an invariant $Q$
+on the space of maps $V_F\to W_F$, homogeneous of degree $sm$, with $m>0$
+and $Q(A_F)\ne0$. Put $P=\prod_j a_j$ and $d_0=smP$. Then $d_0>0$, $s\mid d_0$,
 and $a_j\mid d_0$ for every $j$. For $r>0$ the polynomial $Q^{Pr}$ is
 homogeneous of degree $d=d_0r$, is invariant, and is nonzero at $A_F$.
 This choice enlarges the degree used on page 27 of this paper; it ensures
@@ -245,6 +254,7 @@ the last display. This proves the assertion over the original field.
 \source{bost-adelic-2026:page-0027}
 \uses{def:canonical-pairing}
 \lean{BostConjecture.Geometry.canonicalPairing_reindex_left}
+\leanok
 For $\sigma\in\mathfrak S_d$, let $\sigma$ act on $B_d$ through its action
 on $L_v$ and on $D_d$ through its simultaneous actions on all $L_{t_j}$,
 leaving determinant lines fixed. Then
@@ -266,7 +276,9 @@ Bilinearity extends this identity to all tensors, proving the formula.
 
 \begin{lemma}[Scalar extension of the dual inclusion]
 \label{lem:dual-inclusion-base-change}
+\uses{def:canonical-pairing}
 \lean{BostConjecture.Adelic.Geometry.dualTensorInclusion_baseChange}
+\leanok
 For any field extension $L/K$ and linear map $q:W\to Q$, define
 $A_q=e_E^{-1}q^\vee:Q^\vee\to\bigotimes_jE_j^\vee$.
 With the canonical maps fixed above, one has
@@ -290,6 +302,7 @@ with $e_{E_L}$ are therefore equal; its injectivity proves the assertion.
 \source{bost-adelic-2026:page-0028}
 \uses{def:geometric-semistability,lem:dual-inclusion-base-change}
 \lean{BostConjecture.Adelic.Geometry.geometricSemistability_dualTensor_of_quotient}
+\leanok
 If $q:W\to Q$ is geometrically semistable, then its original-field dual
 inclusion
 \[
@@ -301,8 +314,11 @@ of the dual factors.
 \begin{proof}
 Put $F=\overline K$. The map $e_{E_F}$ intertwines the action
 $\bigotimes_j(g_j^{-1})^\vee$ on $\bigotimes_j(E_j)_F^\vee$ with the
-contragredient tensor action on $W_F^\vee$: evaluation on
-$\bigotimes_jx_j$ gives $\prod_j\ell_j(g_j^{-1}x_j)$ on either side.
+contragredient tensor action on $W_F^\vee$. On a pure tensor, both
+evaluations equal
+\[
+ \prod_j\ell_j(g_j^{-1}x_j).
+\]
 Every tuple of special linear maps on the dual factors has this form,
 since $g\mapsto(g^{-1})^\vee$ is bijective. Pull back the invariant
 polynomial witnessing semistability of $q_F^\vee$ along
@@ -323,7 +339,9 @@ geometric semistability of $A_q$ itself.
 
 \begin{lemma}[Binary tensor-duality convention]
 \label{lem:binary-dual-inclusion}
+\uses{def:canonical-pairing}
 \lean{BostConjecture.Adelic.Geometry.dualTensorInclusion_bool}
+\leanok
 For $J=\{0,1\}$, let $b_E:\bigotimes_{j\in J}E_j\to E_0\otimes_KE_1$
 be the equivalence sending a pure tensor to $x_0\otimes x_1$; define
 $b_{E^\vee}$ in the same way. If $q:E_0\otimes_KE_1\to Q$, then
@@ -335,8 +353,11 @@ where $e_{0,1}:E_0^\vee\otimes_KE_1^\vee\to(E_0\otimes_KE_1)^\vee$
 is the ordinary binary tensor-duality map.
 \end{lemma}
 \begin{proof}
-For $\ell_0,\ell_1,x_0,x_1$, evaluation through either tensor convention is
-$\ell_0(x_0)\ell_1(x_1)$. Thus
+Both conventions evaluate pure tensors as
+\[
+ \ell_0(x_0)\ell_1(x_1).
+\]
+Thus
 $e_{0,1}(b_{E^\vee}z)(b_Ex)=e_E(z)(x)$ for all $z,x$, by bilinearity
 and spanning by pure tensors. Taking $z=e_E^{-1}(qb_E)^\vee\ell$ gives
 $e_{0,1}(b_{E^\vee}z)(b_Ex)=\ell(q(b_Ex))$.
@@ -348,6 +369,7 @@ Surjectivity of $b_E$ and injectivity of $e_{0,1}$ prove the identity.
 \source{bost-adelic-2026:page-0027,bost-adelic-2026:page-0028}
 \uses{lem:geometric-dual-quotient,lem:nonzero-pairings}
 \lean{BostConjecture.Adelic.Geometry.exists_canonicalPairing_nonzero_sequence_of_geometricQuotient}
+\leanok
 If $q:W\to Q$ is geometrically semistable, there exists $d_0>0$, divisible
 by $\dim Q$ and every $a_j$, such that the canonical pairings for
 $A_q:Q^\vee\to\bigotimes_jE_j^\vee$ are nonzero over $K$ at every degree
