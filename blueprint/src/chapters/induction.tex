@@ -467,24 +467,20 @@ ambient tensor product is at least $a+b$. The ranks of $E_1,F_1$ are
 positive, so this supplies a nonzero subspace as required.
 \end{proof}
 
-\begin{lemma}[Finite tensor slopes from binary additivity]
-\label{lem:finite-tensor-slopes-of-binary}
+\begin{lemma}[Mean slope of a finite orthogonal tensor]
+\label{lem:finite-tensor-mean-slope}
 \uses{lem:contraction-tensor-calculus,lem:induction-tensor-degree,def:adelic-slope}
 \source{bost-adelic-2026:page-0001,bost-adelic-2026:page-0032}
-\notready
-Assume that maximal slopes are additive for every pair of positive-rank
-Hermitian bundles on $S$. For every finite nonempty set $I$ and family
+\lean{ArakelovGeometry.AdelicVectorBundle.finrank_piTensorProduct_eq_prod, ArakelovGeometry.AdelicVectorBundle.finrank_piTensorProduct_pos, ArakelovGeometry.AdelicVectorBundle.slope_orthogonalTensorOfMeasurableBase}
+For every finite nonempty set $I$ and family
 $(\overline E_i)_{i\in I}$ of positive-rank Hermitian bundles, the actual
 finite orthogonal tensor bundle $\overline T=\bigotimes_{i\in I}\overline E_i$
 satisfies
 \[
  r(T)=\prod_{i\in I}r(E_i)>0,\qquad
- \widehat\mu(\overline T)=\sum_{i\in I}\widehat\mu(\overline E_i),\qquad
- \widehat\mu_{\max}(\overline T)=
- \sum_{i\in I}\widehat\mu_{\max}(\overline E_i).
+ \widehat\mu(\overline T)=\sum_{i\in I}\widehat\mu(\overline E_i).
 \]
-The rank and mean-slope assertions do not require the binary maximal-slope
-hypothesis. These identities hold independently of the enumeration and
+These identities hold independently of the enumeration and
 parenthesization of the family, with the actual Hilbert and epsilon norms.
 \end{lemma}
 \begin{proof}
@@ -492,7 +488,7 @@ The tensor products of basis vectors form a basis indexed by the product
 of the factor basis sets, proving the rank formula and positivity.
 For a singleton, the canonical tensor map to its unique factor is an
 isometry: every completed tensor is a one-factor pure tensor and its norm
-is that factor's norm. Thus both slope formulas hold for one factor.
+is that factor's norm. Thus the slope formula holds for one factor.
 
 For a larger family, choose $i_0\in I$ and put $J=I\setminus\{i_0\}$,
 which is nonempty. The canonical reindexing and grouping map identifies
@@ -501,23 +497,47 @@ $\overline E_{i_0}\otimes(\bigotimes_{j\in J}\overline E_j)$ isometrically
 at every completed place by Lemma~\ref{lem:contraction-tensor-calculus}.
 This is an identification of the full completed norms on all vectors.
 An isometry preserves ranks and determinant norms, hence degrees and mean
-slopes. It also bijects nonzero subspaces with isometric restricted bundles,
-hence preserves the supremum defining maximal slope.
-The two factors in this grouping have positive rank. The binary mean-slope
-formula and the assumed binary maximal-slope formula, followed by induction
-on $|I|$, give the two displayed sums. The same proof without the
-maximal-slope assertion proves the mean-slope assertion unconditionally.
+slopes. The two factors in this grouping have positive rank. The binary
+mean-slope formula, followed by induction on $|I|$, gives the displayed sum.
 Finally, each change of enumeration is a permutation and each change of
 parenthesization is a composition of associators. The completed isometries
 of Lemma~\ref{lem:contraction-tensor-calculus} show that these changes
-preserve the actual tensor bundle up to isometry and preserve both slopes.
+preserve the actual tensor bundle up to isometry and preserve its slope.
+\end{proof}
+
+\begin{lemma}[Finite maximal slopes from binary additivity]
+\label{lem:finite-tensor-slopes-of-binary}
+\uses{lem:contraction-tensor-calculus,lem:finite-tensor-mean-slope,def:adelic-slope}
+\source{bost-adelic-2026:page-0001,bost-adelic-2026:page-0032}
+\lean{ArakelovGeometry.AdelicVectorBundle.maximalSlope_orthogonalTensorOfMeasurableBase_of_binary_additivity}
+Assume that maximal slopes are additive for every pair of positive-rank
+Hermitian bundles on $S$. Then every finite nonempty family as above satisfies
+\[
+ \widehat\mu_{\max}(\overline T)=
+ \sum_{i\in I}\widehat\mu_{\max}(\overline E_i).
+\]
+This holds independently of enumeration and parenthesization on the actual
+Hilbert and epsilon tensor norms.
+\end{lemma}
+\begin{proof}
+Induct on the size of $I$. For a singleton the canonical identification
+with its factor is an isometry. For $|I|>1$, choose $i_0$ and set
+$J=I\setminus\{i_0\}$. Reindexing and grouping identify the finite tensor
+isometrically with $\overline E_{i_0}\otimes\bigotimes_{j\in J}\overline E_j$.
+The preceding lemma ensures that the latter factor has positive rank.
+An isometry bijects nonzero subspaces with isometric restricted bundles,
+so it preserves their slope supremum. Apply the binary hypothesis to the
+two factors and then the induction hypothesis to $J$. This gives the sum
+over $I$. Permutations and associators are isometries by
+Lemma~\ref{lem:contraction-tensor-calculus}, so the identity is independent
+of the chosen enumeration and parenthesization.
 \end{proof}
 
 \begin{corollary}[Finite tensor semistability from binary additivity]
 \label{cor:finite-tensor-semistability-of-binary}
-\uses{lem:finite-tensor-slopes-of-binary,def:adelic-slope}
+\uses{lem:finite-tensor-slopes-of-binary,lem:finite-tensor-mean-slope,def:adelic-slope}
 \source{bost-adelic-2026:page-0001,bost-adelic-2026:page-0032}
-\notready
+\lean{ArakelovGeometry.AdelicVectorBundle.isMeanSlopeSemistable_orthogonalTensorOfMeasurableBase_of_binary_additivity}
 Under the binary maximal-slope hypothesis of the preceding lemma, the
 orthogonal tensor product of a finite nonempty family of positive-rank
 semistable Hermitian bundles is semistable.
