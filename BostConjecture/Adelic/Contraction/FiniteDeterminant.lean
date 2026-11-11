@@ -101,26 +101,25 @@ section Completed
 variable {K V : Type*} [Field K] {S : AdelicStructure K}
   [AddCommGroup V] [Module K V] [FiniteDimensional K V]
 
-set_option diagnostics true in
+set_option maxHeartbeats 800000 in
+-- Comparing the algebraic completion's ring projections in exterior powers is costly.
 set_option backward.isDefEq.respectTransparency false in
-/-- The determinant-twisted lattice estimate with the actual completed
-determinant norm. The nearly orthogonal basis premise is discharged by the
-completed determinant lower bound, including at trivially valued places. -/
-theorem injective_freeDeterminantMap_completed_tprod_le
+/-- In any completed frame, the lattice realization is bounded by the actual
+norm of its determinant wedge, with no alpha loss. This is the finite-place
+normalization of the determinant embedding on the full Specht factor. -/
+theorem injective_freeLatticeMap_completed_le
     (ξ : NormFamily S V) (ω : S.Ω) (hω : ω ∈ S.Ωfin)
     (hk : 0 < k) (t : Tableau n (rectangle (Module.finrank K V) k))
     (b₀ : Basis (Fin (Module.finrank K V)) (S.ϕ ω).Completion
       ((S.ϕ ω).Completion ⊗[K] V))
     (c : Basis κ ℤ (orbitLattice t))
-    (η : Fin k → (S.ϕ ω).Completion ⊗[K] (⋀[K]^(Module.finrank K V) V))
     (z : (S.ϕ ω).Completion ⊗[ℤ] orbitLattice t) :
     (NormFamily.injectiveTensor (fun _ : Fin n ↦ ξ)).norm ω
       ((tensorBaseChangeEquiv K (S.ϕ ω).Completion (fun _ : Fin n ↦ V)).symm
-        (freeDeterminantMap hk t b₀
-          ((⨂ₜ[(S.ϕ ω).Completion] q,
-            exteriorBaseChangeEquiv K (S.ϕ ω).Completion V (Module.finrank K V) (η q))
-              ⊗ₜ[(S.ϕ ω).Completion] z))) ≤
-      (∏ q : Fin k, ξ.determinant.norm ω (η q)) *
+        (freeLatticeMap hk t b₀ z)) ≤
+      (ξ.determinant.norm ω
+        ((exteriorBaseChangeEquiv K (S.ϕ ω).Completion V (Module.finrank K V)).symm
+          (exteriorPower.ιMulti (S.ϕ ω).Completion (Module.finrank K V) b₀))) ^ k *
         ‖(c.baseChange (S.ϕ ω).Completion).equivFun z‖ := by
   let := ξ.fibreNormedAddCommGroup ω
   let := ξ.fibreNormedSpace ω
@@ -128,10 +127,6 @@ theorem injective_freeDeterminantMap_completed_tprod_le
     (S.ϕ ω).isUltrametricDist_completion hω
   let p := (ξ.determinant.norm ω).comp
     (exteriorBaseChangeEquiv K (S.ϕ ω).Completion V (Module.finrank K V)).symm.toLinearMap
-  change injectiveTensorSeminorm
-    ((tensorBaseChangeEquiv K (S.ϕ ω).Completion (fun _ : Fin n ↦ V))
-      ((tensorBaseChangeEquiv K (S.ϕ ω).Completion (fun _ : Fin n ↦ V)).symm _)) ≤ _
-  rw [LinearEquiv.apply_symm_apply]
   have hp (α : ℝ) (hα : 0 < α) (hα1 : α < 1) :
       ∃ b : Basis (Fin (Module.finrank K V)) (S.ϕ ω).Completion
         ((S.ϕ ω).Completion ⊗[K] V),
@@ -139,10 +134,17 @@ theorem injective_freeDeterminantMap_completed_tprod_le
           p (exteriorPower.ιMulti (S.ϕ ω).Completion (Module.finrank K V) b) := by
     obtain ⟨b, _, hb⟩ := exists_completed_basis_det_bound ξ ω hω hα hα1
     exact ⟨b, hb⟩
-  simpa only [p, Seminorm.comp_apply, LinearEquiv.coe_coe,
-    LinearEquiv.symm_apply_apply] using
-    injective_freeDeterminantMap_tprod_le hk t b₀ c p hp
-      (fun q ↦ exteriorBaseChangeEquiv K (S.ϕ ω).Completion V (Module.finrank K V) (η q)) z
+  have h := injective_freeDeterminantMap_tprod_le hk t b₀ c p hp
+    (fun _ : Fin k ↦ exteriorPower.ιMulti (S.ϕ ω).Completion (Module.finrank K V) b₀) z
+  rw [freeDeterminantMap_basis] at h
+  change injectiveTensorSeminorm
+    ((tensorBaseChangeEquiv K (S.ϕ ω).Completion (fun _ : Fin n ↦ V))
+      ((tensorBaseChangeEquiv K (S.ϕ ω).Completion (fun _ : Fin n ↦ V)).symm _)) ≤ _
+  rw [LinearEquiv.apply_symm_apply]
+  convert h using 1
+  simp only [p, Seminorm.comp_apply, LinearEquiv.coe_coe,
+    Finset.prod_const, Finset.card_univ, Fintype.card_fin]
+  rfl
 
 end Completed
 
