@@ -11,6 +11,7 @@ public import BostConjecture.Adelic.Contraction.Determinant -- shake: keep
 public import BostConjecture.Adelic.Contraction.Lattice -- shake: keep
 public import BostConjecture.Adelic.Geometry.Binary -- shake: keep
 public import BostConjecture.Adelic.Geometry.Quotient -- shake: keep
+public import BostConjecture.Adelic.Induction.FiniteMaxSlope -- shake: keep
 public import BostConjecture.Adelic.Induction.MaxSlope -- shake: keep
 public import BostConjecture.Adelic.Induction.RankInduction -- shake: keep
 public import BostConjecture.Adelic.Semistability.LineTensor -- shake: keep
@@ -19,7 +20,9 @@ public import BostConjecture.Adelic.Slope.BoolTensor -- shake: keep
 public import BostConjecture.Adelic.Slope.Contraction -- shake: keep
 public import BostConjecture.Adelic.Slope.CovolumeLimit -- shake: keep
 public import BostConjecture.Adelic.Slope.DeterminantSpecht -- shake: keep
+public import BostConjecture.Adelic.Slope.DeterminantSpechtTensor -- shake: keep
 public import BostConjecture.Adelic.Slope.DualQuotient -- shake: keep
+public import BostConjecture.Adelic.Specht.Semistability -- shake: keep
 
 /-!
 # Bost's tensor semistability conjecture
