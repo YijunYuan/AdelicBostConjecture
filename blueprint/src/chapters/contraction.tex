@@ -4,6 +4,7 @@ Let $S=(K,\Omega,\mathcal A,\nu,\phi)$ be a proper adelic curve over a
 countable field of characteristic zero. Write $K_\omega$ for the completion
 of $K$ at $\omega$. At an Archimedean place its absolute value is the usual
 real or complex absolute value. All vector spaces below have finite dimension.
+All adelic bundles in this chapter are Hermitian.
 The fibre of a bundle $\overline A$ is $A_\omega=K_\omega\otimes_K A$,
 with its prescribed norm. Duals carry operator norms, subspaces induced norms,
 and tensor products Hilbert norms at infinity and epsilon norms elsewhere.
@@ -37,7 +38,9 @@ trivially valued case and the identifications on completed fibres.
 \lean{BostConjecture.Adelic.Contraction.exists_basis_coord_bound}
 Let $F$ be a complete non-Archimedean valued field, possibly trivially valued,
 and let $A$ be an ultrametric normed $F$-space of dimension $a$. For every
-$0<\alpha<1$ there is a basis $b_1,\ldots,b_a$ such that
+$0<\alpha<1$ there is a basis $b_1,\ldots,b_a$ whose coordinate functionals
+satisfy $\alpha\|b_i\||b_i^*(x)|\leq\|x\|$ for every $i,x$.
+Together with the ultrametric triangle inequality this says
 \[
  \alpha\max_i |z_i|\|b_i\|
  \leq\Big\|\sum_i z_i b_i\Big\|
@@ -64,6 +67,10 @@ inequality. The construction uses an infimum over vectors, not a scalar
 of a prescribed absolute value, so it applies to a trivial valuation.
 \end{proof}
 
+The following weighted estimate expands the determinant step on page 25 of
+this paper. Its arbitrary weights make explicit the calculation used there
+with $w_i=\alpha\|b_i\|$.
+
 \begin{lemma}[Weighted determinant estimate]
 \label{lem:contraction-weighted-determinant}
 \source{bost-adelic-2026:page-0025}
@@ -86,15 +93,14 @@ $\prod_i\|x_{\sigma(i)}\|=\prod_j\|x_j\|$.
 The signs have absolute value one. There is no factorial factor.
 \end{proof}
 
-\begin{lemma}[The completed determinant lower bound]
+\begin{lemma}[Determinant lower bound]
 \label{lem:contraction-completed-determinant}
 \uses{lem:contraction-weighted-determinant}
 \source{bost-adelic-2026:page-0025}
 \lean{BostConjecture.Adelic.Contraction.determinant_norm_basis_ge}
 Fix a non-Archimedean place $\omega$ and a basis $b$ of $A_\omega$.
-If $\alpha>0$ and
-$\alpha\|b_i\||b_i^*(x)|\leq\|x\|$ for all $i,x$, then, with
-$\eta_b=b_1\wedge\cdots\wedge b_a$,
+Suppose $\alpha>0$ and $\alpha\|b_i\||b_i^*(x)|\leq\|x\|$ for all
+$i,x$. Set $\eta_b=b_1\wedge\cdots\wedge b_a$. Then
 \[
  \|\eta_b\|_{\det A,\omega}\geq
                   \alpha^a\prod_i\|b_i\|_\omega.
@@ -230,11 +236,15 @@ taking the supremum over $x$ proves the assertion about transposes.
 \uses{def:constant-specht}
 \source{bost-adelic-2026:page-0026}
 \lean{BostConjecture.Adelic.Contraction.injective_freeLatticeMap_le}
-Let $F$ be complete and non-Archimedean, let $b_1,\ldots,b_a$ be a basis
-of a finite-dimensional normed $F$-space $A$, and let $c_1,\ldots,c_f$
-be any integral basis of $L_{a,ak}$. For
-$x=\sum_h z_hc_h\in F\otimes_{\mathbb Z}L_{a,ak}$ let $b^{\otimes ak}x$
-denote substitution of $b_i$ for the $i$-th letter. Then
+Let $F$ be a complete field with an ultrametric absolute value.
+Let $b_1,\ldots,b_a$ be a basis of a finite-dimensional normed $F$-space $A$,
+and let $c_1,\ldots,c_f$
+be any integral basis of $L_{a,ak}$. Write
+\[
+ x=\sum_h z_hc_h\in F\otimes_{\mathbb Z}L_{a,ak}.
+\]
+Let $b^{\otimes ak}x$ denote substitution of $b_i$ for the $i$-th letter.
+Then
 \[
  \|b^{\otimes ak}x\|_\varepsilon
  \leq\left(\prod_{i=1}^a\|b_i\|\right)^k\max_h|z_h|.
@@ -257,7 +267,7 @@ expansion of $c_h$, and then to $\sum_hz_hc_h$, proves the bound.
 \label{lem:contraction-determinant-base-change}
 \uses{def:canonical-pairing,def:constant-specht}
 \source{bost-adelic-2026:page-0025}
-\notready
+\lean{BostConjecture.Geometry.projectiveDeterminantMap_baseChange_of_basis,BostConjecture.Geometry.freeDeterminantMap_baseChange}
 The canonical determinant embedding
 $\iota_A:(\det A)^{\otimes k}\otimes(K\otimes_{\mathbb Z}L_{a,ak})
 \to A^{\otimes ak}$ commutes with field extension. In particular, under
@@ -283,13 +293,14 @@ lattice after scalar extension. Thus both sides of the defining rule
 transform by $\det(g)^k$, proving the formula for every $b$.
 \end{proof}
 
-\begin{lemma}[Non-Archimedean determinant embedding]
+\begin{lemma}[Finite-place determinant embedding]
 \label{lem:contraction-finite-specht}
 \uses{lem:contraction-nearly-orthogonal-basis,lem:contraction-completed-determinant,lem:contraction-epsilon-coordinates,lem:contraction-balanced-words,lem:contraction-determinant-base-change}
 \source{bost-adelic-2026:page-0025,bost-adelic-2026:page-0026}
 \notready
-For every non-Archimedean place $\omega$ and every
-$z\in S_{a,ak}(A)_\omega$, the actual completed determinant embedding satisfies
+Fix $\omega\in\Omega\setminus\Omega_\infty$.
+The actual completed determinant embedding satisfies, for all
+$z\in S_{a,ak}(A)_\omega$,
 \[
  \|\iota_{A,\omega}(z)\|_\varepsilon\leq\|z\|_{S_{a,ak}(A),\omega}.
 \]
@@ -317,9 +328,9 @@ discreteness or nontriviality of the valuation.
 \uses{def:constant-specht,lem:contraction-determinant-base-change}
 \source{bost-adelic-2026:page-0025}
 \notready
-At every Archimedean place $\omega$, the completed determinant embedding
-$\iota_{A,\omega}$ is an isometry for the prescribed determinant, Specht,
-and Hilbert tensor norms.
+At an Archimedean place $\omega$, the map $\iota_{A,\omega}$ on completed
+fibres is an isometry for the prescribed determinant, Specht, and Hilbert
+tensor norms.
 \end{lemma}
 \begin{proof}
 Identify $K_\omega$ isometrically with $\mathbb R$ or $\mathbb C$, and
@@ -366,7 +377,7 @@ regrouping. The canonical pairing of Definition~\ref{def:canonical-pairing} is
 \label{lem:contraction-pairing-base-change}
 \uses{def:canonical-pairing,lem:contraction-determinant-base-change}
 \source{bost-adelic-2026:page-0026}
-\notready
+\lean{BostConjecture.Geometry.canonicalPairing_baseChange}
 For every place, the scalar extension $\Psi_{d,\omega}$ is the same
 composite on completed fibres:
 \[
@@ -386,8 +397,7 @@ $(r\otimes\lambda)(t\otimes x)=rt\lambda(x)$ for $r,t\in K_\omega$.
 These identities prove the formula on determinant generators and lattice
 basis vectors on both sides of the pairing. Such generators span $B_d$ and
 $D_d$ after extension; bilinearity therefore proves it for all completed
-vectors. Finite-dimensional dual base change is an isomorphism, and the
-completed dual norm is the operator norm under that identification.
+vectors. Finite-dimensional dual base change is an isomorphism.
 \end{proof}
 
 \begin{lemma}[Local canonical pairing contraction]
