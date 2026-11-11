@@ -86,27 +86,15 @@ variable {d : ℕ}
   (bD : ∀ i, Basis (Fin (finrank K (K ⊗[ℤ] orbitLattice (tD i)))) ℤ
     (orbitLattice (tD i)))
 
--- Cache each auxiliary factor before elaborating the iterated tensor dual.
-local instance (i : ι) : FiniteDimensional K
-    ((⨂[K] (_ : Fin (k i)), ⋀[K]^(finrank K (Dual K (E i))) (Dual K (E i))) ⊗[K]
-      (K ⊗[ℤ] orbitLattice (tD i))) := by
-  let : FiniteDimensional K (Dual K (E i)) := inferInstance
-  let : FiniteDimensional K (⋀[K]^(finrank K (Dual K (E i))) (Dual K (E i))) :=
-    inferInstance
-  let : FiniteDimensional K
-      (⨂[K] (_ : Fin (k i)), ⋀[K]^(finrank K (Dual K (E i))) (Dual K (E i))) :=
-    PiTensorProduct.finite
-  infer_instance
-
-omit [Fintype ι] in
-local instance [Finite ι] : FiniteDimensional K
-    (⨂[K] i, (⨂[K] (_ : Fin (k i)), ⋀[K]^(finrank K (Dual K (E i))) (Dual K (E i))) ⊗[K]
-      (K ⊗[ℤ] orbitLattice (tD i))) := PiTensorProduct.finite
-
+-- Use the field-specific dual instance to avoid searching for projectivity
+-- through every layer of the nested auxiliary tensor.
 omit [Fintype ι] in
 local instance [Finite ι] : FiniteDimensional K (Dual K
     (⨂[K] i, (⨂[K] (_ : Fin (k i)), ⋀[K]^(finrank K (Dual K (E i))) (Dual K (E i))) ⊗[K]
-      (K ⊗[ℤ] orbitLattice (tD i)))) := Subspace.instModuleDualFiniteDimensional
+      (K ⊗[ℤ] orbitLattice (tD i)))) :=
+  Subspace.instModuleDualFiniteDimensional (K := K)
+    (V := ⨂[K] i, (⨂[K] (_ : Fin (k i)),
+      ⋀[K]^(finrank K (Dual K (E i))) (Dual K (E i))) ⊗[K] (K ⊗[ℤ] orbitLattice (tD i)))
 
 /-- The right-hand slope in Section 6: apply the auxiliary construction to
 the actual duals of the original factors, then dualize their tensor product. -/
