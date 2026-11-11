@@ -6,7 +6,7 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Geometry.Polynomial.Tensor
-public import BostConjecture.ExternalCode.TauCeti.LinearAlgebra.SymmetricPower.Algebra
+public import BostConjecture.ExternalResults.InvariantBridge.SymmetricPower
 public import BostConjecture.InvariantTheory.Polynomial.Action
 
 /-!
@@ -26,72 +26,74 @@ namespace BostConjecture.Geometry
 open Module PiTensorProduct InvariantTheory
 open scoped TensorProduct
 
-variable {F : Type} [Field F] {X Y : Type*}
+variable {F : Type*} [Field F] {X Y : Type*}
   [AddCommGroup X] [Module F X] [AddCommGroup Y] [Module F Y]
 
 /-- The symmetric quotient multiplication is the existing polynomial tensor map. -/
 theorem toSymmetricAlgebra_mk {d : ℕ} (u : ⨂[F] (_ : Fin d), Dual F X) :
-    TauCeti.SymmetricPower.toSymmetricAlgebra F (Dual F X) d
-      (_root_.SymmetricPower.mk F (Fin d) (Dual F X) u) = polynomialTensorMap F X d u := by
+    TauCeti.SymmetricPower.finiteToSymmetricAlgebra F (Dual F X) d
+      (TauCeti.SymmetricPower.finiteMk F (Dual F X) d u) = polynomialTensorMap F X d u := by
   induction u using PiTensorProduct.induction_on with
   | smul_tprod r ℓ =>
     simp only [map_smul, polynomialTensorMap_tprod]
     congr 1
-    exact TauCeti.SymmetricPower.toSymmetricAlgebra_tprod F (Dual F X) d ℓ
+    simpa only [TauCeti.SymmetricPower.finiteMk_tprod] using
+      TauCeti.SymmetricPower.finiteToSymmetricAlgebra_tprod F (Dual F X) d ℓ
   | add u v hu hv => simp only [map_add, hu, hv]
 
 /-- The generic homogeneous comparison specialized to the established intrinsic
 polynomial degree space, with its canonical module structure. -/
-def symmetricPowerPolynomialEquiv (F : Type) [Field F]
+def symmetricPowerPolynomialEquiv (F : Type*) [Field F]
     (X : Type*) [AddCommGroup X] [Module F X] (d : ℕ) :
-    _root_.SymmetricPower F (Fin d) (Dual F X) ≃ₗ[F] homogeneousPolynomials F X d :=
-  TauCeti.SymmetricPower.equivHomogeneous d
+    TauCeti.SymmetricPower.FinitePower F (Dual F X) d ≃ₗ[F] homogeneousPolynomials F X d :=
+  TauCeti.SymmetricPower.finiteEquivHomogeneous d
 
 @[simp]
-theorem symmetricPowerPolynomialEquiv_coe {d : ℕ} (u : _root_.SymmetricPower F (Fin d) (Dual F X)) :
+theorem symmetricPowerPolynomialEquiv_coe {d : ℕ}
+    (u : TauCeti.SymmetricPower.FinitePower F (Dual F X) d) :
     (symmetricPowerPolynomialEquiv F X d u : SymmetricAlgebra F (Dual F X)) =
-      TauCeti.SymmetricPower.toSymmetricAlgebra F (Dual F X) d u :=
-  TauCeti.SymmetricPower.coe_equivHomogeneous_apply d u
+      TauCeti.SymmetricPower.finiteToSymmetricAlgebra F (Dual F X) d u :=
+  TauCeti.SymmetricPower.coe_finiteEquivHomogeneous_apply d u
 
 private theorem toSymmetricAlgebra_symm {d : ℕ} (p : homogeneousPolynomials F X d) :
-    TauCeti.SymmetricPower.toSymmetricAlgebra F (Dual F X) d
+    TauCeti.SymmetricPower.finiteToSymmetricAlgebra F (Dual F X) d
       ((symmetricPowerPolynomialEquiv F X d).symm p) = p := by
   rw [← symmetricPowerPolynomialEquiv_coe,
     LinearEquiv.apply_symm_apply]
 
 private theorem toSymmetricAlgebra_map_dual {d : ℕ} (f : X →ₗ[F] Y)
-    (u : _root_.SymmetricPower F (Fin d) (Dual F Y)) :
-    TauCeti.SymmetricPower.toSymmetricAlgebra F (Dual F X) d
+    (u : TauCeti.SymmetricPower.FinitePower F (Dual F Y) d) :
+    TauCeti.SymmetricPower.finiteToSymmetricAlgebra F (Dual F X) d
       (_root_.SymmetricPower.map f.dualMap u) = polynomialPullback f
-        (TauCeti.SymmetricPower.toSymmetricAlgebra F (Dual F Y) d u) := by
-  have h : (TauCeti.SymmetricPower.toSymmetricAlgebra F (Dual F X) d).comp
+        (TauCeti.SymmetricPower.finiteToSymmetricAlgebra F (Dual F Y) d u) := by
+  have h : (TauCeti.SymmetricPower.finiteToSymmetricAlgebra F (Dual F X) d).comp
         (_root_.SymmetricPower.map f.dualMap) =
       (polynomialPullback f).toLinearMap.comp
-        (TauCeti.SymmetricPower.toSymmetricAlgebra F (Dual F Y) d) := by
-    apply _root_.SymmetricPower.ext
+        (TauCeti.SymmetricPower.finiteToSymmetricAlgebra F (Dual F Y) d) := by
+    apply TauCeti.SymmetricPower.finite_ext
     intro ℓ
     simp
     rfl
   exact LinearMap.congr_fun h u
 
 /-- The quotient of symmetrization is multiplication by the degree factorial. -/
-theorem polynomialTensorMap_toTensorPower {d : ℕ} (u : _root_.SymmetricPower F (Fin d) (Dual F X)) :
-    polynomialTensorMap F X d (_root_.SymmetricPower.toTensorPower F (Fin d) (Dual F X) u) =
-      (d.factorial : F) • TauCeti.SymmetricPower.toSymmetricAlgebra F (Dual F X) d u := by
+theorem polynomialTensorMap_toTensorPower {d : ℕ}
+    (u : TauCeti.SymmetricPower.FinitePower F (Dual F X) d) :
+    polynomialTensorMap F X d (TauCeti.SymmetricPower.finiteToTensorPower F (Dual F X) d u) =
+      (d.factorial : F) • TauCeti.SymmetricPower.finiteToSymmetricAlgebra F (Dual F X) d u := by
   rw [← toSymmetricAlgebra_mk]
   have h := LinearMap.congr_fun
-    (_root_.SymmetricPower.mk_comp_toTensorPower (R := F) (ι := Fin d) (M := Dual F X)) u
-  simp only [LinearMap.comp_apply, LinearMap.smul_apply, LinearMap.id_apply,
-    Fintype.card_fin] at h
+    (TauCeti.SymmetricPower.finiteMk_comp_toTensorPower F (Dual F X) d) u
+  simp only [LinearMap.comp_apply, LinearMap.smul_apply, LinearMap.id_apply] at h
   rw [h, map_nsmul, Nat.cast_smul_eq_nsmul]
 
 variable [CharZero F]
 
 /-- The canonical normalized symmetric lift of an intrinsic homogeneous polynomial. -/
-def polynomialSymmetricLift (F : Type) [Field F] [CharZero F]
+def polynomialSymmetricLift (F : Type*) [Field F] [CharZero F]
     (X : Type*) [AddCommGroup X] [Module F X] (d : ℕ) :
     homogeneousPolynomials F X d →ₗ[F] (⨂[F] (_ : Fin d), Dual F X) :=
-  ((d.factorial : F)⁻¹ • _root_.SymmetricPower.toTensorPower F (Fin d) (Dual F X)).comp
+  ((d.factorial : F)⁻¹ • TauCeti.SymmetricPower.finiteToTensorPower F (Dual F X) d).comp
     (symmetricPowerPolynomialEquiv F X d).symm.toLinearMap
 
 /-- The symmetric lift is a section of the actual homogeneous polynomial quotient. -/
@@ -113,14 +115,15 @@ theorem polynomialSymmetricLift_pullback {d : ℕ} (f : X →ₗ[F] Y)
         ⟨polynomialPullback f p, polynomialPullback_mem_homogeneous f p.property⟩ =
       _root_.SymmetricPower.map f.dualMap
         ((symmetricPowerPolynomialEquiv F Y d).symm p) := by
-    apply TauCeti.SymmetricPower.toSymmetricAlgebra_injective d
+    apply TauCeti.SymmetricPower.finiteToSymmetricAlgebra_injective d
     rw [toSymmetricAlgebra_symm, toSymmetricAlgebra_map_dual, toSymmetricAlgebra_symm]
   change PiTensorProduct.map (fun _ : Fin d => f.dualMap) ((d.factorial : F)⁻¹ • _) =
     (d.factorial : F)⁻¹ • _
   simp only [map_smul, LinearEquiv.coe_coe]
   rw [h]
   congr 1
-  exact (LinearMap.congr_fun (_root_.SymmetricPower.toTensorPower_comp_map f.dualMap) _).symm
+  exact (LinearMap.congr_fun
+    (TauCeti.SymmetricPower.finiteToTensorPower_comp_map F (Dual F Y) d f.dualMap) _).symm
 
 /-- Invariant homogeneous polynomials have invariant tensor lifts with the same
 nonzero canonical evaluation. -/

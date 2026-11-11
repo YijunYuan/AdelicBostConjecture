@@ -170,10 +170,71 @@ $j_n:D_n\to(W^{\vee})^{\otimes n}$. Define the original-field pairing
 The brackets are algebraic tensor evaluation; no averaging operator is part
 of this definition.
 
+\begin{lemma}[Semistability of the determinant--Specht bundle]
+\label{lem:determinant-specht-semistability}
+\source{bost-adelic-2026:page-0026}
+\uses{lem:specht-semistability,cor:group-line-twist-semistability}
+\notready
+For every positive-rank Hermitian adelic bundle $\overline A$ of rank $a$
+and every positive multiple $n=ak$, the actual bundle
+$S_{a,n}(\overline A)$ and its dual are mean-slope semistable.
+\end{lemma}
+\begin{proof}
+The power $(\det\overline A)^{\otimes k}$ is a Hermitian line. Give it the
+trivial action of $\mathfrak S_n$, and give $\overline L^S_{a,n}$ its
+position-permutation action. The latter is absolutely irreducible and
+preserves the completed norms. After every field extension, a nonzero vector
+of the line identifies the tensor representation with the Specht
+representation. The tensor action is therefore absolutely irreducible and
+isometric. The line-twist semistability theorem applies to the actual
+orthogonal tensor bundle. Its dual is semistable by Hermitian slope duality.
+No semistability of $\overline A$ enters this argument.
+\end{proof}
+
+\begin{lemma}[Independent products of determinant--Specht bundles]
+\label{lem:determinant-specht-product-semistability}
+\source{bost-adelic-2026:page-0027}
+\uses{lem:determinant-specht-semistability,lem:independent-group-semistability}
+\notready
+For a finite family of positive-rank Hermitian bundles $\overline A_i$,
+choose positive multiples $n_i=a_i k_i$ of their ranks. Then
+$\bigotimes_i S_{a_i,n_i}(\overline A_i)$ and its dual are mean-slope
+semistable with their actual orthogonal tensor and dual norms.
+\end{lemma}
+\begin{proof}
+Each factor carries the absolutely irreducible isometric action constructed
+in the preceding proof. Let $\prod_i\mathfrak S_{n_i}$ act by its separate
+coordinates on the tensor factors. Over an algebraic closure each factor
+remains irreducible, so the independent-group semistability theorem applies
+to this product action. It gives semistability of the orthogonal tensor
+bundle and its dual. In particular it applies to $D_n$ and $D_n^{\vee}$;
+no assertion about irreducibility of the diagonal subgroup is needed.
+\end{proof}
+
+\begin{lemma}[The rectangular auxiliary slope]
+\label{lem:determinant-specht-slope}
+\source{bost-adelic-2026:page-0026}
+\uses{lem:determinant-power-slope,lem:specht-degree,lem:tensor-slope}
+\notready
+For a positive-rank Hermitian adelic bundle $\overline A$ of rank $a$ and
+$n=ak>0$, the auxiliary bundle has slope
+\[
+ \widehat\mu(S_{a,n}(\overline A))
+   =n\widehat\mu(\overline A)-m_\infty C_a(k).
+\]
+\end{lemma}
+\begin{proof}
+Both factors have positive rank. The binary tensor-slope formula makes
+the slope their sum. The determinant power contributes
+$k\widehat{\deg}(\overline A)=ka\widehat\mu(\overline A)$,
+and the actual rectangular lattice contributes $-m_\infty C_a(k)$.
+Since $ka=n$, their sum is the displayed expression.
+\end{proof}
+
 \begin{lemma}[The finite-degree geometric slope bound]
 \label{lem:finite-degree-geometric-slope}
 \source{bost-adelic-2026:page-0026,bost-adelic-2026:page-0027}
-\uses{lem:semistable-contraction-slope,lem:determinant-power-slope,lem:specht-degree,lem:specht-semistability,cor:group-line-twist-semistability,lem:independent-group-semistability,lem:slope-duality,lem:local-pairing-contraction}
+\uses{lem:semistable-contraction-slope,lem:determinant-specht-semistability,lem:determinant-specht-product-semistability,lem:determinant-specht-slope,lem:tensor-slope,lem:slope-duality,lem:local-pairing-contraction}
 \notready
 In the preceding setting, if $\Psi_n\neq0$, then
 \[
@@ -183,26 +244,16 @@ In the preceding setting, if $\Psi_n\neq0$, then
 \]
 \end{lemma}
 \begin{proof}
-The permutation action on each rectangular Specht lattice is absolutely
-irreducible and preserves every completed lattice norm. Give each determinant
-line power the trivial action. Tensoring the lattice representation with this
-one-dimensional trivial representation preserves absolute irreducibility:
-after any field extension, choosing a nonzero vector of the line identifies
-the resulting representation with the lattice representation. The action
-preserves the tensor norm because it preserves both factor norms. All these
-bundles are Hermitian.
-
-Consequently $B_n$ is semistable. Each factor of $D_n$ has its own
-permutation group action, so the independent-group semistability theorem
-makes $D_n$ and $D_n^{\vee}$ semistable. This assertion uses the product of
-the groups, not their diagonal subgroup.
+The determinant--Specht semistability lemma makes $B_n$ semistable, and the
+independent-product lemma makes $D_n$ and $D_n^{\vee}$ semistable.
+All these bundles are Hermitian.
 The local pairing contraction gives $\|\Psi_{n,\omega}\|\leq1$ at every
 place. Since $\Psi_n\neq0$, the semistable contraction comparison yields
 \[
  \widehat\mu(B_n)\leq\widehat\mu(D_n^{\vee}).
 \]
 
-The lattice degree formula and the determinant-power formula give
+The rectangular auxiliary slope formula gives
 \[
  \widehat\mu(B_n)=n\widehat\mu(\overline U)-m_\infty C_s(n/s).
 \]

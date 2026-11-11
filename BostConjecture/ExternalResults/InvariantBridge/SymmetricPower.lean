@@ -51,6 +51,14 @@ theorem finiteTprod_perm (n : ℕ) (m : Fin n → M) (e : Equiv.Perm (Fin n)) :
     (fun i : ULift.{u} (Fin n) ↦ m i.down)
   simpa [finiteTprod, MultilinearMap.domDomCongr_apply, Function.comp_def] using h
 
+/-- The symmetric-power map acts componentwise in finite coordinates. -/
+@[simp]
+theorem finiteMap_tprod {N : Type w} [AddCommMonoid N] [Module R N]
+    (f : M →ₗ[R] N) (n : ℕ) (m : Fin n → M) :
+    _root_.SymmetricPower.map f (finiteTprod R M n m) =
+      finiteTprod R N n (fun i ↦ f (m i)) := by
+  simp [finiteTprod, MultilinearMap.domDomCongr_apply]
+
 variable {R M}
 
 /-- A linear map on the lifted symmetric power is determined by finite pure tensors. -/
@@ -302,5 +310,46 @@ noncomputable def finiteEquivHomogeneous (n : ℕ) :
 theorem coe_finiteEquivHomogeneous_apply (n : ℕ) (x : FinitePower R M n) :
     (finiteEquivHomogeneous n x : SymmetricAlgebra R M) =
       finiteToSymmetricAlgebra R M n x := rfl
+
+variable (R M)
+
+/-- The ordinary tensor-power quotient, transported to the lifted index. -/
+noncomputable def finiteMk (n : ℕ) : (⨂[R] (_ : Fin n), M) →ₗ[R] FinitePower R M n :=
+  (_root_.SymmetricPower.mk R (ULift.{u} (Fin n)) M).comp
+    (PiTensorProduct.reindex R (fun _ : Fin n ↦ M) Equiv.ulift.symm).toLinearMap
+
+/-- The quotient sends ordinary pure tensors to their finite symmetric tensors. -/
+@[simp]
+theorem finiteMk_tprod (n : ℕ) (m : Fin n → M) :
+    finiteMk R M n (PiTensorProduct.tprod R m) = finiteTprod R M n m := by
+  simp [finiteMk, finiteTprod, MultilinearMap.domDomCongr_apply,
+    _root_.SymmetricPower.tprod]
+
+/-- Symmetrization followed by reindexing to ordinary finite tensor positions. -/
+noncomputable def finiteToTensorPower (n : ℕ) :
+    FinitePower R M n →ₗ[R] (⨂[R] (_ : Fin n), M) :=
+  (PiTensorProduct.reindex R (fun _ : ULift.{u} (Fin n) ↦ M) Equiv.ulift).toLinearMap.comp
+    (_root_.SymmetricPower.toTensorPower R (ULift.{u} (Fin n)) M)
+
+/-- The quotient of finite symmetrization is multiplication by the degree factorial. -/
+theorem finiteMk_comp_toTensorPower (n : ℕ) :
+    finiteMk R M n ∘ₗ finiteToTensorPower R M n =
+      n.factorial • LinearMap.id (R := R) (M := FinitePower R M n) := by
+  have h := _root_.SymmetricPower.mk_comp_toTensorPower
+    (R := R) (ι := ULift.{u} (Fin n)) (M := M)
+  apply LinearMap.ext
+  intro x
+  simpa only [finiteMk, finiteToTensorPower, LinearMap.comp_apply, LinearEquiv.coe_coe,
+    ← PiTensorProduct.reindex_symm, LinearEquiv.symm_apply_apply, Fintype.card_ulift,
+    Fintype.card_fin] using LinearMap.congr_fun h x
+
+/-- Symmetrization in finite coordinates commutes with every linear map. -/
+theorem finiteToTensorPower_comp_map {N : Type w} [AddCommMonoid N] [Module R N]
+    (n : ℕ) (f : M →ₗ[R] N) :
+    finiteToTensorPower R N n ∘ₗ _root_.SymmetricPower.map f =
+      (PiTensorProduct.map fun _ : Fin n ↦ f) ∘ₗ finiteToTensorPower R M n := by
+  apply finite_ext
+  intro m
+  simp [finiteToTensorPower, finiteTprod, MultilinearMap.domDomCongr_apply]
 
 end TauCeti.SymmetricPower
