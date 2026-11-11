@@ -161,14 +161,6 @@
   "current_source_tree": {
     "note": "The preceding hashes and verification records describe the historical extraction. These current paths identify the reorganized sources; original proof declarations remain in their upstream namespaces except for the explicitly documented project word-model adaptation.",
     "modules": [
-      "BostConjecture/ExternalCode/OAI/NumberTheory/ArithmeticGroups/Lattices/BasisLift.lean",
-      "BostConjecture/ExternalCode/OAI/NumberTheory/ArithmeticGroups/Lattices/BoundedBasis.lean",
-      "BostConjecture/ExternalCode/OAI/NumberTheory/ArithmeticGroups/Lattices/FrameMatrices.lean",
-      "BostConjecture/ExternalCode/OAI/NumberTheory/ArithmeticGroups/Lattices/Minkowski/Ellipsoid.lean",
-      "BostConjecture/ExternalCode/OAI/NumberTheory/ArithmeticGroups/Lattices/OrthogonalStretch.lean",
-      "BostConjecture/ExternalCode/OAI/NumberTheory/ArithmeticGroups/Lattices/ProjectedLattice.lean",
-      "BostConjecture/ExternalCode/OAI/NumberTheory/ArithmeticGroups/Lattices/ShortestVector.lean",
-      "BostConjecture/ExternalCode/OAI/NumberTheory/ArithmeticGroups/Lattices/UniformShortSpan.lean",
       "BostConjecture/ExternalCode/OAI/RepresentationTheory/Saxl/Basic.lean",
       "BostConjecture/ExternalCode/OAI/RepresentationTheory/Saxl/Model.lean",
       "BostConjecture/ExternalCode/OAI/RepresentationTheory/Saxl/Polytabloid.lean",
@@ -183,6 +175,38 @@
       "Localized classical inference to proofs, removed unused DecidableEq from finset_eq_of_signed_sum, and removed unused Fintype/DecidableEq from continuous_basis_matrix."
     ],
     "files": [
+      {
+        "path": "BostConjecture/ExternalCode/OAI/RepresentationTheory/Saxl/Basic.lean",
+        "sha256": "1607375b1a89561ebb1fa0e9e08a6f24364c355034f02c8df7cdffdf8d0f940f"
+      },
+      {
+        "path": "BostConjecture/ExternalCode/OAI/RepresentationTheory/Saxl/Model.lean",
+        "sha256": "7c3c65880a635387ef5a07ab54fe7a28a3649c983060adab89f105f2a277773d"
+      },
+      {
+        "path": "BostConjecture/ExternalCode/OAI/RepresentationTheory/Saxl/Polytabloid.lean",
+        "sha256": "6c8e162e76325b50382268073f8a60a7961b28119c6dcba8aae64ef88db56764"
+      },
+      {
+        "path": "BostConjecture/ExternalCode/OAI/RepresentationTheory/Saxl/SpechtSubmodule.lean",
+        "sha256": "c41272417ed0cf8e8af89831dfd28b3c47e71c3c1ef3f12aae27a363a2a7c1bf"
+      }
+    ]
+  },
+  "main_theorem_pruning": {
+    "date": "2026-11-11",
+    "reason": "The adelic Theorem 1.1 does not use the number-field Mahler compactness branch.",
+    "removed_modules": [
+      "BostConjecture.ExternalCode.OAI.NumberTheory.ArithmeticGroups.Lattices.BasisLift",
+      "BostConjecture.ExternalCode.OAI.NumberTheory.ArithmeticGroups.Lattices.BoundedBasis",
+      "BostConjecture.ExternalCode.OAI.NumberTheory.ArithmeticGroups.Lattices.FrameMatrices",
+      "BostConjecture.ExternalCode.OAI.NumberTheory.ArithmeticGroups.Lattices.Minkowski.Ellipsoid",
+      "BostConjecture.ExternalCode.OAI.NumberTheory.ArithmeticGroups.Lattices.OrthogonalStretch",
+      "BostConjecture.ExternalCode.OAI.NumberTheory.ArithmeticGroups.Lattices.ProjectedLattice",
+      "BostConjecture.ExternalCode.OAI.NumberTheory.ArithmeticGroups.Lattices.ShortestVector",
+      "BostConjecture.ExternalCode.OAI.NumberTheory.ArithmeticGroups.Lattices.UniformShortSpan"
+    ],
+    "removed_local_files": [
       {
         "path": "BostConjecture/ExternalCode/OAI/NumberTheory/ArithmeticGroups/Lattices/BasisLift.lean",
         "sha256": "8e6eba722a74450bd9219e1de7e2aaa87e2989d3d00b19c88d20130fbbd936fc"
@@ -214,11 +238,9 @@
       {
         "path": "BostConjecture/ExternalCode/OAI/NumberTheory/ArithmeticGroups/Lattices/UniformShortSpan.lean",
         "sha256": "7be062d8081cc65f597bd452e9fabbdfbb7f92a2282cd270532bac2c0a531067"
-      },
-      {
-        "path": "BostConjecture/ExternalCode/OAI/RepresentationTheory/Saxl/Basic.lean",
-        "sha256": "1607375b1a89561ebb1fa0e9e08a6f24364c355034f02c8df7cdffdf8d0f940f"
-      },
+      }
+    ],
+    "previous_current_file_records": [
       {
         "path": "BostConjecture/ExternalCode/OAI/RepresentationTheory/Saxl/Model.lean",
         "sha256": "84e57d841a81347c2b8c45d0c2ab0f7f4e1bb37c4083ba7a3b24e48807c06b05"
@@ -231,6 +253,7 @@
         "path": "BostConjecture/ExternalCode/OAI/RepresentationTheory/Saxl/SpechtSubmodule.lean",
         "sha256": "9f0e44805da69eebbf22ded7985407964c11ea46fd0f0c90574d274598ebc630"
       }
-    ]
+    ],
+    "hash_refresh_note": "Current-tree hashes refreshed from retained files during pruning. Historical extraction hashes above and superseded current-file records here are preserved; the retained Specht sources were not edited by this pruning."
   }
 }

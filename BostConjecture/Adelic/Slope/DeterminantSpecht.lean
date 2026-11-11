@@ -9,7 +9,7 @@ public import BostConjecture.Adelic.Slope.DeterminantPower
 public import BostConjecture.Adelic.Specht.Degree
 public import BostConjecture.Adelic.Semistability.Specht
 public import BostConjecture.Adelic.Semistability.LineTensor
-public import BostConjecture.Adelic.Specht.Semistability
+public import BostConjecture.Adelic.Specht.Permutation
 public import ArakelovGeometry.AdelicVectorBundle.Slope.Tensor
 
 /-!

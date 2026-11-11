@@ -34,7 +34,7 @@ open Module ArakelovGeometry ArakelovGeometry.AdelicVectorBundle Specht
 universe u v w
 
 variable {K : Type u} [Field K] [CharZero K] {S : AdelicStructure.{u, v} K}
-  [S.IsProper] {ι : Type w} [Fintype ι] [Nonempty ι]
+  [S.IsProper] {ι : Type w} [Fintype ι]
   {E : ι → Type u} [∀ i, AddCommGroup (E i)] [∀ i, Module K (E i)]
   [∀ i, FiniteDimensional K (E i)]
   (V : ∀ i, AdelicVectorBundle S (E i))
@@ -73,6 +73,9 @@ theorem canonicalPairing_finite_degree_bound_of_norm_le
         (S.v S.Ωinf).toReal * rectangleLogCovolume (finrank K F) l ≤
       (n : ℝ) * ∑ i, (V i).slope (Or.inr hcount) hN +
         (S.v S.Ωinf).toReal * ∑ i, rectangleLogCovolume (finrank K (E i)) (k i) := by
+  let : ∀ i, AddCommGroup ((⨂[K] (_ : Fin (k i)),
+      ⋀[K]^(finrank K (Dual K (E i))) (Dual K (E i))) ⊗[K] (K ⊗[ℤ] orbitLattice (t i))) :=
+    fun _ ↦ Module.addCommMonoidToAddCommGroup K
   let D := orthogonalTensorOfMeasurableBase
     (fun i => determinantSpechtBundle ((V i).dualOfMeasurableBase (Or.inr hcount))
       hN hcount (k i) (t i) (b i)) (Or.inr hcount) hN
@@ -85,7 +88,7 @@ theorem canonicalPairing_finite_degree_bound_of_norm_le
     (determinantSpechtBundle_tensor_isMeanSlopeSemistable_and_dual
       (fun i => (V i).dualOfMeasurableBase (Or.inr hcount)) hN hcount k t b).2
     (BostConjecture.Geometry.canonicalPairing E hk t ha hl v hs A) hA hcontract
-  rw [determinantSpechtBundle_slope_rectangle,
+  erw [determinantSpechtBundle_slope_rectangle,
     determinantSpechtBundle_dual_tensor_dual_slope_rectangle V hN hcount k t b hV] at hcmp
   exact hcmp
 

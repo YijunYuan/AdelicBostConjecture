@@ -6,7 +6,7 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Geometry.Polynomial.Tensor
-public import BostConjecture.ExternalResults.TauCeti.LinearAlgebra.SymmetricPower.Finite
+public import BostConjecture.ExternalCode.TauCeti.LinearAlgebra.SymmetricPower.Finite
 public import BostConjecture.InvariantTheory.Polynomial.Action
 
 /-!

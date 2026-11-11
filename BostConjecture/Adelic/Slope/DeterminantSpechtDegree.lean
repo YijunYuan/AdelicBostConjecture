@@ -29,7 +29,7 @@ open ArakelovGeometry ArakelovGeometry.AdelicVectorBundle Specht Module
 universe u v w
 
 variable {K : Type u} [Field K] [CharZero K] {S : AdelicStructure.{u, v} K}
-  [S.IsProper] {ι : Type w} [Fintype ι] [Nonempty ι]
+  [S.IsProper] {ι : Type w} [Fintype ι]
   {E : ι → Type u} [∀ i, AddCommGroup (E i)] [∀ i, Module K (E i)]
   [∀ i, FiniteDimensional K (E i)] (V : ∀ i, AdelicVectorBundle S (E i))
   (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)

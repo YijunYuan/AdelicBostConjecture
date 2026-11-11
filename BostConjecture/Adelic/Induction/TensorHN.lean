@@ -7,15 +7,18 @@ module
 
 public import BostConjecture.Adelic.Induction.GradeEquality
 public import ArakelovGeometry.AdelicVectorBundle.Tensor.Graded.Degree
+public import ArakelovGeometry.AdelicVectorBundle.Examples.Trivial.Filtration.HN.Lift
+public import BostConjecture.Adelic.Induction.HNContraction
 public import ArakelovGeometry.AdelicVectorBundle.Slope.Tensor
+public import ArakelovGeometry.AdelicVectorBundle.Slope.Quotient
 public import ArakelovGeometry.AdelicVectorBundle.Degree.TensorHermitian
 
 /-!
 # Identification of the tensor Harder--Narasimhan filtration
 
 This paper, Lemma 7.1. The canonical component maps into each tensor grade
-are completed contractions. The image-flag inequalities give the degree and
-quotient-slope bounds. Equality of total degrees makes each bound sharp, so
+are completed contractions. HN functoriality and spanning force the target
+HN threshold to be the whole grade. Equality of total degrees makes each bound sharp, so
 HN uniqueness identifies the weighted tensor filtration. No norm on a direct
 sum of the components is needed. Zero factors and zero grades are included.
 -/
@@ -173,18 +176,41 @@ theorem hermitianHNFiltration_orthogonalTensorPair_of_semistable_grades
         ((f γ p).baseChange (S.ϕ ω).Completion x) ≤ (C γ p).toNormFamily.norm ω x :=
     NormFamily.tensorFiltrationGradedPair_norm_le V.toNormFamily W.toNormFamily
       hN hV hW hP hR p.property ω x
+  have hmin (γ : ℝ) : (γ : EReal) ≤
+      (T.filtrationGraded (tensorFiltration P R) γ hS).minimalSlope hS hN := by
+    let G := T.filtrationGraded (tensorFiltration P R) γ hS
+    have hG := hT.filtrationGraded (tensorFiltration P R) γ
+    apply G.le_minimalSlope_of_hermitianHNFiltration_eq_top hS hN hG γ
+    apply top_unique
+    rw [← hspan γ]
+    apply iSup_le
+    intro p
+    have hsource : (C γ p).hermitianHNFiltration hS hN (hC γ p) γ = ⊤ := by
+      apply (C γ p).hermitianHNFiltration_eq_top_of_minimalSlope_ge hS hN (hC γ p)
+      rcases hCs γ p with hz | ⟨hsemi, hslope⟩
+      · rw [(C γ p).minimalSlope_eq_top_of_finrank_eq_zero hS hN hz]
+        exact le_top
+      · rw [((C γ p).isMeanSlopeSemistable_iff_minimalSlope_eq_slope_of_isHermitian
+          hS hN (hC γ p) hsemi.1).mp hsemi, hslope]
+    have hmap := (C γ p).map_hermitianHNFiltration_le_of_completed_contraction
+      G hS hN (hC γ p) hG (f γ p) (hf γ p) γ
+    simpa only [hsource, Submodule.map_top] using hmap
   obtain ⟨hbot, htop⟩ := tensorFiltration_attains_bot_top b c w z hb hc
   apply T.hermitianHNFiltration_eq_of_graded_quotient_bounds hS hN hT
     (tensorFiltration P R) (antitone_tensorFiltration P R) hbot htop
     (tensorFiltration_locallyConstant_left b c w z hb hc)
   · intro γ
-    exact degree_ge_of_finite_same_slope_spanning_contractions (C γ)
-      (T.filtrationGraded (tensorFiltration P R) γ hS) (f γ) hS hN (hC γ)
-      (hT.filtrationGraded _ _) γ (hCs γ) (hspan γ) (hf γ)
+    let G := T.filtrationGraded (tensorFiltration P R) γ hS
+    by_cases hz : finrank K (FiltrationGraded (tensorFiltration P R) γ) = 0
+    · rw [hz, Nat.cast_zero, mul_zero, G.degree_eq_zero_of_finrank_eq_zero hS hN hz]
+    · have hslope : γ ≤ G.slope hS hN := EReal.coe_le_coe_iff.mp
+        ((hmin γ).trans (G.minimalSlope_le_slope hS hN (Nat.pos_of_ne_zero hz)))
+      rw [G.degree_eq_rank_mul_slope hS hN, mul_comm γ]
+      exact mul_le_mul_of_nonneg_left hslope (Nat.cast_nonneg _)
   · exact finsum_tensor_hermitianHNFiltration_eq_degree V W hS hN hV hW
   · intro γ U hr
-    exact slope_quotient_ge_of_finite_same_slope_spanning_contractions (C γ)
-      (T.filtrationGraded (tensorFiltration P R) γ hS) (f γ) hS hN (hC γ)
-      (hT.filtrationGraded _ _) γ (hCs γ) (hspan γ) (hf γ) U hr
+    exact EReal.coe_le_coe_iff.mp ((hmin γ).trans
+      ((T.filtrationGraded (tensorFiltration P R) γ hS).minimalSlope_le_slope_quotient
+        U hr hS hN))
 
 end ArakelovGeometry.AdelicVectorBundle

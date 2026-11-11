@@ -123,9 +123,10 @@ theorem hermitianHNFiltration_orthogonalTensorPair
       (Nat.ne_of_gt hu)).1
 
 /-- This paper, Theorem 1.1, finite-family form: maximal slopes add on the
-actual orthogonal tensor of any nonempty finite family of positive-rank factors. -/
+actual orthogonal tensor of any finite family of positive-rank factors,
+including the empty family. -/
 theorem maximalSlope_orthogonalTensorOfMeasurableBase
-    {ι : Type wι} [Fintype ι] [Nonempty ι] {D : ι → Type w}
+    {ι : Type wι} [Fintype ι] {D : ι → Type w}
     [∀ i, AddCommGroup (D i)] [∀ i, Module K (D i)]
     [∀ i, FiniteDimensional K (D i)] (V : ∀ i, AdelicVectorBundle S (D i))
     (hV : ∀ i, (V i).IsHermitian hN) (hr : ∀ i, 0 < finrank K (D i)) :
@@ -135,10 +136,10 @@ theorem maximalSlope_orthogonalTensorOfMeasurableBase
   intro A B _ _ _ _ _ _ X Y hX hY hA hB
   exact maximalSlope_orthogonalTensorPair hS hN X Y hX hY hA hB
 
-/-- The actual orthogonal tensor of any nonempty finite family of semistable
-Hermitian adelic bundles is semistable. -/
+/-- The actual orthogonal tensor of any finite family of semistable
+Hermitian adelic bundles is semistable, including the empty family. -/
 theorem isMeanSlopeSemistable_orthogonalTensorOfMeasurableBase
-    {ι : Type wι} [Fintype ι] [Nonempty ι] {D : ι → Type w}
+    {ι : Type wι} [Fintype ι] {D : ι → Type w}
     [∀ i, AddCommGroup (D i)] [∀ i, Module K (D i)]
     [∀ i, FiniteDimensional K (D i)] (V : ∀ i, AdelicVectorBundle S (D i))
     (hV : ∀ i, (V i).IsHermitian hN)

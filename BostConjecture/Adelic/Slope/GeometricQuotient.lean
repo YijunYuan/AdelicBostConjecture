@@ -100,7 +100,7 @@ end BinaryNorm
 section FiniteQuotient
 
 variable {K : Type u} [Field K] [CharZero K] {S : AdelicStructure.{u, v} K}
-  [S.IsProper] {ι : Type w} [Fintype ι] [Nonempty ι]
+  [S.IsProper] {ι : Type w} [Fintype ι]
   {E : ι → Type u} [∀ i, AddCommGroup (E i)] [∀ i, Module K (E i)]
   [∀ i, FiniteDimensional K (E i)] [∀ i, Nontrivial (E i)]
   {Q : Type u} [AddCommGroup Q] [Module K Q] [FiniteDimensional K Q] [Nontrivial Q]

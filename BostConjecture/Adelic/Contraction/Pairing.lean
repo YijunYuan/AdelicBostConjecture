@@ -8,7 +8,6 @@ module
 public import BostConjecture.Adelic.Contraction.FiniteSpecht
 public import BostConjecture.Adelic.Contraction.PairingBaseChange
 public import BostConjecture.Adelic.Contraction.PairingNorm
-public import ArakelovGeometry.AdelicVectorBundle.Degree.Supermodular
 
 /-!
 # The actual adelic canonical pairing
@@ -124,36 +123,5 @@ theorem canonicalPairing_norm_le {n : ℕ} {k : ι → ℕ}
   have hg := projectiveDeterminantMap_norm_le U hN hcount hU hl v bV ω z
   simp only [Geometry.canonicalPairing, LinearMap.baseChange_comp, LinearMap.comp_apply]
   exact hd.trans (he.trans hg)
-
-set_option maxHeartbeats 800000 in
--- The height elaborator reconstructs finiteness of the full nested tensor dual.
-set_option synthInstance.maxHeartbeats 80000 in
-set_option backward.isDefEq.respectTransparency false in
-/-- The actual canonical pairing has nonpositive map height. This includes
-the zero map, whose lower-integral height is negative infinity. -/
-theorem canonicalPairing_mapHeight_le_zero {n : ℕ} {k : ι → ℕ}
-    (hk : ∀ j, 0 < k j)
-    (t : ∀ j, Tableau n (rectangle (finrank K (Dual K (E j))) (k j)))
-    (ha : ∀ j (p : PrimeSpectrum K),
-      Module.rankAtStalk (Dual K (E j)) p = finrank K (Dual K (E j)))
-    (b : ∀ j, Basis (Fin (finrank K (K ⊗[ℤ] orbitLattice (t j)))) ℤ (orbitLattice (t j)))
-    {F : Type u} [AddCommGroup F] [Module K F] [FiniteDimensional K F]
-    (U : AdelicVectorBundle S F) (hU : U.IsHermitian hN)
-    {l : ℕ} (hl : 0 < l) (v : Tableau n (rectangle (finrank K F) l))
-    (hs : ∀ p : PrimeSpectrum K, Module.rankAtStalk F p = finrank K F)
-    (bV : Basis (Fin (finrank K (K ⊗[ℤ] orbitLattice v))) ℤ (orbitLattice v))
-    (i : F →ₗ[K] (⨂[K] j, E j))
-    (hi : ∀ ω x, (orthogonalTensorOfMeasurableBase V (Or.inr hcount) hN hV).norm ω
-      (i.baseChange (S.ϕ ω).Completion x) = U.norm ω x) :
-    let D := orthogonalTensorOfMeasurableBase
-      (fun j ↦ determinantSpechtBundle ((V j).dualOfMeasurableBase (Or.inr hcount))
-        hN hcount (k j) (t j) (b j)) (Or.inr hcount) hN
-      (fun j ↦ determinantSpechtBundle_isHermitian
-        ((V j).dualOfMeasurableBase (Or.inr hcount)) hN hcount (k j) (t j) (b j))
-    (determinantSpechtBundle U hN hcount l v bV).mapHeight
-      (D.dualOfMeasurableBase (Or.inr hcount))
-      (Geometry.canonicalPairing E hk t ha hl v hs i) ≤ 0 := by
-  apply mapHeight_le_zero_of_completed_contraction
-  exact canonicalPairing_norm_le V hN hcount hV hk t ha b U hU hl v hs bV i hi
 
 end BostConjecture.Adelic.Contraction

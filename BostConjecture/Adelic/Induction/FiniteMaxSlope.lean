@@ -44,63 +44,58 @@ variable {K : Type u} [Field K] {S : AdelicStructure.{u, v} K} [S.IsProper]
 include hBinaryAdditivity
 
 /-- Binary maximal-slope additivity implies its finite-family form on the
-actual orthogonal tensor bundle, for arbitrary nonempty finite index types. -/
+actual orthogonal tensor bundle, including the empty index type. -/
 theorem maximalSlope_orthogonalTensorOfMeasurableBase_of_binary_additivity
-    {ι : Type wι} [Fintype ι] [Nonempty ι] {E : ι → Type w}
+    {ι : Type wι} [Fintype ι] {E : ι → Type w}
     [∀ i, AddCommGroup (E i)] [∀ i, Module K (E i)]
     [∀ i, FiniteDimensional K (E i)] (V : ∀ i, AdelicVectorBundle S (E i))
     (hV : ∀ i, (V i).IsHermitian hN) (hr : ∀ i, 0 < finrank K (E i)) :
     (orthogonalTensorOfMeasurableBase V hS hN hV).maximalSlope hS hN =
       ∑ i, (V i).maximalSlope hS hN := by
   classical
-  have main : ∀ (ι : Type wι) [Fintype ι], ∀ [Nonempty ι] (E : ι → Type w)
+  have main : ∀ (ι : Type wι) [Fintype ι], ∀ (E : ι → Type w)
       [∀ i, AddCommGroup (E i)] [∀ i, Module K (E i)]
       [∀ i, FiniteDimensional K (E i)] (V : ∀ i, AdelicVectorBundle S (E i))
       (hV : ∀ i, (V i).IsHermitian hN), (∀ i, 0 < finrank K (E i)) →
       (orthogonalTensorOfMeasurableBase V hS hN hV).maximalSlope hS hN =
         ∑ i, (V i).maximalSlope hS hN := by
     apply Fintype.induction_empty_option
-    · intro α β _ e ih _ E _ _ _ V hV hr
+    · intro α β _ e ih E _ _ _ V hV hr
       let := Fintype.ofEquiv β e.symm
-      have : Nonempty α := ⟨e.symm (Classical.arbitrary β)⟩
       rw [(slopes_orthogonalTensor_reindex hS hN V hV e.symm).2]
       exact (ih (fun i => E (e i)) (fun i => V (e i)) (fun i => hV (e i))
         (fun i => hr (e i))).trans (e.sum_comp (fun i => (V i).maximalSlope hS hN))
-    · intro h
-      exact (not_nonempty_pempty h).elim
-    · intro α _ ih _ E _ _ _ V hV hr
-      cases isEmpty_or_nonempty α with
-      | inl hα =>
-        have := hα
-        let : Unique (Option α) := ⟨⟨none⟩, fun x => by cases x with
-          | none => rfl
-          | some a => exact isEmptyElim a⟩
-        rw [Fintype.sum_eq_single none (fun i hi => (hi (Subsingleton.elim i none)).elim)]
-        exact (slopes_orthogonalTensor_subsingleton hS hN V hV none).2
-      | inr hα =>
-        have := hα
-        let e := Equiv.optionEquivSumPUnit α
-        rw [(slopes_orthogonalTensor_reindex hS hN V hV e).2,
-          ← (slopes_orthogonalTensor_sum hS hN (fun j => V (e.symm j))
-            (fun j => hV (e.symm j))).2]
-        let A := orthogonalTensorOfMeasurableBase (fun i => V (e.symm (.inl i))) hS hN
-          (fun i => hV (e.symm (.inl i)))
-        let B := orthogonalTensorOfMeasurableBase (fun j => V (e.symm (.inr j))) hS hN
-          (fun j => hV (e.symm (.inr j)))
-        rw [hBinaryAdditivity _ _ A B _ _
-          (finrank_piTensorProduct_pos (fun i => hr (e.symm (.inl i))))
-          (finrank_piTensorProduct_pos (fun j => hr (e.symm (.inr j))))]
-        rw [(slopes_orthogonalTensor_subsingleton hS hN
-          (fun j => V (e.symm (.inr j))) (fun j => hV (e.symm (.inr j))) PUnit.unit).2]
-        rw [ih (fun i => E (e.symm (.inl i))) (fun i => V (e.symm (.inl i)))
-          (fun i => hV (e.symm (.inl i))) (fun i => hr (e.symm (.inl i)))]
-        simp [e, Fintype.sum_option, add_comm]
+    · intro E _ _ _ V hV hr
+      have hline : finrank K (⨂[K] i, E i) = 1 := by
+        simp [finrank_piTensorProduct_eq_prod]
+      have hsemi := isMeanSlopeSemistable_of_finrank_eq_one
+        (orthogonalTensorOfMeasurableBase V hS hN hV) hS hN hline
+      rw [(isMeanSlopeSemistable_iff_maximalSlope_eq_slope _ hS hN hsemi.1).mp hsemi,
+        slope_orthogonalTensorOfMeasurableBase hS hN V hV hr]
+      simp
+    · intro α _ ih E _ _ _ V hV hr
+      let e := Equiv.optionEquivSumPUnit α
+      rw [(slopes_orthogonalTensor_reindex hS hN V hV e).2,
+        ← (slopes_orthogonalTensor_sum hS hN (fun j => V (e.symm j))
+          (fun j => hV (e.symm j))).2]
+      let A := orthogonalTensorOfMeasurableBase (fun i => V (e.symm (.inl i))) hS hN
+        (fun i => hV (e.symm (.inl i)))
+      let B := orthogonalTensorOfMeasurableBase (fun j => V (e.symm (.inr j))) hS hN
+        (fun j => hV (e.symm (.inr j)))
+      rw [hBinaryAdditivity _ _ A B _ _
+        (finrank_piTensorProduct_pos (fun i => hr (e.symm (.inl i))))
+        (finrank_piTensorProduct_pos (fun j => hr (e.symm (.inr j))))]
+      rw [(slopes_orthogonalTensor_subsingleton hS hN
+        (fun j => V (e.symm (.inr j))) (fun j => hV (e.symm (.inr j))) PUnit.unit).2]
+      rw [ih (fun i => E (e.symm (.inl i))) (fun i => V (e.symm (.inl i)))
+        (fun i => hV (e.symm (.inl i))) (fun i => hr (e.symm (.inl i)))]
+      simp [e, Fintype.sum_option, add_comm]
   exact main ι E V hV hr
 
-/-- Binary maximal-slope additivity implies semistability of every nonempty
-finite orthogonal tensor of semistable Hermitian bundles. -/
+/-- Binary maximal-slope additivity implies semistability of every
+finite orthogonal tensor of semistable Hermitian bundles, including the empty family. -/
 theorem isMeanSlopeSemistable_orthogonalTensorOfMeasurableBase_of_binary_additivity
-    {ι : Type wι} [Fintype ι] [Nonempty ι] {E : ι → Type w}
+    {ι : Type wι} [Fintype ι] {E : ι → Type w}
     [∀ i, AddCommGroup (E i)] [∀ i, Module K (E i)]
     [∀ i, FiniteDimensional K (E i)] (V : ∀ i, AdelicVectorBundle S (E i))
     (hV : ∀ i, (V i).IsHermitian hN)

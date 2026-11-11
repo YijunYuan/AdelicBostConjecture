@@ -6,7 +6,7 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Adelic.Induction.TensorHN
-public import ArakelovGeometry.AdelicVectorBundle.Tensor.Graded.HNVariation
+public import BostConjecture.Adelic.Induction.HNVariation
 
 /-!
 # Strong rank induction, conditional on the geometric quotient inequality
@@ -106,7 +106,7 @@ theorem tensorHN_and_semistable_of_geometric_quotient_bound
         by_cases hg : IsGeometricallySemistableTensorQuotient (BoolTensorFactors E F)
             (U.mkQ.comp (boolTensorEquiv K (BoolTensorFactors E F)).toLinearMap)
         · exact hgeom E F _ V W hV hW hsV hsW U.mkQ U.mkQ_surjective hU hg
-        · apply slope_sum_le_tensor_quotient_of_not_geometricallySemistable
+        · apply BostConjecture.Adelic.slope_sum_le_tensor_quotient_of_not_geometricallySemistable
             V W hS hN hV hW hsV hsW U.mkQ U.mkQ_surjective hU ?_ hg
           intro P R t u hsmall
           exact (ih (finrank K (FiltrationGraded P t) + finrank K (FiltrationGraded R u))

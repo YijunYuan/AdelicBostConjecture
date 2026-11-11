@@ -1,13 +1,13 @@
 # Reused formalizations
 
 This project targets Theorem 1.1 of `bost.pdf` over proper adelic curves with
-countable characteristic-zero fields. Existing number-field proofs from
-`old.pdf` are reused where applicable. This file records external source reuse;
+countable characteristic-zero fields. The source tree retains the main theorem
+module and its dependencies, including shared algebraic proofs from the earlier
+development. This file records external source reuse;
 it does not attribute the upstream proofs to the project author.
 
-Mathlib, HarderNarasimhan and ArakelovGeometry are pinned Lake dependencies.
-New selectively copied source belongs under `BostConjecture/ExternalResults/`;
-existing copied or adapted source is under `BostConjecture/ExternalCode/`, grouped by
+Mathlib, HarderNarasimhan and ArakelovGeometry are pinned remote Lake dependencies.
+Existing copied or adapted source is under `BostConjecture/ExternalCode/`, grouped by
 origin and compiled as part of the single `BostConjecture` library. Module
 paths describe file organization; public declaration namespaces retain their
 upstream names. The substantially adapted Garnir proofs keep the existing
@@ -22,17 +22,21 @@ modification records and checks; their relocation sections identify current
 paths. Original sources are retrievable from the pinned repositories and revisions;
 redundant upstream source snapshots are omitted. No complete upstream build is
 claimed by checking the selected dependency cone. The retained source supports
-the public adelic and number-field theorems; historical manifests
+the public adelic theorems; historical manifests
 may therefore describe declarations or modules that have since been removed.
 
 ## ArakelovGeometry: adelic foundations and instability filtrations
 
 - Repository: <https://github.com/YijunYuan/ArakelovGeometry> (private).
-- Revision: `0a608c4f219c4de669be8b6b1a1bc47f996d8d72`.
-- License: Apache-2.0; retained in the pinned Lake dependency.
-- Integration: unchanged dependency, fetched by SSH; Lean/mathlib 4.35.0 and
+- Pinned revision: `0a608c4f219c4de669be8b6b1a1bc47f996d8d72`.
+- License: Apache-2.0; source notices are preserved.
+- Integration: unmodified remote git dependency at that revision. Lean/mathlib 4.35.0 and
   HarderNarasimhan `14b3090e1e169b77fe381102a1289f24c2b08a11` match this project.
-- Consumers: `Adelic/Geometry/{Polynomial,Plucker,ScalarExtension,Nonvanishing,Quotient,Binary}`
+  Local `Adelic/Induction/HNContraction` adapts the proofs in
+  `HarderNarasimhan/Hermitian/{Functoriality,LargestSubspace}` to independent
+  carrier universes and supplies the reverse minimal-slope threshold consequence.
+  Source copyright and license notices are retained. No dependency sources are edited.
+- Consumers: `Adelic/Geometry/{Polynomial,Plucker,ScalarExtension,Nonvanishing,Quotient}`
   reuse `InvariantTheory/{Semistability,Plucker,Linearization}` and
   `InvariantTheory/Binary/TensorTransport`, retaining the original-field
   pairing and quotient dual inclusion. `tensorBaseChangeEquiv`,
@@ -41,9 +45,17 @@ may therefore describe declarations or modules that have since been removed.
   `map_destabilizingSubspace_eq_of_completed_isometry` from
   `HarderNarasimhan/Galois/HNScalarExtension`.
 - `Adelic/Induction/{GradeEquality,TensorHN,RankInduction,MaxSlope}` reuse
-  actual completed norms, degree identities, HN uniqueness and the componentwise
-  finite-image variation from `Tensor/Graded/HNVariation`, including
-  `slope_sum_le_tensor_quotient_of_not_geometricallySemistable`.
+  actual completed norms, degree identities, HN uniqueness, HN functoriality,
+  and the component maps in `Tensor/Graded/{Basic,Degree}`. The Bost-specific
+  modules `Examples/Trivial/Filtration/HN/OptimalVariation`, `Tensor/Graded/Degree`
+  and `Tensor/Graded/HNVariation` at the pinned revision are adapted in local
+  `Adelic/Induction/{OptimalVariation,GradedVariation,HNVariation}`. Copyright,
+  author and license notices are retained. The local versions use namespace
+  `BostConjecture.Adelic`, so they coexist with the unchanged upstream versions.
+  The upper bound now uses target HN
+  functoriality directly; its generic bundle and spanning constructions remain
+  in AG. The local unstable-case theorem is
+  `BostConjecture.Adelic.slope_sum_le_tensor_quotient_of_not_geometricallySemistable`.
 - `Adelic/Induction/{FiniteNorms,FiniteSlopes,FiniteMaxSlope}` reuse the
   completed tensor grouping and coherence exports in
   `Tensor/Hermitian/{Dual/Basic,Grouping,Coherence}`, tensor construction on
@@ -59,13 +71,13 @@ may therefore describe declarations or modules that have since been removed.
   `seminorm_multilinearMap_le_of_linear_bound` to dependent generator sets and
   weights. This bound feeds finite-place regrouping, `dualRegroupEquiv_norm_le`,
   and finally the actual `canonicalPairing_norm_le`. These are local adaptations
-  of proof arguments; the pinned dependency itself is unchanged.
+  of proof arguments; their original upstream producers are unchanged.
 - `Adelic/Slope/{GeometricSubspace,GeometricQuotient}` consume the actual
   pairing contraction, the Specht covolume limit, and unchanged exports from
   `Construction/Tensor/Countable`, `Slope/{Quotient,DualUpper}`, norm-family
   pushforward composition, and duality. The resulting geometric quotient bound
   is unconditional and uses the actual induced and quotient norms.
-- Boundary: the upstream instability-variation result retains a smaller-rank
+- Boundary: the local instability-variation result retains a smaller-rank
   tensor-HN hypothesis. This project discharges it by simultaneous rank induction
   and separately proves the geometric semistable branch. `Induction/Bost`
   combines these producers into Theorem 1.1; no main theorem is assumed upstream.
@@ -76,8 +88,8 @@ may therefore describe declarations or modules that have since been removed.
   geometric quotient bound with `Slope/GeometricQuotient`.
   These checks certify the imported dependency cone, not the whole upstream
   library. Prefer this dependency's exports over duplicate local ports after
-  comparing exact statements. The ArakelovGeometry dependency is unmodified;
-  local proof adaptations are identified above. The additional TauCeti
+  comparing exact statements. The current alignment and migration checks are
+  recorded in [the alignment notes](docs/paper-code-alignment.md). The additional TauCeti
   symmetric-power adaptation is recorded below.
 
 ## Mathlib
@@ -96,55 +108,28 @@ may therefore describe declarations or modules that have since been removed.
   `LinearAlgebra/PiTensorProduct/Generators.lean`
   (`PiTensorProduct.submodule_span_eq_top`).
 - Consumers: the intrinsic tensor Hilbert metric, tensor regrouping, Specht
-  orthogonalization and content eigenvalues. The arithmetic, invariant-theory,
-  compactness and asymptotic modules also directly import Mathlib's existing
-  number-field, projective-module, polynomial, Haar-measure and analysis APIs;
+  orthogonalization and content eigenvalues. The invariant-theory and asymptotic
+  modules also directly import Mathlib's existing projective-module, polynomial,
+  measure and analysis APIs;
   their import lists identify the precise modules used.
-- Typeclass refactoring also reuses the Dedekind-domain instance in
+- The Specht lattice and invariant-tensor proofs reuse the Dedekind-domain instance in
   `Mathlib/RingTheory/Flat/TorsionFree.lean`: torsion-free modules are flat.
-  The arithmetic fiber and tensor proofs infer flatness through this instance
-  instead of installing repeated `IsLocalization.flat` proofs locally.
   Specht lattice embeddings and permutation actions use `LinearMap.restrict`
   from `Mathlib/Algebra/Module/Submodule/LinearMap.lean` for their restricted maps.
-- `Slope/DedekindCut.lean` uses `DedekindCut.principal`,
-  `principal_le_iff`, `left_subset_left_iff`, `ext'`, `right_principal` and
-  `upperBounds_left` from `Mathlib/Order/Completion.lean`, together with
-  `csSup_le_iff` from `Mathlib/Order/ConditionallyCompleteLattice/Basic.lean`.
-  Its local real-value conversion and bounds lemma feed
-  `Arithmetic/HN/MaxSlope.lean`; the pinned upstream sources are unmodified.
-
 ## Harder–Narasimhan games
 
 - Repository: <https://github.com/YijunYuan/HarderNarasimhan>.
 - Revision: `14b3090e1e169b77fe381102a1289f24c2b08a11`.
 - Author: Yijun Yuan; license: Apache-2.0.
 - Integration: unmodified pinned Lake dependency, Lean/mathlib `v4.35.0`.
-- Original modules: `HarderNarasimhan.Filtration.Unique`,
-  `HarderNarasimhan.Filtration.Exists`,
-  `HarderNarasimhan.PayoffFunction.Defs`,
-  `HarderNarasimhan.PayoffFunction.Slope`, and
-  `HarderNarasimhan.PayoffFunction.NashEquilibrium`.
-- Results: HN existence and uniqueness, additive-interval slopes, and the
-  comparison of game semistability with ordinary slope semistability.
-- Maximal-slope consumers: `Slope/FiniteLength.lean` combines
-  `PayoffFunction.B_top_eq_max_top` and `IsSlopeLike.min_eq_A` from
-  `HarderNarasimhan.PayoffFunction.GameValue` with breakpoint semistability to
-  prove that a breakpoint attains `PayoffFunction.max ⊤`.
-  `Arithmetic/HN/Filtration.lean` applies
-  `PayoffFunction.hnFiltration_succ_isGreatest_breakpoints` from
-  `HarderNarasimhan.Filtration.Exists` to identify the slope supremum with the
-  first HN slope. The definition and finiteness of `maxSlope` are independent
-  of this identification: `Arithmetic/HN/MaxSlope.lean` uses `PayoffFunction.max`
-  and its upper/lower bounds from `PayoffFunction.Defs`, together with the
-  project's arithmetic degree-finiteness results. These are local bridge
-  proofs; upstream code is unchanged.
-- Consumers: arithmetic HN filtrations and the finite-length slope adapters.
-  The project separately proves the Hermitian degree, quotient and duality
-  bridges; order duality alone is not Hermitian duality.
+- Consumers: ArakelovGeometry's HN existence, uniqueness and slope interfaces.
+  The adelic main proof uses those interfaces for actual Hermitian bundles.
+  The former local number-field HN and finite-length slope adapters have been
+  removed with the independent number-field proof branch.
 - Mathematical source: Chen–Jeannin, *Harder–Narasimhan games*,
   <https://arxiv.org/abs/2306.08283>, §§2.2, 3.3, 4.3–4.4.
 
-## OpenAI: complex Specht modules and Euclidean Mahler compactness
+## OpenAI: complex Specht modules
 
 - Repository: <https://github.com/openai/math>.
 - Revision: `4eaee87548250b2682affda7d05d947c05554bae`; upstream Lean 4.34.1.
@@ -155,21 +140,17 @@ may therefore describe declarations or modules that have since been removed.
 - Specht source: `RepresentationTheory/Saxl/{Model,Basic,Polytabloid,SpechtSubmodule}.lean`.
   The exports include `OAI.Saxl.specht_irreducible`,
   `OAI.Saxl.specht_cyclic_of_ne_zero` and `OAI.Saxl.columnAlt_tabloid`.
-- Mahler source: `NumberTheory/ArithmeticGroups/Lattices/` modules
-  `ShortestVector`, `ProjectedLattice`, `BasisLift`, `BoundedBasis`,
-  `OrthogonalStretch`, `Minkowski/Ellipsoid`, `UniformShortSpan`, `FrameMatrices`.
-  The principal result is
-  `OAI.NumberTheory.ArithmeticGroups.Lattices.FrameMatrices.Construction.exists_compact_lattice_frames`.
 - Adaptations: Lean 4.35 module visibility, removal of unused staircase,
   Kronecker multiplicity and Saxl-conjecture declarations, relocated imports,
   source documentation and mathlib-style formatting. Umbrella Mathlib imports
   are replaced by the specific modules used. Classical inference is
   localized to proofs; unnecessary decidability/finiteness arguments are
-  removed from `finset_eq_of_signed_sum` and `continuous_basis_matrix`.
+  removed from `finset_eq_of_signed_sum`.
 - Consumers: the actual integral Specht orbit lattice, standard polytabloids,
-  central content action, and arithmetic compactness via real trace frames.
-  Project-specific scalar-extension, degree and restriction-of-scalars bridges
-  are proved separately in the local modules.
+  and central content action. Project-specific scalar-extension and adelic
+  degree bridges are proved separately in the local modules. The former Mahler
+  compactness port has no remaining consumer and has been removed; its
+  extraction history remains identified in the source manifest.
 
 ## Etingof representation theory: hook-length formula
 
@@ -258,7 +239,7 @@ may therefore describe declarations or modules that have since been removed.
   The generic quotient, tensor and lift APIs remain in
   `BostConjecture/ExternalCode/TauCeti/LinearAlgebra/SymmetricPower/{Basic,Lift}.lean`.
   The universe-polymorphic finite-index adaptation is in
-  `BostConjecture/ExternalResults/TauCeti/LinearAlgebra/SymmetricPower/Finite.lean`.
+  `BostConjecture/ExternalCode/TauCeti/LinearAlgebra/SymmetricPower/Finite.lean`.
 - The new file adapts the existing selective port at the same pinned revision,
   retaining the Tau Ceti contributors' copyright and Apache-2.0 license and
   crediting Yijun Yuan for the adaptation. Its public namespace remains
@@ -309,10 +290,10 @@ replacement Mathlib dependency. All target Lean/mathlib `v4.35.0`.
 | --- | --- | --- | --- |
 | [#40948](https://github.com/leanprover-community/mathlib4/pull/40948) | `Thmoas-Guan/mathlib4_fork` at `b642b6723caf97b7b462dd5ddeabb0226c3b5433` | Nailin Guan's `Mathlib/LinearAlgebra/ExteriorPower/BaseChange.lean` and two projections from `ExteriorAlgebra/Grading.lean`; `exteriorPower.baseChangeEquiv` and `ExteriorAlgebra.toExteriorPower` | `ExternalCode/MathlibPRs/PR40948/`; arithmetic determinants and geometric Plucker base change |
 | [#44845](https://github.com/leanprover-community/mathlib4/pull/44845) | `DanielJHorton/mathlib4` at `47365e3b9fd4329f058c31ac7aa9565a6036b17d` | Daniel Horton's `Mathlib/LinearAlgebra/PiTensorProduct/Projective.lean` and two declarations from `Dual/Defs.lean`; `PiTensorProduct.Projective`, `piTensorHomEquiv`, `dualDistribEquivOfProjective`, `Module.Dual.dualBaseRingEquiv` | `ExternalCode/MathlibPRs/PR44845/`; integral projective tensor duality, contraction and Schur–Weyl duality |
-| [#45002](https://github.com/leanprover-community/mathlib4/pull/45002) | `TJHeeringa/mathlib4` at `41260205df493c627e1ac0e54812cfdeb6517fbc` | Tjeerd Jan Heeringa's `Mathlib/Analysis/InnerProductSpace/{Abs,Polar}.lean`; `ContinuousLinearMap.abs`, `polarₚₗᵢ`, `polar` and the polar decomposition identities | `ExternalCode/MathlibPRs/PR45002/`; balanced special-linear polar decomposition and orbit-norm bounds |
 
 Local roots in the table are relative to `BostConjecture/`. Each contains
 `LICENSE` and `PROVENANCE.json`. PR #40948 extracts a small projection
 prerequisite. PR #44845 expands two unavailable reindex simplifications.
-PR #45002 adjusts local imports and documentation references. All ports also
-have relocated module imports and mathlib-style source documentation.
+Both retained ports have relocated module imports and mathlib-style source
+documentation. The unused PR #45002 polar-decomposition port was removed
+with the balanced-metric proof branch.

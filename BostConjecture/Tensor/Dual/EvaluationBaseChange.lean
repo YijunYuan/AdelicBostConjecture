@@ -8,6 +8,7 @@ module
 public import BostConjecture.Tensor.Dual.Evaluation
 public import BostConjecture.Tensor.Algebra.BaseChange
 public import BostConjecture.Arithmetic.Dual.Fiber
+public import Mathlib.RingTheory.TensorProduct.Finite
 
 /-!
 # Canonical tensor evaluation commutes with scalar extension
