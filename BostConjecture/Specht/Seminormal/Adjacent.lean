@@ -28,7 +28,7 @@ variable {n : ℕ} {μ : YoungDiagram}
 
 /-- A standard tableau is determined by its sequence of box contents. -/
 theorem IsStandard.eq_of_tableauContent_eq {t u : Tableau n μ}
-    (ht : IsStandard t) (hu : IsStandard u)
+    [ht : IsStandard t] [hu : IsStandard u]
     (h : ∀ i, tableauContent t i = tableauContent u i) : t = u := by
   apply Equiv.ext
   intro i
@@ -36,19 +36,19 @@ theorem IsStandard.eq_of_tableauContent_eq {t u : Tableau n μ}
   | ind i ih =>
     have hc := h i
     simp only [tableauContent] at hc
-    have hcase (v w : Tableau n μ) (hv : IsStandard v)
+    have hcase (v w : Tableau n μ) [hv : IsStandard v]
         (hearlier : ∀ j < i, v j = w j)
         (hr : (w i).val.1 ≤ (v i).val.1)
         (hc : (w i).val.2 ≤ (v i).val.2) : v i = w i := by
       let j := v.symm (w i)
-      have hj : j ≤ i := by simpa [j] using hv.label_mono ⟨hr, hc⟩
+      have hj : j ≤ i := by simpa [j] using IsStandard.label_mono (t := v) ⟨hr, hc⟩
       rcases hj.eq_or_lt with hj | hj
       · simpa [j] using (congrArg v hj).symm
       · have he : w i = w j := by simpa [j] using hearlier j hj
         exact (hj.ne (w.injective he).symm).elim
     rcases le_total (u i).val.1 (t i).val.1 with hr | hr
-    · exact hcase t u ht ih hr (by omega)
-    · exact (hcase u t hu (fun j hj => (ih j hj).symm) hr (by omega)).symm
+    · exact hcase t u ih hr (by omega)
+    · exact (hcase u t (fun j hj => (ih j hj).symm) hr (by omega)).symm
 
 /-- The joint Murphy eigenspace for a standard content sequence is its actual monic line. -/
 theorem eq_smul_orthogonalStandardBasis_of_eigenvalues (t : Tableau n μ)
@@ -65,7 +65,7 @@ theorem eq_smul_orthogonalStandardBasis_of_eigenvalues (t : Tableau n μ)
         (orthogonalStandardBasis_ne_zero t T)))]
   · have hdiff : ∃ j, tableauContent U.val j ≠ tableauContent T.val j := by
       by_contra! h
-      exact hUT (Subtype.ext (U.property.eq_of_tableauContent_eq T.property h))
+      exact hUT (Subtype.ext (IsStandard.eq_of_tableauContent_eq (t := U.val) (u := T.val) h))
     obtain ⟨j, hj⟩ := hdiff
     have hs := murphyOperator_symmetric t j (orthogonalStandardBasis t U) x
     rw [murphyOperator_orthogonalStandardBasis, hx,
@@ -117,10 +117,10 @@ theorem murphyOperator_pred_mul_swap (t : Tableau n μ) (i j : Fin n)
 
 /-- A legal transposition has distinct contents; this is a consequence of content separation. -/
 theorem tableauContent_ne_of_swap_standard {T U : Tableau n μ}
-    (hT : IsStandard T) (hU : IsStandard U) (i j : Fin n) (hij : i ≠ j)
+    [hT : IsStandard T] [hU : IsStandard U] (i j : Fin n) (hij : i ≠ j)
     (hUeq : U = relabel (Equiv.swap i j) T) : tableauContent T i ≠ tableauContent T j := by
   intro hc
-  have he : U = T := hU.eq_of_tableauContent_eq hT (by
+  have he : U = T := IsStandard.eq_of_tableauContent_eq (t := U) (u := T) (by
     intro k
     simpa only [hUeq, tableauContent_relabel_swap] using Equiv.apply_swap_eq_self hc k)
   have hi := congrArg (fun v : Tableau n μ => v i) (he.symm.trans hUeq)
@@ -187,7 +187,7 @@ theorem exists_swap_orthogonalStandardBasis_eq (t : Tableau n μ)
     ∃ c : ℝ, realSpechtRep t (Equiv.swap i j) (orthogonalStandardBasis t T) =
       ((tableauContent T.val j : ℝ) - tableauContent T.val i)⁻¹ •
         orthogonalStandardBasis t T + c • orthogonalStandardBasis t U := by
-  have hne := tableauContent_ne_of_swap_standard T.property U.property i j
+  have hne := tableauContent_ne_of_swap_standard (T := T.val) (U := U.val) i j
     (by intro he; have := congrArg Fin.val he; omega) hU
   have hab : (tableauContent T.val j : ℝ) - tableauContent T.val i ≠ 0 :=
     sub_ne_zero.mpr (fun h => hne (Int.cast_injective h.symm))
@@ -251,7 +251,7 @@ theorem norm_orthogonalStandardBasis_swap_sq (t : Tableau n μ)
     ‖orthogonalStandardBasis t U‖ ^ 2 =
       (1 - (((tableauContent T.val j : ℝ) - tableauContent T.val i)⁻¹) ^ 2) *
         ‖orthogonalStandardBasis t T‖ ^ 2 := by
-  have hne := tableauContent_ne_of_swap_standard T.property U.property i j
+  have hne := tableauContent_ne_of_swap_standard (T := T.val) (U := U.val) i j
     (by intro he; have := congrArg Fin.val he; omega) hU
   have h := norm_swap_residual_of_murphy_eigenvector t i j hij
     (orthogonalStandardBasis t T) (tableauContent T.val i) (tableauContent T.val j)

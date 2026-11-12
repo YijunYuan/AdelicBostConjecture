@@ -62,7 +62,7 @@ places contract for the actual orthogonal tensor norms. -/
 theorem orthogonalTensor_map_norm_le_of_finite_le_infinite_eq
     (ξ : ∀ i, NormFamily S (X i)) (η : ∀ i, NormFamily S (Y i))
     [hN : S.IsArchimedeanNormalized]
-    (hξ : ∀ i, (ξ i).IsHermitian) (hη : ∀ i, (η i).IsHermitian)
+    [hξ : ∀ i, (ξ i).IsHermitian] [hη : ∀ i, (η i).IsHermitian]
     (f : ∀ i, X i →ₗ[K] Y i) (ω : S.Ω)
     (hf : ∀ i x, (η i).norm ω ((f i).baseChange (S.ϕ ω).Completion x) ≤ (ξ i).norm ω x)
     (hfi : ω ∈ S.Ωinf → ∀ i x,
@@ -147,7 +147,7 @@ every completed vector, for Hilbert norms at infinity and epsilon norms elsewher
 theorem tensorPowerPairing_norm_le
     (ξ : NormFamily S E) (η : NormFamily S F)
     [hN : S.IsArchimedeanNormalized]
-    (hξ : ξ.IsHermitian) (hη : η.IsHermitian)
+    [hξ : ξ.IsHermitian] [hη : η.IsHermitian]
     (f : E →ₗ[K] F) (ω : S.Ω)
     (hf : ∀ x, η.norm ω (f.baseChange (S.ϕ ω).Completion x) = ξ.norm ω x)
     (z : (S.ϕ ω).Completion ⊗[K] (⨂[K] (_ : ι), E)) :
@@ -165,7 +165,7 @@ theorem tensorPowerPairing_norm_le
   refine ((NormFamily.orthogonalTensor (fun _ : ι ↦ η)).dual_dual_norm_eval_le
     ω _).trans ?_
   exact orthogonalTensor_map_norm_le_of_finite_le_infinite_eq
-    (fun _ : ι ↦ ξ) (fun _ : ι ↦ η) (fun _ ↦ hξ) (fun _ ↦ hη)
+    (fun _ : ι ↦ ξ) (fun _ : ι ↦ η)
     (fun _ ↦ f) ω (fun _ x ↦ (hf x).le) (fun _ _ ↦ hf) z
 
 end Evaluation

@@ -37,7 +37,7 @@ variable {K E : Type*} [Field K] [CharZero K] {S : AdelicStructure K}
   [AddCommGroup E] [Module K E] [FiniteDimensional K E]
   (ξ : NormFamily S E)
   [hN : S.IsArchimedeanNormalized]
-  (hξ : ξ.IsHermitian) {n k : ℕ}
+  [hξ : ξ.IsHermitian] {n k : ℕ}
 
 /-- The finite-place lattice estimate in the actual completed tensor and
 Specht norms, in any frame of the completed vector space. -/
@@ -70,7 +70,7 @@ variable {K : Type u} [Field K] [CharZero K] {S : AdelicStructure.{u, v} K}
   {E : Type u} [AddCommGroup E] [Module K E] [FiniteDimensional K E]
   (V : AdelicVectorBundle S E)
   [hN : S.IsArchimedeanNormalized]
-  [hcount : S.HasCommonCountableDenseSubfield] (hV : V.IsHermitian)
+  [hcount : S.HasCommonCountableDenseSubfield] [hV : V.IsHermitian]
 
 /-- The existing determinant embedding contracts for the prescribed completed
 norms at every non-Archimedean place, including trivial valuations. -/
@@ -98,7 +98,7 @@ theorem projectiveDeterminantMap_norm_finite {n k : ℕ} (hk : 0 < k)
   refine (congrArg
     ((NormFamily.orthogonalTensor (fun _ : Fin n ↦ V.toNormFamily)).norm ω)
     (projectiveDeterminantMap_baseChange_generator hk t _ b z)).trans_le ?_
-  have hn := orthogonal_freeLatticeMap_completed_le V.toNormFamily hV hk t c ω hω b
+  have hn := orthogonal_freeLatticeMap_completed_le V.toNormFamily hk t c ω hω b
     ((TensorProduct.AlgebraTensorModule.cancelBaseChange ℤ K (S.ϕ ω).Completion
       (S.ϕ ω).Completion (orbitLattice t)).symm z)
   rw [LinearEquiv.apply_symm_apply] at hn
@@ -121,8 +121,8 @@ theorem projectiveDeterminantMap_norm_le {n k : ℕ} (hk : 0 < k)
         (fun p => congrFun (Module.rankAtStalk_eq_finrank_of_free (R := K) (M := E)) p)).baseChange
           (S.ϕ ω).Completion x) ≤ (determinantSpechtBundle V k t c).norm ω x := by
   by_cases hω : ω ∈ S.Ωfin
-  · exact projectiveDeterminantMap_norm_finite V hV hk t c ω hω x
-  · exact (projectiveDeterminantMap_norm_infinite V hV hk t c ω hω x).le
+  · exact projectiveDeterminantMap_norm_finite V hk t c ω hω x
+  · exact (projectiveDeterminantMap_norm_infinite V hk t c ω hω x).le
 
 end Bundle
 

@@ -48,12 +48,12 @@ theorem standardRealBasis_repr_eq_zero_of_leading_zero (t : Tableau (n + 1) μ)
     · simp [hcV]
     have hpol : polytabloidInt V.val (rowWord U.val) = 0 := by
       by_contra hpol
-      have hrow := V.property.2.last_row_le_of_polytabloidInt_ne_zero hpol
+      have hrow := ColumnStandard.last_row_le_of_polytabloidInt_ne_zero (t := V.val) hpol
       have hrV : r ≤ (rowWord V.val (Fin.last n)).val := hU'.1.trans hrow
-      have hle := V.property.2.rowWord_le_of_polytabloid_ne_zero hpol
+      have hle := ColumnStandard.rowWord_le_of_polytabloid_ne_zero (t := V.val) hpol
       have hrev := hmin V (Finset.mem_filter.mpr ⟨Finset.mem_univ _, hrV, hcV⟩)
       have hw : rowWord V.val = rowWord U.val := congrArg ofLex (le_antisymm hle hrev)
-      exact hVU (Subtype.ext (V.property.1.eq_of_rowWord_eq U.property.1 hw))
+      exact hVU (Subtype.ext (RowStandard.eq_of_rowWord_eq (t := V.val) (u := U.val) hw))
     simp [hpol]
   have he := congrArg (fun y : realSpan t => y.val (rowWord U.val))
     ((standardRealBasis t).sum_repr x)
@@ -93,7 +93,7 @@ theorem mem_lastRowSubspace_iff (t : Tableau (n + 1) μ) (r : ℕ) (x : realSpan
       have hz : polytabloidInt T.val w = 0 := by
         by_contra hz
         have hle : (w (Fin.last n)).val ≤ (rowWord T.val (Fin.last n)).val :=
-          T.property.2.last_row_le_of_polytabloidInt_ne_zero hz
+          ColumnStandard.last_row_le_of_polytabloidInt_ne_zero (t := T.val) hz
         exact (not_le_of_gt hw) (hle.trans hT)
       simp [standardRealBasis_coe, realCast, hz]
     | zero => intro w _; rfl

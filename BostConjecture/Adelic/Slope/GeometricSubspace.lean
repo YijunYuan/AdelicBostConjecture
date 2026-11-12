@@ -39,7 +39,7 @@ variable {K : Type u} [Field K] [CharZero K] {S : AdelicStructure.{u, v} K}
   [∀ i, FiniteDimensional K (E i)]
   (V : ∀ i, AdelicVectorBundle S (E i))
   [hN : S.IsArchimedeanNormalized]
-  [hcount : S.HasCommonCountableDenseSubfield] (hV : ∀ i, (V i).IsHermitian)
+  [hcount : S.HasCommonCountableDenseSubfield] [hV : ∀ i, (V i).IsHermitian]
   {F : Type u} [AddCommGroup F] [Module K F] [FiniteDimensional K F]
   (U : AdelicVectorBundle S F)
 
@@ -72,25 +72,33 @@ theorem canonicalPairing_finite_degree_bound_of_norm_le
   let : ∀ i, AddCommGroup ((⨂[K] (_ : Fin (k i)),
       ⋀[K]^(finrank K (Dual K (E i))) (Dual K (E i))) ⊗[K] (K ⊗[ℤ] orbitLattice (t i))) :=
     fun _ ↦ Module.addCommMonoidToAddCommGroup K
+  -- Use the field-specific dual instance for the nested auxiliary tensor.
+  let : FiniteDimensional K (Dual K (⨂[K] i, (⨂[K] (_ : Fin (k i)),
+      ⋀[K]^(finrank K (Dual K (E i))) (Dual K (E i))) ⊗[K] (K ⊗[ℤ] orbitLattice (t i)))) :=
+    Subspace.instModuleDualFiniteDimensional
   let D := orthogonalTensorOfMeasurableBase
     (fun i => determinantSpechtBundle ((V i).dualOfMeasurableBase)
         (k i) (t i) (b i))
-    (hH := fun i => determinantSpechtBundle_isHermitian
+    (hH := fun i ↦ determinantSpechtBundle_isHermitian
       ((V i).dualOfMeasurableBase) (k i) (t i) (b i))
-  have hcmp := slope_le_of_nonzero_completed_contraction
-    (determinantSpechtBundle U l v bU) (D.dualOfMeasurableBase)
-      (determinantSpechtBundle_isHermitian U l v bU)
-    (determinantSpechtBundle_isMeanSlopeSemistable_and_dual U l v bU).1
-    (determinantSpechtBundle_tensor_isMeanSlopeSemistable_and_dual
-      (fun i => (V i).dualOfMeasurableBase) k t b).2
-    (BostConjecture.Geometry.canonicalPairing E hk t ha hl v hs A) hA hcontract
+  have : D.dualOfMeasurableBase.IsMeanSlopeSemistable :=
+    determinantSpechtBundle_tensor_dual_isMeanSlopeSemistable
+      (fun i ↦ (V i).dualOfMeasurableBase) k t b
+  have : (determinantSpechtBundle U l v bU).IsHermitian :=
+    determinantSpechtBundle_isHermitian U l v bU
+  have : (determinantSpechtBundle U l v bU).IsMeanSlopeSemistable :=
+    determinantSpechtBundle_isMeanSlopeSemistable U l v bU
+  have hcmp : (determinantSpechtBundle U l v bU).slope ≤ D.dualOfMeasurableBase.slope :=
+    slope_le_of_nonzero_completed_contraction
+      (determinantSpechtBundle U l v bU) D.dualOfMeasurableBase
+      (BostConjecture.Geometry.canonicalPairing E hk t ha hl v hs A) hA hcontract
   erw [determinantSpechtBundle_slope_rectangle,
-    determinantSpechtBundle_dual_tensor_dual_slope_rectangle V k t b hV] at hcmp
+    determinantSpechtBundle_dual_tensor_dual_slope_rectangle V k t b] at hcmp
   exact hcmp
 
 /-- The finite-degree geometric comparison with the actual completed canonical
 pairing contraction supplied by the checked local norm theorem. -/
-theorem canonicalPairing_finite_degree_bound (hU : U.IsHermitian)
+theorem canonicalPairing_finite_degree_bound [hU : U.IsHermitian]
     {n l : ℕ} {k : ι → ℕ} (hk : ∀ i, 0 < k i)
     (t : ∀ i, OAI.Saxl.Tableau n (rectangle (finrank K (Dual K (E i))) (k i)))
     (ha : ∀ i (p : PrimeSpectrum K),
@@ -107,9 +115,9 @@ theorem canonicalPairing_finite_degree_bound (hU : U.IsHermitian)
         (S.v S.Ωinf).toReal * rectangleLogCovolume (finrank K F) l ≤
       (n : ℝ) * ∑ i, (V i).slope +
         (S.v S.Ωinf).toReal * ∑ i, rectangleLogCovolume (finrank K (E i)) (k i) := by
-  exact canonicalPairing_finite_degree_bound_of_norm_le V hV U
+  exact canonicalPairing_finite_degree_bound_of_norm_le V U
     hk t ha b hl v hs bU A hA
-    (Contraction.canonicalPairing_norm_le V hV hk t ha b U hU hl v hs bU A hi)
+    (Contraction.canonicalPairing_norm_le V hk t ha b U hl v hs bU A hi)
 
 section Limit
 
@@ -170,7 +178,7 @@ theorem slope_le_sum_of_geometricallySemistable_of_pairing_norm_le
     let bU : Basis (Fin (finrank K (K ⊗[ℤ] orbitLattice (v r)))) ℤ (orbitLattice (v r)) :=
       (Module.finBasis ℤ (orbitLattice (v r))).reindex
         (finCongr (by rw [Module.finrank_baseChange]))
-    exact canonicalPairing_finite_degree_bound_of_norm_le V hV U
+    exact canonicalPairing_finite_degree_bound_of_norm_le V U
       (hk r) (t r) (fun i p => by simp) b (hl r) (v r) (fun p => by simp) bU A (hne r)
       (hcontract (d * (r + 1)) (l r) (k r) (hk r) (t r) (fun i p => by simp) b
         (hl r) (v r) (fun p => by simp) bU)
@@ -178,14 +186,14 @@ theorem slope_le_sum_of_geometricallySemistable_of_pairing_norm_le
 /-- The geometric subspace inequality for the prescribed completed tensor norm.
 The canonical pairing norm bound is discharged by its concrete local producer. -/
 theorem slope_le_sum_of_geometricallySemistable
-    (hU : U.IsHermitian) (A : F →ₗ[K] (⨂[K] i, E i))
+    [hU : U.IsHermitian] (A : F →ₗ[K] (⨂[K] i, E i))
     (hA : ∀ ω x, (orthogonalTensorOfMeasurableBase V).norm ω
       (A.baseChange (S.ϕ ω).Completion x) = U.norm ω x)
     (hgeom : ArakelovGeometry.InvariantTheory.IsGeometricallySemistableTensorSubspace E A) :
     U.slope ≤ ∑ i, (V i).slope := by
-  apply slope_le_sum_of_geometricallySemistable_of_pairing_norm_le V hV U A hgeom
+  apply slope_le_sum_of_geometricallySemistable_of_pairing_norm_le V U A hgeom
   intro n l k hk t ha b hl v hs bU
-  exact Contraction.canonicalPairing_norm_le V hV hk t ha b U hU hl v hs bU A hA
+  exact Contraction.canonicalPairing_norm_le V hk t ha b U hl v hs bU A hA
 
 end Limit
 

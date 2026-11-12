@@ -44,7 +44,7 @@ variable {K : Type*} [Field K] {E F : Type u} {Q : Type*}
   (V : AdelicVectorBundle S E) (W : AdelicVectorBundle S F)
   [hS : S.HasMeasurableBase]
   [hN : S.IsArchimedeanNormalized]
-  (hV : V.toNormFamily.IsHermitian) (hW : W.toNormFamily.IsHermitian)
+  [hV : V.IsHermitian] [hW : W.IsHermitian]
 
 /-- The Bost pp.31–32 quotient slope bound from an ACTUAL negative pair. The optimizer,
 HN lifts and common bases are constructed, and the strict rank-sum drop is derived.
@@ -53,7 +53,7 @@ actual grades of the fixed factors, quantified before choosing the optimizer. A6
 one-sided upper bound on the same data suffices; full CM (5.13) is not asserted.
 The original quotient norm is retained. Geometric production of the candidate is separate. -/
 theorem slope_sum_le_tensor_quotient_of_negative_candidate
-    (hsemiV : V.IsMeanSlopeSemistable) (hsemiW : W.IsMeanSlopeSemistable)
+    [hsemiV : V.IsMeanSlopeSemistable] [hsemiW : W.IsMeanSlopeSemistable]
     (q : E ⊗[K] F →ₗ[K] Q) (hq : Function.Surjective q) (hQ : 0 < finrank K Q)
     (hInd : ∀ (P : ℝ → Submodule K E) (R : ℝ → Submodule K F) (t u : ℝ),
       finrank K (FiltrationGraded P t) + finrank K (FiltrationGraded R u) <
@@ -63,27 +63,22 @@ theorem slope_sum_le_tensor_quotient_of_negative_candidate
         ((V.filtrationGraded P t).hermitianHNFiltration)
         ((W.filtrationGraded R u).hermitianHNFiltration))
     (P₀ : ℝ → Submodule K E) (R₀ : ℝ → Submodule K F)
-    (hP₀ : Antitone P₀ ∧ (∃ t, P₀ t = ⊥) ∧ (∃ t, P₀ t = ⊤) ∧
-      (∀ t, ∃ ε > 0, ∀ s, t - ε < s → s ≤ t → P₀ s = P₀ t) ∧
-      filtrationExpectation P₀ = 0)
-    (hR₀ : Antitone R₀ ∧ (∃ t, R₀ t = ⊥) ∧ (∃ t, R₀ t = ⊤) ∧
-      (∀ t, ∃ ε > 0, ∀ s, t - ε < s → s ≤ t → R₀ s = R₀ t) ∧
-      filtrationExpectation R₀ = 0)
+    [hP₀ : IsCenteredFiltration P₀] [hR₀ : IsCenteredFiltration R₀]
     (hneg₀ : filtrationExpectation (fun t ↦ (tensorFiltration P₀ R₀ t).map q) < 0) :
-    let T := V.orthogonalTensorPair W
+    let T := V ⊗ʰ W
     let B := T.pushforward q hq
     V.slope + W.slope ≤ B.slope := by
   obtain ⟨P, R, hP, hR, hunit, _, _, L, M, b, c, a, r, d, s,
       hPb, hL, hRc, hM, hlower⟩ :=
-    exists_bost_hn_variation_bound V W hV hW hsemiV hsemiW q hq hQ
-      P₀ R₀ hP₀ hR₀ hneg₀
+    exists_bost_hn_variation_bound V W q hq hQ
+      P₀ R₀ hneg₀
   have hsmall (t u : ℝ) :
       finrank K (FiltrationGraded P t) + finrank K (FiltrationGraded R u) <
         finrank K E + finrank K F :=
     finrank_filtrationGraded_add_lt_of_centered b c a d hPb hRc
-      hP.2.2.2.2 hR.2.2.2.2 (by rw [hunit]; exact one_ne_zero) t u
-  obtain hupper := tensorFiltrationQuotient_eventual_hn_upper V W hV hW
-    q hq hP.1 hR.1 b c a d hPb hRc L M r s hL hM
+      hP.expectation_eq_zero hR.expectation_eq_zero (by rw [hunit]; exact one_ne_zero) t u
+  obtain hupper := tensorFiltrationQuotient_eventual_hn_upper V W
+    q hq hP.antitone hR.antitone b c a d hPb hRc L M r s hL hM
       (fun t u ↦ hInd P R t u (hsmall t u))
   exact hlower _ hupper
 
@@ -101,7 +96,7 @@ variable {K E F Q : Type u} [Field K] [CharZero K]
   (V : AdelicVectorBundle S E) (W : AdelicVectorBundle S F)
   [hS : S.HasMeasurableBase]
   [hN : S.IsArchimedeanNormalized]
-  (hV : V.toNormFamily.IsHermitian) (hW : W.toNormFamily.IsHermitian)
+  [hV : V.IsHermitian] [hW : W.IsHermitian]
 
 /-- The actual geometric unstable case of Bost pp.31–32, equation (47), with the
 genuine smaller-rank tensor-HN induction hypothesis still explicit. A2 geometric
@@ -112,7 +107,7 @@ pushforward quotient norm, proper adelic and discrete-or-countable setting are
 retained, including trivial valuations. Only the binary HN variation is needed;
 full CM (5.13), the full HN induction, Section 6 and Bost Theorem 1.1 are not asserted. -/
 theorem slope_sum_le_tensor_quotient_of_not_geometricallySemistable
-    (hsemiV : V.IsMeanSlopeSemistable) (hsemiW : W.IsMeanSlopeSemistable)
+    [hsemiV : V.IsMeanSlopeSemistable] [hsemiW : W.IsMeanSlopeSemistable]
     (q : E ⊗[K] F →ₗ[K] Q) (hq : Function.Surjective q) (hQ : 0 < finrank K Q)
     (hInd : ∀ (P : ℝ → Submodule K E) (R : ℝ → Submodule K F) (t u : ℝ),
       finrank K (FiltrationGraded P t) + finrank K (FiltrationGraded R u) <
@@ -123,13 +118,15 @@ theorem slope_sum_le_tensor_quotient_of_not_geometricallySemistable
         ((W.filtrationGraded R u).hermitianHNFiltration))
     (hns : ¬ IsGeometricallySemistableTensorQuotient (BoolTensorFactors E F)
       (q.comp (boolTensorEquiv K (BoolTensorFactors E F)).toLinearMap)) :
-    let T := V.orthogonalTensorPair W
+    let T := V ⊗ʰ W
     let B := T.pushforward q hq
     V.slope + W.slope ≤ B.slope := by
   obtain ⟨P₀, R₀, hP₀, hR₀, _, hneg₀, _⟩ :=
     exists_normalized_tensor_quotient_optimizer_of_not_geometricallySemistable q hq hQ hns
-  exact slope_sum_le_tensor_quotient_of_negative_candidate V W hV hW
-    hsemiV hsemiW q hq hQ hInd P₀ R₀ hP₀ hR₀ hneg₀
+  let : IsCenteredFiltration P₀ := (isCenteredFiltration_iff P₀).mpr hP₀
+  let : IsCenteredFiltration R₀ := (isCenteredFiltration_iff R₀).mpr hR₀
+  exact slope_sum_le_tensor_quotient_of_negative_candidate V W
+      q hq hQ hInd P₀ R₀ hneg₀
 
 end Geometric
 

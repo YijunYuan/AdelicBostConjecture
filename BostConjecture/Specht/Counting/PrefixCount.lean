@@ -43,7 +43,7 @@ def glueRectangleTableau (hμ : μ ≤ rectangle a k) (t : Tableau m μ)
 
 private theorem glueRectangleTableau_label_mono (hμ : μ ≤ rectangle a k)
     {t : Tableau m μ} {u : Tableau l (rectangleComplement μ a k)}
-    (ht : IsStandard t) (hu : IsStandard u) (i j : Fin (m + l))
+    [ht : IsStandard t] [hu : IsStandard u] (i j : Fin (m + l))
     (h : (glueRectangleTableau hμ t u i).val ≤ (glueRectangleTableau hμ t u j).val) :
     i ≤ j := by
   cases i using Fin.addCases with
@@ -51,7 +51,7 @@ private theorem glueRectangleTableau_label_mono (hμ : μ ≤ rectangle a k)
     cases j using Fin.addCases with
     | left j =>
       simp only [glueRectangleTableau_castAdd] at h
-      have hh := ht.label_mono (b := t i) (c := t j) h
+      have hh := IsStandard.label_mono (t := t) (b := t i) (c := t j) h
       change i ≤ j
       simpa using hh
     | right j => exact le_of_lt (by change i.val < m + j.val; omega)
@@ -69,29 +69,29 @@ private theorem glueRectangleTableau_label_mono (hμ : μ ≤ rectangle a k)
           ⟨Nat.sub_le_sub_left h.1 _, Nat.sub_le_sub_left h.2 _⟩
         simpa only [rotateCell_rotateCell (rectangleComplement_le μ a k (u j.rev).property),
           rotateCell_rotateCell (rectangleComplement_le μ a k (u i.rev).property)] using hr
-      have hm := hu.label_mono (b := u j.rev) (c := u i.rev) hh
+      have hm := IsStandard.label_mono (t := u) (b := u j.rev) (c := u i.rev) hh
       simp only [Equiv.symm_apply_apply] at hm
       have hle : i ≤ j := by simpa only [Fin.rev_rev] using Fin.rev_strictAnti.antitone hm
       change m + i.val ≤ m + j.val
       exact Nat.add_le_add_left hle m
 
 /-- Gluing standard complementary fillings yields a standard rectangular tableau. -/
-theorem glueRectangleTableau_isStandard (hμ : μ ≤ rectangle a k)
+instance glueRectangleTableau_isStandard (hμ : μ ≤ rectangle a k)
     {t : Tableau m μ} {u : Tableau l (rectangleComplement μ a k)}
-    (ht : IsStandard t) (hu : IsStandard u) : IsStandard (glueRectangleTableau hμ t u) := by
-  constructor
+    [ht : IsStandard t] [hu : IsStandard u] : IsStandard (glueRectangleTableau hμ t u) := by
+  refine ⟨⟨?_⟩, ⟨?_⟩⟩
   · intro i j hr hq
-    have hle := glueRectangleTableau_label_mono hμ ht hu i j ⟨hr.le, hq.le⟩
+    have hle := glueRectangleTableau_label_mono hμ (t := t) (u := u) i j ⟨hr.le, hq.le⟩
     exact lt_of_le_of_ne hle (by intro he; subst j; exact hq.ne rfl)
   · intro i j hq hr
-    have hle := glueRectangleTableau_label_mono hμ ht hu i j ⟨hr.le, hq.le⟩
+    have hle := glueRectangleTableau_label_mono hμ (t := t) (u := u) i j ⟨hr.le, hq.le⟩
     exact lt_of_le_of_ne hle (by intro he; subst j; exact hr.ne rfl)
 
 /-- The prefix of the glued tableau is precisely the chosen subdiagram. -/
 theorem prefixShape_glueRectangleTableau (hμ : μ ≤ rectangle a k)
     {t : Tableau m μ} {u : Tableau l (rectangleComplement μ a k)}
-    (ht : IsStandard t) (hu : IsStandard u) :
-    prefixShape (glueRectangleTableau_isStandard hμ ht hu) m (Nat.le_add_right m l) = μ := by
+    [ht : IsStandard t] [hu : IsStandard u] :
+    prefixShape (glueRectangleTableau hμ t u) m (Nat.le_add_right m l) = μ := by
   ext c
   change c ∈ Finset.univ.image (fun i : Fin m =>
     (glueRectangleTableau hμ t u (Fin.castLE (Nat.le_add_right m l) i)).val) ↔ c ∈ μ.cells
@@ -106,39 +106,39 @@ theorem prefixShape_glueRectangleTableau (hμ : μ ≤ rectangle a k)
     simp
 
 /-- Transport the actual prefix tableau to its specified shape. -/
-def prefixTableauOfShape {T : Tableau (m + l) (rectangle a k)} (hT : IsStandard T)
-    (hP : prefixShape hT m (Nat.le_add_right m l) = μ) : Tableau m μ :=
-  (prefixTableau hT m (Nat.le_add_right m l)).trans
+def prefixTableauOfShape (T : Tableau (m + l) (rectangle a k)) [hT : IsStandard T]
+    (hP : prefixShape T m (Nat.le_add_right m l) = μ) : Tableau m μ :=
+  (prefixTableau T m (Nat.le_add_right m l)).trans
     (Equiv.subtypeEquivRight fun c => by rw [hP])
 
 @[simp] theorem prefixTableauOfShape_apply {T : Tableau (m + l) (rectangle a k)}
-    (hT : IsStandard T) (hP : prefixShape hT m (Nat.le_add_right m l) = μ) (i : Fin m) :
-    (prefixTableauOfShape hT hP i).val = (T (Fin.castAdd l i)).val := rfl
+    [hT : IsStandard T] (hP : prefixShape T m (Nat.le_add_right m l) = μ) (i : Fin m) :
+    (prefixTableauOfShape T hP i).val = (T (Fin.castAdd l i)).val := rfl
 
-theorem prefixTableauOfShape_isStandard {T : Tableau (m + l) (rectangle a k)}
-    (hT : IsStandard T) (hP : prefixShape hT m (Nat.le_add_right m l) = μ) :
-    IsStandard (prefixTableauOfShape hT hP) := by
-  constructor
+instance prefixTableauOfShape_isStandard {T : Tableau (m + l) (rectangle a k)}
+    [hT : IsStandard T] (hP : prefixShape T m (Nat.le_add_right m l) = μ) :
+    IsStandard (prefixTableauOfShape T hP) := by
+  refine ⟨⟨?_⟩, ⟨?_⟩⟩
   · intro i j hr hq
-    exact hT.1 (Fin.castAdd l i) (Fin.castAdd l j) hr hq
+    exact hT.rowStandard.label_lt (Fin.castAdd l i) (Fin.castAdd l j) hr hq
   · intro i j hq hr
-    exact hT.2 (Fin.castAdd l i) (Fin.castAdd l j) hq hr
+    exact hT.columnStandard.label_lt (Fin.castAdd l i) (Fin.castAdd l j) hq hr
 
 /-- Suffix labels lie outside the specified prefix diagram. -/
 theorem suffix_not_mem {T : Tableau (m + l) (rectangle a k)}
-    (hT : IsStandard T) (hP : prefixShape hT m (Nat.le_add_right m l) = μ) (i : Fin l) :
+    [hT : IsStandard T] (hP : prefixShape T m (Nat.le_add_right m l) = μ) (i : Fin l) :
     (T (Fin.natAdd m i)).val ∉ μ := by
   rw [← hP, mem_prefixShape]
   simp
 
 /-- Extract the suffix, reversing both its labels and its box coordinates. -/
-def complementTableauOfShape {T : Tableau (m + l) (rectangle a k)}
-    (hT : IsStandard T) (hP : prefixShape hT m (Nat.le_add_right m l) = μ) :
+def complementTableauOfShape (T : Tableau (m + l) (rectangle a k))
+    [hT : IsStandard T] (hP : prefixShape T m (Nat.le_add_right m l) = μ) :
     Tableau l (rectangleComplement μ a k) :=
   Equiv.ofBijective
     (fun i => ⟨rotateCell a k (T (Fin.natAdd m i.rev)).val,
       (rotateCell_mem_rectangleComplement (T (Fin.natAdd m i.rev)).property).mpr
-        (suffix_not_mem hT hP i.rev)⟩)
+        (suffix_not_mem (T := T) hP i.rev)⟩)
     ⟨by
       intro i j h
       have he := congrArg (fun c : (rectangleComplement μ a k).cells =>
@@ -148,15 +148,15 @@ def complementTableauOfShape {T : Tableau (m + l) (rectangle a k)}
       have hi : Fin.natAdd m i.rev = Fin.natAdd m j.rev := T.injective (Subtype.ext he)
       have hr : i.rev = j.rev := Fin.ext (Nat.add_left_cancel (congrArg Fin.val hi))
       simpa only [Fin.rev_rev] using congrArg Fin.rev hr
-    , by
+, by
       intro c
       let b : (rectangle a k).cells :=
         ⟨rotateCell a k c.val, rotateCell_mem (rectangleComplement_le μ a k c.property)⟩
       let i := T.symm b
       have hi : m ≤ i.val := by
         by_contra hh
-        have hb : b.val ∈ prefixShape hT m (Nat.le_add_right m l) :=
-          (mem_prefixShape hT m (Nat.le_add_right m l) b).mpr (by omega)
+        have hb : b.val ∈ prefixShape T m (Nat.le_add_right m l) :=
+          (mem_prefixShape (t := T) m (Nat.le_add_right m l) b).mpr (by omega)
         rw [hP] at hb
         exact (mem_rectangleComplement.mp c.property).2 hb
       let j : Fin l := ⟨i.val - m, by have := i.isLt; omega⟩
@@ -169,8 +169,8 @@ def complementTableauOfShape {T : Tableau (m + l) (rectangle a k)}
       exact rotateCell_rotateCell (rectangleComplement_le μ a k c.property)⟩
 
 @[simp] theorem complementTableauOfShape_apply {T : Tableau (m + l) (rectangle a k)}
-    (hT : IsStandard T) (hP : prefixShape hT m (Nat.le_add_right m l) = μ) (i : Fin l) :
-    (complementTableauOfShape hT hP i).val = rotateCell a k (T (Fin.natAdd m i.rev)).val := rfl
+    [hT : IsStandard T] (hP : prefixShape T m (Nat.le_add_right m l) = μ) (i : Fin l) :
+    (complementTableauOfShape T hP i).val = rotateCell a k (T (Fin.natAdd m i.rev)).val := rfl
 
 private theorem rotate_row_comparison {a k : ℕ} {c d : ℕ × ℕ}
     (hc : c ∈ rectangle a k) (hd : d ∈ rectangle a k)
@@ -191,14 +191,14 @@ private theorem rotate_col_comparison {a k : ℕ} {c d : ℕ × ℕ}
   constructor <;> omega
 
 /-- The extracted rotated suffix is standard. -/
-theorem complementTableauOfShape_isStandard {T : Tableau (m + l) (rectangle a k)}
-    (hT : IsStandard T) (hP : prefixShape hT m (Nat.le_add_right m l) = μ) :
-    IsStandard (complementTableauOfShape hT hP) := by
-  constructor
+instance complementTableauOfShape_isStandard {T : Tableau (m + l) (rectangle a k)}
+    [hT : IsStandard T] (hP : prefixShape T m (Nat.le_add_right m l) = μ) :
+    IsStandard (complementTableauOfShape T hP) := by
+  refine ⟨⟨?_⟩, ⟨?_⟩⟩
   · intro i j hr hq
     have h := rotate_row_comparison (T (Fin.natAdd m i.rev)).property
       (T (Fin.natAdd m j.rev)).property hr hq
-    have hh := hT.1 (Fin.natAdd m j.rev) (Fin.natAdd m i.rev) h.1 h.2
+    have hh := hT.rowStandard.label_lt (Fin.natAdd m j.rev) (Fin.natAdd m i.rev) h.1 h.2
     have hrev : j.rev < i.rev := by
       change m + j.rev.val < m + i.rev.val at hh
       exact Nat.lt_of_add_lt_add_left hh
@@ -206,7 +206,7 @@ theorem complementTableauOfShape_isStandard {T : Tableau (m + l) (rectangle a k)
   · intro i j hq hr
     have h := rotate_col_comparison (T (Fin.natAdd m i.rev)).property
       (T (Fin.natAdd m j.rev)).property hq hr
-    have hh := hT.2 (Fin.natAdd m j.rev) (Fin.natAdd m i.rev) h.1 h.2
+    have hh := hT.columnStandard.label_lt (Fin.natAdd m j.rev) (Fin.natAdd m i.rev) h.1 h.2
     have hrev : j.rev < i.rev := by
       change m + j.rev.val < m + i.rev.val at hh
       exact Nat.lt_of_add_lt_add_left hh
@@ -215,18 +215,18 @@ theorem complementTableauOfShape_isStandard {T : Tableau (m + l) (rectangle a k)
 /-- The actual rectangular prefix fiber is the product of the two standard-tableau types. -/
 def rectanglePrefixEquiv (hμ : μ ≤ rectangle a k) :
     {T : {T : Tableau (m + l) (rectangle a k) // IsStandard T} //
-      prefixShape T.property m (Nat.le_add_right m l) = μ} ≃
+      prefixShape T.val m (Nat.le_add_right m l) = μ} ≃
     {t : Tableau m μ // IsStandard t} ×
       {u : Tableau l (rectangleComplement μ a k) // IsStandard u} where
   toFun X :=
-    (⟨prefixTableauOfShape X.val.property X.property,
-       prefixTableauOfShape_isStandard X.val.property X.property⟩,
-     ⟨complementTableauOfShape X.val.property X.property,
-       complementTableauOfShape_isStandard X.val.property X.property⟩)
+    (⟨prefixTableauOfShape X.val.val X.property,
+       prefixTableauOfShape_isStandard (T := X.val.val) X.property⟩,
+     ⟨complementTableauOfShape X.val.val X.property,
+       complementTableauOfShape_isStandard (T := X.val.val) X.property⟩)
   invFun P :=
     ⟨⟨glueRectangleTableau hμ P.1.val P.2.val,
-       glueRectangleTableau_isStandard hμ P.1.property P.2.property⟩,
-     prefixShape_glueRectangleTableau hμ P.1.property P.2.property⟩
+       glueRectangleTableau_isStandard hμ (t := P.1.val) (u := P.2.val)⟩,
+     prefixShape_glueRectangleTableau hμ (t := P.1.val) (u := P.2.val)⟩
   left_inv X := by
     apply Subtype.ext
     apply Subtype.ext
@@ -251,7 +251,7 @@ def rectanglePrefixEquiv (hμ : μ ≤ rectangle a k) :
 /-- Exact counting of a rectangular prefix fiber by complementary standard tableaux. -/
 theorem card_rectanglePrefix (hμ : μ ≤ rectangle a k) :
     Nat.card {T : {T : Tableau (m + l) (rectangle a k) // IsStandard T} //
-      prefixShape T.property m (Nat.le_add_right m l) = μ} =
+      prefixShape T.val m (Nat.le_add_right m l) = μ} =
     Fintype.card {t : Tableau m μ // IsStandard t} *
       Fintype.card {u : Tableau l (rectangleComplement μ a k) // IsStandard u} := by
   rw [Nat.card_congr (rectanglePrefixEquiv hμ)]

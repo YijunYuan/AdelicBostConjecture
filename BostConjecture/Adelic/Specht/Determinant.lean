@@ -31,7 +31,7 @@ variable {K : Type*} [Field K] {S : AdelicStructure K}
 
 /-- Relative to an orthonormal frame, the actual exterior determinant norm
 is the absolute value of the coordinate determinant. -/
-theorem IsHermitian.determinant_norm_eq_norm_det (hξ : ξ.IsHermitian)
+theorem determinant_norm_eq_norm_det (ξ : NormFamily S E) [hξ : ξ.IsHermitian]
     (ω : S.Ω) (hω : ω ∈ S.Ωinf) :
     letI := hS ω hω
     letI := IsRCLikeNormedField.rclike (S.ϕ ω).Completion
@@ -60,7 +60,7 @@ theorem IsHermitian.determinant_norm_eq_norm_det (hξ : ξ.IsHermitian)
 
 /-- The Gram determinant computes the square of the actual exterior norm,
 for every completed tuple, including dependent tuples and rank zero. -/
-theorem IsHermitian.determinant_norm_sq_eq_norm_gram (hξ : ξ.IsHermitian)
+theorem determinant_norm_sq_eq_norm_gram (ξ : NormFamily S E) [hξ : ξ.IsHermitian]
     (ω : S.Ω) (hω : ω ∈ S.Ωinf) :
     letI := hS ω hω
     letI := IsRCLikeNormedField.rclike (S.ϕ ω).Completion
@@ -81,7 +81,8 @@ theorem IsHermitian.determinant_norm_sq_eq_norm_gram (hξ : ξ.IsHermitian)
   intro v
   let b := (stdOrthonormalBasis (S.ϕ ω).Completion
     ((S.ϕ ω).Completion ⊗[K] E)).reindex (finCongr Module.finrank_baseChange)
-  rw [hξ.determinant_norm_eq_norm_det ω hω b v, Matrix.gram_eq_conjTranspose_mul b v,
+  rw [determinant_norm_eq_norm_det ξ ω hω b v,
+    Matrix.gram_eq_conjTranspose_mul b v,
     Matrix.det_mul, Matrix.det_conjTranspose, norm_mul, norm_star, pow_two]
   rfl
 

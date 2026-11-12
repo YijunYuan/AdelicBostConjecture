@@ -29,24 +29,24 @@ open scoped StandardColex
 variable {n : ℕ} {μ : YoungDiagram}
 
 /-- The row count used in the explicit norm product is the row length of the actual prefix shape. -/
-theorem prefixRowCount_eq_rowLen_prefixShape {t : Tableau n μ} (ht : IsStandard t)
+theorem prefixRowCount_eq_rowLen_prefixShape {t : Tableau n μ} [ht : IsStandard t]
     (m : Fin n) (r : ℕ) :
-    prefixRowCount t m r = (prefixShape ht m.val (Nat.le_of_lt m.isLt)).rowLen r := by
+    prefixRowCount t m r = (prefixShape t m.val (Nat.le_of_lt m.isLt)).rowLen r := by
   classical
   rw [prefixRowCount, YoungDiagram.rowLen_eq_card]
   apply Finset.card_bij (fun l _ => (t l).val)
   · intro l hl
     obtain ⟨_, hlm, hlr⟩ := Finset.mem_filter.mp hl
     exact YoungDiagram.mem_row_iff.mpr ⟨
-      (mem_prefixShape ht m.val (Nat.le_of_lt m.isLt) (t l)).mpr
+      (mem_prefixShape (t := t) m.val (Nat.le_of_lt m.isLt) (t l)).mpr
         (by simpa only [Equiv.symm_apply_apply, Fin.lt_def] using hlm), hlr⟩
   · intro l hl q hq he
     exact t.injective (Subtype.ext he)
   · intro b hb
     obtain ⟨hb, hbr⟩ := YoungDiagram.mem_row_iff.mp hb
-    let c : μ := ⟨b, prefixShape_le ht m.val (Nat.le_of_lt m.isLt) hb⟩
+    let c : μ := ⟨b, prefixShape_le (t := t) m.val (Nat.le_of_lt m.isLt) hb⟩
     refine ⟨t.symm c, Finset.mem_filter.mpr ⟨Finset.mem_univ _, ?_, ?_⟩, ?_⟩
-    · exact (mem_prefixShape ht m.val (Nat.le_of_lt m.isLt) c).mp hb
+    · exact (mem_prefixShape (t := t) m.val (Nat.le_of_lt m.isLt) c).mp hb
     · simpa [c] using hbr
     · simp [c]
 
@@ -63,7 +63,7 @@ theorem row_lt_of_standard_adjacent_lt
       rw [hU, rowWord_relabel]
       funext l
       simpa only [Function.comp_apply, Equiv.swap_inv] using Equiv.apply_swap_eq_self (Fin.ext hr) l
-    exact (hTU.ne (Subtype.ext (U.property.1.eq_of_rowWord_eq T.property.1 hw)).symm).elim
+    exact (hTU.ne (Subtype.ext (RowStandard.eq_of_rowWord_eq hw)).symm).elim
   · exact hr
 
 /-- The explicit prefix product is the squared norm of the actual monic orthogonal vector. -/
@@ -79,7 +79,7 @@ theorem norm_orthogonalStandardBasis_sq_eq_prefixNormProduct (a k : ℕ)
   | @tail U V hpath hedge ih =>
     obtain ⟨hUV, i, j, hij, hV⟩ := hedge
     rw [norm_orthogonalStandardBasis_swap_sq t U V i j hij hV hUV, ih,
-      hV, prefixNormProduct_relabel_adjacent U.property i j hij
+      hV, prefixNormProduct_relabel_adjacent (t := U.val) i j hij
         (row_lt_of_standard_adjacent_lt U V i j hij hV hUV)]
 
 /-- The explicit seminormal sum bounds the logarithmic covolume of the unchanged orbit lattice. -/

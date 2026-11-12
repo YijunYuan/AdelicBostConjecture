@@ -31,21 +31,21 @@ private theorem lt_of_adjacent_swap_lt {i j x y : Fin n} (hij : i.val + 1 = j.va
   split_ifs at hxy <;> simp_all [Fin.ext_iff] <;> omega
 
 /-- Swapping consecutive labels in different rows and columns preserves standardness. -/
-theorem IsStandard.relabel_adjacent {t : Tableau n μ} (ht : IsStandard t)
+theorem IsStandard.relabel_adjacent {t : Tableau n μ} [ht : IsStandard t]
     (i j : Fin n) (hij : i.val + 1 = j.val)
     (hr : (t i).val.1 ≠ (t j).val.1) (hc : (t i).val.2 ≠ (t j).val.2) :
     IsStandard (relabel (Equiv.swap i j) t) := by
   have he (l : Fin n) : relabel (Equiv.swap i j) t l = t (Equiv.swap i j l) := by
     simp [relabel]
-  constructor
+  refine ⟨⟨?_⟩, ⟨?_⟩⟩
   · intro x y hrow hcol
     simp only [he] at hrow hcol
-    apply lt_of_adjacent_swap_lt hij (ht.1 _ _ hrow hcol)
+    apply lt_of_adjacent_swap_lt hij (ht.rowStandard.label_lt _ _ hrow hcol)
     rintro ⟨rfl, rfl⟩
     exact hr (by simpa only [Equiv.swap_apply_left, Equiv.swap_apply_right] using hrow)
   · intro x y hcol hrow
     simp only [he] at hrow hcol
-    apply lt_of_adjacent_swap_lt hij (ht.2 _ _ hcol hrow)
+    apply lt_of_adjacent_swap_lt hij (ht.columnStandard.label_lt _ _ hcol hrow)
     rintro ⟨rfl, rfl⟩
     exact hc (by simpa only [Equiv.swap_apply_left, Equiv.swap_apply_right] using hcol)
 
@@ -81,7 +81,7 @@ private theorem exists_adjacent_descent (p : Equiv.Perm (Fin n)) (hp : p ≠ 1) 
 
 /-- A noninitial standard rectangle admits an adjacent pair inverted in column-reading order. -/
 theorem exists_rectangle_adjacent_descent {a k : ℕ}
-    (t : Tableau (a * k) (rectangle a k)) (ht : IsStandard t)
+    (t : Tableau (a * k) (rectangle a k)) [ht : IsStandard t]
     (hne : t ≠ rectangleColumnTableau a k) :
     ∃ i j : Fin (a * k), i.val + 1 = j.val ∧
       (t i).val.1 < (t j).val.1 ∧ (t j).val.2 < (t i).val.2 := by
@@ -102,7 +102,7 @@ theorem exists_rectangle_adjacent_descent {a k : ℕ}
   have hcol : (t j).val.2 < (t i).val.2 := by
     rcases lt_trichotomy (t j).val.2 (t i).val.2 with hh | hh | hh
     · exact hh
-    · have hr := (ht.2.lt_iff_row_lt hh.symm).mp hij'
+    · have hr := (ColumnStandard.lt_iff_row_lt (t := t) hh.symm).mp hij'
       rw [hh] at hdesc'
       omega
     · have hm := Nat.mul_le_mul_left a (show (t i).val.2 + 1 ≤ (t j).val.2 by omega)
@@ -110,7 +110,7 @@ theorem exists_rectangle_adjacent_descent {a k : ℕ}
       nlinarith
   have hrow : (t i).val.1 < (t j).val.1 := by
     by_contra hrow
-    have hh := ht.label_mono (b := t j) (c := t i) ⟨le_of_not_gt hrow, hcol.le⟩
+    have hh := IsStandard.label_mono (t := t) (b := t j) (c := t i) ⟨le_of_not_gt hrow, hcol.le⟩
     simp only [Equiv.symm_apply_apply] at hh
     exact (not_le_of_gt hij') hh
   exact ⟨i, j, hij, hrow, hcol⟩
@@ -141,10 +141,10 @@ theorem rectangle_standard_adjacent_path (a k : ℕ)
         Subtype.ext he
       subst T
       exact Relation.ReflTransGen.refl
-    · obtain ⟨i, j, hij, hr, hc⟩ := exists_rectangle_adjacent_descent T.val T.property he
+    · obtain ⟨i, j, hij, hr, hc⟩ := exists_rectangle_adjacent_descent T.val  he
       let U : {t : Tableau (a * k) (rectangle a k) // IsStandard t} :=
         ⟨relabel (Equiv.swap i j) T.val,
-          T.property.relabel_adjacent i j hij hr.ne hc.ne'⟩
+          IsStandard.relabel_adjacent (t := T.val) i j hij hr.ne hc.ne'⟩
       have hUT : U < T := (standardColex_lt_iff U T).mpr
         (tableauColexLT_relabel_adjacent T.val i j hij hr)
       apply Relation.ReflTransGen.tail (ih U hUT)

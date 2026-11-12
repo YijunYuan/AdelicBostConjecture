@@ -44,7 +44,7 @@ theorem rectanglePrefix_average_eq_weighted (a : ℕ) {k : ℕ} (hk : 0 < k)
   have hcard (μ : RectangleShape a k m) :
       Fintype.card {T // rectanglePrefixShape a k m l T = μ} =
       Nat.card {T : {T : Tableau (m + l) (rectangle a k) // IsStandard T} //
-        prefixShape T.property m (Nat.le_add_right m l) = μ.val} := by
+        prefixShape T.val m (Nat.le_add_right m l) = μ.val} := by
     simp only [rectanglePrefixShape, Subtype.ext_iff, Nat.card_eq_fintype_card]
   simp_rw [hcard] at hfiber
   rw [← hfiber, sum_div]
@@ -61,7 +61,7 @@ theorem rectanglePrefix_average_eq_weighted (a : ℕ) {k : ℕ} (hk : 0 < k)
   have hp := rectanglePrefix_probability_eq_weighted a hk m l hml μ
   calc
     _ = ((Nat.card {T : {T : Tableau (m + l) (rectangle a k) // IsStandard T} //
-          prefixShape T.property m (Nat.le_add_right m l) = μ.val} : ℝ) /
+          prefixShape T.val m (Nat.le_add_right m l) = μ.val} : ℝ) /
         (Fintype.card {T : Tableau (m + l) (rectangle a k) // IsStandard T} : ℝ)) *
           f (rectangleShapeOccupancy μ).val := by ring
     _ = _ := by rw [hp]; ring

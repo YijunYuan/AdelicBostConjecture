@@ -65,40 +65,40 @@ theorem prefixCentralOperator_mem_lastRowSubspace (t : Tableau (n + 1) μ)
 
 /-- Through the actual restriction map, the prefix central sum acts by prefix content. -/
 theorem prefixSliceReal_prefixCentralOperator {t : Tableau (n + 1) μ}
-    (ht : IsStandard t) {x : realSpan t}
+    [ht : IsStandard t] {x : realSpan t}
     (hx : x ∈ lastRowSubspace t (rowWord t (Fin.last n)).val) :
-    prefixSliceReal ht (Nat.le_succ n)
+    prefixSliceReal t (Nat.le_succ n)
         (prefixCentralOperator t n (Nat.le_succ n) x).val =
-      (diagramContent (prefixShape ht n (Nat.le_succ n)) : ℝ) •
-        prefixSliceReal ht (Nat.le_succ n) x.val := by
-  let y := branchingMap ht ⟨x, hx⟩
-  have h := congrArg (fun f : Module.End ℝ (realSpan (prefixTableau ht n (Nat.le_succ n))) =>
-    (f y).val) (sum_murphyOperator_eq (prefixTableau ht n (Nat.le_succ n)))
+      (diagramContent (prefixShape t n (Nat.le_succ n)) : ℝ) •
+        prefixSliceReal t (Nat.le_succ n) x.val := by
+  let y := branchingMap t ⟨x, hx⟩
+  have h := congrArg (fun f : Module.End ℝ (realSpan (prefixTableau t n (Nat.le_succ n))) =>
+    (f y).val) (sum_murphyOperator_eq (prefixTableau t n (Nat.le_succ n)))
   simp only [murphyOperator, LinearMap.sum_apply, Submodule.coe_sum, LinearMap.smul_apply,
     Module.End.one_apply, Submodule.coe_smul, realSpechtRep_coe] at h
-  have hy : y.val = prefixSliceReal ht (Nat.le_succ n) x.val := rfl
+  have hy : y.val = prefixSliceReal t (Nat.le_succ n) x.val := rfl
   rw [hy] at h
   simpa only [prefixCentralOperator, LinearMap.sum_apply, Submodule.coe_sum, map_sum,
     realSpechtRep_coe, prefixSliceReal_wordRepReal] using h
 
 /-- Prefix central action differs from its content scalar only in earlier rows. -/
 theorem prefixCentralOperator_sub_content_mem {t : Tableau (n + 1) μ}
-    (ht : IsStandard t) {x : realSpan t}
+    [ht : IsStandard t] {x : realSpan t}
     (hx : x ∈ lastRowSubspace t (rowWord t (Fin.last n)).val) :
     prefixCentralOperator t n (Nat.le_succ n) x -
-      (diagramContent (prefixShape ht n (Nat.le_succ n)) : ℝ) • x ∈
+      (diagramContent (prefixShape t n (Nat.le_succ n)) : ℝ) • x ∈
         lastRowSubspaceLT t (rowWord t (Fin.last n)).val := by
   have hy : prefixCentralOperator t n (Nat.le_succ n) x -
-      (diagramContent (prefixShape ht n (Nat.le_succ n)) : ℝ) • x ∈
+      (diagramContent (prefixShape t n (Nat.le_succ n)) : ℝ) • x ∈
         lastRowSubspace t (rowWord t (Fin.last n)).val :=
     (lastRowSubspace t _).sub_mem (prefixCentralOperator_mem_lastRowSubspace t _ hx)
       ((lastRowSubspace t _).smul_mem _ hx)
-  apply (branchingMap_eq_zero_iff ht ⟨_, hy⟩).mp
+  apply (branchingMap_eq_zero_iff (t := t) ⟨_, hy⟩).mp
   apply Subtype.ext
-  change prefixSliceReal ht (Nat.le_succ n)
+  change prefixSliceReal t (Nat.le_succ n)
     ((prefixCentralOperator t n (Nat.le_succ n) x).val -
-      (diagramContent (prefixShape ht n (Nat.le_succ n)) : ℝ) • x.val) = 0
-  rw [map_sub, map_smul, prefixSliceReal_prefixCentralOperator ht hx, sub_self]
+      (diagramContent (prefixShape t n (Nat.le_succ n)) : ℝ) • x.val) = 0
+  rw [map_sub, map_smul, prefixSliceReal_prefixCentralOperator (t := t) hx, sub_self]
 
 /-- The central prefix sum is the sum of the Murphy operators at prefix labels. -/
 theorem prefixCentralOperator_eq_sum (t : Tableau n μ) (m : ℕ) (hm : m ≤ n) :
@@ -128,8 +128,8 @@ theorem prefixCentralOperator_add_last (t : Tableau (n + 1) μ) :
   rfl
 
 /-- The total content differs from the prefix content by the content of the last box. -/
-theorem diagramContent_sub_prefixShape {t : Tableau (n + 1) μ} (ht : IsStandard t) :
-    diagramContent μ - diagramContent (prefixShape ht n (Nat.le_succ n)) =
+theorem diagramContent_sub_prefixShape {t : Tableau (n + 1) μ} [ht : IsStandard t] :
+    diagramContent μ - diagramContent (prefixShape t n (Nat.le_succ n)) =
       tableauContent t (Fin.last n) := by
   rw [← sum_tableauContent t, diagramContent_prefixShape, Fin.sum_univ_castSucc]
   have he : (∑ j : Fin n, tableauContent t (Fin.castLE (Nat.le_succ n) j)) =
@@ -139,7 +139,7 @@ theorem diagramContent_sub_prefixShape {t : Tableau (n + 1) μ} (ht : IsStandard
 
 /-- On a branching quotient the last Murphy operator is the content scalar. -/
 theorem murphyOperator_last_sub_content_mem {t : Tableau (n + 1) μ}
-    (ht : IsStandard t) {x : realSpan t}
+    [ht : IsStandard t] {x : realSpan t}
     (hx : x ∈ lastRowSubspace t (rowWord t (Fin.last n)).val) :
     murphyOperator t (Fin.last n) x - (tableauContent t (Fin.last n) : ℝ) • x ∈
       lastRowSubspaceLT t (rowWord t (Fin.last n)).val := by
@@ -147,13 +147,13 @@ theorem murphyOperator_last_sub_content_mem {t : Tableau (n + 1) μ}
     (prefixCentralOperator_add_last t)
   simp only [LinearMap.add_apply, LinearMap.smul_apply, Module.End.one_apply] at h
   have hc : (tableauContent t (Fin.last n) : ℝ) =
-      (diagramContent μ : ℝ) - (diagramContent (prefixShape ht n (Nat.le_succ n)) : ℝ) := by
-    exact_mod_cast (diagramContent_sub_prefixShape ht).symm
+      (diagramContent μ : ℝ) - (diagramContent (prefixShape t n (Nat.le_succ n)) : ℝ) := by
+    exact_mod_cast (diagramContent_sub_prefixShape (t := t)).symm
   have he : murphyOperator t (Fin.last n) x - (tableauContent t (Fin.last n) : ℝ) • x =
       -(prefixCentralOperator t n (Nat.le_succ n) x -
-        (diagramContent (prefixShape ht n (Nat.le_succ n)) : ℝ) • x) := by
+        (diagramContent (prefixShape t n (Nat.le_succ n)) : ℝ) • x) := by
     rw [eq_sub_of_add_eq' h, hc, sub_smul]
     abel
-  simpa only [he] using Submodule.neg_mem _ (prefixCentralOperator_sub_content_mem ht hx)
+  simpa only [he] using Submodule.neg_mem _ (prefixCentralOperator_sub_content_mem (t := t) hx)
 
 end BostConjecture.Specht

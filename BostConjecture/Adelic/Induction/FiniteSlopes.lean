@@ -38,21 +38,21 @@ theorem slope_orthogonalTensorOfMeasurableBase
     {ι : Type wι} [Fintype ι] {E : ι → Type w}
     [∀ i, AddCommGroup (E i)] [∀ i, Module K (E i)]
     [∀ i, FiniteDimensional K (E i)] (V : ∀ i, AdelicVectorBundle S (E i))
-    (hV : ∀ i, (V i).IsHermitian) (hr : ∀ i, 0 < finrank K (E i)) :
+    [hV : ∀ i, (V i).IsHermitian] (hr : ∀ i, 0 < finrank K (E i)) :
     (orthogonalTensorOfMeasurableBase V).slope =
       ∑ i, (V i).slope := by
   classical
   have main : ∀ (ι : Type wι) [Fintype ι], ∀ (E : ι → Type w)
       [∀ i, AddCommGroup (E i)] [∀ i, Module K (E i)]
       [∀ i, FiniteDimensional K (E i)] (V : ∀ i, AdelicVectorBundle S (E i))
-      (hV : ∀ i, (V i).IsHermitian), (∀ i, 0 < finrank K (E i)) →
+      [hV : ∀ i, (V i).IsHermitian], (∀ i, 0 < finrank K (E i)) →
       (orthogonalTensorOfMeasurableBase V).slope =
         ∑ i, (V i).slope := by
     apply Fintype.induction_empty_option
     · intro α β _ e ih E _ _ _ V hV hr
       let := Fintype.ofEquiv β e.symm
-      rw [(slopes_orthogonalTensor_reindex V hV e.symm).1]
-      exact (ih (fun i => E (e i)) (fun i => V (e i)) (fun i => hV (e i))
+      rw [(slopes_orthogonalTensor_reindex V e.symm).1]
+      exact (ih (fun i => E (e i)) (fun i => V (e i))
         (fun i => hr (e i))).trans (e.sum_comp (fun i => (V i).slope))
     · intro E _ _ _ V hV hr
       have hline : ∀ i, (V i).IsLine := fun i ↦ isEmptyElim i
@@ -65,19 +65,18 @@ theorem slope_orthogonalTensorOfMeasurableBase
       simp
     · intro α _ ih E _ _ _ V hV hr
       let e := Equiv.optionEquivSumPUnit α
-      rw [(slopes_orthogonalTensor_reindex V hV e).1,
-        ← (slopes_orthogonalTensor_sum (fun j => V (e.symm j))
-          (fun j => hV (e.symm j))).1]
+      rw [(slopes_orthogonalTensor_reindex V e).1,
+        ← (slopes_orthogonalTensor_sum (fun j => V (e.symm j))).1]
       let A := orthogonalTensorOfMeasurableBase (fun i => V (e.symm (.inl i)))
       let B := orthogonalTensorOfMeasurableBase (fun j => V (e.symm (.inr j)))
       rw [slope_orthogonalTensorPair A B
         (finrank_piTensorProduct_pos (fun i => hr (e.symm (.inl i))))
         (finrank_piTensorProduct_pos (fun j => hr (e.symm (.inr j))))]
       rw [(slopes_orthogonalTensor_subsingleton
-        (fun j => V (e.symm (.inr j))) (fun j => hV (e.symm (.inr j))) PUnit.unit).1]
+        (fun j => V (e.symm (.inr j))) PUnit.unit).1]
       rw [ih (fun i => E (e.symm (.inl i))) (fun i => V (e.symm (.inl i)))
-        (fun i => hV (e.symm (.inl i))) (fun i => hr (e.symm (.inl i)))]
+        (fun i => hr (e.symm (.inl i)))]
       simp [e, Fintype.sum_option, add_comm]
-  exact main ι E V hV hr
+  exact main ι E V hr
 
 end ArakelovGeometry.AdelicVectorBundle

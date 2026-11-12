@@ -217,7 +217,9 @@ may therefore describe declarations or modules that have since been removed.
   `BostConjecture/ExternalCode/TauCeti/RepresentationTheory/Specht/`.
   The proofs replace categorical tabloids with the existing OAI tableaux and
   integral word coordinates, prove integer cancellation by an involution,
-  and collect multiplicities over the rationals. The consumer
+  and collect multiplicities over the rationals. The standard-tableau result
+  is bundled into the local `RowStandard`, `ColumnStandard` and `IsStandard`
+  property classes. The consumer
   `BostConjecture.Specht.polytabloidRat_mem_span_standard` supplies rational
   spanning to the standard real basis; it does not assert an integral basis.
 - Schur–Weyl: selected sources under `TauCeti/RepresentationTheory/Symmetric/TensorAction/`,

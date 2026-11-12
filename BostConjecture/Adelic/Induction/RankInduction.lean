@@ -44,37 +44,37 @@ theorem tensorHN_and_semistable_of_geometric_quotient_bound
       [AddCommGroup F] [Module K F] [FiniteDimensional K F] [Nontrivial F]
       [AddCommGroup Q] [Module K Q] [FiniteDimensional K Q] [Nontrivial Q]
       (V : AdelicVectorBundle S E) (W : AdelicVectorBundle S F)
-      (_ : V.toNormFamily.IsHermitian) (_ : W.toNormFamily.IsHermitian),
-      V.IsMeanSlopeSemistable → W.IsMeanSlopeSemistable →
-      ∀ (q : E ⊗[K] F →ₗ[K] Q) (hq : Function.Surjective q),
+      [V.IsHermitian] [W.IsHermitian]
+      [V.IsMeanSlopeSemistable] [W.IsMeanSlopeSemistable]
+      (q : E ⊗[K] F →ₗ[K] Q) (hq : Function.Surjective q),
       0 < finrank K Q →
       IsGeometricallySemistableTensorQuotient (BoolTensorFactors E F)
         (q.comp (boolTensorEquiv K (BoolTensorFactors E F)).toLinearMap) →
-      let T := V.orthogonalTensorPair W
+      let T := V ⊗ʰ W
       V.slope + W.slope ≤
         (T.pushforward q hq).slope)
     (E F : Type u)
     [AddCommGroup E] [Module K E] [FiniteDimensional K E]
     [AddCommGroup F] [Module K F] [FiniteDimensional K F]
     (V : AdelicVectorBundle S E) (W : AdelicVectorBundle S F)
-    (hV : V.toNormFamily.IsHermitian) (hW : W.toNormFamily.IsHermitian) :
-    (V.orthogonalTensorPair W).hermitianHNFiltration =
+    [hV : V.IsHermitian] [hW : W.IsHermitian] :
+    (V ⊗ʰ W).hermitianHNFiltration =
       tensorFiltration (V.hermitianHNFiltration)
         (W.hermitianHNFiltration) ∧
     (V.IsMeanSlopeSemistable → W.IsMeanSlopeSemistable →
-      (V.orthogonalTensorPair W).IsMeanSlopeSemistable) := by
+      (V ⊗ʰ W).IsMeanSlopeSemistable) := by
   classical
   have main : ∀ n : ℕ, ∀ (E F : Type u)
       [AddCommGroup E] [Module K E] [FiniteDimensional K E]
       [AddCommGroup F] [Module K F] [FiniteDimensional K F]
       (V : AdelicVectorBundle S E) (W : AdelicVectorBundle S F)
-      (_ : V.toNormFamily.IsHermitian) (_ : W.toNormFamily.IsHermitian),
+      [V.IsHermitian] [W.IsHermitian],
       finrank K E + finrank K F ≤ n →
-      (V.orthogonalTensorPair W).hermitianHNFiltration =
+      (V ⊗ʰ W).hermitianHNFiltration =
         tensorFiltration (V.hermitianHNFiltration)
           (W.hermitianHNFiltration) ∧
       (V.IsMeanSlopeSemistable → W.IsMeanSlopeSemistable →
-        (V.orthogonalTensorPair W).IsMeanSlopeSemistable) := by
+        (V ⊗ʰ W).IsMeanSlopeSemistable) := by
     intro n
     induction n using Nat.strong_induction_on with
     | h n ih =>
@@ -82,12 +82,12 @@ theorem tensorHN_and_semistable_of_geometric_quotient_bound
           [AddCommGroup E] [Module K E] [FiniteDimensional K E]
           [AddCommGroup F] [Module K F] [FiniteDimensional K F]
           (V : AdelicVectorBundle S E) (W : AdelicVectorBundle S F)
-          (hV : V.toNormFamily.IsHermitian) (hW : W.toNormFamily.IsHermitian)
+          [hV : V.IsHermitian] [hW : W.IsHermitian]
           (hrank : finrank K E + finrank K F ≤ n)
-          (hsV : V.IsMeanSlopeSemistable)
-          (hsW : W.IsMeanSlopeSemistable) :
-          (V.orthogonalTensorPair W).IsMeanSlopeSemistable := by
-        let T := V.orthogonalTensorPair W
+          [hsV : V.IsMeanSlopeSemistable]
+          [hsW : W.IsMeanSlopeSemistable] :
+          (V ⊗ʰ W).IsMeanSlopeSemistable := by
+        let T := V ⊗ʰ W
         have hT := orthogonalTensorPair_isHermitian V W
         have : Nontrivial E := Module.nontrivial_of_finrank_pos hsV.1
         have : Nontrivial F := Module.nontrivial_of_finrank_pos hsW.1
@@ -102,29 +102,29 @@ theorem tensorHN_and_semistable_of_geometric_quotient_bound
         rw [V.slope_orthogonalTensorPair W hsV.1 hsW.1]
         by_cases hg : IsGeometricallySemistableTensorQuotient (BoolTensorFactors E F)
             (U.mkQ.comp (boolTensorEquiv K (BoolTensorFactors E F)).toLinearMap)
-        · exact hgeom E F _ V W hV hW hsV hsW U.mkQ U.mkQ_surjective hU hg
+        · exact hgeom E F _ V W U.mkQ U.mkQ_surjective hU hg
         · apply BostConjecture.Adelic.slope_sum_le_tensor_quotient_of_not_geometricallySemistable
-            V W hV hW hsV hsW U.mkQ U.mkQ_surjective hU ?_ hg
+            V W U.mkQ U.mkQ_surjective hU ?_ hg
           intro P R t u hsmall
           exact (ih (finrank K (FiltrationGraded P t) + finrank K (FiltrationGraded R u))
             (hsmall.trans_le hrank) (FiltrationGraded P t) (FiltrationGraded R u)
-            (V.filtrationGraded P t) (W.filtrationGraded R u)
-            (hV.filtrationGraded P t) (hW.filtrationGraded R u) le_rfl).1
+            (V.filtrationGraded P t) (W.filtrationGraded R u) le_rfl).1
       intro E F _ _ _ _ _ _ V W hV hW hrank
-      refine ⟨?_, semistable E F V W hV hW hrank⟩
+      refine ⟨?_, fun _ _ ↦ semistable E F V W hrank⟩
       apply hermitianHNFiltration_orthogonalTensorPair_of_semistable_grades
-        V W hV hW
+        V W
       intro t u ht hu
       have hsV := (filtrationGraded_hermitianHN_zero_or_semistable V t).resolve_left
         (Nat.ne_of_gt ht)
       have hsW := (filtrationGraded_hermitianHN_zero_or_semistable W u).resolve_left
         (Nat.ne_of_gt hu)
-      obtain ⟨b, w, hb⟩ := V.exists_weighted_basis_hermitianHNFiltration hV
-      obtain ⟨c, z, hc⟩ := W.exists_weighted_basis_hermitianHNFiltration hW
+      have := hsV.1
+      have := hsW.1
+      obtain ⟨b, w, hb⟩ := V.exists_weighted_basis_hermitianHNFiltration
+      obtain ⟨c, z, hc⟩ := W.exists_weighted_basis_hermitianHNFiltration
       exact semistable _ _ (V.filtrationGraded _ t) (W.filtrationGraded _ u)
-        (hV.filtrationGraded _ t) (hW.filtrationGraded _ u)
         ((Nat.add_le_add (finrank_filtrationGraded_le_of_basis b w hb t)
-          (finrank_filtrationGraded_le_of_basis c z hc u)).trans hrank) hsV.1 hsW.1
-  exact main (finrank K E + finrank K F) E F V W hV hW le_rfl
+          (finrank_filtrationGraded_le_of_basis c z hc u)).trans hrank)
+  exact main (finrank K E + finrank K F) E F V W le_rfl
 
 end ArakelovGeometry.AdelicVectorBundle

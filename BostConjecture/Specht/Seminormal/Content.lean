@@ -87,7 +87,7 @@ theorem polytabloidInt_rowWord_swap (t : Tableau n μ) (i j : Fin n) (hij : i �
   simp [hr, hc, polytabloidInt_rowWord_swap_eq_zero t i j hr hc]
 
 /-- In a standard row, the order of labels is exactly the order of columns. -/
-theorem RowStandard.lt_iff_col_lt {t : Tableau n μ} (ht : RowStandard t)
+theorem RowStandard.lt_iff_col_lt {t : Tableau n μ} [ht : RowStandard t]
     {i j : Fin n} (hr : (t i).val.1 = (t j).val.1) :
     i < j ↔ (t i).val.2 < (t j).val.2 := by
   constructor
@@ -95,11 +95,11 @@ theorem RowStandard.lt_iff_col_lt {t : Tableau n μ} (ht : RowStandard t)
     rcases lt_trichotomy (t i).val.2 (t j).val.2 with h | h | h
     · exact h
     · exact (hij.ne (t.injective (Subtype.ext (Prod.ext hr h)))).elim
-    · exact (hij.not_gt (ht j i hr.symm h)).elim
-  · exact ht i j hr
+    · exact (hij.not_gt (ht.label_lt j i hr.symm h)).elim
+  · exact ht.label_lt i j hr
 
 /-- In a standard column, the order of labels is exactly the order of rows. -/
-theorem ColumnStandard.lt_iff_row_lt {t : Tableau n μ} (ht : ColumnStandard t)
+theorem ColumnStandard.lt_iff_row_lt {t : Tableau n μ} [ht : ColumnStandard t]
     {i j : Fin n} (hc : (t i).val.2 = (t j).val.2) :
     i < j ↔ (t i).val.1 < (t j).val.1 := by
   constructor
@@ -107,19 +107,19 @@ theorem ColumnStandard.lt_iff_row_lt {t : Tableau n μ} (ht : ColumnStandard t)
     rcases lt_trichotomy (t i).val.1 (t j).val.1 with h | h | h
     · exact h
     · exact (hij.ne (t.injective (Subtype.ext (Prod.ext h hc)))).elim
-    · exact (hij.not_gt (ht j i hc.symm h)).elim
-  · exact ht i j hc
+    · exact (hij.not_gt (ht.label_lt j i hc.symm h)).elim
+  · exact ht.label_lt i j hc
 
 open Classical in
 /-- Earlier labels in a standard row are counted by the column coordinate. -/
-theorem RowStandard.card_earlier_row {t : Tableau n μ} (ht : RowStandard t) (j : Fin n) :
+theorem RowStandard.card_earlier_row {t : Tableau n μ} [ht : RowStandard t] (j : Fin n) :
     ((Finset.Iio j).filter fun i => (t i).val.1 = (t j).val.1).card = (t j).val.2 := by
   classical
   rw [← Finset.card_range (t j).val.2]
   apply Finset.card_bij (fun i _ => (t i).val.2)
   · intro i hi
     obtain ⟨hi, hr⟩ := Finset.mem_filter.mp hi
-    exact Finset.mem_range.mpr ((ht.lt_iff_col_lt hr).mp (Finset.mem_Iio.mp hi))
+    exact Finset.mem_range.mpr ((RowStandard.lt_iff_col_lt (t := t) hr).mp (Finset.mem_Iio.mp hi))
   · intro i hi k hk he
     apply t.injective
     apply Subtype.ext
@@ -132,7 +132,7 @@ theorem RowStandard.card_earlier_row {t : Tableau n μ} (ht : RowStandard t) (j 
     · apply Finset.mem_filter.mpr
       constructor
       · apply Finset.mem_Iio.mpr
-        apply (ht.lt_iff_col_lt (by simp [b])).mpr
+        apply (RowStandard.lt_iff_col_lt (t := t) (by simp [b])).mpr
         simpa [b] using hc'
       · simp [b]
     · simp [b]
@@ -140,14 +140,15 @@ theorem RowStandard.card_earlier_row {t : Tableau n μ} (ht : RowStandard t) (j 
 open Classical in
 /-- Earlier labels in a standard column are counted by the row coordinate. -/
 theorem ColumnStandard.card_earlier_column {t : Tableau n μ}
-    (ht : ColumnStandard t) (j : Fin n) :
+    [ht : ColumnStandard t] (j : Fin n) :
     ((Finset.Iio j).filter fun i => (t i).val.2 = (t j).val.2).card = (t j).val.1 := by
   classical
   rw [← Finset.card_range (t j).val.1]
   apply Finset.card_bij (fun i _ => (t i).val.1)
   · intro i hi
     obtain ⟨hi, hc⟩ := Finset.mem_filter.mp hi
-    exact Finset.mem_range.mpr ((ht.lt_iff_row_lt hc).mp (Finset.mem_Iio.mp hi))
+    exact Finset.mem_range.mpr
+      ((ColumnStandard.lt_iff_row_lt (t := t) hc).mp (Finset.mem_Iio.mp hi))
   · intro i hi k hk he
     apply t.injective
     apply Subtype.ext
@@ -160,7 +161,7 @@ theorem ColumnStandard.card_earlier_column {t : Tableau n μ}
     · apply Finset.mem_filter.mpr
       constructor
       · apply Finset.mem_Iio.mpr
-        apply (ht.lt_iff_row_lt (by simp [b])).mpr
+        apply (ColumnStandard.lt_iff_row_lt (t := t) (by simp [b])).mpr
         simpa [b] using hr'
       · simp [b]
     · simp [b]
@@ -170,7 +171,7 @@ def tableauContent (t : Tableau n μ) (j : Fin n) : ℤ :=
   (t j).val.2 - (t j).val.1
 
 /-- The concrete integral Murphy sum has content as its own-row-word coefficient. -/
-theorem sum_polytabloidInt_rowWord_swap {t : Tableau n μ} (ht : IsStandard t) (j : Fin n) :
+theorem sum_polytabloidInt_rowWord_swap {t : Tableau n μ} [ht : IsStandard t] (j : Fin n) :
     ∑ i ∈ Finset.Iio j, polytabloidInt t (rowWord t ∘ Equiv.swap i j) =
       tableauContent t j := by
   classical
@@ -178,6 +179,7 @@ theorem sum_polytabloidInt_rowWord_swap {t : Tableau n μ} (ht : IsStandard t) (
     (Finset.mem_Iio.mp hi).ne)]
   rw [Finset.sum_sub_distrib]
   simp only [← Finset.sum_filter, Finset.sum_const, nsmul_eq_mul, mul_one,
-    ht.1.card_earlier_row, ht.2.card_earlier_column, tableauContent]
+    RowStandard.card_earlier_row (t := t), ColumnStandard.card_earlier_column (t := t),
+    tableauContent]
 
 end BostConjecture.Specht

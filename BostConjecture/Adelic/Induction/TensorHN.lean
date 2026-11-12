@@ -73,7 +73,7 @@ theorem exists_weighted_basis_hermitianHNFiltration
     (V : AdelicVectorBundle S E)
     [hS : S.HasMeasurableBase]
     [hN : S.IsArchimedeanNormalized]
-    (hV : V.toNormFamily.IsHermitian) :
+    [hV : V.IsHermitian] :
     ∃ (b : Basis (Fin (finrank K E)) K E) (w : Fin (finrank K E) → ℝ),
       ∀ t, V.hermitianHNFiltration t = span K (b '' {i | t ≤ w i}) := by
   have ha := V.hermitianHNFiltration_antitone
@@ -95,7 +95,7 @@ variable {F : Type w} [AddCommGroup F] [Module K F] [FiniteDimensional K F]
   (V : AdelicVectorBundle S E) (W : AdelicVectorBundle S F)
   [hS : S.HasMeasurableBase]
   [hN : S.IsArchimedeanNormalized]
-  (hV : V.toNormFamily.IsHermitian) (hW : W.toNormFamily.IsHermitian)
+  [hV : V.IsHermitian] [hW : W.IsHermitian]
 
 /-- The weighted degree of the tensor of the two HN filtrations equals the
 degree of the actual orthogonal tensor bundle, including zero ranks. -/
@@ -103,9 +103,9 @@ theorem finsum_tensor_hermitianHNFiltration_eq_degree :
     (∑ᶠ t : ℝ, t * (finrank K (FiltrationGraded
       (tensorFiltration (V.hermitianHNFiltration)
         (W.hermitianHNFiltration)) t) : ℝ)) =
-      (V.orthogonalTensorPair W).degree := by
-  obtain ⟨b, w, hb⟩ := V.exists_weighted_basis_hermitianHNFiltration hV
-  obtain ⟨c, z, hc⟩ := W.exists_weighted_basis_hermitianHNFiltration hW
+      (V ⊗ʰ W).degree := by
+  obtain ⟨b, w, hb⟩ := V.exists_weighted_basis_hermitianHNFiltration
+  obtain ⟨c, z, hc⟩ := W.exists_weighted_basis_hermitianHNFiltration
   have hVdeg : (∑ i, w i) = V.degree :=
     (finsum_weight_mul_finrank_filtrationGraded b w hb).symm.trans
       (V.finsum_hermitianHNFiltration_eq_degree)
@@ -128,17 +128,17 @@ theorem hermitianHNFiltration_orthogonalTensorPair_of_semistable_grades
       (tensorFiltrationGradedSource V W
         (V.hermitianHNFiltration)
         (W.hermitianHNFiltration) t u).IsMeanSlopeSemistable) :
-    (V.orthogonalTensorPair W).hermitianHNFiltration =
+    (V ⊗ʰ W).hermitianHNFiltration =
         tensorFiltration (V.hermitianHNFiltration)
           (W.hermitianHNFiltration) := by
   let P := V.hermitianHNFiltration
   let R := W.hermitianHNFiltration
-  let T := V.orthogonalTensorPair W
+  let T := V ⊗ʰ W
   have hT := orthogonalTensorPair_isHermitian V W
   have hP : Antitone P := V.hermitianHNFiltration_antitone
   have hR : Antitone R := W.hermitianHNFiltration_antitone
-  obtain ⟨b, w, hb⟩ := V.exists_weighted_basis_hermitianHNFiltration hV
-  obtain ⟨c, z, hc⟩ := W.exists_weighted_basis_hermitianHNFiltration hW
+  obtain ⟨b, w, hb⟩ := V.exists_weighted_basis_hermitianHNFiltration
+  obtain ⟨c, z, hc⟩ := W.exists_weighted_basis_hermitianHNFiltration
   have hs (t u : ℝ) : finrank K (FiltrationGraded P t ⊗[K] FiltrationGraded R u) = 0 ∨
       (tensorFiltrationGradedSource V W P R t u).IsMeanSlopeSemistable ∧
       (tensorFiltrationGradedSource V W P R t u).slope = t + u := by
@@ -161,7 +161,7 @@ theorem hermitianHNFiltration_orthogonalTensorPair_of_semistable_grades
     tensorFiltrationGradedSource V W P R (w p.val.1) (z p.val.2)
   let f (γ : ℝ) (p : {ij : Fin (finrank K E) × Fin (finrank K F) //
       w ij.1 + z ij.2 = γ}) := tensorFiltrationGradedPair hP hR p.property
-  have hC (γ : ℝ) (p) : (C γ p).toNormFamily.IsHermitian :=
+  have hC (γ : ℝ) (p) : (C γ p).IsHermitian :=
     tensorFiltrationGradedSource_isHermitian V W P R _ _
   have hCs (γ : ℝ) (p : {ij : Fin (finrank K E) × Fin (finrank K F) //
       w ij.1 + z ij.2 = γ}) : finrank K
@@ -179,23 +179,23 @@ theorem hermitianHNFiltration_orthogonalTensorPair_of_semistable_grades
       (T.filtrationGraded (tensorFiltration P R) γ).minimalSlope := by
     let G := T.filtrationGraded (tensorFiltration P R) γ
     have hG := hT.filtrationGraded (tensorFiltration P R) γ
-    apply G.le_minimalSlope_of_hermitianHNFiltration_eq_top hG γ
+    apply G.le_minimalSlope_of_hermitianHNFiltration_eq_top γ
     apply top_unique
     rw [← hspan γ]
     apply iSup_le
     intro p
     have hsource : (C γ p).hermitianHNFiltration γ = ⊤ := by
-      apply (C γ p).hermitianHNFiltration_eq_top_of_minimalSlope_ge (hC γ p)
+      apply (C γ p).hermitianHNFiltration_eq_top_of_minimalSlope_ge
       rcases hCs γ p with hz | ⟨hsemi, hslope⟩
       · rw [(C γ p).minimalSlope_eq_top_of_finrank_eq_zero hz]
         exact le_top
       · rw [((C γ p).isMeanSlopeSemistable_iff_minimalSlope_eq_slope_of_isHermitian
              hsemi.1).mp hsemi, hslope]
     have hmap := (C γ p).map_hermitianHNFiltration_le_of_completed_contraction
-      G (hC γ p) hG (f γ p) (hf γ p) γ
+      G (f γ p) (hf γ p) γ
     simpa only [hsource, Submodule.map_top] using hmap
   obtain ⟨hbot, htop⟩ := tensorFiltration_attains_bot_top b c w z hb hc
-  apply T.hermitianHNFiltration_eq_of_graded_quotient_bounds hT
+  apply T.hermitianHNFiltration_eq_of_graded_quotient_bounds
     (tensorFiltration P R) (antitone_tensorFiltration P R) hbot htop
     (tensorFiltration_locallyConstant_left b c w z hb hc)
   · intro γ
@@ -206,7 +206,7 @@ theorem hermitianHNFiltration_orthogonalTensorPair_of_semistable_grades
         ((hmin γ).trans (G.minimalSlope_le_slope (Nat.pos_of_ne_zero hz)))
       rw [G.degree_eq_rank_mul_slope, mul_comm γ]
       exact mul_le_mul_of_nonneg_left hslope (Nat.cast_nonneg _)
-  · exact finsum_tensor_hermitianHNFiltration_eq_degree V W hV hW
+  · exact finsum_tensor_hermitianHNFiltration_eq_degree V W
   · intro γ U hr
     exact EReal.coe_le_coe_iff.mp ((hmin γ).trans
       ((T.filtrationGraded (tensorFiltration P R) γ).minimalSlope_le_slope_quotient

@@ -26,19 +26,29 @@ open OAI.Saxl
 variable {n : ℕ} {μ : YoungDiagram}
 
 /-- Labels increase from left to right in each row. -/
-def RowStandard (t : Tableau n μ) : Prop :=
-  ∀ i j, (t i).val.1 = (t j).val.1 → (t i).val.2 < (t j).val.2 → i < j
+class RowStandard (t : Tableau n μ) : Prop where
+  /-- Labels increase along each row. -/
+  label_lt : ∀ i j, (t i).val.1 = (t j).val.1 → (t i).val.2 < (t j).val.2 → i < j
 
 /-- Labels increase from top to bottom in each column. -/
-def ColumnStandard (t : Tableau n μ) : Prop :=
-  ∀ i j, (t i).val.2 = (t j).val.2 → (t i).val.1 < (t j).val.1 → i < j
+class ColumnStandard (t : Tableau n μ) : Prop where
+  /-- Labels increase down each column. -/
+  label_lt : ∀ i j, (t i).val.2 = (t j).val.2 → (t i).val.1 < (t j).val.1 → i < j
 
 /-- Standardness of an enumerating tableau. -/
-def IsStandard (t : Tableau n μ) : Prop := RowStandard t ∧ ColumnStandard t
+class IsStandard (t : Tableau n μ) : Prop where
+  /-- Standard tableaux are row-standard. -/
+  rowStandard : RowStandard t
+  /-- Standard tableaux are column-standard. -/
+  columnStandard : ColumnStandard t
+
+attribute [instance] IsStandard.rowStandard IsStandard.columnStandard
+
+instance (t : {t : Tableau n μ // IsStandard t}) : IsStandard t.val := t.property
 
 /-- Sorting every row removes the ambiguity in its row tabloid. -/
 theorem RowStandard.eq_of_rowWord_eq {t u : Tableau n μ}
-    (ht : RowStandard t) (hu : RowStandard u) (h : rowWord t = rowWord u) : t = u := by
+    [ht : RowStandard t] [hu : RowStandard u] (h : rowWord t = rowWord u) : t = u := by
   apply Equiv.ext
   intro i
   induction i using WellFoundedLT.induction with
@@ -50,19 +60,19 @@ theorem RowStandard.eq_of_rowWord_eq {t u : Tableau n μ}
     · by_contra hc
       have hc' : (u i).val.2 < (t i).val.2 := lt_of_not_ge hc
       let j := t.symm (u i)
-      have hj : j < i := ht j i (by simp [j, hr]) (by simpa [j] using hc')
+      have hj : j < i := ht.label_lt j i (by simp [j, hr]) (by simpa [j] using hc')
       have he : u i = u j := by simpa [j] using ih j hj
       exact (ne_of_lt hj) (u.injective he).symm
     · by_contra hc
       have hc' : (t i).val.2 < (u i).val.2 := lt_of_not_ge hc
       let j := u.symm (t i)
-      have hj : j < i := hu j i (by simp [j, hr]) (by simpa [j] using hc')
+      have hj : j < i := hu.label_lt j i (by simp [j, hr]) (by simpa [j] using hc')
       have he : t j = t i := by simpa [j] using ih j hj
       exact (ne_of_lt hj) (t.injective he)
 
 /-- In a column-standard tableau, a nonidentity column permutation increases
 the row word lexicographically. -/
-theorem ColumnStandard.rowWord_lt {t : Tableau n μ} (ht : ColumnStandard t)
+theorem ColumnStandard.rowWord_lt {t : Tableau n μ} [ht : ColumnStandard t]
     (g : columnGroup t) (hg : g ≠ 1) :
     toLex (rowWord t) < toLex (rowWord t ∘ (g : Equiv.Perm (Fin n))) := by
   classical
@@ -93,11 +103,11 @@ theorem ColumnStandard.rowWord_lt {t : Tableau n μ} (ht : ColumnStandard t)
     · exact h
     · have he : t i = t (σ i) := Subtype.ext (Prod.ext h (g.property i).symm)
       exact (hlt.ne (t.injective he)).elim
-    · exact (not_lt_of_ge hlt.le (ht (σ i) i (g.property i) h)).elim
+    · exact (not_lt_of_ge hlt.le (ht.label_lt (σ i) i (g.property i) h)).elim
 
 /-- Every word with a nonzero coefficient lies above the leading row word. -/
 theorem ColumnStandard.rowWord_le_of_polytabloid_ne_zero {t : Tableau n μ}
-    (ht : ColumnStandard t) {w : Fin n → Fin (μ.colLen 0)}
+    [ht : ColumnStandard t] {w : Fin n → Fin (μ.colLen 0)}
     (hw : polytabloidInt t w ≠ 0) : toLex (rowWord t) ≤ toLex w := by
   classical
   let := Fintype.ofFinite (columnGroup t)
@@ -111,7 +121,7 @@ theorem ColumnStandard.rowWord_le_of_polytabloid_ne_zero {t : Tableau n μ}
   rw [← he]
   by_cases h : g⁻¹ = 1
   · simp [h]
-  · exact (ht.rowWord_lt g⁻¹ h).le
+  · exact (ColumnStandard.rowWord_lt (t := t) g⁻¹ h).le
 
 /-- The integral standard polytabloids are independent after coefficientwise
 extension to any ring. In particular this applies to both rational and real coefficients. -/
@@ -133,11 +143,11 @@ theorem linearIndependent_standard_polytabloid (R : Type*) [Ring R] :
     · simp [hcu]
     have hpol : polytabloidInt u.val (rowWord t.val) = 0 := by
       by_contra hpol
-      have hle := u.property.2.rowWord_le_of_polytabloid_ne_zero hpol
+      have hle := ColumnStandard.rowWord_le_of_polytabloid_ne_zero (t := u.val) hpol
       have hrev := hmin u (Finset.mem_filter.mpr ⟨hu, hcu⟩)
       have hword : rowWord u.val = rowWord t.val :=
         congrArg ofLex (le_antisymm hle hrev)
-      exact hut (Subtype.ext (u.property.1.eq_of_rowWord_eq t.property.1 hword))
+      exact hut (Subtype.ext (RowStandard.eq_of_rowWord_eq (t := u.val) (u := t.val) hword))
     simp [hpol]
   have he := congrFun hc (rowWord t.val)
   simp only [Finset.sum_apply, Pi.smul_apply, smul_eq_mul, Pi.zero_apply] at he

@@ -31,6 +31,20 @@ open ArakelovGeometry ArakelovGeometry.AdelicVectorBundle Submodule
 open Module
 open scoped BigOperators TensorProduct
 
+namespace ArakelovGeometry.AdelicVectorBundle
+
+/-- Successive flag quotients inherit the Hermitian property of the ambient bundle. -/
+instance flagQuotientOfMeasurableBase_isHermitian
+    {K E : Type*} [Field K] [AddCommGroup E] [Module K E] [FiniteDimensional K E]
+    {S : AdelicStructure K} [S.HasMeasurableBase] [S.IsArchimedeanNormalized]
+    (V : AdelicVectorBundle S E) [V.IsHermitian]
+    {n : ℕ} (P : Fin (n + 1) → Submodule K E) (i : Fin n) :
+    (V.flagQuotientOfMeasurableBase P i).IsHermitian := by
+  unfold flagQuotientOfMeasurableBase
+  infer_instance
+
+end ArakelovGeometry.AdelicVectorBundle
+
 private theorem sum_weighted_increments {n : ℕ}
     (a : Fin (n + 1) → ℝ) (d : Fin (n + 2) → ℝ) :
     (∑ i, a i * (d i.succ - d i.castSucc)) =
@@ -65,7 +79,7 @@ variable {K E : Type*} [Field K] [AddCommGroup E] [Module K E]
   (V : AdelicVectorBundle S E)
   [hS : S.HasMeasurableBase]
   [hN : S.IsArchimedeanNormalized]
-  (hV : V.toNormFamily.IsHermitian)
+  [hV : V.IsHermitian]
 
 /-- Chosen actual grade-HN lift data. The cuts retain the actual HN filtration
 on each quotient; the mean and pairing identities are supplied by A7, not
@@ -89,8 +103,7 @@ structure HNVariationLift (P : ℝ → Submodule K E) where
   direction_left : ∀ t, ∃ ε > 0, ∀ s, t - ε < s → s ≤ t → direction s = direction t
   cuts : ∀ i t, ((direction t).comap (flag i.succ).subtype).map
       ((flag i.castSucc).comap (flag i.succ).subtype).mkQ =
-    (V.flagQuotientOfMeasurableBase flag i).hermitianHNFiltration
-      (hV := (hV.restrict (flag i.succ)).quotient ((flag i.castSucc).comap (flag i.succ).subtype)) t
+    (V.flagQuotientOfMeasurableBase flag i).hermitianHNFiltration t
   mean : Submodule.filtrationExpectation direction = V.slope
   pairing : (finrank K E : ℝ) * Submodule.filtrationPairing P direction =
     ∑ i, weight i * (V.flagQuotientOfMeasurableBase flag i).degree
@@ -103,7 +116,7 @@ grade-HN lift, not an assertion that the lift is the ambient HN filtration. -/
 theorem exists_hnVariationLift (P : ℝ → Submodule K E)
     (hP : Antitone P) (hb : ∃ t, P t = ⊥) (ht : ∃ t, P t = ⊤)
     (hl : ∀ t, ∃ ε > 0, ∀ s, t - ε < s → s ≤ t → P s = P t) :
-    Nonempty (HNVariationLift V hV P) := by
+    Nonempty (HNVariationLift V P) := by
   classical
   obtain ⟨n, U, a, hU, hz, htop, _, ha, _, hlevel, hright, hrec⟩ :=
     Submodule.exists_strictMono_flag_and_jumps_of_antitone hP hb ht hl
@@ -133,13 +146,13 @@ theorem exists_hnVariationLift (P : ℝ → Submodule K E)
 
 namespace HNVariationLift
 
-variable {V hV} {P : ℝ → Submodule K E}
+variable {V} {P : ℝ → Submodule K E}
 
 /-- Bost p32 (48), for the actual chosen grade-HN lift: semistability and
 centering force nonpositive pairing. This is the special HN direction of the
 CM variation argument; no full (5.13), A6 upper bound or A8 existence is used. -/
-theorem pairing_nonpos (L : HNVariationLift V hV P)
-    (hsemi : V.IsMeanSlopeSemistable)
+theorem pairing_nonpos (L : HNVariationLift V P)
+    [hsemi : V.IsMeanSlopeSemistable]
     (hcenter : Submodule.filtrationExpectation P = 0) :
     Submodule.filtrationPairing P L.direction ≤ 0 := by
   let d : Fin (L.length + 1) → ℝ := fun i ↦
@@ -169,8 +182,6 @@ theorem pairing_nonpos (L : HNVariationLift V hV P)
           (L.flag i.castSucc).comap (L.flag i.succ).subtype) : ℝ) * V.slope =
         d i.succ - d i.castSucc := by
     have hle := L.monotone_flag i.castSucc_le_succ
-    have hh : (V.restrictOfMeasurableBase (L.flag i.succ)).toNormFamily.IsHermitian :=
-      hV.restrict _
     have he := degree_restrict_add_degree_quotient_eq_of_isHermitian
       (V.restrictOfMeasurableBase (L.flag i.succ))
       ((L.flag i.castSucc).comap (L.flag i.succ).subtype)
@@ -283,9 +294,28 @@ theorem filtrationExpectation_tensor_variation_center (b : Basis ι K E)
   exact filtrationExpectation_translate B w ht hQ (ε * (μ + ν))
 
 /-- An exhaustive, separated, left-continuous real filtration with mean weight zero. -/
-abbrev IsCenteredFiltration (P : ℝ → Submodule K E) : Prop :=
-  Antitone P ∧ (∃ t, P t = ⊥) ∧ (∃ t, P t = ⊤) ∧
-  (∀ t, ∃ ε > 0, ∀ s, t - ε < s → s ≤ t → P s = P t) ∧ filtrationExpectation P = 0
+class IsCenteredFiltration (P : ℝ → Submodule K E) : Prop where
+  /-- The filtration is decreasing. -/
+  antitone : Antitone P
+  /-- The filtration attains zero. -/
+  exists_bot : ∃ t, P t = ⊥
+  /-- The filtration attains the whole space. -/
+  exists_top : ∃ t, P t = ⊤
+  /-- The filtration is locally constant from the left. -/
+  locallyConstantLeft : ∀ t, ∃ ε > 0, ∀ s, t - ε < s → s ≤ t → P s = P t
+  /-- The mean weight vanishes. -/
+  expectation_eq_zero : filtrationExpectation P = 0
+
+omit [FiniteDimensional K E] in
+/-- The bundled property is equivalent to the hypotheses of the upstream optimizer. -/
+theorem isCenteredFiltration_iff (P : ℝ → Submodule K E) :
+    IsCenteredFiltration P ↔
+      Antitone P ∧ (∃ t, P t = ⊥) ∧ (∃ t, P t = ⊤) ∧
+      (∀ t, ∃ ε > 0, ∀ s, t - ε < s → s ≤ t → P s = P t) ∧
+      filtrationExpectation P = 0 :=
+  ⟨fun h ↦ ⟨h.antitone, h.exists_bot, h.exists_top, h.locallyConstantLeft,
+      h.expectation_eq_zero⟩,
+    fun h ↦ ⟨h.1, h.2.1, h.2.2.1, h.2.2.2.1, h.2.2.2.2⟩⟩
 
 section OptimalVariation
 
@@ -327,8 +357,8 @@ theorem tensor_quotient_variation_lower_bound
     (hPc : filtrationExpectation P = 0) (hTc : filtrationExpectation T = 0)
     (hunit : filtrationPairing P P + filtrationPairing T T = 1)
     (c : ℝ) (hc : c < 0)
-    (hmin : ∀ (A : ℝ → Submodule K E) (B : ℝ → Submodule K F),
-      IsCenteredFiltration A → IsCenteredFiltration B →
+    (hmin : ∀ (A : ℝ → Submodule K E) (B : ℝ → Submodule K F)
+      [IsCenteredFiltration A] [IsCenteredFiltration B],
       0 < filtrationPairing A A + filtrationPairing B B →
       c ≤ filtrationExpectation (fun t ↦ (tensorFiltration A B t).map q) /
         Real.sqrt (filtrationPairing A A + filtrationPairing B B))
@@ -383,7 +413,7 @@ theorem tensor_quotient_variation_lower_bound
   have henergy : filtrationPairing A A + filtrationPairing B B =
       1 + 2 * ε * β + ε ^ 2 * D :=
     centered_tensor_variation_energy b d a r v s hP hR hT hW hPc hTc hunit ε
-  have hcompare := hmin A B hAc hBc (henergy ▸ hpos)
+  have hcompare := hmin A B (henergy ▸ hpos)
   rw [henergy] at hcompare
   have hmul := (le_div_iff₀ (Real.sqrt_pos.mpr hpos)).mp hcompare
   have hshift := filtrationExpectation_tensor_variation_center b d a r v s q hq hQ
@@ -438,17 +468,17 @@ variable {K E F Q ι κ : Type*} [Field K]
   {V : AdelicVectorBundle S E} {Z : AdelicVectorBundle S F}
   [hS : S.HasMeasurableBase]
   [hN : S.IsArchimedeanNormalized]
-  {hV : V.toNormFamily.IsHermitian} {hZ : Z.toNormFamily.IsHermitian}
+  [hV : V.IsHermitian] [hZ : Z.IsHermitian]
   {P : ℝ → Submodule K E} {T : ℝ → Submodule K F}
-  (L : HNVariationLift V hV P)
-  (M : HNVariationLift Z hZ T)
+  (L : HNVariationLift V P)
+  (M : HNVariationLift Z T)
   (b : Basis ι K E) (d : Basis κ K F) (a r : ι → ℝ) (v s : κ → ℝ)
   (hP : ∀ t, P t = span K (b '' {i | t ≤ a i}))
   (hR : ∀ t, L.direction t = span K (b '' {i | t ≤ r i}))
   (hT : ∀ t, T t = span K (d '' {i | t ≤ v i}))
   (hW : ∀ t, M.direction t = span K (d '' {i | t ≤ s i}))
   (q : E ⊗[K] F →ₗ[K] Q) (hq : Function.Surjective q) (hQ : 0 < finrank K Q)
-  (hsemiV : V.IsMeanSlopeSemistable) (hsemiZ : Z.IsMeanSlopeSemistable)
+  [hsemiV : V.IsMeanSlopeSemistable] [hsemiZ : Z.IsMeanSlopeSemistable]
   (hPc : filtrationExpectation P = 0) (hTc : filtrationExpectation T = 0)
   (hunit : filtrationPairing P P + filtrationPairing T T = 1)
 
@@ -461,8 +491,8 @@ local notation "D" =>
   filtrationPairing (filtrationCenter M.direction) (filtrationCenter M.direction))
 
 variable (hc : filtrationExpectation (fun t ↦ (tensorFiltration P T t).map q) < 0)
-  (hmin : ∀ (A : ℝ → Submodule K E) (B : ℝ → Submodule K F),
-    IsCenteredFiltration A → IsCenteredFiltration B →
+  (hmin : ∀ (A : ℝ → Submodule K E) (B : ℝ → Submodule K F)
+    [IsCenteredFiltration A] [IsCenteredFiltration B],
     0 < filtrationPairing A A + filtrationPairing B B →
     filtrationExpectation (fun t ↦ (tensorFiltration P T t).map q) ≤
       filtrationExpectation (fun t ↦ (tensorFiltration A B t).map q) /
@@ -481,7 +511,7 @@ theorem quotient_variation_lower_bound :
       ε * (V.slope + Z.slope) +
         c * Real.sqrt (1 + 2 * ε * β + ε ^ 2 * D) ≤ N ε ∧
       c + ε * (V.slope + Z.slope) + c * D * ε ^ 2 ≤ N ε := by
-  have hbeta := add_nonpos (L.pairing_nonpos hsemiV hPc) (M.pairing_nonpos hsemiZ hTc)
+  have hbeta := add_nonpos (L.pairing_nonpos hPc) (M.pairing_nonpos hTc)
   simpa only [L.mean, M.mean] using
     tensor_quotient_variation_lower_bound b d a r v s hP hR hT hW q hq hQ
       hPc hTc hunit c hc hmin hbeta
@@ -495,7 +525,7 @@ theorem slope_sum_le_of_eventual_upper_bound (δ : ℝ)
     (hupper : ∃ η > 0, ∀ ε, 0 < ε → ε < η → N ε ≤ c + ε * δ) :
     V.slope + Z.slope ≤ δ := by
   obtain ⟨η, hη, hlow⟩ := L.quotient_variation_lower_bound M b d a r v s hP hR hT hW
-    q hq hQ hsemiV hsemiZ hPc hTc hunit hc hmin
+    q hq hQ hPc hTc hunit hc hmin
   exact le_of_quadratic_lower_affine_upper N c _ δ D
     ⟨η, hη, fun ε hε he ↦ (hlow ε hε he).2.2⟩ hupper
 
@@ -519,7 +549,7 @@ variable {K : Type*} [Field K] {E F : Type u} {Q : Type*}
   (V : AdelicVectorBundle S E) (Z : AdelicVectorBundle S F)
   [hS : S.HasMeasurableBase]
   [hN : S.IsArchimedeanNormalized]
-  (hV : V.toNormFamily.IsHermitian) (hZ : Z.toNormFamily.IsHermitian)
+  [hV : V.IsHermitian] [hZ : Z.IsHermitian]
 
 /-- The assembled A9/A7/A3 producer for Bost p32: a negative actual candidate
 produces an actual unit optimizer, actual grade-HN lifts and common bases, with
@@ -529,23 +559,23 @@ inequality. The negative candidate remains the A8 boundary; proving the A6
 upper bound and its comparison with the quotient's arithmetic slope remains
 downstream. This theorem does not prove Bost's main theorem. -/
 theorem exists_bost_hn_variation_bound
-    (hsemiV : V.IsMeanSlopeSemistable) (hsemiZ : Z.IsMeanSlopeSemistable)
+    [hsemiV : V.IsMeanSlopeSemistable] [hsemiZ : Z.IsMeanSlopeSemistable]
     (q : E ⊗[K] F →ₗ[K] Q) (hq : Function.Surjective q) (hQ : 0 < finrank K Q)
     (P₀ : ℝ → Submodule K E) (T₀ : ℝ → Submodule K F)
-    (hP₀ : IsCenteredFiltration P₀) (hT₀ : IsCenteredFiltration T₀)
+    [hP₀ : IsCenteredFiltration P₀] [hT₀ : IsCenteredFiltration T₀]
     (hneg₀ : filtrationExpectation (fun t ↦ (tensorFiltration P₀ T₀ t).map q) < 0) :
     ∃ (P : ℝ → Submodule K E) (T : ℝ → Submodule K F),
       IsCenteredFiltration P ∧ IsCenteredFiltration T ∧
       filtrationPairing P P + filtrationPairing T T = 1 ∧
       filtrationExpectation (fun t ↦ (tensorFiltration P T t).map q) < 0 ∧
-      (∀ (A : ℝ → Submodule K E) (B : ℝ → Submodule K F),
-        IsCenteredFiltration A → IsCenteredFiltration B →
+      (∀ (A : ℝ → Submodule K E) (B : ℝ → Submodule K F)
+        [IsCenteredFiltration A] [IsCenteredFiltration B],
         0 < filtrationPairing A A + filtrationPairing B B →
         filtrationExpectation (fun t ↦ (tensorFiltration P T t).map q) ≤
           filtrationExpectation (fun t ↦ (tensorFiltration A B t).map q) /
             Real.sqrt (filtrationPairing A A + filtrationPairing B B)) ∧
-      ∃ (L : HNVariationLift V hV P)
-        (M : HNVariationLift Z hZ T)
+      ∃ (L : HNVariationLift V P)
+        (M : HNVariationLift Z T)
         (b : Basis (Fin (finrank K E)) K E) (d : Basis (Fin (finrank K F)) K F)
         (a r : Fin (finrank K E) → ℝ) (v s : Fin (finrank K F) → ℝ),
         (∀ t, P t = span K (b '' {i | t ≤ a i})) ∧
@@ -559,21 +589,26 @@ theorem exists_bost_hn_variation_bound
           filtrationExpectation (fun t ↦ (tensorFiltration P T t).map q) + ε * δ) →
           V.slope + Z.slope ≤ δ := by
   obtain ⟨P, T, hP, hT, hunit, hneg, hmin⟩ :=
-    exists_normalized_tensor_quotient_optimizer q hq hsemiV.1 hsemiZ.1 P₀ T₀ hP₀ hT₀ hneg₀
+    exists_normalized_tensor_quotient_optimizer q hq hsemiV.1 hsemiZ.1 P₀ T₀
+      ((isCenteredFiltration_iff P₀).mp hP₀) ((isCenteredFiltration_iff T₀).mp hT₀) hneg₀
   obtain ⟨L⟩ :=
-    exists_hnVariationLift V hV P hP.1 hP.2.1 hP.2.2.1 hP.2.2.2.1
+    exists_hnVariationLift V P hP.1 hP.2.1 hP.2.2.1 hP.2.2.2.1
   obtain ⟨M⟩ :=
-    exists_hnVariationLift Z hZ T hT.1 hT.2.1 hT.2.2.1 hT.2.2.2.1
+    exists_hnVariationLift Z T hT.1 hT.2.1 hT.2.2.1 hT.2.2.2.1
   obtain ⟨b, a, r, hPb, hR, _, _⟩ := exists_common_weighted_basis
     hP.1 hP.2.1 hP.2.2.1 hP.2.2.2.1
     L.antitone_direction L.direction_bot L.direction_top L.direction_left
   obtain ⟨d, v, s, hTd, hW, _, _⟩ := exists_common_weighted_basis
     hT.1 hT.2.1 hT.2.2.1 hT.2.2.2.1
     M.antitone_direction M.direction_bot M.direction_top M.direction_left
-  refine ⟨P, T, hP, hT, hunit, hneg, hmin, L, M, b, d, a, r, v, s, hPb, hR, hTd, hW, ?_⟩
+  have hmin' (A : ℝ → Submodule K E) (B : ℝ → Submodule K F)
+      [hA : IsCenteredFiltration A] [hB : IsCenteredFiltration B] :=
+    hmin A B ((isCenteredFiltration_iff A).mp hA) ((isCenteredFiltration_iff B).mp hB)
+  refine ⟨P, T, (isCenteredFiltration_iff P).mpr hP, (isCenteredFiltration_iff T).mpr hT,
+    hunit, hneg, hmin', L, M, b, d, a, r, v, s, hPb, hR, hTd, hW, ?_⟩
   intro δ hu
   exact L.slope_sum_le_of_eventual_upper_bound M b d a r v s hPb hR hTd hW q hq hQ
-    hsemiV hsemiZ hP.2.2.2.2 hT.2.2.2.2 hunit hneg hmin δ hu
+      hP.2.2.2.2 hT.2.2.2.2 hunit hneg hmin' δ hu
 
 end BinaryAssembly
 

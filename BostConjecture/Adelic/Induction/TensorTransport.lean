@@ -41,15 +41,15 @@ variable {K : Type u} [Field K] {S : AdelicStructure.{u, v} K}
 private theorem tensorPair_map_bound
     (ξ : NormFamily S E) (η : NormFamily S F) (ζ : NormFamily S G) (θ : NormFamily S H)
     [hN : S.IsArchimedeanNormalized]
-    (hξ : ξ.IsHermitian) (hη : η.IsHermitian)
-    (hζ : ζ.IsHermitian) (hθ : θ.IsHermitian)
+    [hξ : ξ.IsHermitian] [hη : η.IsHermitian]
+    [hζ : ζ.IsHermitian] [hθ : θ.IsHermitian]
     (f : E →ₗ[K] G) (g : F →ₗ[K] H) (ω : S.Ω)
     (hf : ∀ x, ζ.norm ω (f.baseChange (S.ϕ ω).Completion x) = ξ.norm ω x)
     (hg : ∀ y, θ.norm ω (g.baseChange (S.ϕ ω).Completion y) = η.norm ω y)
     (z : (S.ϕ ω).Completion ⊗[K] (E ⊗[K] F)) :
-    (ζ.orthogonalTensorPair θ).norm ω
+    (ζ ⊗ʰ θ).norm ω
         ((TensorProduct.map f g).baseChange (S.ϕ ω).Completion z) ≤
-      (ξ.orthogonalTensorPair η).norm ω z := by
+      (ξ ⊗ʰ η).norm ω z := by
   let ff : ∀ i, BinaryTensorFactors E F i →ₗ[K] BinaryTensorFactors G H i :=
     fun i ↦ match i with | .inl _ => f | .inr _ => g
   let a := binaryTensorEquiv K (BinaryTensorFactors E F)
@@ -75,7 +75,7 @@ private theorem tensorPair_map_bound
   rw [hz]
   apply BostConjecture.Adelic.Contraction.orthogonalTensor_map_norm_le_of_finite_le_infinite_eq
     (tensorPairFactors ξ η) (tensorPairFactors ζ θ)
-    (hξ.tensorPairFactors hη) (hζ.tensorPairFactors hθ) ff ω
+      ff ω
   · rintro (i | i) x
     · exact (hf x).le
     · exact (hg x).le
@@ -89,15 +89,15 @@ orthogonal tensor norms, with independent source and target carrier universes. -
 theorem orthogonalTensorPair_norm_congr
     (ξ : NormFamily S E) (η : NormFamily S F) (ζ : NormFamily S G) (θ : NormFamily S H)
     [hN : S.IsArchimedeanNormalized]
-    (hξ : ξ.IsHermitian) (hη : η.IsHermitian)
-    (hζ : ζ.IsHermitian) (hθ : θ.IsHermitian)
+    [hξ : ξ.IsHermitian] [hη : η.IsHermitian]
+    [hζ : ζ.IsHermitian] [hθ : θ.IsHermitian]
     (e : E ≃ₗ[K] G) (f : F ≃ₗ[K] H) (ω : S.Ω)
     (he : ∀ x, ζ.norm ω (e.toLinearMap.baseChange (S.ϕ ω).Completion x) = ξ.norm ω x)
     (hf : ∀ y, θ.norm ω (f.toLinearMap.baseChange (S.ϕ ω).Completion y) = η.norm ω y)
     (z : (S.ϕ ω).Completion ⊗[K] (E ⊗[K] F)) :
-    (ζ.orthogonalTensorPair θ).norm ω
+    (ζ ⊗ʰ θ).norm ω
         ((TensorProduct.congr e f).toLinearMap.baseChange (S.ϕ ω).Completion z) =
-      (ξ.orthogonalTensorPair η).norm ω z := by
+      (ξ ⊗ʰ η).norm ω z := by
   let eω := e.baseChange K (S.ϕ ω).Completion E G
   let fω := f.baseChange K (S.ϕ ω).Completion F H
   have he' (x) : ξ.norm ω (e.symm.toLinearMap.baseChange (S.ϕ ω).Completion x) =
@@ -112,12 +112,12 @@ theorem orthogonalTensorPair_norm_congr
     have h := (hf (fω.symm y)).symm
     change η.norm ω (fω.symm y) = θ.norm ω (fω (fω.symm y)) at h
     simpa only [LinearEquiv.apply_symm_apply] using h
-  apply le_antisymm (tensorPair_map_bound ξ η ζ θ hξ hη hζ hθ
+  apply le_antisymm (tensorPair_map_bound ξ η ζ θ
     e.toLinearMap f.toLinearMap ω he hf z)
   let t := (TensorProduct.congr e f).baseChange K (S.ϕ ω).Completion _ _
-  have h := tensorPair_map_bound ζ θ ξ η hζ hθ hξ hη
+  have h := tensorPair_map_bound ζ θ ξ η
     e.symm.toLinearMap f.symm.toLinearMap ω he' hf' (t z)
-  change (ξ.orthogonalTensorPair η).norm ω (t.symm (t z)) ≤ _ at h
+  change (ξ ⊗ʰ η).norm ω (t.symm (t z)) ≤ _ at h
   rw [LinearEquiv.symm_apply_apply] at h
   exact h
 

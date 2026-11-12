@@ -38,6 +38,22 @@ in [Adelic/Basic.lean](BostConjecture/Adelic/Basic.lean). Archimedean normalizat
 is supplied by `S.IsArchimedeanNormalized`. The finite-family conclusions include
 empty and singleton families. The empty orthogonal tensor is a semistable line of slope zero.
 
+Hermitian and semistability hypotheses are instance arguments. For example,
+with `[V.IsHermitian]`, `[W.IsHermitian]`, `[Nontrivial E]` and `[Nontrivial F]`,
+`maximalSlope_orthogonalTensorPair V W` proves
+`(V ⊗ʰ W).maximalSlope = V.maximalSlope + W.maximalSlope`.
+The notation `⊗ʰ` is supplied by ArakelovGeometry for both norm families and
+adelic bundles under `open scoped TensorProduct`. Binary and finite-family
+tensor semistability are registered instances, so their conclusions can be
+obtained with `inferInstance` from the factor instances.
+
+The local properties `RowStandard`, `ColumnStandard`, `IsStandard` and
+`IsCenteredFiltration` are proposition-valued classes. Standardness propagates
+through prefixes, extensions and rectangular gluing; a standard tableau also
+supplies row and column standardness. Constructors such as `prefixTableau t m hm`
+take the tableau as data and infer its standardness. Chosen bases, lifts and
+filtrations remain explicit data.
+
 The paper and implementation use the same proof route: hook-length counting,
 the full integral Specht lattice with a standard-sublattice Gram upper bound,
 and componentwise HN functoriality in the rank induction. The Bost-specific
@@ -83,7 +99,16 @@ lake exe cache get
 lake build
 ```
 
-Use `lake --wfail build` to require a build with no warnings.
+Use `lake --wfail build` to require a build with no warnings. After building,
+run the public API and axiom regression checks with:
+
+```sh
+lake env lean Tests/PropertyInstances.lean
+```
+
+These checks require warning-free elaboration with the same inference-depth
+limit as the library. They verify property inference, both forms of `⊗ʰ`,
+standard-tableau constructions, and the axioms of the five main results.
 
 The remote dependency revisions are recorded in
 [lake-manifest.json](lake-manifest.json). The package enables the mathlib
@@ -91,18 +116,6 @@ standard linter set, `relaxedAutoImplicit = false` and
 `maxSynthPendingDepth = 3`. Local proofs use Lean's default limits of
 200,000 heartbeats and recursion depth 512. No local source raises the heartbeat
 limit; simplify costly elaboration and rewriting instead of increasing that budget.
-
-To audit the final statements after building, check a temporary Lean file containing:
-
-```lean
-import BostConjecture
-
-#print axioms ArakelovGeometry.AdelicVectorBundle.maximalSlope_orthogonalTensorPair
-#print axioms ArakelovGeometry.AdelicVectorBundle.maximalSlope_orthogonalTensorOfMeasurableBase
-#print axioms ArakelovGeometry.AdelicVectorBundle.isMeanSlopeSemistable_orthogonalTensorPair
-#print axioms ArakelovGeometry.AdelicVectorBundle.isMeanSlopeSemistable_orthogonalTensorOfMeasurableBase
-#print axioms ArakelovGeometry.AdelicVectorBundle.hermitianHNFiltration_orthogonalTensorPair
-```
 
 The expected dependencies are Lean's standard foundational axioms
 `propext`, `Classical.choice` and `Quot.sound`; no `sorryAx` or additional

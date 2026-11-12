@@ -26,15 +26,15 @@ open OAI.Saxl Finset
 /-- The prefix shape as an element of the finite set of rectangular subdiagrams. -/
 def rectanglePrefixShape (a k m l : ℕ)
     (T : {T : Tableau (m + l) (rectangle a k) // IsStandard T}) : RectangleShape a k m :=
-  ⟨prefixShape T.property m (Nat.le_add_right m l),
-    prefixShape_le T.property m (Nat.le_add_right m l),
-    card_prefixShape T.property m (Nat.le_add_right m l)⟩
+  ⟨prefixShape T.val m (Nat.le_add_right m l),
+    prefixShape_le (t := T.val) m (Nat.le_add_right m l),
+    card_prefixShape (t := T.val) m (Nat.le_add_right m l)⟩
 
 /-- The actual prefix fibers partition all standard rectangular tableaux. -/
 theorem sum_card_rectanglePrefix (a k m l : ℕ) :
     ∑ μ : RectangleShape a k m,
       Nat.card {T : {T : Tableau (m + l) (rectangle a k) // IsStandard T} //
-        prefixShape T.property m (Nat.le_add_right m l) = μ.val} =
+        prefixShape T.val m (Nat.le_add_right m l) = μ.val} =
       Fintype.card {T : Tableau (m + l) (rectangle a k) // IsStandard T} := by
   classical
   have h := Fintype.card_congr (Equiv.sigmaFiberEquiv (rectanglePrefixShape a k m l))
@@ -77,7 +77,7 @@ theorem occupancyWeight_rectangleShape (a k m l : ℕ) (hml : m + l = a * k)
     (μ : RectangleShape a k m) :
     occupancyWeight (rectangleShapeOccupancy μ).val =
       (Nat.card {T : {T : Tableau (m + l) (rectangle a k) // IsStandard T} //
-        prefixShape T.property m (Nat.le_add_right m l) = μ.val} : ℝ) *
+        prefixShape T.val m (Nat.le_add_right m l) = μ.val} : ℝ) *
         ((k + a - 1).factorial : ℝ) ^ a /
       ((m.factorial : ℝ) * (l.factorial : ℝ) *
         ((a * (k + a - 1)).choose (m + staircaseSum a) : ℝ)) := by
@@ -88,7 +88,7 @@ theorem occupancyWeight_rectangleShape (a k m l : ℕ) (hml : m + l = a * k)
   have hc := card_rectanglePrefix_mul_factorial_pow μ.property.1 μ.property.2 hl
   have hc' :
       (Nat.card {T : {T : Tableau (m + l) (rectangle a k) // IsStandard T} //
-        prefixShape T.property m (Nat.le_add_right m l) = μ.val} : ℝ) *
+        prefixShape T.val m (Nat.le_add_right m l) = μ.val} : ℝ) *
         ((k + a - 1).factorial : ℝ) ^ a =
       ((m.factorial : ℝ) * (l.factorial : ℝ) *
         (∏ r ∈ range a, ∏ j ∈ Ioo r a,
@@ -122,7 +122,7 @@ theorem sum_occupancyWeight_eq_tableau_count (a k m l : ℕ) (hml : m + l = a * 
   have hc :
       (∑ μ : RectangleShape a k m,
         (Nat.card {T : {T : Tableau (m + l) (rectangle a k) // IsStandard T} //
-          prefixShape T.property m (Nat.le_add_right m l) = μ.val} : ℝ)) =
+          prefixShape T.val m (Nat.le_add_right m l) = μ.val} : ℝ)) =
       (Fintype.card {T : Tableau (m + l) (rectangle a k) // IsStandard T} : ℝ) := by
     exact_mod_cast sum_card_rectanglePrefix a k m l
   rw [hc]

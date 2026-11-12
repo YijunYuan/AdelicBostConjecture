@@ -122,7 +122,7 @@ theorem sum_tableauContent (t : Tableau n μ) :
   exact Equiv.sum_comp t (fun b : μ => (b.val.2 : ℤ) - b.val.1)
 
 /-- The central scalar is determined by the proved integral word coefficients. -/
-theorem centralWordOperator_polytabloid_rowWord {t : Tableau n μ} (ht : IsStandard t) :
+theorem centralWordOperator_polytabloid_rowWord {t : Tableau n μ} [ht : IsStandard t] :
     centralWordOperator n (μ.colLen 0) (polytabloid t) (rowWord t) =
       (diagramContent μ : ℂ) := by
   classical
@@ -130,27 +130,27 @@ theorem centralWordOperator_polytabloid_rowWord {t : Tableau n μ} (ht : IsStand
     (congrFun (complexCast_polytabloid t) w).symm
   simp only [centralWordOperator, LinearMap.sum_apply, Finset.sum_apply]
   change (∑ j, ∑ i ∈ Finset.Iio j, polytabloid t (rowWord t ∘ Equiv.swap i j)) = _
-  simp_rw [hc, ← Int.cast_sum, sum_polytabloidInt_rowWord_swap ht]
+  simp_rw [hc, ← Int.cast_sum, sum_polytabloidInt_rowWord_swap (t := t)]
   rw [sum_tableauContent]
 
 /-- The central sum acts by the total diagram content on a standard polytabloid. -/
-theorem centralWordOperator_polytabloid {t : Tableau n μ} (ht : IsStandard t) :
+theorem centralWordOperator_polytabloid {t : Tableau n μ} [ht : IsStandard t] :
     centralWordOperator n (μ.colLen 0) (polytabloid t) =
       (diagramContent μ : ℂ) • polytabloid t := by
   obtain ⟨c, hc⟩ := Submodule.mem_span_singleton.mp (centralWordOperator_polytabloid_mem t)
   have he := congrFun hc (rowWord t)
   simp only [Pi.smul_apply, smul_eq_mul, polytabloid_rowWord, mul_one,
-    centralWordOperator_polytabloid_rowWord ht] at he
+    centralWordOperator_polytabloid_rowWord (t := t)] at he
   simpa only [he] using hc.symm
 
 /-- The central content identity already holds before scalar extension. -/
-theorem sum_wordRepInt_polytabloid_eq_content {t : Tableau n μ} (ht : IsStandard t) :
+theorem sum_wordRepInt_polytabloid_eq_content {t : Tableau n μ} [ht : IsStandard t] :
     ∑ j, ∑ i ∈ Finset.Iio j, wordRepInt n (μ.colLen 0) (Equiv.swap i j) (polytabloidInt t) =
       diagramContent μ • polytabloidInt t := by
   apply complexCast_injective
   simpa only [map_sum, complexCast_wordRep, complexCast_polytabloid, map_smul,
     Int.cast_smul_eq_zsmul, centralWordOperator, LinearMap.sum_apply] using
-    centralWordOperator_polytabloid ht
+    centralWordOperator_polytabloid (t := t)
 
 /-- The central sum has total content as its scalar on the actual real standard basis. -/
 theorem sum_murphyOperator_standardRealBasis (t : Tableau n μ)
@@ -161,7 +161,7 @@ theorem sum_murphyOperator_standardRealBasis (t : Tableau n μ)
   simp only [murphyOperator, LinearMap.sum_apply, Submodule.coe_sum, Submodule.coe_smul,
     realSpechtRep_coe, standardRealBasis_coe, wordRepReal_realCast]
   have h := congrArg (realCast n (μ.colLen 0))
-    (sum_wordRepInt_polytabloid_eq_content T.property)
+    (sum_wordRepInt_polytabloid_eq_content (t := T.val))
   simpa only [map_sum, map_smul, Int.cast_smul_eq_zsmul] using h
 
 /-- The sum of the actual real Murphy operators is the total-content scalar operator. -/

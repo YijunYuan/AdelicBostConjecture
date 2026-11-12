@@ -38,8 +38,8 @@ theorem tendsto_average_log_prefixNormProduct_div {a : ℕ} (ha : 2 ≤ a) :
     apply div_nonneg _ (Nat.cast_nonneg _)
     apply expect_nonneg
     intro T _
-    rw [log_prefixNormProduct T.property]
-    exact sum_nonneg (fun m _ => log_prefixInsertionFactor_nonneg T.property m)
+    rw [log_prefixNormProduct (t := T.val)]
+    exact sum_nonneg (fun m _ => log_prefixInsertionFactor_nonneg (t := T.val) m)
   apply tendsto_order.mpr
   constructor
   · intro x hx

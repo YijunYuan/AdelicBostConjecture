@@ -39,7 +39,7 @@ completed norms forces arithmetic mean-slope semistability. -/
 theorem isMeanSlopeSemistable_of_isIrreducible (V : AdelicVectorBundle S E)
     [hS : S.HasMeasurableBase]
     [hN : S.IsArchimedeanNormalized]
-    (hV : V.toNormFamily.IsHermitian) (hr : 0 < Module.finrank K E)
+    [hV : V.IsHermitian] (hr : 0 < Module.finrank K E)
     (ρ : Representation K G E) [ρ.IsIrreducible]
     (hρ : ∀ g ω z, V.toNormFamily.norm ω
       ((ρ g).baseChange (S.ϕ ω).Completion z) = V.toNormFamily.norm ω z) :

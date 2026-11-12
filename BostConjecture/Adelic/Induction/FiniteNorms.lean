@@ -39,7 +39,7 @@ namespace NormFamily
 theorem orthogonalTensor_norm_subsingletonEquiv [Subsingleton ι]
     (ξ : ∀ i, NormFamily S (E i))
     [hN : S.IsArchimedeanNormalized]
-    (hξ : ∀ i, (ξ i).IsHermitian) (i₀ : ι) (ω : S.Ω)
+    [hξ : ∀ i, (ξ i).IsHermitian] (i₀ : ι) (ω : S.Ω)
     (z : (S.ϕ ω).Completion ⊗[K] (⨂[K] i, E i)) :
     (ξ i₀).norm ω
       ((PiTensorProduct.subsingletonEquiv (R := K) (s := E) i₀).toLinearMap.baseChange
@@ -93,7 +93,7 @@ theorem finrank_piTensorProduct_pos [Finite ι] (hr : ∀ i, 0 < finrank K (E i)
 /-- Reindexing preserves both slopes of the actual finite orthogonal bundle. -/
 theorem slopes_orthogonalTensor_reindex {κ : Type wι} [Fintype κ]
     (V : ∀ i, AdelicVectorBundle S (E i))
-    (hV : ∀ i, (V i).IsHermitian) (e : ι ≃ κ) :
+    [hV : ∀ i, (V i).IsHermitian] (e : ι ≃ κ) :
     (orthogonalTensorOfMeasurableBase V).slope =
         (orthogonalTensorOfMeasurableBase (fun j => V (e.symm j))).slope ∧
     (orthogonalTensorOfMeasurableBase V).maximalSlope =
@@ -106,13 +106,13 @@ theorem slopes_orthogonalTensor_reindex {κ : Type wι} [Fintype κ]
 /-- The one-factor finite tensor has exactly the slopes of its factor. -/
 theorem slopes_orthogonalTensor_subsingleton [Subsingleton ι]
     (V : ∀ i, AdelicVectorBundle S (E i))
-    (hV : ∀ i, (V i).IsHermitian) (i₀ : ι) :
+    [hV : ∀ i, (V i).IsHermitian] (i₀ : ι) :
     (orthogonalTensorOfMeasurableBase V).slope =
         (V i₀).slope ∧
     (orthogonalTensorOfMeasurableBase V).maximalSlope =
         (V i₀).maximalSlope := by
   have he := NormFamily.orthogonalTensor_norm_subsingletonEquiv
-    (fun i => (V i).toNormFamily) hV i₀
+    (fun i => (V i).toNormFamily) i₀
   exact ⟨slope_eq_of_completed_isometry _ _
       (PiTensorProduct.subsingletonEquiv (R := K) (s := E) i₀) he,
     maximalSlope_eq_of_completed_isometry _ _
@@ -122,12 +122,12 @@ theorem slopes_orthogonalTensor_subsingleton [Subsingleton ι]
 theorem slopes_orthogonalTensor_sum {κ : Type wι} [Fintype κ]
     {D : ι ⊕ κ → Type w} [∀ i, AddCommGroup (D i)] [∀ i, Module K (D i)]
     [∀ i, FiniteDimensional K (D i)] (V : ∀ i, AdelicVectorBundle S (D i))
-    (hV : ∀ i, (V i).IsHermitian) :
+    [hV : ∀ i, (V i).IsHermitian] :
     let A := orthogonalTensorOfMeasurableBase (fun i => V (.inl i))
     let B := orthogonalTensorOfMeasurableBase (fun j => V (.inr j))
-    (A.orthogonalTensorPair B).slope =
+    (A ⊗ʰ B).slope =
         (orthogonalTensorOfMeasurableBase V).slope ∧
-    (A.orthogonalTensorPair B).maximalSlope =
+    (A ⊗ʰ B).maximalSlope =
         (orthogonalTensorOfMeasurableBase V).maximalSlope := by
   have he := NormFamily.orthogonalTensor_norm_tmulEquivDep
     (fun i => (V i).toNormFamily)

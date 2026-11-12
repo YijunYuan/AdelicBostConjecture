@@ -30,7 +30,7 @@ variable {K E : Type*} [Field K] [AddCommGroup E] [Module K E]
   (V : AdelicVectorBundle S E)
   [hS : S.HasMeasurableBase]
   [hN : S.IsArchimedeanNormalized]
-  (hV : V.toNormFamily.IsHermitian)
+  [hV : V.IsHermitian]
 
 include hV
 
@@ -105,7 +105,7 @@ theorem hermitianHNFiltration_eq_of_graded_quotient_bounds
   · exact Or.inl hr
   · have hp : 0 < finrank K (FiltrationGraded P t) := Nat.pos_of_ne_zero hr
     have hs : (V.filtrationGraded P t).slope = t := by
-      rw [slope, V.filtrationGraded_degree_eq_of_lower_bounds hV
+      rw [slope, V.filtrationGraded_degree_eq_of_lower_bounds
         P hP hbot htop hleft hlower htotal t]
       exact mul_div_cancel_right₀ t (Nat.cast_ne_zero.mpr hr)
     refine Or.inr ⟨?_, hs⟩

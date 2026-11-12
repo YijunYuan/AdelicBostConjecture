@@ -33,8 +33,8 @@ theorem slope_le_of_nonzero_completed_contraction
     (V : AdelicVectorBundle S E) (W : AdelicVectorBundle S F)
     [hS : S.HasMeasurableBase]
     [hN : S.IsArchimedeanNormalized]
-    (hV : V.toNormFamily.IsHermitian)
-    (hVS : V.IsMeanSlopeSemistable) (hWS : W.IsMeanSlopeSemistable)
+    [hV : V.IsHermitian]
+    [hVS : V.IsMeanSlopeSemistable] [hWS : W.IsMeanSlopeSemistable]
     (f : E →ₗ[K] F) (hf : f ≠ 0)
     (hcontract : ∀ ω x, W.norm ω (f.baseChange (S.ϕ ω).Completion x) ≤ V.norm ω x) :
     V.slope ≤ W.slope := by

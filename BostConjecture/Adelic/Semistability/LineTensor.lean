@@ -81,17 +81,17 @@ orthogonal tensor norms on every completed fibre. -/
 theorem NormFamily.orthogonalTensorPair_norm_trivialLineTensor
     (ξ : NormFamily S D) (η : NormFamily S E)
     [hN : S.IsArchimedeanNormalized]
-    (hξ : ξ.IsHermitian) (hη : η.IsHermitian) (ρ : Representation K G E)
+    [hξ : ξ.IsHermitian] [hη : η.IsHermitian] (ρ : Representation K G E)
     (hρ : ∀ g ω z, η.norm ω ((ρ g).baseChange (S.ϕ ω).Completion z) = η.norm ω z)
     (g : G) (ω : S.Ω) (z : (S.ϕ ω).Completion ⊗[K] (D ⊗[K] E)) :
-    (ξ.orthogonalTensorPair η).norm ω
+    (ξ ⊗ʰ η).norm ω
         ((((Representation.trivial K G D).tprod ρ) g).baseChange (S.ϕ ω).Completion z) =
-      (ξ.orthogonalTensorPair η).norm ω z := by
+      (ξ ⊗ʰ η).norm ω z := by
   let τ := (Representation.trivial K G D).tprod ρ
   have hle (a : G) (x : (S.ϕ ω).Completion ⊗[K] (D ⊗[K] E)) :
-      (ξ.orthogonalTensorPair η).norm ω
+      (ξ ⊗ʰ η).norm ω
           ((τ a).baseChange (S.ϕ ω).Completion x) ≤
-        (ξ.orthogonalTensorPair η).norm ω x := by
+        (ξ ⊗ʰ η).norm ω x := by
     apply NormFamily.orthogonalTensorPair_map_norm_le_of_norm_eq ξ η ξ η
           (LinearMap.id) (ρ a) ω
     · intro y
@@ -111,35 +111,34 @@ theorem isMeanSlopeSemistable_lineTensor_of_isIrreducible [S.IsProper]
     (L : AdelicVectorBundle S D) (V : AdelicVectorBundle S E)
     [hS : S.HasMeasurableBase]
     [hN : S.IsArchimedeanNormalized]
-    (hL : L.IsHermitian) (hV : V.IsHermitian)
+    [hL : L.IsHermitian] [hV : V.IsHermitian]
     (hD : Module.finrank K D = 1) (hE : 0 < Module.finrank K E)
     (ρ : Representation K G E) [ρ.IsIrreducible]
     (hρ : ∀ g ω z, V.norm ω ((ρ g).baseChange (S.ϕ ω).Completion z) = V.norm ω z) :
-    (L.orthogonalTensorPair V).IsMeanSlopeSemistable := by
+    (L ⊗ʰ V).IsMeanSlopeSemistable := by
   let : ((Representation.trivial K G D).tprod ρ).IsIrreducible :=
     isIrreducible_trivialLineTensor hD ρ
   apply isMeanSlopeSemistable_of_isIrreducible _
-    (orthogonalTensorPair_isHermitian L V)
     (by simpa only [Module.finrank_tensorProduct, hD, one_mul] using hE)
     ((Representation.trivial K G D).tprod ρ)
   exact NormFamily.orthogonalTensorPair_norm_trivialLineTensor
-    L.toNormFamily V.toNormFamily hL hV ρ hρ
+    L.toNormFamily V.toNormFamily ρ hρ
 
 /-- The actual line tensor and its actual dual are both semistable. -/
 theorem isMeanSlopeSemistable_lineTensor_and_dual_of_isIrreducible [S.IsProper]
     (L : AdelicVectorBundle S D) (V : AdelicVectorBundle S E)
     [hS : S.HasMeasurableBase]
     [hN : S.IsArchimedeanNormalized]
-    (hL : L.IsHermitian) (hV : V.IsHermitian)
+    [hL : L.IsHermitian] [hV : V.IsHermitian]
     (hD : Module.finrank K D = 1) (hE : 0 < Module.finrank K E)
     (ρ : Representation K G E) [ρ.IsIrreducible]
     (hρ : ∀ g ω z, V.norm ω ((ρ g).baseChange (S.ϕ ω).Completion z) = V.norm ω z) :
-    (L.orthogonalTensorPair V).IsMeanSlopeSemistable ∧
-      ((L.orthogonalTensorPair V).dualOfMeasurableBase).IsMeanSlopeSemistable := by
+    (L ⊗ʰ V).IsMeanSlopeSemistable ∧
+      ((L ⊗ʰ V).dualOfMeasurableBase).IsMeanSlopeSemistable := by
   have hs := isMeanSlopeSemistable_lineTensor_of_isIrreducible
-    L V hL hV hD hE ρ hρ
+    L V hD hE ρ hρ
   exact ⟨hs, (isMeanSlopeSemistable_dual_iff_of_isHermitian
-      (L.orthogonalTensorPair V)
+      (L ⊗ʰ V)
        hs.1).mpr hs⟩
 
 end AdelicVectorBundle

@@ -45,8 +45,7 @@ on exactly the source of `Geometry.projectiveDeterminantMap`. -/
 def determinantSpechtBundle :
     AdelicVectorBundle S
       ((⨂[K] (_ : Fin k), ⋀[K]^(finrank K E) E) ⊗[K] (K ⊗[ℤ] orbitLattice t)) :=
-  (determinantPower V k).orthogonalTensorPair
-    (latticeBundle S t b)
+  ((determinantPower V k) ⊗ʰ (latticeBundle S t b))
 
 instance determinantSpechtBundle_isHermitian :
     (determinantSpechtBundle V k t b).IsHermitian :=
@@ -63,10 +62,18 @@ theorem determinantSpechtBundle_isMeanSlopeSemistable_and_dual :
   let : ρ.IsIrreducible := Arithmetic.Specht.integralRepresentation_baseChange_isIrreducible K t
   exact isMeanSlopeSemistable_lineTensor_and_dual_of_isIrreducible
     (determinantPower V k) (latticeBundle S t b)
-      (determinantPower_isHermitian V k)
-    (latticeBundle_isHermitian S t b)
     (determinantPower_isLine V k).rank_eq_one finrank_pos ρ
     (latticeNormFamily_orbitAction S t b)
+
+/-- The canonical determinant--Specht auxiliary bundle is semistable. -/
+instance determinantSpechtBundle_isMeanSlopeSemistable :
+    (determinantSpechtBundle V k t b).IsMeanSlopeSemistable :=
+  (determinantSpechtBundle_isMeanSlopeSemistable_and_dual V k t b).1
+
+/-- The dual of the canonical determinant--Specht auxiliary bundle is semistable. -/
+instance determinantSpechtBundle_dual_isMeanSlopeSemistable :
+    (determinantSpechtBundle V k t b).dualOfMeasurableBase.IsMeanSlopeSemistable :=
+  (determinantSpechtBundle_isMeanSlopeSemistable_and_dual V k t b).2
 
 /-- The slope formula in the canonical rectangular covolume notation used by
 the asymptotic error-elimination theorem. -/

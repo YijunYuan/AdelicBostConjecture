@@ -42,7 +42,7 @@ def prefixInsertionFactor (t : Tableau n μ) (m : Fin n) : ℝ :=
 def prefixNormProduct (t : Tableau n μ) : ℝ := ∏ m, prefixInsertionFactor t m
 
 /-- In the row of the current box, its column counts exactly the earlier labels. -/
-theorem prefixRowCount_self {t : Tableau n μ} (ht : IsStandard t) (m : Fin n) :
+theorem prefixRowCount_self {t : Tableau n μ} [ht : IsStandard t] (m : Fin n) :
     prefixRowCount t m (t m).val.1 = (t m).val.2 := by
   classical
   unfold prefixRowCount
@@ -50,7 +50,7 @@ theorem prefixRowCount_self {t : Tableau n μ} (ht : IsStandard t) (m : Fin n) :
   apply Finset.card_bij (fun l _ => (t l).val.2)
   · intro l hl
     obtain ⟨_, hlm, hr⟩ := Finset.mem_filter.mp hl
-    exact Finset.mem_range.mpr ((ht.1.lt_iff_col_lt hr).mp hlm)
+    exact Finset.mem_range.mpr ((RowStandard.lt_iff_col_lt (t := t) hr).mp hlm)
   · intro l hl q hq he
     obtain ⟨_, _, hlr⟩ := Finset.mem_filter.mp hl
     obtain ⟨_, _, hqr⟩ := Finset.mem_filter.mp hq
@@ -59,12 +59,12 @@ theorem prefixRowCount_self {t : Tableau n μ} (ht : IsStandard t) (m : Fin n) :
     have hc' : c < (t m).val.2 := Finset.mem_range.mp hc
     let b : μ := ⟨((t m).val.1, c), μ.up_left_mem le_rfl hc'.le (t m).property⟩
     refine ⟨t.symm b, Finset.mem_filter.mpr ⟨Finset.mem_univ _, ?_, ?_⟩, ?_⟩
-    · exact ht.1 _ m (by simp [b]) (by simpa [b] using hc')
+    · exact ht.rowStandard.label_lt _ m (by simp [b]) (by simpa [b] using hc')
     · simp [b]
     · simp [b]
 
 /-- Every row above the current box already contains its column and all preceding columns. -/
-theorem col_add_one_le_prefixRowCount {t : Tableau n μ} (ht : IsStandard t)
+theorem col_add_one_le_prefixRowCount {t : Tableau n μ} [ht : IsStandard t]
     (m : Fin n) (r : ℕ) (hr : r < (t m).val.1) :
     (t m).val.2 + 1 ≤ prefixRowCount t m r := by
   classical
@@ -73,7 +73,7 @@ theorem col_add_one_le_prefixRowCount {t : Tableau n μ} (ht : IsStandard t)
     let b : μ := ⟨(r, c.val), μ.up_left_mem hr.le (Nat.le_of_lt_succ c.isLt) (t m).property⟩
     ⟨t.symm b, Finset.mem_filter.mpr ⟨Finset.mem_univ _,
       lt_of_le_of_ne (by
-        simpa using ht.label_mono (b := b) (c := t m)
+        simpa using IsStandard.label_mono (t := t) (b := b) (c := t m)
           ⟨hr.le, show c.val ≤ (t m).val.2 from Nat.le_of_lt_succ c.isLt⟩)
         (by
           intro he
@@ -88,18 +88,18 @@ theorem col_add_one_le_prefixRowCount {t : Tableau n μ} (ht : IsStandard t)
     Fintype.card_le_of_injective f hf
 
 /-- All factors that occur in the prefix product have distance at least two. -/
-theorem two_le_prefixAxialDistance {t : Tableau n μ} (ht : IsStandard t)
+theorem two_le_prefixAxialDistance {t : Tableau n μ} [ht : IsStandard t]
     (m : Fin n) (r : ℕ) (hr : r < (t m).val.1) : 2 ≤ prefixAxialDistance t m r := by
-  have hc := col_add_one_le_prefixRowCount ht m r hr
+  have hc := col_add_one_le_prefixRowCount (t := t) m r hr
   unfold prefixAxialDistance
   omega
 
-theorem prefixInsertionFactor_pos {t : Tableau n μ} (ht : IsStandard t) (m : Fin n) :
+theorem prefixInsertionFactor_pos {t : Tableau n μ} [ht : IsStandard t] (m : Fin n) :
     0 < prefixInsertionFactor t m := by
   apply Finset.prod_pos
   intro r hr
   have hd : (2 : ℝ) ≤ prefixAxialDistance t m r := by
-    exact_mod_cast two_le_prefixAxialDistance ht m r (Finset.mem_range.mp hr)
+    exact_mod_cast two_le_prefixAxialDistance (t := t) m r (Finset.mem_range.mp hr)
   exact div_pos (by linarith) (by linarith)
 
 /-- Consecutive prefixes differ by the row of the intervening label. -/
@@ -188,7 +188,7 @@ theorem prefixInsertionFactor_relabel_adjacent_left (t : Tableau n μ) (i j : Fi
     prefixRowCount_succ t i j hij, ite_eq_right hri, add_zero]
 
 /-- Only one factor changes in the lower insertion. -/
-theorem prefixInsertionFactor_relabel_adjacent_right {t : Tableau n μ} (ht : IsStandard t)
+theorem prefixInsertionFactor_relabel_adjacent_right {t : Tableau n μ} [ht : IsStandard t]
     (i j : Fin n) (hij : i.val + 1 = j.val) (hr : (t j).val.1 < (t i).val.1) :
     prefixInsertionFactor (relabel (Equiv.swap i j) t) j =
       (1 - ((prefixAxialDistance t i (t j).val.1 : ℝ)⁻¹) ^ 2) * prefixInsertionFactor t i := by
@@ -212,7 +212,7 @@ theorem prefixInsertionFactor_relabel_adjacent_right {t : Tableau n μ} (ht : Is
       norm_num only [Int.cast_add]
       simp only [ite_true, Int.cast_one, add_sub_cancel_right]
       have hp : (2 : ℝ) ≤ prefixAxialDistance t i q := by
-        exact_mod_cast two_le_prefixAxialDistance ht i q hr
+        exact_mod_cast two_le_prefixAxialDistance (t := t) i q hr
       have h0 : (prefixAxialDistance t i q : ℝ) ≠ 0 := by linarith
       have h1 : (prefixAxialDistance t i q : ℝ) - 1 ≠ 0 := by linarith
       dsimp [A]
@@ -229,16 +229,16 @@ theorem prefixInsertionFactor_relabel_adjacent_right {t : Tableau n μ} (ht : Is
   rw [hprod]
 
 /-- The distance in the changed prefix factor is exactly the adjacent content difference. -/
-theorem prefixAxialDistance_eq_content_sub {t : Tableau n μ} (ht : IsStandard t)
+theorem prefixAxialDistance_eq_content_sub {t : Tableau n μ} [ht : IsStandard t]
     (i j : Fin n) (hij : i.val + 1 = j.val) (hr : (t j).val.1 < (t i).val.1) :
     prefixAxialDistance t i (t j).val.1 = tableauContent t j - tableauContent t i := by
   have he := prefixRowCount_succ t i j hij (t j).val.1
-  rw [prefixRowCount_self ht j, ite_eq_right hr.ne', add_zero] at he
+  rw [prefixRowCount_self (t := t) j, ite_eq_right hr.ne', add_zero] at he
   simp only [prefixAxialDistance, tableauContent, ← he]
   ring
 
 /-- The explicit prefix product satisfies the same legal adjacent ratio as the monic norm. -/
-theorem prefixNormProduct_relabel_adjacent {t : Tableau n μ} (ht : IsStandard t)
+theorem prefixNormProduct_relabel_adjacent {t : Tableau n μ} [ht : IsStandard t]
     (i j : Fin n) (hij : i.val + 1 = j.val) (hr : (t j).val.1 < (t i).val.1) :
     prefixNormProduct (relabel (Equiv.swap i j) t) =
       (1 - (((tableauContent t j : ℝ) - tableauContent t i)⁻¹) ^ 2) * prefixNormProduct t := by
@@ -254,7 +254,7 @@ theorem prefixNormProduct_relabel_adjacent {t : Tableau n μ} (ht : IsStandard t
     by_cases hmj : m = j
     · subst m
       rw [Equiv.swap_apply_right, ite_eq_left rfl]
-      exact prefixInsertionFactor_relabel_adjacent_right ht i j hij hr
+      exact prefixInsertionFactor_relabel_adjacent_right (t := t) i j hij hr
     rw [Equiv.swap_apply_of_ne_of_ne hmi hmj, ite_eq_right hmj, one_mul]
     exact prefixInsertionFactor_relabel_adjacent_of_ne t i j hij m hmi hmj
   unfold prefixNormProduct
@@ -262,6 +262,6 @@ theorem prefixNormProduct_relabel_adjacent {t : Tableau n μ} (ht : IsStandard t
   have hprod : ∏ m : Fin n, (if m = j then A else 1) = A := by simp
   rw [hprod, Equiv.prod_comp]
   congr 1
-  simp only [A, prefixAxialDistance_eq_content_sub ht i j hij hr, Int.cast_sub]
+  simp only [A, prefixAxialDistance_eq_content_sub (t := t) i j hij hr, Int.cast_sub]
 
 end BostConjecture.Specht

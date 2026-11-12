@@ -56,16 +56,27 @@ theorem determinantSpechtBundle_tensor_isMeanSlopeSemistable_and_dual :
       exact Arithmetic.isIrreducible_baseChange_trivialLineTensor
         (determinantPower_isLine (V i) (k i)).rank_eq_one _ (AlgebraicClosure K)
   apply isMeanSlopeSemistable_orthogonalTensor_and_dual_of_isIrreducible_baseChange
-    _ _
+    _
     (fun i => (determinantSpechtBundle_isMeanSlopeSemistable_and_dual
       (V i) (k i) (t i) (b i)).1.1) ρ (AlgebraicClosure K)
   intro i
   exact NormFamily.orthogonalTensorPair_norm_trivialLineTensor
     (determinantPower (V i) (k i)).toNormFamily
     (latticeBundle S (t i) (b i)).toNormFamily
-    (determinantPower_isHermitian (V i) (k i))
-    (latticeBundle_isHermitian S (t i) (b i))
     (Arithmetic.representationBaseChange K (Arithmetic.Specht.integralRepresentation (t i)))
     (latticeNormFamily_orbitAction S (t i) (b i))
+
+/-- The independent determinant--Specht tensor is semistable. -/
+instance determinantSpechtBundle_tensor_isMeanSlopeSemistable :
+    (orthogonalTensorOfMeasurableBase
+      (fun i ↦ determinantSpechtBundle (V i) (k i) (t i) (b i))).IsMeanSlopeSemistable :=
+  (determinantSpechtBundle_tensor_isMeanSlopeSemistable_and_dual V k t b).1
+
+/-- The dual of the independent determinant--Specht tensor is semistable. -/
+instance determinantSpechtBundle_tensor_dual_isMeanSlopeSemistable :
+    AdelicVectorBundle.IsMeanSlopeSemistable
+      (orthogonalTensorOfMeasurableBase (fun i ↦
+        determinantSpechtBundle (V i) (k i) (t i) (b i))).dualOfMeasurableBase :=
+  (determinantSpechtBundle_tensor_isMeanSlopeSemistable_and_dual V k t b).2
 
 end BostConjecture.Adelic

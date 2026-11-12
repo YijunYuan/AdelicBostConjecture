@@ -33,7 +33,7 @@ theorem weight_le_first_hermitianHNOrderedSlope
     (V : AdelicVectorBundle S E)
     [hS : S.HasMeasurableBase]
     [hN : S.IsArchimedeanNormalized]
-    (hV : V.toNormFamily.IsHermitian) (hr : 0 < finrank K E)
+    [hV : V.IsHermitian] (hr : 0 < finrank K E)
     {ι : Type*} (b : Basis ι K E) (w : ι → ℝ)
     (hb : ∀ t, V.hermitianHNFiltration t = span K (b '' {i | t ≤ w i}))
     (i : ι) : w i ≤ V.hermitianHNOrderedSlope ⟨0, hr⟩ := by
@@ -56,14 +56,14 @@ theorem maximalSlope_orthogonalTensorPair_of_hnFiltration_eq
     (V : AdelicVectorBundle S E) (W : AdelicVectorBundle S F)
     [hS : S.HasMeasurableBase]
     [hN : S.IsArchimedeanNormalized]
-    (hV : V.toNormFamily.IsHermitian) (hW : W.toNormFamily.IsHermitian)
+    [hV : V.IsHermitian] [hW : W.IsHermitian]
     (hE : 0 < finrank K E) (hF : 0 < finrank K F)
-    (hHN : (V.orthogonalTensorPair W).hermitianHNFiltration =
+    (hHN : (V ⊗ʰ W).hermitianHNFiltration =
       tensorFiltration (V.hermitianHNFiltration)
         (W.hermitianHNFiltration)) :
-    (V.orthogonalTensorPair W).maximalSlope =
+    (V ⊗ʰ W).maximalSlope =
       V.maximalSlope + W.maximalSlope := by
-  let T := V.orthogonalTensorPair W
+  let T := V ⊗ʰ W
   have hT := orthogonalTensorPair_isHermitian V W
   have hpos : 0 < finrank K (E ⊗[K] F) := by
     rw [finrank_tensorProduct]
@@ -71,10 +71,10 @@ theorem maximalSlope_orthogonalTensorPair_of_hnFiltration_eq
   let a := V.hermitianHNOrderedSlope ⟨0, hE⟩
   let b := W.hermitianHNOrderedSlope ⟨0, hF⟩
   let c := T.hermitianHNOrderedSlope ⟨0, hpos⟩
-  obtain ⟨e, w, he⟩ := V.exists_weighted_basis_hermitianHNFiltration hV
-  obtain ⟨f, z, hf⟩ := W.exists_weighted_basis_hermitianHNFiltration hW
-  have hw (i) : w i ≤ a := V.weight_le_first_hermitianHNOrderedSlope hV hE e w he i
-  have hz (j) : z j ≤ b := W.weight_le_first_hermitianHNOrderedSlope hW hF f z hf j
+  obtain ⟨e, w, he⟩ := V.exists_weighted_basis_hermitianHNFiltration
+  obtain ⟨f, z, hf⟩ := W.exists_weighted_basis_hermitianHNFiltration
+  have hw (i) : w i ≤ a := V.weight_le_first_hermitianHNOrderedSlope hE e w he i
+  have hz (j) : z j ≤ b := W.weight_le_first_hermitianHNOrderedSlope hF f z hf j
   have hbound : c ≤ a + b := by
     by_contra hn
     have hempty : {p : Fin (finrank K E) × Fin (finrank K F) | c ≤ w p.1 + z p.2} = ∅ := by

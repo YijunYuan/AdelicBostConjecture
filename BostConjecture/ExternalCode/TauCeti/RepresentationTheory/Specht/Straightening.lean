@@ -477,7 +477,7 @@ theorem polytabloidRat_mem_span_standard (t : Tableau n μ) :
     by_cases hstd : (∀ x y : Fin n,
           colIndex t x = colIndex t y → rowIndex t x < rowIndex t y → x < y) ∧
         ∀ x y : Fin n, rowIndex t x = rowIndex t y → colIndex t x < colIndex t y → x < y
-    · exact Submodule.subset_span ⟨⟨t, hstd.2, hstd.1⟩, rfl⟩
+    · exact Submodule.subset_span ⟨⟨t, ⟨hstd.2⟩, ⟨hstd.1⟩⟩, rfl⟩
     · refine (Submodule.span_le.mpr ?_) (polytabloid_mem_span_of_lt t hstd)
       rintro _ ⟨t', hlt, rfl⟩
       refine ih (straightBound n - straightWeight t') ?_ t' le_rfl

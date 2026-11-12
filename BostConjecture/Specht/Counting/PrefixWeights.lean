@@ -36,7 +36,7 @@ Vandermonde numerator. -/
 theorem card_rectanglePrefix_mul_factorials (hμ : μ ≤ rectangle a k)
     (hm : μ.card = m) (hl : (rectangleComplement μ a k).card = l) :
     Nat.card {T : {T : Tableau (m + l) (rectangle a k) // IsStandard T} //
-      prefixShape T.property m (Nat.le_add_right m l) = μ} *
+      prefixShape T.val m (Nat.le_add_right m l) = μ} *
       (∏ r ∈ range a, (shiftedRowLength μ a r).factorial *
         (k + a - 1 - shiftedRowLength μ a r).factorial) =
     m.factorial * l.factorial *
@@ -58,7 +58,7 @@ theorem card_rectanglePrefix_mul_factorials (hμ : μ ≤ rectangle a k)
 theorem card_rectanglePrefix_mul_factorial_pow (hμ : μ ≤ rectangle a k)
     (hm : μ.card = m) (hl : (rectangleComplement μ a k).card = l) :
     Nat.card {T : {T : Tableau (m + l) (rectangle a k) // IsStandard T} //
-      prefixShape T.property m (Nat.le_add_right m l) = μ} *
+      prefixShape T.val m (Nat.le_add_right m l) = μ} *
         (k + a - 1).factorial ^ a =
     (m.factorial * l.factorial *
       (∏ r ∈ range a, ∏ j ∈ Ioo r a,
@@ -82,7 +82,7 @@ theorem card_rectanglePrefix_mul_factorial_pow (hμ : μ ≤ rectangle a k)
   rw [← hbin]
   calc
     _ = (Nat.card {T : {T : Tableau (m + l) (rectangle a k) // IsStandard T} //
-      prefixShape T.property m (Nat.le_add_right m l) = μ} *
+      prefixShape T.val m (Nat.le_add_right m l) = μ} *
       (∏ r ∈ range a, (shiftedRowLength μ a r).factorial *
         (k + a - 1 - shiftedRowLength μ a r).factorial)) *
       (∏ r ∈ range a, (k + a - 1).choose (shiftedRowLength μ a r)) := by ring

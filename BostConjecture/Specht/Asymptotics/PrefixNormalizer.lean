@@ -163,7 +163,7 @@ the labelled occupancy law. -/
 theorem rectanglePrefix_probability_eq_weighted (a : ℕ) {k : ℕ} (hk : 0 < k)
     (m l : ℕ) (hml : m + l = a * k) (μ : RectangleShape a k m) :
     (Nat.card {T : {T : Tableau (m + l) (rectangle a k) // IsStandard T} //
-      prefixShape T.property m (Nat.le_add_right m l) = μ.val} : ℝ) /
+      prefixShape T.val m (Nat.le_add_right m l) = μ.val} : ℝ) /
       (Fintype.card {T : Tableau (m + l) (rectangle a k) // IsStandard T} : ℝ) =
     (a.factorial : ℝ) * occupancyWeight (rectangleShapeOccupancy μ).val /
       (∑ b : Occupancy a (k + a - 1) (m + staircaseSum a), occupancyWeight b) := by

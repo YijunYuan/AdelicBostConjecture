@@ -34,11 +34,11 @@ transpose followed by the canonical inverse tensor-duality isomorphism. -/
 theorem orthogonalTensorPair_pushforward_dual_norm
     (ξ : NormFamily S E) (η : NormFamily S F)
     [hN : S.IsArchimedeanNormalized]
-    (hξ : ξ.IsHermitian) (hη : η.IsHermitian)
+    [hξ : ξ.IsHermitian] [hη : η.IsHermitian]
     (q : E ⊗[K] F →ₗ[K] Q) (hq : Function.Surjective q)
     (ω : S.Ω) (z : (S.ϕ ω).Completion ⊗[K] Module.Dual K Q) :
-    ((ξ.orthogonalTensorPair η).pushforward q hq).dual.norm ω z =
-      (ξ.dual.orthogonalTensorPair η.dual).norm ω
+    ((ξ ⊗ʰ η).pushforward q hq).dual.norm ω z =
+      (ξ.dual ⊗ʰ η.dual).norm ω
         (((TensorProduct.dualDistribEquiv K E F).symm.toLinearMap.comp q.dualMap).baseChange
           (S.ϕ ω).Completion z) := by
   rw [pushforward_dual_norm_eq, ← orthogonalTensorPair_dual_norm ξ η]
@@ -59,7 +59,7 @@ geometric quotient criterion. -/
 theorem orthogonalTensor_pushforward_dual_norm
     (ξ : ∀ i, NormFamily S (A i))
     [hN : S.IsArchimedeanNormalized]
-    (hξ : ∀ i, (ξ i).IsHermitian)
+    [hξ : ∀ i, (ξ i).IsHermitian]
     (q : (⨂[K] i, A i) →ₗ[K] Q) (hq : Function.Surjective q)
     (ω : S.Ω) (z : (S.ϕ ω).Completion ⊗[K] Module.Dual K Q) :
     ((orthogonalTensor ξ).pushforward q hq).dual.norm ω z =

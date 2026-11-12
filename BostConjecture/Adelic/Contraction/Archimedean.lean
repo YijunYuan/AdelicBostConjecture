@@ -133,7 +133,7 @@ variable {K : Type u} [Field K] [CharZero K] {S : AdelicStructure.{u, v} K}
   {E : Type u} [AddCommGroup E] [Module K E] [FiniteDimensional K E]
   (ξ : NormFamily S E)
   [hN : S.IsArchimedeanNormalized]
-  (hξ : ξ.IsHermitian) {n k : ℕ}
+  [hξ : ξ.IsHermitian] {n k : ℕ}
 
 /-- The word isometry uses the prescribed norms on both actual completed
 fibres, and the canonical cancellation of the intermediate field. -/
@@ -186,8 +186,9 @@ variable {K : Type u} [Field K] [CharZero K] {S : AdelicStructure.{u, v} K}
   {E : Type u} [AddCommGroup E] [Module K E] [FiniteDimensional K E]
   (V : AdelicVectorBundle S E)
   [hN : S.IsArchimedeanNormalized]
-  [hcount : S.HasCommonCountableDenseSubfield] (hV : V.IsHermitian)
+  [hcount : S.HasCommonCountableDenseSubfield] [hV : V.IsHermitian]
 
+omit hV in
 /-- On determinant pure tensors the actual auxiliary norm is the product of
 the actual determinant norms and the completed Specht norm, at every place. -/
 theorem determinantSpechtBundle_norm_tprod {n k : ℕ}
@@ -269,7 +270,7 @@ theorem determinantSpechtBundle_norm_generator {n k : ℕ}
   intro b x
   refine (NormFamily.orthogonalTensorPair_norm_tmul_completed _ _
      ω _ _).trans ?_
-  rw [determinantPower_norm_orthonormalBasis V hV k ω hω b, one_mul]
+  rw [determinantPower_norm_orthonormalBasis V k ω hω b, one_mul]
   rfl
 
 /-- At every real or complex Archimedean completion, the actual canonical
@@ -304,7 +305,7 @@ theorem projectiveDeterminantMap_norm_infinite {n k : ℕ} (hk : 0 < k)
     ((NormFamily.orthogonalTensor (fun _ : Fin n ↦ V.toNormFamily)).norm ω)
     (projectiveDeterminantMap_baseChange_generator (K := K) (L := (S.ϕ ω).Completion)
       (E := E) hk t _ b.toBasis z)).trans ?_
-  have hn := orthogonal_freeLatticeMap_completed_norm V.toNormFamily hV hk t c ω hω b
+  have hn := orthogonal_freeLatticeMap_completed_norm V.toNormFamily hk t c ω hω b
     ((TensorProduct.AlgebraTensorModule.cancelBaseChange ℤ K (S.ϕ ω).Completion
       (S.ϕ ω).Completion (orbitLattice t)).symm z)
   rw [LinearEquiv.apply_symm_apply] at hn

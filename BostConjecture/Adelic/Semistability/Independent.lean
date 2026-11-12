@@ -119,7 +119,7 @@ orthogonal tensor norm, including its epsilon norms at finite places. -/
 theorem NormFamily.orthogonalTensor_norm_independentPiRepresentation
     (ξ : ∀ i, NormFamily S (E i))
     [hN : S.IsArchimedeanNormalized]
-    (hξ : ∀ i, (ξ i).IsHermitian) (ρ : ∀ i, Representation K (G i) (E i))
+    [hξ : ∀ i, (ξ i).IsHermitian] (ρ : ∀ i, Representation K (G i) (E i))
     (hρ : ∀ i g ω z, (ξ i).norm ω
       ((ρ i g).baseChange (S.ϕ ω).Completion z) = (ξ i).norm ω z)
     (g : ∀ i, G i) (ω : S.Ω) (z : (S.ϕ ω).Completion ⊗[K] (⨂[K] i, E i)) :
@@ -148,7 +148,7 @@ theorem isMeanSlopeSemistable_orthogonalTensor_and_dual_of_isIrreducible_baseCha
     [S.IsProper] (V : ∀ i, AdelicVectorBundle S (E i))
     [hS : S.HasMeasurableBase]
     [hN : S.IsArchimedeanNormalized]
-    (hV : ∀ i, (V i).toNormFamily.IsHermitian)
+    [hV : ∀ i, (V i).IsHermitian]
     (hr : ∀ i, 0 < Module.finrank K (E i))
     (ρ : ∀ i, Representation K (G i) (E i))
     (L : Type*) [Field L] [Algebra K L] [IsAlgClosed L]
@@ -163,14 +163,14 @@ theorem isMeanSlopeSemistable_orthogonalTensor_and_dual_of_isIrreducible_baseCha
   let : Representation.IsIrreducible (independentPiRepresentation ρ) :=
     isIrreducible_independentPi_of_representationBaseChange (L := L) ρ
   let T := orthogonalTensorOfMeasurableBase V
-  have hT : T.toNormFamily.IsHermitian :=
+  have hT : T.IsHermitian :=
     orthogonalTensorOfMeasurableBase_isHermitian V
   have hpos : 0 < Module.finrank K (⨂[K] i, E i) := Module.finrank_pos
   have hs : T.IsMeanSlopeSemistable :=
-    T.isMeanSlopeSemistable_of_isIrreducible hT hpos
+    T.isMeanSlopeSemistable_of_isIrreducible hpos
       (independentPiRepresentation ρ)
       (NormFamily.orthogonalTensor_norm_independentPiRepresentation
-        (fun i => (V i).toNormFamily) hV ρ hρ)
+        (fun i => (V i).toNormFamily) ρ hρ)
   exact ⟨hs, (T.isMeanSlopeSemistable_dual_iff_of_isHermitian hpos).mpr hs⟩
 
 end AdelicVectorBundle

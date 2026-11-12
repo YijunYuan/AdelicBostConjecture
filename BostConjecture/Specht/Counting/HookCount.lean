@@ -72,15 +72,15 @@ def standardTableauEquivPartition (p : Nat.Partition n) :
     T.val.symm.bijective.comp (partitionCellEquiv p).bijective, by
       constructor
       · intro c d hr hc
-        simpa using T.property.1 (T.val.symm (partitionCellEquiv p c))
+        simpa using T.property.rowStandard.label_lt (T.val.symm (partitionCellEquiv p c))
           (T.val.symm (partitionCellEquiv p d)) (by simpa [partitionCellEquiv] using hr)
           (by simpa [partitionCellEquiv] using hc)
       · intro c d hc hr
-        simpa using T.property.2 (T.val.symm (partitionCellEquiv p c))
+        simpa using T.property.columnStandard.label_lt (T.val.symm (partitionCellEquiv p c))
           (T.val.symm (partitionCellEquiv p d)) (by simpa [partitionCellEquiv] using hc)
           (by simpa [partitionCellEquiv] using hr)⟩
   invFun F := ⟨(Equiv.ofBijective F.val F.property.1).symm.trans (partitionCellEquiv p), by
-    constructor
+    refine ⟨⟨?_⟩, ⟨?_⟩⟩
     · intro i j hr hc
       have h := F.property.2.1 ((Equiv.ofBijective F.val F.property.1).symm i)
         ((Equiv.ofBijective F.val F.property.1).symm j) hr hc

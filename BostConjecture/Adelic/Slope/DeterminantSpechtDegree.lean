@@ -52,7 +52,7 @@ theorem determinantSpechtBundle_tensor_slope_rectangle :
       (determinantPower_isLine (V i) (k i)).rank_eq_one
     simpa only [Module.finrank_tensorProduct, hp, one_mul] using
       (finrank_pos : 0 < finrank K (K ⊗[ℤ] orbitLattice (t i)))
-  rw [slope_orthogonalTensorOfMeasurableBase _ _ hr]
+  rw [slope_orthogonalTensorOfMeasurableBase _ hr]
   exact Finset.sum_congr rfl fun i _ =>
     determinantSpechtBundle_slope_rectangle (V i) (k i) (t i) (b i)
 
@@ -96,7 +96,7 @@ local instance [Finite ι] : FiniteDimensional K (Dual K
 /-- The right-hand slope in Section 6: apply the auxiliary construction to
 the actual duals of the original factors, then dualize their tensor product. -/
 theorem determinantSpechtBundle_dual_tensor_dual_slope_rectangle
-    (hV : ∀ i, (V i).IsHermitian) :
+    [hV : ∀ i, (V i).IsHermitian] :
     ((orthogonalTensorOfMeasurableBase
       (fun i => determinantSpechtBundle ((V i).dualOfMeasurableBase)
           (k i) (tD i) (bD i))).dualOfMeasurableBase).slope =

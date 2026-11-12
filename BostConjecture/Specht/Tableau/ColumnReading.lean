@@ -39,13 +39,13 @@ theorem rectangleColumnTableau_label (a k : ℕ) (j : Fin (a * k)) :
     rectangleColumnTableau_symm_val a k (rectangleColumnTableau a k j)
 
 /-- Column reading increases both along rows and down columns. -/
-theorem rectangleColumnTableau_isStandard (a k : ℕ) :
+instance rectangleColumnTableau_isStandard (a k : ℕ) :
     IsStandard (rectangleColumnTableau a k) := by
   have hlabel := rectangleColumnTableau_label a k
   have ha (i : Fin (a * k)) : 0 < a := by
     have := (mem_rectangle.mp (rectangleColumnTableau a k i).property).1
     omega
-  constructor
+  refine ⟨⟨?_⟩, ⟨?_⟩⟩
   · intro i j hr hc
     have hm := Nat.mul_lt_mul_of_pos_left hc (ha i)
     have hi := hlabel i
@@ -61,7 +61,7 @@ theorem rectangleColumnTableau_isStandard (a k : ℕ) :
 
 /-- At the last changed box, every other standard tableau has a strictly later row. -/
 theorem rectangleColumnTableau_colexLT {a k : ℕ}
-    (u : Tableau (a * k) (rectangle a k)) (hu : IsStandard u)
+    (u : Tableau (a * k) (rectangle a k)) [hu : IsStandard u]
     (hne : u ≠ rectangleColumnTableau a k) :
     TableauColexLT (rectangleColumnTableau a k) u := by
   classical
@@ -98,7 +98,7 @@ theorem rectangleColumnTableau_colexLT {a k : ℕ}
   refine ⟨j, ?_, fun l hl => congrArg (fun b : rectangle a k => b.val.1) (htail l hl).symm⟩
   by_contra hr
   have hrow : (u j).val.1 ≤ (v j).val.1 := le_of_not_gt hr
-  have hjle : j ≤ u.symm (v j) := by simpa using hu.label_mono ⟨hrow, hcol⟩
+  have hjle : j ≤ u.symm (v j) := by simpa using IsStandard.label_mono (t := u) ⟨hrow, hcol⟩
   rcases hjle.eq_or_lt with he | he
   · exact hdiff (by simpa using congrArg u he)
   · have hh := htail (u.symm (v j)) he
@@ -112,7 +112,7 @@ theorem rectangleColumnTableau_isLeast (a k : ℕ)
   intro h
   have hne : U.val ≠ rectangleColumnTableau a k := fun he =>
     h.ne (Subtype.ext he)
-  have hrev := rectangleColumnTableau_colexLT U.val U.property hne
+  have hrev := rectangleColumnTableau_colexLT U.val  hne
   exact (not_lt_of_gt h) ((standardColex_lt_iff _ _).mpr hrev)
 
 /-- The actual initial orthogonal vector is the column-reading polytabloid. -/

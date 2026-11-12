@@ -58,7 +58,7 @@ scoped instance : LinearOrder {t : Tableau n μ // IsStandard t} :=
   LinearOrder.lift' (fun T => toLex (rowWord T.val ∘ Fin.rev)) (by
     intro T U h
     apply Subtype.ext
-    apply T.property.1.eq_of_rowWord_eq U.property.1
+    apply RowStandard.eq_of_rowWord_eq (t := T.val) (u := U.val)
     funext i
     have he := congrFun (congrArg ofLex h) i.rev
     simpa using he)
@@ -76,9 +76,9 @@ theorem tableauColexLT_of_last_row_lt {u t : Tableau (n + 1) μ}
   ⟨Fin.last n, h, fun k hk => (not_lt_of_ge (Fin.le_last k) hk).elim⟩
 
 /-- Deleting a common last box preserves and reflects colex comparison. -/
-theorem tableauColexLT_extendTableau_iff {t : Tableau (n + 1) μ} (ht : IsStandard t)
-    (u v : Tableau n (prefixShape ht n (Nat.le_succ n))) :
-    TableauColexLT (extendTableau ht u) (extendTableau ht v) ↔ TableauColexLT u v := by
+theorem tableauColexLT_extendTableau_iff {t : Tableau (n + 1) μ} [ht : IsStandard t]
+    (u v : Tableau n (prefixShape t n (Nat.le_succ n))) :
+    TableauColexLT (extendTableau t u) (extendTableau t v) ↔ TableauColexLT u v := by
   constructor
   · rintro ⟨j, hj, htail⟩
     induction j using Fin.lastCases with
@@ -96,21 +96,21 @@ theorem tableauColexLT_extendTableau_iff {t : Tableau (n + 1) μ} (ht : IsStanda
       | last => simp only [extendTableau_last]
       | cast k => simpa only [extendTableau_castSucc] using htail k hk
 
-@[simp] theorem extendTableau_prefixTableau {t : Tableau (n + 1) μ} (ht : IsStandard t) :
-    extendTableau ht (prefixTableau ht n (Nat.le_succ n)) = t := by
+@[simp] theorem extendTableau_prefixTableau {t : Tableau (n + 1) μ} [ht : IsStandard t] :
+    extendTableau t (prefixTableau t n (Nat.le_succ n)) = t := by
   apply Equiv.ext
   intro i
   induction i using Fin.lastCases with
-  | last => exact extendTableau_last ht _
-  | cast i => exact Subtype.ext (extendTableau_castSucc ht _ i)
+  | last => exact extendTableau_last (t := t) _
+  | cast i => exact Subtype.ext (extendTableau_castSucc (t := t) _ i)
 
 /-- Lifting a smaller earlier tableau gives an earlier tableau in the same corner stratum. -/
-theorem tableauColexLT_extendTableau {t : Tableau (n + 1) μ} (ht : IsStandard t)
-    {u : Tableau n (prefixShape ht n (Nat.le_succ n))}
-    (hu : TableauColexLT u (prefixTableau ht n (Nat.le_succ n))) :
-    TableauColexLT (extendTableau ht u) t := by
+theorem tableauColexLT_extendTableau {t : Tableau (n + 1) μ} [ht : IsStandard t]
+    {u : Tableau n (prefixShape t n (Nat.le_succ n))}
+    (hu : TableauColexLT u (prefixTableau t n (Nat.le_succ n))) :
+    TableauColexLT (extendTableau t u) t := by
   simpa only [extendTableau_prefixTableau] using
-    (tableauColexLT_extendTableau_iff ht _ _).mpr hu
+    (tableauColexLT_extendTableau_iff (t := t) _ _).mpr hu
 
 /-- The span of standard polytabloids strictly earlier than the specified tableau. -/
 def colexSubspace (t u : Tableau n μ) : Submodule ℝ (realSpan t) :=
@@ -124,56 +124,56 @@ theorem lastRowSubspaceLT_le_colexSubspace (t : Tableau (n + 1) μ) :
   exact Submodule.subset_span ⟨U, tableauColexLT_of_last_row_lt hU, rfl⟩
 
 /-- The linear lift obtained by extending each standard tableau at the fixed corner. -/
-def cornerLift {t : Tableau (n + 1) μ} (ht : IsStandard t) :
-    realSpan (prefixTableau ht n (Nat.le_succ n)) →ₗ[ℝ] realSpan t :=
-  (standardRealBasis (prefixTableau ht n (Nat.le_succ n))).constr ℝ
-    (fun U => standardRealBasis t (extendStandardTableau ht U))
+def cornerLift (t : Tableau (n + 1) μ) [ht : IsStandard t] :
+    realSpan (prefixTableau t n (Nat.le_succ n)) →ₗ[ℝ] realSpan t :=
+  (standardRealBasis (prefixTableau t n (Nat.le_succ n))).constr ℝ
+    (fun U => standardRealBasis t (extendStandardTableau t U))
 
-@[simp] theorem cornerLift_standardRealBasis {t : Tableau (n + 1) μ} (ht : IsStandard t)
-    (U : {u : Tableau n (prefixShape ht n (Nat.le_succ n)) // IsStandard u}) :
-    cornerLift ht (standardRealBasis (prefixTableau ht n (Nat.le_succ n)) U) =
-      standardRealBasis t (extendStandardTableau ht U) :=
+@[simp] theorem cornerLift_standardRealBasis {t : Tableau (n + 1) μ} [ht : IsStandard t]
+    (U : {u : Tableau n (prefixShape t n (Nat.le_succ n)) // IsStandard u}) :
+    cornerLift t (standardRealBasis (prefixTableau t n (Nat.le_succ n)) U) =
+      standardRealBasis t (extendStandardTableau t U) :=
   Module.Basis.constr_basis _ _ _ _
 
 /-- All lifted vectors lie in the correct largest-label filtration step. -/
-theorem cornerLift_mem_lastRowSubspace {t : Tableau (n + 1) μ} (ht : IsStandard t)
-    (x : realSpan (prefixTableau ht n (Nat.le_succ n))) :
-    cornerLift ht x ∈ lastRowSubspace t (rowWord t (Fin.last n)).val := by
-  rw [← (standardRealBasis (prefixTableau ht n (Nat.le_succ n))).sum_repr x, map_sum]
+theorem cornerLift_mem_lastRowSubspace {t : Tableau (n + 1) μ} [ht : IsStandard t]
+    (x : realSpan (prefixTableau t n (Nat.le_succ n))) :
+    cornerLift t x ∈ lastRowSubspace t (rowWord t (Fin.last n)).val := by
+  rw [← (standardRealBasis (prefixTableau t n (Nat.le_succ n))).sum_repr x, map_sum]
   apply Submodule.sum_mem
   intro U _
   rw [map_smul, cornerLift_standardRealBasis]
   apply Submodule.smul_mem
   apply Submodule.subset_span
-  refine ⟨extendStandardTableau ht U, ?_, rfl⟩
-  change (extendTableau ht U.val (Fin.last n)).val.1 ≤ (t (Fin.last n)).val.1
+  refine ⟨extendStandardTableau t U, ?_, rfl⟩
+  change (extendTableau t U.val (Fin.last n)).val.1 ≤ (t (Fin.last n)).val.1
   rw [extendTableau_last]
 
 /-- The concrete coefficient restriction is a left inverse of the standard lift. -/
-theorem prefixSliceReal_cornerLift {t : Tableau (n + 1) μ} (ht : IsStandard t)
-    (x : realSpan (prefixTableau ht n (Nat.le_succ n))) :
-    prefixSliceReal ht (Nat.le_succ n) (cornerLift ht x).val = x.val := by
-  have h : (prefixSliceReal ht (Nat.le_succ n)).comp
-      ((realSpan t).subtype.comp (cornerLift ht)) =
-        (realSpan (prefixTableau ht n (Nat.le_succ n))).subtype := by
-    apply (standardRealBasis (prefixTableau ht n (Nat.le_succ n))).ext
+theorem prefixSliceReal_cornerLift {t : Tableau (n + 1) μ} [ht : IsStandard t]
+    (x : realSpan (prefixTableau t n (Nat.le_succ n))) :
+    prefixSliceReal t (Nat.le_succ n) (cornerLift t x).val = x.val := by
+  have h : (prefixSliceReal t (Nat.le_succ n)).comp
+      ((realSpan t).subtype.comp (cornerLift t)) =
+        (realSpan (prefixTableau t n (Nat.le_succ n))).subtype := by
+    apply (standardRealBasis (prefixTableau t n (Nat.le_succ n))).ext
     intro U
     simp only [LinearMap.comp_apply, Submodule.subtype_apply,
       cornerLift_standardRealBasis, standardRealBasis_coe]
-    exact prefixSliceReal_extendTableau ht U.val
+    exact prefixSliceReal_extendTableau (t := t) U.val
   exact LinearMap.congr_fun h x
 
 /-- Earlier prefix polytabloids lift to earlier polytabloids in the original space. -/
-theorem cornerLift_mem_colexSubspace {t : Tableau (n + 1) μ} (ht : IsStandard t)
-    {x : realSpan (prefixTableau ht n (Nat.le_succ n))}
-    (hx : x ∈ colexSubspace (prefixTableau ht n (Nat.le_succ n))
-      (prefixTableau ht n (Nat.le_succ n))) : cornerLift ht x ∈ colexSubspace t t := by
+theorem cornerLift_mem_colexSubspace {t : Tableau (n + 1) μ} [ht : IsStandard t]
+    {x : realSpan (prefixTableau t n (Nat.le_succ n))}
+    (hx : x ∈ colexSubspace (prefixTableau t n (Nat.le_succ n))
+      (prefixTableau t n (Nat.le_succ n))) : cornerLift t x ∈ colexSubspace t t := by
   induction hx using Submodule.span_induction with
   | mem y hy =>
     obtain ⟨U, hU, rfl⟩ := hy
     rw [cornerLift_standardRealBasis]
     exact Submodule.subset_span
-      ⟨extendStandardTableau ht U, tableauColexLT_extendTableau ht hU, rfl⟩
+      ⟨extendStandardTableau t U, tableauColexLT_extendTableau (t := t) hU, rfl⟩
   | zero => simp
   | add x y hx hy ihx ihy => simpa only [map_add] using Submodule.add_mem _ ihx ihy
   | smul a x hx ih => simpa only [map_smul] using Submodule.smul_mem _ a ih

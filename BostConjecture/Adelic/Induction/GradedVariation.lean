@@ -137,8 +137,8 @@ theorem HNVariationLift.filtrationOnGraded_eq
     {V : AdelicVectorBundle S E}
     [hS : S.HasMeasurableBase]
     [hN : S.IsArchimedeanNormalized]
-    {hV : V.toNormFamily.IsHermitian} {P : ℝ → Submodule K E}
-    (L : HNVariationLift V hV P) (t : ℝ) :
+    [hV : V.IsHermitian] {P : ℝ → Submodule K E}
+    (L : HNVariationLift V P) (t : ℝ) :
     Submodule.filtrationOnGraded P L.direction t =
       (V.filtrationGraded P t).hermitianHNFiltration := by
   classical
@@ -147,8 +147,7 @@ theorem HNVariationLift.filtrationOnGraded_eq
     let C (A : Submodule K E × Submodule K E) :=
       ∀ s, ((L.direction s).comap A.1.subtype).map (A.2.comap A.1.subtype).mkQ =
         ((V.restrictOfMeasurableBase A.1).quotientOfMeasurableBase
-          (A.2.comap A.1.subtype)).hermitianHNFiltration
-            (hV := (hV.restrict A.1).quotient (A.2.comap A.1.subtype)) s
+          (A.2.comap A.1.subtype)).hermitianHNFiltration s
     have hp : (P (L.weight i), Submodule.filtrationRightLimit P (L.weight i)) =
         (L.flag i.succ, L.flag i.castSucc) := Prod.ext (L.level i) (L.right i)
     have hc : C (L.flag i.succ, L.flag i.castSucc) := L.cuts i
@@ -168,7 +167,7 @@ theorem tensorFiltrationQuotient_eventual_hn_upper
     (V : AdelicVectorBundle S E) (W : AdelicVectorBundle S F)
     [hS : S.HasMeasurableBase]
     [hN : S.IsArchimedeanNormalized]
-    (hV : V.toNormFamily.IsHermitian) (hW : W.toNormFamily.IsHermitian)
+    [hV : V.IsHermitian] [hW : W.IsHermitian]
     (q : E ⊗[K] F →ₗ[K] Q) (hq : Function.Surjective q)
     {P : ℝ → Submodule K E} {R : ℝ → Submodule K F}
     (hP : Antitone P) (hR : Antitone R)
@@ -176,8 +175,8 @@ theorem tensorFiltrationQuotient_eventual_hn_upper
     (b : Basis ι K E) (c : Basis κ K F) (w : ι → ℝ) (z : κ → ℝ)
     (hPw : ∀ t, P t = Submodule.span K (b '' {i | t ≤ w i}))
     (hRz : ∀ u, R u = Submodule.span K (c '' {j | u ≤ z j}))
-    (L : HNVariationLift V hV P)
-    (M : HNVariationLift W hW R)
+    (L : HNVariationLift V P)
+    (M : HNVariationLift W R)
     (s : ι → ℝ) (v : κ → ℝ)
     (hLs : ∀ t, L.direction t = Submodule.span K (b '' {i | t ≤ s i}))
     (hMv : ∀ t, M.direction t = Submodule.span K (c '' {j | t ≤ v j}))
@@ -186,7 +185,7 @@ theorem tensorFiltrationQuotient_eventual_hn_upper
       Submodule.tensorFiltration
         ((V.filtrationGraded P t).hermitianHNFiltration)
         ((W.filtrationGraded R u).hermitianHNFiltration)) :
-    let T := V.orthogonalTensorPair W
+    let T := V ⊗ʰ W
     let B := T.pushforward q hq
     ∃ η > 0, ∀ ε, 0 < ε → ε < η →
       Submodule.filtrationExpectation (fun t ↦
@@ -196,9 +195,9 @@ theorem tensorFiltrationQuotient_eventual_hn_upper
         ε * B.slope := by
   classical
   dsimp only
-  let T := V.orthogonalTensorPair W
+  let T := V ⊗ʰ W
   let B := T.pushforward q hq
-  have hB : B.toNormFamily.IsHermitian :=
+  have hB : B.IsHermitian :=
     (NormFamily.orthogonalTensorPair_isHermitian
       V.toNormFamily W.toNormFamily).pushforward q hq
   let PQ : ℝ → Submodule K Q := fun t ↦ (Submodule.tensorFiltration P R t).map q
@@ -214,7 +213,7 @@ theorem tensorFiltrationQuotient_eventual_hn_upper
   obtain ⟨hPQb, hPQt⟩ := Submodule.span_weights_attains_bot_top d₀ a₀
   have hPQl := Submodule.span_weights_locallyConstant_left d₀ a₀
   simp_rw [← hPQ] at hPQb hPQt hPQl
-  obtain ⟨N⟩ := exists_hnVariationLift B hB PQ hPQa hPQb hPQt hPQl
+  obtain ⟨N⟩ := exists_hnVariationLift B PQ hPQa hPQb hPQt hPQl
   obtain ⟨d, a, r, hd, hNr, _, _⟩ := Submodule.exists_common_weighted_basis
     hPQa hPQb hPQt hPQl N.antitone_direction N.direction_bot N.direction_top N.direction_left
   have hb (i : ι) : b i ∈ P (w i) := by
@@ -235,7 +234,7 @@ theorem tensorFiltrationQuotient_eventual_hn_upper
     let hC := tensorFiltrationGradedSource_isHermitian V W P R (w p.1) (z p.2)
     let f := Submodule.tensorFiltrationGradedQuotientPair q hP hR (t := w p.1) (u := z p.2) rfl
     have hf := C.map_hermitianHNFiltration_le_of_completed_contraction
-      (B.filtrationGraded PQ (w p.1 + z p.2)) hC (hB.filtrationGraded _ _) f
+      (B.filtrationGraded PQ (w p.1 + z p.2)) f
       (fun ω x ↦ NormFamily.tensorFiltrationGradedPair_pushforward_norm_le
         V.toNormFamily W.toNormFamily q hq hP hR rfl ω x) (s p.1 + v p.2)
     let x := Submodule.filtrationGradedMk P (w p.1) ⟨b p.1, hb p.1⟩

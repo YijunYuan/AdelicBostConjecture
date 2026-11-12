@@ -33,7 +33,7 @@ variable {K : Type u} [Field K] [CharZero K] {S : AdelicStructure.{u, v} K}
   [∀ j, FiniteDimensional K (E j)]
   (V : ∀ j, AdelicVectorBundle S (E j))
   [hN : S.IsArchimedeanNormalized]
-  [hcount : S.HasCommonCountableDenseSubfield] (hV : ∀ j, (V j).IsHermitian)
+  [hcount : S.HasCommonCountableDenseSubfield] [hV : ∀ j, (V j).IsHermitian]
 
 /-- The independent tensor of the actual determinant embeddings contracts on
 every completed fibre. Its Archimedean factor maps are the proved isometries. -/
@@ -55,12 +55,10 @@ theorem tensor_projectiveDeterminantMap_norm_le {n : ℕ} {k : ι → ℕ}
   apply orthogonalTensor_map_norm_le_of_finite_le_infinite_eq
     (fun j ↦ (determinantSpechtBundle (V j) (k j) (t j) (b j)).toNormFamily)
     (fun j ↦ NormFamily.orthogonalTensor (fun _ : Fin n ↦ (V j).toNormFamily))
-    (fun j ↦ determinantSpechtBundle_isHermitian (V j) (k j) (t j) (b j))
-    (fun j ↦ NormFamily.orthogonalTensor_isHermitian _)
   · exact fun j x ↦ projectiveDeterminantMap_norm_le
-      (V j) (hV j) (hk j) (t j) (b j) ω x
+      (V j) (hk j) (t j) (b j) ω x
   · exact fun hω j x ↦ projectiveDeterminantMap_norm_infinite
-      (V j) (hV j) (hk j) (t j) (b j) ω hω x
+      (V j) (hk j) (t j) (b j) ω hω x
 
 /-- The original-field canonical pairing contracts on every completed fibre
 for the actual determinant–Specht source and the dual of the actual auxiliary
@@ -72,7 +70,7 @@ theorem canonicalPairing_norm_le {n : ℕ} {k : ι → ℕ}
       Module.rankAtStalk (Dual K (E j)) p = finrank K (Dual K (E j)))
     (b : ∀ j, Basis (Fin (finrank K (K ⊗[ℤ] orbitLattice (t j)))) ℤ (orbitLattice (t j)))
     {F : Type u} [AddCommGroup F] [Module K F] [FiniteDimensional K F]
-    (U : AdelicVectorBundle S F) (hU : U.IsHermitian)
+    (U : AdelicVectorBundle S F) [hU : U.IsHermitian]
     {l : ℕ} (hl : 0 < l) (v : Tableau n (rectangle (finrank K F) l))
     (hs : ∀ p : PrimeSpectrum K, Module.rankAtStalk F p = finrank K F)
     (bV : Basis (Fin (finrank K (K ⊗[ℤ] orbitLattice v))) ℤ (orbitLattice v))
@@ -99,15 +97,15 @@ theorem canonicalPairing_norm_le {n : ℕ} {k : ι → ℕ}
       ((Geometry.dualDeterminantMap E hk t ha).baseChange (S.ϕ ω).Completion x) ≤
         D.norm ω x := by
     simp only [Geometry.dualDeterminantMap, LinearMap.baseChange_comp, LinearMap.comp_apply]
-    exact (dualRegroupEquiv_norm_le (fun j ↦ (V j).toNormFamily) hV ω _).trans
-      (tensor_projectiveDeterminantMap_norm_le VD hVD hk t b ω x)
+    exact (dualRegroupEquiv_norm_le (fun j ↦ (V j).toNormFamily) ω _).trans
+      (tensor_projectiveDeterminantMap_norm_le VD hk t b ω x)
   change D.toNormFamily.dual.norm ω
     ((Geometry.canonicalPairing E hk t ha hl v hs i).baseChange (S.ϕ ω).Completion z) ≤ _
   let gz := (projectiveDeterminantMap hl v hs).baseChange (S.ϕ ω).Completion z
-  have he := tensorPowerPairing_norm_le U.toNormFamily W hU hW i ω (hi ω) gz
+  have he := tensorPowerPairing_norm_le U.toNormFamily W i ω (hi ω) gz
   have hd := dualMap_norm_le D.toNormFamily T (Geometry.dualDeterminantMap E hk t ha)
     ω hj ((Tensor.tensorPowerPairing i).baseChange (S.ϕ ω).Completion gz)
-  have hg := projectiveDeterminantMap_norm_le U hU hl v bV ω z
+  have hg := projectiveDeterminantMap_norm_le U hl v bV ω z
   simp only [Geometry.canonicalPairing, LinearMap.baseChange_comp, LinearMap.comp_apply]
   exact hd.trans (he.trans hg)
 

@@ -32,7 +32,7 @@ variable {K : Type u} [Field K] {S : AdelicStructure.{u, v} K} [S.IsProper]
   (V : AdelicVectorBundle S E) (W : AdelicVectorBundle S F)
   [hS : S.HasMeasurableBase]
   [hN : S.IsArchimedeanNormalized]
-  (hV : V.IsHermitian) (hW : W.IsHermitian)
+  [hV : V.IsHermitian] [hW : W.IsHermitian]
 
 /-- Completed contractions preserve every HN threshold, including for the zero map. -/
 theorem map_hermitianHNFiltration_le_of_completed_contraction

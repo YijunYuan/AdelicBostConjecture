@@ -31,7 +31,7 @@ attribute [local instance] Classical.propDecidable
 theorem expect_prefixGap_eq {a k n m : ℕ} (hm : m ≤ n) (L : ℝ) :
     (𝔼 T : {T : Tableau n (rectangle a k) // IsStandard T},
       if HasSmallGap (fun i : Fin a =>
-        (shiftedRowLength (prefixShape T.property m hm) a i.val : ℝ)) L then 1 else 0) =
+        (shiftedRowLength (prefixShape T.val m hm) a i.val : ℝ)) L then 1 else 0) =
       rectanglePrefixGapProbability a k m (n - m) L := by
   classical
   obtain ⟨l, rfl⟩ := Nat.exists_eq_add_of_le hm
@@ -47,7 +47,7 @@ theorem expect_prefixGap_uniform {a : ℕ} (ha : 2 ≤ a) {ε : ℝ} (hε : 0 < 
       ε * (a * k : ℕ) ≤ m.val → ε * (a * k : ℕ) ≤ a * k - m.val →
       (𝔼 T : {T : Tableau (a * k) (rectangle a k) // IsStandard T},
         if HasSmallGap (fun i : Fin a =>
-          (shiftedRowLength (prefixShape T.property m.val (Nat.le_of_lt m.isLt)) a i.val : ℝ)) L
+          (shiftedRowLength (prefixShape T.val m.val (Nat.le_of_lt m.isLt)) a i.val : ℝ)) L
           then 1 else 0) < δ := by
   obtain ⟨K, hK⟩ := rectanglePrefixGapProbability_uniform ha hε L hδ
   refine ⟨K, ?_⟩
@@ -65,7 +65,7 @@ theorem expect_logInsertion_le {a k : ℕ} (hk : 0 < k) (m : Fin (a * k))
       (a - 1 : ℕ) / (L - 1) + (a - 1 : ℕ) * Real.log 2 *
         (𝔼 T : {T : Tableau (a * k) (rectangle a k) // IsStandard T},
           if HasSmallGap (fun i : Fin a =>
-            (shiftedRowLength (prefixShape T.property m.val (Nat.le_of_lt m.isLt)) a i.val : ℝ)) L
+            (shiftedRowLength (prefixShape T.val m.val (Nat.le_of_lt m.isLt)) a i.val : ℝ)) L
             then 1 else 0) := by
   classical
   have hcard : 0 < Fintype.card {T : Tableau (a * k) (rectangle a k) // IsStandard T} := by
@@ -77,15 +77,15 @@ theorem expect_logInsertion_le {a k : ℕ} (hk : 0 < k) (m : Fin (a * k))
     _ ≤ 𝔼 T : {T : Tableau (a * k) (rectangle a k) // IsStandard T},
         ((a - 1 : ℕ) / (L - 1) + (a - 1 : ℕ) * Real.log 2 *
           (if HasSmallGap (fun i : Fin a =>
-            (shiftedRowLength (prefixShape T.property m.val (Nat.le_of_lt m.isLt)) a i.val : ℝ)) L
+            (shiftedRowLength (prefixShape T.val m.val (Nat.le_of_lt m.isLt)) a i.val : ℝ)) L
             then 1 else 0)) := by
       apply expect_le_expect
       intro T _
       split_ifs with hgap
-      · simpa only [mul_one] using (log_prefixInsertionFactor_le T.property m).trans
+      · simpa only [mul_one] using (log_prefixInsertionFactor_le (t := T.val) m).trans
           (le_add_of_nonneg_left hB)
       · simpa only [mul_zero, add_zero] using
-          log_prefixInsertionFactor_le_of_not_gap T.property m hL hgap
+          log_prefixInsertionFactor_le_of_not_gap (t := T.val) m hL hgap
     _ = _ := by rw [expect_add_distrib, expect_const hne, mul_expect]
 
 private theorem sum_indicator_lt_le {d : ℕ} (b : ℕ) (g : Fin d → Fin d)
@@ -164,7 +164,7 @@ theorem average_log_prefixNormProduct_eventually_le {a : ℕ} (ha : 2 ≤ a)
   have hsum := sum_le_of_bulk
     (fun m : Fin (a * k) => 𝔼 T : {T : Tableau (a * k) (rectangle a k) // IsStandard T},
       Real.log (prefixInsertionFactor T.val m)) hε.le hC hB
-    (fun m => expect_le hne (fun T _ => log_prefixInsertionFactor_le T.property m))
+    (fun m => expect_le hne (fun T _ => log_prefixInsertionFactor_le (t := T.val) m))
     (fun m hm hl => (expect_logInsertion_le hk0 m hL).trans
       (add_le_add le_rfl (mul_le_mul_of_nonneg_left (hK k (by omega) m hm (by
         simpa only [Nat.cast_mul] using hl)).le hC)))
@@ -174,7 +174,7 @@ theorem average_log_prefixNormProduct_eventually_le {a : ℕ} (ha : 2 ≤ a)
         Real.log (prefixInsertionFactor T.val m) := by
     simp_rw [show ∀ T : {T : Tableau (a * k) (rectangle a k) // IsStandard T},
       Real.log (prefixNormProduct T.val) = ∑ m, Real.log (prefixInsertionFactor T.val m)
-      from fun T => log_prefixNormProduct T.property]
+      from fun T => log_prefixNormProduct (t := T.val)]
     exact expect_sum_comm _ _ _
   rw [he]
   calc

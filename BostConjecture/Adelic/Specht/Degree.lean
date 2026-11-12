@@ -101,7 +101,7 @@ theorem latticeDetVector_norm_sq_infinite (ω : S.Ω) (hω : ω ∈ S.Ωinf) :
     simp only [Matrix.gram_apply, Basis.baseChange_apply]
     exact latticeNormFamily_inner_integral S t b ω hω (b i) (b j)
   rw [← fibre_latticeDetVector S t b ω,
-    (latticeNormFamily_isHermitian S t b).determinant_norm_sq_eq_norm_gram ω hω, hg]
+    NormFamily.determinant_norm_sq_eq_norm_gram (latticeNormFamily S t b) ω hω, hg]
   change ‖((Int.castRingHom (S.ϕ ω).Completion).mapMatrix G).det‖ = _
   rw [← RingHom.map_det]
   change ‖(G.det : (S.ϕ ω).Completion)‖ = _
