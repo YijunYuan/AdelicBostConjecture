@@ -118,20 +118,20 @@ variable {K : Type*} [Field K] {S : AdelicStructure K} {ι : Type*} [Fintype ι]
 orthogonal tensor norm, including its epsilon norms at finite places. -/
 theorem NormFamily.orthogonalTensor_norm_independentPiRepresentation
     (ξ : ∀ i, NormFamily S (E i))
-    (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
-    (hξ : ∀ i, (ξ i).IsHermitian hN) (ρ : ∀ i, Representation K (G i) (E i))
+    [hN : S.IsArchimedeanNormalized]
+    (hξ : ∀ i, (ξ i).IsHermitian) (ρ : ∀ i, Representation K (G i) (E i))
     (hρ : ∀ i g ω z, (ξ i).norm ω
       ((ρ i g).baseChange (S.ϕ ω).Completion z) = (ξ i).norm ω z)
     (g : ∀ i, G i) (ω : S.Ω) (z : (S.ϕ ω).Completion ⊗[K] (⨂[K] i, E i)) :
-    (NormFamily.orthogonalTensor ξ hN hξ).norm ω
+    (NormFamily.orthogonalTensor ξ).norm ω
       ((independentPiRepresentation ρ g).baseChange (S.ϕ ω).Completion z) =
-      (NormFamily.orthogonalTensor ξ hN hξ).norm ω z := by
+      (NormFamily.orthogonalTensor ξ).norm ω z := by
   let τ := independentPiRepresentation ρ
   have hle (a : ∀ i, G i) (x : (S.ϕ ω).Completion ⊗[K] (⨂[K] i, E i)) :
-      (NormFamily.orthogonalTensor ξ hN hξ).norm ω
+      (NormFamily.orthogonalTensor ξ).norm ω
           ((τ a).baseChange (S.ϕ ω).Completion x) ≤
-        (NormFamily.orthogonalTensor ξ hN hξ).norm ω x :=
-    NormFamily.orthogonalTensor_map_norm_le_of_norm_eq ξ ξ hN hξ hξ
+        (NormFamily.orthogonalTensor ξ).norm ω x :=
+    NormFamily.orthogonalTensor_map_norm_le_of_norm_eq ξ ξ
       (fun i => ρ i (a i)) ω (fun i => hρ i (a i) ω) x
   apply le_antisymm (hle g z)
   have hinv : (τ g⁻¹).baseChange (S.ϕ ω).Completion
@@ -146,33 +146,32 @@ isometric actions make the actual orthogonal tensor bundle and its dual
 mean-slope semistable over the original field. -/
 theorem isMeanSlopeSemistable_orthogonalTensor_and_dual_of_isIrreducible_baseChange
     [S.IsProper] (V : ∀ i, AdelicVectorBundle S (E i))
-    (hS : DiscreteMeasurableSpace S.Ω ∨ S.HasCommonCountableDenseSubfield)
-    (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
-    (hV : ∀ i, (V i).toNormFamily.IsHermitian hN)
+    [hS : S.HasMeasurableBase]
+    [hN : S.IsArchimedeanNormalized]
+    (hV : ∀ i, (V i).toNormFamily.IsHermitian)
     (hr : ∀ i, 0 < Module.finrank K (E i))
     (ρ : ∀ i, Representation K (G i) (E i))
     (L : Type*) [Field L] [Algebra K L] [IsAlgClosed L]
     [∀ i, Representation.IsIrreducible (representationBaseChange L (ρ i))]
     (hρ : ∀ i g ω z, (V i).toNormFamily.norm ω
       ((ρ i g).baseChange (S.ϕ ω).Completion z) = (V i).toNormFamily.norm ω z) :
-    (orthogonalTensorOfMeasurableBase V hS hN hV).IsMeanSlopeSemistable hS hN ∧
-      ((orthogonalTensorOfMeasurableBase V hS hN hV).dualOfMeasurableBase hS).IsMeanSlopeSemistable
-        hS hN := by
+    (orthogonalTensorOfMeasurableBase V).IsMeanSlopeSemistable ∧
+      ((orthogonalTensorOfMeasurableBase V).dualOfMeasurableBase).IsMeanSlopeSemistable := by
   let : ∀ i, Nontrivial (E i) := fun i => Module.nontrivial_of_finrank_pos (hr i)
   let b := Basis.piTensorProduct (fun i => Module.Free.chooseBasis K (E i))
   let : Nontrivial (⨂[K] i, E i) := b.repr.symm.injective.nontrivial
   let : Representation.IsIrreducible (independentPiRepresentation ρ) :=
     isIrreducible_independentPi_of_representationBaseChange (L := L) ρ
-  let T := orthogonalTensorOfMeasurableBase V hS hN hV
-  have hT : T.toNormFamily.IsHermitian hN :=
-    orthogonalTensorOfMeasurableBase_isHermitian V hS hN hV
+  let T := orthogonalTensorOfMeasurableBase V
+  have hT : T.toNormFamily.IsHermitian :=
+    orthogonalTensorOfMeasurableBase_isHermitian V
   have hpos : 0 < Module.finrank K (⨂[K] i, E i) := Module.finrank_pos
-  have hs : T.IsMeanSlopeSemistable hS hN :=
-    T.isMeanSlopeSemistable_of_isIrreducible hS hN hT hpos
+  have hs : T.IsMeanSlopeSemistable :=
+    T.isMeanSlopeSemistable_of_isIrreducible hT hpos
       (independentPiRepresentation ρ)
       (NormFamily.orthogonalTensor_norm_independentPiRepresentation
-        (fun i => (V i).toNormFamily) hN hV ρ hρ)
-  exact ⟨hs, (T.isMeanSlopeSemistable_dual_iff_of_isHermitian hS hN hT hpos).mpr hs⟩
+        (fun i => (V i).toNormFamily) hV ρ hρ)
+  exact ⟨hs, (T.isMeanSlopeSemistable_dual_iff_of_isHermitian hpos).mpr hs⟩
 
 end AdelicVectorBundle
 

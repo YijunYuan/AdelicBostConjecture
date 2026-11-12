@@ -172,8 +172,8 @@ variable {K : Type*} [Field K] {S : AdelicStructure K}
 /-- The epsilon universal bound on the actual completed tensor fibre. -/
 theorem norm_linearMap_le_orthogonalTensor_of_finite
     (ξ : ∀ i, NormFamily S (P i))
-    (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
-    (hξ : ∀ i, (ξ i).IsHermitian hN) (ω : S.Ω) (hω : ω ∈ S.Ωfin)
+    [hN : S.IsArchimedeanNormalized]
+    (hξ : ∀ i, (ξ i).IsHermitian) (ω : S.Ω) (hω : ω ∈ S.Ωfin)
     {W : Type*} [SeminormedAddCommGroup W] [NormedSpace (S.ϕ ω).Completion W]
     (f : ((S.ϕ ω).Completion ⊗[K] (⨂[K] i, P i)) →ₗ[(S.ϕ ω).Completion] W)
     (hW : ∀ x y : W, ‖x + y‖ ≤ max ‖x‖ ‖y‖) {C : ℝ} (hC : 0 ≤ C)
@@ -181,7 +181,7 @@ theorem norm_linearMap_le_orthogonalTensor_of_finite
       ‖f ((tensorBaseChangeEquiv K (S.ϕ ω).Completion P).symm
       (⨂ₜ[(S.ϕ ω).Completion] i, x i))‖ ≤ C * ∏ i, (ξ i).norm ω (x i))
     (z : (S.ϕ ω).Completion ⊗[K] (⨂[K] i, P i)) :
-    ‖f z‖ ≤ C * (NormFamily.orthogonalTensor ξ hN hξ).norm ω z := by
+    ‖f z‖ ≤ C * (NormFamily.orthogonalTensor ξ).norm ω z := by
   let L := (S.ϕ ω).Completion
   let : ∀ i, NormedAddCommGroup (L ⊗[K] P i) := fun i ↦ (ξ i).fibreNormedAddCommGroup ω
   let : ∀ i, NormedSpace L (L ⊗[K] P i) := fun i ↦ (ξ i).fibreNormedSpace ω
@@ -189,7 +189,7 @@ theorem norm_linearMap_le_orthogonalTensor_of_finite
   have h := norm_linearMap_le_mul_injective_of_ultrametric_factors
     (f ∘ₗ e.symm.toLinearMap) hW hC hf (e z)
   simp only [LinearMap.comp_apply, LinearEquiv.coe_coe, LinearEquiv.symm_apply_apply] at h
-  rw [NormFamily.orthogonalTensor_norm_of_finite _ _ _ ω hω]
+  rw [NormFamily.orthogonalTensor_norm_of_finite _ ω hω]
   exact h
 
 end Finite
@@ -205,8 +205,8 @@ variable {K : Type*} [Field K] {S : AdelicStructure K}
 for iterated epsilon norms. -/
 theorem norm_linearMap_le_nested_orthogonalTensor_of_finite
     (ξ : ∀ i j, NormFamily S (P i j))
-    (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
-    (hξ : ∀ i j, (ξ i j).IsHermitian hN) (ω : S.Ω) (hω : ω ∈ S.Ωfin)
+    [hN : S.IsArchimedeanNormalized]
+    (hξ : ∀ i j, (ξ i j).IsHermitian) (ω : S.Ω) (hω : ω ∈ S.Ωfin)
     {W : Type*} [SeminormedAddCommGroup W] [NormedSpace (S.ϕ ω).Completion W]
     (f : ((S.ϕ ω).Completion ⊗[K] (⨂[K] i, ⨂[K] j, P i j)) →ₗ[(S.ϕ ω).Completion] W)
     (hW : ∀ x y : W, ‖x + y‖ ≤ max ‖x‖ ‖y‖) {C : ℝ} (hC : 0 ≤ C)
@@ -217,18 +217,17 @@ theorem norm_linearMap_le_nested_orthogonalTensor_of_finite
             (⨂ₜ[(S.ϕ ω).Completion] j, x i j)))‖ ≤ C * ∏ i, ∏ j, (ξ i j).norm ω (x i j))
     (z : (S.ϕ ω).Completion ⊗[K] (⨂[K] i, ⨂[K] j, P i j)) :
     ‖f z‖ ≤ C * (NormFamily.orthogonalTensor
-      (fun i ↦ NormFamily.orthogonalTensor (ξ i) hN (hξ i)) hN
-      (fun _ ↦ NormFamily.orthogonalTensor_isHermitian _ _ _)).norm ω z := by
+      (fun i ↦ NormFamily.orthogonalTensor (ξ i))).norm ω z := by
   let L := (S.ϕ ω).Completion
   let X i := L ⊗[K] (⨂[K] j, P i j)
-  let η i := NormFamily.orthogonalTensor (ξ i) hN (hξ i)
+  let η i := NormFamily.orthogonalTensor (ξ i)
   let : ∀ i, NormedAddCommGroup (X i) := fun i ↦ (η i).fibreNormedAddCommGroup ω
   let : ∀ i, NormedSpace L (X i) := fun i ↦ (η i).fibreNormedSpace ω
   let g := f.compMultilinearMap
     ((tensorBaseChangeEquiv K L (fun i ↦ ⨂[K] j, P i j)).symm.toLinearMap.compMultilinearMap
       (PiTensorProduct.tprod L))
-  apply norm_linearMap_le_orthogonalTensor_of_finite η hN
-    (fun _ ↦ NormFamily.orthogonalTensor_isHermitian _ _ _) ω hω f hW hC
+  apply norm_linearMap_le_orthogonalTensor_of_finite η
+    (fun _ ↦ NormFamily.orthogonalTensor_isHermitian _) ω hω f hW hC
   intro x
   change ‖g x‖ ≤ C * ∏ i, ‖x i‖
   exact multilinear_bound_of_generator_bounds (X := X) (G := fun i ↦ ∀ j, L ⊗[K] P i j)
@@ -237,7 +236,7 @@ theorem norm_linearMap_le_nested_orthogonalTensor_of_finite
     (fun i y ↦ Finset.prod_nonneg (fun j _ ↦ (ξ i j).norm_nonneg ω (y j)))
     g (fun i g A hA hg z ↦ by
       change ‖g z‖ ≤ A * (η i).norm ω z
-      exact norm_linearMap_le_orthogonalTensor_of_finite (ξ i) hN (hξ i) ω hω g hW hA hg z)
+      exact norm_linearMap_le_orthogonalTensor_of_finite (ξ i) (hξ i) ω hω g hW hA hg z)
     hC (fun y ↦ by
       change ‖f _‖ ≤ _
       exact hf y) x
@@ -246,24 +245,21 @@ theorem norm_linearMap_le_nested_orthogonalTensor_of_finite
 finite place, including a trivial valuation. -/
 theorem regroup_norm_le_finite
     (ξ : ∀ i j, NormFamily S (P i j))
-    (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
-    (hξ : ∀ i j, (ξ i j).IsHermitian hN) (ω : S.Ω) (hω : ω ∈ S.Ωfin)
+    [hN : S.IsArchimedeanNormalized]
+    (hξ : ∀ i j, (ξ i j).IsHermitian) (ω : S.Ω) (hω : ω ∈ S.Ωfin)
     (z : (S.ϕ ω).Completion ⊗[K] (⨂[K] i, ⨂[K] j, P i j)) :
     (NormFamily.orthogonalTensor
-      (fun j ↦ NormFamily.orthogonalTensor (fun i ↦ ξ i j) hN (fun i ↦ hξ i j)) hN
-      (fun _ ↦ NormFamily.orthogonalTensor_isHermitian _ _ _)).norm ω
+      (fun j ↦ NormFamily.orthogonalTensor (fun i ↦ ξ i j))).norm ω
       ((Tensor.regroupEquiv K P).toLinearMap.baseChange (S.ϕ ω).Completion z) ≤
     (NormFamily.orthogonalTensor
-      (fun i ↦ NormFamily.orthogonalTensor (ξ i) hN (hξ i)) hN
-      (fun _ ↦ NormFamily.orthogonalTensor_isHermitian _ _ _)).norm ω z := by
+      (fun i ↦ NormFamily.orthogonalTensor (ξ i))).norm ω z := by
   let τ := NormFamily.orthogonalTensor
-    (fun j ↦ NormFamily.orthogonalTensor (fun i ↦ ξ i j) hN (fun i ↦ hξ i j)) hN
-    (fun _ ↦ NormFamily.orthogonalTensor_isHermitian _ _ _)
+    (fun j ↦ NormFamily.orthogonalTensor (fun i ↦ ξ i j))
   let := τ.fibreNormedAddCommGroup ω
   let := τ.fibreNormedSpace ω
-  have h := norm_linearMap_le_nested_orthogonalTensor_of_finite ξ hN hξ ω hω
+  have h := norm_linearMap_le_nested_orthogonalTensor_of_finite ξ hξ ω hω
     ((Tensor.regroupEquiv K P).toLinearMap.baseChange (S.ϕ ω).Completion)
-    ((NormFamily.orthogonalTensor_isHermitian _ _ _).1 ω hω)
+    ((NormFamily.orthogonalTensor_isHermitian _).1 ω hω)
     (C := 1) zero_le_one (fun x ↦ by
       change τ.norm ω _ ≤ _
       rw [regroup_baseChange_tprod]
@@ -306,8 +302,8 @@ variable {K : Type*} [Field K] {S : AdelicStructure K}
 /-- The actual completed Hilbert tensor inner product has the product formula. -/
 theorem orthogonalTensor_fibre_inner_tprod
     (ξ : ∀ i, NormFamily S (P i))
-    (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
-    (hξ : ∀ i, (ξ i).IsHermitian hN) (ω : S.Ω) (hω : ω ∈ S.Ωinf)
+    [hN : S.IsArchimedeanNormalized]
+    (hξ : ∀ i, (ξ i).IsHermitian) (ω : S.Ω) (hω : ω ∈ S.Ωinf)
     (x y : ∀ i, (S.ϕ ω).Completion ⊗[K] P i) :
     letI := hN ω hω
     letI := IsRCLikeNormedField.rclike (S.ϕ ω).Completion
@@ -316,10 +312,10 @@ theorem orthogonalTensor_fibre_inner_tprod
     letI : ∀ i, NormedSpace (S.ϕ ω).Completion ((S.ϕ ω).Completion ⊗[K] P i) :=
       fun i ↦ (ξ i).fibreNormedSpace ω
     letI : ∀ i, InnerProductSpace (S.ϕ ω).Completion ((S.ϕ ω).Completion ⊗[K] P i) :=
-      fun i ↦ (hξ i).fibreInnerProductSpace ω hω
-    letI := (NormFamily.orthogonalTensor ξ hN hξ).fibreNormedAddCommGroup ω
-    letI := (NormFamily.orthogonalTensor ξ hN hξ).fibreNormedSpace ω
-    letI := (NormFamily.orthogonalTensor_isHermitian ξ hN hξ).fibreInnerProductSpace ω hω
+      fun i ↦ (ξ i).fiberInnerProductSpace ω hω
+    letI := (NormFamily.orthogonalTensor ξ).fibreNormedAddCommGroup ω
+    letI := (NormFamily.orthogonalTensor ξ).fibreNormedSpace ω
+    letI := (NormFamily.orthogonalTensor ξ).fiberInnerProductSpace ω hω
     inner (S.ϕ ω).Completion
       ((tensorBaseChangeEquiv K (S.ϕ ω).Completion P).symm (⨂ₜ[(S.ϕ ω).Completion] i, x i))
       ((tensorBaseChangeEquiv K (S.ϕ ω).Completion P).symm (⨂ₜ[(S.ϕ ω).Completion] i, y i)) =
@@ -330,17 +326,17 @@ theorem orthogonalTensor_fibre_inner_tprod
   let : ∀ i, NormedAddCommGroup (L ⊗[K] P i) := fun i ↦ (ξ i).fibreNormedAddCommGroup ω
   let : ∀ i, NormedSpace L (L ⊗[K] P i) := fun i ↦ (ξ i).fibreNormedSpace ω
   let : ∀ i, InnerProductSpace L (L ⊗[K] P i) :=
-    fun i ↦ (hξ i).fibreInnerProductSpace ω hω
-  let := (NormFamily.orthogonalTensor ξ hN hξ).fibreNormedAddCommGroup ω
-  let := (NormFamily.orthogonalTensor ξ hN hξ).fibreNormedSpace ω
-  let := (NormFamily.orthogonalTensor_isHermitian ξ hN hξ).fibreInnerProductSpace ω hω
+    fun i ↦ (ξ i).fiberInnerProductSpace ω hω
+  let := (NormFamily.orthogonalTensor ξ).fibreNormedAddCommGroup ω
+  let := (NormFamily.orthogonalTensor ξ).fibreNormedSpace ω
+  let := (NormFamily.orthogonalTensor ξ).fiberInnerProductSpace ω hω
   let b := fun i ↦ stdOrthonormalBasis L (L ⊗[K] P i)
   let := orthogonalTensorNormedAddCommGroup b
   let := orthogonalTensorNormedSpace b
   let := orthogonalTensorInnerProductSpace b
   let e : (L ⊗[K] (⨂[K] i, P i)) ≃ₗᵢ[L] (⨂[L] i, L ⊗[K] P i) :=
     { toLinearEquiv := tensorBaseChangeEquiv K L P
-      norm_map' := fun z ↦ (NormFamily.orthogonalTensor_norm_of_infinite ξ hN hξ ω hω z).symm }
+      norm_map' := fun z ↦ (NormFamily.orthogonalTensor_norm_of_infinite ξ ω hω z).symm }
   have he := e.inner_map_map
     ((tensorBaseChangeEquiv K L P).symm (⨂ₜ[L] i, x i))
     ((tensorBaseChangeEquiv K L P).symm (⨂ₜ[L] i, y i))
@@ -364,48 +360,46 @@ variable {K : Type*} [Field K] {S : AdelicStructure K}
 both real and complex completions. -/
 theorem regroup_norm_infinite
     (ξ : ∀ i j, NormFamily S (P i j))
-    (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
-    (hξ : ∀ i j, (ξ i j).IsHermitian hN) (ω : S.Ω) (hω : ω ∈ S.Ωinf)
+    [hN : S.IsArchimedeanNormalized]
+    (hξ : ∀ i j, (ξ i j).IsHermitian) (ω : S.Ω) (hω : ω ∈ S.Ωinf)
     (z : (S.ϕ ω).Completion ⊗[K] (⨂[K] i, ⨂[K] j, P i j)) :
     (NormFamily.orthogonalTensor
-      (fun j ↦ NormFamily.orthogonalTensor (fun i ↦ ξ i j) hN (fun i ↦ hξ i j)) hN
-      (fun _ ↦ NormFamily.orthogonalTensor_isHermitian _ _ _)).norm ω
+      (fun j ↦ NormFamily.orthogonalTensor (fun i ↦ ξ i j))).norm ω
       ((Tensor.regroupEquiv K P).toLinearMap.baseChange (S.ϕ ω).Completion z) =
     (NormFamily.orthogonalTensor
-      (fun i ↦ NormFamily.orthogonalTensor (ξ i) hN (hξ i)) hN
-      (fun _ ↦ NormFamily.orthogonalTensor_isHermitian _ _ _)).norm ω z := by
+      (fun i ↦ NormFamily.orthogonalTensor (ξ i))).norm ω z := by
   let L := (S.ϕ ω).Completion
   let := hN ω hω
   let := IsRCLikeNormedField.rclike L
-  let η i := NormFamily.orthogonalTensor (ξ i) hN (hξ i)
-  let hη i := NormFamily.orthogonalTensor_isHermitian (ξ i) hN (hξ i)
-  let θ j := NormFamily.orthogonalTensor (fun i ↦ ξ i j) hN (fun i ↦ hξ i j)
-  let hθ j := NormFamily.orthogonalTensor_isHermitian (fun i ↦ ξ i j) hN (fun i ↦ hξ i j)
-  let σ := NormFamily.orthogonalTensor η hN hη
-  let τ := NormFamily.orthogonalTensor θ hN hθ
+  let η i := NormFamily.orthogonalTensor (ξ i)
+  let hη i := NormFamily.orthogonalTensor_isHermitian (ξ i)
+  let θ j := NormFamily.orthogonalTensor (fun i ↦ ξ i j)
+  let hθ j := NormFamily.orthogonalTensor_isHermitian (fun i ↦ ξ i j)
+  let σ := NormFamily.orthogonalTensor η
+  let τ := NormFamily.orthogonalTensor θ
   let : ∀ i j, NormedAddCommGroup (L ⊗[K] P i j) :=
     fun i j ↦ (ξ i j).fibreNormedAddCommGroup ω
   let : ∀ i j, NormedSpace L (L ⊗[K] P i j) := fun i j ↦ (ξ i j).fibreNormedSpace ω
   let : ∀ i j, InnerProductSpace L (L ⊗[K] P i j) :=
-    fun i j ↦ (hξ i j).fibreInnerProductSpace ω hω
+    fun i j ↦ (ξ i j).fiberInnerProductSpace ω hω
   let : ∀ i, NormedAddCommGroup (L ⊗[K] (⨂[K] j, P i j)) :=
     fun i ↦ (η i).fibreNormedAddCommGroup ω
   let : ∀ i, NormedSpace L (L ⊗[K] (⨂[K] j, P i j)) :=
     fun i ↦ (η i).fibreNormedSpace ω
   let : ∀ i, InnerProductSpace L (L ⊗[K] (⨂[K] j, P i j)) :=
-    fun i ↦ (hη i).fibreInnerProductSpace ω hω
+    fun i ↦ (η i).fiberInnerProductSpace ω hω
   let : ∀ j, NormedAddCommGroup (L ⊗[K] (⨂[K] i, P i j)) :=
     fun j ↦ (θ j).fibreNormedAddCommGroup ω
   let : ∀ j, NormedSpace L (L ⊗[K] (⨂[K] i, P i j)) :=
     fun j ↦ (θ j).fibreNormedSpace ω
   let : ∀ j, InnerProductSpace L (L ⊗[K] (⨂[K] i, P i j)) :=
-    fun j ↦ (hθ j).fibreInnerProductSpace ω hω
+    fun j ↦ (θ j).fiberInnerProductSpace ω hω
   let := σ.fibreNormedAddCommGroup ω
   let := σ.fibreNormedSpace ω
-  let := (NormFamily.orthogonalTensor_isHermitian η hN hη).fibreInnerProductSpace ω hω
+  let := (NormFamily.orthogonalTensor η).fiberInnerProductSpace ω hω
   let := τ.fibreNormedAddCommGroup ω
   let := τ.fibreNormedSpace ω
-  let := (NormFamily.orthogonalTensor_isHermitian θ hN hθ).fibreInnerProductSpace ω hω
+  let := (NormFamily.orthogonalTensor θ).fiberInnerProductSpace ω hω
   let f := (Tensor.regroupEquiv K P).toLinearMap.baseChange L
   have hi (x y : L ⊗[K] (⨂[K] i, ⨂[K] j, P i j)) :
       inner L (f x) (f y) = inner L x y := by
@@ -415,20 +409,20 @@ theorem regroup_norm_infinite
       ((Tensor.regroupEquiv K P).toLinearMap.baseChange L _) = _
     rw [regroup_baseChange_tprod, regroup_baseChange_tprod]
     simp only [LinearMap.id_apply]
-    rw [orthogonalTensor_fibre_inner_tprod θ hN hθ ω hω,
-      orthogonalTensor_fibre_inner_tprod η hN hη ω hω]
+    rw [orthogonalTensor_fibre_inner_tprod θ hθ ω hω,
+      orthogonalTensor_fibre_inner_tprod η hη ω hω]
     calc
       _ = ∏ j, ∏ i, inner L (x i j) (y i j) := by
         apply Finset.prod_congr rfl
         intro j _
         exact orthogonalTensor_fibre_inner_tprod
-          (fun i ↦ ξ i j) hN (fun i ↦ hξ i j) ω hω _ _
+          (fun i ↦ ξ i j) (fun i ↦ hξ i j) ω hω _ _
       _ = ∏ i, ∏ j, inner L (x i j) (y i j) := Finset.prod_comm
       _ = _ := by
         symm
         apply Finset.prod_congr rfl
         intro i _
-        exact orthogonalTensor_fibre_inner_tprod (ξ i) hN (hξ i) ω hω _ _
+        exact orthogonalTensor_fibre_inner_tprod (ξ i) (hξ i) ω hω _ _
   change ‖f z‖ = ‖z‖
   apply (sq_eq_sq₀ (norm_nonneg _) (norm_nonneg _)).mp
   have h := congrArg RCLike.re (hi z z)
@@ -446,19 +440,17 @@ variable {K : Type*} [Field K] {S : AdelicStructure K}
 /-- Rectangular regrouping contracts at every place for the prescribed norms. -/
 theorem regroup_norm_le
     (ξ : ∀ i j, NormFamily S (P i j))
-    (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
-    (hξ : ∀ i j, (ξ i j).IsHermitian hN) (ω : S.Ω)
+    [hN : S.IsArchimedeanNormalized]
+    (hξ : ∀ i j, (ξ i j).IsHermitian) (ω : S.Ω)
     (z : (S.ϕ ω).Completion ⊗[K] (⨂[K] i, ⨂[K] j, P i j)) :
     (NormFamily.orthogonalTensor
-      (fun j ↦ NormFamily.orthogonalTensor (fun i ↦ ξ i j) hN (fun i ↦ hξ i j)) hN
-      (fun _ ↦ NormFamily.orthogonalTensor_isHermitian _ _ _)).norm ω
+      (fun j ↦ NormFamily.orthogonalTensor (fun i ↦ ξ i j))).norm ω
       ((Tensor.regroupEquiv K P).toLinearMap.baseChange (S.ϕ ω).Completion z) ≤
     (NormFamily.orthogonalTensor
-      (fun i ↦ NormFamily.orthogonalTensor (ξ i) hN (hξ i)) hN
-      (fun _ ↦ NormFamily.orthogonalTensor_isHermitian _ _ _)).norm ω z := by
+      (fun i ↦ NormFamily.orthogonalTensor (ξ i))).norm ω z := by
   by_cases hω : ω ∈ S.Ωfin
-  · exact regroup_norm_le_finite ξ hN hξ ω hω z
-  · exact (regroup_norm_infinite ξ hN hξ ω hω z).le
+  · exact regroup_norm_le_finite ξ hξ ω hω z
+  · exact (regroup_norm_infinite ξ hξ ω hω z).le
 
 end Regroup
 
@@ -472,17 +464,14 @@ variable {K : Type*} [Field K] {S : AdelicStructure K}
 completed fibres for the prescribed Hilbert and epsilon tensor norms. -/
 theorem dualRegroupEquiv_norm_le
     (ξ : ∀ i, NormFamily S (E i))
-    (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
-    (hξ : ∀ i, (ξ i).IsHermitian hN) (ω : S.Ω)
+    [hN : S.IsArchimedeanNormalized]
+    (hξ : ∀ i, (ξ i).IsHermitian) (ω : S.Ω)
     (z : (S.ϕ ω).Completion ⊗[K] (⨂[K] i, ⨂[K] (_ : κ), Dual K (E i))) :
     (NormFamily.orthogonalTensor
-      (fun _ : κ ↦ (NormFamily.orthogonalTensor ξ hN hξ).dual) hN
-      (fun _ ↦ (NormFamily.orthogonalTensor_isHermitian ξ hN hξ).dual)).norm ω
+      (fun _ : κ ↦ (NormFamily.orthogonalTensor ξ).dual)).norm ω
       ((Tensor.dualRegroupEquiv K E).toLinearMap.baseChange (S.ϕ ω).Completion z) ≤
     (NormFamily.orthogonalTensor
-      (fun i ↦ NormFamily.orthogonalTensor (fun _ : κ ↦ (ξ i).dual) hN
-        (fun _ ↦ (hξ i).dual)) hN
-      (fun _ ↦ NormFamily.orthogonalTensor_isHermitian _ _ _)).norm ω z := by
+      (fun i ↦ NormFamily.orthogonalTensor (fun _ : κ ↦ (ξ i).dual))).norm ω z := by
   have he : (Tensor.dualRegroupEquiv K E (κ := κ)).toLinearMap =
       (PiTensorProduct.map (fun _ : κ ↦ (PiTensorProduct.dualDistrib :
         (⨂[K] i, Dual K (E i)) →ₗ[K] Dual K (⨂[K] i, E i)))) ∘ₗ
@@ -492,14 +481,11 @@ theorem dualRegroupEquiv_norm_le
     simp only [dualDistribEquivOfProjective_toLinearMap_eq]
   rw [he, LinearMap.baseChange_comp, LinearMap.comp_apply]
   refine (NormFamily.orthogonalTensor_map_norm_le_of_norm_eq
-    (fun _ : κ ↦ NormFamily.orthogonalTensor (fun i ↦ (ξ i).dual) hN
-      (fun i ↦ (hξ i).dual))
-    (fun _ : κ ↦ (NormFamily.orthogonalTensor ξ hN hξ).dual) hN
-    (fun _ ↦ NormFamily.orthogonalTensor_isHermitian _ _ _)
-    (fun _ ↦ (NormFamily.orthogonalTensor_isHermitian ξ hN hξ).dual)
+    (fun _ : κ ↦ NormFamily.orthogonalTensor (fun i ↦ (ξ i).dual))
+    (fun _ : κ ↦ (NormFamily.orthogonalTensor ξ).dual)
     (fun _ : κ ↦ PiTensorProduct.dualDistrib) ω
-    (fun _ x ↦ NormFamily.orthogonalTensor_dual_norm ξ hN hξ ω x) _).trans ?_
-  exact regroup_norm_le (fun i (_ : κ) ↦ (ξ i).dual) hN
+    (fun _ x ↦ NormFamily.orthogonalTensor_dual_norm ξ ω x) _).trans ?_
+  exact regroup_norm_le (fun i (_ : κ) ↦ (ξ i).dual)
     (fun i _ ↦ (hξ i).dual) ω z
 
 end DualRegroup

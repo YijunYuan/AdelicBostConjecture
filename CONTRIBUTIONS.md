@@ -28,10 +28,17 @@ may therefore describe declarations or modules that have since been removed.
 ## ArakelovGeometry: adelic foundations and instability filtrations
 
 - Repository: <https://github.com/YijunYuan/ArakelovGeometry> (private).
-- Pinned revision: `0a608c4f219c4de669be8b6b1a1bc47f996d8d72`.
+- Pinned revision: `c9dfe39888d87cdde965b647116127744cf3623e`.
 - License: Apache-2.0; source notices are preserved.
 - Integration: unmodified remote git dependency at that revision. Lean/mathlib 4.35.0 and
   HarderNarasimhan `14b3090e1e169b77fe381102a1289f24c2b08a11` match this project.
+  The migration from `0a608c4` follows upstream commits `c093b26` (integral ring
+  maps, prime spectra and the `ExternalCode` reorganization) and `c9dfe39`
+  (property instances). Base measurability,
+  Archimedean normalization and common countable density now use instances;
+  tensor, degree and HN consumers use the revised signatures. Completed inner
+  products are selected by `NormFamily.fiberInnerProductSpace`. The local
+  Specht norms and determinant powers expose their canonical property instances.
   Local `Adelic/Induction/HNContraction` adapts the proofs in
   `HarderNarasimhan/Hermitian/{Functoriality,LargestSubspace}` to independent
   carrier universes and supplies the reverse minimal-slope threshold consequence.

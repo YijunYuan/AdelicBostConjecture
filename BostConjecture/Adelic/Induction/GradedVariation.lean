@@ -135,20 +135,20 @@ real level. Its finite flag data also settle levels outside the jump set. -/
 theorem HNVariationLift.filtrationOnGraded_eq
     [S.IsProper]
     {V : AdelicVectorBundle S E}
-    {hS : DiscreteMeasurableSpace S.Ω ∨ S.HasCommonCountableDenseSubfield}
-    {hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion}
-    {hV : V.toNormFamily.IsHermitian hN} {P : ℝ → Submodule K E}
-    (L : HNVariationLift V hS hN hV P) (t : ℝ) :
+    [hS : S.HasMeasurableBase]
+    [hN : S.IsArchimedeanNormalized]
+    {hV : V.toNormFamily.IsHermitian} {P : ℝ → Submodule K E}
+    (L : HNVariationLift V hV P) (t : ℝ) :
     Submodule.filtrationOnGraded P L.direction t =
-      (V.filtrationGraded P t hS).hermitianHNFiltration hS hN (hV.filtrationGraded P t) := by
+      (V.filtrationGraded P t).hermitianHNFiltration := by
   classical
   by_cases hm : t ∈ Set.range L.weight
   · obtain ⟨i, rfl⟩ := hm
     let C (A : Submodule K E × Submodule K E) :=
       ∀ s, ((L.direction s).comap A.1.subtype).map (A.2.comap A.1.subtype).mkQ =
-        ((V.restrictOfMeasurableBase A.1 hS).quotientOfMeasurableBase
-          (A.2.comap A.1.subtype) hS).hermitianHNFiltration
-          hS hN ((hV.restrict A.1).quotient (A.2.comap A.1.subtype)) s
+        ((V.restrictOfMeasurableBase A.1).quotientOfMeasurableBase
+          (A.2.comap A.1.subtype)).hermitianHNFiltration
+            (hV := (hV.restrict A.1).quotient (A.2.comap A.1.subtype)) s
     have hp : (P (L.weight i), Submodule.filtrationRightLimit P (L.weight i)) =
         (L.flag i.succ, L.flag i.castSucc) := Prod.ext (L.level i) (L.right i)
     have hc : C (L.flag i.succ, L.flag i.castSucc) := L.cuts i
@@ -166,9 +166,9 @@ Tensor-HN compatibility is needed on the source grades; rank drop belongs
 only to the induction caller. No secondary image filtration is constructed. -/
 theorem tensorFiltrationQuotient_eventual_hn_upper
     (V : AdelicVectorBundle S E) (W : AdelicVectorBundle S F)
-    (hS : DiscreteMeasurableSpace S.Ω ∨ S.HasCommonCountableDenseSubfield)
-    (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
-    (hV : V.toNormFamily.IsHermitian hN) (hW : W.toNormFamily.IsHermitian hN)
+    [hS : S.HasMeasurableBase]
+    [hN : S.IsArchimedeanNormalized]
+    (hV : V.toNormFamily.IsHermitian) (hW : W.toNormFamily.IsHermitian)
     (q : E ⊗[K] F →ₗ[K] Q) (hq : Function.Surjective q)
     {P : ℝ → Submodule K E} {R : ℝ → Submodule K F}
     (hP : Antitone P) (hR : Antitone R)
@@ -176,32 +176,31 @@ theorem tensorFiltrationQuotient_eventual_hn_upper
     (b : Basis ι K E) (c : Basis κ K F) (w : ι → ℝ) (z : κ → ℝ)
     (hPw : ∀ t, P t = Submodule.span K (b '' {i | t ≤ w i}))
     (hRz : ∀ u, R u = Submodule.span K (c '' {j | u ≤ z j}))
-    (L : HNVariationLift V hS hN hV P)
-    (M : HNVariationLift W hS hN hW R)
+    (L : HNVariationLift V hV P)
+    (M : HNVariationLift W hW R)
     (s : ι → ℝ) (v : κ → ℝ)
     (hLs : ∀ t, L.direction t = Submodule.span K (b '' {i | t ≤ s i}))
     (hMv : ∀ t, M.direction t = Submodule.span K (c '' {j | t ≤ v j}))
     (hInd : ∀ t u,
-      (tensorFiltrationGradedSource V W hS hN hV hW P R t u).hermitianHNFiltration hS hN
-        (tensorFiltrationGradedSource_isHermitian V W hS hN hV hW P R t u) =
+      (tensorFiltrationGradedSource V W P R t u).hermitianHNFiltration =
       Submodule.tensorFiltration
-        ((V.filtrationGraded P t hS).hermitianHNFiltration hS hN (hV.filtrationGraded P t))
-        ((W.filtrationGraded R u hS).hermitianHNFiltration hS hN (hW.filtrationGraded R u))) :
-    let T := V.orthogonalTensorPair W hS hN hV hW
-    let B := T.pushforward q hq (T.isMeasurable.pushforward_of_discrete_or_countable hS q hq)
+        ((V.filtrationGraded P t).hermitianHNFiltration)
+        ((W.filtrationGraded R u).hermitianHNFiltration)) :
+    let T := V.orthogonalTensorPair W
+    let B := T.pushforward q hq
     ∃ η > 0, ∀ ε, 0 < ε → ε < η →
       Submodule.filtrationExpectation (fun t ↦
         (Submodule.tensorFiltration (Submodule.weightedBasisVariation b w s ε)
           (Submodule.weightedBasisVariation c z v ε) t).map q) ≤
       Submodule.filtrationExpectation (fun t ↦ (Submodule.tensorFiltration P R t).map q) +
-        ε * B.slope hS hN := by
+        ε * B.slope := by
   classical
   dsimp only
-  let T := V.orthogonalTensorPair W hS hN hV hW
-  let B := T.pushforward q hq (T.isMeasurable.pushforward_of_discrete_or_countable hS q hq)
-  have hB : B.toNormFamily.IsHermitian hN :=
+  let T := V.orthogonalTensorPair W
+  let B := T.pushforward q hq
+  have hB : B.toNormFamily.IsHermitian :=
     (NormFamily.orthogonalTensorPair_isHermitian
-      V.toNormFamily W.toNormFamily hN hV hW).pushforward q hq
+      V.toNormFamily W.toNormFamily).pushforward q hq
   let PQ : ℝ → Submodule K Q := fun t ↦ (Submodule.tensorFiltration P R t).map q
   obtain ⟨d₀, a₀, hd₀⟩ := Submodule.exists_weighted_basis_image
     (b.tensorProduct c) (fun p ↦ w p.1 + z p.2) q hq
@@ -215,7 +214,7 @@ theorem tensorFiltrationQuotient_eventual_hn_upper
   obtain ⟨hPQb, hPQt⟩ := Submodule.span_weights_attains_bot_top d₀ a₀
   have hPQl := Submodule.span_weights_locallyConstant_left d₀ a₀
   simp_rw [← hPQ] at hPQb hPQt hPQl
-  obtain ⟨N⟩ := exists_hnVariationLift B hS hN hB PQ hPQa hPQb hPQt hPQl
+  obtain ⟨N⟩ := exists_hnVariationLift B hB PQ hPQa hPQb hPQt hPQl
   obtain ⟨d, a, r, hd, hNr, _, _⟩ := Submodule.exists_common_weighted_basis
     hPQa hPQb hPQt hPQl N.antitone_direction N.direction_bot N.direction_top N.direction_left
   have hb (i : ι) : b i ∈ P (w i) := by
@@ -232,31 +231,31 @@ theorem tensorFiltrationQuotient_eventual_hn_upper
   have hclass (p : ι × κ) : Submodule.filtrationGradedMk PQ (w p.1 + z p.2)
       ⟨q ((b.tensorProduct c) p), hm p⟩ ∈
         Submodule.filtrationOnGraded PQ N.direction (w p.1 + z p.2) (s p.1 + v p.2) := by
-    let C := tensorFiltrationGradedSource V W hS hN hV hW P R (w p.1) (z p.2)
-    let hC := tensorFiltrationGradedSource_isHermitian V W hS hN hV hW P R (w p.1) (z p.2)
+    let C := tensorFiltrationGradedSource V W P R (w p.1) (z p.2)
+    let hC := tensorFiltrationGradedSource_isHermitian V W P R (w p.1) (z p.2)
     let f := Submodule.tensorFiltrationGradedQuotientPair q hP hR (t := w p.1) (u := z p.2) rfl
     have hf := C.map_hermitianHNFiltration_le_of_completed_contraction
-      (B.filtrationGraded PQ (w p.1 + z p.2) hS) hS hN hC (hB.filtrationGraded _ _) f
+      (B.filtrationGraded PQ (w p.1 + z p.2)) hC (hB.filtrationGraded _ _) f
       (fun ω x ↦ NormFamily.tensorFiltrationGradedPair_pushforward_norm_le
-        V.toNormFamily W.toNormFamily hN hV hW q hq hP hR rfl ω x) (s p.1 + v p.2)
+        V.toNormFamily W.toNormFamily q hq hP hR rfl ω x) (s p.1 + v p.2)
     let x := Submodule.filtrationGradedMk P (w p.1) ⟨b p.1, hb p.1⟩
     let y := Submodule.filtrationGradedMk R (z p.2) ⟨c p.2, hc p.2⟩
-    have hx : x ∈ (V.filtrationGraded P (w p.1) hS).hermitianHNFiltration
-        hS hN (hV.filtrationGraded P (w p.1)) (s p.1) := by
+    have hx : x ∈ (V.filtrationGraded P (w p.1)).hermitianHNFiltration
+           (s p.1) := by
       rw [← L.filtrationOnGraded_eq]
       refine ⟨⟨b p.1, hb p.1⟩, ?_, rfl⟩
       change b p.1 ∈ L.direction (s p.1)
       rw [hLs]
       exact Submodule.subset_span ⟨p.1, (show s p.1 ≤ s p.1 from le_rfl), rfl⟩
-    have hy : y ∈ (W.filtrationGraded R (z p.2) hS).hermitianHNFiltration
-        hS hN (hW.filtrationGraded R (z p.2)) (v p.2) := by
+    have hy : y ∈ (W.filtrationGraded R (z p.2)).hermitianHNFiltration
+           (v p.2) := by
       rw [← M.filtrationOnGraded_eq]
       refine ⟨⟨c p.2, hc p.2⟩, ?_, rfl⟩
       change c p.2 ∈ M.direction (v p.2)
       rw [hMv]
       exact Submodule.subset_span ⟨p.2, (show v p.2 ≤ v p.2 from le_rfl), rfl⟩
-    have hxy : x ⊗ₜ[K] y ∈ C.hermitianHNFiltration hS hN hC (s p.1 + v p.2) := by
-      rw [show C.hermitianHNFiltration hS hN hC = _ from hInd (w p.1) (z p.2)]
+    have hxy : x ⊗ₜ[K] y ∈ C.hermitianHNFiltration (s p.1 + v p.2) := by
+      rw [show C.hermitianHNFiltration = _ from hInd (w p.1) (z p.2)]
       exact Submodule.tmul_mem_tensorFiltration le_rfl hx hy
     rw [N.filtrationOnGraded_eq]
     have hmem := hf (Submodule.mem_map.mpr ⟨x ⊗ₜ[K] y, hxy, rfl⟩)

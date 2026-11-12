@@ -31,23 +31,23 @@ bundles compares their actual real slopes. Hermitianity is needed only for
 the source's minimal-slope characterization of semistability. -/
 theorem slope_le_of_nonzero_completed_contraction
     (V : AdelicVectorBundle S E) (W : AdelicVectorBundle S F)
-    (hS : DiscreteMeasurableSpace S.Ω ∨ S.HasCommonCountableDenseSubfield)
-    (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
-    (hV : V.toNormFamily.IsHermitian hN)
-    (hVS : V.IsMeanSlopeSemistable hS hN) (hWS : W.IsMeanSlopeSemistable hS hN)
+    [hS : S.HasMeasurableBase]
+    [hN : S.IsArchimedeanNormalized]
+    (hV : V.toNormFamily.IsHermitian)
+    (hVS : V.IsMeanSlopeSemistable) (hWS : W.IsMeanSlopeSemistable)
     (f : E →ₗ[K] F) (hf : f ≠ 0)
     (hcontract : ∀ ω x, W.norm ω (f.baseChange (S.ϕ ω).Completion x) ≤ V.norm ω x) :
-    V.slope hS hN ≤ W.slope hS hN := by
+    V.slope ≤ W.slope := by
   have hmin := (V.isMeanSlopeSemistable_iff_minimalSlope_eq_slope_of_isHermitian
-    hS hN hV hVS.1).mp hVS
-  have hmax := (W.isMeanSlopeSemistable_iff_maximalSlope_eq_slope hS hN hWS.1).mp hWS
-  have hmap := V.minimalSlope_le_maximalSlope_add_mapHeight_of_ne_zero W hS hN f hf
+       hVS.1).mp hVS
+  have hmax := (W.isMeanSlopeSemistable_iff_maximalSlope_eq_slope hWS.1).mp hWS
+  have hmap := V.minimalSlope_le_maximalSlope_add_mapHeight_of_ne_zero W f hf
   have hheight := V.mapHeight_le_zero_of_completed_contraction W f hcontract
   rw [hmin, hmax] at hmap
   apply EReal.coe_le_coe_iff.mp
   calc
-    (V.slope hS hN : EReal) ≤ (W.slope hS hN : EReal) + V.mapHeight W f := hmap
-    _ ≤ (W.slope hS hN : EReal) + 0 := add_le_add le_rfl hheight
-    _ = (W.slope hS hN : EReal) := add_zero _
+    (V.slope : EReal) ≤ (W.slope : EReal) + V.mapHeight W f := hmap
+    _ ≤ (W.slope : EReal) + 0 := add_le_add le_rfl hheight
+    _ = (W.slope : EReal) := add_zero _
 
 end ArakelovGeometry.AdelicVectorBundle

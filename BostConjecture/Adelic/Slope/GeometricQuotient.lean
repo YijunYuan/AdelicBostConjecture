@@ -61,38 +61,36 @@ variable {K : Type u} [Field K] {S : AdelicStructure.{u, v} K}
 
 private theorem orthogonalTensor_bool_pushforward
     (ξ : NormFamily S E) (η : NormFamily S F)
-    (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
-    (hξ : ξ.IsHermitian hN) (hη : η.IsHermitian hN) :
+    [hN : S.IsArchimedeanNormalized]
+    (hξ : ξ.IsHermitian) (hη : η.IsHermitian) :
     (NormFamily.orthogonalTensor
-      (fun i ↦ NormFamily.tensorPairFactors ξ η (boolEquivUnitSumUnit i))
-      hN (fun i ↦ hξ.tensorPairFactors hη (boolEquivUnitSumUnit i))).pushforward
+      (fun i ↦ NormFamily.tensorPairFactors ξ η (boolEquivUnitSumUnit i))).pushforward
         (boolTensorEquiv K (BoolTensorFactors E F)).toLinearMap
         (boolTensorEquiv K (BoolTensorFactors E F)).surjective =
-      ξ.orthogonalTensorPair η hN hξ hη := by
+      ξ.orthogonalTensorPair η := by
   ext ω z
   let e := boolTensorEquiv K (BoolTensorFactors E F)
   obtain ⟨x, rfl⟩ := (e.baseChange K (S.ϕ ω).Completion _ _).surjective z
   exact (NormFamily.pushforward_norm_of_injective _ e.toLinearMap e.surjective
     e.injective ω x).trans
-      (NormFamily.orthogonalTensor_norm_boolTensorEquiv ξ η hN hξ hη ω x).symm
+      (NormFamily.orthogonalTensor_norm_boolTensorEquiv ξ η hξ hη ω x).symm
 
 omit [FiniteDimensional K Q] in
 private theorem orthogonalTensor_bool_quotient
     (ξ : NormFamily S E) (η : NormFamily S F)
-    (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
-    (hξ : ξ.IsHermitian hN) (hη : η.IsHermitian hN)
+    [hN : S.IsArchimedeanNormalized]
+    (hξ : ξ.IsHermitian) (hη : η.IsHermitian)
     (q : E ⊗[K] F →ₗ[K] Q) (hq : Function.Surjective q) :
     (NormFamily.orthogonalTensor
-      (fun i ↦ NormFamily.tensorPairFactors ξ η (boolEquivUnitSumUnit i))
-      hN (fun i ↦ hξ.tensorPairFactors hη (boolEquivUnitSumUnit i))).pushforward
+      (fun i ↦ NormFamily.tensorPairFactors ξ η (boolEquivUnitSumUnit i))).pushforward
         (q.comp (boolTensorEquiv K (BoolTensorFactors E F)).toLinearMap)
         (hq.comp (boolTensorEquiv K (BoolTensorFactors E F)).surjective) =
-      (ξ.orthogonalTensorPair η hN hξ hη).pushforward q hq := by
+      (ξ.orthogonalTensorPair η).pushforward q hq := by
   exact (NormFamily.pushforward_comp _
     (boolTensorEquiv K (BoolTensorFactors E F)).toLinearMap
     (boolTensorEquiv K (BoolTensorFactors E F)).surjective q hq).symm.trans
       (congrArg (fun ζ ↦ ζ.pushforward q hq)
-        (orthogonalTensor_bool_pushforward ξ η hN hξ hη))
+        (orthogonalTensor_bool_pushforward ξ η hξ hη))
 
 end BinaryNorm
 
@@ -108,47 +106,44 @@ variable {K : Type u} [Field K] [CharZero K] {S : AdelicStructure.{u, v} K}
 for its actual pushforward bundle, without arithmetic semistability of factors. -/
 theorem slope_sum_le_orthogonalTensor_quotient_of_geometricallySemistable
     (V : ∀ i, AdelicVectorBundle S (E i))
-    (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
-    (hcount : S.HasCommonCountableDenseSubfield) (hV : ∀ i, (V i).IsHermitian hN)
+    [hN : S.IsArchimedeanNormalized]
+    [hcount : S.HasCommonCountableDenseSubfield] (hV : ∀ i, (V i).IsHermitian)
     (q : (⨂[K] i, E i) →ₗ[K] Q) (hq : Function.Surjective q)
     (hg : IsGeometricallySemistableTensorQuotient E q) :
-    let T := orthogonalTensorOfMeasurableBase V (Or.inr hcount) hN hV
-    ∑ i, (V i).slope (Or.inr hcount) hN ≤
-      (T.pushforward q hq (T.isMeasurable.pushforward_of_discrete_or_countable
-        (Or.inr hcount) q hq)).slope (Or.inr hcount) hN := by
-  let T := orthogonalTensorOfMeasurableBase V (Or.inr hcount) hN hV
-  let B := T.pushforward q hq (T.isMeasurable.pushforward_of_discrete_or_countable
-    (Or.inr hcount) q hq)
-  let VD := fun i ↦ (V i).dualOfMeasurableBase (Or.inr hcount)
-  let hVD : ∀ i, (VD i).IsHermitian hN := fun i ↦ (hV i).dual
+    let T := orthogonalTensorOfMeasurableBase V
+    ∑ i, (V i).slope ≤
+      (T.pushforward q hq).slope := by
+  let T := orthogonalTensorOfMeasurableBase V
+  let B := T.pushforward q hq
+  let VD := fun i ↦ (V i).dualOfMeasurableBase
+  let hVD : ∀ i, (VD i).IsHermitian := fun i ↦ (hV i).dual
   let A := (PiTensorProduct.dualDistribEquivOfProjective K E).symm.toLinearMap.comp q.dualMap
-  have hB : B.IsHermitian hN :=
-    (orthogonalTensorOfMeasurableBase_isHermitian V (Or.inr hcount) hN hV).pushforward
+  have hB : B.IsHermitian :=
+    (orthogonalTensorOfMeasurableBase_isHermitian V).pushforward
       q hq _
   have hA (ω : S.Ω) (x : (S.ϕ ω).Completion ⊗[K] Dual K Q) :
-      (orthogonalTensorOfMeasurableBase VD (Or.inr hcount) hN hVD).norm ω
+      (orthogonalTensorOfMeasurableBase VD).norm ω
         (A.baseChange (S.ϕ ω).Completion x) =
-      (B.dualOfMeasurableBase (Or.inr hcount)).norm ω x := by
-    change (NormFamily.orthogonalTensor (fun i ↦ (V i).toNormFamily.dual)
-      hN (fun i ↦ (hV i).dual)).norm ω
+      (B.dualOfMeasurableBase).norm ω x := by
+    change (NormFamily.orthogonalTensor (fun i ↦ (V i).toNormFamily.dual)).norm ω
         (((PiTensorProduct.dualDistribEquivOfProjective K E).symm.toLinearMap.comp
           q.dualMap).baseChange (S.ϕ ω).Completion x) =
-      ((NormFamily.orthogonalTensor (fun i ↦ (V i).toNormFamily) hN hV).pushforward
+      ((NormFamily.orthogonalTensor (fun i ↦ (V i).toNormFamily)).pushforward
         q hq).dual.norm ω x
     rw [dualDistribEquivOfProjective_eq]
     exact (NormFamily.orthogonalTensor_pushforward_dual_norm E
-      (fun i ↦ (V i).toNormFamily) hN hV q hq ω x).symm
-  have hdual := slope_le_sum_of_geometricallySemistable VD hN hcount hVD
-    (B.dualOfMeasurableBase (Or.inr hcount)) hB.dual A hA
+      (fun i ↦ (V i).toNormFamily) hV q hq ω x).symm
+  have hdual := slope_le_sum_of_geometricallySemistable VD hVD
+    (B.dualOfMeasurableBase) hB.dual A hA
     (Geometry.geometricSemistability_dualTensor_of_quotient E q hg)
-  have hBD := slope_add_slope_dual_eq_zero_of_isHermitian B (Or.inr hcount) hN hB
-  have hD (i : ι) : (VD i).slope (Or.inr hcount) hN =
-      -(V i).slope (Or.inr hcount) hN := by
-    have h := slope_add_slope_dual_eq_zero_of_isHermitian (V i) (Or.inr hcount) hN (hV i)
+  have hBD := slope_add_slope_dual_eq_zero_of_isHermitian B
+  have hD (i : ι) : (VD i).slope =
+      -(V i).slope := by
+    have h := slope_add_slope_dual_eq_zero_of_isHermitian (V i)
     linarith
   simp_rw [hD] at hdual
   rw [Finset.sum_neg_distrib] at hdual
-  change ∑ i, (V i).slope (Or.inr hcount) hN ≤ B.slope (Or.inr hcount) hN
+  change ∑ i, (V i).slope ≤ B.slope
   linarith
 
 end FiniteQuotient
@@ -171,21 +166,20 @@ original binary orthogonal tensor and its actual pushforward quotient norms.
 No arithmetic semistability hypothesis on either original factor is required. -/
 theorem slope_sum_le_tensor_quotient_of_geometricallySemistable
     (V : AdelicVectorBundle S E) (W : AdelicVectorBundle S F)
-    (hS : DiscreteMeasurableSpace S.Ω ∨ S.HasCommonCountableDenseSubfield)
-    (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
-    (hV : V.IsHermitian hN) (hW : W.IsHermitian hN)
+    [hS : S.HasMeasurableBase]
+    [hN : S.IsArchimedeanNormalized]
+    (hV : V.IsHermitian) (hW : W.IsHermitian)
     (q : E ⊗[K] F →ₗ[K] Q) (hq : Function.Surjective q)
     (hg : IsGeometricallySemistableTensorQuotient (BoolTensorFactors E F)
       (q.comp (boolTensorEquiv K (BoolTensorFactors E F)).toLinearMap)) :
-    let T := V.orthogonalTensorPair W hS hN hV hW
-    let B := T.pushforward q hq (T.isMeasurable.pushforward_of_discrete_or_countable hS q hq)
-    V.slope hS hN + W.slope hS hN ≤ B.slope hS hN := by
-  let hcount := S.hasCommonCountableDenseSubfield_of_countable
+    let T := V.orthogonalTensorPair W
+    let B := T.pushforward q hq
+    V.slope + W.slope ≤ B.slope := by
   let VF : ∀ i, AdelicVectorBundle S (BoolTensorFactors E F i) := fun i ↦
     match i with
     | false => V
     | true => W
-  have hVF : ∀ i, (VF i).IsHermitian hN := by
+  have hVF : ∀ i, (VF i).IsHermitian := by
     intro i
     cases i
     · exact hV
@@ -193,11 +187,10 @@ theorem slope_sum_le_tensor_quotient_of_geometricallySemistable
   let e := boolTensorEquiv K (BoolTensorFactors E F)
   let qB := q.comp e.toLinearMap
   have hqB : Function.Surjective qB := hq.comp e.surjective
-  let TF := orthogonalTensorOfMeasurableBase VF (Or.inr hcount) hN hVF
+  let TF := orthogonalTensorOfMeasurableBase VF
   let BF := TF.pushforward qB hqB
-    (TF.isMeasurable.pushforward_of_discrete_or_countable (Or.inr hcount) qB hqB)
-  let T := V.orthogonalTensorPair W hS hN hV hW
-  let B := T.pushforward q hq (T.isMeasurable.pushforward_of_discrete_or_countable hS q hq)
+  let T := V.orthogonalTensorPair W
+  let B := T.pushforward q hq
   have hnorm : (fun i ↦ (VF i).toNormFamily) =
       (fun i ↦ NormFamily.tensorPairFactors V.toNormFamily W.toNormFamily
         (boolEquivUnitSumUnit i)) := by
@@ -205,15 +198,15 @@ theorem slope_sum_le_tensor_quotient_of_geometricallySemistable
     cases i <;> rfl
   have hB : BF = B := by
     apply AdelicVectorBundle.ext
-    change (NormFamily.orthogonalTensor (fun i ↦ (VF i).toNormFamily) hN hVF).pushforward
+    change (NormFamily.orthogonalTensor (fun i ↦ (VF i).toNormFamily)).pushforward
       (q.comp e.toLinearMap) hqB =
-      (V.toNormFamily.orthogonalTensorPair W.toNormFamily hN hV hW).pushforward q hq
+      (V.toNormFamily.orthogonalTensorPair W.toNormFamily).pushforward q hq
     simp only [hnorm]
     exact BostConjecture.Adelic.orthogonalTensor_bool_quotient
-      V.toNormFamily W.toNormFamily hN hV hW q hq
+      V.toNormFamily W.toNormFamily hV hW q hq
   have h := BostConjecture.Adelic.slope_sum_le_orthogonalTensor_quotient_of_geometricallySemistable
-    VF hN hcount hVF qB hqB hg
-  change ∑ i, (VF i).slope (Or.inr hcount) hN ≤ BF.slope (Or.inr hcount) hN at h
+    VF hVF qB hqB hg
+  change ∑ i, (VF i).slope ≤ BF.slope at h
   rw [hB] at h
   simp only [Fintype.sum_bool, VF, add_comm] at h
   exact h

@@ -33,15 +33,15 @@ variable {K : Type u} [Field K] {S : AdelicStructure.{u, v} K}
 transpose followed by the canonical inverse tensor-duality isomorphism. -/
 theorem orthogonalTensorPair_pushforward_dual_norm
     (ξ : NormFamily S E) (η : NormFamily S F)
-    (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
-    (hξ : ξ.IsHermitian hN) (hη : η.IsHermitian hN)
+    [hN : S.IsArchimedeanNormalized]
+    (hξ : ξ.IsHermitian) (hη : η.IsHermitian)
     (q : E ⊗[K] F →ₗ[K] Q) (hq : Function.Surjective q)
     (ω : S.Ω) (z : (S.ϕ ω).Completion ⊗[K] Module.Dual K Q) :
-    ((ξ.orthogonalTensorPair η hN hξ hη).pushforward q hq).dual.norm ω z =
-      (ξ.dual.orthogonalTensorPair η.dual hN hξ.dual hη.dual).norm ω
+    ((ξ.orthogonalTensorPair η).pushforward q hq).dual.norm ω z =
+      (ξ.dual.orthogonalTensorPair η.dual).norm ω
         (((TensorProduct.dualDistribEquiv K E F).symm.toLinearMap.comp q.dualMap).baseChange
           (S.ϕ ω).Completion z) := by
-  rw [pushforward_dual_norm_eq, ← orthogonalTensorPair_dual_norm ξ η hN hξ hη]
+  rw [pushforward_dual_norm_eq, ← orthogonalTensorPair_dual_norm ξ η]
   congr 1
   rw [← TensorProduct.toLinearMap_dualDistribEquiv, ← LinearMap.comp_apply,
     ← LinearMap.baseChange_comp]
@@ -58,15 +58,15 @@ variable {ι : Type*} [Fintype ι] (A : ι → Type w)
 geometric quotient criterion. -/
 theorem orthogonalTensor_pushforward_dual_norm
     (ξ : ∀ i, NormFamily S (A i))
-    (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
-    (hξ : ∀ i, (ξ i).IsHermitian hN)
+    [hN : S.IsArchimedeanNormalized]
+    (hξ : ∀ i, (ξ i).IsHermitian)
     (q : (⨂[K] i, A i) →ₗ[K] Q) (hq : Function.Surjective q)
     (ω : S.Ω) (z : (S.ϕ ω).Completion ⊗[K] Module.Dual K Q) :
-    ((orthogonalTensor ξ hN hξ).pushforward q hq).dual.norm ω z =
-      (orthogonalTensor (fun i ↦ (ξ i).dual) hN (fun i ↦ (hξ i).dual)).norm ω
+    ((orthogonalTensor ξ).pushforward q hq).dual.norm ω z =
+      (orthogonalTensor (fun i ↦ (ξ i).dual)).norm ω
         (((PiTensorProduct.dualDistribEquiv (R := K) (M := A)).symm.toLinearMap.comp
           q.dualMap).baseChange (S.ϕ ω).Completion z) := by
-  rw [pushforward_dual_norm_eq, ← orthogonalTensor_dual_norm ξ hN hξ]
+  rw [pushforward_dual_norm_eq, ← orthogonalTensor_dual_norm ξ]
   congr 1
   rw [← LinearMap.comp_apply, ← LinearMap.baseChange_comp]
   congr 2

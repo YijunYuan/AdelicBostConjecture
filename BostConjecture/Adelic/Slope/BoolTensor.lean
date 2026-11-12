@@ -49,26 +49,25 @@ namespace NormFamily
 orthogonal tensor norm. -/
 theorem orthogonalTensor_norm_boolTensorEquiv
     (ξ : NormFamily S E) (η : NormFamily S F)
-    (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
-    (hξ : ξ.IsHermitian hN) (hη : η.IsHermitian hN)
+    [hN : S.IsArchimedeanNormalized]
+    (hξ : ξ.IsHermitian) (hη : η.IsHermitian)
     (ω : S.Ω) (z : (S.ϕ ω).Completion ⊗[K] (⨂[K] i, BoolTensorFactors E F i)) :
-    (ξ.orthogonalTensorPair η hN hξ hη).norm ω
+    (ξ.orthogonalTensorPair η).norm ω
       ((boolTensorEquiv K (BoolTensorFactors E F)).toLinearMap.baseChange
         (S.ϕ ω).Completion z) =
-    (orthogonalTensor (fun i ↦ tensorPairFactors ξ η (boolEquivUnitSumUnit i))
-      hN (fun i ↦ hξ.tensorPairFactors hη (boolEquivUnitSumUnit i))).norm ω z := by
+    (orthogonalTensor (fun i ↦ tensorPairFactors ξ η (boolEquivUnitSumUnit i))).norm ω z := by
   let r := PiTensorProduct.reindex K (BinaryTensorFactors E F) boolEquivUnitSumUnit.symm
   obtain ⟨x, rfl⟩ := (r.baseChange K (S.ϕ ω).Completion _ _).surjective z
   have h := congrArg (fun f ↦ f.baseChange (S.ϕ ω).Completion x)
     (boolTensorEquiv_reindex_binary (K := K) (E := E) (F := F))
   simp only [LinearMap.baseChange_comp, LinearMap.comp_apply] at h
-  change (ξ.orthogonalTensorPair η hN hξ hη).norm ω
+  change (ξ.orthogonalTensorPair η).norm ω
     ((boolTensorEquiv K (BoolTensorFactors E F)).toLinearMap.baseChange
       (S.ϕ ω).Completion (r.toLinearMap.baseChange (S.ϕ ω).Completion x)) = _
   rw [h]
-  refine Eq.trans ?_ (orthogonalTensor_norm_reindex (tensorPairFactors ξ η) hN
-    (hξ.tensorPairFactors hη) boolEquivUnitSumUnit.symm ω x).symm
-  change (orthogonalTensor (tensorPairFactors ξ η) hN (hξ.tensorPairFactors hη)).norm ω
+  refine Eq.trans ?_ (orthogonalTensor_norm_reindex (tensorPairFactors ξ η)
+     boolEquivUnitSumUnit.symm ω x).symm
+  change (orthogonalTensor (tensorPairFactors ξ η)).norm ω
     ((binaryTensorEquiv K (BinaryTensorFactors E F)).symm.toLinearMap.baseChange
       (S.ϕ ω).Completion
       ((binaryTensorEquiv K (BinaryTensorFactors E F)).toLinearMap.baseChange

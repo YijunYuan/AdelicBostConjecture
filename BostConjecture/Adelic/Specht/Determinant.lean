@@ -27,17 +27,17 @@ open scoped TensorProduct
 variable {K : Type*} [Field K] {S : AdelicStructure K}
   {E : Type*} [AddCommGroup E] [Module K E] [FiniteDimensional K E]
   {ξ : NormFamily S E}
-  {hS : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion}
+  [hS : S.IsArchimedeanNormalized]
 
 /-- Relative to an orthonormal frame, the actual exterior determinant norm
 is the absolute value of the coordinate determinant. -/
-theorem IsHermitian.determinant_norm_eq_norm_det (hξ : ξ.IsHermitian hS)
+theorem IsHermitian.determinant_norm_eq_norm_det (hξ : ξ.IsHermitian)
     (ω : S.Ω) (hω : ω ∈ S.Ωinf) :
     letI := hS ω hω
     letI := IsRCLikeNormedField.rclike (S.ϕ ω).Completion
     letI := ξ.fibreNormedAddCommGroup ω
     letI := ξ.fibreNormedSpace ω
-    letI := hξ.fibreInnerProductSpace ω hω
+    letI := ξ.fiberInnerProductSpace ω hω
     ∀ (b : OrthonormalBasis (Fin (Module.finrank K E)) (S.ϕ ω).Completion
         ((S.ϕ ω).Completion ⊗[K] E))
       (v : Fin (Module.finrank K E) → (S.ϕ ω).Completion ⊗[K] E),
@@ -48,7 +48,7 @@ theorem IsHermitian.determinant_norm_eq_norm_det (hξ : ξ.IsHermitian hS)
   let := IsRCLikeNormedField.rclike (S.ϕ ω).Completion
   let := ξ.fibreNormedAddCommGroup ω
   let := ξ.fibreNormedSpace ω
-  let := hξ.fibreInnerProductSpace ω hω
+  let := ξ.fiberInnerProductSpace ω hω
   intro b v
   have hv : _root_.exteriorPower.ιMulti (S.ϕ ω).Completion (Module.finrank K E) v =
       b.toBasis.det v • _root_.exteriorPower.ιMulti (S.ϕ ω).Completion _ b.toBasis := by
@@ -60,13 +60,13 @@ theorem IsHermitian.determinant_norm_eq_norm_det (hξ : ξ.IsHermitian hS)
 
 /-- The Gram determinant computes the square of the actual exterior norm,
 for every completed tuple, including dependent tuples and rank zero. -/
-theorem IsHermitian.determinant_norm_sq_eq_norm_gram (hξ : ξ.IsHermitian hS)
+theorem IsHermitian.determinant_norm_sq_eq_norm_gram (hξ : ξ.IsHermitian)
     (ω : S.Ω) (hω : ω ∈ S.Ωinf) :
     letI := hS ω hω
     letI := IsRCLikeNormedField.rclike (S.ϕ ω).Completion
     letI := ξ.fibreNormedAddCommGroup ω
     letI := ξ.fibreNormedSpace ω
-    letI := hξ.fibreInnerProductSpace ω hω
+    letI := ξ.fiberInnerProductSpace ω hω
     ∀ v : Fin (Module.finrank K E) → (S.ϕ ω).Completion ⊗[K] E,
       (ξ.determinant.norm ω
         ((exteriorBaseChangeEquiv K (S.ϕ ω).Completion E _).symm
@@ -77,7 +77,7 @@ theorem IsHermitian.determinant_norm_sq_eq_norm_gram (hξ : ξ.IsHermitian hS)
   let := IsRCLikeNormedField.rclike (S.ϕ ω).Completion
   let := ξ.fibreNormedAddCommGroup ω
   let := ξ.fibreNormedSpace ω
-  let := hξ.fibreInnerProductSpace ω hω
+  let := ξ.fiberInnerProductSpace ω hω
   intro v
   let b := (stdOrthonormalBasis (S.ϕ ω).Completion
     ((S.ϕ ω).Completion ⊗[K] E)).reindex (finCongr Module.finrank_baseChange)

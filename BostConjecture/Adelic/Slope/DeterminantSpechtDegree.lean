@@ -32,8 +32,8 @@ variable {K : Type u} [Field K] [CharZero K] {S : AdelicStructure.{u, v} K}
   [S.IsProper] {ι : Type w} [Fintype ι]
   {E : ι → Type u} [∀ i, AddCommGroup (E i)] [∀ i, Module K (E i)]
   [∀ i, FiniteDimensional K (E i)] (V : ∀ i, AdelicVectorBundle S (E i))
-  (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
-  (hcount : S.HasCommonCountableDenseSubfield)
+  [hN : S.IsArchimedeanNormalized]
+  [hcount : S.HasCommonCountableDenseSubfield]
   (k : ι → ℕ) {n : ι → ℕ}
   (t : ∀ i, OAI.Saxl.Tableau (n i) (rectangle (finrank K (E i)) (k i)))
   (b : ∀ i, Basis (Fin (finrank K (K ⊗[ℤ] orbitLattice (t i)))) ℤ (orbitLattice (t i)))
@@ -42,40 +42,32 @@ variable {K : Type u} [Field K] [CharZero K] {S : AdelicStructure.{u, v} K}
 rectangular error expressed in the canonical asymptotic notation. -/
 theorem determinantSpechtBundle_tensor_slope_rectangle :
     (orthogonalTensorOfMeasurableBase
-      (fun i => determinantSpechtBundle (V i) hN hcount (k i) (t i) (b i))
-      (Or.inr hcount) hN (fun i => determinantSpechtBundle_isHermitian
-        (V i) hN hcount (k i) (t i) (b i))).slope (Or.inr hcount) hN =
-      ∑ i, ((n i : ℝ) * (V i).slope (Or.inr hcount) hN -
+      (fun i => determinantSpechtBundle (V i) (k i) (t i) (b i))).slope =
+      ∑ i, ((n i : ℝ) * (V i).slope -
         (S.v S.Ωinf).toReal * rectangleLogCovolume (finrank K (E i)) (k i)) := by
   have hr (i : ι) : 0 < finrank K
       ((⨂[K] (_ : Fin (k i)), ⋀[K]^(finrank K (E i)) (E i)) ⊗[K]
         (K ⊗[ℤ] orbitLattice (t i))) := by
     have hp : finrank K (⨂[K] (_ : Fin (k i)), ⋀[K]^(finrank K (E i)) (E i)) = 1 :=
-      determinantPower_isLine (V i) (Or.inr hcount) hN (k i)
+      (determinantPower_isLine (V i) (k i)).rank_eq_one
     simpa only [Module.finrank_tensorProduct, hp, one_mul] using
       (finrank_pos : 0 < finrank K (K ⊗[ℤ] orbitLattice (t i)))
-  rw [slope_orthogonalTensorOfMeasurableBase _ _ _ _ hr]
+  rw [slope_orthogonalTensorOfMeasurableBase _ _ hr]
   exact Finset.sum_congr rfl fun i _ =>
-    determinantSpechtBundle_slope_rectangle (V i) hN hcount (k i) (t i) (b i)
+    determinantSpechtBundle_slope_rectangle (V i) (k i) (t i) (b i)
 
 /-- The exact slope of the actual dual auxiliary product in Section 6. -/
 theorem determinantSpechtBundle_tensor_dual_slope_rectangle :
     ((orthogonalTensorOfMeasurableBase
-      (fun i => determinantSpechtBundle (V i) hN hcount (k i) (t i) (b i))
-      (Or.inr hcount) hN (fun i => determinantSpechtBundle_isHermitian
-        (V i) hN hcount (k i) (t i) (b i))).dualOfMeasurableBase
-          (Or.inr hcount)).slope (Or.inr hcount) hN =
-      ∑ i, (-(n i : ℝ) * (V i).slope (Or.inr hcount) hN +
+      (fun i => determinantSpechtBundle (V i) (k i) (t i) (b i))).dualOfMeasurableBase).slope =
+      ∑ i, (-(n i : ℝ) * (V i).slope +
         (S.v S.Ωinf).toReal * rectangleLogCovolume (finrank K (E i)) (k i)) := by
   have h := slope_add_slope_dual_eq_zero_of_isHermitian
     (orthogonalTensorOfMeasurableBase
-      (fun i => determinantSpechtBundle (V i) hN hcount (k i) (t i) (b i))
-      (Or.inr hcount) hN (fun i => determinantSpechtBundle_isHermitian
-        (V i) hN hcount (k i) (t i) (b i)))
-    (Or.inr hcount) hN (orthogonalTensorOfMeasurableBase_isHermitian _ _ _ _)
+      (fun i => determinantSpechtBundle (V i) (k i) (t i) (b i)))
   rw [determinantSpechtBundle_tensor_slope_rectangle] at h
   calc
-    _ = -(∑ i, ((n i : ℝ) * (V i).slope (Or.inr hcount) hN -
+    _ = -(∑ i, ((n i : ℝ) * (V i).slope -
         (S.v S.Ωinf).toReal * rectangleLogCovolume (finrank K (E i)) (k i))) := by
       linarith
     _ = _ := by
@@ -104,20 +96,16 @@ local instance [Finite ι] : FiniteDimensional K (Dual K
 /-- The right-hand slope in Section 6: apply the auxiliary construction to
 the actual duals of the original factors, then dualize their tensor product. -/
 theorem determinantSpechtBundle_dual_tensor_dual_slope_rectangle
-    (hV : ∀ i, (V i).IsHermitian hN) :
+    (hV : ∀ i, (V i).IsHermitian) :
     ((orthogonalTensorOfMeasurableBase
-      (fun i => determinantSpechtBundle ((V i).dualOfMeasurableBase (Or.inr hcount))
-        hN hcount (k i) (tD i) (bD i))
-      (Or.inr hcount) hN (fun i => determinantSpechtBundle_isHermitian
-        ((V i).dualOfMeasurableBase (Or.inr hcount)) hN hcount
-        (k i) (tD i) (bD i))).dualOfMeasurableBase (Or.inr hcount)).slope (Or.inr hcount) hN =
-      (d : ℝ) * ∑ i, (V i).slope (Or.inr hcount) hN +
+      (fun i => determinantSpechtBundle ((V i).dualOfMeasurableBase)
+          (k i) (tD i) (bD i))).dualOfMeasurableBase).slope =
+      (d : ℝ) * ∑ i, (V i).slope +
         (S.v S.Ωinf).toReal * ∑ i, rectangleLogCovolume (finrank K (E i)) (k i) := by
   rw [determinantSpechtBundle_tensor_dual_slope_rectangle]
-  have hd (i : ι) : ((V i).dualOfMeasurableBase (Or.inr hcount)).slope
-      (Or.inr hcount) hN = -(V i).slope (Or.inr hcount) hN := by
+  have hd (i : ι) : ((V i).dualOfMeasurableBase).slope = -(V i).slope := by
     have h := slope_add_slope_dual_eq_zero_of_isHermitian
-      (V i) (Or.inr hcount) hN (hV i)
+      (V i)
     linarith
   simp_rw [hd, Subspace.dual_finrank_eq, neg_mul_neg]
   rw [Finset.sum_add_distrib, ← Finset.mul_sum, ← Finset.mul_sum]

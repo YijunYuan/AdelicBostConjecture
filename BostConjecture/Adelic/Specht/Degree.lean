@@ -58,7 +58,7 @@ theorem fibre_latticeDetVector (ω : S.Ω) :
   ext i
   simp only [Basis.baseChange_apply]
 
-variable (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
+variable [hN : S.IsArchimedeanNormalized]
 
 include hN
 /-- The integral determinant section has unit norm at every finite place. -/
@@ -66,7 +66,7 @@ theorem latticeDetVector_norm_finite (ω : S.Ω) (hω : ω ∈ S.Ωfin) :
     (latticeNormFamily S t b).determinant.norm ω
       ((1 : (S.ϕ ω).Completion) ⊗ₜ[K] latticeDetVector (K := K) t b) = 1 := by
   rw [← fibre_latticeDetVector S t b ω]
-  apply (latticeNormFamily_isHermitian S t b hN).determinant_norm_completedBasis_eq_one
+  apply (latticeNormFamily_isHermitian S t b).determinant_norm_completedBasis_eq_one
     (latticeNormFamily S t b) ω ((b.baseChange K).baseChange (S.ϕ ω).Completion)
   · intro i
     rw [latticeNormFamily_norm_finite S t b ω hω]
@@ -92,16 +92,16 @@ theorem latticeDetVector_norm_sq_infinite (ω : S.Ω) (hω : ω ∈ S.Ωinf) :
   let := IsRCLikeNormedField.rclike (S.ϕ ω).Completion
   let := (latticeNormFamily S t b).fibreNormedAddCommGroup ω
   let := (latticeNormFamily S t b).fibreNormedSpace ω
-  let := (latticeNormFamily_isHermitian S t b hN).fibreInnerProductSpace ω hω
+  let := (latticeNormFamily S t b).fiberInnerProductSpace ω hω
   let G := Matrix.of fun i j => ∑ w, (b i).val w * (b j).val w
   have hg : Matrix.gram (S.ϕ ω).Completion
       ((b.baseChange K).baseChange (S.ϕ ω).Completion) =
       G.map (Int.castRingHom (S.ϕ ω).Completion) := by
     ext i j
     simp only [Matrix.gram_apply, Basis.baseChange_apply]
-    exact latticeNormFamily_inner_integral S t b hN ω hω (b i) (b j)
+    exact latticeNormFamily_inner_integral S t b ω hω (b i) (b j)
   rw [← fibre_latticeDetVector S t b ω,
-    (latticeNormFamily_isHermitian S t b hN).determinant_norm_sq_eq_norm_gram ω hω, hg]
+    (latticeNormFamily_isHermitian S t b).determinant_norm_sq_eq_norm_gram ω hω, hg]
   change ‖((Int.castRingHom (S.ϕ ω).Completion).mapMatrix G).det‖ = _
   rw [← RingHom.map_det]
   change ‖(G.det : (S.ϕ ω).Completion)‖ = _
@@ -115,7 +115,7 @@ theorem latticeDetVector_norm_infinite (ω : S.Ω) (hω : ω ∈ S.Ωinf) :
     (latticeNormFamily S t b).determinant.norm ω
       ((1 : (S.ϕ ω).Completion) ⊗ₜ[K] latticeDetVector (K := K) t b) =
       ZLattice.covolume (spanLattice t) := by
-  have hs := latticeDetVector_norm_sq_infinite S t b hN ω hω
+  have hs := latticeDetVector_norm_sq_infinite S t b ω hω
   have hn := (latticeNormFamily S t b).determinant.norm_nonneg ω
     ((1 : (S.ϕ ω).Completion) ⊗ₜ[K] latticeDetVector (K := K) t b)
   have hc := ZLattice.covolume_pos (spanLattice t) volume
@@ -127,27 +127,27 @@ theorem latticeDetVector_logNorm (ω : S.Ω) :
       S.Ωinf.indicator (fun _ => Real.log (ZLattice.covolume (spanLattice t))) ω := by
   classical
   by_cases hω : ω ∈ S.Ωinf
-  · simp [NormFamily.logNorm, latticeDetVector_norm_infinite S t b hN ω hω,
+  · simp [NormFamily.logNorm, latticeDetVector_norm_infinite S t b ω hω,
       Set.indicator_of_mem hω]
   · have hf : ω ∈ S.Ωfin := not_not.mp hω
-    simp [NormFamily.logNorm, latticeDetVector_norm_finite S t b hN ω hf,
+    simp [NormFamily.logNorm, latticeDetVector_norm_finite S t b ω hf,
       Set.indicator_of_notMem hω]
 
-variable [S.IsProper] (hcount : S.HasCommonCountableDenseSubfield)
+variable [S.IsProper] [hcount : S.HasCommonCountableDenseSubfield]
 
 /-- Degree of the constant Specht lattice with its actual word Gram metric. -/
 theorem latticeBundle_degree :
-    (latticeBundle S t b hN hcount).degree (Or.inr hcount) hN =
+    (latticeBundle S t b).degree =
       -(S.v S.Ωinf).toReal * Real.log (ZLattice.covolume (spanLattice t)) := by
-  rw [AdelicVectorBundle.degree_eq_neg_integral _ _ _
+  rw [AdelicVectorBundle.degree_eq_neg_integral _
     ⟨latticeDetVector (K := K) t b, latticeDetVector_ne_zero t b⟩]
-  simp_rw [latticeBundle_toNormFamily, latticeDetVector_logNorm S t b hN]
+  simp_rw [latticeBundle_toNormFamily, latticeDetVector_logNorm S t b]
   rw [integral_indicator S.measurableSet_Ωinf, setIntegral_const]
   simp [Measure.real, neg_mul]
 
 /-- Slope is the normalized logarithmic covolume, weighted by the mass at infinity. -/
 theorem latticeBundle_slope :
-    (latticeBundle S t b hN hcount).slope (Or.inr hcount) hN =
+    (latticeBundle S t b).slope =
       -(S.v S.Ωinf).toReal *
         (Real.log (ZLattice.covolume (spanLattice t)) /
           Module.finrank K (K ⊗[ℤ] orbitLattice t)) := by
@@ -159,7 +159,7 @@ independently of the tableau chosen to generate its integral orbit lattice. -/
 theorem latticeBundle_slope_rectangle {a k : ℕ}
     (t : OAI.Saxl.Tableau n (rectangle a k))
     (b : Basis (Fin (Module.finrank K (K ⊗[ℤ] orbitLattice t))) ℤ (orbitLattice t)) :
-    (latticeBundle S t b hN hcount).slope (Or.inr hcount) hN =
+    (latticeBundle S t b).slope =
       -(S.v S.Ωinf).toReal * rectangleLogCovolume a k := by
   have hr : Module.finrank K (K ⊗[ℤ] orbitLattice t) =
       Module.finrank ℤ (orbitLattice t) := by

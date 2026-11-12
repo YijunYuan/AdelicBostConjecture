@@ -61,16 +61,16 @@ variable {K : Type u} [Field K] {S : AdelicStructure.{u, v} K}
 places contract for the actual orthogonal tensor norms. -/
 theorem orthogonalTensor_map_norm_le_of_finite_le_infinite_eq
     (ξ : ∀ i, NormFamily S (X i)) (η : ∀ i, NormFamily S (Y i))
-    (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
-    (hξ : ∀ i, (ξ i).IsHermitian hN) (hη : ∀ i, (η i).IsHermitian hN)
+    [hN : S.IsArchimedeanNormalized]
+    (hξ : ∀ i, (ξ i).IsHermitian) (hη : ∀ i, (η i).IsHermitian)
     (f : ∀ i, X i →ₗ[K] Y i) (ω : S.Ω)
     (hf : ∀ i x, (η i).norm ω ((f i).baseChange (S.ϕ ω).Completion x) ≤ (ξ i).norm ω x)
     (hfi : ω ∈ S.Ωinf → ∀ i x,
       (η i).norm ω ((f i).baseChange (S.ϕ ω).Completion x) = (ξ i).norm ω x)
     (z : (S.ϕ ω).Completion ⊗[K] (⨂[K] i, X i)) :
-    (NormFamily.orthogonalTensor η hN hη).norm ω
+    (NormFamily.orthogonalTensor η).norm ω
       ((PiTensorProduct.map f).baseChange (S.ϕ ω).Completion z) ≤
-        (NormFamily.orthogonalTensor ξ hN hξ).norm ω z := by
+        (NormFamily.orthogonalTensor ξ).norm ω z := by
   let L := (S.ϕ ω).Completion
   let : ∀ j, NormedAddCommGroup (L ⊗[K] X j) := fun j ↦ (ξ j).fibreNormedAddCommGroup ω
   let : ∀ j, NormedSpace L (L ⊗[K] X j) := fun j ↦ (ξ j).fibreNormedSpace ω
@@ -80,13 +80,13 @@ theorem orthogonalTensor_map_norm_le_of_finite_le_infinite_eq
   · let := hN ω hω
     let := IsRCLikeNormedField.rclike L
     let : ∀ j, InnerProductSpace L (L ⊗[K] X j) :=
-      fun j ↦ (hξ j).fibreInnerProductSpace ω hω
+      fun j ↦ (ξ j).fiberInnerProductSpace ω hω
     let : ∀ j, InnerProductSpace L (L ⊗[K] Y j) :=
-      fun j ↦ (hη j).fibreInnerProductSpace ω hω
+      fun j ↦ (η j).fiberInnerProductSpace ω hω
     let g : ∀ j, (L ⊗[K] X j) →ₗᵢ[L] (L ⊗[K] Y j) :=
       fun j ↦ ⟨(f j).baseChange L, hfi hω j⟩
-    rw [NormFamily.orthogonalTensor_norm_of_infinite _ _ _ ω hω,
-      NormFamily.orthogonalTensor_norm_of_infinite _ _ _ ω hω]
+    rw [NormFamily.orthogonalTensor_norm_of_infinite _ ω hω,
+      NormFamily.orthogonalTensor_norm_of_infinite _ ω hω]
     change orthogonalTensorSeminorm (fun j ↦ stdOrthonormalBasis L (L ⊗[K] Y j))
         (tensorBaseChangeEquiv K L Y ((PiTensorProduct.map f).baseChange L z)) ≤
       orthogonalTensorSeminorm (fun j ↦ stdOrthonormalBasis L (L ⊗[K] X j))
@@ -95,8 +95,8 @@ theorem orthogonalTensor_map_norm_le_of_finite_le_infinite_eq
     exact (orthogonalTensorSeminorm_map_eq
       (fun j ↦ stdOrthonormalBasis L (L ⊗[K] X j))
       (fun j ↦ stdOrthonormalBasis L (L ⊗[K] Y j)) g _).le
-  · rw [NormFamily.orthogonalTensor_norm_of_finite _ _ _ ω (not_not.mp hω),
-      NormFamily.orthogonalTensor_norm_of_finite _ _ _ ω (not_not.mp hω)]
+  · rw [NormFamily.orthogonalTensor_norm_of_finite _ ω (not_not.mp hω),
+      NormFamily.orthogonalTensor_norm_of_finite _ ω (not_not.mp hω)]
     change injectiveTensorSeminorm (tensorBaseChangeEquiv K L Y
       ((PiTensorProduct.map f).baseChange L z)) ≤
         injectiveTensorSeminorm (tensorBaseChangeEquiv K L X z)
@@ -146,26 +146,26 @@ theorem tensorPowerPairing_eq {κ : Type*} [Finite κ] (f : E →ₗ[K] F) :
 every completed vector, for Hilbert norms at infinity and epsilon norms elsewhere. -/
 theorem tensorPowerPairing_norm_le
     (ξ : NormFamily S E) (η : NormFamily S F)
-    (hN : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
-    (hξ : ξ.IsHermitian hN) (hη : η.IsHermitian hN)
+    [hN : S.IsArchimedeanNormalized]
+    (hξ : ξ.IsHermitian) (hη : η.IsHermitian)
     (f : E →ₗ[K] F) (ω : S.Ω)
     (hf : ∀ x, η.norm ω (f.baseChange (S.ϕ ω).Completion x) = ξ.norm ω x)
     (z : (S.ϕ ω).Completion ⊗[K] (⨂[K] (_ : ι), E)) :
-    (NormFamily.orthogonalTensor (fun _ : ι ↦ η.dual) hN (fun _ ↦ hη.dual)).dual.norm ω
+    (NormFamily.orthogonalTensor (fun _ : ι ↦ η.dual)).dual.norm ω
       ((Tensor.tensorPowerPairing f).baseChange (S.ϕ ω).Completion z) ≤
-        (NormFamily.orthogonalTensor (fun _ : ι ↦ ξ) hN (fun _ ↦ hξ)).norm ω z := by
+        (NormFamily.orthogonalTensor (fun _ : ι ↦ ξ)).norm ω z := by
   rw [tensorPowerPairing_eq, LinearMap.baseChange_comp, LinearMap.baseChange_comp,
     LinearMap.comp_apply, LinearMap.comp_apply]
   refine (dualMap_norm_le
-    (NormFamily.orthogonalTensor (fun _ : ι ↦ η.dual) hN (fun _ ↦ hη.dual))
-    (NormFamily.orthogonalTensor (fun _ : ι ↦ η) hN (fun _ ↦ hη)).dual
+    (NormFamily.orthogonalTensor (fun _ : ι ↦ η.dual))
+    (NormFamily.orthogonalTensor (fun _ : ι ↦ η)).dual
     PiTensorProduct.dualDistrib ω
-    (fun x ↦ (NormFamily.orthogonalTensor_dual_norm (fun _ : ι ↦ η) hN
-      (fun _ ↦ hη) ω x).le) _).trans ?_
-  refine ((NormFamily.orthogonalTensor (fun _ : ι ↦ η) hN (fun _ ↦ hη)).dual_dual_norm_eval_le
+    (fun x ↦ (NormFamily.orthogonalTensor_dual_norm (fun _ : ι ↦ η)
+       ω x).le) _).trans ?_
+  refine ((NormFamily.orthogonalTensor (fun _ : ι ↦ η)).dual_dual_norm_eval_le
     ω _).trans ?_
   exact orthogonalTensor_map_norm_le_of_finite_le_infinite_eq
-    (fun _ : ι ↦ ξ) (fun _ : ι ↦ η) hN (fun _ ↦ hξ) (fun _ ↦ hη)
+    (fun _ : ι ↦ ξ) (fun _ : ι ↦ η) (fun _ ↦ hξ) (fun _ ↦ hη)
     (fun _ ↦ f) ω (fun _ x ↦ (hf x).le) (fun _ _ ↦ hf) z
 
 end Evaluation

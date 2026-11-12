@@ -14,7 +14,7 @@ the actual completed Hilbert/epsilon norms and discharge the geometric slope
 and smaller-rank induction hypotheses.
 
 ArakelovGeometry is an unmodified remote dependency pinned to
-`0a608c4f219c4de669be8b6b1a1bc47f996d8d72`. The reformulated variation
+`c9dfe39888d87cdde965b647116127744cf3623e`. The reformulated variation
 argument and the HN compatibility adapters are local to BostConjecture;
 see [the dependency record](docs/remote-ag-dependency.md).
 HarderNarasimhan remains pinned at
@@ -32,11 +32,11 @@ The public adelic declarations are in namespace
 | `isMeanSlopeSemistable_orthogonalTensorOfMeasurableBase` | Finite-family tensor semistability |
 | `hermitianHNFiltration_orthogonalTensorPair` | Weighted tensor HN compatibility |
 
-The explicit measurability argument `hS` follows from countability of the field
-by `ArakelovGeometry.AdelicStructure.hasCommonCountableDenseSubfield_of_countable`
-in [Adelic/Basic.lean](BostConjecture/Adelic/Basic.lean). It adds no assumption to
-the paper's theorem. The finite-family conclusions include empty and singleton
-families. The empty orthogonal tensor is a semistable line of slope zero.
+The measurability instance `S.HasMeasurableBase` follows from countability of the
+field through `ArakelovGeometry.AdelicStructure.hasCommonCountableDenseSubfield_of_countable`
+in [Adelic/Basic.lean](BostConjecture/Adelic/Basic.lean). Archimedean normalization
+is supplied by `S.IsArchimedeanNormalized`. The finite-family conclusions include
+empty and singleton families. The empty orthogonal tensor is a semistable line of slope zero.
 
 The paper and implementation use the same proof route: hook-length counting,
 the full integral Specht lattice with a standard-sublattice Gram upper bound,
@@ -82,6 +82,8 @@ Lean and mathlib are pinned to `v4.35.0`. Install Lean through `elan`, then run:
 lake exe cache get
 lake build
 ```
+
+Use `lake --wfail build` to require a build with no warnings.
 
 The remote dependency revisions are recorded in
 [lake-manifest.json](lake-manifest.json). The package enables the mathlib

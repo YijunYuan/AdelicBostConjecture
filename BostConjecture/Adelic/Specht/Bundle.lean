@@ -73,8 +73,9 @@ theorem latticeNormFamily_norm_infinite (ω : S.Ω) (hω : ω ∈ S.Ωinf)
     fibreWordCoordinates_eq_basis]
 
 /-- Rational norm evaluations are measurable finite coordinate expressions. -/
-theorem latticeNormFamily_isMeasurable : (latticeNormFamily S t b).IsMeasurable := by
+instance latticeNormFamily_isMeasurable : (latticeNormFamily S t b).IsMeasurable := by
   classical
+  constructor
   intro x
   have hword := (NormFamily.ofBasisHermitian_isMeasurable
     (S := S) (Pi.basisFun K (Fin n → Fin (μ.colLen 0)))).pullback
@@ -90,17 +91,18 @@ theorem latticeNormFamily_isMeasurable : (latticeNormFamily S t b).IsMeasurable 
   by_cases hω : ω ∈ S.Ωinf <;>
     simp [latticeNormFamily, NormFamily.piecewise_norm, hω, wordNormFamily]
 
-variable (hS : ∀ ω ∈ S.Ωinf, IsRCLikeNormedField (S.ϕ ω).Completion)
+variable [hS : S.IsArchimedeanNormalized]
 
 /-- The original completed scalar actions and norms satisfy the Hermitian
 condition. No replacement of the Gram matrix is involved. -/
-theorem latticeNormFamily_isHermitian : (latticeNormFamily S t b).IsHermitian hS := by
+instance latticeNormFamily_isHermitian : (latticeNormFamily S t b).IsHermitian := by
   have hw := (NormFamily.ofBasisHermitian_isHermitian
-    (S := S) (Pi.basisFun K (Fin n → Fin (μ.colLen 0))) hS).pullback
+    (S := S) (Pi.basisFun K (Fin n → Fin (μ.colLen 0)))).pullback
       (wordCoordinates K t) (wordCoordinates_injective K t)
-  have hb := NormFamily.ofBasisHermitian_isHermitian (S := S) (b.baseChange K) hS
+  have hb := NormFamily.ofBasisHermitian_isHermitian (S := S) (b.baseChange K)
   constructor
-  · intro ω hω x y
+  · constructor
+    intro ω hω x y
     have hn : ω ∉ S.Ωinf := fun h => h hω
     simpa only [latticeNormFamily, NormFamily.piecewise_norm, ite_eq_right hn] using hb.1 ω hω x y
   · intro ω hω
@@ -110,37 +112,37 @@ theorem latticeNormFamily_isHermitian : (latticeNormFamily S t b).IsHermitian hS
 include hS
 /-- Strong domination follows from the checked pullback and splicing theorems
 for actual norm families. Finiteness of the Archimedean mass is proved by AG. -/
-theorem latticeNormFamily_isStronglyDominated :
+instance latticeNormFamily_isStronglyDominated :
     (latticeNormFamily S t b).IsStronglyDominated := by
-  have hfin := S.v_Ωinf_lt_top_of_isRCLike hS
+  have hfin := S.v_Ωinf_lt_top_of_isRCLike
   have hw := (NormFamily.ofBasisHermitian_isStronglyDominated_of_measure_lt_top
     (S := S) (Pi.basisFun K (Fin n → Fin (μ.colLen 0))) hfin).pullback
-      (wordCoordinates K t) (wordCoordinates_injective K t) hS
+      (wordCoordinates K t) (wordCoordinates_injective K t)
   exact hw.piecewise
     (NormFamily.ofBasisHermitian_isStronglyDominated_of_measure_lt_top (b.baseChange K) hfin)
     hfin S.Ωinf
 
 /-- Domination of the family and its actual completed dual. -/
-theorem latticeNormFamily_isDominated : (latticeNormFamily S t b).IsDominated :=
-  (latticeNormFamily_isStronglyDominated S t b hS).isDominated
+instance latticeNormFamily_isDominated : (latticeNormFamily S t b).IsDominated :=
+  (latticeNormFamily_isStronglyDominated S t b).isDominated
 
 /-- The constant adelic bundle with its actual word Gram metric. -/
-def latticeBundle (hcount : S.HasCommonCountableDenseSubfield) :
+def latticeBundle [hcount : S.HasCommonCountableDenseSubfield] :
     AdelicVectorBundle S (K ⊗[ℤ] orbitLattice t) where
   toNormFamily := latticeNormFamily S t b
   isMeasurable := latticeNormFamily_isMeasurable S t b
   dual_isMeasurable :=
     (latticeNormFamily_isMeasurable S t b).dual_of_common_countable_dense_subfield hcount
-  isDominated := latticeNormFamily_isDominated S t b hS
+  isDominated := latticeNormFamily_isDominated S t b
 
 @[simp]
-theorem latticeBundle_toNormFamily (hcount : S.HasCommonCountableDenseSubfield) :
-    (latticeBundle S t b hS hcount).toNormFamily = latticeNormFamily S t b := rfl
+theorem latticeBundle_toNormFamily [hcount : S.HasCommonCountableDenseSubfield] :
+    (latticeBundle S t b).toNormFamily = latticeNormFamily S t b := rfl
 
 /-- The constructed adelic bundle is Hermitian. -/
-theorem latticeBundle_isHermitian (hcount : S.HasCommonCountableDenseSubfield) :
-    (latticeBundle S t b hS hcount).IsHermitian hS :=
-  latticeNormFamily_isHermitian S t b hS
+instance latticeBundle_isHermitian [S.HasCommonCountableDenseSubfield] :
+    (latticeBundle S t b).IsHermitian :=
+  latticeNormFamily_isHermitian S t b
 
 /-- The inner product selected from the Hermitian norm is the actual word
 Gram inner product. This fixes the metric used by determinant constructions. -/
@@ -149,7 +151,7 @@ theorem latticeNormFamily_inner (ω : S.Ω) (hω : ω ∈ S.Ωinf) :
     letI := IsRCLikeNormedField.rclike (S.ϕ ω).Completion
     letI := (latticeNormFamily S t b).fibreNormedAddCommGroup ω
     letI := (latticeNormFamily S t b).fibreNormedSpace ω
-    letI := (latticeNormFamily_isHermitian S t b hS).fibreInnerProductSpace ω hω
+    letI := (latticeNormFamily S t b).fiberInnerProductSpace ω hω
     ∀ x y : (S.ϕ ω).Completion ⊗[K] (K ⊗[ℤ] orbitLattice t),
       inner (S.ϕ ω).Completion x y =
         ∑ w, star (fibreWordCoordinates t x w) * fibreWordCoordinates t y w := by
@@ -157,7 +159,7 @@ theorem latticeNormFamily_inner (ω : S.Ω) (hω : ω ∈ S.Ωinf) :
   let := IsRCLikeNormedField.rclike (S.ϕ ω).Completion
   let := (latticeNormFamily S t b).fibreNormedAddCommGroup ω
   let := (latticeNormFamily S t b).fibreNormedSpace ω
-  let := (latticeNormFamily_isHermitian S t b hS).fibreInnerProductSpace ω hω
+  let := (latticeNormFamily S t b).fiberInnerProductSpace ω hω
   let f : ((S.ϕ ω).Completion ⊗[K] (K ⊗[ℤ] orbitLattice t)) →ₗᵢ[(S.ϕ ω).Completion]
       EuclideanSpace (S.ϕ ω).Completion (Fin n → Fin (μ.colLen 0)) :=
     { toLinearMap := (WithLp.linearEquiv 2 (S.ϕ ω).Completion _).symm.toLinearMap.comp
@@ -181,7 +183,7 @@ theorem latticeNormFamily_inner_integral (ω : S.Ω) (hω : ω ∈ S.Ωinf) :
     letI := IsRCLikeNormedField.rclike (S.ϕ ω).Completion
     letI := (latticeNormFamily S t b).fibreNormedAddCommGroup ω
     letI := (latticeNormFamily S t b).fibreNormedSpace ω
-    letI := (latticeNormFamily_isHermitian S t b hS).fibreInnerProductSpace ω hω
+    letI := (latticeNormFamily S t b).fiberInnerProductSpace ω hω
     ∀ x y : orbitLattice t,
       inner (S.ϕ ω).Completion
         ((1 : (S.ϕ ω).Completion) ⊗ₜ[K] ((1 : K) ⊗ₜ[ℤ] x))
@@ -191,8 +193,8 @@ theorem latticeNormFamily_inner_integral (ω : S.Ω) (hω : ω ∈ S.Ωinf) :
   let := IsRCLikeNormedField.rclike (S.ϕ ω).Completion
   let := (latticeNormFamily S t b).fibreNormedAddCommGroup ω
   let := (latticeNormFamily S t b).fibreNormedSpace ω
-  let := (latticeNormFamily_isHermitian S t b hS).fibreInnerProductSpace ω hω
+  let := (latticeNormFamily S t b).fiberInnerProductSpace ω hω
   intro x y
-  simp [latticeNormFamily_inner S t b hS ω hω]
+  simp [latticeNormFamily_inner S t b ω hω]
 
 end BostConjecture.Specht

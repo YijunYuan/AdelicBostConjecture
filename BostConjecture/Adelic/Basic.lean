@@ -30,8 +30,8 @@ theorem isDenseSubfieldAt_top (S : AdelicStructure K) (ω : S.Ω) :
 
 /-- A countable base field supplies one countable subfield dense at every place,
 as required by the adelic restriction, quotient, dual and tensor constructions. -/
-theorem hasCommonCountableDenseSubfield_of_countable [Countable K]
+instance hasCommonCountableDenseSubfield_of_countable [Countable K]
     (S : AdelicStructure K) : S.HasCommonCountableDenseSubfield :=
-  ⟨⊤, inferInstance, S.isDenseSubfieldAt_top⟩
+  ⟨⟨⊤, inferInstance, S.isDenseSubfieldAt_top⟩⟩
 
 end ArakelovGeometry.AdelicStructure
