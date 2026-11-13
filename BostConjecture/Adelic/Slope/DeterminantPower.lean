@@ -29,22 +29,28 @@ open ArakelovGeometry ArakelovGeometry.AdelicVectorBundle
 universe u v w
 
 variable {K : Type u} [Field K] {S : AdelicStructure.{u, v} K}
-  {E : Type w} [AddCommGroup E] [Module K E] [FiniteDimensional K E]
-  (V : AdelicVectorBundle S E)
-  [hS : S.HasMeasurableBase]
+  (V : AdelicVectorBundle S)
+  [hS : S.NormMeasurabilityHypotheses]
   [hN : S.IsArchimedeanNormalized]
 
 /-- The actual orthogonal tensor power of the determinant adelic line. -/
-def determinantPower (k : ℕ) :
-    AdelicVectorBundle S (⨂[K] (_ : Fin k), ⋀[K]^(Module.finrank K E) E) :=
-  orthogonalTensorLines (fun _ : Fin k ↦ V.determinantOfMeasurableBase)
+abbrev determinantPower (k : ℕ) :
+    AdelicVectorBundle S where
+  carrier := ⨂[K] (_ : Fin k), ⋀[K]^(Module.finrank K V) V
+  instAddCommGroup := inferInstance
+  instModule := inferInstance
+  instFiniteDimensional := inferInstance
+  toNormFamily :=
+    (orthogonalTensorLines (fun _ : Fin k ↦ V.determinantOfNormMeasurability)).toNormFamily
+  toIsAdelic :=
+    (orthogonalTensorLines (fun _ : Fin k ↦ V.determinantOfNormMeasurability)).toIsAdelic
 
 instance determinantPower_isLine (k : ℕ) : (determinantPower V k).IsLine :=
-  orthogonalTensorLines_isLine _
+  orthogonalTensorLines_isLine (fun _ : Fin k ↦ V.determinantOfNormMeasurability)
 
 instance determinantPower_isHermitian (k : ℕ) :
     (determinantPower V k).IsHermitian :=
-  orthogonalTensorLines_isHermitian _
+  orthogonalTensorLines_isHermitian (fun _ : Fin k ↦ V.determinantOfNormMeasurability)
 
 variable [S.IsProper]
 
@@ -56,7 +62,7 @@ theorem determinantPower_slope (k : ℕ) :
     (determinantPower_isLine V k).rank_eq_one,
     (determinantPower V k).degree_eq_lineDegree]
   change (orthogonalTensorLines
-    (fun _ : Fin k ↦ V.determinantOfMeasurableBase)).lineDegree = _
+    (fun _ : Fin k ↦ V.determinantOfNormMeasurability)).lineDegree = _
   rw [lineDegree_orthogonalTensorLines]
   change (∑ _ : Fin k, V.degree) = _
   simp [nsmul_eq_mul]
@@ -64,7 +70,7 @@ theorem determinantPower_slope (k : ℕ) :
 /-- The common rectangular degree is rank times width. -/
 theorem determinantPower_slope_eq_rank_mul (k : ℕ) :
     (determinantPower V k).slope =
-      (Module.finrank K E * k : ℕ) * V.slope := by
+      (Module.finrank K V * k : ℕ) * V.slope := by
   rw [determinantPower_slope, V.degree_eq_rank_mul_slope, Nat.cast_mul]
   ring
 

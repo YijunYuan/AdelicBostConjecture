@@ -127,13 +127,15 @@ instance latticeNormFamily_isDominated : (latticeNormFamily S t b).IsDominated :
   (latticeNormFamily_isStronglyDominated S t b).isDominated
 
 /-- The constant adelic bundle with its actual word Gram metric. -/
-def latticeBundle [hcount : S.HasCommonCountableDenseSubfield] :
-    AdelicVectorBundle S (K ⊗[ℤ] orbitLattice t) where
+abbrev latticeBundle [hcount : S.HasCommonCountableDenseSubfield] :
+    AdelicVectorBundle S where
+  carrier := K ⊗[ℤ] orbitLattice t
   toNormFamily := latticeNormFamily S t b
-  isMeasurable := latticeNormFamily_isMeasurable S t b
-  dual_isMeasurable :=
-    (latticeNormFamily_isMeasurable S t b).dual_of_common_countable_dense_subfield hcount
-  isDominated := latticeNormFamily_isDominated S t b
+  toIsAdelic := {
+    isMeasurable := latticeNormFamily_isMeasurable S t b
+    dual_isMeasurable :=
+      (latticeNormFamily_isMeasurable S t b).dual_of_common_countable_dense_subfield hcount
+    isDominated := latticeNormFamily_isDominated S t b }
 
 @[simp]
 theorem latticeBundle_toNormFamily [hcount : S.HasCommonCountableDenseSubfield] :

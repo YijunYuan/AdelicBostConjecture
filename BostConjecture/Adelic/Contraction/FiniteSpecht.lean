@@ -67,34 +67,33 @@ section Bundle
 
 universe u v
 variable {K : Type u} [Field K] [CharZero K] {S : AdelicStructure.{u, v} K}
-  {E : Type u} [AddCommGroup E] [Module K E] [FiniteDimensional K E]
-  (V : AdelicVectorBundle S E)
+  (V : AdelicVectorBundle S)
   [hN : S.IsArchimedeanNormalized]
   [hcount : S.HasCommonCountableDenseSubfield] [hV : V.IsHermitian]
 
 /-- The existing determinant embedding contracts for the prescribed completed
 norms at every non-Archimedean place, including trivial valuations. -/
 theorem projectiveDeterminantMap_norm_finite {n k : ℕ} (hk : 0 < k)
-    (t : Tableau n (rectangle (finrank K E) k))
+    (t : Tableau n (rectangle (finrank K V) k))
     (c : Basis (Fin (finrank K (K ⊗[ℤ] orbitLattice t))) ℤ (orbitLattice t))
     (ω : S.Ω) (hω : ω ∈ S.Ωfin)
     (x : (S.ϕ ω).Completion ⊗[K]
-      ((⨂[K] (_ : Fin k), ⋀[K]^(finrank K E) E) ⊗[K] (K ⊗[ℤ] orbitLattice t))) :
+      ((⨂[K] (_ : Fin k), ⋀[K]^(finrank K V) V) ⊗[K] (K ⊗[ℤ] orbitLattice t))) :
     (NormFamily.orthogonalTensor (fun _ : Fin n => V.toNormFamily)).norm ω
       ((projectiveDeterminantMap hk t
-        (fun p => congrFun (Module.rankAtStalk_eq_finrank_of_free (R := K) (M := E)) p)).baseChange
+        (fun p => congrFun (Module.rankAtStalk_eq_finrank_of_free (R := K) (M := V)) p)).baseChange
           (S.ϕ ω).Completion x) ≤ (determinantSpechtBundle V k t c).norm ω x := by
-  let b := (Module.finBasis (S.ϕ ω).Completion ((S.ϕ ω).Completion ⊗[K] E)).reindex
+  let b := (Module.finBasis (S.ϕ ω).Completion ((S.ϕ ω).Completion ⊗[K] V)).reindex
     (finCongr Module.finrank_baseChange)
   let e := determinantTwistBaseChangeEquiv (R := K) (S := (S.ϕ ω).Completion)
-    (M := E) (orbitLattice t) k (finrank K E)
+    (M := V) (orbitLattice t) k (finrank K V)
   obtain ⟨z, hz⟩ := exists_determinantPower_tmul b (e x)
   have hx := e.eq_symm_apply.mpr hz
   rw [hx]
   change (NormFamily.orthogonalTensor _).norm ω
     ((projectiveDeterminantMap hk t _).baseChange (S.ϕ ω).Completion
-      ((determinantTwistBaseChangeEquiv (R := K) (S := (S.ϕ ω).Completion) (M := E)
-        (orbitLattice t) k (finrank K E)).symm _)) ≤ _
+      ((determinantTwistBaseChangeEquiv (R := K) (S := (S.ϕ ω).Completion) (M := V)
+        (orbitLattice t) k (finrank K V)).symm _)) ≤ _
   refine (congrArg
     ((NormFamily.orthogonalTensor (fun _ : Fin n ↦ V.toNormFamily)).norm ω)
     (projectiveDeterminantMap_baseChange_generator hk t _ b z)).trans_le ?_
@@ -104,21 +103,21 @@ theorem projectiveDeterminantMap_norm_finite {n k : ℕ} (hk : 0 < k)
   rw [LinearEquiv.apply_symm_apply] at hn
   refine hn.trans_eq ?_
   change _ = (determinantSpechtBundle V k t c).norm ω
-    ((determinantTwistBaseChangeEquiv (R := K) (S := (S.ϕ ω).Completion) (M := E)
-      (orbitLattice t) k (finrank K E)).symm _)
+    ((determinantTwistBaseChangeEquiv (R := K) (S := (S.ϕ ω).Completion) (M := V)
+      (orbitLattice t) k (finrank K V)).symm _)
   rw [determinantSpechtBundle_norm_tprod V t c ω]
   simp only [Finset.prod_const, Finset.card_univ, Fintype.card_fin]
 
 /-- The actual determinant–Specht embedding contracts at every place. -/
 theorem projectiveDeterminantMap_norm_le {n k : ℕ} (hk : 0 < k)
-    (t : Tableau n (rectangle (finrank K E) k))
+    (t : Tableau n (rectangle (finrank K V) k))
     (c : Basis (Fin (finrank K (K ⊗[ℤ] orbitLattice t))) ℤ (orbitLattice t))
     (ω : S.Ω)
     (x : (S.ϕ ω).Completion ⊗[K]
-      ((⨂[K] (_ : Fin k), ⋀[K]^(finrank K E) E) ⊗[K] (K ⊗[ℤ] orbitLattice t))) :
+      ((⨂[K] (_ : Fin k), ⋀[K]^(finrank K V) V) ⊗[K] (K ⊗[ℤ] orbitLattice t))) :
     (NormFamily.orthogonalTensor (fun _ : Fin n => V.toNormFamily)).norm ω
       ((projectiveDeterminantMap hk t
-        (fun p => congrFun (Module.rankAtStalk_eq_finrank_of_free (R := K) (M := E)) p)).baseChange
+        (fun p => congrFun (Module.rankAtStalk_eq_finrank_of_free (R := K) (M := V)) p)).baseChange
           (S.ϕ ω).Completion x) ≤ (determinantSpechtBundle V k t c).norm ω x := by
   by_cases hω : ω ∈ S.Ωfin
   · exact projectiveDeterminantMap_norm_finite V hk t c ω hω x

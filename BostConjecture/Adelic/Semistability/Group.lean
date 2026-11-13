@@ -31,16 +31,15 @@ noncomputable section
 namespace ArakelovGeometry.AdelicVectorBundle
 
 variable {K : Type*} [Field K] {S : AdelicStructure K} [S.IsProper]
-  {E : Type*} [AddCommGroup E] [Module K E] [FiniteDimensional K E]
   {G : Type*} [Group G]
 
 /-- Lemma 2.6 of this paper: an irreducible group action preserving the actual
 completed norms forces arithmetic mean-slope semistability. -/
-theorem isMeanSlopeSemistable_of_isIrreducible (V : AdelicVectorBundle S E)
-    [hS : S.HasMeasurableBase]
+theorem isMeanSlopeSemistable_of_isIrreducible (V : AdelicVectorBundle S)
+    [hS : S.NormMeasurabilityHypotheses]
     [hN : S.IsArchimedeanNormalized]
-    [hV : V.IsHermitian] (hr : 0 < Module.finrank K E)
-    (ρ : Representation K G E) [ρ.IsIrreducible]
+    [hV : V.IsHermitian] (hr : 0 < Module.finrank K V)
+    (ρ : Representation K G V) [ρ.IsIrreducible]
     (hρ : ∀ g ω z, V.toNormFamily.norm ω
       ((ρ g).baseChange (S.ϕ ω).Completion z) = V.toNormFamily.norm ω z) :
     V.IsMeanSlopeSemistable := by

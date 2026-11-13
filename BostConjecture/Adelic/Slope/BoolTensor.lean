@@ -25,22 +25,23 @@ noncomputable section
 universe u v w
 
 variable {K : Type u} [Field K] {S : AdelicStructure.{u, v} K}
-  {E F : Type w} [AddCommGroup E] [Module K E] [FiniteDimensional K E]
+  {E F : Type*} [AddCommGroup E] [Module K E] [FiniteDimensional K E]
   [AddCommGroup F] [Module K F] [FiniteDimensional K F]
 
 omit [FiniteDimensional K E] [FiniteDimensional K F] in
 private theorem boolTensorEquiv_reindex_binary :
-    (boolTensorEquiv K (BoolTensorFactors E F)).toLinearMap.comp
-      (PiTensorProduct.reindex K (BinaryTensorFactors E F)
+    (boolTensorPairEquiv K E F).toLinearMap.comp
+      (PiTensorProduct.reindex K (LiftedTensorFactors E F)
         boolEquivUnitSumUnit.symm).toLinearMap =
-    (binaryTensorEquiv K (BinaryTensorFactors E F)).toLinearMap := by
+    (tensorPairEquiv K E F).toLinearMap := by
   apply PiTensorProduct.ext
   apply MultilinearMap.ext
   intro x
-  change boolTensorEquiv K (BoolTensorFactors E F)
-    (PiTensorProduct.reindex K (BinaryTensorFactors E F) boolEquivUnitSumUnit.symm
-      (⨂ₜ[K] i, x i)) = binaryTensorEquiv K (BinaryTensorFactors E F) (⨂ₜ[K] i, x i)
-  simp only [PiTensorProduct.reindex_tprod, boolTensorEquiv_tprod, binaryTensorEquiv_tprod]
+  change boolTensorPairEquiv K E F
+    (PiTensorProduct.reindex K (LiftedTensorFactors E F) boolEquivUnitSumUnit.symm
+      (⨂ₜ[K] i, x i)) = tensorPairEquiv K E F (⨂ₜ[K] i, x i)
+  simp [PiTensorProduct.reindex_tprod, boolTensorPairEquiv, tensorPairEquiv,
+    boolTensorEquiv_tprod, binaryTensorEquiv_tprod]
   rfl
 
 namespace NormFamily
@@ -51,30 +52,30 @@ theorem orthogonalTensor_norm_boolTensorEquiv
     (ξ : NormFamily S E) (η : NormFamily S F)
     [hN : S.IsArchimedeanNormalized]
     [hξ : ξ.IsHermitian] [hη : η.IsHermitian]
-    (ω : S.Ω) (z : (S.ϕ ω).Completion ⊗[K] (⨂[K] i, BoolTensorFactors E F i)) :
+    (ω : S.Ω) (z : (S.ϕ ω).Completion ⊗[K] (⨂[K] i, LiftedBoolTensorFactors E F i)) :
     (ξ ⊗ʰ η).norm ω
-      ((boolTensorEquiv K (BoolTensorFactors E F)).toLinearMap.baseChange
+      ((boolTensorPairEquiv K E F).toLinearMap.baseChange
         (S.ϕ ω).Completion z) =
     (orthogonalTensor (fun i ↦ tensorPairFactors ξ η (boolEquivUnitSumUnit i))).norm ω z := by
-  let r := PiTensorProduct.reindex K (BinaryTensorFactors E F) boolEquivUnitSumUnit.symm
+  let r := PiTensorProduct.reindex K (LiftedTensorFactors E F) boolEquivUnitSumUnit.symm
   obtain ⟨x, rfl⟩ := (r.baseChange K (S.ϕ ω).Completion _ _).surjective z
   have h := congrArg (fun f ↦ f.baseChange (S.ϕ ω).Completion x)
     (boolTensorEquiv_reindex_binary (K := K) (E := E) (F := F))
   simp only [LinearMap.baseChange_comp, LinearMap.comp_apply] at h
   change (ξ ⊗ʰ η).norm ω
-    ((boolTensorEquiv K (BoolTensorFactors E F)).toLinearMap.baseChange
+    ((boolTensorPairEquiv K E F).toLinearMap.baseChange
       (S.ϕ ω).Completion (r.toLinearMap.baseChange (S.ϕ ω).Completion x)) = _
   rw [h]
   refine Eq.trans ?_ (orthogonalTensor_norm_reindex (tensorPairFactors ξ η)
      boolEquivUnitSumUnit.symm ω x).symm
   change (orthogonalTensor (tensorPairFactors ξ η)).norm ω
-    ((binaryTensorEquiv K (BinaryTensorFactors E F)).symm.toLinearMap.baseChange
+    ((tensorPairEquiv K E F).symm.toLinearMap.baseChange
       (S.ϕ ω).Completion
-      ((binaryTensorEquiv K (BinaryTensorFactors E F)).toLinearMap.baseChange
+      ((tensorPairEquiv K E F).toLinearMap.baseChange
         (S.ϕ ω).Completion x)) = _
   congr 1
   exact (LinearEquiv.baseChange K (S.ϕ ω).Completion _ _
-    (binaryTensorEquiv K (BinaryTensorFactors E F))).symm_apply_apply x
+    (tensorPairEquiv K E F)).symm_apply_apply x
 
 end NormFamily
 

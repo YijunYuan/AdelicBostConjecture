@@ -23,19 +23,17 @@ namespace ArakelovGeometry.AdelicVectorBundle
 universe u v w w'
 
 variable {K : Type u} [Field K] {S : AdelicStructure.{u, v} K} [S.IsProper]
-  {E : Type w} [AddCommGroup E] [Module K E] [FiniteDimensional K E]
-  {F : Type w'} [AddCommGroup F] [Module K F] [FiniteDimensional K F]
 
 /-- A nonzero completed contraction between mean-slope semistable adelic
 bundles compares their actual real slopes. Hermitianity is needed only for
 the source's minimal-slope characterization of semistability. -/
 theorem slope_le_of_nonzero_completed_contraction
-    (V : AdelicVectorBundle S E) (W : AdelicVectorBundle S F)
-    [hS : S.HasMeasurableBase]
+    (V : AdelicVectorBundle S) (W : AdelicVectorBundle S)
+    [hS : S.NormMeasurabilityHypotheses]
     [hN : S.IsArchimedeanNormalized]
     [hV : V.IsHermitian]
     [hVS : V.IsMeanSlopeSemistable] [hWS : W.IsMeanSlopeSemistable]
-    (f : E →ₗ[K] F) (hf : f ≠ 0)
+    (f : V →ₗ[K] W) (hf : f ≠ 0)
     (hcontract : ∀ ω x, W.norm ω (f.baseChange (S.ϕ ω).Completion x) ≤ V.norm ω x) :
     V.slope ≤ W.slope := by
   have hmin := (V.isMeanSlopeSemistable_iff_minimalSlope_eq_slope_of_isHermitian

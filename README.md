@@ -14,7 +14,7 @@ the actual completed Hilbert/epsilon norms and discharge the geometric slope
 and smaller-rank induction hypotheses.
 
 ArakelovGeometry is an unmodified remote dependency pinned to
-`c9dfe39888d87cdde965b647116127744cf3623e`. The reformulated variation
+`df942e19748f3ab6c41cce7827af7607e2934735`. The reformulated variation
 argument and the HN compatibility adapters are local to BostConjecture;
 see [the dependency record](docs/remote-ag-dependency.md).
 HarderNarasimhan remains pinned at
@@ -27,19 +27,23 @@ The public adelic declarations are in namespace
 | Declaration | Conclusion |
 | --- | --- |
 | `maximalSlope_orthogonalTensorPair` | Binary maximal-slope additivity |
-| `maximalSlope_orthogonalTensorOfMeasurableBase` | Additivity for any finite family, including the empty family |
-| `isMeanSlopeSemistable_orthogonalTensorPair` | Binary tensor semistability |
-| `isMeanSlopeSemistable_orthogonalTensorOfMeasurableBase` | Finite-family tensor semistability |
+| `maximalSlope_orthogonalTensorOfNormMeasurability` | Additivity for any finite family, including the empty family |
+| `isSemistable_orthogonalTensorPair` | Binary tensor semistability |
+| `isSemistable_orthogonalTensorOfNormMeasurability` | Finite-family tensor semistability |
 | `hermitianHNFiltration_orthogonalTensorPair` | Weighted tensor HN compatibility |
 
-The measurability instance `S.HasMeasurableBase` follows from countability of the
+The measurability instance `S.NormMeasurabilityHypotheses` follows from countability of the
 field through `ArakelovGeometry.AdelicStructure.hasCommonCountableDenseSubfield_of_countable`
 in [Adelic/Basic.lean](BostConjecture/Adelic/Basic.lean). Archimedean normalization
 is supplied by `S.IsArchimedeanNormalized`. The finite-family conclusions include
 empty and singleton families. The empty orthogonal tensor is a semistable line of slope zero.
 
-Hermitian and semistability hypotheses are instance arguments. For example,
-with `[V.IsHermitian]`, `[W.IsHermitian]`, `[Nontrivial E]` and `[Nontrivial F]`,
+An `AdelicVectorBundle S` bundles its underlying finite-dimensional vector space
+and coerces to that space. The field and the two factors may have independent
+universes. Hermitian and `.IsSemistable` hypotheses are instance arguments.
+For Hermitian bundles, `isSemistable_iff_isMeanSlopeSemistable` connects the public
+HN semistability predicate to the mean-slope criterion used inside the proof.
+For example, with `[V.IsHermitian]`, `[W.IsHermitian]`, `[Nontrivial V]` and `[Nontrivial W]`,
 `maximalSlope_orthogonalTensorPair V W` proves
 `(V ⊗ʰ W).maximalSlope = V.maximalSlope + W.maximalSlope`.
 The notation `⊗ʰ` is supplied by ArakelovGeometry for both norm families and
@@ -103,12 +107,12 @@ Use `lake --wfail build` to require a build with no warnings. After building,
 run the public API and axiom regression checks with:
 
 ```sh
-lake env lean Tests/PropertyInstances.lean
+lake env lean -j2 Tests/Universes.lean
 ```
 
 These checks require warning-free elaboration with the same inference-depth
-limit as the library. They verify property inference, both forms of `⊗ʰ`,
-standard-tableau constructions, and the axioms of the five main results.
+limit as the library. They verify semistability inference, binary and finite-family results, reindexing
+across distinct universes, and the axioms of the main results.
 
 The remote dependency revisions are recorded in
 [lake-manifest.json](lake-manifest.json). The package enables the mathlib

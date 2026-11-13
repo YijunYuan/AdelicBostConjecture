@@ -25,4 +25,4 @@ name = "BostConjecture"
 [[require]]
 name = "ArakelovGeometry"
 git = "git@github.com:YijunYuan/ArakelovGeometry.git"
-rev = "c9dfe39888d87cdde965b647116127744cf3623e"
+rev = "df942e19748f3ab6c41cce7827af7607e2934735"

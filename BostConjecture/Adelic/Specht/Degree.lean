@@ -141,7 +141,9 @@ theorem latticeBundle_degree :
       -(S.v S.Ωinf).toReal * Real.log (ZLattice.covolume (spanLattice t)) := by
   rw [AdelicVectorBundle.degree_eq_neg_integral _
     ⟨latticeDetVector (K := K) t b, latticeDetVector_ne_zero t b⟩]
-  simp_rw [latticeBundle_toNormFamily, latticeDetVector_logNorm S t b]
+  change -(∫ ω, (latticeNormFamily S t b).determinant.logNorm
+    (latticeDetVector (K := K) t b) ω ∂S.v) = _
+  simp_rw [latticeDetVector_logNorm S t b]
   rw [integral_indicator S.measurableSet_Ωinf, setIntegral_const]
   simp [Measure.real, neg_mul]
 

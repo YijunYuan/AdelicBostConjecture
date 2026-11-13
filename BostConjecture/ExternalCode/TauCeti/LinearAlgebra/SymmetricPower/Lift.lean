@@ -56,6 +56,7 @@ open scoped TensorProduct
 
 universe u v w
 
+-- This matches Mathlib's `SymmetricPower`; `Finite.lean` supplies the ULift wrapper.
 variable {R ι : Type u} {M : Type v} {N : Type w}
 
 namespace SymmetricPower

@@ -34,13 +34,13 @@ open scoped BigOperators TensorProduct
 namespace ArakelovGeometry.AdelicVectorBundle
 
 /-- Successive flag quotients inherit the Hermitian property of the ambient bundle. -/
-instance flagQuotientOfMeasurableBase_isHermitian
-    {K E : Type*} [Field K] [AddCommGroup E] [Module K E] [FiniteDimensional K E]
-    {S : AdelicStructure K} [S.HasMeasurableBase] [S.IsArchimedeanNormalized]
-    (V : AdelicVectorBundle S E) [V.IsHermitian]
-    {n : ℕ} (P : Fin (n + 1) → Submodule K E) (i : Fin n) :
-    (V.flagQuotientOfMeasurableBase P i).IsHermitian := by
-  unfold flagQuotientOfMeasurableBase
+instance flagQuotientOfNormMeasurability_isHermitian
+    {K : Type*} [Field K] {S : AdelicStructure K}
+    [S.NormMeasurabilityHypotheses] [S.IsArchimedeanNormalized]
+    (V : AdelicVectorBundle S) [V.IsHermitian]
+    {n : ℕ} (P : Fin (n + 1) → Submodule K V) (i : Fin n) :
+    (V.flagQuotientOfNormMeasurability P i).IsHermitian := by
+  unfold flagQuotientOfNormMeasurability
   infer_instance
 
 end ArakelovGeometry.AdelicVectorBundle
@@ -74,10 +74,9 @@ private theorem sum_weighted_increments_nonpos {n : ℕ}
 
 namespace BostConjecture.Adelic
 
-variable {K E : Type*} [Field K] [AddCommGroup E] [Module K E]
-  [FiniteDimensional K E] {S : AdelicStructure K} [S.IsProper]
-  (V : AdelicVectorBundle S E)
-  [hS : S.HasMeasurableBase]
+variable {K : Type*} [Field K] {S : AdelicStructure K} [S.IsProper]
+  (V : AdelicVectorBundle S)
+  [hS : S.NormMeasurabilityHypotheses]
   [hN : S.IsArchimedeanNormalized]
   [hV : V.IsHermitian]
 
@@ -85,9 +84,9 @@ variable {K E : Type*} [Field K] [AddCommGroup E] [Module K E]
 on each quotient; the mean and pairing identities are supplied by A7, not
 optimality assumptions. `exists_hnVariationLift` constructs this data for every
 finite real filtration. No nonpositivity or arithmetic upper bound is a field. -/
-structure HNVariationLift (P : ℝ → Submodule K E) where
+structure HNVariationLift (P : ℝ → Submodule K V) where
   length : ℕ
-  flag : Fin (length + 1) → Submodule K E
+  flag : Fin (length + 1) → Submodule K V
   monotone_flag : Monotone flag
   flag_zero : flag 0 = ⊥
   flag_top : flag (Fin.last length) = ⊤
@@ -96,24 +95,24 @@ structure HNVariationLift (P : ℝ → Submodule K E) where
   level : ∀ i, P (weight i) = flag i.succ
   right : ∀ i, Submodule.filtrationRightLimit P (weight i) = flag i.castSucc
   reconstruct : ∀ t, P t = ⨆ (i : Fin length) (_ : t ≤ weight i), flag i.succ
-  direction : ℝ → Submodule K E
+  direction : ℝ → Submodule K V
   antitone_direction : Antitone direction
   direction_bot : ∃ t, direction t = ⊥
   direction_top : ∃ t, direction t = ⊤
   direction_left : ∀ t, ∃ ε > 0, ∀ s, t - ε < s → s ≤ t → direction s = direction t
   cuts : ∀ i t, ((direction t).comap (flag i.succ).subtype).map
       ((flag i.castSucc).comap (flag i.succ).subtype).mkQ =
-    (V.flagQuotientOfMeasurableBase flag i).hermitianHNFiltration t
+    (V.flagQuotientOfNormMeasurability flag i).hermitianHNFiltration t
   mean : Submodule.filtrationExpectation direction = V.slope
-  pairing : (finrank K E : ℝ) * Submodule.filtrationPairing P direction =
-    ∑ i, weight i * (V.flagQuotientOfMeasurableBase flag i).degree
-  primary_mean : (finrank K E : ℝ) * Submodule.filtrationExpectation P =
+  pairing : (finrank K V : ℝ) * Submodule.filtrationPairing P direction =
+    ∑ i, weight i * (V.flagQuotientOfNormMeasurability flag i).degree
+  primary_mean : (finrank K V : ℝ) * Submodule.filtrationExpectation P =
     ∑ i, weight i * (finrank K
       ((flag i.succ) ⧸ (flag i.castSucc).comap (flag i.succ).subtype) : ℝ)
 
 /-- A3/A7 construct the actual lift data used in Bost p32. This is a chosen
 grade-HN lift, not an assertion that the lift is the ambient HN filtration. -/
-theorem exists_hnVariationLift (P : ℝ → Submodule K E)
+theorem exists_hnVariationLift (P : ℝ → Submodule K V)
     (hP : Antitone P) (hb : ∃ t, P t = ⊥) (ht : ∃ t, P t = ⊤)
     (hl : ∀ t, ∃ ε > 0, ∀ s, t - ε < s → s ≤ t → P s = P t) :
     Nonempty (HNVariationLift V P) := by
@@ -133,7 +132,7 @@ theorem exists_hnVariationLift (P : ℝ → Submodule K E)
         ∑ i, a i * (finrank K
           ((U i.succ) ⧸ (U i.castSucc).comap (U i.succ).subtype) : ℝ) := by
       simp [Fintype.sum_sigma, mul_comm]
-    by_cases hzE : finrank K E = 0
+    by_cases hzE : finrank K V = 0
     · have hcard : Fintype.card (Σ i : Fin n, Fin (finrank K
           ((U i.succ) ⧸ (U i.castSucc).comap (U i.succ).subtype))) = 0 := by
         rw [← finrank_eq_card_basis B, hzE]
@@ -146,7 +145,7 @@ theorem exists_hnVariationLift (P : ℝ → Submodule K E)
 
 namespace HNVariationLift
 
-variable {V} {P : ℝ → Submodule K E}
+variable {V} {P : ℝ → Submodule K V}
 
 /-- Bost p32 (48), for the actual chosen grade-HN lift: semistability and
 centering force nonpositive pairing. This is the special HN direction of the
@@ -156,7 +155,7 @@ theorem pairing_nonpos (L : HNVariationLift V P)
     (hcenter : Submodule.filtrationExpectation P = 0) :
     Submodule.filtrationPairing P L.direction ≤ 0 := by
   let d : Fin (L.length + 1) → ℝ := fun i ↦
-    (V.restrictOfMeasurableBase (L.flag i)).degree -
+    (V.restrictOfNormMeasurability (L.flag i)).degree -
       (finrank K (L.flag i) : ℝ) * V.slope
   have hd (i) : d i ≤ 0 := by
     dsimp only [d]
@@ -170,20 +169,20 @@ theorem pairing_nonpos (L : HNVariationLift V P)
     dsimp only [d]
     rw [L.flag_zero]
     simp only [finrank_bot, Nat.cast_zero, zero_mul, sub_zero]
-    exact degree_eq_zero_of_finrank_eq_zero _ (finrank_bot K E)
+    exact degree_eq_zero_of_finrank_eq_zero _ (finrank_bot K V)
   have htop : d (Fin.last L.length) = 0 := by
     dsimp only [d]
     rw [L.flag_top]
     simp only [finrank_top, V.degree_restrict_top,
       V.degree_eq_rank_mul_slope, sub_self]
   have hstep (i : Fin L.length) :
-      (V.flagQuotientOfMeasurableBase L.flag i).degree -
+      (V.flagQuotientOfNormMeasurability L.flag i).degree -
         (finrank K ((L.flag i.succ) ⧸
           (L.flag i.castSucc).comap (L.flag i.succ).subtype) : ℝ) * V.slope =
         d i.succ - d i.castSucc := by
     have hle := L.monotone_flag i.castSucc_le_succ
     have he := degree_restrict_add_degree_quotient_eq_of_isHermitian
-      (V.restrictOfMeasurableBase (L.flag i.succ))
+      (V.restrictOfNormMeasurability (L.flag i.succ))
       ((L.flag i.castSucc).comap (L.flag i.succ).subtype)
     rw [V.degree_restrict_restrict _ _ hle] at he
     have hr := ((L.flag i.castSucc).comap (L.flag i.succ).subtype).finrank_quotient_add_finrank
@@ -191,8 +190,8 @@ theorem pairing_nonpos (L : HNVariationLift V P)
     have hr' : (finrank K ((L.flag i.succ) ⧸
         (L.flag i.castSucc).comap (L.flag i.succ).subtype) : ℝ) +
         finrank K (L.flag i.castSucc) = finrank K (L.flag i.succ) := by exact_mod_cast hr
-    change (V.restrictOfMeasurableBase (L.flag i.castSucc)).degree +
-      (V.flagQuotientOfMeasurableBase L.flag i).degree = _ at he
+    change (V.restrictOfNormMeasurability (L.flag i.castSucc)).degree +
+      (V.flagQuotientOfNormMeasurability L.flag i).degree = _ at he
     dsimp only [d]
     rw [← hr']
     nlinarith [he]
@@ -201,7 +200,7 @@ theorem pairing_nonpos (L : HNVariationLift V P)
     ← Finset.sum_mul] at hsum
   rw [← L.pairing, ← L.primary_mean, hcenter] at hsum
   simp only [mul_zero, zero_mul, sub_zero] at hsum
-  have hr : (0 : ℝ) < finrank K E := Nat.cast_pos.mpr hsemi.1
+  have hr : (0 : ℝ) < finrank K V := Nat.cast_pos.mpr hsemi.1
   nlinarith
 
 end HNVariationLift
@@ -460,24 +459,22 @@ section Binary
 
 open Submodule
 
-variable {K E F Q ι κ : Type*} [Field K]
-  [AddCommGroup E] [Module K E] [FiniteDimensional K E]
-  [AddCommGroup F] [Module K F] [FiniteDimensional K F]
+variable {K Q ι κ : Type*} [Field K]
   [AddCommGroup Q] [Module K Q] [FiniteDimensional K Q]
   [Finite ι] [Finite κ] {S : AdelicStructure K} [S.IsProper]
-  {V : AdelicVectorBundle S E} {Z : AdelicVectorBundle S F}
-  [hS : S.HasMeasurableBase]
+  {V : AdelicVectorBundle S} {Z : AdelicVectorBundle S}
+  [hS : S.NormMeasurabilityHypotheses]
   [hN : S.IsArchimedeanNormalized]
   [hV : V.IsHermitian] [hZ : Z.IsHermitian]
-  {P : ℝ → Submodule K E} {T : ℝ → Submodule K F}
+  {P : ℝ → Submodule K V} {T : ℝ → Submodule K Z}
   (L : HNVariationLift V P)
   (M : HNVariationLift Z T)
-  (b : Basis ι K E) (d : Basis κ K F) (a r : ι → ℝ) (v s : κ → ℝ)
+  (b : Basis ι K V) (d : Basis κ K Z) (a r : ι → ℝ) (v s : κ → ℝ)
   (hP : ∀ t, P t = span K (b '' {i | t ≤ a i}))
   (hR : ∀ t, L.direction t = span K (b '' {i | t ≤ r i}))
   (hT : ∀ t, T t = span K (d '' {i | t ≤ v i}))
   (hW : ∀ t, M.direction t = span K (d '' {i | t ≤ s i}))
-  (q : E ⊗[K] F →ₗ[K] Q) (hq : Function.Surjective q) (hQ : 0 < finrank K Q)
+  (q : V ⊗[K] Z →ₗ[K] Q) (hq : Function.Surjective q) (hQ : 0 < finrank K Q)
   [hsemiV : V.IsMeanSlopeSemistable] [hsemiZ : Z.IsMeanSlopeSemistable]
   (hPc : filtrationExpectation P = 0) (hTc : filtrationExpectation T = 0)
   (hunit : filtrationPairing P P + filtrationPairing T T = 1)
@@ -491,7 +488,7 @@ local notation "D" =>
   filtrationPairing (filtrationCenter M.direction) (filtrationCenter M.direction))
 
 variable (hc : filtrationExpectation (fun t ↦ (tensorFiltration P T t).map q) < 0)
-  (hmin : ∀ (A : ℝ → Submodule K E) (B : ℝ → Submodule K F)
+  (hmin : ∀ (A : ℝ → Submodule K V) (B : ℝ → Submodule K Z)
     [IsCenteredFiltration A] [IsCenteredFiltration B],
     0 < filtrationPairing A A + filtrationPairing B B →
     filtrationExpectation (fun t ↦ (tensorFiltration P T t).map q) ≤
@@ -541,13 +538,11 @@ section BinaryAssembly
 
 universe u
 
-variable {K : Type*} [Field K] {E F : Type u} {Q : Type*}
-  [AddCommGroup E] [Module K E] [FiniteDimensional K E]
-  [AddCommGroup F] [Module K F] [FiniteDimensional K F]
+variable {K : Type*} [Field K] {Q : Type*}
   [AddCommGroup Q] [Module K Q] [FiniteDimensional K Q]
   {S : AdelicStructure K} [S.IsProper]
-  (V : AdelicVectorBundle S E) (Z : AdelicVectorBundle S F)
-  [hS : S.HasMeasurableBase]
+  (V : AdelicVectorBundle S) (Z : AdelicVectorBundle S)
+  [hS : S.NormMeasurabilityHypotheses]
   [hN : S.IsArchimedeanNormalized]
   [hV : V.IsHermitian] [hZ : Z.IsHermitian]
 
@@ -560,15 +555,15 @@ upper bound and its comparison with the quotient's arithmetic slope remains
 downstream. This theorem does not prove Bost's main theorem. -/
 theorem exists_bost_hn_variation_bound
     [hsemiV : V.IsMeanSlopeSemistable] [hsemiZ : Z.IsMeanSlopeSemistable]
-    (q : E ⊗[K] F →ₗ[K] Q) (hq : Function.Surjective q) (hQ : 0 < finrank K Q)
-    (P₀ : ℝ → Submodule K E) (T₀ : ℝ → Submodule K F)
+    (q : V ⊗[K] Z →ₗ[K] Q) (hq : Function.Surjective q) (hQ : 0 < finrank K Q)
+    (P₀ : ℝ → Submodule K V) (T₀ : ℝ → Submodule K Z)
     [hP₀ : IsCenteredFiltration P₀] [hT₀ : IsCenteredFiltration T₀]
     (hneg₀ : filtrationExpectation (fun t ↦ (tensorFiltration P₀ T₀ t).map q) < 0) :
-    ∃ (P : ℝ → Submodule K E) (T : ℝ → Submodule K F),
+    ∃ (P : ℝ → Submodule K V) (T : ℝ → Submodule K Z),
       IsCenteredFiltration P ∧ IsCenteredFiltration T ∧
       filtrationPairing P P + filtrationPairing T T = 1 ∧
       filtrationExpectation (fun t ↦ (tensorFiltration P T t).map q) < 0 ∧
-      (∀ (A : ℝ → Submodule K E) (B : ℝ → Submodule K F)
+      (∀ (A : ℝ → Submodule K V) (B : ℝ → Submodule K Z)
         [IsCenteredFiltration A] [IsCenteredFiltration B],
         0 < filtrationPairing A A + filtrationPairing B B →
         filtrationExpectation (fun t ↦ (tensorFiltration P T t).map q) ≤
@@ -576,8 +571,8 @@ theorem exists_bost_hn_variation_bound
             Real.sqrt (filtrationPairing A A + filtrationPairing B B)) ∧
       ∃ (L : HNVariationLift V P)
         (M : HNVariationLift Z T)
-        (b : Basis (Fin (finrank K E)) K E) (d : Basis (Fin (finrank K F)) K F)
-        (a r : Fin (finrank K E) → ℝ) (v s : Fin (finrank K F) → ℝ),
+        (b : Basis (Fin (finrank K V)) K V) (d : Basis (Fin (finrank K Z)) K Z)
+        (a r : Fin (finrank K V) → ℝ) (v s : Fin (finrank K Z) → ℝ),
         (∀ t, P t = span K (b '' {i | t ≤ a i})) ∧
         (∀ t, L.direction t = span K (b '' {i | t ≤ r i})) ∧
         (∀ t, T t = span K (d '' {i | t ≤ v i})) ∧
@@ -601,7 +596,7 @@ theorem exists_bost_hn_variation_bound
   obtain ⟨d, v, s, hTd, hW, _, _⟩ := exists_common_weighted_basis
     hT.1 hT.2.1 hT.2.2.1 hT.2.2.2.1
     M.antitone_direction M.direction_bot M.direction_top M.direction_left
-  have hmin' (A : ℝ → Submodule K E) (B : ℝ → Submodule K F)
+  have hmin' (A : ℝ → Submodule K V) (B : ℝ → Submodule K Z)
       [hA : IsCenteredFiltration A] [hB : IsCenteredFiltration B] :=
     hmin A B ((isCenteredFiltration_iff A).mp hA) ((isCenteredFiltration_iff B).mp hB)
   refine ⟨P, T, (isCenteredFiltration_iff P).mpr hP, (isCenteredFiltration_iff T).mpr hT,

@@ -65,16 +65,15 @@ namespace ArakelovGeometry.AdelicVectorBundle
 
 universe u v w
 
-variable {K : Type u} {E : Type w} [Field K] [AddCommGroup E] [Module K E]
-  [FiniteDimensional K E] {S : AdelicStructure.{u, v} K} [S.IsProper]
+variable {K : Type u} [Field K] {S : AdelicStructure.{u, v} K} [S.IsProper]
 
 /-- An actual Hermitian HN filtration admits a weighted basis, also in rank zero. -/
 theorem exists_weighted_basis_hermitianHNFiltration
-    (V : AdelicVectorBundle S E)
-    [hS : S.HasMeasurableBase]
+    (V : AdelicVectorBundle S)
+    [hS : S.NormMeasurabilityHypotheses]
     [hN : S.IsArchimedeanNormalized]
     [hV : V.IsHermitian] :
-    ∃ (b : Basis (Fin (finrank K E)) K E) (w : Fin (finrank K E) → ℝ),
+    ∃ (b : Basis (Fin (finrank K V)) K V) (w : Fin (finrank K V) → ℝ),
       ∀ t, V.hermitianHNFiltration t = span K (b '' {i | t ≤ w i}) := by
   have ha := V.hermitianHNFiltration_antitone
   obtain ⟨a, ha'⟩ := V.hermitianHNFiltration_separated
@@ -91,9 +90,8 @@ theorem exists_weighted_basis_hermitianHNFiltration
     ha hbot htop hleft ha hbot htop hleft
   exact ⟨b, w, hw⟩
 
-variable {F : Type w} [AddCommGroup F] [Module K F] [FiniteDimensional K F]
-  (V : AdelicVectorBundle S E) (W : AdelicVectorBundle S F)
-  [hS : S.HasMeasurableBase]
+variable (V : AdelicVectorBundle S) (W : AdelicVectorBundle S)
+  [hS : S.NormMeasurabilityHypotheses]
   [hN : S.IsArchimedeanNormalized]
   [hV : V.IsHermitian] [hW : W.IsHermitian]
 
@@ -156,14 +154,14 @@ theorem hermitianHNFiltration_orthogonalTensorPair_of_semistable_grades
     exact ((V.filtrationGraded P t).slope_orthogonalTensorPair
       (W.filtrationGraded R u)
        htp hup).trans (congrArg₂ (· + ·) hts.2 hus.2)
-  let C (γ : ℝ) (p : {ij : Fin (finrank K E) × Fin (finrank K F) //
+  let C (γ : ℝ) (p : {ij : Fin (finrank K V) × Fin (finrank K W) //
       w ij.1 + z ij.2 = γ}) :=
     tensorFiltrationGradedSource V W P R (w p.val.1) (z p.val.2)
-  let f (γ : ℝ) (p : {ij : Fin (finrank K E) × Fin (finrank K F) //
+  let f (γ : ℝ) (p : {ij : Fin (finrank K V) × Fin (finrank K W) //
       w ij.1 + z ij.2 = γ}) := tensorFiltrationGradedPair hP hR p.property
   have hC (γ : ℝ) (p) : (C γ p).IsHermitian :=
     tensorFiltrationGradedSource_isHermitian V W P R _ _
-  have hCs (γ : ℝ) (p : {ij : Fin (finrank K E) × Fin (finrank K F) //
+  have hCs (γ : ℝ) (p : {ij : Fin (finrank K V) × Fin (finrank K W) //
       w ij.1 + z ij.2 = γ}) : finrank K
       (FiltrationGraded P (w p.val.1) ⊗[K] FiltrationGraded R (z p.val.2)) = 0 ∨
       (C γ p).IsMeanSlopeSemistable ∧ (C γ p).slope = γ := by

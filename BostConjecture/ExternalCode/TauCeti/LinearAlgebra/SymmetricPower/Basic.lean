@@ -34,6 +34,7 @@ open scoped TensorProduct
 
 universe u v
 
+-- Mathlib's `SymmetricPower` requires its ring and index type in the same universe.
 variable {R ι : Type u} {M : Type v}
 
 namespace SymmetricPower

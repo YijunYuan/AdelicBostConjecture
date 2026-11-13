@@ -30,24 +30,23 @@ universe u v w
 
 variable {K : Type u} [Field K] [CharZero K] {S : AdelicStructure.{u, v} K}
   [S.IsProper] {ι : Type w} [Fintype ι]
-  {E : ι → Type u} [∀ i, AddCommGroup (E i)] [∀ i, Module K (E i)]
-  [∀ i, FiniteDimensional K (E i)] (V : ∀ i, AdelicVectorBundle S (E i))
+  (V : ι → AdelicVectorBundle S)
   [hN : S.IsArchimedeanNormalized]
   [hcount : S.HasCommonCountableDenseSubfield]
   (k : ι → ℕ) {n : ι → ℕ}
-  (t : ∀ i, OAI.Saxl.Tableau (n i) (rectangle (finrank K (E i)) (k i)))
+  (t : ∀ i, OAI.Saxl.Tableau (n i) (rectangle (finrank K (V i)) (k i)))
   (b : ∀ i, Basis (Fin (finrank K (K ⊗[ℤ] orbitLattice (t i)))) ℤ (orbitLattice (t i)))
 
 /-- Independent permutation groups make the actual auxiliary tensor bundle
 and its actual dual semistable. The degrees of different factors may differ. -/
 theorem determinantSpechtBundle_tensor_isMeanSlopeSemistable_and_dual :
-    (orthogonalTensorOfMeasurableBase
+    (orthogonalTensorOfNormMeasurability
       (fun i => determinantSpechtBundle (V i) (k i) (t i) (b i))).IsMeanSlopeSemistable ∧
-    ((orthogonalTensorOfMeasurableBase (fun i => determinantSpechtBundle
-      (V i) (k i) (t i) (b i))).dualOfMeasurableBase).IsMeanSlopeSemistable := by
+    ((orthogonalTensorOfNormMeasurability (fun i => determinantSpechtBundle
+      (V i) (k i) (t i) (b i))).dualOfNormMeasurability).IsMeanSlopeSemistable := by
   let ρ (i : ι) :=
     (Representation.trivial K (Equiv.Perm (Fin (n i)))
-      (⨂[K] (_ : Fin (k i)), ⋀[K]^(finrank K (E i)) (E i))).tprod
+      (⨂[K] (_ : Fin (k i)), ⋀[K]^(finrank K (V i)) (V i))).tprod
         (Arithmetic.representationBaseChange K (Arithmetic.Specht.integralRepresentation (t i)))
   let : ∀ i, (Arithmetic.representationBaseChange (AlgebraicClosure K) (ρ i)).IsIrreducible :=
     fun i => by
@@ -68,15 +67,15 @@ theorem determinantSpechtBundle_tensor_isMeanSlopeSemistable_and_dual :
 
 /-- The independent determinant--Specht tensor is semistable. -/
 instance determinantSpechtBundle_tensor_isMeanSlopeSemistable :
-    (orthogonalTensorOfMeasurableBase
+    (orthogonalTensorOfNormMeasurability
       (fun i ↦ determinantSpechtBundle (V i) (k i) (t i) (b i))).IsMeanSlopeSemistable :=
   (determinantSpechtBundle_tensor_isMeanSlopeSemistable_and_dual V k t b).1
 
 /-- The dual of the independent determinant--Specht tensor is semistable. -/
 instance determinantSpechtBundle_tensor_dual_isMeanSlopeSemistable :
     AdelicVectorBundle.IsMeanSlopeSemistable
-      (orthogonalTensorOfMeasurableBase (fun i ↦
-        determinantSpechtBundle (V i) (k i) (t i) (b i))).dualOfMeasurableBase :=
+      (orthogonalTensorOfNormMeasurability (fun i ↦
+        determinantSpechtBundle (V i) (k i) (t i) (b i))).dualOfNormMeasurability :=
   (determinantSpechtBundle_tensor_isMeanSlopeSemistable_and_dual V k t b).2
 
 end BostConjecture.Adelic

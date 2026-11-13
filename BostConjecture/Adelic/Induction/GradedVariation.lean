@@ -126,27 +126,25 @@ namespace BostConjecture.Adelic
 universe u v w w'
 
 variable {K : Type u} [Field K] {S : AdelicStructure.{u, v} K}
-  {E F : Type w} [AddCommGroup E] [Module K E] [FiniteDimensional K E]
-  [AddCommGroup F] [Module K F] [FiniteDimensional K F]
   {Q : Type w'} [AddCommGroup Q] [Module K Q] [FiniteDimensional K Q]
 
 /-- The chosen HN variation lift has the actual grade-HN cuts at every
 real level. Its finite flag data also settle levels outside the jump set. -/
 theorem HNVariationLift.filtrationOnGraded_eq
     [S.IsProper]
-    {V : AdelicVectorBundle S E}
-    [hS : S.HasMeasurableBase]
+    {V : AdelicVectorBundle S}
+    [hS : S.NormMeasurabilityHypotheses]
     [hN : S.IsArchimedeanNormalized]
-    [hV : V.IsHermitian] {P : ℝ → Submodule K E}
+    [hV : V.IsHermitian] {P : ℝ → Submodule K V}
     (L : HNVariationLift V P) (t : ℝ) :
     Submodule.filtrationOnGraded P L.direction t =
       (V.filtrationGraded P t).hermitianHNFiltration := by
   classical
   by_cases hm : t ∈ Set.range L.weight
   · obtain ⟨i, rfl⟩ := hm
-    let C (A : Submodule K E × Submodule K E) :=
+    let C (A : Submodule K V × Submodule K V) :=
       ∀ s, ((L.direction s).comap A.1.subtype).map (A.2.comap A.1.subtype).mkQ =
-        ((V.restrictOfMeasurableBase A.1).quotientOfMeasurableBase
+        ((V.restrictOfNormMeasurability A.1).quotientOfNormMeasurability
           (A.2.comap A.1.subtype)).hermitianHNFiltration s
     have hp : (P (L.weight i), Submodule.filtrationRightLimit P (L.weight i)) =
         (L.flag i.succ, L.flag i.castSucc) := Prod.ext (L.level i) (L.right i)
@@ -164,15 +162,15 @@ small-positive-parameter upper bound directly by the actual quotient slope.
 Tensor-HN compatibility is needed on the source grades; rank drop belongs
 only to the induction caller. No secondary image filtration is constructed. -/
 theorem tensorFiltrationQuotient_eventual_hn_upper
-    (V : AdelicVectorBundle S E) (W : AdelicVectorBundle S F)
-    [hS : S.HasMeasurableBase]
+    (V : AdelicVectorBundle S) (W : AdelicVectorBundle S)
+    [hS : S.NormMeasurabilityHypotheses]
     [hN : S.IsArchimedeanNormalized]
     [hV : V.IsHermitian] [hW : W.IsHermitian]
-    (q : E ⊗[K] F →ₗ[K] Q) (hq : Function.Surjective q)
-    {P : ℝ → Submodule K E} {R : ℝ → Submodule K F}
+    (q : V ⊗[K] W →ₗ[K] Q) (hq : Function.Surjective q)
+    {P : ℝ → Submodule K V} {R : ℝ → Submodule K W}
     (hP : Antitone P) (hR : Antitone R)
     {ι κ : Type*} [Finite ι] [Finite κ]
-    (b : Basis ι K E) (c : Basis κ K F) (w : ι → ℝ) (z : κ → ℝ)
+    (b : Basis ι K V) (c : Basis κ K W) (w : ι → ℝ) (z : κ → ℝ)
     (hPw : ∀ t, P t = Submodule.span K (b '' {i | t ≤ w i}))
     (hRz : ∀ u, R u = Submodule.span K (c '' {j | u ≤ z j}))
     (L : HNVariationLift V P)

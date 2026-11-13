@@ -25,10 +25,9 @@ open scoped BigOperators
 
 namespace ArakelovGeometry.AdelicVectorBundle
 
-variable {K E : Type*} [Field K] [AddCommGroup E] [Module K E]
-  [FiniteDimensional K E] {S : AdelicStructure K} [S.IsProper]
-  (V : AdelicVectorBundle S E)
-  [hS : S.HasMeasurableBase]
+variable {K : Type*} [Field K] {S : AdelicStructure K} [S.IsProper]
+  (V : AdelicVectorBundle S)
+  [hS : S.NormMeasurabilityHypotheses]
   [hN : S.IsArchimedeanNormalized]
   [hV : V.IsHermitian]
 
@@ -37,7 +36,7 @@ include hV
 /-- Equality of the total degree forces equality in every graded lower bound,
 including the grades of rank zero. -/
 theorem filtrationGraded_degree_eq_of_lower_bounds
-    (P : ℝ → Submodule K E) (hP : Antitone P)
+    (P : ℝ → Submodule K V) (hP : Antitone P)
     (hbot : ∃ t, P t = ⊥) (htop : ∃ t, P t = ⊤)
     (hleft : ∀ t, ∃ ε > 0, ∀ s, t - ε < s → s ≤ t → P s = P t)
     (hlower : ∀ t, t * (finrank K (FiltrationGraded P t) : ℝ) ≤
@@ -51,11 +50,11 @@ theorem filtrationGraded_degree_eq_of_lower_bounds
     exists_strictMono_flag_and_jumps_of_antitone hP hbot htop hleft
   have hdegree (i : Fin n) :
       (V.filtrationGraded P (a i)).degree =
-        (V.flagQuotientOfMeasurableBase U i).degree := by
+        (V.flagQuotientOfNormMeasurability U i).degree := by
     have hp : (P (a i), filtrationRightLimit P (a i)) =
         (U i.succ, U i.castSucc) := Prod.ext (hlevel i) (hright i)
-    have he := congrArg (fun p : Submodule K E × Submodule K E ↦
-      ((V.restrictOfMeasurableBase p.1).quotientOfMeasurableBase
+    have he := congrArg (fun p : Submodule K V × Submodule K V ↦
+      ((V.restrictOfNormMeasurability p.1).quotientOfNormMeasurability
         (p.2.comap p.1.subtype)).degree) hp
     exact he
   have hrank (i : Fin n) : finrank K (FiltrationGraded P (a i)) =
@@ -64,11 +63,11 @@ theorem filtrationGraded_degree_eq_of_lower_bounds
     rw [hlevel i, hright i]
   have hle (i : Fin n) : a i * (finrank K
       ((U i.succ) ⧸ (U i.castSucc).comap (U i.succ).subtype) : ℝ) ≤
-        (V.flagQuotientOfMeasurableBase U i).degree := by
+        (V.flagQuotientOfNormMeasurability U i).degree := by
     simpa only [hdegree i, hrank i] using hlower (a i)
   have heq : (∑ i : Fin n, a i * (finrank K
       ((U i.succ) ⧸ (U i.castSucc).comap (U i.succ).subtype) : ℝ)) =
-        ∑ i : Fin n, (V.flagQuotientOfMeasurableBase U i).degree := by
+        ∑ i : Fin n, (V.flagQuotientOfNormMeasurability U i).degree := by
     rw [← finsum_weight_mul_finrank_filtrationGraded_eq_flag U a ha.injective
       hlevel hright hrec, htotal,
       V.sum_flagQuotient_degree_eq_of_isHermitian U hU.monotone hz ht]
@@ -84,7 +83,7 @@ theorem filtrationGraded_degree_eq_of_lower_bounds
 /-- A finite filtration with sharp total graded degree and quotient slope lower
 bounds on each grade is the actual HN filtration. No semistability is assumed. -/
 theorem hermitianHNFiltration_eq_of_graded_quotient_bounds
-    (P : ℝ → Submodule K E) (hP : Antitone P)
+    (P : ℝ → Submodule K V) (hP : Antitone P)
     (hbot : ∃ t, P t = ⊥) (htop : ∃ t, P t = ⊤)
     (hleft : ∀ t, ∃ ε > 0, ∀ s, t - ε < s → s ≤ t → P s = P t)
     (hlower : ∀ t, t * (finrank K (FiltrationGraded P t) : ℝ) ≤
@@ -93,7 +92,7 @@ theorem hermitianHNFiltration_eq_of_graded_quotient_bounds
       V.degree)
     (hquot : ∀ t (U : Submodule K (FiltrationGraded P t)),
       0 < finrank K (FiltrationGraded P t ⧸ U) →
-      t ≤ ((V.filtrationGraded P t).quotientOfMeasurableBase U).slope) :
+      t ≤ ((V.filtrationGraded P t).quotientOfNormMeasurability U).slope) :
     V.hermitianHNFiltration = P := by
   symm
   apply V.hermitianHNFiltration_unique P hP hbot htop hleft

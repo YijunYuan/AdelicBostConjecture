@@ -25,7 +25,7 @@ universe u
 
 namespace BostConjecture.Arithmetic
 
-variable {K G : Type*} {D E : Type u} [Field K] [Group G]
+variable {K G : Type*} {D E : Type*} [Field K] [Group G]
   [AddCommGroup D] [Module K D] [FiniteDimensional K D]
   [AddCommGroup E] [Module K E]
 
@@ -72,7 +72,7 @@ namespace ArakelovGeometry
 
 open BostConjecture.Arithmetic
 
-variable {K G : Type*} {D E : Type u} [Field K] [Group G] {S : AdelicStructure K}
+variable {K G : Type*} {D E : Type*} [Field K] [Group G] {S : AdelicStructure K}
   [AddCommGroup D] [Module K D] [FiniteDimensional K D]
   [AddCommGroup E] [Module K E] [FiniteDimensional K E]
 
@@ -108,33 +108,33 @@ namespace AdelicVectorBundle
 /-- A Hermitian line times an irreducible isometric bundle is semistable,
 on the actual binary tensor type used by the determinant--Specht pairing. -/
 theorem isMeanSlopeSemistable_lineTensor_of_isIrreducible [S.IsProper]
-    (L : AdelicVectorBundle S D) (V : AdelicVectorBundle S E)
-    [hS : S.HasMeasurableBase]
+    (L : AdelicVectorBundle S) (V : AdelicVectorBundle S)
+    [hS : S.NormMeasurabilityHypotheses]
     [hN : S.IsArchimedeanNormalized]
     [hL : L.IsHermitian] [hV : V.IsHermitian]
-    (hD : Module.finrank K D = 1) (hE : 0 < Module.finrank K E)
-    (ρ : Representation K G E) [ρ.IsIrreducible]
+    (hD : Module.finrank K L = 1) (hE : 0 < Module.finrank K V)
+    (ρ : Representation K G V) [ρ.IsIrreducible]
     (hρ : ∀ g ω z, V.norm ω ((ρ g).baseChange (S.ϕ ω).Completion z) = V.norm ω z) :
     (L ⊗ʰ V).IsMeanSlopeSemistable := by
-  let : ((Representation.trivial K G D).tprod ρ).IsIrreducible :=
+  let : ((Representation.trivial K G L).tprod ρ).IsIrreducible :=
     isIrreducible_trivialLineTensor hD ρ
   apply isMeanSlopeSemistable_of_isIrreducible _
     (by simpa only [Module.finrank_tensorProduct, hD, one_mul] using hE)
-    ((Representation.trivial K G D).tprod ρ)
+    ((Representation.trivial K G L).tprod ρ)
   exact NormFamily.orthogonalTensorPair_norm_trivialLineTensor
     L.toNormFamily V.toNormFamily ρ hρ
 
 /-- The actual line tensor and its actual dual are both semistable. -/
 theorem isMeanSlopeSemistable_lineTensor_and_dual_of_isIrreducible [S.IsProper]
-    (L : AdelicVectorBundle S D) (V : AdelicVectorBundle S E)
-    [hS : S.HasMeasurableBase]
+    (L : AdelicVectorBundle S) (V : AdelicVectorBundle S)
+    [hS : S.NormMeasurabilityHypotheses]
     [hN : S.IsArchimedeanNormalized]
     [hL : L.IsHermitian] [hV : V.IsHermitian]
-    (hD : Module.finrank K D = 1) (hE : 0 < Module.finrank K E)
-    (ρ : Representation K G E) [ρ.IsIrreducible]
+    (hD : Module.finrank K L = 1) (hE : 0 < Module.finrank K V)
+    (ρ : Representation K G V) [ρ.IsIrreducible]
     (hρ : ∀ g ω z, V.norm ω ((ρ g).baseChange (S.ϕ ω).Completion z) = V.norm ω z) :
     (L ⊗ʰ V).IsMeanSlopeSemistable ∧
-      ((L ⊗ʰ V).dualOfMeasurableBase).IsMeanSlopeSemistable := by
+      ((L ⊗ʰ V).dualOfNormMeasurability).IsMeanSlopeSemistable := by
   have hs := isMeanSlopeSemistable_lineTensor_of_isIrreducible
     L V hD hE ρ hρ
   exact ⟨hs, (isMeanSlopeSemistable_dual_iff_of_isHermitian

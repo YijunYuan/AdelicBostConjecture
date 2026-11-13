@@ -26,7 +26,7 @@ universe u v w w'
 
 variable {K : Type u} [Field K] {S : AdelicStructure.{u, v} K}
   {E : Type w} [AddCommGroup E] [Module K E] [FiniteDimensional K E]
-  {F : Type w} [AddCommGroup F] [Module K F] [FiniteDimensional K F]
+  {F : Type*} [AddCommGroup F] [Module K F] [FiniteDimensional K F]
   {Q : Type w'} [AddCommGroup Q] [Module K Q] [FiniteDimensional K Q]
 
 /-- The dual of the actual tensor-quotient norm is the induced norm along the

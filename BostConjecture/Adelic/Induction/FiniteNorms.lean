@@ -5,6 +5,7 @@ Authors: Yijun Yuan
 -/
 module
 
+public import BostConjecture.Adelic.Induction.TensorTransport
 public import ArakelovGeometry.AdelicVectorBundle.Tensor.Hermitian.Coherence
 public import ArakelovGeometry.AdelicVectorBundle.Slope.Tensor
 public import ArakelovGeometry.AdelicVectorBundle.Construction.Tensor.Countable
@@ -73,7 +74,7 @@ end NormFamily
 namespace AdelicVectorBundle
 
 variable [S.IsProper]
-  [hS : S.HasMeasurableBase]
+  [hS : S.NormMeasurabilityHypotheses]
   [hN : S.IsArchimedeanNormalized]
 
 /-- The finite tensor rank is the product of the factor ranks, including zero ranks. -/
@@ -91,48 +92,92 @@ theorem finrank_piTensorProduct_pos [Finite ι] (hr : ∀ i, 0 < finrank K (E i)
   exact Finset.prod_pos fun i _ => hr i
 
 /-- Reindexing preserves both slopes of the actual finite orthogonal bundle. -/
-theorem slopes_orthogonalTensor_reindex {κ : Type wι} [Fintype κ]
-    (V : ∀ i, AdelicVectorBundle S (E i))
+theorem slopes_orthogonalTensor_reindex {κ : Type*} [Fintype κ]
+    (V : ι → AdelicVectorBundle S)
     [hV : ∀ i, (V i).IsHermitian] (e : ι ≃ κ) :
-    (orthogonalTensorOfMeasurableBase V).slope =
-        (orthogonalTensorOfMeasurableBase (fun j => V (e.symm j))).slope ∧
-    (orthogonalTensorOfMeasurableBase V).maximalSlope =
-        (orthogonalTensorOfMeasurableBase (fun j => V (e.symm j))).maximalSlope := by
+    (orthogonalTensorOfNormMeasurability V).slope =
+        (orthogonalTensorOfNormMeasurability (fun j => V (e.symm j))).slope ∧
+    (orthogonalTensorOfNormMeasurability V).maximalSlope =
+        (orthogonalTensorOfNormMeasurability (fun j => V (e.symm j))).maximalSlope := by
   have he := NormFamily.orthogonalTensor_norm_reindex
     (fun i => (V i).toNormFamily) e
-  exact ⟨slope_eq_of_completed_isometry _ _ (PiTensorProduct.reindex K E e) he,
-    maximalSlope_eq_of_completed_isometry _ _ (PiTensorProduct.reindex K E e) he⟩
+  let A := orthogonalTensorOfNormMeasurability V
+  let B := orthogonalTensorOfNormMeasurability (fun j ↦ V (e.symm j))
+  exact ⟨slope_eq_of_completed_isometry A B (PiTensorProduct.reindex K (fun i ↦ V i) e) he,
+    maximalSlope_eq_of_completed_isometry A B (PiTensorProduct.reindex K (fun i ↦ V i) e) he⟩
 
 /-- The one-factor finite tensor has exactly the slopes of its factor. -/
 theorem slopes_orthogonalTensor_subsingleton [Subsingleton ι]
-    (V : ∀ i, AdelicVectorBundle S (E i))
+    (V : ι → AdelicVectorBundle S)
     [hV : ∀ i, (V i).IsHermitian] (i₀ : ι) :
-    (orthogonalTensorOfMeasurableBase V).slope =
+    (orthogonalTensorOfNormMeasurability V).slope =
         (V i₀).slope ∧
-    (orthogonalTensorOfMeasurableBase V).maximalSlope =
+    (orthogonalTensorOfNormMeasurability V).maximalSlope =
         (V i₀).maximalSlope := by
   have he := NormFamily.orthogonalTensor_norm_subsingletonEquiv
     (fun i => (V i).toNormFamily) i₀
-  exact ⟨slope_eq_of_completed_isometry _ _
-      (PiTensorProduct.subsingletonEquiv (R := K) (s := E) i₀) he,
-    maximalSlope_eq_of_completed_isometry _ _
-      (PiTensorProduct.subsingletonEquiv (R := K) (s := E) i₀) he⟩
+  let A := orthogonalTensorOfNormMeasurability V
+  exact ⟨slope_eq_of_completed_isometry A (V i₀)
+      (PiTensorProduct.subsingletonEquiv (R := K) (s := (fun i ↦ V i)) i₀) he,
+    maximalSlope_eq_of_completed_isometry A (V i₀)
+      (PiTensorProduct.subsingletonEquiv (R := K) (s := (fun i ↦ V i)) i₀) he⟩
 
-/-- Canonical grouping preserves the mean and maximal slopes on the actual norms. -/
-theorem slopes_orthogonalTensor_sum {κ : Type wι} [Fintype κ]
-    {D : ι ⊕ κ → Type w} [∀ i, AddCommGroup (D i)] [∀ i, Module K (D i)]
-    [∀ i, FiniteDimensional K (D i)] (V : ∀ i, AdelicVectorBundle S (D i))
+/-- The upstream grouping isometry for index types in the same universe. -/
+private theorem slopes_orthogonalTensor_sum_same_universe {κ : Type wι} [Fintype κ]
+    (V : (ι ⊕ κ) → AdelicVectorBundle S)
     [hV : ∀ i, (V i).IsHermitian] :
-    let A := orthogonalTensorOfMeasurableBase (fun i => V (.inl i))
-    let B := orthogonalTensorOfMeasurableBase (fun j => V (.inr j))
+    let A := orthogonalTensorOfNormMeasurability (fun i => V (.inl i))
+    let B := orthogonalTensorOfNormMeasurability (fun j => V (.inr j))
     (A ⊗ʰ B).slope =
-        (orthogonalTensorOfMeasurableBase V).slope ∧
+        (orthogonalTensorOfNormMeasurability V).slope ∧
     (A ⊗ʰ B).maximalSlope =
-        (orthogonalTensorOfMeasurableBase V).maximalSlope := by
+        (orthogonalTensorOfNormMeasurability V).maximalSlope := by
   have he := NormFamily.orthogonalTensor_norm_tmulEquivDep
     (fun i => (V i).toNormFamily)
-  exact ⟨slope_eq_of_completed_isometry _ _ (PiTensorProduct.tmulEquivDep K D) he,
-    maximalSlope_eq_of_completed_isometry _ _ (PiTensorProduct.tmulEquivDep K D) he⟩
+  let A := orthogonalTensorOfNormMeasurability (fun i ↦ V (.inl i))
+  let B := orthogonalTensorOfNormMeasurability (fun j ↦ V (.inr j))
+  let C := orthogonalTensorOfNormMeasurability V
+  exact ⟨slope_eq_of_completed_isometry (A ⊗ʰ B) C
+      (PiTensorProduct.tmulEquivDep K (fun i ↦ V i)) he,
+    maximalSlope_eq_of_completed_isometry (A ⊗ʰ B) C
+      (PiTensorProduct.tmulEquivDep K (fun i ↦ V i)) he⟩
+
+
+/-- Canonical grouping preserves both slopes, with independent index universes. -/
+theorem slopes_orthogonalTensor_sum {κ : Type*} [Fintype κ]
+    (V : (ι ⊕ κ) → AdelicVectorBundle S)
+    [hV : ∀ i, (V i).IsHermitian] :
+    let A := orthogonalTensorOfNormMeasurability (fun i ↦ V (.inl i))
+    let B := orthogonalTensorOfNormMeasurability (fun j ↦ V (.inr j))
+    (A ⊗ʰ B).slope = (orthogonalTensorOfNormMeasurability V).slope ∧
+    (A ⊗ʰ B).maximalSlope = (orthogonalTensorOfNormMeasurability V).maximalSlope := by
+  classical
+  let eι := Fintype.equivFin ι
+  let eκ := Fintype.equivFin κ
+  let e := Equiv.sumCongr eι eκ
+  let A := orthogonalTensorOfNormMeasurability (fun i ↦ V (.inl i))
+  let B := orthogonalTensorOfNormMeasurability (fun j ↦ V (.inr j))
+  let A' := orthogonalTensorOfNormMeasurability (fun i ↦ V (.inl (eι.symm i)))
+  let B' := orthogonalTensorOfNormMeasurability (fun j ↦ V (.inr (eκ.symm j)))
+  let f := PiTensorProduct.reindex K (fun i ↦ V (.inl i)) eι
+  let g := PiTensorProduct.reindex K (fun j ↦ V (.inr j)) eκ
+  have hf := NormFamily.orthogonalTensor_norm_reindex
+    (fun i ↦ (V (.inl i)).toNormFamily) eι
+  have hg := NormFamily.orthogonalTensor_norm_reindex
+    (fun j ↦ (V (.inr j)).toNormFamily) eκ
+  have ht (ω : S.Ω) (z) : (A' ⊗ʰ B').norm ω
+      ((TensorProduct.congr f g).toLinearMap.baseChange (S.ϕ ω).Completion z) =
+        (A ⊗ʰ B).norm ω z :=
+    NormFamily.orthogonalTensorPair_norm_congr
+      A.toNormFamily B.toNormFamily A'.toNormFamily B'.toNormFamily f g ω (hf ω) (hg ω) z
+  have hs := slope_eq_of_completed_isometry (A ⊗ʰ B) (A' ⊗ʰ B')
+    (TensorProduct.congr f g) ht
+  have hm := maximalSlope_eq_of_completed_isometry (A ⊗ʰ B) (A' ⊗ʰ B')
+    (TensorProduct.congr f g) ht
+  have hgroup := slopes_orthogonalTensor_sum_same_universe (fun j ↦ V (e.symm j))
+  have hreindex := slopes_orthogonalTensor_reindex V e
+  exact ⟨hs.trans (hgroup.1.trans hreindex.1.symm),
+    hm.trans (hgroup.2.trans hreindex.2.symm)⟩
 
 end AdelicVectorBundle
 

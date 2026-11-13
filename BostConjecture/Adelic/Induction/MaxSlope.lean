@@ -25,16 +25,15 @@ namespace ArakelovGeometry.AdelicVectorBundle
 
 universe u v w
 
-variable {K : Type u} {E : Type w} [Field K] [AddCommGroup E] [Module K E]
-  [FiniteDimensional K E] {S : AdelicStructure.{u, v} K} [S.IsProper]
+variable {K : Type u} [Field K] {S : AdelicStructure.{u, v} K} [S.IsProper]
 
 /-- Each weight of an HN-adapted basis is bounded by the first actual HN slope. -/
 theorem weight_le_first_hermitianHNOrderedSlope
-    (V : AdelicVectorBundle S E)
-    [hS : S.HasMeasurableBase]
+    (V : AdelicVectorBundle S)
+    [hS : S.NormMeasurabilityHypotheses]
     [hN : S.IsArchimedeanNormalized]
-    [hV : V.IsHermitian] (hr : 0 < finrank K E)
-    {ι : Type*} (b : Basis ι K E) (w : ι → ℝ)
+    [hV : V.IsHermitian] (hr : 0 < finrank K V)
+    {ι : Type*} (b : Basis ι K V) (w : ι → ℝ)
     (hb : ∀ t, V.hermitianHNFiltration t = span K (b '' {i | t ≤ w i}))
     (i : ι) : w i ≤ V.hermitianHNOrderedSlope ⟨0, hr⟩ := by
   have hm : b i ∈ V.hermitianHNFiltration (w i) := by
@@ -49,15 +48,13 @@ theorem weight_le_first_hermitianHNOrderedSlope
   exact b.ne_zero i (congrArg Subtype.val
     (Subsingleton.elim (⟨b i, hm⟩ : V.hermitianHNFiltration (w i)) 0))
 
-variable {F : Type w} [AddCommGroup F] [Module K F] [FiniteDimensional K F]
-
 /-- The actual tensor HN identity implies maximal-slope additivity in positive rank. -/
 theorem maximalSlope_orthogonalTensorPair_of_hnFiltration_eq
-    (V : AdelicVectorBundle S E) (W : AdelicVectorBundle S F)
-    [hS : S.HasMeasurableBase]
+    (V : AdelicVectorBundle S) (W : AdelicVectorBundle S)
+    [hS : S.NormMeasurabilityHypotheses]
     [hN : S.IsArchimedeanNormalized]
     [hV : V.IsHermitian] [hW : W.IsHermitian]
-    (hE : 0 < finrank K E) (hF : 0 < finrank K F)
+    (hE : 0 < finrank K V) (hF : 0 < finrank K W)
     (hHN : (V ⊗ʰ W).hermitianHNFiltration =
       tensorFiltration (V.hermitianHNFiltration)
         (W.hermitianHNFiltration)) :
@@ -65,7 +62,7 @@ theorem maximalSlope_orthogonalTensorPair_of_hnFiltration_eq
       V.maximalSlope + W.maximalSlope := by
   let T := V ⊗ʰ W
   have hT := orthogonalTensorPair_isHermitian V W
-  have hpos : 0 < finrank K (E ⊗[K] F) := by
+  have hpos : 0 < finrank K (V ⊗[K] W) := by
     rw [finrank_tensorProduct]
     exact Nat.mul_pos hE hF
   let a := V.hermitianHNOrderedSlope ⟨0, hE⟩
@@ -77,7 +74,7 @@ theorem maximalSlope_orthogonalTensorPair_of_hnFiltration_eq
   have hz (j) : z j ≤ b := W.weight_le_first_hermitianHNOrderedSlope hF f z hf j
   have hbound : c ≤ a + b := by
     by_contra hn
-    have hempty : {p : Fin (finrank K E) × Fin (finrank K F) | c ≤ w p.1 + z p.2} = ∅ := by
+    have hempty : {p : Fin (finrank K V) × Fin (finrank K W) | c ≤ w p.1 + z p.2} = ∅ := by
       apply Set.eq_empty_iff_forall_notMem.mpr
       intro p hp
       exact hn (hp.trans (add_le_add (hw p.1) (hz p.2)))

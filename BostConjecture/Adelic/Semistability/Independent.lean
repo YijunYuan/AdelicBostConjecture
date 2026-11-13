@@ -145,27 +145,27 @@ namespace AdelicVectorBundle
 isometric actions make the actual orthogonal tensor bundle and its dual
 mean-slope semistable over the original field. -/
 theorem isMeanSlopeSemistable_orthogonalTensor_and_dual_of_isIrreducible_baseChange
-    [S.IsProper] (V : ∀ i, AdelicVectorBundle S (E i))
-    [hS : S.HasMeasurableBase]
+    [S.IsProper] (V : ι → AdelicVectorBundle S)
+    [hS : S.NormMeasurabilityHypotheses]
     [hN : S.IsArchimedeanNormalized]
     [hV : ∀ i, (V i).IsHermitian]
-    (hr : ∀ i, 0 < Module.finrank K (E i))
-    (ρ : ∀ i, Representation K (G i) (E i))
+    (hr : ∀ i, 0 < Module.finrank K (V i))
+    (ρ : ∀ i, Representation K (G i) (V i))
     (L : Type*) [Field L] [Algebra K L] [IsAlgClosed L]
     [∀ i, Representation.IsIrreducible (representationBaseChange L (ρ i))]
     (hρ : ∀ i g ω z, (V i).toNormFamily.norm ω
       ((ρ i g).baseChange (S.ϕ ω).Completion z) = (V i).toNormFamily.norm ω z) :
-    (orthogonalTensorOfMeasurableBase V).IsMeanSlopeSemistable ∧
-      ((orthogonalTensorOfMeasurableBase V).dualOfMeasurableBase).IsMeanSlopeSemistable := by
-  let : ∀ i, Nontrivial (E i) := fun i => Module.nontrivial_of_finrank_pos (hr i)
-  let b := Basis.piTensorProduct (fun i => Module.Free.chooseBasis K (E i))
-  let : Nontrivial (⨂[K] i, E i) := b.repr.symm.injective.nontrivial
+    (orthogonalTensorOfNormMeasurability V).IsMeanSlopeSemistable ∧
+      ((orthogonalTensorOfNormMeasurability V).dualOfNormMeasurability).IsMeanSlopeSemistable := by
+  let : ∀ i, Nontrivial (V i) := fun i => Module.nontrivial_of_finrank_pos (hr i)
+  let b := Basis.piTensorProduct (fun i => Module.Free.chooseBasis K (V i))
+  let : Nontrivial (⨂[K] i, V i) := b.repr.symm.injective.nontrivial
   let : Representation.IsIrreducible (independentPiRepresentation ρ) :=
     isIrreducible_independentPi_of_representationBaseChange (L := L) ρ
-  let T := orthogonalTensorOfMeasurableBase V
+  let T := orthogonalTensorOfNormMeasurability V
   have hT : T.IsHermitian :=
-    orthogonalTensorOfMeasurableBase_isHermitian V
-  have hpos : 0 < Module.finrank K (⨂[K] i, E i) := Module.finrank_pos
+    orthogonalTensorOfNormMeasurability_isHermitian V
+  have hpos : 0 < Module.finrank K (⨂[K] i, V i) := Module.finrank_pos
   have hs : T.IsMeanSlopeSemistable :=
     T.isMeanSlopeSemistable_of_isIrreducible hpos
       (independentPiRepresentation ρ)

@@ -130,7 +130,7 @@ section Completed
 universe u v
 
 variable {K : Type u} [Field K] [CharZero K] {S : AdelicStructure.{u, v} K}
-  {E : Type u} [AddCommGroup E] [Module K E] [FiniteDimensional K E]
+  {E : Type*} [AddCommGroup E] [Module K E] [FiniteDimensional K E]
   (ξ : NormFamily S E)
   [hN : S.IsArchimedeanNormalized]
   [hξ : ξ.IsHermitian] {n k : ℕ}
@@ -183,8 +183,7 @@ section Bundle
 universe u v
 
 variable {K : Type u} [Field K] [CharZero K] {S : AdelicStructure.{u, v} K}
-  {E : Type u} [AddCommGroup E] [Module K E] [FiniteDimensional K E]
-  (V : AdelicVectorBundle S E)
+  (V : AdelicVectorBundle S)
   [hN : S.IsArchimedeanNormalized]
   [hcount : S.HasCommonCountableDenseSubfield] [hV : V.IsHermitian]
 
@@ -192,25 +191,28 @@ omit hV in
 /-- On determinant pure tensors the actual auxiliary norm is the product of
 the actual determinant norms and the completed Specht norm, at every place. -/
 theorem determinantSpechtBundle_norm_tprod {n k : ℕ}
-    (t : Tableau n (rectangle (finrank K E) k))
+    (t : Tableau n (rectangle (finrank K V) k))
     (c : Basis (Fin (finrank K (K ⊗[ℤ] orbitLattice t))) ℤ (orbitLattice t))
     (ω : S.Ω)
-    (η : Fin k → ⋀[(S.ϕ ω).Completion]^(finrank K E) ((S.ϕ ω).Completion ⊗[K] E))
+    (η : Fin k → ⋀[(S.ϕ ω).Completion]^(finrank K V) ((S.ϕ ω).Completion ⊗[K] V))
     (z : (S.ϕ ω).Completion ⊗[ℤ] orbitLattice t) :
     (determinantSpechtBundle V k t c).norm ω
-      ((determinantTwistBaseChangeEquiv (R := K) (S := (S.ϕ ω).Completion) (M := E)
-        (orbitLattice t) k (finrank K E)).symm ((⨂ₜ[(S.ϕ ω).Completion] q, η q)
+      ((determinantTwistBaseChangeEquiv (R := K) (S := (S.ϕ ω).Completion) (M := V)
+        (orbitLattice t) k (finrank K V)).symm ((⨂ₜ[(S.ϕ ω).Completion] q, η q)
           ⊗ₜ[(S.ϕ ω).Completion] z)) =
       (∏ q, V.toNormFamily.determinant.norm ω
-        ((exteriorBaseChangeEquiv K (S.ϕ ω).Completion E _).symm (η q))) *
+        ((exteriorBaseChangeEquiv K (S.ϕ ω).Completion V _).symm (η q))) *
       (latticeNormFamily S t c).norm ω
         ((TensorProduct.AlgebraTensorModule.cancelBaseChange ℤ K (S.ϕ ω).Completion
           (S.ϕ ω).Completion (orbitLattice t)).symm z) := by
-  rw [determinantTwistBaseChangeEquiv_symm_tprod (K := K) (E := E) η z]
+  rw [determinantTwistBaseChangeEquiv_symm_tprod (K := K) (E := V) η z]
   refine (NormFamily.orthogonalTensorPair_norm_tmul_completed _ _
      ω _ _).trans ?_
   congr 1
-  exact NormFamily.orthogonalTensor_norm_tprod _ ω _
+  exact NormFamily.orthogonalTensor_norm_tprod
+    (fun _ : Fin k ↦ V.toNormFamily.determinant)
+    (hξ := fun _ ↦ AdelicVectorBundle.IsLine.isHermitian
+      (AdelicVectorBundle.determinantOfNormMeasurability_isLine V)) ω _
 
 omit [CharZero K] in
 /-- The power of an orthonormal determinant generator has norm one for the
@@ -221,13 +223,13 @@ theorem determinantPower_norm_orthonormalBasis (k : ℕ) (ω : S.Ω) (hω : ω �
     letI := V.toNormFamily.fibreNormedAddCommGroup ω
     letI := V.toNormFamily.fibreNormedSpace ω
     letI := V.toNormFamily.fiberInnerProductSpace ω hω
-    ∀ b : OrthonormalBasis (Fin (finrank K E)) (S.ϕ ω).Completion
-        ((S.ϕ ω).Completion ⊗[K] E),
+    ∀ b : OrthonormalBasis (Fin (finrank K V)) (S.ϕ ω).Completion
+        ((S.ϕ ω).Completion ⊗[K] V),
       (determinantPower V k).norm ω
         ((tensorBaseChangeEquiv K (S.ϕ ω).Completion
-          (fun _ : Fin k => ⋀[K]^(finrank K E) E)).symm
+          (fun _ : Fin k => ⋀[K]^(finrank K V) V)).symm
             (⨂ₜ[(S.ϕ ω).Completion] (_ : Fin k),
-              (exteriorBaseChangeEquiv K (S.ϕ ω).Completion E _).symm
+              (exteriorBaseChangeEquiv K (S.ϕ ω).Completion V _).symm
                 (exteriorPower.ιMulti (S.ϕ ω).Completion _ b))) = 1 := by
   let := hN ω hω
   let := IsRCLikeNormedField.rclike (S.ϕ ω).Completion
@@ -235,14 +237,16 @@ theorem determinantPower_norm_orthonormalBasis (k : ℕ) (ω : S.Ω) (hω : ω �
   let := V.toNormFamily.fibreNormedSpace ω
   let := V.toNormFamily.fiberInnerProductSpace ω hω
   intro b
-  refine (NormFamily.orthogonalTensor_norm_tprod _ ω _).trans ?_
-  simp only [AdelicVectorBundle.determinantOfMeasurableBase_toNormFamily,
-    hV.determinant_norm_orthonormalBasis V.toNormFamily ω hω b, Finset.prod_const_one]
+  refine (NormFamily.orthogonalTensor_norm_tprod
+    (fun _ : Fin k ↦ V.toNormFamily.determinant)
+    (hξ := fun _ ↦ AdelicVectorBundle.IsLine.isHermitian
+      (AdelicVectorBundle.determinantOfNormMeasurability_isLine V)) ω _).trans ?_
+  simp only [hV.determinant_norm_orthonormalBasis V.toNormFamily ω hω b, Finset.prod_const_one]
 
 /-- Tensoring with the completed orthonormal determinant generator leaves the
 actual Specht norm unchanged. -/
 theorem determinantSpechtBundle_norm_generator {n k : ℕ}
-    (t : Tableau n (rectangle (finrank K E) k))
+    (t : Tableau n (rectangle (finrank K V) k))
     (c : Basis (Fin (finrank K (K ⊗[ℤ] orbitLattice t))) ℤ (orbitLattice t))
     (ω : S.Ω) (hω : ω ∈ S.Ωinf) :
     letI := hN ω hω
@@ -250,16 +254,16 @@ theorem determinantSpechtBundle_norm_generator {n k : ℕ}
     letI := V.toNormFamily.fibreNormedAddCommGroup ω
     letI := V.toNormFamily.fibreNormedSpace ω
     letI := V.toNormFamily.fiberInnerProductSpace ω hω
-    ∀ (b : OrthonormalBasis (Fin (finrank K E)) (S.ϕ ω).Completion
-        ((S.ϕ ω).Completion ⊗[K] E))
+    ∀ (b : OrthonormalBasis (Fin (finrank K V)) (S.ϕ ω).Completion
+        ((S.ϕ ω).Completion ⊗[K] V))
       (x : (S.ϕ ω).Completion ⊗[K] (K ⊗[ℤ] orbitLattice t)),
       (determinantSpechtBundle V k t c).norm ω
         ((TensorProduct.AlgebraTensorModule.distribBaseChange K (S.ϕ ω).Completion
-          (⨂[K] (_ : Fin k), ⋀[K]^(finrank K E) E) (K ⊗[ℤ] orbitLattice t)).symm
+          (⨂[K] (_ : Fin k), ⋀[K]^(finrank K V) V) (K ⊗[ℤ] orbitLattice t)).symm
           (((tensorBaseChangeEquiv K (S.ϕ ω).Completion
-            (fun _ : Fin k => ⋀[K]^(finrank K E) E)).symm
+            (fun _ : Fin k => ⋀[K]^(finrank K V) V)).symm
               (⨂ₜ[(S.ϕ ω).Completion] (_ : Fin k),
-                (exteriorBaseChangeEquiv K (S.ϕ ω).Completion E _).symm
+                (exteriorBaseChangeEquiv K (S.ϕ ω).Completion V _).symm
                   (exteriorPower.ιMulti (S.ϕ ω).Completion _ b)))
             ⊗ₜ[(S.ϕ ω).Completion] x)) = (latticeNormFamily S t c).norm ω x := by
   let := hN ω hω
@@ -271,19 +275,18 @@ theorem determinantSpechtBundle_norm_generator {n k : ℕ}
   refine (NormFamily.orthogonalTensorPair_norm_tmul_completed _ _
      ω _ _).trans ?_
   rw [determinantPower_norm_orthonormalBasis V k ω hω b, one_mul]
-  rfl
 
 /-- At every real or complex Archimedean completion, the actual canonical
 determinant–Specht map is isometric for the prescribed adelic norms. -/
 theorem projectiveDeterminantMap_norm_infinite {n k : ℕ} (hk : 0 < k)
-    (t : Tableau n (rectangle (finrank K E) k))
+    (t : Tableau n (rectangle (finrank K V) k))
     (c : Basis (Fin (finrank K (K ⊗[ℤ] orbitLattice t))) ℤ (orbitLattice t))
     (ω : S.Ω) (hω : ω ∈ S.Ωinf)
     (x : (S.ϕ ω).Completion ⊗[K]
-      ((⨂[K] (_ : Fin k), ⋀[K]^(finrank K E) E) ⊗[K] (K ⊗[ℤ] orbitLattice t))) :
+      ((⨂[K] (_ : Fin k), ⋀[K]^(finrank K V) V) ⊗[K] (K ⊗[ℤ] orbitLattice t))) :
     (NormFamily.orthogonalTensor (fun _ : Fin n => V.toNormFamily)).norm ω
       ((projectiveDeterminantMap hk t
-        (fun p => congrFun (Module.rankAtStalk_eq_finrank_of_free (R := K) (M := E)) p)).baseChange
+        (fun p => congrFun (Module.rankAtStalk_eq_finrank_of_free (R := K) (M := V)) p)).baseChange
           (S.ϕ ω).Completion x) = (determinantSpechtBundle V k t c).norm ω x := by
   let := hN ω hω
   let := IsRCLikeNormedField.rclike (S.ϕ ω).Completion
@@ -291,20 +294,20 @@ theorem projectiveDeterminantMap_norm_infinite {n k : ℕ} (hk : 0 < k)
   let := V.toNormFamily.fibreNormedSpace ω
   let := V.toNormFamily.fiberInnerProductSpace ω hω
   let b := (stdOrthonormalBasis (S.ϕ ω).Completion
-    ((S.ϕ ω).Completion ⊗[K] E)).reindex (finCongr Module.finrank_baseChange)
+    ((S.ϕ ω).Completion ⊗[K] V)).reindex (finCongr Module.finrank_baseChange)
   let e := determinantTwistBaseChangeEquiv (R := K) (S := (S.ϕ ω).Completion)
-    (M := E) (orbitLattice t) k (finrank K E)
+    (M := V) (orbitLattice t) k (finrank K V)
   obtain ⟨z, hz⟩ := exists_determinantPower_tmul b.toBasis (e x)
   have hx := e.eq_symm_apply.mpr hz
   rw [hx]
   change (NormFamily.orthogonalTensor _).norm ω
     ((projectiveDeterminantMap hk t _).baseChange (S.ϕ ω).Completion
-      ((determinantTwistBaseChangeEquiv (R := K) (S := (S.ϕ ω).Completion) (M := E)
-        (orbitLattice t) k (finrank K E)).symm _)) = _
+      ((determinantTwistBaseChangeEquiv (R := K) (S := (S.ϕ ω).Completion) (M := V)
+        (orbitLattice t) k (finrank K V)).symm _)) = _
   refine (congrArg
     ((NormFamily.orthogonalTensor (fun _ : Fin n ↦ V.toNormFamily)).norm ω)
     (projectiveDeterminantMap_baseChange_generator (K := K) (L := (S.ϕ ω).Completion)
-      (E := E) hk t _ b.toBasis z)).trans ?_
+      (E := V) hk t _ b.toBasis z)).trans ?_
   have hn := orthogonal_freeLatticeMap_completed_norm V.toNormFamily hk t c ω hω b
     ((TensorProduct.AlgebraTensorModule.cancelBaseChange ℤ K (S.ϕ ω).Completion
       (S.ϕ ω).Completion (orbitLattice t)).symm z)
@@ -312,8 +315,8 @@ theorem projectiveDeterminantMap_norm_infinite {n k : ℕ} (hk : 0 < k)
   refine hn.trans ?_
   symm
   change (determinantSpechtBundle V k t c).norm ω
-    ((determinantTwistBaseChangeEquiv (R := K) (S := (S.ϕ ω).Completion) (M := E)
-      (orbitLattice t) k (finrank K E)).symm _) = _
+    ((determinantTwistBaseChangeEquiv (R := K) (S := (S.ϕ ω).Completion) (M := V)
+      (orbitLattice t) k (finrank K V)).symm _) = _
   rw [determinantSpechtBundle_norm_tprod V t c ω]
   simp only [OrthonormalBasis.coe_toBasis,
     hV.determinant_norm_orthonormalBasis V.toNormFamily ω hω b,

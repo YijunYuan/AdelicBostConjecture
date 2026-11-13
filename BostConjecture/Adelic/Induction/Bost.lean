@@ -5,7 +5,7 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Adelic.Induction.TensorTransport
+public import BostConjecture.Adelic.Semistability.Comparison
 public import BostConjecture.Adelic.Induction.RankInduction
 public import BostConjecture.Adelic.Induction.MaxSlope
 public import BostConjecture.Adelic.Induction.FiniteMaxSlope
@@ -29,128 +29,91 @@ open scoped TensorProduct
 
 namespace ArakelovGeometry.AdelicVectorBundle
 
-universe u v w wι
+universe u v wι
 
 variable {K : Type u} [Field K] [CharZero K] [Countable K]
   {S : AdelicStructure.{u, v} K} [S.IsProper]
   [hN : S.IsArchimedeanNormalized]
 
 /-- The concrete geometric quotient theorem closes simultaneous rank induction
-on carriers in the field universe, including zero-rank HN identities. -/
+with independent carrier universes, including zero-rank HN identities. -/
 theorem tensorHN_and_semistable
-    {E F : Type u} [AddCommGroup E] [Module K E] [FiniteDimensional K E]
-    [AddCommGroup F] [Module K F] [FiniteDimensional K F]
-    (V : AdelicVectorBundle S E) (W : AdelicVectorBundle S F)
+    (V : AdelicVectorBundle S) (W : AdelicVectorBundle S)
     [hV : V.IsHermitian] [hW : W.IsHermitian] :
     (V ⊗ʰ W).hermitianHNFiltration =
       tensorFiltration (V.hermitianHNFiltration)
         (W.hermitianHNFiltration) ∧
-    (V.IsMeanSlopeSemistable → W.IsMeanSlopeSemistable →
-      (V ⊗ʰ W).IsMeanSlopeSemistable) := by
-  apply tensorHN_and_semistable_of_geometric_quotient_bound ?_ E F V W
-  intro A B Q _ _ _ _ _ _ _ _ _ _ _ _ X Y hX hY _ _ q hq _ hg
-  exact slope_sum_le_tensor_quotient_of_geometricallySemistable X Y q hq hg
-
-variable {E F : Type w}
-  [AddCommGroup E] [Module K E] [FiniteDimensional K E]
-  [AddCommGroup F] [Module K F] [FiniteDimensional K F]
+    (V.IsSemistable → W.IsSemistable → (V ⊗ʰ W).IsSemistable) := by
+  have h := tensorHN_and_semistable_of_geometric_quotient_bound
+    (S := S) (fun Q _ _ _ _ X Y _ _ _ _ _ _ q hq _ hg ↦
+      slope_sum_le_tensor_quotient_of_geometricallySemistable X Y q hq hg) V W
+  refine ⟨h.1, fun hsV hsW ↦ ?_⟩
+  exact (isSemistable_iff_isMeanSlopeSemistable (V ⊗ʰ W)).mpr
+    (h.2 ((isSemistable_iff_isMeanSlopeSemistable V).mp hsV)
+      ((isSemistable_iff_isMeanSlopeSemistable W).mp hsW))
 
 /-- This paper, Theorem 1.1: maximal slopes add under the actual binary
-orthogonal tensor product. The original field and arbitrary carrier universe
-are retained; finite-dimensional coordinates are transported isometrically. -/
+orthogonal tensor product. The two factors may have independent carrier universes. -/
 theorem maximalSlope_orthogonalTensorPair
-    (V : AdelicVectorBundle S E) (W : AdelicVectorBundle S F)
+    (V : AdelicVectorBundle S) (W : AdelicVectorBundle S)
     [hV : V.IsHermitian] [hW : W.IsHermitian]
-    [Nontrivial E] [Nontrivial F] :
+    [Nontrivial V] [Nontrivial W] :
     (V ⊗ʰ W).maximalSlope =
       V.maximalSlope + W.maximalSlope := by
-  let e := (finBasis K E).equivFun.symm
-  let f := (finBasis K F).equivFun.symm
-  let X := V.pullbackEquiv e
-  let Y := W.pullbackEquiv f
-  have hX : X.IsHermitian := NormFamily.IsHermitian.pullback hV e.toLinearMap e.injective
-  have hY : Y.IsHermitian := NormFamily.IsHermitian.pullback hW f.toLinearMap f.injective
-  have hrX : 0 < finrank K (Fin (finrank K E) → K) := e.finrank_eq.symm ▸ finrank_pos
-  have hrY : 0 < finrank K (Fin (finrank K F) → K) := f.finrank_eq.symm ▸ finrank_pos
-  have hXY := maximalSlope_orthogonalTensorPair_of_hnFiltration_eq X Y
-    hrX hrY (tensorHN_and_semistable X Y).1
-  have he := maximalSlope_eq_of_completed_isometry X V e (fun _ _ ↦ rfl)
-  have hf := maximalSlope_eq_of_completed_isometry Y W f (fun _ _ ↦ rfl)
-  have ht := maximalSlope_eq_of_completed_isometry
-    (X ⊗ʰ Y) (V ⊗ʰ W)
-    (TensorProduct.congr e f)
-    (fun ω z ↦ NormFamily.orthogonalTensorPair_norm_congr
-      X.toNormFamily Y.toNormFamily V.toNormFamily W.toNormFamily
-      e f ω (fun _ ↦ rfl) (fun _ ↦ rfl) z)
-  exact ht.symm.trans (hXY.trans (congrArg₂ (· + ·) he hf))
+  exact maximalSlope_orthogonalTensorPair_of_hnFiltration_eq V W
+    finrank_pos finrank_pos (tensorHN_and_semistable V W).1
 
 /-- The binary orthogonal tensor of semistable Hermitian adelic bundles is
 semistable, with positive rank supplied by the factors' semistability. -/
-instance isMeanSlopeSemistable_orthogonalTensorPair
-    (V : AdelicVectorBundle S E) (W : AdelicVectorBundle S F)
+instance isSemistable_orthogonalTensorPair
+    (V : AdelicVectorBundle S) (W : AdelicVectorBundle S)
     [hV : V.IsHermitian] [hW : W.IsHermitian]
-    [hsV : V.IsMeanSlopeSemistable] [hsW : W.IsMeanSlopeSemistable] :
-    (V ⊗ʰ W).IsMeanSlopeSemistable := by
-  let : Nontrivial E := Module.nontrivial_of_finrank_pos hsV.rank_pos
-  let : Nontrivial F := Module.nontrivial_of_finrank_pos hsW.rank_pos
-  have hr : 0 < finrank K (E ⊗[K] F) := by
-    rw [finrank_tensorProduct]
-    exact Nat.mul_pos hsV.1 hsW.1
-  apply (isMeanSlopeSemistable_iff_maximalSlope_eq_slope _ hr).mpr
-  rw [maximalSlope_orthogonalTensorPair V W,
-    slope_orthogonalTensorPair V W hsV.1 hsW.1,
-    (V.isMeanSlopeSemistable_iff_maximalSlope_eq_slope hsV.1).mp hsV,
-    (W.isMeanSlopeSemistable_iff_maximalSlope_eq_slope hsW.1).mp hsW,
-    EReal.coe_add]
+    [V.IsSemistable] [W.IsSemistable] :
+    (V ⊗ʰ W).IsSemistable :=
+  (tensorHN_and_semistable V W).2 inferInstance inferInstance
 
 /-- This paper, Corollary 7.3: the actual tensor HN filtration is the weighted
 tensor of the factor HN filtrations. Zero-rank factors and zero grades are allowed. -/
 theorem hermitianHNFiltration_orthogonalTensorPair
-    (V : AdelicVectorBundle S E) (W : AdelicVectorBundle S F)
+    (V : AdelicVectorBundle S) (W : AdelicVectorBundle S)
     [hV : V.IsHermitian] [hW : W.IsHermitian] :
     (V ⊗ʰ W).hermitianHNFiltration =
       tensorFiltration (V.hermitianHNFiltration)
         (W.hermitianHNFiltration) := by
-  apply hermitianHNFiltration_orthogonalTensorPair_of_semistable_grades V W
-  intro t u ht hu
-  have := ((filtrationGraded_hermitianHN_zero_or_semistable V t).resolve_left
-    (Nat.ne_of_gt ht)).1
-  have := ((filtrationGraded_hermitianHN_zero_or_semistable W u).resolve_left
-    (Nat.ne_of_gt hu)).1
-  exact isMeanSlopeSemistable_orthogonalTensorPair
-    (V.filtrationGraded _ t) (W.filtrationGraded _ u)
+  exact (tensorHN_and_semistable V W).1
 
 /-- This paper, Theorem 1.1, finite-family form: maximal slopes add on the
 actual orthogonal tensor of any finite family of positive-rank factors,
 including the empty family. -/
-theorem maximalSlope_orthogonalTensorOfMeasurableBase
-    {ι : Type wι} [Fintype ι] {D : ι → Type w}
-    [∀ i, AddCommGroup (D i)] [∀ i, Module K (D i)]
-    [∀ i, FiniteDimensional K (D i)] (V : ∀ i, AdelicVectorBundle S (D i))
-    [hV : ∀ i, (V i).IsHermitian] [∀ i, Nontrivial (D i)] :
-    (orthogonalTensorOfMeasurableBase V).maximalSlope =
+theorem maximalSlope_orthogonalTensorOfNormMeasurability
+    {ι : Type wι} [Fintype ι]
+    (V : ι → AdelicVectorBundle S)
+    [hV : ∀ i, (V i).IsHermitian] [∀ i, Nontrivial (V i)] :
+    (orthogonalTensorOfNormMeasurability V).maximalSlope =
       ∑ i, (V i).maximalSlope := by
-  apply maximalSlope_orthogonalTensorOfMeasurableBase_of_binary_additivity
+  apply maximalSlope_orthogonalTensorOfNormMeasurability_of_binary_additivity
     ?_ V (fun _ ↦ finrank_pos)
-  intro A B _ _ _ _ _ _ X Y hX hY hA hB
-  let : Nontrivial A := Module.nontrivial_of_finrank_pos hA
-  let : Nontrivial B := Module.nontrivial_of_finrank_pos hB
+  intro X Y hX hY hA hB
+  let : Nontrivial X := Module.nontrivial_of_finrank_pos hA
+  let : Nontrivial Y := Module.nontrivial_of_finrank_pos hB
   exact maximalSlope_orthogonalTensorPair X Y
 
 /-- The actual orthogonal tensor of any finite family of semistable
 Hermitian adelic bundles is semistable, including the empty family. -/
-instance isMeanSlopeSemistable_orthogonalTensorOfMeasurableBase
-    {ι : Type wι} [Fintype ι] {D : ι → Type w}
-    [∀ i, AddCommGroup (D i)] [∀ i, Module K (D i)]
-    [∀ i, FiniteDimensional K (D i)] (V : ∀ i, AdelicVectorBundle S (D i))
+instance isSemistable_orthogonalTensorOfNormMeasurability
+    {ι : Type wι} [Fintype ι]
+    (V : ι → AdelicVectorBundle S)
     [hV : ∀ i, (V i).IsHermitian]
-    [hsemi : ∀ i, (V i).IsMeanSlopeSemistable] :
-    (orthogonalTensorOfMeasurableBase V).IsMeanSlopeSemistable := by
-  apply isMeanSlopeSemistable_orthogonalTensorOfMeasurableBase_of_binary_additivity
+    [hsemi : ∀ i, (V i).IsSemistable] :
+    (orthogonalTensorOfNormMeasurability V).IsSemistable := by
+  let : ∀ i, (V i).IsMeanSlopeSemistable := fun i ↦
+    ((V i).isSemistable_iff_isMeanSlopeSemistable).mp (hsemi i)
+  apply (isSemistable_iff_isMeanSlopeSemistable _).mpr
+  apply isMeanSlopeSemistable_orthogonalTensorOfNormMeasurability_of_binary_additivity
     ?_ V
-  intro A B _ _ _ _ _ _ X Y hX hY hA hB
-  let : Nontrivial A := Module.nontrivial_of_finrank_pos hA
-  let : Nontrivial B := Module.nontrivial_of_finrank_pos hB
+  intro X Y hX hY hA hB
+  let : Nontrivial X := Module.nontrivial_of_finrank_pos hA
+  let : Nontrivial Y := Module.nontrivial_of_finrank_pos hB
   exact maximalSlope_orthogonalTensorPair X Y
 
 end ArakelovGeometry.AdelicVectorBundle

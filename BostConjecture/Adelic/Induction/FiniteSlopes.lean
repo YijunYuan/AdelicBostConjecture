@@ -29,54 +29,52 @@ namespace ArakelovGeometry.AdelicVectorBundle
 universe u v w wι
 
 variable {K : Type u} [Field K] {S : AdelicStructure.{u, v} K} [S.IsProper]
-  [hS : S.HasMeasurableBase]
+  [hS : S.NormMeasurabilityHypotheses]
   [hN : S.IsArchimedeanNormalized]
 
 /-- The actual finite orthogonal tensor has mean slope equal to the sum of
 the positive-rank factor slopes. No maximal-slope hypothesis is used. -/
-theorem slope_orthogonalTensorOfMeasurableBase
-    {ι : Type wι} [Fintype ι] {E : ι → Type w}
-    [∀ i, AddCommGroup (E i)] [∀ i, Module K (E i)]
-    [∀ i, FiniteDimensional K (E i)] (V : ∀ i, AdelicVectorBundle S (E i))
-    [hV : ∀ i, (V i).IsHermitian] (hr : ∀ i, 0 < finrank K (E i)) :
-    (orthogonalTensorOfMeasurableBase V).slope =
+theorem slope_orthogonalTensorOfNormMeasurability
+    {ι : Type wι} [Fintype ι]
+    (V : ι → AdelicVectorBundle S)
+    [hV : ∀ i, (V i).IsHermitian] (hr : ∀ i, 0 < finrank K (V i)) :
+    (orthogonalTensorOfNormMeasurability V).slope =
       ∑ i, (V i).slope := by
   classical
-  have main : ∀ (ι : Type wι) [Fintype ι], ∀ (E : ι → Type w)
-      [∀ i, AddCommGroup (E i)] [∀ i, Module K (E i)]
-      [∀ i, FiniteDimensional K (E i)] (V : ∀ i, AdelicVectorBundle S (E i))
-      [hV : ∀ i, (V i).IsHermitian], (∀ i, 0 < finrank K (E i)) →
-      (orthogonalTensorOfMeasurableBase V).slope =
+  have main : ∀ (ι : Type wι) [Fintype ι], ∀
+      (V : ι → AdelicVectorBundle S)
+      [hV : ∀ i, (V i).IsHermitian], (∀ i, 0 < finrank K (V i)) →
+      (orthogonalTensorOfNormMeasurability V).slope =
         ∑ i, (V i).slope := by
     apply Fintype.induction_empty_option
-    · intro α β _ e ih E _ _ _ V hV hr
+    · intro α β _ e ih V hV hr
       let := Fintype.ofEquiv β e.symm
       rw [(slopes_orthogonalTensor_reindex V e.symm).1]
-      exact (ih (fun i => E (e i)) (fun i => V (e i))
+      exact (ih (fun i => V (e i))
         (fun i => hr (e i))).trans (e.sum_comp (fun i => (V i).slope))
-    · intro E _ _ _ V hV hr
+    · intro V hV hr
       have hline : ∀ i, (V i).IsLine := fun i ↦ isEmptyElim i
-      have he : orthogonalTensorOfMeasurableBase V =
+      have he : orthogonalTensorOfNormMeasurability V =
           orthogonalTensorLines V := rfl
       rw [he, slope_eq_degree_of_finrank_one _
         (orthogonalTensorLines_isLine V).rank_eq_one,
         degree_eq_lineDegree,
         lineDegree_orthogonalTensorLines]
       simp
-    · intro α _ ih E _ _ _ V hV hr
-      let e := Equiv.optionEquivSumPUnit α
+    · intro α _ ih V hV hr
+      let e : Option α ≃ α ⊕ PUnit.{wι + 1} := Equiv.optionEquivSumPUnit α
       rw [(slopes_orthogonalTensor_reindex V e).1,
         ← (slopes_orthogonalTensor_sum (fun j => V (e.symm j))).1]
-      let A := orthogonalTensorOfMeasurableBase (fun i => V (e.symm (.inl i)))
-      let B := orthogonalTensorOfMeasurableBase (fun j => V (e.symm (.inr j)))
+      let A := orthogonalTensorOfNormMeasurability (fun i => V (e.symm (.inl i)))
+      let B := orthogonalTensorOfNormMeasurability (fun j => V (e.symm (.inr j)))
       rw [slope_orthogonalTensorPair A B
         (finrank_piTensorProduct_pos (fun i => hr (e.symm (.inl i))))
         (finrank_piTensorProduct_pos (fun j => hr (e.symm (.inr j))))]
       rw [(slopes_orthogonalTensor_subsingleton
         (fun j => V (e.symm (.inr j))) PUnit.unit).1]
-      rw [ih (fun i => E (e.symm (.inl i))) (fun i => V (e.symm (.inl i)))
+      rw [ih (fun i => V (e.symm (.inl i)))
         (fun i => hr (e.symm (.inl i)))]
       simp [e, Fintype.sum_option, add_comm]
-  exact main ι E V hr
+  exact main ι V hr
 
 end ArakelovGeometry.AdelicVectorBundle
