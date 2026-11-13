@@ -22,7 +22,7 @@ namespace ArakelovGeometry.AdelicStructure
 variable {K : Type*} [Field K]
 
 /-- The whole rational field is dense in each of its actual completions. -/
-theorem isDenseSubfieldAt_top (S : AdelicStructure K) (ω : S.Ω) :
+private theorem isDenseSubfieldAt_top (S : AdelicStructure K) (ω : S.Ω) :
     S.IsDenseSubfieldAt ⊤ ω := by
   refine Dense.mono ?_ (UniformSpace.Completion.denseRange_coe (α := WithAbs (S.ϕ ω)))
   rintro _ ⟨x, rfl⟩
