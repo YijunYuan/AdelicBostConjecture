@@ -107,8 +107,8 @@ representation constructions remain in their existing modules.
 | `ExternalCode`, `ExternalResults` | Selected upstream proofs required by these modules, with provenance and licenses |
 
 File paths organize source modules; they do not change mathematical namespaces.
-External sources are grouped by donor. Their namespaces, copyright notices and
-licenses are preserved. [CONTRIBUTIONS.md](CONTRIBUTIONS.md) records exact
+External sources are grouped by donor. Copyright notices and licenses are
+preserved; namespace adaptations are documented. [CONTRIBUTIONS.md](CONTRIBUTIONS.md) records exact
 revisions, selected declarations, adaptations and consumers. All local Lean
 modules belong to the single `BostConjecture` library.
 
@@ -123,32 +123,22 @@ lake build
 
 Use `lake --wfail build` to require a build with no warnings. To build the
 classical entry point directly, run `lake build BostConjecture.Classical.Bost`.
-After building, run the adelic public API and axiom regression checks with:
-
-```sh
-lake env lean -j2 Tests/Universes.lean
-```
-
-These checks require warning-free elaboration with the same inference-depth
-limit as the library. They verify semistability inference, binary and finite-family results, reindexing
-across distinct universes, and the axioms of the main results.
-
-The classical statement is also available through the root import. Its axiom
-dependencies can be checked in a Lean file with:
+After building, check the public theorem axioms in a Lean file:
 
 ```lean
 import BostConjecture
 
+#print axioms ArakelovGeometry.AdelicVectorBundle.maximalSlope_orthogonalTensorPair
+#print axioms ArakelovGeometry.AdelicVectorBundle.maximalSlope_orthogonalTensorOfNormMeasurability
 #print axioms BostConjecture.Arithmetic.HermitianMetric.maxSlope_tensor
 ```
 
 The remote dependency revisions are recorded in
 [lake-manifest.json](lake-manifest.json). The package enables the mathlib
 standard linter set, `relaxedAutoImplicit = false` and
-`maxSynthPendingDepth = 3`. The default proof limits are 200,000 heartbeats and
-recursion depth 512. Two finite-place determinant comparison lemmas in
-[Classical/Adelic/Determinant.lean](BostConjecture/Classical/Adelic/Determinant.lean)
-locally use 800,000 heartbeats.
+`maxSynthPendingDepth = 3`. Proofs use Lean's default limits of 200,000
+heartbeats and recursion depth 512, including the finite-place determinant
+comparisons.
 
 The expected dependencies are Lean's standard foundational axioms
 `propext`, `Classical.choice` and `Quot.sound`; no `sorryAx` or additional

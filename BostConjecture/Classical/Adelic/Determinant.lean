@@ -108,8 +108,6 @@ end MultilinearBounds
 
 section DeterminantComparison
 
-set_option backward.isDefEq.respectTransparency false
-
 open NumberField TensorProduct IsDedekindDomain exteriorPower
 open ArakelovGeometry ArakelovGeometry.AdelicStructure
   ArakelovGeometry.ActualPrimeIndexing ArakelovGeometry.NumberFieldFullLattice
@@ -200,8 +198,6 @@ theorem finite_norm_completedIntegralWedge_le (h : HermitianMetric K M)
   · intro v hv
     exact (h.determinant.finite_norm_le_one_iff p _).mpr (h.completedIntegralWedge_mem p v hv)
 
-set_option maxHeartbeats 800000 in
--- Elaborating the two exterior-power scalar extensions is expensive.
 /-- The adelic determinant seminorm is bounded on all integral determinant sections. -/
 theorem finite_determinant_section_le_one (h : HermitianMetric K M)
     (p : HeightOneSpectrum (𝓞 K)) (ξ : DeterminantLine (K := K) M) :
@@ -209,60 +205,40 @@ theorem finite_determinant_section_le_one (h : HermitianMetric K M)
       (LinearEquiv.baseChange K (FiniteCompletion p) _ _ (determinantGenericEquiv (K := K) M)
         (1 ⊗ₜ[K] ((1 : K) ⊗ₜ[𝓞 K] ξ))) ≤ 1 := by
   classical
-  let ω := normalizedPrimeParameter p
+  -- Keep the place explicit so the dependent completion instances match directly.
   let e := LinearEquiv.baseChange K (FiniteCompletion p) _ _
     (determinantGenericEquiv (K := K) M)
-  let q := (h.adelicNormFamily.determinant.norm ω).comp e.toLinearMap
+  let q := (h.adelicNormFamily.determinant.norm (normalizedPrimeParameter p)).comp e.toLinearMap
   have hq : ∀ x y, q (x + y) ≤ max (q x) (q y) := by
     intro x y
-    change h.adelicNormFamily.determinant.norm ω (e (x + y)) ≤ _
+    change h.adelicNormFamily.determinant.norm (normalizedPrimeParameter p) (e (x + y)) ≤ _
     rw [map_add]
     exact h.adelicNormFamily.determinant.isUltrametricAtFinitePlaces_of_finrank_le_one
-      NormFamily.determinant_finrank.le ω (normalizedPrimeParameter_mem_fin p) _ _
-  change q (1 ⊗ₜ[K] ((1 : K) ⊗ₜ[𝓞 K] ξ)) ≤ 1
+      NormFamily.determinant_finrank.le (normalizedPrimeParameter p)
+      (normalizedPrimeParameter_mem_fin p) _ _
+  apply (Seminorm.comp_apply (h.adelicNormFamily.determinant.norm (normalizedPrimeParameter p))
+    e.toLinearMap _).ge.trans
   have hξ : ξ ∈ Submodule.span (𝓞 K) (Set.range (ιMulti (𝓞 K)
       (Module.finrank K (K ⊗[𝓞 K] M)) (M := M))) := by
     rw [ιMulti_span]; trivial
-  induction hξ using Submodule.span_induction with
-  | mem ξ hξ =>
-    obtain ⟨v, rfl⟩ := hξ
-    have hb := h.adelicNormFamily.determinant_norm_ιMulti_le ω
-      (fun i => (1 : FiniteCompletion p) ⊗ₜ[K] ((1 : K) ⊗ₜ[𝓞 K] v i))
-    have he : (exteriorBaseChangeEquiv K (FiniteCompletion p) (K ⊗[𝓞 K] M) _).symm
-        (ιMulti (FiniteCompletion p) _
-          (fun i => (1 : FiniteCompletion p) ⊗ₜ[K] ((1 : K) ⊗ₜ[𝓞 K] v i))) =
-        e (1 ⊗ₜ[K] ((1 : K) ⊗ₜ[𝓞 K] ιMulti (𝓞 K) _ v)) := by
-      simp only [e, LinearEquiv.baseChange_tmul, determinantGenericEquiv,
-        exteriorPower.baseChangeEquiv_apply_tmul, exteriorBaseChangeEquiv_symm_ιMulti_tmul,
-        Finset.prod_const_one]
-      rfl
-    rw [he] at hb
-    exact hb.trans ((Finset.prod_le_prod₀
-      (fun i _ => h.adelicNormFamily.norm_nonneg ω _)
-      (fun i _ => h.finite_norm_section_le_one p (v i))).trans_eq (by simp))
-  | zero =>
-    rw [tmul_zero, tmul_zero]
-    exact (map_zero q).le.trans zero_le_one
-  | add x y _ _ hx hy =>
-    simpa only [tmul_add] using (hq (1 ⊗ₜ[K] ((1 : K) ⊗ₜ[𝓞 K] x))
-      (1 ⊗ₜ[K] ((1 : K) ⊗ₜ[𝓞 K] y))).trans (max_le hx hy)
-  | smul a x _ hx =>
-    let c := (normalizedNumberFieldAdelicStructure K).integralCompletedLocalCoefficientMap
-      ω (normalizedPrimeParameter_mem_fin p) a
-    have hc : ‖(c : FiniteCompletion p)‖ ≤ 1 :=
-      ((normalizedNumberFieldAdelicStructure K).mem_completedLocalRing _ _ _).mp c.property
-    have he : (1 : FiniteCompletion p) ⊗ₜ[K] ((1 : K) ⊗ₜ[𝓞 K] (a • x)) =
-        (c : FiniteCompletion p) • (1 ⊗ₜ[K] ((1 : K) ⊗ₜ[𝓞 K] x)) := by
-      change _ = (algebraMap K (FiniteCompletion p) (algebraMap (𝓞 K) K a)) • _
-      rw [IsScalarTower.algebraMap_smul, ← tmul_smul]
-      congr 1
-      rw [tmul_smul, smul_tmul']
-      simp only [Algebra.smul_def, smul_tmul', mul_one, Algebra.algebraMap_self, RingHom.id_apply]
-    rw [he, map_smul_eq_mul]
-    exact (mul_le_mul hc hx (apply_nonneg q _) zero_le_one).trans_eq (mul_one _)
+  apply seminorm_le_one_on_integral_span p q hq _ _ hξ
+  intro ξ hξ
+  obtain ⟨v, rfl⟩ := hξ
+  have hb := h.adelicNormFamily.determinant_norm_ιMulti_le (normalizedPrimeParameter p)
+    (fun i => (1 : FiniteCompletion p) ⊗ₜ[K] ((1 : K) ⊗ₜ[𝓞 K] v i))
+  have he : (exteriorBaseChangeEquiv K (FiniteCompletion p) (K ⊗[𝓞 K] M) _).symm
+      (ιMulti (FiniteCompletion p) _
+        (fun i => (1 : FiniteCompletion p) ⊗ₜ[K] ((1 : K) ⊗ₜ[𝓞 K] v i))) =
+      e (1 ⊗ₜ[K] ((1 : K) ⊗ₜ[𝓞 K] ιMulti (𝓞 K) _ v)) := by
+    exact (e.apply_symm_apply _).symm.trans
+      (congrArg e (completedIntegralWedge_section (K := K) (M := M) (FiniteCompletion p) v))
+  simp only [q, Seminorm.comp_apply, LinearEquiv.coe_coe]
+  exact ((congrArg (h.adelicNormFamily.determinant.norm (normalizedPrimeParameter p)) he).ge.trans
+    hb).trans
+    ((Finset.prod_le_prod₀
+    (fun i _ => h.adelicNormFamily.norm_nonneg (normalizedPrimeParameter p) _)
+    (fun i _ => h.finite_norm_section_le_one p (v i))).trans_eq (by simp))
 
-set_option maxHeartbeats 800000 in
--- Elaborating the two exterior-power scalar extensions is expensive.
 /-- Both constructions give the same completed determinant norm at finite places. -/
 theorem finite_norm_determinant (h : HermitianMetric K M)
     (p : HeightOneSpectrum (𝓞 K))
@@ -271,31 +247,26 @@ theorem finite_norm_determinant (h : HermitianMetric K M)
       (LinearEquiv.baseChange K (FiniteCompletion p) _ _ (determinantGenericEquiv (K := K) M) z) =
       h.determinant.adelicNormFamily.norm (normalizedPrimeParameter p) z := by
   classical
-  let ω := normalizedPrimeParameter p
   let e := LinearEquiv.baseChange K (FiniteCompletion p) _ _
     (determinantGenericEquiv (K := K) M)
-  let q := (h.adelicNormFamily.determinant.norm ω).comp e.toLinearMap
-  have hq : ∀ x y, q (x + y) ≤ max (q x) (q y) := by
-    intro x y
-    change h.adelicNormFamily.determinant.norm ω (e (x + y)) ≤ _
-    rw [map_add]
-    exact h.adelicNormFamily.determinant.isUltrametricAtFinitePlaces_of_finrank_le_one
-      NormFamily.determinant_finrank.le ω (normalizedPrimeParameter_mem_fin p) _ _
   apply le_antisymm
-  · have hb := seminorm_le_completedGauge
-      (genericLattice (K := K) (DeterminantLine (K := K) M))
-      (genericLattice_fg (K := K) _) (genericLattice_span (K := K) _) p q hq
-      (by rintro ⟨_, ξ, rfl⟩; exact h.finite_determinant_section_le_one p ξ) z
-    change q z ≤ h.determinant.adelicNormFamily.norm _ _
-    rw [adelicNormFamily, fullLatticeGaugeFamily_norm_prime]
-    exact hb
-  · let q' := (h.determinant.adelicNormFamily.norm ω).comp e.symm.toLinearMap
-    have hb := h.adelicNormFamily.seminorm_le_determinant_of_ιMulti_le ω q'
-      (fun x => h.finite_norm_completedIntegralWedge_le p x) (e z)
-    change h.determinant.adelicNormFamily.norm ω (e.symm (e z)) ≤
-      h.adelicNormFamily.determinant.norm ω (e z) at hb
+  · exact h.determinant.finite_seminorm_le p
+      (h.adelicNormFamily.determinant.norm (normalizedPrimeParameter p)) e.toLinearMap
+      (h.adelicNormFamily.determinant.isUltrametricAtFinitePlaces_of_finrank_le_one
+        NormFamily.determinant_finrank.le (normalizedPrimeParameter p)
+        (normalizedPrimeParameter_mem_fin p))
+      (fun ξ => h.finite_determinant_section_le_one p ξ) z
+  · let q' := (h.determinant.adelicNormFamily.norm (normalizedPrimeParameter p)).comp
+      e.symm.toLinearMap
+    have hb := h.adelicNormFamily.seminorm_le_determinant_of_ιMulti_le
+      (normalizedPrimeParameter p) q'
+      (fun x => by
+        simp only [q', Seminorm.comp_apply, LinearEquiv.coe_coe]
+        exact h.finite_norm_completedIntegralWedge_le p x) (e z)
+    change h.determinant.adelicNormFamily.norm (normalizedPrimeParameter p) (e.symm (e z)) ≤
+      h.adelicNormFamily.determinant.norm (normalizedPrimeParameter p) (e z) at hb
     rw [LinearEquiv.symm_apply_apply] at hb
-    simpa only [e, ω] using hb
+    exact hb
 
 end HermitianMetric
 end BostConjecture.Arithmetic

@@ -46,10 +46,8 @@ project-specific adaptations documented in `CONTRIBUTIONS.md`.
 
 public section
 
--- Preserve the upstream declaration names for compatibility.
-set_option linter.dupNamespace false
 
-namespace RepresentationTheory.Combinatorics.YoungDiagram.CornerStatistics
+namespace RepresentationTheory.Combinatorics.CornerStatistics
 
 open RepresentationTheory.SymmetricGroup.PartitionAuxiliaryConstructions
 open RepresentationTheory.YoungDiagram.PartitionConstructions
@@ -1732,4 +1730,4 @@ theorem Partition.auxiliaryCard_mul_hookLengthProduct_eq_factorial (n : ℕ) (la
 
 end
 
-end RepresentationTheory.Combinatorics.YoungDiagram.CornerStatistics
+end RepresentationTheory.Combinatorics.CornerStatistics

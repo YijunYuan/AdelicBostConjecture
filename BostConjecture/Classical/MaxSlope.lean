@@ -100,8 +100,6 @@ variable [Nontrivial (K ⊗[𝓞 K] M)] in
 def maxSlope (h : HermitianMetric K M) : ℝ :=
   ((BostConjecture.Subspace.slope h.subspaceDegree).max ⊤).toReal
 
-set_option backward.isDefEq.respectTransparency false
-
 open ArakelovGeometry
 
 /-- All original integral subspace degrees are the adelic restriction degrees. -/

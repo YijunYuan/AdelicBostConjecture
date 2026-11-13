@@ -22,8 +22,6 @@ The adelic tensor theorem used in the proof is Theorem 1.1 of `bost.tex`.
 @[expose] public section
 noncomputable section
 
-set_option backward.isDefEq.respectTransparency false
-
 open NumberField TensorProduct
 open ArakelovGeometry ArakelovGeometry.AdelicStructure
 

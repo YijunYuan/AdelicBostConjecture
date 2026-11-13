@@ -35,7 +35,7 @@ namespace BostConjecture.Specht
 open OAI.Saxl
 open RepresentationTheory.SymmetricGroup.PartitionAuxiliaryConstructions
 open RepresentationTheory.YoungDiagram.PartitionConstructions
-open RepresentationTheory.Combinatorics.YoungDiagram.CornerStatistics
+open RepresentationTheory.Combinatorics.CornerStatistics
 
 variable {n : ℕ}
 

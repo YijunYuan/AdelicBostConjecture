@@ -27,6 +27,8 @@ open ArakelovGeometry ArakelovGeometry.AdelicStructure
 
 namespace BostConjecture.Arithmetic
 
+attribute [local instance 2000] Algebra.toModule Algebra.toSMul
+
 variable {K : Type*} [Field K] [NumberField K]
 
 /-- The literal completion of the standard number-field curve at an infinite place. -/
@@ -62,6 +64,8 @@ variable (M : Type*) [AddCommGroup M] [Module (𝓞 K) M]
 /-- The generic fibre followed by completion, mapped to the original complex fibre. -/
 def classicalCompletedFiberMap (w : InfinitePlace K) :
     let : Algebra K ℂ := w.embedding.toAlgebra
+    let : Algebra (𝓞 K) ℂ := (w.embedding.comp (algebraMap (𝓞 K) K)).toAlgebra
+    let : IsScalarTower (𝓞 K) K ℂ := IsScalarTower.of_algebraMap_eq fun _ => rfl
     ClassicalCompletion w ⊗[K] (K ⊗[𝓞 K] M) →ₗ[K] ComplexFiber M w.embedding := by
   let : Algebra K ℂ := w.embedding.toAlgebra
   let : Algebra (𝓞 K) ℂ := (w.embedding.comp (algebraMap (𝓞 K) K)).toAlgebra

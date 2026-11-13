@@ -115,7 +115,7 @@
     "namespace_note": "Canonical upstream declaration namespaces are retained. The symmetric algebra port restores TauCeti.SymmetricPower and private Schur-Weyl helpers restore TauCeti; Garnir/straightening retains the documented BostConjecture.Specht adaptation to the project word model."
   },
   "current_source_tree": {
-    "note": "The preceding hashes and verification records describe the historical extraction. These current paths identify the reorganized sources; original proof declarations remain in their upstream namespaces except for the explicitly documented project word-model adaptation.",
+    "note": "The preceding hashes and verification records describe the historical extraction. These current paths identify the reorganized sources; namespace adaptations are documented in organization_changes and CONTRIBUTIONS.md.",
     "modules": [
       "BostConjecture/ExternalCode/Etingof/RepresentationTheory/Alignment/Attribute.lean",
       "BostConjecture/ExternalCode/Etingof/RepresentationTheory/Combinatorics/YoungDiagram/CornerStatistics.lean",
@@ -131,7 +131,8 @@
       "Replaced all umbrella Mathlib imports with the required Young-diagram, partition, finite-type, factorial and tactic modules.",
       "Pruned SymmetricGroup/PartitionAuxiliaryConstructions to auxiliaryPartitionNatList and AuxiliaryPartitionSource; omitted unused canonical-filling and group-algebra constructions.",
       "Pruned YoungDiagram/PartitionConstructions to auxiliaryYoungDiagramOfPartition; omitted unused auxiliaryPartitionPairNat and semistandard-tableau dependency.",
-      "Normalized formatting, documented source_ref parser whitespace, and made simplification dependencies explicit without changing retained theorem statements or mathematical proofs."
+      "Normalized formatting, documented source_ref parser whitespace, and made simplification dependencies explicit without changing retained theorem statements or mathematical proofs.",
+      "Shorten the corner-statistics namespace to RepresentationTheory.Combinatorics.CornerStatistics, update consumers, and remove the duplicate-namespace linter suppression."
     ],
     "files": [
       {
@@ -140,7 +141,7 @@
       },
       {
         "path": "BostConjecture/ExternalCode/Etingof/RepresentationTheory/Combinatorics/YoungDiagram/CornerStatistics.lean",
-        "sha256": "2caeac3308e45ff5738c69561c0d31c1d4f94a113f56280ec531ecbd53dd04f5"
+        "sha256": "07cfcff6da1195ca5698ca2d6c0d1df92675a902ec2c4bdc6ed596cdbe7cc300"
       },
       {
         "path": "BostConjecture/ExternalCode/Etingof/RepresentationTheory/Partition/YoungDiagram.lean",

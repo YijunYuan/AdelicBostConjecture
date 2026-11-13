@@ -22,8 +22,6 @@ noncomputable section
 
 section FiniteTensor
 
-set_option backward.isDefEq.respectTransparency false
-
 open NumberField TensorProduct IsDedekindDomain
 open ArakelovGeometry ArakelovGeometry.AdelicStructure
   ArakelovGeometry.ActualPrimeIndexing ArakelovGeometry.NumberFieldFullLattice
@@ -155,27 +153,22 @@ theorem finite_norm_tensor (h : HermitianMetric K M) (g : HermitianMetric K N)
       ((AlgebraTensorModule.distribBaseChange (𝓞 K) K M N).toLinearMap.baseChange
         (FiniteCompletion p) z) =
       (h ⊗[𝓞 K] g).toAdelicBundle.norm (normalizedPrimeParameter p) z := by
-  let ω := normalizedPrimeParameter p
+  -- Keep the place explicit so the dependent completion instances match directly.
   let e := LinearEquiv.baseChange K (FiniteCompletion p) _ _
     (AlgebraTensorModule.distribBaseChange (𝓞 K) K M N)
   let τ := h.toAdelicBundle.toNormFamily ⊗ʰ g.toAdelicBundle.toNormFamily
   have hτ := NormFamily.orthogonalTensorPair_isHermitian
     h.toAdelicBundle.toNormFamily g.toAdelicBundle.toNormFamily
-  let q := (τ.norm ω).comp e.toLinearMap
-  have hq : ∀ x y, q (x + y) ≤ max (q x) (q y) := by
-    intro x y
-    change τ.norm ω (e (x + y)) ≤ _
-    rw [map_add]
-    exact hτ.1 ω (normalizedPrimeParameter_mem_fin p) _ _
+  have hq := hτ.1 (normalizedPrimeParameter p) (normalizedPrimeParameter_mem_fin p)
   apply le_antisymm
-  · have hL : ∀ x : M ⊗[𝓞 K] N, q (1 ⊗ₜ[K] ((1 : K) ⊗ₜ[𝓞 K] x)) ≤ 1 := by
+  · have hL : ∀ x : M ⊗[𝓞 K] N,
+        τ.norm (normalizedPrimeParameter p) (e (1 ⊗ₜ[K] ((1 : K) ⊗ₜ[𝓞 K] x))) ≤ 1 := by
       intro x
       induction x using TensorProduct.inductionOn with
       | add x y hx hy =>
-        simpa only [tmul_add] using (hq (1 ⊗ₜ[K] ((1 : K) ⊗ₜ[𝓞 K] x))
-          (1 ⊗ₜ[K] ((1 : K) ⊗ₜ[𝓞 K] y))).trans (max_le hx hy)
+        simpa only [tmul_add, e.map_add] using (hq (e (1 ⊗ₜ[K] ((1 : K) ⊗ₜ[𝓞 K] x)))
+          (e (1 ⊗ₜ[K] ((1 : K) ⊗ₜ[𝓞 K] y)))).trans (max_le hx hy)
       | tmul x y =>
-        change τ.norm ω (e _) ≤ 1
         have he : e (1 ⊗ₜ[K] ((1 : K) ⊗ₜ[𝓞 K] (x ⊗ₜ[𝓞 K] y))) =
             (AlgebraTensorModule.distribBaseChange K (FiniteCompletion p)
               (K ⊗[𝓞 K] M) (K ⊗[𝓞 K] N)).symm
@@ -188,27 +181,25 @@ theorem finite_norm_tensor (h : HermitianMetric K M) (g : HermitianMetric K N)
         rw [he, NormFamily.orthogonalTensorPair_norm_tmul_completed]
         exact (mul_le_mul (h.finite_norm_section_le_one p x)
           (g.finite_norm_section_le_one p y)
-          (g.toAdelicBundle.toNormFamily.norm_nonneg ω _) zero_le_one).trans_eq (mul_one _)
-    have hb := seminorm_le_completedGauge (genericLattice (K := K) (M ⊗[𝓞 K] N))
-      (genericLattice_fg (K := K) _) (genericLattice_span (K := K) _) p q hq
-      (by rintro ⟨_, x, rfl⟩; exact hL x) z
-    change q z ≤ (h ⊗[𝓞 K] g).adelicNormFamily.norm _ _
-    rw [adelicNormFamily, fullLatticeGaugeFamily_norm_prime]
-    exact hb
-  · let := (h ⊗[𝓞 K] g).adelicNormFamily.fibreNormedAddCommGroup ω
-    let := (h ⊗[𝓞 K] g).adelicNormFamily.fibreNormedSpace ω
+          (g.toAdelicBundle.toNormFamily.norm_nonneg (normalizedPrimeParameter p) _)
+          zero_le_one).trans_eq (mul_one _)
+    exact (h ⊗[𝓞 K] g).finite_seminorm_le p (τ.norm (normalizedPrimeParameter p))
+      e.toLinearMap hq hL z
+  · let := (h ⊗[𝓞 K] g).adelicNormFamily.fibreNormedAddCommGroup (normalizedPrimeParameter p)
+    let := (h ⊗[𝓞 K] g).adelicNormFamily.fibreNormedSpace (normalizedPrimeParameter p)
     have hb := NormFamily.norm_linearMap_le_orthogonalTensorPair_of_finite
-      h.toAdelicBundle.toNormFamily g.toAdelicBundle.toNormFamily ω
+      h.toAdelicBundle.toNormFamily g.toAdelicBundle.toNormFamily (normalizedPrimeParameter p)
       (normalizedPrimeParameter_mem_fin p) e.symm.toLinearMap
-      ((h ⊗[𝓞 K] g).toAdelicBundle_isHermitian.1 ω (normalizedPrimeParameter_mem_fin p))
+      ((h ⊗[𝓞 K] g).toAdelicBundle_isHermitian.1 (normalizedPrimeParameter p)
+        (normalizedPrimeParameter_mem_fin p))
       (C := 1) zero_le_one
       (fun x y => by
-        change (h ⊗[𝓞 K] g).adelicNormFamily.norm ω _ ≤ _
-        simpa only [completedTensorEquiv, LinearEquiv.trans_symm, LinearEquiv.trans_apply,
-          one_mul, e, ω, LinearEquiv.coe_coe] using h.finite_norm_completedTensor_le g p x y)
+        change (h ⊗[𝓞 K] g).adelicNormFamily.norm (normalizedPrimeParameter p) _ ≤ _
+        rw [one_mul]
+        exact h.finite_norm_completedTensor_le g p x y)
       (e z)
-    change (h ⊗[𝓞 K] g).adelicNormFamily.norm ω (e.symm (e z)) ≤
-      1 * τ.norm ω (e z) at hb
+    change (h ⊗[𝓞 K] g).adelicNormFamily.norm (normalizedPrimeParameter p) (e.symm (e z)) ≤
+      1 * τ.norm (normalizedPrimeParameter p) (e z) at hb
     rw [LinearEquiv.symm_apply_apply, one_mul] at hb
     exact hb
 
@@ -218,8 +209,6 @@ end BostConjecture.Arithmetic
 end FiniteTensor
 
 section TensorComparison
-
-set_option backward.isDefEq.respectTransparency false
 
 open NumberField TensorProduct
 open scoped InnerProductSpace
@@ -255,6 +244,7 @@ theorem infinite_norm_tensor (h : HermitianMetric K M) (g : HermitianMetric K N)
   let := g.adelicNormFamily.fiberInnerProductSpace
     (normalizedInfinitePlacePoint w) (normalizedInfinitePlacePoint_mem_inf w)
   let : Algebra K ℂ := w.embedding.toAlgebra
+  let : Algebra (𝓞 K) ℂ := (w.embedding.comp (algebraMap (𝓞 K) K)).toAlgebra
   let : InnerProductSpace.Core ℂ (ComplexFiber (M ⊗[𝓞 K] N) w.embedding) :=
     (h ⊗[𝓞 K] g).fiber w.embedding
   let := InnerProductSpace.Core.toNormedAddCommGroup
@@ -307,7 +297,7 @@ theorem infinite_norm_tensor (h : HermitianMetric K M) (g : HermitianMetric K N)
   change RCLike.re (inner (ClassicalCompletion w) (e z) (e z)) =
     RCLike.re (inner ℂ (classicalCompletedFiberMap (M ⊗[𝓞 K] N) w z)
       (classicalCompletedFiberMap (M ⊗[𝓞 K] N) w z)) at hi
-  rw [inner_self_eq_norm_sq, inner_self_eq_norm_sq] at hi
+  simp only [inner_self_eq_norm_sq] at hi
   nlinarith [norm_nonneg (e z), norm_nonneg (classicalCompletedFiberMap (M ⊗[𝓞 K] N) w z)]
 
 /-- Adelization commutes isometrically with the original tensor product. -/

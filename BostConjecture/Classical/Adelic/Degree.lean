@@ -80,8 +80,6 @@ end GramDeterminant
 
 section LineDegree
 
-set_option backward.isDefEq.respectTransparency false
-
 open NumberField TensorProduct MeasureTheory
 open ArakelovGeometry ArakelovGeometry.AdelicStructure
   ArakelovGeometry.ActualPrimeIndexing ArakelovGeometry.NumberFieldFullLattice
@@ -188,8 +186,6 @@ end BostConjecture.Arithmetic.HermitianMetric
 end LineDegree
 
 section DegreeComparison
-
-set_option backward.isDefEq.respectTransparency false
 
 open NumberField TensorProduct MeasureTheory exteriorPower
 open scoped InnerProductSpace

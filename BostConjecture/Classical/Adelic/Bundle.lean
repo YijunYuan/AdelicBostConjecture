@@ -26,7 +26,7 @@ open NumberField TensorProduct
 
 namespace BostConjecture.Arithmetic
 
-attribute [local instance 2000] ArakelovGeometry.integralVectorModule
+attribute [local instance 2000] Algebra.toModule Algebra.toSMul
 
 variable {K : Type*} [Field K]
 variable (M : Type*) [AddCommGroup M] [Module (𝓞 K) M]
@@ -52,8 +52,6 @@ end BostConjecture.Arithmetic
 end GenericLattice
 
 section Bundle
-
-set_option backward.isDefEq.respectTransparency false
 
 open NumberField TensorProduct
 open ArakelovGeometry ArakelovGeometry.AdelicStructure
@@ -149,20 +147,32 @@ def adelicNormFamily (h : HermitianMetric K M) :
   NumberFieldFullLattice.fullLatticeGaugeFamily (genericLattice M)
     (genericLattice_fg M) (genericLattice_span M) h.archimedeanNormFamily
 
+/-- At an infinite point the actual adelic norm is the original completed metric. -/
+theorem adelicNormFamily_norm_infinite_point (h : HermitianMetric K M)
+    (w : InfinitePlace K) :
+    h.adelicNormFamily.norm (normalizedInfinitePlacePoint w) =
+      h.completedArchimedeanNorm w := by
+  exact (NumberFieldFullLattice.fullLatticeGaugeFamily_norm_not_finite
+    (K := K) (E := K ⊗[𝓞 K] M)
+    (genericLattice (K := K) M) (genericLattice_fg (K := K) M)
+    (genericLattice_span (K := K) M) h.archimedeanNormFamily
+    (normalizedInfinitePlacePoint w) (normalizedInfinitePlacePoint_mem_inf w)).trans
+      ((h.archimedeanNormFamily_norm_infinite _ (normalizedInfinitePlacePoint_mem_inf w)).trans
+        (h.infiniteNormAt_point w _))
+
 instance adelicNormFamily_isHermitian (h : HermitianMetric K M) :
     h.adelicNormFamily.IsHermitian := by
-  apply NormFamily.isHermitian_iff_parallelogram.mpr
+  apply (NormFamily.isHermitian_iff_parallelogram
+    (K := K) (E := K ⊗[𝓞 K] M) (ξ := h.adelicNormFamily)).mpr
   refine ⟨NumberFieldFullLattice.fullLatticeGaugeFamily_isUltrametricAtFinitePlaces
+    (K := K) (E := K ⊗[𝓞 K] M)
     (genericLattice (K := K) M) (genericLattice_fg (K := K) M)
     (genericLattice_span (K := K) M) h.archimedeanNormFamily, ?_⟩
   intro ω hω x y
   obtain ⟨w, rfl⟩ : ∃ w : InfinitePlace K, normalizedInfinitePlacePoint w = ω :=
     by
       simpa only [normalizedNumberFieldAdelicStructure_Ωinf_eq_range, Set.mem_range] using hω
-  have hn : h.adelicNormFamily.norm (normalizedInfinitePlacePoint w) =
-      h.completedArchimedeanNorm w := by
-    rw [adelicNormFamily, NumberFieldFullLattice.fullLatticeGaugeFamily_norm_not_finite
-      _ _ _ _ _ hω, archimedeanNormFamily_norm_infinite _ _ hω, infiniteNormAt_point]
+  have hn := h.adelicNormFamily_norm_infinite_point w
   simp only [hn]
   exact h.completedArchimedeanNorm_parallelogram w x y
 
@@ -170,7 +180,9 @@ instance adelicNormFamily_isHermitian (h : HermitianMetric K M) :
 abbrev toAdelicBundle (h : HermitianMetric K M) :
     AdelicVectorBundle (normalizedNumberFieldAdelicStructure K) := by
   have hd : h.adelicNormFamily.IsDominated :=
-    (NumberFieldFullLattice.fullLatticeGaugeFamily_coherent_and_dominated
+    (@NumberFieldFullLattice.fullLatticeGaugeFamily_coherent_and_dominated
+      K inferInstance inferInstance (K ⊗[𝓞 K] M) inferInstance inferInstance
+      (Module.Finite.base_change (𝓞 K) K M)
       (genericLattice (K := K) M) (genericLattice_fg (K := K) M)
       (genericLattice_span (K := K) M) h.archimedeanNormFamily).2
   exact AdelicVectorBundle.ofMeasurableDominated h.adelicNormFamily
@@ -179,23 +191,14 @@ abbrev toAdelicBundle (h : HermitianMetric K M) :
 instance toAdelicBundle_isHermitian (h : HermitianMetric K M) :
     h.toAdelicBundle.IsHermitian := h.adelicNormFamily_isHermitian
 
-/-- At an infinite point the actual adelic norm is the original completed metric. -/
-theorem adelicNormFamily_norm_infinite_point (h : HermitianMetric K M)
-    (w : InfinitePlace K) :
-    h.adelicNormFamily.norm (normalizedInfinitePlacePoint w) =
-      h.completedArchimedeanNorm w := by
-  rw [adelicNormFamily, NumberFieldFullLattice.fullLatticeGaugeFamily_norm_not_finite
-    _ _ _ _ _ (normalizedInfinitePlacePoint_mem_inf w),
-    archimedeanNormFamily_norm_infinite _ _ (normalizedInfinitePlacePoint_mem_inf w),
-    infiniteNormAt_point]
-
 /-- All original integral section norms are preserved at infinity. -/
 theorem toAdelicBundle_norm_section (h : HermitianMetric K M)
     (w : InfinitePlace K) (x : M) :
     h.toAdelicBundle.norm (normalizedInfinitePlacePoint w)
       (1 ⊗ₜ[K] ((1 : K) ⊗ₜ[𝓞 K] x)) = h.sectionNorm w.embedding x := by
   change h.adelicNormFamily.norm _ _ = _
-  rw [adelicNormFamily_norm_infinite_point, completedArchimedeanNorm_section]
+  rw [adelicNormFamily_norm_infinite_point]
+  exact h.completedArchimedeanNorm_section w x
 
 end HermitianMetric
 end BostConjecture.Arithmetic

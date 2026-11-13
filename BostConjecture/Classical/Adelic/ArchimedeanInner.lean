@@ -14,8 +14,6 @@ public import ArakelovGeometry.AdelicVectorBundle.Tensor.Hermitian.InnerProduct
 @[expose] public section
 noncomputable section
 
-set_option backward.isDefEq.respectTransparency false
-
 open NumberField TensorProduct
 open scoped ComplexConjugate InnerProductSpace
 open ArakelovGeometry ArakelovGeometry.AdelicStructure
@@ -52,6 +50,7 @@ theorem completedFiber_inner_im_of_real (h : HermitianMetric K M)
     ((h.fiber w.embedding).inner
       (classicalCompletedFiberMap M w x) (classicalCompletedFiberMap M w y)).im = 0 := by
   let : Algebra K ℂ := w.embedding.toAlgebra
+  let : Algebra (𝓞 K) ℂ := (w.embedding.comp (algebraMap (𝓞 K) K)).toAlgebra
   let : InnerProductSpace.Core ℂ (ComplexFiber M w.embedding) := h.fiber w.embedding
   have hs (m n : M) : ((h.fiber w.embedding).inner
       (fiberSection M w.embedding m) (fiberSection M w.embedding n)).im = 0 := by
@@ -113,6 +112,7 @@ theorem completedFiber_inner (h : HermitianMetric K M) (w : InfinitePlace K) :
   let := h.adelicNormFamily.fiberInnerProductSpace
     (normalizedInfinitePlacePoint w) (normalizedInfinitePlacePoint_mem_inf w)
   let : Algebra K ℂ := w.embedding.toAlgebra
+  let : Algebra (𝓞 K) ℂ := (w.embedding.comp (algebraMap (𝓞 K) K)).toAlgebra
   let : InnerProductSpace.Core ℂ (ComplexFiber M w.embedding) := h.fiber w.embedding
   let := InnerProductSpace.Core.toNormedAddCommGroup
     (𝕜 := ℂ) (F := ComplexFiber M w.embedding)

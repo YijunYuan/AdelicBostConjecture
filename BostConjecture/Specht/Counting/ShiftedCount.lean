@@ -22,7 +22,7 @@ noncomputable section
 namespace BostConjecture.Specht
 
 open OAI.Saxl Finset
-open RepresentationTheory.Combinatorics.YoungDiagram.CornerStatistics
+open RepresentationTheory.Combinatorics.CornerStatistics
 
 /-- A row length shifted by its distance from the last of `a` rows. -/
 def shiftedRowLength (μ : YoungDiagram) (a r : ℕ) : ℕ := μ.rowLen r + a - r - 1

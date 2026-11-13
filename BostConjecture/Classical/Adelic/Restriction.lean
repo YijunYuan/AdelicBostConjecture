@@ -14,8 +14,6 @@ public import ArakelovGeometry.AdelicVectorBundle.Degree.Isometry
 @[expose] public section
 noncomputable section
 
-set_option backward.isDefEq.respectTransparency false
-
 open NumberField TensorProduct IsDedekindDomain
 open ArakelovGeometry ArakelovGeometry.AdelicStructure
   ArakelovGeometry.ActualPrimeIndexing ArakelovGeometry.NumberFieldFullLattice

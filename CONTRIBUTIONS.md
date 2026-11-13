@@ -186,11 +186,14 @@ may therefore describe declarations or modules that have since been removed.
   `SymmetricGroup/PartitionAuxiliaryConstructions`, and
   `Combinatorics/YoungDiagram/CornerStatistics`.
 - Principal declaration:
-  `RepresentationTheory.Combinatorics.YoungDiagram.CornerStatistics.Partition.auxiliaryCard_mul_hookLengthProduct_eq_factorial`.
+  `RepresentationTheory.Combinatorics.CornerStatistics.Partition.auxiliaryCard_mul_hookLengthProduct_eq_factorial`.
   The counted objects are increasing bijective fillings of partition cells.
 - Adaptations: Lean 4.35 visibility and proof elaboration, local import paths,
   source documentation, formatting and explicit simplification dependencies.
-  The original `RepresentationTheory` namespaces are retained. The two
+  The corner-statistics namespace is shortened to
+  `RepresentationTheory.Combinatorics.CornerStatistics` to avoid repeating
+  `YoungDiagram` in declaration names; consumers open the new namespace.
+  The other `RepresentationTheory` namespaces are retained. The two
   auxiliary-construction files retain only `auxiliaryPartitionNatList`,
   `AuxiliaryPartitionSource`, and `auxiliaryYoungDiagramOfPartition`; unused
   canonical-filling, group-algebra and semistandard-tableau APIs are omitted.
