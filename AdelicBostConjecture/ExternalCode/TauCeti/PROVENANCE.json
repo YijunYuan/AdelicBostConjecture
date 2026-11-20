@@ -1,0 +1,308 @@
+{
+  "record_scope": "Historical extraction record: original local paths, hashes, commands, dependency boundaries and checks below describe the initial port. Current source locations and checksums are listed in current_source_tree; original upstream source paths and hashes remain unchanged.",
+  "repository": "https://github.com/TauCetiProject/TauCeti",
+  "revision": "b3b0334ab9203d9faee4b2f34cd75161463ecdd0",
+  "license": "Apache-2.0",
+  "upstream_toolchain": "leanprover/lean4:v4.36.0-rc2",
+  "target_toolchain": "leanprover/lean4:v4.35.0",
+  "upstream_mathlib_revision": "1b1ccf4b088b32fa3f23f2de1127433254a81e1e",
+  "source_files": [
+    {
+      "path": "TauCeti/Analysis/InnerProductSpace/Gram/Hadamard.lean",
+      "sha256": "c60d2eb74730e2ff414d171d280e41866868dba0f1da0a48f14dd3a6d34b47b5",
+      "git_blob_sha": "da64908a96f7ccad56f915b09d500f7896621ffa",
+      "url": "https://github.com/TauCetiProject/TauCeti/blob/b3b0334ab9203d9faee4b2f34cd75161463ecdd0/TauCeti/Analysis/InnerProductSpace/Gram/Hadamard.lean"
+    },
+    {
+      "path": "TauCeti/Algebra/Module/ZLattice/Covolume.lean",
+      "sha256": "9375db3e2c088ad79c9aee5ae1c279904a07374c687847993c9eb622e80d26ce",
+      "git_blob_sha": "d80fe600a9045b2774513834a2c7722e881e449a",
+      "url": "https://github.com/TauCetiProject/TauCeti/blob/b3b0334ab9203d9faee4b2f34cd75161463ecdd0/TauCeti/Algebra/Module/ZLattice/Covolume.lean"
+    }
+  ],
+  "license_file": {
+    "upstream_path": "LICENSE",
+    "local_path": "LICENSE",
+    "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1"
+  },
+  "notice": "No root NOTICE file found at the pinned upstream revision in the source survey.",
+  "local_file": {
+    "path": "BostConjecture/Lattice/Covolume.lean",
+    "sha256": "21ee71e598ef41bc642a3e9b2d4a5a52a9fd457f7738ae2948133bfbd0c42194",
+    "bytes": 4798,
+    "lines": 95
+  },
+  "declarations": [
+    {
+      "name": "OrthonormalBasis.det_gram_eq_norm_det_sq",
+      "upstream_path": "TauCeti/Analysis/InnerProductSpace/Gram/Hadamard.lean",
+      "upstream_declaration": "det_gram_eq_norm_det_sq",
+      "upstream_excerpt": {
+        "start_line": 86,
+        "end_line": 92,
+        "sha256": "d3b3b9125a9ddac6cc5028a3340d3cdc48f67b6d94aba2d2dd5fa3485b2d7e36"
+      },
+      "local_excerpt": {
+        "start_line": 37,
+        "end_line": 45,
+        "sha256": "53e47c48be2dd78c66929a589d6afa0c6e064052fe02a7fa97b08c2b3aae8555"
+      },
+      "modifications": [
+        "Specialize the scalar field from RCLike to real numbers.",
+        "Replace the final rewrite with simp to eliminate the real RCLike coercion."
+      ]
+    },
+    {
+      "name": "OrthonormalBasis.volume_fundamentalDomain",
+      "upstream_path": "TauCeti/Algebra/Module/ZLattice/Covolume.lean",
+      "upstream_declaration": "OrthonormalBasis.volume_fundamentalDomain",
+      "upstream_excerpt": {
+        "start_line": 240,
+        "end_line": 243,
+        "sha256": "e90e3c76f4b19b843f0e7b897a30f863c34b4097283219a525030581118d6fd8"
+      },
+      "local_excerpt": {
+        "start_line": 51,
+        "end_line": 54,
+        "sha256": "89717cdd687f4c09322220c3cf94f7c6f1e03620a3ab01c7e9cbcec3c3f8fda1"
+      },
+      "modifications": [
+        "Retain the proof and hypotheses; remove the enclosing TauCeti namespace and _root_ qualifier."
+      ]
+    },
+    {
+      "name": "OrthonormalBasis.volume_real_fundamentalDomain",
+      "upstream_path": "TauCeti/Algebra/Module/ZLattice/Covolume.lean",
+      "upstream_declaration": "OrthonormalBasis.volume_real_fundamentalDomain",
+      "upstream_excerpt": {
+        "start_line": 247,
+        "end_line": 249,
+        "sha256": "666e782f07b15f7c6e8d2c2b5ab67c8f20204eb183e593b0e197d4f5f117bb2b"
+      },
+      "local_excerpt": {
+        "start_line": 58,
+        "end_line": 60,
+        "sha256": "e5cbc68d2bbb2800ecde823693f6596a6e7e54351edd674d58ae380a3aaa5307"
+      },
+      "modifications": [
+        "Retain the proof and hypotheses; remove the enclosing TauCeti namespace and _root_ qualifier."
+      ]
+    },
+    {
+      "name": "ZLattice.covolume_sq_eq_det_gram",
+      "upstream_path": "TauCeti/Algebra/Module/ZLattice/Covolume.lean",
+      "upstream_declaration": "ZLattice.covolume_sq_eq_det_gram",
+      "upstream_excerpt": {
+        "start_line": 253,
+        "end_line": 262,
+        "sha256": "b5a045d565acb4945cfba5639025cea644209c233ae94027ad52401cae0f63a0"
+      },
+      "local_excerpt": {
+        "start_line": 63,
+        "end_line": 72,
+        "sha256": "0b36e4852842a05106594936e39d62ca7b8364384cf85f3b7ba53e2bb67c5820"
+      },
+      "modifications": [
+        "Retain the proof and hypotheses; use the specialized real coordinate-determinant lemma."
+      ]
+    },
+    {
+      "name": "ZLattice.covolume_span_sq_eq_det_gram",
+      "upstream_path": "TauCeti/Algebra/Module/ZLattice/Covolume.lean",
+      "upstream_declaration": "ZLattice.covolume_span_sq_eq_det_gram",
+      "upstream_excerpt": {
+        "start_line": 266,
+        "end_line": 269,
+        "sha256": "34a04c3eef977fed503287d5256701775bc1fb9842d603cfcb38501e46d681d9"
+      },
+      "local_excerpt": {
+        "start_line": 75,
+        "end_line": 79,
+        "sha256": "f1c38dd1dc9daad971b63a68d4542043dc7370285ea23515b8a6accf0678556c"
+      },
+      "modifications": [
+        "Retain the proof and hypotheses."
+      ]
+    },
+    {
+      "name": "ZLattice.covolume_le_covolume_of_le",
+      "upstream_path": "TauCeti/Algebra/Module/ZLattice/Covolume.lean",
+      "upstream_declaration": "ZLattice.covolume_le_covolume_of_le",
+      "upstream_excerpt": {
+        "start_line": 135,
+        "end_line": 164,
+        "sha256": "be2263618f19f633200d6d4b125f5fb8390b915b9064d1748cbb049949c28ff7"
+      },
+      "local_excerpt": {
+        "start_line": 82,
+        "end_line": 95,
+        "sha256": "15dc9d4f089019ca3beded36fd7b2d715ee53349fb030025182e42178486a08c"
+      },
+      "modifications": [
+        "Specialize from a finite-dimensional real normed space with arbitrary Haar measure to a finite-dimensional real inner product space with its canonical volume.",
+        "Retain the deduction that the discrete superlattice is full.",
+        "Replace the fundamental-domain comparison argument with Mathlib ZLattice.covolume_div_covolume_eq_relIndex' and positivity of covolumes."
+      ]
+    }
+  ],
+  "omitted_dependencies": [
+    "TauCeti.MeasureTheory.Group.FundamentalDomain: its comparison helper is unnecessary because Mathlib supplies the real inner-product relative-index formula.",
+    "No TauCeti Lake dependency or separate Lean library was introduced."
+  ],
+  "implementation_note": "The short coordinate determinant proof is retained because it directly bridges the two existing Mathlib APIs; using LinearMap.normDet_sq_eq_det_gram would require an additional basis-to-endomorphism construction and determinant bridge.",
+  "intended_consumer": "Integral Specht lattice: covolume_sq_eq_integer_gram and covolume_sq_le_det_gram use the copied Gram and inclusion results; standard real basis follows rational straightening.",
+  "verification": {
+    "build_target": "BostConjecture.Lattice.Covolume",
+    "transitive_axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "specht_straightening": {
+    "source_files": [
+      {
+        "path": "TauCeti/RepresentationTheory/Symmetric/Specht/Garnir.lean",
+        "sha256": "7c52af5ceff8adac75adbd89997b3142d8b4711ea20aa025b20892081f61ce17"
+      },
+      {
+        "path": "TauCeti/RepresentationTheory/Symmetric/Specht/Straightening.lean",
+        "sha256": "ae260b0b9802988ba936c3399be040e8bf659a977663b5bd13ee5cdf94dc78fb"
+      },
+      {
+        "path": "TauCeti/Combinatorics/Young/Diagram.lean",
+        "sha256": "9b39863c01abc682ed15b5cbf89ab1c57c6c17715252d9b1edb442d90f8b7f29"
+      },
+      {
+        "path": "TauCeti/Algebra/Order/BigOperators/Sum/LtSum.lean",
+        "sha256": "a14136d443981de8dc127c53331c434bed3c5c5a70bad9b40b41ad1284e4a2e8"
+      },
+      {
+        "path": "TauCeti/Algebra/BigOperators/Finset/Swap.lean",
+        "sha256": "5b46b09474adcec8d644b6ca9e4e993de9bf1c2142455871e301e4ebb7db444d"
+      }
+    ],
+    "local_files": [
+      "BostConjecture/Specht/Garnir.lean",
+      "BostConjecture/Specht/GarnirSets.lean",
+      "BostConjecture/Specht/Straightening.lean"
+    ],
+    "modifications": "Selective adaptation to the existing OAI enumerating tableau and integer word model; direct integer swap-involution cancellation; coefficientwise rational cast; bounded-moment straightening. See CONTRIBUTIONS.md for declaration map.",
+    "consumer": "BostConjecture.Specht.polytabloidRat_mem_span_standard",
+    "boundary": "Rational spanning only; no integral standard basis or seminormal formula.",
+    "verification": {
+      "build": "horizon check BostConjecture.Specht.Straightening; horizon check",
+      "axiom_probe": "verification/SpechtAxioms.lean",
+      "transitive_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "evidence": "verification/RESULTS.md, session 0007"
+    }
+  },
+  "relocation_2026_11_06": {
+    "note": "Compiled sources were relocated beneath BostConjecture/ExternalCode; module imports and source documentation were updated. Historical source hashes, commands and diffs describe the original extraction and remain unchanged.",
+    "path_map": {
+      "BostConjecture/Lattice/Covolume.lean": "BostConjecture/ExternalCode/TauCeti/Lattice/Covolume.lean",
+      "BostConjecture/LinearAlgebra/SymmetricPower/Algebra.lean": "BostConjecture/ExternalCode/TauCeti/LinearAlgebra/SymmetricPower/Algebra.lean",
+      "BostConjecture/LinearAlgebra/SymmetricPower/Basic.lean": "BostConjecture/ExternalCode/TauCeti/LinearAlgebra/SymmetricPower/Basic.lean",
+      "BostConjecture/LinearAlgebra/SymmetricPower/Lift.lean": "BostConjecture/ExternalCode/TauCeti/LinearAlgebra/SymmetricPower/Lift.lean",
+      "BostConjecture/RepresentationTheory/SchurWeyl/GeneralLinear.lean": "BostConjecture/ExternalCode/TauCeti/RepresentationTheory/SchurWeyl/GeneralLinear.lean",
+      "BostConjecture/RepresentationTheory/SchurWeyl/Centralizer.lean": "BostConjecture/ExternalCode/TauCeti/RepresentationTheory/SchurWeyl/Centralizer.lean",
+      "BostConjecture/RepresentationTheory/SchurWeyl/Action.lean": "BostConjecture/ExternalCode/TauCeti/RepresentationTheory/SchurWeyl/Action.lean",
+      "BostConjecture/RepresentationTheory/SchurWeyl/SchurWeyl.lean": "BostConjecture/ExternalCode/TauCeti/RepresentationTheory/SchurWeyl/SchurWeyl.lean",
+      "BostConjecture/RepresentationTheory/SchurWeyl/Invariants.lean": "BostConjecture/ExternalCode/TauCeti/RepresentationTheory/SchurWeyl/Invariants.lean",
+      "BostConjecture/RepresentationTheory/SchurWeyl/Polarization.lean": "BostConjecture/ExternalCode/TauCeti/RepresentationTheory/SchurWeyl/Polarization.lean",
+      "BostConjecture/RepresentationTheory/SchurWeyl/DoubleCentralizer.lean": "BostConjecture/ExternalCode/TauCeti/RepresentationTheory/SchurWeyl/DoubleCentralizer.lean",
+      "BostConjecture/Specht/Garnir.lean": "BostConjecture/ExternalCode/TauCeti/RepresentationTheory/Specht/Garnir.lean",
+      "BostConjecture/Specht/GarnirSets.lean": "BostConjecture/ExternalCode/TauCeti/RepresentationTheory/Specht/GarnirSets.lean",
+      "BostConjecture/Specht/Straightening.lean": "BostConjecture/ExternalCode/TauCeti/RepresentationTheory/Specht/Straightening.lean"
+    },
+    "namespace_note": "Canonical upstream declaration namespaces are retained. The symmetric algebra port restores TauCeti.SymmetricPower and private Schur-Weyl helpers restore TauCeti; Garnir/straightening retains the documented BostConjecture.Specht adaptation to the project word model."
+  },
+  "current_source_tree": {
+    "note": "The preceding hashes and verification records describe the historical extraction. These current paths identify the reorganized sources; original proof declarations remain in their upstream namespaces except for the explicitly documented project word-model adaptation.",
+    "modules": [
+      "AdelicBostConjecture/ExternalCode/TauCeti/Lattice/Covolume.lean",
+      "AdelicBostConjecture/ExternalCode/TauCeti/LinearAlgebra/SymmetricPower/Algebra.lean",
+      "AdelicBostConjecture/ExternalCode/TauCeti/LinearAlgebra/SymmetricPower/Basic.lean",
+      "AdelicBostConjecture/ExternalCode/TauCeti/LinearAlgebra/SymmetricPower/Lift.lean",
+      "AdelicBostConjecture/ExternalCode/TauCeti/RepresentationTheory/SchurWeyl/Action.lean",
+      "AdelicBostConjecture/ExternalCode/TauCeti/RepresentationTheory/SchurWeyl/Centralizer.lean",
+      "AdelicBostConjecture/ExternalCode/TauCeti/RepresentationTheory/SchurWeyl/DoubleCentralizer.lean",
+      "AdelicBostConjecture/ExternalCode/TauCeti/RepresentationTheory/SchurWeyl/GeneralLinear.lean",
+      "AdelicBostConjecture/ExternalCode/TauCeti/RepresentationTheory/SchurWeyl/Invariants.lean",
+      "AdelicBostConjecture/ExternalCode/TauCeti/RepresentationTheory/SchurWeyl/Polarization.lean",
+      "AdelicBostConjecture/ExternalCode/TauCeti/RepresentationTheory/SchurWeyl/SchurWeyl.lean",
+      "AdelicBostConjecture/ExternalCode/TauCeti/RepresentationTheory/Specht/Garnir.lean",
+      "AdelicBostConjecture/ExternalCode/TauCeti/RepresentationTheory/Specht/GarnirSets.lean",
+      "AdelicBostConjecture/ExternalCode/TauCeti/RepresentationTheory/Specht/Straightening.lean"
+    ],
+    "organization_changes": [
+      "Compiled together in the single AdelicBostConjecture library.",
+      "Module imports relocated under AdelicBostConjecture.ExternalCode; no separate OAI or RepresentationTheory Lake libraries.",
+      "Source attribution added to module docstrings; proof-local classical inference and mathlib style fixes applied.",
+      "Redundant upstream source snapshots removed; pinned original paths and hashes remain available.",
+      "Project module paths and namespaces renamed; current source checksums refreshed. Historical extraction records retain their original names and hashes."
+    ],
+    "files": [
+      {
+        "path": "AdelicBostConjecture/ExternalCode/TauCeti/Lattice/Covolume.lean",
+        "sha256": "0faa5bd0bfdaad4f81627c68bd176c76f32cd743ae2af4f4a34b1f08d8739147"
+      },
+      {
+        "path": "AdelicBostConjecture/ExternalCode/TauCeti/LinearAlgebra/SymmetricPower/Algebra.lean",
+        "sha256": "bc9752634a5761d648922093ce5c13dffe72495145b4db8f2048c76527c48ca5"
+      },
+      {
+        "path": "AdelicBostConjecture/ExternalCode/TauCeti/LinearAlgebra/SymmetricPower/Basic.lean",
+        "sha256": "a16a6fe9ec73ffb04c235a5f1f8c67bb7cdf1dbfc51e5ec27f5dc1720a190740"
+      },
+      {
+        "path": "AdelicBostConjecture/ExternalCode/TauCeti/LinearAlgebra/SymmetricPower/Lift.lean",
+        "sha256": "188f1c3bd1c4f4046553f86d465b4136aa09a8e7105d487133b02c831806c543"
+      },
+      {
+        "path": "AdelicBostConjecture/ExternalCode/TauCeti/RepresentationTheory/SchurWeyl/Action.lean",
+        "sha256": "50d8fb398a811e092cc40e3aceafe6654c0daee0cad615b3ae789a726dd967e3"
+      },
+      {
+        "path": "AdelicBostConjecture/ExternalCode/TauCeti/RepresentationTheory/SchurWeyl/Centralizer.lean",
+        "sha256": "25dac54ba98acda3916ca8da4d589ebf9308e57615bf25b755c9785289a125d6"
+      },
+      {
+        "path": "AdelicBostConjecture/ExternalCode/TauCeti/RepresentationTheory/SchurWeyl/DoubleCentralizer.lean",
+        "sha256": "f4c6c8fb678211b122d37dd4563f5b3f06f14d7dc410dd19f6666a815000b837"
+      },
+      {
+        "path": "AdelicBostConjecture/ExternalCode/TauCeti/RepresentationTheory/SchurWeyl/GeneralLinear.lean",
+        "sha256": "f02b52aacd96e41c8e9c19a4ab9a5e1d9e085d9d8c8a6286fd91487cbeb1d934"
+      },
+      {
+        "path": "AdelicBostConjecture/ExternalCode/TauCeti/RepresentationTheory/SchurWeyl/Invariants.lean",
+        "sha256": "768d271b160373ae5096b8a15485babcfdc968965b0f4291496d548839a58956"
+      },
+      {
+        "path": "AdelicBostConjecture/ExternalCode/TauCeti/RepresentationTheory/SchurWeyl/Polarization.lean",
+        "sha256": "748f28df7f3181ff9ce19689299ebb2abd8888c150a72d3c450ee42b47787764"
+      },
+      {
+        "path": "AdelicBostConjecture/ExternalCode/TauCeti/RepresentationTheory/SchurWeyl/SchurWeyl.lean",
+        "sha256": "4872590be134d264d1f08aa413d8a1865be270713fe6d92f24243159eeff892f"
+      },
+      {
+        "path": "AdelicBostConjecture/ExternalCode/TauCeti/RepresentationTheory/Specht/Garnir.lean",
+        "sha256": "29a48141ab12a1b6f9a8b00f44d176e79286e9954fecff05db5b2d17ce32f193"
+      },
+      {
+        "path": "AdelicBostConjecture/ExternalCode/TauCeti/RepresentationTheory/Specht/GarnirSets.lean",
+        "sha256": "07811f108d723b276eb4164cda169af2d53a8fe766b1eb873aa0279829fc5611"
+      },
+      {
+        "path": "AdelicBostConjecture/ExternalCode/TauCeti/RepresentationTheory/Specht/Straightening.lean",
+        "sha256": "b7bc8dc4a3a66f9dfaee4537747cebb045aaa986fd858fcc0f2fb90f7bca405d"
+      }
+    ]
+  }
+}

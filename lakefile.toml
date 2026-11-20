@@ -1,6 +1,6 @@
-name = "bostConjecture"
+name = "adelicBostConjecture"
 version = "0.1.0"
-defaultTargets = ["BostConjecture"]
+defaultTargets = ["AdelicBostConjecture"]
 weakLeanArgs = ["-j2"]
 
 [leanOptions]
@@ -20,7 +20,7 @@ git = "https://github.com/YijunYuan/HarderNarasimhan.git"
 rev = "14b3090e1e169b77fe381102a1289f24c2b08a11"
 
 [[lean_lib]]
-name = "BostConjecture"
+name = "AdelicBostConjecture"
 
 [[require]]
 name = "ArakelovGeometry"

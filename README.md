@@ -1,4 +1,4 @@
-# BostConjecture
+# AdelicBostConjecture
 
 This project formalizes Theorem 1.2 of **On the tensor product of semistable
 Hermitian adelic vector bundles over an adelic curve**, by Huayi Chen and
@@ -41,7 +41,7 @@ semistability conclusions are registered instances. For example,
 Hermitian factors. The notation uses `open scoped TensorProduct`.
 
 The classical theorem is
-`BostConjecture.Arithmetic.HermitianMetric.maxSlope_tensor`. For finite
+`AdelicBostConjecture.Arithmetic.HermitianMetric.maxSlope_tensor`. For finite
 projective modules over the ring of integers of a number field, with nonzero
 generic fibers and Hermitian metrics `h` and `g`, it proves
 
@@ -177,7 +177,7 @@ adaptations are documented in the accompanying provenance records.
 | `InvariantTheory` | Polynomial actions and homogeneous components |
 | `ExternalCode` | Selected upstream proofs with preserved attribution and licenses |
 
-Import `BostConjecture` to obtain both the adelic and classical results.
+Import `AdelicBostConjecture` to obtain both the adelic and classical results.
 Lean and mathlib are pinned to `v4.35.0`. Install Lean through `elan`, then run:
 
 ```sh
@@ -195,11 +195,11 @@ adapters are local to this project.
 The public theorem axiom checks are:
 
 ```lean
-import BostConjecture
+import AdelicBostConjecture
 
 #print axioms ArakelovGeometry.AdelicVectorBundle.maximalSlope_orthogonalTensorPair
 #print axioms ArakelovGeometry.AdelicVectorBundle.maximalSlope_orthogonalTensorOfNormMeasurability
-#print axioms BostConjecture.Arithmetic.HermitianMetric.maxSlope_tensor
+#print axioms AdelicBostConjecture.Arithmetic.HermitianMetric.maxSlope_tensor
 ```
 
 The permitted axioms are `propext`, `Classical.choice` and `Quot.sound`.

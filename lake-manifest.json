@@ -111,6 +111,6 @@
    "inputRev": "v4.35.0",
    "inherited": true,
    "configFile": "lakefile.toml"}],
- "name": "bostConjecture",
+ "name": "adelicBostConjecture",
  "lakeDir": ".lake",
  "fixedToolchain": false}

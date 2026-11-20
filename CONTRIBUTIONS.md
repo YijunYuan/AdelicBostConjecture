@@ -7,11 +7,11 @@ development. This file records external source reuse;
 it does not attribute the upstream proofs to the project author.
 
 Mathlib, HarderNarasimhan and ArakelovGeometry are pinned remote Lake dependencies.
-Existing copied or adapted source is under `BostConjecture/ExternalCode/`, grouped by
-origin and compiled as part of the single `BostConjecture` library. Module
+Existing copied or adapted source is under `AdelicBostConjecture/ExternalCode/`, grouped by
+origin and compiled as part of the single `AdelicBostConjecture` library. Module
 paths describe file organization; public declaration namespaces retain their
 upstream names. The substantially adapted Garnir proofs keep the existing
-`BostConjecture.Specht` namespace because they use this project's integral
+`AdelicBostConjecture.Specht` namespace because they use this project's integral
 word model. The symmetric-algebra port uses its original
 `TauCeti.SymmetricPower` namespace.
 
@@ -71,11 +71,11 @@ may therefore describe declarations or modules that have since been removed.
   and `Tensor/Graded/HNVariation` at the pinned revision are adapted in local
   `Adelic/Induction/{OptimalVariation,GradedVariation,HNVariation}`. Copyright,
   author and license notices are retained. The local versions use namespace
-  `BostConjecture.Adelic`, so they coexist with the unchanged upstream versions.
+  `AdelicBostConjecture.Adelic`, so they coexist with the unchanged upstream versions.
   The upper bound now uses target HN
   functoriality directly; its generic bundle and spanning constructions remain
   in AG. The local unstable-case theorem is
-  `BostConjecture.Adelic.slope_sum_le_tensor_quotient_of_not_geometricallySemistable`.
+  `AdelicBostConjecture.Adelic.slope_sum_le_tensor_quotient_of_not_geometricallySemistable`.
 - `Adelic/Induction/{FiniteNorms,FiniteSlopes,FiniteMaxSlope}` reuse the
   completed tensor grouping and coherence exports in
   `Tensor/Hermitian/{Dual/Basic,Grouping,Coherence}`, tensor construction on
@@ -153,10 +153,10 @@ may therefore describe declarations or modules that have since been removed.
 
 - Repository: <https://github.com/openai/math>.
 - Revision: `4eaee87548250b2682affda7d05d947c05554bae`; upstream Lean 4.34.1.
-- License: Apache-2.0; [license](BostConjecture/ExternalCode/OAI/LICENSE) and
-  [source manifest](BostConjecture/ExternalCode/OAI/PROVENANCE.json).
+- License: Apache-2.0; [license](AdelicBostConjecture/ExternalCode/OAI/LICENSE) and
+  [source manifest](AdelicBostConjecture/ExternalCode/OAI/PROVENANCE.json).
 - Original source root: `lean/OAI/`; local source root:
-  `BostConjecture/ExternalCode/OAI/`.
+  `AdelicBostConjecture/ExternalCode/OAI/`.
 - Specht source: `RepresentationTheory/Saxl/{Model,Basic,Polytabloid,SpechtSubmodule}.lean`.
   The exports include `OAI.Saxl.specht_irreducible`,
   `OAI.Saxl.specht_cyclic_of_ne_zero` and `OAI.Saxl.columnAlt_tabloid`.
@@ -176,11 +176,11 @@ may therefore describe declarations or modules that have since been removed.
 
 - Repository: <https://github.com/mathlib-initiative/Etingof-RepresentationTheory-draft1>.
 - Revision: `c6d86a8bd52065aafb8251fa1cdcd55b609743ef`; upstream Lean 4.32.2.
-- License: Apache-2.0; [license](BostConjecture/ExternalCode/Etingof/LICENSE),
-  [notice](BostConjecture/ExternalCode/Etingof/NOTICE), and
-  [source manifest](BostConjecture/ExternalCode/Etingof/PROVENANCE.json).
+- License: Apache-2.0; [license](AdelicBostConjecture/ExternalCode/Etingof/LICENSE),
+  [notice](AdelicBostConjecture/ExternalCode/Etingof/NOTICE), and
+  [source manifest](AdelicBostConjecture/ExternalCode/Etingof/PROVENANCE.json).
 - Original source root: `clean-code/release/RepresentationTheory/`; local root:
-  `BostConjecture/ExternalCode/Etingof/RepresentationTheory/`.
+  `AdelicBostConjecture/ExternalCode/Etingof/RepresentationTheory/`.
 - Selected four-module closure:
   `YoungDiagram/PartitionConstructions`, `Partition/YoungDiagram`,
   `SymmetricGroup/PartitionAuxiliaryConstructions`, and
@@ -211,13 +211,13 @@ may therefore describe declarations or modules that have since been removed.
 - Repository: <https://github.com/TauCetiProject/TauCeti>.
 - Revision: `b3b0334ab9203d9faee4b2f34cd75161463ecdd0`; upstream Lean 4.36.0-rc2.
 - Authors: The Tau Ceti contributors; license: Apache-2.0.
-  [License](BostConjecture/ExternalCode/TauCeti/LICENSE),
-  [covolume and straightening provenance](BostConjecture/ExternalCode/TauCeti/PROVENANCE.json),
-  [Schur–Weyl provenance](BostConjecture/ExternalCode/TauCeti/Provenance/SchurWeyl/PROVENANCE.md).
+  [License](AdelicBostConjecture/ExternalCode/TauCeti/LICENSE),
+  [covolume and straightening provenance](AdelicBostConjecture/ExternalCode/TauCeti/PROVENANCE.json),
+  [Schur–Weyl provenance](AdelicBostConjecture/ExternalCode/TauCeti/Provenance/SchurWeyl/PROVENANCE.md).
 - Covolumes: selected declarations from
   `TauCeti/Analysis/InnerProductSpace/Gram/Hadamard.lean` and
   `TauCeti/Algebra/Module/ZLattice/Covolume.lean` live in
-  `BostConjecture/ExternalCode/TauCeti/Lattice/Covolume.lean`.
+  `AdelicBostConjecture/ExternalCode/TauCeti/Lattice/Covolume.lean`.
   They include `OrthonormalBasis.det_gram_eq_norm_det_sq`,
   `OrthonormalBasis.volume_fundamentalDomain`,
   `OrthonormalBasis.volume_real_fundamentalDomain`,
@@ -230,13 +230,13 @@ may therefore describe declarations or modules that have since been removed.
   and selected helpers from `Combinatorics/Young/Diagram.lean`,
   `Algebra/BigOperators/Finset/Swap.lean`, and
   `Algebra/Order/BigOperators/Sum/LtSum.lean` are adapted under
-  `BostConjecture/ExternalCode/TauCeti/RepresentationTheory/Specht/`.
+  `AdelicBostConjecture/ExternalCode/TauCeti/RepresentationTheory/Specht/`.
   The proofs replace categorical tabloids with the existing OAI tableaux and
   integral word coordinates, prove integer cancellation by an involution,
   and collect multiplicities over the rationals. The standard-tableau result
   is bundled into the local `RowStandard`, `ColumnStandard` and `IsStandard`
   property classes. The consumer
-  `BostConjecture.Specht.polytabloidRat_mem_span_standard` supplies rational
+  `AdelicBostConjecture.Specht.polytabloidRat_mem_span_standard` supplies rational
   spanning to the standard real basis; it does not assert an integral basis.
 - Schur–Weyl: selected sources under `TauCeti/RepresentationTheory/Symmetric/TensorAction/`,
   `RepresentationTheory/AsAlgebraHom.lean`, `Data/Finset/Basic.lean`,
@@ -244,7 +244,7 @@ may therefore describe declarations or modules that have since been removed.
   `RingTheory/Semisimple/DoubleCentralizer.lean`,
   `LinearAlgebra/Matrix/GeneralLinearGroup/Multilinear.lean`, and
   `LinearAlgebra/PiTensorProduct/GeneralLinear.lean` are adapted under
-  `BostConjecture/ExternalCode/TauCeti/RepresentationTheory/SchurWeyl/`.
+  `AdelicBostConjecture/ExternalCode/TauCeti/RepresentationTheory/SchurWeyl/`.
   The provenance table records every selected declaration and its source.
   The port keeps permutation actions, inclusion-exclusion polarization,
   pure-power spanning, the double centralizer and invertible diagonal span;
@@ -259,12 +259,12 @@ may therefore describe declarations or modules that have since been removed.
 - Repository: <https://github.com/TauCetiProject/TauCeti>.
 - Revision: `3c3a32baea963db05c302adeb307b22baae4de78`; upstream Lean 4.36.0-rc2.
 - Authors: The Tau Ceti contributors; license: Apache-2.0.
-  [Detailed provenance and license](BostConjecture/ExternalCode/TauCeti/Provenance/SymmetricPower/PROVENANCE.md).
+  [Detailed provenance and license](AdelicBostConjecture/ExternalCode/TauCeti/Provenance/SymmetricPower/PROVENANCE.md).
 - Original files: `TauCeti/LinearAlgebra/SymmetricPower/{Basic,Lift,Algebra}.lean`.
   The generic quotient, tensor and lift APIs remain in
-  `BostConjecture/ExternalCode/TauCeti/LinearAlgebra/SymmetricPower/{Basic,Lift}.lean`.
+  `AdelicBostConjecture/ExternalCode/TauCeti/LinearAlgebra/SymmetricPower/{Basic,Lift}.lean`.
   The universe-polymorphic finite-index adaptation is in
-  `BostConjecture/ExternalCode/TauCeti/LinearAlgebra/SymmetricPower/Finite.lean`.
+  `AdelicBostConjecture/ExternalCode/TauCeti/LinearAlgebra/SymmetricPower/Finite.lean`.
 - The new file adapts the existing selective port at the same pinned revision,
   retaining the Tau Ceti contributors' copyright and Apache-2.0 license and
   crediting Yijun Yuan for the adaptation. Its public namespace remains
@@ -293,10 +293,10 @@ may therefore describe declarations or modules that have since been removed.
 
 - Repository: <https://github.com/AxiomMath/Stacks>.
 - Revision: `012108f61d7f92a6ffc35ec3f263b6da5d438125`; upstream Lean 4.34.0-rc2.
-- License: Apache-2.0; [license](BostConjecture/ExternalCode/Stacks/LICENSE) and
-  [per-declaration provenance](BostConjecture/ExternalCode/Stacks/PROVENANCE.json).
+- License: Apache-2.0; [license](AdelicBostConjecture/ExternalCode/Stacks/LICENSE) and
+  [per-declaration provenance](AdelicBostConjecture/ExternalCode/Stacks/PROVENANCE.json).
 - Original path: `StacksFrontier/LinearAlgebra/Matrix/AlternatingTensorPower.lean`.
-  Local path: `BostConjecture/ExternalCode/Stacks/LinearAlgebra/Matrix/AlternatingTensorPower.lean`.
+  Local path: `AdelicBostConjecture/ExternalCode/Stacks/LinearAlgebra/Matrix/AlternatingTensorPower.lean`.
 - Eight selected declarations: `Matrix.altVec`, `sum_mul_altVec`,
   `altVec_coe_perm`, `altVec_eq_zero_of_not_bijective`, `det_submatrix_left`,
   `tensorPow`, `tensorPow_apply`, and `sum_tensorPow_mul_altVec`.
@@ -316,7 +316,7 @@ replacement Mathlib dependency. All target Lean/mathlib `v4.35.0`.
 | [#40948](https://github.com/leanprover-community/mathlib4/pull/40948) | `Thmoas-Guan/mathlib4_fork` at `b642b6723caf97b7b462dd5ddeabb0226c3b5433` | Nailin Guan's `Mathlib/LinearAlgebra/ExteriorPower/BaseChange.lean` and two projections from `ExteriorAlgebra/Grading.lean`; `exteriorPower.baseChangeEquiv` and `ExteriorAlgebra.toExteriorPower` | `ExternalCode/MathlibPRs/PR40948/`; arithmetic determinants and geometric Plucker base change |
 | [#44845](https://github.com/leanprover-community/mathlib4/pull/44845) | `DanielJHorton/mathlib4` at `47365e3b9fd4329f058c31ac7aa9565a6036b17d` | Daniel Horton's `Mathlib/LinearAlgebra/PiTensorProduct/Projective.lean` and two declarations from `Dual/Defs.lean`; `PiTensorProduct.Projective`, `piTensorHomEquiv`, `dualDistribEquivOfProjective`, `Module.Dual.dualBaseRingEquiv` | `ExternalCode/MathlibPRs/PR44845/`; integral projective tensor duality, contraction and Schur–Weyl duality |
 
-Local roots in the table are relative to `BostConjecture/`. Each contains
+Local roots in the table are relative to `AdelicBostConjecture/`. Each contains
 `LICENSE` and `PROVENANCE.json`. PR #40948 extracts a small projection
 prerequisite. PR #44845 expands two unavailable reindex simplifications.
 Both retained ports have relocated module imports and mathlib-style source
