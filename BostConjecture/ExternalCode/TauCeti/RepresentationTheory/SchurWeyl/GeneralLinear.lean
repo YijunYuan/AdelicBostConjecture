@@ -5,26 +5,26 @@ Authors: The Tau Ceti contributors
 -/
 module
 
-public import Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.MvPolynomial
 public import Mathlib.LinearAlgebra.Dual.Lemmas
+public import Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.MvPolynomial
 public import Mathlib.LinearAlgebra.PiTensorProduct.Basic
 
 /-!
 # Invertible diagonal operators span all diagonal operators
 
 Two selected TauCeti density slices; see
-BostConjecture/ExternalCode/TauCeti/Provenance/SchurWeyl/PROVENANCE.md.
+the accompanying provenance records.
 
 ## Source
 
 Adapted from <https://github.com/TauCetiProject/TauCeti>, revision
 `b3b0334ab9203d9faee4b2f34cd75161463ecdd0`.
 Original sources:
-* `TauCeti/LinearAlgebra/Matrix/GeneralLinearGroup/Multilinear.lean`.
-* `TauCeti/LinearAlgebra/PiTensorProduct/GeneralLinear.lean`.
+* `TauCeti.LinearAlgebra.Matrix.GeneralLinearGroup.Multilinear`.
+* `TauCeti.LinearAlgebra.PiTensorProduct.GeneralLinear`.
 
 The original declaration namespaces and license notices are retained, except for
-project-specific adaptations documented in `CONTRIBUTIONS.md`.
+project-specific adaptations documented in the project contribution records.
 -/
 
 @[expose] public section

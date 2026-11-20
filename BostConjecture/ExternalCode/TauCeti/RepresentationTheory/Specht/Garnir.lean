@@ -25,11 +25,11 @@ gives a rational straightening relation.
 Adapted from <https://github.com/TauCetiProject/TauCeti>, revision
 `b3b0334ab9203d9faee4b2f34cd75161463ecdd0`.
 Original sources:
-* `TauCeti/RepresentationTheory/Symmetric/Specht/Garnir.lean`.
-* `TauCeti/RepresentationTheory/Symmetric/Specht/Straightening.lean`.
+* `TauCeti.RepresentationTheory.Symmetric.Specht.Garnir`.
+* `TauCeti.RepresentationTheory.Symmetric.Specht.Straightening`.
 
 The original declaration namespaces and license notices are retained, except for
-project-specific adaptations documented in `CONTRIBUTIONS.md`.
+project-specific adaptations documented in the project contribution records.
 -/
 
 @[expose] public section

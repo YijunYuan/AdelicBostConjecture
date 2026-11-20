@@ -11,8 +11,8 @@ See CONTRIBUTIONS.md for source paths and modifications.
 -/
 module
 
-public import BostConjecture.ExternalCode.TauCeti.RepresentationTheory.Specht.GarnirSets
 public import BostConjecture.ExternalCode.TauCeti.RepresentationTheory.Specht.Garnir
+public import BostConjecture.ExternalCode.TauCeti.RepresentationTheory.Specht.GarnirSets
 public import BostConjecture.Specht.Tableau.Standard
 
 /-!
@@ -26,10 +26,10 @@ polytabloid as a rational combination of standard ones.
 Adapted from <https://github.com/TauCetiProject/TauCeti>, revision
 `b3b0334ab9203d9faee4b2f34cd75161463ecdd0`.
 Original source:
-* `TauCeti/RepresentationTheory/Symmetric/Specht/Straightening.lean`.
+* `TauCeti.RepresentationTheory.Symmetric.Specht.Straightening`.
 
 The original declaration namespaces and license notices are retained, except for
-project-specific adaptations documented in `CONTRIBUTIONS.md`.
+project-specific adaptations documented in the project contribution records.
 -/
 
 @[expose] public section

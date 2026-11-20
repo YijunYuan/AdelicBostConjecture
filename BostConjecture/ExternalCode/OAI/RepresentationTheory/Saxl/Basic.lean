@@ -25,10 +25,10 @@ Column permutations and polytabloid coefficients.
 Adapted from <https://github.com/openai/math>, revision
 `4eaee87548250b2682affda7d05d947c05554bae`.
 Original source:
-* `lean/OAI/RepresentationTheory/Saxl/Basic.lean`.
+* `lean.OAI.RepresentationTheory.Saxl.Basic`.
 
 The original declaration namespaces and license notices are retained, except for
-project-specific adaptations documented in `CONTRIBUTIONS.md`.
+project-specific adaptations documented in the project contribution records.
 -/
 
 @[expose] public section

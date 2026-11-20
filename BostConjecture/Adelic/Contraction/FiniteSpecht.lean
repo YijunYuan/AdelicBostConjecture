@@ -5,10 +5,10 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Adelic.Contraction.FiniteDeterminant
-public import BostConjecture.Adelic.Contraction.Archimedean
-public import BostConjecture.Adelic.Specht.Bundle
 public import ArakelovGeometry.AdelicVectorBundle.Tensor.Hermitian.InnerProduct
+public import BostConjecture.Adelic.Contraction.Archimedean
+public import BostConjecture.Adelic.Contraction.FiniteDeterminant
+public import BostConjecture.Adelic.Specht.Bundle
 
 /-!
 # Finite-place Specht contractions on completed fibres
@@ -71,7 +71,10 @@ variable {K : Type u} [Field K] [CharZero K] {S : AdelicStructure.{u, v} K}
   [hN : S.IsArchimedeanNormalized]
   [hcount : S.HasCommonCountableDenseSubfield] [hV : V.IsHermitian]
 
-/-- The existing determinant embedding contracts for the prescribed completed
+/-- This paper, Lemma 6.1, non-Archimedean contraction. Compare [Chen–Moriwaki, Proposition
+A.2.8][cmp].
+
+The existing determinant embedding contracts for the prescribed completed
 norms at every non-Archimedean place, including trivial valuations. -/
 theorem projectiveDeterminantMap_norm_finite {n k : ℕ} (hk : 0 < k)
     (t : Tableau n (rectangle (finrank K V) k))

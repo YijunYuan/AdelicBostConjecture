@@ -5,8 +5,8 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Classical.Metric
 public import BostConjecture.Classical.Line.Coordinates
+public import BostConjecture.Classical.Metric
 public import Mathlib.RingTheory.Flat.TorsionFree
 
 /-!
@@ -18,7 +18,7 @@ integral section used to recover the metric length and the generic coordinate
 are proved irrelevant. Generic rank one is a dimension statement about the
 canonical scalar extension, not a chosen integral basis.
 
-Reference: this paper, §2, page 3. The quotient-cardinality
+Reference: this paper, Section 1.2; [Bost, Appendix A.2–A.4][bost96]. The quotient-cardinality
 formula follows from the fractional-ideal index theorem.
 -/
 

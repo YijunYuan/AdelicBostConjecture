@@ -201,7 +201,10 @@ theorem exists_swap_orthogonalStandardBasis_eq (t : Tableau n μ)
     ‖orthogonalStandardBasis t U‖ ^ 2, ?_⟩
   exact (sub_eq_iff_eq_add.mp hx).trans (add_comm _ _)
 
-/-- Literal relabeling fixes the off-diagonal coefficient to one for an increasing legal swap. -/
+/-- This paper, proof of Proposition 4.17. This is [Ryom-Hansen, Section 2, equation (1)][rh] in the
+monic normalization.
+
+Literal relabeling fixes the off-diagonal coefficient to one for an increasing legal swap. -/
 theorem realSpechtRep_swap_orthogonalStandardBasis (t : Tableau n μ)
     (T U : {u : Tableau n μ // IsStandard u}) (i j : Fin n)
     (hij : i.val + 1 = j.val) (hU : U.val = relabel (Equiv.swap i j) T.val)
@@ -243,7 +246,9 @@ theorem realSpechtRep_swap_orthogonalStandardBasis (t : Tableau n μ)
   have hc1 : c = 1 := by nlinarith [hzero]
   simpa only [hc1, one_smul] using hc
 
-/-- The normalized adjacent action gives the actual neighboring squared-norm ratio. -/
+/-- This paper, equation (4.4). See [Ryom-Hansen, Section 2, equation (1)][rh].
+
+The normalized adjacent action gives the actual neighboring squared-norm ratio. -/
 theorem norm_orthogonalStandardBasis_swap_sq (t : Tableau n μ)
     (T U : {u : Tableau n μ // IsStandard u}) (i j : Fin n)
     (hij : i.val + 1 = j.val) (hU : U.val = relabel (Equiv.swap i j) T.val)

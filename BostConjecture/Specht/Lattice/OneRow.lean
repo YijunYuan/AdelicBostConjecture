@@ -11,7 +11,8 @@ public import BostConjecture.Specht.Lattice.Rectangle
 # The one-row rectangular lattice
 
 There is one row word and its polytabloid is a unit vector. Consequently the
-one-row lattice has covolume one. Reference: this paper §3, page 4, the case `a = 1`.
+one-row lattice has covolume one. Reference: this paper, Example 3.12 and the proof of Proposition
+5.1.
 -/
 
 @[expose] public section

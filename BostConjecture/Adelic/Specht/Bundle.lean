@@ -5,14 +5,15 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Adelic.Specht.Coordinates
 public import ArakelovGeometry.AdelicVectorBundle.Basic
-public import ArakelovGeometry.AdelicVectorBundle.NormFamily.Hermitian.Basis
-public import ArakelovGeometry.AdelicVectorBundle.NormFamily.Completion.Density
 public import ArakelovGeometry.AdelicVectorBundle.Measurability.Countable
+public import ArakelovGeometry.AdelicVectorBundle.NormFamily.Completion.Density
+public import ArakelovGeometry.AdelicVectorBundle.NormFamily.Hermitian.Basis
 public import ArakelovGeometry.AdelicVectorBundle.Tensor.Hermitian.InnerProduct
-import ArakelovGeometry.AdelicVectorBundle.NormFamily.Domination.Subquotient
+public import BostConjecture.Adelic.Specht.Coordinates
+
 import ArakelovGeometry.AdelicCurve.Basic
+import ArakelovGeometry.AdelicVectorBundle.NormFamily.Domination.Subquotient
 
 /-!
 # The constant adelic Specht bundle
@@ -22,7 +23,7 @@ restriction of the Euclidean **word** norm. At finite places it is the maximum
 of the coefficients in an integral lattice basis. In particular, the lattice
 basis is not made orthonormal at infinity.
 
-This constructs the bundle in this paper, Lemma 6.1 (page 25). The countable
+This constructs the bundle in this paper, Lemma 6.1 and Section 2.6. The countable
 common dense subfield is used only for measurability of the actual dual norm.
 The degree calculation and representation-theoretic semistability are separate.
 -/
@@ -46,7 +47,9 @@ def wordNormFamily : NormFamily S (K ⊗[ℤ] orbitLattice t) :=
 
 variable {ι : Type*} [Fintype ι] (b : Basis ι ℤ (orbitLattice t))
 
-/-- The actual constant Specht norms: word Gram at infinity and lattice max
+/-- This paper, Section 2.6, constant Specht norm family.
+
+The actual constant Specht norms: word Gram at infinity and lattice max
 at finite places. The basis is an integral basis of the full orbit lattice. -/
 def latticeNormFamily : NormFamily S (K ⊗[ℤ] orbitLattice t) :=
   (wordNormFamily S t).piecewise
@@ -72,7 +75,9 @@ theorem latticeNormFamily_norm_infinite (ω : S.Ω) (hω : ω ∈ S.Ωinf)
     NormFamily.ofBasisHermitian_norm_of_infinite _ ω hω,
     fibreWordCoordinates_eq_basis]
 
-/-- Rational norm evaluations are measurable finite coordinate expressions. -/
+/-- This paper, Section 2.6, measurability of the constant Specht norm family.
+
+Rational norm evaluations are measurable finite coordinate expressions. -/
 instance latticeNormFamily_isMeasurable : (latticeNormFamily S t b).IsMeasurable := by
   classical
   constructor
@@ -122,7 +127,9 @@ instance latticeNormFamily_isStronglyDominated :
     (NormFamily.ofBasisHermitian_isStronglyDominated_of_measure_lt_top (b.baseChange K) hfin)
     hfin S.Ωinf
 
-/-- Domination of the family and its actual completed dual. -/
+/-- This paper, Section 2.6, domination of the constant Specht norm family.
+
+Domination of the family and its actual completed dual. -/
 instance latticeNormFamily_isDominated : (latticeNormFamily S t b).IsDominated :=
   (latticeNormFamily_isStronglyDominated S t b).isDominated
 

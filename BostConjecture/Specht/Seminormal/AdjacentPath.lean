@@ -126,7 +126,9 @@ theorem tableauColexLT_relabel_adjacent (t : Tableau n μ) (i j : Fin n)
     have hlj : l ≠ j := hl.ne'
     simp [relabel, Equiv.swap_apply_of_ne_of_ne hli hlj]
 
-/-- The finite legal-swap graph is connected by paths increasing from column reading. -/
+/-- This paper, proof of Proposition 4.17, connectivity by legal adjacent swaps.
+
+The finite legal-swap graph is connected by paths increasing from column reading. -/
 theorem rectangle_standard_adjacent_path (a k : ℕ)
     (T : {t : Tableau (a * k) (rectangle a k) // IsStandard t}) :
     Relation.ReflTransGen

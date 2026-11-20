@@ -17,7 +17,7 @@ The integral orbit span embeds in the complex word realization of `OAI.Saxl`.
 The definitions use integer coefficients before extending scalars; no metric is
 placed on the function space in this file.
 
-Reference: this paper, §3, page 4.
+Reference: this paper, Definition 3.6.
 -/
 
 @[expose] public section
@@ -31,7 +31,9 @@ open scoped TensorProduct
 
 variable {n d : ℕ} {μ : YoungDiagram}
 
-/-- The position action on integer word coefficients. -/
+/-- This paper, Definition 3.3.
+
+The position action on integer word coefficients. -/
 def wordRepInt (n d : ℕ) :
     Representation ℤ (Equiv.Perm (Fin n)) ((Fin n → Fin d) → ℤ) where
   toFun g :=
@@ -56,7 +58,9 @@ theorem complexCast_injective : Function.Injective (complexCast n d) := by
     (x : (Fin n → Fin d) → ℤ) :
     complexCast n d (wordRepInt n d g x) = wordRep n d g (complexCast n d x) := rfl
 
-/-- The integral column antisymmetrizer of the row word. -/
+/-- This paper, Definition 3.6, equation (3.3). See [Kuenzer–Nebe, Section 2.1][kn].
+
+The integral column antisymmetrizer of the row word. -/
 def polytabloidInt (t : Tableau n μ) : (Fin n → Fin (μ.colLen 0)) → ℤ := by
   classical
   letI := Fintype.ofFinite (columnGroup t)
@@ -85,7 +89,10 @@ theorem polytabloidInt_ne_zero (t : Tableau n μ) : polytabloidInt t ≠ 0 := by
   have := polytabloidInt_rowWord t
   simp [h] at this
 
-/-- The integral span of the permutation orbit of one polytabloid. -/
+/-- This paper, Definition 3.6, equation (3.4). The equality with the span of all tableaux is
+`orbitLattice_eq_span_polytabloids`.
+
+The integral span of the permutation orbit of one polytabloid. -/
 def orbitLattice (t : Tableau n μ) : Submodule ℤ ((Fin n → Fin (μ.colLen 0)) → ℤ) :=
   Submodule.span ℤ (Set.range fun g => wordRepInt n (μ.colLen 0) g (polytabloidInt t))
 

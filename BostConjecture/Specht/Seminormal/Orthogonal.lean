@@ -27,7 +27,10 @@ variable {n : ℕ} {μ : YoungDiagram}
 variable [LinearOrder {t : Tableau n μ // IsStandard t}]
 variable [LocallyFiniteOrderBot {t : Tableau n μ // IsStandard t}]
 
-/-- Monic Gram-Schmidt orthogonalization in the real span of the orbit lattice. -/
+/-- This paper, Definition 4.14, equation (4.1). See [Ryom-Hansen, Section 2, Gram–Schmidt
+construction][rh].
+
+Monic Gram-Schmidt orthogonalization in the real span of the orbit lattice. -/
 def orthogonalStandardBasis (t : Tableau n μ) :
     Basis {u : Tableau n μ // IsStandard u} ℝ (realSpan t) :=
   gramSchmidtBasis (standardRealBasis t)

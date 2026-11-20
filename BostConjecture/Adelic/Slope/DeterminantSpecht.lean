@@ -5,12 +5,12 @@ Authors: Yijun Yuan
 -/
 module
 
+public import ArakelovGeometry.AdelicVectorBundle.Slope.Tensor
+public import BostConjecture.Adelic.Semistability.LineTensor
+public import BostConjecture.Adelic.Semistability.Specht
 public import BostConjecture.Adelic.Slope.DeterminantPower
 public import BostConjecture.Adelic.Specht.Degree
-public import BostConjecture.Adelic.Semistability.Specht
-public import BostConjecture.Adelic.Semistability.LineTensor
 public import BostConjecture.Adelic.Specht.Permutation
-public import ArakelovGeometry.AdelicVectorBundle.Slope.Tensor
 
 /-!
 # The actual determinant–Specht auxiliary bundle
@@ -94,7 +94,9 @@ theorem determinantSpechtBundle_slope_rectangle :
     determinantPower_slope_eq_rank_mul, latticeBundle_slope_rectangle, ← hn]
   ring
 
-/-- The actual auxiliary slope, before identifying the lattice covolume with
+/-- This paper, Lemma 6.1, equation (6.1). Uses [Chen–Moriwaki, Proposition 4.3.19][cm].
+
+The actual auxiliary slope, before identifying the lattice covolume with
 the canonical rectangular covolume. -/
 theorem determinantSpechtBundle_slope :
     (determinantSpechtBundle V k t b).slope =

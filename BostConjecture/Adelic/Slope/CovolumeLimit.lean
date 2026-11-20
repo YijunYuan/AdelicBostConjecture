@@ -5,6 +5,7 @@ Authors: Yijun Yuan
 -/
 module
 
+public import BostConjecture.Adelic.Specht.Degree
 public import BostConjecture.Specht.Asymptotics.Limit
 
 /-!
@@ -18,11 +19,25 @@ coefficient is arbitrary, so this applies to the mass of the Archimedean places.
 @[expose] public section
 
 open Filter
-open scoped BigOperators Topology
+open scoped BigOperators TensorProduct Topology
 
 namespace BostConjecture.Adelic
 
 open Specht
+
+/-- This paper, Proposition 5.1: the negative slope of the constant rectangular Specht
+bundle divided by the tensor degree tends to zero at fixed positive height.
+The bases may vary with the width; equation (2.10) identifies every slope with its covolume. -/
+theorem tendsto_neg_specht_slope_div {K : Type*} [Field K] [CharZero K]
+    (S : ArakelovGeometry.AdelicStructure K) [S.IsProper] [S.IsArchimedeanNormalized]
+    [S.HasCommonCountableDenseSubfield] {a : ℕ} (ha : 0 < a)
+    (t : ∀ k, OAI.Saxl.Tableau (a * k) (rectangle a k))
+    (b : ∀ k, Module.Basis
+      (Fin (Module.finrank K (K ⊗[ℤ] orbitLattice (t k)))) ℤ (orbitLattice (t k))) :
+    Tendsto (fun k : ℕ => -(latticeBundle S (t k) (b k)).slope / (a * k : ℕ))
+      atTop (𝓝 0) := by
+  simpa only [latticeBundle_slope_rectangle, neg_mul, neg_neg, mul_div_assoc, mul_zero]
+    using (tendsto_rectangleLogCovolume_div ha).const_mul (S.v S.Ωinf).toReal
 
 /-- Along common rectangular degrees, the actual Specht covolume errors are
 sublinear. No sign condition is required on their common scalar coefficient. -/

@@ -18,10 +18,10 @@ Selected from TauCeti, adapted to the checked Mathlib PR #44845 API.
 Adapted from <https://github.com/TauCetiProject/TauCeti>, revision
 `b3b0334ab9203d9faee4b2f34cd75161463ecdd0`.
 Original source:
-* `TauCeti/RepresentationTheory/Symmetric/TensorAction/Centralizer.lean`.
+* `TauCeti.RepresentationTheory.Symmetric.TensorAction.Centralizer`.
 
 The original declaration namespaces and license notices are retained, except for
-project-specific adaptations documented in `CONTRIBUTIONS.md`.
+project-specific adaptations documented in the project contribution records.
 -/
 
 @[expose] public section

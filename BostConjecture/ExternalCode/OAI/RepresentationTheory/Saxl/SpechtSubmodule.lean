@@ -12,11 +12,11 @@ This file has been modified for Lean 4.35 module visibility.
 -/
 module
 
+public import BostConjecture.ExternalCode.OAI.RepresentationTheory.Saxl.Basic
 public import BostConjecture.ExternalCode.OAI.RepresentationTheory.Saxl.Polytabloid
-public import Mathlib.RepresentationTheory.Irreducible
 public import Mathlib.Analysis.Complex.Basic
 public import Mathlib.LinearAlgebra.Matrix.DotProduct
-public import BostConjecture.ExternalCode.OAI.RepresentationTheory.Saxl.Basic
+public import Mathlib.RepresentationTheory.Irreducible
 
 /-!
 # Irreducibility of the complex Specht submodule
@@ -28,10 +28,10 @@ Irreducibility of the complex Specht submodule.
 Adapted from <https://github.com/openai/math>, revision
 `4eaee87548250b2682affda7d05d947c05554bae`.
 Original source:
-* `lean/OAI/RepresentationTheory/Saxl/SpechtSubmodule.lean`.
+* `lean.OAI.RepresentationTheory.Saxl.SpechtSubmodule`.
 
 The original declaration namespaces and license notices are retained, except for
-project-specific adaptations documented in `CONTRIBUTIONS.md`.
+project-specific adaptations documented in the project contribution records.
 -/
 
 @[expose] public section

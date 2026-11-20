@@ -5,12 +5,12 @@ Authors: Yijun Yuan
 -/
 module
 
+public import BostConjecture.Adelic.Contraction.Pairing
+public import BostConjecture.Adelic.Geometry.Nonvanishing
 public import BostConjecture.Adelic.Slope.Contraction
 public import BostConjecture.Adelic.Slope.CovolumeLimit
-public import BostConjecture.Adelic.Slope.DeterminantSpechtTensor
 public import BostConjecture.Adelic.Slope.DeterminantSpechtDegree
-public import BostConjecture.Adelic.Geometry.Nonvanishing
-public import BostConjecture.Adelic.Contraction.Pairing
+public import BostConjecture.Adelic.Slope.DeterminantSpechtTensor
 
 /-!
 # The finite-degree and limit comparisons for the actual canonical pairing
@@ -101,7 +101,9 @@ theorem canonicalPairing_finite_degree_bound_of_norm_le
     determinantSpechtBundle_dual_tensor_dual_slope_rectangle V k t b] at hcmp
   exact hcmp
 
-/-- The finite-degree geometric comparison with the actual completed canonical
+/-- This paper, equations (6.4)–(6.5).
+
+The finite-degree geometric comparison with the actual completed canonical
 pairing contraction supplied by the checked local norm theorem. -/
 theorem canonicalPairing_finite_degree_bound [hU : U.IsHermitian]
     {n l : ℕ} {k : ι → ℕ} (hk : ∀ i, 0 < k i)
@@ -194,7 +196,9 @@ theorem slope_le_sum_of_geometricallySemistable_of_pairing_norm_le
       (hcontract (d * (r + 1)) (l r) (k r) (hk r) (t r) (fun i p => by simp) b
         (hl r) (v r) (fun p => by simp) bU)
 
-/-- The geometric subspace inequality for the prescribed completed tensor norm.
+/-- This paper, Theorem 6.2. This proves the inequality posed in [Bost–Chen, Problem 1.17][bc].
+
+The geometric subspace inequality for the prescribed completed tensor norm.
 The canonical pairing norm bound is discharged by its concrete local producer. -/
 theorem slope_le_sum_of_geometricallySemistable
     [hU : U.IsHermitian] (A : U →ₗ[K] (⨂[K] i, V i))

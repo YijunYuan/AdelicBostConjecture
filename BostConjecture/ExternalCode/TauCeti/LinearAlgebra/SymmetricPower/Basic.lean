@@ -13,7 +13,7 @@ public import Mathlib.LinearAlgebra.TensorPower.Symmetric
 
 Selectively adapted from TauCeti revision
 `3c3a32baea963db05c302adeb307b22baae4de78`; see
-`BostConjecture/ExternalCode/TauCeti/Provenance/SymmetricPower/PROVENANCE.md`. Only the natural
+the accompanying provenance records. Only the natural
 tensor section
 and its required quotient/map API are retained.
 
@@ -22,10 +22,10 @@ and its required quotient/map API are retained.
 Adapted from <https://github.com/TauCetiProject/TauCeti>, revision
 `3c3a32baea963db05c302adeb307b22baae4de78`.
 Original source:
-* `TauCeti/LinearAlgebra/SymmetricPower/Basic.lean`.
+* `TauCeti.LinearAlgebra.SymmetricPower.Basic`.
 
 The original declaration namespaces and license notices are retained, except for
-project-specific adaptations documented in `CONTRIBUTIONS.md`.
+project-specific adaptations documented in the project contribution records.
 -/
 
 public section

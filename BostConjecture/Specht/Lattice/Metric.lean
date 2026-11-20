@@ -5,15 +5,15 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Specht.Lattice.Integral
 public import BostConjecture.ExternalCode.TauCeti.Lattice.Covolume
+public import BostConjecture.Specht.Lattice.Integral
 
 /-!
 # The orthonormal word metric on the integral Specht lattice
 
 Integer word coefficients embed in `EuclideanSpace`, whose coordinate vectors
 are orthonormal. The image of the orbit lattice is discrete and is a full
-integer lattice in its own real linear span. Reference: this paper §3, page 4.
+integer lattice in its own real linear span. Reference: this paper, Section 3.2.
 -/
 
 @[expose] public section
@@ -167,6 +167,7 @@ theorem one_le_covolume (t : Tableau n μ) : 1 ≤ ZLattice.covolume (spanLattic
   have hG1 : (1 : ℝ) ≤ (G.det : ℝ) := by exact_mod_cast hG
   nlinarith
 
+/-- This paper, equation (3.17), lower bound. -/
 theorem log_covolume_nonneg (t : Tableau n μ) :
     0 ≤ Real.log (ZLattice.covolume (spanLattice t)) :=
   Real.log_nonneg (one_le_covolume t)

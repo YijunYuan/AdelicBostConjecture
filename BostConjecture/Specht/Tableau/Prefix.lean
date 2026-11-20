@@ -42,7 +42,9 @@ theorem IsStandard.label_mono [ht : IsStandard t] {b c : μ}
         (by simp [a]) (by simpa [a] using he)).le
   exact hba.trans hac
 
-/-- The boxes whose labels are in the first `m` positions. -/
+/-- This paper, Definition 4.6. Labels in the formalization start at zero.
+
+The boxes whose labels are in the first `m` positions. -/
 def prefixShape (t : Tableau n μ) [ht : IsStandard t] (m : ℕ) (hm : m ≤ n) : YoungDiagram where
   cells := Finset.univ.image (fun i : Fin m => (t (Fin.castLE hm i)).val)
   isLowerSet := by

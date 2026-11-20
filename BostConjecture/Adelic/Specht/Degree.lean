@@ -5,12 +5,13 @@ Authors: Yijun Yuan
 -/
 module
 
+public import ArakelovGeometry.AdelicVectorBundle.Slope.Basic
 public import BostConjecture.Adelic.Specht.Bundle
 public import BostConjecture.Adelic.Specht.Determinant
 public import BostConjecture.Specht.Lattice.Rectangle
-public import ArakelovGeometry.AdelicVectorBundle.Slope.Basic
-import ArakelovGeometry.Analysis.Determinant.ExactSequence
+
 import ArakelovGeometry.AdelicCurve.Basic
+import ArakelovGeometry.Analysis.Determinant.ExactSequence
 import Mathlib.MeasureTheory.Integral.Bochner.Set
 
 /-!
@@ -135,7 +136,9 @@ theorem latticeDetVector_logNorm (ω : S.Ω) :
 
 variable [S.IsProper] [hcount : S.HasCommonCountableDenseSubfield]
 
-/-- Degree of the constant Specht lattice with its actual word Gram metric. -/
+/-- This paper, equation (2.10), for the integral Specht lattice.
+
+Degree of the constant Specht lattice with its actual word Gram metric. -/
 theorem latticeBundle_degree :
     (latticeBundle S t b).degree =
       -(S.v S.Ωinf).toReal * Real.log (ZLattice.covolume (spanLattice t)) := by
@@ -147,7 +150,9 @@ theorem latticeBundle_degree :
   rw [integral_indicator S.measurableSet_Ωinf, setIntegral_const]
   simp [Measure.real, neg_mul]
 
-/-- Slope is the normalized logarithmic covolume, weighted by the mass at infinity. -/
+/-- This paper, equation (2.10), for the integral Specht lattice.
+
+Slope is the normalized logarithmic covolume, weighted by the mass at infinity. -/
 theorem latticeBundle_slope :
     (latticeBundle S t b).slope =
       -(S.v S.Ωinf).toReal *

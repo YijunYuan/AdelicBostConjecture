@@ -8,6 +8,7 @@ module
 public import BostConjecture.Adelic.Specht.Bundle
 public import BostConjecture.Adelic.Specht.IntegralNorm
 public import BostConjecture.Arithmetic.Specht.Representation
+
 import Mathlib.Analysis.Normed.Group.Ultra
 
 /-!
@@ -48,7 +49,9 @@ theorem latticeNormFamily_basis_independent (b : Basis ι ℤ (orbitLattice t))
       fibreBasisCoordinates_cancel, fibreBasisCoordinates_cancel]
     exact integralBasis_norm_eq b c _
 
-/-- Position permutations preserve the actual finite and infinite fibre norms. -/
+/-- This paper, Lemma 6.1, isometric permutation action on the Specht factor.
+
+Position permutations preserve the actual finite and infinite fibre norms. -/
 theorem latticeNormFamily_orbitAction (b : Basis ι ℤ (orbitLattice t))
     (g : Equiv.Perm (Fin n)) (ω : S.Ω)
     (x : (S.ϕ ω).Completion ⊗[K] (K ⊗[ℤ] orbitLattice t)) :

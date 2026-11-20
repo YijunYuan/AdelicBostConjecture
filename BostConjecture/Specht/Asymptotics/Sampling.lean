@@ -5,10 +5,10 @@ Authors: Yijun Yuan
 -/
 module
 
+public import Mathlib.Algebra.BigOperators.Field
+public import Mathlib.Analysis.Complex.Exponential
 public import Mathlib.Data.Nat.Choose.Sum
 public import Mathlib.Data.Nat.Factorial.BigOperators
-public import Mathlib.Analysis.Complex.Exponential
-public import Mathlib.Algebra.BigOperators.Field
 
 /-!
 # Binomial moments for sampling without replacement
@@ -78,7 +78,9 @@ theorem sum_choose_inter (t : Finset α) {A r : ℕ} (hr : r ≤ A) :
       simpa only [hc, card_filter] using h
     _ = _ := by simp
 
-/-- The normalized incidence count is the usual falling-factorial moment. -/
+/-- This paper, proof of Lemma 5.3, factorial moments.
+
+The normalized incidence count is the usual falling-factorial moment. -/
 theorem sampling_binomialMoment_eq (t : Finset α) {A r : ℕ}
     (hA : A ≤ Fintype.card α) (hr : r ≤ A) :
     (∑ s ∈ univ.powersetCard A, ((s ∩ t).card.choose r : ℝ)) /
@@ -185,7 +187,9 @@ theorem sampling_exp_le_of_nonneg (t : Finset α) {A : ℕ}
     (z := Real.exp θ - 1) (sub_nonneg.mpr (Real.one_le_exp_iff.mpr hθ))
   simpa only [add_sub_cancel, Real.exp_nat_mul] using h
 
-/-- The same Bernoulli bound holds for negative parameters by complementing successes. -/
+/-- This paper, proof of Lemma 5.3, exponential moments.
+
+The same Bernoulli bound holds for negative parameters by complementing successes. -/
 theorem sampling_exp_le (t : Finset α) {A : ℕ}
     (hN : 0 < Fintype.card α) (hA : A ≤ Fintype.card α) (θ : ℝ) :
     (∑ s ∈ univ.powersetCard A, Real.exp ((s ∩ t).card * θ)) /

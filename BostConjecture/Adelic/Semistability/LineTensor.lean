@@ -59,7 +59,9 @@ def trivialLineTensorBaseChangeEquiv (hD : Module.finrank K D = 1)
     ((ρ g).baseChange L).comp (e.toLinearMap.baseChange L)
   rw [← LinearMap.baseChange_comp, ← LinearMap.baseChange_comp, e.isIntertwining' g]
 
-/-- Absolute irreducibility is preserved by a trivial one-dimensional factor. -/
+/-- This paper, Lemma 6.1, absolute irreducibility after a determinant twist.
+
+Absolute irreducibility is preserved by a trivial one-dimensional factor. -/
 theorem isIrreducible_baseChange_trivialLineTensor (hD : Module.finrank K D = 1)
     (ρ : Representation K G E) (L : Type*) [Field L] [Algebra K L]
     [(representationBaseChange L ρ).IsIrreducible] :

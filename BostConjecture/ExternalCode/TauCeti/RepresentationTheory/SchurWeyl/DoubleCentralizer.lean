@@ -5,24 +5,24 @@ Authors: The Tau Ceti contributors
 -/
 module
 
-public import Mathlib.RingTheory.SimpleModule.Basic
 public import Mathlib.Algebra.Algebra.Subalgebra.Basic
+public import Mathlib.RingTheory.SimpleModule.Basic
 
 /-!
 # The semisimple image double centralizer, with only its restriction-of-scalars helper
 
-Selected from TauCeti; see BostConjecture/ExternalCode/TauCeti/Provenance/SchurWeyl/PROVENANCE.md.
+Selected from TauCeti; see the accompanying provenance records.
 
 ## Source
 
 Adapted from <https://github.com/TauCetiProject/TauCeti>, revision
 `b3b0334ab9203d9faee4b2f34cd75161463ecdd0`.
 Original sources:
-* `TauCeti/LinearAlgebra/End/Centralizer.lean`.
-* `TauCeti/RingTheory/Semisimple/DoubleCentralizer.lean`.
+* `TauCeti.LinearAlgebra.End.Centralizer`.
+* `TauCeti.RingTheory.Semisimple.DoubleCentralizer`.
 
 The original declaration namespaces and license notices are retained, except for
-project-specific adaptations documented in `CONTRIBUTIONS.md`.
+project-specific adaptations documented in the project contribution records.
 -/
 
 @[expose] public section

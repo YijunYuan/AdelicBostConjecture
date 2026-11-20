@@ -77,7 +77,10 @@ theorem determinant_covariant_of_specialLinear_fixed [IsAlgClosed F]
   congr 1
   rw [hn, pow_mul, hc]
 
-/-- Actual SL-fixed tensors are exactly the scalar-extended rectangular
+/-- This paper, equation (3.10) and Lemma 6.1, over an algebraically closed field. Compare
+[Chen–Moriwaki, Theorem A.1.1][cmp]; this proof uses Schur–Weyl duality.
+
+Actual SL-fixed tensors are exactly the scalar-extended rectangular
 integral lattice, over an algebraically closed characteristic-zero field. -/
 theorem mem_range_freeLatticeMap_iff_specialLinear_fixed [IsAlgClosed F]
     (ha : 0 < a) (hk : 0 < k)

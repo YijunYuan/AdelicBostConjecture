@@ -90,7 +90,9 @@ theorem wordTensorAction_polytabloid (hk : 0 < k)
   rw [Finset.prod_mul_distrib]
   simp [mul_comm]
 
-/-- Determinant covariance holds for every vector of the actual integral
+/-- This paper, equation (3.9) and proof of Lemma 6.1. See [Chen–Moriwaki, Section A.1.2][cmp].
+
+Determinant covariance holds for every vector of the actual integral
 orbit lattice after coefficient extension. -/
 theorem wordTensorAction_of_mem_orbitLattice (hk : 0 < k)
     (t : Tableau n (rectangle a k)) (u : Matrix (Fin a) (Fin a) R)

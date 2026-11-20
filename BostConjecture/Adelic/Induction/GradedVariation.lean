@@ -5,9 +5,9 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Adelic.Induction.OptimalVariation
 public import ArakelovGeometry.AdelicVectorBundle.Tensor.Graded.Degree
 public import BostConjecture.Adelic.Induction.HNContraction
+public import BostConjecture.Adelic.Induction.OptimalVariation
 
 /-!
 # The upper bound for Bost's HN variation
@@ -157,7 +157,10 @@ theorem HNVariationLift.filtrationOnGraded_eq
 
 variable [S.IsProper]
 
-/-- HN functoriality on the canonical component contractions gives the
+/-- This paper, Lemma 7.2, equation (7.2). Uses the component maps of [Chen–Moriwaki, Proposition
+5.5.5 and Remark 5.5.6][cm].
+
+HN functoriality on the canonical component contractions gives the
 small-positive-parameter upper bound directly by the actual quotient slope.
 Tensor-HN compatibility is needed on the source grades; rank drop belongs
 only to the induction caller. No secondary image filtration is constructed. -/

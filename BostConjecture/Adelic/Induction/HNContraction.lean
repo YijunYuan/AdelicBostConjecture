@@ -5,15 +5,15 @@ Authors: Yijun Yuan
 -/
 module
 
-public import ArakelovGeometry.AdelicVectorBundle.HarderNarasimhan.Hermitian.Truncations
-public import ArakelovGeometry.AdelicVectorBundle.Slope.Subquotient
-public import ArakelovGeometry.AdelicVectorBundle.Slope.LinearMap
 public import ArakelovGeometry.AdelicVectorBundle.Degree.Supermodular
+public import ArakelovGeometry.AdelicVectorBundle.HarderNarasimhan.Hermitian.Truncations
+public import ArakelovGeometry.AdelicVectorBundle.Slope.LinearMap
+public import ArakelovGeometry.AdelicVectorBundle.Slope.Subquotient
 
 /-!
 # HN contraction consequences for the pinned AG interfaces
 
-The contraction specialization of CM Proposition 4.3.49 is needed for source
+The contraction specialization of [Chen–Moriwaki, Proposition 4.3.49][cm] is needed for source
 and target carriers in independent universes. The proof adapts AG's
 `map_hermitianHNFiltration_le_of_mapHeight_le` at revision
 `aa45299acf0f320a3584c0b135b2e5c54623f8bc`, using the actual restricted and
@@ -32,7 +32,10 @@ variable {K : Type u} [Field K] {S : AdelicStructure.{u, v} K} [S.IsProper]
   [hN : S.IsArchimedeanNormalized]
   [hV : V.IsHermitian] [hW : W.IsHermitian]
 
-/-- Completed contractions preserve every HN threshold, including for the zero map. -/
+/-- This paper, Section 2.5 and the proofs of Lemmas 7.1–7.2. This is the contraction case of
+[Chen–Moriwaki, Proposition 4.3.49][cm].
+
+Completed contractions preserve every HN threshold, including for the zero map. -/
 theorem map_hermitianHNFiltration_le_of_completed_contraction
     (f : V →ₗ[K] W)
     (hf : ∀ ω x, W.norm ω (f.baseChange (S.ϕ ω).Completion x) ≤ V.norm ω x)

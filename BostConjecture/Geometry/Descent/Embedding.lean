@@ -6,8 +6,8 @@ Authors: Yijun Yuan
 module
 
 public import BostConjecture.Geometry.Descent.Frames
-public import BostConjecture.Geometry.Determinant.Tower
 public import BostConjecture.Geometry.Descent.Localization
+public import BostConjecture.Geometry.Determinant.Tower
 public import Mathlib.RingTheory.Flat.Localization
 
 /-!
@@ -176,7 +176,9 @@ theorem projectiveDeterminantMap_baseChange_of_basis {S : Type*} [CommRing S] [A
     (projectiveDeterminantMap hk t ha)
     (fun i => projectiveDeterminantMap_baseChange hk t ha i (b i)) c
 
-/-- Flatness over the integers preserves the integral lattice inclusion in
+/-- This paper, Lemma 6.1, injectivity of the canonical determinant–Specht map.
+
+Flatness over the integers preserves the integral lattice inclusion in
 every chart, hence also globally. No freeness over `R` is assumed. -/
 theorem projectiveDeterminantMap_injective [Module.Flat ℤ R] (hk : 0 < k)
     (t : OAI.Saxl.Tableau n (Specht.rectangle a k))

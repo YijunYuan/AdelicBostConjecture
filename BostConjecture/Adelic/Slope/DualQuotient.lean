@@ -5,15 +5,15 @@ Authors: Yijun Yuan
 -/
 module
 
-public import ArakelovGeometry.AdelicVectorBundle.Tensor.Hermitian.Dual.Basic
 public import ArakelovGeometry.AdelicVectorBundle.Dual.Map
+public import ArakelovGeometry.AdelicVectorBundle.Tensor.Hermitian.Dual.Basic
 
 /-!
 # The actual tensor-quotient dual norm
 
 Dualizing the quotient norm gives precisely the induced norm in the orthogonal
 tensor product of the dual factors. This is the metric identification used when
-passing from Theorem 6.2 of this paper to its quotient formulation (43).
+passing from Theorem 6.2 of this paper to its quotient formulation (6.6).
 -/
 
 @[expose] public section

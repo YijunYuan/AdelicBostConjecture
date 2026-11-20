@@ -105,7 +105,9 @@ theorem prefixInsertionFactor_rectangleColumnTableau {a k : ℕ} (m : Fin (a * k
       Finset.prod_range_reflect (fun r => ((r : ℝ) + 2) / ((r : ℝ) + 1)) s
     _ = (s : ℝ) + 1 := prod_successive_real_ratio s
 
-/-- The prefix product at column reading is the independently known initial squared norm. -/
+/-- This paper, proof of Proposition 4.17, initial product.
+
+The prefix product at column reading is the independently known initial squared norm. -/
 theorem prefixNormProduct_rectangleColumnTableau (a k : ℕ) :
     prefixNormProduct (rectangleColumnTableau a k) = (Nat.factorial a : ℝ) ^ k := by
   classical

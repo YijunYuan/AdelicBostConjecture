@@ -15,17 +15,17 @@ public import Mathlib.RepresentationTheory.Maschke
 
 Selected TauCeti double-centralizer argument, generalized from coordinate
 spaces to the existing finite-dimensional module and reindexing APIs.
-See BostConjecture/ExternalCode/TauCeti/Provenance/SchurWeyl/PROVENANCE.md.
+See the accompanying provenance records.
 
 ## Source
 
 Adapted from <https://github.com/TauCetiProject/TauCeti>, revision
 `b3b0334ab9203d9faee4b2f34cd75161463ecdd0`.
 Original source:
-* `TauCeti/RepresentationTheory/Symmetric/TensorAction/SchurWeyl.lean`.
+* `TauCeti.RepresentationTheory.Symmetric.TensorAction.SchurWeyl`.
 
 The original declaration namespaces and license notices are retained, except for
-project-specific adaptations documented in `CONTRIBUTIONS.md`.
+project-specific adaptations documented in the project contribution records.
 -/
 
 @[expose] public section

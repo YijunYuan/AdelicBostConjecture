@@ -13,7 +13,7 @@ public import BostConjecture.Specht.Lattice.OneRow
 
 The bulk separation estimate controls the actual finite average of the
 seminormal logarithms. The integral Gram comparison then gives the limit.
-Reference: this paper equation (29) and Proposition 5.3, pages 23–24.
+Reference: this paper, Proposition 5.1 and equations (5.1)–(5.3).
 -/
 
 @[expose] public section
@@ -25,7 +25,9 @@ namespace BostConjecture.Specht
 open OAI.Saxl Finset Filter
 open scoped BigOperators Topology
 
-/-- The normalized logarithmic norm average of actual standard tableaux tends to zero. -/
+/-- This paper, equation (5.3), in the proof of Proposition 5.1.
+
+The normalized logarithmic norm average of actual standard tableaux tends to zero. -/
 theorem tendsto_average_log_prefixNormProduct_div {a : ℕ} (ha : 2 ≤ a) :
     Tendsto (fun k : ℕ =>
       (𝔼 T : {T : Tableau (a * k) (rectangle a k) // IsStandard T},
@@ -73,7 +75,9 @@ theorem tendsto_average_log_prefixNormProduct_div {a : ℕ} (ha : 2 ≤ a) :
     have hsmall := mul_le_mul_of_nonneg_right hi.le hC
     nlinarith
 
-/-- The canonical integral orbit lattice has sublinear rank-normalized logarithmic
+/-- This paper, proof of Proposition 5.1, Euclidean covolume limit.
+
+The canonical integral orbit lattice has sublinear rank-normalized logarithmic
 covolume in every fixed positive rectangular height. -/
 theorem tendsto_rectangleLogCovolume_div {a : ℕ} (ha : 0 < a) :
     Tendsto (fun k : ℕ => rectangleLogCovolume a k / (a * k : ℕ)) atTop (𝓝 0) := by

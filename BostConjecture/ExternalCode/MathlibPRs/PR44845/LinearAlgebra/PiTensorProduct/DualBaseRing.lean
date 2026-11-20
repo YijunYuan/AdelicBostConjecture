@@ -21,10 +21,10 @@ project-local module; proofs and canonical declaration names are unchanged.
 Adapted from <https://github.com/DanielJHorton/mathlib4>, revision
 `47365e3b9fd4329f058c31ac7aa9565a6036b17d`.
 Original source:
-* `Mathlib/LinearAlgebra/Dual/Defs.lean`.
+* `Mathlib.LinearAlgebra.Dual.Defs`.
 
 The original declaration namespaces and license notices are retained, except for
-project-specific adaptations documented in `CONTRIBUTIONS.md`.
+project-specific adaptations documented in the project contribution records.
 -/
 
 @[expose] public section

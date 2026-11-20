@@ -5,14 +5,14 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Adelic.Basic
-public import BostConjecture.Adelic.Slope.GeometricSubspace
-public import BostConjecture.Adelic.Slope.DualQuotient
-public import BostConjecture.Adelic.Slope.BoolTensor
-public import BostConjecture.Adelic.Geometry.Quotient
 public import ArakelovGeometry.AdelicVectorBundle.Construction.Tensor.Countable
-public import ArakelovGeometry.AdelicVectorBundle.Slope.Quotient
 public import ArakelovGeometry.AdelicVectorBundle.Slope.DualUpper
+public import ArakelovGeometry.AdelicVectorBundle.Slope.Quotient
+public import BostConjecture.Adelic.Basic
+public import BostConjecture.Adelic.Geometry.Quotient
+public import BostConjecture.Adelic.Slope.BoolTensor
+public import BostConjecture.Adelic.Slope.DualQuotient
+public import BostConjecture.Adelic.Slope.GeometricSubspace
 
 /-!
 # The geometric quotient bound with the original pushforward norms
@@ -100,7 +100,9 @@ variable {K : Type u} [Field K] [CharZero K] {S : AdelicStructure.{u, v} K}
   [S.IsProper] {ι : Type w} [Fintype ι]
   {Q : Type*} [AddCommGroup Q] [Module K Q] [FiniteDimensional K Q] [Nontrivial Q]
 
-/-- Geometric semistability of a finite tensor quotient gives the slope bound
+/-- This paper, equation (6.6). This removes the error term in [Chen–Moriwaki, Remark 5.3.2][cm].
+
+Geometric semistability of a finite tensor quotient gives the slope bound
 for its actual pushforward bundle, without arithmetic semistability of factors. -/
 theorem slope_sum_le_orthogonalTensor_quotient_of_geometricallySemistable
     (V : ι → AdelicVectorBundle S)

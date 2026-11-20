@@ -11,7 +11,7 @@ public import Mathlib.RepresentationTheory.Irreducible
 /-!
 # Irreducible isometric group actions and adelic semistability
 
-The first assertion of Lemma 2.6 of this paper follows from invariance of the
+The first assertion of Proposition 2.6 of this paper follows from invariance of the
 actual largest destabilizing subspace. ArakelovGeometry proves that invariance
 using its actual restricted degrees and the uniqueness of the largest
 maximal-slope subspace. Irreducibility then makes this nonzero subspace the
@@ -33,7 +33,10 @@ namespace ArakelovGeometry.AdelicVectorBundle
 variable {K : Type*} [Field K] {S : AdelicStructure K} [S.IsProper]
   {G : Type*} [Group G]
 
-/-- Lemma 2.6 of this paper: an irreducible group action preserving the actual
+/-- This paper, Proposition 2.6, first assertion. Uses HN invariance as in [Chen–Moriwaki,
+Proposition 4.3.38][cm].
+
+Proposition 2.6 of this paper: an irreducible group action preserving the actual
 completed norms forces arithmetic mean-slope semistability. -/
 theorem isMeanSlopeSemistable_of_isIrreducible (V : AdelicVectorBundle S)
     [hS : S.NormMeasurabilityHypotheses]

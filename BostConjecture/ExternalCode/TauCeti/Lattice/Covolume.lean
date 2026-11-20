@@ -17,22 +17,22 @@ of an integral basis. Inclusion of full lattices reverses their covolumes.
 The ambient space is any finite-dimensional real inner product space, equipped
 with its inner-product volume; this also covers lattices in real Specht spaces.
 
-Adapted from `TauCeti/Algebra/Module/ZLattice/Covolume.lean` and
-`TauCeti/Analysis/InnerProductSpace/Gram/Hadamard.lean` at TauCeti revision
+Adapted from `TauCeti.Algebra.Module.ZLattice.Covolume` and
+`TauCeti.Analysis.InnerProductSpace.Gram.Hadamard` at TauCeti revision
 `b3b0334ab9203d9faee4b2f34cd75161463ecdd0`. Changes for Lean/mathlib 4.35.0
-and exact source hashes are recorded in `BostConjecture/ExternalCode/TauCeti/PROVENANCE.json`;
-the upstream license is preserved in `BostConjecture/ExternalCode/TauCeti/LICENSE`.
+and exact source hashes are recorded in the accompanying provenance records;
+the upstream license is preserved in the accompanying license notice.
 
 ## Source
 
 Adapted from <https://github.com/TauCetiProject/TauCeti>, revision
 `b3b0334ab9203d9faee4b2f34cd75161463ecdd0`.
 Original sources:
-* `TauCeti/Algebra/Module/ZLattice/Covolume.lean`.
-* `TauCeti/Analysis/InnerProductSpace/Gram/Hadamard.lean`.
+* `TauCeti.Algebra.Module.ZLattice.Covolume`.
+* `TauCeti.Analysis.InnerProductSpace.Gram.Hadamard`.
 
 The original declaration namespaces and license notices are retained, except for
-project-specific adaptations documented in `CONTRIBUTIONS.md`.
+project-specific adaptations documented in the project contribution records.
 -/
 
 public section

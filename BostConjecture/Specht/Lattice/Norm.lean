@@ -5,15 +5,15 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Specht.Tableau.Basic
 public import BostConjecture.Specht.Lattice.Metric
+public import BostConjecture.Specht.Tableau.Basic
 
 /-!
 # The norm of an integral polytabloid
 
 Distinct column permutations give distinct orthonormal row words, so the
 squared norm of a polytabloid is the order of its column group.
-Reference: this paper §4, page 5 (the initial seminormal norm).
+Reference: this paper, equation (3.16) and the proof of Proposition 4.17.
 -/
 
 @[expose] public section

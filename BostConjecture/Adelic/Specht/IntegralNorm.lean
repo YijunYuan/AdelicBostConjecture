@@ -5,8 +5,9 @@ Authors: Yijun Yuan
 -/
 module
 
-public import Mathlib.LinearAlgebra.TensorProduct.Basis
 public import ArakelovGeometry.Analysis.NormedSpace.CoordinateNorm
+public import Mathlib.LinearAlgebra.TensorProduct.Basis
+
 import Mathlib.Analysis.Normed.Ring.Ultra
 
 /-!
@@ -61,7 +62,9 @@ theorem integralEquiv_norm (b : Basis ι ℤ M) (c : Basis κ ℤ N)
     | add x y hx hy => simp only [map_add, hx, hy]
   simpa only [he] using h
 
-/-- The maximum norm is independent of the chosen integral basis of a lattice. -/
+/-- This paper, Section 2.6, basis independence of (2.9).
+
+The maximum norm is independent of the chosen integral basis of a lattice. -/
 theorem integralBasis_norm_eq (b : Basis ι ℤ M) (c : Basis κ ℤ M)
     (x : L ⊗[ℤ] M) :
     ‖(b.baseChange L).equivFun x‖ = ‖(c.baseChange L).equivFun x‖ := by

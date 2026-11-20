@@ -98,7 +98,10 @@ theorem integralRepresentation_baseChange_isIrreducible (K : Type*) [Field K] [C
   exact isIrreducible_of_equiv
     (representationBaseChangeTowerEquiv (A := ℚ) (B := K) (integralRepresentation t)).symm
 
-/-- Absolute irreducibility in the exact iterated scalar-extension form used
+/-- This paper, Proposition 3.14. See [Bürgisser et al., Lemma 3.9][bgow] and [Kowalski, Theorem
+2.7.24][kowalski].
+
+Absolute irreducibility in the exact iterated scalar-extension form used
 by the independent-product semistability criterion. -/
 theorem integralRepresentation_baseChange_isAbsolutelyIrreducible
     (K L : Type*) [Field K] [CharZero K] [Field L] [Algebra K L]

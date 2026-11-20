@@ -30,7 +30,9 @@ variable {K : Type*} [Field K] [CharZero K] {ι : Type*} [Fintype ι]
   [∀ i, FiniteDimensional K (E i)] [∀ i, Nontrivial (E i)]
   {V : Type*} [AddCommGroup V] [Module K V] [FiniteDimensional K V] [Nontrivial V]
 
-/-- Geometric tensor-subspace semistability produces the actual original-field
+/-- This paper, proof of Theorem 6.2, nonvanishing at multiples of a common degree.
+
+Geometric tensor-subspace semistability produces the actual original-field
 determinant pairing in every positive multiple of a common rectangular degree.
 All dimensions and rank-at-stalk witnesses are canonical; no basis or invariant
 is required as an additional hypothesis. -/

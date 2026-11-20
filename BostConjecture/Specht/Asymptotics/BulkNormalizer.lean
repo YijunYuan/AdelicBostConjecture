@@ -90,7 +90,9 @@ theorem pow_staircaseSum_le_prod (a k : ℕ) :
     (fun j _ => pow_le_pow_left₀ (by positivity)
       (le_add_of_nonneg_right (Nat.cast_nonneg j)) j)
 
-/-- Uniform polynomial lower bound on the exact normalizer in the rectangular bulk. -/
+/-- This paper, equation (5.11).
+
+Uniform polynomial lower bound on the exact normalizer in the rectangular bulk. -/
 theorem sum_occupancyWeight_bulk_lower {a k : ℕ} (ha : 0 < a) (hk : 0 < k)
     (m l : ℕ) (hml : m + l = a * k) {ε : ℝ} (hε : 0 ≤ ε)
     (hm : ε * (a * k : ℕ) ≤ m) (hl : ε * (a * k : ℕ) ≤ l) :

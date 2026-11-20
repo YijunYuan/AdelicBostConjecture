@@ -6,8 +6,8 @@ Authors: Yijun Yuan
 module
 
 public import ArakelovGeometry.AdelicVectorBundle.Examples.Trivial.Filtration.Optimal.Geometric
-public import BostConjecture.Adelic.Induction.GradedVariation
 public import ArakelovGeometry.LinearAlgebra.Filtration.RankDrop
+public import BostConjecture.Adelic.Induction.GradedVariation
 
 /-!
 # Bost's HN variation in the unstable case
@@ -20,7 +20,7 @@ hypothesis to be applied to all source grades, including zero grades.
 
 The quotient retains the pushforward of the original orthogonal tensor norm.
 The subsequent rank induction and the geometric semistable branch complete
-the proof of Theorem 1.1 in the other modules of this project.
+the proof of Theorem 1.2 in the other modules of this project.
 -/
 
 @[expose] public section
@@ -48,7 +48,8 @@ variable {K : Type*} [Field K] {Q : Type*}
 HN lifts and common bases are constructed, and the strict rank-sum drop is derived.
 The only arithmetic induction boundary is tensor-HN compatibility on all smaller-rank
 actual grades of the fixed factors, quantified before choosing the optimizer. A6's
-one-sided upper bound on the same data suffices; full CM (5.13) is not asserted.
+one-sided upper bound on the same data suffices; full [Chen–Moriwaki, equation (5.13)][cm] is not
+asserted.
 The original quotient norm is retained. Geometric production of the candidate is separate. -/
 theorem slope_sum_le_tensor_quotient_of_negative_candidate
     [hsemiV : V.IsMeanSlopeSemistable] [hsemiW : W.IsMeanSlopeSemistable]
@@ -95,14 +96,18 @@ variable {K : Type u} {Q : Type*} [Field K] [CharZero K]
   [hN : S.IsArchimedeanNormalized]
   [hV : V.IsHermitian] [hW : W.IsHermitian]
 
-/-- The actual geometric unstable case of Bost pp.31–32, equation (47), with the
+/-- This paper, proof of Theorem 1.2, equation (7.3), unstable case. The negative optimizer comes
+from [Chen–Moriwaki, Theorem 5.4.3][cm].
+
+The actual geometric unstable case of this paper, Section 7.3, equation (7.3), with the
 genuine smaller-rank tensor-HN induction hypothesis still explicit. A2 geometric
 nonsemistability produces an original-field unit negative global optimizer; its
 actual candidate enters the proved optimizer/HN-lift arithmetic assembly. There
 is no assumed numerical inequality or rank-drop certificate. The original tensor
 pushforward quotient norm, proper adelic and discrete-or-countable setting are
 retained, including trivial valuations. Only the binary HN variation is needed;
-full CM (5.13), the full HN induction, Section 6 and Bost Theorem 1.1 are not asserted. -/
+full [Chen–Moriwaki, equation (5.13)][cm], the full HN induction, Section 6 and Bost Theorem 1.2
+are not asserted. -/
 theorem slope_sum_le_tensor_quotient_of_not_geometricallySemistable
     [hsemiV : V.IsMeanSlopeSemistable] [hsemiW : W.IsMeanSlopeSemistable]
     (q : V ⊗[K] W →ₗ[K] Q) (hq : Function.Surjective q) (hQ : 0 < finrank K Q)

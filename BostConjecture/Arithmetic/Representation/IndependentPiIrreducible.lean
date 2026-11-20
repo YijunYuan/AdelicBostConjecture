@@ -5,8 +5,8 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.ExternalCode.MathlibPRs.PR44845.LinearAlgebra.PiTensorProduct.Projective
 public import BostConjecture.Arithmetic.Representation.Density
+public import BostConjecture.ExternalCode.MathlibPRs.PR44845.LinearAlgebra.PiTensorProduct.Projective
 public import Mathlib.LinearAlgebra.PiTensorProduct.Basis
 public import Mathlib.LinearAlgebra.PiTensorProduct.Generators
 
@@ -51,7 +51,9 @@ theorem span_independentPiRepresentation_eq_top (ρ : ∀ i, Representation k (G
     Function.comp_def, LinearEquiv.coe_coe, piTensorHomEquiv_apply,
     piTensorHomMap_tprod_eq_map] using he
 
-/-- Finite independent tensor products of irreducible representations are irreducible. -/
+/-- This paper, proof of Proposition 2.6. See [Kowalski, Proposition 2.3.23][kowalski].
+
+Finite independent tensor products of irreducible representations are irreducible. -/
 theorem isIrreducible_independentPi (ρ : ∀ i, Representation k (G i) (V i))
     [∀ i, Representation.IsIrreducible (ρ i)] :
     Representation.IsIrreducible (independentPiRepresentation ρ) := by

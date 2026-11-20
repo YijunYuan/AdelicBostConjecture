@@ -19,10 +19,10 @@ row- and column-increasing fillings by `Fin n` is finite.
 Adapted from <https://github.com/mathlib-initiative/Etingof-RepresentationTheory-draft1>, revision
 `c6d86a8bd52065aafb8251fa1cdcd55b609743ef`.
 Original source:
-* `clean-code/release/RepresentationTheory/Partition/YoungDiagram.lean`.
+* `clean-code.release.RepresentationTheory.Partition.YoungDiagram`.
 
 The original declaration namespaces and license notices are retained, except for
-project-specific adaptations documented in `CONTRIBUTIONS.md`.
+project-specific adaptations documented in the project contribution records.
 -/
 
 @[expose] public section

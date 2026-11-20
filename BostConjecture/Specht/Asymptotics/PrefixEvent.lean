@@ -19,7 +19,9 @@ namespace BostConjecture.Specht
 
 open OAI.Saxl Finset
 
-/-- Exact transport of every symmetric observable from uniform tableaux to
+/-- This paper, equation (5.10).
+
+Exact transport of every symmetric observable from uniform tableaux to
 the labelled squared-Vandermonde occupancy law. -/
 theorem rectanglePrefix_average_eq_weighted (a : ℕ) {k : ℕ} (hk : 0 < k)
     (m l : ℕ) (hml : m + l = a * k)

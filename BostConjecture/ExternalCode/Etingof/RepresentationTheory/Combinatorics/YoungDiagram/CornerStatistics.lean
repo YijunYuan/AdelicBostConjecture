@@ -7,15 +7,15 @@ module
 
 /- Ported to Lean 4.35.0 for BostConjecture; see the project's CONTRIBUTIONS.md. -/
 
-public import BostConjecture.ExternalCode.Etingof.RepresentationTheory.YoungDiagram.PartitionConstructions
 public import BostConjecture.ExternalCode.Etingof.RepresentationTheory.Partition.YoungDiagram
+public import BostConjecture.ExternalCode.Etingof.RepresentationTheory.YoungDiagram.PartitionConstructions
 public import Mathlib.Algebra.BigOperators.Field
 public import Mathlib.Algebra.Order.BigOperators.GroupWithZero.Finset
+public import Mathlib.Algebra.Order.Field.Basic
 public import Mathlib.Data.List.GetD
+public import Mathlib.Data.Rat.Cast.Order
 public import Mathlib.SetTheory.Cardinal.Finite
 public import Mathlib.Tactic.FieldSimp
-public import Mathlib.Algebra.Order.Field.Basic
-public import Mathlib.Data.Rat.Cast.Order
 public import Mathlib.Tactic.Linarith.Frontend
 public import Mathlib.Tactic.NormNum.Abs
 public import Mathlib.Tactic.NormNum.DivMod
@@ -38,10 +38,10 @@ Chapter 5, discussion of the hook-length derivation.
 Adapted from <https://github.com/mathlib-initiative/Etingof-RepresentationTheory-draft1>, revision
 `c6d86a8bd52065aafb8251fa1cdcd55b609743ef`.
 Original source:
-* `clean-code/release/RepresentationTheory/Combinatorics/YoungDiagram/CornerStatistics.lean`.
+* `clean-code.release.RepresentationTheory.Combinatorics.YoungDiagram.CornerStatistics`.
 
 The original declaration namespaces and license notices are retained, except for
-project-specific adaptations documented in `CONTRIBUTIONS.md`.
+project-specific adaptations documented in the project contribution records.
 -/
 
 public section

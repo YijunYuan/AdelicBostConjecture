@@ -15,10 +15,10 @@ at non-bijective indices. The Kronecker power of a square matrix acts on it by i
 
 This is the eight-declaration dependency cone of `Matrix.sum_tensorPow_mul_altVec`, extracted
 from AxiomMath/Stacks at revision `012108f61d7f92a6ffc35ec3f263b6da5d438125`:
-https://github.com/AxiomMath/Stacks/blob/012108f61d7f92a6ffc35ec3f263b6da5d438125/StacksFrontier/LinearAlgebra/Matrix/AlternatingTensorPower.lean
+<https://github.com/AxiomMath/Stacks/tree/012108f61d7f92a6ffc35ec3f263b6da5d438125>
 
-Copyright and license: Apache-2.0; see `BostConjecture/ExternalCode/Stacks/LICENSE` and
-`BostConjecture/ExternalCode/Stacks/PROVENANCE.json` for the upstream file hash and extraction
+Copyright and license: Apache-2.0; see the preserved Apache-2.0 license and
+the accompanying provenance records for the upstream file hash and extraction
 details.
 
 ## Source
@@ -26,10 +26,10 @@ details.
 Adapted from <https://github.com/AxiomMath/Stacks>, revision
 `012108f61d7f92a6ffc35ec3f263b6da5d438125`.
 Original source:
-* `StacksFrontier/LinearAlgebra/Matrix/AlternatingTensorPower.lean`.
+* `StacksFrontier.LinearAlgebra.Matrix.AlternatingTensorPower`.
 
 The original declaration namespaces and license notices are retained, except for
-project-specific adaptations documented in `CONTRIBUTIONS.md`.
+project-specific adaptations documented in the project contribution records.
 -/
 
 @[expose] public section

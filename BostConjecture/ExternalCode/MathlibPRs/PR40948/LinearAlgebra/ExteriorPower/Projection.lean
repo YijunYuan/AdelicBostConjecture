@@ -21,10 +21,10 @@ public import Mathlib.LinearAlgebra.ExteriorAlgebra.Grading
 Adapted from <https://github.com/Thmoas-Guan/mathlib4_fork>, revision
 `b642b6723caf97b7b462dd5ddeabb0226c3b5433`.
 Original source:
-* `Mathlib/LinearAlgebra/ExteriorAlgebra/Grading.lean`.
+* `Mathlib.LinearAlgebra.ExteriorAlgebra.Grading`.
 
 The original declaration namespaces and license notices are retained, except for
-project-specific adaptations documented in `CONTRIBUTIONS.md`.
+project-specific adaptations documented in the project contribution records.
 -/
 
 @[expose] public section

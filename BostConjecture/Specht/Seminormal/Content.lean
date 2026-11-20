@@ -166,7 +166,9 @@ theorem ColumnStandard.card_earlier_column {t : Tableau n μ}
       · simp [b]
     · simp [b]
 
-/-- The signed content of the box carrying a label. -/
+/-- This paper, Definition 4.11.
+
+The signed content of the box carrying a label. -/
 def tableauContent (t : Tableau n μ) (j : Fin n) : ℤ :=
   (t j).val.2 - (t j).val.1
 

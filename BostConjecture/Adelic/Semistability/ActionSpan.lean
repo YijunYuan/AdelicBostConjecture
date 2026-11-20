@@ -55,7 +55,9 @@ theorem map_baseChange_span_representation (ρ : Representation K G E) :
   simp [representationBaseChange]
   rfl
 
-/-- Having full endomorphism span is unchanged by extension of fields. -/
+/-- This paper, proof of Proposition 3.14, equations (3.11)–(3.12).
+
+Having full endomorphism span is unchanged by extension of fields. -/
 theorem span_representationBaseChange_eq_top_iff (ρ : Representation K G E) :
     Submodule.span L (Set.range (representationBaseChange L ρ)) = ⊤ ↔
       Submodule.span K (Set.range ρ) = ⊤ := by

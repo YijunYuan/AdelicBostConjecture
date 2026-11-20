@@ -5,8 +5,8 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Specht.Lattice.Rectangle
 public import BostConjecture.ExternalCode.Stacks.LinearAlgebra.Matrix.AlternatingTensorPower
+public import BostConjecture.Specht.Lattice.Rectangle
 
 /-!
 # Rectangular polytabloids are products of alternating columns
@@ -62,7 +62,10 @@ private theorem rectangle_rowWord_columnGroupOf (hk : 0 < k)
       (rectangleCoordinates t q).2))).1).val = _
   simp [rectangleColumnWordEquiv]
 
-/-- The coefficient of an actual integral polytabloid is the product of its
+/-- This paper, equation (3.8). The alternating tensor convention is [Chen–Moriwaki, Section
+A.1.2][cmp].
+
+The coefficient of an actual integral polytabloid is the product of its
 column alternating coefficients. -/
 theorem polytabloidInt_rectangle_eq_prod (hk : 0 < k)
     (t : Tableau n (rectangle a k)) (w : Fin n → Fin a) :

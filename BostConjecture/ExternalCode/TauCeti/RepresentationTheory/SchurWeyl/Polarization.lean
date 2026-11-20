@@ -7,24 +7,24 @@ module
 
 public import Mathlib.Algebra.Module.BigOperators
 public import Mathlib.Data.Fintype.Perm
-public import Mathlib.LinearAlgebra.PiTensorProduct.Basic
 public import Mathlib.Data.Nat.Choose.Sum
+public import Mathlib.LinearAlgebra.PiTensorProduct.Basic
 
 /-!
 # Inclusion-exclusion polarization, selected from the pinned TauCeti source
 
-See BostConjecture/ExternalCode/TauCeti/Provenance/SchurWeyl/PROVENANCE.md.
+See the accompanying provenance records.
 
 ## Source
 
 Adapted from <https://github.com/TauCetiProject/TauCeti>, revision
 `b3b0334ab9203d9faee4b2f34cd75161463ecdd0`.
 Original sources:
-* `TauCeti/Data/Finset/Basic.lean`.
-* `TauCeti/LinearAlgebra/Multilinear/Polarization.lean`.
+* `TauCeti.Data.Finset.Basic`.
+* `TauCeti.LinearAlgebra.Multilinear.Polarization`.
 
 The original declaration namespaces and license notices are retained, except for
-project-specific adaptations documented in `CONTRIBUTIONS.md`.
+project-specific adaptations documented in the project contribution records.
 -/
 
 @[expose] public section

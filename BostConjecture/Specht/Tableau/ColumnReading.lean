@@ -124,7 +124,9 @@ theorem orthogonalStandardBasis_rectangleColumnTableau
         ⟨rectangleColumnTableau a k, rectangleColumnTableau_isStandard a k⟩ :=
   orthogonalStandardBasis_eq_of_isLeast t _ (rectangleColumnTableau_isLeast a k)
 
-/-- The initial monic squared norm is the cardinality of the rectangular column group. -/
+/-- This paper, proof of Proposition 4.17, initial norm.
+
+The initial monic squared norm is the cardinality of the rectangular column group. -/
 theorem norm_orthogonalStandardBasis_rectangleColumnTableau_sq
     (a k : ℕ) (t : Tableau (a * k) (rectangle a k)) :
     ‖orthogonalStandardBasis t

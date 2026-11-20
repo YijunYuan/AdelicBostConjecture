@@ -5,9 +5,9 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Specht.Seminormal.PrefixNormInitial
 public import BostConjecture.Specht.Seminormal.Adjacent
 public import BostConjecture.Specht.Seminormal.AdjacentPath
+public import BostConjecture.Specht.Seminormal.PrefixNormInitial
 
 /-!
 # Seminormal norm and Gram products for the canonical rectangular lattice
@@ -24,7 +24,7 @@ noncomputable section
 namespace BostConjecture.Specht
 
 open OAI.Saxl
-open scoped StandardColex
+open scoped BigOperators StandardColex
 
 variable {n : ℕ} {μ : YoungDiagram}
 
@@ -66,7 +66,9 @@ theorem row_lt_of_standard_adjacent_lt
     exact (hTU.ne (Subtype.ext (RowStandard.eq_of_rowWord_eq hw)).symm).elim
   · exact hr
 
-/-- The explicit prefix product is the squared norm of the actual monic orthogonal vector. -/
+/-- This paper, Proposition 4.17, equation (4.2). The implementation uses the colexicographic order.
+
+The explicit prefix product is the squared norm of the actual monic orthogonal vector. -/
 theorem norm_orthogonalStandardBasis_sq_eq_prefixNormProduct (a k : ℕ)
     (t : Tableau (a * k) (rectangle a k))
     (T : {u : Tableau (a * k) (rectangle a k) // IsStandard u}) :
@@ -82,6 +84,21 @@ theorem norm_orthogonalStandardBasis_sq_eq_prefixNormProduct (a k : ℕ)
       hV, prefixNormProduct_relabel_adjacent (t := U.val) i j hij
         (row_lt_of_standard_adjacent_lt U V i j hij hV hUV)]
 
+/-- This paper, Proposition 4.17, equation (4.3): the normalized logarithmic Gram
+determinant is the uniform expectation of the logarithmic squared seminormal norm.
+The monic normalization agrees with [Ryom-Hansen, Section 2][rh]. -/
+theorem log_det_standard_gram_div_card_eq_average (a k : ℕ)
+    (t : Tableau (a * k) (rectangle a k)) :
+    Real.log (Matrix.gram ℝ (standardRealBasis t)).det /
+        Fintype.card {u : Tableau (a * k) (rectangle a k) // IsStandard u} =
+      (𝔼 T : {u : Tableau (a * k) (rectangle a k) // IsStandard u},
+        Real.log (prefixNormProduct T.val)) := by
+  rw [det_standard_gram_eq_prod_orthogonal_norm_sq,
+    Real.log_prod (fun u _ => pow_ne_zero 2
+      (norm_ne_zero_iff.mpr (orthogonalStandardBasis_ne_zero t u)))]
+  simp only [norm_orthogonalStandardBasis_sq_eq_prefixNormProduct,
+    Finset.expect_eq_sum_div_card, Finset.card_univ]
+
 /-- The explicit seminormal sum bounds the logarithmic covolume of the unchanged orbit lattice. -/
 theorem two_mul_log_covolume_le_sum_log_prefixNormProduct (a k : ℕ)
     (t : Tableau (a * k) (rectangle a k)) :
@@ -91,7 +108,9 @@ theorem two_mul_log_covolume_le_sum_log_prefixNormProduct (a k : ℕ)
   simpa only [norm_orthogonalStandardBasis_sq_eq_prefixNormProduct] using
     two_mul_log_covolume_le_sum_log_orthogonal_norm_sq t
 
-/-- Dividing by the actual integral rank gives the uniform standard-tableau average. -/
+/-- This paper, equation (5.2).
+
+Dividing by the actual integral rank gives the uniform standard-tableau average. -/
 theorem two_mul_rectangleLogCovolume_le_average_log_prefixNormProduct (a k : ℕ) :
     2 * rectangleLogCovolume a k ≤
       (∑ T : {u : Tableau (a * k) (rectangle a k) // IsStandard u},

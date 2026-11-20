@@ -47,7 +47,10 @@ theorem representation_asAlgebraHom_surjective (ρ : Representation k G V)
     (congrArg (fun u : Module.End (Module.End k[G] ρ.asModule) ρ.asModule =>
       u (ρ.asModuleEquiv.symm x)) ha)
 
-/-- The action operators span the full endomorphism space. -/
+/-- This paper, proof of Proposition 3.14, equation (3.11). This is Burnside’s criterion [Kowalski,
+Theorem 2.7.24][kowalski], proved using Jacobson density.
+
+The action operators span the full endomorphism space. -/
 theorem span_representation_eq_top (ρ : Representation k G V)
     [FiniteDimensional k V] [IsAlgClosed k] [Representation.IsIrreducible ρ] :
     Submodule.span k (Set.range ρ) = ⊤ := by

@@ -138,7 +138,9 @@ theorem sum_le_of_bulk {d : ℕ} (f : Fin d → ℝ) {ε C B : ℝ}
       simpa only [id_eq] using hleft
     _ ≤ _ := by nlinarith
 
-/-- The normalized total logarithmic norm is eventually bounded by the
+/-- This paper, equation (5.13).
+
+The normalized total logarithmic norm is eventually bounded by the
 bulk, boundary, and small-gap contributions, with no probabilistic hypotheses. -/
 theorem average_log_prefixNormProduct_eventually_le {a : ℕ} (ha : 2 ≤ a)
     {ε δ L : ℝ} (hε : 0 < ε) (hδ : 0 < δ) (hL : 2 ≤ L) :

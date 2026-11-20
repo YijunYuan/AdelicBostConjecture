@@ -11,8 +11,8 @@ BostConjecture/ExternalCode/MathlibPRs/PR40948/PROVENANCE.json.
 -/
 module
 
-public import Mathlib.LinearAlgebra.ExteriorAlgebra.BaseChange
 public import BostConjecture.ExternalCode.MathlibPRs.PR40948.LinearAlgebra.ExteriorPower.Projection
+public import Mathlib.LinearAlgebra.ExteriorAlgebra.BaseChange
 public import Mathlib.LinearAlgebra.ExteriorPower.Basic
 
 /-!
@@ -30,10 +30,10 @@ In this file, we proved that exterior power commutes with arbitrary base change.
 Adapted from <https://github.com/Thmoas-Guan/mathlib4_fork>, revision
 `b642b6723caf97b7b462dd5ddeabb0226c3b5433`.
 Original source:
-* `Mathlib/LinearAlgebra/ExteriorPower/BaseChange.lean`.
+* `Mathlib.LinearAlgebra.ExteriorPower.BaseChange`.
 
 The original declaration namespaces and license notices are retained, except for
-project-specific adaptations documented in `CONTRIBUTIONS.md`.
+project-specific adaptations documented in the project contribution records.
 -/
 
 noncomputable section

@@ -89,7 +89,9 @@ theorem dualDeterminantMap_norm_le {n : ℕ} {k : ι → ℕ}
   exact (dualRegroupEquiv_norm_le (fun j ↦ (V j).toNormFamily) ω _).trans
     (tensor_projectiveDeterminantMap_norm_le VD hk t b ω x)
 
-/-- The original-field canonical pairing contracts on every completed fibre
+/-- This paper, equation (6.3).
+
+The original-field canonical pairing contracts on every completed fibre
 for the actual determinant–Specht source and the dual of the actual auxiliary
 orthogonal tensor bundle. The sole metric premise is the induced norm on the inclusion. -/
 theorem canonicalPairing_norm_le {n : ℕ} {k : ι → ℕ}

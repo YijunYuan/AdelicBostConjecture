@@ -5,8 +5,8 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Geometry.Tensor.FreeEmbedding
 public import BostConjecture.Geometry.Determinant.Coordinates
+public import BostConjecture.Geometry.Tensor.FreeEmbedding
 
 /-!
 # Frame-independent determinant-twisted tensor realization
@@ -77,7 +77,9 @@ theorem freeDeterminantMap_injective [Module.Flat ℤ R] (hk : 0 < k)
     (TensorProduct.lid R _).injective.comp <|
     (LinearEquiv.rTensor _ (determinantPowerCoordinates k b)).injective
 
-/-- The determinant line absorbs the frame dependence of the lattice map. -/
+/-- This paper, proof of Lemma 6.1, independence of the chosen frame.
+
+The determinant line absorbs the frame dependence of the lattice map. -/
 theorem freeDeterminantMap_eq (hk : 0 < k)
     (t : OAI.Saxl.Tableau n (Specht.rectangle a k)) (b c : Basis (Fin a) R M) :
     freeDeterminantMap hk t b = freeDeterminantMap hk t c := by

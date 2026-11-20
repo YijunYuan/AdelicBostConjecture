@@ -5,12 +5,12 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Adelic.Specht.Bundle
-public import BostConjecture.Adelic.Slope.DeterminantSpecht
-public import BostConjecture.Adelic.Geometry.Plucker
-public import BostConjecture.Adelic.Contraction.Tensor
-public import BostConjecture.Geometry.Descent.Embedding
 public import ArakelovGeometry.AdelicVectorBundle.Determinant.HermitianBasis
+public import BostConjecture.Adelic.Contraction.Tensor
+public import BostConjecture.Adelic.Geometry.Plucker
+public import BostConjecture.Adelic.Slope.DeterminantSpecht
+public import BostConjecture.Adelic.Specht.Bundle
+public import BostConjecture.Geometry.Descent.Embedding
 
 /-!
 # Archimedean determinant–Specht isometry
@@ -276,7 +276,10 @@ theorem determinantSpechtBundle_norm_generator {n k : ℕ}
      ω _ _).trans ?_
   rw [determinantPower_norm_orthonormalBasis V k ω hω b, one_mul]
 
-/-- At every real or complex Archimedean completion, the actual canonical
+/-- This paper, Lemma 6.1, Archimedean isometry. The retained factorial agrees with [Chen–Moriwaki,
+Remark A.2.9][cmp].
+
+At every real or complex Archimedean completion, the actual canonical
 determinant–Specht map is isometric for the prescribed adelic norms. -/
 theorem projectiveDeterminantMap_norm_infinite {n k : ℕ} (hk : 0 < k)
     (t : Tableau n (rectangle (finrank K V) k))

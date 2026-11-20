@@ -73,7 +73,9 @@ theorem unsortOccupancy_surjective (a M A : ℕ) :
   funext i
   exact congrArg b.val.val (σ.apply_symm_apply i)
 
-/-- Every distinct labelled tuple has exactly one decreasing form and one labelling. -/
+/-- This paper, proof of Proposition 5.2, sorting correspondence.
+
+Every distinct labelled tuple has exactly one decreasing form and one labelling. -/
 def sortedOccupancyEquiv (a M A : ℕ) :
     SortedOccupancy a M A × Equiv.Perm (Fin a) ≃
       {b : Occupancy a M A // Function.Injective b.val} :=

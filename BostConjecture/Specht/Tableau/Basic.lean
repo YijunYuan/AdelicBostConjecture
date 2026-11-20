@@ -12,7 +12,7 @@ public import BostConjecture.Specht.Lattice.Integral
 
 Relabeling a tableau conjugates its column stabilizer and transports its
 integral polytabloid. Thus the integral orbit span is the span of all
-polytabloids of the shape. Reference: this paper §3, page 4.
+polytabloids of the shape. Reference: this paper, Section 3.2.
 -/
 
 @[expose] public section
@@ -54,7 +54,9 @@ theorem wordRepInt_single {d : ℕ} (g : Equiv.Perm (Fin n)) (w : Fin n → Fin 
   apply complexCast_injective
   simp [wordRep_single]
 
-/-- The integral polytabloid transforms by the same position permutation as the tableau. -/
+/-- This paper, Remark 3.8. See [Kuenzer–Nebe, Section 2.1][kn].
+
+The integral polytabloid transforms by the same position permutation as the tableau. -/
 theorem polytabloidInt_relabel (g : Equiv.Perm (Fin n)) (t : Tableau n μ) :
     polytabloidInt (relabel g t) = wordRepInt n (μ.colLen 0) g (polytabloidInt t) := by
   classical
@@ -93,7 +95,9 @@ theorem range_orbit_eq_range_polytabloid (t : Tableau n μ) :
     congr 1
     ext i <;> simp [relabel]
 
-/-- The orbit lattice equals the integral span of all polytabloids. -/
+/-- This paper, Definition 3.6 and equation (3.9).
+
+The orbit lattice equals the integral span of all polytabloids. -/
 theorem orbitLattice_eq_span_polytabloids (t : Tableau n μ) :
     orbitLattice t = Submodule.span ℤ (Set.range (polytabloidInt (n := n) (μ := μ))) := by
   rw [orbitLattice, range_orbit_eq_range_polytabloid]

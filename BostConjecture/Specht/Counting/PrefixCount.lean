@@ -248,7 +248,9 @@ def rectanglePrefixEquiv (hμ : μ ≤ rectangle a k) :
       simp only [complementTableauOfShape_apply, glueRectangleTableau_natAdd, Fin.rev_rev]
       exact rotateCell_rotateCell (rectangleComplement_le μ a k (P.2.val i).property)
 
-/-- Exact counting of a rectangular prefix fiber by complementary standard tableaux. -/
+/-- This paper, Proposition 5.2, counting identity underlying (5.8).
+
+Exact counting of a rectangular prefix fiber by complementary standard tableaux. -/
 theorem card_rectanglePrefix (hμ : μ ≤ rectangle a k) :
     Nat.card {T : {T : Tableau (m + l) (rectangle a k) // IsStandard T} //
       prefixShape T.val m (Nat.le_add_right m l) = μ} =

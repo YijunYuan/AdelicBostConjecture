@@ -5,8 +5,8 @@ Authors: mathlib-initiative
 -/
 module
 
-public import BostConjecture.Specht.Lattice.Basis
 public import BostConjecture.ExternalCode.Etingof.RepresentationTheory.Combinatorics.YoungDiagram.CornerStatistics
+public import BostConjecture.Specht.Lattice.Basis
 public import Mathlib.Combinatorics.Enumerative.Partition.YoungDiagram
 
 /-!
@@ -15,12 +15,12 @@ public import Mathlib.Combinatorics.Enumerative.Partition.YoungDiagram
 Inverting an enumerating tableau identifies it with the increasing fillings
 counted by the imported hook formula. The cell comparison adapts the private
 `sytCell_iff_mem_toYoungDiagram` and `sytCellEquiv` from the attributed Etingof
-extraction; see `CONTRIBUTIONS.md`. No new tableau representation is introduced.
+extraction; see the project contribution records. No new tableau representation is introduced.
 
 ## Source
 
 The two cell comparisons adapt
-`clean-code/release/RepresentationTheory/Combinatorics/YoungDiagram/CornerStatistics.lean`
+`clean-code.release.RepresentationTheory.Combinatorics.YoungDiagram.CornerStatistics`
 from <https://github.com/mathlib-initiative/Etingof-RepresentationTheory-draft1>, revision
 `c6d86a8bd52065aafb8251fa1cdcd55b609743ef`, under Apache-2.0.
 The inversion and compatibility with the project's standard tableaux are local bridge proofs.
@@ -113,7 +113,10 @@ theorem card_standard_eq_partition (p : Nat.Partition n) :
       Nat.card (AuxiliaryPartitionSource n p) := by
   simpa only [← Nat.card_eq_fintype_card] using Nat.card_congr (standardTableauEquivPartition p)
 
-/-- Hook enumeration for any diagram, expressed in the existing tableau model. -/
+/-- This paper, Section 3.4, hook-length formula. This is the formula of
+[Frame–Robinson–Thrall][frt], transported to the enumerating tableaux.
+
+Hook enumeration for any diagram, expressed in the existing tableau model. -/
 theorem card_standard_mul_hookProduct (μ : YoungDiagram) (h : μ.card = n) :
     Fintype.card {t : Tableau n μ // IsStandard t} *
       μ.cells.prod (fun c => μ.rowLen c.1 + μ.colLen c.2 - c.1 - c.2 - 1) =

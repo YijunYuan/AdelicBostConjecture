@@ -5,8 +5,8 @@ Authors: Yijun Yuan
 -/
 module
 
-public import Mathlib.NumberTheory.NumberField.InfinitePlace.Basic
 public import Mathlib.CategoryTheory.Category.Init
+public import Mathlib.NumberTheory.NumberField.InfinitePlace.Basic
 public import Mathlib.RingTheory.Flat.Basic
 
 /-!
@@ -18,7 +18,7 @@ integral generators; sesquilinearity extends it to the entire complex fiber.
 The underlying module of a Hermitian bundle is finite projective, without a
 freeness hypothesis. No degree or slope identities are part of the data.
 
-Reference: this paper, §2, pages 2–3.
+Reference: this paper, Section 1.2; [Bost, Appendix A.2–A.4][bost96].
 -/
 
 @[expose] public section

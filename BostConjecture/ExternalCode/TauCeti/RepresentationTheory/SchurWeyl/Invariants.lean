@@ -19,10 +19,10 @@ the final averaging argument is direct and imports no additional representation 
 Adapted from <https://github.com/TauCetiProject/TauCeti>, revision
 `b3b0334ab9203d9faee4b2f34cd75161463ecdd0`.
 Original source:
-* `TauCeti/RepresentationTheory/Symmetric/TensorAction/Invariants.lean`.
+* `TauCeti.RepresentationTheory.Symmetric.TensorAction.Invariants`.
 
 The original declaration namespaces and license notices are retained, except for
-project-specific adaptations documented in `CONTRIBUTIONS.md`.
+project-specific adaptations documented in the project contribution records.
 -/
 
 @[expose] public section

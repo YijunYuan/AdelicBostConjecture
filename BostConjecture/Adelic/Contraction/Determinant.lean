@@ -5,9 +5,10 @@ Authors: Yijun Yuan
 -/
 module
 
+public import ArakelovGeometry.AdelicVectorBundle.Determinant.Universal
 public import ArakelovGeometry.Analysis.Determinant.Basic
 public import ArakelovGeometry.Analysis.Determinant.Pairing
-public import ArakelovGeometry.AdelicVectorBundle.Determinant.Universal
+
 import ArakelovGeometry.Analysis.AbsoluteValue.Basic
 
 /-!
@@ -136,7 +137,10 @@ theorem determinant_norm_basis_ge_weight (ξ : NormFamily S V) (ω : S.Ω)
     LinearEquiv.apply_symm_apply, exteriorPower.alternatingMapLinearEquiv_apply_ιMulti,
     Basis.det_self, norm_one, mul_one] using h
 
-/-- The alpha-orthogonal lower determinant bound of Lemma 6.1 on the actual
+/-- This paper, proof of Lemma 6.1, nearly orthogonal determinant estimate. See [Chen–Moriwaki,
+Section 1.2.3][cm].
+
+The alpha-orthogonal lower determinant bound of Lemma 6.1 on the actual
 AG completed fibre. No discreteness or nontrivial valuation is assumed. -/
 theorem determinant_norm_basis_ge (ξ : NormFamily S V) (ω : S.Ω)
     (hω : ω ∈ S.Ωfin)

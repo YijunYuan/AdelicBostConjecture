@@ -49,7 +49,10 @@ theorem occupancyGapProbability_uniform {a : ℕ} (ha : 2 ≤ a) {ε : ℝ} (hε
   exact (occupancyGapProbability_bulk_le ha hk0 m l hml hε hm hl L hu).trans_lt
     (hK k (by omega))
 
-/-- Uniform bulk separation for the prefixes of actual uniform standard rectangular tableaux. -/
+/-- This paper, Lemma 5.4. Uniform convergence is expressed by an eventual bound valid at every
+intermediate time.
+
+Uniform bulk separation for the prefixes of actual uniform standard rectangular tableaux. -/
 theorem rectanglePrefixGapProbability_uniform {a : ℕ} (ha : 2 ≤ a)
     {ε : ℝ} (hε : 0 < ε) (L : ℝ) {δ : ℝ} (hδ : 0 < δ) :
     ∃ K : ℕ, ∀ k ≥ K, ∀ m l : ℕ, m + l = a * k →

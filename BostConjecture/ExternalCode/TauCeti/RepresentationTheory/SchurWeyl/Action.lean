@@ -5,11 +5,11 @@ Authors: The Tau Ceti contributors
 -/
 module
 
-public import Mathlib.LinearAlgebra.PiTensorProduct.Basic
 public import Mathlib.Algebra.Order.Field.Basic
 public import Mathlib.CategoryTheory.Category.Init
 public import Mathlib.Data.Nat.Totient
 public import Mathlib.Data.Sym.Sym2.Init
+public import Mathlib.LinearAlgebra.PiTensorProduct.Basic
 public import Mathlib.RepresentationTheory.Basic
 public import Mathlib.Tactic.NormNum.GCD
 public import Mathlib.Tactic.Positivity.Finset
@@ -17,7 +17,7 @@ public import Mathlib.Tactic.Positivity.Finset
 /-!
 # Selected permutation action and group-algebra range API
 
-See BostConjecture/ExternalCode/TauCeti/Provenance/SchurWeyl/PROVENANCE.md for the pinned source and
+See the accompanying provenance records for the pinned source and
 scope.
 
 ## Source
@@ -25,11 +25,11 @@ scope.
 Adapted from <https://github.com/TauCetiProject/TauCeti>, revision
 `b3b0334ab9203d9faee4b2f34cd75161463ecdd0`.
 Original sources:
-* `TauCeti/RepresentationTheory/Symmetric/TensorAction/Basic.lean`.
-* `TauCeti/RepresentationTheory/AsAlgebraHom.lean`.
+* `TauCeti.RepresentationTheory.Symmetric.TensorAction.Basic`.
+* `TauCeti.RepresentationTheory.AsAlgebraHom`.
 
 The original declaration namespaces and license notices are retained, except for
-project-specific adaptations documented in `CONTRIBUTIONS.md`.
+project-specific adaptations documented in the project contribution records.
 -/
 
 @[expose] public section

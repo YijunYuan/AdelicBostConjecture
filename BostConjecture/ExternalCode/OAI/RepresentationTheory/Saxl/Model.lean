@@ -13,9 +13,9 @@ declarations.
 -/
 module
 
+public import Mathlib.Basic.Complex.Basic
 public import Mathlib.Combinatorics.Young.YoungDiagram
 public import Mathlib.RepresentationTheory.Subrepresentation
-public import Mathlib.Basic.Complex.Basic
 
 /-!
 # The tableau and word model for Specht modules
@@ -27,10 +27,10 @@ The tableau and word model for Specht modules.
 Adapted from <https://github.com/openai/math>, revision
 `4eaee87548250b2682affda7d05d947c05554bae`.
 Original source:
-* `lean/OAI/RepresentationTheory/Saxl/Model.lean`.
+* `lean.OAI.RepresentationTheory.Saxl.Model`.
 
 The original declaration namespaces and license notices are retained, except for
-project-specific adaptations documented in `CONTRIBUTIONS.md`.
+project-specific adaptations documented in the project contribution records.
 -/
 
 @[expose] public section

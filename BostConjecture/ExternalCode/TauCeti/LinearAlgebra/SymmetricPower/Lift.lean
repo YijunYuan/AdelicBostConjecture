@@ -6,6 +6,7 @@ Authors: The Tau Ceti contributors
 module
 
 public import BostConjecture.ExternalCode.TauCeti.LinearAlgebra.SymmetricPower.Basic
+
 import Mathlib.GroupTheory.Perm.Fin
 
 /-!
@@ -44,10 +45,10 @@ Since `Sym[R]^k M` is indexed by `Fin k`, this part takes the scalars in `Type`.
 Adapted from <https://github.com/TauCetiProject/TauCeti>, revision
 `3c3a32baea963db05c302adeb307b22baae4de78`.
 Original source:
-* `TauCeti/LinearAlgebra/SymmetricPower/Lift.lean`.
+* `TauCeti.LinearAlgebra.SymmetricPower.Lift`.
 
 The original declaration namespaces and license notices are retained, except for
-project-specific adaptations documented in `CONTRIBUTIONS.md`.
+project-specific adaptations documented in the project contribution records.
 -/
 
 public section

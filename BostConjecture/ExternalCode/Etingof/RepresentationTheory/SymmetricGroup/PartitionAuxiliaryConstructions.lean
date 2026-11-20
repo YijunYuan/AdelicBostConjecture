@@ -17,10 +17,10 @@ public import Mathlib.Combinatorics.Enumerative.Partition.Basic
 Adapted from <https://github.com/mathlib-initiative/Etingof-RepresentationTheory-draft1>, revision
 `c6d86a8bd52065aafb8251fa1cdcd55b609743ef`.
 Original source:
-* `clean-code/release/RepresentationTheory/SymmetricGroup/PartitionAuxiliaryConstructions.lean`.
+* `clean-code.release.RepresentationTheory.SymmetricGroup.PartitionAuxiliaryConstructions`.
 
 The original declaration namespaces and license notices are retained, except for
-project-specific adaptations documented in `CONTRIBUTIONS.md`.
+project-specific adaptations documented in the project contribution records.
 Only the sorted row lengths and standard-tableau type needed for the hook-length formula
 are retained; permutation subgroups, group-algebra elements and canonical fillings are omitted.
 -/

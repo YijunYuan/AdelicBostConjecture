@@ -5,10 +5,10 @@ Authors: Yijun Yuan
 -/
 module
 
-public import Mathlib.Data.Fintype.BigOperators
-public import Mathlib.Data.Fintype.Prod
 public import Mathlib.Algebra.BigOperators.Field
 public import Mathlib.Basic.Real.Basic
+public import Mathlib.Data.Fintype.BigOperators
+public import Mathlib.Data.Fintype.Prod
 
 /-!
 # Labelled occupancy counting
@@ -109,7 +109,9 @@ theorem occupancyMass_nonneg {a M A : ℕ} (b : Occupancy a M A) :
   apply div_nonneg _ (Nat.cast_nonneg _)
   exact_mod_cast Nat.zero_le (∏ i, M.choose (b.val i).val)
 
-/-- Normalization of the labelled law, including the empty sampling case. -/
+/-- This paper, Section 5.2, normalization of the hypergeometric law.
+
+Normalization of the labelled law, including the empty sampling case. -/
 theorem sum_occupancyMass {a M A : ℕ} (hA : A ≤ a * M) :
     ∑ b : Occupancy a M A, occupancyMass b = 1 := by
   unfold occupancyMass

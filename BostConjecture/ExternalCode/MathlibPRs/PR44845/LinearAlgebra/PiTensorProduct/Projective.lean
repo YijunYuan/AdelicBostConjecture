@@ -5,13 +5,13 @@ Authors: Daniel Horton
 -/
 module
 
+public import BostConjecture.ExternalCode.MathlibPRs.PR44845.LinearAlgebra.PiTensorProduct.DualBaseRing
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.LinearAlgebra.PiTensorProduct.Finite
-public import BostConjecture.ExternalCode.MathlibPRs.PR44845.LinearAlgebra.PiTensorProduct.DualBaseRing
+public import Mathlib.RingTheory.PiTensorProduct
 
 import Mathlib.LinearAlgebra.Contraction
 import Mathlib.LinearAlgebra.PiTensorProduct.Generators
-public import Mathlib.RingTheory.PiTensorProduct
 
 /-!
 # Tensor Products of Families of Projective Modules
@@ -20,7 +20,7 @@ Selective port from Mathlib PR #44845 at commit
 47365e3b9fd4329f058c31ac7aa9565a6036b17d.
 Changed file: added the project-local prerequisite import and expanded two uses
 of reindexing simp lemmas absent from the pinned Mathlib. The canonical API is
-unchanged. See `BostConjecture/ExternalCode/MathlibPRs/PR44845/PROVENANCE.json`.
+unchanged. See the accompanying provenance records.
 
 This file develops the properties of tensor products of families of projective modules. Results for
 binary tensor products from `LinearAlgebra/Contraction` are extended to `PiTensorProduct`, and the
@@ -58,10 +58,10 @@ contraction, dual module, projective module, tensor, tensor product
 Adapted from <https://github.com/DanielJHorton/mathlib4>, revision
 `47365e3b9fd4329f058c31ac7aa9565a6036b17d`.
 Original source:
-* `Mathlib/LinearAlgebra/PiTensorProduct/Projective.lean`.
+* `Mathlib.LinearAlgebra.PiTensorProduct.Projective`.
 
 The original declaration namespaces and license notices are retained, except for
-project-specific adaptations documented in `CONTRIBUTIONS.md`.
+project-specific adaptations documented in the project contribution records.
 -/
 
 namespace PiTensorProduct

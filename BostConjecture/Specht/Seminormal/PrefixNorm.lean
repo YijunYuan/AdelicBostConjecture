@@ -29,7 +29,9 @@ variable {n : ℕ} {μ : YoungDiagram}
 def prefixRowCount (t : Tableau n μ) (m : Fin n) (r : ℕ) : ℕ :=
   (Finset.univ.filter fun l => l < m ∧ (t l).val.1 = r).card
 
-/-- The integer distance from an earlier row end to the newly inserted box. -/
+/-- This paper, Definition 4.15.
+
+The integer distance from an earlier row end to the newly inserted box. -/
 def prefixAxialDistance (t : Tableau n μ) (m : Fin n) (r : ℕ) : ℤ :=
   (prefixRowCount t m r : ℤ) - (t m).val.2 + (t m).val.1 - r
 
@@ -87,7 +89,9 @@ theorem col_add_one_le_prefixRowCount {t : Tableau n μ} [ht : IsStandard t]
   simpa only [Fintype.card_fin, Fintype.card_coe, s, prefixRowCount] using
     Fintype.card_le_of_injective f hf
 
-/-- All factors that occur in the prefix product have distance at least two. -/
+/-- This paper, Definition 4.15, legal-addition bound.
+
+All factors that occur in the prefix product have distance at least two. -/
 theorem two_le_prefixAxialDistance {t : Tableau n μ} [ht : IsStandard t]
     (m : Fin n) (r : ℕ) (hr : r < (t m).val.1) : 2 ≤ prefixAxialDistance t m r := by
   have hc := col_add_one_le_prefixRowCount (t := t) m r hr
@@ -237,7 +241,9 @@ theorem prefixAxialDistance_eq_content_sub {t : Tableau n μ} [ht : IsStandard t
   simp only [prefixAxialDistance, tableauContent, ← he]
   ring
 
-/-- The explicit prefix product satisfies the same legal adjacent ratio as the monic norm. -/
+/-- This paper, proof of Proposition 4.17, adjacent product ratio.
+
+The explicit prefix product satisfies the same legal adjacent ratio as the monic norm. -/
 theorem prefixNormProduct_relabel_adjacent {t : Tableau n μ} [ht : IsStandard t]
     (i j : Fin n) (hij : i.val + 1 = j.val) (hr : (t j).val.1 < (t i).val.1) :
     prefixNormProduct (relabel (Equiv.swap i j) t) =

@@ -105,7 +105,9 @@ private theorem row_hooks_disjoint_shiftedDifferences (μ : YoungDiagram) (a r :
   exact hook_ne_shiftedDifference μ (mem_Ioo.mp hj).1 (mem_Ioo.mp hj).2
     (mem_range.mp hq) he.symm
 
-/-- The hooks of one row and the differences with all subsequent shifted
+/-- This paper, proof of Proposition 3.15.
+
+The hooks of one row and the differences with all subsequent shifted
 rows partition the interval from one to its shifted length. -/
 theorem row_hooks_union_shiftedDifferences (μ : YoungDiagram) {a r : ℕ}
     (ha : μ.colLen 0 ≤ a) (hr : r < a) :
@@ -168,7 +170,9 @@ theorem hookProduct_mul_shiftedVandermonde (μ : YoungDiagram) {a : ℕ}
   rw [hookProduct_eq_prod_rows μ ha, ← prod_mul_distrib]
   exact prod_congr rfl fun r hr => row_hookProduct_mul_shiftedDifferences μ ha (mem_range.mp hr)
 
-/-- Shifted-coordinate enumeration without division, valid also for the empty diagram. -/
+/-- This paper, equation (3.14). This is the shifted form of [Frame–Robinson–Thrall][frt].
+
+Shifted-coordinate enumeration without division, valid also for the empty diagram. -/
 theorem card_standard_mul_shiftedFactorials (μ : YoungDiagram) {n a : ℕ}
     (hn : μ.card = n) (ha : μ.colLen 0 ≤ a) :
     Fintype.card {t : Tableau n μ // IsStandard t} *

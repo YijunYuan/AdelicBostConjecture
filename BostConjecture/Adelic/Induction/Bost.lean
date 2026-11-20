@@ -5,16 +5,16 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Adelic.Semistability.Comparison
-public import BostConjecture.Adelic.Induction.RankInduction
-public import BostConjecture.Adelic.Induction.MaxSlope
 public import BostConjecture.Adelic.Induction.FiniteMaxSlope
+public import BostConjecture.Adelic.Induction.MaxSlope
+public import BostConjecture.Adelic.Induction.RankInduction
+public import BostConjecture.Adelic.Semistability.Comparison
 public import BostConjecture.Adelic.Slope.GeometricQuotient
 
 /-!
 # The adelic Bost theorem
 
-This paper, Theorem 1.1 and Corollary 7.3. The concrete Section 6 geometric
+This paper, Theorem 1.2 and Corollary 7.3. The concrete Section 6 geometric
 quotient inequality supplies the input of simultaneous strong rank induction.
 All tensor and quotient bundles carry their actual completed Hilbert/epsilon
 norms. No geometric slope or tensor semistability assumption remains.
@@ -35,7 +35,10 @@ variable {K : Type u} [Field K] [CharZero K] [Countable K]
   {S : AdelicStructure.{u, v} K} [S.IsProper]
   [hN : S.IsArchimedeanNormalized]
 
-/-- The concrete geometric quotient theorem closes simultaneous rank induction
+/-- This paper, proof of Theorem 1.2, simultaneous rank induction. See [Chen–Moriwaki, Theorem
+5.6.1][cm] for the original reduction.
+
+The concrete geometric quotient theorem closes simultaneous rank induction
 with independent carrier universes, including zero-rank HN identities. -/
 theorem tensorHN_and_semistable
     (V : AdelicVectorBundle S) (W : AdelicVectorBundle S)
@@ -52,7 +55,7 @@ theorem tensorHN_and_semistable
     (h.2 ((isSemistable_iff_isMeanSlopeSemistable V).mp hsV)
       ((isSemistable_iff_isMeanSlopeSemistable W).mp hsW))
 
-/-- This paper, Theorem 1.1: maximal slopes add under the actual binary
+/-- This paper, Theorem 1.2: maximal slopes add under the actual binary
 orthogonal tensor product. The two factors may have independent carrier universes. -/
 theorem maximalSlope_orthogonalTensorPair
     (V : AdelicVectorBundle S) (W : AdelicVectorBundle S)
@@ -63,7 +66,9 @@ theorem maximalSlope_orthogonalTensorPair
   exact maximalSlope_orthogonalTensorPair_of_hnFiltration_eq V W
     finrank_pos finrank_pos (tensorHN_and_semistable V W).1
 
-/-- The binary orthogonal tensor of semistable Hermitian adelic bundles is
+/-- This paper, Theorem 1.2, binary semistability consequence.
+
+The binary orthogonal tensor of semistable Hermitian adelic bundles is
 semistable, with positive rank supplied by the factors' semistability. -/
 instance isSemistable_orthogonalTensorPair
     (V : AdelicVectorBundle S) (W : AdelicVectorBundle S)
@@ -82,7 +87,7 @@ theorem hermitianHNFiltration_orthogonalTensorPair
         (W.hermitianHNFiltration) := by
   exact (tensorHN_and_semistable V W).1
 
-/-- This paper, Theorem 1.1, finite-family form: maximal slopes add on the
+/-- This paper, Theorem 1.2, finite-family form: maximal slopes add on the
 actual orthogonal tensor of any finite family of positive-rank factors,
 including the empty family. -/
 theorem maximalSlope_orthogonalTensorOfNormMeasurability
@@ -98,7 +103,10 @@ theorem maximalSlope_orthogonalTensorOfNormMeasurability
   let : Nontrivial Y := Module.nontrivial_of_finrank_pos hB
   exact maximalSlope_orthogonalTensorPair X Y
 
-/-- The actual orthogonal tensor of any finite family of semistable
+/-- This paper, Theorem 1.2, finite-family semistability consequence. The formalization also
+includes the empty family.
+
+The actual orthogonal tensor of any finite family of semistable
 Hermitian adelic bundles is semistable, including the empty family. -/
 instance isSemistable_orthogonalTensorOfNormMeasurability
     {ι : Type wι} [Fintype ι]

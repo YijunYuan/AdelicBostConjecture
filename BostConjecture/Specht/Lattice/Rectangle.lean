@@ -11,7 +11,7 @@ public import BostConjecture.Specht.Lattice.Norm
 # Rectangular polytabloid lattices
 
 The rectangle is a concrete Young diagram. Its column group is a product of
-symmetric groups, one for each column. Reference: this paper §3, pages 4–5.
+symmetric groups, one for each column. Reference: this paper, Section 3.2 and equation (3.16).
 -/
 
 @[expose] public section
@@ -151,7 +151,10 @@ theorem card_rectangle_columnGroup {n a k : ℕ} (t : Tableau n (rectangle a k))
   rw [Nat.card_congr (rectangleColumnGroupEquiv t)]
   simp [Fintype.card_perm]
 
-/-- The initial seminormal squared norm of a rectangular polytabloid. -/
+/-- This paper, equation (3.16). The factorial normalization agrees with [Chen–Moriwaki, Remark
+A.2.9][cmp].
+
+The initial seminormal squared norm of a rectangular polytabloid. -/
 theorem norm_rectangle_polytabloidInt_sq {n a k : ℕ} (t : Tableau n (rectangle a k)) :
     ‖realCast n (rectangle a k |>.colLen 0) (polytabloidInt t)‖ ^ 2 =
       (a.factorial : ℝ) ^ k := by

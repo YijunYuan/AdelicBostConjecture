@@ -5,8 +5,8 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Geometry.Polynomial.Tensor
 public import BostConjecture.ExternalCode.TauCeti.LinearAlgebra.SymmetricPower.Finite
+public import BostConjecture.Geometry.Polynomial.Tensor
 public import BostConjecture.InvariantTheory.Polynomial.Action
 
 /-!
@@ -125,7 +125,10 @@ theorem polynomialSymmetricLift_pullback {d : ℕ} (f : X →ₗ[F] Y)
   exact (LinearMap.congr_fun
     (TauCeti.SymmetricPower.finiteToTensorPower_comp_map F (Dual F Y) d f.dualMap) _).symm
 
-/-- Invariant homogeneous polynomials have invariant tensor lifts with the same
+/-- This paper, proof of Theorem 6.2, invariant symmetric tensor lifting. Compare [Chen–Moriwaki,
+Theorem A.1.4][cmp].
+
+Invariant homogeneous polynomials have invariant tensor lifts with the same
 nonzero canonical evaluation. -/
 theorem exists_invariant_tensor_evaluation_ne_zero [FiniteDimensional F X]
     {G : Type*} [Group G] (ρ : Representation F G X) {d : ℕ}

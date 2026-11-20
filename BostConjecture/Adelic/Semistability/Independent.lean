@@ -5,17 +5,17 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Adelic.Semistability.Group
-public import BostConjecture.Arithmetic.Representation.BaseChange
-public import BostConjecture.Arithmetic.Representation.IndependentPiIrreducible
 public import ArakelovGeometry.AdelicVectorBundle.Construction.Tensor.Countable
 public import ArakelovGeometry.AdelicVectorBundle.HarderNarasimhan.Hermitian.Semistability
 public import ArakelovGeometry.AdelicVectorBundle.Tensor.PairMap
+public import BostConjecture.Adelic.Semistability.Group
+public import BostConjecture.Arithmetic.Representation.BaseChange
+public import BostConjecture.Arithmetic.Representation.IndependentPiIrreducible
 
 /-!
 # Independent products of absolutely irreducible isometric actions
 
-For the second assertion of Lemma 2.6 of this paper, irreducibility is checked
+For the second assertion of Proposition 2.6 of this paper, irreducibility is checked
 over a common algebraically closed extension of the original field. The
 canonical tensor base-change equivalence and faithful scalar extension descend
 irreducibility to the original field. The actual orthogonal tensor norms are
@@ -141,7 +141,10 @@ theorem NormFamily.orthogonalTensor_norm_independentPiRepresentation
 
 namespace AdelicVectorBundle
 
-/-- Lemma 2.6, finite-family conclusion: absolutely irreducible independent
+/-- This paper, Proposition 2.6, second assertion. The representation input is [Kowalski,
+Proposition 2.3.23][kowalski] over an algebraically closed extension.
+
+Proposition 2.6, finite-family conclusion: absolutely irreducible independent
 isometric actions make the actual orthogonal tensor bundle and its dual
 mean-slope semistable over the original field. -/
 theorem isMeanSlopeSemistable_orthogonalTensor_and_dual_of_isIrreducible_baseChange

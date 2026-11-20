@@ -6,9 +6,9 @@ Authors: The Tau Ceti contributors, Yijun Yuan
 module
 
 public import BostConjecture.ExternalCode.TauCeti.LinearAlgebra.SymmetricPower.Lift
-public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
 public import Mathlib.Algebra.BigOperators.Fin
 public import Mathlib.GroupTheory.Perm.Fin
+public import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
 
 /-!
 # Symmetric powers with universe-lifted finite indices
@@ -19,7 +19,7 @@ arbitrary coefficient universes. The finite-coordinate maps below recover the
 usual degree conventions without restricting the scalar ring.
 
 Adapted from TauCeti revision `3c3a32baea963db05c302adeb307b22baae4de78`,
-`TauCeti/LinearAlgebra/SymmetricPower/{Lift,Algebra}.lean`, Apache-2.0, through
+`TauCeti.LinearAlgebra.SymmetricPower.{Lift,Algebra}`, Apache-2.0, through
 this project’s existing selective ports. The adaptation changes only finite
 index transport and its proofs; it retains the upstream namespace and quotient.
 The intended consumer is `BostConjecture.Geometry.Polynomial.Polarization`.

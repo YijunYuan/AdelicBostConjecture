@@ -147,7 +147,9 @@ namespace HNVariationLift
 
 variable {V} {P : ℝ → Submodule K V}
 
-/-- Bost p32 (48), for the actual chosen grade-HN lift: semistability and
+/-- This paper, equation (7.4).
+
+Bost p32 (48), for the actual chosen grade-HN lift: semistability and
 centering force nonpositive pairing. This is the special HN direction of the
 CM variation argument; no full (5.13), A6 upper bound or A8 existence is used. -/
 theorem pairing_nonpos (L : HNVariationLift V P)
@@ -350,7 +352,7 @@ theorem centered_tensor_variation_energy
 /-- The actual A9 global comparison gives the finite-epsilon Bost bound.
 The directions here may be any common-basis directions with nonpositive
 total pairing; `HNVariationLift` supplies that property without assuming it.
-This is the sufficient binary specialization, not full CM (5.13). -/
+This is the sufficient binary specialization, not full [Chen–Moriwaki, equation (5.13)][cm]. -/
 theorem tensor_quotient_variation_lower_bound
     (q : E ⊗[K] F →ₗ[K] Q) (hq : Function.Surjective q) (hQ : 0 < finrank K Q)
     (hPc : filtrationExpectation P = 0) (hTc : filtrationExpectation T = 0)
@@ -516,7 +518,8 @@ theorem quotient_variation_lower_bound :
 /-- The precise Bost p32 lower bound on the arithmetic variation coefficient.
 An eventual affine upper bound for the SAME actual quotient and chosen bases
 is the remaining A6 input; equality is unnecessary. Actual HN lifts prove the
-pairing sign here. This does not assert full CM (5.13), A8 existence, the A6
+pairing sign here. This does not assert full [Chen–Moriwaki, equation (5.13)][cm], A8 existence,
+the A6
 upper bound itself, or Bost's main theorem. -/
 theorem slope_sum_le_of_eventual_upper_bound (δ : ℝ)
     (hupper : ∃ η > 0, ∀ ε, 0 < ε → ε < η → N ε ≤ c + ε * δ) :
@@ -549,7 +552,8 @@ variable {K : Type*} [Field K] {Q : Type*}
 /-- The assembled A9/A7/A3 producer for Bost p32: a negative actual candidate
 produces an actual unit optimizer, actual grade-HN lifts and common bases, with
 the needed slope lower bound for every A6 eventual affine upper bound on those
-same data. This replaces only the binary HN use of CM (5.13), not that full
+same data. This replaces only the binary HN use of [Chen–Moriwaki, equation (5.13)][cm], not that
+full
 inequality. The negative candidate remains the A8 boundary; proving the A6
 upper bound and its comparison with the quotient's arithmetic slope remains
 downstream. This theorem does not prove Bost's main theorem. -/

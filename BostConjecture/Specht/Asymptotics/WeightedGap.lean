@@ -84,7 +84,9 @@ theorem occupancy_vandermonde_sq_le {a M A : ℕ} (b : Occupancy a M A) :
   have hj0 : (0 : ℝ) ≤ (b.val j).val := by positivity
   exact abs_le.mpr ⟨by linarith, by linarith⟩
 
-/-- The unnormalized Vandermonde-weighted mass of bounded coordinate gaps. -/
+/-- This paper, proof of Lemma 5.4, central and tail estimates.
+
+The unnormalized Vandermonde-weighted mass of bounded coordinate gaps. -/
 theorem sum_occupancyWeight_gap_le {a M A : ℕ} (ha : 0 < a) (hM : 0 < M)
     (hA0 : 0 < A) (hA : A ≤ a * M) (L : ℝ) {u : ℝ} (hu : 0 < u) :
     ∑ b ∈ (univ : Finset (Occupancy a M A)).filter

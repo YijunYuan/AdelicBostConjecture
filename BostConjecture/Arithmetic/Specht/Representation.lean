@@ -13,7 +13,7 @@ public import Mathlib.MeasureTheory.Integral.Bochner.Basic
 
 The action restricts position permutations to the existing integral orbit lattice.
 
-Reference: this paper, §§3, 6, pages 4 and 9.
+Reference: this paper, Definition 3.3 and Proposition 3.14.
 -/
 
 @[expose] public section

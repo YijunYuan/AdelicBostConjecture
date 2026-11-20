@@ -56,7 +56,9 @@ theorem log_prefixInsertionFactor_nonneg {n : ℕ} {μ : YoungDiagram} {t : Tabl
     (log_ratio_bounds (by
       exact_mod_cast two_le_prefixAxialDistance (t := t) m r (mem_range.mp hr))).1
 
-/-- The uniform logarithmic insertion bound in a rectangle with `a` rows. -/
+/-- This paper, equation (5.7), uniform bound.
+
+The uniform logarithmic insertion bound in a rectangle with `a` rows. -/
 theorem log_prefixInsertionFactor_le {n a k : ℕ} {t : Tableau n (rectangle a k)}
     [ht : IsStandard t] (m : Fin n) :
     Real.log (prefixInsertionFactor t m) ≤ (a - 1 : ℕ) * Real.log 2 := by
@@ -92,7 +94,9 @@ theorem prefixAxialDistance_eq_shifted {n a k : ℕ} {t : Tableau n (rectangle a
   push_cast
   linarith
 
-/-- When the preceding prefix has no bounded gap, each logarithmic insertion is small. -/
+/-- This paper, equation (5.7), large-gap bound.
+
+When the preceding prefix has no bounded gap, each logarithmic insertion is small. -/
 theorem log_prefixInsertionFactor_le_of_not_gap {n a k : ℕ} {t : Tableau n (rectangle a k)}
     [ht : IsStandard t] (m : Fin n) {L : ℝ} (hL : 2 ≤ L)
     (hgap : ¬ HasSmallGap (fun i : Fin a =>
@@ -120,7 +124,9 @@ theorem log_prefixInsertionFactor_le_of_not_gap {n a k : ℕ} {t : Tableau n (re
     _ ≤ _ := div_le_div_of_nonneg_right (by
       exact_mod_cast Nat.le_sub_one_of_lt hrow) (by linarith)
 
-/-- The logarithm of the actual prefix product is the sum of its insertion logarithms. -/
+/-- This paper, equation (5.5).
+
+The logarithm of the actual prefix product is the sum of its insertion logarithms. -/
 theorem log_prefixNormProduct {n : ℕ} {μ : YoungDiagram} {t : Tableau n μ}
     [ht : IsStandard t] :
     Real.log (prefixNormProduct t) = ∑ m, Real.log (prefixInsertionFactor t m) :=

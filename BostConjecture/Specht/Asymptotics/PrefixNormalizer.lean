@@ -76,7 +76,9 @@ theorem shiftedFactorials_rectangle (a k : ℕ) :
       omega
     _ = _ := prod_range_reflect (fun j => (k + j).factorial) a
 
-/-- The rectangular tableau count in ordinary consecutive factorials. -/
+/-- This paper, Proposition 3.15, tableau count in (3.13). See [Frame–Robinson–Thrall][frt].
+
+The rectangular tableau count in ordinary consecutive factorials. -/
 theorem card_standard_rectangle_eq_factorials (a : ℕ) {k : ℕ} (hk : 0 < k) :
     (Fintype.card {T : Tableau (a * k) (rectangle a k) // IsStandard T} : ℝ) =
       ((a * k).factorial : ℝ) * (∏ j ∈ range a, (j.factorial : ℝ)) /
@@ -86,6 +88,16 @@ theorem card_standard_rectangle_eq_factorials (a : ℕ) {k : ℕ} (hk : 0 < k) :
   rw [shiftedFactorials_rectangle, shiftedVandermonde_rectangle] at h
   apply (eq_div_iff (by positivity)).mpr
   exact_mod_cast h
+
+/-- This paper, Proposition 3.15, equation (3.13): the rank of the full integral rectangular
+Specht lattice is the rectangular hook-length count. See [Kuenzer–Nebe, Section 2.1][kn]
+and [Frame–Robinson–Thrall][frt]. -/
+theorem rectangleRank_eq_factorials (a : ℕ) {k : ℕ} (hk : 0 < k) :
+    (rectangleRank a k : ℝ) =
+      ((a * k).factorial : ℝ) * (∏ j ∈ range a, (j.factorial : ℝ)) /
+        (∏ j ∈ range a, ((k + j).factorial : ℝ)) := by
+  rw [rectangleRank, finrank_orbitLattice_eq_card_standard]
+  exact card_standard_rectangle_eq_factorials a hk
 
 /-- The factorial ratio appearing in the normalizer is a polynomial product. -/
 theorem factorial_pow_eq_shiftedFactorials_mul_powers {k : ℕ} (hk : 0 < k) (a : ℕ) :
@@ -106,7 +118,9 @@ theorem factorial_pow_eq_shiftedFactorials_mul_powers {k : ℕ} (hk : 0 < k) (a 
         ring
       _ = _ := by rw [ih]; ring
 
-/-- Closed finite-product normalizer of the labelled Vandermonde law. -/
+/-- This paper, Proposition 5.2, equation (5.9).
+
+Closed finite-product normalizer of the labelled Vandermonde law. -/
 theorem sum_occupancyWeight_eq_closed (a : ℕ) {k : ℕ} (hk : 0 < k)
     (m l : ℕ) (hml : m + l = a * k) :
     ∑ b : Occupancy a (k + a - 1) (m + staircaseSum a), occupancyWeight b =
@@ -158,7 +172,9 @@ theorem card_standard_rectangle_pos (a : ℕ) {k : ℕ} (hk : 0 < k) :
   rw [card_standard_rectangle_eq_factorials a hk]
   positivity
 
-/-- The actual uniform tableau prefix law is obtained by weighting and sorting
+/-- This paper, Proposition 5.2, weighted prefix law.
+
+The actual uniform tableau prefix law is obtained by weighting and sorting
 the labelled occupancy law. -/
 theorem rectanglePrefix_probability_eq_weighted (a : ℕ) {k : ℕ} (hk : 0 < k)
     (m l : ℕ) (hml : m + l = a * k) (μ : RectangleShape a k m) :

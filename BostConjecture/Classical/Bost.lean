@@ -5,18 +5,18 @@ Authors: Yijun Yuan
 -/
 module
 
-public import BostConjecture.Classical.MaxSlope
 public import BostConjecture.Adelic.Induction.Bost
 public import BostConjecture.Classical.Adelic.Tensor
+public import BostConjecture.Classical.MaxSlope
 
 /-!
-# The classical Bost conjecture from Theorem 1.1
+# The classical Bost conjecture from Theorem 1.2
 
 The conclusion uses the original metric, tensor notation and maximal-slope
 definition from `81cf08a874039fde5d23c0fbf3970f7d28c3beca`.
 
 The degree and completed tensor comparisons are proved in `Classical/Adelic`.
-The adelic tensor theorem used in the proof is Theorem 1.1 of `bost.tex`.
+The adelic tensor theorem used in the proof is Theorem 1.2 of this paper.
 -/
 
 @[expose] public section
@@ -47,8 +47,11 @@ instance tensorGenericNontrivial :
     Module.finrank_tensorProduct]
   exact Nat.mul_pos Module.finrank_pos Module.finrank_pos
 
-/-- Bost's conjecture for the original integral Hermitian metrics, deduced from
-Theorem 1.1 through the canonical adelization. -/
+/-- This paper, Conjecture 1.1, maximal-slope formulation, proved by Theorem 1.2. See [Bost–Chen,
+Problems 1.3–1.5][bc] and [Bost][bost97].
+
+Bost's conjecture for the original integral Hermitian metrics, deduced from
+Theorem 1.2 through the canonical adelization. -/
 theorem maxSlope_tensor (h : HermitianMetric K M) (g : HermitianMetric K N) :
     (h ⊗[𝓞 K] g).maxSlope = h.maxSlope + g.maxSlope := by
   let : Countable K := (Module.finBasis ℚ K).repr.injective.countable

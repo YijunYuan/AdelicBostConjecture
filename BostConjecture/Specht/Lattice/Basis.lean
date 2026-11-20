@@ -98,7 +98,10 @@ theorem linearIndependent_real_standard_polytabloid :
   apply LinearIndependent.of_comp (EuclideanSpace.equiv (Fin n → Fin (μ.colLen 0)) ℝ).toLinearMap
   exact linearIndependent_standard_polytabloid ℝ
 
-/-- The standard polytabloids form a real basis of the actual orbit span. -/
+/-- This paper, Remark 3.8. The standard basis theorem is [Kuenzer–Nebe, Section 2.1][kn] and
+[Ryom-Hansen, Section 2][rh].
+
+The standard polytabloids form a real basis of the actual orbit span. -/
 def standardRealBasis (t : Tableau n μ) :
     Basis {t : Tableau n μ // IsStandard t} ℝ (realSpan t) :=
   (Basis.span linearIndependent_real_standard_polytabloid).map
@@ -117,13 +120,17 @@ theorem standardRealBasis_mem_spanLattice (t : Tableau n μ)
   rw [standardRealBasis_coe]
   exact ⟨polytabloidInt T.val, polytabloidInt_mem_orbitLattice_of_tableau t T.val, rfl⟩
 
-/-- The canonical integral orbit rank equals the number of standard tableaux. -/
+/-- This paper, Proposition 3.15, rank equality in (3.13). See [Kuenzer–Nebe, Section 2.1][kn].
+
+The canonical integral orbit rank equals the number of standard tableaux. -/
 theorem finrank_orbitLattice_eq_card_standard (t : Tableau n μ) :
     finrank ℤ (orbitLattice t) = Fintype.card {t : Tableau n μ // IsStandard t} := by
   rw [(latticeEquiv t).finrank_eq, ZLattice.rank ℝ (spanLattice t)]
   exact finrank_eq_card_basis (standardRealBasis t)
 
-/-- The logarithmic standard Gram bound, with its basis and integrality hypotheses discharged. -/
+/-- This paper, equation (3.17), upper bound.
+
+The logarithmic standard Gram bound, with its basis and integrality hypotheses discharged. -/
 theorem two_mul_log_covolume_le_log_det_standard_gram (t : Tableau n μ) :
     2 * Real.log (ZLattice.covolume (spanLattice t)) ≤
       Real.log (Matrix.gram ℝ (standardRealBasis t)).det := by

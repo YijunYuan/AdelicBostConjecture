@@ -86,6 +86,41 @@ theorem bernoulli_exp_le {p θ : ℝ} (hp0 : 0 ≤ p) (hp1 : p ≤ 1) (hθ : |θ
   have hlin := Real.add_one_le_exp (p * θ + θ ^ 2)
   nlinarith
 
+/-- This paper, proof of Lemma 5.3: the centered exponential moment of sampling without
+replacement is bounded by a quadratic exponential for parameters of absolute value at most one. -/
+theorem sampling_centered_exp_le {α : Type*} [Fintype α] [DecidableEq α]
+    (t : Finset α) {A : ℕ} (hN : 0 < Fintype.card α) (hA : A ≤ Fintype.card α)
+    {θ : ℝ} (hθ : |θ| ≤ 1) :
+    (∑ s ∈ univ.powersetCard A,
+      Real.exp ((((s ∩ t).card : ℝ) - A * (t.card / Fintype.card α : ℝ)) * θ)) /
+        ((Fintype.card α).choose A : ℝ) ≤ Real.exp ((A : ℝ) * θ ^ 2) := by
+  let p : ℝ := t.card / Fintype.card α
+  have hp0 : 0 ≤ p := by dsimp [p]; positivity
+  have hp1 : p ≤ 1 := (div_le_one (by positivity)).mpr (by exact_mod_cast card_le_univ t)
+  have hb0 : 0 ≤ 1 + p * (Real.exp θ - 1) := by
+    have := mul_nonneg hp0 (Real.exp_nonneg θ)
+    nlinarith
+  have he (s : Finset α) :
+      Real.exp ((((s ∩ t).card : ℝ) - A * p) * θ) =
+        Real.exp (-(A * p) * θ) * Real.exp ((s ∩ t).card * θ) := by
+    rw [← Real.exp_add]
+    congr 1
+    ring
+  change (∑ s ∈ univ.powersetCard A,
+    Real.exp ((((s ∩ t).card : ℝ) - A * p) * θ)) / _ ≤ _
+  simp_rw [he]
+  rw [← mul_sum, mul_div_assoc]
+  calc
+    _ ≤ Real.exp (-(A * p) * θ) * (1 + p * (Real.exp θ - 1)) ^ A :=
+      mul_le_mul_of_nonneg_left (sampling_exp_le t hN hA θ) (Real.exp_nonneg _)
+    _ ≤ Real.exp (-(A * p) * θ) * (Real.exp (p * θ + θ ^ 2)) ^ A :=
+      mul_le_mul_of_nonneg_left
+        (pow_le_pow_left₀ hb0 (bernoulli_exp_le hp0 hp1 hθ) A) (Real.exp_nonneg _)
+    _ = _ := by
+      rw [← Real.exp_nat_mul, ← Real.exp_add]
+      congr 1
+      ring
+
 /-- Centered exponential moments of the existing occupancy law, for small parameters. -/
 theorem sum_occupancyMass_centered_exp_le {a M A : ℕ} (ha : 0 < a) (hM : 0 < M)
     (hA : A ≤ a * M) (i : Fin a) {θ : ℝ} (hθ : |θ| ≤ 1) :
@@ -196,7 +231,45 @@ theorem sum_abs_tail_le_of_exp_bound {ι : Type*} [Fintype ι] (w f : ι → ℝ
     rw [hempty, sum_empty]
     positivity
 
-/-- Uniform two-sided concentration for the actual labelled hypergeometric law. -/
+/-- This paper, Lemma 5.3: the two-sided hypergeometric tail bound for an arbitrary
+finite population and arbitrary marked subset. The sample is uniform among subsets of size `A`. -/
+theorem sampling_concentration {α : Type*} [Fintype α] [DecidableEq α]
+    (t : Finset α) {A : ℕ} (hN : 0 < Fintype.card α) (hA0 : 0 < A)
+    (hA : A ≤ Fintype.card α) {u : ℝ} (hu : 0 < u) :
+    (((univ.powersetCard A).filter fun s : Finset α =>
+      u ≤ |((s ∩ t).card : ℝ) - A * (t.card / Fintype.card α : ℝ)|).card : ℝ) /
+        ((Fintype.card α).choose A : ℝ) ≤ 2 * Real.exp (-u ^ 2 / (4 * (A : ℝ))) := by
+  classical
+  let samples := (univ : Finset α).powersetCard A
+  let p : ℝ := t.card / Fintype.card α
+  let w : samples → ℝ := fun _ => 1 / ((Fintype.card α).choose A : ℝ)
+  let f : samples → ℝ := fun s => (s.val ∩ t).card - A * p
+  have hp0 : 0 ≤ p := by dsimp [p]; positivity
+  have hp1 : p ≤ 1 := (div_le_one (by positivity)).mpr (by exact_mod_cast card_le_univ t)
+  have hf (s : samples) : |f s| ≤ A := by
+    have hs : s.val.card = A := (mem_powersetCard.mp s.property).2
+    have hc : ((s.val ∩ t).card : ℝ) ≤ A := by
+      exact_mod_cast (card_le_card inter_subset_left).trans_eq hs
+    have hc0 : (0 : ℝ) ≤ (s.val ∩ t).card := by positivity
+    have hm0 := mul_nonneg (Nat.cast_nonneg A : (0 : ℝ) ≤ A) hp0
+    have hm1 := mul_le_mul_of_nonneg_left hp1 (Nat.cast_nonneg A : (0 : ℝ) ≤ A)
+    dsimp [f]
+    rw [abs_le]
+    constructor <;> nlinarith
+  have hmgf (θ : ℝ) (hθ : |θ| ≤ 1) :
+      ∑ s : samples, w s * Real.exp (θ * f s) ≤ Real.exp ((A : ℝ) * θ ^ 2) := by
+    simp only [w, f, one_div_mul_eq_div, ← sum_div]
+    rw [← sum_subtype samples (fun _ => Iff.rfl)
+      (fun s => Real.exp (θ * (((s ∩ t).card : ℝ) - A * p)))]
+    simpa only [p, samples, mul_comm θ] using sampling_centered_exp_le t hN hA hθ
+  have h := sum_abs_tail_le_of_exp_bound w f (fun _ => by dsimp [w]; positivity)
+    (by positivity) hf hmgf hu
+  simp only [w, f, sum_filter, ← sum_div] at h
+  rw [← sum_subtype samples (fun _ => Iff.rfl)
+    (fun s => if u ≤ |((s ∩ t).card : ℝ) - A * p| then (1 : ℝ) else 0)] at h
+  simpa only [samples, p, sum_boole] using h
+
+/-- This paper, Lemma 5.3, specialized to one block of the labelled occupancy law. -/
 theorem occupancyMass_concentration {a M A : ℕ} (ha : 0 < a) (hM : 0 < M)
     (hA0 : 0 < A) (hA : A ≤ a * M) (i : Fin a) {u : ℝ} (hu : 0 < u) :
     ∑ b ∈ (univ : Finset (Occupancy a M A)).filter
@@ -221,7 +294,9 @@ theorem occupancyMass_concentration {a M A : ℕ} (ha : 0 < a) (hM : 0 < M)
   · intro θ hθ
     simpa only [mul_comm θ] using sum_occupancyMass_centered_exp_le ha hM hA i hθ
 
-/-- Union bound for simultaneous deviations of the labelled coordinates. -/
+/-- This paper, proof of Lemma 5.4, union bound used in (5.12).
+
+Union bound for simultaneous deviations of the labelled coordinates. -/
 theorem occupancyMass_max_concentration {a M A : ℕ} (ha : 0 < a) (hM : 0 < M)
     (hA0 : 0 < A) (hA : A ≤ a * M) {u : ℝ} (hu : 0 < u) :
     ∑ b ∈ (univ : Finset (Occupancy a M A)).filter
