@@ -28,7 +28,7 @@ may therefore describe declarations or modules that have since been removed.
 ## ArakelovGeometry: adelic foundations and instability filtrations
 
 - Repository: <https://github.com/YijunYuan/ArakelovGeometry> (private).
-- Pinned revision: `df942e19748f3ab6c41cce7827af7607e2934735`.
+- Pinned revision: `c5bc84472182eac62bea952d975b5db305f615d4`.
 - License: Apache-2.0; source notices are preserved.
 - Integration: unmodified remote git dependency at that revision. Lean/mathlib 4.35.0 and
   HarderNarasimhan `14b3090e1e169b77fe381102a1289f24c2b08a11` match this project.

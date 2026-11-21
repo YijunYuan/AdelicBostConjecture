@@ -1,4 +1,23 @@
-# AdelicBostConjecture
+<div align="center">
+
+# Adelic Bost Conjecture
+
+**Hermitian adelic bundles · Maximal slopes · Tensor semistability**
+
+![CI](https://github.com/YijunYuan/AdelicBostConjecture/actions/workflows/lean_action_ci.yml/badge.svg)
+[![Lean](https://img.shields.io/badge/Lean-4.35.0-5C2D91)](https://leanprover.github.io)
+[![mathlib](https://img.shields.io/badge/mathlib-56a005855ea17e0b0958f73ec801ae140b0a1679-5C2D91)](https://github.com/leanprover-community/mathlib4/tree/56a005855ea17e0b0958f73ec801ae140b0a1679)
+[![License](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
+
+[Public results](#public-results) ·
+[Statement coverage](#statement-coverage) ·
+[References](#references-used-in-docstrings) ·
+[External code](#external-code) ·
+[Build and checks](#organization-and-build)
+
+</div>
+
+---
 
 This project formalizes Theorem 1.2 of **On the tensor product of semistable
 Hermitian adelic vector bundles over an adelic curve**, by Huayi Chen and
@@ -6,29 +25,21 @@ Yijun Yuan, and deduces its number-field specialization, Conjecture 1.1.
 For nonzero Hermitian adelic bundles on a proper adelic curve over a countable
 field of characteristic zero, maximal slopes add under orthogonal tensor
 products. Consequently, tensor products of semistable bundles are semistable.
-Archimedean absolute values have their usual real or complex normalization;
-tensor norms are Hilbert norms at Archimedean places and epsilon norms elsewhere.
 
-The binary and finite-family conclusions and the tensor HN filtration identity
-are proved unconditionally. Their proofs use the completed norms and discharge
-the geometric inequality and the smaller-rank induction hypotheses. The
-statement coverage below records the remaining differences between the
-formalization and the full generality of intermediate assertions in
-**On the tensor product of semistable Hermitian adelic vector bundles over an
-adelic curve**. Thus the main theorem is formalized, but complete alignment of
-every intermediate statement is not claimed.
 
 ## Public results
+
+### Adelic bundles
 
 The adelic declarations belong to `ArakelovGeometry.AdelicVectorBundle`.
 
 | Result | Declaration |
 | --- | --- |
-| Theorem 1.2: binary maximal-slope additivity | `maximalSlope_orthogonalTensorPair` |
-| Theorem 1.2: finite-family additivity | `maximalSlope_orthogonalTensorOfNormMeasurability` |
-| Theorem 1.2: binary tensor semistability | `isSemistable_orthogonalTensorPair` |
-| Theorem 1.2: finite-family tensor semistability | `isSemistable_orthogonalTensorOfNormMeasurability` |
-| Corollary 7.3: weighted tensor HN compatibility | `hermitianHNFiltration_orthogonalTensorPair` |
+| **Theorem 1.2: binary maximal-slope additivity** | `maximalSlope_orthogonalTensorPair` |
+| **Theorem 1.2: finite-family additivity** | `maximalSlope_orthogonalTensorOfNormMeasurability` |
+| **Theorem 1.2: binary tensor semistability** | `isSemistable_orthogonalTensorPair` |
+| **Theorem 1.2: finite-family tensor semistability** | `isSemistable_orthogonalTensorOfNormMeasurability` |
+| **Corollary 7.3: weighted tensor HN compatibility** | `hermitianHNFiltration_orthogonalTensorPair` |
 
 The finite-family declarations also include the empty family, whose tensor
 product is a semistable line of slope zero. Countability supplies
@@ -39,6 +50,8 @@ semistability conclusions are registered instances. For example,
 `maximalSlope_orthogonalTensorPair V W` proves
 `(V ⊗ʰ W).maximalSlope = V.maximalSlope + W.maximalSlope` for nonzero
 Hermitian factors. The notation uses `open scoped TensorProduct`.
+
+### Number-field specialization
 
 The classical theorem is
 `AdelicBostConjecture.Arithmetic.HermitianMetric.maxSlope_tensor`. For finite
@@ -54,6 +67,8 @@ normalized classical maximal slope. The degree and tensor-norm comparisons
 also cover nonfree projective modules. The classical statement and definitions
 retain the conventions of revision `81cf08a874039fde5d23c0fbf3970f7d28c3beca`.
 
+---
+
 ## Statement coverage
 
 Numbering follows **On the tensor product of semistable Hermitian adelic
@@ -64,22 +79,24 @@ qualified by the module or namespace indicated in the surrounding text.
 
 | Statement | Formal counterpart and coverage |
 | --- | --- |
-| Proposition 2.3 | `isHermitian_standard_constructions`, `quotient_dual_norm_eq_annihilator`, `dual_quotient_norm_eq_restriction` |
-| Proposition 2.4 | `slope_bounds_of_nonzero_map`; `slope_le_of_nonzero_completed_contraction` is the specialization used in Section 6 |
-| Theorem 2.5 | `hermitianHNFlag_spec`, `hermitianHNOrderedSlope_extrema`, `eq_hermitianHNFiltration_of_semistable_grades` |
-| Proposition 2.6 | `isMeanSlopeSemistable_of_isIrreducible`, `isMeanSlopeSemistable_orthogonalTensor_and_dual_of_isIrreducible_baseChange` |
-| Proposition 3.14 | `integralRepresentation_baseChange_isAbsolutelyIrreducible` |
-| Proposition 3.15 | `finrank_orbitLattice_eq_card_standard`, `rectangleRank_eq_factorials` |
-| Proposition 4.17 | `norm_orthogonalStandardBasis_sq_eq_prefixNormProduct`, `log_det_standard_gram_div_card_eq_average`; fixed colex order |
-| Proposition 5.1 | `tendsto_rectangleLogCovolume_div`, `tendsto_neg_specht_slope_div` |
-| Proposition 5.2 | `card_rectanglePrefix`, `sum_occupancyWeight_eq_closed`, `rectanglePrefix_probability_eq_weighted`, `rectanglePrefix_average_eq_weighted` |
-| Lemma 5.3 | `sampling_concentration` for any finite population and marked subset; `occupancyMass_concentration` for the occupancy application |
-| Lemma 5.4 | `rectanglePrefixGapProbability_uniform`, expressing an eventual bound uniform over intermediate times |
-| Lemma 6.1 | `projectiveDeterminantMap_injective`, `projectiveDeterminantMap_norm_infinite`, `projectiveDeterminantMap_norm_finite`, `determinantSpechtBundle_slope`; invariant-image coverage is restricted as described below |
-| Theorem 6.2 | `slope_le_sum_of_geometricallySemistable`; equation (6.6) is `slope_sum_le_orthogonalTensor_quotient_of_geometricallySemistable` |
-| Lemma 7.1 | `hermitianHNFiltration_orthogonalTensorPair_of_semistable_grades` |
-| Lemma 7.2 | `tensorFiltrationQuotient_eventual_hn_upper` |
-| Theorem 1.2 and Corollary 7.3 | The public results above and `tensorHN_and_semistable` |
+| **Proposition 2.3** | `isHermitian_standard_constructions`,<br>`quotient_dual_norm_eq_annihilator`,<br>`dual_quotient_norm_eq_restriction` |
+| **Proposition 2.4** | `slope_bounds_of_nonzero_map`; `slope_le_of_nonzero_completed_contraction` is the specialization used in Section 6 |
+| **Theorem 2.5** | `hermitianHNFlag_spec`,<br>`hermitianHNOrderedSlope_extrema`,<br>`eq_hermitianHNFiltration_of_semistable_grades` |
+| **Proposition 2.6** | `isMeanSlopeSemistable_of_isIrreducible`,<br>`isMeanSlopeSemistable_orthogonalTensor_and_dual_of_isIrreducible_baseChange` |
+| **Proposition 3.14** | `integralRepresentation_baseChange_isAbsolutelyIrreducible` |
+| **Proposition 3.15** | `finrank_orbitLattice_eq_card_standard`,<br>`rectangleRank_eq_factorials` |
+| **Proposition 4.17** | `norm_orthogonalStandardBasis_sq_eq_prefixNormProduct`,<br>`log_det_standard_gram_div_card_eq_average`; fixed colex order |
+| **Proposition 5.1** | `tendsto_rectangleLogCovolume_div`,<br>`tendsto_neg_specht_slope_div` |
+| **Proposition 5.2** | `card_rectanglePrefix`,<br>`sum_occupancyWeight_eq_closed`,<br>`rectanglePrefix_probability_eq_weighted`,<br>`rectanglePrefix_average_eq_weighted` |
+| **Lemma 5.3** | `sampling_concentration` for any finite population and marked subset; `occupancyMass_concentration` for the occupancy application |
+| **Lemma 5.4** | `rectanglePrefixGapProbability_uniform`, expressing an eventual bound uniform over intermediate times |
+| **Lemma 6.1** | `projectiveDeterminantMap_injective`,<br>`projectiveDeterminantMap_norm_infinite`,<br>`projectiveDeterminantMap_norm_finite`,<br>`determinantSpechtBundle_slope`; invariant-image coverage is restricted as described below |
+| **Theorem 6.2** | `slope_le_sum_of_geometricallySemistable`; equation (6.6) is `slope_sum_le_orthogonalTensor_quotient_of_geometricallySemistable` |
+| **Lemma 7.1** | `hermitianHNFiltration_orthogonalTensorPair_of_semistable_grades` |
+| **Lemma 7.2** | `tensorFiltrationQuotient_eventual_hn_upper` |
+| **Theorem 1.2 and Corollary 7.3** | The public results above and `tensorHN_and_semistable` |
+
+### Proof conventions
 
 The proof follows the integral orbit lattice, the standard-sublattice Gram
 bound, the exact Vandermonde-weighted prefix distribution, and simultaneous
@@ -88,6 +105,8 @@ equations, including (3.17), (5.7), (5.10)–(5.13), (6.3)–(6.6), and (7.4).
 Finite probability expectations are finite weighted sums. Tableau labels and
 row indices start at zero in Lean. These conventions preserve the mathematical
 statements after the corresponding index translation.
+
+### Remaining differences
 
 The following differences remain:
 
@@ -121,6 +140,8 @@ formal proof. Source attribution describes mathematical correspondence;
 formal proofs may use a different established argument, such as Jacobson
 density for Burnside's criterion or Schur–Weyl duality for invariant spanning.
 
+---
+
 ## References used in docstrings
 
 Citation keys below identify the external works independently of
@@ -148,6 +169,8 @@ motivation in the introduction. They are not invoked as unproved inputs to
 the adelic tensor theorem. Other references appearing only in that historical
 discussion are likewise not dependencies of its formal proof.
 
+---
+
 ## External code
 
 The `ExternalCode` modules contain selected proofs adapted from the following
@@ -157,25 +180,31 @@ adaptations are documented in the accompanying provenance records.
 
 | Module group | Upstream project | Reused material |
 | --- | --- | --- |
-| `OAI` | [openai/math](https://github.com/openai/math) | Tableau and word models, polytabloids and Specht submodules from the Saxl development |
-| `TauCeti` | [TauCetiProject/TauCeti](https://github.com/TauCetiProject/TauCeti) | Lattice covolumes, symmetric powers, Garnir relations, Specht straightening and Schur–Weyl duality |
-| `Etingof` | [mathlib-initiative/Etingof-RepresentationTheory-draft1](https://github.com/mathlib-initiative/Etingof-RepresentationTheory-draft1) | Partitions, Young diagrams and the hook-length formula for standard tableaux |
-| `Stacks` | [AxiomMath/Stacks](https://github.com/AxiomMath/Stacks) | Determinant covariance of alternating tensors under matrix tensor powers |
-| `MathlibPRs.PR40948` | [Thmoas-Guan/mathlib4_fork](https://github.com/Thmoas-Guan/mathlib4_fork), [mathlib PR #40948](https://github.com/leanprover-community/mathlib4/pull/40948) | Exterior-power base change and homogeneous projection |
-| `MathlibPRs.PR44845` | [DanielJHorton/mathlib4](https://github.com/DanielJHorton/mathlib4), [mathlib PR #44845](https://github.com/leanprover-community/mathlib4/pull/44845) | Finite projective tensor products and duality |
+| [`OAI`](AdelicBostConjecture/ExternalCode/OAI/) | [openai/math](https://github.com/openai/math) | Tableau and word models, polytabloids and Specht submodules from the Saxl development |
+| [`TauCeti`](AdelicBostConjecture/ExternalCode/TauCeti/) | [TauCetiProject/TauCeti](https://github.com/TauCetiProject/TauCeti) | Lattice covolumes, symmetric powers, Garnir relations, Specht straightening and Schur–Weyl duality |
+| [`Etingof`](AdelicBostConjecture/ExternalCode/Etingof/) | [mathlib-initiative/Etingof-RepresentationTheory-draft1](https://github.com/mathlib-initiative/Etingof-RepresentationTheory-draft1) | Partitions, Young diagrams and the hook-length formula for standard tableaux |
+| [`Stacks`](AdelicBostConjecture/ExternalCode/Stacks/) | [AxiomMath/Stacks](https://github.com/AxiomMath/Stacks) | Determinant covariance of alternating tensors under matrix tensor powers |
+| [`MathlibPRs.PR40948`](AdelicBostConjecture/ExternalCode/MathlibPRs/PR40948/) | [Thmoas-Guan/mathlib4_fork](https://github.com/Thmoas-Guan/mathlib4_fork), [mathlib PR #40948](https://github.com/leanprover-community/mathlib4/pull/40948) | Exterior-power base change and homogeneous projection |
+| [`MathlibPRs.PR44845`](AdelicBostConjecture/ExternalCode/MathlibPRs/PR44845/) | [DanielJHorton/mathlib4](https://github.com/DanielJHorton/mathlib4), [mathlib PR #44845](https://github.com/leanprover-community/mathlib4/pull/44845) | Finite projective tensor products and duality |
+
+---
 
 ## Organization and build
 
+### Source layout
+
 | Module group | Contents |
 | --- | --- |
-| `Adelic` | Normed bundles, preliminaries, auxiliary semistability, contractions, geometric inequalities and rank induction |
-| `Classical` | Integral Hermitian metrics, degree and slope, adelization and the number-field theorem |
-| `Specht` | Integral orbit lattices, seminormal norms, hook counts, prefix probabilities and covolume limits |
-| `Geometry` | Determinant maps, invariant tensors, polarization and nonvanishing |
-| `Arithmetic` | Shared dual base change and representation theory |
-| `Tensor` | Regrouping, duality and scalar-extension compatibility |
-| `InvariantTheory` | Polynomial actions and homogeneous components |
-| `ExternalCode` | Selected upstream proofs with preserved attribution and licenses |
+| [`Adelic`](AdelicBostConjecture/Adelic/) | Normed bundles, preliminaries, auxiliary semistability, contractions, geometric inequalities and rank induction |
+| [`Classical`](AdelicBostConjecture/Classical/) | Integral Hermitian metrics, degree and slope, adelization and the number-field theorem |
+| [`Specht`](AdelicBostConjecture/Specht/) | Integral orbit lattices, seminormal norms, hook counts, prefix probabilities and covolume limits |
+| [`Geometry`](AdelicBostConjecture/Geometry/) | Determinant maps, invariant tensors, polarization and nonvanishing |
+| [`Arithmetic`](AdelicBostConjecture/Arithmetic/) | Shared dual base change and representation theory |
+| [`Tensor`](AdelicBostConjecture/Tensor/) | Regrouping, duality and scalar-extension compatibility |
+| [`InvariantTheory`](AdelicBostConjecture/InvariantTheory/) | Polynomial actions and homogeneous components |
+| [`ExternalCode`](AdelicBostConjecture/ExternalCode/) | Selected upstream proofs with preserved attribution and licenses |
+
+### Build
 
 Import `AdelicBostConjecture` to obtain both the adelic and classical results.
 Lean and mathlib are pinned to `v4.35.0`. Install Lean through `elan`, then run:
@@ -187,10 +216,15 @@ lake --wfail build
 
 The warning-failing build uses the mathlib standard linter set,
 `relaxedAutoImplicit = false`, and `maxSynthPendingDepth = 3`.
-ArakelovGeometry is pinned to `df942e19748f3ab6c41cce7827af7607e2934735`;
+
+### Pinned dependencies
+
+ArakelovGeometry is pinned to `c5bc84472182eac62bea952d975b5db305f615d4`;
 HarderNarasimhan is pinned to `14b3090e1e169b77fe381102a1289f24c2b08a11`.
 The dependencies remain unmodified. The HN variation and compatibility
 adapters are local to this project.
+
+### Axiom checks
 
 The public theorem axiom checks are:
 
@@ -202,9 +236,15 @@ import AdelicBostConjecture
 #print axioms AdelicBostConjecture.Arithmetic.HermitianMetric.maxSlope_tensor
 ```
 
-The permitted axioms are `propext`, `Classical.choice` and `Quot.sound`.
-Neither `sorryAx` nor an additional mathematical axiom is permitted.
+> [!IMPORTANT]
+> The permitted axioms are `propext`, `Classical.choice` and `Quot.sound`.
+> Neither `sorryAx` nor an additional mathematical axiom is permitted.
+
+### Contributing and licensing
 
 Code and documentation follow the [mathlib contribution guidelines](https://mathlib.org/contribute/),
 including their documentation, style and naming conventions. Original code is
 released under Apache-2.0; reused code retains its upstream licenses and attribution.
+
+[Reuse and provenance](CONTRIBUTIONS.md) · [License](LICENSE) ·
+[Back to top](#adelic-bost-conjecture)
